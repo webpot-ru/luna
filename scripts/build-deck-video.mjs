@@ -688,6 +688,136 @@ async function main() {
       { icon: "💬", text: "Chat y amigos" },
       { icon: "📝", text: "Notas de estudio" }
     ];
+  } else if (lang === 'TR') {
+    outroTitle = "Bu kelimeleri sonsuza dek öğrenin";
+    outroSubtitle = "Sitemizde desteleri ücretsiz olarak çalışın";
+    outroBadges = [
+      { icon: "⚡️", text: "Kendi Temponuz" },
+      { icon: "🎮", text: "Eşleştirme Oyunu" },
+      { icon: "🧠", text: "Akıllı Algoritma" },
+      { icon: "🖼️", text: "Resimler ve Ses" },
+      { icon: "⏱️", text: "Pomodoro Sayacı" },
+      { icon: "🎵", text: "Arka Plan Müzikleri" },
+      { icon: "💬", text: "Çalışma Sohbeti" },
+      { icon: "📝", text: "Kişisel Notlar" }
+    ];
+  } else if (lang === 'PT' || lang === 'PT-BR') {
+    outroTitle = "Aprenda estas palavras para sempre";
+    outroSubtitle = "Pratique baralhos grátis em nosso site";
+    outroBadges = [
+      { icon: "⚡️", text: "Ritmo Próprio" },
+      { icon: "🎮", text: "Jogo da Memória" },
+      { icon: "🧠", text: "Algoritmo Inteligente" },
+      { icon: "🖼️", text: "Imagens e Áudio" },
+      { icon: "⏱️", text: "Timer Pomodoro" },
+      { icon: "🎵", text: "Música de Fundo" },
+      { icon: "💬", text: "Chat de Estudos" },
+      { icon: "📝", text: "Notas Pessoais" }
+    ];
+  } else if (lang === 'KO') {
+    outroTitle = "이 단어들을 영원히 기억하세요";
+    outroSubtitle = "웹사이트에서 무료로 카드 세트를 연습하세요";
+    outroBadges = [
+      { icon: "⚡️", text: "맞춤형 학습 템포" },
+      { icon: "🎮", text: "짝맞추기 게임" },
+      { icon: "🧠", text: "스마트 암기 알고리즘" },
+      { icon: "🖼️", text: "이미지 및 오디오 지원" },
+      { icon: "⏱️", text: "뽀모도로 타이머" },
+      { icon: "🎵", text: "백그라운드 음악" },
+      { icon: "💬", text: "학습 채팅방" },
+      { icon: "📝", text: "나만의 학습 메모" }
+    ];
+  } else if (lang === 'JA') {
+    outroTitle = "これらの単語を一生忘れない";
+    outroSubtitle = "ウェブサイトで無料デッキを練習する";
+    outroBadges = [
+      { icon: "⚡️", text: "自分のペース" },
+      { icon: "🎮", text: "神経衰弱ゲーム" },
+      { icon: "🧠", text: "記憶アルゴリズム" },
+      { icon: "🖼️", text: "画像と音声に対応" },
+      { icon: "⏱️", text: "ポモドーロタイマー" },
+      { icon: "🎵", text: "BGM音楽" },
+      { icon: "💬", text: "勉強用チャット" },
+      { icon: "📝", text: "個人メモ機能" }
+    ];
+  } else if (lang === 'HI') {
+    outroTitle = "इन शब्दों को हमेशा के लिए याद रखें";
+    outroSubtitle = "हमारी वेबसाइट पर मुफ़्त में डेक का अभ्यास करें";
+    outroBadges = [
+      { icon: "⚡️", text: "खुद की गति" },
+      { icon: "🎮", text: "मैच खेलें" },
+      { icon: "🧠", text: "स्मार्ट एल्गोरिदम" },
+      { icon: "🖼️", text: "चित्र और ध्वनि" },
+      { icon: "⏱️", text: "पोमोडोरो टाइमर" },
+      { icon: "🎵", text: "पृष्ठभूमि संगीत" },
+      { icon: "💬", text: "अध्ययन चैट" },
+      { icon: "📝", text: "व्यक्तिगत नोट्स" }
+    ];
+  } else if (lang === 'UZ') {
+    outroTitle = "Bu so'zlarni abadiy eslab qoling";
+    outroSubtitle = "Saytimizda kartochkalar to'plamini bepul mashq qiling";
+    outroBadges = [
+      { icon: "⚡️", text: "O'z tempingiz" },
+      { icon: "🎮", text: "Juftini top o'yini" },
+      { icon: "🧠", text: "Aqlli algoritm" },
+      { icon: "🖼️", text: "Rasm va ovoz" },
+      { icon: "⏱️", text: "Pomodoro taymeri" },
+      { icon: "🎵", text: "Fon musiqasi" },
+      { icon: "💬", text: "O'quv chati" },
+      { icon: "📝", text: "Shaxsiy eslatmalar" }
+    ];
+  } else if (lang === 'AZ') {
+    outroTitle = "Bu sözləri həmişəlik öyrənin";
+    outroSubtitle = "Saytımızda dəstləri pulsuz məşq edin";
+    outroBadges = [
+      { icon: "⚡️", text: "Öz tempiniz" },
+      { icon: "🎮", text: "Uyğunluq oyunu" },
+      { icon: "🧠", text: "Ağıllı alqoritm" },
+      { icon: "🖼️", text: "Şəkillər və səs" },
+      { icon: "⏱️", text: "Pomodoro taymeri" },
+      { icon: "🎵", text: "Fon musiqisi" },
+      { icon: "💬", text: "Dərs söhbəti" },
+      { icon: "📝", text: "Şəxsi qeydlər" }
+    ];
+  } else if (lang === 'KK') {
+    outroTitle = "Бұл сөздерді мәңгілікке үйреніңіз";
+    outroSubtitle = "Біздің сайтта жинақтарды тегін жаттықтырыңыз";
+    outroBadges = [
+      { icon: "⚡️", text: "Өз қарқыныңыз" },
+      { icon: "🎮", text: "«Жұбын тап» ойыны" },
+      { icon: "🧠", text: "Ақылды алгоритм" },
+      { icon: "🖼️", text: "Суреттер мен дыбыс" },
+      { icon: "⏱️", text: "Помодоро таймері" },
+      { icon: "🎵", text: "Фондық музыка" },
+      { icon: "💬", text: "Оқу чаты" },
+      { icon: "📝", text: "Жеке жазбалар" }
+    ];
+  } else if (lang === 'KA') {
+    outroTitle = "ისწავლეთ ეს სიტყვები სამუდამოდ";
+    outroSubtitle = "ივარჯიშეთ კოლექციებზე უფასოდ ჩვენს საიტზე";
+    outroBadges = [
+      { icon: "⚡️", text: "საკუთარი ტემპი" },
+      { icon: "🎮", text: "თამაში «იპოვე წყვილი»" },
+      { icon: "🧠", text: "ჭკვიანი ალგორითმი" },
+      { icon: "🖼️", text: "სურათები და ხმა" },
+      { icon: "⏱️", text: "პომოდოროს ტაიმერი" },
+      { icon: "🎵", text: "ფონური მუსიკა" },
+      { icon: "💬", text: "სასწავლო ჩატი" },
+      { icon: "📝", text: "პირადი შენიшვნები" }
+    ];
+  } else if (lang === 'HY') {
+    outroTitle = "Սովորեք այս բառերը հավերժ";
+    outroSubtitle = "Մարզեք հավաքածուները անվճար մեր կայքում";
+    outroBadges = [
+      { icon: "⚡️", text: "Ձեր տեմպով" },
+      { icon: "🎮", text: "«Գտիր զույգը» խաղ" },
+      { icon: "🧠", text: "Խելացի ալգորիթմ" },
+      { icon: "🖼️", text: "Պատկերներ և ձայն" },
+      { icon: "⏱️", text: "Պոմոդորոյի ժամաչափ" },
+      { icon: "🎵", text: "Ֆոնային երաժշտություն" },
+      { icon: "💬", text: "Ուսումնական չատ" },
+      { icon: "📝", text: "Անձնական նշումներ" }
+    ];
   }
   const outroOptions = {
     title: outroTitle,
