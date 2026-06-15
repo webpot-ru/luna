@@ -242,9 +242,12 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
   const cleanVoiceId = String(voiceId).replace(/^edge_/, "");
   console.log(`[Local TTS] Generating: "${cleanedText.slice(0, 40)}..." using voice ${cleanVoiceId}`);
   
-  let venvPath = path.resolve(".venv-source-tools/bin/edge-tts");
-  if (process.platform === "win32") {
-    venvPath = path.resolve(".venv-source-tools/Scripts/edge-tts.exe");
+  let venvPath = "edge-tts";
+  const localVenvPath = process.platform === "win32"
+    ? path.resolve(".venv-source-tools/Scripts/edge-tts.exe")
+    : path.resolve(".venv-source-tools/bin/edge-tts");
+  if (fs.existsSync(localVenvPath)) {
+    venvPath = localVenvPath;
   }
   
   try {
