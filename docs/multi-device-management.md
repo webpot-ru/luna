@@ -82,7 +82,7 @@ scripts/db-dump.sh
 
 **Формат команды:**
 ```bash
-node scripts/trigger-workflow.mjs [set_id] [support_langs] [concurrency] [workflow_filename]
+node scripts/trigger-workflow.mjs [set_id] [support_langs] [concurrency] [workflow_filename] [target_langs]
 ```
 
 **Примеры запуска:**
@@ -95,6 +95,9 @@ node scripts/trigger-workflow.mjs home_kitchen_cookware_pilot_01 "UZ,AZ,KK,KA,HY
 
 # 3. Запустить параллельную сборку матрицы для всех остальных 50 языков
 node scripts/trigger-workflow.mjs home_kitchen_cookware_pilot_01 ALL 2 build-all-videos-matrix.yml
+
+# 4. Запустить сборку только для конкретных изучаемых языков (например, EN и RU для носителей азербайджанского AZ)
+node scripts/trigger-workflow.mjs home_kitchen_cookware_pilot_01 AZ 2 build-videos.yml EN,RU
 ```
 
 ---
