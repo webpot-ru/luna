@@ -1,0 +1,1017 @@
+{
+  "contract_id": "english_core_3000_source_contract_v0",
+  "status": "first_release_google_sheet_delivered",
+  "approved_for_generation": false,
+  "approved_for_postgres_import": false,
+  "approved_for_google_sheet": true,
+  "user_direction": {
+    "date": "2026-05-05",
+    "decision": "Proceed with the safe English Core 3000 path: Oxford remains benchmark only; production source list must come from usable/open/internal sources. Include EN-GB as a first-release text/example column, but keep transcription columns EN-only."
+  },
+  "course": {
+    "course_id": "english_core_3000",
+    "first_release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "source_language_code": "EN",
+    "source_variant": "American English / US default",
+    "regional_variant_code": "EN-GB",
+    "british_variant_status": "included_as_text_example_column_without_transcription",
+    "target_selected_rows": 150,
+    "target_candidate_pool_rows_min": 300,
+    "target_language_order_source": "config/language-order.json",
+    "first_release_excluded_language_codes": [],
+    "first_release_language_column_count": 54,
+    "transcription_scope": "US English source word and US English source example only"
+  },
+  "english_variant_decision": {
+    "first_release_variant": "EN",
+    "first_release_variant_label": "US English",
+    "en_gb_in_first_release": true,
+    "en_gb_first_release_status": "text_and_example_column_only",
+    "en_gb_transcription_in_first_release": false,
+    "reason": "EN-GB is included for British English word/display and example text, while transcription remains EN-only to avoid a separate British pronunciation QA branch in the first release."
+  },
+  "level_slicing_model": {
+    "whole_course_target_rows": 3000,
+    "first_release": {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "level_slice": "A1/A2",
+      "target_rows": 150,
+      "reason": "Small first release to prove source snapshot, 54-language QA, workbook shape, and benchmark audit before scaling."
+    },
+    "default_release_order": [
+      {
+        "level_slice": "A1/A2",
+        "role": "foundation everyday core",
+        "chunk_size_after_pilot": 300
+      },
+      {
+        "level_slice": "B1",
+        "role": "middle core: social, work, study, travel, media, abstract vocabulary",
+        "chunk_size": 300
+      },
+      {
+        "level_slice": "B2",
+        "role": "upper core: argumentation, news, education, professional and abstract meanings",
+        "chunk_size": 300
+      },
+      {
+        "level_slice": "B2/C1",
+        "role": "later Core 5000-style extension after Core 3000 is stable",
+        "chunk_size": 300,
+        "status": "later_expansion"
+      }
+    ],
+    "required_level_columns": [
+      "core_band",
+      "level_min",
+      "level_max"
+    ],
+    "one_file_with_3000_rows_first": false
+  },
+  "source_stack": [
+    {
+      "source_id": "ngsl_1_2",
+      "role": "primary_source_candidate",
+      "status": "candidate_source_needs_sharealike_review",
+      "url": "https://www.newgeneralservicelist.com/new-general-service-list",
+      "terms_snapshot": "Official NGSL page lists NGSL 1.2 as a 2809-word downloadable list and states CC BY-SA 4.0 licensing.",
+      "attribution_text": "New General Service List by Browne, C., Culligan, B., and Phillips, J. is licensed under CC BY-SA 4.0. Retrieved from https://www.newgeneralservicelist.com/new-general-service-list.",
+      "use_before_review": "source_candidate_only",
+      "blocked_until_review": [
+        "production packaging without attribution/share-alike decision",
+        "final workbook release metadata that omits attribution"
+      ]
+    },
+    {
+      "source_id": "cefr_j_wordlist",
+      "role": "level_and_pos_crosscheck",
+      "status": "candidate_crosscheck_needs_snapshot_review",
+      "url": "https://corpuscobo.net/",
+      "secondary_url": "https://github.com/openlanguageprofiles/olp-en-cefrj",
+      "terms_snapshot": "Official CEFR-J site publishes Wordlist Version 1.6. Open Language Profiles records CEFR-J vocabulary/grammar datasets as usable for research and commercial purposes with proper citation.",
+      "attribution_text": "The CEFR-J Wordlist Version 1.6. Compiled by Yukio Tono, Tokyo University of Foreign Studies. Retrieved from https://www.cefr-j.org/download.html.",
+      "use_before_review": "crosscheck_only",
+      "blocked_until_review": [
+        "production source-list use without stored snapshot and citation text"
+      ]
+    },
+    {
+      "source_id": "oxford_3000_5000",
+      "role": "benchmark_only",
+      "status": "not_a_production_source",
+      "url": "https://www.oxfordlearnersdictionaries.com/about/oxford3000",
+      "blocked": [
+        "copy exact Oxford word list as source data",
+        "copy Oxford list order",
+        "copy Oxford level labels",
+        "copy Oxford definitions",
+        "copy Oxford examples",
+        "copy Oxford pronunciations",
+        "use official/certified/endorsed claims"
+      ]
+    },
+    {
+      "source_id": "kaikki_wiktionary_en",
+      "role": "pos_sense_candidate_evidence",
+      "status": "local_reference_candidate"
+    },
+    {
+      "source_id": "omw_wordnet",
+      "role": "sense_grouping_candidate_evidence",
+      "status": "local_reference_candidate"
+    },
+    {
+      "source_id": "wikidata_concepticon",
+      "role": "concept_disambiguation_candidate_evidence",
+      "status": "local_reference_candidate"
+    },
+    {
+      "source_id": "local_translation_source_stack",
+      "role": "54_language_translation_and_example_preflight",
+      "status": "candidate_evidence_only"
+    },
+    {
+      "source_id": "internal_curation",
+      "role": "final_selection_meaning_scene_examples",
+      "status": "required"
+    }
+  ],
+  "snapshot_requirements": {
+    "future_output_root": "outputs/english-core-3000/source",
+    "required_metadata": [
+      "source_id",
+      "source_url",
+      "retrieved_at",
+      "raw_file_sha256",
+      "normalized_file_sha256",
+      "license_or_terms_note",
+      "attribution_text",
+      "field_mapping",
+      "included_columns",
+      "excluded_columns"
+    ],
+    "blocked_content": [
+      "Oxford definitions",
+      "Oxford examples",
+      "Oxford pronunciations",
+      "Oxford exact order as production source"
+    ]
+  },
+  "latest_source_snapshot": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "status": "checked_ok",
+    "checked_command": "node scripts/english-core/check-core-3000-source-snapshot.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "manifest_path": "outputs/english-core-3000/source/english_core_3000_a1_a2_part_001_150_v1_source_snapshot_manifest.json",
+    "sources": [
+      {
+        "source_id": "ngsl_1_2",
+        "normalized_rows": 2809,
+        "normalized_path": "outputs/english-core-3000/source/english_core_3000_a1_a2_part_001_150_v1.ngsl_1_2.normalized.jsonl"
+      },
+      {
+        "source_id": "cefr_j_wordlist",
+        "normalized_rows": 7801,
+        "normalized_path": "outputs/english-core-3000/source/english_core_3000_a1_a2_part_001_150_v1.cefr_j_wordlist.normalized.jsonl"
+      }
+    ],
+    "still_not_approved_for_generation": true
+  },
+  "latest_license_attribution_review": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "review_id": "license_attribution_review_v1",
+    "status": "accepted_with_attribution_and_sharealike_packaging",
+    "checked_command": "node scripts/english-core/build-core-3000-license-attribution-review.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "path": "outputs/english-core-3000/license/english_core_3000_a1_a2_part_001_150_v1_license_attribution_review_v1.json",
+    "summary_path": "outputs/english-core-3000/license/english_core_3000_a1_a2_part_001_150_v1_license_attribution_review_v1.md",
+    "ngsl_license": "CC-BY-SA-4.0",
+    "ngsl_license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "ngsl_required_notice": "New General Service List by Browne, C., Culligan, B., and Phillips, J. is licensed under CC BY-SA 4.0. Retrieved from https://www.newgeneralservicelist.com/new-general-service-list.",
+    "cefr_j_required_notice": "The CEFR-J Wordlist Version 1.6. Compiled by Yukio Tono, Tokyo University of Foreign Studies. Retrieved from https://www.cefr-j.org/download.html.",
+    "sharealike_packaging_required": true,
+    "no_endorsement_claim_required": true,
+    "postgres_changes": false,
+    "google_sheet_created": false,
+    "delivery_approved": false
+  },
+  "delivery_contract": {
+    "future_delivery_folder_name": "Слова для FlashcarsLuna",
+    "future_delivery_folder_id": "1mrg1eiUkOK5RFEN61EfEDMTH8dbMiNei",
+    "google_sheet_title": "FlashcardsLuna_US_English_Core_3000_A1_A2_Part_001",
+    "workbook_title": "LunaCards US English Core 3000 - A1/A2 Part 1",
+    "later_sheet_title_pattern": "FlashcardsLuna_US_English_Core_3000_<LEVEL>_Part_<NNN>",
+    "main_sheet_name": "English Core 3000",
+    "status": "delivered_google_sheet_verified",
+    "forbidden_title_terms_without_permission": [
+      "Oxford",
+      "official",
+      "certified",
+      "endorsed"
+    ],
+    "course_metadata_sheet": {
+      "required": true,
+      "sheet_name": "Course Metadata",
+      "shape": "row 1 has spreadsheet language codes; row 2 has Title; row 3 has Description",
+      "language_columns_source": "first-release workbook language order from config/language-order.json, including EN-GB",
+      "first_release_language_column_count": 54,
+      "required_rows": [
+        "Title",
+        "Description"
+      ],
+      "requires_localized_title_per_language": true,
+      "requires_localized_description_per_language": true,
+      "title_final_punctuation_required": true,
+      "description_final_punctuation_required": true,
+      "description_must_include_level_signal_as_separate_sentence": true,
+      "draft_en": {
+        "Title": "US English Core.",
+        "Description": "Everyday core words. Elementary level.",
+        "level_signal": "Elementary level"
+      },
+      "other_language_metadata_status": "draft_v0_prepared_needs_language_qa_before_delivery"
+    }
+  },
+  "workbook_columns": {
+    "fixed_columns": [
+      "release_id",
+      "course_id",
+      "row_id",
+      "core_item_id",
+      "meaning_id",
+      "source_language",
+      "source_variant",
+      "source_headword",
+      "part_of_speech",
+      "sense_no",
+      "core_band",
+      "level_min",
+      "level_max",
+      "source_rank",
+      "benchmark_membership",
+      "source_status",
+      "meaning_note",
+      "semantic_scene"
+    ],
+    "translation_columns_source": "config/language-order.json spreadsheetCode values in exact order, including EN-GB for first release",
+    "example_columns_source": "config/language-order.json spreadsheetCode values in exact order prefixed with example_, including EN-GB for first release",
+    "first_release_excluded_language_codes": [],
+    "status_columns": [
+      "qa_status",
+      "qa_notes"
+    ],
+    "english_only_transcription_columns": [
+      "transcription_EN",
+      "example_transcription_EN"
+    ],
+    "article_display_policy": {
+      "source_of_truth": [
+        "docs/card-content-model.md",
+        "docs/language-specific-rules.md"
+      ],
+      "en_policy": "US English countable singular nouns use a/an; plural and uncountable nouns do not get artificial a/an; verbs use to + base verb; other POS use base learner form.",
+      "target_policy": "Languages with learner-useful articles/gender/classifier markers use them according to language-specific rules; languages without articles do not get artificial articles.",
+      "qa_gate": "article_gender_marker_consistency"
+    },
+    "service_sheets": [
+      "Course Metadata",
+      "_README",
+      "_languages",
+      "_source_contract",
+      "_source_snapshot",
+      "_benchmark_audit",
+      "_source_assisted_qa",
+      "_source_decisions",
+      "_release_metadata"
+    ],
+    "target_language_transcription_columns": "out_of_scope_for_non_english_target_languages",
+    "en_gb_text_columns": "included_for_first_release",
+    "en_gb_transcription_columns": "out_of_scope_for_first_release",
+    "transcription_policy": "Learners study English with US source pronunciation first, so only EN source word/example transcription is included. EN-GB text/example columns are included, but EN-GB transcription requires separate approval."
+  },
+  "candidate_pool_contract": {
+    "future_artifact": "outputs/english-core-3000/candidate-pools/english_core_3000_a1_a2_part_001_150_v1_candidate_pool.jsonl",
+    "min_rows": 300,
+    "selected_rows": 150,
+    "first_release_function_word_selected_limit": 30,
+    "selection_policy": "For the first A1/A2 pilot, avoid making the workbook mostly grammar/function words. Select at most 30 grammar-sensitive function rows; fill the rest with ordinary A1/A2 vocabulary candidates.",
+    "required_fields": [
+      "source_candidate_id",
+      "source_headword",
+      "normalized_headword",
+      "part_of_speech",
+      "ngsl_rank",
+      "ngsl_band",
+      "cefr_j_level",
+      "oxford_benchmark_match",
+      "source_support",
+      "duplicate_risk",
+      "sense_split_risk",
+      "translation_coverage_risk",
+      "example_feasibility",
+      "selection_decision",
+      "decision_note"
+    ],
+    "allowed_selection_decisions": [
+      "selected",
+      "backup",
+      "excluded",
+      "needs_review"
+    ]
+  },
+  "latest_candidate_pool": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "status": "checked_ok",
+    "checked_command": "node scripts/english-core/check-core-3000-candidate-pool.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "path": "outputs/english-core-3000/candidate-pools/english_core_3000_a1_a2_part_001_150_v1_candidate_pool.jsonl",
+    "summary_path": "outputs/english-core-3000/candidate-pools/english_core_3000_a1_a2_part_001_150_v1_candidate_pool_summary.md",
+    "rows": 300,
+    "selected_rows": 150,
+    "backup_rows": 144,
+    "needs_review_rows": 6,
+    "selected_profile_counts": {
+      "ordinary_vocab": 120,
+      "grammar_sensitive": 30
+    },
+    "still_not_approved_for_generation": true
+  },
+  "latest_base_draft": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "status": "checked_ok_structural_skeleton",
+    "checked_command": "node scripts/english-core/check-core-3000-base-draft.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "path": "outputs/english-core-3000/base-drafts/english_core_3000_a1_a2_part_001_150_v1_base_draft.jsonl",
+    "summary_path": "outputs/english-core-3000/base-drafts/english_core_3000_a1_a2_part_001_150_v1_base_draft_summary.md",
+    "rows": 150,
+    "generation_ready_rows": 0,
+    "needs_review_rows": 150,
+    "function_rows": 30,
+    "pos_sense_review_rows": 64,
+    "noun_article_countability_review_rows": 24,
+    "verb_to_base_display_rows": 25,
+    "contains_final_translations": false,
+    "contains_final_examples": false,
+    "contains_final_transcriptions": false,
+    "still_not_approved_for_generation": true
+  },
+  "latest_row_review": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "status": "checked_ok_all_rows_reviewed_needs_evidence",
+    "checked_command": "node scripts/english-core/check-core-3000-row-review.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "overrides_path": "config/english-core-3000-row-review-overrides-v0.json",
+    "path": "outputs/english-core-3000/row-reviews/english_core_3000_a1_a2_part_001_150_v1_row_review_v1.jsonl",
+    "summary_path": "outputs/english-core-3000/row-reviews/english_core_3000_a1_a2_part_001_150_v1_row_review_v1_summary.md",
+    "rows": 150,
+    "reviewed_rows": 150,
+    "unreviewed_rows": 0,
+    "reviewed_function_rows": 30,
+    "part_of_speech_counts": {
+      "determiner": 5,
+      "be-verb": 1,
+      "conjunction": 4,
+      "preposition": 9,
+      "infinitive-to": 1,
+      "have-verb": 1,
+      "pronoun": 7,
+      "adverb": 22,
+      "do-verb": 1,
+      "modal auxiliary": 1,
+      "verb": 46,
+      "noun": 38,
+      "adjective": 14
+    },
+    "generation_ready_rows": 0,
+    "reviewed_fields": [
+      "part_of_speech",
+      "sense_no",
+      "meaning_id",
+      "meaning_note",
+      "semantic_scene",
+      "example_EN",
+      "article_or_marker_EN",
+      "countability_EN"
+    ],
+    "still_required_before_generation": [
+      "source_backed_transcription_EN",
+      "source_backed_example_transcription_EN",
+      "duplicate_reuse_review",
+      "translation_preflight",
+      "final_qa"
+    ],
+    "contains_final_translations": false,
+    "contains_final_transcriptions": false,
+    "still_not_approved_for_generation": true
+  },
+  "latest_en_transcription_review": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "status": "checked_ok_source_backed_planning_artifact",
+    "checked_command": "node scripts/english-core/check-core-3000-en-transcriptions.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "path": "outputs/english-core-3000/en-transcriptions/english_core_3000_a1_a2_part_001_150_v1_en_transcriptions_v1.jsonl",
+    "summary_path": "outputs/english-core-3000/en-transcriptions/english_core_3000_a1_a2_part_001_150_v1_en_transcriptions_v1_summary.md",
+    "rows": 150,
+    "transcription_EN_rows": 150,
+    "example_transcription_EN_rows": 150,
+    "target_language_transcription_rows": 0,
+    "source_method": "CMUdict exact-token lookup plus deterministic ARPABET-to-IPA conversion",
+    "source_ids": [
+      "ipa-focused-english-us-cmudict-dict",
+      "ipa-focused-english-us-cmudict-phones",
+      "ipa-focused-english-us-cmudict-symbols"
+    ],
+    "contains_final_qa_evidence": false,
+    "contains_final_translations": false,
+    "still_not_approved_for_generation": true
+  },
+  "latest_duplicate_reuse_review": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "status": "checked_ok_read_only_no_reuse_candidates",
+    "checked_command": "node scripts/english-core/check-core-3000-duplicate-reuse.mjs",
+    "path": "outputs/english-core-3000/reuse/english_core_3000_a1_a2_part_001_150_v1_duplicate_reuse_review_v1.json",
+    "summary_path": "outputs/english-core-3000/reuse/english_core_3000_a1_a2_part_001_150_v1_duplicate_reuse_review_v1_summary.md",
+    "rows": 150,
+    "existing_postgres_meaning_rows_checked": 110,
+    "decision_counts": {
+      "new_meaning_candidate": 150
+    },
+    "postgres_changes": false,
+    "still_not_approved_for_generation": true
+  },
+  "latest_en_gb_text_layer": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "status": "checked_ok_text_example_only_no_transcription",
+    "checked_command": "node scripts/english-core/check-core-3000-en-gb-layer.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "path": "outputs/english-core-3000/en-gb/english_core_3000_a1_a2_part_001_150_v1_en_gb_text_v1.jsonl",
+    "summary_path": "outputs/english-core-3000/en-gb/english_core_3000_a1_a2_part_001_150_v1_en_gb_text_v1_summary.md",
+    "rows": 150,
+    "same_as_us_text_and_example_rows": 150,
+    "transcription_EN_GB_rows": 0,
+    "example_transcription_EN_GB_rows": 0,
+    "contains_final_qa_evidence": false,
+    "still_not_approved_for_generation": true
+  },
+  "latest_course_metadata": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "status": "checked_ok_metadata_language_qa_v1",
+    "metadata_config_path": "config/english-core-3000-course-metadata-v0.json",
+    "checked_command": "node scripts/english-core/check-core-3000-course-metadata.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "native_style_qa_command": "node scripts/english-core/audit-core-3000-course-metadata-native-style.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "path": "outputs/english-core-3000/course-metadata/english_core_3000_a1_a2_part_001_150_v1_course_metadata_v0.json",
+    "sheet_preview_path": "outputs/english-core-3000/course-metadata/english_core_3000_a1_a2_part_001_150_v1_course_metadata_sheet_preview.tsv",
+    "summary_path": "outputs/english-core-3000/course-metadata/english_core_3000_a1_a2_part_001_150_v1_course_metadata_v0_summary.md",
+    "native_style_qa_report_path": "outputs/english-core-3000/course-metadata/english_core_3000_a1_a2_part_001_150_v1_course_metadata_native_style_qa_v1.json",
+    "native_style_qa_summary_path": "outputs/english-core-3000/course-metadata/english_core_3000_a1_a2_part_001_150_v1_course_metadata_native_style_qa_v1.md",
+    "language_rows": 54,
+    "title_limit": 25,
+    "description_limit": 60,
+    "draft_en": {
+      "Title": "US English Core.",
+      "Description": "Everyday core words. Elementary level.",
+      "level_signal": "Elementary level"
+    },
+    "metadata_language_qa_blockers": 0,
+    "metadata_language_qa_warnings": 0,
+    "external_native_speaker_approval": false,
+    "contains_final_qa_evidence": true,
+    "still_not_approved_for_generation": true
+  },
+  "latest_translation_batches": [
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "ru_es_fr_v0",
+      "status": "checked_ok_draft_native_style_qa_v2_checked",
+      "languages": [
+        "RU",
+        "ES",
+        "FR"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=ru_es_fr_v0 --languages=RU,ES,FR",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_ru_es_fr_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_ru_es_fr_v0_summary.md",
+      "language_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_ru_es_fr_language_qa_v1.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_ru_es_fr_native_style_qa_v2.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "de_it_pt_v0",
+      "status": "checked_ok_draft_native_style_qa_v2_checked",
+      "languages": [
+        "DE",
+        "IT",
+        "PT"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=de_it_pt_v0 --languages=DE,IT,PT",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_de_it_pt_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_de_it_pt_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_de_it_pt_native_style_qa_v1.md",
+      "native_style_qa_v2_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_de_it_pt_native_style_qa_v2.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "zh_ja_ko_v0",
+      "status": "checked_ok_draft_native_style_qa_v2_checked",
+      "languages": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=zh_ja_ko_v0 --languages=ZH,JA,KO",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_zh_ja_ko_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_zh_ja_ko_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_zh_ja_ko_native_style_qa_v1.md",
+      "native_style_qa_v2_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_zh_ja_ko_native_style_qa_v2.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "vi_th_ms_id_v0",
+      "status": "checked_ok_draft_native_style_qa_v2_checked",
+      "languages": [
+        "VI",
+        "TH",
+        "MS",
+        "ID"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=vi_th_ms_id_v0 --languages=VI,TH,MS,ID",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_vi_th_ms_id_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_vi_th_ms_id_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_vi_th_ms_id_native_style_qa_v1.md",
+      "native_style_qa_v2_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_vi_th_ms_id_native_style_qa_v2.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "pl_nl_sv_no_v0",
+      "status": "checked_ok_draft_native_style_qa_v2_checked",
+      "languages": [
+        "PL",
+        "NL",
+        "SV",
+        "NO"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=pl_nl_sv_no_v0 --languages=PL,NL,SV,NO",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_pl_nl_sv_no_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_pl_nl_sv_no_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_pl_nl_sv_no_native_style_qa_v1.md",
+      "native_style_qa_v2_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_pl_nl_sv_no_native_style_qa_v2.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "da_fi_cs_sk_v0",
+      "status": "checked_ok_draft_native_style_qa_v2_checked",
+      "languages": [
+        "DA",
+        "FI",
+        "CS",
+        "SK"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=da_fi_cs_sk_v0 --languages=DA,FI,CS,SK",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_da_fi_cs_sk_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_da_fi_cs_sk_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_da_fi_cs_sk_native_style_qa_v1.md",
+      "native_style_qa_v2_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_da_fi_cs_sk_native_style_qa_v2.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "hu_ro_bg_hr_v0",
+      "status": "checked_ok_draft_native_style_qa_v3_checked",
+      "languages": [
+        "HU",
+        "RO",
+        "BG",
+        "HR"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=hu_ro_bg_hr_v0 --languages=HU,RO,BG,HR",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_hu_ro_bg_hr_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_hu_ro_bg_hr_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_hu_ro_bg_hr_native_style_qa_v1.md",
+      "native_style_qa_v2_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_hu_ro_bg_hr_native_style_qa_v2.md",
+      "native_style_qa_v3_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_hu_ro_bg_hr_native_style_qa_v3.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "sr_sl_lt_lv_v0",
+      "status": "checked_ok_draft_native_style_qa_v3_checked",
+      "languages": [
+        "SR",
+        "SL",
+        "LT",
+        "LV"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=sr_sl_lt_lv_v0 --languages=SR,SL,LT,LV",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_sr_sl_lt_lv_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_sr_sl_lt_lv_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_sr_sl_lt_lv_native_style_qa_v1.md",
+      "native_style_qa_v2_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_sr_sl_lt_lv_native_style_qa_v2.md",
+      "native_style_qa_v3_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_sr_sl_lt_lv_native_style_qa_v3.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "et_is_hi_bn_v0",
+      "status": "checked_ok_draft_native_style_qa_v3_checked",
+      "languages": [
+        "ET",
+        "IS",
+        "HI",
+        "BN"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=et_is_hi_bn_v0 --languages=ET,IS,HI,BN",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_et_is_hi_bn_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_et_is_hi_bn_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_et_is_hi_bn_native_style_qa_v1.md",
+      "native_style_qa_v2_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_et_is_hi_bn_native_style_qa_v2.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "tl_my_km_lo_v0",
+      "status": "checked_ok_draft_native_style_qa_v4_checked",
+      "languages": [
+        "TL",
+        "MY",
+        "KM",
+        "LO"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=tl_my_km_lo_v0 --languages=TL,MY,KM,LO",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_tl_my_km_lo_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_tl_my_km_lo_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_tl_my_km_lo_native_style_qa_v3.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "ne_si_ta_v0",
+      "status": "checked_ok_draft_native_style_qa_v3_checked",
+      "languages": [
+        "NE",
+        "SI",
+        "TA"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=ne_si_ta_v0 --languages=NE,SI,TA",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_ne_si_ta_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_ne_si_ta_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_ne_si_ta_native_style_qa_v2.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "te_kn_ml_v0",
+      "status": "checked_ok_draft_native_style_qa_v3_checked",
+      "languages": [
+        "TE",
+        "KN",
+        "ML"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=te_kn_ml_v0 --languages=TE,KN,ML",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_te_kn_ml_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_te_kn_ml_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_te_kn_ml_native_style_qa_v2.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "uz_kk_az_v0",
+      "status": "checked_ok_draft_native_style_qa_v2_checked",
+      "languages": [
+        "UZ",
+        "KK",
+        "AZ"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=uz_kk_az_v0 --languages=UZ,KK,AZ",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_uz_kk_az_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_uz_kk_az_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_uz_kk_az_native_style_qa_v2.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "ka_hy_tr_v0",
+      "status": "checked_ok_draft_native_style_qa_v2_checked",
+      "languages": [
+        "KA",
+        "HY",
+        "TR"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=ka_hy_tr_v0 --languages=KA,HY,TR",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_ka_hy_tr_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_ka_hy_tr_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_ka_hy_tr_native_style_qa_v2.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    },
+    {
+      "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+      "batch_id": "sw_pt_br_es_419_v0",
+      "status": "checked_ok_draft_native_style_qa_v3_checked",
+      "languages": [
+        "SW",
+        "PT-BR",
+        "ES-419"
+      ],
+      "checked_command": "node scripts/english-core/check-core-3000-translation-batch.mjs --batch=sw_pt_br_es_419_v0 --languages=SW,PT-BR,ES-419",
+      "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_sw_pt_br_es_419_v0.jsonl",
+      "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_sw_pt_br_es_419_v0_summary.md",
+      "native_style_qa_report_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_translation_batch_sw_pt_br_es_419_native_style_qa_v2.md",
+      "rows": 150,
+      "target_language_transcription_rows": 0,
+      "contains_final_qa_evidence": false,
+      "requires_final_source_assisted_qa": true,
+      "postgres_changes": false,
+      "google_sheet_created": false,
+      "still_not_approved_for_generation": true
+    }
+  ],
+  "latest_all_language_native_style_audit": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "audit_id": "all_language_native_style_audit_v2",
+    "status": "passed_no_findings",
+    "path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_all_language_native_style_audit_v2.json",
+    "summary_path": "outputs/english-core-3000/translation-batches/english_core_3000_a1_a2_part_001_150_v1_all_language_native_style_audit_v2.md",
+    "rows": 150,
+    "language_columns": 54,
+    "expected_display_example_cells": 16200,
+    "blockers": 0,
+    "warnings": 0,
+    "scope": [
+      "all multilingual translation batches",
+      "EN-GB text layer",
+      "regional PT/PT-BR and ES/ES-419 scans",
+      "exact English fallback scans",
+      "non-Latin script leakage scans",
+      "high-risk semantic row spot checks"
+    ],
+    "repairs_before_pass": [
+      "core3000_0082 too repaired for HI, BN, MY, NE, TA, TE, KN and ML to preserve excessive degree",
+      "core3000_0028 will repaired for PT-BR display/example alignment"
+    ],
+    "external_native_speaker_approval": false,
+    "postgres_changes": false,
+    "google_sheet_created": false,
+    "still_not_approved_for_generation": true
+  },
+  "latest_source_assisted_readiness": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "report_id": "source_assisted_readiness_v1",
+    "status": "passed_source_assisted_readiness_google_sheet_delivered",
+    "checked_command": "node scripts/english-core/check-core-3000-source-assisted-readiness.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "path": "outputs/english-core-3000/readiness/english_core_3000_a1_a2_part_001_150_v1_source_assisted_readiness_v1.json",
+    "summary_path": "outputs/english-core-3000/readiness/english_core_3000_a1_a2_part_001_150_v1_source_assisted_readiness_v1.md",
+    "rows": 150,
+    "language_columns": 54,
+    "expected_display_example_cells": 16200,
+    "filled_display_example_cells": 16200,
+    "translation_batches": 15,
+    "target_languages_in_batches": 52,
+    "transcription_EN_rows": 150,
+    "example_transcription_EN_rows": 150,
+    "target_language_transcription_rows": 0,
+    "en_gb_transcription_rows": 0,
+    "blockers": 0,
+    "warnings": 0,
+    "warnings_summary": [],
+    "postgres_changes": false,
+    "google_sheet_created": true,
+    "delivery_approved": true,
+    "still_not_approved_for_generation": true
+  },
+  "latest_workbook_export": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "status": "exported_local_xlsx_checked_and_google_sheet_delivered",
+    "export_command": "NODE_PATH=/Users/lali/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules /Users/lali/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/english-core/export-core-3000-workbook.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "checked_command": "NODE_PATH=/Users/lali/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules /Users/lali/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/english-core/check-core-3000-workbook-export.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "path": "outputs/english-core-3000/final/FlashcardsLuna_US_English_Core_3000_A1_A2_Part_001_final.xlsx",
+    "manifest_path": "outputs/english-core-3000/final/FlashcardsLuna_US_English_Core_3000_A1_A2_Part_001_final_manifest.json",
+    "delivery_manifest_path": "outputs/english-core-3000/final/FlashcardsLuna_US_English_Core_3000_A1_A2_Part_001_final_delivery.json",
+    "workbook_sha256": "178e1b75314f993789abbeae6a850c430230792dc97578e0b8eb77566d01e440",
+    "rows": 150,
+    "language_columns": 54,
+    "headers": 130,
+    "main_sheet": "English Core 3000",
+    "service_sheets": [
+      "Course Metadata",
+      "_README",
+      "_languages",
+      "_source_contract",
+      "_source_snapshot",
+      "_benchmark_audit",
+      "_source_assisted_qa",
+      "_source_decisions",
+      "_release_metadata"
+    ],
+    "postgres_changes": false,
+    "google_sheet_created": true,
+    "delivery_approved": true
+  },
+  "latest_google_sheet_delivery": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "status": "updated_existing_and_readback_verified_after_focused_polish",
+    "upload_command": "node scripts/upload-spreadsheet-to-drive-folder.mjs outputs/english-core-3000/final/FlashcardsLuna_US_English_Core_3000_A1_A2_Part_001_final.xlsx --file-id=1Sd7lSn-_elmyg0uS7opYvsyqSXsUnbLqLo9duKkVqag --title=FlashcardsLuna_US_English_Core_3000_A1_A2_Part_001",
+    "readback_command": "NODE_PATH=/Users/lali/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules /Users/lali/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/english-core/check-core-3000-google-sheet-readback.mjs english_core_3000_a1_a2_part_001_150_v1",
+    "delivery_manifest_path": "outputs/english-core-3000/final/FlashcardsLuna_US_English_Core_3000_A1_A2_Part_001_final_delivery.json",
+    "google_sheet_id": "1Sd7lSn-_elmyg0uS7opYvsyqSXsUnbLqLo9duKkVqag",
+    "google_sheet_url": "https://docs.google.com/spreadsheets/d/1Sd7lSn-_elmyg0uS7opYvsyqSXsUnbLqLo9duKkVqag/edit?usp=drivesdk",
+    "google_sheet_title": "FlashcardsLuna_US_English_Core_3000_A1_A2_Part_001",
+    "drive_folder_id": "1mrg1eiUkOK5RFEN61EfEDMTH8dbMiNei",
+    "google_sheet_mime_type": "application/vnd.google-apps.spreadsheet",
+    "google_sheet_verified_in_folder": true,
+    "google_sheet_upload_mode": "update_existing",
+    "google_sheet_uploaded_workbook_sha256": "178e1b75314f993789abbeae6a850c430230792dc97578e0b8eb77566d01e440",
+    "google_sheet_readback_status": "verified",
+    "google_sheet_readback_sample_count": 19795,
+    "google_sheet_readback_method": "sheets_values_english_core_main_full_plus_course_metadata",
+    "postgres_changes": false,
+    "google_sheet_created": true,
+    "delivery_approved": true
+  },
+  "latest_per_language_quality_assessment": {
+    "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+    "report_id": "per_language_quality_scores_v2",
+    "status": "passed_ai_native_style_quality_assessment",
+    "checked_command": "node scripts/english-core/audit-core-3000-per-language-quality-scores.mjs",
+    "path": "outputs/english-core-3000/qa/english_core_3000_a1_a2_part_001_150_v1_per_language_quality_scores_v2.json",
+    "summary_path": "outputs/english-core-3000/qa/english_core_3000_a1_a2_part_001_150_v1_per_language_quality_scores_v2.md",
+    "language_count": 54,
+    "score_min_percent": 96,
+    "score_max_percent": 99,
+    "score_average_percent": 97.2,
+    "basis": [
+      "focused low-resource language polish completed for MY, KM, LO, SI, SR, SL, LT, LV, IS, TA, TE, KN, HY and SW",
+      "all-language native-style audit v2 blockers=0 warnings=0",
+      "Course Metadata native-style QA v1 blockers=0 warnings=0",
+      "Google Sheet readback verified 19795 cells"
+    ],
+    "external_native_speaker_approval": false,
+    "postgres_changes": false,
+    "google_sheet_created": false,
+    "delivery_sheet_unchanged": true
+  },
+  "qa_gates_before_generation": [
+    "source_snapshot_hashes",
+    "license_attribution_review",
+    "candidate_pool_min_size",
+    "selection_decision_coverage",
+    "base_draft_structural_check",
+    "sense_split_review",
+    "article_countability_review",
+    "duplicate_reuse_review",
+    "meaning_note_semantic_scene_review",
+    "us_english_example_review",
+    "course_metadata_localization_review",
+    "course_metadata_sentence_punctuation",
+    "benchmark_audit",
+    "english_transcription_source_review",
+    "source_assisted_preflight_design",
+    "source_assisted_readiness"
+  ],
+  "source_snapshot_scripts": [
+    "scripts/english-core/build-core-3000-source-snapshot.mjs",
+    "scripts/english-core/check-core-3000-source-snapshot.mjs"
+  ],
+  "license_attribution_scripts": [
+    "scripts/english-core/build-core-3000-license-attribution-review.mjs"
+  ],
+  "candidate_pool_scripts": [
+    "scripts/english-core/build-core-3000-candidate-pool.mjs",
+    "scripts/english-core/check-core-3000-candidate-pool.mjs"
+  ],
+  "base_draft_scripts": [
+    "scripts/english-core/build-core-3000-base-draft.mjs",
+    "scripts/english-core/check-core-3000-base-draft.mjs"
+  ],
+  "row_review_scripts": [
+    "scripts/english-core/apply-core-3000-row-review.mjs",
+    "scripts/english-core/apply-core-3000-ordinary-row-review.mjs",
+    "scripts/english-core/check-core-3000-row-review.mjs"
+  ],
+  "en_transcription_scripts": [
+    "scripts/english-core/apply-core-3000-en-transcriptions.mjs",
+    "scripts/english-core/check-core-3000-en-transcriptions.mjs"
+  ],
+  "duplicate_reuse_scripts": [
+    "scripts/english-core/check-core-3000-duplicate-reuse.mjs"
+  ],
+  "en_gb_text_scripts": [
+    "scripts/english-core/build-core-3000-en-gb-layer.mjs",
+    "scripts/english-core/check-core-3000-en-gb-layer.mjs"
+  ],
+  "course_metadata_scripts": [
+    "scripts/english-core/build-core-3000-course-metadata.mjs",
+    "scripts/english-core/check-core-3000-course-metadata.mjs",
+    "scripts/english-core/audit-core-3000-course-metadata-native-style.mjs"
+  ],
+  "translation_batch_scripts": [
+    "scripts/english-core/build-core-3000-translation-batch-ru-es-fr.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-de-it-pt.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-zh-ja-ko.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-vi-th-ms-id.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-pl-nl-sv-no.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-da-fi-cs-sk.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-hu-ro-bg-hr.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-sr-sl-lt-lv.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-et-is-hi-bn.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-tl-my-km-lo.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-ne-si-ta.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-te-kn-ml.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-uz-kk-az.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-ka-hy-tr.mjs",
+    "scripts/english-core/build-core-3000-translation-batch-sw-pt-br-es-419.mjs",
+    "scripts/english-core/check-core-3000-translation-batch.mjs"
+  ],
+  "all_language_audit_scripts": [
+    "scripts/english-core/audit-core-3000-all-language-native-style.mjs",
+    "scripts/english-core/audit-core-3000-per-language-quality-scores.mjs"
+  ],
+  "source_assisted_readiness_scripts": [
+    "scripts/english-core/check-core-3000-source-assisted-readiness.mjs"
+  ],
+  "workbook_export_scripts": [
+    "scripts/english-core/export-core-3000-workbook.mjs",
+    "scripts/english-core/check-core-3000-workbook-export.mjs",
+    "scripts/english-core/check-core-3000-google-sheet-readback.mjs"
+  ]
+}

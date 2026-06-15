@@ -1,0 +1,99 @@
+{
+  "contractVersion": "v1",
+  "languageVariantCount": 54,
+  "languageOrderSource": "config/language-order.json",
+  "requiredWorkbookSheets": [
+    "Main vocabulary sheet",
+    "Course Metadata",
+    "Deck Metadata",
+    "Card Metadata",
+    "_README",
+    "_qa_status",
+    "_languages"
+  ],
+  "mainSheetColumnBlocks": [
+    {
+      "name": "translations",
+      "headerPattern": "{spreadsheet_code}"
+    },
+    {
+      "name": "examples",
+      "headerPattern": "{spreadsheet_code} example"
+    },
+    {
+      "name": "word_transcriptions",
+      "headerPattern": "{spreadsheet_code} transcription"
+    }
+  ],
+  "keys": {
+    "spreadsheetRowKey": "card_key",
+    "cardKeyFormula": "set_id::meaning_id",
+    "semanticKey": "meaning_id",
+    "contextExampleKey": "context_example_key",
+    "contextExampleKeyFormula": "set_id::meaning_id::example_id"
+  },
+  "acceptedFinalStatuses": {
+    "selectionStatus": [
+      "approved"
+    ],
+    "contentQualityStatuses": [
+      "approved",
+      "generated_checked"
+    ],
+    "pronunciationStatuses": [
+      "approved",
+      "generated_checked",
+      "not_applicable"
+    ]
+  },
+  "finalExportRequirements": [
+    "zero_empty_words",
+    "zero_empty_examples",
+    "zero_empty_transcriptions",
+    "all_content_statuses_final_ready",
+    "all_pronunciation_statuses_final_ready",
+    "content_sets.selection_status_is_approved",
+    "generated_checked_requires_structured_qa_reviews",
+    "text_bearing_qa_requires_current_checked_value_hash",
+    "latest_qa_review_semantics",
+    "qa_evidence_and_target_statuses_synchronized",
+    "context_examples_require_base_example_alignment_evidence",
+    "example_translations_require_semantic_preservation_evidence"
+  ],
+  "structuredQaEvidenceRequiredFields": [
+    "target_type",
+    "target_key",
+    "review_status",
+    "reviewer",
+    "reviewed_at",
+    "check_family",
+    "result_summary",
+    "pass_id_or_batch_id"
+  ],
+  "textBearingQaEvidenceFields": [
+    "checked_value_hash"
+  ],
+  "deliveryManifest": {
+    "pathPattern": "outputs/google-sheets/{workbook_base}_delivery.json",
+    "requiredFields": [
+      "set_id",
+      "workbook_path",
+      "row_count",
+      "language_count",
+      "language_variant_count",
+      "drive_folder_id",
+      "google_sheet_id",
+      "google_sheet_url",
+      "google_sheet_verified_in_folder",
+      "google_sheet_matches_current_workbook",
+      "google_sheet_upload_status"
+    ]
+  },
+  "specialLanguageCodeRules": {
+    "norwegian": {
+      "spreadsheetCode": "NO",
+      "dbCode": "NB",
+      "rule": "Google Sheets uses NO; Postgres stores Norwegian Bokmal as NB."
+    }
+  }
+}

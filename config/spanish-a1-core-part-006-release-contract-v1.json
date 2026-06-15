@@ -1,0 +1,415 @@
+{
+  "contract_id": "spanish_a1_core_release_contract_v1::spanish_a1_core_part_006_300_v1",
+  "status": "support_generation_blocked_gemini_quota_cached_partial",
+  "scope": "Spanish A1 course-prep vocabulary release workbook Part 006, separate from ordinary thematic decks, Oxford English vocabulary, HSK Classic and HSK 3.0; final buyer-facing delivery requires separate Spanish (Spain) and Latin American Spanish edition workbooks.",
+  "approved_for_generation": true,
+  "source_candidate_file": "config/spanish-a1-core-part-006-candidates.tsv",
+  "release_part": {
+    "part_number": 6,
+    "row_id_start": 1501,
+    "meaning_namespace": "spanish_a1::part_006",
+    "selected_scope": "Internal LunaCards continuation of Spanish A1 Core after Parts 001-005; additional A1/A1+ travel, services, home, food, study, admin, tech, nature, emotions, common verbs and adjectives."
+  },
+  "default_release": {
+    "release_id": "spanish_a1_core_part_006_300_v1",
+    "course_id": "spanish_a1_core",
+    "cefr_level": "A1",
+    "expected_row_count": 300
+  },
+  "course": {
+    "course_id": "spanish_a1_core",
+    "product_safe_working_title": "LunaCards Spanish A1 Course Prep",
+    "source_language_code": "ES",
+    "source_variant": "Spanish (Spain) default",
+    "regional_variant_code": "ES-419",
+    "regional_variant_label": "Latin American Spanish",
+    "target_language_order_source": "config/language-order.json",
+    "target_language_column_count": 54,
+    "target_language_role": "learner support translations for studying Spanish, not an ordinary polyglot thematic deck contract"
+  },
+  "source_policy": {
+    "benchmark_only_sources": [
+      {
+        "id": "instituto-cervantes-pcic-a1-a2",
+        "name": "Instituto Cervantes Plan Curricular / PCIC A1-A2",
+        "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/niveles/09_nociones_especificas_inventario_a1-a2.htm",
+        "role": "benchmark_coverage_only"
+      },
+      {
+        "id": "dele-instituto-cervantes",
+        "name": "DELE Spanish exams",
+        "url": "https://examenes.cervantes.es/es/dele/que-es",
+        "role": "exam_benchmark_only"
+      },
+      {
+        "id": "siele-instituto-cervantes",
+        "name": "SIELE Spanish exam",
+        "url": "https://examenes.cervantes.es/es/siele/que-es",
+        "role": "exam_benchmark_and_regional_variant_signal_only"
+      }
+    ],
+    "production_truth": [
+      "internal_lunacards_row_curation",
+      "meaning_note",
+      "semantic_scene",
+      "reviewed_spanish_source_fields",
+      "reviewed_lunacards_authored_examples",
+      "release_qa_evidence"
+    ],
+    "local_candidate_sources": [
+      {
+        "source_id": "kaikki-spanish",
+        "local_path": "reference-sources/raw/wiktionary-kaikki/kaikki.org-dictionary-Spanish.jsonl.gz",
+        "role": "Spanish lexical forms, POS, gender/article hints and ES/ES-419 lexical sanity",
+        "confidence": "source_partial"
+      },
+      {
+        "source_id": "dbnary-es-20251001",
+        "local_path": "reference-sources/raw/dbnary/es_dbnary_all_20251001.tgz",
+        "role": "Spanish lexical/RDF lookup and bilingual candidate support",
+        "confidence": "source_partial"
+      },
+      {
+        "source_id": "unimorph-spa",
+        "local_path": "reference-sources/raw/unimorph/spa/spa",
+        "role": "Spanish morphology sanity for Spanish verbs, gender, number and inflected forms",
+        "confidence": "source_partial"
+      },
+      {
+        "source_id": "freedict-eng-spa-src",
+        "local_path": "reference-sources/raw/freedict/dictionaries/eng-spa/freedict-eng-spa-2025.11.23.src.tar.xz",
+        "role": "English-Spanish bilingual candidate support",
+        "confidence": "source_partial"
+      },
+      {
+        "source_id": "apertium-eng-spa-debian-dix",
+        "local_path": "reference-sources/raw/apertium/eng-spa/apertium-eng-spa.eng-spa.dix",
+        "role": "English-Spanish bilingual candidate support",
+        "confidence": "source_partial"
+      },
+      {
+        "source_id": "opus-en-es",
+        "local_path": "reference-sources/raw/opus/*/en-es.txt.zip",
+        "role": "Example and collocation sanity only",
+        "confidence": "source_partial"
+      }
+    ],
+    "external_frequency_references": [
+      {
+        "id": "wordfreq",
+        "url": "https://pypi.org/project/wordfreq/",
+        "role": "frequency sanity only; data license impact must be reviewed before redistribution"
+      },
+      {
+        "id": "corpus-del-espanol",
+        "url": "https://www.corpusdata.org/spanish.asp",
+        "role": "frequency and dialect sanity only; terms must be reviewed before downloadable data use"
+      }
+    ],
+    "blocked_without_permission_or_review": [
+      "copy_pcic_list_order_or_text_as_release_rows",
+      "copy_dele_or_siele_exam_materials",
+      "copy_textbook_or_paid_deck_vocabulary_sections",
+      "claim_official_certified_approved_or_endorsed_status",
+      "treat_dictionary_or_corpus_candidates_as_final_truth_without_row_level_sense_review"
+    ],
+    "allowed_uses": [
+      "benchmark_coverage_mapping",
+      "internal_lunacards_candidate_selection",
+      "source_assisted_article_gender_morphology_checks",
+      "source_assisted_regional_variant_review",
+      "lunacards_authored_examples",
+      "54_language_support_translations_after_preflight"
+    ]
+  },
+  "row_identity": {
+    "row_key": "release_id::spanish_item_id",
+    "semantic_key": "meaning_id",
+    "required_source_fields": [
+      "release_id",
+      "course_id",
+      "row_id",
+      "spanish_item_id",
+      "meaning_id",
+      "cefr_level",
+      "source_language",
+      "source_variant",
+      "source_lemma",
+      "display_ES",
+      "display_ES_419",
+      "part_of_speech",
+      "gender",
+      "article_ES",
+      "article_ES_419",
+      "number_policy",
+      "verb_infinitive",
+      "verb_group",
+      "meaning_note",
+      "semantic_scene",
+      "topic_domain",
+      "example_ES",
+      "example_ES_419",
+      "transcription_ES",
+      "transcription_ES_419",
+      "source_status",
+      "qa_status",
+      "qa_notes"
+    ],
+    "sense_split_rule": "Split one Spanish source form into separate meaning_id rows when part of speech, sense, construction, register or semantic scene differs."
+  },
+  "field_rules": {
+    "article_gender": "Required for Spanish nouns. Stressed feminine-a nouns may use article el while retaining feminine gender.",
+    "verb_forms": "Use infinitive as canonical form unless the row intentionally teaches a high-frequency A1 phrase; store -ar/-er/-ir/irregular group.",
+    "source_examples": "LunaCards-authored A1 examples only; simple, concrete, present tense preferred.",
+    "source_transcription": "For Spanish A1 final edition workbooks, primary Spanish word transcription columns use course-specific broad learner IPA (`spanish_a1_broad_learner_ipa_v1`) generated by `scripts/spanish-a1/lib/spanish-pronunciation.mjs`; Spain (`ES`) and Latin American Spanish (`ES-419`) differ where pronunciation policy differs, such as distinción /θ/ versus seseo /s/. Candidate source fields store IPA for the base display without learner article; final workbook word IPA is computed from learner-facing display and includes el/la where visible.",
+    "support_language_transcription": "not_in_scope_v1",
+    "audio": "not_in_scope_v1",
+    "regional_variant": "ES-419 may equal ES when region-neutral; differences must be intentional and reviewed.",
+    "source_example_transcription": "For Spanish A1 final edition workbooks, the primary Spanish example transcription column uses course-specific broad learner IPA (`spanish_a1_broad_learner_ipa_v1`) generated from the visible Spanish example sentence for the concrete edition (`ES` or `ES-419`)."
+  },
+  "workbook": {
+    "principle": "Buyer-facing Spanish A1 course delivery produces two separate edition workbooks, analogous to Oxford US/UK: a Spanish (Spain) workbook and a Latin American Spanish workbook. Each main sheet exposes one primary Spanish variant first, omits the other Spanish source variant from the buyer-facing main sheet, keeps the omitted variant in Card Metadata/source/isolated DB, and includes primary Spanish word/example broad learner IPA columns.",
+    "main_sheet_name": "Spanish A1 Core Part 006",
+    "translation_columns": "Edition-specific order: Spanish (Spain) uses ES first and omits ES-419 from the main sheet; Latin American Spanish uses ES-419 first and omits ES. After the primary Spanish variant, include remaining non-Spanish support spreadsheetCode values from config/language-order.json in their existing relative order.",
+    "example_columns": "Edition-specific order as `${CODE} example` columns matching the display columns, followed by primary Spanish word transcription and primary Spanish example transcription columns for the concrete edition.",
+    "language_column_order_policy": "separate_spanish_editions",
+    "language_column_order_first": {
+      "latin_american_spanish": [
+        "ES-419",
+        "EN",
+        "FR"
+      ],
+      "spain_spanish": [
+        "ES",
+        "EN",
+        "FR"
+      ]
+    },
+    "main_sheet_column_contract": "translations -> examples -> primary Spanish transcription -> primary Spanish example transcription",
+    "source_fields_in_main_sheet": false,
+    "spanish_noun_articles_in_main_sheet": true,
+    "support_language_transcriptions_in_main_sheet": false,
+    "service_sheets": [
+      "Course Metadata",
+      "Deck Metadata",
+      "Card Metadata",
+      "README",
+      "Languages",
+      "Source Contract",
+      "Benchmark Audit",
+      "Candidate Pool",
+      "Source Assisted QA",
+      "Regional Variant QA",
+      "Translation QA",
+      "Sources",
+      "Support Batches"
+    ],
+    "postgres_import": false,
+    "ordinary_deck_sort": null,
+    "isolated_db_storage": {
+      "enabled": true,
+      "ordinary_deck_tables": false,
+      "source_only_saved": false,
+      "final_support_storage_ready": false,
+      "tables": [
+        "spanish_a1_source_items",
+        "spanish_a1_support_items",
+        "spanish_a1_db_import_runs"
+      ]
+    },
+    "google_sheet_created": false,
+    "final_delivery_ready": false,
+    "course_metadata_policy": "Course Metadata keeps the ordinary 5-row polyglot shape, but Title, Description, Module and Category are resolved from the concrete edition metadata source. Latin American Spanish and Spanish (Spain) are separate metadata sources and separate Google Sheets. Metadata labels must be full reader-facing labels, not cramped abbreviations; export, local workbook readback and Google Sheet readback exact-check Course Metadata and block old shortened labels.",
+    "primary_spanish_transcription_columns_in_main_sheet": true,
+    "primary_spanish_example_transcription_in_main_sheet": true,
+    "course_metadata_version": "spanish-a1-core-course-metadata-v5-polished-edition-labels",
+    "course_metadata_full_reader_labels": true,
+    "course_metadata_abbreviation_gate": true,
+    "course_metadata_style": {
+      "freeze_header_and_label_column": true,
+      "wrap_text": true,
+      "widened_language_columns": true,
+      "bordered_table": true
+    }
+  },
+  "qa_gates": [
+    "source_contract_gate",
+    "benchmark_no_copy_gate",
+    "candidate_pool_gate",
+    "spanish_source_candidate_gate",
+    "spanish_article_gender_gate",
+    "spanish_morphology_gate",
+    "spanish_regional_variant_gate",
+    "spanish_example_quality_gate",
+    "source_draft_xlsx_readback_gate",
+    "support_generation_plan_gate",
+    "support_translation_memory_reuse_map_gate",
+    "support_language_source_preflight",
+    "support_example_scene_gate",
+    "final_workbook_contract_gate",
+    "google_sheet_readback_gate"
+  ],
+  "ai_tool_policy": {
+    "default_generation": "structured_local_first",
+    "gemini_role": "reviewer_or_repair_support_only_unless_user_explicitly_approves_bounded_live_generation",
+    "paid_api_usage": "requires_explicit_user_confirmation",
+    "ai_output_source_truth": false,
+    "latest_explicit_user_confirmation": {
+      "confirmed_at": "2026-06-12T13:24:00.000Z",
+      "source": "user_chat_2026_06_12_delai_dalshe_after_quota_warning",
+      "scope": "Use subscription-backed Gemini CLI only for Spanish A1 Core Part 006 support-language generation; no paid API key; no model downgrade; no ordinary deck import.",
+      "release_id": "spanish_a1_core_part_006_300_v1",
+      "model": "gemini-3.1-pro-preview",
+      "paid_api_key": false,
+      "paid_api_key_usage": false,
+      "quota_use": true,
+      "ordinary_deck_import": false,
+      "isolated_spanish_a1_db_import_after_final_support": true
+    },
+    "part003_note": "Part 003 live Gemini/support-language generation was explicitly confirmed by the user on 2026-06-09 for subscription-backed Gemini CLI only. No paid API key use and no model downgrade are allowed.",
+    "part004_note": "Part 004 support-language generation approved by user reply in Russian: delai dalshe, immediately after Codex warned that the next step spends subscription-backed Gemini CLI quota. Use gemini-3.1-pro-preview only; no paid API key and no model downgrade.",
+    "part005_note": "Part 005 support-language generation approved by user reply in Russian: delai, immediately after Codex warned that the next step spends subscription-backed Gemini CLI quota. Use gemini-3.1-pro-preview only; no paid API key and no model downgrade.",
+    "part006_note": "Part 006 support-language generation approved by user reply in Russian: delai dalshe, immediately after Codex reported the explicit Gemini quota blocker. Use subscription-backed Gemini CLI gemini-3.1-pro-preview only; no paid API key and no model downgrade."
+  },
+  "current_blockers": [
+    "gemini-3.1-pro-preview quota exhausted until 2026-06-13T03:20:50.729Z; resume same generator command after reset"
+  ],
+  "current_pending": [
+    "resume_support_language_generation_from_cached_chunks",
+    "spanish_a1_gates",
+    "final_two_edition_workbook_export",
+    "native_google_sheet_upload_and_readback",
+    "sample_quality_audit",
+    "isolated_spanish_a1_db_import_and_readback",
+    "final_release_gate"
+  ],
+  "updated_at": "2026-06-12T13:50:53.960Z",
+  "part006_candidate_scaffold": "config/spanish-a1-core-part-006-candidates.tsv",
+  "latest_candidate_pool": "outputs/spanish-a1-core/candidate-pools/spanish_a1_core_part_006_300_v1_candidate_pool.jsonl",
+  "latest_source_lookup": {
+    "status": "pass_with_advisory_warnings",
+    "path": "outputs/spanish-a1-core/source-lookup/spanish_a1_core_part_006_300_v1_spanish_source_lookup_20260612-part006-source-lookup-v5.json",
+    "rows": 300,
+    "unique_lookup_targets": 363,
+    "kaikki_exact_match_rows": 188,
+    "rows_without_kaikki_exact_match": 112,
+    "verb_rows": 17,
+    "verb_rows_with_unimorph": 15,
+    "regional_variant_rows": 92,
+    "advisory_warnings": 114,
+    "blockers": 0
+  },
+  "latest_source_advisory_review": {
+    "status": "pass",
+    "path": "outputs/spanish-a1-core/source-review/spanish_a1_core_part_006_300_v1_source_advisory_review_20260612-part006-source-review-v5.json",
+    "reviewed_advisories": 114,
+    "accepted_advisories": 114,
+    "unresolved_advisories": 0,
+    "blockers": 0,
+    "source_truth_promotion": "none_source_partial_retained",
+    "candidate_pool_mutated": false,
+    "approved_for_generation": false,
+    "checked_at": "20260612-part006-source-review-v5"
+  },
+  "latest_source_draft": {
+    "workbook_path": "outputs/spanish-a1-core/source-drafts/FlashcardsLuna_spanish_a1_core_part_006_300_v1_source_draft.xlsx",
+    "manifest_path": "outputs/spanish-a1-core/source-drafts/FlashcardsLuna_spanish_a1_core_part_006_300_v1_source_draft_manifest.json",
+    "workbook_sha256": "1c67d706ed14deed02e9652ab835598a64d6e9c95ac2f10f0850149b4ff6dd17",
+    "rows": 300,
+    "language_columns": 54,
+    "main_sheet_columns": 138,
+    "support_languages_generated": false,
+    "google_sheet_created": false,
+    "postgres_changes": false,
+    "xlsx_readback": {
+      "status": "pass",
+      "main_rows": 300,
+      "main_cols": 138,
+      "filled_ES": 300,
+      "filled_ES_419": 300,
+      "filled_example_ES": 300,
+      "filled_example_ES_419": 300,
+      "blockers": 0
+    }
+  },
+  "latest_support_generation_plan": {
+    "path": "outputs/spanish-a1-core/support-generation/spanish_a1_core_part_006_300_v1_support_generation_plan_20260612-part006-support-plan-v3.json",
+    "status": "pass",
+    "support_generation_status": "planned_not_started",
+    "approved_for_generation": false,
+    "generation_ready_without_external_quota": false,
+    "quality_target": "oxford_contour_equivalent_fail_closed",
+    "rows": 300,
+    "total_language_columns": 54,
+    "source_language_columns": [
+      "ES",
+      "ES-419"
+    ],
+    "target_support_languages": 52,
+    "expected_support_display_cells": 15600,
+    "expected_support_example_cells": 15600,
+    "completed_support_languages": 0,
+    "missing_support_language_outputs": 52,
+    "blockers": 0,
+    "checked_at": "20260612-part006-support-plan-v3"
+  },
+  "latest_support_reuse_map": {
+    "status": "reuse_map_ready_not_final_generation",
+    "path": "outputs/spanish-a1-core/support-generation/spanish_a1_core_part_006_300_v1_support_reuse_map_20260612-part006-reuse-map-v3.json",
+    "csv_path": "outputs/spanish-a1-core/support-generation/spanish_a1_core_part_006_300_v1_support_reuse_map_20260612-part006-reuse-map-v3.csv",
+    "draft_jsonl_path": "outputs/spanish-a1-core/support-generation/spanish_a1_core_part_006_300_v1_support_display_draft_from_reuse_20260612-part006-reuse-map-v3.jsonl",
+    "source": "ordinary_db_read_only_translation_memory",
+    "db_meanings_with_entries": 1244,
+    "rows": 300,
+    "support_language_count": 52,
+    "auto_exact_english_rows": 255,
+    "full_display_reuse_rows": 255,
+    "ambiguous_exact_english_rows": 6,
+    "no_exact_english_match_rows": 39,
+    "spanish_exact_candidate_rows": 261,
+    "display_cells_available_from_exact_reuse": 13260,
+    "display_cells_expected": 15600,
+    "example_cells_safe_to_reuse": 0,
+    "example_cells_expected": 15600,
+    "final_delivery_ready": false,
+    "checked_at": "20260612-part006-reuse-map-v3"
+  },
+  "latest_source_package_gate": {
+    "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_006_300_v1_release_gate_20260612-part006-quota-checkpoint-gate-v2.json",
+    "status": "ok",
+    "blocker_count": 0,
+    "warning_count": 0,
+    "blockers": [],
+    "warnings": [],
+    "require_final_support": false,
+    "checked_at": "2026-06-12T13:50:53.942Z"
+  },
+  "latest_support_generation_attempt": {
+    "status": "blocked_gemini_quota_exhausted",
+    "model": "gemini-3.1-pro-preview",
+    "paid_api_key": false,
+    "generation_source": "subscription_backed_gemini_cli",
+    "started_after_user_confirmation": true,
+    "checked_at": "2026-06-12T13:38:25.729Z",
+    "quota_reset_after": "13h42m25s",
+    "quota_reset_at_utc": "2026-06-13T03:20:50.729Z",
+    "quota_reset_at_bangkok": "2026-06-13 10:20:50",
+    "cached_source_hash": "a3e20f73dc497730",
+    "row_chunk_size": 50,
+    "group_size": 4,
+    "cached_rows_by_language": {
+      "EN": 200,
+      "FR": 200,
+      "DE": 200,
+      "IT": 200
+    },
+    "payload_files": [
+      "outputs/spanish-a1-core/support-translations/gemini-cache/spanish_a1_core_part_006_300_v1_a3e20f73dc497730_gemini_rows_01_n050_EN_FR_DE_IT.payload.json",
+      "outputs/spanish-a1-core/support-translations/gemini-cache/spanish_a1_core_part_006_300_v1_a3e20f73dc497730_gemini_rows_02_n050_EN_FR_DE_IT.payload.json",
+      "outputs/spanish-a1-core/support-translations/gemini-cache/spanish_a1_core_part_006_300_v1_a3e20f73dc497730_gemini_rows_03_n050_EN_FR_DE_IT.payload.json",
+      "outputs/spanish-a1-core/support-translations/gemini-cache/spanish_a1_core_part_006_300_v1_a3e20f73dc497730_gemini_rows_04_n050_EN_FR_DE_IT.payload.json"
+    ],
+    "failed_next_prompt": "outputs/spanish-a1-core/support-translations/gemini-cache/spanish_a1_core_part_006_300_v1_a3e20f73dc497730_gemini_rows_05_n050_EN_FR_DE_IT.prompt.txt",
+    "error": "TerminalQuotaError: You have exhausted your capacity on this model. Your quota will reset after 13h42m25s."
+  }
+}

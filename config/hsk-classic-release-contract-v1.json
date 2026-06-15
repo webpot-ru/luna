@@ -1,0 +1,73 @@
+{
+  "contract_id": "hsk_classic_release_v1",
+  "status": "working_contract",
+  "scope": "HSK exam vocabulary release workbooks, separate from the normal LunaCards deck export contract.",
+  "default_release": {
+    "release_id": "hsk2_classic_level_1_150_v1",
+    "hsk_version": "HSK 2.0 classic",
+    "hsk_level": 1,
+    "expected_row_count": 150
+  },
+  "source_policy": {
+    "chinese_base_source": "drkameleon/complete-hsk-vocabulary old-1 exclusive wordlist",
+    "source_url": "https://github.com/drkameleon/complete-hsk-vocabulary",
+    "license": "MIT",
+    "source_role": "Chinese base vocabulary membership, POS, classifiers and source dictionary meanings. Card-facing traditional forms, pinyin and EN meanings are curated separately to avoid raw dictionary artifacts.",
+    "curated_card_overrides": "config/hsk-classic-hsk1-card-overrides.json",
+    "curated_examples": "config/hsk-classic-hsk1-examples.json",
+    "translation_packs": "config/hsk-classic-hsk1-translations-*.tsv"
+  },
+  "main_sheet": {
+    "required_fixed_columns": [
+      "release_id",
+      "hsk_version",
+      "hsk_level",
+      "hsk_order",
+      "simplified",
+      "traditional",
+      "pinyin",
+      "example_zh",
+      "example_pinyin"
+    ],
+    "language_columns_source": "config/language-order.json spreadsheetCode values in order, excluding ZH for HSK because Chinese is already represented by fixed source fields",
+    "example_language_columns_source": "config/language-order.json spreadsheetCode values in order excluding ZH, prefixed as example_<SPREADSHEET_CODE>",
+    "required_status_columns": [
+      "translation_status",
+      "example_status",
+      "qa_notes"
+    ]
+  },
+  "course_metadata_sheet": {
+    "sheet_name": "Course Metadata",
+    "rows": [
+      "Title",
+      "Description",
+      "Module",
+      "Category"
+    ],
+    "language_columns_source": "config/language-order.json spreadsheetCode values in order, excluding ZH",
+    "module_value": "localized short label for Chinese, for example EN Chinese, RU Китайский, KK Қытай тілі",
+    "category_value": "HSK <level>",
+    "notes": "Course Metadata follows the ordinary LunaCards workbook shape: header row plus Title, Description, Module and Category rows. Module/Category are short mobile-app labels and do not require sentence punctuation. Category keeps the stable exam-level label HSK <level> because HSK is a proper course/exam name."
+  },
+  "field_rules": {
+    "audio": "not_in_scope",
+    "target_language_transcription": "not_in_scope",
+    "word_pinyin": "required for Chinese word only",
+    "example_pinyin": "required for every row together with example_zh",
+    "translation_cells": "short learner-facing meaning in the learner language; no grammar explanations or long dictionary articles",
+    "word_display_article_policy": "for HSK word columns, include noun articles only where they are normal learner-facing dictionary display for that language (for example ES/FR/DE/IT/PT/NL/SV/NO/DA/RO); do not invent artificial articles for no-article languages; English a/an is optional in HSK glosses and required only if converted into the ordinary LunaCards deck display model",
+    "example_translation_cells": "short translation of example_zh in the learner language; no target-language transcription",
+    "zh_language_column": "not included in HSK language columns; use simplified/traditional/pinyin/example_zh/example_pinyin fixed source fields instead"
+  },
+  "workbook_sheets": [
+    "HSK1 Classic",
+    "Course Metadata",
+    "README",
+    "Languages",
+    "Translation Source Plan",
+    "Translation QA",
+    "Source Audit",
+    "Sources"
+  ]
+}

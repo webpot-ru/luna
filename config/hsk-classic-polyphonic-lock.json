@@ -1,0 +1,60 @@
+{
+  "rule_version": "classic-hsk-polyphonic-lock-v1",
+  "description": "Executable lock for known HSK Classic cross-level duplicate readings that must remain tracked but should not trigger open-ended manual review.",
+  "locks": [
+    {
+      "release_id": "hsk2_classic_level_1_150_v1",
+      "hsk_order": 111,
+      "hsk_key": "111:喂",
+      "simplified": "喂",
+      "pinyin": "wéi",
+      "needs_review_type": "cross_level_duplicate_with_pinyin_variants",
+      "reason": "HSK1 phone greeting reading is distinct from HSK6 feed reading."
+    },
+    {
+      "release_id": "hsk2_classic_level_2_150_v1",
+      "hsk_order": 8,
+      "hsk_key": "8:长",
+      "simplified": "长",
+      "pinyin": "cháng",
+      "needs_review_type": "cross_level_duplicate_with_pinyin_variants",
+      "reason": "HSK2 adjective reading long is distinct from HSK3 grow reading."
+    },
+    {
+      "release_id": "hsk2_classic_level_2_150_v1",
+      "hsk_order": 20,
+      "hsk_key": "20:得",
+      "simplified": "得",
+      "pinyin": "de",
+      "needs_review_type": "cross_level_duplicate_with_pinyin_variants",
+      "reason": "HSK2 degree-complement neutral particle reading is distinct from HSK4 must reading."
+    },
+    {
+      "release_id": "hsk2_classic_level_3_300_v1",
+      "hsk_order": 278,
+      "hsk_key": "278:长",
+      "simplified": "长",
+      "pinyin": "zhǎng",
+      "needs_review_type": "cross_level_duplicate_with_pinyin_variants",
+      "reason": "HSK3 verb reading grow is distinct from HSK2 long reading."
+    },
+    {
+      "release_id": "hsk2_classic_level_4_600_v1",
+      "hsk_order": 84,
+      "hsk_key": "84:得",
+      "simplified": "得",
+      "pinyin": "děi",
+      "needs_review_type": "cross_level_duplicate_with_pinyin_variants",
+      "reason": "HSK4 modal reading must is distinct from HSK2 neutral degree-complement particle."
+    },
+    {
+      "release_id": "hsk2_classic_level_6_2500_v1",
+      "hsk_order": 1884,
+      "hsk_key": "1884:喂",
+      "simplified": "喂",
+      "pinyin": "wèi",
+      "needs_review_type": "cross_level_duplicate_with_pinyin_variants",
+      "reason": "HSK6 feed reading is distinct from HSK1 phone greeting reading."
+    }
+  ]
+}

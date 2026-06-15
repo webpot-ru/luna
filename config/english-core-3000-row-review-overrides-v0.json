@@ -1,0 +1,583 @@
+{
+  "contract_id": "english_core_3000_row_review_overrides_v0",
+  "release_id": "english_core_3000_a1_a2_part_001_150_v1",
+  "status": "partial_function_word_review",
+  "approved_for_generation": false,
+  "review_scope": {
+    "rows": 30,
+    "selection": "first-release function/grammar-sensitive rows",
+    "notes": "These are LunaCards-owned POS/sense, meaning_note, semantic_scene and US English example proposals. They do not include source-backed transcription, duplicate/reuse review, translation preflight or final generation approval."
+  },
+  "reviewed_rows": [
+    {
+      "core_item_id": "core3000_0001",
+      "part_of_speech": "determiner",
+      "sense_no": "01_definite_article",
+      "meaning_id": "english_core_the_definite_article_01",
+      "en_display": "the",
+      "meaning_note": "Definite article used before a noun when the listener knows which person or thing is meant.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "door",
+        "target_display": "the",
+        "subject_number": "singular",
+        "action_or_state": "is open",
+        "state_or_location": "known door in the scene",
+        "tense_aspect": "simple_present",
+        "topic_context": "basic definite article"
+      },
+      "example_EN": "The door is open."
+    },
+    {
+      "core_item_id": "core3000_0002",
+      "part_of_speech": "be-verb",
+      "sense_no": "01_state_or_identity",
+      "meaning_id": "english_core_be_state_identity_01",
+      "en_display": "to be",
+      "meaning_note": "Verb used to show state, identity or condition.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "speaker",
+        "target_display": "to be",
+        "subject_number": "singular",
+        "action_or_state": "wants readiness",
+        "state_or_location": "ready state",
+        "tense_aspect": "infinitive_after_want",
+        "topic_context": "basic state verb"
+      },
+      "example_EN": "I want to be ready."
+    },
+    {
+      "core_item_id": "core3000_0003",
+      "part_of_speech": "conjunction",
+      "sense_no": "01_addition",
+      "meaning_id": "english_core_and_addition_01",
+      "en_display": "and",
+      "meaning_note": "Conjunction used to join two similar words, phrases or ideas.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "tea and water",
+        "target_display": "and",
+        "subject_number": "plural",
+        "action_or_state": "are available",
+        "state_or_location": "on the table",
+        "tense_aspect": "simple_present",
+        "topic_context": "joining two items"
+      },
+      "example_EN": "Tea and water are on the table."
+    },
+    {
+      "core_item_id": "core3000_0004",
+      "part_of_speech": "preposition",
+      "sense_no": "01_belonging_or_content",
+      "meaning_id": "english_core_of_content_relation_01",
+      "en_display": "of",
+      "meaning_note": "Preposition used to show that something belongs to, is part of, or contains something else.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "cup of tea",
+        "target_display": "of",
+        "subject_number": "singular",
+        "action_or_state": "is hot",
+        "state_or_location": "cup contains tea",
+        "tense_aspect": "simple_present",
+        "topic_context": "content relation"
+      },
+      "example_EN": "A cup of tea is hot."
+    },
+    {
+      "core_item_id": "core3000_0005",
+      "part_of_speech": "infinitive-to",
+      "sense_no": "01_infinitive_marker",
+      "meaning_id": "english_core_to_infinitive_marker_01",
+      "en_display": "to",
+      "meaning_note": "Marker used before a base verb to form an infinitive.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "go home action",
+        "target_display": "to",
+        "subject_number": "singular",
+        "action_or_state": "wants to go",
+        "state_or_location": "home",
+        "tense_aspect": "infinitive_after_want",
+        "topic_context": "infinitive marker"
+      },
+      "example_EN": "I want to go home."
+    },
+    {
+      "core_item_id": "core3000_0006",
+      "part_of_speech": "determiner",
+      "sense_no": "01_indefinite_article",
+      "meaning_id": "english_core_a_indefinite_article_01",
+      "en_display": "a",
+      "meaning_note": "Indefinite article used before one singular countable noun when the exact item is not already known.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "book",
+        "target_display": "a",
+        "subject_number": "singular",
+        "action_or_state": "speaker has one item",
+        "state_or_location": "not previously identified",
+        "tense_aspect": "simple_present",
+        "topic_context": "indefinite article"
+      },
+      "example_EN": "I have a book."
+    },
+    {
+      "core_item_id": "core3000_0007",
+      "part_of_speech": "preposition",
+      "sense_no": "01_inside_location",
+      "meaning_id": "english_core_in_inside_location_01",
+      "en_display": "in",
+      "meaning_note": "Preposition used to show that something is inside a place or container.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "key",
+        "target_display": "in",
+        "subject_number": "singular",
+        "action_or_state": "is located",
+        "state_or_location": "in the bag",
+        "tense_aspect": "simple_present",
+        "topic_context": "inside location"
+      },
+      "example_EN": "The key is in the bag."
+    },
+    {
+      "core_item_id": "core3000_0008",
+      "part_of_speech": "have-verb",
+      "sense_no": "01_possession",
+      "meaning_id": "english_core_have_possession_01",
+      "en_display": "to have",
+      "meaning_note": "Verb used to say that someone owns, holds or possesses something.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "phone",
+        "target_display": "to have",
+        "subject_number": "singular",
+        "action_or_state": "owns or holds",
+        "state_or_location": "with the speaker",
+        "tense_aspect": "simple_present",
+        "topic_context": "basic possession"
+      },
+      "example_EN": "I have a phone."
+    },
+    {
+      "core_item_id": "core3000_0009",
+      "part_of_speech": "pronoun",
+      "sense_no": "01_known_thing_pronoun",
+      "meaning_id": "english_core_it_known_thing_pronoun_01",
+      "en_display": "it",
+      "meaning_note": "Pronoun used for a thing, animal, idea or situation already known from context.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "known thing",
+        "target_display": "it",
+        "subject_number": "singular",
+        "action_or_state": "is located",
+        "state_or_location": "in the bag",
+        "tense_aspect": "simple_present",
+        "topic_context": "known thing pronoun"
+      },
+      "example_EN": "It is in the bag."
+    },
+    {
+      "core_item_id": "core3000_0010",
+      "part_of_speech": "pronoun",
+      "sense_no": "01_listener_pronoun",
+      "meaning_id": "english_core_you_listener_pronoun_01",
+      "en_display": "you",
+      "meaning_note": "Pronoun used for the person or people being spoken to.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "listener",
+        "target_display": "you",
+        "subject_number": "singular_or_plural",
+        "action_or_state": "are identified as friend",
+        "state_or_location": "speaker-listener relation",
+        "tense_aspect": "simple_present",
+        "topic_context": "direct address pronoun"
+      },
+      "example_EN": "You are my friend."
+    },
+    {
+      "core_item_id": "core3000_0011",
+      "part_of_speech": "pronoun",
+      "sense_no": "01_male_subject_pronoun",
+      "meaning_id": "english_core_he_male_subject_pronoun_01",
+      "en_display": "he",
+      "meaning_note": "Subject pronoun used for a male person or a male animal already known from context.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "male person",
+        "target_display": "he",
+        "subject_number": "singular",
+        "action_or_state": "is located",
+        "state_or_location": "at school",
+        "tense_aspect": "simple_present",
+        "topic_context": "subject pronoun"
+      },
+      "example_EN": "He is at school."
+    },
+    {
+      "core_item_id": "core3000_0012",
+      "part_of_speech": "preposition",
+      "sense_no": "01_intended_recipient",
+      "meaning_id": "english_core_for_intended_recipient_01",
+      "en_display": "for",
+      "meaning_note": "Preposition used to show the person something is intended to help, reach or belong to.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "gift",
+        "target_display": "for",
+        "subject_number": "singular",
+        "action_or_state": "is intended",
+        "state_or_location": "for the listener",
+        "tense_aspect": "simple_present",
+        "topic_context": "recipient relation"
+      },
+      "example_EN": "This gift is for you."
+    },
+    {
+      "core_item_id": "core3000_0013",
+      "part_of_speech": "pronoun",
+      "sense_no": "01_plural_subject_pronoun",
+      "meaning_id": "english_core_they_plural_subject_pronoun_01",
+      "en_display": "they",
+      "meaning_note": "Subject pronoun used for two or more people, animals, things or ideas already known from context.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "known group",
+        "target_display": "they",
+        "subject_number": "plural",
+        "action_or_state": "are located",
+        "state_or_location": "at home",
+        "tense_aspect": "simple_present",
+        "topic_context": "plural subject pronoun"
+      },
+      "example_EN": "They are at home."
+    },
+    {
+      "core_item_id": "core3000_0015",
+      "part_of_speech": "determiner",
+      "sense_no": "01_that_far_or_identified",
+      "meaning_id": "english_core_that_determiner_01",
+      "en_display": "that",
+      "meaning_note": "Determiner used before a noun to point to a person or thing that is not close, or that has just been identified.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "book",
+        "target_display": "that",
+        "subject_number": "singular",
+        "action_or_state": "belongs to speaker",
+        "state_or_location": "not close or already identified",
+        "tense_aspect": "simple_present",
+        "topic_context": "demonstrative determiner"
+      },
+      "example_EN": "That book is mine."
+    },
+    {
+      "core_item_id": "core3000_0016",
+      "part_of_speech": "pronoun",
+      "sense_no": "01_speaker_group_pronoun",
+      "meaning_id": "english_core_we_speaker_group_pronoun_01",
+      "en_display": "we",
+      "meaning_note": "Subject pronoun used for the speaker and at least one other person.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "speaker group",
+        "target_display": "we",
+        "subject_number": "plural",
+        "action_or_state": "are ready",
+        "state_or_location": "ready state",
+        "tense_aspect": "simple_present",
+        "topic_context": "speaker group pronoun"
+      },
+      "example_EN": "We are ready."
+    },
+    {
+      "core_item_id": "core3000_0017",
+      "part_of_speech": "preposition",
+      "sense_no": "01_surface_location",
+      "meaning_id": "english_core_on_surface_location_01",
+      "en_display": "on",
+      "meaning_note": "Preposition used to show that something touches or is supported by a surface.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "cup",
+        "target_display": "on",
+        "subject_number": "singular",
+        "action_or_state": "is located",
+        "state_or_location": "on the table",
+        "tense_aspect": "simple_present",
+        "topic_context": "surface location"
+      },
+      "example_EN": "The cup is on the table."
+    },
+    {
+      "core_item_id": "core3000_0018",
+      "part_of_speech": "preposition",
+      "sense_no": "01_accompaniment",
+      "meaning_id": "english_core_with_accompaniment_01",
+      "en_display": "with",
+      "meaning_note": "Preposition used to show that people or things are together.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "speaker and family",
+        "target_display": "with",
+        "subject_number": "singular_plus_group",
+        "action_or_state": "is together",
+        "state_or_location": "with family",
+        "tense_aspect": "simple_present",
+        "topic_context": "accompaniment"
+      },
+      "example_EN": "I am with my family."
+    },
+    {
+      "core_item_id": "core3000_0019",
+      "part_of_speech": "determiner",
+      "sense_no": "01_this_near_or_current",
+      "meaning_id": "english_core_this_determiner_01",
+      "en_display": "this",
+      "meaning_note": "Determiner used before a noun to point to a person or thing that is near, current or being shown.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "book",
+        "target_display": "this",
+        "subject_number": "singular",
+        "action_or_state": "is new",
+        "state_or_location": "near or current item",
+        "tense_aspect": "simple_present",
+        "topic_context": "demonstrative determiner"
+      },
+      "example_EN": "This book is new."
+    },
+    {
+      "core_item_id": "core3000_0020",
+      "part_of_speech": "pronoun",
+      "sense_no": "01_speaker_subject_pronoun",
+      "meaning_id": "english_core_i_speaker_subject_pronoun_01",
+      "en_display": "I",
+      "meaning_note": "Subject pronoun used by the speaker to refer to themselves.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "speaker",
+        "target_display": "I",
+        "subject_number": "singular",
+        "action_or_state": "is located",
+        "state_or_location": "at home",
+        "tense_aspect": "simple_present",
+        "topic_context": "speaker subject pronoun"
+      },
+      "example_EN": "I am at home."
+    },
+    {
+      "core_item_id": "core3000_0021",
+      "part_of_speech": "do-verb",
+      "sense_no": "01_perform_action",
+      "meaning_id": "english_core_do_perform_action_01",
+      "en_display": "to do",
+      "meaning_note": "Verb used to mean perform an action, activity or task.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "homework",
+        "target_display": "to do",
+        "subject_number": "singular",
+        "action_or_state": "does homework",
+        "state_or_location": "homework task",
+        "tense_aspect": "simple_present",
+        "topic_context": "performing a task"
+      },
+      "example_EN": "I do my homework."
+    },
+    {
+      "core_item_id": "core3000_0022",
+      "part_of_speech": "preposition",
+      "sense_no": "01_role_or_function",
+      "meaning_id": "english_core_as_role_function_01",
+      "en_display": "as",
+      "meaning_note": "Preposition used to show the role, job or function of someone or something.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "teacher role",
+        "target_display": "as",
+        "subject_number": "singular",
+        "action_or_state": "works in a role",
+        "state_or_location": "as a teacher",
+        "tense_aspect": "simple_present",
+        "topic_context": "role relation"
+      },
+      "example_EN": "She works as a teacher."
+    },
+    {
+      "core_item_id": "core3000_0023",
+      "part_of_speech": "preposition",
+      "sense_no": "01_specific_place",
+      "meaning_id": "english_core_at_specific_place_01",
+      "en_display": "at",
+      "meaning_note": "Preposition used to show a specific place or point.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "meeting",
+        "target_display": "at",
+        "subject_number": "plural",
+        "action_or_state": "meet",
+        "state_or_location": "at school",
+        "tense_aspect": "imperative_or_future_context",
+        "topic_context": "specific place"
+      },
+      "example_EN": "Meet me at school."
+    },
+    {
+      "core_item_id": "core3000_0024",
+      "part_of_speech": "pronoun",
+      "sense_no": "01_female_subject_pronoun",
+      "meaning_id": "english_core_she_female_subject_pronoun_01",
+      "en_display": "she",
+      "meaning_note": "Subject pronoun used for a female person or a female animal already known from context.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "female person",
+        "target_display": "she",
+        "subject_number": "singular",
+        "action_or_state": "is identified as sister",
+        "state_or_location": "family relation",
+        "tense_aspect": "simple_present",
+        "topic_context": "subject pronoun"
+      },
+      "example_EN": "She is my sister."
+    },
+    {
+      "core_item_id": "core3000_0025",
+      "part_of_speech": "conjunction",
+      "sense_no": "01_contrast",
+      "meaning_id": "english_core_but_contrast_01",
+      "en_display": "but",
+      "meaning_note": "Conjunction used to connect two contrasting ideas.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "two contrasting states",
+        "target_display": "but",
+        "subject_number": "singular",
+        "action_or_state": "is tired and happy",
+        "state_or_location": "contrast between states",
+        "tense_aspect": "simple_present",
+        "topic_context": "contrast conjunction"
+      },
+      "example_EN": "I am tired, but I am happy."
+    },
+    {
+      "core_item_id": "core3000_0026",
+      "part_of_speech": "preposition",
+      "sense_no": "01_origin",
+      "meaning_id": "english_core_from_origin_01",
+      "en_display": "from",
+      "meaning_note": "Preposition used to show where someone or something starts, comes or originates.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "speaker",
+        "target_display": "from",
+        "subject_number": "singular",
+        "action_or_state": "comes from a country",
+        "state_or_location": "from Canada",
+        "tense_aspect": "simple_present",
+        "topic_context": "origin"
+      },
+      "example_EN": "I am from Canada."
+    },
+    {
+      "core_item_id": "core3000_0027",
+      "part_of_speech": "preposition",
+      "sense_no": "01_near_location",
+      "meaning_id": "english_core_by_near_location_01",
+      "en_display": "by",
+      "meaning_note": "Preposition used to mean near or beside something.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "bag",
+        "target_display": "by",
+        "subject_number": "singular",
+        "action_or_state": "is located",
+        "state_or_location": "by the door",
+        "tense_aspect": "simple_present",
+        "topic_context": "near location"
+      },
+      "example_EN": "The bag is by the door."
+    },
+    {
+      "core_item_id": "core3000_0028",
+      "part_of_speech": "modal auxiliary",
+      "sense_no": "01_future_intention",
+      "meaning_id": "english_core_will_future_auxiliary_01",
+      "en_display": "will",
+      "meaning_note": "Modal auxiliary used before a verb to talk about the future or a decision.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "call action",
+        "target_display": "will",
+        "subject_number": "singular",
+        "action_or_state": "will call",
+        "state_or_location": "future action",
+        "tense_aspect": "future_with_modal",
+        "topic_context": "future auxiliary"
+      },
+      "example_EN": "I will call you."
+    },
+    {
+      "core_item_id": "core3000_0029",
+      "part_of_speech": "conjunction",
+      "sense_no": "01_choice",
+      "meaning_id": "english_core_or_choice_01",
+      "en_display": "or",
+      "meaning_note": "Conjunction used to connect alternatives or choices.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "tea or coffee",
+        "target_display": "or",
+        "subject_number": "singular_choice",
+        "action_or_state": "is acceptable",
+        "state_or_location": "choice between drinks",
+        "tense_aspect": "simple_present",
+        "topic_context": "choice conjunction"
+      },
+      "example_EN": "Tea or coffee is fine."
+    },
+    {
+      "core_item_id": "core3000_0032",
+      "part_of_speech": "conjunction",
+      "sense_no": "01_result",
+      "meaning_id": "english_core_so_result_01",
+      "en_display": "so",
+      "meaning_note": "Conjunction used to introduce a result or consequence.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "result relation",
+        "target_display": "so",
+        "subject_number": "singular",
+        "action_or_state": "goes home because it is late",
+        "state_or_location": "late time causes action",
+        "tense_aspect": "simple_present",
+        "topic_context": "result conjunction"
+      },
+      "example_EN": "It is late, so I am going home."
+    },
+    {
+      "core_item_id": "core3000_0033",
+      "part_of_speech": "determiner",
+      "sense_no": "01_whole_group",
+      "meaning_id": "english_core_all_whole_group_01",
+      "en_display": "all",
+      "meaning_note": "Determiner used to mean the whole number or amount of people or things in a group.",
+      "semantic_scene": {
+        "status": "reviewed",
+        "target_object": "students",
+        "target_display": "all",
+        "subject_number": "plural",
+        "action_or_state": "are present",
+        "state_or_location": "here",
+        "tense_aspect": "simple_present",
+        "topic_context": "whole group determiner"
+      },
+      "example_EN": "All the students are here."
+    }
+  ]
+}

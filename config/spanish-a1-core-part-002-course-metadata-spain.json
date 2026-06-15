@@ -1,0 +1,447 @@
+{
+  "version": "spanish-a1-core-course-metadata-v5-polished-edition-labels",
+  "release_id": "spanish_a1_core_part_002_300_v1",
+  "description": "Polished localized Course Metadata for the Spanish A1 Core Part 002 Spanish (Spain) buyer-facing workbook. Keys use spreadsheetCode values from config/language-order.json.",
+  "rows": {
+    "EN": {
+      "title": "Spanish (Spain) A1",
+      "description": "Spanish (Spain) A1. Basic level.",
+      "module": "Languages",
+      "category": "Spanish (Spain)",
+      "level_signal": "Basic level.",
+      "edition_marker": "Spanish (Spain)"
+    },
+    "ES": {
+      "title": "Español de España A1",
+      "description": "Español de España A1. Nivel básico.",
+      "module": "Idiomas",
+      "category": "Español de España",
+      "level_signal": "Nivel básico.",
+      "edition_marker": "Español de España"
+    },
+    "FR": {
+      "title": "Espagnol d'Espagne A1",
+      "description": "Espagnol d'Espagne A1. Niveau élémentaire.",
+      "module": "Langues",
+      "category": "Espagnol d'Espagne",
+      "level_signal": "Niveau élémentaire.",
+      "edition_marker": "Espagnol d'Espagne"
+    },
+    "DE": {
+      "title": "Spanisch (Spanien) A1",
+      "description": "Spanisch (Spanien) A1. Grundstufe.",
+      "module": "Sprachen",
+      "category": "Spanisch (Spanien)",
+      "level_signal": "Grundstufe.",
+      "edition_marker": "Spanisch (Spanien)"
+    },
+    "IT": {
+      "title": "Spagnolo di Spagna A1",
+      "description": "Spagnolo di Spagna A1. Livello base.",
+      "module": "Lingue",
+      "category": "Spagnolo di Spagna",
+      "level_signal": "Livello base.",
+      "edition_marker": "Spagnolo di Spagna"
+    },
+    "PT": {
+      "title": "Espanhol de Espanha A1",
+      "description": "Espanhol de Espanha A1. Nível básico.",
+      "module": "Idiomas",
+      "category": "Espanhol de Espanha",
+      "level_signal": "Nível básico.",
+      "edition_marker": "Espanhol de Espanha"
+    },
+    "RU": {
+      "title": "Испанский (Испания) A1",
+      "description": "Испанский (Испания) A1. Начальный уровень.",
+      "module": "Языки",
+      "category": "Испанский (Испания)",
+      "level_signal": "Начальный уровень.",
+      "edition_marker": "Испанский (Испания)"
+    },
+    "ZH": {
+      "title": "西班牙西班牙语 A1",
+      "description": "西班牙西班牙语 A1. 初级水平。",
+      "module": "语言",
+      "category": "西班牙西班牙语",
+      "level_signal": "初级水平。",
+      "edition_marker": "西班牙西班牙语"
+    },
+    "JA": {
+      "title": "スペインのスペイン語 A1",
+      "description": "スペインのスペイン語 A1. 初級レベル。",
+      "module": "言語",
+      "category": "スペインのスペイン語",
+      "level_signal": "初級レベル。",
+      "edition_marker": "スペインのスペイン語"
+    },
+    "KO": {
+      "title": "스페인 스페인어 A1",
+      "description": "스페인 스페인어 A1. 기초 수준.",
+      "module": "언어",
+      "category": "스페인 스페인어",
+      "level_signal": "기초 수준.",
+      "edition_marker": "스페인 스페인어"
+    },
+    "VI": {
+      "title": "Tiếng Tây Ban Nha (Tây Ban Nha) A1",
+      "description": "Tiếng Tây Ban Nha (Tây Ban Nha) A1. Cấp cơ bản.",
+      "module": "Ngôn ngữ",
+      "category": "Tiếng Tây Ban Nha (Tây Ban Nha)",
+      "level_signal": "Cấp cơ bản.",
+      "edition_marker": "Tiếng Tây Ban Nha (Tây Ban Nha)"
+    },
+    "TH": {
+      "title": "ภาษาสเปน (สเปน) A1",
+      "description": "ภาษาสเปน (สเปน) A1. ระดับพื้นฐาน.",
+      "module": "ภาษา",
+      "category": "ภาษาสเปน (สเปน)",
+      "level_signal": "ระดับพื้นฐาน.",
+      "edition_marker": "ภาษาสเปน (สเปน)"
+    },
+    "MS": {
+      "title": "Bahasa Sepanyol (Sepanyol) A1",
+      "description": "Bahasa Sepanyol (Sepanyol) A1. Tahap asas.",
+      "module": "Bahasa",
+      "category": "Bahasa Sepanyol (Sepanyol)",
+      "level_signal": "Tahap asas.",
+      "edition_marker": "Bahasa Sepanyol (Sepanyol)"
+    },
+    "ID": {
+      "title": "Bahasa Spanyol (Spanyol) A1",
+      "description": "Bahasa Spanyol (Spanyol) A1. Tingkat dasar.",
+      "module": "Bahasa",
+      "category": "Bahasa Spanyol (Spanyol)",
+      "level_signal": "Tingkat dasar.",
+      "edition_marker": "Bahasa Spanyol (Spanyol)"
+    },
+    "PL": {
+      "title": "Hiszpański (Hiszpania) A1",
+      "description": "Hiszpański (Hiszpania) A1. Poziom podstawowy.",
+      "module": "Języki",
+      "category": "Hiszpański (Hiszpania)",
+      "level_signal": "Poziom podstawowy.",
+      "edition_marker": "Hiszpański (Hiszpania)"
+    },
+    "NL": {
+      "title": "Spaans (Spanje) A1",
+      "description": "Spaans (Spanje) A1. Basisniveau.",
+      "module": "Talen",
+      "category": "Spaans (Spanje)",
+      "level_signal": "Basisniveau.",
+      "edition_marker": "Spaans (Spanje)"
+    },
+    "SV": {
+      "title": "Spanska (Spanien) A1",
+      "description": "Spanska (Spanien) A1. Grundnivå.",
+      "module": "Språk",
+      "category": "Spanska (Spanien)",
+      "level_signal": "Grundnivå.",
+      "edition_marker": "Spanska (Spanien)"
+    },
+    "NO": {
+      "title": "Spansk (Spania) A1",
+      "description": "Spansk (Spania) A1. Grunnnivå.",
+      "module": "Språk",
+      "category": "Spansk (Spania)",
+      "level_signal": "Grunnnivå.",
+      "edition_marker": "Spansk (Spania)"
+    },
+    "DA": {
+      "title": "Spansk (Spanien) A1",
+      "description": "Spansk (Spanien) A1. Grundniveau.",
+      "module": "Sprog",
+      "category": "Spansk (Spanien)",
+      "level_signal": "Grundniveau.",
+      "edition_marker": "Spansk (Spanien)"
+    },
+    "FI": {
+      "title": "Espanjan espanja A1",
+      "description": "Espanjan espanja A1. Perustaso.",
+      "module": "Kielet",
+      "category": "Espanjan espanja",
+      "level_signal": "Perustaso.",
+      "edition_marker": "Espanjan espanja"
+    },
+    "CS": {
+      "title": "Španělština (Španělsko) A1",
+      "description": "Španělština (Španělsko) A1. Základní úroveň.",
+      "module": "Jazyky",
+      "category": "Španělština (Španělsko)",
+      "level_signal": "Základní úroveň.",
+      "edition_marker": "Španělština (Španělsko)"
+    },
+    "SK": {
+      "title": "Španielčina (Španielsko) A1",
+      "description": "Španielčina (Španielsko) A1. Základná úroveň.",
+      "module": "Jazyky",
+      "category": "Španielčina (Španielsko)",
+      "level_signal": "Základná úroveň.",
+      "edition_marker": "Španielčina (Španielsko)"
+    },
+    "HU": {
+      "title": "Spanyol (Spanyolország) A1",
+      "description": "Spanyol (Spanyolország) A1. Alapszint.",
+      "module": "Nyelvek",
+      "category": "Spanyol (Spanyolország)",
+      "level_signal": "Alapszint.",
+      "edition_marker": "Spanyol (Spanyolország)"
+    },
+    "RO": {
+      "title": "Spaniolă (Spania) A1",
+      "description": "Spaniolă (Spania) A1. Nivel de bază.",
+      "module": "Limbi",
+      "category": "Spaniolă (Spania)",
+      "level_signal": "Nivel de bază.",
+      "edition_marker": "Spaniolă (Spania)"
+    },
+    "BG": {
+      "title": "Испански (Испания) A1",
+      "description": "Испански (Испания) A1. Начално ниво.",
+      "module": "Езици",
+      "category": "Испански (Испания)",
+      "level_signal": "Начално ниво.",
+      "edition_marker": "Испански (Испания)"
+    },
+    "HR": {
+      "title": "Španjolski (Španjolska) A1",
+      "description": "Španjolski (Španjolska) A1. Osnovna razina.",
+      "module": "Jezici",
+      "category": "Španjolski (Španjolska)",
+      "level_signal": "Osnovna razina.",
+      "edition_marker": "Španjolski (Španjolska)"
+    },
+    "SR": {
+      "title": "Шпански (Шпанија) A1",
+      "description": "Шпански (Шпанија) A1. Osnovni nivo.",
+      "module": "Jezici",
+      "category": "Шпански (Шпанија)",
+      "level_signal": "Osnovni nivo.",
+      "edition_marker": "Шпански (Шпанија)"
+    },
+    "SL": {
+      "title": "Španščina (Španija) A1",
+      "description": "Španščina (Španija) A1. Osnovna raven.",
+      "module": "Jeziki",
+      "category": "Španščina (Španija)",
+      "level_signal": "Osnovna raven.",
+      "edition_marker": "Španščina (Španija)"
+    },
+    "LT": {
+      "title": "Ispanų (Ispanija) A1",
+      "description": "Ispanų (Ispanija) A1. Pradinis lygis.",
+      "module": "Kalbos",
+      "category": "Ispanų (Ispanija)",
+      "level_signal": "Pradinis lygis.",
+      "edition_marker": "Ispanų (Ispanija)"
+    },
+    "LV": {
+      "title": "Spāņu (Spānija) A1",
+      "description": "Spāņu (Spānija) A1. Pamata līmenis.",
+      "module": "Valodas",
+      "category": "Spāņu (Spānija)",
+      "level_signal": "Pamata līmenis.",
+      "edition_marker": "Spāņu (Spānija)"
+    },
+    "ET": {
+      "title": "Hispaania hispaania keel A1",
+      "description": "Hispaania hispaania keel A1. Algtase.",
+      "module": "Keeled",
+      "category": "Hispaania hispaania keel",
+      "level_signal": "Algtase.",
+      "edition_marker": "Hispaania hispaania keel"
+    },
+    "IS": {
+      "title": "Spænska (Spánn) A1",
+      "description": "Spænska (Spánn) A1. Grunnstig.",
+      "module": "Tungumál",
+      "category": "Spænska (Spánn)",
+      "level_signal": "Grunnstig.",
+      "edition_marker": "Spænska (Spánn)"
+    },
+    "HI": {
+      "title": "स्पेनिश (स्पेन) A1",
+      "description": "स्पेनिश (स्पेन) A1. बुनियादी स्तर।",
+      "module": "भाषाएँ",
+      "category": "स्पेनिश (स्पेन)",
+      "level_signal": "बुनियादी स्तर।",
+      "edition_marker": "स्पेनिश (स्पेन)"
+    },
+    "BN": {
+      "title": "স্প্যানিশ (স্পেন) A1",
+      "description": "স্প্যানিশ (স্পেন) A1. প্রাথমিক স্তর।",
+      "module": "ভাষা",
+      "category": "স্প্যানিশ (স্পেন)",
+      "level_signal": "প্রাথমিক স্তর।",
+      "edition_marker": "স্প্যানিশ (স্পেন)"
+    },
+    "TL": {
+      "title": "Espanyol (Espanya) A1",
+      "description": "Espanyol (Espanya) A1. Batayang antas.",
+      "module": "Mga wika",
+      "category": "Espanyol (Espanya)",
+      "level_signal": "Batayang antas.",
+      "edition_marker": "Espanyol (Espanya)"
+    },
+    "MY": {
+      "title": "စပိန်စကား (စပိန်) A1",
+      "description": "စပိန်စကား (စပိန်) A1. အခြေခံအဆင့်။",
+      "module": "ဘာသာစကားများ",
+      "category": "စပိန်စကား (စပိန်)",
+      "level_signal": "အခြေခံအဆင့်။",
+      "edition_marker": "စပိန်စကား (စပိန်)"
+    },
+    "KM": {
+      "title": "ភាសាអេស្ប៉ាញ (អេស្ប៉ាញ) A1",
+      "description": "ភាសាអេស្ប៉ាញ (អេស្ប៉ាញ) A1. កម្រិតមូលដ្ឋាន។",
+      "module": "ភាសា",
+      "category": "ភាសាអេស្ប៉ាញ (អេស្ប៉ាញ)",
+      "level_signal": "កម្រិតមូលដ្ឋាន។",
+      "edition_marker": "ភាសាអេស្ប៉ាញ (អេស្ប៉ាញ)"
+    },
+    "LO": {
+      "title": "ພາສາສະເປນ (ສະເປນ) A1",
+      "description": "ພາສາສະເປນ (ສະເປນ) A1. ລະດັບພື້ນຖານ.",
+      "module": "ພາສາ",
+      "category": "ພາສາສະເປນ (ສະເປນ)",
+      "level_signal": "ລະດັບພື້ນຖານ.",
+      "edition_marker": "ພາສາສະເປນ (ສະເປນ)"
+    },
+    "NE": {
+      "title": "स्पेनी (स्पेन) A1",
+      "description": "स्पेनी (स्पेन) A1. आधारभूत स्तर।",
+      "module": "भाषाहरू",
+      "category": "स्पेनी (स्पेन)",
+      "level_signal": "आधारभूत स्तर।",
+      "edition_marker": "स्पेनी (स्पेन)"
+    },
+    "SI": {
+      "title": "ස්පාඤ්ඤ (ස්පාඤ්ඤය) A1",
+      "description": "ස්පාඤ්ඤ (ස්පාඤ්ඤය) A1. මූලික මට්ටම.",
+      "module": "භාෂා",
+      "category": "ස්පාඤ්ඤ (ස්පාඤ්ඤය)",
+      "level_signal": "මූලික මට්ටම.",
+      "edition_marker": "ස්පාඤ්ඤ (ස්පාඤ්ඤය)"
+    },
+    "TA": {
+      "title": "ஸ்பானிஷ் (ஸ்பெயின்) A1",
+      "description": "ஸ்பானிஷ் (ஸ்பெயின்) A1. அடிப்படை நிலை.",
+      "module": "மொழிகள்",
+      "category": "ஸ்பானிஷ் (ஸ்பெயின்)",
+      "level_signal": "அடிப்படை நிலை.",
+      "edition_marker": "ஸ்பானிஷ் (ஸ்பெயின்)"
+    },
+    "TE": {
+      "title": "స్పానిష్ (స్పెయిన్) A1",
+      "description": "స్పానిష్ (స్పెయిన్) A1. ప్రాథమిక స్థాయి.",
+      "module": "భాషలు",
+      "category": "స్పానిష్ (స్పెయిన్)",
+      "level_signal": "ప్రాథమిక స్థాయి.",
+      "edition_marker": "స్పానిష్ (స్పెయిన్)"
+    },
+    "KN": {
+      "title": "ಸ್ಪ್ಯಾನಿಷ್ (ಸ್ಪೇನ್) A1",
+      "description": "ಸ್ಪ್ಯಾನಿಷ್ (ಸ್ಪೇನ್) A1. ಮೂಲ ಮಟ್ಟ.",
+      "module": "ಭಾಷೆಗಳು",
+      "category": "ಸ್ಪ್ಯಾನಿಷ್ (ಸ್ಪೇನ್)",
+      "level_signal": "ಮೂಲ ಮಟ್ಟ.",
+      "edition_marker": "ಸ್ಪ್ಯಾನಿಷ್ (ಸ್ಪೇನ್)"
+    },
+    "ML": {
+      "title": "സ്പാനിഷ് (സ്പെയിൻ) A1",
+      "description": "സ്പാനിഷ് (സ്പെയിൻ) A1. അടിസ്ഥാന നില.",
+      "module": "ഭാഷകൾ",
+      "category": "സ്പാനിഷ് (സ്പെയിൻ)",
+      "level_signal": "അടിസ്ഥാന നില.",
+      "edition_marker": "സ്പാനിഷ് (സ്പെയിൻ)"
+    },
+    "UZ": {
+      "title": "Ispan tili (Ispaniya) A1",
+      "description": "Ispan tili (Ispaniya) A1. Boshlang‘ich daraja.",
+      "module": "Tillar",
+      "category": "Ispan tili (Ispaniya)",
+      "level_signal": "Boshlang‘ich daraja.",
+      "edition_marker": "Ispan tili (Ispaniya)"
+    },
+    "KK": {
+      "title": "Испан тілі (Испания) A1",
+      "description": "Испан тілі (Испания) A1. Бастапқы деңгей.",
+      "module": "Тілдер",
+      "category": "Испан тілі (Испания)",
+      "level_signal": "Бастапқы деңгей.",
+      "edition_marker": "Испан тілі (Испания)"
+    },
+    "AZ": {
+      "title": "İspan dili (İspaniya) A1",
+      "description": "İspan dili (İspaniya) A1. Başlanğıc səviyyə.",
+      "module": "Dillər",
+      "category": "İspan dili (İspaniya)",
+      "level_signal": "Başlanğıc səviyyə.",
+      "edition_marker": "İspan dili (İspaniya)"
+    },
+    "KA": {
+      "title": "ესპანური (ესპანეთი) A1",
+      "description": "ესპანური (ესპანეთი) A1. საწყისი დონე.",
+      "module": "ენები",
+      "category": "ესპანური (ესპანეთი)",
+      "level_signal": "საწყისი დონე.",
+      "edition_marker": "ესპანური (ესპანეთი)"
+    },
+    "HY": {
+      "title": "Իսպաներեն (Իսպանիա) A1",
+      "description": "Իսպաներեն (Իսպանիա) A1. Սկզբնական մակարդակ։",
+      "module": "Լեզուներ",
+      "category": "Իսպաներեն (Իսպանիա)",
+      "level_signal": "Սկզբնական մակարդակ։",
+      "edition_marker": "Իսպաներեն (Իսպանիա)"
+    },
+    "TR": {
+      "title": "İspanyolca (İspanya) A1",
+      "description": "İspanyolca (İspanya) A1. Temel seviye.",
+      "module": "Diller",
+      "category": "İspanyolca (İspanya)",
+      "level_signal": "Temel seviye.",
+      "edition_marker": "İspanyolca (İspanya)"
+    },
+    "SW": {
+      "title": "Kihispania (Hispania) A1",
+      "description": "Kihispania (Hispania) A1. Kiwango cha msingi.",
+      "module": "Lugha",
+      "category": "Kihispania (Hispania)",
+      "level_signal": "Kiwango cha msingi.",
+      "edition_marker": "Kihispania (Hispania)"
+    },
+    "PT-BR": {
+      "title": "Espanhol da Espanha A1",
+      "description": "Espanhol da Espanha A1. Nível básico.",
+      "module": "Idiomas",
+      "category": "Espanhol da Espanha",
+      "level_signal": "Nível básico.",
+      "edition_marker": "Espanhol da Espanha"
+    },
+    "ES-419": {
+      "title": "Español de España A1",
+      "description": "Español de España A1. Nivel básico.",
+      "module": "Idiomas",
+      "category": "Español de España",
+      "level_signal": "Nivel básico.",
+      "edition_marker": "Español de España"
+    },
+    "EN-GB": {
+      "title": "Spanish (Spain) A1",
+      "description": "Spanish (Spain) A1. Basic level.",
+      "module": "Languages",
+      "category": "Spanish (Spain)",
+      "level_signal": "Basic level.",
+      "edition_marker": "Spanish (Spain)"
+    }
+  },
+  "workbook_edition": "spain_spanish",
+  "primary_spanish_variant": "ES",
+  "omitted_main_sheet_source_variants": [
+    "ES-419"
+  ],
+  "variant_label": "polished_spain_spanish_label",
+  "variant_policy": "Course Metadata must use reader-facing full edition labels, not cramped abbreviations, while preserving the ordinary 5-row polyglot sheet shape.",
+  "source_template": "config/spanish-a1-core-course-metadata.json"
+}

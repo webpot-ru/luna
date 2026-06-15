@@ -1,0 +1,64 @@
+{
+  "contract_id": "hsk3_release_v1",
+  "status": "working_contract",
+  "scope": "HSK 3.0 exam vocabulary release workbooks, separate from HSK Classic 2.0, ordinary decks, Oxford and Polyglot.",
+  "default_release": {
+    "release_id": "hsk3_level_1_300_v1",
+    "hsk_version": "HSK 3.0",
+    "hsk_level": 1,
+    "expected_row_count": 300
+  },
+  "source_policy": {
+    "chinese_base_source": "Official ChineseTest HSK 3.0 syllabus PDF",
+    "official_page_url": "https://www.chinesetest.cn/hsk",
+    "pdf_url": "https://hsk.cn-bj.ufileos.com/3.0/%E6%96%B0%E7%89%88HSK%E8%80%83%E8%AF%95%E5%A4%A7%E7%BA%B2%EF%BC%88%E8%AF%8D%E6%B1%87%E3%80%81%E6%B1%89%E5%AD%97%E3%80%81%E8%AF%AD%E6%B3%95%EF%BC%89.pdf",
+    "local_pdf_snapshot": "outputs/hsk/source/hsk3_official_syllabus_vocab_chars_grammar_202511_202607.pdf",
+    "source_snapshot": "outputs/hsk/source/hsk3_level_1_300_v1.source.json",
+    "source_role": "Chinese vocabulary membership, row order, HSK 3.0 level, pinyin and part-of-speech labels. Classic HSK may be candidate evidence only after row-level pinyin/sense classification."
+  },
+  "main_sheet": {
+    "sheet_name": "HSK3 Level 1",
+    "required_fixed_columns": [
+      "release_id",
+      "hsk_version",
+      "hsk_level",
+      "hsk_order",
+      "source_word",
+      "simplified",
+      "pinyin",
+      "source_pos",
+      "classic_reuse_class",
+      "classic_reuse_notes",
+      "example_zh",
+      "example_pinyin"
+    ],
+    "language_columns_source": "config/language-order.json spreadsheetCode values in order, excluding ZH for HSK because Chinese is represented by fixed source fields",
+    "example_language_columns_source": "config/language-order.json spreadsheetCode values in order excluding ZH, prefixed as example_<SPREADSHEET_CODE>",
+    "required_status_columns": [
+      "translation_status",
+      "example_status",
+      "qa_notes"
+    ]
+  },
+  "field_rules": {
+    "audio": "not_in_scope",
+    "target_language_transcription": "not_in_scope",
+    "word_pinyin": "required for Chinese source word only; HSK 3.0 official pinyin wins over Classic pinyin",
+    "example_pinyin": "required only after curated Chinese examples are added",
+    "translation_cells": "short learner-facing meaning in the learner language; blank is allowed only in preparation workbooks before translation packs are generated",
+    "example_translation_cells": "short translation of example_zh in the learner language; blank is allowed only in preparation workbooks before Chinese examples and translation packs are generated",
+    "classic_reuse_class": "exact Classic matches are classified before reuse as exact_same_pinyin, style_only_pinyin, variant_ok, tone_or_neutral_policy, semantic_conflict or absent_as_exact_classic_word",
+    "zh_language_column": "not included in HSK language columns; use source_word/simplified/pinyin/example_zh/example_pinyin fixed source fields instead"
+  },
+  "workbook_sheets": [
+    "HSK3 Level 1",
+    "Course Metadata",
+    "README",
+    "Languages",
+    "Classic Reuse Map",
+    "Translation Source Plan",
+    "Translation QA",
+    "Source Audit",
+    "Sources"
+  ]
+}

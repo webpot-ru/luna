@@ -1,0 +1,680 @@
+{
+  "contract_id": "spanish_a1_core_release_contract_v1::spanish_a1_core_part_005_300_v1",
+  "status": "final_delivery_ready",
+  "scope": "Spanish A1 course-prep vocabulary release workbook Part 005, separate from ordinary thematic decks, Oxford English vocabulary, HSK Classic and HSK 3.0; final buyer-facing delivery requires separate Spanish (Spain) and Latin American Spanish edition workbooks.",
+  "approved_for_generation": true,
+  "source_candidate_file": "config/spanish-a1-core-part-005-candidates.tsv",
+  "release_part": {
+    "part_number": 5,
+    "row_id_start": 1201,
+    "meaning_namespace": "spanish_a1::part_005",
+    "selected_scope": "Internal LunaCards continuation of Spanish A1 Core after Parts 001-004; additional A1/A1+ time, people, home, food, clothing, health, transport, nature, leisure, study/admin/tech, common verbs and adjectives."
+  },
+  "default_release": {
+    "release_id": "spanish_a1_core_part_005_300_v1",
+    "course_id": "spanish_a1_core",
+    "cefr_level": "A1",
+    "expected_row_count": 300
+  },
+  "course": {
+    "course_id": "spanish_a1_core",
+    "product_safe_working_title": "LunaCards Spanish A1 Course Prep",
+    "source_language_code": "ES",
+    "source_variant": "Spanish (Spain) default",
+    "regional_variant_code": "ES-419",
+    "regional_variant_label": "Latin American Spanish",
+    "target_language_order_source": "config/language-order.json",
+    "target_language_column_count": 54,
+    "target_language_role": "learner support translations for studying Spanish, not an ordinary polyglot thematic deck contract"
+  },
+  "source_policy": {
+    "benchmark_only_sources": [
+      {
+        "id": "instituto-cervantes-pcic-a1-a2",
+        "name": "Instituto Cervantes Plan Curricular / PCIC A1-A2",
+        "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/niveles/09_nociones_especificas_inventario_a1-a2.htm",
+        "role": "benchmark_coverage_only"
+      },
+      {
+        "id": "dele-instituto-cervantes",
+        "name": "DELE Spanish exams",
+        "url": "https://examenes.cervantes.es/es/dele/que-es",
+        "role": "exam_benchmark_only"
+      },
+      {
+        "id": "siele-instituto-cervantes",
+        "name": "SIELE Spanish exam",
+        "url": "https://examenes.cervantes.es/es/siele/que-es",
+        "role": "exam_benchmark_and_regional_variant_signal_only"
+      }
+    ],
+    "production_truth": [
+      "internal_lunacards_row_curation",
+      "meaning_note",
+      "semantic_scene",
+      "reviewed_spanish_source_fields",
+      "reviewed_lunacards_authored_examples",
+      "release_qa_evidence"
+    ],
+    "local_candidate_sources": [
+      {
+        "source_id": "kaikki-spanish",
+        "local_path": "reference-sources/raw/wiktionary-kaikki/kaikki.org-dictionary-Spanish.jsonl.gz",
+        "role": "Spanish lexical forms, POS, gender/article hints and ES/ES-419 lexical sanity",
+        "confidence": "source_partial"
+      },
+      {
+        "source_id": "dbnary-es-20251001",
+        "local_path": "reference-sources/raw/dbnary/es_dbnary_all_20251001.tgz",
+        "role": "Spanish lexical/RDF lookup and bilingual candidate support",
+        "confidence": "source_partial"
+      },
+      {
+        "source_id": "unimorph-spa",
+        "local_path": "reference-sources/raw/unimorph/spa/spa",
+        "role": "Spanish morphology sanity for Spanish verbs, gender, number and inflected forms",
+        "confidence": "source_partial"
+      },
+      {
+        "source_id": "freedict-eng-spa-src",
+        "local_path": "reference-sources/raw/freedict/dictionaries/eng-spa/freedict-eng-spa-2025.11.23.src.tar.xz",
+        "role": "English-Spanish bilingual candidate support",
+        "confidence": "source_partial"
+      },
+      {
+        "source_id": "apertium-eng-spa-debian-dix",
+        "local_path": "reference-sources/raw/apertium/eng-spa/apertium-eng-spa.eng-spa.dix",
+        "role": "English-Spanish bilingual candidate support",
+        "confidence": "source_partial"
+      },
+      {
+        "source_id": "opus-en-es",
+        "local_path": "reference-sources/raw/opus/*/en-es.txt.zip",
+        "role": "Example and collocation sanity only",
+        "confidence": "source_partial"
+      }
+    ],
+    "external_frequency_references": [
+      {
+        "id": "wordfreq",
+        "url": "https://pypi.org/project/wordfreq/",
+        "role": "frequency sanity only; data license impact must be reviewed before redistribution"
+      },
+      {
+        "id": "corpus-del-espanol",
+        "url": "https://www.corpusdata.org/spanish.asp",
+        "role": "frequency and dialect sanity only; terms must be reviewed before downloadable data use"
+      }
+    ],
+    "blocked_without_permission_or_review": [
+      "copy_pcic_list_order_or_text_as_release_rows",
+      "copy_dele_or_siele_exam_materials",
+      "copy_textbook_or_paid_deck_vocabulary_sections",
+      "claim_official_certified_approved_or_endorsed_status",
+      "treat_dictionary_or_corpus_candidates_as_final_truth_without_row_level_sense_review"
+    ],
+    "allowed_uses": [
+      "benchmark_coverage_mapping",
+      "internal_lunacards_candidate_selection",
+      "source_assisted_article_gender_morphology_checks",
+      "source_assisted_regional_variant_review",
+      "lunacards_authored_examples",
+      "54_language_support_translations_after_preflight"
+    ]
+  },
+  "row_identity": {
+    "row_key": "release_id::spanish_item_id",
+    "semantic_key": "meaning_id",
+    "required_source_fields": [
+      "release_id",
+      "course_id",
+      "row_id",
+      "spanish_item_id",
+      "meaning_id",
+      "cefr_level",
+      "source_language",
+      "source_variant",
+      "source_lemma",
+      "display_ES",
+      "display_ES_419",
+      "part_of_speech",
+      "gender",
+      "article_ES",
+      "article_ES_419",
+      "number_policy",
+      "verb_infinitive",
+      "verb_group",
+      "meaning_note",
+      "semantic_scene",
+      "topic_domain",
+      "example_ES",
+      "example_ES_419",
+      "transcription_ES",
+      "transcription_ES_419",
+      "source_status",
+      "qa_status",
+      "qa_notes"
+    ],
+    "sense_split_rule": "Split one Spanish source form into separate meaning_id rows when part of speech, sense, construction, register or semantic scene differs."
+  },
+  "field_rules": {
+    "article_gender": "Required for Spanish nouns. Stressed feminine-a nouns may use article el while retaining feminine gender.",
+    "verb_forms": "Use infinitive as canonical form unless the row intentionally teaches a high-frequency A1 phrase; store -ar/-er/-ir/irregular group.",
+    "source_examples": "LunaCards-authored A1 examples only; simple, concrete, present tense preferred.",
+    "source_transcription": "For Spanish A1 final edition workbooks, primary Spanish word transcription columns use course-specific broad learner IPA (`spanish_a1_broad_learner_ipa_v1`) generated by `scripts/spanish-a1/lib/spanish-pronunciation.mjs`; Spain (`ES`) and Latin American Spanish (`ES-419`) differ where pronunciation policy differs, such as distinción /θ/ versus seseo /s/. Candidate source fields store IPA for the base display without learner article; final workbook word IPA is computed from learner-facing display and includes el/la where visible.",
+    "support_language_transcription": "not_in_scope_v1",
+    "audio": "not_in_scope_v1",
+    "regional_variant": "ES-419 may equal ES when region-neutral; differences must be intentional and reviewed.",
+    "source_example_transcription": "For Spanish A1 final edition workbooks, the primary Spanish example transcription column uses course-specific broad learner IPA (`spanish_a1_broad_learner_ipa_v1`) generated from the visible Spanish example sentence for the concrete edition (`ES` or `ES-419`)."
+  },
+  "workbook": {
+    "principle": "Buyer-facing Spanish A1 course delivery produces two separate edition workbooks, analogous to Oxford US/UK: a Spanish (Spain) workbook and a Latin American Spanish workbook. Each main sheet exposes one primary Spanish variant first, omits the other Spanish source variant from the buyer-facing main sheet, keeps the omitted variant in Card Metadata/source/isolated DB, and includes primary Spanish word/example broad learner IPA columns.",
+    "main_sheet_name": "Spanish A1 Core Part 005",
+    "translation_columns": "Edition-specific order: Spanish (Spain) uses ES first and omits ES-419 from the main sheet; Latin American Spanish uses ES-419 first and omits ES. After the primary Spanish variant, include remaining non-Spanish support spreadsheetCode values from config/language-order.json in their existing relative order.",
+    "example_columns": "Edition-specific order as `${CODE} example` columns matching the display columns, followed by primary Spanish word transcription and primary Spanish example transcription columns for the concrete edition.",
+    "language_column_order_policy": "separate_spanish_editions",
+    "language_column_order_first": {
+      "latin_american_spanish": [
+        "ES-419",
+        "EN",
+        "FR"
+      ],
+      "spain_spanish": [
+        "ES",
+        "EN",
+        "FR"
+      ]
+    },
+    "main_sheet_column_contract": "translations -> examples -> primary Spanish transcription -> primary Spanish example transcription",
+    "source_fields_in_main_sheet": false,
+    "spanish_noun_articles_in_main_sheet": true,
+    "support_language_transcriptions_in_main_sheet": false,
+    "service_sheets": [
+      "Course Metadata",
+      "Deck Metadata",
+      "Card Metadata",
+      "README",
+      "Languages",
+      "Source Contract",
+      "Benchmark Audit",
+      "Candidate Pool",
+      "Source Assisted QA",
+      "Regional Variant QA",
+      "Translation QA",
+      "Sources",
+      "Support Batches"
+    ],
+    "postgres_import": false,
+    "ordinary_deck_sort": null,
+    "isolated_db_storage": {
+      "enabled": true,
+      "ordinary_deck_tables": false,
+      "source_only_saved": false,
+      "final_support_storage_ready": false,
+      "tables": [
+        "spanish_a1_source_items",
+        "spanish_a1_support_items",
+        "spanish_a1_db_import_runs"
+      ]
+    },
+    "google_sheet_created": false,
+    "final_delivery_ready": false,
+    "course_metadata_policy": "Course Metadata keeps the ordinary 5-row polyglot shape, but Title, Description, Module and Category are resolved from the concrete edition metadata source. Latin American Spanish and Spanish (Spain) are separate metadata sources and separate Google Sheets. Metadata labels must be full reader-facing labels, not cramped abbreviations; export, local workbook readback and Google Sheet readback exact-check Course Metadata and block old shortened labels.",
+    "primary_spanish_transcription_columns_in_main_sheet": true,
+    "primary_spanish_example_transcription_in_main_sheet": true,
+    "course_metadata_version": "spanish-a1-core-course-metadata-v5-polished-edition-labels",
+    "course_metadata_full_reader_labels": true,
+    "course_metadata_abbreviation_gate": true,
+    "course_metadata_style": {
+      "freeze_header_and_label_column": true,
+      "wrap_text": true,
+      "widened_language_columns": true,
+      "bordered_table": true
+    }
+  },
+  "qa_gates": [
+    "source_contract_gate",
+    "benchmark_no_copy_gate",
+    "candidate_pool_gate",
+    "spanish_source_candidate_gate",
+    "spanish_article_gender_gate",
+    "spanish_morphology_gate",
+    "spanish_regional_variant_gate",
+    "spanish_example_quality_gate",
+    "source_draft_xlsx_readback_gate",
+    "support_generation_plan_gate",
+    "support_translation_memory_reuse_map_gate",
+    "support_language_source_preflight",
+    "support_example_scene_gate",
+    "final_workbook_contract_gate",
+    "google_sheet_readback_gate"
+  ],
+  "ai_tool_policy": {
+    "default_generation": "structured_local_first",
+    "gemini_role": "reviewer_or_repair_support_only_unless_user_explicitly_approves_bounded_live_generation",
+    "paid_api_usage": "requires_explicit_user_confirmation",
+    "ai_output_source_truth": false,
+    "latest_explicit_user_confirmation": {
+      "confirmed_at": "2026-06-12T03:26:29.577Z",
+      "source": "user_chat_2026_06_12_delai_after_quota_warning",
+      "scope": "Use subscription-backed Gemini CLI only for Spanish A1 Core Part 005 support-language generation; no paid API key; no ordinary deck import.",
+      "release_id": "spanish_a1_core_part_005_300_v1",
+      "model": "gemini-3.1-pro-preview",
+      "paid_api_key": false,
+      "paid_api_key_usage": false,
+      "quota_use": true,
+      "ordinary_deck_import": false,
+      "isolated_spanish_a1_db_import_after_final_support": true
+    },
+    "part003_note": "Part 003 live Gemini/support-language generation was explicitly confirmed by the user on 2026-06-09 for subscription-backed Gemini CLI only. No paid API key use and no model downgrade are allowed.",
+    "part004_note": "Part 004 support-language generation approved by user reply in Russian: delai dalshe, immediately after Codex warned that the next step spends subscription-backed Gemini CLI quota. Use gemini-3.1-pro-preview only; no paid API key and no model downgrade.",
+    "part005_note": "Part 005 support-language generation approved by user reply in Russian: delai, immediately after Codex warned that the next step spends subscription-backed Gemini CLI quota. Use gemini-3.1-pro-preview only; no paid API key and no model downgrade."
+  },
+  "current_blockers": [],
+  "current_pending": [],
+  "updated_at": "2026-06-12T11:33:11.031Z",
+  "latest_source_lookup": {
+    "status": "pass_with_advisory_warnings",
+    "path": "outputs/spanish-a1-core/source-lookup/spanish_a1_core_part_005_300_v1_spanish_source_lookup_20260612-part005-source-lookup.json",
+    "rows": 300,
+    "kaikki_exact_match_rows": 300,
+    "rows_without_kaikki_exact_match": 0,
+    "advisory_warnings": 1,
+    "blockers": 0
+  },
+  "latest_source_advisory_review": {
+    "status": "pass",
+    "path": "outputs/spanish-a1-core/source-review/spanish_a1_core_part_005_300_v1_source_advisory_review_20260612-part005-source-review.json",
+    "reviewed_advisories": 1,
+    "accepted_advisories": 1,
+    "unresolved_advisories": 0,
+    "blockers": 0,
+    "candidate_pool_mutated": false,
+    "approved_for_generation": false
+  },
+  "latest_source_draft": {
+    "workbook_path": "outputs/spanish-a1-core/source-drafts/FlashcardsLuna_spanish_a1_core_part_005_300_v1_source_draft.xlsx",
+    "manifest_path": "outputs/spanish-a1-core/source-drafts/FlashcardsLuna_spanish_a1_core_part_005_300_v1_source_draft_manifest.json",
+    "workbook_sha256": "e142f3714ee4efe01d5c8ab08201f5ece6d06e2bba73aef36d83d3af9c2e049e",
+    "rows": 300,
+    "language_columns": 54,
+    "main_sheet_columns": 138,
+    "support_languages_generated": false,
+    "google_sheet_created": false,
+    "postgres_changes": false,
+    "xlsx_readback": {
+      "status": "pass",
+      "main_rows": 300,
+      "main_cols": 138,
+      "filled_ES": 300,
+      "filled_ES_419": 300,
+      "filled_example_ES": 300,
+      "filled_example_ES_419": 300,
+      "blockers": 0
+    }
+  },
+  "latest_support_generation_plan": {
+    "path": "outputs/spanish-a1-core/support-generation/spanish_a1_core_part_005_300_v1_support_generation_plan_20260612-part005-support-after-it-repair.json",
+    "status": "pass",
+    "support_generation_status": "complete",
+    "approved_for_generation": true,
+    "generation_ready_without_external_quota": false,
+    "quality_target": "oxford_contour_equivalent_fail_closed",
+    "rows": 300,
+    "total_language_columns": 54,
+    "source_language_columns": [
+      "ES",
+      "ES-419"
+    ],
+    "target_support_languages": 52,
+    "expected_support_display_cells": 15600,
+    "expected_support_example_cells": 15600,
+    "completed_support_languages": 52,
+    "missing_support_language_outputs": 0,
+    "blockers": 0,
+    "checked_at": "20260612-part005-support-after-it-repair"
+  },
+  "latest_support_reuse_map": {
+    "status": "reuse_map_ready_not_final_generation",
+    "path": "outputs/spanish-a1-core/support-generation/spanish_a1_core_part_005_300_v1_support_reuse_map_20260612-part005-reuse-map.json",
+    "csv_path": "outputs/spanish-a1-core/support-generation/spanish_a1_core_part_005_300_v1_support_reuse_map_20260612-part005-reuse-map.csv",
+    "draft_jsonl_path": "outputs/spanish-a1-core/support-generation/spanish_a1_core_part_005_300_v1_support_display_draft_from_reuse_20260612-part005-reuse-map.jsonl",
+    "auto_exact_english_rows": 45,
+    "full_display_reuse_rows": 45,
+    "ambiguous_exact_english_rows": 3,
+    "no_exact_english_match_rows": 252,
+    "spanish_exact_candidate_rows": 44,
+    "display_cells_available_from_exact_reuse": 2340,
+    "display_cells_expected": 15600,
+    "example_cells_safe_to_reuse": 0,
+    "example_cells_expected": 15600,
+    "final_delivery_ready": false
+  },
+  "latest_gate_report": {
+    "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_release_gate_20260612-part005-final-contract-sync.json",
+    "status": "ok",
+    "blocker_count": 0,
+    "warning_count": 0,
+    "require_final_support": true
+  },
+  "latest_source_package_gate": {
+    "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_release_gate_20260612-part005-source-package-doc-sync.json",
+    "status": "ok",
+    "blocker_count": 0,
+    "warning_count": 0,
+    "blockers": [],
+    "warnings": [],
+    "require_final_support": false,
+    "checked_at": "2026-06-12T03:21:39.500Z"
+  },
+  "support_generation_completed_at": "2026-06-12T11:31:38.924Z",
+  "latest_hy_terminal_punctuation_repair": {
+    "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_hy_terminal_punctuation_repair_20260612-part005.json",
+    "status": "ok",
+    "language_code": "HY",
+    "rows_checked": 300,
+    "rows_updated": 250,
+    "fields_updated": 500,
+    "remaining_bad_terminal_rows": 0,
+    "checked_at": "2026-06-12T10:48:46.722Z"
+  },
+  "latest_it_mild_weather_repair": {
+    "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_it_mild_weather_repair_20260612-part005.json",
+    "status": "ok",
+    "rows_checked": 300,
+    "rows_updated": 1,
+    "checked_at": "2026-06-12T11:16:53.346Z"
+  },
+  "latest_sample_quality_audit": {
+    "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_sample_quality_audit_20260612-part005-gemini-sample-after-it-repair.json",
+    "status": "pass",
+    "method": "deterministic local checks plus Gemini CLI AI sample review",
+    "sample_positions": [
+      1,
+      75,
+      150,
+      225,
+      300
+    ],
+    "source_sample_checks": 10,
+    "support_sample_checks": 260,
+    "gemini_reviews": 260,
+    "warnings": 5,
+    "blockers": 0,
+    "does_not_replace": "native-speaker certification or full row-by-row linguistic audit",
+    "model": "gemini-3.1-pro-preview",
+    "checked_at": "2026-06-12T11:24:13.408Z"
+  },
+  "latest_expanded_quality_audit": {
+    "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_expanded_quality_audit_20260612-part005-expanded-after-it-repair.json",
+    "status": "pass",
+    "method": "deterministic expanded sample checks plus full ES/ES-419 source-field checks; no Gemini or external quota used",
+    "sample_positions": [
+      1,
+      34,
+      67,
+      101,
+      134,
+      167,
+      200,
+      234,
+      267,
+      300
+    ],
+    "sampled_source_rows_count": 10,
+    "language_variants_sampled": 54,
+    "sample_checks_total": 540,
+    "source_sample_checks": 20,
+    "support_sample_checks": 520,
+    "full_spanish_variant_checks": 600,
+    "blockers": 0,
+    "warnings": 421,
+    "does_not_replace": "native-speaker certification or full row-by-row support-language linguistic audit",
+    "checked_at": "2026-06-12T11:24:27.269Z"
+  },
+  "latest_full_row_quality_audit": {
+    "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_expanded_quality_audit_20260612-part005-expanded-after-it-repair.json",
+    "status": "pass",
+    "method": "deterministic expanded sample checks plus full ES/ES-419 source-field checks; no Gemini or external quota used",
+    "full_spanish_variant_checks": 600,
+    "blockers": 0,
+    "warnings": 421,
+    "checked_at": "2026-06-12T11:24:27.269Z"
+  },
+  "latest_final_workbooks": {
+    "latin_american_spanish": {
+      "workbook_path": "outputs/spanish-a1-core/final/FlashcardsLuna_Spanish_A1_Core_Part_005_Latin_American_Spanish.xlsx",
+      "manifest_path": "outputs/spanish-a1-core/final/FlashcardsLuna_Spanish_A1_Core_Part_005_Latin_American_Spanish_manifest.json",
+      "workbook_edition": "latin_american_spanish",
+      "primary_spanish_variant": "ES-419",
+      "omitted_main_sheet_source_variants": [
+        "ES"
+      ],
+      "workbook_layout": "buyer_facing_clean_v3_separate_spanish_edition",
+      "language_column_order_policy": "latin_american_spanish_edition: ES-419 first, ES omitted from buyer-facing main sheet, then remaining non-Spanish support languages from config/language-order.json",
+      "language_column_order_first": [
+        "ES-419",
+        "EN",
+        "FR"
+      ],
+      "source_fields_in_main_sheet": false,
+      "spanish_noun_articles_in_main_sheet": true,
+      "primary_spanish_transcription_policy": "spanish_a1_broad_learner_ipa_v1",
+      "primary_spanish_transcription_columns": [
+        "ES-419 transcription",
+        "ES-419 example transcription"
+      ],
+      "primary_spanish_example_transcription_in_main_sheet": true,
+      "xlsx_readback": {
+        "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_final_workbook_readback_20260612-part005-final-latam-readback.json",
+        "blockers": []
+      },
+      "course_metadata_source": "config/spanish-a1-core-part-005-course-metadata.json",
+      "course_metadata_version": "spanish-a1-core-course-metadata-v5-polished-edition-labels",
+      "course_metadata_localized": true,
+      "google_sheet_created": true,
+      "google_sheet_id": "1GJuxT4lwSuu6vWAFnFLMpBAje6s8p4ZZ6H5skbojXjw",
+      "google_sheet_url": "https://docs.google.com/spreadsheets/d/1GJuxT4lwSuu6vWAFnFLMpBAje6s8p4ZZ6H5skbojXjw/edit?usp=drivesdk",
+      "google_sheet_title": "FlashcardsLuna Spanish A1 Core Part 005 - Latin American Spanish",
+      "google_sheet_mime_type": "application/vnd.google-apps.spreadsheet",
+      "google_sheet_verified_in_folder": true,
+      "google_sheet_upload_mode": "create_new",
+      "google_sheet_uploaded_workbook_sha256": "d8a1b46f5a53b7a714c1b4c03787598e1e6c8f15a4b57d8393082bafd1720443",
+      "google_sheet_uploaded_at": "2026-06-12T11:26:48.306Z",
+      "google_sheet_readback": {
+        "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_google_sheet_readback_20260612-part005-latam-google-readback.json",
+        "blockers": []
+      },
+      "workbook_sha256": "d8a1b46f5a53b7a714c1b4c03787598e1e6c8f15a4b57d8393082bafd1720443",
+      "rows": 300,
+      "language_columns": 53,
+      "main_sheet_columns": 108,
+      "support_language_batches": 52,
+      "support_rows": 15600,
+      "course_metadata_full_reader_labels": true,
+      "course_metadata_abbreviation_gate": true
+    },
+    "spain_spanish": {
+      "workbook_path": "outputs/spanish-a1-core/final/FlashcardsLuna_Spanish_A1_Core_Part_005_Spain_Spanish.xlsx",
+      "manifest_path": "outputs/spanish-a1-core/final/FlashcardsLuna_Spanish_A1_Core_Part_005_Spain_Spanish_manifest.json",
+      "workbook_edition": "spain_spanish",
+      "primary_spanish_variant": "ES",
+      "omitted_main_sheet_source_variants": [
+        "ES-419"
+      ],
+      "workbook_layout": "buyer_facing_clean_v3_separate_spanish_edition",
+      "language_column_order_policy": "spain_spanish_edition: ES first, ES-419 omitted from buyer-facing main sheet, then remaining non-Spanish support languages from config/language-order.json",
+      "language_column_order_first": [
+        "ES",
+        "EN",
+        "FR"
+      ],
+      "source_fields_in_main_sheet": false,
+      "spanish_noun_articles_in_main_sheet": true,
+      "primary_spanish_transcription_policy": "spanish_a1_broad_learner_ipa_v1",
+      "primary_spanish_transcription_columns": [
+        "ES transcription",
+        "ES example transcription"
+      ],
+      "primary_spanish_example_transcription_in_main_sheet": true,
+      "xlsx_readback": {
+        "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_final_workbook_readback_20260612-part005-final-spain-readback.json",
+        "blockers": []
+      },
+      "course_metadata_source": "config/spanish-a1-core-part-005-course-metadata-spain.json",
+      "course_metadata_version": "spanish-a1-core-course-metadata-v5-polished-edition-labels",
+      "course_metadata_localized": true,
+      "google_sheet_created": true,
+      "google_sheet_id": "1Qkz91ETK_Qh9BDX4mdONR0kDkLB-UKDufitPTWp3NBY",
+      "google_sheet_url": "https://docs.google.com/spreadsheets/d/1Qkz91ETK_Qh9BDX4mdONR0kDkLB-UKDufitPTWp3NBY/edit?usp=drivesdk",
+      "google_sheet_title": "FlashcardsLuna Spanish A1 Core Part 005 - Spanish (Spain)",
+      "google_sheet_mime_type": "application/vnd.google-apps.spreadsheet",
+      "google_sheet_verified_in_folder": true,
+      "google_sheet_upload_mode": "create_new",
+      "google_sheet_uploaded_workbook_sha256": "defd4823dfcfd409ebe0779497d3570ef1fef9511084a8307938218a864db691",
+      "google_sheet_uploaded_at": "2026-06-12T11:27:03.613Z",
+      "google_sheet_readback": {
+        "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_google_sheet_readback_20260612-part005-spain-google-readback.json",
+        "blockers": []
+      },
+      "workbook_sha256": "defd4823dfcfd409ebe0779497d3570ef1fef9511084a8307938218a864db691",
+      "rows": 300,
+      "language_columns": 53,
+      "main_sheet_columns": 108,
+      "support_language_batches": 52,
+      "support_rows": 15600,
+      "course_metadata_full_reader_labels": true,
+      "course_metadata_abbreviation_gate": true
+    }
+  },
+  "latest_final_workbook": {
+    "workbook_path": "outputs/spanish-a1-core/final/FlashcardsLuna_Spanish_A1_Core_Part_005_Latin_American_Spanish.xlsx",
+    "manifest_path": "outputs/spanish-a1-core/final/FlashcardsLuna_Spanish_A1_Core_Part_005_Latin_American_Spanish_manifest.json",
+    "workbook_edition": "latin_american_spanish",
+    "primary_spanish_variant": "ES-419",
+    "omitted_main_sheet_source_variants": [
+      "ES"
+    ],
+    "workbook_layout": "buyer_facing_clean_v3_separate_spanish_edition",
+    "language_column_order_policy": "latin_american_spanish_edition: ES-419 first, ES omitted from buyer-facing main sheet, then remaining non-Spanish support languages from config/language-order.json",
+    "language_column_order_first": [
+      "ES-419",
+      "EN",
+      "FR"
+    ],
+    "source_fields_in_main_sheet": false,
+    "spanish_noun_articles_in_main_sheet": true,
+    "primary_spanish_transcription_policy": "spanish_a1_broad_learner_ipa_v1",
+    "primary_spanish_transcription_columns": [
+      "ES-419 transcription",
+      "ES-419 example transcription"
+    ],
+    "primary_spanish_example_transcription_in_main_sheet": true,
+    "xlsx_readback": {
+      "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_final_workbook_readback_20260612-part005-final-latam-readback.json",
+      "blockers": []
+    },
+    "course_metadata_source": "config/spanish-a1-core-part-005-course-metadata.json",
+    "course_metadata_version": "spanish-a1-core-course-metadata-v5-polished-edition-labels",
+    "course_metadata_localized": true,
+    "google_sheet_created": true,
+    "google_sheet_id": "1GJuxT4lwSuu6vWAFnFLMpBAje6s8p4ZZ6H5skbojXjw",
+    "google_sheet_url": "https://docs.google.com/spreadsheets/d/1GJuxT4lwSuu6vWAFnFLMpBAje6s8p4ZZ6H5skbojXjw/edit?usp=drivesdk",
+    "google_sheet_title": "FlashcardsLuna Spanish A1 Core Part 005 - Latin American Spanish",
+    "google_sheet_mime_type": "application/vnd.google-apps.spreadsheet",
+    "google_sheet_verified_in_folder": true,
+    "google_sheet_upload_mode": "create_new",
+    "google_sheet_uploaded_workbook_sha256": "d8a1b46f5a53b7a714c1b4c03787598e1e6c8f15a4b57d8393082bafd1720443",
+    "google_sheet_uploaded_at": "2026-06-12T11:26:48.306Z",
+    "google_sheet_readback": {
+      "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_google_sheet_readback_20260612-part005-latam-google-readback.json",
+      "blockers": []
+    },
+    "workbook_sha256": "d8a1b46f5a53b7a714c1b4c03787598e1e6c8f15a4b57d8393082bafd1720443",
+    "rows": 300,
+    "language_columns": 53,
+    "main_sheet_columns": 108,
+    "support_language_batches": 52,
+    "support_rows": 15600,
+    "course_metadata_full_reader_labels": true,
+    "course_metadata_abbreviation_gate": true,
+    "alias_note": "Latin American Spanish workbook alias only; use latest_final_workbooks for both edition workbooks."
+  },
+  "latest_google_sheet_deliveries": {
+    "latin_american_spanish": {
+      "delivery_manifest_path": "outputs/spanish-a1-core/final/FlashcardsLuna_Spanish_A1_Core_Part_005_Latin_American_Spanish_delivery.json",
+      "google_sheet_id": "1GJuxT4lwSuu6vWAFnFLMpBAje6s8p4ZZ6H5skbojXjw",
+      "google_sheet_url": "https://docs.google.com/spreadsheets/d/1GJuxT4lwSuu6vWAFnFLMpBAje6s8p4ZZ6H5skbojXjw/edit?usp=drivesdk",
+      "google_sheet_title": "FlashcardsLuna Spanish A1 Core Part 005 - Latin American Spanish",
+      "google_sheet_mime_type": "application/vnd.google-apps.spreadsheet",
+      "google_sheet_verified_in_folder": true,
+      "google_sheet_upload_mode": "create_new",
+      "google_sheet_uploaded_workbook_sha256": "d8a1b46f5a53b7a714c1b4c03787598e1e6c8f15a4b57d8393082bafd1720443",
+      "google_sheet_uploaded_at": "2026-06-12T11:26:48.306Z",
+      "workbook_path": "outputs/spanish-a1-core/final/FlashcardsLuna_Spanish_A1_Core_Part_005_Latin_American_Spanish.xlsx",
+      "workbook_sha256": "d8a1b46f5a53b7a714c1b4c03787598e1e6c8f15a4b57d8393082bafd1720443",
+      "readback": {
+        "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_google_sheet_readback_20260612-part005-latam-google-readback.json",
+        "blockers": []
+      }
+    },
+    "spain_spanish": {
+      "delivery_manifest_path": "outputs/spanish-a1-core/final/FlashcardsLuna_Spanish_A1_Core_Part_005_Spain_Spanish_delivery.json",
+      "google_sheet_id": "1Qkz91ETK_Qh9BDX4mdONR0kDkLB-UKDufitPTWp3NBY",
+      "google_sheet_url": "https://docs.google.com/spreadsheets/d/1Qkz91ETK_Qh9BDX4mdONR0kDkLB-UKDufitPTWp3NBY/edit?usp=drivesdk",
+      "google_sheet_title": "FlashcardsLuna Spanish A1 Core Part 005 - Spanish (Spain)",
+      "google_sheet_mime_type": "application/vnd.google-apps.spreadsheet",
+      "google_sheet_verified_in_folder": true,
+      "google_sheet_upload_mode": "create_new",
+      "google_sheet_uploaded_workbook_sha256": "defd4823dfcfd409ebe0779497d3570ef1fef9511084a8307938218a864db691",
+      "google_sheet_uploaded_at": "2026-06-12T11:27:03.613Z",
+      "workbook_path": "outputs/spanish-a1-core/final/FlashcardsLuna_Spanish_A1_Core_Part_005_Spain_Spanish.xlsx",
+      "workbook_sha256": "defd4823dfcfd409ebe0779497d3570ef1fef9511084a8307938218a864db691",
+      "readback": {
+        "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_google_sheet_readback_20260612-part005-spain-google-readback.json",
+        "blockers": []
+      }
+    }
+  },
+  "latest_google_sheet_delivery": {
+    "delivery_manifest_path": "outputs/spanish-a1-core/final/FlashcardsLuna_Spanish_A1_Core_Part_005_Latin_American_Spanish_delivery.json",
+    "google_sheet_id": "1GJuxT4lwSuu6vWAFnFLMpBAje6s8p4ZZ6H5skbojXjw",
+    "google_sheet_url": "https://docs.google.com/spreadsheets/d/1GJuxT4lwSuu6vWAFnFLMpBAje6s8p4ZZ6H5skbojXjw/edit?usp=drivesdk",
+    "google_sheet_title": "FlashcardsLuna Spanish A1 Core Part 005 - Latin American Spanish",
+    "google_sheet_mime_type": "application/vnd.google-apps.spreadsheet",
+    "google_sheet_verified_in_folder": true,
+    "google_sheet_upload_mode": "create_new",
+    "google_sheet_uploaded_workbook_sha256": "d8a1b46f5a53b7a714c1b4c03787598e1e6c8f15a4b57d8393082bafd1720443",
+    "google_sheet_uploaded_at": "2026-06-12T11:26:48.306Z",
+    "workbook_path": "outputs/spanish-a1-core/final/FlashcardsLuna_Spanish_A1_Core_Part_005_Latin_American_Spanish.xlsx",
+    "workbook_sha256": "d8a1b46f5a53b7a714c1b4c03787598e1e6c8f15a4b57d8393082bafd1720443",
+    "readback": {
+      "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_google_sheet_readback_20260612-part005-latam-google-readback.json",
+      "blockers": []
+    },
+    "alias_note": "Latin American Spanish delivery alias only; use latest_google_sheet_deliveries for both edition sheets."
+  },
+  "latest_isolated_db_import": {
+    "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_db_import_20260612-part005-final-support.json",
+    "status": "ok",
+    "source_only": false,
+    "dry_run": false,
+    "source_rows": 300,
+    "support_rows": 15600,
+    "expected_support_rows": 15600,
+    "ordinary_table_leak_count": 0,
+    "readback_mismatch_count": 0,
+    "blockers": [],
+    "warnings": [],
+    "generated_at": "2026-06-12T11:29:06.640Z"
+  },
+  "latest_final_release_gate": {
+    "path": "outputs/spanish-a1-core/qa/spanish_a1_core_part_005_300_v1_release_gate_20260612-part005-final-contract-sync.json",
+    "status": "ok",
+    "blocker_count": 0,
+    "warning_count": 0,
+    "blockers": [],
+    "warnings": [],
+    "checked_at": "2026-06-12T11:33:11.019Z"
+  }
+}

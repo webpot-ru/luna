@@ -1,0 +1,257 @@
+{
+  "policy_version": "translation-source-backed-v1",
+  "updated_at": "2026-05-03",
+  "source_of_truth": "docs/reference-sources.md",
+  "source_priority": [
+    "curated_or_official_bilingual_dictionary",
+    "language_specific_dictionary",
+    "wiktionary_kaikki_structured_data",
+    "freedict_dbnary",
+    "panlex_omw_supporting_evidence",
+    "tatoeba_example_collocation_only",
+    "ai_suggestion_never_final_source_truth"
+  ],
+  "statuses": {
+    "final_ready": [
+      "source_exact",
+      "loan_decision"
+    ],
+    "non_blocking": [
+      "source_partial",
+      "no_source",
+      "not_checkable"
+    ],
+    "blocking": [
+      "conflict",
+      "stale_decision",
+      "source_mismatch"
+    ]
+  },
+  "v1_enforcement": {
+    "hard_block_exact_english_fallback": true,
+    "hard_block_high_english_token_fallback_without_decision": true,
+    "hard_block_stale_source_decisions": true,
+    "hard_block_source_conflict": true,
+    "no_source_is_report_only": true
+  },
+  "global_supporting_source_ids": [
+    "omw-1.4",
+    "panlex-license-note"
+  ],
+  "example_collocation_source_ids": [
+    "tatoeba-downloads-note"
+  ],
+  "language_source_ids": {
+    "EN": [
+      "kaikki-english",
+      "dbnary-en-20251001"
+    ],
+    "ES": [
+      "kaikki-spanish",
+      "dbnary-es-20251001"
+    ],
+    "FR": [
+      "kaikki-french",
+      "dbnary-fr-20251001"
+    ],
+    "DE": [
+      "kaikki-german",
+      "dbnary-de-20251001"
+    ],
+    "IT": [
+      "kaikki-italian",
+      "dbnary-it-20251001"
+    ],
+    "PT": [
+      "kaikki-portuguese",
+      "dbnary-pt-20251001"
+    ],
+    "RU": [
+      "kaikki-russian",
+      "dbnary-ru-20251001"
+    ],
+    "ZH": [
+      "cc-cedict-mdbg",
+      "kaikki-chinese",
+      "kaikki-mandarin",
+      "dbnary-zh-20251001"
+    ],
+    "JA": [
+      "jmdict-e",
+      "kaikki-japanese",
+      "dbnary-ja-20251001"
+    ],
+    "KO": [
+      "kaikki-korean",
+      "official-nikl-korean-basic-dictionary"
+    ],
+    "VI": [
+      "kaikki-vietnamese"
+    ],
+    "TH": [
+      "kaikki-thai",
+      "official-lexitron-thai-2",
+      "sealang-dictionary-reference"
+    ],
+    "MS": [
+      "kaikki-malay",
+      "freedict-database-index"
+    ],
+    "ID": [
+      "kaikki-indonesian",
+      "dbnary-id-20251001"
+    ],
+    "PL": [
+      "kaikki-polish",
+      "dbnary-pl-20251001"
+    ],
+    "NL": [
+      "kaikki-dutch",
+      "dbnary-nl-20251001"
+    ],
+    "SV": [
+      "kaikki-swedish",
+      "dbnary-sv-20251001"
+    ],
+    "NB": [
+      "kaikki-norwegian-bokmal",
+      "dbnary-no-20251001"
+    ],
+    "DA": [
+      "kaikki-danish",
+      "dbnary-da-20251001"
+    ],
+    "FI": [
+      "kaikki-finnish",
+      "dbnary-fi-20251001"
+    ],
+    "CS": [
+      "kaikki-czech",
+      "dbnary-cs-20251001"
+    ],
+    "SK": [
+      "kaikki-slovak"
+    ],
+    "HU": [
+      "kaikki-hungarian"
+    ],
+    "RO": [
+      "kaikki-romanian"
+    ],
+    "BG": [
+      "kaikki-bulgarian",
+      "dbnary-bg-20251001"
+    ],
+    "HR": [
+      "kaikki-serbo-croatian",
+      "dbnary-sh-20251001"
+    ],
+    "SR": [
+      "kaikki-serbo-croatian",
+      "dbnary-sh-20251001"
+    ],
+    "SL": [
+      "kaikki-slovene",
+      "freedict-database-index"
+    ],
+    "LT": [
+      "kaikki-lithuanian",
+      "dbnary-lt-20251001"
+    ],
+    "LV": [
+      "kaikki-latvian"
+    ],
+    "ET": [
+      "kaikki-estonian"
+    ],
+    "IS": [
+      "kaikki-icelandic"
+    ],
+    "HI": [
+      "kaikki-hindi",
+      "tool-indictrans2-mt-sanity"
+    ],
+    "BN": [
+      "kaikki-bengali",
+      "tool-indictrans2-mt-sanity"
+    ],
+    "TL": [
+      "kaikki-tagalog",
+      "freedict-database-index"
+    ],
+    "MY": [
+      "kaikki-burmese",
+      "sealang-dictionary-reference"
+    ],
+    "KM": [
+      "kaikki-khmer",
+      "sealang-dictionary-reference"
+    ],
+    "LO": [
+      "kaikki-lao",
+      "sealang-dictionary-reference"
+    ],
+    "NE": [
+      "kaikki-nepali",
+      "tool-indictrans2-mt-sanity"
+    ],
+    "SI": [
+      "siwiktionary-latest-pages-articles",
+      "siwiktionary-latest-all-titles-ns0",
+      "tool-indictrans2-mt-sanity"
+    ],
+    "TA": [
+      "kaikki-tamil",
+      "tool-indictrans2-mt-sanity"
+    ],
+    "TE": [
+      "kaikki-telugu",
+      "tool-indictrans2-mt-sanity"
+    ],
+    "KN": [
+      "kaikki-kannada",
+      "tool-indictrans2-mt-sanity"
+    ],
+    "ML": [
+      "kaikki-malayalam",
+      "tool-indictrans2-mt-sanity"
+    ],
+    "UZ": [
+      "kaikki-uzbek",
+      "freedict-database-index"
+    ],
+    "KK": [
+      "kaikki-kazakh"
+    ],
+    "AZ": [
+      "kaikki-azerbaijani",
+      "freedict-database-index"
+    ],
+    "KA": [
+      "kaikki-georgian"
+    ],
+    "HY": [
+      "kaikki-armenian"
+    ],
+    "TR": [
+      "kaikki-turkish",
+      "dbnary-tr-20251001"
+    ],
+    "SW": [
+      "kaikki-swahili",
+      "freedict-database-index"
+    ],
+    "PT-BR": [
+      "kaikki-portuguese",
+      "dbnary-pt-20251001"
+    ],
+    "ES-419": [
+      "kaikki-spanish",
+      "dbnary-es-20251001"
+    ],
+    "EN-GB": [
+      "kaikki-english",
+      "dbnary-en-20251001"
+    ]
+  }
+}

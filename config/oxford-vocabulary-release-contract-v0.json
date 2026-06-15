@@ -1,0 +1,2382 @@
+{
+  "contract_id": "oxford_vocabulary_release_contract_v0",
+  "status": "final_delivery_ready_google_sheets_uploaded",
+  "approved_for_generation": true,
+  "scope": "Oxford 3000 / Oxford 5000 licensing/request contour for an English vocabulary course. User-reported OUP permission is accepted as project evidence for this first Oxford 3000 Core A1 Part 001 final delivery. Final learner-facing US/UK Google Sheets are allowed for this release; ordinary deck-table Postgres import remains disabled and Oxford data remains isolated in oxford_vocabulary_* tables.",
+  "permission_request": {
+    "prepared_on": "2026-05-16",
+    "request_artifact": "outputs/permission-requests/oxford-3000-5000-permission-request.md",
+    "user_intent": "User confirmed Oxford is needed for product/market positioning and later reported that OUP allowed all requested uses.",
+    "status": "project_evidence_decision_accepted",
+    "next_step": "Keep written OUP evidence if received later; do not claim official/endorsed/certified Oxford status unless separately granted.",
+    "project_evidence_decision": {
+      "accepted_on": "2026-05-17",
+      "accepted_by": "user",
+      "basis": "User reported OUP allowed the requested Oxford 3000/5000 use and then explicitly instructed to make the release final.",
+      "written_oup_evidence_stored": false
+    }
+  },
+  "latest_source_snapshot": {
+    "release_id": "oxford_3000_core_a1_part_001_150_v1",
+    "status": "source_snapshot_ready_pending_written_permission_evidence",
+    "checked_command": "/Users/lali/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/oxford/build-oxford-source-package.py --release=oxford_3000_core_a1_part_001_150_v1 --course-id=oxford_3000_core --levels=A1 --limit=150 --workbook-name=FlashcardsLuna_Oxford_3000_Core_A1_Part_001_source_draft.xlsx --main-sheet-name='Oxford 3000 Core'",
+    "manifest_path": "outputs/oxford-vocabulary/source/oxford_3000_core_a1_part_001_150_v1_source_snapshot_manifest.json",
+    "normalized_path": "outputs/oxford-vocabulary/source/oxford_3000_core_a1_part_001_150_v1.oxford_3000.normalized.jsonl",
+    "candidate_pool_path": "outputs/oxford-vocabulary/candidate-pools/oxford_3000_core_a1_part_001_150_v1_candidate_pool.jsonl",
+    "workbook_path": "outputs/oxford-vocabulary/final/FlashcardsLuna_Oxford_3000_Core_A1_Part_001_source_draft.xlsx",
+    "normalized_rows": 3000,
+    "level_filter": [
+      "A1"
+    ],
+    "level_filtered_rows": 897,
+    "selected_rows": 150,
+    "selected_scope": "first 150 A1 Oxford 3000 rows in source order",
+    "postgres_changes": false,
+    "google_sheet_created": false,
+    "copied_definitions_examples_pronunciations": false
+  },
+  "latest_row_review": {
+    "review_id": "row_review_v1",
+    "status": "row_reviewed_machine_assisted_for_english_learning_not_delivery_ready",
+    "script_path": "scripts/oxford/build-oxford-row-review.mjs",
+    "script_version": "2026-05-21.v1",
+    "path": "outputs/oxford-vocabulary/row-reviews/oxford_3000_core_a1_part_001_150_v1_row_review_v1.jsonl",
+    "summary_path": "outputs/oxford-vocabulary/row-reviews/oxford_3000_core_a1_part_001_150_v1_row_review_v1_summary.md",
+    "rows": 150,
+    "broader_level_span_rows": 23,
+    "closes_gate_layer": [
+      "learner_sense_pos_check",
+      "learner_value_check",
+      "cefr_level_span_review"
+    ],
+    "does_not_close": [
+      "english_pronunciation_source_check",
+      "english_example_quality_check",
+      "support_translation_meaning_check",
+      "support_example_scene_check",
+      "weak_language_targeted_review",
+      "support_translation_sample_review",
+      "support_translation_source_backed_audit",
+      "support_example_quality_audit",
+      "final_delivery_approval_check"
+    ]
+  },
+  "latest_english_examples": {
+    "examples_id": "english_examples_v1",
+    "status": "english_examples_reviewed_not_delivery_ready",
+    "script_path": "scripts/oxford/build-oxford-a1-english-examples.py",
+    "path": "outputs/oxford-vocabulary/examples/oxford_3000_core_a1_part_001_150_v1_english_examples_v1.jsonl",
+    "summary_path": "outputs/oxford-vocabulary/examples/oxford_3000_core_a1_part_001_150_v1_english_examples_v1_summary.md",
+    "rows": 150,
+    "example_source": "lunacards_authored_not_oxford",
+    "closes_gate_layer": [
+      "english_example_quality_check"
+    ],
+    "does_not_close": [
+      "permission_evidence_or_project_evidence_decision",
+      "allowed_fields_review",
+      "english_pronunciation_source_check",
+      "support_translation_meaning_check",
+      "support_example_scene_check",
+      "weak_language_targeted_review",
+      "final_delivery_approval_check"
+    ]
+  },
+  "latest_english_pronunciation": {
+    "pronunciation_id": "en_us_edition_pronunciations_v1",
+    "status": "source_backed_en_us_edition_pronunciations_not_delivery_ready",
+    "script_path": "scripts/oxford/build-oxford-a1-edition-pronunciations.py",
+    "path": "outputs/oxford-vocabulary/pronunciations/oxford_3000_core_a1_part_001_150_v1_en_us_edition_pronunciations_v1.jsonl",
+    "summary_path": "outputs/oxford-vocabulary/pronunciations/oxford_3000_core_a1_part_001_150_v1_en_us_edition_pronunciations_v1_summary.md",
+    "rows": 150,
+    "source_variant": "EN-US",
+    "source_ids": [
+      "ipa-focused-english-us-cmudict-dict",
+      "ipa-focused-english-us-cmudict-phones",
+      "ipa-focused-english-us-cmudict-symbols"
+    ],
+    "method": "cmudict_exact_token_lookup_plus_deterministic_arpabet_to_ipa",
+    "copied_oxford_pronunciation": false,
+    "closes_gate_layer": [
+      "english_pronunciation_source_check"
+    ],
+    "does_not_close": [
+      "permission_evidence_or_project_evidence_decision",
+      "allowed_fields_review",
+      "support_translation_meaning_check",
+      "support_example_scene_check",
+      "weak_language_targeted_review",
+      "final_delivery_approval_check"
+    ]
+  },
+  "latest_edition_layer": {
+    "layer_id": "us_uk_edition_layer_v1",
+    "status": "draft_us_uk_edition_overlay_not_final_delivery",
+    "script_path": "scripts/oxford/build-oxford-a1-edition-layers.py",
+    "path": "outputs/oxford-vocabulary/edition-layers/oxford_3000_core_a1_part_001_150_v1_us_uk_edition_layer_v1.jsonl",
+    "summary_path": "outputs/oxford-vocabulary/edition-layers/oxford_3000_core_a1_part_001_150_v1_us_uk_edition_layer_v1_summary.md",
+    "rows": 150,
+    "principle": "One canonical Oxford A1 source package produces two buyer-facing English editions.",
+    "shared_identity_fields": [
+      "release_id",
+      "row_id",
+      "core_item_id",
+      "meaning_id"
+    ],
+    "edition_specific_fields": [
+      "display_headword",
+      "example",
+      "source_variant",
+      "deck_title",
+      "transcription",
+      "example_transcription"
+    ],
+    "us_spelling_example_overrides": 1,
+    "british_spelling_example_overrides": 1,
+    "does_not_close": [
+      "permission_evidence_or_project_evidence_decision",
+      "allowed_fields_review",
+      "final_delivery_approval_check"
+    ]
+  },
+  "latest_edition_pronunciations": [
+    {
+      "pronunciation_id": "en_us_edition_pronunciations_v1",
+      "status": "source_backed_en_us_edition_pronunciations_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-edition-pronunciations.py",
+      "path": "outputs/oxford-vocabulary/pronunciations/oxford_3000_core_a1_part_001_150_v1_en_us_edition_pronunciations_v1.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/pronunciations/oxford_3000_core_a1_part_001_150_v1_en_us_edition_pronunciations_v1_summary.md",
+      "rows": 150,
+      "source_variant": "EN-US",
+      "source_ids": [
+        "ipa-focused-english-us-cmudict-dict",
+        "ipa-focused-english-us-cmudict-phones",
+        "ipa-focused-english-us-cmudict-symbols"
+      ],
+      "method": "cmudict_exact_token_lookup_plus_deterministic_arpabet_to_ipa",
+      "copied_oxford_pronunciation": false
+    },
+    {
+      "pronunciation_id": "en_gb_edition_pronunciations_v1",
+      "status": "source_backed_en_gb_edition_pronunciations_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-edition-pronunciations.py",
+      "path": "outputs/oxford-vocabulary/pronunciations/oxford_3000_core_a1_part_001_150_v1_en_gb_edition_pronunciations_v1.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/pronunciations/oxford_3000_core_a1_part_001_150_v1_en_gb_edition_pronunciations_v1_summary.md",
+      "rows": 150,
+      "source_variant": "EN-GB",
+      "source_ids": [
+        "ipa-focused-english-gb-britfone-main",
+        "ipa-focused-english-gb-britfone-symbols",
+        "ipa-focused-english-gb-britfone-license",
+        "ipa-focused-english-gb-britfone-readme"
+      ],
+      "method": "britfone_exact_token_lookup_plus_deterministic_spacing_normalization",
+      "fallbacks": [
+        "regular inflection suffixes when Britfone has exact base form",
+        "initialism letter-name handling documented by Britfone README"
+      ],
+      "copied_oxford_pronunciation": false
+    }
+  ],
+  "latest_support_translation_batches": [
+    {
+      "batch_id": "ru_es_fr_article_display_v2",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-ru-es-fr.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_ru_es_fr_article_display_v2.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_ru_es_fr_article_display_v2_summary.md",
+      "rows": 150,
+      "languages": [
+        "RU",
+        "ES",
+        "FR"
+      ],
+      "display_cells": 450,
+      "example_cells": 450,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ],
+      "article_display_repair": {
+        "repair_id": "support_article_display_repair_v1",
+        "source_batch_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_ru_es_fr_v1.jsonl",
+        "generated_at": "2026-05-17T13:20:47.236946+00:00",
+        "policy": "English headwords stay Oxford-style lemmas. Support-language noun displays use natural articles/gender markers for article languages; languages without articles are not changed.",
+        "affected_languages": [
+          "ES",
+          "FR"
+        ],
+        "display_cells_changed": 158,
+        "examples_changed": 0,
+        "target_language_transcriptions_added": 0
+      }
+    },
+    {
+      "batch_id": "de_it_pt_article_display_v2",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-de-it-pt.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_de_it_pt_article_display_v2.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_de_it_pt_article_display_v2_summary.md",
+      "rows": 150,
+      "languages": [
+        "DE",
+        "IT",
+        "PT"
+      ],
+      "display_cells": 450,
+      "example_cells": 450,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ],
+      "article_display_repair": {
+        "repair_id": "support_article_display_repair_v1",
+        "source_batch_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_de_it_pt_v1.jsonl",
+        "generated_at": "2026-05-17T13:20:47.236946+00:00",
+        "policy": "English headwords stay Oxford-style lemmas. Support-language noun displays use natural articles/gender markers for article languages; languages without articles are not changed.",
+        "affected_languages": [
+          "DE",
+          "IT",
+          "PT"
+        ],
+        "display_cells_changed": 243,
+        "examples_changed": 0,
+        "target_language_transcriptions_added": 0
+      }
+    },
+    {
+      "batch_id": "pl_nl_sv_article_display_v2",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-pl-nl-sv.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_pl_nl_sv_article_display_v2.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_pl_nl_sv_article_display_v2_summary.md",
+      "rows": 150,
+      "languages": [
+        "PL",
+        "NL",
+        "SV"
+      ],
+      "display_cells": 450,
+      "example_cells": 450,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ],
+      "article_display_repair": {
+        "repair_id": "support_article_display_repair_v1",
+        "source_batch_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_pl_nl_sv_v1.jsonl",
+        "generated_at": "2026-05-17T13:20:47.236946+00:00",
+        "policy": "English headwords stay Oxford-style lemmas. Support-language noun displays use natural articles/gender markers for article languages; languages without articles are not changed.",
+        "affected_languages": [
+          "NL",
+          "SV"
+        ],
+        "display_cells_changed": 157,
+        "examples_changed": 0,
+        "target_language_transcriptions_added": 0
+      }
+    },
+    {
+      "batch_id": "zh_ja_ko_v1",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-zh-ja-ko.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_zh_ja_ko_v1.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_zh_ja_ko_v1_summary.md",
+      "rows": 150,
+      "languages": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "display_cells": 450,
+      "example_cells": 450,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "script_aware_validation": [
+        "ZH Han script",
+        "JA Japanese script",
+        "KO Hangul"
+      ],
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ]
+    },
+    {
+      "batch_id": "vi_th_ms_id_v1",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-vi-th-ms-id.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_vi_th_ms_id_v1.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_vi_th_ms_id_v1_summary.md",
+      "rows": 150,
+      "languages": [
+        "VI",
+        "TH",
+        "MS",
+        "ID"
+      ],
+      "display_cells": 600,
+      "example_cells": 600,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "script_aware_validation": [
+        "TH Thai script",
+        "VI/MS/ID non-empty Latin-native display/example cells",
+        "exact Latin fallback scan passed with known loanword exceptions only"
+      ],
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ]
+    },
+    {
+      "batch_id": "no_da_fi_cs_article_display_v2",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-no-da-fi-cs.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_no_da_fi_cs_article_display_v2.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_no_da_fi_cs_article_display_v2_summary.md",
+      "rows": 150,
+      "languages": [
+        "NO",
+        "DA",
+        "FI",
+        "CS"
+      ],
+      "display_cells": 600,
+      "example_cells": 600,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "validation": [
+        "exact source-row coverage",
+        "non-empty display/example cells",
+        "sentence punctuation",
+        "exact Latin fallback scan found known cognates/loanwords only"
+      ],
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ],
+      "article_display_repair": {
+        "repair_id": "support_article_display_repair_v1",
+        "source_batch_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_no_da_fi_cs_v1.jsonl",
+        "generated_at": "2026-05-17T13:20:47.236946+00:00",
+        "policy": "English headwords stay Oxford-style lemmas. Support-language noun displays use natural articles/gender markers for article languages; languages without articles are not changed.",
+        "affected_languages": [
+          "DA",
+          "NO"
+        ],
+        "display_cells_changed": 152,
+        "examples_changed": 0,
+        "target_language_transcriptions_added": 0
+      }
+    },
+    {
+      "batch_id": "sk_hu_ro_bg_article_display_v2",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-sk-hu-ro-bg.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_sk_hu_ro_bg_article_display_v2.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_sk_hu_ro_bg_article_display_v2_summary.md",
+      "rows": 150,
+      "languages": [
+        "SK",
+        "HU",
+        "RO",
+        "BG"
+      ],
+      "display_cells": 600,
+      "example_cells": 600,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "validation": [
+        "exact source-row coverage",
+        "non-empty display/example cells",
+        "sentence punctuation",
+        "BG Cyrillic script"
+      ],
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ],
+      "article_display_repair": {
+        "repair_id": "support_article_display_repair_v1",
+        "source_batch_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_sk_hu_ro_bg_v1.jsonl",
+        "generated_at": "2026-05-17T13:20:47.236946+00:00",
+        "policy": "English headwords stay Oxford-style lemmas. Support-language noun displays use natural articles/gender markers for article languages; languages without articles are not changed.",
+        "affected_languages": [
+          "RO"
+        ],
+        "display_cells_changed": 78,
+        "examples_changed": 0,
+        "target_language_transcriptions_added": 0
+      }
+    },
+    {
+      "batch_id": "hr_sr_sl_lt_v1",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-hr-sr-sl-lt.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_hr_sr_sl_lt_v1.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_hr_sr_sl_lt_v1_summary.md",
+      "rows": 150,
+      "languages": [
+        "HR",
+        "SR",
+        "SL",
+        "LT"
+      ],
+      "display_cells": 600,
+      "example_cells": 600,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "validation": [
+        "exact source-row coverage",
+        "non-empty display/example cells",
+        "sentence punctuation",
+        "SR Cyrillic script"
+      ],
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ]
+    },
+    {
+      "batch_id": "lv_et_is_hi_v1",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-lv-et-is-hi.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_lv_et_is_hi_v1.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_lv_et_is_hi_v1_summary.md",
+      "rows": 150,
+      "languages": [
+        "LV",
+        "ET",
+        "IS",
+        "HI"
+      ],
+      "display_cells": 600,
+      "example_cells": 600,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "validation": [
+        "exact source-row coverage",
+        "non-empty display/example cells",
+        "sentence punctuation",
+        "HI Devanagari script"
+      ],
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ]
+    },
+    {
+      "batch_id": "bn_tl_my_km_v1",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-bn-tl-my-km.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_bn_tl_my_km_v1.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_bn_tl_my_km_v1_summary.md",
+      "rows": 150,
+      "languages": [
+        "BN",
+        "TL",
+        "MY",
+        "KM"
+      ],
+      "display_cells": 600,
+      "example_cells": 600,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "validation": [
+        "exact source-row coverage",
+        "non-empty display/example cells",
+        "sentence punctuation",
+        "BN Bengali script",
+        "MY Myanmar script",
+        "KM Khmer script"
+      ],
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ]
+    },
+    {
+      "batch_id": "lo_ne_si_ta_v1",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-lo-ne-si-ta.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_lo_ne_si_ta_v1.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_lo_ne_si_ta_v1_summary.md",
+      "rows": 150,
+      "languages": [
+        "LO",
+        "NE",
+        "SI",
+        "TA"
+      ],
+      "display_cells": 600,
+      "example_cells": 600,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "validation": [
+        "exact source-row coverage",
+        "non-empty display/example cells",
+        "sentence punctuation",
+        "LO Lao script",
+        "NE Devanagari script",
+        "SI Sinhala script",
+        "TA Tamil script"
+      ],
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ]
+    },
+    {
+      "batch_id": "te_kn_ml_uz_v1",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-te-kn-ml-uz.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_te_kn_ml_uz_v1.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_te_kn_ml_uz_v1_summary.md",
+      "rows": 150,
+      "languages": [
+        "TE",
+        "KN",
+        "ML",
+        "UZ"
+      ],
+      "display_cells": 600,
+      "example_cells": 600,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "validation": [
+        "exact source-row coverage",
+        "non-empty display/example cells",
+        "sentence punctuation",
+        "TE Telugu script",
+        "KN Kannada script",
+        "ML Malayalam script",
+        "UZ Latin-native support cells"
+      ],
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ]
+    },
+    {
+      "batch_id": "kk_az_ka_hy_v1",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-kk-az-ka-hy.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_kk_az_ka_hy_v1.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_kk_az_ka_hy_v1_summary.md",
+      "rows": 150,
+      "languages": [
+        "KK",
+        "AZ",
+        "KA",
+        "HY"
+      ],
+      "display_cells": 600,
+      "example_cells": 600,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "validation": [
+        "exact source-row coverage",
+        "non-empty display/example cells",
+        "sentence punctuation",
+        "KK Cyrillic script",
+        "KA Georgian script",
+        "HY Armenian script",
+        "AZ Latin-native support cells"
+      ],
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "support_translation_meaning_check",
+        "support_example_scene_check",
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ]
+    },
+    {
+      "batch_id": "tr_sw_pt_br_es_419_article_display_v2",
+      "status": "partial_support_translation_batch_not_delivery_ready",
+      "script_path": "scripts/oxford/build-oxford-a1-support-translation-batch-tr-sw-pt-br-es-419.py",
+      "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_tr_sw_pt_br_es_419_article_display_v2.jsonl",
+      "summary_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_tr_sw_pt_br_es_419_article_display_v2_summary.md",
+      "rows": 150,
+      "languages": [
+        "TR",
+        "SW",
+        "PT-BR",
+        "ES-419"
+      ],
+      "display_cells": 600,
+      "example_cells": 600,
+      "translation_status": "draft_native_style_needs_source_assisted_qa",
+      "example_status": "draft_scene_preserving_needs_source_assisted_qa",
+      "validation": [
+        "exact source-row coverage",
+        "non-empty display/example cells",
+        "sentence punctuation",
+        "TR Latin-native support cells",
+        "SW Latin-native support cells",
+        "PT-BR regional support cells derived from PT with explicit overrides",
+        "ES-419 regional support cells derived from ES with explicit overrides"
+      ],
+      "regionalization_inputs": {
+        "PT-BR": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_de_it_pt_v1.jsonl#PT",
+        "ES-419": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_ru_es_fr_v1.jsonl#ES"
+      },
+      "target_language_transcriptions": false,
+      "closes_gate_layer": [],
+      "does_not_close": [
+        "weak_language_targeted_review",
+        "final_delivery_approval_check"
+      ],
+      "article_display_repair": {
+        "repair_id": "support_article_display_repair_v1",
+        "source_batch_path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_tr_sw_pt_br_es_419_v1.jsonl",
+        "generated_at": "2026-05-17T13:20:47.236946+00:00",
+        "policy": "English headwords stay Oxford-style lemmas. Support-language noun displays use natural articles/gender markers for article languages; languages without articles are not changed.",
+        "affected_languages": [
+          "ES-419",
+          "PT-BR"
+        ],
+        "display_cells_changed": 160,
+        "examples_changed": 0,
+        "target_language_transcriptions_added": 0
+      }
+    }
+  ],
+  "course": {
+    "course_id": "oxford_3000_core",
+    "product_safe_working_title": "Oxford 3000 Core",
+    "internal_benchmark_label": "oxford_3000_5000_source_package",
+    "source_language_code": "EN",
+    "source_variant": "American English / US default",
+    "regional_variant_code": "EN-GB",
+    "target_language_order_source": "config/language-order.json",
+    "target_language_column_count": 54,
+    "target_language_role": "support_language_aids_for_english_learning_not_ordinary_polyglot_deck_contract"
+  },
+  "source_policy": {
+    "oxford_3000_5000_role": "user_reported_licensed_source_project_evidence_accepted_for_final_delivery",
+    "external_terms_snapshot": {
+      "checked_on": "2026-05-05",
+      "sources": [
+        "https://www.oxfordlearnersdictionaries.com/about/oxford3000",
+        "https://www.oxfordlearnersdictionaries.com/us/faq/index.html",
+        "https://www.oxfordlearnersdictionaries.com/terms-and-conditions.html"
+      ],
+      "conclusion": "Oxford pages support learner browsing/download for study but do not provide a documented free licence for systematic reuse as a LunaCards production source list. User-reported OUP permission allows local source-package work, but final delivery remains blocked until written evidence or an explicit project evidence decision is stored."
+    },
+    "blocked_without_review": [
+      "copy_oxford_definitions",
+      "copy_oxford_examples",
+      "copy_oxford_pronunciations",
+      "use_exact_oxford_wordlist_order_or_level_labels_in_final_delivery_without_evidence",
+      "use_official_certified_approved_or_endorsed_claims"
+    ],
+    "permission_fields_to_request": [
+      "Oxford 3000 headwords",
+      "Oxford 5000 headwords",
+      "part-of-speech labels",
+      "CEFR labels",
+      "exact list membership",
+      "list order or ordering bands",
+      "Oxford 3000 / Oxford 5000 name and branding",
+      "right to create multilingual translations",
+      "right to create LunaCards-authored examples",
+      "right to distribute as Google Sheets/workbooks/downloads/app flashcards",
+      "required attribution and no-endorsement wording",
+      "whether definitions, examples, pronunciations or audio may be used"
+    ],
+    "allowed_draft_use": [
+      "market_benchmark",
+      "coverage_gap_check",
+      "learner_expectation_reference",
+      "local_source_package",
+      "source_draft_workbook",
+      "source_assisted_translation_planning"
+    ],
+    "production_source_candidates": [
+      "NGSL",
+      "CEFR-J cross-check",
+      "internal curation",
+      "Kaikki/Wiktionary English",
+      "OMW/WordNet",
+      "Wikidata/Concepticon"
+    ],
+    "allowed_fields": [
+      "Oxford 3000 headwords",
+      "part-of-speech labels",
+      "CEFR labels",
+      "exact list membership",
+      "list order/order bands for internal part slicing",
+      "Oxford 3000 name in product/workbook titles",
+      "LunaCards-authored learner examples",
+      "54-language support translations and examples",
+      "Google Sheets/workbook delivery for this release",
+      "downloadable/app flashcard reuse for this release"
+    ],
+    "final_delivery_allowed_fields_reviewed_on": "2026-05-17",
+    "attribution_no_endorsement_wording": "Oxford 3000 and Oxford 5000 are Oxford University Press word lists. This LunaCards workbook is independently prepared by LunaCards and is not official, certified, approved, or endorsed by Oxford University Press.",
+    "final_delivery_blocked_fields": [
+      "copied Oxford definitions",
+      "copied Oxford dictionary examples",
+      "copied Oxford pronunciation text",
+      "Oxford audio",
+      "official/certified/approved/endorsed by Oxford claims"
+    ]
+  },
+  "row_identity": {
+    "row_key": "release_id::core_item_id",
+    "semantic_key": "meaning_id",
+    "sense_split_rule": "Split one source headword into multiple meaning_id rows when part of speech, sense, or semantic scene differs.",
+    "required_source_fields": [
+      "release_id",
+      "course_id",
+      "row_id",
+      "core_item_id",
+      "meaning_id",
+      "source_language",
+      "source_variant",
+      "source_headword",
+      "part_of_speech",
+      "sense_no",
+      "core_band",
+      "level_min",
+      "level_max",
+      "benchmark_membership",
+      "source_status",
+      "meaning_note",
+      "semantic_scene"
+    ]
+  },
+  "workbook": {
+    "principle": "HSK-style course workbook: one release workbook, source rows, fixed 54 language columns, service sheets for source and QA traceability.",
+    "translation_columns": "All spreadsheetCode values from config/language-order.json in exact order.",
+    "example_columns": "All spreadsheetCode values from config/language-order.json in exact order.",
+    "status_columns": [
+      "qa_status",
+      "qa_notes"
+    ],
+    "service_sheets": [
+      "_README",
+      "_languages",
+      "_source_contract",
+      "_benchmark_audit",
+      "_source_assisted_qa",
+      "_source_decisions",
+      "_release_metadata"
+    ]
+  },
+  "edition_export_model": {
+    "status": "approved_for_final_google_sheet_delivery",
+    "decision_date": "2026-05-17",
+    "canonical_source_release": "oxford_3000_core_a1_part_001_150_v1",
+    "principle": "Keep one canonical source package and export two buyer-facing English editions through the ordinary LunaCards spreadsheet shell instead of duplicating semantic rows.",
+    "spreadsheet_contract": "config/spreadsheet-contract-v1.json",
+    "required_sheets": [
+      "main vocabulary sheet",
+      "Course Metadata",
+      "Deck Metadata",
+      "Card Metadata",
+      "_README",
+      "_qa_status",
+      "_languages"
+    ],
+    "main_sheet_column_contract": "53 buyer-facing word columns -> 53 buyer-facing example columns -> primary English word IPA -> primary English example IPA",
+    "editions": [
+      {
+        "edition_id": "us_english",
+        "deck_id": "oxford_3000_core_a1_part_001_us_english_draft",
+        "deck_title": "FlashcardsLuna Oxford 3000 Core A1 Part 001 - US English",
+        "source_variant": "EN-US",
+        "primary_language_code": "EN",
+        "pronunciation_source": "CMUdict"
+      },
+      {
+        "edition_id": "british_english",
+        "deck_id": "oxford_3000_core_a1_part_001_british_english_draft",
+        "deck_title": "FlashcardsLuna Oxford 3000 Core A1 Part 001 - British English",
+        "source_variant": "EN-GB",
+        "primary_language_code": "EN-GB",
+        "pronunciation_source": "Britfone"
+      }
+    ],
+    "shared_fields": [
+      "release_id",
+      "course_id",
+      "row_id",
+      "core_item_id",
+      "meaning_id",
+      "source_headword",
+      "part_of_speech",
+      "sense_no",
+      "core_band",
+      "level_min",
+      "level_max",
+      "benchmark_membership",
+      "meaning_note",
+      "semantic_scene",
+      "54_language_word_columns",
+      "54_language_example_columns",
+      "54_language_word_transcription_columns"
+    ],
+    "edition_specific_fields": [
+      "deck_id",
+      "deck_title",
+      "deck_edition",
+      "source_variant",
+      "primary_language_code",
+      "display_headword",
+      "example",
+      "transcription",
+      "example_transcription",
+      "pronunciation_status",
+      "pronunciation_source",
+      "variant_note"
+    ],
+    "export_script": "scripts/oxford/export-oxford-a1-edition-workbooks.py",
+    "postgres_import": false,
+    "google_sheet_created": true,
+    "final_delivery_ready": true,
+    "support_language_word_transcriptions_required": false,
+    "support_language_word_transcription_policy": "out_of_scope_for_oxford_english_learning_edition_workbooks; do not create empty support-language transcription columns",
+    "support_transcription_columns_present": false,
+    "example_transcription_location": "main_sheet_final_two_primary_english_columns",
+    "article_policy": {
+      "english_headword": "Oxford-style lemma/headword; do not add artificial a/an/the to English source headwords.",
+      "support_translation_display": "Keep natural articles/gender markers in support-language display where the language normally teaches nouns with them."
+    },
+    "source_package_variant_contract": "US/UK pronunciation and spelling variants remain in source/QA artifacts; buyer-facing main sheets show only the primary English edition.",
+    "opposite_english_variant_present_in_main_sheet": false
+  },
+  "transcription_scope": {
+    "target_language_transcription": "out_of_scope_for_source_package_batches; support_language_word_transcriptions_missing_for_ordinary_final_export",
+    "source_language_pronunciation": "source_backed_en_us_and_en_gb_edition_pronunciation_artifacts_active_for_v1",
+    "allowed_future_pronunciation_sources": [
+      "CMUdict for EN-US",
+      "Britfone or documented EN-GB source for EN-GB",
+      "other documented pronunciation sources from reference-sources manifest"
+    ],
+    "blocked_without_review": [
+      "copy_oxford_pronunciation_content"
+    ]
+  },
+  "example_policy": {
+    "copy_oxford_examples": false,
+    "example_source": "LunaCards-authored examples with semantic_scene and QA evidence.",
+    "requirements": [
+      "short learner-friendly sentence",
+      "meaning-specific usage",
+      "scene preserved across target examples",
+      "no template padding"
+    ]
+  },
+  "release_slicing": {
+    "user_facing_packaging": {
+      "decision_date": "2026-05-16",
+      "principle": "Expose two coherent courses plus a complete bundle. Do not expose one giant 5000-row learner workflow and do not expose 19 unrelated products.",
+      "courses": [
+        {
+          "course_id": "oxford_3000_core",
+          "title": "Oxford 3000 Core",
+          "scope": "Oxford 3000 A1-B2 core vocabulary"
+        },
+        {
+          "course_id": "oxford_5000_advanced_extension",
+          "title": "Oxford 5000 Advanced Extension",
+          "scope": "Additional Oxford 5000 B2-C1 extension vocabulary beyond Oxford 3000"
+        }
+      ],
+      "bundle": {
+        "bundle_id": "complete_oxford_3000_5000_vocabulary",
+        "title": "Complete Oxford 3000 + 5000 Vocabulary",
+        "scope": "Bundles Oxford 3000 Core and Oxford 5000 Advanced Extension"
+      },
+      "internal_parts_total": 19,
+      "standard_part_size_after_pilot": "250-300 rows"
+    },
+    "parsed_source_counts": {
+      "oxford_3000": {
+        "total_rows": 3000,
+        "levels": {
+          "A1": 897,
+          "A2": 802,
+          "B1": 701,
+          "B2": 600
+        }
+      },
+      "oxford_5000_extension": {
+        "total_rows": 1995,
+        "levels": {
+          "B1": 1,
+          "B2": 697,
+          "C1": 1297
+        }
+      }
+    },
+    "recommended_internal_parts": [
+      {
+        "course": "Oxford 3000 Core",
+        "level_group": "A1",
+        "parts": 3
+      },
+      {
+        "course": "Oxford 3000 Core",
+        "level_group": "A2",
+        "parts": 3
+      },
+      {
+        "course": "Oxford 3000 Core",
+        "level_group": "B1",
+        "parts": 3
+      },
+      {
+        "course": "Oxford 3000 Core",
+        "level_group": "B2",
+        "parts": 2
+      },
+      {
+        "course": "Oxford 5000 Advanced Extension",
+        "level_group": "B2 Extension",
+        "parts": 3
+      },
+      {
+        "course": "Oxford 5000 Advanced Extension",
+        "level_group": "C1 Extension",
+        "parts": 5
+      }
+    ],
+    "default_first_release": {
+      "release_id": "oxford_3000_core_a1_part_001_150_v1",
+      "target_row_count": 150,
+      "scope": "first Oxford 3000 Core A1-only source-draft pilot",
+      "status": "source_snapshot_ready_pending_written_permission_evidence"
+    },
+    "default_chunk_sizes": {
+      "pilot": [
+        100,
+        150
+      ],
+      "standard_after_pilot": 300
+    },
+    "oxford_5000_extension": "later_expansion_after_core_3000_quality_is_proven"
+  },
+  "local_source_families": [
+    "Kaikki/Wiktionary",
+    "DBnary",
+    "FreeDict/Apertium",
+    "PanLex vocabulary",
+    "PanLex meanings",
+    "Tatoeba/OPUS",
+    "Wikidata/Concepticon",
+    "Hunspell",
+    "OMW/WordNet",
+    "CC-CEDICT",
+    "JMdict",
+    "NIKL Korean Learners Dictionary",
+    "LEXiTRON",
+    "SEAlang",
+    "weak-language dictionaries and corpora",
+    "IPA/source caches"
+  ],
+  "qa_gate_scope": {
+    "mode": "english_learning_course_release_specific",
+    "does_not_modify": [
+      "ordinary_lunacards_polyglot_deck_gates",
+      "docs/qa-process.md",
+      "docs/data-delivery-pipeline.md",
+      "ordinary_180_deck_backlog_pipeline",
+      "global_scripts_check_gates"
+    ],
+    "quality_center": "English learner value: learner sense, POS, CEFR fit, US English default, optional EN-GB variant, learner example and allowed source pronunciation.",
+    "support_language_role": "Support translations/examples help learners understand English in the source-package gate. The US/UK edition workbooks use the final Oxford English-learning sheet contract, not ordinary learn-any-language delivery: support-language word/example cells are present, the opposite English edition is omitted from each buyer-facing main sheet, and empty support-language transcription columns are forbidden."
+  },
+  "qa_gate_layers": {
+    "source_and_legal_gates": [
+      "source_license_review",
+      "permission_evidence_or_project_evidence_decision",
+      "allowed_fields_review",
+      "no_oxford_content_copy_check",
+      "attribution_no_endorsement_review"
+    ],
+    "english_learning_core_gates": [
+      "source_list_snapshot",
+      "row_identity_check",
+      "cefr_level_fit_check",
+      "cefr_level_span_review",
+      "row_review_artifact_check",
+      "learner_sense_pos_check",
+      "learner_value_check",
+      "english_variant_check",
+      "english_pronunciation_source_check",
+      "english_example_artifact_check",
+      "english_example_quality_check",
+      "benchmark_audit"
+    ],
+    "support_language_gates": [
+      "support_language_role_check",
+      "support_translation_meaning_check",
+      "support_example_scene_check",
+      "weak_language_targeted_review",
+      "support_translation_sample_review",
+      "all_fields_sample_review",
+      "support_translation_source_backed_audit",
+      "support_example_quality_audit",
+      "support_article_display_repair_check"
+    ],
+    "workbook_and_delivery_gates": [
+      "workbook_contract_check",
+      "release_specific_audit_script_check",
+      "final_delivery_approval_check"
+    ]
+  },
+  "qa_gates": [
+    "source_license_review",
+    "permission_evidence_or_project_evidence_decision",
+    "allowed_fields_review",
+    "no_oxford_content_copy_check",
+    "attribution_no_endorsement_review",
+    "source_list_snapshot",
+    "row_identity_check",
+    "cefr_level_fit_check",
+    "cefr_level_span_review",
+    "row_review_artifact_check",
+    "learner_sense_pos_check",
+    "learner_value_check",
+    "english_variant_check",
+    "english_pronunciation_source_check",
+    "english_example_artifact_check",
+    "english_example_quality_check",
+    "benchmark_audit",
+    "support_language_role_check",
+    "support_translation_meaning_check",
+    "support_example_scene_check",
+    "weak_language_targeted_review",
+    "support_translation_sample_review",
+    "all_fields_sample_review",
+    "support_translation_source_backed_audit",
+    "support_example_quality_audit",
+    "support_article_display_repair_check",
+    "workbook_contract_check",
+    "release_specific_audit_script_check",
+    "final_delivery_approval_check"
+  ],
+  "latest_gate_report": {
+    "report_id": "oxford_english_learning_gates_v1",
+    "script_path": "scripts/oxford/check-oxford-english-learning-gates.py",
+    "json_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_oxford_english_learning_gates_v1.json",
+    "markdown_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_oxford_english_learning_gates_v1.md",
+    "status": "passed",
+    "passed_gates": 30,
+    "warning_gates": 1,
+    "blocked_gates": 0,
+    "blocker_gates": [],
+    "warning_gates_list": [
+      "support_language_warning_budget"
+    ],
+    "last_checked_at": "2026-05-31T09:25:33.887705+00:00",
+    "registered_by": "scripts/oxford/register-oxford-gate-report.mjs",
+    "registered_script_version": "2026-05-24.v2"
+  },
+  "blockers_before_launch": [],
+  "next_stage_options": [
+    "Continue the next unfinished Oxford 3000/5000 source package from the source-of-truth docs and contract files.",
+    "Apply the standing Oxford auto-publish rule when the next part finishes source-package QA: export final US/UK workbooks, upload native Google Sheets, run readback, update docs/contract and register the gate report.",
+    "Keep ordinary deck-table Postgres import and isolated Oxford DB import disabled unless explicitly approved."
+  ],
+  "latest_weak_language_targeted_review": {
+    "review_id": "weak_language_targeted_review_v1",
+    "status": "passed_deterministic_weak_language_review_not_external_native_approval",
+    "script_path": "scripts/oxford/build-oxford-a1-weak-language-targeted-review.py",
+    "path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_weak_language_targeted_review_v1.json",
+    "summary_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_weak_language_targeted_review_v1.md",
+    "rows_reviewed": 150,
+    "target_support_languages": 52,
+    "display_cells": 7800,
+    "example_cells": 7800,
+    "blockers": 0,
+    "warnings": 41,
+    "review_scope": "Deterministic targeted review of Oxford A1 support-language artifacts. This is source-package QA and not external native-speaker approval.",
+    "closes_gate_layer": [
+      "weak_language_targeted_review"
+    ],
+    "does_not_close": [
+      "permission_evidence_or_project_evidence_decision",
+      "allowed_fields_review",
+      "final_delivery_approval_check"
+    ]
+  },
+  "latest_edition_exports": {
+    "export_id": "edition_exports_final_v1",
+    "status": "final_google_sheets_uploaded_readback_verified",
+    "script_path": "scripts/oxford/export-oxford-a1-edition-workbooks.py",
+    "manifest_path": "outputs/oxford-vocabulary/final/oxford_3000_core_a1_part_001_150_v1_edition_exports_final_v1.json",
+    "summary_path": "outputs/oxford-vocabulary/final/oxford_3000_core_a1_part_001_150_v1_edition_exports_final_v1_summary.md",
+    "spreadsheet_contract": "config/spreadsheet-contract-v1.json",
+    "required_sheets": [
+      "main vocabulary sheet",
+      "Course Metadata",
+      "Deck Metadata",
+      "Card Metadata",
+      "_README",
+      "_qa_status",
+      "_languages"
+    ],
+    "main_sheet_column_contract": "53 buyer-facing word columns -> 53 buyer-facing example columns -> primary English word IPA -> primary English example IPA",
+    "editions": [
+      {
+        "path": "outputs/oxford-vocabulary/final/FlashcardsLuna_Oxford_3000_Core_A1_Part_001_US_English.xlsx",
+        "rows": 150,
+        "columns": 108,
+        "sheet": "Oxford A1 US",
+        "main_sheet_language_codes": [
+          "EN",
+          "ES",
+          "FR",
+          "DE",
+          "IT",
+          "PT",
+          "RU",
+          "ZH",
+          "JA",
+          "KO",
+          "VI",
+          "TH",
+          "MS",
+          "ID",
+          "PL",
+          "NL",
+          "SV",
+          "NO",
+          "DA",
+          "FI",
+          "CS",
+          "SK",
+          "HU",
+          "RO",
+          "BG",
+          "HR",
+          "SR",
+          "SL",
+          "LT",
+          "LV",
+          "ET",
+          "IS",
+          "HI",
+          "BN",
+          "TL",
+          "MY",
+          "KM",
+          "LO",
+          "NE",
+          "SI",
+          "TA",
+          "TE",
+          "KN",
+          "ML",
+          "UZ",
+          "KK",
+          "AZ",
+          "KA",
+          "HY",
+          "TR",
+          "SW",
+          "PT-BR",
+          "ES-419"
+        ],
+        "main_sheet_pronunciation_headers": [
+          "EN transcription",
+          "EN example transcription"
+        ],
+        "edition_id": "us_english",
+        "deck_id": "oxford_3000_core_a1_part_001_us_english",
+        "deck_title": "FlashcardsLuna Oxford 3000 Core A1 Part 001 - US English",
+        "source_variant": "EN-US",
+        "primary_language_code": "EN",
+        "shape": {
+          "rows": 150,
+          "columns": 108,
+          "main_sheet": "Oxford A1 US",
+          "sheets": [
+            "Oxford A1 US",
+            "Course Metadata",
+            "Deck Metadata",
+            "Card Metadata",
+            "_README",
+            "_qa_status",
+            "_languages"
+          ]
+        }
+      },
+      {
+        "path": "outputs/oxford-vocabulary/final/FlashcardsLuna_Oxford_3000_Core_A1_Part_001_British_English.xlsx",
+        "rows": 150,
+        "columns": 108,
+        "sheet": "Oxford A1 UK",
+        "main_sheet_language_codes": [
+          "EN-GB",
+          "ES",
+          "FR",
+          "DE",
+          "IT",
+          "PT",
+          "RU",
+          "ZH",
+          "JA",
+          "KO",
+          "VI",
+          "TH",
+          "MS",
+          "ID",
+          "PL",
+          "NL",
+          "SV",
+          "NO",
+          "DA",
+          "FI",
+          "CS",
+          "SK",
+          "HU",
+          "RO",
+          "BG",
+          "HR",
+          "SR",
+          "SL",
+          "LT",
+          "LV",
+          "ET",
+          "IS",
+          "HI",
+          "BN",
+          "TL",
+          "MY",
+          "KM",
+          "LO",
+          "NE",
+          "SI",
+          "TA",
+          "TE",
+          "KN",
+          "ML",
+          "UZ",
+          "KK",
+          "AZ",
+          "KA",
+          "HY",
+          "TR",
+          "SW",
+          "PT-BR",
+          "ES-419"
+        ],
+        "main_sheet_pronunciation_headers": [
+          "EN-GB transcription",
+          "EN-GB example transcription"
+        ],
+        "edition_id": "british_english",
+        "deck_id": "oxford_3000_core_a1_part_001_british_english",
+        "deck_title": "FlashcardsLuna Oxford 3000 Core A1 Part 001 - British English",
+        "source_variant": "EN-GB",
+        "primary_language_code": "EN-GB",
+        "shape": {
+          "rows": 150,
+          "columns": 108,
+          "main_sheet": "Oxford A1 UK",
+          "sheets": [
+            "Oxford A1 UK",
+            "Course Metadata",
+            "Deck Metadata",
+            "Card Metadata",
+            "_README",
+            "_qa_status",
+            "_languages"
+          ]
+        }
+      }
+    ],
+    "language_variant_count": 54,
+    "support_language_count": 52,
+    "words_filled_per_workbook": 7950,
+    "examples_filled_per_workbook": 7950,
+    "word_transcriptions_filled_per_workbook": 300,
+    "word_transcriptions_missing_per_workbook": 0,
+    "support_display_cells_per_workbook": 7800,
+    "support_example_cells_per_workbook": 7800,
+    "postgres_import": false,
+    "google_sheet_created": true,
+    "final_delivery_ready": true,
+    "remaining_blockers": [],
+    "does_not_close": [],
+    "script_version": "2026-05-17.v5",
+    "release_id": "oxford_3000_core_a1_part_001_150_v1",
+    "generated_at": "2026-05-17T16:07:49.527837+00:00",
+    "principle": "one canonical source package, two buyer-facing US/UK English deck workbooks using the ordinary LunaCards sheet shell",
+    "support_language_word_transcriptions_required": false,
+    "support_language_word_transcription_policy": "out_of_scope_for_oxford_english_learning_edition_workbooks",
+    "edition_layer_path": "outputs/oxford-vocabulary/edition-layers/oxford_3000_core_a1_part_001_150_v1_us_uk_edition_layer_v1.jsonl",
+    "support_translation_batch_paths": [
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_ru_es_fr_article_display_v2.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_de_it_pt_article_display_v2.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_pl_nl_sv_article_display_v2.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_zh_ja_ko_v1.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_vi_th_ms_id_v1.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_no_da_fi_cs_article_display_v2.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_sk_hu_ro_bg_article_display_v2.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_hr_sr_sl_lt_v1.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_lv_et_is_hi_v1.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_bn_tl_my_km_v1.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_lo_ne_si_ta_v1.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_te_kn_ml_uz_v1.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_kk_az_ka_hy_v1.jsonl",
+      "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_tr_sw_pt_br_es_419_article_display_v2.jsonl"
+    ],
+    "ordinary_deck_table_postgres_import": false,
+    "isolated_oxford_db_persistence": true,
+    "delivery_manifests": [
+      {
+        "delivery_manifest_path": "outputs/oxford-vocabulary/final/FlashcardsLuna_Oxford_3000_Core_A1_Part_001_US_English_delivery.json",
+        "workbook_path": "outputs/oxford-vocabulary/final/FlashcardsLuna_Oxford_3000_Core_A1_Part_001_US_English.xlsx",
+        "google_sheet_id": "1krmAB56Bg7xLVHhOVj7tyJU-nzTzF2lZl-NOXnc2D_Y",
+        "google_sheet_url": "https://docs.google.com/spreadsheets/d/1krmAB56Bg7xLVHhOVj7tyJU-nzTzF2lZl-NOXnc2D_Y/edit?usp=drivesdk",
+        "google_sheet_title": "FlashcardsLuna Oxford 3000 Core A1 Part 001 - US English",
+        "google_sheet_mime_type": "application/vnd.google-apps.spreadsheet",
+        "google_sheet_uploaded_at": "2026-05-17T16:08:17.667Z",
+        "google_sheet_verified_in_folder": true,
+        "google_sheet_upload_status": "uploaded",
+        "google_sheet_readback_status": "verified",
+        "google_sheet_readback_verified_at": "2026-05-17T16:09:17.303Z",
+        "google_sheet_readback_sample_count": 22524,
+        "google_sheet_readback_method": "drive_export_xlsx_full_oxford_edition_workbook_values"
+      },
+      {
+        "delivery_manifest_path": "outputs/oxford-vocabulary/final/FlashcardsLuna_Oxford_3000_Core_A1_Part_001_British_English_delivery.json",
+        "workbook_path": "outputs/oxford-vocabulary/final/FlashcardsLuna_Oxford_3000_Core_A1_Part_001_British_English.xlsx",
+        "google_sheet_id": "18TYpNhaxHqMwvpuTNIIAyvNkRPq19mkK4FNtouBpAZU",
+        "google_sheet_url": "https://docs.google.com/spreadsheets/d/18TYpNhaxHqMwvpuTNIIAyvNkRPq19mkK4FNtouBpAZU/edit?usp=drivesdk",
+        "google_sheet_title": "FlashcardsLuna Oxford 3000 Core A1 Part 001 - British English",
+        "google_sheet_mime_type": "application/vnd.google-apps.spreadsheet",
+        "google_sheet_uploaded_at": "2026-05-17T16:08:28.091Z",
+        "google_sheet_verified_in_folder": true,
+        "google_sheet_upload_status": "uploaded",
+        "google_sheet_readback_status": "verified",
+        "google_sheet_readback_verified_at": "2026-05-17T16:09:39.157Z",
+        "google_sheet_readback_sample_count": 22524,
+        "google_sheet_readback_method": "drive_export_xlsx_full_oxford_edition_workbook_values"
+      }
+    ],
+    "google_sheet_readback_verified": true,
+    "example_transcriptions_filled_per_workbook": 300,
+    "example_transcription_languages": [
+      "EN",
+      "EN-GB"
+    ],
+    "course_metadata_localized": true,
+    "course_metadata_title_includes_part": true,
+    "card_metadata_columns": 28,
+    "example_transcription_location": "main_sheet_final_two_primary_english_columns",
+    "support_transcription_columns_present": false,
+    "article_policy": {
+      "english_headword": "Oxford-style lemma/headword; do not add artificial a/an/the to English source headwords.",
+      "support_translation_display": "Keep natural articles/gender markers in support-language display where the language normally teaches nouns with them."
+    },
+    "support_article_display_repair": {
+      "repair_id": "support_article_display_repair_v1",
+      "generated_at": "2026-05-17T13:20:47.236946+00:00",
+      "policy": "English headwords stay Oxford-style lemmas. Support-language noun displays use natural articles/gender markers for article languages; languages without articles are not changed.",
+      "target_languages": [
+        "ES",
+        "FR",
+        "DE",
+        "IT",
+        "PT",
+        "NL",
+        "SV",
+        "NO",
+        "DA",
+        "RO",
+        "ES-419",
+        "PT-BR"
+      ],
+      "changed_batches": [
+        {
+          "batch_id": "ru_es_fr_article_display_v2",
+          "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_ru_es_fr_article_display_v2.jsonl",
+          "affected_languages": [
+            "ES",
+            "FR"
+          ],
+          "display_cells_changed": 158,
+          "sample": [
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+              "language": "ES",
+              "before": "acción",
+              "after": "la acción"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+              "language": "FR",
+              "before": "action",
+              "after": "l'action"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+              "language": "ES",
+              "before": "actividad",
+              "after": "la actividad"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+              "language": "FR",
+              "before": "activité",
+              "after": "l'activité"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+              "language": "ES",
+              "before": "actor",
+              "after": "el actor"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+              "language": "FR",
+              "before": "acteur",
+              "after": "l'acteur"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+              "language": "ES",
+              "before": "actriz",
+              "after": "la actriz"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+              "language": "FR",
+              "before": "actrice",
+              "after": "l'actrice"
+            }
+          ]
+        },
+        {
+          "batch_id": "de_it_pt_article_display_v2",
+          "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_de_it_pt_article_display_v2.jsonl",
+          "affected_languages": [
+            "DE",
+            "IT",
+            "PT"
+          ],
+          "display_cells_changed": 243,
+          "sample": [
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+              "language": "DE",
+              "before": "Handlung; Aktion",
+              "after": "die Handlung; die Aktion"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+              "language": "IT",
+              "before": "azione",
+              "after": "l'azione"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+              "language": "PT",
+              "before": "ação",
+              "after": "a ação"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+              "language": "DE",
+              "before": "Aktivität; Tätigkeit",
+              "after": "die Aktivität; die Tätigkeit"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+              "language": "IT",
+              "before": "attività",
+              "after": "l'attività"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+              "language": "PT",
+              "before": "atividade",
+              "after": "a atividade"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+              "language": "DE",
+              "before": "Schauspieler",
+              "after": "der Schauspieler"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+              "language": "IT",
+              "before": "attore",
+              "after": "l'attore"
+            }
+          ]
+        },
+        {
+          "batch_id": "pl_nl_sv_article_display_v2",
+          "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_pl_nl_sv_article_display_v2.jsonl",
+          "affected_languages": [
+            "NL",
+            "SV"
+          ],
+          "display_cells_changed": 157,
+          "sample": [
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+              "language": "NL",
+              "before": "actie; handeling",
+              "after": "de actie; de handeling"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+              "language": "SV",
+              "before": "handling",
+              "after": "en handling"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+              "language": "NL",
+              "before": "activiteit",
+              "after": "de activiteit"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+              "language": "SV",
+              "before": "aktivitet",
+              "after": "en aktivitet"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+              "language": "NL",
+              "before": "acteur",
+              "after": "de acteur"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+              "language": "SV",
+              "before": "skådespelare",
+              "after": "en skådespelare"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+              "language": "NL",
+              "before": "actrice",
+              "after": "de actrice"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+              "language": "SV",
+              "before": "skådespelerska",
+              "after": "en skådespelerska"
+            }
+          ]
+        },
+        {
+          "batch_id": "no_da_fi_cs_article_display_v2",
+          "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_no_da_fi_cs_article_display_v2.jsonl",
+          "affected_languages": [
+            "DA",
+            "NO"
+          ],
+          "display_cells_changed": 152,
+          "sample": [
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+              "language": "DA",
+              "before": "handling",
+              "after": "en handling"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+              "language": "NO",
+              "before": "handling",
+              "after": "en handling"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+              "language": "DA",
+              "before": "aktivitet",
+              "after": "en aktivitet"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+              "language": "NO",
+              "before": "aktivitet",
+              "after": "en aktivitet"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+              "language": "DA",
+              "before": "skuespiller",
+              "after": "en skuespiller"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+              "language": "NO",
+              "before": "skuespiller",
+              "after": "en skuespiller"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+              "language": "DA",
+              "before": "skuespillerinde",
+              "after": "en skuespillerinde"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+              "language": "NO",
+              "before": "skuespillerinne",
+              "after": "en skuespillerinne"
+            }
+          ]
+        },
+        {
+          "batch_id": "sk_hu_ro_bg_article_display_v2",
+          "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_sk_hu_ro_bg_article_display_v2.jsonl",
+          "affected_languages": [
+            "RO"
+          ],
+          "display_cells_changed": 78,
+          "sample": [
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+              "language": "RO",
+              "before": "acțiune",
+              "after": "o acțiune"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+              "language": "RO",
+              "before": "activitate",
+              "after": "o activitate"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+              "language": "RO",
+              "before": "actor",
+              "after": "un actor"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+              "language": "RO",
+              "before": "actriță",
+              "after": "o actriță"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::010",
+              "language": "RO",
+              "before": "adresă",
+              "after": "o adresă"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::011",
+              "language": "RO",
+              "before": "adult",
+              "after": "un adult"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::012",
+              "language": "RO",
+              "before": "sfaturi; sfat",
+              "after": "un sfat"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::015",
+              "language": "RO",
+              "before": "după-amiază",
+              "after": "o după-amiază"
+            }
+          ]
+        },
+        {
+          "batch_id": "tr_sw_pt_br_es_419_article_display_v2",
+          "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_tr_sw_pt_br_es_419_article_display_v2.jsonl",
+          "affected_languages": [
+            "ES-419",
+            "PT-BR"
+          ],
+          "display_cells_changed": 160,
+          "sample": [
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+              "language": "ES-419",
+              "before": "acción",
+              "after": "la acción"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+              "language": "PT-BR",
+              "before": "ação",
+              "after": "a ação"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+              "language": "ES-419",
+              "before": "actividad",
+              "after": "la actividad"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+              "language": "PT-BR",
+              "before": "atividade",
+              "after": "a atividade"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+              "language": "ES-419",
+              "before": "actor",
+              "after": "el actor"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+              "language": "PT-BR",
+              "before": "ator",
+              "after": "o ator"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+              "language": "ES-419",
+              "before": "actriz",
+              "after": "la actriz"
+            },
+            {
+              "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+              "language": "PT-BR",
+              "before": "atriz",
+              "after": "a atriz"
+            }
+          ]
+        }
+      ],
+      "display_cells_changed": 948,
+      "changes_by_language": {
+        "DA": 76,
+        "DE": 81,
+        "ES": 79,
+        "ES-419": 79,
+        "FR": 79,
+        "IT": 81,
+        "NL": 81,
+        "NO": 76,
+        "PT": 81,
+        "PT-BR": 81,
+        "RO": 78,
+        "SV": 76
+      },
+      "examples_changed": 0,
+      "target_language_transcriptions_added": 0
+    },
+    "source_package_variant_contract": "US/UK pronunciation and spelling variants remain in source/QA artifacts; buyer-facing main sheets show only the primary English edition.",
+    "main_sheet_language_variant_count": 53,
+    "opposite_english_variant_present_in_main_sheet": false
+  },
+  "latest_db_isolation_import": {
+    "import_id": "oxford_vocabulary_db_import_v1",
+    "status": "ok_isolated_oxford_tables_only",
+    "migration_path": "db/migrations/027_oxford_vocabulary_isolation.sql",
+    "script_path": "scripts/oxford/import-oxford-a1-to-db.mjs",
+    "report_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_db_isolation_import_20260517.json",
+    "release_id": "oxford_3000_core_a1_part_001_150_v1",
+    "stored_tables": [
+      "oxford_vocabulary_source_items",
+      "oxford_vocabulary_edition_items",
+      "oxford_vocabulary_support_items",
+      "oxford_vocabulary_db_import_runs"
+    ],
+    "ordinary_tables_written": false,
+    "ordinary_table_leak_count": 0,
+    "readback_mismatches": 0,
+    "foreign_key_blockers": 0,
+    "stored_counts": {
+      "source_rows": 150,
+      "edition_rows": 300,
+      "support_rows": 7800,
+      "us_edition_rows": 150,
+      "british_edition_rows": 150,
+      "support_language_count": 52
+    },
+    "idempotency_rerun": {
+      "source_unchanged": 150,
+      "edition_unchanged": 300,
+      "support_unchanged": 7800,
+      "inserted": 0,
+      "updated": 0,
+      "duplicates_created": false
+    },
+    "final_delivery_ready": false,
+    "does_not_close": [
+      "permission_evidence_or_project_evidence_decision",
+      "allowed_fields_review",
+      "final_delivery_approval_check",
+      "support_language_word_transcriptions_missing_for_ordinary_final_export",
+      "course_metadata_localization_pending"
+    ]
+  },
+  "final_delivery_decision": {
+    "status": "approved",
+    "approved_on": "2026-05-17",
+    "approved_by": "user",
+    "scope": "Final Google Sheets delivery for oxford_3000_core_a1_part_001_150_v1 US English and British English editions.",
+    "ordinary_deck_table_postgres_import": false,
+    "google_sheet_delivery": true,
+    "support_language_word_transcriptions_required": false,
+    "support_transcription_columns_present": false,
+    "article_policy": {
+      "english_headword": "Oxford-style lemma/headword; do not add artificial a/an/the to English source headwords.",
+      "support_translation_display": "Keep natural articles/gender markers in support-language display where the language normally teaches nouns with them."
+    }
+  },
+  "latest_support_article_display_repair": {
+    "repair_id": "support_article_display_repair_v1",
+    "generated_at": "2026-05-17T13:20:47.236946+00:00",
+    "policy": "English headwords stay Oxford-style lemmas. Support-language noun displays use natural articles/gender markers for article languages; languages without articles are not changed.",
+    "target_languages": [
+      "ES",
+      "FR",
+      "DE",
+      "IT",
+      "PT",
+      "NL",
+      "SV",
+      "NO",
+      "DA",
+      "RO",
+      "ES-419",
+      "PT-BR"
+    ],
+    "changed_batches": [
+      {
+        "batch_id": "ru_es_fr_article_display_v2",
+        "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_ru_es_fr_article_display_v2.jsonl",
+        "affected_languages": [
+          "ES",
+          "FR"
+        ],
+        "display_cells_changed": 158,
+        "sample": [
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+            "language": "ES",
+            "before": "acción",
+            "after": "la acción"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+            "language": "FR",
+            "before": "action",
+            "after": "l'action"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+            "language": "ES",
+            "before": "actividad",
+            "after": "la actividad"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+            "language": "FR",
+            "before": "activité",
+            "after": "l'activité"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+            "language": "ES",
+            "before": "actor",
+            "after": "el actor"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+            "language": "FR",
+            "before": "acteur",
+            "after": "l'acteur"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+            "language": "ES",
+            "before": "actriz",
+            "after": "la actriz"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+            "language": "FR",
+            "before": "actrice",
+            "after": "l'actrice"
+          }
+        ]
+      },
+      {
+        "batch_id": "de_it_pt_article_display_v2",
+        "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_de_it_pt_article_display_v2.jsonl",
+        "affected_languages": [
+          "DE",
+          "IT",
+          "PT"
+        ],
+        "display_cells_changed": 243,
+        "sample": [
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+            "language": "DE",
+            "before": "Handlung; Aktion",
+            "after": "die Handlung; die Aktion"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+            "language": "IT",
+            "before": "azione",
+            "after": "l'azione"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+            "language": "PT",
+            "before": "ação",
+            "after": "a ação"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+            "language": "DE",
+            "before": "Aktivität; Tätigkeit",
+            "after": "die Aktivität; die Tätigkeit"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+            "language": "IT",
+            "before": "attività",
+            "after": "l'attività"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+            "language": "PT",
+            "before": "atividade",
+            "after": "a atividade"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+            "language": "DE",
+            "before": "Schauspieler",
+            "after": "der Schauspieler"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+            "language": "IT",
+            "before": "attore",
+            "after": "l'attore"
+          }
+        ]
+      },
+      {
+        "batch_id": "pl_nl_sv_article_display_v2",
+        "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_pl_nl_sv_article_display_v2.jsonl",
+        "affected_languages": [
+          "NL",
+          "SV"
+        ],
+        "display_cells_changed": 157,
+        "sample": [
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+            "language": "NL",
+            "before": "actie; handeling",
+            "after": "de actie; de handeling"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+            "language": "SV",
+            "before": "handling",
+            "after": "en handling"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+            "language": "NL",
+            "before": "activiteit",
+            "after": "de activiteit"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+            "language": "SV",
+            "before": "aktivitet",
+            "after": "en aktivitet"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+            "language": "NL",
+            "before": "acteur",
+            "after": "de acteur"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+            "language": "SV",
+            "before": "skådespelare",
+            "after": "en skådespelare"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+            "language": "NL",
+            "before": "actrice",
+            "after": "de actrice"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+            "language": "SV",
+            "before": "skådespelerska",
+            "after": "en skådespelerska"
+          }
+        ]
+      },
+      {
+        "batch_id": "no_da_fi_cs_article_display_v2",
+        "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_no_da_fi_cs_article_display_v2.jsonl",
+        "affected_languages": [
+          "DA",
+          "NO"
+        ],
+        "display_cells_changed": 152,
+        "sample": [
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+            "language": "DA",
+            "before": "handling",
+            "after": "en handling"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+            "language": "NO",
+            "before": "handling",
+            "after": "en handling"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+            "language": "DA",
+            "before": "aktivitet",
+            "after": "en aktivitet"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+            "language": "NO",
+            "before": "aktivitet",
+            "after": "en aktivitet"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+            "language": "DA",
+            "before": "skuespiller",
+            "after": "en skuespiller"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+            "language": "NO",
+            "before": "skuespiller",
+            "after": "en skuespiller"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+            "language": "DA",
+            "before": "skuespillerinde",
+            "after": "en skuespillerinde"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+            "language": "NO",
+            "before": "skuespillerinne",
+            "after": "en skuespillerinne"
+          }
+        ]
+      },
+      {
+        "batch_id": "sk_hu_ro_bg_article_display_v2",
+        "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_sk_hu_ro_bg_article_display_v2.jsonl",
+        "affected_languages": [
+          "RO"
+        ],
+        "display_cells_changed": 78,
+        "sample": [
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+            "language": "RO",
+            "before": "acțiune",
+            "after": "o acțiune"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+            "language": "RO",
+            "before": "activitate",
+            "after": "o activitate"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+            "language": "RO",
+            "before": "actor",
+            "after": "un actor"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+            "language": "RO",
+            "before": "actriță",
+            "after": "o actriță"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::010",
+            "language": "RO",
+            "before": "adresă",
+            "after": "o adresă"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::011",
+            "language": "RO",
+            "before": "adult",
+            "after": "un adult"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::012",
+            "language": "RO",
+            "before": "sfaturi; sfat",
+            "after": "un sfat"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::015",
+            "language": "RO",
+            "before": "după-amiază",
+            "after": "o după-amiază"
+          }
+        ]
+      },
+      {
+        "batch_id": "tr_sw_pt_br_es_419_article_display_v2",
+        "path": "outputs/oxford-vocabulary/support-translations/oxford_3000_core_a1_part_001_150_v1_support_translation_batch_tr_sw_pt_br_es_419_article_display_v2.jsonl",
+        "affected_languages": [
+          "ES-419",
+          "PT-BR"
+        ],
+        "display_cells_changed": 160,
+        "sample": [
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+            "language": "ES-419",
+            "before": "acción",
+            "after": "la acción"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::005",
+            "language": "PT-BR",
+            "before": "ação",
+            "after": "a ação"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+            "language": "ES-419",
+            "before": "actividad",
+            "after": "la actividad"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::006",
+            "language": "PT-BR",
+            "before": "atividade",
+            "after": "a atividade"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+            "language": "ES-419",
+            "before": "actor",
+            "after": "el actor"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::007",
+            "language": "PT-BR",
+            "before": "ator",
+            "after": "o ator"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+            "language": "ES-419",
+            "before": "actriz",
+            "after": "la actriz"
+          },
+          {
+            "row_id": "oxford_3000_core_a1_part_001_150_v1::008",
+            "language": "PT-BR",
+            "before": "atriz",
+            "after": "a atriz"
+          }
+        ]
+      }
+    ],
+    "display_cells_changed": 948,
+    "changes_by_language": {
+      "DA": 76,
+      "DE": 81,
+      "ES": 79,
+      "ES-419": 79,
+      "FR": 79,
+      "IT": 81,
+      "NL": 81,
+      "NO": 76,
+      "PT": 81,
+      "PT-BR": 81,
+      "RO": 78,
+      "SV": 76
+    },
+    "examples_changed": 0,
+    "target_language_transcriptions_added": 0
+  },
+  "latest_support_translation_sample_review": {
+    "report_id": "support_translation_sample_review_v1",
+    "script_path": "scripts/oxford/build-oxford-a1-translation-sample-review.py",
+    "path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_support_translation_sample_review_v1.json",
+    "csv_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_support_translation_sample_review_v1.csv",
+    "markdown_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_support_translation_sample_review_v1.md",
+    "status": "pass",
+    "generated_at": "2026-05-17T14:16:26.846804+00:00",
+    "review_method": "Deterministic Codex semantic plausibility sample review against the reviewed English meaning notes. This is not native-speaker certification and does not replace full final linguistic audit.",
+    "sample_size_per_language": 10,
+    "languages_reviewed": 54,
+    "support_languages_reviewed": 52,
+    "unique_sample_display_cells_reviewed": 540,
+    "final_workbook_display_cells_checked": 1060,
+    "blocker_count": 0,
+    "warning_count": 0,
+    "does_not_replace": "full native-speaker final linguistic audit"
+  },
+  "latest_support_translation_source_backed_audit": {
+    "report_id": "support_translation_source_backed_audit_v1",
+    "script_path": "scripts/oxford/check-oxford-a1-support-translations-source-backed.mjs",
+    "path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_support_translation_source_backed_audit_v1.json",
+    "csv_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_support_translation_source_backed_audit_v1.csv",
+    "markdown_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_support_translation_source_backed_audit_v1.md",
+    "status": "pass",
+    "generated_at": "2026-06-05T13:53:57.712Z",
+    "display_cells_checked": 7800,
+    "support_languages_checked": 52,
+    "source_candidate_rows": 4426,
+    "source_exact_or_normalized_match_rows": 3923,
+    "source_partial_only_rows": 503,
+    "no_source_candidate_rows": 3374,
+    "blocker_count": 0,
+    "warning_count": 5497,
+    "audit_scope": "Oxford A1 support-language display translations checked against local indexed source candidates. Sources are candidate evidence, not automatic truth or native-speaker approval.",
+    "source_hash": "d3f1c43cbf3f2aa678e5ad78dd6cbe43482e60818eb2ee686a89eda6234c21c7",
+    "does_not_replace": "native-speaker certification or full final linguistic audit"
+  },
+  "latest_support_example_quality_audit": {
+    "report_id": "support_example_quality_audit_v1",
+    "script_path": "scripts/oxford/check-oxford-a1-support-examples-quality.mjs",
+    "path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_support_example_quality_audit_v1.json",
+    "csv_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_support_example_quality_audit_v1.csv",
+    "markdown_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_support_example_quality_audit_v1.md",
+    "status": "pass",
+    "generated_at": "2026-05-17T16:06:56.210Z",
+    "example_cells_checked": 7800,
+    "support_languages_checked": 52,
+    "blocker_count": 0,
+    "warning_count": 4665,
+    "audit_scope": "Oxford A1 support-language examples checked with deterministic shape, script, casing, spacing, known naturalness, pedagogical and lexical-anchor gates. This is not native-speaker certification.",
+    "source_hash": "912268699cbc31563e049b64801ed4eb770ae1492d498372709857b94f4b458f",
+    "does_not_replace": "native-speaker certification or full final linguistic audit"
+  },
+  "latest_all_fields_sample_review": {
+    "report_id": "all_fields_sample_review_v1",
+    "script_path": "scripts/oxford/build-oxford-part002-all-fields-sample-review.mjs",
+    "script_version": "2026-05-20.v2",
+    "path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_all_fields_sample_review_v1.json",
+    "csv_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_all_fields_sample_review_v1.csv",
+    "markdown_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_all_fields_sample_review_v1.md",
+    "status": "pass",
+    "generated_at": "2026-05-20T08:49:54.859Z",
+    "source_package_only": true,
+    "sample_size_per_language": 10,
+    "languages_reviewed": 54,
+    "support_languages_reviewed": 52,
+    "language_row_records_checked": 540,
+    "checked_field_count": 12820,
+    "blocker_count": 0,
+    "warning_signal_count": 528,
+    "does_not_replace": "native-speaker certification, final workbook readback or final linguistic audit"
+  },
+  "updated_at": "2026-05-20T08:52:49.965Z",
+  "latest_post_final_language_spot_check": {
+    "report_id": "post_final_language_spot_check_v1",
+    "script_path": "scripts/oxford/build-oxford-post-final-language-spot-check.py",
+    "path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_post_final_language_spot_check_v1.json",
+    "csv_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_post_final_language_spot_check_v1.csv",
+    "markdown_path": "outputs/oxford-vocabulary/qa/oxford_3000_core_a1_part_001_150_v1_post_final_language_spot_check_v1.md",
+    "status": "pass",
+    "generated_at": "2026-05-31T08:02:10.864166+00:00",
+    "sample_method": "deterministic_even_spread_across_row_review_order",
+    "sample_size_per_language": 5,
+    "languages_reviewed": 54,
+    "support_languages_reviewed": 52,
+    "sample_source_headwords": [
+      "a, an",
+      "arm",
+      "best",
+      "butter",
+      "close1"
+    ],
+    "source_package_display_cells_checked": 270,
+    "source_package_example_cells_checked": 270,
+    "final_workbook_display_cells_checked": 530,
+    "final_workbook_example_cells_checked": 530,
+    "final_workbook_transcription_cells_checked": 20,
+    "transcription_rows_checked": 10,
+    "blocker_count": 0,
+    "advisory_warning_signal_count": 391,
+    "does_not_replace": "native-speaker certification or a full row-by-row linguistic audit"
+  }
+}

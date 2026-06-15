@@ -1,0 +1,192 @@
+{
+  "version": "transcription-style-profiles-v1",
+  "profiles": {
+    "MY": {
+      "label": "Burmese practical learner romanization",
+      "description": "Project style uses lowercase ASCII letters plus spaces, hyphen, straight apostrophe, colon and dot as tone/register or syllable markers. Do not mix accented Latin, curly apostrophes, compact dictionary punctuation or IPA symbols.",
+      "allowedPattern": "^[a-z0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": [
+        {
+          "code": "my_colon_without_separator",
+          "pattern": ":[a-z0-9]",
+          "reason": "Burmese colon tone/register marker must not be glued to the next syllable; use a space after ':' inside multi-syllable forms."
+        },
+        {
+          "code": "my_dot_without_separator",
+          "pattern": "\\.(?=\\S)",
+          "reason": "Burmese dot tone/register marker must not be glued to the next syllable; use a space after '.' inside multi-syllable forms."
+        }
+      ],
+      "validExamples": ["pan: kan", "za. loun", "le' hpe' ji zun:", "mi: hpou chaun thoun: pa. wa"],
+      "invalidExamples": ["pan:kan", "laksutpa.wa", "a.hpum:", "tú", "khwet’"]
+    },
+    "KM": {
+      "label": "Khmer practical romanization",
+      "description": "Project style for Khmer practical romanization is lowercase ASCII Latin words separated by spaces. IPA-like symbols and accented source notation are not final card style.",
+      "allowedPattern": "^[a-z0-9 .'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": [
+        {
+          "code": "km_ipa_like_practical_symbol",
+          "pattern": "[ɑɒɔəɜɨɯɤɐʔɛ]",
+          "reason": "Khmer practical romanization must not mix IPA-like symbols into the final learner-facing project style."
+        }
+      ],
+      "validExamples": ["slab prea", "kam bet", "kamsiew"],
+      "invalidExamples": ["pɛɛng", "cɑɑcɑngkəh", "kambət"]
+    },
+    "TH": {
+      "label": "Thai learner romanization with tone diacritics",
+      "description": "Project style allows Latin learner romanization with tone marks and learner vowels; tone numbers and native Thai script are not final transcription.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M} .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": [
+        {
+          "code": "thai_tone_number",
+          "pattern": "\\d",
+          "reason": "Thai learner romanization must use tone diacritics, not tone numbers."
+        }
+      ],
+      "validExamples": ["tûai", "chɔ́ɔn-chaa", "mái-nûuat-bpɛ̂ɛng"],
+      "invalidExamples": ["tûai3", "RTGS"]
+    },
+    "LO": {
+      "label": "Lao learner romanization with tone diacritics",
+      "description": "Project style allows Latin learner romanization with tone marks and learner vowels; tone numbers and native Lao script are not final transcription.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M} .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": [
+        {
+          "code": "lao_tone_number",
+          "pattern": "\\d",
+          "reason": "Lao learner romanization must use tone diacritics, not tone numbers."
+        }
+      ],
+      "validExamples": ["thûai", "mîit", "fǎa môh"],
+      "invalidExamples": ["thûai3", "BGN/PCGN"]
+    },
+    "HY": {
+      "label": "Armenian practical BGN/PCGN-style romanization",
+      "description": "Project style uses lowercase ASCII Latin BGN/PCGN-style romanization.",
+      "allowedPattern": "^[a-z0-9 '-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": [],
+      "validExamples": ["gdal", "karagi danak", "pahatso batsich"],
+      "invalidExamples": ["gdaĺ", "Գդալ"]
+    },
+    "KA": {
+      "label": "Georgian national romanization",
+      "description": "Project style uses lowercase ASCII Latin Georgian national romanization; straight apostrophe is allowed for ejectives.",
+      "allowedPattern": "^[a-z0-9 '-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": [],
+      "validExamples": ["k'ovzi", "chais k'ovzi", "sats'uri"],
+      "invalidExamples": ["k’ovzi", "კოვზი"]
+    },
+    "RU": {
+      "label": "Russian practical Latin transliteration",
+      "description": "Project style uses Latin transliteration, not Cyrillic copy or IPA.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M}0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    },
+    "BG": {
+      "label": "Bulgarian streamlined transliteration",
+      "description": "Project style uses official-style Latin transliteration, not Cyrillic copy or IPA.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M}0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    },
+    "KK": {
+      "label": "Kazakh practical Cyrillic-to-Latin transliteration",
+      "description": "Project style uses practical Latin transliteration from the current Kazakh Cyrillic display form.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M}0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    },
+    "ZH": {
+      "label": "Chinese Hanyu Pinyin with tone marks",
+      "description": "Project style uses Hanyu Pinyin with tone marks; tone numbers are blocked elsewhere and here.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M} üÜ]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": [
+        {
+          "code": "zh_tone_number",
+          "pattern": "\\d",
+          "reason": "Chinese pinyin must use tone marks, not tone numbers."
+        }
+      ]
+    },
+    "JA": {
+      "label": "Japanese Modified Hepburn with macrons",
+      "description": "Project style uses Latin Hepburn romanization with macrons where needed.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M}0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    },
+    "KO": {
+      "label": "Korean Revised Romanization",
+      "description": "Project style uses lowercase ASCII Revised Romanization.",
+      "allowedPattern": "^[a-z0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    },
+    "HI": {
+      "label": "Hindi ISO 15919",
+      "description": "Project style uses ISO 15919 Latin transliteration.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M}0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    },
+    "BN": {
+      "label": "Bengali ISO 15919",
+      "description": "Project style uses ISO 15919 Latin transliteration.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M}0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    },
+    "NE": {
+      "label": "Nepali ISO 15919",
+      "description": "Project style uses ISO 15919 Latin transliteration.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M}0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    },
+    "SI": {
+      "label": "Sinhala ISO 15919",
+      "description": "Project style uses ISO 15919 Latin transliteration.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M}0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    },
+    "TA": {
+      "label": "Tamil ISO 15919",
+      "description": "Project style uses ISO 15919 Latin transliteration.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M}0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    },
+    "TE": {
+      "label": "Telugu ISO 15919",
+      "description": "Project style uses ISO 15919 Latin transliteration.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M}0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    },
+    "KN": {
+      "label": "Kannada ISO 15919",
+      "description": "Project style uses ISO 15919 Latin transliteration.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M}0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    },
+    "ML": {
+      "label": "Malayalam ISO 15919",
+      "description": "Project style uses ISO 15919 Latin transliteration.",
+      "allowedPattern": "^[\\p{Script=Latin}\\p{M}0-9 .:'-]+$",
+      "mustBeLowercase": true,
+      "forbiddenPatterns": []
+    }
+  }
+}
