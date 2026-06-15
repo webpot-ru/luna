@@ -165,28 +165,45 @@ async function main() {
   console.log(`Transition:    ${transition}`);
   console.log(`======================================`);
 
-  // Query database to get unique target languages available for this deck
-  console.log("Fetching target languages from Postgres database...");
-  const sql = `
-    select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
-      select distinct language_code 
-      from meaning_language_entries
-      where meaning_id in (
-        select meaning_id from meaning_set_memberships 
-        where set_id = '${setId}'
-      )
-      and language_code <> '${supportLang}'
-      order by language_code
-    ) rows;
-  `;
-  
+  // Resolve target languages: read from offline JSON if available, otherwise query Postgres
+  const jsonPath = path.resolve(`data/decks/${setId}.json`);
   let languages = [];
-  try {
-    const rows = await psqlJson(sql);
-    languages = rows.map(r => r.language_code);
-  } catch (e) {
-    console.error("Database query failed:", e.message);
-    process.exit(1);
+
+  if (fs.existsSync(jsonPath)) {
+    console.log(`[OFFLINE] Reading target languages from offline JSON: ${jsonPath}`);
+    try {
+      const deckData = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
+      if (deckData.cards?.[supportLang]) {
+        languages = Object.keys(deckData.cards[supportLang]).map(code => code.toUpperCase());
+      } else {
+        console.warn(`Warning: support language "${supportLang}" has no target languages in offline JSON.`);
+      }
+    } catch (err) {
+      console.error(`Failed to parse offline JSON data: ${err.message}`);
+    }
+  }
+
+  if (languages.length === 0) {
+    console.log("Fetching target languages from Postgres database...");
+    const sql = `
+      select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
+        select distinct language_code 
+        from meaning_language_entries
+        where meaning_id in (
+          select meaning_id from meaning_set_memberships 
+          where set_id = '${setId}'
+        )
+        and language_code <> '${supportLang}'
+        order by language_code
+      ) rows;
+    `;
+    try {
+      const rows = await psqlJson(sql);
+      languages = rows.map(r => r.language_code);
+    } catch (e) {
+      console.error("Database query failed:", e.message);
+      process.exit(1);
+    }
   }
 
   if (languages.length === 0) {
