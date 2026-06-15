@@ -1,3 +1,9 @@
+import fs from "node:fs";
+import path from "node:path";
+
+const localizationPath = path.resolve("config/video-localization.json");
+const localizationData = JSON.parse(fs.readFileSync(localizationPath, "utf8"));
+
 export const flagMap = {
   'EN': '🇺🇸',
   'EN-GB': '🇬🇧',
@@ -657,6 +663,7 @@ export function generateSlideHtml(options) {
 }
 
 export function generateUnifiedRendererHtml() {
+  const localizationJson = JSON.stringify(localizationData);
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -946,6 +953,7 @@ export function generateUnifiedRendererHtml() {
   </div>
 
   <script>
+    const localizationData = ${localizationJson};
     window.renderTask = (task) => {
       const { type, options } = task;
       
@@ -1018,19 +1026,19 @@ export function generateUnifiedRendererHtml() {
         
         // Header title text
         let headerTitle = deckName;
+        const langData = localizationData[String(supportLang).toUpperCase()] || localizationData['EN'];
         if (isQuiz) {
-          if (supportLang === 'RU') headerTitle = 'Мини-тест · Переведите слово';
-          else if (supportLang === 'ES' || supportLang === 'ES-419') headerTitle = 'Mini-test · Traduce la palabra';
-          else headerTitle = 'Mini-Test · Translate the word';
+          headerTitle = langData.quiz_title || 'Mini-Test · Translate the word';
         }
         document.getElementById('card-header-title').textContent = headerTitle;
 
         // Progress label text
         let progressText = \`\${currentIndex} / \${totalCards}\`;
         if (isQuiz) {
-          if (supportLang === 'RU') progressText = \`Вопрос \${currentIndex} из \${totalCards}\`;
-          else if (supportLang === 'ES' || supportLang === 'ES-419') progressText = \`Pregunta \${currentIndex} de \${totalCards}\`;
-          else progressText = \`Question \${currentIndex} of \${totalCards}\`;
+          const qTemplate = langData.quiz_question_label_template || "Question {current} of {total}";
+          progressText = qTemplate
+            .replace('{current}', currentIndex)
+            .replace('{total}', totalCards);
         }
         document.getElementById('card-progress-text').textContent = progressText;
 

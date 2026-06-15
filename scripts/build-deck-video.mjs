@@ -18,6 +18,9 @@ import {
 } from "./lib/card-slide-template.mjs";
 import { getOutroText } from "./lib/outro-slide-template.mjs";
 
+const localizationPath = path.resolve("config/video-localization.json");
+const localizationData = JSON.parse(fs.readFileSync(localizationPath, "utf8"));
+
 const cleanStr = (s) => String(s || '').trim().toLowerCase().replace(/[\/\[\]()]/g, '');
 
 function extractLevel(setId) {
@@ -30,30 +33,13 @@ function extractLevel(setId) {
 
 function getLanguageLabel(targetLang, supportLang, levelCode = 'A1') {
   const supportUpper = String(supportLang).toUpperCase();
-  const levelPrefixMap = {
-    'RU': 'Уровень',
-    'EN': 'Level',
-    'EN-GB': 'Level',
-    'ES': 'Nivel',
-    'ES-419': 'Nivel',
-    'TR': 'Seviye',
-    'PT': 'Nível',
-    'PT-BR': 'Nível',
-    'KO': '난이도',
-    'JA': 'レベル',
-    'HI': 'स्तर',
-    'UZ': 'Daraja',
-    'AZ': 'Səviyyə',
-    'KK': 'Деңгей',
-    'KA': 'დონე',
-    'HY': 'Մակարդակ'
-  };
-  const prefix = levelPrefixMap[supportUpper] || 'Level';
+  const langData = localizationData[supportUpper] || localizationData['EN'];
+  const prefix = langData.level_prefix || 'Level';
   const levelLabel = `${prefix} ${levelCode}`;
   const localizedLangName = getLanguageNameInLang(targetLang, supportLang);
-  return supportUpper === 'RU'
-    ? `${localizedLangName} язык · ${levelLabel}`
-    : `${localizedLangName} · ${levelLabel}`;
+  const titleTemplate = langData.intro_title_template || "{target_lang}";
+  const formattedTitle = titleTemplate.replace("{target_lang}", localizedLangName);
+  return `${formattedTitle} · ${levelLabel}`;
 }
 
 function buildCardOptions({
@@ -224,32 +210,11 @@ async function main() {
     cleanDeckTitle = cleanDeckTitle.slice(0, -1);
   }
   
-  let introAudioText = `Изучаем ${targetName} язык. Тема урока: ${cleanDeckTitle}.`;
-  if (supportUpper === 'EN' || supportUpper === 'EN-GB') {
-    introAudioText = `Learning ${targetName}. Lesson topic: ${cleanDeckTitle}.`;
-  } else if (supportUpper === 'ES' || supportUpper === 'ES-419') {
-    introAudioText = `Aprendiendo ${targetName}. Tema de la lección: ${cleanDeckTitle}.`;
-  } else if (supportUpper === 'TR') {
-    introAudioText = `${targetName} öğreniyoruz. Ders konusu: ${cleanDeckTitle}.`;
-  } else if (supportUpper === 'PT' || supportUpper === 'PT-BR') {
-    introAudioText = `Estudando ${targetName}. Tema da lição: ${cleanDeckTitle}.`;
-  } else if (supportUpper === 'KO') {
-    introAudioText = `${targetName} 공부하기. 오늘의 주제는 ${cleanDeckTitle}입니다.`;
-  } else if (supportUpper === 'JA') {
-    introAudioText = `${targetName}の学習。レッスンのテーマは、${cleanDeckTitle}です。`;
-  } else if (supportUpper === 'HI') {
-    introAudioText = `हम ${targetName} सीख रहे हैं। पाठ का विषय है ${cleanDeckTitle}।`;
-  } else if (supportUpper === 'UZ') {
-    introAudioText = `${targetName} tilini o'rganamiz. Dars mavzusi: ${cleanDeckTitle}.`;
-  } else if (supportUpper === 'AZ') {
-    introAudioText = `${targetName} dilini öyrənirik. Dərs mövzusu: ${cleanDeckTitle}.`;
-  } else if (supportUpper === 'KK') {
-    introAudioText = `${targetName} тілін үйренеміз. Сабақтың тақырыбы: ${cleanDeckTitle}.`;
-  } else if (supportUpper === 'KA') {
-    introAudioText = `ვსწავლობთ ${targetName} ენას. გაკვეთილის თემა: ${cleanDeckTitle}.`;
-  } else if (supportUpper === 'HY') {
-    introAudioText = `Սովորում ենք ${targetName}։ Դասի թեման է՝ ${cleanDeckTitle}։`;
-  }
+  const langData = localizationData[supportUpper] || localizationData['EN'];
+  const introSpeechTemplate = langData.intro_speech_template || "Learning {target_lang}. Lesson topic: {deck_title}.";
+  const introAudioText = introSpeechTemplate
+    .replace("{target_lang}", targetName)
+    .replace("{deck_title}", cleanDeckTitle);
 
   // 3.5 Pre-fetch all TTS Audios in parallel batches
   console.log("\n--- Pre-fetching all TTS Audios in parallel batches ---");
@@ -330,68 +295,22 @@ async function main() {
   tempWavFiles.push(wavIntro);
 
   console.log(`  -> Queue state: Intro`);
-
-  let introDesc = `Слушайте произношение носителей языка и повторяйте слова в паузах.<br>В конце вас ждет проверочный мини-тест!`;
-  if (supportUpper === 'EN' || supportUpper === 'EN-GB') {
-    introDesc = `Listen carefully to the native pronunciation and repeat the words in pauses.<br>An interactive mini-test awaits you at the end!`;
-  } else if (supportUpper === 'ES' || supportUpper === 'ES-419') {
-    introDesc = `Escuche atentamente la pronunciación de los hablantes nativos y repita las palabras en las pausas.<br>¡Un mini-test interactivo le espera al final!`;
-  } else if (supportUpper === 'TR') {
-    introDesc = `Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın.<br>Sonunda sizi etkileşimli bir mini test bekliyor!`;
-  } else if (supportUpper === 'PT' || supportUpper === 'PT-BR') {
-    introDesc = `Ouça a pronúncia nativa e repita as palavras nas pausas.<br>Um mini-teste interativo espera por você no final!`;
-  } else if (supportUpper === 'KO') {
-    introDesc = `원어민의 발음을 잘 듣고 따라 해보세요.<br>마지막에는 퀴즈가 준비되어 있습니다!`;
-  } else if (supportUpper === 'JA') {
-    introDesc = `ネイティブの発音を聞いて、ポーズの間に繰り返してください。<br>最後にミニテストがあります！`;
-  } else if (supportUpper === 'HI') {
-    introDesc = `मूल उच्चारण को ध्यान से सुनें और ठहराव में शब्दों को दोहराएं।<br>अंत में एक इंटरैक्टिव मिनी-टेस्ट आपका इंतजार कर रहा है!`;
-  } else if (supportUpper === 'UZ') {
-    introDesc = `Ona tilida so'zlashuvchilarning talaffuzini tinglang va tanaffuslarda so'zlarni takrorlang.<br>Oxirida sizni interaktiv mini-test kutmoqda!`;
-  } else if (supportUpper === 'AZ') {
-    introDesc = `Yerli natiqlərin tələffüzünü dinləyin və fasilələrdə sözləri təkrarlayın.<br>Sonda sizi interaktiv mini-test gözləyir!`;
-  } else if (supportUpper === 'KK') {
-    introDesc = `Тіл иелерінің айтылуын тыңдап, үзілістерде сөздерді қайталаңыз.<br>Соңында сізді интерактивті шағын тест күтеді!`;
-  } else if (supportUpper === 'KA') {
-    introDesc = `მოუსმინეთ მშობლიურ გამოთქმას და გაიმეორეთ სიტყვები პაუზების დროს.<br>ბოლოს გელით ინტერაქტიული მინი-ტესტი!`;
-  } else if (supportUpper === 'HY') {
-    introDesc = `Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ:<br>Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ:`;
-  }
+  const introDesc = langData.intro_desc || `Listen carefully to the native pronunciation and repeat the words in pauses.<br>An interactive mini-test awaits you at the end!`;
   const levelCode = extractLevel(setId);
-  let introSubtitleText = `Уровень ${levelCode} · ${cards.length} слов`;
-  if (supportUpper === 'EN' || supportUpper === 'EN-GB') {
-    introSubtitleText = `Level ${levelCode} · ${cards.length} words`;
-  } else if (supportUpper === 'ES' || supportUpper === 'ES-419') {
-    introSubtitleText = `Nivel ${levelCode} · ${cards.length} palabras`;
-  } else if (supportUpper === 'TR') {
-    introSubtitleText = `Seviye ${levelCode} · ${cards.length} kelime`;
-  } else if (supportUpper === 'PT' || supportUpper === 'PT-BR') {
-    introSubtitleText = `Nível ${levelCode} · ${cards.length} palavras`;
-  } else if (supportUpper === 'KO') {
-    introSubtitleText = `난이도 ${levelCode} · ${cards.length} 단어`;
-  } else if (supportUpper === 'JA') {
-    introSubtitleText = `レベル ${levelCode} · ${cards.length}単語`;
-  } else if (supportUpper === 'HI') {
-    introSubtitleText = `स्तर ${levelCode} · ${cards.length} शब्द`;
-  } else if (supportUpper === 'UZ') {
-    introSubtitleText = `Daraja ${levelCode} · ${cards.length} ta so'z`;
-  } else if (supportUpper === 'AZ') {
-    introSubtitleText = `Səviyyə ${levelCode} · ${cards.length} söz`;
-  } else if (supportUpper === 'KK') {
-    introSubtitleText = `Деңгей ${levelCode} · ${cards.length} сөз`;
-  } else if (supportUpper === 'KA') {
-    introSubtitleText = `დონე ${levelCode} · ${cards.length} სიტყვა`;
-  } else if (supportUpper === 'HY') {
-    introSubtitleText = `Մակարդակ ${levelCode} · ${cards.length} բառ`;
-  }
+  const prefix = langData.level_prefix || 'Level';
+  const wordsLabel = langData.words_label || "words";
+  const introSubtitleText = `${prefix} ${levelCode} · ${cards.length} ${wordsLabel}`;
 
   const audioDurIntro = getAudioDuration(wavIntro);
   const totalVisualDurIntro = Math.round((audioDurIntro + 2.0) * 25) / 25; // add 2.0s freeze
   const pauseDurIntro = totalVisualDurIntro - audioDurIntro;
 
+  const titleTemplate = langData.intro_title_template || "{target_lang}";
+  const introTitle = titleTemplate.replace("{target_lang}", targetName);
+
   const introOptions = {
     flag: getFlagEmoji(targetLang),
-    title: supportUpper === 'RU' ? `${targetName} язык` : targetName,
+    title: introTitle,
     deckTitle: deckTitle,
     subtitle: introSubtitleText,
     description: introDesc
@@ -668,177 +587,18 @@ async function main() {
   tempWavFiles.push(wavOutro);
 
   console.log(`  -> Queue state: Outro (CTA)`);
-  
-  const lang = String(supportLang).toUpperCase();
-  let outroTitle = "Выучи эти слова навсегда";
-  let outroSubtitle = "Тренируй колоды бесплатно на сайте";
-  let outroBadges = [
-    { icon: "⚡️", text: "Свой темп" },
-    { icon: "🎮", text: "Игра «Найди пару»" },
-    { icon: "🧠", text: "Умный алгоритм" },
-    { icon: "🖼️", text: "Картинки и звук" },
-    { icon: "⏱️", text: "Таймер Помодоро" },
-    { icon: "🎵", text: "Фоновая музыка" },
-    { icon: "💬", text: "Чат и друзья" },
-    { icon: "📝", text: "Свои заметки" }
+  const outroTitle = langData.outro_title || "Learn these words forever";
+  const outroSubtitle = langData.outro_subtitle || "Practice decks for free on our website";
+  const outroBadges = [
+    { icon: "⚡️", text: langData.badge_speed || "Custom Tempo" },
+    { icon: "🎮", text: langData.badge_match || "Matching Game" },
+    { icon: "🧠", text: langData.badge_smart || "Smart Algorithm" },
+    { icon: "🖼️", text: langData.badge_media || "Images & Audio" },
+    { icon: "⏱️", text: langData.badge_pomo || "Pomodoro Timer" },
+    { icon: "🎵", text: langData.badge_music || "Background Music" },
+    { icon: "💬", text: langData.badge_chat || "Study Chat" },
+    { icon: "📝", text: langData.badge_notes || "Personal Notes" }
   ];
-  if (lang === 'EN' || lang === 'EN-GB') {
-    outroTitle = "Learn these words forever";
-    outroSubtitle = "Practice decks for free on our website";
-    outroBadges = [
-      { icon: "⚡️", text: "Custom Tempo" },
-      { icon: "🎮", text: "Matching Game" },
-      { icon: "🧠", text: "Smart Algorithm" },
-      { icon: "🖼️", text: "Images & Audio" },
-      { icon: "⏱️", text: "Pomodoro Timer" },
-      { icon: "🎵", text: "Background Music" },
-      { icon: "💬", text: "Study Chat" },
-      { icon: "📝", text: "Personal Notes" }
-    ];
-  } else if (lang === 'ES' || lang === 'ES-419') {
-    outroTitle = "Aprende estas palabras para siempre";
-    outroSubtitle = "Practica mazos gratis en nuestro sitio web";
-    outroBadges = [
-      { icon: "⚡️", text: "Ritmo propio" },
-      { icon: "🎮", text: "Juego Match" },
-      { icon: "🧠", text: "Algoritmo inteligente" },
-      { icon: "🖼️", text: "Imágenes y audio" },
-      { icon: "⏱️", text: "Temporizador Pomodoro" },
-      { icon: "🎵", text: "Música de fondo" },
-      { icon: "💬", text: "Chat y amigos" },
-      { icon: "📝", text: "Notas de estudio" }
-    ];
-  } else if (lang === 'TR') {
-    outroTitle = "Bu kelimeleri sonsuza dek öğrenin";
-    outroSubtitle = "Sitemizde desteleri ücretsiz olarak çalışın";
-    outroBadges = [
-      { icon: "⚡️", text: "Kendi Temponuz" },
-      { icon: "🎮", text: "Eşleştirme Oyunu" },
-      { icon: "🧠", text: "Akıllı Algoritma" },
-      { icon: "🖼️", text: "Resimler ve Ses" },
-      { icon: "⏱️", text: "Pomodoro Sayacı" },
-      { icon: "🎵", text: "Arka Plan Müzikleri" },
-      { icon: "💬", text: "Çalışma Sohbeti" },
-      { icon: "📝", text: "Kişisel Notlar" }
-    ];
-  } else if (lang === 'PT' || lang === 'PT-BR') {
-    outroTitle = "Aprenda estas palavras para sempre";
-    outroSubtitle = "Pratique baralhos grátis em nosso site";
-    outroBadges = [
-      { icon: "⚡️", text: "Ritmo Próprio" },
-      { icon: "🎮", text: "Jogo da Memória" },
-      { icon: "🧠", text: "Algoritmo Inteligente" },
-      { icon: "🖼️", text: "Imagens e Áudio" },
-      { icon: "⏱️", text: "Timer Pomodoro" },
-      { icon: "🎵", text: "Música de Fundo" },
-      { icon: "💬", text: "Chat de Estudos" },
-      { icon: "📝", text: "Notas Pessoais" }
-    ];
-  } else if (lang === 'KO') {
-    outroTitle = "이 단어들을 영원히 기억하세요";
-    outroSubtitle = "웹사이트에서 무료로 카드 세트를 연습하세요";
-    outroBadges = [
-      { icon: "⚡️", text: "맞춤형 학습 템포" },
-      { icon: "🎮", text: "짝맞추기 게임" },
-      { icon: "🧠", text: "스마트 암기 알고리즘" },
-      { icon: "🖼️", text: "이미지 및 오디오 지원" },
-      { icon: "⏱️", text: "뽀모도로 타이머" },
-      { icon: "🎵", text: "백그라운드 음악" },
-      { icon: "💬", text: "학습 채팅방" },
-      { icon: "📝", text: "나만의 학습 메모" }
-    ];
-  } else if (lang === 'JA') {
-    outroTitle = "これらの単語を一生忘れない";
-    outroSubtitle = "ウェブサイトで無料デッキを練習する";
-    outroBadges = [
-      { icon: "⚡️", text: "自分のペース" },
-      { icon: "🎮", text: "神経衰弱ゲーム" },
-      { icon: "🧠", text: "記憶アルゴリズム" },
-      { icon: "🖼️", text: "画像と音声に対応" },
-      { icon: "⏱️", text: "ポモドーロタイマー" },
-      { icon: "🎵", text: "BGM音楽" },
-      { icon: "💬", text: "勉強用チャット" },
-      { icon: "📝", text: "個人メモ機能" }
-    ];
-  } else if (lang === 'HI') {
-    outroTitle = "इन शब्दों को हमेशा के लिए याद रखें";
-    outroSubtitle = "हमारी वेबसाइट पर मुफ़्त में डेक का अभ्यास करें";
-    outroBadges = [
-      { icon: "⚡️", text: "खुद की गति" },
-      { icon: "🎮", text: "मैच खेलें" },
-      { icon: "🧠", text: "स्मार्ट एल्गोरिदम" },
-      { icon: "🖼️", text: "चित्र और ध्वनि" },
-      { icon: "⏱️", text: "पोमोडोरो टाइमर" },
-      { icon: "🎵", text: "पृष्ठभूमि संगीत" },
-      { icon: "💬", text: "अध्ययन चैट" },
-      { icon: "📝", text: "व्यक्तिगत नोट्स" }
-    ];
-  } else if (lang === 'UZ') {
-    outroTitle = "Bu so'zlarni abadiy eslab qoling";
-    outroSubtitle = "Saytimizda kartochkalar to'plamini bepul mashq qiling";
-    outroBadges = [
-      { icon: "⚡️", text: "O'z tempingiz" },
-      { icon: "🎮", text: "Juftini top o'yini" },
-      { icon: "🧠", text: "Aqlli algoritm" },
-      { icon: "🖼️", text: "Rasm va ovoz" },
-      { icon: "⏱️", text: "Pomodoro taymeri" },
-      { icon: "🎵", text: "Fon musiqasi" },
-      { icon: "💬", text: "O'quv chati" },
-      { icon: "📝", text: "Shaxsiy eslatmalar" }
-    ];
-  } else if (lang === 'AZ') {
-    outroTitle = "Bu sözləri həmişəlik öyrənin";
-    outroSubtitle = "Saytımızda dəstləri pulsuz məşq edin";
-    outroBadges = [
-      { icon: "⚡️", text: "Öz tempiniz" },
-      { icon: "🎮", text: "Uyğunluq oyunu" },
-      { icon: "🧠", text: "Ağıllı alqoritm" },
-      { icon: "🖼️", text: "Şəkillər və səs" },
-      { icon: "⏱️", text: "Pomodoro taymeri" },
-      { icon: "🎵", text: "Fon musiqisi" },
-      { icon: "💬", text: "Dərs söhbəti" },
-      { icon: "📝", text: "Şəxsi qeydlər" }
-    ];
-  } else if (lang === 'KK') {
-    outroTitle = "Бұл сөздерді мәңгілікке үйреніңіз";
-    outroSubtitle = "Біздің сайтта жинақтарды тегін жаттықтырыңыз";
-    outroBadges = [
-      { icon: "⚡️", text: "Өз қарқыныңыз" },
-      { icon: "🎮", text: "«Жұбын тап» ойыны" },
-      { icon: "🧠", text: "Ақылды алгоритм" },
-      { icon: "🖼️", text: "Суреттер мен дыбыс" },
-      { icon: "⏱️", text: "Помодоро таймері" },
-      { icon: "🎵", text: "Фондық музыка" },
-      { icon: "💬", text: "Оқу чаты" },
-      { icon: "📝", text: "Жеке жазбалар" }
-    ];
-  } else if (lang === 'KA') {
-    outroTitle = "ისწავლეთ ეს სიტყვები სამუდამოდ";
-    outroSubtitle = "ივარჯიშეთ კოლექციებზე უფასოდ ჩვენს საიტზე";
-    outroBadges = [
-      { icon: "⚡️", text: "საკუთარი ტემპი" },
-      { icon: "🎮", text: "თამაში «იპოვე წყვილი»" },
-      { icon: "🧠", text: "ჭკვიანი ალგორითმი" },
-      { icon: "🖼️", text: "სურათები და ხმა" },
-      { icon: "⏱️", text: "პომოდოროს ტაიმერი" },
-      { icon: "🎵", text: "ფონური მუსიკა" },
-      { icon: "💬", text: "სასწავლო ჩატი" },
-      { icon: "📝", text: "პირადი შენიшვნები" }
-    ];
-  } else if (lang === 'HY') {
-    outroTitle = "Սովորեք այս բառերը հավերժ";
-    outroSubtitle = "Մարզեք հավաքածուները անվճար մեր կայքում";
-    outroBadges = [
-      { icon: "⚡️", text: "Ձեր տեմպով" },
-      { icon: "🎮", text: "«Գտիր զույգը» խաղ" },
-      { icon: "🧠", text: "Խելացի ալգորիթմ" },
-      { icon: "🖼️", text: "Պատկերներ և ձայն" },
-      { icon: "⏱️", text: "Պոմոդորոյի ժամաչափ" },
-      { icon: "🎵", text: "Ֆոնային երաժշտություն" },
-      { icon: "💬", text: "Ուսումնական չատ" },
-      { icon: "📝", text: "Անձնական նշումներ" }
-    ];
-  }
   const outroOptions = {
     title: outroTitle,
     subtitle: outroSubtitle,
