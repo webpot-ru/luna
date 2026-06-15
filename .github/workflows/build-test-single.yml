@@ -1,0 +1,49 @@
+name: Test Single Video Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install system dependencies & FFmpeg
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+
+    - name: Install Python & Edge-TTS
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - run: pip install edge-tts
+
+    - name: Install Node dependencies
+      run: npm ci || npm install
+
+    - name: Install Playwright Chromium with dependencies
+      run: npx playwright install chromium --with-deps
+
+    - name: Download Offline Deck Data from Google Drive
+      run: |
+        mkdir -p data/decks
+        curl -L "https://docs.google.com/uc?export=download&id=1W9tKVQPzvn8ZxZXtVEPPx0VcDaUzfRCF" -o "data/decks/home_kitchen_cookware_pilot_01.json"
+
+    - name: Run single test compilation
+      run: |
+        node scripts/build-all-deck-videos.mjs --set home_kitchen_cookware_pilot_01 --support UZ --langs EN --concurrency 1
+
+    - name: Upload Videos as Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-single-video-uz
+        path: outputs/video-generator/
+        retention-days: 1
