@@ -1,0 +1,86 @@
+name: Bulk Matrix Compile All Videos
+
+on:
+  workflow_dispatch:
+    inputs:
+      set_id:
+        description: 'Set ID of the deck to compile'
+        required: true
+        default: 'home_kitchen_cookware_pilot_01'
+      concurrency:
+        description: 'Concurrency limit per runner'
+        required: true
+        default: '2'
+
+jobs:
+  build-matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        support: [
+          'TR', 'KO', 'JA', 'PT', 'PT-BR', 'HI', 'UZ', 'AZ', 'KK', 'KA', 
+          'HY', 'FR', 'DE', 'IT', 'ZH', 'VI', 'TH', 'MS', 'ID', 'PL', 
+          'NL', 'SV', 'NO', 'NB', 'DA', 'FI', 'CS', 'SK', 'HU', 'RO', 
+          'BG', 'HR', 'SR', 'SL', 'LT', 'LV', 'ET', 'IS', 'BN', 'TL', 
+          'MY', 'KM', 'LO', 'NE', 'SI', 'TA', 'TE', 'KN', 'ML', 'SW'
+        ]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install system dependencies & FFmpeg
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+
+    - name: Install Python & Edge-TTS
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - run: pip install edge-tts
+
+    - name: Install Node dependencies
+      run: npm ci || npm install
+
+    - name: Install Playwright Chromium with dependencies
+      run: npx playwright install chromium --with-deps
+
+    - name: Download Offline Deck Data from Google Drive
+      run: |
+        SET_ID="${{ github.event.inputs.set_id }}"
+        FILE_ID=$(node -e "
+          const fs = require('fs');
+          const path = require('path');
+          const mappingPath = path.resolve('data/deck-sources.json');
+          if (fs.existsSync(mappingPath)) {
+            const mapping = JSON.parse(fs.readFileSync(mappingPath, 'utf8'));
+            console.log(mapping['$SET_ID'] || '');
+          }
+        ")
+        if [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
+          echo "Found Google Drive File ID for $SET_ID: $FILE_ID"
+          mkdir -p data/decks
+          curl -L "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
+          echo "Downloaded offline data to data/decks/${SET_ID}.json"
+        else
+          echo "No Google Drive File ID found for $SET_ID in data/deck-sources.json. Running with local files if they exist."
+        fi
+
+    - name: Run bulk compilation for Support Lang
+      env:
+        AI33_API_KEY: ${{ secrets.AI33_API_KEY }}
+      run: |
+        node scripts/build-all-deck-videos.mjs --set ${{ github.event.inputs.set_id }} --support ${{ matrix.support }} --concurrency ${{ github.event.inputs.concurrency }}
+
+    - name: Upload Videos as Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: compiled-videos-${{ matrix.support }}
+        path: outputs/video-generator/
+        retention-days: 7
