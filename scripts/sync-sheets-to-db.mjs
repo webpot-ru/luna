@@ -113,12 +113,20 @@ async function main() {
   });
 
   mappings.sort((a, b) => a.num - b.num);
-  console.log(`Loaded ${mappings.length} thematic decks. Starting database synchronization...`);
+  
+  const filterSetId = process.argv[2];
+  const mappingsToProcess = filterSetId ? mappings.filter(m => m.set_id === filterSetId) : mappings;
+  
+  if (filterSetId && mappingsToProcess.length === 0) {
+    console.warn(`No matching spreadsheet mapping found for set_id: ${filterSetId}`);
+  }
+
+  console.log(`Loaded ${mappingsToProcess.length} thematic decks. Starting database synchronization...`);
 
   let totalUpdatedEntries = 0;
   let totalUpdatedExamples = 0;
 
-  for (const mapping of mappings) {
+  for (const mapping of mappingsToProcess) {
     console.log(`\nProcessing Deck ${mapping.num} (${mapping.set_id})...`);
     try {
       // 1. Fetch spreadsheet metadata to get first sheet title
