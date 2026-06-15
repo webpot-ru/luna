@@ -32,9 +32,11 @@ async function main() {
     },
     body: JSON.stringify({
       ref: "main",
-      inputs: workflowName.includes("matrix")
-        ? { set_id: setId, concurrency: concurrency }
-        : { set_id: setId, support: support, concurrency: concurrency }
+      ...(workflowName.includes("test") ? {} : {
+        inputs: workflowName.includes("matrix")
+          ? { set_id: setId, concurrency: concurrency }
+          : { set_id: setId, support: support, concurrency: concurrency }
+      })
     })
   });
 
