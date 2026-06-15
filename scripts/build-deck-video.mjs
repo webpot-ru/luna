@@ -589,15 +589,24 @@ async function main() {
   console.log(`  -> Queue state: Outro (CTA)`);
   const outroTitle = langData.outro_title || "Learn these words forever";
   const outroSubtitle = langData.outro_subtitle || "Practice decks for free on our website";
+  const cleanBadgeText = (val, defaultText) => {
+    if (!val) return defaultText;
+    const parts = val.trim().split(/\s+/);
+    if (parts.length > 1) {
+      return parts.slice(1).join(' ');
+    }
+    return val;
+  };
+
   const outroBadges = [
-    { icon: "⚡️", text: langData.badge_speed || "Custom Tempo" },
-    { icon: "🎮", text: langData.badge_match || "Matching Game" },
-    { icon: "🧠", text: langData.badge_smart || "Smart Algorithm" },
-    { icon: "🖼️", text: langData.badge_media || "Images & Audio" },
-    { icon: "⏱️", text: langData.badge_pomo || "Pomodoro Timer" },
-    { icon: "🎵", text: langData.badge_music || "Background Music" },
-    { icon: "💬", text: langData.badge_chat || "Study Chat" },
-    { icon: "📝", text: langData.badge_notes || "Personal Notes" }
+    { icon: "⚡️", text: cleanBadgeText(langData.badge_speed, "Custom Tempo") },
+    { icon: "🎮", text: cleanBadgeText(langData.badge_match, "Matching Game") },
+    { icon: "🧠", text: cleanBadgeText(langData.badge_smart, "Smart Algorithm") },
+    { icon: "🖼️", text: cleanBadgeText(langData.badge_media, "Images & Audio") },
+    { icon: "⏱️", text: cleanBadgeText(langData.badge_pomo, "Pomodoro Timer") },
+    { icon: "🎵", text: cleanBadgeText(langData.badge_music, "Background Music") },
+    { icon: "💬", text: cleanBadgeText(langData.badge_chat, "Study Chat") },
+    { icon: "📝", text: cleanBadgeText(langData.badge_notes, "Personal Notes") }
   ];
   const outroOptions = {
     title: outroTitle,
