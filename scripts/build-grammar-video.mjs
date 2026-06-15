@@ -18,15 +18,30 @@ import { getOutroText } from "./lib/outro-slide-template.mjs";
 
 const cleanStr = (s) => String(s || '').trim().toLowerCase().replace(/[\/\[\]()]/g, '');
 
-function getLanguageLabel(targetLang, supportLang) {
-  let levelLabel = 'Уровень A1';
-  if (supportLang === 'EN' || supportLang === 'EN-GB') {
-    levelLabel = 'Level A1';
-  } else if (supportLang === 'ES' || supportLang === 'ES-419') {
-    levelLabel = 'Nivel A1';
-  }
+function getLanguageLabel(targetLang, supportLang, levelCode = 'A1') {
+  const supportUpper = String(supportLang).toUpperCase();
+  const levelPrefixMap = {
+    'RU': 'Уровень',
+    'EN': 'Level',
+    'EN-GB': 'Level',
+    'ES': 'Nivel',
+    'ES-419': 'Nivel',
+    'TR': 'Seviye',
+    'PT': 'Nível',
+    'PT-BR': 'Nível',
+    'KO': '난이도',
+    'JA': 'レベル',
+    'HI': 'स्तर',
+    'UZ': 'Daraja',
+    'AZ': 'Səviyyə',
+    'KK': 'Деңгей',
+    'KA': 'დონე',
+    'HY': 'Մակարդակ'
+  };
+  const prefix = levelPrefixMap[supportUpper] || 'Level';
+  const levelLabel = `${prefix} ${levelCode}`;
   const localizedLangName = getLanguageNameInLang(targetLang, supportLang);
-  return supportLang === 'RU'
+  return supportUpper === 'RU'
     ? `${localizedLangName} язык · ${levelLabel}`
     : `${localizedLangName} · ${levelLabel}`;
 }

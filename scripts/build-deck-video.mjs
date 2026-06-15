@@ -20,15 +20,38 @@ import { getOutroText } from "./lib/outro-slide-template.mjs";
 
 const cleanStr = (s) => String(s || '').trim().toLowerCase().replace(/[\/\[\]()]/g, '');
 
-function getLanguageLabel(targetLang, supportLang) {
-  let levelLabel = 'Уровень A1';
-  if (supportLang === 'EN' || supportLang === 'EN-GB') {
-    levelLabel = 'Level A1';
-  } else if (supportLang === 'ES' || supportLang === 'ES-419') {
-    levelLabel = 'Nivel A1';
+function extractLevel(setId) {
+  const match = setId.match(/_(a[12]|b[12]|c[12])(_(a[12]|b[12]|c[12]))?$/i);
+  if (match) {
+    return match[0].substring(1).toUpperCase().replace('_', '-');
   }
+  return 'A1';
+}
+
+function getLanguageLabel(targetLang, supportLang, levelCode = 'A1') {
+  const supportUpper = String(supportLang).toUpperCase();
+  const levelPrefixMap = {
+    'RU': 'Уровень',
+    'EN': 'Level',
+    'EN-GB': 'Level',
+    'ES': 'Nivel',
+    'ES-419': 'Nivel',
+    'TR': 'Seviye',
+    'PT': 'Nível',
+    'PT-BR': 'Nível',
+    'KO': '난이도',
+    'JA': 'レベル',
+    'HI': 'स्तर',
+    'UZ': 'Daraja',
+    'AZ': 'Səviyyə',
+    'KK': 'Деңгей',
+    'KA': 'დონე',
+    'HY': 'Մակարդակ'
+  };
+  const prefix = levelPrefixMap[supportUpper] || 'Level';
+  const levelLabel = `${prefix} ${levelCode}`;
   const localizedLangName = getLanguageNameInLang(targetLang, supportLang);
-  return supportLang === 'RU'
+  return supportUpper === 'RU'
     ? `${localizedLangName} язык · ${levelLabel}`
     : `${localizedLangName} · ${levelLabel}`;
 }
@@ -49,7 +72,8 @@ function buildCardOptions({
   const supportWord = card.support_display;
   const showTranscription = targetTranscription && cleanStr(targetWord) !== cleanStr(targetTranscription);
   const flag = getFlagEmoji(targetLang);
-  const langLabel = getLanguageLabel(targetLang, supportLang);
+  const levelCode = extractLevel(setId);
+  const langLabel = getLanguageLabel(targetLang, supportLang, levelCode);
   const progressPercent = ((currentIndex / totalCards) * 100).toFixed(1);
 
   return {
@@ -333,32 +357,32 @@ async function main() {
   } else if (supportUpper === 'HY') {
     introDesc = `Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ:<br>Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ:`;
   }
-
-  let introSubtitleText = `Уровень ${cards[0]?.level_label || 'A1'} · ${cards.length} слов`;
+  const levelCode = extractLevel(setId);
+  let introSubtitleText = `Уровень ${levelCode} · ${cards.length} слов`;
   if (supportUpper === 'EN' || supportUpper === 'EN-GB') {
-    introSubtitleText = `Level ${cards[0]?.level_label || 'A1'} · ${cards.length} words`;
+    introSubtitleText = `Level ${levelCode} · ${cards.length} words`;
   } else if (supportUpper === 'ES' || supportUpper === 'ES-419') {
-    introSubtitleText = `Nivel ${cards[0]?.level_label || 'A1'} · ${cards.length} palabras`;
+    introSubtitleText = `Nivel ${levelCode} · ${cards.length} palabras`;
   } else if (supportUpper === 'TR') {
-    introSubtitleText = `Seviye ${cards[0]?.level_label || 'A1'} · ${cards.length} kelime`;
+    introSubtitleText = `Seviye ${levelCode} · ${cards.length} kelime`;
   } else if (supportUpper === 'PT' || supportUpper === 'PT-BR') {
-    introSubtitleText = `Nível ${cards[0]?.level_label || 'A1'} · ${cards.length} palavras`;
+    introSubtitleText = `Nível ${levelCode} · ${cards.length} palavras`;
   } else if (supportUpper === 'KO') {
-    introSubtitleText = `난이도 ${cards[0]?.level_label || 'A1'} · ${cards.length} 단어`;
+    introSubtitleText = `난이도 ${levelCode} · ${cards.length} 단어`;
   } else if (supportUpper === 'JA') {
-    introSubtitleText = `レベル ${cards[0]?.level_label || 'A1'} · ${cards.length}単語`;
+    introSubtitleText = `レベル ${levelCode} · ${cards.length}単語`;
   } else if (supportUpper === 'HI') {
-    introSubtitleText = `स्तर ${cards[0]?.level_label || 'A1'} · ${cards.length} शब्द`;
+    introSubtitleText = `स्तर ${levelCode} · ${cards.length} शब्द`;
   } else if (supportUpper === 'UZ') {
-    introSubtitleText = `Daraja ${cards[0]?.level_label || 'A1'} · ${cards.length} ta so'z`;
+    introSubtitleText = `Daraja ${levelCode} · ${cards.length} ta so'z`;
   } else if (supportUpper === 'AZ') {
-    introSubtitleText = `Səviyyə ${cards[0]?.level_label || 'A1'} · ${cards.length} söz`;
+    introSubtitleText = `Səviyyə ${levelCode} · ${cards.length} söz`;
   } else if (supportUpper === 'KK') {
-    introSubtitleText = `Деңгей ${cards[0]?.level_label || 'A1'} · ${cards.length} сөз`;
+    introSubtitleText = `Деңгей ${levelCode} · ${cards.length} сөз`;
   } else if (supportUpper === 'KA') {
-    introSubtitleText = `დონე ${cards[0]?.level_label || 'A1'} · ${cards.length} სიტყვა`;
+    introSubtitleText = `დონე ${levelCode} · ${cards.length} სიტყვა`;
   } else if (supportUpper === 'HY') {
-    introSubtitleText = `Մակարդակ ${cards[0]?.level_label || 'A1'} · ${cards.length} բառ`;
+    introSubtitleText = `Մակարդակ ${levelCode} · ${cards.length} բառ`;
   }
 
   const audioDurIntro = getAudioDuration(wavIntro);
@@ -367,15 +391,11 @@ async function main() {
 
   const introOptions = {
     flag: getFlagEmoji(targetLang),
-    title: `${targetName} язык`,
+    title: supportUpper === 'RU' ? `${targetName} язык` : targetName,
     deckTitle: deckTitle,
     subtitle: introSubtitleText,
     description: introDesc
   };
-
-  if (supportUpper === 'EN' || supportUpper === 'EN-GB' || supportUpper === 'ES' || supportUpper === 'ES-419') {
-    introOptions.title = targetName;
-  }
 
   queueSegment('intro', introOptions, wavIntro, totalVisualDurIntro, `intro-slide`, pauseDurIntro);
 

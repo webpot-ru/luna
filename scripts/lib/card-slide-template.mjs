@@ -394,14 +394,29 @@ export function generateSlideHtml(options) {
   const showTranscription = targetTranscription && cleanStr(targetWord) !== cleanStr(targetTranscription);
   
   // Localized levels and language label
-  let levelLabel = 'Уровень A1';
-  if (supportLang === 'EN' || supportLang === 'EN-GB') {
-    levelLabel = 'Level A1';
-  } else if (supportLang === 'ES' || supportLang === 'ES-419') {
-    levelLabel = 'Nivel A1';
-  }
+  const supportUpper = String(supportLang).toUpperCase();
+  const levelPrefixMap = {
+    'RU': 'Уровень',
+    'EN': 'Level',
+    'EN-GB': 'Level',
+    'ES': 'Nivel',
+    'ES-419': 'Nivel',
+    'TR': 'Seviye',
+    'PT': 'Nível',
+    'PT-BR': 'Nível',
+    'KO': '난이도',
+    'JA': 'レベル',
+    'HI': 'स्तर',
+    'UZ': 'Daraja',
+    'AZ': 'Səviyyə',
+    'KK': 'Деңгей',
+    'KA': 'დონე',
+    'HY': 'Մակարդակ'
+  };
+  const prefix = levelPrefixMap[supportUpper] || 'Level';
+  const levelLabel = `${prefix} A1`;
   const localizedLangName = getLanguageNameInLang(targetLang, supportLang);
-  const langLabel = supportLang === 'RU'
+  const langLabel = supportUpper === 'RU'
     ? `${localizedLangName} язык · ${levelLabel}`
     : `${localizedLangName} · ${levelLabel}`;
 
