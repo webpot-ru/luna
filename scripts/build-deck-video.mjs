@@ -908,7 +908,11 @@ async function main() {
   const finalVideoPath = path.join(outputDir, `lesson_${targetLang.toLowerCase()}_${supportLang.toLowerCase()}.mp4`);
   console.log("\nGenerating final video in single-pass...");
   try {
-    const muxCommand = `ffmpeg -y -f concat -safe 0 -i "${imageConcatListPath}" -i "${finalAudioPath}" -c:v h264_qsv -preset fast -r 25 -pix_fmt nv12 -vf scale=1920:1080 -c:a aac -ar 48000 -ac 2 -b:a 192k -shortest "${finalVideoPath}"`;
+    let encodeParams = "-c:v h264_qsv -preset fast -pix_fmt nv12";
+    if (process.env.GITHUB_ACTIONS === "true") {
+      encodeParams = "-c:v libx264 -preset superfast -pix_fmt yuv420p";
+    }
+    const muxCommand = `ffmpeg -y -f concat -safe 0 -i "${imageConcatListPath}" -i "${finalAudioPath}" ${encodeParams} -r 25 -vf scale=1920:1080 -c:a aac -ar 48000 -ac 2 -b:a 192k -shortest "${finalVideoPath}"`;
     console.log(`Running command: ${muxCommand}`);
     execSync(muxCommand, { stdio: "ignore" });
     console.log(`\n🎉 Success! Final video saved to:\n   ${finalVideoPath}`);
