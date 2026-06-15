@@ -138,6 +138,41 @@ qrcode npm package
 - не выводить URL из `content_sets.slug` автоматически: DB slug и public site slug могут отличаться, а несуществующий dynamic route может выглядеть как HTTP 200 из-за Next.js fallback.
 - QR генерируется локально как SVG data URI через `qrcode`; production renderer не должен зависеть от `api.qrserver.com` или заранее сохраненных QR-файлов.
 
+### YouTube metadata generation
+
+Каждый собранный `.mp4` должен получать соседний `youtube_metadata.json` для будущей загрузки на YouTube. Source of truth скрипты:
+
+```text
+scripts/generate-youtube-metadata.mjs
+scripts/check-youtube-metadata.mjs
+scripts/lib/youtube-metadata.mjs
+```
+
+Metadata включает `title`, `description`, `tags`, `hashtags`, `categoryId=27`, `privacyStatus`, `courseUrl`, `supportLang`, `targetLang`, `setId` и provenance (`source`, `model`, `generatedAt`). По умолчанию `privacyStatus=unlisted`, чтобы массовая автозагрузка сначала проходила human spot-check перед public publish.
+
+Правило качества:
+
+- template fallback всегда должен работать без AI и без внешней зависимости;
+- Gemini используется только как AI-polish слой поверх фактов из Course Metadata, списка слов и public course URL;
+- Gemini output не должен придумывать длительность, платные обещания, сертификаты, guaranteed fluency, teacher/native-speaker claims beyond the actual video facts;
+- `description` должен содержать точный `courseUrl`;
+- `tags` не должны содержать hashtags, а общий YouTube tag budget должен оставаться <= 500 chars;
+- `scripts/check-youtube-metadata.mjs` является обязательным gate перед upload stage.
+
+Локальный Gemini smoke можно запускать через subscription-backed Gemini CLI:
+
+```bash
+node scripts/generate-youtube-metadata.mjs \
+  --set home_kitchen_cookware_pilot_01 \
+  --support RU \
+  --target ES \
+  --with-gemini \
+  --gemini-backend cli \
+  --model gemini-3.1-pro-preview
+```
+
+В GitHub Actions Gemini должен идти через secret `GEMINI_API_KEY` или `GOOGLE_API_KEY`; если secret отсутствует, workflow должен оставаться успешным на template fallback. Для API mode default model задается `GEMINI_MODEL`/repository variable, иначе используется `gemini-3.5-flash`.
+
 ---
 
 ## 5. Техническая реализация и оптимизация производительности (Tech Pipeline & Speed Optimizations)

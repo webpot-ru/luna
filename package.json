@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "check:video-localization": "node scripts/check-video-localization.mjs"
+    "check:video-localization": "node scripts/check-video-localization.mjs",
+    "check:youtube-metadata": "node scripts/check-youtube-metadata.mjs"
   },
   "dependencies": {
     "playwright": "^1.44.0",

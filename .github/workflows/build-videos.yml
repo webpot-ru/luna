@@ -99,6 +99,33 @@ jobs:
           done
         fi
 
+    - name: Generate YouTube metadata
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+      run: |
+        GEMINI_ARGS=""
+        if [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
+          GEMINI_ARGS="--with-gemini --gemini-backend api"
+        fi
+        TARGET_ARGS=""
+        if [ -n "${{ github.event.inputs.langs }}" ]; then
+          TARGET_ARGS="--targets ${{ github.event.inputs.langs }}"
+        fi
+        if [ "${{ github.event.inputs.support }}" = "ALL" ]; then
+          for sup in ES-419 TR KO JA PT PT-BR HI UZ AZ KK KA HY; do
+            node scripts/generate-youtube-metadata.mjs --set ${{ github.event.inputs.set_id }} --support "$sup" $TARGET_ARGS --privacy unlisted $GEMINI_ARGS
+          done
+        else
+          IFS=',' read -ra ADDR <<< "${{ github.event.inputs.support }}"
+          for sup in "${ADDR[@]}"; do
+            sup_trimmed=$(echo "$sup" | xargs)
+            node scripts/generate-youtube-metadata.mjs --set ${{ github.event.inputs.set_id }} --support "$sup_trimmed" $TARGET_ARGS --privacy unlisted $GEMINI_ARGS
+          done
+        fi
+        npm run check:youtube-metadata -- outputs/video-generator
+
     - name: Upload Videos as Artifacts
       uses: actions/upload-artifact@v4
       with:

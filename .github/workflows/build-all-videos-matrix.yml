@@ -80,6 +80,19 @@ jobs:
       run: |
         node scripts/build-all-deck-videos.mjs --set ${{ github.event.inputs.set_id }} --support ${{ matrix.support }} --concurrency ${{ github.event.inputs.concurrency }}
 
+    - name: Generate YouTube metadata
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+      run: |
+        GEMINI_ARGS=""
+        if [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
+          GEMINI_ARGS="--with-gemini --gemini-backend api"
+        fi
+        node scripts/generate-youtube-metadata.mjs --set ${{ github.event.inputs.set_id }} --support ${{ matrix.support }} --privacy unlisted $GEMINI_ARGS
+        npm run check:youtube-metadata -- outputs/video-generator
+
     - name: Upload Videos as Artifacts
       uses: actions/upload-artifact@v4
       with:
