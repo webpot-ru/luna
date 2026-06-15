@@ -14,6 +14,16 @@ export function getOutroText(supportLang) {
     return "これらの単語を一生忘れないようにしたいですか？flashcardsluna.comにアクセスして、このデッキや他の何千ものデッキを無料で練習しましょう。リンクは概要欄にあります！";
   } else if (lang === 'HI') {
     return "क्या आप इन शब्दों को हमेशा के लिए याद रखना चाहते हैं? flashcardsluna.com पर जाएं और इस और हजारों अन्य डेक का मुफ्त में अभ्यास करें। लिंक विवरण में है!";
+  } else if (lang === 'UZ') {
+    return "Bu so'zlarni abadiy eslab qolishni xohlaysizmi? flashcardsluna.com saytiga o'tishingiz va ushbu va boshqa minglab kartochkalar to'plamini mutlaqo bepul mashq qilishingiz mumkin. Havola tavsifda!";
+  } else if (lang === 'AZ') {
+    return "Bu sözləri həmişəlik yadda saxlamaq istəyirsiniz? flashcardsluna.com saytına daxil olun və bu və digər minlərlə dəsti tamamilə pulsuz məşq edin. Keçid təsvirdədir!";
+  } else if (lang === 'KK') {
+    return "Бұл сөздерді мәңгі есте сақтағыңыз келе ме? flashcardsluna.com сайтына өтіп, осы және басқа да мыңдаған жинақтарды мүлдем тегін жаттықтырыңыз. Сілтеме сипаттамада!";
+  } else if (lang === 'KA') {
+    return "გსურთ ამ სიტყვების სამუდამოდ დამახსოვრება? გადადით flashcardsluna.com-ზე და ივარჯიშეთ ამ და ათასობით სხვა კოლექციაზე სრულიად უფასოდ. ბმული აღწერაშია!";
+  } else if (lang === 'HY') {
+    return "Ցանկանու՞մ եք հավերժ հիշել այս բառերը։ Անցեք flashcardsluna.com կայք և մարզեք այս և հազարավոր այլ հավաքածուներ բոլորովին անվճար։ Հղումը նկարագրության մեջ է։";
   }
   // Default fallback English
   return "Want to remember these words forever? Go to flashcardsluna.com and practice this and thousands of other decks for free. Link in the description!";
@@ -110,6 +120,61 @@ export function generateOutroHtml(supportLang) {
     badgeMusic = "🎵 पृष्ठभूमि संगीत";
     badgeChat = "💬 अध्ययन चैट";
     badgeNotes = "📝 व्यक्तिगत नोट्स";
+  } else if (lang === 'UZ') {
+    title = "Bu so'zlarni abadiy eslab qoling";
+    subtitle = "Saytimizda kartochkalar to'plamini bepul mashq qiling";
+    badgeSpeed = "⚡️ O'z tempingiz";
+    badgeMatch = "🎮 Juftini top o'yini";
+    badgeSmart = "🧠 Aqlli algoritm";
+    badgeMedia = "🖼️ Rasm va ovoz";
+    badgePomo = "⏱️ Pomodoro taymeri";
+    badgeMusic = "🎵 Fon musiqasi";
+    badgeChat = "💬 O'quv chati";
+    badgeNotes = "📝 Shaxsiy eslatmalar";
+  } else if (lang === 'AZ') {
+    title = "Bu sözləri həmişəlik öyrənin";
+    subtitle = "Saytımızda dəstləri pulsuz məşq edin";
+    badgeSpeed = "⚡️ Öz tempiniz";
+    badgeMatch = "🎮 Uyğunluq oyunu";
+    badgeSmart = "🧠 Ağıllı alqoritm";
+    badgeMedia = "🖼️ Şəkillər və səs";
+    badgePomo = "⏱️ Pomodoro taymeri";
+    badgeMusic = "🎵 Fon musiqisi";
+    badgeChat = "💬 Dərs söhbəti";
+    badgeNotes = "📝 Şəxsi qeydlər";
+  } else if (lang === 'KK') {
+    title = "Бұл сөздерді мәңгілікке үйреніңіз";
+    subtitle = "Біздің сайтта жинақтарды тегін жаттықтырыңыз";
+    badgeSpeed = "⚡️ Өз қарқыныңыз";
+    badgeMatch = "🎮 «Жұбын тап» ойыны";
+    badgeSmart = "🧠 Ақылды алгоритм";
+    badgeMedia = "🖼️ Суреттер мен дыбыс";
+    badgePomo = "⏱️ Помодоро таймері";
+    badgeMusic = "🎵 Фондық музыка";
+    badgeChat = "💬 Оқу чаты";
+    badgeNotes = "📝 Жеке жазбалар";
+  } else if (lang === 'KA') {
+    title = "ისწავლეთ ეს სიტყვები სამუდამოდ";
+    subtitle = "ივარჯიშეთ კოლექციებზე უფასოდ ჩვენს საიტზე";
+    badgeSpeed = "⚡️ საკუთარი ტემპი";
+    badgeMatch = "🎮 თამაში «იპოვე წყვილი»";
+    badgeSmart = "🧠 ჭკვიანი ალგორითმი";
+    badgeMedia = "🖼️ სურათები და ხმა";
+    badgePomo = "⏱️ პომოდოროს ტაიმერი";
+    badgeMusic = "🎵 ფონური მუსიკა";
+    badgeChat = "💬 სასწავლო ჩატი";
+    badgeNotes = "📝 პირადი შენიშვნები";
+  } else if (lang === 'HY') {
+    title = "Սովորեք այս բառերը հավերժ";
+    subtitle = "Մարզեք հավաքածուները անվճար մեր կայքում";
+    badgeSpeed = "⚡️ Ձեր տեմպով";
+    badgeMatch = "🎮 «Գտիր զույգը» խաղ";
+    badgeSmart = "🧠 Խելացի ալգորիթմ";
+    badgeMedia = "🖼️ Պատկերներ և ձայն";
+    badgePomo = "⏱️ Պոմոդորոյի ժամաչափ";
+    badgeMusic = "🎵 Ֆոնային երաժշտություն";
+    badgeChat = "💬 Ուսումնական չատ";
+    badgeNotes = "📝 Անձնական նշումներ";
   }
 
   return `<!DOCTYPE html>

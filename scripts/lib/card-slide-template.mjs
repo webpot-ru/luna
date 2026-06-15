@@ -290,13 +290,82 @@ export function getLanguageNameInLang(targetLang, supportLang) {
       'PT-BR': 'Portugués (Brasil)',
       'ES-419': 'Español (Latinoamérica)',
       'EN-GB': 'Inglés (Reino Unido)'
+    },
+    'UZ': {
+      'EN': 'Ingliz',
+      'ES': 'Ispan',
+      'RU': 'Rus',
+      'FR': 'Fransuz',
+      'DE': 'Nemis',
+      'IT': 'Italyan',
+      'ZH': 'Xitoy',
+      'JA': 'Yapon',
+      'KO': 'Koreys',
+      'TR': 'Turk',
+      'UZ': 'O\'zbek'
+    },
+    'AZ': {
+      'EN': 'İngilis',
+      'ES': 'İspan',
+      'RU': 'Rus',
+      'FR': 'Fransız',
+      'DE': 'Alman',
+      'IT': 'İtalyan',
+      'ZH': 'Çin',
+      'JA': 'Yapon',
+      'KO': 'Koreya',
+      'TR': 'Türk',
+      'AZ': 'Azərbaycan'
+    },
+    'KK': {
+      'EN': 'Ағылшын',
+      'ES': 'Испан',
+      'RU': 'Орыс',
+      'FR': 'Француз',
+      'DE': 'Неміс',
+      'IT': 'Итальян',
+      'ZH': 'Қытай',
+      'JA': 'Жапон',
+      'KO': 'Корей',
+      'TR': 'Түрік',
+      'KK': 'Қазақ'
+    },
+    'KA': {
+      'EN': 'ინგლისური',
+      'ES': 'ესპანური',
+      'RU': 'რუსული',
+      'FR': 'ფრანგული',
+      'DE': 'გერმანული',
+      'IT': 'იტალიური',
+      'ZH': 'ჩინური',
+      'JA': 'იაპონური',
+      'KO': 'კორეული',
+      'TR': 'თურქული',
+      'KA': 'ქართული'
+    },
+    'HY': {
+      'EN': 'Անգլերեն',
+      'ES': 'Իսպաներեն',
+      'RU': 'Ռուսերեն',
+      'FR': 'Ֆրանսերեն',
+      'DE': 'Գերմաներեն',
+      'IT': 'Իտալերեն',
+      'ZH': 'Չինարեն',
+      'JA': 'Ճապոներեն',
+      'KO': 'Կորեերեն',
+      'TR': 'Թուրքերեն',
+      'HY': 'Հայերեն'
     }
   };
 
   const target = String(targetLang).toUpperCase();
   const support = String(supportLang).toUpperCase();
-  const supportMap = translations[support] || translations['EN'];
-  return supportMap[target] || target;
+  const supportMap = translations[support];
+  if (supportMap && supportMap[target]) {
+    return supportMap[target];
+  }
+  const enMap = translations['EN'];
+  return enMap[target] || target;
 }
 
 export function getLanguageName(langCode) {

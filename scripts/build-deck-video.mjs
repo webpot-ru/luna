@@ -215,6 +215,16 @@ async function main() {
     introAudioText = `${targetName}の学習。レッスンのテーマは、${cleanDeckTitle}です。`;
   } else if (supportUpper === 'HI') {
     introAudioText = `हम ${targetName} सीख रहे हैं। पाठ का विषय है ${cleanDeckTitle}।`;
+  } else if (supportUpper === 'UZ') {
+    introAudioText = `${targetName} tilini o'rganamiz. Dars mavzusi: ${cleanDeckTitle}.`;
+  } else if (supportUpper === 'AZ') {
+    introAudioText = `${targetName} dilini öyrənirik. Dərs mövzusu: ${cleanDeckTitle}.`;
+  } else if (supportUpper === 'KK') {
+    introAudioText = `${targetName} тілін үйренеміз. Сабақтың тақырыбы: ${cleanDeckTitle}.`;
+  } else if (supportUpper === 'KA') {
+    introAudioText = `ვსწავლობთ ${targetName} ენას. გაკვეთილის თემა: ${cleanDeckTitle}.`;
+  } else if (supportUpper === 'HY') {
+    introAudioText = `Սովորում ենք ${targetName}։ Դասի թեման է՝ ${cleanDeckTitle}։`;
   }
 
   // 3.5 Pre-fetch all TTS Audios in parallel batches
@@ -312,6 +322,16 @@ async function main() {
     introDesc = `ネイティブの発音を聞いて、ポーズの間に繰り返してください。<br>最後にミニテストがあります！`;
   } else if (supportUpper === 'HI') {
     introDesc = `मूल उच्चारण को ध्यान से सुनें और ठहराव में शब्दों को दोहराएं।<br>अंत में एक इंटरैक्टिव मिनी-टेस्ट आपका इंतजार कर रहा है!`;
+  } else if (supportUpper === 'UZ') {
+    introDesc = `Ona tilida so'zlashuvchilarning talaffuzini tinglang va tanaffuslarda so'zlarni takrorlang.<br>Oxirida sizni interaktiv mini-test kutmoqda!`;
+  } else if (supportUpper === 'AZ') {
+    introDesc = `Yerli natiqlərin tələffüzünü dinləyin və fasilələrdə sözləri təkrarlayın.<br>Sonda sizi interaktiv mini-test gözləyir!`;
+  } else if (supportUpper === 'KK') {
+    introDesc = `Тіл иелерінің айтылуын тыңдап, үзілістерде сөздерді қайталаңыз.<br>Соңында сізді интерактивті шағын тест күтеді!`;
+  } else if (supportUpper === 'KA') {
+    introDesc = `მოუსმინეთ მშობლიურ გამოთქმას და გაიმეორეთ სიტყვები პაუზების დროს.<br>ბოლოს გელით ინტერაქტიული მინი-ტესტი!`;
+  } else if (supportUpper === 'HY') {
+    introDesc = `Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ:<br>Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ:`;
   }
 
   let introSubtitleText = `Уровень ${cards[0]?.level_label || 'A1'} · ${cards.length} слов`;
@@ -329,6 +349,16 @@ async function main() {
     introSubtitleText = `レベル ${cards[0]?.level_label || 'A1'} · ${cards.length}単語`;
   } else if (supportUpper === 'HI') {
     introSubtitleText = `स्तर ${cards[0]?.level_label || 'A1'} · ${cards.length} शब्द`;
+  } else if (supportUpper === 'UZ') {
+    introSubtitleText = `Daraja ${cards[0]?.level_label || 'A1'} · ${cards.length} ta so'z`;
+  } else if (supportUpper === 'AZ') {
+    introSubtitleText = `Səviyyə ${cards[0]?.level_label || 'A1'} · ${cards.length} söz`;
+  } else if (supportUpper === 'KK') {
+    introSubtitleText = `Деңгей ${cards[0]?.level_label || 'A1'} · ${cards.length} сөз`;
+  } else if (supportUpper === 'KA') {
+    introSubtitleText = `დონე ${cards[0]?.level_label || 'A1'} · ${cards.length} სიტყვა`;
+  } else if (supportUpper === 'HY') {
+    introSubtitleText = `Մակարդակ ${cards[0]?.level_label || 'A1'} · ${cards.length} բառ`;
   }
 
   const audioDurIntro = getAudioDuration(wavIntro);
