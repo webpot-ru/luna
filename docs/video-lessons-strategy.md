@@ -39,6 +39,7 @@
 * **Стиль**: Премиальный веб-дизайн, соответствующий визуальному стилю сайта *flashcardsluna.com* (светло-голубой фон `#f4f7f9`, белая карточка с закругленными углами `rounded-3xl` и мягкой тенью, темно-синий цвет шрифта `#0e224e`, прогресс-бар в верхней части экрана).
 * **Адаптация под экраны**: Все тексты и элементы увеличены (шрифты от 52px до 80px), чтобы контент легко читался на экранах мобильных телефонов и телевизоров.
 * **Транскрипция**: Текстовое отображение транскрипции целевого слова на слайдах **отсутствует** (удалено для чистоты дизайна согласно скриншотам сайта).
+* **Intro / карточки / quiz visual polish**: production renderer keeps the same LunaCards light-blue / white-card system, but intro uses a denser premium glass panel with a brand pill, localized deck title, localized subtitle pill and framed instruction text. Static and quiz cards use a slightly richer white-card background, larger word hierarchy, stronger chip styling, and a clearer quiz placeholder/answer hierarchy. Visual regression preview is kept at `outputs/tmp/visual-check-intro-card-templates-v2/contact-sheet.jpg`; generated screenshots should show no visible text clipping or overlap.
 
 ---
 
@@ -64,6 +65,78 @@
 2. **Таймер**: Запускается визуальный обратный отсчет (3... 2... 1...) длительностью **3.0 секунды**.
 3. **Экран ответа**: По истечении таймера показывается правильное слово на изучаемом языке (*la ducha*) и воспроизводится его аудиозапись.
 4. **Пауза перед следующим вопросом**: Фиксированная пауза **2.5 секунды**.
+
+---
+
+## 4.1. Локализация Intro / Outro / Quiz
+
+Тексты intro, outro, quiz labels, feature badges и QR-подписи берутся из:
+
+```text
+config/video-localization.json
+scripts/generate-video-localization.mjs
+```
+
+Outro feature badges use generated premium line-icon PNGs instead of emoji:
+
+```text
+assets/video/outro-icons/premium-outro-icons-light-transparent.png
+assets/video/outro-icons/split/*.png
+scripts/lib/video-outro-icons.mjs
+```
+
+Outro feature grid keeps all 8 badges, but the visual hierarchy should stay conversion-focused: subtle glass feature cards, icon wells, a lighter URL pill, and a clean white QR card. Do not turn the feature grid back into heavy button-like cards or emoji badges.
+
+Название колоды и subtitle на intro берутся не из технического `content_sets.set_name`, а из localized Course Metadata:
+
+```text
+content_set_localizations.title
+content_set_localizations.description
+scripts/lib/video-generator.mjs#fetchDeckTitle
+scripts/lib/video-generator.mjs#fetchDeckMetadata
+```
+
+Для слайда `Title` очищается от финальной точки, потому что `Course Metadata.Title` хранится с sentence punctuation для Google Sheets, а на видео эта точка выглядит как лишний UI-знак. `Description` используется для intro subtitle после удаления повторяющегося `Title`, например `Ингредиенты. Начальный уровень.` превращается в `Начальный уровень · 32 слова`; count label может иметь language-specific форму, например RU `слово` / `слова` / `слов`. Если localized metadata отсутствует, fallback идет в таком порядке: English Course Metadata, затем internal `content_sets.set_name`, затем slug-derived title.
+
+`scripts/generate-video-localization.mjs` является генератором для `config/video-localization.json`. Если меняется локализация, нужно обновлять генератор и затем пересобирать JSON:
+
+```bash
+node scripts/generate-video-localization.mjs
+```
+
+Перед массовой сборкой видео нужно запускать gate:
+
+```bash
+npm run check:video-localization
+```
+
+Gate проверяет:
+
+- все support-language entries имеют одинаковый набор ключей;
+- `intro_speech_template` содержит `{target_lang}` и `{deck_title}`;
+- `quiz_question_label_template` содержит `{current}` и `{total}`;
+- `qr_scan_label` заполнен, чтобы QR-подпись не оставалась hardcoded English;
+- outro QR не откатывается на homepage: для опубликованных курсов используется `/lang/courses/<site-slug>`, для неопубликованных или неизвестных `set_id` используется `/lang/courses`;
+- в локалях с отдельной письменностью нет очевидных чужих Unicode-блоков, например Thai inside Lao/Khmer, Devanagari inside Bengali/Tamil, Cyrillic inside Georgian, Burmese inside Armenian.
+
+Этот gate не заменяет native-speaker review. Он блокирует видимые технические и script-level ошибки, которые напрямую попадают на YouTube-слайды и в TTS.
+
+### Outro QR destination
+
+Outro CTA должен вести на учебные материалы сайта, а не на главную страницу:
+
+```text
+config/video-public-course-links.json
+scripts/lib/video-public-url.mjs
+qrcode npm package
+```
+
+Правило fail-closed:
+
+- если `set_id` есть в `publishedCourseSlugBySetId`, QR ведет на localized course page, например `https://flashcardsluna.com/ru/courses/home-kitchen-kitchenware-basics`;
+- если `set_id` еще не опубликован на сайте или slug не проверен, QR ведет на localized courses page, например `https://flashcardsluna.com/ru/courses`;
+- не выводить URL из `content_sets.slug` автоматически: DB slug и public site slug могут отличаться, а несуществующий dynamic route может выглядеть как HTTP 200 из-за Next.js fallback.
+- QR генерируется локально как SVG data URI через `qrcode`; production renderer не должен зависеть от `api.qrserver.com` или заранее сохраненных QR-файлов.
 
 ---
 
@@ -187,5 +260,3 @@
 | `--transition` | `flip` | Анимационный переход (`flip` для 3D-переворота, `static` без анимации). |
 | `--quiz-limit` | `3` | Количество карточек в проверочном квизе в конце видео. |
 | `--targets` | *нет* | Список целевых языков через запятую. Если опущен — берутся все активные языки из БД. |
-
-

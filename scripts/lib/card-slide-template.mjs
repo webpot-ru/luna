@@ -1,8 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
+import { getQrCodeImageUrl } from "./video-public-url.mjs";
+import { getOutroIconDataUris, outroIconNames } from "./video-outro-icons.mjs";
 
 const localizationPath = path.resolve("config/video-localization.json");
 const localizationData = JSON.parse(fs.readFileSync(localizationPath, "utf8"));
+const defaultOutroUrl = "https://flashcardsluna.com/en/courses";
+const defaultOutroQrImageUrl = getQrCodeImageUrl(defaultOutroUrl);
+const outroIconDataUris = getOutroIconDataUris();
 
 export const flagMap = {
   'EN': '🇺🇸',
@@ -452,8 +457,10 @@ export function generateSlideHtml(options) {
       font-family: 'Outfit', sans-serif;
     }
     .luna-card {
-      background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
-      box-shadow: 0 25px 50px -12px rgba(14, 34, 78, 0.08), 0 0 40px rgba(74, 144, 226, 0.04);
+      background:
+        radial-gradient(circle at 50% 4%, rgba(74, 144, 226, 0.085) 0%, rgba(74, 144, 226, 0) 38%),
+        linear-gradient(135deg, #ffffff 0%, #f9fbff 58%, #f4f8fd 100%);
+      box-shadow: 0 28px 60px -16px rgba(14, 34, 78, 0.14), 0 0 42px rgba(74, 144, 226, 0.055);
     }
     .timer-animation {
       animation: pulse 1s infinite alternate;
@@ -528,7 +535,7 @@ export function generateSlideHtml(options) {
             <div class="flex flex-col gap-8 my-auto">
               <div class="flex flex-col items-center gap-3">
                 <div class="flex items-center justify-center">
-                  <h1 class="text-[64px] font-bold text-[#0e224e] font-outfit tracking-tight">${targetWord}</h1>
+                  <h1 class="text-[76px] font-bold text-[#0e224e] font-outfit tracking-tight leading-tight">${targetWord}</h1>
                 </div>
                 ${showTranscription ? `
                   <div class="text-[28px] text-slate-400/80 font-normal mt-1">${targetTranscription}</div>
@@ -553,7 +560,7 @@ export function generateSlideHtml(options) {
             <div class="flex flex-col gap-8 my-auto">
               <div class="flex flex-col items-center gap-3">
                 <div class="flex items-center justify-center">
-                  <h1 class="text-[64px] font-bold text-[#0e224e] font-outfit tracking-tight">${supportWord}</h1>
+                  <h1 class="text-[76px] font-bold text-[#0e224e] font-outfit tracking-tight leading-tight">${supportWord}</h1>
                 </div>
               </div>
             </div>
@@ -574,7 +581,7 @@ export function generateSlideHtml(options) {
           ${state === 'word-and-translation' || state === 'quiz-answer' ? `
             <div class="flex items-center gap-4">
               <span class="text-5xl">${flag}</span>
-              <div class="px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 font-semibold text-[20px] font-outfit tracking-wide">
+              <div class="px-5 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-600 font-semibold text-[22px] font-outfit tracking-wide shadow-sm">
                 ${targetWord}
               </div>
             </div>
@@ -605,7 +612,7 @@ export function generateSlideHtml(options) {
           ${state === 'quiz-question' ? `
             <!-- Quiz Question: Centered placeholder and translation below -->
             <div class="flex justify-center items-center my-4 h-[116px]">
-              <div class="h-[96px] w-[350px] border-2 border-dashed border-blue-300 bg-blue-50/30 rounded-2xl flex items-center justify-center text-blue-400 font-bold text-[36px] font-outfit">
+              <div class="h-[104px] w-[360px] border-2 border-dashed border-blue-300 bg-blue-50/40 rounded-2xl flex items-center justify-center text-blue-400 font-bold text-[44px] font-outfit shadow-inner">
                 ?
               </div>
             </div>
@@ -613,12 +620,12 @@ export function generateSlideHtml(options) {
               <div class="w-1/3 h-[1.5px] bg-gradient-to-r from-transparent via-blue-200/60 to-transparent"></div>
             </div>
             <div class="flex items-center justify-center h-[72px]">
-              <h2 class="text-[36px] font-semibold text-slate-500 font-outfit tracking-tight">${supportWord}</h2>
+              <h2 class="text-[44px] font-semibold text-slate-600 font-outfit tracking-tight">${supportWord}</h2>
             </div>
           ` : (state === 'quiz-answer' ? `
             <!-- Quiz Answer: Centered Target word and translation below -->
             <div class="flex flex-col items-center justify-center my-4 h-[116px] gap-2">
-              <h1 class="text-[64px] font-bold text-[#0e224e] font-outfit tracking-tight leading-none">${targetWord}</h1>
+              <h1 class="text-[76px] font-bold text-[#0e224e] font-outfit tracking-tight leading-none">${targetWord}</h1>
               ${showTranscription ? `
                 <div class="text-[28px] text-slate-400/80 font-normal mt-2 leading-none">${targetTranscription}</div>
               ` : ''}
@@ -627,17 +634,17 @@ export function generateSlideHtml(options) {
               <div class="w-1/3 h-[1.5px] bg-gradient-to-r from-transparent via-blue-200/60 to-transparent"></div>
             </div>
             <div class="flex items-center justify-center h-[72px]">
-              <h2 class="text-[36px] font-semibold text-slate-500 font-outfit tracking-tight">${supportWord}</h2>
+              <h2 class="text-[40px] font-semibold text-slate-500 font-outfit tracking-tight">${supportWord}</h2>
             </div>
           ` : (state === 'word-and-translation' ? `
             <!-- Flipped Card: Translation is large in the center -->
             <div class="flex items-center justify-center">
-              <h1 class="text-[64px] font-bold text-[#0e224e] font-outfit tracking-tight">${supportWord}</h1>
+              <h1 class="text-[76px] font-bold text-[#0e224e] font-outfit tracking-tight leading-tight">${supportWord}</h1>
             </div>
           ` : `
             <!-- Word Only (State 1) -->
             <div class="flex flex-col items-center justify-center gap-3">
-              <h1 class="text-[64px] font-bold text-[#0e224e] font-outfit tracking-tight">${targetWord}</h1>
+              <h1 class="text-[76px] font-bold text-[#0e224e] font-outfit tracking-tight leading-tight">${targetWord}</h1>
               ${showTranscription ? `
                   <div class="text-[28px] text-slate-400/80 font-normal mt-1">${targetTranscription}</div>
                 ` : ''}
@@ -664,6 +671,8 @@ export function generateSlideHtml(options) {
 
 export function generateUnifiedRendererHtml() {
   const localizationJson = JSON.stringify(localizationData);
+  const outroIconJson = JSON.stringify(outroIconDataUris);
+  const outroIconNameJson = JSON.stringify(outroIconNames);
   return `<!DOCTYPE html>
 <html>
 <head>
@@ -684,8 +693,10 @@ export function generateUnifiedRendererHtml() {
       font-family: 'Outfit', sans-serif;
     }
     .luna-card {
-      background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
-      box-shadow: 0 25px 50px -12px rgba(14, 34, 78, 0.08), 0 0 40px rgba(74, 144, 226, 0.04);
+      background:
+        radial-gradient(circle at 50% 4%, rgba(74, 144, 226, 0.085) 0%, rgba(74, 144, 226, 0) 38%),
+        linear-gradient(135deg, #ffffff 0%, #f9fbff 58%, #f4f8fd 100%);
+      box-shadow: 0 28px 60px -16px rgba(14, 34, 78, 0.14), 0 0 42px rgba(74, 144, 226, 0.055);
     }
     .timer-animation {
       animation: pulse 1s infinite alternate;
@@ -723,10 +734,175 @@ export function generateUnifiedRendererHtml() {
       transform: rotateY(180deg);
     }
     .glass-card {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.065);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    .intro-panel {
+      width: 1480px;
+      min-height: 710px;
+      padding: 72px 88px;
+      border-radius: 40px;
+      background:
+        radial-gradient(circle at 50% 10%, rgba(103, 173, 255, 0.12) 0%, rgba(103, 173, 255, 0) 42%),
+        rgba(255, 255, 255, 0.065);
+    }
+    .intro-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      color: #7ab6ff;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .intro-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+    }
+    .intro-deck-title {
+      color: #93c5fd;
+      font-size: 64px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      line-height: 1.14;
+      padding-bottom: 4px;
+    }
+    .intro-subtitle-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: max-content;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 12px 28px;
+      border-radius: 999px;
+      background: rgba(147, 197, 253, 0.11);
+      border: 1px solid rgba(147, 197, 253, 0.16);
+      color: rgba(219, 234, 254, 0.88);
+      font-size: 30px;
+      font-weight: 700;
+    }
+    .intro-description-panel {
+      width: 980px;
+      max-width: 100%;
+      padding: 26px 34px;
+      border-radius: 26px;
+      background: rgba(2, 12, 32, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .static-card-title {
+      font-size: 76px;
+      line-height: 1.18;
+      padding-bottom: 4px;
+    }
+    .static-card-secondary {
+      font-size: 40px;
+      line-height: 1.26;
+      padding-bottom: 3px;
+    }
+    .static-chip {
+      padding: 8px 20px;
+      border-radius: 999px;
+      background: #eff6ff;
+      border: 1px solid #dbeafe;
+      color: #2563eb;
+      font-size: 22px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.06);
+    }
+    .quiz-placeholder {
+      height: 104px;
+      width: 360px;
+      border: 2px dashed #93c5fd;
+      background: rgba(239, 246, 255, 0.48);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #60a5fa;
+      font-family: 'Outfit', sans-serif;
+      font-size: 44px;
+      font-weight: 800;
+      box-shadow: inset 0 1px 8px rgba(37, 99, 235, 0.05);
+    }
+    .outro-feature-card {
+      min-height: 94px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.075);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .outro-icon-well {
+      width: 62px;
+      height: 62px;
+      flex: 0 0 62px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      background: rgba(74, 144, 226, 0.09);
+      border: 1px solid rgba(184, 217, 255, 0.12);
+    }
+    .outro-icon {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+    }
+    .outro-feature-text {
+      color: #f8fbff;
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+    .outro-url-pill {
+      margin-top: 4px;
+      display: inline-flex;
+      align-items: center;
+      width: max-content;
+      border-radius: 18px;
+      padding: 16px 36px;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      box-shadow: 0 18px 36px rgba(37, 99, 235, 0.24);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+    .outro-qr-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      padding: 28px;
+      border-radius: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 0 28px 58px rgba(0, 0, 0, 0.26);
+      border: 1px solid rgba(184, 217, 255, 0.5);
+    }
+    .outro-qr-image {
+      width: 350px;
+      height: 350px;
+      border-radius: 18px;
+    }
+    .outro-qr-label {
+      color: #172033;
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
     }
   </style>
 </head>
@@ -764,7 +940,7 @@ export function generateUnifiedRendererHtml() {
             <div class="flex flex-col gap-8 my-auto">
               <div class="flex flex-col items-center gap-3">
                 <div class="flex items-center justify-center">
-                  <h1 id="flip-front-word" class="text-[64px] font-bold text-[#0e224e] font-outfit tracking-tight">word</h1>
+                  <h1 id="flip-front-word" class="static-card-title font-bold text-[#0e224e] font-outfit tracking-tight">word</h1>
                 </div>
                 <div id="flip-front-transc" class="text-[28px] text-slate-400/80 font-normal mt-1">transcription</div>
               </div>
@@ -777,13 +953,13 @@ export function generateUnifiedRendererHtml() {
           <div class="card-face card-back luna-card border border-[#cbdff2] rounded-[36px] p-16 flex flex-col justify-between">
             <div class="flex justify-center items-center gap-4 mt-4">
               <span id="flip-back-flag" class="text-5xl">🌐</span>
-              <div id="flip-back-tag" class="px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 font-semibold text-[20px] font-outfit tracking-wide ml-2">word</div>
+              <div id="flip-back-tag" class="static-chip ml-2">word</div>
             </div>
             
             <div class="flex flex-col gap-8 my-auto">
               <div class="flex flex-col items-center gap-3">
                 <div class="flex items-center justify-center">
-                  <h1 id="flip-back-word" class="text-[64px] font-bold text-[#0e224e] font-outfit tracking-tight">translation</h1>
+                  <h1 id="flip-back-word" class="static-card-title font-bold text-[#0e224e] font-outfit tracking-tight">translation</h1>
                 </div>
               </div>
             </div>
@@ -800,7 +976,7 @@ export function generateUnifiedRendererHtml() {
         <div class="flex justify-center items-center relative w-full mt-4">
           <div id="static-tag-wrapper" class="flex items-center gap-4 hidden opacity-0">
             <span id="static-flag" class="text-5xl">🌐</span>
-            <div id="static-tag-word" class="px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 font-semibold text-[20px] font-outfit tracking-wide">word</div>
+            <div id="static-tag-word" class="static-chip">word</div>
           </div>
 
           <div id="static-timer-badge" class="absolute right-0 top-0 flex items-center justify-center w-14 h-14 rounded-full border-2 border-amber-400 bg-amber-50 text-[24px] font-bold text-amber-500 timer-animation font-mono shadow-sm hidden">
@@ -818,17 +994,17 @@ export function generateUnifiedRendererHtml() {
         <div class="flex flex-col gap-8 my-auto">
           <!-- Quiz Question placeholder -->
           <div id="static-quiz-question-wrapper" class="flex justify-center items-center my-4 h-[116px] hidden">
-            <div class="h-[96px] w-[350px] border-2 border-dashed border-blue-300 bg-blue-50/30 rounded-2xl flex items-center justify-center text-blue-400 font-bold text-[36px] font-outfit">?</div>
+            <div class="quiz-placeholder">?</div>
           </div>
           <div id="static-divider" class="w-full flex justify-center hidden">
             <div class="w-1/3 h-[1.5px] bg-gradient-to-r from-transparent via-blue-200/60 to-transparent"></div>
           </div>
           <div id="static-lower-text-wrapper" class="flex items-center justify-center h-[72px] hidden">
-            <h2 id="static-lower-text" class="text-[36px] font-semibold text-slate-500 font-outfit tracking-tight">translation</h2>
+            <h2 id="static-lower-text" class="static-card-secondary font-semibold text-slate-500 font-outfit tracking-tight">translation</h2>
           </div>
 
           <div id="static-main-text-wrapper" class="flex flex-col items-center justify-center gap-3">
-            <h1 id="static-main-text-word" class="text-[64px] font-bold text-[#0e224e] font-outfit tracking-tight">word</h1>
+            <h1 id="static-main-text-word" class="static-card-title font-bold text-[#0e224e] font-outfit tracking-tight">word</h1>
             <div id="static-main-text-transc" class="text-[28px] text-slate-400/80 font-normal mt-1">transcription</div>
           </div>
         </div>
@@ -846,10 +1022,10 @@ export function generateUnifiedRendererHtml() {
 
   <!-- Intro Layout Container -->
   <div id="intro-layout" class="hidden flex-col justify-center items-center w-full h-full box-border">
-    <div class="glass-card rounded-[40px] p-16 flex flex-col items-center justify-center gap-12 w-[1400px]">
+    <div class="glass-card intro-panel flex flex-col items-center justify-center gap-11">
       
       <!-- Top Branding -->
-      <div class="flex items-center gap-4 text-blue-400">
+      <div class="intro-brand">
         <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
         </svg>
@@ -859,24 +1035,24 @@ export function generateUnifiedRendererHtml() {
       <!-- Main Content -->
       <div class="text-center flex flex-col gap-6">
         <!-- Flag & Target Lang Title -->
-        <div class="flex items-center justify-center gap-6">
+        <div class="intro-title-row">
           <span id="intro-flag" class="text-[64px] inline-block"></span>
           <h1 id="intro-title" class="text-[64px] font-bold font-outfit text-white">Target Language</h1>
         </div>
         
         <!-- Deck Title -->
-        <h2 id="intro-deck-title" class="text-[52px] font-bold font-outfit text-blue-300">Deck Title</h2>
+        <h2 id="intro-deck-title" class="intro-deck-title">Deck Title</h2>
         
         <!-- Subtitle/Details -->
-        <p id="intro-subtitle" class="text-[32px] text-blue-200/80 font-medium">Level A1 · 50 cards</p>
+        <p id="intro-subtitle" class="intro-subtitle-pill">Level A1 · 50 cards</p>
       </div>
 
       <!-- Divider -->
       <div class="w-2/3 h-[1px] bg-white/10"></div>
 
       <!-- Description / How-to -->
-      <div class="text-center max-w-4xl">
-        <p id="intro-description" class="text-[28px] text-slate-300 leading-relaxed">
+      <div class="intro-description-panel text-center">
+        <p id="intro-description" class="text-[29px] text-slate-200 leading-relaxed font-medium">
           Listen carefully to the native pronunciation and repeat the words in pauses.
         </p>
       </div>
@@ -904,49 +1080,49 @@ export function generateUnifiedRendererHtml() {
 
         <!-- Badges Grid (8 features) -->
         <div class="grid grid-cols-2 gap-4 max-w-2xl text-slate-100">
-          <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 shadow-sm">
-            <span id="outro-badge-icon-0" class="text-[36px]">⚡️</span>
-            <span id="outro-badge-text-0" class="text-[26px] font-semibold">Custom Tempo</span>
+          <div class="outro-feature-card">
+            <div class="outro-icon-well"><img id="outro-badge-icon-0" class="outro-icon" alt="" /></div>
+            <span id="outro-badge-text-0" class="outro-feature-text">Custom Tempo</span>
           </div>
-          <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 shadow-sm">
-            <span id="outro-badge-icon-1" class="text-[36px]">🎮</span>
-            <span id="outro-badge-text-1" class="text-[26px] font-semibold">Matching Game</span>
+          <div class="outro-feature-card">
+            <div class="outro-icon-well"><img id="outro-badge-icon-1" class="outro-icon" alt="" /></div>
+            <span id="outro-badge-text-1" class="outro-feature-text">Matching Game</span>
           </div>
-          <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 shadow-sm">
-            <span id="outro-badge-icon-2" class="text-[36px]">🧠</span>
-            <span id="outro-badge-text-2" class="text-[26px] font-semibold">Smart Algorithm</span>
+          <div class="outro-feature-card">
+            <div class="outro-icon-well"><img id="outro-badge-icon-2" class="outro-icon" alt="" /></div>
+            <span id="outro-badge-text-2" class="outro-feature-text">Smart Algorithm</span>
           </div>
-          <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 shadow-sm">
-            <span id="outro-badge-icon-3" class="text-[36px]">🖼️</span>
-            <span id="outro-badge-text-3" class="text-[26px] font-semibold">Images & Audio</span>
+          <div class="outro-feature-card">
+            <div class="outro-icon-well"><img id="outro-badge-icon-3" class="outro-icon" alt="" /></div>
+            <span id="outro-badge-text-3" class="outro-feature-text">Images & Audio</span>
           </div>
-          <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 shadow-sm">
-            <span id="outro-badge-icon-4" class="text-[36px]">⏱️</span>
-            <span id="outro-badge-text-4" class="text-[26px] font-semibold">Pomodoro Timer</span>
+          <div class="outro-feature-card">
+            <div class="outro-icon-well"><img id="outro-badge-icon-4" class="outro-icon" alt="" /></div>
+            <span id="outro-badge-text-4" class="outro-feature-text">Pomodoro Timer</span>
           </div>
-          <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 shadow-sm">
-            <span id="outro-badge-icon-5" class="text-[36px]">🎵</span>
-            <span id="outro-badge-text-5" class="text-[26px] font-semibold">Background Music</span>
+          <div class="outro-feature-card">
+            <div class="outro-icon-well"><img id="outro-badge-icon-5" class="outro-icon" alt="" /></div>
+            <span id="outro-badge-text-5" class="outro-feature-text">Background Music</span>
           </div>
-          <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 shadow-sm">
-            <span id="outro-badge-icon-6" class="text-[36px]">💬</span>
-            <span id="outro-badge-text-6" class="text-[26px] font-semibold">Study Chat</span>
+          <div class="outro-feature-card">
+            <div class="outro-icon-well"><img id="outro-badge-icon-6" class="outro-icon" alt="" /></div>
+            <span id="outro-badge-text-6" class="outro-feature-text">Study Chat</span>
           </div>
-          <div class="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 shadow-sm">
-            <span id="outro-badge-icon-7" class="text-[36px]">📝</span>
-            <span id="outro-badge-text-7" class="text-[26px] font-semibold">Personal Notes</span>
+          <div class="outro-feature-card">
+            <div class="outro-icon-well"><img id="outro-badge-icon-7" class="outro-icon" alt="" /></div>
+            <span id="outro-badge-text-7" class="outro-feature-text">Personal Notes</span>
           </div>
         </div>
 
-        <div class="mt-2 bg-blue-500 text-white rounded-2xl px-12 py-5 inline-flex items-center w-max font-bold text-[36px] shadow-lg shadow-blue-500/30 font-outfit">
-          flashcardsluna.com
+        <div id="outro-display-url" class="outro-url-pill">
+          flashcardsluna.com/en/courses
         </div>
       </div>
 
       <!-- Right Side: QR Code -->
-      <div class="bg-white p-6 rounded-3xl flex flex-col items-center gap-6 shadow-2xl">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=https://flashcardsluna.com&margin=10" class="w-[350px] h-[350px] rounded-xl" />
-        <span class="text-slate-800 text-[24px] font-bold font-outfit tracking-wider">SCAN ME</span>
+      <div class="outro-qr-card">
+        <img id="outro-qr-image" src="${defaultOutroQrImageUrl}" class="outro-qr-image" />
+        <span id="outro-qr-label" class="outro-qr-label">Scan me</span>
       </div>
 
     </div>
@@ -954,6 +1130,8 @@ export function generateUnifiedRendererHtml() {
 
   <script>
     const localizationData = ${localizationJson};
+    const outroIconData = ${outroIconJson};
+    const outroIconNames = ${outroIconNameJson};
     window.renderTask = (task) => {
       const { type, options } = task;
       
@@ -966,12 +1144,16 @@ export function generateUnifiedRendererHtml() {
         
         document.getElementById('outro-title').textContent = options.title;
         document.getElementById('outro-subtitle').textContent = options.subtitle;
+        document.getElementById('outro-qr-label').textContent = options.qrScanLabel || 'Scan me';
+        document.getElementById('outro-qr-image').src = options.outroQrImageSrc || '${defaultOutroQrImageUrl}';
+        document.getElementById('outro-display-url').textContent = options.outroDisplayUrl || 'flashcardsluna.com/en/courses';
         
         if (options.badges) {
           for (let i = 0; i < 8; i++) {
             const badge = options.badges[i];
             if (badge) {
-              document.getElementById(\`outro-badge-icon-\${i}\`).textContent = badge.icon;
+              const iconName = badge.iconName || outroIconNames[i];
+              document.getElementById(\`outro-badge-icon-\${i}\`).src = badge.iconSrc || outroIconData[iconName] || outroIconData[outroIconNames[i]];
               document.getElementById(\`outro-badge-text-\${i}\`).textContent = badge.text;
             }
           }
@@ -1195,4 +1377,3 @@ export function generateUnifiedRendererHtml() {
 </body>
 </html>`;
 }
-

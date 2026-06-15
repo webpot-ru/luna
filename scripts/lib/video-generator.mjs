@@ -362,15 +362,22 @@ export async function fetchDeckCards(setId, targetLang, supportLang) {
 }
 
 // Fetch localized deck title
-export async function fetchDeckTitle(setId, supportLang) {
+export async function fetchDeckMetadata(setId, supportLang) {
   const offlineData = getOfflineDeckData(setId);
   if (offlineData && offlineData.titles?.[supportLang]) {
-    return offlineData.titles[supportLang];
+    return {
+      title: offlineData.titles[supportLang],
+      description: offlineData.descriptions?.[supportLang] ?? "",
+      levelSignal: offlineData.levelSignals?.[supportLang] ?? ""
+    };
   }
 
   const sql = `
     select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
-      select title 
+      select
+        title,
+        description,
+        level_signal as "levelSignal"
       from content_set_localizations 
       where set_id = '${setId.replace(/'/g, "''")}' 
         and language_code = '${supportLang.replace(/'/g, "''")}'
@@ -379,17 +386,50 @@ export async function fetchDeckTitle(setId, supportLang) {
   `;
   const res = await psqlJson(sql);
   if (res && res[0] && res[0].title) {
-    return res[0].title;
+    return res[0];
   }
-  // Fallback to content_sets slug/title
+
+  // Fallback to English Course Metadata title before using the internal set name.
+  const englishFallbackSql = `
+    select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
+      select
+        title,
+        description,
+        level_signal as "levelSignal"
+      from content_set_localizations
+      where set_id = '${setId.replace(/'/g, "''")}'
+        and language_code = 'EN'
+      limit 1
+    ) rows;
+  `;
+  const englishFallbackRes = await psqlJson(englishFallbackSql);
+  if (englishFallbackRes && englishFallbackRes[0] && englishFallbackRes[0].title) {
+    return englishFallbackRes[0];
+  }
+
+  // Last fallback: internal content set name, then slug.
   const fallbackSql = `
     select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
-      select slug from content_sets where set_id = '${setId.replace(/'/g, "''")}' limit 1
+      select set_name, slug from content_sets where set_id = '${setId.replace(/'/g, "''")}' limit 1
     ) rows;
   `;
   const fallbackRes = await psqlJson(fallbackSql);
-  if (fallbackRes && fallbackRes[0] && fallbackRes[0].slug) {
-    return fallbackRes[0].slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  if (fallbackRes && fallbackRes[0]) {
+    if (fallbackRes[0].set_name) {
+      return { title: fallbackRes[0].set_name, description: "", levelSignal: "" };
+    }
+    if (fallbackRes[0].slug) {
+      return {
+        title: fallbackRes[0].slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+        description: "",
+        levelSignal: ""
+      };
+    }
   }
-  return "Vocabulary Lesson";
+  return { title: "Vocabulary Lesson", description: "", levelSignal: "" };
+}
+
+export async function fetchDeckTitle(setId, supportLang) {
+  const metadata = await fetchDeckMetadata(setId, supportLang);
+  return metadata.title;
 }

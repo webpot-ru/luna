@@ -2,8 +2,12 @@
   "name": "lunacards-video",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "check:video-localization": "node scripts/check-video-localization.mjs"
+  },
   "dependencies": {
     "playwright": "^1.44.0",
+    "qrcode": "^1.5.4",
     "xlsx": "^0.18.5"
   }
 }

@@ -1,12 +1,23 @@
 # Project State
 
-Last updated: 2026-06-12.
+Last updated: 2026-06-15.
 
 This is the short handoff document for new AI chats and agents. It should stay compact and point to source-of-truth documents instead of duplicating them.
 
 ## Current Shape
 
 Docs/data/QA/Google Sheets flashcard production pipeline. Existing source-of-truth docs include workflow, decision log and QA process.
+
+## Current Video Localization State
+
+- On 2026-06-15 the YouTube video intro/outro/quiz localization layer was repaired for visible mixed-script and wrong-language blockers in `scripts/generate-video-localization.mjs` and regenerated into `config/video-localization.json`.
+- `qr_scan_label` is now generated for all 55 support-language entries and wired into the outro QR slide, replacing the previous hardcoded `SCAN ME` label in the production renderer.
+- Video intro deck titles and subtitles now use localized `content_set_localizations.title` / `description` Course Metadata for the support language, with final Course Metadata punctuation stripped for slide display and repeated title text removed from the subtitle; fallback is English Course Metadata, then internal `content_sets.set_name`.
+- Outro QR URLs now use `config/video-public-course-links.json` through `scripts/lib/video-public-url.mjs`: published decks point to `/<support-site-lang>/courses/<site-slug>`, while unknown or not-yet-published decks fall back to `/<support-site-lang>/courses` instead of the homepage. QR images are generated locally as SVG data URIs through the `qrcode` npm package, so GitHub Actions does not need prebuilt QR assets or `api.qrserver.com`.
+- Outro feature badges now use generated premium line-icon PNGs from `assets/video/outro-icons/split/` through `scripts/lib/video-outro-icons.mjs`, replacing the previous emoji look in the production renderer. The outro keeps all 8 feature badges, but the card styling is lighter and less button-like, with icon wells, a compact URL pill and a cleaner QR card.
+- Intro/static/quiz card templates in `scripts/lib/card-slide-template.mjs` were visually polished on 2026-06-15: intro now uses a denser premium glass panel with localized title/subtitle hierarchy, and card/quiz states use a richer white card, larger word hierarchy, stronger target-word chips and clearer quiz answer/question composition. Visual check outputs are under `outputs/tmp/visual-check-intro-card-templates-v2/`, including `contact-sheet.jpg`.
+- New gate: `npm run check:video-localization` validates key coverage, placeholders, QR label presence and obvious wrong-script Unicode leaks before bulk video generation.
+- This gate is technical/script-level QA only; it does not replace native-speaker review for marketing tone or naturalness.
 
 ## Current Source Research State
 

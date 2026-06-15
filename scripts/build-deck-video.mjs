@@ -5,6 +5,7 @@ import crypto from "node:crypto";
 import { execSync } from "node:child_process";
 import { 
   fetchDeckCards, 
+  fetchDeckMetadata,
   fetchDeckTitle, 
   getVoiceForLanguage, 
   getTtsAudio, 
@@ -17,11 +18,40 @@ import {
   getLanguageNameInLang 
 } from "./lib/card-slide-template.mjs";
 import { getOutroText } from "./lib/outro-slide-template.mjs";
+import { getPublicCourseDisplayUrl, getPublicCourseUrl, getQrCodeImageUrl } from "./lib/video-public-url.mjs";
+import { outroIconNames } from "./lib/video-outro-icons.mjs";
 
 const localizationPath = path.resolve("config/video-localization.json");
 const localizationData = JSON.parse(fs.readFileSync(localizationPath, "utf8"));
 
 const cleanStr = (s) => String(s || '').trim().toLowerCase().replace(/[\/\[\]()]/g, '');
+const stripSentenceTerminator = (s) => String(s || '').trim().replace(/[.!?。！？։။။।]+$/u, '').trim();
+
+function buildIntroMetadataSubtitle(metadata, cardsLength, wordsLabel, fallbackLevelLabel) {
+  const title = String(metadata?.title || '').trim();
+  const description = String(metadata?.description || '').trim();
+  let descriptionWithoutTitle = description;
+
+  if (title && description.startsWith(title)) {
+    descriptionWithoutTitle = description.slice(title.length).trim();
+  }
+
+  descriptionWithoutTitle = stripSentenceTerminator(descriptionWithoutTitle.replace(/^[.!?。！？։။။।]+/u, '').trim());
+  const levelText = descriptionWithoutTitle || stripSentenceTerminator(metadata?.levelSignal) || fallbackLevelLabel;
+  return `${levelText} · ${cardsLength} ${wordsLabel}`;
+}
+
+function getIntroWordsLabel(count, supportLang, defaultWordsLabel) {
+  const supportUpper = String(supportLang).toUpperCase();
+  if (supportUpper === "RU") {
+    const mod10 = count % 10;
+    const mod100 = count % 100;
+    if (mod10 === 1 && mod100 !== 11) return "слово";
+    if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return "слова";
+    return "слов";
+  }
+  return defaultWordsLabel;
+}
 
 function extractLevel(setId) {
   const match = setId.match(/_(a[12]|b[12]|c[12])(_(a[12]|b[12]|c[12]))?$/i);
@@ -150,8 +180,9 @@ async function main() {
   }
   console.log(`Fetched ${cards.length} cards from database.`);
 
-  // Fetch title
-  const deckTitle = await fetchDeckTitle(setId, supportLang);
+  // Fetch localized Course Metadata for the intro slide.
+  const deckMetadata = await fetchDeckMetadata(setId, supportLang);
+  const deckTitle = deckMetadata.title || await fetchDeckTitle(setId, supportLang);
   console.log(`Deck Title: "${deckTitle}"`);
 
   // 2. Setup folders
@@ -205,10 +236,7 @@ async function main() {
     targetName = targetName.toLowerCase();
   }
   
-  let cleanDeckTitle = deckTitle.trim();
-  if (cleanDeckTitle.endsWith(".")) {
-    cleanDeckTitle = cleanDeckTitle.slice(0, -1);
-  }
+  let cleanDeckTitle = stripSentenceTerminator(deckTitle);
   
   const langData = localizationData[supportUpper] || localizationData['EN'];
   const introSpeechTemplate = langData.intro_speech_template || "Learning {target_lang}. Lesson topic: {deck_title}.";
@@ -299,7 +327,13 @@ async function main() {
   const levelCode = extractLevel(setId);
   const prefix = langData.level_prefix || 'Level';
   const wordsLabel = langData.words_label || "words";
-  const introSubtitleText = `${prefix} ${levelCode} · ${cards.length} ${wordsLabel}`;
+  const introWordsLabel = getIntroWordsLabel(cards.length, supportLang, wordsLabel);
+  const introSubtitleText = buildIntroMetadataSubtitle(
+    deckMetadata,
+    cards.length,
+    introWordsLabel,
+    `${prefix} ${levelCode}`
+  );
 
   const audioDurIntro = getAudioDuration(wavIntro);
   const totalVisualDurIntro = Math.round((audioDurIntro + 2.0) * 25) / 25; // add 2.0s freeze
@@ -311,7 +345,7 @@ async function main() {
   const introOptions = {
     flag: getFlagEmoji(targetLang),
     title: introTitle,
-    deckTitle: deckTitle,
+    deckTitle: cleanDeckTitle,
     subtitle: introSubtitleText,
     description: introDesc
   };
@@ -589,6 +623,11 @@ async function main() {
   console.log(`  -> Queue state: Outro (CTA)`);
   const outroTitle = langData.outro_title || "Learn these words forever";
   const outroSubtitle = langData.outro_subtitle || "Practice decks for free on our website";
+  const qrScanLabel = langData.qr_scan_label || "Scan me";
+  const outroUrl = getPublicCourseUrl({ setId, supportLang });
+  const outroDisplayUrl = getPublicCourseDisplayUrl(outroUrl);
+  const outroQrImageSrc = getQrCodeImageUrl(outroUrl);
+  console.log(`  -> Outro QR URL: ${outroUrl}`);
   const cleanBadgeText = (val, defaultText) => {
     if (!val) return defaultText;
     const parts = val.trim().split(/\s+/);
@@ -599,18 +638,22 @@ async function main() {
   };
 
   const outroBadges = [
-    { icon: "⚡️", text: cleanBadgeText(langData.badge_speed, "Custom Tempo") },
-    { icon: "🎮", text: cleanBadgeText(langData.badge_match, "Matching Game") },
-    { icon: "🧠", text: cleanBadgeText(langData.badge_smart, "Smart Algorithm") },
-    { icon: "🖼️", text: cleanBadgeText(langData.badge_media, "Images & Audio") },
-    { icon: "⏱️", text: cleanBadgeText(langData.badge_pomo, "Pomodoro Timer") },
-    { icon: "🎵", text: cleanBadgeText(langData.badge_music, "Background Music") },
-    { icon: "💬", text: cleanBadgeText(langData.badge_chat, "Study Chat") },
-    { icon: "📝", text: cleanBadgeText(langData.badge_notes, "Personal Notes") }
+    { iconName: outroIconNames[0], text: cleanBadgeText(langData.badge_speed, "Custom Tempo") },
+    { iconName: outroIconNames[1], text: cleanBadgeText(langData.badge_match, "Matching Game") },
+    { iconName: outroIconNames[2], text: cleanBadgeText(langData.badge_smart, "Smart Algorithm") },
+    { iconName: outroIconNames[3], text: cleanBadgeText(langData.badge_media, "Images & Audio") },
+    { iconName: outroIconNames[4], text: cleanBadgeText(langData.badge_pomo, "Pomodoro Timer") },
+    { iconName: outroIconNames[5], text: cleanBadgeText(langData.badge_music, "Background Music") },
+    { iconName: outroIconNames[6], text: cleanBadgeText(langData.badge_chat, "Study Chat") },
+    { iconName: outroIconNames[7], text: cleanBadgeText(langData.badge_notes, "Personal Notes") }
   ];
   const outroOptions = {
     title: outroTitle,
     subtitle: outroSubtitle,
+    qrScanLabel,
+    outroUrl,
+    outroDisplayUrl,
+    outroQrImageSrc,
     badges: outroBadges
   };
 
