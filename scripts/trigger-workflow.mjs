@@ -18,8 +18,9 @@ async function main() {
   const support = process.argv[3] || "UZ,AZ,KK,KA,HY";
   const concurrency = process.argv[4] || "2";
   const workflowName = process.argv[5] || "build-videos.yml";
+  const langs = process.argv[6] || "";
 
-  console.log(`Triggering workflow '${workflowName}' for set '${setId}', support languages '${support}' with concurrency ${concurrency}...`);
+  console.log(`Triggering workflow '${workflowName}' for set '${setId}', support languages '${support}' with concurrency ${concurrency}${langs ? ` and target languages '${langs}'` : ""}...`);
 
   const url = `https://api.github.com/repos/webpot-ru/luna/actions/workflows/${workflowName}/dispatches`;
   const response = await fetch(url, {
@@ -35,7 +36,7 @@ async function main() {
       ...(workflowName.includes("test") ? {} : {
         inputs: workflowName.includes("matrix")
           ? { set_id: setId, concurrency: concurrency }
-          : { set_id: setId, support: support, concurrency: concurrency }
+          : { set_id: setId, support: support, concurrency: concurrency, langs: langs }
       })
     })
   });

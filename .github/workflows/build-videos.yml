@@ -15,6 +15,10 @@ on:
         description: 'Concurrency limit (number of parallel builds)'
         required: true
         default: '2'
+      langs:
+        description: 'Target languages comma-separated (optional, e.g. EN,RU)'
+        required: false
+        default: ''
 
 jobs:
   build:
@@ -76,14 +80,22 @@ jobs:
         if [ "${{ github.event.inputs.support }}" = "ALL" ]; then
           # Run remaining support languages including all Blue Ocean priority channels
           for sup in ES-419 TR KO JA PT PT-BR HI UZ AZ KK KA HY; do
-            node scripts/build-all-deck-videos.mjs --set ${{ github.event.inputs.set_id }} --support $sup --concurrency ${{ github.event.inputs.concurrency }}
+            EXTRA_ARGS=""
+            if [ -n "${{ github.event.inputs.langs }}" ]; then
+              EXTRA_ARGS="--langs ${{ github.event.inputs.langs }}"
+            fi
+            node scripts/build-all-deck-videos.mjs --set ${{ github.event.inputs.set_id }} --support $sup --concurrency ${{ github.event.inputs.concurrency }} $EXTRA_ARGS
           done
         else
           # Split comma-separated support codes
           IFS=',' read -ra ADDR <<< "${{ github.event.inputs.support }}"
           for sup in "${ADDR[@]}"; do
             sup_trimmed=$(echo "$sup" | xargs)
-            node scripts/build-all-deck-videos.mjs --set ${{ github.event.inputs.set_id }} --support "$sup_trimmed" --concurrency ${{ github.event.inputs.concurrency }}
+            EXTRA_ARGS=""
+            if [ -n "${{ github.event.inputs.langs }}" ]; then
+              EXTRA_ARGS="--langs ${{ github.event.inputs.langs }}"
+            fi
+            node scripts/build-all-deck-videos.mjs --set ${{ github.event.inputs.set_id }} --support "$sup_trimmed" --concurrency ${{ github.event.inputs.concurrency }} $EXTRA_ARGS
           done
         fi
 
