@@ -35,7 +35,9 @@ jobs:
     - name: Download Offline Deck Data from Google Drive
       run: |
         mkdir -p data/decks
-        curl -L "https://docs.google.com/uc?export=download&id=1W9tKVQPzvn8ZxZXtVEPPx0VcDaUzfRCF" -o "data/decks/home_kitchen_cookware_pilot_01.json"
+        curl -c /tmp/cookies -sL "https://docs.google.com/uc?export=download&id=1W9tKVQPzvn8ZxZXtVEPPx0VcDaUzfRCF" > /tmp/confirm.html
+        CONFIRM=$(grep -o 'confirm=[^&\" ]*' /tmp/confirm.html | head -n1 | cut -d= -f2)
+        curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&confirm=${CONFIRM}&id=1W9tKVQPzvn8ZxZXtVEPPx0VcDaUzfRCF" -o "data/decks/home_kitchen_cookware_pilot_01.json"
 
     - name: Run single test compilation
       run: |

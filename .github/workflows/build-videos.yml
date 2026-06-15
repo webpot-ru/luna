@@ -61,7 +61,9 @@ jobs:
         if [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
           echo "Found Google Drive File ID for $SET_ID: $FILE_ID"
           mkdir -p data/decks
-          curl -L "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
+          curl -c /tmp/cookies -sL "https://docs.google.com/uc?export=download&id=${FILE_ID}" > /tmp/confirm.html
+          CONFIRM=$(grep -o 'confirm=[^&\" ]*' /tmp/confirm.html | head -n1 | cut -d= -f2)
+          curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&confirm=${CONFIRM}&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
           echo "Downloaded offline data to data/decks/${SET_ID}.json"
         else
           echo "No Google Drive File ID found for $SET_ID in data/deck-sources.json (or placeholder active). Running with local files if they exist."
