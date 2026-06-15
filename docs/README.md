@@ -40,6 +40,7 @@
 | [Video Lessons Registry](video-lessons-registry.md) | Source of truth | Реестр сгенерированных видеоуроков и ссылок на YouTube. |
 | [Grammar & Textbook Roadmap](grammar-roadmap.md) | Source of truth | Стратегический план и правила интеграции учебников грамматики (включая юридические правила именования). |
 | [Windows Handover & Setup Spec](windows-handover-spec.md) | Operations Guide | Руководство по развертыванию проекта и продолжению сборки видеоуроков на Windows. |
+| [Multi-Device Management Spec](multi-device-management.md) | Operations Guide | Руководство по настройке окружения на нескольких компьютерах и удаленному управлению сборкой видеоуроков через GitHub Actions. |
 | [Project Skills](../project-skills/README.md) | Project-local agent workflow helpers | Reusable Codex skills for deck delivery, QA evidence, final linguistic audit, and external lexical-source workflows. They do not replace source-of-truth docs. |
 
 
@@ -116,6 +117,7 @@
 29. [Video Lessons Registry](video-lessons-registry.md)
 30. [Grammar & Textbook Roadmap](grammar-roadmap.md)
 31. [Windows Handover & Setup Spec](windows-handover-spec.md)
+32. [Multi-Device Management Spec](multi-device-management.md)
 
 
 ## Проверка перед завершением задачи
