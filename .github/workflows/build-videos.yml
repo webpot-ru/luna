@@ -8,7 +8,7 @@ on:
         required: true
         default: 'home_kitchen_cookware_pilot_01'
       support:
-        description: 'Support language (e.g., RU, EN, ES, ES-419, TR, KO, JA, PT, PT-BR, HI, or ALL)'
+        description: 'Support language (e.g., UZ or UZ,AZ,KK,KA,HY or ALL)'
         required: true
         default: 'ALL'
       concurrency:
@@ -72,12 +72,17 @@ jobs:
         AI33_API_KEY: ${{ secrets.AI33_API_KEY }}
       run: |
         if [ "${{ github.event.inputs.support }}" = "ALL" ]; then
-          # Run all remaining support languages
-          for sup in ES-419 TR KO JA PT PT-BR HI; do
+          # Run remaining support languages including all Blue Ocean priority channels
+          for sup in ES-419 TR KO JA PT PT-BR HI UZ AZ KK KA HY; do
             node scripts/build-all-deck-videos.mjs --set ${{ github.event.inputs.set_id }} --support $sup --concurrency ${{ github.event.inputs.concurrency }}
           done
         else
-          node scripts/build-all-deck-videos.mjs --set ${{ github.event.inputs.set_id }} --support ${{ github.event.inputs.support }} --concurrency ${{ github.event.inputs.concurrency }}
+          # Split comma-separated support codes
+          IFS=',' read -ra ADDR <<< "${{ github.event.inputs.support }}"
+          for sup in "${ADDR[@]}"; do
+            sup_trimmed=$(echo "$sup" | xargs)
+            node scripts/build-all-deck-videos.mjs --set ${{ github.event.inputs.set_id }} --support "$sup_trimmed" --concurrency ${{ github.event.inputs.concurrency }}
+          done
         fi
 
     - name: Upload Videos as Artifacts

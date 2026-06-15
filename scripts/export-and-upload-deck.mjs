@@ -151,27 +151,90 @@ async function main() {
     cards: {}
   };
   
-  for (const lang of allLangs) {
-    try {
-      const title = await fetchDeckTitle(setId, lang);
-      deckData.titles[lang] = title;
-    } catch (e) {
-      console.warn(`Warning: title failed for ${lang}`);
+  // Fetch all titles in one query
+  const titleSql = `
+    select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
+      select language_code, title 
+      from content_set_localizations 
+      where set_id = '${setId.replace(/'/g, "''")}'
+    ) rows;
+  `;
+  const titlesResult = await psqlJson(titleSql);
+  for (const row of titlesResult) {
+    if (row.language_code) {
+      deckData.titles[row.language_code.toUpperCase()] = row.title;
     }
   }
   
-  const supportLangs = ["RU", "EN", "ES", "ES-419", "TR", "KO", "JA", "PT", "PT-BR", "HI"];
+  // Fetch all cards and example translations in one single query
+  const cardsSql = `
+    select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
+      with deck_examples as (
+        select distinct on (meaning_id)
+          example_id,
+          meaning_id
+        from meaning_examples
+        where set_id = '${setId.replace(/'/g, "''")}' or example_role = 'base'
+        order by meaning_id, case when set_id = '${setId.replace(/'/g, "''")}' then 1 else 2 end
+      )
+      select
+        msm.meaning_id,
+        msm.display_order,
+        mu.canonical_english,
+        ex.example_id,
+        (
+          select json_object_agg(language_code, row_to_json(le))
+          from (
+            select language_code, native_word, word_with_article_or_marker, transcription
+            from meaning_language_entries
+            where meaning_id = msm.meaning_id
+          ) le
+        ) as word_entries,
+        (
+          select json_object_agg(language_code, example_text)
+          from meaning_example_translations
+          where example_id = ex.example_id
+        ) as example_translations
+      from meaning_set_memberships msm
+      join meaning_units mu on mu.meaning_id = msm.meaning_id
+      left join deck_examples ex on ex.meaning_id = msm.meaning_id
+      where msm.set_id = '${setId.replace(/'/g, "''")}'
+      order by msm.display_order, msm.meaning_id
+    ) rows;
+  `;
+  const cardsResult = await psqlJson(cardsSql);
+  
+  // Compile combinations in memory
+  const supportLangs = allLangs;
   for (const supportLang of supportLangs) {
     deckData.cards[supportLang] = {};
     for (const targetLang of allLangs) {
       if (targetLang === supportLang) continue;
-      try {
-        const cards = await fetchDeckCards(setId, targetLang, supportLang);
-        if (cards && cards.length > 0) {
-          deckData.cards[supportLang][targetLang] = cards;
+      
+      const cardsList = [];
+      for (const row of cardsResult) {
+        const wordT = row.word_entries?.[targetLang];
+        const wordS = row.word_entries?.[supportLang];
+        
+        if (wordT && wordT.native_word) {
+          cardsList.push({
+            meaning_id: row.meaning_id,
+            display_order: row.display_order,
+            canonical_english: row.canonical_english,
+            target_word: wordT.native_word,
+            target_display: wordT.word_with_article_or_marker || wordT.native_word,
+            target_transcription: wordT.transcription || "",
+            support_word: wordS ? (wordS.native_word || "") : "",
+            support_display: wordS ? (wordS.word_with_article_or_marker || wordS.native_word || "") : "",
+            example_id: row.example_id || null,
+            target_example: row.example_translations?.[targetLang] || "",
+            support_example: row.example_translations?.[supportLang] || ""
+          });
         }
-      } catch (e) {
-        // skip
+      }
+      
+      if (cardsList.length > 0) {
+        deckData.cards[supportLang][targetLang] = cardsList;
       }
     }
   }
