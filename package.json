@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "check:video-localization": "node scripts/check-video-localization.mjs",
-    "check:youtube-metadata": "node scripts/check-youtube-metadata.mjs"
+    "check:youtube-metadata": "node scripts/check-youtube-metadata.mjs",
+    "check:vectorengine-gemini": "node scripts/check-vectorengine-gemini.mjs"
   },
   "dependencies": {
     "playwright": "^1.44.0",

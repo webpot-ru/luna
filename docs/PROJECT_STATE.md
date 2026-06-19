@@ -1,12 +1,18 @@
 # Project State
 
-Last updated: 2026-06-15.
+Last updated: 2026-06-19.
 
 This is the short handoff document for new AI chats and agents. It should stay compact and point to source-of-truth documents instead of duplicating them.
 
 ## Current Shape
 
 Docs/data/QA/Google Sheets flashcard production pipeline. Existing source-of-truth docs include workflow, decision log and QA process.
+
+## Current YouTube Channel Prep State
+
+- On 2026-06-19 the first English-native channel package was prepared at `outputs/youtube-channel-assets/en/channel-package.md`. It targets `supportLang=EN` / `https://flashcardsluna.com/en/courses`, uses the channel name `LunaCards - Learn Languages`, includes broad 50+ language positioning instead of listing a few target languages, and points the banner/description at `flashcardsluna.com`.
+- EN channel branding candidates are under `outputs/youtube-channel-assets/en/`. The primary upload-ready banner candidate is `lunacards-en-channel-banner-youtube-2560x1440-v3-safearea.png`, with a central crop check at `lunacards-en-channel-banner-safearea-preview-v3.png`; the avatar candidate is `lunacards-en-channel-avatar-preview-v2.png`.
+- The first EN-channel unlisted upload candidates are the GitHub-rendered files `outputs/github-video-test-20260619/support-EN/compiled-videos-EN/home_kitchen_cookware_pilot_01_es_en/lesson_es_en.mp4` and `outputs/github-video-test-20260619/support-EN/compiled-videos-EN/home_kitchen_cookware_pilot_01_ru_en/lesson_ru_en.mp4`, each with adjacent `youtube_metadata.json`.
 
 ## Current Video Localization State
 
@@ -17,6 +23,7 @@ Docs/data/QA/Google Sheets flashcard production pipeline. Existing source-of-tru
 - Outro feature badges now use generated premium line-icon PNGs from `assets/video/outro-icons/split/` through `scripts/lib/video-outro-icons.mjs`, replacing the previous emoji look in the production renderer. The outro keeps all 8 feature badges, but the card styling is lighter and less button-like, with icon wells, a compact URL pill and a cleaner QR card.
 - Intro/static/quiz card templates in `scripts/lib/card-slide-template.mjs` were visually polished on 2026-06-15: intro now uses a denser premium glass panel with localized title/subtitle hierarchy, and card/quiz states use a richer white card, larger word hierarchy, stronger target-word chips and clearer quiz answer/question composition. Visual check outputs are under `outputs/tmp/visual-check-intro-card-templates-v2/`, including `contact-sheet.jpg`.
 - YouTube metadata generation now writes `youtube_metadata.json` next to generated videos through `scripts/generate-youtube-metadata.mjs`. It has template fallback plus optional Gemini polish (`GEMINI_API_KEY` / `GOOGLE_API_KEY` in GitHub Actions, or local Gemini CLI). Gate `scripts/check-youtube-metadata.mjs` validates title/description/tags/hashtags, course URL presence and upload-safe metadata limits. A live local Gemini CLI smoke on 2026-06-15 for `home_kitchen_cookware_pilot_01` ES/RU passed and wrote `outputs/tmp/youtube-metadata-smoke-gemini/home_kitchen_cookware_pilot_01_es_ru_youtube_metadata.json`.
+- On 2026-06-19 the Gemini API polish layer gained a VectorEngine proxy backend copied from the Deveron VectorEngine integration pattern: `scripts/lib/vectorengine-gemini.mjs`, `scripts/check-vectorengine-gemini.mjs` and `--gemini-backend vectorengine`. GitHub metadata workflows use VectorEngine only when a VectorEngine key and explicit `VECTORENGINE_GEMINI_MODEL` repository variable are both set, then direct `GEMINI_API_KEY` / `GOOGLE_API_KEY`, then template fallback if no API backend is configured. Default VectorEngine endpoint is `https://api.vectorengine.ai`; default CLI/script model is `gemini-3-pro-preview`, and calls have a bounded timeout (`VECTORENGINE_TIMEOUT_MS`, default 120000ms). GitHub secret `VECTORENGINE_API_KEY` exists in `webpot-ru/luna` as of `2026-06-19T06:42:12Z`, but no GitHub `VECTORENGINE_GEMINI_MODEL` variable should be set until a stable text model is confirmed. Live smoke state: one short `gemini-3-pro-preview` health check passed and wrote `outputs/tmp/vectorengine-gemini-smoke/vectorengine-gemini-smoke-20260619T065232Z.json`, but repeated checks timed out or returned upstream saturation; `/v1beta/models` for the current local key listed no Gemini text models.
 - On 2026-06-18 the live site route for `home_kitchen_cookware_pilot_01` was verified as `https://flashcardsluna.com/ru/courses/kitchenware-basic/study/standard?langs=es`; the older video public-link slug `home-kitchen-kitchenware-basics` returned 404 and was replaced by `kitchenware-basic` in `config/video-public-course-links.json`. Video outro QR and YouTube metadata now use target-specific study URLs when `targetLang` is known: path language is the support/native viewer language, and `?langs=<target>` selects the studied language.
 - New gate: `npm run check:video-localization` validates key coverage, placeholders, QR label presence and obvious wrong-script Unicode leaks before bulk video generation.
 - This gate is technical/script-level QA only; it does not replace native-speaker review for marketing tone or naturalness.

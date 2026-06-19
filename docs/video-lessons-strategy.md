@@ -30,6 +30,24 @@
 > * **Для языка поддержки (Support Language)**: Используйте один общий канал (например, Английский) с универсальным или самым массовым диалектом (US English).
 > * **Для изучаемого языка (Target Language)**: Разные диалекты живут на **одном** канале, но в разных плейлистах (Например: плейлист "Learn Spanish (Spain)" и плейлист "Learn Spanish (Mexico)").
 
+### 1.1. Channel branding packages
+
+Для каждого support-language канала рабочие материалы оформления можно готовить в:
+
+```text
+outputs/youtube-channel-assets/<support-lang>/
+```
+
+Правило баннера: не перечислять на главном channel art только 2-3 изучаемых языка, потому что это искусственно сужает канал при каталоге 50+ языков. Баннер должен продвигать всю систему: бренд LunaCards, broad promise вроде `Learn 50+ Languages`, язык аудитории (`for English speakers`, `для русскоязычных` и т.п.) и сайт `flashcardsluna.com`. Конкретные target languages живут в плейлистах, названиях видео, metadata и ссылках `?langs=<target>`.
+
+Первый рабочий пакет для EN-канала создан в:
+
+```text
+outputs/youtube-channel-assets/en/channel-package.md
+```
+
+Он включает banner/avatar candidates, channel description, first playlists and the first two unlisted upload candidates from the GitHub EN support render test.
+
 ---
 
 ## 2. Спецификации видео и анимации (Video Specs)
@@ -173,7 +191,30 @@ node scripts/generate-youtube-metadata.mjs \
   --model gemini-3.1-pro-preview
 ```
 
-В GitHub Actions Gemini должен идти через secret `GEMINI_API_KEY` или `GOOGLE_API_KEY`; если secret отсутствует, workflow должен оставаться успешным на template fallback. Для API mode default model задается `GEMINI_MODEL`/repository variable, иначе используется `gemini-3.5-flash`.
+В GitHub Actions Gemini может идти двумя API-путями:
+
+- direct Google Gemini API: secrets `GEMINI_API_KEY` или `GOOGLE_API_KEY`; для API mode default model задается `GEMINI_MODEL` / repository variable, иначе используется `gemini-3.5-flash`;
+- VectorEngine Gemini proxy: secret `VECTORENGINE_API_KEY` (или legacy alias `VECTOR_ENGINE_API_KEY`), optional repository variables `VECTORENGINE_BASE_URL` and `VECTORENGINE_GEMINI_MODEL`; default base URL is `https://api.vectorengine.ai`, default model is `gemini-3-pro-preview`.
+
+GitHub metadata workflow выбирает VectorEngine только если задан ключ `VECTORENGINE_API_KEY` / `VECTOR_ENGINE_API_KEY` **и** явная repository variable `VECTORENGINE_GEMINI_MODEL`. Это намеренно fail-safe: наличие VectorEngine image/proxy key alone не доказывает, что у аккаунта есть доступный text-generation Gemini channel. Если VectorEngine model не задана, но есть direct Google key, используется direct Google API. Если ни один API backend не задан, workflow должен оставаться успешным на template fallback. VectorEngine здесь используется только как Gemini text proxy для `youtube_metadata.json`; он не меняет видео-рендеринг, TTS, QR или slide templates.
+
+2026-06-19 live smoke through a local `VECTORENGINE_API_KEY` confirmed the VectorEngine endpoint and one short `gemini-3-pro-preview` health check once, but repeated text-generation checks were not stable: a later `gemini-3-pro-preview` health check timed out after 120s, `/v1beta/models` for the local key listed 7 models with no Gemini text models, and `gemma-7b-it` returned `429 Current group upstream load is saturated`. Earlier Deveron-key checks also showed no stable text Gemini channel: text models such as `gemini-3-pro-preview`, `gemini-3.1-pro-preview`, `gemini-2.5-flash`, `gemini-2.0-flash` returned `503 No available channel`, while image Gemini models returned `429`. Do not enable VectorEngine metadata polish in GitHub until a working text model is confirmed and set in `VECTORENGINE_GEMINI_MODEL`.
+
+Локальный smoke-check VectorEngine Gemini:
+
+```bash
+npm run check:vectorengine-gemini -- --confirm-spend
+```
+
+Если ключ лежит во внешнем env-файле, можно явно указать его без печати секрета:
+
+```bash
+npm run check:vectorengine-gemini -- --env-file /path/to/.env --confirm-spend
+```
+
+Скрипт требует `--confirm-spend`, потому даже короткий health-check тратит API usage. Он пишет безопасный readback в `outputs/tmp/vectorengine-gemini-smoke/` and prints only the env key name, never the key value.
+
+VectorEngine helper keeps the Gemini REST payload shape aligned with the official Gemini API text-generation docs: `contents[].parts[].text`, optional `systemInstruction` / `system_instruction`, `generationConfig`, and SSE parsing from `streamGenerateContent?alt=sse`. The project code uses `systemInstruction` because that is the shape shown in the JavaScript/App Script examples and accepted by the VectorEngine compatibility layer. Calls have a bounded timeout (`VECTORENGINE_TIMEOUT_MS`, default 120000ms) so GitHub jobs do not hang indefinitely on a saturated upstream stream.
 
 ---
 

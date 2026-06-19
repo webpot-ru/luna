@@ -48,9 +48,15 @@ jobs:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+        VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
+        VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
+        VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
+        VECTORENGINE_GEMINI_MODEL: ${{ vars.VECTORENGINE_GEMINI_MODEL }}
       run: |
         GEMINI_ARGS=""
-        if [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
+        if [ -n "${VECTORENGINE_API_KEY:-}" ] || [ -n "${VECTOR_ENGINE_API_KEY:-}" ]; then
+          GEMINI_ARGS="--with-gemini --gemini-backend vectorengine --model ${VECTORENGINE_GEMINI_MODEL:-gemini-3.5-flash}"
+        elif [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
           GEMINI_ARGS="--with-gemini --gemini-backend api"
         fi
         node scripts/generate-youtube-metadata.mjs --set home_kitchen_cookware_pilot_01 --support UZ --targets EN --privacy unlisted $GEMINI_ARGS

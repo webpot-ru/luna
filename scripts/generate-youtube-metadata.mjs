@@ -40,7 +40,10 @@ function usage() {
     "",
     "Options:",
     "  --with-gemini                 Improve template metadata with Gemini.",
-    "  --gemini-backend api|cli       Use API key mode or local Gemini CLI. Defaults to API when GEMINI_API_KEY exists, otherwise CLI.",
+    "  --gemini-backend api|cli|vectorengine",
+    "                                  Use Google API, local Gemini CLI, or VectorEngine Gemini proxy.",
+    "                                  Defaults to Google API when GEMINI_API_KEY exists, otherwise CLI.",
+    "                                  VectorEngine is opt-in via this flag or GEMINI_BACKEND=vectorengine.",
     "  --model <model>                Override Gemini model.",
     "  --privacy private|unlisted|public",
     "  --output-dir <dir>             Defaults to outputs/video-generator/<set>_<target>_<support>/youtube_metadata.json."

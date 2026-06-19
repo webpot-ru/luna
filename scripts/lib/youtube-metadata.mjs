@@ -5,11 +5,13 @@ import { promisify } from "node:util";
 import { fetchDeckCards, fetchDeckMetadata } from "./video-generator.mjs";
 import { getLanguageNameInLang } from "./card-slide-template.mjs";
 import { getPublicCourseDisplayUrl, getPublicCourseUrl } from "./video-public-url.mjs";
+import { callVectorEngineGeminiJson } from "./vectorengine-gemini.mjs";
 
 const execFileAsync = promisify(execFile);
 const databaseUrl = process.env.DATABASE_URL ?? "postgresql://lunacards:lunacards@127.0.0.1:55433/lunacards";
 const defaultGeminiApiModel = process.env.GEMINI_MODEL || "gemini-3.5-flash";
 const defaultGeminiCliModel = process.env.GEMINI_CLI_MODEL || "gemini-3.1-pro-preview";
+const defaultVectorEngineGeminiModel = process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash";
 
 export const YOUTUBE_METADATA_SCHEMA = {
   type: "object",
@@ -301,6 +303,21 @@ async function callGeminiCli(prompt, { model = defaultGeminiCliModel } = {}) {
   return JSON.parse(raw.slice(jsonStart, jsonEnd + 1));
 }
 
+async function callGeminiVectorEngine(prompt, { model = defaultVectorEngineGeminiModel, maxOutputTokens = 1600 } = {}) {
+  return callVectorEngineGeminiJson({
+    prompt,
+    schema: YOUTUBE_METADATA_SCHEMA,
+    model,
+    maxOutputTokens,
+    temperature: 0.35,
+    systemInstruction: [
+      "You create YouTube metadata for LunaCards vocabulary videos.",
+      "Return strict JSON only and follow the provided schema.",
+      "Do not include hidden reasoning, Markdown, comments or extra fields."
+    ].join(" ")
+  });
+}
+
 function normalizeHashtag(value) {
   const text = cleanText(value);
   if (!text) return "";
@@ -354,11 +371,19 @@ export async function generateYouTubeMetadata(input) {
   if (!input.withGemini) return template;
 
   const prompt = buildGeminiPrompt(template, cards);
-  const backend = input.geminiBackend || (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY ? "api" : "cli");
-  const model = input.model || (backend === "api" ? defaultGeminiApiModel : defaultGeminiCliModel);
+  const backend = input.geminiBackend
+    || process.env.GEMINI_BACKEND
+    || (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY ? "api" : "cli");
+  const model = input.model || (
+    backend === "api"
+      ? defaultGeminiApiModel
+      : (backend === "vectorengine" ? defaultVectorEngineGeminiModel : defaultGeminiCliModel)
+  );
   const generated = backend === "api"
     ? await callGeminiApi(prompt, { model })
-    : await callGeminiCli(prompt, { model });
+    : (backend === "vectorengine"
+      ? await callGeminiVectorEngine(prompt, { model })
+      : await callGeminiCli(prompt, { model }));
 
   return normalizeYouTubeMetadata({
     ...template,
