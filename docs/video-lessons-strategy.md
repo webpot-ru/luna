@@ -133,7 +133,7 @@ Accepted grouping:
    - `Китайский HSK 3.0: Уровень 1` for HSK 3.0 Level 1;
    - `Испанский A1: еда и дом` or `Испанский A1: бытовой словарь` for ordinary thematic decks once there is enough volume.
 3. **Course families stay separate when learner intent differs.** HSK Classic 2.0 and HSK 3.0 are separate playlists. Oxford 3000 Core and Oxford 5000 Advanced Extension are separate playlists. Spanish A1 Core is separate from ordinary Spanish thematic vocabulary.
-4. **Regional target variants share a support-language channel but may split playlists only when the actual learning content differs.** `ES` vs `ES-419`, `PT` vs `PT-BR`, and `EN` vs `EN-GB` should not become separate channels; they can become separate playlists when audio/text/positioning differs enough for learners.
+4. **Regional or duplicate target variants share a support-language channel but may split playlists when the learner-facing content differs.** `ES` vs `ES-419`, `PT` vs `PT-BR`, and `EN` vs `EN-GB` should not become separate channels. They can live on the same viewer-language channel as separate playlists, for example a Russian-native channel can have both `Португальский A1` and `Бразильский португальский A1` playlists if the videos/text/audio are region-specific. This is not considered duplicate channel content; the distinction belongs to playlist identity, title, description, thumbnail copy and metadata.
 5. **Ordinary decks should be grouped by macro learner journey, not by exact deck title.** Start with target-language playlists like `Spanish A1 Everyday Vocabulary`, then split into `Food`, `Home`, `Travel`, `Core Verbs`, etc. only after a playlist has enough videos to justify a shelf.
 6. **Lazy-create playlists.** Create a playlist only when a flagship course exists or when at least 3-5 videos are ready for that playlist. Do not pre-create empty playlists for every possible language pair.
 
@@ -164,19 +164,22 @@ RU__EN__oxford-3000-core__a1-a2
 RU__ZH__hsk3__level-1__2025
 EN__ES__ordinary-vocabulary__a1-everyday
 EN__ES-419__ordinary-vocabulary__a1-everyday
+RU__PT__ordinary-vocabulary__a1-everyday
+RU__PT-BR__ordinary-vocabulary__a1-everyday
 ```
 
 Initial playlist plan for the first channels:
 
 | support channel | first playlist keys to prepare | Notes |
 |---|---|---|
-| `RU` | `RU__ES__spanish-a1-core__a1`, `RU__EN__oxford-3000-core__a1-a2`, `RU__ZH__hsk3__level-1__2025`, later `RU__ES__ordinary-vocabulary__a1-everyday` | Russian-native channel. Target English content belongs here; do not make `RU__RU` self-learning playlists. |
-| `EN` | `EN__ES__spanish-a1-core__a1`, `EN__ZH__hsk3__level-1__2025`, `EN__RU__ordinary-vocabulary__a1-everyday`, later additional target-language ordinary tracks | English-native channel. Do not create `EN__EN` “learn English” playlists on the English-native channel; English-learning content belongs on non-English support channels. |
+| `RU` | `RU__ES__spanish-a1-core__a1`, `RU__EN__oxford-3000-core__a1-a2`, `RU__ZH__hsk3__level-1__2025`, later `RU__ES__ordinary-vocabulary__a1-everyday`, `RU__ES-419__ordinary-vocabulary__a1-everyday`, `RU__PT__ordinary-vocabulary__a1-everyday`, `RU__PT-BR__ordinary-vocabulary__a1-everyday` | Russian-native channel. Target English content belongs here; do not make `RU__RU` self-learning playlists. Spain/LatAm Spanish and Portugal/Brazil Portuguese can be adjacent playlists on the same RU channel when they are distinct learner products. |
+| `EN` | `EN__ES__spanish-a1-core__a1`, `EN__ES-419__ordinary-vocabulary__a1-everyday`, `EN__ZH__hsk3__level-1__2025`, `EN__RU__ordinary-vocabulary__a1-everyday`, later additional target-language ordinary tracks | English-native channel. Do not create `EN__EN` “learn English” playlists on the English-native channel; English-learning content belongs on non-English support channels. Spain/LatAm Spanish can be separate playlists on the same EN channel if content differs. |
 | future support channels | start with the same high-signal flagship families, not all possible pairs | Create channels only after support-language branding/channel ID is known and enough videos exist. |
 
 Anti-rules:
 
 - Do not pre-create all 54 x 53 language-pair playlists.
+- Do not create separate viewer-language channels only because a target language has a regional duplicate. Put regional target variants on the same support/viewer-language channel and split by playlist only when content differs.
 - Do not create empty playlists.
 - Do not create a playlist solely because one video file exists.
 - Do not use localized playlist title as identity; titles can change and localize, `playlist_key` must stay stable.
