@@ -20,6 +20,7 @@
 2. **«LunaCards — Learn Languages»** (Для англоязычной аудитории):
    * **Язык поддержки**: Только Английский (`EN`).
    * **Контент**: Плейлисты: *Learn Spanish*, *Learn Chinese (HSK)*, *Learn German* и т.д.
+   * **Naming note**: если этот канал становится зонтичным English-native каналом для языков и будущих неязыковых колод, не использовать language-only name. Broad working name: **`LunaCards - Flashcard Lessons`**. `LunaCards - Learn Languages` остается корректным только для intentionally language-only канала.
 3. **Другие региональные каналы**:
    * Создаются по мере необходимости по той же схеме (например, `LunaCards — Aprender Idiomas` для испаноязычной аудитории с поддержкой на `ES`).
 
@@ -38,9 +39,11 @@
 outputs/youtube-channel-assets/<support-lang>/
 ```
 
-Правило баннера: не перечислять на главном channel art только 2-3 изучаемых языка, потому что это искусственно сужает канал при каталоге 50+ языков. Баннер должен продвигать всю систему: бренд LunaCards, broad promise вроде `Learn 50+ Languages`, язык аудитории (`for English speakers`, `для русскоязычных` и т.п.) и сайт `flashcardsluna.com`. Конкретные target languages живут в плейлистах, названиях видео, metadata и ссылках `?langs=<target>`.
+Правило баннера: не перечислять на главном channel art только 2-3 изучаемых языка, потому что это искусственно сужает канал при каталоге 50+ языков. Баннер должен продвигать всю систему: бренд LunaCards, broad flashcard-learning promise, место для будущего расширения за пределы языков и сайт `flashcardsluna.com`. Конкретные target languages живут в плейлистах, названиях видео, metadata и ссылках `?langs=<target>`. Если канал намеренно остается только языковым, допустим narrower promise вроде `Learn 50+ Languages`; для зонтичного LunaCards branding предпочтительнее `Learn with Flashcards` / `Languages and more`, чтобы не закрывать будущие неязыковые колоды.
 
-Визуально channel art должен быть продолжением сайта `flashcardsluna.com`: light `#f4f7f9` page background, white rounded library panels, soft blue-gray borders, real course-card thumbnail feel, blue CTA accents, restrained violet accent and deep navy typography. Первый site-style EN banner candidate: `outputs/youtube-channel-assets/en/lunacards-en-channel-banner-youtube-2560x1440-v6-site-ui-safe.png`; central safe-area check: `outputs/youtube-channel-assets/en/lunacards-en-channel-banner-safearea-preview-v6-site-ui-safe.png`.
+Визуально channel art должен быть продолжением сайта `flashcardsluna.com`: light `#f4f7f9` page background, white rounded library panels, soft blue-gray borders, real course-card thumbnail feel, blue CTA accents, restrained violet accent and deep navy typography. Первый broad site-style EN banner candidate: `outputs/youtube-channel-assets/en/lunacards-en-channel-banner-youtube-2560x1440-v8-site-ui-general-clean.png`; central safe-area check: `outputs/youtube-channel-assets/en/lunacards-en-channel-banner-safearea-preview-v8-site-ui-general-clean.png`. Narrower language-only alternative remains `outputs/youtube-channel-assets/en/lunacards-en-channel-banner-youtube-2560x1440-v6-site-ui-safe.png`.
+
+2026-06-19 localized site-style banner batch for `ES`, `PT`, `RU`, `HI`, `ID`, `FR`, `DE`, `JA`, `KO`, `TR` and `ZH` is stored under `outputs/youtube-channel-assets/<support-code>/`. The production upload file pattern is `lunacards-<code>-channel-banner-youtube-2560x1440-v1-site-ui.png`; the central visual check pattern is `lunacards-<code>-channel-banner-safearea-preview-v1-site-ui.png`; batch safe-area overview is `outputs/youtube-channel-assets/localized-safearea-contact-sheet-v1.png`. The Google Sheet tracker row for each generated language points at the upload-ready banner and the shared site-logo avatar `outputs/youtube-channel-assets/en/flashcardsluna-site-avatar-512.png`.
 
 Первый рабочий пакет для EN-канала создан в:
 
@@ -49,6 +52,206 @@ outputs/youtube-channel-assets/en/channel-package.md
 ```
 
 Он включает banner/avatar candidates, channel description, first playlists and the first two unlisted upload candidates from the GitHub EN support render test.
+
+Операционный трекер каналов ведется в Google Sheet `Ютуб курсы FCL`, tab `YouTube каналы`:
+
+```text
+https://docs.google.com/spreadsheets/d/1Uw5mO7Xy1asF-WlbRkphUCftaGDP6uVtu6xGgXD00_I/edit#gid=202606190
+```
+
+### 1.2. Video thumbnails
+
+Видео должны получать отдельную YouTube-обложку, а не полагаться только на первый intro slide. Thumbnail должен быть визуально из той же системы, что и channel art: light `#f4f7f9` background, white rounded card panels, soft blue accents, deep navy typography, restrained LunaCards branding and a clean premium flashcard feel. Он не должен быть темным, кричащим или кликбейтным; цель - быстро показать viewer language, target language/level and deck topic.
+
+2026-06-19 VectorEngine GPT Image 2 smoke showed that `gpt-image-2` is available through the OpenAI-compatible `/v1/images/generations` endpoint and can render difficult multilingual text materially better than older image models. Stress-test artifacts:
+
+```text
+outputs/tmp/vectorengine-image-text-smoke/gpt-image-2-min-text-20260619T083029Z.png
+outputs/tmp/vectorengine-image-text-smoke/gpt-image-2-hard-text-20260619T083215Z.png
+```
+
+The hard-text image visually preserved `LunaCards`, `日本語 A1`, `ქართული A1`, `العربية A1`, `தமிழ் A1` and `O‘zbek tili A1` well enough for thumbnail exploration. The earlier prompt with pipe separators produced an extra `|`, so thumbnail prompts must list exact text on separate lines and explicitly forbid separators/extra symbols. GPT Image 2 may be used for full thumbnail candidates, including rendered text, but mass generation still needs a readback gate: at minimum human visual spot-check for new scripts, and preferably OCR/vision validation before public upload at scale.
+
+### 1.3. Playlist architecture
+
+Status: **accepted implementation contract for YouTube playlist planning and upload automation**. New work should follow this path unless the user explicitly approves a revised strategy and this document plus [Decision Log](decision-log.md) are updated in the same cycle.
+
+Playlist strategy must optimize for viewer clarity, channel growth and automation safety, not for mirroring every generated file. Current DB/readback on 2026-06-19 shows:
+
+- `content_sets`: 42 ordinary thematic deck sets across `Home`, `Food & Eating`, `Core Foundation`, `Time`, `Shopping`, and adjacent domains;
+- isolated course tables outside ordinary deck sets: `oxford_vocabulary_*` (1,197 source rows / 5 releases in current local DB), `hsk_classic_*` (5,000 rows / 6 releases), `hsk3_*` (6,800 rows / 7 releases), and `spanish_a1_*` (1,800 rows / 6 releases);
+- active target/support language universe: 54 active language variants;
+- localized course/deck titles, descriptions, modules and categories live in `content_set_localizations`, so playlist titles, thumbnail copy and descriptions must use localized metadata when available, not internal `content_sets.set_name`.
+
+Therefore do **not** create a playlist per `(supportLang, targetLang, setId)` or per single small ordinary deck. That would create thousands of thin playlists, make channel pages unreadable, and waste YouTube API quota. Official YouTube constraints also push toward a compact playlist registry: `playlists.insert` and `playlistItems.insert` each cost 50 quota units, public playlist creation has daily channel limits, `playlists.insert` can fail with `maxPlaylistExceeded`, and a channel can feature at most 10 homepage shelves through `channelSections`.
+
+Official API/readback references used for this decision:
+
+- YouTube Data API `playlists.insert`: <https://developers.google.com/youtube/v3/docs/playlists/insert>
+- YouTube Data API `playlistItems.insert`: <https://developers.google.com/youtube/v3/docs/playlistItems/insert>
+- YouTube Data API `videos.insert`: <https://developers.google.com/youtube/v3/docs/videos/insert>
+- YouTube Data API `thumbnails.set`: <https://developers.google.com/youtube/v3/docs/thumbnails/set>
+- YouTube Data API `channelSections.insert`: <https://developers.google.com/youtube/v3/docs/channelSections/insert>
+- YouTube Help playlist basics and public playlist daily limit note: <https://support.google.com/youtube/answer/57792>
+
+Accepted grouping:
+
+1. **Channel = support/viewer language.** A Russian-native channel contains Russian explanations/translations; an English-native channel contains English explanations/translations.
+2. **Playlist = target language + course family + level/track.** Examples for the RU channel:
+   - `Испанский A1: базовый курс` for Spanish A1 Core videos;
+   - `Английский: Oxford 3000 Core` for Oxford Core English vocabulary videos;
+   - `Китайский HSK 3.0: Уровень 1` for HSK 3.0 Level 1;
+   - `Испанский A1: еда и дом` or `Испанский A1: бытовой словарь` for ordinary thematic decks once there is enough volume.
+3. **Course families stay separate when learner intent differs.** HSK Classic 2.0 and HSK 3.0 are separate playlists. Oxford 3000 Core and Oxford 5000 Advanced Extension are separate playlists. Spanish A1 Core is separate from ordinary Spanish thematic vocabulary.
+4. **Regional target variants share a support-language channel but may split playlists only when the actual learning content differs.** `ES` vs `ES-419`, `PT` vs `PT-BR`, and `EN` vs `EN-GB` should not become separate channels; they can become separate playlists when audio/text/positioning differs enough for learners.
+5. **Ordinary decks should be grouped by macro learner journey, not by exact deck title.** Start with target-language playlists like `Spanish A1 Everyday Vocabulary`, then split into `Food`, `Home`, `Travel`, `Core Verbs`, etc. only after a playlist has enough videos to justify a shelf.
+6. **Lazy-create playlists.** Create a playlist only when a flagship course exists or when at least 3-5 videos are ready for that playlist. Do not pre-create empty playlists for every possible language pair.
+
+Course family taxonomy for playlist keys:
+
+| `courseFamily` | Use for | Split rule |
+|---|---|---|
+| `ordinary-vocabulary` | ordinary thematic `content_sets` videos | Group by target language and macro learner journey such as `a1-everyday`, `a1-food`, `a1-home`; do not make one playlist per small deck. |
+| `spanish-a1-core` | isolated Spanish A1 Core course videos | Keep separate from ordinary Spanish vocabulary; split `ES` / `ES-419` only when the video content or positioning differs. |
+| `oxford-3000-core` | Oxford 3000 Core English vocabulary videos | Target is English; belongs on non-English support channels. Keep US/UK edition differences in track/variant only when content differs. |
+| `oxford-5000-advanced` | Oxford 5000 Advanced Extension videos | Separate from Oxford 3000 Core because learner intent and level differ. |
+| `hsk-classic` | HSK Classic 2.0 videos | Separate from HSK 3.0. Track by official level. |
+| `hsk3` | HSK 3.0 videos | Separate from HSK Classic. Include level and, if needed, curriculum/year variant. |
+| `english-core-3000` | future LunaCards-owned English Core 3000 videos | Separate from Oxford-branded benchmark/source-package work. |
+| `jlpt`, `topik`, `dele`, `goethe` | future exam/course families | Add only after source-of-truth course docs exist. |
+
+Automation must use a stable machine key, not localized playlist titles:
+
+```text
+playlist_key = <supportLang>__<targetLang>__<courseFamily>__<levelOrTrack>[__<variantOrYear>]
+```
+
+Examples:
+
+```text
+RU__ES__spanish-a1-core__a1
+RU__EN__oxford-3000-core__a1-a2
+RU__ZH__hsk3__level-1__2025
+EN__ES__ordinary-vocabulary__a1-everyday
+EN__ES-419__ordinary-vocabulary__a1-everyday
+```
+
+Initial playlist plan for the first channels:
+
+| support channel | first playlist keys to prepare | Notes |
+|---|---|---|
+| `RU` | `RU__ES__spanish-a1-core__a1`, `RU__EN__oxford-3000-core__a1-a2`, `RU__ZH__hsk3__level-1__2025`, later `RU__ES__ordinary-vocabulary__a1-everyday` | Russian-native channel. Target English content belongs here; do not make `RU__RU` self-learning playlists. |
+| `EN` | `EN__ES__spanish-a1-core__a1`, `EN__ZH__hsk3__level-1__2025`, `EN__RU__ordinary-vocabulary__a1-everyday`, later additional target-language ordinary tracks | English-native channel. Do not create `EN__EN` “learn English” playlists on the English-native channel; English-learning content belongs on non-English support channels. |
+| future support channels | start with the same high-signal flagship families, not all possible pairs | Create channels only after support-language branding/channel ID is known and enough videos exist. |
+
+Anti-rules:
+
+- Do not pre-create all 54 x 53 language-pair playlists.
+- Do not create empty playlists.
+- Do not create a playlist solely because one video file exists.
+- Do not use localized playlist title as identity; titles can change and localize, `playlist_key` must stay stable.
+- Do not infer public course URL from internal DB slug without site-route readback.
+- Do not rely on YouTube homepage shelves for the whole catalog; only 10 sections can be featured, so playlists must also work through search, video end screens/descriptions and channel playlist tab.
+- Do not let duplicate historical rows in `docs/video-lessons-registry.md` create duplicate playlist API calls.
+
+Future upload automation should add a machine-readable playlist registry before writing to YouTube:
+
+```text
+config/youtube-channels.json
+config/youtube-playlists.json
+outputs/youtube-publish-ledger.jsonl
+```
+
+The registry should store `playlist_key`, support channel key, target language, course family, level/track, localized title/description, `youtube_playlist_id` after creation, creation status, and last readback. `youtube_metadata.json` should carry the computed `playlist_key` so the uploader can create the playlist if missing and then call `playlistItems.insert` with the uploaded `videoId`.
+
+Implementation sequence:
+
+1. **Phase A - planner/dry-run only.** Add playlist-key computation and dry-run reports. No YouTube writes. Every video candidate must show `playlist_key`, localized playlist title, source evidence and either `publish_ready=true` or an explicit exclusion reason.
+2. **Phase B - manual channel/playlist registry.** Add `config/youtube-channels.json` and `config/youtube-playlists.json`; allow manual `youtube_channel_id` / `youtube_playlist_id` fill from YouTube Studio/API readback.
+3. **Phase C - uploader.** Only after OAuth/channel ownership is configured, add upload/private-or-unlisted flow, thumbnail set, playlist resolve/create, playlist item insert and ledger write.
+4. **Phase D - public publish.** Make videos public only after visual spot-check, description URL check, playlist membership readback and channel placement/readiness check.
+
+Recommended publication flow:
+
+1. generate video, thumbnail and `youtube_metadata.json`;
+2. validate metadata with `scripts/check-youtube-metadata.mjs`;
+3. upload video as `private` or `unlisted` first;
+4. set custom thumbnail only after image/OCR or human visual readback;
+5. resolve or create playlist by `playlist_key`;
+6. add the video to the playlist;
+7. write `videoId`, `playlistId`, `playlistItemId`, status, privacy, and readback timestamp to a machine-readable ledger;
+8. make public only after spot-checking the video, thumbnail, description URL, playlist membership and channel placement.
+
+Acceptance gates before any automated YouTube playlist writes:
+
+- dry-run report includes `supportLang`, `targetLang`, `setId` or course release id, `courseFamily`, `levelOrTrack`, computed `playlist_key`, localized playlist title/description and public course URL;
+- no duplicate `playlist_key` values with conflicting meanings;
+- every generated upload candidate has a playlist assignment or an explicit `playlist_excluded_reason`;
+- playlist create/add calls are idempotent and read back the resulting `youtube_playlist_id` / `playlistItemId`;
+- quota cost estimate is printed before a batch and the batch can stop before spending quota;
+- failures leave a ledger row with status and error, not an ambiguous half-published state;
+- `docs/video-lessons-strategy.md`, `docs/video-lessons-registry.md` and `docs/PROJECT_STATE.md` are updated when the workflow contract changes.
+
+Do not rely on `docs/video-lessons-registry.md` alone for playlist automation. That markdown table is useful as a human-readable status ledger, but playlist upload/publish needs a structured JSON/JSONL registry to avoid duplicates and title/localization drift.
+
+### 1.4. Background music and Content ID safety
+
+Status: **planned, disabled by default until owned-music readback passes**. Rollout decision: do **not** add background music to the first/current video deck batch. The first implementation and A/B check should happen on the **second video deck** after the current pilot batch, currently expected to be the next deck in the video pipeline (for example `home_bathroom_essentials_a1` if the documented Windows handover order is used).
+
+The project may use the user's original music as quiet background audio in YouTube lessons, but only through an explicit owned-music workflow. Because the tracks are managed through Content ID / a distributor, the operational risk is not ordinary copyright ownership; the risk is **self-claiming**: the distributor or Content ID asset may claim, monetize, block, or track the channel's own uploads unless the exact channel/video use is cleared.
+
+Before enabling background music at scale, each track must have a local manifest entry:
+
+```text
+assets/audio/background-music/original/
+config/youtube-background-music.json
+```
+
+Required manifest fields:
+
+- stable `musicTrackId`;
+- local file path and checksum;
+- display title;
+- composer/owner confirmation;
+- distributor name;
+- Content ID asset id if available;
+- ISRC/UPC if available;
+- rights territory / exclusivity notes;
+- allowed YouTube channel ids or handles;
+- whitelist/allowlist status at the distributor;
+- intended Content ID policy for LunaCards-owned videos: `allow_no_claim`, `track_only`, `monetize_owner_channel`, or `blocked_until_resolved`;
+- safe usage notes such as instrumental-only, no vocals, no uncleared samples, no third-party loops unless licensed for YouTube monetization.
+
+Default decision:
+
+- Do not upload videos with background music to public status until at least one private/unlisted test upload has been checked in YouTube Studio for copyright/Content ID status.
+- Prefer `allow_no_claim` or explicit channel allowlisting for LunaCards channels. If the distributor must claim the videos, this must be understood and documented before public release.
+- Do not use tracks that contain uncleared samples, vocals competing with TTS, aggressive bass, sudden stingers, or copyrighted third-party loops.
+- Do not choose music randomly without provenance. Use deterministic seeded rotation by `setId + supportLang + targetLang`, then write the selected `musicTrackId` to `youtube_metadata.json` and the future publish ledger.
+- Keep music off by default in CI/GitHub generation until `config/youtube-background-music.json` exists, test upload readback passes, and the user explicitly approves batch use.
+
+Rollout timing:
+
+1. **Current/first deck batch:** keep silent background. Do not change the audio mix while validating intro/outro, QR, metadata, playlists, thumbnails and upload flow.
+2. **Second deck pilot:** add 3-5 original instrumental tracks, create the manifest, implement deterministic music selection, and generate a small A/B sample with and without music.
+3. **Second deck Content ID readback:** upload one music-enabled video as private/unlisted, then check YouTube Studio copyright status and distributor allowlist behavior.
+4. **Later batch enablement:** only after the second-deck test passes, allow music in batch generation with explicit `musicTrackId` metadata and per-video ledger rows.
+
+Mixing rule:
+
+- Background music must be quiet and subordinate to TTS. Target practical level is around `-30` to `-36 LUFS` under speech, with fade in/out and ducking during spoken parts.
+- The renderer should mix music as a post-process audio step when possible, not force a full video re-render. Expected overhead target is roughly `+10-60s` per video depending on duration and host speed; actual timing must be measured with a small A/B batch before enabling mass generation.
+- Each output should record `musicTrackId`, source file checksum, mix level, ducking setting and generation duration in metadata/readback.
+
+Acceptance gate before mass use:
+
+1. Add 3-5 original instrumental tracks plus manifest entries.
+2. Generate a small A/B batch with and without music.
+3. Check speech intelligibility and loudness by listening/readback.
+4. Upload at least one private/unlisted test video to the intended channel.
+5. Check YouTube Studio copyright status after processing.
+6. Confirm distributor whitelist/allowlist behavior.
+7. Only then enable seeded rotation for batch generation.
 
 ---
 
@@ -296,6 +499,23 @@ VectorEngine helper keeps the Gemini REST payload shape aligned with the officia
 Для удобного пакетного запуска генерации видеоуроков по всем целевым языкам без ручной настройки отдельных процессов разработан автоматический CLI-скрипт: [build-all-deck-videos.mjs](file:///c:/Users/ramil/Desktop/luna/scripts/build-all-deck-videos.mjs).
 
 Скрипт автоматически опрашивает базу данных Prisma для выявления активных языков в системе, запускает рендеринг видеопотоков в параллельном режиме (с заданным лимитом concurrency) и самостоятельно заносит успешные результаты в [Video Lessons Registry](video-lessons-registry.md).
+
+### Fresh rerun of the first deck
+
+2026-06-19 rollout decision: the first video deck batch will be started again as a fresh run, as if the video pipeline is just beginning. The first deck is:
+
+```text
+home_kitchen_cookware_pilot_01
+```
+
+Rules for this rerun:
+
+- Treat older local/GitHub video outputs, downloaded artifacts and registry rows for `home_kitchen_cookware_pilot_01` as historical evidence only.
+- Do not infer current publish readiness from old `Pending` rows in [Video Lessons Registry](video-lessons-registry.md).
+- Start the first deck again with the current renderer, localized intro/outro, QR course URL, YouTube metadata, thumbnail direction and playlist strategy.
+- Keep background music disabled for this first fresh batch. Music is deferred to the second video deck pilot.
+- Use new output artifacts and metadata generated by the fresh run as the current evidence.
+- After the fresh run, update the human registry and future machine-readable ledger from readback, not from old rows.
 
 ### Требования для запуска:
 - Установленный Node.js (версии 18 и выше).

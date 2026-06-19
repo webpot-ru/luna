@@ -4,6 +4,20 @@
 
 Статус: **Source of Truth для реестра видеоуроков**.
 
+Важно: этот Markdown-документ является **человеческим реестром видео**, а не machine-readable ledger для YouTube upload/playlist automation. Историческая таблица ниже может содержать повторные pending-строки и рабочие записи по одному и тому же `set_id` / языковой паре; из нее нельзя напрямую создавать плейлисты, загружать видео или делать `playlistItems.insert`.
+
+Accepted playlist/upload contract lives in [Video Lessons Strategy - Playlist architecture](video-lessons-strategy.md#13-playlist-architecture). Future automation must use structured files:
+
+```text
+config/youtube-channels.json
+config/youtube-playlists.json
+outputs/youtube-publish-ledger.jsonl
+```
+
+The structured ledger must store stable `playlist_key`, `youtube_video_id`, `youtube_playlist_id`, `playlistItemId`, privacy/status, timestamp and readback result. This Markdown registry can summarize or link to those facts after readback, but it must not be the only state used for idempotent YouTube API writes.
+
+2026-06-19 fresh-run note: `home_kitchen_cookware_pilot_01` is being restarted as the first clean video batch. Existing rows below for this `set_id` from 2026-06-14 / 2026-06-15 and earlier GitHub/local video artifacts are historical working evidence only. Do not use them as current publish readiness, playlist membership, or upload state. The fresh rerun should append new current rows/readback instead of treating old `Pending` rows as active state.
+
 ---
 
 ## Реестр видеоуроков (Video Registry)
@@ -262,3 +276,9 @@
    * Разработчик (или AI-ассистент) добавляет новую запись в таблицу с датой сборки, параметрами компиляции и статусом `Pending`.
 2. **После публикации на YouTube**:
    * Пользователь (или разработчик) меняет статус на `Published` и вставляет прямую ссылку на видео в колонку «Ссылка на YouTube».
+3. **Для плейлистов и массовой публикации**:
+   * Не использовать эту Markdown-таблицу как источник истины для API-действий.
+   * Сначала выполнить dry-run playlist planner по правилам `docs/video-lessons-strategy.md#13-playlist-architecture`.
+   * Для каждого видео должен быть stable `playlist_key` или explicit `playlist_excluded_reason`.
+   * Создание плейлистов, загрузка видео, установка thumbnail и добавление в playlist должны писать machine-readable readback в `outputs/youtube-publish-ledger.jsonl`.
+   * После readback можно вручную или автоматически обновить этот human registry краткой строкой статуса.

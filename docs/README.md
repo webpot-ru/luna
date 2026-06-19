@@ -36,8 +36,8 @@
 | [Database Schema](database-schema.md) | Source of truth, schema v0 | Postgres-схема рабочей базы: languages, meaning units, entries, examples, sets, QA, batches and exports. |
 | [Language Transcription Policy](language-transcription-policy.md) | Source of truth, display policy v1 | Список языков, коды и единый формат `transcription`, который показывается в карточке. |
 | [Card Taxonomy](card-taxonomy.md) | Source of truth | Тематические domains, vocabulary-only situational domains, Home, Personal Life, Food & Eating, City & Transport, Shopping & Services, Money & Banking, Documents, Work & Study, Technology, Nature, Health, Travel, Leisure, Emergency taxonomy v0 и proposed additions. |
-| [Video Lessons Strategy](video-lessons-strategy.md) | Source of truth | Стратегия создания, технические спецификации и дистрибуция видеоуроков для YouTube. |
-| [Video Lessons Registry](video-lessons-registry.md) | Source of truth | Реестр сгенерированных видеоуроков и ссылок на YouTube. |
+| [Video Lessons Strategy](video-lessons-strategy.md) | Source of truth | Стратегия создания, технические спецификации и дистрибуция видеоуроков для YouTube, включая accepted playlist/upload automation contract. |
+| [Video Lessons Registry](video-lessons-registry.md) | Human-readable video registry | Реестр сгенерированных видеоуроков и ссылок на YouTube; не использовать как machine-readable ledger для playlist/upload API. |
 | [Grammar & Textbook Roadmap](grammar-roadmap.md) | Source of truth | Стратегический план и правила интеграции учебников грамматики (включая юридические правила именования). |
 | [Windows Handover & Setup Spec](windows-handover-spec.md) | Operations Guide | Руководство по развертыванию проекта и продолжению сборки видеоуроков на Windows. |
 | [Multi-Device Management Spec](multi-device-management.md) | Operations Guide | Руководство по настройке окружения на нескольких компьютерах и удаленному управлению сборкой видеоуроков через GitHub Actions. |

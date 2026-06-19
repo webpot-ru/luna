@@ -2,6 +2,19 @@ name: Test Single Video Build
 
 on:
   workflow_dispatch:
+    inputs:
+      set_id:
+        description: 'Set ID of the deck to compile'
+        required: true
+        default: 'home_kitchen_cookware_pilot_01'
+      support:
+        description: 'Support language for the test video'
+        required: true
+        default: 'RU'
+      langs:
+        description: 'Target language(s) comma-separated for the test video'
+        required: true
+        default: 'ES'
 
 jobs:
   build-test:
@@ -34,14 +47,30 @@ jobs:
 
     - name: Download Offline Deck Data from Google Drive
       run: |
-        mkdir -p data/decks
-        curl -c /tmp/cookies -sL "https://docs.google.com/uc?export=download&id=1W9tKVQPzvn8ZxZXtVEPPx0VcDaUzfRCF" > /tmp/confirm.html
-        CONFIRM=$(grep -o 'confirm=[^&\" ]*' /tmp/confirm.html | head -n1 | cut -d= -f2)
-        curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&confirm=${CONFIRM}&id=1W9tKVQPzvn8ZxZXtVEPPx0VcDaUzfRCF" -o "data/decks/home_kitchen_cookware_pilot_01.json"
+        SET_ID="${{ github.event.inputs.set_id }}"
+        FILE_ID=$(node -e "
+          const fs = require('fs');
+          const path = require('path');
+          const mappingPath = path.resolve('data/deck-sources.json');
+          if (fs.existsSync(mappingPath)) {
+            const mapping = JSON.parse(fs.readFileSync(mappingPath, 'utf8'));
+            console.log(mapping['$SET_ID'] || '');
+          }
+        ")
+        if [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
+          echo "Found Google Drive File ID for $SET_ID: $FILE_ID"
+          mkdir -p data/decks
+          curl -c /tmp/cookies -sL "https://docs.google.com/uc?export=download&id=${FILE_ID}" > /tmp/confirm.html
+          CONFIRM=$(grep -o 'confirm=[^&\" ]*' /tmp/confirm.html | head -n1 | cut -d= -f2)
+          curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&confirm=${CONFIRM}&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
+          echo "Downloaded offline data to data/decks/${SET_ID}.json"
+        else
+          echo "No Google Drive File ID found for $SET_ID in data/deck-sources.json. Running with local files if they exist."
+        fi
 
     - name: Run single test compilation
       run: |
-        node scripts/build-all-deck-videos.mjs --set home_kitchen_cookware_pilot_01 --support UZ --langs EN --concurrency 1
+        node scripts/build-all-deck-videos.mjs --set "${{ github.event.inputs.set_id }}" --support "${{ github.event.inputs.support }}" --langs "${{ github.event.inputs.langs }}" --concurrency 1
 
     - name: Generate YouTube metadata
       env:
@@ -59,12 +88,12 @@ jobs:
         elif [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
           GEMINI_ARGS="--with-gemini --gemini-backend api"
         fi
-        node scripts/generate-youtube-metadata.mjs --set home_kitchen_cookware_pilot_01 --support UZ --targets EN --privacy unlisted $GEMINI_ARGS
+        node scripts/generate-youtube-metadata.mjs --set "${{ github.event.inputs.set_id }}" --support "${{ github.event.inputs.support }}" --targets "${{ github.event.inputs.langs }}" --privacy unlisted $GEMINI_ARGS
         npm run check:youtube-metadata -- outputs/video-generator
 
     - name: Upload Videos as Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: test-single-video-uz
+        name: test-single-video-${{ github.event.inputs.support }}-${{ github.event.inputs.langs }}
         path: outputs/video-generator/
         retention-days: 1

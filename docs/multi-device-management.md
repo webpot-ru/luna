@@ -72,8 +72,10 @@ scripts/db-dump.sh
 
 Сборка видео на 54 языка — ресурсоемкий процесс. Чтобы не нагружать локальный компьютер (особенно если это ноутбук), вы можете запускать компиляцию видеоуроков напрямую в облаке GitHub Actions и следить за процессом локально.
 
+2026-06-19 fresh-run rule: the next GitHub video build should restart the first deck `home_kitchen_cookware_pilot_01` as a clean first batch. Treat earlier GitHub artifacts, downloaded videos and old `docs/video-lessons-registry.md` `Pending` rows for this set as historical. Keep background music disabled for this fresh first-deck run; music starts only on the second-deck pilot after Content ID readback.
+
 В репозитории настроены три облачных Workflow:
-1. `build-test-single.yml` — Быстрый тест сборки одного видеоурока (целевой язык ES, поддержка RU).
+1. `build-test-single.yml` — Быстрый тест сборки одного видеоурока. Default fresh-start test: `set_id=home_kitchen_cookware_pilot_01`, `support=RU`, `langs=ES`; inputs можно изменить вручную в GitHub Actions.
 2. `build-videos.yml` — Сборка видеоуроков для конкретных указанных языков поддержки (по умолчанию: UZ, AZ, KK, KA, HY).
 3. `build-all-videos-matrix.yml` — Массовая сборка для всех оставшихся языков (50 языков параллельно в облачной матрице).
 
@@ -142,3 +144,18 @@ node scripts/download-job-log.mjs 27521973958
   ```
 
 Результаты сборки будут сохранены в папку `outputs/video-generator/`, а в файл реестра `docs/video-lessons-registry.md` автоматически добавится запись со статусом `Pending`.
+
+### Background music rollout note
+
+Background music is **not** enabled for the first/current video deck batch. The first music-enabled render should be a second-deck pilot after the silent video flow is stable.
+
+Operational rule:
+
+- keep current GitHub/local video builds silent unless the command/config explicitly enables a documented music pilot;
+- put owned tracks only under `assets/audio/background-music/original/`;
+- add `config/youtube-background-music.json` before any music-enabled batch;
+- use deterministic seeded track selection, not untracked random choice;
+- write `musicTrackId` into adjacent `youtube_metadata.json` and the future publish ledger;
+- before public upload, run one private/unlisted YouTube Studio copyright readback for the second-deck pilot because the tracks are Content ID / distributor-managed.
+
+Source of truth: [Video Lessons Strategy - Background music and Content ID safety](video-lessons-strategy.md#14-background-music-and-content-id-safety).
