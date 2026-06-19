@@ -196,9 +196,20 @@ Do not rely on `docs/video-lessons-registry.md` alone for playlist automation. T
 
 ### 1.4. Background music and Content ID safety
 
-Status: **planned, disabled by default until owned-music readback passes**. Rollout decision: do **not** add background music to the first/current video deck batch. The first implementation and A/B check should happen on the **second video deck** after the current pilot batch, currently expected to be the next deck in the video pipeline (for example `home_bathroom_essentials_a1` if the documented Windows handover order is used).
+Status: **cancelled / not implementing**. 2026-06-19 business decision: do **not** add background music to LunaCards video lessons. The expected direct music-rights revenue is too low relative to the Content ID/self-claim risk, audio-mix complexity and possible harm to TTS intelligibility. The second video deck is no longer a music pilot; keep it silent as well.
 
-The project may use the user's original music as quiet background audio in YouTube lessons, but only through an explicit owned-music workflow. Because the tracks are managed through Content ID / a distributor, the operational risk is not ordinary copyright ownership; the risk is **self-claiming**: the distributor or Content ID asset may claim, monetize, block, or track the channel's own uploads unless the exact channel/video use is cleared.
+Default rule:
+
+- Do not add background music to generated videos.
+- Do not create `config/youtube-background-music.json`.
+- Do not add `musicTrackId` fields to `youtube_metadata.json` or the publish ledger.
+- Do not spend render time, API quota or YouTube test uploads on music A/B checks.
+- Keep the video audio focused on target-language TTS, support-language TTS, pauses and quiz audio.
+- If this decision is reconsidered later, the user must explicitly approve a new music rollout decision and this section must be updated before code changes.
+
+Archived fallback only:
+
+The project could technically use the user's original music as quiet background audio, but only through an explicit owned-music workflow. Because the tracks are managed through Content ID / a distributor, the operational risk is not ordinary copyright ownership; the risk is **self-claiming**: the distributor or Content ID asset may claim, monetize, block, or track the channel's own uploads unless the exact channel/video use is cleared.
 
 Before enabling background music at scale, each track must have a local manifest entry:
 
@@ -222,20 +233,13 @@ Required manifest fields:
 - intended Content ID policy for LunaCards-owned videos: `allow_no_claim`, `track_only`, `monetize_owner_channel`, or `blocked_until_resolved`;
 - safe usage notes such as instrumental-only, no vocals, no uncleared samples, no third-party loops unless licensed for YouTube monetization.
 
-Default decision:
+If music is ever reconsidered:
 
 - Do not upload videos with background music to public status until at least one private/unlisted test upload has been checked in YouTube Studio for copyright/Content ID status.
 - Prefer `allow_no_claim` or explicit channel allowlisting for LunaCards channels. If the distributor must claim the videos, this must be understood and documented before public release.
 - Do not use tracks that contain uncleared samples, vocals competing with TTS, aggressive bass, sudden stingers, or copyrighted third-party loops.
 - Do not choose music randomly without provenance. Use deterministic seeded rotation by `setId + supportLang + targetLang`, then write the selected `musicTrackId` to `youtube_metadata.json` and the future publish ledger.
 - Keep music off by default in CI/GitHub generation until `config/youtube-background-music.json` exists, test upload readback passes, and the user explicitly approves batch use.
-
-Rollout timing:
-
-1. **Current/first deck batch:** keep silent background. Do not change the audio mix while validating intro/outro, QR, metadata, playlists, thumbnails and upload flow.
-2. **Second deck pilot:** add 3-5 original instrumental tracks, create the manifest, implement deterministic music selection, and generate a small A/B sample with and without music.
-3. **Second deck Content ID readback:** upload one music-enabled video as private/unlisted, then check YouTube Studio copyright status and distributor allowlist behavior.
-4. **Later batch enablement:** only after the second-deck test passes, allow music in batch generation with explicit `musicTrackId` metadata and per-video ledger rows.
 
 Mixing rule:
 

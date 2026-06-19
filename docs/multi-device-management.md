@@ -147,15 +147,14 @@ node scripts/download-job-log.mjs 27521973958
 
 ### Background music rollout note
 
-Background music is **not** enabled for the first/current video deck batch. The first music-enabled render should be a second-deck pilot after the silent video flow is stable.
+Background music is **not enabled and not planned** for current GitHub/local video builds. The earlier second-deck music pilot idea was cancelled on 2026-06-19.
 
 Operational rule:
 
-- keep current GitHub/local video builds silent unless the command/config explicitly enables a documented music pilot;
-- put owned tracks only under `assets/audio/background-music/original/`;
-- add `config/youtube-background-music.json` before any music-enabled batch;
-- use deterministic seeded track selection, not untracked random choice;
-- write `musicTrackId` into adjacent `youtube_metadata.json` and the future publish ledger;
-- before public upload, run one private/unlisted YouTube Studio copyright readback for the second-deck pilot because the tracks are Content ID / distributor-managed.
+- keep all GitHub/local video builds silent;
+- do not add `config/youtube-background-music.json`;
+- do not add `musicTrackId` to adjacent `youtube_metadata.json` or future publish ledger rows;
+- do not run music A/B tests or private/unlisted YouTube copyright test uploads;
+- if the user explicitly reopens the idea later, update `docs/video-lessons-strategy.md` first and only then implement a new owned-music workflow.
 
 Source of truth: [Video Lessons Strategy - Background music and Content ID safety](video-lessons-strategy.md#14-background-music-and-content-id-safety).
