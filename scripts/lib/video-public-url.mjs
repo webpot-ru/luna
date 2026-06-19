@@ -1,11 +1,28 @@
 import fs from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
-import QRCode from "qrcode";
 
 const configPath = path.resolve("config/video-public-course-links.json");
+const require = createRequire(import.meta.url);
 const DEFAULT_SITE_BASE_URL = "https://flashcardsluna.com";
 const DEFAULT_LANGUAGE = "en";
 const DEFAULT_FALLBACK_COURSE_PATH = "courses";
+const PUBLIC_SITE_LANGUAGE_PATH_OVERRIDES = {
+  EN: "en",
+  "EN-GB": "en",
+  US: "en",
+  UK: "en",
+  GB: "en",
+  ES: "es",
+  "ES-419": "es",
+  "ES-LATAM": "es",
+  LATAM: "es",
+  MX: "es",
+  PT: "pt",
+  "PT-BR": "pt",
+  BR: "pt",
+  BRAZILIAN: "pt"
+};
 
 function loadConfig() {
   try {
@@ -16,6 +33,7 @@ function loadConfig() {
 }
 
 const config = loadConfig();
+let qrCodeModule;
 
 function trimSlashes(value) {
   return String(value || "").trim().replace(/^\/+|\/+$/g, "");
@@ -25,9 +43,14 @@ function getBaseUrl() {
   return String(config.siteBaseUrl || DEFAULT_SITE_BASE_URL).replace(/\/+$/g, "");
 }
 
-export function getSiteLanguagePath(supportLang) {
-  const lang = String(supportLang || "").toUpperCase();
+function normalizeLanguageCode(value) {
+  return String(value || "").trim().replace(/_/g, "-").toUpperCase();
+}
+
+export function getPublicSiteLanguagePath(languageCode) {
+  const lang = normalizeLanguageCode(languageCode);
   return (
+    PUBLIC_SITE_LANGUAGE_PATH_OVERRIDES[lang] ||
     config.languagePathBySupportLanguage?.[lang] ||
     (lang ? lang.toLowerCase().split("-")[0] : "") ||
     config.defaultLanguage ||
@@ -35,8 +58,17 @@ export function getSiteLanguagePath(supportLang) {
   );
 }
 
+export function getSiteLanguagePath(supportLang) {
+  return getPublicSiteLanguagePath(supportLang);
+}
+
 function getTargetStudyLanguageCode(targetLang) {
   return String(targetLang || "").trim().toLowerCase();
+}
+
+function getQrCodeModule() {
+  qrCodeModule ||= require("qrcode");
+  return qrCodeModule.default || qrCodeModule;
 }
 
 export function getPublicCourseUrl({ setId, supportLang, targetLang } = {}) {
@@ -64,6 +96,7 @@ export function getPublicCourseDisplayUrl(url) {
 }
 
 export function getQrCodeImageUrl(url, size = 350) {
+  const QRCode = getQrCodeModule();
   const qr = QRCode.create(String(url || DEFAULT_SITE_BASE_URL), {
     errorCorrectionLevel: "M"
   });

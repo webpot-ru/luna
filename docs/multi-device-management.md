@@ -70,9 +70,9 @@ scripts/db-dump.sh
 
 ## 4. Удаленное управление сборкой видеоуроков через GitHub Actions
 
-Сборка видео на 54 языка — ресурсоемкий процесс. Чтобы не нагружать локальный компьютер (особенно если это ноутбук), вы можете запускать компиляцию видеоуроков напрямую в облаке GitHub Actions и следить за процессом локально.
+Сборка видео на 54 языковых варианта — ресурсоемкий процесс. Чтобы не нагружать локальный компьютер (особенно если это ноутбук), вы можете запускать компиляцию видеоуроков напрямую в облаке GitHub Actions и следить за процессом локально. Не путать это с 51 публичным языковым разделом сайта: `PT-BR`, `ES-419` and `EN-GB` могут оставаться в видео и `langs=...`, но site path должен быть `/pt`, `/es` and `/en`.
 
-2026-06-19 fresh-run rule: the next GitHub video build should restart the first deck `home_kitchen_cookware_pilot_01` as a clean first batch. Treat earlier GitHub artifacts, downloaded videos and old `docs/video-lessons-registry.md` `Pending` rows for this set as historical. Keep background music disabled for this fresh first-deck run; music starts only on the second-deck pilot after Content ID readback.
+2026-06-19 fresh-run rule: the next GitHub video build should restart the first deck `home_kitchen_cookware_pilot_01` as a clean first batch. Treat earlier GitHub artifacts, downloaded videos and old `docs/video-lessons-registry.md` `Pending` rows for this set as historical. Keep background music disabled for this fresh first-deck run and future batches unless the user explicitly reopens the cancelled music decision. Regional variants such as `EN-GB`, `ES-419` and `PT-BR` remain valid deck/video language variants; only public website paths collapse to `/en`, `/es` and `/pt` through `scripts/lib/video-public-url.mjs`.
 
 В репозитории настроены три облачных Workflow:
 1. `build-test-single.yml` — Быстрый тест сборки одного видеоурока. Default fresh-start test: `set_id=home_kitchen_cookware_pilot_01`, `support=RU`, `langs=ES`; inputs можно изменить вручную в GitHub Actions.
