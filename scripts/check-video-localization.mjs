@@ -119,9 +119,10 @@ for (const languageCode of Object.keys(localization)) {
 
 const knownPublishedUrl = getPublicCourseUrl({
   setId: "home_kitchen_cookware_pilot_01",
-  supportLang: "RU"
+  supportLang: "RU",
+  targetLang: "ES"
 });
-if (knownPublishedUrl !== "https://flashcardsluna.com/ru/courses/home-kitchen-kitchenware-basics") {
+if (knownPublishedUrl !== "https://flashcardsluna.com/ru/courses/kitchenware-basic/study/standard?langs=es") {
   blockers.push({
     languageCode: "RU",
     key: "outro_url",

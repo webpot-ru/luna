@@ -624,7 +624,7 @@ async function main() {
   const outroTitle = langData.outro_title || "Learn these words forever";
   const outroSubtitle = langData.outro_subtitle || "Practice decks for free on our website";
   const qrScanLabel = langData.qr_scan_label || "Scan me";
-  const outroUrl = getPublicCourseUrl({ setId, supportLang });
+  const outroUrl = getPublicCourseUrl({ setId, supportLang, targetLang });
   const outroDisplayUrl = getPublicCourseDisplayUrl(outroUrl);
   const outroQrImageSrc = getQrCodeImageUrl(outroUrl);
   console.log(`  -> Outro QR URL: ${outroUrl}`);

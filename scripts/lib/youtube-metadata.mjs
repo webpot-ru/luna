@@ -169,7 +169,7 @@ export function buildTemplateYouTubeMetadata(input) {
   } = input;
   const deckTitle = stripSentenceTerminator(deckMetadata?.title) || "Vocabulary Lesson";
   const level = extractLevel(setId, deckMetadata);
-  const courseUrl = getPublicCourseUrl({ setId, supportLang });
+  const courseUrl = getPublicCourseUrl({ setId, supportLang, targetLang });
   const courseDisplayUrl = getPublicCourseDisplayUrl(courseUrl);
   const targetLanguageName = getLanguageNameInLang(targetLang, supportLang);
   const wordCount = cards.length;
@@ -324,7 +324,11 @@ function capTagBudget(tags, maxChars = 450) {
 export function normalizeYouTubeMetadata(metadata) {
   const tags = capTagBudget(uniqueStrings(metadata.tags || []));
   const hashtags = uniqueStrings((metadata.hashtags || []).map(normalizeHashtag)).slice(0, 5);
-  const courseUrl = metadata.courseUrl || getPublicCourseUrl({ setId: metadata.setId, supportLang: metadata.supportLang });
+  const courseUrl = metadata.courseUrl || getPublicCourseUrl({
+    setId: metadata.setId,
+    supportLang: metadata.supportLang,
+    targetLang: metadata.targetLang
+  });
   let description = String(metadata.description || "").trim();
   if (courseUrl && !description.includes(courseUrl)) {
     description = `${description.trim()}\n\n${courseUrl}`.trim();

@@ -35,13 +35,20 @@ export function getSiteLanguagePath(supportLang) {
   );
 }
 
-export function getPublicCourseUrl({ setId, supportLang } = {}) {
+function getTargetStudyLanguageCode(targetLang) {
+  return String(targetLang || "").trim().toLowerCase();
+}
+
+export function getPublicCourseUrl({ setId, supportLang, targetLang } = {}) {
   const baseUrl = getBaseUrl();
   const languagePath = trimSlashes(getSiteLanguagePath(supportLang));
   const coursePath = trimSlashes(config.fallbackCoursePath || DEFAULT_FALLBACK_COURSE_PATH);
   const courseSlug = trimSlashes(config.publishedCourseSlugBySetId?.[setId]);
   const pathParts = [languagePath, coursePath, courseSlug].filter(Boolean);
-  return `${baseUrl}/${pathParts.join("/")}`;
+  const courseUrl = `${baseUrl}/${pathParts.join("/")}`;
+  const targetStudyLang = getTargetStudyLanguageCode(targetLang);
+  if (!courseSlug || !targetStudyLang) return courseUrl;
+  return `${courseUrl}/study/standard?langs=${encodeURIComponent(targetStudyLang)}`;
 }
 
 export function getPublicCourseDisplayUrl(url) {
