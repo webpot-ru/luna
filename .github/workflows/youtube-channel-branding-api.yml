@@ -1,0 +1,136 @@
+name: YouTube Channel Branding API
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "What to run: plan is local-only; readback/apply use YouTube API tokens."
+        required: true
+        default: "readback"
+        type: choice
+        options:
+          - plan
+          - readback
+          - apply
+      scope:
+        description: "Channel scope when channels is empty."
+        required: true
+        default: "assigned"
+        type: choice
+        options:
+          - assigned
+          - not-configured
+          - configured
+          - all
+      channels:
+        description: "Optional comma-separated channel keys, e.g. it,vi,th. Overrides scope."
+        required: false
+        default: ""
+      exclude:
+        description: "Optional comma-separated channel keys to skip."
+        required: false
+        default: ""
+      force_configured:
+        description: "Allow apply to touch configured_readback channels. Required with scope=all."
+        required: true
+        default: false
+        type: boolean
+      confirm_youtube_write:
+        description: "For mode=apply type APPLY_API_BRANDING."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  channel-branding-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Materialize public branding assets
+        run: node scripts/sync-youtube-channel-branding-assets.mjs --to-outputs --verify
+
+      - name: Restore YouTube OAuth bundle from secret
+        if: ${{ github.event.inputs.mode == 'readback' || github.event.inputs.mode == 'apply' }}
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing Actions secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+          echo "YouTube OAuth bundle restored for this runner."
+
+      - name: Plan API-manageable branding
+        if: ${{ github.event.inputs.mode == 'plan' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run plan:youtube-channel-branding -- --json > outputs/youtube-channel-assets/github-youtube-channel-branding-plan.json
+          node -e "const fs=require('fs'); const p='outputs/youtube-channel-assets/github-youtube-channel-branding-plan.json'; const r=JSON.parse(fs.readFileSync(p,'utf8')); console.log('planned_channels='+(r.plans||[]).length); console.log('report='+p);"
+
+      - name: YouTube API branding readback
+        if: ${{ github.event.inputs.mode == 'readback' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ARGS=()
+          if [ -n "${{ github.event.inputs.channels }}" ]; then
+            ARGS+=("--channels=${{ github.event.inputs.channels }}")
+          else
+            ARGS+=("--scope=${{ github.event.inputs.scope }}")
+          fi
+          if [ -n "${{ github.event.inputs.exclude }}" ]; then
+            ARGS+=("--exclude=${{ github.event.inputs.exclude }}")
+          fi
+          npm run check:youtube-channel-branding-readback -- "${ARGS[@]}"
+
+      - name: Apply YouTube API branding
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event.inputs.confirm_youtube_write }}" != "APPLY_API_BRANDING" ]; then
+            echo "::error::mode=apply requires confirm_youtube_write=APPLY_API_BRANDING"
+            exit 1
+          fi
+          ARGS=("--apply" "--confirm-youtube-write")
+          if [ -n "${{ github.event.inputs.channels }}" ]; then
+            ARGS+=("--channels=${{ github.event.inputs.channels }}")
+          else
+            ARGS+=("--scope=${{ github.event.inputs.scope }}")
+          fi
+          if [ -n "${{ github.event.inputs.exclude }}" ]; then
+            ARGS+=("--exclude=${{ github.event.inputs.exclude }}")
+          fi
+          if [ "${{ github.event.inputs.force_configured }}" = "true" ]; then
+            ARGS+=("--force-configured")
+          fi
+          npm run apply:youtube-channel-branding-batch -- "${ARGS[@]}"
+
+      - name: Upload non-secret reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-channel-branding-api-reports
+          if-no-files-found: warn
+          retention-days: 7
+          path: |
+            outputs/youtube-channel-assets/github-youtube-channel-branding-plan.json
+            outputs/youtube-channel-assets/youtube-channel-branding-apply-*.json
+            outputs/youtube-channel-assets/youtube-channel-branding-readback-*.json
