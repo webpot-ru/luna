@@ -177,13 +177,15 @@ GitHub Actions safe API branding workflow:
 
 This workflow is for the official API-manageable channel branding subset only: banner upload, `brandingSettings.channel.description` and player watermark. It does not change channel title/name, handle, profile avatar/icon, contact email or public profile links. It is manual-only through `workflow_dispatch`, and apply mode requires the explicit input `confirm_youtube_write=APPLY_API_BRANDING`.
 
-The workflow does not store OAuth files in Git. Runtime secrets are restored only on the runner from the repository secret `YOUTUBE_OAUTH_BUNDLE_TGZ_B64`, created from local gitignored OAuth files without printing contents:
+The workflow does not store OAuth files in Git. Runtime secrets are restored only on the runner from the GitHub Environment secret `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` in environment `youtube-api-branding`, created from local gitignored OAuth files without printing contents:
 
 ```bash
 tar -czf - .local/youtube-oauth/google-oauth-client.json .local/youtube-oauth/tokens \
   | base64 | tr -d '\n' \
-  | gh secret set YOUTUBE_OAUTH_BUNDLE_TGZ_B64 --body-file -
+  | gh secret set --env youtube-api-branding YOUTUBE_OAUTH_BUNDLE_TGZ_B64
 ```
+
+In GitHub UI, configure the `youtube-api-branding` environment with required reviewers before running `mode=apply`; this keeps the long-lived YouTube refresh-token bundle out of normal repository-wide workflow execution.
 
 The workflow uses committed public branding assets mirrored under `assets/youtube-channel-branding/`. That mirror is generated from the current `config/youtube-channels.json` references and the local `outputs/youtube-channel-assets/` files:
 

@@ -46,6 +46,7 @@ permissions:
 jobs:
   channel-branding-api:
     runs-on: ubuntu-latest
+    environment: youtube-api-branding
     timeout-minutes: 60
 
     steps:
