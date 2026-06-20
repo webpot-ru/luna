@@ -82,7 +82,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          npm run plan:youtube-channel-branding -- --json > outputs/youtube-channel-assets/github-youtube-channel-branding-plan.json
+          node scripts/youtube-channel-branding.mjs --dry-run --json > outputs/youtube-channel-assets/github-youtube-channel-branding-plan.json
           node -e "const fs=require('fs'); const p='outputs/youtube-channel-assets/github-youtube-channel-branding-plan.json'; const r=JSON.parse(fs.readFileSync(p,'utf8')); console.log('planned_channels='+(r.plans||[]).length); console.log('report='+p);"
 
       - name: YouTube API branding readback
