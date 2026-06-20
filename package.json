@@ -18,7 +18,8 @@
     "resolve:youtube-channel-handles": "node scripts/youtube-channel-branding.mjs --resolve-handles",
     "sync:youtube-channel-sheet": "node scripts/sync-youtube-channel-sheet.mjs",
     "apply:youtube-channel-positioning-copy": "node scripts/apply-youtube-channel-positioning-copy.mjs",
-    "apply:youtube-channel-branding-batch": "node scripts/apply-youtube-channel-branding-batch.mjs"
+    "apply:youtube-channel-branding-batch": "node scripts/apply-youtube-channel-branding-batch.mjs",
+    "check:youtube-channel-branding-readback": "node scripts/check-youtube-channel-branding-readback.mjs"
   },
   "dependencies": {
     "playwright": "^1.44.0",
