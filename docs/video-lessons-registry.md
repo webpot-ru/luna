@@ -26,7 +26,7 @@ These rows are current YouTube upload/readback facts from the structured GitHub 
 
 | Set ID | Title | Target | Support | Built / Uploaded | GitHub run | Status | Video | Playlist | Readback |
 |---|---|---|---|---|---|---|---|---|---|
-| `home_kitchen_cookware_pilot_01` | Испанский язык: Кухонная посуда (A1) \| 50 испанских слов с произношением | ES | RU | 2026-06-21 | `27899494910` | `uploaded`, `unlisted`, thumbnail set | https://www.youtube.com/watch?v=xOh97WAt53k | https://www.youtube.com/playlist?list=PLx5nIeqMBQ7kjzCzItWOtLDCjmHJjYJXq | channel `UC1f5EyXEMejXIumH9104GMA`, playlist item `UEx4NW5JZXFNQlE3a2p6Q3pJdFdPdExEQ2ptSEpqWUpYcS41NkI0NEY2RDEwNTU3Q0M2`, metadata `source=gemini-vectorengine` |
+| `home_kitchen_cookware_pilot_01` | Испанский язык для начинающих: Кухонная посуда (A1) \| 50 слов с произношением | ES | RU | 2026-06-21 | `27900462868` | `uploaded`, `unlisted`, thumbnail set, logo overlay | https://www.youtube.com/watch?v=dWk3ncNgrFU | https://www.youtube.com/playlist?list=PLx5nIeqMBQ7kjzCzItWOtLDCjmHJjYJXq | channel `UC1f5EyXEMejXIumH9104GMA`, playlist item `UEx4NW5JZXFNQlE3a2p6Q3pJdFdPdExEQ2ptSEpqWUpYcS4yODlGNEE0NkRGMEEzMEQy`, metadata `source=gemini-vectorengine`, thumbnail `thumbnailLogoOverlay=true`; supersedes old unlisted upload `xOh97WAt53k` |
 
 ---
 
