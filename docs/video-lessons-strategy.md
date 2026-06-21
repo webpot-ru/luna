@@ -757,6 +757,8 @@ npm run check:vectorengine-gemini -- --env-file /path/to/.env --confirm-spend
 
 VectorEngine helper keeps the Gemini REST payload shape aligned with the official Gemini API text-generation docs: `contents[].parts[].text`, optional `systemInstruction` / `system_instruction`, `generationConfig`, and JSON parsing from `generateContent`. SSE parsing for `streamGenerateContent?alt=sse` remains available behind `VECTORENGINE_GEMINI_METHOD=streamGenerateContent`, but production defaults to `generateContent` because that is the tested stable VectorEngine path for `gemini-3.5-flash`. The project code uses `systemInstruction` because that is the shape shown in the JavaScript/App Script examples and accepted by the VectorEngine compatibility layer. Calls have a bounded timeout (`VECTORENGINE_TIMEOUT_MS`, default 120000ms) so GitHub jobs do not hang indefinitely on a saturated upstream stream.
 
+VectorEngine image generation for thumbnails is intentionally bounded too: `VECTORENGINE_IMAGE_TIMEOUT_MS` defaults to 180000ms per attempt, and `VECTORENGINE_IMAGE_RETRIES` defaults to 2 recoverable retries for `fetch failed`, timeout, HTTP 429 and HTTP 5xx cases. Missing keys, auth failures and non-recoverable 4xx responses remain hard failures. This keeps flaky `gpt-image-2` calls from hanging a GitHub job for a long time while still allowing a transient upstream/network failure to recover.
+
 ---
 
 ## 5. Техническая реализация и оптимизация производительности (Tech Pipeline & Speed Optimizations)

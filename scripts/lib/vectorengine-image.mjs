@@ -2,7 +2,39 @@ import fs from "node:fs";
 
 export const DEFAULT_VECTORENGINE_BASE_URL = "https://api.vectorengine.ai";
 export const DEFAULT_VECTORENGINE_IMAGE_MODEL = "gpt-image-2";
-export const DEFAULT_VECTORENGINE_IMAGE_TIMEOUT_MS = 420000;
+export const DEFAULT_VECTORENGINE_IMAGE_TIMEOUT_MS = 180000;
+export const DEFAULT_VECTORENGINE_IMAGE_RETRIES = 2;
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function normalizePositiveInteger(value, fallback) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed >= 0 ? Math.floor(parsed) : fallback;
+}
+
+function boundedErrorMessage(error) {
+  return String(error?.message || error || "unknown VectorEngine image error")
+    .replace(/\s+/gu, " ")
+    .trim()
+    .slice(0, 600);
+}
+
+function isRecoverableImageError(error) {
+  const message = boundedErrorMessage(error);
+  return [
+    /fetch failed/iu,
+    /timed out/iu,
+    /timeout/iu,
+    /aborted/iu,
+    /ECONNRESET/iu,
+    /ETIMEDOUT/iu,
+    /EAI_AGAIN/iu,
+    /HTTP 429/iu,
+    /HTTP 5\d\d/iu,
+  ].some((pattern) => pattern.test(message));
+}
 
 export function loadDotEnvFile(filePath) {
   if (!filePath || !fs.existsSync(filePath)) return false;
@@ -39,12 +71,48 @@ export async function callVectorEngineImage({
   size = "1536x864",
   apiKey,
   baseUrl = process.env.VECTORENGINE_BASE_URL || DEFAULT_VECTORENGINE_BASE_URL,
-  timeoutMs = Number(process.env.VECTORENGINE_IMAGE_TIMEOUT_MS || DEFAULT_VECTORENGINE_IMAGE_TIMEOUT_MS),
+  timeoutMs = normalizePositiveInteger(process.env.VECTORENGINE_IMAGE_TIMEOUT_MS, DEFAULT_VECTORENGINE_IMAGE_TIMEOUT_MS),
+  retries = normalizePositiveInteger(process.env.VECTORENGINE_IMAGE_RETRIES, DEFAULT_VECTORENGINE_IMAGE_RETRIES),
 }) {
   if (!apiKey) {
     throw new Error("VECTORENGINE_API_KEY or VECTOR_ENGINE_API_KEY is required for VectorEngine image generation.");
   }
   const endpoint = String(baseUrl || DEFAULT_VECTORENGINE_BASE_URL).replace(/\/+$/u, "");
+  const attempts = retries + 1;
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await callVectorEngineImageOnce({
+        prompt,
+        model,
+        size,
+        apiKey,
+        endpoint,
+        timeoutMs,
+      });
+    } catch (error) {
+      lastError = error;
+      if (attempt >= attempts || !isRecoverableImageError(error)) {
+        throw error;
+      }
+      const delayMs = Math.min(15000, 3000 * attempt);
+      console.warn(
+        `[VECTORENGINE_IMAGE_RETRY] attempt ${attempt}/${attempts} failed; retrying in ${delayMs}ms: ${boundedErrorMessage(error)}`
+      );
+      await sleep(delayMs);
+    }
+  }
+  throw lastError;
+}
+
+async function callVectorEngineImageOnce({
+  prompt,
+  model,
+  size,
+  apiKey,
+  endpoint,
+  timeoutMs,
+}) {
   const response = await fetch(`${endpoint}/v1/images/generations`, {
     method: "POST",
     signal: AbortSignal.timeout(timeoutMs),
