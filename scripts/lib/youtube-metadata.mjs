@@ -64,6 +64,29 @@ function truncateAtWord(value, maxLength) {
   return `${(lastSpace > 40 ? cut.slice(0, lastSpace) : cut).trim()}…`;
 }
 
+function boundedAiError(error) {
+  return cleanText(error?.message || String(error || "unknown AI metadata error")).slice(0, 600);
+}
+
+function isStrictAiMetadataMode() {
+  return /^(1|true|yes)$/iu.test(String(process.env.YOUTUBE_METADATA_AI_STRICT || ""));
+}
+
+function isRecoverableAiMetadataError(error) {
+  const message = boundedAiError(error);
+  return [
+    /did not return JSON/iu,
+    /returned empty text/iu,
+    /Unexpected token/iu,
+    /JSON.parse/iu,
+    /timed out/iu,
+    /fetch failed/iu,
+    /ECONNRESET/iu,
+    /HTTP 5\d\d/iu,
+    /HTTP 429/iu
+  ].some((pattern) => pattern.test(message));
+}
+
 function extractLevel(setId, metadata) {
   const signal = stripSentenceTerminator(metadata?.levelSignal);
   if (signal) return signal;
@@ -314,7 +337,7 @@ async function callGeminiCli(prompt, { model = defaultGeminiCliModel } = {}) {
 }
 
 async function callGeminiVectorEngine(prompt, { model = defaultVectorEngineGeminiModel, maxOutputTokens = 1600 } = {}) {
-  return callVectorEngineGeminiJson({
+  const request = {
     prompt,
     schema: YOUTUBE_METADATA_SCHEMA,
     model,
@@ -325,7 +348,31 @@ async function callGeminiVectorEngine(prompt, { model = defaultVectorEngineGemin
       "Return strict JSON only and follow the provided schema.",
       "Do not include hidden reasoning, Markdown, comments or extra fields."
     ].join(" ")
-  });
+  };
+  try {
+    return await callVectorEngineGeminiJson(request);
+  } catch (error) {
+    if (!/did not return JSON|returned empty text|Unexpected token|JSON\.parse/iu.test(boundedAiError(error))) {
+      throw error;
+    }
+    return callVectorEngineGeminiJson({
+      ...request,
+      temperature: 0,
+      systemInstruction: [
+        "You are a strict JSON compiler.",
+        "Return exactly one valid JSON object and nothing else.",
+        "No Markdown, no explanation, no numbered lists, no comments."
+      ].join(" "),
+      prompt: [
+        prompt,
+        "",
+        "CRITICAL FORMAT REQUIREMENT:",
+        "Output exactly one JSON object with these keys only: title, description, tags, hashtags.",
+        "Example shape:",
+        '{"title":"...","description":"...","tags":["..."],"hashtags":["#..."]}'
+      ].join("\n")
+    });
+  }
 }
 
 function normalizeHashtag(value) {
@@ -403,11 +450,32 @@ export async function generateYouTubeMetadata(input) {
       ? defaultGeminiApiModel
       : (backend === "vectorengine" ? defaultVectorEngineGeminiModel : defaultGeminiCliModel)
   );
-  const generated = backend === "api"
-    ? await callGeminiApi(prompt, { model })
-    : (backend === "vectorengine"
-      ? await callGeminiVectorEngine(prompt, { model })
-      : await callGeminiCli(prompt, { model }));
+  let generated;
+  try {
+    generated = backend === "api"
+      ? await callGeminiApi(prompt, { model })
+      : (backend === "vectorengine"
+        ? await callGeminiVectorEngine(prompt, { model })
+        : await callGeminiCli(prompt, { model }));
+  } catch (error) {
+    if (isStrictAiMetadataMode() || !isRecoverableAiMetadataError(error)) {
+      throw error;
+    }
+    const message = boundedAiError(error);
+    console.warn(`[YOUTUBE_METADATA_AI_FALLBACK] ${backend}/${model}: ${message}`);
+    return normalizeYouTubeMetadata({
+      ...template,
+      source: "template-ai-fallback",
+      aiMetadata: {
+        attempted: true,
+        backend,
+        model,
+        status: "fallback",
+        error: message
+      },
+      generatedAt: new Date().toISOString()
+    });
+  }
 
   return normalizeYouTubeMetadata({
     ...template,

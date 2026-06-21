@@ -248,7 +248,7 @@ function validate(metadata, file) {
   if (titleLength > 90) warnings.push(`title above preferred search title range 45-90 chars: ${titleLength}`);
   if (!hasSiblingThumbnail(file)) warnings.push("no sibling thumbnail/cover/poster file found; YouTube thumbnail SEO still needs visual QA");
   if (!playlistKey) warnings.push("missing playlist_key; publish planner can compute it, but fresh metadata should carry it");
-  if (String(metadata.source || "") === "template" && !["EN", "RU", "ES", "ES-419", "PT", "PT-BR"].includes(String(metadata.supportLang || "").toUpperCase())) {
+  if (String(metadata.source || "").startsWith("template") && !["EN", "RU", "ES", "ES-419", "PT", "PT-BR"].includes(String(metadata.supportLang || "").toUpperCase())) {
     warnings.push("template metadata for this support language needs AI/native polish before public publish");
   }
   if (containsAny(searchTextLower, CLICKBAIT_OR_UNSUPPORTED_PATTERNS)) {
