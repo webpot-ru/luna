@@ -503,12 +503,13 @@ Calendar contract:
 - One reservation is keyed by `setId + supportLang + targetLang + channelKey`.
 - `supportLang` and `targetLang` preserve regional variants such as `EN-GB`, `ES-419` and `PT-BR`.
 - `channelKey` is the public support-channel key, so shared viewer channels (`en`, `es`, `pt`) use one combined calendar even when they serve multiple support variants.
+- Shared viewer channels use explicit support-variant priority from `config/youtube-publish-schedule-policy.json`: `en` publishes `EN` before `EN-GB`, `es` publishes `ES-419` before `ES`, and `pt` publishes `PT-BR` before `PT`. This makes the first shared-channel wave prioritize US/base English, Latin American Spanish and Brazilian Portuguese while still preserving regional variants in playlists, metadata and course links.
 - `publishAt` is the UTC YouTube API time; `localDate`, `localTime`, `timeZone`, `localSlotIndex` and `localDayOffset` are stored for human review.
 - Calendar rows are not upload proof. Upload/readback proof remains `config/youtube-published-videos.json` plus YouTube API readback.
 
 `scripts/plan-youtube-publish-schedule.mjs` must consider existing active calendar reservations, future scheduled publications in `config/youtube-published-videos.json`, and slots assigned earlier in the same run. If a reservation already exists for the same `setId/supportLang/targetLang/channelKey`, the planner reuses that slot and rewrites metadata to match it rather than silently moving the video.
 
-For parallel GitHub workers, scheduled mode must pass the generation target preflight report as `--target-plan`. The planner then uses the target's global ordinal within the channel's eligible target list and chooses that Nth-free slot. This prevents worker 0, worker 1 and worker 2 from all reserving the first local slot when they run at the same time from the same committed calendar.
+For parallel GitHub workers, scheduled mode must pass the generation target preflight report as `--target-plan`. The planner applies the shared-channel `supportPriority` order first, then uses the target's global ordinal within the channel's eligible target list and chooses that Nth-free slot. This prevents worker 0, worker 1 and worker 2 from all reserving the first local slot when they run at the same time from the same committed calendar, and it keeps shared-channel first slots deterministic for `EN`, `ES-419` and `PT-BR`.
 
 Operational rules:
 

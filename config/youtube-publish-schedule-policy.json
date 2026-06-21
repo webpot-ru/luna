@@ -25,6 +25,7 @@
   "notes": [
     "Scheduled YouTube uploads must be uploaded as private with status.publishAt; YouTube makes them public at the scheduled time.",
     "Policy is keyed by public support-language channel, not target-language variant. Regional target variants such as EN-GB, ES-419 and PT-BR stay in metadata/playlists, but shared support channels use one calendar.",
+    "Shared support channels can declare supportPriority. Current first-wave priority is EN before EN-GB, ES-419 before ES, and PT-BR before PT, so US/base English, Latin American Spanish and Brazilian Portuguese publish first inside their shared channel calendars.",
     "Six slots per support channel means 50 videos for one channel take about 9 local days. Across many channels, each channel has its own local calendar.",
     "Accepted starting cadence is one deck wave across all 51 support channels at six public releases per channel per local day. Do not run multiple deck waves at once or raise cadence until 24h/72h/7d readback and policy health are acceptable.",
     "Analytics readback is not immediate. Track planned publishAt now, then collect YouTube Analytics/Data API snapshots at 24h, 72h, 7d and 30d."
@@ -38,10 +39,18 @@
     "de": { "timezone": "Europe/Berlin" },
     "en": {
       "timezone": "America/New_York",
+      "supportPriority": [
+        "EN",
+        "EN-GB"
+      ],
       "notes": "Shared English support channel for EN and EN-GB audiences; keep one calendar unless the channel is split later."
     },
     "es": {
       "timezone": "Europe/Madrid",
+      "supportPriority": [
+        "ES-419",
+        "ES"
+      ],
       "notes": "Shared Spanish support channel for ES and ES-419 audiences; keep one calendar unless the channel is split later."
     },
     "et": { "timezone": "Europe/Tallinn" },
@@ -75,6 +84,10 @@
     "pl": { "timezone": "Europe/Warsaw" },
     "pt": {
       "timezone": "Europe/Lisbon",
+      "supportPriority": [
+        "PT-BR",
+        "PT"
+      ],
       "notes": "Shared Portuguese support channel for PT and PT-BR audiences; keep one calendar unless the channel is split later."
     },
     "ro": { "timezone": "Europe/Bucharest" },

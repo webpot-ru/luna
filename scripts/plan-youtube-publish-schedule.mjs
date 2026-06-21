@@ -191,6 +191,14 @@ function channelPolicy(policy, channelKey) {
   };
 }
 
+function supportPriorityIndex(policy, channelKey, supportLang) {
+  const priority = policy.channels?.[channelKey]?.supportPriority;
+  if (!Array.isArray(priority) || priority.length === 0) return 10_000;
+  const normalizedPriority = priority.map(normalizeLanguageCode).filter(Boolean);
+  const index = normalizedPriority.indexOf(normalizeLanguageCode(supportLang));
+  return index >= 0 ? index : 10_000;
+}
+
 function loadCalendar(filePath = DEFAULT_CALENDAR_PATH) {
   if (!fs.existsSync(filePath)) {
     return {
@@ -293,7 +301,7 @@ function findFreeSlot({
   throw new Error(`No free publish slot found for channel=${channelKey} within ${maxIterations} slot attempts.`);
 }
 
-function loadTargetPlan(filePath, channelRegistry) {
+function loadTargetPlan(filePath, channelRegistry, policy) {
   const resolvedPath = filePath || (fs.existsSync(DEFAULT_TARGET_PLAN_PATH) ? DEFAULT_TARGET_PLAN_PATH : "");
   if (!resolvedPath || !fs.existsSync(resolvedPath)) {
     return {
@@ -306,10 +314,31 @@ function loadTargetPlan(filePath, channelRegistry) {
   const report = JSON.parse(fs.readFileSync(resolvedPath, "utf8"));
   const channelCounts = new Map();
   const ordinalsByAssignmentKey = new Map();
-  for (const supportReport of report.supports || []) {
-    const supportLang = normalizeLanguageCode(supportReport.supportLang);
-    const channel = findChannelForSupport(channelRegistry.channels, supportLang);
-    if (!channel?.key) continue;
+  const supportReports = (report.supports || [])
+    .map((supportReport, sourceIndex) => {
+      const supportLang = normalizeLanguageCode(supportReport.supportLang);
+      const channel = findChannelForSupport(channelRegistry.channels, supportLang);
+      if (!channel?.key) return null;
+      return {
+        supportReport,
+        supportLang,
+        channel,
+        sourceIndex,
+        priorityIndex: supportPriorityIndex(policy, channel.key, supportLang),
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => [
+      a.channel.key,
+      String(a.priorityIndex).padStart(5, "0"),
+      String(a.sourceIndex).padStart(6, "0"),
+    ].join("|").localeCompare([
+      b.channel.key,
+      String(b.priorityIndex).padStart(5, "0"),
+      String(b.sourceIndex).padStart(6, "0"),
+    ].join("|")));
+
+  for (const { supportReport, supportLang, channel } of supportReports) {
     const start = channelCounts.get(channel.key) || 0;
     const eligibleTargets = Array.isArray(supportReport.eligibleTargets)
       ? supportReport.eligibleTargets.map(normalizeLanguageCode).filter(Boolean)
@@ -451,7 +480,7 @@ async function main() {
   const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
   const calendar = loadCalendar(options.calendar);
   calendar.policyPath = options.policy;
-  const targetPlan = loadTargetPlan(options.targetPlan, channelRegistry);
+  const targetPlan = loadTargetPlan(options.targetPlan, channelRegistry, policy);
   let metadataFiles = collectMetadataFiles(options.inputs);
   if (options.limit > 0) metadataFiles = metadataFiles.slice(0, options.limit);
 
