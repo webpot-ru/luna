@@ -4,6 +4,7 @@ import path from "node:path";
 import { exec, execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { getDbLanguageCode, normalizeLanguageCode } from "./lib/video-language-codes.mjs";
+import { BRAND_NAME } from "./lib/brand.mjs";
 
 const execAsync = promisify(exec);
 const execFileAsync = promisify(execFile);
@@ -158,7 +159,7 @@ async function main() {
     process.exit(1);
   }
 
-  console.log(`=== LunaCards Bulk Video Generator ===`);
+  console.log(`=== ${BRAND_NAME} Bulk Video Generator ===`);
   console.log(`Set ID:        ${setId}`);
   console.log(`Support Lang:  ${supportLang}`);
   console.log(`Concurrency:   ${concurrencyLimit}`);

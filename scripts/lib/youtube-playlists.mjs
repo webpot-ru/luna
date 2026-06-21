@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { BRAND_NAME } from "./brand.mjs";
 
 export const DEFAULT_PLAYLIST_REGISTRY_PATH = "config/youtube-playlists.json";
 export const DEFAULT_CHANNEL_CONFIG_PATH = "config/youtube-channels.json";
@@ -212,27 +213,27 @@ function buildTitle({ supportLang, targetLang, courseFamily, levelOrTrack }) {
     if (courseFamily === "spanish-a1-core") return `${targetName} A1: базовый курс`;
     if (courseFamily === "hsk3") return `${targetName}: HSK 3.0`;
     if (courseFamily.startsWith("oxford")) return `${targetName}: Oxford vocabulary`;
-    return `${targetName}: LunaCards`;
+    return `${targetName}: ${BRAND_NAME}`;
   }
   if (support === "ES" || support === "ES-419") {
-    return `${targetName} ${level || "A1"}: tarjetas LunaCards`;
+    return `${targetName} ${level || "A1"}: tarjetas ${BRAND_NAME}`;
   }
   if (support === "PT" || support === "PT-BR") {
-    return `${targetName} ${level || "A1"}: flashcards LunaCards`;
+    return `${targetName} ${level || "A1"}: flashcards ${BRAND_NAME}`;
   }
   if (courseFamily === "ordinary-vocabulary") {
     return `${targetName} ${level || "A1"} Flashcards`;
   }
-  return `${targetName} ${level || "A1"}: LunaCards flashcards`;
+  return `${targetName} ${level || "A1"}: ${BRAND_NAME} flashcards`;
 }
 
 function buildDescription({ supportLang, targetLang, courseFamily, levelOrTrack }) {
   const support = normalizeLanguageCode(supportLang);
   const targetName = getPlaylistLanguageName(targetLang, support);
   if (support === "RU") {
-    return `Видео LunaCards для русскоязычных, которые изучают ${targetName}: карточки, произношение, паузы для повторения и короткие мини-тесты. Playlist key: ${courseFamily}/${levelOrTrack}.`;
+    return `Видео ${BRAND_NAME} для русскоязычных, которые изучают ${targetName}: карточки, произношение, паузы для повторения и короткие мини-тесты. Playlist key: ${courseFamily}/${levelOrTrack}.`;
   }
-  return `LunaCards videos for native ${support} speakers learning ${targetName}: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ${courseFamily}/${levelOrTrack}.`;
+  return `${BRAND_NAME} videos for native ${support} speakers learning ${targetName}: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ${courseFamily}/${levelOrTrack}.`;
 }
 
 export function buildPlaylistAssignment(metadata = {}) {

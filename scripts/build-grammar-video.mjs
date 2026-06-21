@@ -15,6 +15,7 @@ import {
   getLanguageNameInLang 
 } from "./lib/card-slide-template.mjs";
 import { getOutroText } from "./lib/outro-slide-template.mjs";
+import { BRAND_NAME } from "./lib/brand.mjs";
 
 const cleanStr = (s) => String(s || '').trim().toLowerCase().replace(/[\/\[\]()]/g, '');
 
@@ -122,7 +123,7 @@ async function main() {
   const voiceTarget = getVoiceForLanguage(targetLang);
   const voiceSupport = getVoiceForLanguage(supportLang);
 
-  console.log(`=== LunaCards Grammar Video Generator ===`);
+  console.log(`=== ${BRAND_NAME} Grammar Video Generator ===`);
   console.log(`Lesson ID: ${setId}`);
   console.log(`Title: ${title} (${subtitle || ''})`);
   console.log(`Target Language: ${targetLang} (Voice: ${voiceTarget})`);

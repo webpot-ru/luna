@@ -9,6 +9,7 @@ import {
   getVectorEngineApiKey,
   loadDotEnvFile,
 } from "./lib/vectorengine-image.mjs";
+import { BRAND_NAME } from "./lib/brand.mjs";
 
 const DEFAULT_SIZE = "1536x864";
 const OUTPUT_NAME = "youtube_thumbnail";
@@ -113,7 +114,7 @@ function thumbnailCopy(metadata) {
   const deckTitle = truncateText(stripSentenceTerminator(metadata.deckTitle) || "Vocabulary", 38);
 
   return {
-    brand: "LunaCards",
+    brand: BRAND_NAME,
     headline: `${targetName} ${level}`.trim(),
     topic: deckTitle,
   };
@@ -122,9 +123,9 @@ function thumbnailCopy(metadata) {
 function buildPrompt(metadata) {
   const copy = thumbnailCopy(metadata);
   return [
-    "Create one premium YouTube thumbnail for a LunaCards flashcard vocabulary lesson.",
+    `Create one premium YouTube thumbnail for a ${BRAND_NAME} flashcard vocabulary lesson.`,
     "Canvas: 16:9 YouTube thumbnail, high contrast and readable at small size.",
-    "Visual style: same premium LunaCards system as the channel art and flashcardsluna.com: light #f4f7f9 background, white rounded flashcard panels, soft blue accents, deep navy typography, subtle violet accent, clean modern educational product feel.",
+    `Visual style: same premium ${BRAND_NAME} system as the channel art and flashcardsluna.com: light #f4f7f9 background, white rounded flashcard panels, soft blue accents, deep navy typography, subtle violet accent, clean modern educational product feel.`,
     "Layout: big readable text on the left or center-left, elegant flashcard/course-card composition on the right, no clutter, no people, no dark background, no clickbait face, no neon.",
     "Show a few abstract non-text flashcards or icons that suggest vocabulary, audio/pronunciation and a quick quiz. Icons may include headphones, cards, check mark, book, moon-card motif.",
     "Important text rule: render ONLY the exact text lines below. Put each line on its own line. Do not add pipe separators, quotes, URLs, extra words, watermarks, signatures, random letters, or translated alternatives.",

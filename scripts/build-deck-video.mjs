@@ -20,6 +20,7 @@ import {
 import { getOutroText } from "./lib/outro-slide-template.mjs";
 import { getPublicCourseDisplayUrl, getPublicCourseUrl, getQrCodeImageUrl } from "./lib/video-public-url.mjs";
 import { outroIconNames } from "./lib/video-outro-icons.mjs";
+import { BRAND_NAME } from "./lib/brand.mjs";
 
 const localizationPath = path.resolve("config/video-localization.json");
 const localizationData = JSON.parse(fs.readFileSync(localizationPath, "utf8"));
@@ -163,7 +164,7 @@ if (!voiceTarget) voiceTarget = getVoiceForLanguage(targetLang);
 if (!voiceSupport) voiceSupport = getVoiceForLanguage(supportLang);
 
 async function main() {
-  console.log(`=== LunaCards Video Generator ===`);
+  console.log(`=== ${BRAND_NAME} Video Generator ===`);
   console.log(`Set ID: ${setId}`);
   console.log(`Target Language: ${targetLang} (Voice: ${voiceTarget})`);
   console.log(`Support Language: ${supportLang} (Voice: ${voiceSupport})`);

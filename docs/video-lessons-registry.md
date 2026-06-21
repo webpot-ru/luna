@@ -1,6 +1,6 @@
 # Video Lessons Registry
 
-Этот документ является реестром сгенерированных видеоуроков LunaCards. Он используется для отслеживания дат сборки, параметров компиляции и сохранения ссылок на опубликованные ролики на YouTube.
+Этот документ является реестром сгенерированных видеоуроков FlashcardsLuna. Он используется для отслеживания дат сборки, параметров компиляции и сохранения ссылок на опубликованные ролики на YouTube.
 
 Статус: **Source of Truth для реестра видеоуроков**.
 
@@ -17,6 +17,16 @@ outputs/youtube-publish-ledger.jsonl
 The structured ledger must store stable `playlist_key`, `youtube_video_id`, `youtube_playlist_id`, `playlistItemId`, privacy/status, timestamp and readback result. This Markdown registry can summarize or link to those facts after readback, but it must not be the only state used for idempotent YouTube API writes.
 
 2026-06-19 fresh-run note: `home_kitchen_cookware_pilot_01` is being restarted as the first clean video batch. Existing rows below for this `set_id` from 2026-06-14 / 2026-06-15 and earlier GitHub/local video artifacts are historical working evidence only. Do not use them as current publish readiness, playlist membership, or upload state. The fresh rerun should append new current rows/readback instead of treating old `Pending` rows as active state.
+
+---
+
+## Current Published / Readback Rows
+
+These rows are current YouTube upload/readback facts from the structured GitHub artifact/ledger, not historical planning rows.
+
+| Set ID | Title | Target | Support | Built / Uploaded | GitHub run | Status | Video | Playlist | Readback |
+|---|---|---|---|---|---|---|---|---|---|
+| `home_kitchen_cookware_pilot_01` | Испанский язык: Кухонная посуда (A1) \| 50 испанских слов с произношением | ES | RU | 2026-06-21 | `27899494910` | `uploaded`, `unlisted`, thumbnail set | https://www.youtube.com/watch?v=xOh97WAt53k | https://www.youtube.com/playlist?list=PLx5nIeqMBQ7kjzCzItWOtLDCjmHJjYJXq | channel `UC1f5EyXEMejXIumH9104GMA`, playlist item `UEx4NW5JZXFNQlE3a2p6Q3pJdFdPdExEQ2ptSEpqWUpYcS41NkI0NEY2RDEwNTU3Q0M2`, metadata `source=gemini-vectorengine` |
 
 ---
 

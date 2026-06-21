@@ -8,6 +8,7 @@ import { getPublicCourseDisplayUrl, getPublicCourseUrl } from "./video-public-ur
 import { callVectorEngineGeminiJson } from "./vectorengine-gemini.mjs";
 import { buildPlaylistAssignment } from "./youtube-playlists.mjs";
 import { getDbLanguageCode, normalizeLanguageCode } from "./video-language-codes.mjs";
+import { BRAND_HASHTAG, BRAND_NAME } from "./brand.mjs";
 
 const execFileAsync = promisify(execFile);
 const databaseUrl = process.env.DATABASE_URL ?? "postgresql://lunacards:lunacards@127.0.0.1:55433/lunacards";
@@ -108,7 +109,7 @@ function getSupportCopy(supportLang) {
       title: ({ targetLanguageName, deckTitle, wordCount }) =>
         `${targetLanguageName} A1: ${deckTitle} | ${wordCount} слов с произношением`,
       description: ({ targetLanguageName, deckTitle, wordCount, courseUrl }) =>
-        `Выучите ${wordCount} слов по теме «${deckTitle}» для языка ${targetLanguageName}. Это короткий видеоурок LunaCards для начинающих: слушайте слово и перевод, повторяйте вслух во время пауз, обращайте внимание на произношение и закрепляйте лексику в мини-тесте в конце видео.\n\nТакой формат удобно использовать как быструю ежедневную тренировку словаря A1: сначала посмотрите урок полностью, затем откройте карточки на сайте и повторите слова в своем темпе. Колода помогает связать написание, звучание и значение без лишней теории.\n\nОткройте эту колоду и другие бесплатные упражнения LunaCards на сайте:\n${courseUrl}\n\nПодписывайтесь на канал, если хотите регулярно пополнять словарный запас короткими видеоуроками с произношением, паузами для повторения и понятной практикой.`,
+        `Выучите ${wordCount} слов по теме «${deckTitle}» для языка ${targetLanguageName}. Это короткий видеоурок ${BRAND_NAME} для начинающих: слушайте слово и перевод, повторяйте вслух во время пауз, обращайте внимание на произношение и закрепляйте лексику в мини-тесте в конце видео.\n\nТакой формат удобно использовать как быструю ежедневную тренировку словаря A1: сначала посмотрите урок полностью, затем откройте карточки на сайте и повторите слова в своем темпе. Колода помогает связать написание, звучание и значение без лишней теории.\n\nОткройте эту колоду и другие бесплатные упражнения ${BRAND_NAME} на сайте:\n${courseUrl}\n\nПодписывайтесь на канал, если хотите регулярно пополнять словарный запас короткими видеоуроками с произношением, паузами для повторения и понятной практикой.`,
       tags: ({ targetLanguageName, deckTitle }) => [
         `${targetLanguageName} язык`,
         `${targetLanguageName} для начинающих`,
@@ -118,9 +119,9 @@ function getSupportCopy(supportLang) {
         "слова с произношением",
         "карточки для слов",
         "изучение языков",
-        "LunaCards"
+        BRAND_NAME
       ],
-      hashtags: ["#LunaCards", "#изучениеязыков", "#словарныйзапас"]
+      hashtags: [BRAND_HASHTAG, "#изучениеязыков", "#словарныйзапас"]
     };
   }
   if (code === "ES" || code === "ES-419") {
@@ -128,7 +129,7 @@ function getSupportCopy(supportLang) {
       title: ({ targetLanguageName, deckTitle, wordCount }) =>
         `${targetLanguageName} A1: ${deckTitle} | ${wordCount} palabras con pronunciación`,
       description: ({ targetLanguageName, deckTitle, wordCount, courseUrl }) =>
-        `Aprende ${wordCount} palabras de ${targetLanguageName} sobre «${deckTitle}» con un video corto de LunaCards para principiantes. Escucha cada palabra, mira el significado, repite en las pausas y usa la mini prueba final para comprobar qué recuerdas.\n\nEste formato está pensado para practicar vocabulario A1 de forma rápida: primero mira el video completo, después abre la baraja en el sitio y repasa las tarjetas a tu propio ritmo. Así conectas escritura, pronunciación y significado sin una explicación larga.\n\nPractica esta baraja y otros cursos gratuitos de LunaCards aquí:\n${courseUrl}\n\nSuscríbete para recibir más videos cortos de vocabulario, pronunciación y práctica de idiomas con tarjetas claras y ejercicios rápidos.`,
+        `Aprende ${wordCount} palabras de ${targetLanguageName} sobre «${deckTitle}» con un video corto de ${BRAND_NAME} para principiantes. Escucha cada palabra, mira el significado, repite en las pausas y usa la mini prueba final para comprobar qué recuerdas.\n\nEste formato está pensado para practicar vocabulario A1 de forma rápida: primero mira el video completo, después abre la baraja en el sitio y repasa las tarjetas a tu propio ritmo. Así conectas escritura, pronunciación y significado sin una explicación larga.\n\nPractica esta baraja y otros cursos gratuitos de ${BRAND_NAME} aquí:\n${courseUrl}\n\nSuscríbete para recibir más videos cortos de vocabulario, pronunciación y práctica de idiomas con tarjetas claras y ejercicios rápidos.`,
       tags: ({ targetLanguageName, deckTitle }) => [
         `${targetLanguageName} para principiantes`,
         `aprender ${targetLanguageName}`,
@@ -137,16 +138,16 @@ function getSupportCopy(supportLang) {
         "palabras con pronunciación",
         "tarjetas de vocabulario",
         "aprender idiomas",
-        "LunaCards"
+        BRAND_NAME
       ],
-      hashtags: ["#LunaCards", "#AprenderIdiomas", "#Vocabulario"]
+      hashtags: [BRAND_HASHTAG, "#AprenderIdiomas", "#Vocabulario"]
     };
   }
   return {
     title: ({ targetLanguageName, deckTitle, wordCount }) =>
       `${targetLanguageName} A1: ${deckTitle} | ${wordCount} words with pronunciation`,
     description: ({ targetLanguageName, deckTitle, wordCount, courseUrl }) =>
-      `Learn ${wordCount} ${targetLanguageName} words from the topic "${deckTitle}" with a short LunaCards video lesson for beginners. Listen to each word, read the meaning, repeat during the pauses, and use the quick mini-test at the end to check what you remember.\n\nThis A1 vocabulary format is built for daily practice: watch the lesson once, then open the deck on the site and review the flashcards at your own pace. It helps connect spelling, pronunciation and meaning without a long grammar explanation.\n\nPractice this deck and other free LunaCards courses here:\n${courseUrl}\n\nSubscribe for more short vocabulary videos with pronunciation, flashcards, repeat pauses and simple review exercises for language learners.`,
+      `Learn ${wordCount} ${targetLanguageName} words from the topic "${deckTitle}" with a short ${BRAND_NAME} video lesson for beginners. Listen to each word, read the meaning, repeat during the pauses, and use the quick mini-test at the end to check what you remember.\n\nThis A1 vocabulary format is built for daily practice: watch the lesson once, then open the deck on the site and review the flashcards at your own pace. It helps connect spelling, pronunciation and meaning without a long grammar explanation.\n\nPractice this deck and other free ${BRAND_NAME} courses here:\n${courseUrl}\n\nSubscribe for more short vocabulary videos with pronunciation, flashcards, repeat pauses and simple review exercises for language learners.`,
     tags: ({ targetLanguageName, deckTitle }) => [
       `${targetLanguageName} for beginners`,
       `learn ${targetLanguageName}`,
@@ -155,9 +156,9 @@ function getSupportCopy(supportLang) {
       "words with pronunciation",
       "flashcards",
       "language learning",
-      "LunaCards"
+      BRAND_NAME
     ],
-    hashtags: ["#LunaCards", "#LanguageLearning", "#Vocabulary"]
+    hashtags: [BRAND_HASHTAG, "#LanguageLearning", "#Vocabulary"]
   };
 }
 
@@ -252,7 +253,7 @@ export function buildTemplateYouTubeMetadata(input) {
 export function buildGeminiPrompt(baseMetadata, cards) {
   const cardWords = uniqueStrings(cards.map((card) => card.target_display || card.target_word)).slice(0, 40);
   return [
-    "Create YouTube metadata for a LunaCards vocabulary lesson.",
+    `Create YouTube metadata for a ${BRAND_NAME} vocabulary lesson.`,
     "Return JSON only. Do not use Markdown. Do not add fields outside the schema.",
     "",
     "Audience and language rules:",
@@ -268,7 +269,7 @@ export function buildGeminiPrompt(baseMetadata, cards) {
     "- The video teaches vocabulary with pronunciation.",
     "- The learner repeats during pauses.",
     "- The end includes a short mini-test.",
-    "- LunaCards provides practice decks on the website.",
+    `- ${BRAND_NAME} provides practice decks on the website.`,
     "- Do not invent paid features, certificates, native teacher claims, exact duration, or guarantees.",
     "- Keep it search-friendly but not clickbait.",
     "",
@@ -304,7 +305,7 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
   return [
     "You are a JSON API. Return only the completed JSON object that starts with { and ends with }.",
     "Do not write analysis, notes, length checks, character counts, Markdown or prose outside JSON.",
-    "Task: improve YouTube metadata for a LunaCards vocabulary video while preserving the facts below.",
+    `Task: improve YouTube metadata for a ${BRAND_NAME} vocabulary video while preserving the facts below.`,
     "",
     "FACTS_JSON:",
     JSON.stringify(facts),
@@ -313,7 +314,7 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
     "- Write title, description, tags and hashtags in the same language as baseTitle/baseDescription.",
     "- Make the title a natural search title for beginner learners, not clickbait.",
     "- Make the description several useful short paragraphs and include courseUrl exactly once.",
-    "- Mention vocabulary, pronunciation, repeat pauses, mini-test/review, and LunaCards flashcards.",
+    `- Mention vocabulary, pronunciation, repeat pauses, mini-test/review, and ${BRAND_NAME} flashcards.`,
     "- Include 3-5 concrete sampleWords in the description if they fit naturally; do not turn the description into a keyword list.",
     "- tags: 12-18 short search phrases, no # characters.",
     "- hashtags: exactly 3 strings, each begins with # and contains no spaces.",
@@ -381,7 +382,7 @@ async function callGeminiVectorEngine(prompt, { model = defaultVectorEngineGemin
     maxOutputTokens,
     temperature: 0.35,
     systemInstruction: [
-      "You create YouTube metadata for LunaCards vocabulary videos.",
+      `You create YouTube metadata for ${BRAND_NAME} vocabulary videos.`,
       "Return strict JSON only and follow the provided schema.",
       "Do not include hidden reasoning, Markdown, comments or extra fields."
     ].join(" ")
@@ -449,7 +450,7 @@ export function normalizeYouTubeMetadata(metadata) {
 
   const normalized = {
     ...metadata,
-    title: truncateAtWord(metadata.title || "LunaCards Vocabulary Lesson", 100),
+    title: truncateAtWord(metadata.title || `${BRAND_NAME} Vocabulary Lesson`, 100),
     description: description.slice(0, 5000),
     tags,
     hashtags,
