@@ -24,12 +24,14 @@ function parseArgs(argv) {
     output: "",
     writeRegistry: false,
     allowPlaylistCreate: false,
+    requireAiMetadata: false,
     json: false,
   };
 
   for (const arg of argv) {
     if (arg === "--write-registry") options.writeRegistry = true;
     else if (arg === "--allow-playlist-create") options.allowPlaylistCreate = true;
+    else if (arg === "--require-ai-metadata") options.requireAiMetadata = true;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
@@ -48,6 +50,7 @@ function usage() {
     "Options:",
     "  --write-registry          Add missing planned playlist entries to config/youtube-playlists.json.",
     "  --allow-playlist-create   Treat missing playlist IDs as publishable if uploader may create them later.",
+    "  --require-ai-metadata     Block template/template-ai-fallback metadata; intended for live apply planning.",
     "  --output=<file>           Write dry-run plan to this file. Defaults to outputs/youtube-publish-plan-<timestamp>.json.",
     "  --json                    Print compact JSON summary.",
   ].join("\n");
@@ -112,7 +115,16 @@ function quotaForCandidate({ hasThumbnail, playlistEntry, allowPlaylistCreate })
   return quota;
 }
 
-function buildCandidate({ metadataFile, metadata, channelRegistry, playlistRegistry, allowPlaylistCreate }) {
+function polishedMetadataIssue(metadata) {
+  const source = String(metadata.source || "").trim();
+  if (!source) return "metadata source missing; live publish requires AI-polished or human-curated metadata";
+  if (source.toLowerCase().startsWith("template")) {
+    return `metadata source ${source} is plan-only; live publish requires AI-polished or human-curated metadata`;
+  }
+  return "";
+}
+
+function buildCandidate({ metadataFile, metadata, channelRegistry, playlistRegistry, allowPlaylistCreate, requireAiMetadata }) {
   const assignment = buildPlaylistAssignment(metadata);
   const channel = findChannelForSupport(channelRegistry.channels, metadata.supportLang);
   const playlistEntry = findPlaylistEntry(playlistRegistry, assignment.key);
@@ -126,6 +138,11 @@ function buildCandidate({ metadataFile, metadata, channelRegistry, playlistRegis
   if (!videoPath) blockers.push("missing video file next to metadata");
   if (!metadata.title || String(metadata.title).length > 100) blockers.push("missing or too-long title");
   if (!metadata.description || !String(metadata.description).includes("flashcardsluna.com")) blockers.push("description missing flashcardsluna.com link");
+  const metadataIssue = polishedMetadataIssue(metadata);
+  if (metadataIssue) {
+    if (requireAiMetadata) blockers.push(metadataIssue);
+    else warnings.push(`${metadataIssue}; allowed in plan only`);
+  }
   if (!playlistEntry) warnings.push("playlist registry entry missing");
   else if (!playlistEntry.youtube_playlist_id && !allowPlaylistCreate) warnings.push("playlist has no youtube_playlist_id yet");
   if (!thumbnailPath) warnings.push("thumbnail not found; uploader will skip thumbnails.set");
@@ -142,6 +159,7 @@ function buildCandidate({ metadataFile, metadata, channelRegistry, playlistRegis
     supportLang: metadata.supportLang,
     targetLang: metadata.targetLang,
     title: metadata.title,
+    metadataSource: metadata.source || "",
     privacyStatus: metadata.privacyStatus || "unlisted",
     channelKey: channel?.key || "",
     youtube_channel_id: channel?.channelId || "",
@@ -200,6 +218,7 @@ async function main() {
       channelRegistry,
       playlistRegistry,
       allowPlaylistCreate: options.allowPlaylistCreate,
+      requireAiMetadata: options.requireAiMetadata,
     });
     if (options.writeRegistry && !findPlaylistEntry(playlistRegistry, candidate.playlist_key)) {
       const { created } = upsertPlannedPlaylist(

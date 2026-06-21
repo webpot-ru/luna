@@ -246,17 +246,30 @@ jobs:
         run: npm run check:video-tts-variant-contract -- --metadata outputs/video-generator --output=outputs/video-generator/video-tts-variant-contract-report-github.json
 
       - name: Validate YouTube SEO metadata
-        run: npm run check:youtube-seo-metadata -- outputs/video-generator --output=outputs/video-generator/youtube-seo-metadata-report-github.json
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+        run: |
+          set -euo pipefail
+          SEO_ARGS=("outputs/video-generator" "--output=outputs/video-generator/youtube-seo-metadata-report-github.json")
+          if [ "$MODE" = "apply" ]; then
+            SEO_ARGS+=("--require-ai-metadata")
+          fi
+          npm run check:youtube-seo-metadata -- "${SEO_ARGS[@]}"
 
       - name: Plan YouTube publication
         shell: bash
         env:
           CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}
+          MODE: ${{ github.event.inputs.mode }}
         run: |
           set -euo pipefail
           PLAN_ARGS=("outputs/video-generator" "--write-registry" "--output=outputs/youtube-publish-plan-github.json")
           if [ "$CREATE_PLAYLISTS" = "true" ]; then
             PLAN_ARGS+=("--allow-playlist-create")
+          fi
+          if [ "$MODE" = "apply" ]; then
+            PLAN_ARGS+=("--require-ai-metadata")
           fi
           npm run plan:youtube-publish -- "${PLAN_ARGS[@]}"
 

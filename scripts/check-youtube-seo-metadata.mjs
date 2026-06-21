@@ -7,18 +7,20 @@ import { getPublicCourseUrl } from "./lib/video-public-url.mjs";
 const options = {
   output: "",
   strictWarnings: false,
+  requireAiMetadata: false,
 };
 const inputs = [];
 
 for (const arg of process.argv.slice(2)) {
   if (arg === "--strict-warnings") options.strictWarnings = true;
+  else if (arg === "--require-ai-metadata") options.requireAiMetadata = true;
   else if (arg.startsWith("--output=")) options.output = arg.slice("--output=".length);
   else inputs.push(arg);
 }
 
 function usage() {
   return [
-    "Usage: node scripts/check-youtube-seo-metadata.mjs <metadata-file-or-dir> [...] [--output=report.json] [--strict-warnings]",
+    "Usage: node scripts/check-youtube-seo-metadata.mjs <metadata-file-or-dir> [...] [--output=report.json] [--strict-warnings] [--require-ai-metadata]",
     "",
     "Blocks structural publish risks. Emits warnings for SEO-quality gaps that need AI/native review.",
   ].join("\n");
@@ -73,6 +75,15 @@ function countOccurrences(haystack, needle) {
 
 function containsAny(text, patterns) {
   return patterns.some((pattern) => pattern.test(text));
+}
+
+function polishedMetadataIssue(metadata) {
+  const source = String(metadata.source || "").trim();
+  if (!source) return "metadata source missing; live publish requires AI-polished or human-curated metadata";
+  if (source.toLowerCase().startsWith("template")) {
+    return `metadata source ${source} is plan-only; live publish requires AI-polished or human-curated metadata`;
+  }
+  return "";
 }
 
 const LEARNING_INTENT_PATTERNS = [
@@ -248,8 +259,10 @@ function validate(metadata, file) {
   if (titleLength > 90) warnings.push(`title above preferred search title range 45-90 chars: ${titleLength}`);
   if (!hasSiblingThumbnail(file)) warnings.push("no sibling thumbnail/cover/poster file found; YouTube thumbnail SEO still needs visual QA");
   if (!playlistKey) warnings.push("missing playlist_key; publish planner can compute it, but fresh metadata should carry it");
-  if (String(metadata.source || "").startsWith("template") && !["EN", "RU", "ES", "ES-419", "PT", "PT-BR"].includes(String(metadata.supportLang || "").toUpperCase())) {
-    warnings.push("template metadata for this support language needs AI/native polish before public publish");
+  const metadataIssue = polishedMetadataIssue(metadata);
+  if (metadataIssue) {
+    if (options.requireAiMetadata) blockers.push(metadataIssue);
+    else warnings.push(`${metadataIssue}; allowed in plan only`);
   }
   if (containsAny(searchTextLower, CLICKBAIT_OR_UNSUPPORTED_PATTERNS)) {
     blockers.push("metadata contains unsupported guarantee/certificate/native-teacher/clickbait claim");
@@ -294,6 +307,7 @@ try {
       blockerCount,
       warningCount,
       strictWarnings: options.strictWarnings,
+      requireAiMetadata: options.requireAiMetadata,
       averageScore: Math.round(results.reduce((sum, result) => sum + result.metrics.score, 0) / results.length),
     },
     results,

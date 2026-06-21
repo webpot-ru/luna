@@ -92,6 +92,15 @@ function buildUploadDescription(metadata) {
   return `${description}\n\n${missing.join(" ")}`.trim();
 }
 
+function polishedMetadataIssue(metadata) {
+  const source = String(metadata.source || "").trim();
+  if (!source) return "metadata source missing; live publish requires AI-polished or human-curated metadata";
+  if (source.toLowerCase().startsWith("template")) {
+    return `metadata source ${source} is plan-only; live publish requires AI-polished or human-curated metadata`;
+  }
+  return "";
+}
+
 function resolveExistingPath(filePath, label) {
   if (!filePath) return "";
   const resolved = path.resolve(filePath);
@@ -294,6 +303,7 @@ function appendLedger(ledgerPath, row) {
 function dryRun(plan) {
   console.log("YouTube publish dry-run");
   console.log(`metadata=${plan.metadataFile}`);
+  console.log(`metadataSource=${plan.metadataSource || "(missing)"}`);
   console.log(`video=${plan.videoPath || "MISSING"}`);
   console.log(`thumbnail=${plan.thumbnailPath || "none"}`);
   console.log(`channel=${plan.channelKey} ${plan.youtube_channel_id}`);
@@ -328,8 +338,17 @@ async function main() {
   if (!["private", "unlisted", "public"].includes(privacyStatus)) fail(`Invalid privacy: ${privacyStatus}`);
   if (privacyStatus === "public" && !options.confirmPublic) fail("privacy=public requires --confirm-public.");
 
+  const metadataIssue = polishedMetadataIssue(metadata);
+  const blockers = [
+    ...(metadataIssue ? [metadataIssue] : []),
+    ...(playlistEntry?.youtube_playlist_id || options.createPlaylist
+      ? []
+      : ["playlist has no youtube_playlist_id; pass --create-playlist or fill config/youtube-playlists.json"])
+  ];
+
   const plan = {
     metadataFile,
+    metadataSource: metadata.source || "",
     videoPath,
     thumbnailPath,
     channelKey: channel.key,
@@ -338,7 +357,7 @@ async function main() {
     youtube_playlist_id: playlistEntry?.youtube_playlist_id || "",
     privacyStatus,
     estimatedQuotaUnits: 1600 + (thumbnailPath ? 50 : 0) + (playlistEntry?.youtube_playlist_id ? 50 : (options.createPlaylist ? 100 : 0)),
-    blockers: playlistEntry?.youtube_playlist_id || options.createPlaylist ? [] : ["playlist has no youtube_playlist_id; pass --create-playlist or fill config/youtube-playlists.json"],
+    blockers,
     warnings: thumbnailPath ? [] : ["thumbnail not found; thumbnails.set will be skipped"],
   };
 
