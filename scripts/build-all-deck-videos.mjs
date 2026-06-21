@@ -5,6 +5,7 @@ import { exec, execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { getDbLanguageCode, normalizeLanguageCode } from "./lib/video-language-codes.mjs";
 import { BRAND_NAME } from "./lib/brand.mjs";
+import { shardItems } from "./lib/work-shards.mjs";
 
 const execAsync = promisify(exec);
 const execFileAsync = promisify(execFile);
@@ -131,6 +132,8 @@ async function main() {
   let quizLimit = 3;
   let transition = "flip";
   let selectedLangs = null;
+  let shardCount = 1;
+  let shardIndex = 0;
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--set" && args[i + 1]) {
@@ -151,11 +154,17 @@ async function main() {
     } else if (args[i] === "--langs" && args[i + 1]) {
       selectedLangs = args[i + 1].toUpperCase().split(",");
       i++;
+    } else if (args[i] === "--shard-count" && args[i + 1]) {
+      shardCount = Number(args[i + 1]);
+      i++;
+    } else if (args[i] === "--shard-index" && args[i + 1]) {
+      shardIndex = Number(args[i + 1]);
+      i++;
     }
   }
 
   if (!setId) {
-    console.error("Usage: node scripts/build-all-deck-videos.mjs --set <set_id> [--support <support_lang>] [--concurrency <N>] [--quiz-limit <N>] [--transition <static|flip>] [--langs <LANG1,LANG2,...>]");
+    console.error("Usage: node scripts/build-all-deck-videos.mjs --set <set_id> [--support <support_lang>] [--concurrency <N>] [--quiz-limit <N>] [--transition <static|flip>] [--langs <LANG1,LANG2,...>] [--shard-count <N> --shard-index <0-based>]");
     process.exit(1);
   }
 
@@ -163,6 +172,7 @@ async function main() {
   console.log(`Set ID:        ${setId}`);
   console.log(`Support Lang:  ${supportLang}`);
   console.log(`Concurrency:   ${concurrencyLimit}`);
+  console.log(`Shard:         ${shardIndex}/${shardCount}`);
   console.log(`Quiz Limit:    ${quizLimit}`);
   console.log(`Transition:    ${transition}`);
   console.log(`======================================`);
@@ -221,8 +231,32 @@ async function main() {
   if (selectedLangs) {
     languages = languages.filter(l => selectedLangs.includes(l));
   }
+  const shard = shardItems(languages, { shardCount, shardIndex });
+  languages = shard.selectedItems;
 
-  console.log(`Found ${languages.length} target languages to compile: ${languages.join(", ")}`);
+  fs.mkdirSync(path.resolve("outputs/video-generator"), { recursive: true });
+  const shardManifestPath = path.resolve(`outputs/video-generator/${setId}_${supportLang.toLowerCase()}_video_build_shard_${shardIndex}_of_${shardCount}.json`);
+  fs.writeFileSync(shardManifestPath, `${JSON.stringify({
+    generatedAt: new Date().toISOString(),
+    phase: "video_build",
+    setId,
+    supportLang,
+    shardCount,
+    shardIndex,
+    inputTargetCount: shard.allItems.length,
+    selectedTargetCount: shard.selectedItems.length,
+    skippedTargetCount: shard.skippedItems.length,
+    selectedTargets: shard.selectedItems,
+    skippedTargets: shard.skippedItems,
+  }, null, 2)}\n`, "utf8");
+
+  console.log(`Found ${shard.allItems.length} target languages before sharding: ${shard.allItems.join(", ")}`);
+  console.log(`Shard selected ${languages.length} target languages to compile: ${languages.join(", ") || "(none)"}`);
+  console.log(`Shard manifest: ${shardManifestPath}`);
+  if (languages.length === 0) {
+    console.log("No target languages assigned to this shard. Exiting successfully.");
+    return;
+  }
   
   const globalStart = Date.now();
   const queue = [...languages];

@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "status": "active",
+  "purpose": "Per-support-language YouTube scheduled publication policy for FlashcardsLuna video uploads.",
+  "default": {
+    "timezone": "Etc/UTC",
+    "dailySlotsLocal": [
+      "08:30",
+      "11:30",
+      "14:30",
+      "17:30",
+      "20:30",
+      "23:30"
+    ],
+    "maxVideosPerDay": 6,
+    "minimumSpacingMinutes": 180,
+    "defaultStartDelayDays": 1,
+    "performanceCheckpointsHours": [
+      24,
+      72,
+      168,
+      720
+    ]
+  },
+  "notes": [
+    "Scheduled YouTube uploads must be uploaded as private with status.publishAt; YouTube makes them public at the scheduled time.",
+    "Policy is keyed by public support-language channel, not target-language variant. Regional target variants such as EN-GB, ES-419 and PT-BR stay in metadata/playlists, but shared support channels use one calendar.",
+    "Six slots per support channel means 50 videos for one channel take about 9 local days. Across many channels, each channel has its own local calendar.",
+    "Accepted starting cadence is one deck wave across all 51 support channels at six public releases per channel per local day. Do not run multiple deck waves at once or raise cadence until 24h/72h/7d readback and policy health are acceptable.",
+    "Analytics readback is not immediate. Track planned publishAt now, then collect YouTube Analytics/Data API snapshots at 24h, 72h, 7d and 30d."
+  ],
+  "channels": {
+    "az": { "timezone": "Asia/Baku" },
+    "bg": { "timezone": "Europe/Sofia" },
+    "bn": { "timezone": "Asia/Dhaka" },
+    "cs": { "timezone": "Europe/Prague" },
+    "da": { "timezone": "Europe/Copenhagen" },
+    "de": { "timezone": "Europe/Berlin" },
+    "en": {
+      "timezone": "America/New_York",
+      "notes": "Shared English support channel for EN and EN-GB audiences; keep one calendar unless the channel is split later."
+    },
+    "es": {
+      "timezone": "Europe/Madrid",
+      "notes": "Shared Spanish support channel for ES and ES-419 audiences; keep one calendar unless the channel is split later."
+    },
+    "et": { "timezone": "Europe/Tallinn" },
+    "fi": { "timezone": "Europe/Helsinki" },
+    "fr": { "timezone": "Europe/Paris" },
+    "hi": { "timezone": "Asia/Kolkata" },
+    "hr": { "timezone": "Europe/Zagreb" },
+    "hu": { "timezone": "Europe/Budapest" },
+    "hy": { "timezone": "Asia/Yerevan" },
+    "id": { "timezone": "Asia/Jakarta" },
+    "is": { "timezone": "Atlantic/Reykjavik" },
+    "it": { "timezone": "Europe/Rome" },
+    "ja": { "timezone": "Asia/Tokyo" },
+    "ka": { "timezone": "Asia/Tbilisi" },
+    "kk": { "timezone": "Asia/Almaty" },
+    "km": { "timezone": "Asia/Phnom_Penh" },
+    "kn": { "timezone": "Asia/Kolkata" },
+    "ko": { "timezone": "Asia/Seoul" },
+    "lo": { "timezone": "Asia/Vientiane" },
+    "lt": { "timezone": "Europe/Vilnius" },
+    "lv": { "timezone": "Europe/Riga" },
+    "ml": { "timezone": "Asia/Kolkata" },
+    "ms": { "timezone": "Asia/Kuala_Lumpur" },
+    "my": { "timezone": "Asia/Yangon" },
+    "ne": { "timezone": "Asia/Kathmandu" },
+    "nl": { "timezone": "Europe/Amsterdam" },
+    "no": {
+      "timezone": "Europe/Oslo",
+      "notes": "Norwegian content contract is Bokmal/NB for ordinary decks unless a course says otherwise."
+    },
+    "pl": { "timezone": "Europe/Warsaw" },
+    "pt": {
+      "timezone": "Europe/Lisbon",
+      "notes": "Shared Portuguese support channel for PT and PT-BR audiences; keep one calendar unless the channel is split later."
+    },
+    "ro": { "timezone": "Europe/Bucharest" },
+    "ru": { "timezone": "Europe/Moscow" },
+    "si": { "timezone": "Asia/Colombo" },
+    "sk": { "timezone": "Europe/Bratislava" },
+    "sl": { "timezone": "Europe/Ljubljana" },
+    "sr": {
+      "timezone": "Europe/Belgrade",
+      "notes": "Serbian ordinary-deck text contract is Latin Gaj unless a separate Cyrillic course contract says otherwise."
+    },
+    "sv": { "timezone": "Europe/Stockholm" },
+    "sw": { "timezone": "Africa/Nairobi" },
+    "ta": { "timezone": "Asia/Kolkata" },
+    "te": { "timezone": "Asia/Kolkata" },
+    "th": { "timezone": "Asia/Bangkok" },
+    "tl": { "timezone": "Asia/Manila" },
+    "tr": { "timezone": "Europe/Istanbul" },
+    "uz": { "timezone": "Asia/Tashkent" },
+    "vi": { "timezone": "Asia/Ho_Chi_Minh" },
+    "zh": { "timezone": "Asia/Shanghai" }
+  }
+}

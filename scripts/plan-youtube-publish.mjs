@@ -12,6 +12,12 @@ import {
   savePlaylistRegistry,
   upsertPlannedPlaylist,
 } from "./lib/youtube-playlists.mjs";
+import {
+  DEFAULT_PUBLICATION_REGISTRY_PATH,
+  activePublicationBlocker,
+  findActivePublication,
+  loadPublicationRegistry,
+} from "./lib/youtube-publication-registry.mjs";
 
 const VIDEO_EXTENSIONS = new Set([".mp4", ".mov", ".m4v", ".webm"]);
 const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
@@ -21,9 +27,11 @@ function parseArgs(argv) {
     inputs: [],
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     playlistRegistry: DEFAULT_PLAYLIST_REGISTRY_PATH,
+    publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
     output: "",
     writeRegistry: false,
     allowPlaylistCreate: false,
+    allowRepublish: false,
     requireAiMetadata: false,
     json: false,
   };
@@ -31,11 +39,13 @@ function parseArgs(argv) {
   for (const arg of argv) {
     if (arg === "--write-registry") options.writeRegistry = true;
     else if (arg === "--allow-playlist-create") options.allowPlaylistCreate = true;
+    else if (arg === "--allow-republish") options.allowRepublish = true;
     else if (arg === "--require-ai-metadata") options.requireAiMetadata = true;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--playlist-registry=")) options.playlistRegistry = arg.slice("--playlist-registry=".length);
+    else if (arg.startsWith("--publication-registry=")) options.publicationRegistry = arg.slice("--publication-registry=".length);
     else if (arg.startsWith("--output=")) options.output = arg.slice("--output=".length);
     else options.inputs.push(arg);
   }
@@ -50,6 +60,7 @@ function usage() {
     "Options:",
     "  --write-registry          Add missing planned playlist entries to config/youtube-playlists.json.",
     "  --allow-playlist-create   Treat missing playlist IDs as publishable if uploader may create them later.",
+    "  --allow-republish         Allow uploading a set/support/target already present in config/youtube-published-videos.json.",
     "  --require-ai-metadata     Block template/template-ai-fallback metadata; intended for live apply planning.",
     "  --output=<file>           Write dry-run plan to this file. Defaults to outputs/youtube-publish-plan-<timestamp>.json.",
     "  --json                    Print compact JSON summary.",
@@ -124,12 +135,24 @@ function polishedMetadataIssue(metadata) {
   return "";
 }
 
-function buildCandidate({ metadataFile, metadata, channelRegistry, playlistRegistry, allowPlaylistCreate, requireAiMetadata }) {
+function buildCandidate({
+  metadataFile,
+  metadata,
+  channelRegistry,
+  playlistRegistry,
+  publicationRegistry,
+  allowPlaylistCreate,
+  allowRepublish,
+  requireAiMetadata,
+}) {
   const assignment = buildPlaylistAssignment(metadata);
   const channel = findChannelForSupport(channelRegistry.channels, metadata.supportLang);
   const playlistEntry = findPlaylistEntry(playlistRegistry, assignment.key);
+  const existingPublication = findActivePublication(publicationRegistry, metadata);
   const videoPath = findVideoFile(metadataFile, metadata);
   const thumbnailPath = findThumbnailFile(metadataFile, metadata);
+  const privacyStatus = metadata.privacyStatus || "public";
+  const publishAt = metadata.publishAt || metadata.scheduledPublishAt || "";
   const blockers = [];
   const warnings = [];
 
@@ -143,8 +166,18 @@ function buildCandidate({ metadataFile, metadata, channelRegistry, playlistRegis
     if (requireAiMetadata) blockers.push(metadataIssue);
     else warnings.push(`${metadataIssue}; allowed in plan only`);
   }
+  if (publishAt) {
+    const publishTime = Date.parse(publishAt);
+    if (privacyStatus !== "private") blockers.push("scheduled publishAt requires privacyStatus=private");
+    if (!Number.isFinite(publishTime)) blockers.push(`invalid publishAt timestamp: ${publishAt}`);
+    else if (publishTime <= Date.now() + 5 * 60 * 1000) blockers.push(`publishAt must be at least 5 minutes in the future: ${publishAt}`);
+    if (playlistEntry?.status && String(playlistEntry.status).toLowerCase().includes("unlisted")) {
+      blockers.push("scheduled public release needs a public playlist; promote existing unlisted playlist before upload or create a new public playlist");
+    }
+  }
   if (!playlistEntry) warnings.push("playlist registry entry missing");
   else if (!playlistEntry.youtube_playlist_id && !allowPlaylistCreate) warnings.push("playlist has no youtube_playlist_id yet");
+  if (existingPublication && !allowRepublish) blockers.push(activePublicationBlocker(existingPublication));
   if (!thumbnailPath) warnings.push("thumbnail not found; uploader will skip thumbnails.set");
 
   const playlistAction = playlistEntry?.youtube_playlist_id
@@ -160,9 +193,18 @@ function buildCandidate({ metadataFile, metadata, channelRegistry, playlistRegis
     targetLang: metadata.targetLang,
     title: metadata.title,
     metadataSource: metadata.source || "",
-    privacyStatus: metadata.privacyStatus || "public",
+    privacyStatus,
+    publishAt,
     channelKey: channel?.key || "",
     youtube_channel_id: channel?.channelId || "",
+    existingPublication: existingPublication ? {
+      youtubeVideoId: existingPublication.youtubeVideoId,
+      youtubeVideoUrl: existingPublication.youtubeVideoUrl || "",
+      publicationStatus: existingPublication.publicationStatus || "",
+      privacyStatus: existingPublication.privacyStatus || "",
+      githubRunId: existingPublication.githubRunId || "",
+      lastReadbackAt: existingPublication.lastReadbackAt || "",
+    } : null,
     playlist_key: assignment.key,
     playlist: {
       ...assignment,
@@ -209,6 +251,7 @@ async function main() {
   const metadataFiles = collectMetadataFiles(options.inputs);
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const playlistRegistry = loadPlaylistRegistry(options.playlistRegistry);
+  const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
   const registryCreates = [];
   const candidates = metadataFiles.map((metadataFile) => {
     const metadata = JSON.parse(fs.readFileSync(metadataFile, "utf8"));
@@ -217,7 +260,9 @@ async function main() {
       metadata,
       channelRegistry,
       playlistRegistry,
+      publicationRegistry,
       allowPlaylistCreate: options.allowPlaylistCreate,
+      allowRepublish: options.allowRepublish,
       requireAiMetadata: options.requireAiMetadata,
     });
     if (options.writeRegistry && !findPlaylistEntry(playlistRegistry, candidate.playlist_key)) {
@@ -242,6 +287,7 @@ async function main() {
     sourceInputs: options.inputs,
     channelConfig: options.channelConfig,
     playlistRegistry: options.playlistRegistry,
+    publicationRegistry: options.publicationRegistry,
     registryCreates,
     summary: {
       candidateCount: candidates.length,

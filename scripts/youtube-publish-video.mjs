@@ -12,6 +12,14 @@ import {
   savePlaylistRegistry,
   upsertPlannedPlaylist,
 } from "./lib/youtube-playlists.mjs";
+import {
+  DEFAULT_PUBLICATION_REGISTRY_PATH,
+  activePublicationBlocker,
+  findActivePublication,
+  loadPublicationRegistry,
+  savePublicationRegistry,
+  upsertPublication,
+} from "./lib/youtube-publication-registry.mjs";
 
 function parseArgs(argv) {
   const options = {
@@ -20,11 +28,14 @@ function parseArgs(argv) {
     thumbnail: "",
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     playlistRegistry: DEFAULT_PLAYLIST_REGISTRY_PATH,
+    publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
     ledger: "outputs/youtube-publish-ledger.jsonl",
     apply: false,
     confirmYoutubeWrite: false,
     createPlaylist: false,
+    allowRepublish: false,
     privacyStatus: "",
+    publishAt: "",
     confirmPublic: false,
   };
 
@@ -32,6 +43,7 @@ function parseArgs(argv) {
     if (arg === "--apply") options.apply = true;
     else if (arg === "--confirm-youtube-write") options.confirmYoutubeWrite = true;
     else if (arg === "--create-playlist") options.createPlaylist = true;
+    else if (arg === "--allow-republish") options.allowRepublish = true;
     else if (arg === "--confirm-public") options.confirmPublic = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else if (arg.startsWith("--metadata=")) options.metadata = arg.slice("--metadata=".length);
@@ -39,8 +51,10 @@ function parseArgs(argv) {
     else if (arg.startsWith("--thumbnail=")) options.thumbnail = arg.slice("--thumbnail=".length);
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--playlist-registry=")) options.playlistRegistry = arg.slice("--playlist-registry=".length);
+    else if (arg.startsWith("--publication-registry=")) options.publicationRegistry = arg.slice("--publication-registry=".length);
     else if (arg.startsWith("--ledger=")) options.ledger = arg.slice("--ledger=".length);
     else if (arg.startsWith("--privacy=")) options.privacyStatus = arg.slice("--privacy=".length);
+    else if (arg.startsWith("--publish-at=")) options.publishAt = arg.slice("--publish-at=".length);
     else if (!options.metadata) options.metadata = arg;
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -57,7 +71,9 @@ function usage() {
     "",
     "Options:",
     "  --create-playlist         Create the playlist if registry has no youtube_playlist_id.",
+    "  --allow-republish         Allow uploading a set/support/target already present in config/youtube-published-videos.json.",
     "  --privacy=private|unlisted|public",
+    "  --publish-at=<ISO>        Schedule publish time. Requires privacy=private.",
     "  --confirm-public          Required if privacy=public.",
   ].join("\n");
 }
@@ -212,12 +228,12 @@ async function youtubeMediaUpload({ accessToken, method = "POST", pathName, quer
   return response.json();
 }
 
-async function uploadVideoResumable({ accessToken, videoPath, metadata, privacyStatus }) {
+async function uploadVideoResumable({ accessToken, videoPath, metadata, privacyStatus, publishAt }) {
   const stat = fs.statSync(videoPath);
   const initUrl = new URL("videos", "https://www.googleapis.com/upload/youtube/v3/");
   initUrl.searchParams.set("uploadType", "resumable");
   initUrl.searchParams.set("part", "snippet,status");
-  initUrl.searchParams.set("fields", "id,snippet(title),status(privacyStatus,uploadStatus)");
+  initUrl.searchParams.set("fields", "id,snippet(title),status(privacyStatus,uploadStatus,publishAt)");
 
   const resource = {
     snippet: {
@@ -231,6 +247,7 @@ async function uploadVideoResumable({ accessToken, videoPath, metadata, privacyS
       selfDeclaredMadeForKids: false,
     },
   };
+  if (publishAt) resource.status.publishAt = publishAt;
 
   const init = await fetch(initUrl, {
     method: "POST",
@@ -300,6 +317,54 @@ function appendLedger(ledgerPath, row) {
   fs.appendFileSync(ledgerPath, `${JSON.stringify(row)}\n`, "utf8");
 }
 
+function githubRunUrl() {
+  const runId = process.env.GITHUB_RUN_ID || "";
+  const serverUrl = process.env.GITHUB_SERVER_URL || "https://github.com";
+  const repository = process.env.GITHUB_REPOSITORY || "";
+  return runId && repository ? `${serverUrl}/${repository}/actions/runs/${runId}` : "";
+}
+
+function buildPublicationRecord({ metadata, ledgerRow, uploadedVideo, channel, thumbnailSet }) {
+  const videoId = ledgerRow.youtubeVideoId;
+  const playlistId = ledgerRow.youtubePlaylistId;
+  const runId = process.env.GITHUB_RUN_ID || "";
+  const publishAt = ledgerRow.publishAt || "";
+  return {
+    setId: metadata.setId,
+    supportLang: metadata.supportLang,
+    targetLang: metadata.targetLang,
+    playlist_key: ledgerRow.playlist_key,
+    title: uploadedVideo.snippet?.title || metadata.title,
+    youtubeVideoId: videoId,
+    youtubeVideoUrl: videoId ? `https://www.youtube.com/watch?v=${videoId}` : "",
+    youtubePlaylistId: playlistId,
+    youtubePlaylistUrl: playlistId ? `https://www.youtube.com/playlist?list=${playlistId}` : "",
+    playlistItemId: ledgerRow.playlistItemId,
+    channelKey: ledgerRow.channelKey,
+    youtubeChannelId: ledgerRow.uploadedVideoChannelId || ledgerRow.expectedYoutubeChannelId,
+    channelHandle: channel.snippet?.customUrl || "",
+    privacyStatus: ledgerRow.privacyStatus,
+    publicationStatus: ledgerRow.status,
+    publishAt,
+    scheduledPublishAt: publishAt,
+    desiredPrivacyStatus: publishAt ? "public" : ledgerRow.privacyStatus,
+    needsVisibilityPromotion: false,
+    thumbnailSet,
+    thumbnailLogoOverlay: true,
+    metadataSource: metadata.source || "",
+    metadataModel: metadata.model || metadata.geminiModel || "",
+    githubRunId: runId,
+    githubRunUrl: githubRunUrl(),
+    uploadedAt: ledgerRow.timestamp,
+    lastReadbackAt: ledgerRow.timestamp,
+    readback: {
+      uploadStatus: uploadedVideo.status?.uploadStatus || "",
+      privacyStatus: uploadedVideo.status?.privacyStatus || ledgerRow.privacyStatus,
+      publishAt: uploadedVideo.status?.publishAt || publishAt,
+    },
+  };
+}
+
 function dryRun(plan) {
   console.log("YouTube publish dry-run");
   console.log(`metadata=${plan.metadataFile}`);
@@ -309,6 +374,7 @@ function dryRun(plan) {
   console.log(`channel=${plan.channelKey} ${plan.youtube_channel_id}`);
   console.log(`playlist=${plan.playlist_key} ${plan.youtube_playlist_id || "(missing id)"}`);
   console.log(`privacy=${plan.privacyStatus}`);
+  if (plan.publishAt) console.log(`publishAt=${plan.publishAt}`);
   console.log(`estimatedQuotaUnits=${plan.estimatedQuotaUnits}`);
   if (plan.blockers.length) console.log(`blockers=${plan.blockers.join("; ")}`);
   if (plan.warnings.length) console.log(`warnings=${plan.warnings.join("; ")}`);
@@ -325,6 +391,7 @@ async function main() {
   const metadata = JSON.parse(fs.readFileSync(metadataFile, "utf8"));
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const playlistRegistry = loadPlaylistRegistry(options.playlistRegistry);
+  const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
   const channel = findChannelForSupport(channelRegistry.channels, metadata.supportLang);
   if (!channel) fail(`No channel configured for supportLang=${metadata.supportLang}`);
   if (!channel.channelId) fail(`Channel ${channel.key} has no channelId.`);
@@ -335,12 +402,24 @@ async function main() {
   const thumbnailCandidate = options.thumbnail || defaultThumbnailPath(metadataFile, metadata);
   const thumbnailPath = thumbnailCandidate ? resolveExistingPath(thumbnailCandidate, "thumbnail") : "";
   const privacyStatus = options.privacyStatus || metadata.privacyStatus || "public";
+  const publishAt = options.publishAt || metadata.publishAt || metadata.scheduledPublishAt || "";
   if (!["private", "unlisted", "public"].includes(privacyStatus)) fail(`Invalid privacy: ${privacyStatus}`);
   if (options.apply && privacyStatus === "public" && !options.confirmPublic) fail("privacy=public requires --confirm-public.");
+  if (publishAt) {
+    const publishTime = Date.parse(publishAt);
+    if (privacyStatus !== "private") fail("Scheduled publishAt requires privacy=private.");
+    if (!Number.isFinite(publishTime)) fail(`Invalid publishAt timestamp: ${publishAt}`);
+    if (publishTime <= Date.now() + 5 * 60 * 1000) fail(`publishAt must be at least 5 minutes in the future: ${publishAt}`);
+  }
 
   const metadataIssue = polishedMetadataIssue(metadata);
+  const existingPublication = findActivePublication(publicationRegistry, metadata);
   const blockers = [
     ...(metadataIssue ? [metadataIssue] : []),
+    ...(existingPublication && !options.allowRepublish ? [activePublicationBlocker(existingPublication)] : []),
+    ...(publishAt && playlistEntry?.status && String(playlistEntry.status).toLowerCase().includes("unlisted")
+      ? ["scheduled public release needs a public playlist; promote existing unlisted playlist before upload or create a new public playlist"]
+      : []),
     ...(playlistEntry?.youtube_playlist_id || options.createPlaylist
       ? []
       : ["playlist has no youtube_playlist_id; pass --create-playlist or fill config/youtube-playlists.json"])
@@ -353,9 +432,18 @@ async function main() {
     thumbnailPath,
     channelKey: channel.key,
     youtube_channel_id: channel.channelId,
+    existingPublication: existingPublication ? {
+      youtubeVideoId: existingPublication.youtubeVideoId,
+      youtubeVideoUrl: existingPublication.youtubeVideoUrl || "",
+      publicationStatus: existingPublication.publicationStatus || "",
+      privacyStatus: existingPublication.privacyStatus || "",
+      githubRunId: existingPublication.githubRunId || "",
+      lastReadbackAt: existingPublication.lastReadbackAt || "",
+    } : null,
     playlist_key: assignment.key,
     youtube_playlist_id: playlistEntry?.youtube_playlist_id || "",
     privacyStatus,
+    publishAt,
     estimatedQuotaUnits: 1600 + (thumbnailPath ? 50 : 0) + (playlistEntry?.youtube_playlist_id ? 50 : (options.createPlaylist ? 100 : 0)),
     blockers,
     warnings: thumbnailPath ? [] : ["thumbnail not found; thumbnails.set will be skipped"],
@@ -386,6 +474,7 @@ async function main() {
     playlist_key: assignment.key,
     expectedYoutubeChannelId: channel.channelId,
     privacyStatus,
+    publishAt,
   };
 
   let uploadedVideoId = "";
@@ -405,7 +494,7 @@ async function main() {
       playlistEntry = result.entry;
     }
     if (!playlistEntry.youtube_playlist_id) {
-      const playlistPrivacyStatus = privacyStatus === "public" ? "public" : "unlisted";
+      const playlistPrivacyStatus = (privacyStatus === "public" || publishAt) ? "public" : "unlisted";
       const playlist = await youtubeJson({
         accessToken,
         method: "POST",
@@ -426,7 +515,7 @@ async function main() {
     }
     youtubePlaylistId = playlistEntry.youtube_playlist_id;
 
-    const uploaded = await uploadVideoResumable({ accessToken, videoPath, metadata, privacyStatus });
+    const uploaded = await uploadVideoResumable({ accessToken, videoPath, metadata, privacyStatus, publishAt });
     const videoId = uploaded.id;
     uploadedVideoId = videoId;
     let thumbnailResult = null;
@@ -463,7 +552,7 @@ async function main() {
       query: {
         part: "snippet,status",
         id: videoId,
-        fields: "items(id,snippet(channelId,title),status(privacyStatus,uploadStatus))",
+        fields: "items(id,snippet(channelId,title),status(privacyStatus,uploadStatus,publishAt))",
       },
     });
     const uploadedVideo = assertUploadedVideoChannel({
@@ -474,7 +563,7 @@ async function main() {
 
     const ledgerRow = {
       ...ledgerBase,
-      status: "published_uploaded",
+      status: publishAt ? "scheduled_uploaded" : "published_uploaded",
       youtubeVideoId: videoId,
       youtubePlaylistId: playlistEntry.youtube_playlist_id,
       playlistItemId: playlistItem.id,
@@ -484,6 +573,14 @@ async function main() {
       readback: videoReadback,
     };
     appendLedger(options.ledger, ledgerRow);
+    upsertPublication(publicationRegistry, buildPublicationRecord({
+      metadata,
+      ledgerRow,
+      uploadedVideo,
+      channel: authorizedChannel,
+      thumbnailSet: Boolean(thumbnailResult),
+    }));
+    savePublicationRegistry(publicationRegistry, options.publicationRegistry);
     console.log(JSON.stringify(ledgerRow, null, 2));
   } catch (error) {
     appendLedger(options.ledger, {

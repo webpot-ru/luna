@@ -28,6 +28,7 @@ function parseArgs(argv) {
     force: false,
     writeMetadata: true,
     limit: null,
+    concurrency: Number(process.env.VECTORENGINE_IMAGE_CONCURRENCY || 2),
     output: "",
     logoAsset: process.env.YOUTUBE_THUMBNAIL_LOGO_ASSET || DEFAULT_LOGO_ASSET,
     logoOverlay: process.env.YOUTUBE_THUMBNAIL_LOGO_OVERLAY !== "0",
@@ -48,6 +49,7 @@ function parseArgs(argv) {
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = readValue();
     else if (arg === "--logo-asset" || arg.startsWith("--logo-asset=")) options.logoAsset = readValue();
     else if (arg === "--limit" || arg.startsWith("--limit=")) options.limit = Number(readValue());
+    else if (arg === "--concurrency" || arg.startsWith("--concurrency=")) options.concurrency = Number(readValue());
     else if (arg === "--confirm-spend") options.confirmSpend = true;
     else if (arg === "--dry-run") options.dryRun = true;
     else if (arg === "--force") options.force = true;
@@ -69,6 +71,7 @@ function usage() {
     "Creates one VectorEngine GPT Image 2 YouTube thumbnail per youtube_metadata.json.",
     "The final JPEG is written next to metadata as youtube_thumbnail.jpg and metadata.thumbnailPath is updated.",
     `By default, the real logo asset is overlaid when present: ${DEFAULT_LOGO_ASSET}`,
+    "Default live concurrency is 2; override with --concurrency=<n> or VECTORENGINE_IMAGE_CONCURRENCY.",
     "",
     "Safety:",
     "  Live VectorEngine image calls require --confirm-spend.",
@@ -253,6 +256,7 @@ async function main() {
   const files = collectMetadataFiles(options.inputs);
   const selectedFiles = options.limit ? files.slice(0, options.limit) : files;
   const logoPath = options.logoOverlay ? resolveLogoAsset(options.logoAsset) : "";
+  const concurrency = Math.max(1, Math.min(Math.floor(Number(options.concurrency) || 1), Math.max(1, selectedFiles.length)));
   const loadedEnvFiles = [];
   for (const envFile of options.envFiles) {
     const resolved = path.resolve(envFile);
@@ -263,25 +267,23 @@ async function main() {
     throw new Error("Missing VectorEngine key. Set VECTORENGINE_API_KEY or VECTOR_ENGINE_API_KEY.");
   }
 
-  const records = [];
-  for (const metadataFile of selectedFiles) {
+  async function processMetadata(metadataFile) {
     const metadata = JSON.parse(fs.readFileSync(metadataFile, "utf8"));
     const paths = outputPaths(metadataFile, options.outputName);
     const prompt = buildPrompt(metadata);
     const existing = fs.existsSync(paths.thumbnailPath);
     if (existing && !options.force) {
       if (options.writeMetadata) updateMetadataFile(metadataFile, metadata, paths.thumbnailPath, paths.thumbnailMetadataPath, logoPath);
-      records.push({
+      return {
         status: "skipped_existing",
         metadataFile: relativeProjectPath(metadataFile),
         thumbnailPath: relativeProjectPath(paths.thumbnailPath),
         logoOverlay: Boolean(logoPath),
         logoAsset: logoPath ? relativeProjectPath(logoPath) : options.logoAsset,
-      });
-      continue;
+      };
     }
     if (options.dryRun) {
-      records.push({
+      return {
         status: "dry_run",
         metadataFile: relativeProjectPath(metadataFile),
         rawPath: relativeProjectPath(paths.rawPath),
@@ -289,8 +291,7 @@ async function main() {
         logoOverlay: Boolean(logoPath),
         logoAsset: logoPath ? relativeProjectPath(logoPath) : options.logoAsset,
         prompt,
-      });
-      continue;
+      };
     }
 
     await fsp.mkdir(path.dirname(paths.rawPath), { recursive: true });
@@ -325,20 +326,33 @@ async function main() {
     };
     await fsp.writeFile(paths.thumbnailMetadataPath, `${JSON.stringify(record, null, 2)}\n`, "utf8");
     if (options.writeMetadata) updateMetadataFile(metadataFile, metadata, paths.thumbnailPath, paths.thumbnailMetadataPath, logoPath);
-    records.push(record);
+    return record;
   }
 
+  const records = new Array(selectedFiles.length);
+  let nextIndex = 0;
+  async function worker() {
+    while (nextIndex < selectedFiles.length) {
+      const currentIndex = nextIndex;
+      nextIndex += 1;
+      records[currentIndex] = await processMetadata(selectedFiles[currentIndex]);
+    }
+  }
+  await Promise.all(Array.from({ length: concurrency }, () => worker()));
+  const compactRecords = records.filter(Boolean);
+
   const report = {
-    status: records.some((record) => record.status === "ok" || record.status === "skipped_existing" || record.status === "dry_run")
+    status: compactRecords.some((record) => record.status === "ok" || record.status === "skipped_existing" || record.status === "dry_run")
       ? "ok"
       : "empty",
     generatedAt: new Date().toISOString(),
     model: options.model,
     size: options.size,
     dryRun: options.dryRun,
+    concurrency,
     inputCount: files.length,
-    processedCount: records.length,
-    records,
+    processedCount: compactRecords.length,
+    records: compactRecords,
   };
   const json = `${JSON.stringify(report, null, 2)}\n`;
   if (options.output) {

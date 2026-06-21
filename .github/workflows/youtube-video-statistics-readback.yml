@@ -1,0 +1,94 @@
+name: YouTube Video Statistics Readback
+
+on:
+  workflow_dispatch:
+    inputs:
+      due_only:
+        description: "Only read checkpoints already due at as_of."
+        required: true
+        default: true
+        type: boolean
+      as_of:
+        description: "Optional ISO timestamp. Empty means runner now."
+        required: false
+        default: ""
+      confirm_youtube_read:
+        description: "Type READ_YOUTUBE_STATS to call YouTube Data API."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  youtube-video-statistics-readback:
+    runs-on: ubuntu-latest
+    environment: youtube-api-branding
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Refuse unsafe read inputs
+        shell: bash
+        env:
+          CONFIRM_YOUTUBE_READ: ${{ github.event.inputs.confirm_youtube_read }}
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRM_YOUTUBE_READ" != "READ_YOUTUBE_STATS" ]; then
+            echo "::error::YouTube stats readback requires confirm_youtube_read=READ_YOUTUBE_STATS"
+            exit 1
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Node dependencies
+        run: npm ci || npm install
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+          echo "YouTube OAuth bundle restored for stats readback."
+
+      - name: Read YouTube video statistics
+        shell: bash
+        env:
+          DUE_ONLY: ${{ github.event.inputs.due_only }}
+          AS_OF: ${{ github.event.inputs.as_of }}
+        run: |
+          set -euo pipefail
+          ARGS=("--fetch" "--confirm-youtube-read" "--output=outputs/youtube-video-statistics-readback-github.json" "--ledger=outputs/youtube-video-statistics-ledger.jsonl")
+          if [ "$DUE_ONLY" = "true" ]; then
+            ARGS+=("--due-only")
+          else
+            ARGS+=("--include-pending")
+          fi
+          if [ -n "$AS_OF" ]; then
+            ARGS+=("--as-of=$AS_OF")
+          fi
+          npm run read:youtube-video-statistics -- "${ARGS[@]}"
+
+      - name: Upload non-secret statistics artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-video-statistics-readback-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-video-statistics-readback-github.json
+            outputs/youtube-video-statistics-ledger.jsonl
