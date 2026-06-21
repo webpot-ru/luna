@@ -690,6 +690,7 @@ Metadata включает `title`, `description`, `tags`, `hashtags`, `categoryI
 Правило качества:
 
 - template fallback всегда должен работать без AI и без внешней зависимости;
+- primary template fallbacks (`EN`, `RU`, `ES` / `ES-419`) should target the same 650+ character useful-description SEO floor as AI-polished metadata, so a recoverable AI outage does not produce thin descriptions;
 - Gemini используется только как AI-polish слой поверх фактов из Course Metadata, списка слов и public course URL;
 - recoverable Gemini/VectorEngine polish failures (`non-JSON`, timeout, HTTP 429/5xx) must not block a valid video plan by default: the generator retries once with a stricter JSON-only prompt, then writes `source=template-ai-fallback` with bounded `aiMetadata` diagnostics. Set `YOUTUBE_METADATA_AI_STRICT=1` only when explicitly debugging AI output and willing to fail the run;
 - Gemini output не должен придумывать длительность, платные обещания, сертификаты, guaranteed fluency, teacher/native-speaker claims beyond the actual video facts;

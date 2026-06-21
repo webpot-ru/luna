@@ -108,7 +108,7 @@ function getSupportCopy(supportLang) {
       title: ({ targetLanguageName, deckTitle, wordCount }) =>
         `${targetLanguageName} A1: ${deckTitle} | ${wordCount} слов с произношением`,
       description: ({ targetLanguageName, deckTitle, wordCount, courseUrl }) =>
-        `Выучите ${wordCount} слов по теме «${deckTitle}» для языка ${targetLanguageName}. Слушайте произношение, повторяйте слова в паузах и закрепите материал в коротком мини-тесте в конце видео.\n\nОткройте эту колоду и другие бесплатные упражнения LunaCards на сайте:\n${courseUrl}\n\nПодписывайтесь на канал, если хотите регулярно пополнять словарный запас короткими видеоуроками.`,
+        `Выучите ${wordCount} слов по теме «${deckTitle}» для языка ${targetLanguageName}. Это короткий видеоурок LunaCards для начинающих: слушайте слово и перевод, повторяйте вслух во время пауз, обращайте внимание на произношение и закрепляйте лексику в мини-тесте в конце видео.\n\nТакой формат удобно использовать как быструю ежедневную тренировку словаря A1: сначала посмотрите урок полностью, затем откройте карточки на сайте и повторите слова в своем темпе. Колода помогает связать написание, звучание и значение без лишней теории.\n\nОткройте эту колоду и другие бесплатные упражнения LunaCards на сайте:\n${courseUrl}\n\nПодписывайтесь на канал, если хотите регулярно пополнять словарный запас короткими видеоуроками с произношением, паузами для повторения и понятной практикой.`,
       tags: ({ targetLanguageName, deckTitle }) => [
         `${targetLanguageName} язык`,
         `${targetLanguageName} для начинающих`,
@@ -128,7 +128,7 @@ function getSupportCopy(supportLang) {
       title: ({ targetLanguageName, deckTitle, wordCount }) =>
         `${targetLanguageName} A1: ${deckTitle} | ${wordCount} palabras con pronunciación`,
       description: ({ targetLanguageName, deckTitle, wordCount, courseUrl }) =>
-        `Aprende ${wordCount} palabras de ${targetLanguageName} sobre «${deckTitle}». Escucha la pronunciación, repite en las pausas y termina con una mini prueba rápida para repasar.\n\nPractica esta baraja y otros cursos gratuitos de LunaCards aquí:\n${courseUrl}\n\nSuscríbete para recibir nuevos videos cortos de vocabulario y práctica de idiomas.`,
+        `Aprende ${wordCount} palabras de ${targetLanguageName} sobre «${deckTitle}» con un video corto de LunaCards para principiantes. Escucha cada palabra, mira el significado, repite en las pausas y usa la mini prueba final para comprobar qué recuerdas.\n\nEste formato está pensado para practicar vocabulario A1 de forma rápida: primero mira el video completo, después abre la baraja en el sitio y repasa las tarjetas a tu propio ritmo. Así conectas escritura, pronunciación y significado sin una explicación larga.\n\nPractica esta baraja y otros cursos gratuitos de LunaCards aquí:\n${courseUrl}\n\nSuscríbete para recibir más videos cortos de vocabulario, pronunciación y práctica de idiomas con tarjetas claras y ejercicios rápidos.`,
       tags: ({ targetLanguageName, deckTitle }) => [
         `${targetLanguageName} para principiantes`,
         `aprender ${targetLanguageName}`,
@@ -146,7 +146,7 @@ function getSupportCopy(supportLang) {
     title: ({ targetLanguageName, deckTitle, wordCount }) =>
       `${targetLanguageName} A1: ${deckTitle} | ${wordCount} words with pronunciation`,
     description: ({ targetLanguageName, deckTitle, wordCount, courseUrl }) =>
-      `Learn ${wordCount} ${targetLanguageName} words from the topic "${deckTitle}". Listen to the pronunciation, repeat during the pauses, and finish with a short mini-test to review the words.\n\nPractice this deck and other free LunaCards courses here:\n${courseUrl}\n\nSubscribe for more short vocabulary videos and language practice.`,
+      `Learn ${wordCount} ${targetLanguageName} words from the topic "${deckTitle}" with a short LunaCards video lesson for beginners. Listen to each word, read the meaning, repeat during the pauses, and use the quick mini-test at the end to check what you remember.\n\nThis A1 vocabulary format is built for daily practice: watch the lesson once, then open the deck on the site and review the flashcards at your own pace. It helps connect spelling, pronunciation and meaning without a long grammar explanation.\n\nPractice this deck and other free LunaCards courses here:\n${courseUrl}\n\nSubscribe for more short vocabulary videos with pronunciation, flashcards, repeat pauses and simple review exercises for language learners.`,
     tags: ({ targetLanguageName, deckTitle }) => [
       `${targetLanguageName} for beginners`,
       `learn ${targetLanguageName}`,
