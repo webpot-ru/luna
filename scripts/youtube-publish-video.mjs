@@ -234,6 +234,42 @@ async function uploadVideoResumable({ accessToken, videoPath, metadata, privacyS
   return upload.json();
 }
 
+function singleYouTubeItem(response, label) {
+  const item = response?.items?.[0];
+  if (!item) fail(`YouTube ${label} readback returned no items.`);
+  return item;
+}
+
+async function readAuthorizedChannel({ accessToken, expectedChannelId }) {
+  const readback = await youtubeJson({
+    accessToken,
+    method: "GET",
+    pathName: "channels",
+    query: {
+      part: "snippet",
+      mine: "true",
+      fields: "items(id,snippet(title,customUrl))",
+    },
+  });
+  const item = singleYouTubeItem(readback, "authorized channel");
+  if (item.id !== expectedChannelId) {
+    fail(`OAuth token channel mismatch: expected ${expectedChannelId}, got ${item.id}.`);
+  }
+  return item;
+}
+
+function assertUploadedVideoChannel({ videoReadback, expectedChannelId, videoId }) {
+  const item = singleYouTubeItem(videoReadback, "uploaded video");
+  if (item.id !== videoId) {
+    fail(`Uploaded video readback mismatch: expected video ${videoId}, got ${item.id}.`);
+  }
+  const actualChannelId = item.snippet?.channelId || "";
+  if (actualChannelId !== expectedChannelId) {
+    fail(`Uploaded video channel mismatch: expected ${expectedChannelId}, got ${actualChannelId || "(missing)"}.`);
+  }
+  return item;
+}
+
 function appendLedger(ledgerPath, row) {
   fs.mkdirSync(path.dirname(ledgerPath), { recursive: true });
   fs.appendFileSync(ledgerPath, `${JSON.stringify(row)}\n`, "utf8");
@@ -313,11 +349,22 @@ async function main() {
     targetLang: metadata.targetLang,
     setId: metadata.setId,
     playlist_key: assignment.key,
+    expectedYoutubeChannelId: channel.channelId,
     privacyStatus,
   };
 
+  let uploadedVideoId = "";
+  let youtubePlaylistId = playlistEntry?.youtube_playlist_id || "";
+  let playlistItemId = "";
+  let authorizedChannel = null;
+
   try {
     const accessToken = await getAccessToken({ clientFile, tokenFile });
+    authorizedChannel = await readAuthorizedChannel({
+      accessToken,
+      expectedChannelId: channel.channelId,
+    });
+
     if (!playlistEntry) {
       const result = upsertPlannedPlaylist(playlistRegistry, assignment, channel);
       playlistEntry = result.entry;
@@ -341,9 +388,11 @@ async function main() {
       playlistEntry.lastReadbackAt = new Date().toISOString();
       savePlaylistRegistry(playlistRegistry, options.playlistRegistry);
     }
+    youtubePlaylistId = playlistEntry.youtube_playlist_id;
 
     const uploaded = await uploadVideoResumable({ accessToken, videoPath, metadata, privacyStatus });
     const videoId = uploaded.id;
+    uploadedVideoId = videoId;
     let thumbnailResult = null;
     if (thumbnailPath) {
       thumbnailResult = await youtubeMediaUpload({
@@ -369,6 +418,7 @@ async function main() {
         },
       },
     });
+    playlistItemId = playlistItem.id;
 
     const videoReadback = await youtubeJson({
       accessToken,
@@ -377,8 +427,13 @@ async function main() {
       query: {
         part: "snippet,status",
         id: videoId,
-        fields: "items(id,snippet(title),status(privacyStatus,uploadStatus))",
+        fields: "items(id,snippet(channelId,title),status(privacyStatus,uploadStatus))",
       },
+    });
+    const uploadedVideo = assertUploadedVideoChannel({
+      videoReadback,
+      expectedChannelId: channel.channelId,
+      videoId,
     });
 
     const ledgerRow = {
@@ -388,6 +443,8 @@ async function main() {
       youtubePlaylistId: playlistEntry.youtube_playlist_id,
       playlistItemId: playlistItem.id,
       thumbnailSet: Boolean(thumbnailResult),
+      authorizedChannel,
+      uploadedVideoChannelId: uploadedVideo.snippet?.channelId || "",
       readback: videoReadback,
     };
     appendLedger(options.ledger, ledgerRow);
@@ -396,6 +453,10 @@ async function main() {
     appendLedger(options.ledger, {
       ...ledgerBase,
       status: "failed",
+      youtubeVideoId: uploadedVideoId,
+      youtubePlaylistId,
+      playlistItemId,
+      authorizedChannel,
       error: error.message,
     });
     throw error;
