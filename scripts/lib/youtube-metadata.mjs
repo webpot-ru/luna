@@ -287,6 +287,43 @@ export function buildGeminiPrompt(baseMetadata, cards) {
   ].join("\n");
 }
 
+export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
+  const cardWords = uniqueStrings(cards.map((card) => card.target_display || card.target_word)).slice(0, 24);
+  const facts = {
+    supportLang: baseMetadata.supportLang,
+    targetLang: baseMetadata.targetLang,
+    targetLanguageName: baseMetadata.targetLanguageName,
+    deckTitle: baseMetadata.deckTitle,
+    level: baseMetadata.level,
+    wordCount: baseMetadata.wordCount,
+    courseUrl: baseMetadata.courseUrl,
+    baseTitle: baseMetadata.title,
+    baseDescription: baseMetadata.description,
+    sampleWords: cardWords
+  };
+  return [
+    "You are a JSON API. Return only the completed JSON object that starts with { and ends with }.",
+    "Do not write analysis, notes, length checks, character counts, Markdown or prose outside JSON.",
+    "Task: improve YouTube metadata for a LunaCards vocabulary video while preserving the facts below.",
+    "",
+    "FACTS_JSON:",
+    JSON.stringify(facts),
+    "",
+    "Rules:",
+    "- Write title, description, tags and hashtags in the same language as baseTitle/baseDescription.",
+    "- Make the title a natural search title for beginner learners, not clickbait.",
+    "- Make the description several useful short paragraphs and include courseUrl exactly once.",
+    "- Mention vocabulary, pronunciation, repeat pauses, mini-test/review, and LunaCards flashcards.",
+    "- Include 3-5 concrete sampleWords in the description if they fit naturally; do not turn the description into a keyword list.",
+    "- tags: 12-18 short search phrases, no # characters.",
+    "- hashtags: exactly 3 strings, each begins with # and contains no spaces.",
+    "- Do not invent paid features, certificates, native teachers, exact duration or guarantees.",
+    "",
+    "Complete this exact JSON shape:",
+    '{"title":"","description":"","tags":[],"hashtags":[]}'
+  ].join("\n");
+}
+
 function parseGeminiTextResponse(data) {
   const parts = data?.candidates?.[0]?.content?.parts || [];
   const text = parts.map((part) => part.text || "").join("").trim();
@@ -336,7 +373,7 @@ async function callGeminiCli(prompt, { model = defaultGeminiCliModel } = {}) {
   return JSON.parse(raw.slice(jsonStart, jsonEnd + 1));
 }
 
-async function callGeminiVectorEngine(prompt, { model = defaultVectorEngineGeminiModel, maxOutputTokens = 1600 } = {}) {
+async function callGeminiVectorEngine(prompt, { model = defaultVectorEngineGeminiModel, maxOutputTokens = 3200 } = {}) {
   const request = {
     prompt,
     schema: YOUTUBE_METADATA_SCHEMA,
@@ -364,11 +401,13 @@ async function callGeminiVectorEngine(prompt, { model = defaultVectorEngineGemin
         "No Markdown, no explanation, no numbered lists, no comments."
       ].join(" "),
       prompt: [
+        "You are a JSON repair endpoint. Return only JSON.",
+        "Do not count text length. Do not explain. Do not use Markdown.",
+        "",
+        "METADATA_TASK:",
         prompt,
         "",
-        "CRITICAL FORMAT REQUIREMENT:",
-        "Output exactly one JSON object with these keys only: title, description, tags, hashtags.",
-        "Example shape:",
+        "OUTPUT EXACTLY THIS OBJECT SHAPE WITH REAL VALUES:",
         '{"title":"...","description":"...","tags":["..."],"hashtags":["#..."]}'
       ].join("\n")
     });
@@ -441,10 +480,12 @@ export async function generateYouTubeMetadata(input) {
   const template = buildTemplateYouTubeMetadata({ ...input, cards, deckMetadata });
   if (!input.withGemini) return template;
 
-  const prompt = buildGeminiPrompt(template, cards);
   const backend = input.geminiBackend
     || process.env.GEMINI_BACKEND
     || (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY ? "api" : "cli");
+  const prompt = backend === "vectorengine"
+    ? buildVectorEngineGeminiPrompt(template, cards)
+    : buildGeminiPrompt(template, cards);
   const model = input.model || (
     backend === "api"
       ? defaultGeminiApiModel
