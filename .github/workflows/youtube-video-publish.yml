@@ -238,7 +238,48 @@ jobs:
             echo "No Google Drive File ID found for $SET_ID in data/deck-sources.json. Running with local files if they exist."
           fi
 
-      - name: Build videos and generate YouTube metadata
+      - name: Plan YouTube generation targets
+        id: generation_targets
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          LANGS_INPUT: ${{ github.event.inputs.langs }}
+          WORKER_COUNT: ${{ github.event.inputs.worker_count }}
+          WORKER_INDEX: ${{ github.event.inputs.worker_index }}
+          ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
+        run: |
+          set -euo pipefail
+          PRE_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT_INPUT" "--shard-count" "$WORKER_COUNT" "--shard-index" "$WORKER_INDEX" "--output=outputs/video-generator/youtube-generation-targets-github.json")
+          if [ -n "$LANGS_INPUT" ]; then
+            PRE_ARGS+=("--targets" "$LANGS_INPUT")
+          fi
+          if [ "$ALLOW_REPUBLISH" = "true" ]; then
+            PRE_ARGS+=("--allow-republish")
+          fi
+          npm run plan:youtube-generation-targets -- "${PRE_ARGS[@]}"
+          node -e '
+            const fs = require("fs");
+            const report = JSON.parse(fs.readFileSync("outputs/video-generator/youtube-generation-targets-github.json", "utf8"));
+            const summary = report.summary || {};
+            const hasTargets = summary.hasShardTargets ? "true" : "false";
+            fs.appendFileSync(process.env.GITHUB_ENV, `YOUTUBE_GENERATION_HAS_TARGETS=${hasTargets}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `has_targets=${hasTargets}\n`);
+            console.log(JSON.stringify(summary, null, 2));
+            if (process.env.GITHUB_STEP_SUMMARY) {
+              fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
+                "### YouTube generation target preflight",
+                "",
+                `- Eligible targets before sharding: ${summary.eligibleTargetCount || 0}`,
+                `- Targets assigned to this worker: ${summary.shardSelectedTargetCount || 0}`,
+                `- Skipped active publications: ${summary.skippedExistingPublicationCount || 0}`,
+                "",
+              ].join("\n"));
+            }
+          '
+
+      - name: Build videos, metadata, schedule and thumbnails
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
         shell: bash
         env:
           AI33_API_KEY: ${{ secrets.AI33_API_KEY }}
@@ -249,6 +290,13 @@ jobs:
           VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
           VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
           VECTORENGINE_GEMINI_MODEL: ${{ vars.VECTORENGINE_GEMINI_MODEL }}
+          VECTORENGINE_IMAGE_MODEL: ${{ vars.VECTORENGINE_IMAGE_MODEL }}
+          GENERATE_THUMBNAILS: ${{ github.event.inputs.generate_thumbnails }}
+          CONFIRM_THUMBNAIL_SPEND: ${{ github.event.inputs.confirm_thumbnail_spend }}
+          THUMBNAIL_CONCURRENCY: ${{ github.event.inputs.thumbnail_concurrency }}
+          SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
+          SCHEDULE_POLICY: ${{ github.event.inputs.schedule_policy }}
+          ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
         run: |
           set -euo pipefail
           SET_ID="${{ github.event.inputs.set_id }}"
@@ -265,22 +313,41 @@ jobs:
             EFFECTIVE_PRIVACY="private"
           fi
 
+          target_csv_for_support() {
+            local requested_support="$1"
+            node -e '
+              const fs = require("fs");
+              const requestedSupport = String(process.argv[1] || "").trim().replace(/_/g, "-").toUpperCase();
+              const report = JSON.parse(fs.readFileSync("outputs/video-generator/youtube-generation-targets-github.json", "utf8"));
+              const row = (report.supports || []).find((item) => String(item.supportLang || "").toUpperCase() === requestedSupport);
+              process.stdout.write((row?.eligibleTargets || []).join(","));
+            ' "$requested_support"
+          }
+
+          BUILD_PIDS=()
+          BUILD_LABELS=()
+          METADATA_STATUS=0
           IFS=',' read -ra SUPPORTS <<< "$SUPPORT_INPUT"
           for raw_support in "${SUPPORTS[@]}"; do
             support="$(echo "$raw_support" | xargs | tr '[:lower:]' '[:upper:]')"
             if [ -z "$support" ]; then
               continue
             fi
+            ELIGIBLE_TARGETS="$(target_csv_for_support "$support")"
+            if [ -z "$ELIGIBLE_TARGETS" ]; then
+              echo "No eligible generation targets for support=$support after publication-registry preflight."
+              continue
+            fi
 
             BUILD_ARGS=("--set" "$SET_ID" "--support" "$support" "--concurrency" "$CONCURRENCY" "--shard-count" "$WORKER_COUNT" "--shard-index" "$WORKER_INDEX")
             METADATA_ARGS=("--set" "$SET_ID" "--support" "$support" "--privacy" "$EFFECTIVE_PRIVACY" "--concurrency" "$METADATA_CONCURRENCY" "--shard-count" "$WORKER_COUNT" "--shard-index" "$WORKER_INDEX")
-            if [ -n "$LANGS_INPUT" ]; then
-              BUILD_ARGS+=("--langs" "$LANGS_INPUT")
-              METADATA_ARGS+=("--targets" "$LANGS_INPUT")
-            fi
+            BUILD_ARGS+=("--langs" "$ELIGIBLE_TARGETS")
+            METADATA_ARGS+=("--targets" "$ELIGIBLE_TARGETS")
 
-            echo "Building videos for support=$support"
-            node scripts/build-all-deck-videos.mjs "${BUILD_ARGS[@]}"
+            echo "Starting video build in background for support=$support targets=$ELIGIBLE_TARGETS"
+            node scripts/build-all-deck-videos.mjs "${BUILD_ARGS[@]}" &
+            BUILD_PIDS+=("$!")
+            BUILD_LABELS+=("video:$support")
 
             GEMINI_ARGS=()
             if [ -n "${VECTORENGINE_API_KEY:-}" ] || [ -n "${VECTOR_ENGINE_API_KEY:-}" ]; then
@@ -289,81 +356,73 @@ jobs:
               GEMINI_ARGS=("--with-gemini" "--gemini-backend" "api")
             fi
 
-            echo "Generating metadata for support=$support"
-            node scripts/generate-youtube-metadata.mjs "${METADATA_ARGS[@]}" "${GEMINI_ARGS[@]}"
+            echo "Generating metadata while video renders for support=$support"
+            if ! node scripts/generate-youtube-metadata.mjs "${METADATA_ARGS[@]}" "${GEMINI_ARGS[@]}"; then
+              METADATA_STATUS=1
+            fi
           done
 
-      - name: Validate deterministic worker isolation
-        shell: bash
-        env:
-          WORKER_COUNT: ${{ github.event.inputs.worker_count }}
-          WORKER_INDEX: ${{ github.event.inputs.worker_index }}
-        run: |
-          set -euo pipefail
-          npm run check:youtube-run-isolation -- outputs/video-generator --shard-count="$WORKER_COUNT" --shard-index="$WORKER_INDEX" --allow-empty --output=outputs/video-generator/youtube-run-isolation-report-github.json
+          if [ "$METADATA_STATUS" -eq 0 ]; then
+            npm run check:youtube-run-isolation -- outputs/video-generator --shard-count="$WORKER_COUNT" --shard-index="$WORKER_INDEX" --allow-empty --output=outputs/video-generator/youtube-run-isolation-report-github.json
 
-      - name: Assign scheduled YouTube publish times
-        if: ${{ github.event.inputs.publish_mode == 'scheduled' }}
-        shell: bash
-        env:
-          SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
-          SCHEDULE_POLICY: ${{ github.event.inputs.schedule_policy }}
-          ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
-        run: |
-          set -euo pipefail
-          SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--write-metadata" "--output=outputs/youtube-publish-schedule-github.json")
-          if [ "$ALLOW_REPUBLISH" = "true" ]; then
-            SCHEDULE_ARGS+=("--allow-republish")
+            if [ "$PUBLISH_MODE" = "scheduled" ]; then
+              SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--write-metadata" "--output=outputs/youtube-publish-schedule-github.json")
+              if [ "$ALLOW_REPUBLISH" = "true" ]; then
+                SCHEDULE_ARGS+=("--allow-republish")
+              fi
+              npm run plan:youtube-publish-schedule -- "${SCHEDULE_ARGS[@]}"
+            fi
+
+            if [ "$GENERATE_THUMBNAILS" = "true" ]; then
+              if [ "$CONFIRM_THUMBNAIL_SPEND" != "GENERATE_THUMBNAILS" ]; then
+                echo "::error::Thumbnail generation spends VectorEngine image credits. Set confirm_thumbnail_spend=GENERATE_THUMBNAILS."
+                METADATA_STATUS=1
+              elif [ -z "${VECTORENGINE_API_KEY:-}" ] && [ -z "${VECTOR_ENGINE_API_KEY:-}" ]; then
+                echo "::error::Missing VECTORENGINE_API_KEY / VECTOR_ENGINE_API_KEY for thumbnail generation."
+                METADATA_STATUS=1
+              else
+                npm run generate:youtube-thumbnails -- outputs/video-generator --confirm-spend --concurrency="$THUMBNAIL_CONCURRENCY" --output=outputs/video-generator/youtube-thumbnail-generation-report-github.json || METADATA_STATUS=1
+              fi
+            fi
+
+            if [ "$METADATA_STATUS" -eq 0 ]; then
+              npm run check:youtube-thumbnails -- outputs/video-generator --output=outputs/video-generator/youtube-thumbnail-report-github.json || METADATA_STATUS=1
+            fi
+
+            if [ "$METADATA_STATUS" -eq 0 ]; then
+              REVIEW_ARGS=("outputs/video-generator" "--output-prefix=outputs/video-generator/youtube-thumbnail-review-github")
+              if [ "$PUBLISH_MODE" = "scheduled" ]; then
+                REVIEW_ARGS+=("--require-publish-at")
+              fi
+              npm run build:youtube-thumbnail-review -- "${REVIEW_ARGS[@]}" || METADATA_STATUS=1
+            fi
           fi
-          npm run plan:youtube-publish-schedule -- "${SCHEDULE_ARGS[@]}"
 
-      - name: Generate YouTube thumbnails
-        if: ${{ github.event.inputs.generate_thumbnails == 'true' }}
-        shell: bash
-        env:
-          CONFIRM_THUMBNAIL_SPEND: ${{ github.event.inputs.confirm_thumbnail_spend }}
-          THUMBNAIL_CONCURRENCY: ${{ github.event.inputs.thumbnail_concurrency }}
-          VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
-          VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
-          VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
-          VECTORENGINE_IMAGE_MODEL: ${{ vars.VECTORENGINE_IMAGE_MODEL }}
-        run: |
-          set -euo pipefail
-          if [ "$CONFIRM_THUMBNAIL_SPEND" != "GENERATE_THUMBNAILS" ]; then
-            echo "::error::Thumbnail generation spends VectorEngine image credits. Set confirm_thumbnail_spend=GENERATE_THUMBNAILS."
+          BUILD_STATUS=0
+          for index in "${!BUILD_PIDS[@]}"; do
+            if ! wait "${BUILD_PIDS[$index]}"; then
+              echo "::error::Background ${BUILD_LABELS[$index]} failed."
+              BUILD_STATUS=1
+            fi
+          done
+          if [ "$METADATA_STATUS" -ne 0 ] || [ "$BUILD_STATUS" -ne 0 ]; then
             exit 1
           fi
-          if [ -z "${VECTORENGINE_API_KEY:-}" ] && [ -z "${VECTOR_ENGINE_API_KEY:-}" ]; then
-            echo "::error::Missing VECTORENGINE_API_KEY / VECTOR_ENGINE_API_KEY for thumbnail generation."
-            exit 1
-          fi
-          npm run generate:youtube-thumbnails -- outputs/video-generator --confirm-spend --concurrency="$THUMBNAIL_CONCURRENCY" --output=outputs/video-generator/youtube-thumbnail-generation-report-github.json
-
-      - name: Validate YouTube thumbnails
-        run: npm run check:youtube-thumbnails -- outputs/video-generator --output=outputs/video-generator/youtube-thumbnail-report-github.json
-
-      - name: Build thumbnail visual review sheet
-        shell: bash
-        env:
-          PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
-        run: |
-          set -euo pipefail
-          REVIEW_ARGS=("outputs/video-generator" "--output-prefix=outputs/video-generator/youtube-thumbnail-review-github")
-          if [ "$PUBLISH_MODE" = "scheduled" ]; then
-            REVIEW_ARGS+=("--require-publish-at")
-          fi
-          npm run build:youtube-thumbnail-review -- "${REVIEW_ARGS[@]}"
 
       - name: Validate YouTube metadata
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
         run: npm run check:youtube-metadata -- outputs/video-generator
 
       - name: Validate YouTube playlist naming contract
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
         run: npm run check:youtube-playlist-naming
 
       - name: Validate video TTS variant contract
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
         run: npm run check:video-tts-variant-contract -- --metadata outputs/video-generator --output=outputs/video-generator/video-tts-variant-contract-report-github.json
 
       - name: Validate YouTube SEO metadata
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
         shell: bash
         env:
           MODE: ${{ github.event.inputs.mode }}
@@ -376,6 +435,7 @@ jobs:
           npm run check:youtube-seo-metadata -- "${SEO_ARGS[@]}"
 
       - name: Plan YouTube publication
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
         shell: bash
         env:
           CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}
@@ -396,6 +456,7 @@ jobs:
           npm run plan:youtube-publish -- "${PLAN_ARGS[@]}"
 
       - name: Gate publish plan
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
         shell: bash
         env:
           MODE: ${{ github.event.inputs.mode }}
@@ -420,7 +481,7 @@ jobs:
           "
 
       - name: Upload videos to YouTube
-        if: ${{ github.event.inputs.mode == 'apply' }}
+        if: ${{ github.event.inputs.mode == 'apply' && steps.generation_targets.outputs.has_targets == 'true' }}
         shell: bash
         env:
           CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}

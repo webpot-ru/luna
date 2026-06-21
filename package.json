@@ -29,6 +29,7 @@
     "apply:youtube-channel-branding-batch": "node scripts/apply-youtube-channel-branding-batch.mjs",
     "check:youtube-channel-branding-readback": "node scripts/check-youtube-channel-branding-readback.mjs",
     "plan:youtube-publish": "node scripts/plan-youtube-publish.mjs",
+    "plan:youtube-generation-targets": "node scripts/plan-youtube-generation-targets.mjs",
     "plan:youtube-publish-schedule": "node scripts/plan-youtube-publish-schedule.mjs",
     "plan:youtube-analytics-readback": "node scripts/plan-youtube-analytics-readback.mjs",
     "read:youtube-video-statistics": "node scripts/read-youtube-video-statistics.mjs",
