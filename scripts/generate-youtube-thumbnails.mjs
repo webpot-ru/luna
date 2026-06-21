@@ -14,6 +14,7 @@ import { BRAND_NAME } from "./lib/brand.mjs";
 const DEFAULT_SIZE = "1536x864";
 const OUTPUT_NAME = "youtube_thumbnail";
 const MAX_YOUTUBE_THUMBNAIL_BYTES = 2 * 1024 * 1024;
+const DEFAULT_LOGO_ASSET = "assets/youtube-channel-branding/en/flashcardsluna-site-avatar-512.png";
 
 function parseArgs(argv) {
   const options = {
@@ -28,6 +29,8 @@ function parseArgs(argv) {
     writeMetadata: true,
     limit: null,
     output: "",
+    logoAsset: process.env.YOUTUBE_THUMBNAIL_LOGO_ASSET || DEFAULT_LOGO_ASSET,
+    logoOverlay: process.env.YOUTUBE_THUMBNAIL_LOGO_OVERLAY !== "0",
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -43,11 +46,13 @@ function parseArgs(argv) {
     else if (arg === "--size" || arg.startsWith("--size=")) options.size = readValue();
     else if (arg === "--output-name" || arg.startsWith("--output-name=")) options.outputName = readValue();
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = readValue();
+    else if (arg === "--logo-asset" || arg.startsWith("--logo-asset=")) options.logoAsset = readValue();
     else if (arg === "--limit" || arg.startsWith("--limit=")) options.limit = Number(readValue());
     else if (arg === "--confirm-spend") options.confirmSpend = true;
     else if (arg === "--dry-run") options.dryRun = true;
     else if (arg === "--force") options.force = true;
     else if (arg === "--no-write-metadata") options.writeMetadata = false;
+    else if (arg === "--no-logo-overlay") options.logoOverlay = false;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else options.inputs.push(arg);
   }
@@ -63,6 +68,7 @@ function usage() {
     "",
     "Creates one VectorEngine GPT Image 2 YouTube thumbnail per youtube_metadata.json.",
     "The final JPEG is written next to metadata as youtube_thumbnail.jpg and metadata.thumbnailPath is updated.",
+    `By default, the real logo asset is overlaid when present: ${DEFAULT_LOGO_ASSET}`,
     "",
     "Safety:",
     "  Live VectorEngine image calls require --confirm-spend.",
@@ -128,6 +134,7 @@ function buildPrompt(metadata) {
     `Visual style: same premium ${BRAND_NAME} system as the channel art and flashcardsluna.com: light #f4f7f9 background, white rounded flashcard panels, soft blue accents, deep navy typography, subtle violet accent, clean modern educational product feel.`,
     "Layout: big readable text on the left or center-left, elegant flashcard/course-card composition on the right, no clutter, no people, no dark background, no clickbait face, no neon.",
     "Show a few abstract non-text flashcards or icons that suggest vocabulary, audio/pronunciation and a quick quiz. Icons may include headphones, cards, check mark, book, moon-card motif.",
+    "Leave a clean safe area in the top-right corner for the real brand logo overlay.",
     "Important text rule: render ONLY the exact text lines below. Put each line on its own line. Do not add pipe separators, quotes, URLs, extra words, watermarks, signatures, random letters, or translated alternatives.",
     copy.brand,
     copy.headline,
@@ -153,26 +160,41 @@ function assertFfmpeg() {
   }
 }
 
-function normalizeWithFfmpeg(rawPath, thumbnailPath) {
+function normalizeWithFfmpeg(rawPath, thumbnailPath, logoPath = "") {
   assertFfmpeg();
   const qualities = [3, 5, 7, 9, 11];
   let lastError = "";
+  const hasLogo = Boolean(logoPath && fs.existsSync(logoPath));
   for (const quality of qualities) {
-    const result = spawnSync("ffmpeg", [
+    const args = [
       "-hide_banner",
       "-loglevel",
       "error",
       "-y",
       "-i",
       rawPath,
-      "-vf",
-      "scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720",
+    ];
+    if (hasLogo) {
+      args.push(
+        "-i",
+        logoPath,
+        "-filter_complex",
+        "[0:v]scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720[base];[1:v]scale=96:96[logo];[base][logo]overlay=W-w-42:42:format=auto"
+      );
+    } else {
+      args.push(
+        "-vf",
+        "scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720"
+      );
+    }
+    args.push(
       "-frames:v",
       "1",
       "-q:v",
       String(quality),
       thumbnailPath,
-    ], {
+    );
+    const result = spawnSync("ffmpeg", args, {
       encoding: "utf8",
       maxBuffer: 20 * 1024 * 1024,
     });
@@ -182,24 +204,37 @@ function normalizeWithFfmpeg(rawPath, thumbnailPath) {
     }
     const size = fs.statSync(thumbnailPath).size;
     if (size <= MAX_YOUTUBE_THUMBNAIL_BYTES) {
-      return { quality, size };
+      return {
+        quality,
+        size,
+        logoOverlay: hasLogo,
+        logoPath: hasLogo ? relativeProjectPath(logoPath) : "",
+      };
     }
   }
   const size = fs.existsSync(thumbnailPath) ? fs.statSync(thumbnailPath).size : 0;
   throw new Error(`Could not create a <=2MB thumbnail. Last size=${size}. ${lastError}`);
 }
 
+function resolveLogoAsset(logoAsset) {
+  if (!logoAsset) return "";
+  const resolved = path.isAbsolute(logoAsset) ? logoAsset : path.resolve(logoAsset);
+  return fs.existsSync(resolved) ? resolved : "";
+}
+
 function relativeProjectPath(filePath) {
   return path.relative(process.cwd(), filePath).replace(/\\/g, "/");
 }
 
-function updateMetadataFile(metadataFile, metadata, thumbnailPath, thumbnailMetadataPath) {
+function updateMetadataFile(metadataFile, metadata, thumbnailPath, thumbnailMetadataPath, logoPath = "") {
   const next = {
     ...metadata,
     thumbnailPath: relativeProjectPath(thumbnailPath),
     thumbnail: relativeProjectPath(thumbnailPath),
     thumbnailSource: "vectorengine-gpt-image-2",
     thumbnailMetadataPath: relativeProjectPath(thumbnailMetadataPath),
+    thumbnailLogoOverlay: Boolean(logoPath),
+    thumbnailLogoAsset: logoPath ? relativeProjectPath(logoPath) : "",
     thumbnailGeneratedAt: new Date().toISOString(),
   };
   fs.writeFileSync(metadataFile, `${JSON.stringify(next, null, 2)}\n`, "utf8");
@@ -217,6 +252,7 @@ async function main() {
 
   const files = collectMetadataFiles(options.inputs);
   const selectedFiles = options.limit ? files.slice(0, options.limit) : files;
+  const logoPath = options.logoOverlay ? resolveLogoAsset(options.logoAsset) : "";
   const loadedEnvFiles = [];
   for (const envFile of options.envFiles) {
     const resolved = path.resolve(envFile);
@@ -234,11 +270,13 @@ async function main() {
     const prompt = buildPrompt(metadata);
     const existing = fs.existsSync(paths.thumbnailPath);
     if (existing && !options.force) {
-      if (options.writeMetadata) updateMetadataFile(metadataFile, metadata, paths.thumbnailPath, paths.thumbnailMetadataPath);
+      if (options.writeMetadata) updateMetadataFile(metadataFile, metadata, paths.thumbnailPath, paths.thumbnailMetadataPath, logoPath);
       records.push({
         status: "skipped_existing",
         metadataFile: relativeProjectPath(metadataFile),
         thumbnailPath: relativeProjectPath(paths.thumbnailPath),
+        logoOverlay: Boolean(logoPath),
+        logoAsset: logoPath ? relativeProjectPath(logoPath) : options.logoAsset,
       });
       continue;
     }
@@ -248,6 +286,8 @@ async function main() {
         metadataFile: relativeProjectPath(metadataFile),
         rawPath: relativeProjectPath(paths.rawPath),
         thumbnailPath: relativeProjectPath(paths.thumbnailPath),
+        logoOverlay: Boolean(logoPath),
+        logoAsset: logoPath ? relativeProjectPath(logoPath) : options.logoAsset,
         prompt,
       });
       continue;
@@ -262,7 +302,7 @@ async function main() {
       apiKey,
     });
     await fsp.writeFile(paths.rawPath, imageBytes);
-    const normalized = normalizeWithFfmpeg(paths.rawPath, paths.thumbnailPath);
+    const normalized = normalizeWithFfmpeg(paths.rawPath, paths.thumbnailPath, logoPath);
     const record = {
       status: "ok",
       metadataFile: relativeProjectPath(metadataFile),
@@ -277,12 +317,14 @@ async function main() {
       prompt,
       rawPath: relativeProjectPath(paths.rawPath),
       thumbnailPath: relativeProjectPath(paths.thumbnailPath),
+      logoAsset: logoPath ? relativeProjectPath(logoPath) : options.logoAsset,
+      logoOverlay: Boolean(logoPath),
       ffmpeg: normalized,
       startedAt,
       finishedAt: new Date().toISOString(),
     };
     await fsp.writeFile(paths.thumbnailMetadataPath, `${JSON.stringify(record, null, 2)}\n`, "utf8");
-    if (options.writeMetadata) updateMetadataFile(metadataFile, metadata, paths.thumbnailPath, paths.thumbnailMetadataPath);
+    if (options.writeMetadata) updateMetadataFile(metadataFile, metadata, paths.thumbnailPath, paths.thumbnailMetadataPath, logoPath);
     records.push(record);
   }
 
