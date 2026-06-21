@@ -565,6 +565,8 @@ async function listAuthorizedChannels({ accessToken }) {
   return items.map((item) => ({
     channelId: item.id,
     title: item.snippet?.title || item.brandingSettings?.channel?.title || "",
+    snippetTitle: item.snippet?.title || "",
+    brandingTitle: item.brandingSettings?.channel?.title || "",
     customUrl: item.snippet?.customUrl || "",
     description: item.snippet?.description || item.brandingSettings?.channel?.description || "",
     defaultLanguage: item.snippet?.defaultLanguage || item.brandingSettings?.channel?.defaultLanguage || "",

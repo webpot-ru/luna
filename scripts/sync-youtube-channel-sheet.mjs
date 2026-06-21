@@ -109,11 +109,11 @@ function buildSheetRows(report) {
         ? "target handle not verified; current channel has no public handle; manual Studio handle setup needed"
         : "target handle not verified; current handle API-readback 2026-06-20; manual Studio rename needed";
     const ready = item.oldContentRisk
-      ? "assigned; token ready; API branding pending; old content/title review required"
-      : "assigned; token ready; API branding pending; manual Studio fields pending";
+      ? "assigned; token ready; API branding readback OK; old content/title review required; manual Studio fields pending"
+      : "assigned; token ready; API branding readback OK; manual Studio fields pending";
     const checked = item.oldContentRisk
-      ? `assigned from ${item.tokenKey}; API readback 2026-06-20; existing non-Luna channel/content risk; do public cleanup before launch`
-      : `assigned from ${item.tokenKey}; API readback 2026-06-20; Studio branding not yet published`;
+      ? `assigned from ${item.tokenKey}; API branding write/readback OK 2026-06-20; existing non-Luna channel/content risk; do public cleanup before launch`
+      : `assigned from ${item.tokenKey}; API branding write/readback OK 2026-06-20; Studio name/handle/avatar/contact/link pending`;
 
     return [
       priority,

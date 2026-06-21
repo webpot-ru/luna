@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { exec, execFile } from "node:child_process";
 import { promisify } from "node:util";
+import { getDbLanguageCode, normalizeLanguageCode } from "./lib/video-language-codes.mjs";
 
 const execAsync = promisify(exec);
 const execFileAsync = promisify(execFile);
@@ -165,6 +166,8 @@ async function main() {
   console.log(`Transition:    ${transition}`);
   console.log(`======================================`);
 
+  const supportDbLang = getDbLanguageCode(supportLang);
+
   // Resolve target languages: read from offline JSON if available, otherwise query Postgres
   const jsonPath = path.resolve(`data/decks/${setId}.json`);
   let languages = [];
@@ -173,8 +176,11 @@ async function main() {
     console.log(`[OFFLINE] Reading target languages from offline JSON: ${jsonPath}`);
     try {
       const deckData = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
-      if (deckData.cards?.[supportLang]) {
-        languages = Object.keys(deckData.cards[supportLang]).map(code => code.toUpperCase());
+      const supportKey = deckData.cards?.[supportLang] ? supportLang : supportDbLang;
+      if (deckData.cards?.[supportKey]) {
+        languages = Object.keys(deckData.cards[supportKey])
+          .map(code => normalizeLanguageCode(code))
+          .filter(code => getDbLanguageCode(code) !== supportDbLang);
       } else {
         console.warn(`Warning: support language "${supportLang}" has no target languages in offline JSON.`);
       }
@@ -193,7 +199,7 @@ async function main() {
           select meaning_id from meaning_set_memberships 
           where set_id = '${setId}'
         )
-        and language_code <> '${supportLang}'
+        and language_code <> '${supportDbLang}'
         order by language_code
       ) rows;
     `;

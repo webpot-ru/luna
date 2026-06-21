@@ -9,6 +9,7 @@
 | Документ | Статус | За что отвечает |
 | --- | --- | --- |
 | [Project Workflow](project-workflow.md) | Source of truth | Рабочий порядок, правила обновления документации, согласование изменений. |
+| [Codex Operations](codex-operations.md) | Source of truth | Проектный контур использования Codex worktrees, handoff, Browser/Developer mode, Record & Replay, hooks and read-only automations без нарушения секретов, YouTube/OAuth boundaries and docs gates. |
 | [Decision Log](decision-log.md) | Source of truth | Принятые решения, открытые вопросы, gate-план и правила "не переделывать по кругу". |
 | [Product Development Roadmap](product-development-roadmap.md) | Source of truth, product direction map | Верхнеуровневая карта развития LunaCards: ordinary decks, course/exam releases, source-assisted quality, future non-language flashcards and links to профильные source-of-truth документы. |
 | [Content Architecture](content-architecture.md) | Source of truth | Общий контур учебного контента: текущий production/export режим vocabulary-only и английский canonical base. |

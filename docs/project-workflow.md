@@ -32,6 +32,7 @@
 На текущий момент:
 
 - рабочий процесс описан здесь;
+- Codex app/worktree/handoff/browser/Record & Replay/hooks/read-only automation contour описан в [Codex Operations](codex-operations.md);
 - принятые решения и gate-план описаны в [Decision Log](decision-log.md);
 - operational order колод описан в [Deck Master Plan](deck-master-plan.md);
 - physical deck specs before generation описаны в [Deck Specs Registry](deck-specs/README.md);
@@ -89,4 +90,3 @@ scripts/move-to-trash.sh <relative-path>
 2. **Освобождение хода (Yield)**: Сразу прекратить вызов инструментов и завершить свой ход. Не запускать циклы опроса (`manage_task status`) и не слать пользователю промежуточных сообщений.
 3. **Реактивный подъем (Wakeup)**: Система сама разбудит агента новым сообщением, когда фоновый процесс завершит выполнение.
 4. **Итоговый отчет**: Получив уведомление о завершении, агент делает финальную сверку результатов и выдает пользователю готовый отчет.
-

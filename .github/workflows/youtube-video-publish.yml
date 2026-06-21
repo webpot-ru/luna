@@ -41,6 +41,15 @@ on:
         required: true
         default: true
         type: boolean
+      generate_thumbnails:
+        description: "Generate custom YouTube thumbnails through VectorEngine GPT Image 2."
+        required: true
+        default: true
+        type: boolean
+      confirm_thumbnail_spend:
+        description: "For thumbnail generation type GENERATE_THUMBNAILS."
+        required: false
+        default: ""
       confirm_youtube_write:
         description: "For mode=apply type APPLY_YOUTUBE_UPLOAD."
         required: false
@@ -203,8 +212,38 @@ jobs:
             node scripts/generate-youtube-metadata.mjs "${METADATA_ARGS[@]}" "${GEMINI_ARGS[@]}"
           done
 
+      - name: Generate YouTube thumbnails
+        if: ${{ github.event.inputs.generate_thumbnails == 'true' }}
+        shell: bash
+        env:
+          CONFIRM_THUMBNAIL_SPEND: ${{ github.event.inputs.confirm_thumbnail_spend }}
+          VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
+          VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
+          VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
+          VECTORENGINE_IMAGE_MODEL: ${{ vars.VECTORENGINE_IMAGE_MODEL }}
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRM_THUMBNAIL_SPEND" != "GENERATE_THUMBNAILS" ]; then
+            echo "::error::Thumbnail generation spends VectorEngine image credits. Set confirm_thumbnail_spend=GENERATE_THUMBNAILS."
+            exit 1
+          fi
+          if [ -z "${VECTORENGINE_API_KEY:-}" ] && [ -z "${VECTOR_ENGINE_API_KEY:-}" ]; then
+            echo "::error::Missing VECTORENGINE_API_KEY / VECTOR_ENGINE_API_KEY for thumbnail generation."
+            exit 1
+          fi
+          npm run generate:youtube-thumbnails -- outputs/video-generator --confirm-spend --output=outputs/video-generator/youtube-thumbnail-generation-report-github.json
+
+      - name: Validate YouTube thumbnails
+        run: npm run check:youtube-thumbnails -- outputs/video-generator --output=outputs/video-generator/youtube-thumbnail-report-github.json
+
       - name: Validate YouTube metadata
         run: npm run check:youtube-metadata -- outputs/video-generator
+
+      - name: Validate YouTube playlist naming contract
+        run: npm run check:youtube-playlist-naming
+
+      - name: Validate video TTS variant contract
+        run: npm run check:video-tts-variant-contract -- --metadata outputs/video-generator --output=outputs/video-generator/video-tts-variant-contract-report-github.json
 
       - name: Validate YouTube SEO metadata
         run: npm run check:youtube-seo-metadata -- outputs/video-generator --output=outputs/video-generator/youtube-seo-metadata-report-github.json
@@ -237,6 +276,10 @@ jobs:
               if (s.blockerCount) throw new Error('Publish plan has blockers.');
               if (s.publishReadyCount !== s.candidateCount) {
                 throw new Error('Not all publish candidates are publish_ready.');
+              }
+              const missingThumbnails = (report.candidates || []).filter((item) => !item.thumbnailPath);
+              if (missingThumbnails.length) {
+                throw new Error('Apply publish requires custom thumbnails for every candidate.');
               }
             }
           "

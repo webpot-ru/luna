@@ -4,6 +4,10 @@ import crypto from "node:crypto";
 import { execSync, execFileSync } from "node:child_process";
 import { psqlJson } from "./qa-utils.mjs";
 import { generateSlideHtml, getFlagEmoji } from "./card-slide-template.mjs";
+import { getDbLanguageCode, normalizeLanguageCode } from "./video-language-codes.mjs";
+import { defaultVoiceMap, getVoiceForLanguage } from "./tts-voice-map.mjs";
+
+export { defaultVoiceMap, getVoiceForLanguage };
 
 // Load Environment Variables from local or webpot
 function loadEnv() {
@@ -41,69 +45,6 @@ loadEnv();
 
 const baseUrl = process.env.AI33_BASE_URL || "https://api.ai33.pro";
 const apiKey = process.env.AI33_API_KEY;
-
-export const defaultVoiceMap = {
-  'RU': 'edge_ru-RU-DmitryNeural',
-  'ES': 'edge_es-ES-AlvaroNeural',
-  'ES-419': 'edge_es-MX-JorgeNeural',
-  'EN': 'edge_en-US-GuyNeural',
-  'EN-GB': 'edge_en-GB-RyanNeural',
-  'DE': 'edge_de-DE-ConradNeural',
-  'FR': 'edge_fr-FR-HenriNeural',
-  'IT': 'edge_it-IT-DiegoNeural',
-  'JA': 'edge_ja-JP-KeitaNeural',
-  'KO': 'edge_ko-KR-InJoonNeural',
-  'ZH': 'edge_zh-CN-YunxiNeural',
-  'VI': 'edge_vi-VN-NamMinhNeural',
-  'TH': 'edge_th-TH-NiwatNeural',
-  'TR': 'edge_tr-TR-AhmetNeural',
-  'NL': 'edge_nl-NL-ColetteNeural',
-  'SV': 'edge_sv-SE-MattiasNeural',
-  'NO': 'edge_nb-NO-FinnNeural',
-  'NB': 'edge_nb-NO-FinnNeural',
-  'DA': 'edge_da-DK-JeppeNeural',
-  'FI': 'edge_fi-FI-HarriNeural',
-  'PL': 'edge_pl-PL-MarekNeural',
-  'CS': 'edge_cs-CZ-AntoninNeural',
-  'SK': 'edge_sk-SK-LukasNeural',
-  'HU': 'edge_hu-HU-TamasNeural',
-  'RO': 'edge_ro-RO-EmilNeural',
-  'BG': 'edge_bg-BG-BorislavNeural',
-  'HR': 'edge_hr-HR-SreckoNeural',
-  'SR': 'edge_sr-RS-NicholasNeural',
-  'SL': 'edge_sl-SI-RokNeural',
-  'LT': 'edge_lt-LT-LeonasNeural',
-  'LV': 'edge_lv-LV-NilsNeural',
-  'ET': 'edge_et-EE-KertNeural',
-  'IS': 'edge_is-IS-GunnarNeural',
-  'HI': 'edge_hi-IN-MadhurNeural',
-  'BN': 'edge_bn-IN-BashkarNeural',
-  'TL': 'edge_fil-PH-AngeloNeural',
-  'MY': 'edge_my-MM-ThihaNeural',
-  'KM': 'edge_km-KH-PisethNeural',
-  'LO': 'edge_lo-LA-ChanthavongNeural',
-  'NE': 'edge_ne-NP-SagarNeural',
-  'SI': 'edge_si-LK-SameeraNeural',
-  'TA': 'edge_ta-IN-ValluvarNeural',
-  'TE': 'edge_te-IN-MohanNeural',
-  'KN': 'edge_kn-IN-GaganNeural',
-  'ML': 'edge_ml-IN-MidhunNeural',
-  'UZ': 'edge_uz-UZ-MadinaNeural',
-  'KK': 'edge_kk-KZ-DauletNeural',
-  'AZ': 'edge_az-AZ-BabekNeural',
-  'KA': 'edge_ka-GE-GiorgiNeural',
-  'HY': 'edge_hy-AM-AramNeural',
-  'SW': 'edge_sw-KE-RafikiNeural',
-  'PT': 'edge_pt-PT-DuarteNeural',
-  'PT-BR': 'edge_pt-BR-FranciscaNeural',
-  'MS': 'edge_ms-MY-YasminNeural',
-  'ID': 'edge_id-ID-GadisNeural'
-};
-
-export function getVoiceForLanguage(langCode) {
-  const code = String(langCode).toUpperCase();
-  return defaultVoiceMap[code] || 'edge_en-US-GuyNeural';
-}
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -310,9 +251,17 @@ function getOfflineDeckData(setId) {
 
 // Fetch cards data from Postgres
 export async function fetchDeckCards(setId, targetLang, supportLang) {
+  const targetCode = normalizeLanguageCode(targetLang);
+  const supportCode = normalizeLanguageCode(supportLang);
+  const targetDbLang = getDbLanguageCode(targetCode);
+  const supportDbLang = getDbLanguageCode(supportCode);
   const offlineData = getOfflineDeckData(setId);
-  if (offlineData && offlineData.cards?.[supportLang]?.[targetLang]) {
-    return offlineData.cards[supportLang][targetLang];
+  if (offlineData) {
+    const exactCards = offlineData.cards?.[supportCode]?.[targetCode];
+    if (exactCards) return exactCards;
+
+    const dbMappedCards = offlineData.cards?.[supportDbLang]?.[targetDbLang];
+    if (dbMappedCards) return dbMappedCards;
   }
 
   const sql = `
@@ -343,17 +292,17 @@ export async function fetchDeckCards(setId, targetLang, supportLang) {
       join meaning_units mu on mu.meaning_id = msm.meaning_id
       left join meaning_language_entries le_target 
         on le_target.meaning_id = msm.meaning_id 
-        and le_target.language_code = '${targetLang.replace(/'/g, "''")}'
+        and le_target.language_code = '${targetDbLang.replace(/'/g, "''")}'
       left join meaning_language_entries le_support 
         on le_support.meaning_id = msm.meaning_id 
-        and le_support.language_code = '${supportLang.replace(/'/g, "''")}'
+        and le_support.language_code = '${supportDbLang.replace(/'/g, "''")}'
       left join deck_examples ex on ex.meaning_id = msm.meaning_id
       left join meaning_example_translations ex_target 
         on ex_target.example_id = ex.example_id 
-        and ex_target.language_code = '${targetLang.replace(/'/g, "''")}'
+        and ex_target.language_code = '${targetDbLang.replace(/'/g, "''")}'
       left join meaning_example_translations ex_support 
         on ex_support.example_id = ex.example_id 
-        and ex_support.language_code = '${supportLang.replace(/'/g, "''")}'
+        and ex_support.language_code = '${supportDbLang.replace(/'/g, "''")}'
       where msm.set_id = '${setId.replace(/'/g, "''")}'
       order by msm.display_order, msm.meaning_id
     ) rows;
@@ -363,12 +312,15 @@ export async function fetchDeckCards(setId, targetLang, supportLang) {
 
 // Fetch localized deck title
 export async function fetchDeckMetadata(setId, supportLang) {
+  const supportCode = normalizeLanguageCode(supportLang);
+  const supportDbLang = getDbLanguageCode(supportCode);
   const offlineData = getOfflineDeckData(setId);
-  if (offlineData && offlineData.titles?.[supportLang]) {
+  const offlineTitleKey = offlineData?.titles?.[supportCode] ? supportCode : supportDbLang;
+  if (offlineData && offlineData.titles?.[offlineTitleKey]) {
     return {
-      title: offlineData.titles[supportLang],
-      description: offlineData.descriptions?.[supportLang] ?? "",
-      levelSignal: offlineData.levelSignals?.[supportLang] ?? ""
+      title: offlineData.titles[offlineTitleKey],
+      description: offlineData.descriptions?.[offlineTitleKey] ?? "",
+      levelSignal: offlineData.levelSignals?.[offlineTitleKey] ?? ""
     };
   }
 
@@ -380,7 +332,7 @@ export async function fetchDeckMetadata(setId, supportLang) {
         level_signal as "levelSignal"
       from content_set_localizations 
       where set_id = '${setId.replace(/'/g, "''")}' 
-        and language_code = '${supportLang.replace(/'/g, "''")}'
+        and language_code = '${supportDbLang.replace(/'/g, "''")}'
       limit 1
     ) rows;
   `;

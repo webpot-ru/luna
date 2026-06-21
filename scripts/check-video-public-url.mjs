@@ -16,6 +16,8 @@ const sitePathCases = [
   ["PT", "pt"],
   ["PT-BR", "pt"],
   ["BR", "pt"],
+  ["NO", "no"],
+  ["NB", "no"],
   ["RU", "ru"],
   ["JA", "ja"]
 ];

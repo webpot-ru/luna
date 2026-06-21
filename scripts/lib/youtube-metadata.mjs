@@ -7,6 +7,7 @@ import { getLanguageNameInLang } from "./card-slide-template.mjs";
 import { getPublicCourseDisplayUrl, getPublicCourseUrl } from "./video-public-url.mjs";
 import { callVectorEngineGeminiJson } from "./vectorengine-gemini.mjs";
 import { buildPlaylistAssignment } from "./youtube-playlists.mjs";
+import { getDbLanguageCode, normalizeLanguageCode } from "./video-language-codes.mjs";
 
 const execFileAsync = promisify(execFile);
 const databaseUrl = process.env.DATABASE_URL ?? "postgresql://lunacards:lunacards@127.0.0.1:55433/lunacards";
@@ -138,11 +139,19 @@ function getSupportCopy(supportLang) {
 }
 
 export async function resolveTargetLanguages(setId, supportLang) {
+  const supportCode = normalizeLanguageCode(supportLang);
+  const supportDbLang = getDbLanguageCode(supportCode);
   const jsonPath = path.resolve(`data/decks/${setId}.json`);
   if (fs.existsSync(jsonPath)) {
     const deckData = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
-    const langs = Object.keys(deckData.cards?.[supportLang] || {});
-    if (langs.length > 0) return langs.map((lang) => lang.toUpperCase()).sort();
+    const supportKey = deckData.cards?.[supportCode] ? supportCode : supportDbLang;
+    const langs = Object.keys(deckData.cards?.[supportKey] || {});
+    if (langs.length > 0) {
+      return langs
+        .map((lang) => normalizeLanguageCode(lang))
+        .filter((lang) => getDbLanguageCode(lang) !== supportDbLang)
+        .sort();
+    }
   }
 
   const sql = `
@@ -153,7 +162,7 @@ export async function resolveTargetLanguages(setId, supportLang) {
         select meaning_id from meaning_set_memberships
         where set_id = ${sqlString(setId)}
       )
-      and language_code <> ${sqlString(supportLang)}
+      and language_code <> ${sqlString(supportDbLang)}
       order by language_code
     ) rows;
   `;

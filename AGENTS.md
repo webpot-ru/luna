@@ -54,6 +54,7 @@ These rules extend project-specific rules without replacing them.
 - Work only inside this project unless the user explicitly confirms otherwise.
 - Do not delete files or folders. Use `scripts/move-to-trash.sh <relative-path>` when an approved removal is needed.
 - Keep documentation current in the same work cycle as meaningful code, data, UX, API, deployment, business-rule, or workflow changes.
+- For Codex app/worktree/handoff/browser/Record & Replay/hooks/automation behavior in this repository, follow `docs/codex-operations.md`.
 - Do not create duplicate docs. Update the existing source of truth first; create a new document only for a genuinely new or overloaded topic and link it from `docs/README.md`.
 - Use suitable available skills/tools/plugins by default for specialized work: browser checks for UI, image/design workflows for visual tasks, spreadsheet/document/presentation/PDF workflows for those artifacts, GitHub/CI/deploy logs for those systems, readback for DB/external services, measurement for performance, and security review for sensitive surfaces.
 - Visual tasks must end with a concrete artifact when the environment allows it: image, file, mockup, screenshot, link, local path, or implemented UI.
@@ -66,4 +67,3 @@ These rules extend project-specific rules without replacing them.
 - For bug fixes, explain root cause and the verification that proves the fix.
 - If proposing follow-up work for a new chat/agent, provide a self-contained launch prompt unless the task is already complete and verified.
 - When running long-running tasks (such as video generation via `build-all-deck-videos.mjs`, bulk audits, or scripts taking more than a minute), run them in background/async mode using the `run_command` tool (setting a low `WaitMsBeforeAsync`). Immediately yield and stop calling tools to let the task complete in token-saving mode. Do NOT poll the task status in loops or send intermediate check messages. The system will automatically wake you up when the task finishes. This avoids wasting Gemini API limits, RPM/TPM, and input context tokens.
-

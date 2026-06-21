@@ -21,7 +21,9 @@ const PUBLIC_SITE_LANGUAGE_PATH_OVERRIDES = {
   PT: "pt",
   "PT-BR": "pt",
   BR: "pt",
-  BRAZILIAN: "pt"
+  BRAZILIAN: "pt",
+  NO: "no",
+  NB: "no"
 };
 
 function loadConfig() {

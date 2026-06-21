@@ -181,6 +181,8 @@ async function checkChannel(config, channel) {
   };
   const manual = {
     title: matched.title || "",
+    snippetTitle: matched.snippetTitle || "",
+    brandingTitle: matched.brandingTitle || "",
     titleMatchesFinalName,
     customUrl: matched.customUrl || "",
     publicLinksNeedStudioCheck: true,

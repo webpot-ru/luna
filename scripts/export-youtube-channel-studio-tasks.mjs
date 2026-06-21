@@ -33,8 +33,8 @@ function timestampSlug() {
 }
 
 function needsManual(channel) {
-  if (channel.profileStatus !== "configured_readback") return true;
   if (channel.profileStatus === "needs_public_link_fix") return true;
+  if (!["configured_readback", "studio_complete"].includes(channel.profileStatus)) return true;
   if (/^new/i.test(String(channel.currentHandle || ""))) return true;
   return false;
 }
