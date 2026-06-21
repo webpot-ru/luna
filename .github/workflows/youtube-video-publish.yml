@@ -68,6 +68,10 @@ on:
         description: "Schedule policy JSON path."
         required: false
         default: "config/youtube-publish-schedule-policy.json"
+      schedule_calendar:
+        description: "Durable schedule reservation calendar JSON path."
+        required: false
+        default: "config/youtube-publish-calendar.json"
       create_playlists:
         description: "Allow the uploader to create missing unlisted playlists from config/youtube-playlists.json assignments."
         required: true
@@ -296,6 +300,7 @@ jobs:
           THUMBNAIL_CONCURRENCY: ${{ github.event.inputs.thumbnail_concurrency }}
           SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
           SCHEDULE_POLICY: ${{ github.event.inputs.schedule_policy }}
+          SCHEDULE_CALENDAR: ${{ github.event.inputs.schedule_calendar }}
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
         run: |
           set -euo pipefail
@@ -366,7 +371,7 @@ jobs:
             npm run check:youtube-run-isolation -- outputs/video-generator --shard-count="$WORKER_COUNT" --shard-index="$WORKER_INDEX" --allow-empty --output=outputs/video-generator/youtube-run-isolation-report-github.json
 
             if [ "$PUBLISH_MODE" = "scheduled" ]; then
-              SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--write-metadata" "--output=outputs/youtube-publish-schedule-github.json")
+              SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--target-plan=outputs/video-generator/youtube-generation-targets-github.json" "--write-metadata" "--write-calendar" "--output=outputs/youtube-publish-schedule-github.json")
               if [ "$ALLOW_REPUBLISH" = "true" ]; then
                 SCHEDULE_ARGS+=("--allow-republish")
               fi
@@ -526,4 +531,5 @@ jobs:
             outputs/youtube-publish-plan-github.json
             outputs/youtube-publish-ledger.jsonl
             config/youtube-playlists.json
+            config/youtube-publish-calendar.json
             config/youtube-published-videos.json

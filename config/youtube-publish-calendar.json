@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "sourceOfTruth": "docs/video-lessons-strategy.md#publication-schedule-and-global-calendar",
+  "purpose": "Durable non-secret reservation calendar for scheduled YouTube publication slots across all 51 public support-language channels.",
+  "policyPath": "config/youtube-publish-schedule-policy.json",
+  "notes": [
+    "This file stores planned/scheduled publishAt reservations only. It does not contain OAuth tokens, secrets, video files or API credentials.",
+    "Reservations are keyed by setId + supportLang + targetLang + channelKey. Regional variants stay in supportLang/targetLang, while shared EN/ES/PT public channels use one channelKey calendar.",
+    "GitHub workflow artifacts are raw evidence. Commit reviewed calendar updates after scheduled plan/apply runs before relying on them in later separate runs."
+  ],
+  "reservations": []
+}
