@@ -1,0 +1,276 @@
+name: YouTube Video Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "plan builds/validates only; apply uploads to YouTube."
+        required: true
+        default: "plan"
+        type: choice
+        options:
+          - plan
+          - apply
+      set_id:
+        description: "Set ID of the deck to compile and publish."
+        required: true
+        default: "home_kitchen_cookware_pilot_01"
+      support:
+        description: "Support language code(s), comma-separated. ALL is refused for publish safety."
+        required: true
+        default: "RU"
+      langs:
+        description: "Target language code(s), comma-separated. Leave empty for all targets available for each support language."
+        required: false
+        default: "ES"
+      concurrency:
+        description: "Video build concurrency per support language."
+        required: true
+        default: "2"
+      privacy:
+        description: "Initial YouTube privacy status."
+        required: true
+        default: "unlisted"
+        type: choice
+        options:
+          - private
+          - unlisted
+          - public
+      create_playlists:
+        description: "Allow the uploader to create missing unlisted playlists from config/youtube-playlists.json assignments."
+        required: true
+        default: true
+        type: boolean
+      confirm_youtube_write:
+        description: "For mode=apply type APPLY_YOUTUBE_UPLOAD."
+        required: false
+        default: ""
+      confirm_public:
+        description: "For privacy=public type PUBLISH_PUBLIC."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  youtube-video-publish:
+    runs-on: ubuntu-latest
+    environment: youtube-api-branding
+    timeout-minutes: 360
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Refuse unsafe broad publish inputs
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          PRIVACY: ${{ github.event.inputs.privacy }}
+          CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+          CONFIRM_PUBLIC: ${{ github.event.inputs.confirm_public }}
+        run: |
+          set -euo pipefail
+          if [ "$(printf '%s' "$SUPPORT" | tr '[:lower:]' '[:upper:]' | xargs)" = "ALL" ]; then
+            echo "::error::This workflow refuses support=ALL. Pass an explicit support list like RU,EN,ES."
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_YOUTUBE_UPLOAD" ]; then
+            echo "::error::mode=apply requires confirm_youtube_write=APPLY_YOUTUBE_UPLOAD"
+            exit 1
+          fi
+          if [ "$PRIVACY" = "public" ] && [ "$CONFIRM_PUBLIC" != "PUBLISH_PUBLIC" ]; then
+            echo "::error::privacy=public requires confirm_public=PUBLISH_PUBLIC"
+            exit 1
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install system dependencies and FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Python TTS dependency
+        run: pip install edge-tts
+
+      - name: Install Node dependencies
+        run: npm ci || npm install
+
+      - name: Install Playwright Chromium with dependencies
+        run: npx playwright install chromium --with-deps
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+          echo "YouTube OAuth bundle restored for this runner."
+
+      - name: Download offline deck data from Google Drive
+        shell: bash
+        run: |
+          set -euo pipefail
+          SET_ID="${{ github.event.inputs.set_id }}"
+          FILE_ID=$(node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const mappingPath = path.resolve('data/deck-sources.json');
+            if (fs.existsSync(mappingPath)) {
+              const mapping = JSON.parse(fs.readFileSync(mappingPath, 'utf8'));
+              console.log(mapping['$SET_ID'] || '');
+            }
+          ")
+          if [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
+            echo "Found Google Drive File ID for $SET_ID."
+            mkdir -p data/decks
+            curl -c /tmp/cookies -sL "https://docs.google.com/uc?export=download&id=${FILE_ID}" > /tmp/confirm.html
+            CONFIRM=$(grep -o 'confirm=[^&\" ]*' /tmp/confirm.html | head -n1 | cut -d= -f2 || true)
+            if [ -n "$CONFIRM" ]; then
+              curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&confirm=${CONFIRM}&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
+            else
+              curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
+            fi
+            test -s "data/decks/${SET_ID}.json"
+            echo "Downloaded offline data to data/decks/${SET_ID}.json"
+          else
+            echo "No Google Drive File ID found for $SET_ID in data/deck-sources.json. Running with local files if they exist."
+          fi
+
+      - name: Build videos and generate YouTube metadata
+        shell: bash
+        env:
+          AI33_API_KEY: ${{ secrets.AI33_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
+          VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
+          VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
+          VECTORENGINE_GEMINI_MODEL: ${{ vars.VECTORENGINE_GEMINI_MODEL }}
+        run: |
+          set -euo pipefail
+          SET_ID="${{ github.event.inputs.set_id }}"
+          SUPPORT_INPUT="${{ github.event.inputs.support }}"
+          LANGS_INPUT="${{ github.event.inputs.langs }}"
+          CONCURRENCY="${{ github.event.inputs.concurrency }}"
+          PRIVACY="${{ github.event.inputs.privacy }}"
+
+          IFS=',' read -ra SUPPORTS <<< "$SUPPORT_INPUT"
+          for raw_support in "${SUPPORTS[@]}"; do
+            support="$(echo "$raw_support" | xargs | tr '[:lower:]' '[:upper:]')"
+            if [ -z "$support" ]; then
+              continue
+            fi
+
+            BUILD_ARGS=("--set" "$SET_ID" "--support" "$support" "--concurrency" "$CONCURRENCY")
+            METADATA_ARGS=("--set" "$SET_ID" "--support" "$support" "--privacy" "$PRIVACY")
+            if [ -n "$LANGS_INPUT" ]; then
+              BUILD_ARGS+=("--langs" "$LANGS_INPUT")
+              METADATA_ARGS+=("--targets" "$LANGS_INPUT")
+            fi
+
+            echo "Building videos for support=$support"
+            node scripts/build-all-deck-videos.mjs "${BUILD_ARGS[@]}"
+
+            GEMINI_ARGS=()
+            if [ -n "${VECTORENGINE_API_KEY:-}" ] || [ -n "${VECTOR_ENGINE_API_KEY:-}" ]; then
+              GEMINI_ARGS=("--with-gemini" "--gemini-backend" "vectorengine" "--model" "${VECTORENGINE_GEMINI_MODEL:-gemini-3.5-flash}")
+            elif [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
+              GEMINI_ARGS=("--with-gemini" "--gemini-backend" "api")
+            fi
+
+            echo "Generating metadata for support=$support"
+            node scripts/generate-youtube-metadata.mjs "${METADATA_ARGS[@]}" "${GEMINI_ARGS[@]}"
+          done
+
+      - name: Validate YouTube metadata
+        run: npm run check:youtube-metadata -- outputs/video-generator
+
+      - name: Plan YouTube publication
+        shell: bash
+        env:
+          CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}
+        run: |
+          set -euo pipefail
+          PLAN_ARGS=("outputs/video-generator" "--write-registry" "--output=outputs/youtube-publish-plan-github.json")
+          if [ "$CREATE_PLAYLISTS" = "true" ]; then
+            PLAN_ARGS+=("--allow-playlist-create")
+          fi
+          npm run plan:youtube-publish -- "${PLAN_ARGS[@]}"
+
+      - name: Gate publish plan
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+        run: |
+          set -euo pipefail
+          node -e "
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('outputs/youtube-publish-plan-github.json', 'utf8'));
+            console.log(JSON.stringify(report.summary, null, 2));
+            if (process.env.MODE === 'apply') {
+              const s = report.summary || {};
+              if (!s.candidateCount) throw new Error('No publish candidates.');
+              if (s.blockerCount) throw new Error('Publish plan has blockers.');
+              if (s.publishReadyCount !== s.candidateCount) {
+                throw new Error('Not all publish candidates are publish_ready.');
+              }
+            }
+          "
+
+      - name: Upload videos to YouTube
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        shell: bash
+        env:
+          CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}
+          PRIVACY: ${{ github.event.inputs.privacy }}
+        run: |
+          set -euo pipefail
+          mapfile -d '' METADATA_FILES < <(find outputs/video-generator -name youtube_metadata.json -print0 | sort -z)
+          if [ "${#METADATA_FILES[@]}" -eq 0 ]; then
+            echo "::error::No youtube_metadata.json files found."
+            exit 1
+          fi
+          for metadata_file in "${METADATA_FILES[@]}"; do
+            PUBLISH_ARGS=("--metadata=$metadata_file" "--privacy=$PRIVACY" "--apply" "--confirm-youtube-write")
+            if [ "$CREATE_PLAYLISTS" = "true" ]; then
+              PUBLISH_ARGS+=("--create-playlist")
+            fi
+            if [ "$PRIVACY" = "public" ]; then
+              PUBLISH_ARGS+=("--confirm-public")
+            fi
+            npm run apply:youtube-publish -- "${PUBLISH_ARGS[@]}"
+          done
+
+      - name: Upload non-secret publish artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-video-publish-${{ github.event.inputs.mode }}-${{ github.event.inputs.set_id }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            outputs/video-generator/
+            outputs/youtube-publish-plan-github.json
+            outputs/youtube-publish-ledger.jsonl
+            config/youtube-playlists.json

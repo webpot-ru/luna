@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "sourceOfTruth": "docs/video-lessons-strategy.md#13-playlist-architecture",
+  "defaults": {
+    "privacyStatusBeforeReview": "unlisted",
+    "ledgerPath": "outputs/youtube-publish-ledger.jsonl",
+    "manualReviewBeforePublic": true
+  },
+  "playlists": [
+    {
+      "playlist_key": "EN__ES__ordinary-vocabulary__a1-everyday",
+      "supportLang": "EN",
+      "targetLang": "ES",
+      "courseFamily": "ordinary-vocabulary",
+      "levelOrTrack": "a1-everyday",
+      "variantOrYear": "",
+      "channelKey": "en",
+      "youtube_channel_id": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "youtube_playlist_id": "",
+      "title": "Spanish A1: Everyday Flashcards",
+      "description": "LunaCards videos for native EN speakers learning Spanish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "status": "planned",
+      "titleReviewStatus": "template_reviewed_family",
+      "createdAt": "2026-06-20T11:54:36.270Z",
+      "lastReadbackAt": ""
+    }
+  ]
+}

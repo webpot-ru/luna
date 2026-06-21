@@ -6,6 +6,7 @@ import { fetchDeckCards, fetchDeckMetadata } from "./video-generator.mjs";
 import { getLanguageNameInLang } from "./card-slide-template.mjs";
 import { getPublicCourseDisplayUrl, getPublicCourseUrl } from "./video-public-url.mjs";
 import { callVectorEngineGeminiJson } from "./vectorengine-gemini.mjs";
+import { buildPlaylistAssignment } from "./youtube-playlists.mjs";
 
 const execFileAsync = promisify(execFile);
 const databaseUrl = process.env.DATABASE_URL ?? "postgresql://lunacards:lunacards@127.0.0.1:55433/lunacards";
@@ -351,7 +352,7 @@ export function normalizeYouTubeMetadata(metadata) {
     description = `${description.trim()}\n\n${courseUrl}`.trim();
   }
 
-  return {
+  const normalized = {
     ...metadata,
     title: truncateAtWord(metadata.title || "LunaCards Vocabulary Lesson", 100),
     description: description.slice(0, 5000),
@@ -362,6 +363,20 @@ export function normalizeYouTubeMetadata(metadata) {
       ? metadata.privacyStatus
       : "unlisted"
   };
+
+  if (normalized.setId && normalized.supportLang && normalized.targetLang) {
+    const assignment = buildPlaylistAssignment(normalized);
+    normalized.playlist_key = normalized.playlist_key || normalized.playlistKey || assignment.key;
+    normalized.playlistKey = normalized.playlistKey || normalized.playlist_key;
+    normalized.playlist = {
+      ...assignment,
+      key: normalized.playlist_key,
+      title: normalized.playlistTitle || assignment.title,
+      description: normalized.playlistDescription || assignment.description
+    };
+  }
+
+  return normalized;
 }
 
 export async function generateYouTubeMetadata(input) {

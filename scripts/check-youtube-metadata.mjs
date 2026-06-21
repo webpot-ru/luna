@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { buildPlaylistAssignment } from "./lib/youtube-playlists.mjs";
 
 const paths = process.argv.slice(2);
 
@@ -37,6 +38,7 @@ function validate(metadata, file) {
   const tags = Array.isArray(metadata.tags) ? metadata.tags : [];
   const hashtags = Array.isArray(metadata.hashtags) ? metadata.hashtags : [];
   const tagsTotal = tags.join(",").length;
+  const playlistKey = metadata.playlist_key || metadata.playlistKey || metadata.playlist?.key || "";
 
   if (!metadata.setId) blockers.push("missing setId");
   if (!metadata.targetLang) blockers.push("missing targetLang");
@@ -54,6 +56,12 @@ function validate(metadata, file) {
   if (hashtags.some((tag) => !String(tag).startsWith("#"))) blockers.push("hashtags must start with #");
   if (String(metadata.categoryId) !== "27") warnings.push(`categoryId is ${metadata.categoryId}, expected 27 for Education`);
   if (!["private", "unlisted", "public"].includes(metadata.privacyStatus)) blockers.push(`invalid privacyStatus: ${metadata.privacyStatus}`);
+  if (!playlistKey) {
+    warnings.push("missing playlist_key; regenerate metadata or use plan:youtube-publish before upload");
+  } else if (metadata.setId && metadata.targetLang && metadata.supportLang) {
+    const computed = buildPlaylistAssignment(metadata).key;
+    if (playlistKey !== computed) blockers.push(`playlist_key mismatch: ${playlistKey} != ${computed}`);
+  }
 
   return {
     file,
@@ -65,7 +73,8 @@ function validate(metadata, file) {
       descriptionLength,
       tagCount: tags.length,
       tagsTotal,
-      hashtagCount: hashtags.length
+      hashtagCount: hashtags.length,
+      playlistKey
     }
   };
 }
