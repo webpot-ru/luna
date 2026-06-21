@@ -157,7 +157,9 @@ function checkWorkflow() {
     /^scripts\/plan-youtube-channel-tokens\.mjs$/,
     /^scripts\/generate-youtube-metadata\.mjs$/,
     /^scripts\/check-youtube-metadata\.mjs$/,
+    /^scripts\/check-youtube-seo-metadata\.mjs$/,
     /^\.github\/workflows\/build-.*\.ya?ml$/,
+    /^\.github\/workflows\/.*youtube.*\.ya?ml$/,
   ];
   const videoWorkflowPatterns = [
     /^config\/video-/,

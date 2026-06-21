@@ -76,6 +76,22 @@ function detectMimeType(filePath) {
   return "video/mp4";
 }
 
+function normalizeUploadHashtag(value) {
+  const text = String(value || "").trim().replace(/\s+/gu, "");
+  if (!text) return "";
+  return text.startsWith("#") ? text : `#${text}`;
+}
+
+function buildUploadDescription(metadata) {
+  const description = String(metadata.description || "").trim();
+  const hashtags = Array.isArray(metadata.hashtags)
+    ? metadata.hashtags.map(normalizeUploadHashtag).filter(Boolean).slice(0, 3)
+    : [];
+  const missing = hashtags.filter((tag) => !description.toLocaleLowerCase().includes(tag.toLocaleLowerCase()));
+  if (!missing.length) return description;
+  return `${description}\n\n${missing.join(" ")}`.trim();
+}
+
 function resolveExistingPath(filePath, label) {
   if (!filePath) return "";
   const resolved = path.resolve(filePath);
@@ -197,7 +213,7 @@ async function uploadVideoResumable({ accessToken, videoPath, metadata, privacyS
   const resource = {
     snippet: {
       title: metadata.title,
-      description: metadata.description,
+      description: buildUploadDescription(metadata),
       tags: Array.isArray(metadata.tags) ? metadata.tags : [],
       categoryId: String(metadata.categoryId || "27"),
     },

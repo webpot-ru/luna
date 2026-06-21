@@ -98,6 +98,7 @@ jobs:
         fi
         node scripts/generate-youtube-metadata.mjs --set ${{ github.event.inputs.set_id }} --support ${{ matrix.support }} --privacy unlisted $GEMINI_ARGS
         npm run check:youtube-metadata -- outputs/video-generator
+        npm run check:youtube-seo-metadata -- outputs/video-generator --output=outputs/video-generator/youtube-seo-metadata-report.json
 
     - name: Upload Videos as Artifacts
       uses: actions/upload-artifact@v4

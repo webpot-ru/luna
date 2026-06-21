@@ -206,6 +206,9 @@ jobs:
       - name: Validate YouTube metadata
         run: npm run check:youtube-metadata -- outputs/video-generator
 
+      - name: Validate YouTube SEO metadata
+        run: npm run check:youtube-seo-metadata -- outputs/video-generator --output=outputs/video-generator/youtube-seo-metadata-report-github.json
+
       - name: Plan YouTube publication
         shell: bash
         env:

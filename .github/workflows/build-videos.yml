@@ -131,6 +131,7 @@ jobs:
           done
         fi
         npm run check:youtube-metadata -- outputs/video-generator
+        npm run check:youtube-seo-metadata -- outputs/video-generator --output=outputs/video-generator/youtube-seo-metadata-report.json
 
     - name: Upload Videos as Artifacts
       uses: actions/upload-artifact@v4

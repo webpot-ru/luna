@@ -399,9 +399,10 @@ Implementation sequence:
 - `config/youtube-playlists.json` is the structured playlist registry. It stores `playlist_key`, support/target language, course family, level/track, channel id, eventual YouTube playlist id, title/description and readback status. Do not prefill every possible language pair; add planned entries from real upload candidates.
 - `scripts/lib/youtube-playlists.mjs` computes stable playlist assignments without importing the heavy video renderer. New `youtube_metadata.json` files generated through `scripts/generate-youtube-metadata.mjs` now include `playlist_key`, `playlistKey` and a `playlist` object.
 - `npm run check:youtube-metadata` warns on historical metadata without `playlist_key`, but blocks a present mismatched key.
+- `npm run check:youtube-seo-metadata -- outputs/video-generator --output=outputs/video-generator/youtube-seo-metadata-report.json` is the SEO/readiness gate for fresh build and publish workflows. It blocks structural metadata risks and writes a non-secret report with quality warnings.
 - `npm run plan:youtube-publish -- <metadata-file-or-dir> [--write-registry] [--allow-playlist-create]` produces a dry-run report under `outputs/youtube-publish-plan-*.json`, estimates quota, resolves channel/playlist assignment and can add missing planned playlist entries locally.
 - `npm run apply:youtube-publish -- --metadata=<youtube_metadata.json> [--video=<mp4>] [--thumbnail=<image>] [--create-playlist]` is dry-run by default. Live YouTube writes require `--apply --confirm-youtube-write`. `--privacy=public` is refused unless `--confirm-public` is also passed.
-- The uploader uses the official YouTube Data API only: resumable `videos.insert`, optional `thumbnails.set`, optional unlisted `playlists.insert`, `playlistItems.insert`, `videos.list` readback and JSONL append to `outputs/youtube-publish-ledger.jsonl`.
+- The uploader uses the official YouTube Data API only: pre-upload `channels.list(mine=true)` token/channel verification, resumable `videos.insert`, optional `thumbnails.set`, optional unlisted `playlists.insert`, `playlistItems.insert`, post-upload `videos.list` readback with `snippet.channelId` equality check, and JSONL append to `outputs/youtube-publish-ledger.jsonl`. Because YouTube has no separate API field for hashtags, the uploader appends the first 3 normalized `metadata.hashtags` to the upload description when they are not already present.
 - Smoke proof on 2026-06-20 used the historical EN->ES first-deck test metadata: `npm run check:youtube-metadata` passed with only the expected historical missing-`playlist_key` warning; `npm run plan:youtube-publish -- ... --write-registry --allow-playlist-create` added planned playlist `EN__ES__ordinary-vocabulary__a1-everyday`; uploader dry-run resolved channel `en`, video path and estimated 1700 quota units without live YouTube writes.
 - 2026-06-21 GitHub upload workflow: `.github/workflows/youtube-video-publish.yml` is the manual GitHub Actions entrypoint for build + metadata + playlist plan + optional YouTube upload. `mode=plan` builds/validates and uploads non-secret artifacts without restoring OAuth. `mode=apply` restores `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` from environment `youtube-api-branding` and requires `confirm_youtube_write=APPLY_YOUTUBE_UPLOAD`. `privacy=public` additionally requires `confirm_public=PUBLISH_PUBLIC`; default is `unlisted`. The workflow refuses `support=ALL`; pass an explicit support list such as `RU` or `RU,EN,ES` to avoid accidental quota burn and cross-channel writes. Missing playlists can be created as unlisted when `create_playlists=true`; the updated `config/youtube-playlists.json` and `outputs/youtube-publish-ledger.jsonl` are uploaded as artifacts and must be reviewed/committed before relying on created playlist IDs in later separate runs.
 
@@ -409,12 +410,13 @@ Recommended publication flow:
 
 1. generate video, thumbnail and `youtube_metadata.json`;
 2. validate metadata with `scripts/check-youtube-metadata.mjs`;
-3. upload video as `private` or `unlisted` first;
-4. set custom thumbnail only after image/OCR or human visual readback;
-5. resolve or create playlist by `playlist_key`;
-6. add the video to the playlist;
-7. write `videoId`, `playlistId`, `playlistItemId`, status, privacy, and readback timestamp to a machine-readable ledger;
-8. make public only after spot-checking the video, thumbnail, description URL, playlist membership and channel placement.
+3. validate SEO/readiness with `scripts/check-youtube-seo-metadata.mjs`;
+4. upload video as `private` or `unlisted` first;
+5. set custom thumbnail only after image/OCR or human visual readback;
+6. resolve or create playlist by `playlist_key`;
+7. add the video to the playlist;
+8. write `videoId`, `playlistId`, `playlistItemId`, status, privacy, and readback timestamp to a machine-readable ledger;
+9. make public only after spot-checking the video, thumbnail, description URL, playlist membership and channel placement.
 
 Acceptance gates before any automated YouTube playlist writes:
 
@@ -608,6 +610,7 @@ qrcode npm package
 ```text
 scripts/generate-youtube-metadata.mjs
 scripts/check-youtube-metadata.mjs
+scripts/check-youtube-seo-metadata.mjs
 scripts/lib/youtube-metadata.mjs
 ```
 
@@ -621,6 +624,28 @@ Metadata включает `title`, `description`, `tags`, `hashtags`, `categoryI
 - `description` должен содержать точный `courseUrl`;
 - `tags` не должны содержать hashtags, а общий YouTube tag budget должен оставаться <= 500 chars;
 - `scripts/check-youtube-metadata.mjs` является обязательным gate перед upload stage.
+- `scripts/check-youtube-seo-metadata.mjs` является обязательным SEO gate перед publish/upload workflows: он проверяет search/usefulness contract, точный `courseUrl`, target/deck intent, vocabulary/pronunciation/repeat-mini-test signals, tag/hashtag hygiene, computed course URL equality and playlist-key mismatch checks.
+
+SEO gate разделяет blockers and warnings:
+
+- Blockers: missing/mismatched `courseUrl`, description without the exact URL, upload-length violations, tag spam, invalid hashtags, unsupported guarantee/certificate/native-teacher claims and present mismatched playlist keys.
+- Warnings: short but valid descriptions, missing exact inflected target-language name, missing sibling thumbnail/cover/poster file, template fallback for support languages that need AI/native polish, and historical metadata without `playlist_key`.
+- The gate is title/description/URL/thumbnail-focused. YouTube's own help says title, thumbnail and description are the main discovery metadata, while tags play only a minimal role except for common misspellings; therefore do not overfit this pipeline to hidden tag lists.
+- YouTube hashtags are not a separate API field. Generated `hashtags` are metadata intent; the uploader appends the first 3 normalized hashtags to the upload description if they are not already present, matching YouTube's hashtag behavior and avoiding description tag spam.
+- Google Search video SEO is a separate website layer. To get Google video-search traffic, the site later needs stable watch/course pages with embedded YouTube videos, unique page titles/descriptions, stable thumbnail URLs, `VideoObject` structured data and/or video sitemap coverage. Uploading to YouTube alone does not create those website SEO signals.
+
+SEO targets for LunaCards videos:
+
+- YouTube Search: support-language queries for beginner vocabulary, for example `Spanish A1 vocabulary`, `learn Spanish words`, `Spanish kitchen vocabulary`, `Spanish words with pronunciation`, plus localized equivalents such as `испанский для начинающих`, `испанские слова`, `слова с произношением`.
+- YouTube browse/session clustering: consistent playlist keys by viewer/support language + target language + course family + level/track.
+- Conversion: the first description link and QR must point to the exact target-specific LunaCards study URL, not the homepage.
+- Google Search later: course/watch pages on `flashcardsluna.com` should embed the final YouTube video and expose video metadata/thumbnail so Google can understand the video page.
+
+External SEO references for this contract:
+
+- YouTube Help, tags: <https://support.google.com/youtube/answer/146402>
+- YouTube Help, hashtags: <https://support.google.com/youtube/answer/6390658>
+- Google Search Central, video SEO best practices: <https://developers.google.com/search/docs/appearance/video>
 
 Локальный Gemini smoke можно запускать через subscription-backed Gemini CLI:
 
@@ -751,6 +776,7 @@ Rules for this rerun:
 - Treat older local/GitHub video outputs, downloaded artifacts and registry rows for `home_kitchen_cookware_pilot_01` as historical evidence only.
 - Do not infer current publish readiness from old `Pending` rows in [Video Lessons Registry](video-lessons-registry.md).
 - Start the first deck again with the current renderer, localized intro/outro, QR course URL, YouTube metadata, thumbnail direction and playlist strategy.
+- Run both metadata gates on the fresh artifacts: `npm run check:youtube-metadata -- outputs/video-generator` and `npm run check:youtube-seo-metadata -- outputs/video-generator --output=outputs/video-generator/youtube-seo-metadata-report.json`.
 - Keep background music disabled for this first fresh batch. Music is deferred to the second video deck pilot.
 - Use new output artifacts and metadata generated by the fresh run as the current evidence.
 - After the fresh run, update the human registry and future machine-readable ledger from readback, not from old rows.

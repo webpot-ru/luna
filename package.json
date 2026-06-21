@@ -5,6 +5,7 @@
   "scripts": {
     "check:video-localization": "node scripts/check-video-localization.mjs",
     "check:youtube-metadata": "node scripts/check-youtube-metadata.mjs",
+    "check:youtube-seo-metadata": "node scripts/check-youtube-seo-metadata.mjs",
     "check:vectorengine-gemini": "node scripts/check-vectorengine-gemini.mjs",
     "check:video-public-url": "node scripts/check-video-public-url.mjs",
     "check:codex-workflow": "node scripts/check-codex-workflow-safety.mjs",
