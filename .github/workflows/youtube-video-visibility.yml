@@ -1,0 +1,112 @@
+name: YouTube Video Visibility
+
+on:
+  workflow_dispatch:
+    inputs:
+      video_id:
+        description: "Existing YouTube video id to update."
+        required: true
+      support:
+        description: "Support language code for channel/token lookup."
+        required: true
+        default: "RU"
+      playlist_id:
+        description: "Optional playlist id to update to the same privacy."
+        required: false
+        default: ""
+      privacy:
+        description: "Target YouTube privacy status."
+        required: true
+        default: "public"
+        type: choice
+        options:
+          - private
+          - unlisted
+          - public
+      confirm_youtube_write:
+        description: "Type APPLY_YOUTUBE_VISIBILITY."
+        required: false
+        default: ""
+      confirm_public:
+        description: "For privacy=public type PUBLISH_PUBLIC."
+        required: false
+        default: "PUBLISH_PUBLIC"
+
+permissions:
+  contents: read
+
+jobs:
+  youtube-video-visibility:
+    runs-on: ubuntu-latest
+    environment: youtube-api-branding
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Refuse unsafe visibility inputs
+        shell: bash
+        env:
+          PRIVACY: ${{ github.event.inputs.privacy }}
+          CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+          CONFIRM_PUBLIC: ${{ github.event.inputs.confirm_public }}
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_YOUTUBE_VISIBILITY" ]; then
+            echo "::error::visibility update requires confirm_youtube_write=APPLY_YOUTUBE_VISIBILITY"
+            exit 1
+          fi
+          if [ "$PRIVACY" = "public" ] && [ "$CONFIRM_PUBLIC" != "PUBLISH_PUBLIC" ]; then
+            echo "::error::privacy=public requires confirm_public=PUBLISH_PUBLIC"
+            exit 1
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+          echo "YouTube OAuth bundle restored for this runner."
+
+      - name: Update YouTube visibility
+        shell: bash
+        env:
+          VIDEO_ID: ${{ github.event.inputs.video_id }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          PLAYLIST_ID: ${{ github.event.inputs.playlist_id }}
+          PRIVACY: ${{ github.event.inputs.privacy }}
+        run: |
+          set -euo pipefail
+          ARGS=("--video-id=$VIDEO_ID" "--support=$SUPPORT" "--privacy=$PRIVACY" "--apply" "--confirm-youtube-write" "--ledger=outputs/youtube-visibility-ledger.jsonl")
+          if [ -n "$PLAYLIST_ID" ]; then
+            ARGS+=("--playlist-id=$PLAYLIST_ID")
+          fi
+          if [ "$PRIVACY" = "public" ]; then
+            ARGS+=("--confirm-public")
+          fi
+          node scripts/youtube-update-visibility.mjs "${ARGS[@]}"
+
+      - name: Upload non-secret visibility artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-video-visibility-${{ github.event.inputs.video_id }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-visibility-ledger.jsonl
+            config/youtube-published-videos.json

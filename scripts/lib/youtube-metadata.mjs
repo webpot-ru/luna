@@ -201,7 +201,7 @@ export function buildTemplateYouTubeMetadata(input) {
     supportLang,
     cards,
     deckMetadata,
-    privacyStatus = "unlisted"
+    privacyStatus = "public"
   } = input;
   const deckTitle = stripSentenceTerminator(deckMetadata?.title) || "Vocabulary Lesson";
   const level = extractLevel(setId, deckMetadata);
@@ -457,7 +457,7 @@ export function normalizeYouTubeMetadata(metadata) {
     categoryId: String(metadata.categoryId || "27"),
     privacyStatus: ["private", "unlisted", "public"].includes(metadata.privacyStatus)
       ? metadata.privacyStatus
-      : "unlisted"
+      : "public"
   };
 
   if (normalized.setId && normalized.supportLang && normalized.targetLang) {

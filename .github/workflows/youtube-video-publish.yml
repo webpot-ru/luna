@@ -28,9 +28,9 @@ on:
         required: true
         default: "2"
       privacy:
-        description: "Initial YouTube privacy status."
+        description: "Initial YouTube privacy status. Production uploads should be public."
         required: true
-        default: "unlisted"
+        default: "public"
         type: choice
         options:
           - private
@@ -57,7 +57,7 @@ on:
       confirm_public:
         description: "For privacy=public type PUBLISH_PUBLIC."
         required: false
-        default: ""
+        default: "PUBLISH_PUBLIC"
 
 permissions:
   contents: read

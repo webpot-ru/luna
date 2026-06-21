@@ -334,9 +334,9 @@ async function main() {
   const videoPath = resolveExistingPath(options.video || defaultVideoPath(metadataFile, metadata), "video");
   const thumbnailCandidate = options.thumbnail || defaultThumbnailPath(metadataFile, metadata);
   const thumbnailPath = thumbnailCandidate ? resolveExistingPath(thumbnailCandidate, "thumbnail") : "";
-  const privacyStatus = options.privacyStatus || metadata.privacyStatus || "unlisted";
+  const privacyStatus = options.privacyStatus || metadata.privacyStatus || "public";
   if (!["private", "unlisted", "public"].includes(privacyStatus)) fail(`Invalid privacy: ${privacyStatus}`);
-  if (privacyStatus === "public" && !options.confirmPublic) fail("privacy=public requires --confirm-public.");
+  if (options.apply && privacyStatus === "public" && !options.confirmPublic) fail("privacy=public requires --confirm-public.");
 
   const metadataIssue = polishedMetadataIssue(metadata);
   const blockers = [
@@ -405,6 +405,7 @@ async function main() {
       playlistEntry = result.entry;
     }
     if (!playlistEntry.youtube_playlist_id) {
+      const playlistPrivacyStatus = privacyStatus === "public" ? "public" : "unlisted";
       const playlist = await youtubeJson({
         accessToken,
         method: "POST",
@@ -415,11 +416,11 @@ async function main() {
             title: playlistEntry.title || assignment.title,
             description: playlistEntry.description || assignment.description,
           },
-          status: { privacyStatus: "unlisted" },
+          status: { privacyStatus: playlistPrivacyStatus },
         },
       });
       playlistEntry.youtube_playlist_id = playlist.id;
-      playlistEntry.status = "created_unlisted";
+      playlistEntry.status = `created_${playlistPrivacyStatus}`;
       playlistEntry.lastReadbackAt = new Date().toISOString();
       savePlaylistRegistry(playlistRegistry, options.playlistRegistry);
     }

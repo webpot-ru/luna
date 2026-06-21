@@ -88,7 +88,7 @@ jobs:
         elif [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
           GEMINI_ARGS="--with-gemini --gemini-backend api"
         fi
-        node scripts/generate-youtube-metadata.mjs --set "${{ github.event.inputs.set_id }}" --support "${{ github.event.inputs.support }}" --targets "${{ github.event.inputs.langs }}" --privacy unlisted $GEMINI_ARGS
+        node scripts/generate-youtube-metadata.mjs --set "${{ github.event.inputs.set_id }}" --support "${{ github.event.inputs.support }}" --targets "${{ github.event.inputs.langs }}" --privacy public $GEMINI_ARGS
         npm run check:youtube-metadata -- outputs/video-generator
         npm run check:youtube-seo-metadata -- outputs/video-generator --output=outputs/video-generator/youtube-seo-metadata-report.json
 

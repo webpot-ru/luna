@@ -11,10 +11,13 @@ Accepted playlist/upload contract lives in [Video Lessons Strategy - Playlist ar
 ```text
 config/youtube-channels.json
 config/youtube-playlists.json
+config/youtube-published-videos.json
 outputs/youtube-publish-ledger.jsonl
 ```
 
-The structured ledger must store stable `playlist_key`, `youtube_video_id`, `youtube_playlist_id`, `playlistItemId`, privacy/status, timestamp and readback result. This Markdown registry can summarize or link to those facts after readback, but it must not be the only state used for idempotent YouTube API writes.
+The committed publication registry is `config/youtube-published-videos.json`; it is the durable machine-readable list of videos that have been uploaded/read back and should survive GitHub artifact expiration. The per-run structured ledger `outputs/youtube-publish-ledger.jsonl` must store stable `playlist_key`, `youtube_video_id`, `youtube_playlist_id`, `playlistItemId`, privacy/status, timestamp and readback result. This Markdown registry can summarize or link to those facts after readback, but it must not be the only state used for idempotent YouTube API writes.
+
+Production publication policy from 2026-06-21: default video/playlist visibility is `public`. `private` and `unlisted` are allowed only as temporary test/pre-publication states or for copyright checks; they should be promoted to `public` or superseded before batch rollout.
 
 2026-06-19 fresh-run note: `home_kitchen_cookware_pilot_01` is being restarted as the first clean video batch. Existing rows below for this `set_id` from 2026-06-14 / 2026-06-15 and earlier GitHub/local video artifacts are historical working evidence only. Do not use them as current publish readiness, playlist membership, or upload state. The fresh rerun should append new current rows/readback instead of treating old `Pending` rows as active state.
 
@@ -26,7 +29,7 @@ These rows are current YouTube upload/readback facts from the structured GitHub 
 
 | Set ID | Title | Target | Support | Built / Uploaded | GitHub run | Status | Video | Playlist | Readback |
 |---|---|---|---|---|---|---|---|---|---|
-| `home_kitchen_cookware_pilot_01` | Испанский язык для начинающих: Кухонная посуда (A1) \| 50 слов с произношением | ES | RU | 2026-06-21 | `27900462868` | `uploaded`, `unlisted`, thumbnail set, logo overlay | https://www.youtube.com/watch?v=dWk3ncNgrFU | https://www.youtube.com/playlist?list=PLx5nIeqMBQ7kjzCzItWOtLDCjmHJjYJXq | channel `UC1f5EyXEMejXIumH9104GMA`, playlist item `UEx4NW5JZXFNQlE3a2p6Q3pJdFdPdExEQ2ptSEpqWUpYcS4yODlGNEE0NkRGMEEzMEQy`, metadata `source=gemini-vectorengine`, thumbnail `thumbnailLogoOverlay=true`; supersedes old unlisted upload `xOh97WAt53k` |
+| `home_kitchen_cookware_pilot_01` | Испанский язык для начинающих: Кухонная посуда (A1) \| 50 слов с произношением | ES | RU | 2026-06-21 | `27900462868` | `public_user_reported`, thumbnail set, logo overlay | https://www.youtube.com/watch?v=dWk3ncNgrFU | https://www.youtube.com/playlist?list=PLx5nIeqMBQ7kjzCzItWOtLDCjmHJjYJXq | channel `UC1f5EyXEMejXIumH9104GMA`, playlist item `UEx4NW5JZXFNQlE3a2p6Q3pJdFdPdExEQ2ptSEpqWUpYcS4yODlGNEE0NkRGMEEzMEQy`, metadata `source=gemini-vectorengine`, thumbnail `thumbnailLogoOverlay=true`; user reported manual public update; durable row in `config/youtube-published-videos.json`; supersedes old unlisted upload `xOh97WAt53k` |
 
 ---
 
@@ -290,5 +293,5 @@ These rows are current YouTube upload/readback facts from the structured GitHub 
    * Не использовать эту Markdown-таблицу как источник истины для API-действий.
    * Сначала выполнить dry-run playlist planner по правилам `docs/video-lessons-strategy.md#13-playlist-architecture`.
    * Для каждого видео должен быть stable `playlist_key` или explicit `playlist_excluded_reason`.
-   * Создание плейлистов, загрузка видео, установка thumbnail и добавление в playlist должны писать machine-readable readback в `outputs/youtube-publish-ledger.jsonl`.
+   * Создание плейлистов, загрузка видео, установка thumbnail и добавление в playlist должны писать machine-readable readback в `outputs/youtube-publish-ledger.jsonl`; durable publication/readback rows must also be committed to `config/youtube-published-videos.json`.
    * После readback можно вручную или автоматически обновить этот human registry краткой строкой статуса.

@@ -160,7 +160,7 @@ function buildCandidate({ metadataFile, metadata, channelRegistry, playlistRegis
     targetLang: metadata.targetLang,
     title: metadata.title,
     metadataSource: metadata.source || "",
-    privacyStatus: metadata.privacyStatus || "unlisted",
+    privacyStatus: metadata.privacyStatus || "public",
     channelKey: channel?.key || "",
     youtube_channel_id: channel?.channelId || "",
     playlist_key: assignment.key,

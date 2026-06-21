@@ -279,7 +279,8 @@ export function loadPlaylistRegistry(filePath = DEFAULT_PLAYLIST_REGISTRY_PATH) 
       schemaVersion: 1,
       sourceOfTruth: "docs/video-lessons-strategy.md#13-playlist-architecture",
       defaults: {
-        privacyStatusBeforeReview: "unlisted",
+        defaultVideoPrivacyStatus: "public",
+        defaultPlaylistPrivacyStatus: "public",
         ledgerPath: "outputs/youtube-publish-ledger.jsonl",
       },
       playlists: [],

@@ -28,6 +28,7 @@
     "check:youtube-channel-branding-readback": "node scripts/check-youtube-channel-branding-readback.mjs",
     "plan:youtube-publish": "node scripts/plan-youtube-publish.mjs",
     "apply:youtube-publish": "node scripts/youtube-publish-video.mjs",
+    "update:youtube-visibility": "node scripts/youtube-update-visibility.mjs",
     "export:youtube-channel-studio-tasks": "node scripts/export-youtube-channel-studio-tasks.mjs"
   },
   "dependencies": {

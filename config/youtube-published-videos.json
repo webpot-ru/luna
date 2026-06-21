@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "sourceOfTruth": "docs/video-lessons-registry.md#current-published--readback-rows",
+  "ledgerArtifactPath": "outputs/youtube-publish-ledger.jsonl",
+  "notes": [
+    "This committed registry stores durable publication/readback facts. GitHub artifacts are still the per-run raw ledger, but they are not long-term source of truth.",
+    "Publication means public YouTube visibility for production videos. Unlisted/private rows are pre-publication states and must be promoted or superseded before batch rollout."
+  ],
+  "publications": [
+    {
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "RU",
+      "targetLang": "ES",
+      "playlist_key": "RU__ES__ordinary-vocabulary__a1-everyday",
+      "title": "Испанский язык для начинающих: Кухонная посуда (A1) | 50 слов с произношением",
+      "youtubeVideoId": "dWk3ncNgrFU",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=dWk3ncNgrFU",
+      "youtubePlaylistId": "PLx5nIeqMBQ7kjzCzItWOtLDCjmHJjYJXq",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLx5nIeqMBQ7kjzCzItWOtLDCjmHJjYJXq",
+      "playlistItemId": "UEx4NW5JZXFNQlE3a2p6Q3pJdFdPdExEQ2ptSEpqWUpYcS4yODlGNEE0NkRGMEEzMEQy",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "channelHandle": "@lunacardsru",
+      "privacyStatus": "public",
+      "publicationStatus": "public_user_reported",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": true,
+      "thumbnailLogoOverlay": true,
+      "metadataSource": "gemini-vectorengine",
+      "metadataModel": "gemini-3.5-flash",
+      "seoScore": 100,
+      "githubRunId": "27900462868",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27900462868",
+      "uploadedAt": "2026-06-21T09:49:55.288Z",
+      "lastReadbackAt": "2026-06-21T09:49:55.288Z",
+      "visibilityUpdatedAt": "2026-06-21",
+      "visibilityUpdateEvidence": "User reported manual YouTube Studio update to public; Codex did not run API privacy readback.",
+      "supersedes": [
+        "xOh97WAt53k"
+      ],
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "public_user_reported",
+        "videoHttpStatus": 200,
+        "playlistHttpStatus": 200
+      }
+    }
+  ]
+}

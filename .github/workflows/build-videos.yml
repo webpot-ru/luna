@@ -121,13 +121,13 @@ jobs:
         fi
         if [ "${{ github.event.inputs.support }}" = "ALL" ]; then
           for sup in ES-419 TR KO JA PT PT-BR HI UZ AZ KK KA HY; do
-            node scripts/generate-youtube-metadata.mjs --set ${{ github.event.inputs.set_id }} --support "$sup" $TARGET_ARGS --privacy unlisted $GEMINI_ARGS
+            node scripts/generate-youtube-metadata.mjs --set ${{ github.event.inputs.set_id }} --support "$sup" $TARGET_ARGS --privacy public $GEMINI_ARGS
           done
         else
           IFS=',' read -ra ADDR <<< "${{ github.event.inputs.support }}"
           for sup in "${ADDR[@]}"; do
             sup_trimmed=$(echo "$sup" | xargs)
-            node scripts/generate-youtube-metadata.mjs --set ${{ github.event.inputs.set_id }} --support "$sup_trimmed" $TARGET_ARGS --privacy unlisted $GEMINI_ARGS
+            node scripts/generate-youtube-metadata.mjs --set ${{ github.event.inputs.set_id }} --support "$sup_trimmed" $TARGET_ARGS --privacy public $GEMINI_ARGS
           done
         fi
         npm run check:youtube-metadata -- outputs/video-generator

@@ -12,7 +12,7 @@ function parseArgs(argv) {
     withGemini: false,
     geminiBackend: "",
     model: "",
-    privacyStatus: "unlisted"
+    privacyStatus: "public"
   };
 
   for (let i = 0; i < argv.length; i++) {
