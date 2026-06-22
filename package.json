@@ -37,6 +37,7 @@
     "read:youtube-video-statistics": "node scripts/read-youtube-video-statistics.mjs",
     "apply:youtube-publish": "node scripts/youtube-publish-video.mjs",
     "set:youtube-thumbnail": "node scripts/youtube-set-video-thumbnail.mjs",
+    "pause:youtube-fallback-schedules": "node scripts/youtube-pause-fallback-schedules.mjs",
     "update:youtube-visibility": "node scripts/youtube-update-visibility.mjs",
     "export:youtube-channel-studio-tasks": "node scripts/export-youtube-channel-studio-tasks.mjs"
   },

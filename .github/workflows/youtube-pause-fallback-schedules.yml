@@ -1,0 +1,137 @@
+name: YouTube Pause Fallback Schedules
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "plan is read-only; apply pauses scheduled fallback-thumbnail videos."
+        required: true
+        default: "plan"
+        type: choice
+        options:
+          - plan
+          - apply
+      supports:
+        description: "Comma-separated support channel codes in one YouTube API route, e.g. DE,FR,IT."
+        required: true
+        default: "DE"
+      youtube_environment:
+        description: "GitHub environment with the route-specific OAuth bundle."
+        required: true
+        default: "youtube-api-branding"
+        type: choice
+        options:
+          - youtube-api-branding
+          - youtube-api-youtube-2
+          - youtube-api-youtube-3
+          - youtube-api-youtube-4
+      target_file:
+        description: "Committed non-secret pause target file."
+        required: true
+        default: "config/youtube-fallback-schedule-pause-targets-20260622.json"
+      limit:
+        description: "Optional limit for canary runs. Use 0 for all selected targets."
+        required: true
+        default: "0"
+      confirm_youtube_write:
+        description: "For mode=apply type PAUSE_FALLBACK_SCHEDULES."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  pause-fallback-schedules:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.youtube_environment }}
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate inputs and YouTube API route
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          SUPPORTS: ${{ github.event.inputs.supports }}
+          LIMIT: ${{ github.event.inputs.limit }}
+          TARGET_FILE: ${{ github.event.inputs.target_file }}
+          YOUTUBE_ENVIRONMENT: ${{ github.event.inputs.youtube_environment }}
+          CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+        run: |
+          set -euo pipefail
+          if [ -z "$(printf '%s' "$SUPPORTS" | xargs)" ]; then
+            echo "::error::supports is required."
+            exit 1
+          fi
+          if [ "$(printf '%s' "$SUPPORTS" | tr '[:lower:]' '[:upper:]' | xargs)" = "ALL" ]; then
+            echo "::error::This workflow refuses supports=ALL. Dispatch one route-scoped support list."
+            exit 1
+          fi
+          if ! printf '%s' "$LIMIT" | grep -Eq '^[0-9]+$'; then
+            echo "::error::limit must be an integer."
+            exit 1
+          fi
+          test -f "$TARGET_FILE"
+          node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORTS" --environment="$YOUTUBE_ENVIRONMENT"
+          if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "PAUSE_FALLBACK_SCHEDULES" ]; then
+            echo "::error::mode=apply requires confirm_youtube_write=PAUSE_FALLBACK_SCHEDULES"
+            exit 1
+          fi
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+          echo "YouTube OAuth bundle restored."
+
+      - name: Pause fallback schedules
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          SUPPORTS: ${{ github.event.inputs.supports }}
+          TARGET_FILE: ${{ github.event.inputs.target_file }}
+          LIMIT: ${{ github.event.inputs.limit }}
+        run: |
+          set -euo pipefail
+          mkdir -p outputs
+          ARGS=(
+            "--target-file=$TARGET_FILE"
+            "--support=$SUPPORTS"
+            "--report=outputs/youtube-fallback-schedule-pause-report-github.json"
+            "--ledger=outputs/youtube-schedule-pause-ledger.jsonl"
+          )
+          if [ "$LIMIT" != "0" ]; then
+            ARGS+=("--limit=$LIMIT")
+          fi
+          if [ "$MODE" = "apply" ]; then
+            ARGS+=("--apply" "--confirm-youtube-write=PAUSE_FALLBACK_SCHEDULES")
+          fi
+          npm run pause:youtube-fallback-schedules -- "${ARGS[@]}"
+
+      - name: Upload pause report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-fallback-schedule-pause-${{ github.event.inputs.mode }}-${{ github.run_id }}
+          path: |
+            outputs/youtube-fallback-schedule-pause-report-github.json
+            outputs/youtube-schedule-pause-ledger.jsonl
+          if-no-files-found: ignore
