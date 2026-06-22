@@ -346,6 +346,32 @@ function isQuotaError(error) {
   return /quotaExceeded|youtube\.quota|quota/i.test(String(error?.message || error));
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function sameTimestamp(left, right) {
+  const leftTime = Date.parse(left || "");
+  const rightTime = Date.parse(right || "");
+  return Number.isFinite(leftTime) && Number.isFinite(rightTime) && Math.abs(leftTime - rightTime) <= 1000;
+}
+
+function pauseReadbackOk(status, holdPublishAt = "") {
+  if (status?.privacyStatus !== "private") return false;
+  if (!holdPublishAt) return !status?.publishAt;
+  return !status?.publishAt || sameTimestamp(status.publishAt, holdPublishAt);
+}
+
+async function readVideoUntilPaused({ accessToken, videoId, holdPublishAt }) {
+  let last = null;
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    last = await readVideo({ accessToken, videoId });
+    if (pauseReadbackOk(last.status || {}, holdPublishAt)) return last;
+    if (attempt < 5) await sleep(2000);
+  }
+  return last;
+}
+
 function summarize(results) {
   const summary = {
     total: results.length,
@@ -554,9 +580,23 @@ async function main() {
         appendLedger(options.ledger, row);
         continue;
       }
+      if (
+        options.holdPublishAt
+        && before.status?.privacyStatus === "private"
+        && sameTimestamp(before.status?.publishAt, options.holdPublishAt)
+      ) {
+        const row = { ...plan, status: "schedule_held", authorizedChannel: channelAuthCache.get(channel.key), before, after: before };
+        results.push(row);
+        appendLedger(options.ledger, row);
+        continue;
+      }
 
       await cancelSchedule({ accessToken, video: before, holdPublishAt: options.holdPublishAt });
-      const after = await readVideo({ accessToken, videoId: target.youtubeVideoId });
+      const after = await readVideoUntilPaused({
+        accessToken,
+        videoId: target.youtubeVideoId,
+        holdPublishAt: options.holdPublishAt,
+      });
       if (after.status?.privacyStatus !== "private") {
         fail(`Pause readback privacy mismatch: expected private, got ${after.status?.privacyStatus || "(missing)"}.`);
       }
