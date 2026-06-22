@@ -30,6 +30,16 @@ on:
         description: "Optional comma-separated channel keys to skip."
         required: false
         default: ""
+      youtube_environment:
+        description: "GitHub environment with the route-specific OAuth bundle."
+        required: true
+        default: "youtube-api-branding"
+        type: choice
+        options:
+          - youtube-api-branding
+          - youtube-api-youtube-2
+          - youtube-api-youtube-3
+          - youtube-api-youtube-4
       force_configured:
         description: "Allow apply to touch configured_readback channels. Required with scope=all."
         required: true
@@ -46,7 +56,7 @@ permissions:
 jobs:
   channel-branding-api:
     runs-on: ubuntu-latest
-    environment: youtube-api-branding
+    environment: ${{ github.event.inputs.youtube_environment }}
     timeout-minutes: 60
 
     steps:
@@ -60,6 +70,14 @@ jobs:
 
       - name: Materialize public branding assets
         run: node scripts/sync-youtube-channel-branding-assets.mjs --to-outputs --verify
+
+      - name: Validate YouTube API route environment
+        if: ${{ github.event.inputs.channels != '' }}
+        shell: bash
+        env:
+          CHANNELS_INPUT: ${{ github.event.inputs.channels }}
+          YOUTUBE_ENVIRONMENT_INPUT: ${{ github.event.inputs.youtube_environment }}
+        run: node scripts/resolve-youtube-api-environment.mjs --support="$CHANNELS_INPUT" --environment="$YOUTUBE_ENVIRONMENT_INPUT"
 
       - name: Restore YouTube OAuth bundle from secret
         if: ${{ github.event.inputs.mode == 'readback' || github.event.inputs.mode == 'apply' }}
