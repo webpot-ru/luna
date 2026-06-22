@@ -8,6 +8,7 @@ const DEFAULT_BASE_URL = "https://api.vectorengine.ai";
 const DEFAULT_MODEL = "gpt-image-2";
 const DEFAULT_SIZE = "1536x1024";
 const CHANNEL_COPY_PATH = path.resolve("config/youtube-channel-banner-copy.json");
+const BRAND_NAME = "FlashcardsLuna";
 
 function loadDotEnv(filePath) {
   if (!filePath || !fs.existsSync(filePath)) return false;
@@ -167,27 +168,27 @@ async function main() {
 
   const prompt = args.mode === "full-render"
     ? [
-      "Create one complete premium YouTube channel banner for LunaCards. Do not leave empty space for later editing.",
+      `Create one complete premium YouTube channel banner for ${BRAND_NAME}. Do not leave empty space for later editing.`,
       "The final artwork must already include all visible brand text and design elements as one coherent rendered image.",
       "Target composition: ultra-wide YouTube channel header, light modern SaaS/product UI, matching flashcardsluna.com: pale #f4f7f9 background, white rounded flashcard/course tiles, soft blue accents, deep navy brand text, subtle violet highlights, polished premium educational feel.",
       "YouTube safety: all important content must be compact and centered vertically. Imagine only a narrow horizontal strip through the exact middle will be visible. Keep every letter, logo, URL, and important card inside the middle 40% of the image height, with large empty padding above and below. Do not make the brand text huge.",
       "Scale rule: the whole center brand lockup should occupy about one third of the image height, not more. Leave generous top and bottom whitespace.",
       "Center text must be exact, readable, and large:",
-      "LunaCards",
+      BRAND_NAME,
       copy.headline,
       copy.subline,
       "flashcardsluna.com",
       "Use no other words, letters, labels, URLs, signatures, watermarks, or random text anywhere.",
-      "Draw a small LunaCards-style blue flashcard logo above the word LunaCards: blue card stack, yellow crescent moon, tiny black cat ears. It does not need to be an exact imported logo, but it must be clean and premium.",
+      `Draw a small ${BRAND_NAME}-style blue flashcard logo above the word ${BRAND_NAME}: blue card stack, yellow crescent moon, tiny black cat ears. It does not need to be an exact imported logo, but it must be clean and premium.`,
       "Left and right sides: rich website-like grids of small rounded flashcard/course tiles with non-text icons only: globe, books, notebook, headphones, microscope flask, camera, landscape card, pencil, plant, moon card, quiz card. Fill the full wide header so it never looks like a small centered image.",
       "Keep all exact text inside the central safe area with generous margins. The full-width desktop crop should show side tiles across both edges and a clean center.",
       "Avoid dark backgrounds, neon, busy collage, stock photo look, people, animals except the tiny cat-ear logo motif, and heavy borders."
     ].join("\n")
     : [
-      "Create a premium YouTube channel banner background artwork for LunaCards, an educational flashcard learning brand.",
+      `Create a premium YouTube channel banner background artwork for ${BRAND_NAME}, an educational flashcard learning brand.`,
       "Landscape 3:2 composition that will be assembled into a 16:9 YouTube banner.",
       "Style: light modern SaaS/product UI, similar to flashcardsluna.com: pale #f4f7f9 background, clean white rounded course cards, soft blue accents, deep navy details, subtle violet accent, polished premium feel.",
-      "Content: an elegant flashcard library and learning dashboard. Put many small white flashcard tiles and course tiles on both the left and right sides, arranged in neat grids like the LunaCards website. Include abstract learning icons inside tiles: globe, books, notebook, headphones, microscope flask, camera, landscape card, pencil, plant, moon card, quiz card.",
+      `Content: an elegant flashcard library and learning dashboard. Put many small white flashcard tiles and course tiles on both the left and right sides, arranged in neat grids like the ${BRAND_NAME} website. Include abstract learning icons inside tiles: globe, books, notebook, headphones, microscope flask, camera, landscape card, pencil, plant, moon card, quiz card.`,
       "The side panels must fill the full desktop-width header, not look like a small centered image. Left and right side areas should feel rich and detailed, with at least 14-20 small tiles total.",
       "Composition rule: leave a wide clean bright center area for later text/logo overlay. Important detailed objects should sit outside the central safe area and remain visible in a very wide YouTube desktop crop.",
       "Critical: do NOT include any readable text, letters, URLs, brand names, logos, signatures, borders, frames, watermarks, or UI labels. No words anywhere.",
@@ -240,7 +241,7 @@ async function main() {
     loadedEnvFiles,
     prompt,
     localizedCopy: {
-      brand: "LunaCards",
+      brand: BRAND_NAME,
       headline: copy.headline,
       subline: copy.subline,
       url: "flashcardsluna.com"

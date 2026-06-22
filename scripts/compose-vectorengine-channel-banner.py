@@ -10,6 +10,10 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 LOGO_PATH = ROOT / "outputs" / "youtube-channel-assets" / "en" / "flashcardsluna-site-logo-light.png"
+BRAND_PREFIX = "Flashcards"
+BRAND_ACCENT = "Luna"
+BRAND_NAVY = "#06134a"
+BRAND_ACCENT_COLOR = "#8b7cf6"
 
 CANVAS = (2560, 1440)
 DESKTOP_CROP = (0, 508, 2560, 931)
@@ -33,6 +37,18 @@ def center_text(draw: ImageDraw.ImageDraw, xy: tuple[int, int], text: str, fnt, 
     x, y = xy
     w, h = text_size(draw, text, fnt)
     draw.text((x - w / 2, y - h / 2), text, font=fnt, fill=fill)
+
+
+def split_center_text(draw: ImageDraw.ImageDraw, xy: tuple[int, int], prefix: str, accent: str, fnt):
+    x, y = xy
+    prefix_w, prefix_h = text_size(draw, prefix, fnt)
+    accent_w, accent_h = text_size(draw, accent, fnt)
+    total_w = prefix_w + accent_w
+    line_h = max(prefix_h, accent_h)
+    left = x - total_w / 2
+    top = y - line_h / 2
+    draw.text((left, top), prefix, font=fnt, fill=BRAND_NAVY)
+    draw.text((left + prefix_w, top), accent, font=fnt, fill=BRAND_ACCENT_COLOR)
 
 
 def rounded_shadow(base: Image.Image, box, radius: int, fill, shadow=(22, 48, 92, 35), blur=34, offset=(0, 18), outline=None, width=1):
@@ -86,7 +102,7 @@ def build_banner(
     sub_font = font(FONT_ARIAL_BOLD, 32)
     url_font = font(FONT_ARIAL_BOLD, 25)
 
-    center_text(d, (center_x, 686), "LunaCards", brand_font, "#06134a")
+    split_center_text(d, (center_x, 686), BRAND_PREFIX, BRAND_ACCENT, brand_font)
     center_text(d, (center_x, 792), headline, headline_font, "#06134a")
     center_text(d, (center_x, 835), subline, sub_font, "#4b70f4")
 

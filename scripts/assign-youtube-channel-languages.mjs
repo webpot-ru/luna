@@ -382,10 +382,7 @@ function supportLangsForCode(code) {
 }
 
 function bannerAssetForCode(code) {
-  if (code === "en") {
-    return "outputs/youtube-channel-assets/en/lunacards-en-channel-banner-youtube-2560x1440-v8-center-v9-wide-reference-v1.jpg";
-  }
-  return `outputs/youtube-channel-assets/${code}/lunacards-${code}-channel-banner-youtube-2560x1440-v1-site-ui-center-v9-wide-reference-v1.jpg`;
+  return `outputs/youtube-channel-assets/${code}/lunacards-${code}-channel-banner-youtube-2560x1440-v1-site-ui-vectorengine-direct-v1.jpg`;
 }
 
 function renderPositioningCopy(positioningCopy, code, siteCoursesUrl, fallbackDetails) {
@@ -480,7 +477,7 @@ async function main() {
       siteCoursesUrl: item.siteCoursesUrl,
       finalChannelName: item.finalChannelName,
       bannerAsset: item.bannerAsset,
-      bannerSlug: "v1-site-ui-center-v9-wide-reference-v1",
+      bannerSlug: "v1-site-ui-vectorengine-direct-v1",
       shortDescription: item.shortDescription,
       desiredDescription: item.desiredDescription,
       profileStatus: "assigned_needs_api_branding",

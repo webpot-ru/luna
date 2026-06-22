@@ -25,6 +25,7 @@ CENTER_BLOCK = (605, 0, 1955, 423)
 SLUG = "v1-site-ui-center-v9-wide-reference-v1"
 
 FONT_ARIAL_BOLD = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
+BRAND_TEXT = "FlashcardsLuna"
 
 CHANNEL_COPY = json.loads(COPY_CONFIG.read_text(encoding="utf8"))
 CHANNELS = {code: cfg["languageName"] for code, cfg in sorted(CHANNEL_COPY.items())}
@@ -94,13 +95,13 @@ def write_banner(code: str) -> dict[str, Any]:
         "code": code,
         "supportLanguage": CHANNELS[code],
         "localizedCopy": {
-            "brand": "LunaCards",
+            "brand": BRAND_TEXT,
             "headline": CHANNEL_COPY[code]["headline"],
             "subline": CHANNEL_COPY[code]["subline"],
             "url": "flashcardsluna.com",
         },
         "slug": SLUG,
-        "method": "localized v1-site-ui center reference over EN v9 wide side panels; same refit scheme as the accepted EN banner; no text redraw",
+        "method": "localized v1-site-ui center reference over EN v9 wide side panels; center text must come from the source artwork, not a local text patch",
         "centerReference": str(source_path(code)),
         "wideReference": str(WIDE_REFERENCE),
         "uploadPath": str(upload),

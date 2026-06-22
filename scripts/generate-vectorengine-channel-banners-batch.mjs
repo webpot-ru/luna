@@ -11,6 +11,7 @@ const DEFAULT_TIMEOUT_MS = 420000;
 const RAW_SLUG = "v1-site-ui-vectorengine-full-v1";
 const SOURCE_SLUG = "v1-site-ui";
 const FINAL_SLUG = "v1-site-ui-center-v9-wide-reference-v1";
+const BRAND_NAME = "FlashcardsLuna";
 const ACCEPTED_FINAL_OVERRIDES = new Map([
   ["en", "outputs/youtube-channel-assets/en/lunacards-en-channel-banner-youtube-2560x1440-v8-center-v9-wide-reference-v1.jpg"],
 ]);
@@ -67,6 +68,7 @@ function parseArgs(argv) {
     skipExisting: true,
     regenerateRaw: false,
     regenerateSource: false,
+    skipRefit: false,
     limit: null,
   };
 
@@ -91,6 +93,7 @@ function parseArgs(argv) {
     else if (arg === "--no-skip-existing") options.skipExisting = false;
     else if (arg === "--regenerate-raw") options.regenerateRaw = true;
     else if (arg === "--regenerate-source") options.regenerateSource = true;
+    else if (arg === "--skip-refit") options.skipRefit = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -110,6 +113,8 @@ Purpose:
 Safety:
   Refuses paid VectorEngine calls without --confirm-spend.
   Existing final banners are skipped by default.
+  Use --skip-refit when the generated v1-site-ui sources will be exported
+  directly instead of mixed with the older EN wide side panels.
 `);
 }
 
@@ -155,18 +160,18 @@ function acceptedFinalPath(code, options) {
 
 function buildPrompt(copy) {
   return [
-    `Create one complete premium YouTube channel banner for LunaCards for native ${copy.languageName} speakers.`,
+    `Create one complete premium YouTube channel banner for ${BRAND_NAME} for native ${copy.languageName} speakers.`,
     "Do not leave empty space for later editing; the final artwork must already include all visible brand text as one coherent rendered image.",
     "Target composition: ultra-wide YouTube channel header, light modern SaaS/product UI, matching flashcardsluna.com: pale #f4f7f9 background, white rounded flashcard/course tiles, soft blue accents, deep navy brand text, subtle violet highlights, polished premium educational feel.",
     "YouTube safety: all important content must be compact and centered vertically. Imagine only a narrow horizontal strip through the exact middle will be visible. Keep every letter, logo, URL, and important card inside the middle 40% of the image height, with large empty padding above and below. Do not make the brand text huge.",
     "Scale rule: the whole center brand lockup should occupy about one third of the image height, not more. Leave generous top and bottom whitespace.",
     "Center text must be exact, readable, and large. Render these four text lines exactly and do not translate or change them:",
-    "LunaCards",
+    BRAND_NAME,
     copy.headline,
     copy.subline,
     "flashcardsluna.com",
     "Use no other words, letters, labels, URLs, signatures, watermarks, or random text anywhere.",
-    "Draw a small LunaCards-style blue flashcard logo above the word LunaCards: blue card stack, yellow crescent moon, tiny black cat ears. It does not need to be an exact imported logo, but it must be clean and premium.",
+    `Draw a small ${BRAND_NAME}-style blue flashcard logo above the word ${BRAND_NAME}: blue card stack, yellow crescent moon, tiny black cat ears. It does not need to be an exact imported logo, but it must be clean and premium.`,
     "Left and right sides: rich website-like grids of small rounded flashcard/course tiles with non-text icons only: globe, books, notebook, headphones, microscope flask, camera, landscape card, pencil, plant, moon card, quiz card. Fill the full wide header so it never looks like a small centered image.",
     "Keep all exact text inside the central safe area with generous margins. The full-width desktop crop should show side tiles across both edges and a clean center.",
     "Avoid dark backgrounds, neon, busy collage, stock photo look, people, animals except the tiny cat-ear logo motif, and heavy borders."
@@ -273,7 +278,7 @@ async function processCode(code, copy, options, apiKey, keyName) {
       keyName,
       prompt,
       localizedCopy: {
-        brand: "LunaCards",
+        brand: BRAND_NAME,
         headline: copy.headline,
         subline: copy.subline,
         url: "flashcardsluna.com",
@@ -298,11 +303,13 @@ async function processCode(code, copy, options, apiKey, keyName) {
     ]);
   }
 
-  runChecked("python3", [
-    "scripts/refit-localized-channel-banners-from-source.py",
-    "--codes",
-    code,
-  ]);
+  if (!options.skipRefit) {
+    runChecked("python3", [
+      "scripts/refit-localized-channel-banners-from-source.py",
+      "--codes",
+      code,
+    ]);
+  }
 
   return {
     status: "ok",
@@ -392,7 +399,7 @@ async function main() {
   }
 
   const okCodes = records.filter((record) => record.status === "ok").map((record) => record.code);
-  if (okCodes.length > 0) {
+  if (okCodes.length > 0 && !options.skipRefit) {
     runChecked("python3", [
       "scripts/refit-localized-channel-banners-from-source.py",
       "--codes",

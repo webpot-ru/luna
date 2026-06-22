@@ -16,6 +16,7 @@ WIDE_REFERENCE = OUT_DIR / "lunacards-en-channel-banner-youtube-2560x1440-v9-wid
 CANVAS = (2560, 1440)
 DESKTOP_CROP = (0, 508, 2560, 931)
 SAFE_CROP = (507, 508, 2053, 931)
+BRAND_TEXT = "FlashcardsLuna"
 
 
 def edge_fade_mask(size: tuple[int, int], fade: int) -> Image.Image:
@@ -67,7 +68,8 @@ def main() -> None:
         "status": "ok",
         "centerReference": str(CENTER_REFERENCE),
         "wideReference": str(WIDE_REFERENCE),
-        "method": "v8 center block over v9 wide reference side panels; no paid image generation",
+        "method": "v8 center block over v9 wide reference side panels; no local brand text patch",
+        "brand": BRAND_TEXT,
         "uploadPath": str(upload),
         "desktopPreviewPath": str(desktop),
         "safeAreaPreviewPath": str(safe),

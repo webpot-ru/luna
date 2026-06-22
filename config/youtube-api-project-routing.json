@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "status": "planning_local_contract",
+  "sourceOfTruth": "docs/youtube-api-project-routing.md",
+  "generatedFor": "51 public YouTube support channels / 54 support-language variants",
+  "projectLabels": [
+    "youtube 1",
+    "youtube 2",
+    "youtube 3",
+    "youtube 4"
+  ],
+  "dailyCadence": {
+    "publicReleasesPerSupportVariantPerDay": 6,
+    "publicChannels": 51,
+    "supportLanguageVariants": 54,
+    "plannedPublicReleasesPerDay": 324
+  },
+  "routingRules": [
+    "A public support channel is assigned to exactly one YouTube API project route.",
+    "Regional support variants stay attached to their shared public channel: EN/EN-GB -> en, ES/ES-419 -> es, PT/PT-BR -> pt.",
+    "Do not put OAuth token JSON, client secret JSON, refresh tokens, or .local files in this config.",
+    "Each real Google Cloud / YouTube API project must have its own GitHub environment secret bundle before live uploads use that route.",
+    "This file is a local routing contract only; creating Google Cloud projects, OAuth clients, production status, quota extension requests, and GitHub secrets are external steps."
+  ],
+  "projects": [
+    {
+      "key": "youtube-1",
+      "label": "youtube 1",
+      "status": "existing_primary_project",
+      "githubEnvironment": "youtube-api-branding",
+      "notes": [
+        "Existing first project route. It currently maps to the already-used GitHub environment until a renamed production environment is introduced.",
+        "Contains the highest-priority shared channels first: EN/EN-GB, ES/ES-419, PT/PT-BR, plus RU and major audience channels."
+      ],
+      "supportChannelKeys": [
+        "en",
+        "es",
+        "pt",
+        "ru",
+        "hi",
+        "id",
+        "fr",
+        "de",
+        "ja",
+        "ko",
+        "tr",
+        "zh",
+        "it"
+      ],
+      "supportVariants": [
+        "EN",
+        "EN-GB",
+        "ES-419",
+        "ES",
+        "PT-BR",
+        "PT",
+        "RU",
+        "HI",
+        "ID",
+        "FR",
+        "DE",
+        "JA",
+        "KO",
+        "TR",
+        "ZH",
+        "IT"
+      ],
+      "plannedPublicReleasesPerDay": 96
+    },
+    {
+      "key": "youtube-2",
+      "label": "youtube 2",
+      "status": "github_secret_uploaded",
+      "githubEnvironment": "youtube-api-youtube-2",
+      "notes": [
+        "Local OAuth reauthorization completed on 2026-06-22 for all 13 assigned channels using OAuth client 327715936948-...; read-only channels.list readback matched every expected channelId.",
+        "GitHub environment youtube-api-youtube-2 exists as of 2026-06-22. After explicit user risk approval, YOUTUBE_OAUTH_BUNDLE_TGZ_B64 was uploaded there; gh secret list readback shows updated 2026-06-22T06:12:05Z."
+      ],
+      "supportChannelKeys": [
+        "vi",
+        "th",
+        "ms",
+        "pl",
+        "nl",
+        "sv",
+        "no",
+        "da",
+        "fi",
+        "cs",
+        "sk",
+        "hu",
+        "ro"
+      ],
+      "supportVariants": [
+        "VI",
+        "TH",
+        "MS",
+        "PL",
+        "NL",
+        "SV",
+        "NO",
+        "DA",
+        "FI",
+        "CS",
+        "SK",
+        "HU",
+        "RO"
+      ],
+      "plannedPublicReleasesPerDay": 78
+    },
+    {
+      "key": "youtube-3",
+      "label": "youtube 3",
+      "status": "github_secret_uploaded",
+      "githubEnvironment": "youtube-api-youtube-3",
+      "notes": [
+        "Local OAuth reauthorization completed on 2026-06-22 for all 13 assigned channels using OAuth client 1076963270652-...; read-only channels.list readback matched every expected channelId.",
+        "During setup, the first MY attempts selected the ML/Malayalam channel; this was caught by channelId readback and corrected before continuing.",
+        "After explicit user risk approval, YOUTUBE_OAUTH_BUNDLE_TGZ_B64 was uploaded to GitHub environment youtube-api-youtube-3; gh secret list readback shows updated 2026-06-22T06:58:15Z."
+      ],
+      "supportChannelKeys": [
+        "bg",
+        "hr",
+        "sr",
+        "sl",
+        "lt",
+        "lv",
+        "et",
+        "is",
+        "bn",
+        "tl",
+        "my",
+        "km",
+        "lo"
+      ],
+      "supportVariants": [
+        "BG",
+        "HR",
+        "SR",
+        "SL",
+        "LT",
+        "LV",
+        "ET",
+        "IS",
+        "BN",
+        "TL",
+        "MY",
+        "KM",
+        "LO"
+      ],
+      "plannedPublicReleasesPerDay": 78
+    },
+    {
+      "key": "youtube-4",
+      "label": "youtube 4",
+      "status": "github_secret_uploaded",
+      "githubEnvironment": "youtube-api-youtube-4",
+      "notes": [
+        "The fourth route has 12 public channels because the project has 51 public support channels total.",
+        "Local OAuth reauthorization completed on 2026-06-22 for all 12 assigned channels using OAuth client 215536805171-...; read-only channels.list readback matched every expected channelId.",
+        "After explicit user risk approval, YOUTUBE_OAUTH_BUNDLE_TGZ_B64 was uploaded to GitHub environment youtube-api-youtube-4; gh secret list readback shows updated 2026-06-22T07:35:20Z."
+      ],
+      "supportChannelKeys": [
+        "ne",
+        "si",
+        "ta",
+        "te",
+        "kn",
+        "ml",
+        "uz",
+        "kk",
+        "az",
+        "ka",
+        "hy",
+        "sw"
+      ],
+      "supportVariants": [
+        "NE",
+        "SI",
+        "TA",
+        "TE",
+        "KN",
+        "ML",
+        "UZ",
+        "KK",
+        "AZ",
+        "KA",
+        "HY",
+        "SW"
+      ],
+      "plannedPublicReleasesPerDay": 72
+    }
+  ]
+}

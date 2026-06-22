@@ -290,8 +290,8 @@ def draw_banner(code: str, cfg: dict):
     logo = Image.open(LOGO_PATH).convert("RGBA").resize((86, 86), Image.Resampling.LANCZOS)
     img.alpha_composite(logo, (center_x - 43, 558))
 
-    brand_font = font(FONT_ARIAL_BLACK, 92)
-    center_text(d, (center_x, 688), "LunaCards", brand_font, "#06134a")
+    brand_font = font(FONT_ARIAL_BLACK, 78)
+    center_text(d, (center_x, 688), "FlashcardsLuna", brand_font, "#06134a")
 
     d.line((870, 752, 1182, 752), fill="#d8e4f3", width=2)
     d.line((1378, 752, 1690, 752), fill="#d8e4f3", width=2)

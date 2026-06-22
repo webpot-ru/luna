@@ -1,0 +1,151 @@
+# YouTube API Project Routing
+
+Status: **source of truth for local routing plan; `youtube 1`-`youtube 4` OAuth bundles uploaded**.
+
+This document records how the 51 public YouTube support-language channels are assigned to four Google Cloud / YouTube API project routes named `youtube 1`, `youtube 2`, `youtube 3` and `youtube 4`.
+
+It does **not** create Google Cloud projects, OAuth clients, GitHub secrets or YouTube quota. Those are external setup steps. The machine-readable mirror is `config/youtube-api-project-routing.json`; validate it with:
+
+```bash
+npm run check:youtube-api-project-routing
+```
+
+## Purpose
+
+The publishing plan targets **54 de-jure support-language variants** but only **51 public support channels**:
+
+- `EN` and `EN-GB` share channel `en`.
+- `ES` and `ES-419` share channel `es`.
+- `PT` and `PT-BR` share channel `pt`.
+
+At the current publishing cadence of **6 scheduled public releases per support-language variant per day**, the total target is:
+
+```text
+54 variants * 6 releases/day = 324 scheduled public releases/day
+```
+
+The four-project route is an operational grouping for production upload automation. It is not a substitute for YouTube API audit/approval, quota extension, policy compliance, or channel daily upload limits.
+
+## Project Summary
+
+| API project route | Status | GitHub environment | Public channels | Support variants | Planned scheduled public releases/day |
+| --- | --- | --- | ---: | ---: | ---: |
+| `youtube 1` | Existing primary route | `youtube-api-branding` for now | 13 | 16 | 96 |
+| `youtube 2` | GitHub OAuth bundle uploaded | `youtube-api-youtube-2` | 13 | 13 | 78 |
+| `youtube 3` | GitHub OAuth bundle uploaded | `youtube-api-youtube-3` | 13 | 13 | 78 |
+| `youtube 4` | GitHub OAuth bundle uploaded | `youtube-api-youtube-4` | 12 | 12 | 72 |
+| **Total** |  |  | **51** | **54** | **324** |
+
+`youtube 4` has 12 public channels because 51 public support channels cannot be split into four groups of 13.
+
+OAuth note for `youtube 1`: browser readback on 2026-06-22 showed project `flashcardmate` / FlashCardMate is **In production** on Google Auth Platform Audience. This does not require creating a new OAuth client id/secret by itself. However, channel refresh tokens minted while the app was still in **Testing** should be re-authorized for the assigned `youtube 1` channels before relying on GitHub scheduled uploads, because Google's Testing publishing status issues refresh tokens that expire in 7 days for external apps with non-basic scopes.
+
+2026-06-22 local reauthorization status: `youtube 1` has been reauthorized locally after the Production switch for all 13 assigned channels (`en`, `es`, `pt`, `ru`, `hi`, `id`, `fr`, `de`, `ja`, `ko`, `tr`, `zh`, `it`) using OAuth client `130628727588-...`. Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. Token contents are local-only and must stay out of git. The `youtube 1` OAuth bundle was rebuilt with the expected client JSON and 13 token files, then uploaded to GitHub repo `webpot-ru/luna`, environment `youtube-api-branding`, secret `YOUTUBE_OAUTH_BUNDLE_TGZ_B64`; readback via `gh secret list` shows update time `2026-06-22T04:52:30Z`.
+
+2026-06-22 local reauthorization status: `youtube 2` has been reauthorized locally for all 13 assigned channels (`vi`, `th`, `ms`, `pl`, `nl`, `sv`, `no`, `da`, `fi`, `cs`, `sk`, `hu`, `ro`) using OAuth client `327715936948-...`. Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. During setup, an initial `sk` attempt produced a token for `sv`; this was caught by channelId readback and corrected before continuing. Token contents remain local-only under `.local/youtube-oauth/tokens/` and must not be printed or committed. The route's GitHub environment `youtube-api-youtube-2` now exists; readback also shows `youtube-api-youtube-3` and `youtube-api-youtube-4`. After explicit user approval acknowledging the refresh-token storage risk, `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` was uploaded to `webpot-ru/luna` environment `youtube-api-youtube-2`; `gh secret list --env youtube-api-youtube-2 --repo webpot-ru/luna` readback shows updated `2026-06-22T06:12:05Z`.
+
+2026-06-22 local reauthorization status: `youtube 3` has been reauthorized locally for all 13 assigned channels (`bg`, `hr`, `sr`, `sl`, `lt`, `lv`, `et`, `is`, `bn`, `tl`, `my`, `km`, `lo`) using OAuth client `1076963270652-...`. Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. During setup, the first `my` attempts selected the `ml` / Malayalam channel; this was caught by channelId readback and corrected before continuing. Token contents remain local-only under `.local/youtube-oauth/tokens/` and must not be printed or committed. After explicit user approval acknowledging the refresh-token storage risk, `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` was uploaded to `webpot-ru/luna` environment `youtube-api-youtube-3`; `gh secret list --env youtube-api-youtube-3 --repo webpot-ru/luna` readback shows updated `2026-06-22T06:58:15Z`.
+
+2026-06-22 local reauthorization status: `youtube 4` has been reauthorized locally for all 12 assigned channels (`ne`, `si`, `ta`, `te`, `kn`, `ml`, `uz`, `kk`, `az`, `ka`, `hy`, `sw`) using OAuth client `215536805171-...`. Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. Token contents remain local-only under `.local/youtube-oauth/tokens/` and must not be printed or committed. After explicit user approval acknowledging the refresh-token storage risk, `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` was uploaded to `webpot-ru/luna` environment `youtube-api-youtube-4`; `gh secret list --env youtube-api-youtube-4 --repo webpot-ru/luna` readback shows updated `2026-06-22T07:35:20Z`.
+
+## Assignments
+
+### youtube 1
+
+Existing primary project. Keep the high-priority shared channels here first.
+
+| Channel key | Support variants | Notes |
+| --- | --- | --- |
+| `en` | `EN`, `EN-GB` | Shared English channel. |
+| `es` | `ES-419`, `ES` | Shared Spanish channel; Latin American Spanish is first-wave priority. |
+| `pt` | `PT-BR`, `PT` | Shared Portuguese channel; Brazilian Portuguese is first-wave priority. |
+| `ru` | `RU` | Existing tested Russian channel. |
+| `hi` | `HI` | Hindi. |
+| `id` | `ID` | Indonesian. |
+| `fr` | `FR` | French. |
+| `de` | `DE` | German. |
+| `ja` | `JA` | Japanese. |
+| `ko` | `KO` | Korean. |
+| `tr` | `TR` | Turkish. |
+| `zh` | `ZH` | Chinese. |
+| `it` | `IT` | Italian. |
+
+### youtube 2
+
+| Channel key | Support variants |
+| --- | --- |
+| `vi` | `VI` |
+| `th` | `TH` |
+| `ms` | `MS` |
+| `pl` | `PL` |
+| `nl` | `NL` |
+| `sv` | `SV` |
+| `no` | `NO` |
+| `da` | `DA` |
+| `fi` | `FI` |
+| `cs` | `CS` |
+| `sk` | `SK` |
+| `hu` | `HU` |
+| `ro` | `RO` |
+
+### youtube 3
+
+| Channel key | Support variants |
+| --- | --- |
+| `bg` | `BG` |
+| `hr` | `HR` |
+| `sr` | `SR` |
+| `sl` | `SL` |
+| `lt` | `LT` |
+| `lv` | `LV` |
+| `et` | `ET` |
+| `is` | `IS` |
+| `bn` | `BN` |
+| `tl` | `TL` |
+| `my` | `MY` |
+| `km` | `KM` |
+| `lo` | `LO` |
+
+### youtube 4
+
+| Channel key | Support variants |
+| --- | --- |
+| `ne` | `NE` |
+| `si` | `SI` |
+| `ta` | `TA` |
+| `te` | `TE` |
+| `kn` | `KN` |
+| `ml` | `ML` |
+| `uz` | `UZ` |
+| `kk` | `KK` |
+| `az` | `AZ` |
+| `ka` | `KA` |
+| `hy` | `HY` |
+| `sw` | `SW` |
+
+## Operational Rules
+
+- The Google Sheet `Ютуб курсы FCL` / tab `YouTube каналы` remains the human source of truth for channel identity, channel id, current handle and live status.
+- `config/youtube-channels.json` remains the machine-readable channel registry.
+- `config/youtube-api-project-routing.json` maps those channels to API project routes and must not contain secrets.
+- Each public support channel must be assigned to exactly one API project route.
+- Each support-language variant must be assigned to exactly one API project route.
+- Regional variants are preserved in video metadata, playlist keys, titles, descriptions and target/support codes. Only public site support-language URL paths collapse (`EN/EN-GB -> /en`, `ES/ES-419 -> /es`, `PT/PT-BR -> /pt`).
+- A live upload workflow must choose the OAuth bundle/GitHub environment from the channel's route, not from the target language.
+- If one API project hits quota or returns `quotaExceeded`, stop that route only. Do not blindly retry the same write against another project unless the channel has been deliberately re-authorized under that project and the docs/config are updated.
+- New Google Cloud projects must be production/audited with matching YouTube API disclosure, OAuth consent configuration and GitHub environment secrets before they are used for public scheduled uploads.
+- Token files, refresh tokens, client secrets and `.local` contents must stay out of git and out of this document.
+
+## Before Adding Or Replacing API Project Routes
+
+For each future project route or route replacement:
+
+1. Create or confirm the external Google Cloud project and YouTube Data API access.
+2. Configure OAuth consent in production mode where required.
+3. Create the OAuth client for the runner/browser flow.
+4. Authorize only the assigned support channels for that route.
+5. Store the matching OAuth bundle as a GitHub Environment secret for the route.
+6. Add workflow support for selecting the route-specific environment by `support` channel.
+7. Run a read-only token/channel identity check: token `channels.list(mine=true)` must match the expected `channelId` in the Sheet and `config/youtube-channels.json`.
+8. Run a dry-run publish plan with quota estimate before any `videos.insert`.
+9. Update `docs/PROJECT_STATE.md` with the exact readback state.
