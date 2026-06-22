@@ -33,6 +33,10 @@ on:
         description: "Optional limit for canary runs. Use 0 for all selected targets."
         required: true
         default: "0"
+      hold_publish_at:
+        description: "Optional future ISO time to hold schedules instead of trying to clear publishAt."
+        required: false
+        default: ""
       confirm_youtube_write:
         description: "For mode=apply type PAUSE_FALLBACK_SCHEDULES."
         required: false
@@ -62,6 +66,7 @@ jobs:
           MODE: ${{ github.event.inputs.mode }}
           SUPPORTS: ${{ github.event.inputs.supports }}
           LIMIT: ${{ github.event.inputs.limit }}
+          HOLD_PUBLISH_AT: ${{ github.event.inputs.hold_publish_at }}
           TARGET_FILE: ${{ github.event.inputs.target_file }}
           YOUTUBE_ENVIRONMENT: ${{ github.event.inputs.youtube_environment }}
           CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
@@ -78,6 +83,9 @@ jobs:
           if ! printf '%s' "$LIMIT" | grep -Eq '^[0-9]+$'; then
             echo "::error::limit must be an integer."
             exit 1
+          fi
+          if [ -n "$HOLD_PUBLISH_AT" ]; then
+            node -e "const t=Date.parse(process.env.HOLD_PUBLISH_AT); if (!Number.isFinite(t) || t <= Date.now() + 600000) { throw new Error('hold_publish_at must be a future ISO timestamp'); }"
           fi
           test -f "$TARGET_FILE"
           node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORTS" --environment="$YOUTUBE_ENVIRONMENT"
@@ -109,6 +117,7 @@ jobs:
           SUPPORTS: ${{ github.event.inputs.supports }}
           TARGET_FILE: ${{ github.event.inputs.target_file }}
           LIMIT: ${{ github.event.inputs.limit }}
+          HOLD_PUBLISH_AT: ${{ github.event.inputs.hold_publish_at }}
         run: |
           set -euo pipefail
           mkdir -p outputs
@@ -120,6 +129,9 @@ jobs:
           )
           if [ "$LIMIT" != "0" ]; then
             ARGS+=("--limit=$LIMIT")
+          fi
+          if [ -n "$HOLD_PUBLISH_AT" ]; then
+            ARGS+=("--hold-publish-at=$HOLD_PUBLISH_AT")
           fi
           if [ "$MODE" = "apply" ]; then
             ARGS+=("--apply" "--confirm-youtube-write=PAUSE_FALLBACK_SCHEDULES")

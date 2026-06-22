@@ -25,6 +25,7 @@ function parseArgs(argv) {
     support: "",
     videoId: "",
     limit: 0,
+    holdPublishAt: "",
     apply: false,
     writeRegistry: false,
     confirmYoutubeWrite: "",
@@ -45,6 +46,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--support=")) options.support = arg.slice("--support=".length).toUpperCase();
     else if (arg.startsWith("--video-id=")) options.videoId = arg.slice("--video-id=".length);
     else if (arg.startsWith("--limit=")) options.limit = Number(arg.slice("--limit=".length)) || 0;
+    else if (arg.startsWith("--hold-publish-at=")) options.holdPublishAt = arg.slice("--hold-publish-at=".length);
     else if (arg.startsWith("--confirm-youtube-write=")) options.confirmYoutubeWrite = arg.slice("--confirm-youtube-write=".length);
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -65,6 +67,7 @@ function usage() {
     "  --video-id=<id>           Filter by YouTube video ID.",
     "  --target-file=<json>      Use an explicit non-secret target list instead of registry/artifacts.",
     "  --export-target-file=<json>  Write the selected non-secret target list and exit.",
+    "  --hold-publish-at=<iso>   Instead of clearing publishAt, move the schedule to this future hold time.",
     "  --write-registry          Update existing local registry rows after readback.",
   ].join("\n");
 }
@@ -310,9 +313,10 @@ async function readVideo({ accessToken, videoId }) {
   return singleYouTubeItem(readback, "video");
 }
 
-function cancelledStatusBody(currentStatus) {
+function cancelledStatusBody(currentStatus, holdPublishAt = "") {
   const next = {
     privacyStatus: "private",
+    ...(holdPublishAt ? { publishAt: holdPublishAt } : {}),
     embeddable: currentStatus.embeddable,
     license: currentStatus.license,
     publicStatsViewable: currentStatus.publicStatsViewable,
@@ -322,7 +326,7 @@ function cancelledStatusBody(currentStatus) {
   return Object.fromEntries(Object.entries(next).filter(([, value]) => value !== undefined));
 }
 
-async function cancelSchedule({ accessToken, video }) {
+async function cancelSchedule({ accessToken, video, holdPublishAt = "" }) {
   return youtubeJson({
     accessToken,
     method: "PUT",
@@ -333,7 +337,7 @@ async function cancelSchedule({ accessToken, video }) {
     },
     body: {
       id: video.id,
-      status: cancelledStatusBody(video.status || {}),
+      status: cancelledStatusBody(video.status || {}, holdPublishAt),
     },
   });
 }
@@ -348,15 +352,17 @@ function summarize(results) {
     dryRun: results.filter((r) => r.status === "dry_run").length,
     paused: results.filter((r) => r.status === "schedule_paused").length,
     alreadyPaused: results.filter((r) => r.status === "already_paused").length,
+    held: results.filter((r) => r.status === "schedule_held").length,
     failed: results.filter((r) => r.status === "failed").length,
   };
   summary.bySupport = {};
   for (const result of results) {
     const key = result.supportLang || "UNKNOWN";
-    summary.bySupport[key] = summary.bySupport[key] || { total: 0, paused: 0, alreadyPaused: 0, failed: 0 };
+    summary.bySupport[key] = summary.bySupport[key] || { total: 0, paused: 0, alreadyPaused: 0, held: 0, failed: 0 };
     summary.bySupport[key].total += 1;
     if (result.status === "schedule_paused") summary.bySupport[key].paused += 1;
     if (result.status === "already_paused") summary.bySupport[key].alreadyPaused += 1;
+    if (result.status === "schedule_held") summary.bySupport[key].held += 1;
     if (result.status === "failed") summary.bySupport[key].failed += 1;
   }
   return summary;
@@ -416,17 +422,20 @@ function updateRegistryRows({ registryPath, results }) {
   const now = new Date().toISOString();
   let updated = 0;
   for (const result of results) {
-    if (!["schedule_paused", "already_paused"].includes(result.status)) continue;
+    if (!["schedule_paused", "already_paused", "schedule_held"].includes(result.status)) continue;
     const entry = registry.publications.find((item) => item.youtubeVideoId === result.youtubeVideoId);
     if (!entry) continue;
     const originalPublishAt = entry.publishAt || entry.scheduledPublishAt || result.before?.status?.publishAt || result.originalPublishAt || "";
     entry.privacyStatus = "private";
-    entry.publicationStatus = "scheduled_paused_thumbnail_auto";
+    entry.publicationStatus = result.status === "schedule_held"
+      ? "scheduled_hold_thumbnail_auto"
+      : "scheduled_paused_thumbnail_auto";
     entry.schedulePausedAt = result.timestamp || now;
     entry.schedulePauseReason = "custom_thumbnail_unavailable_youtube_auto_thumbnail_not_first_frame_safe";
     if (originalPublishAt) entry.originalPublishAt = entry.originalPublishAt || originalPublishAt;
-    entry.publishAt = "";
-    entry.scheduledPublishAt = "";
+    entry.publishAt = result.holdPublishAt || "";
+    entry.scheduledPublishAt = result.holdPublishAt || "";
+    if (result.holdPublishAt) entry.holdPublishAt = result.holdPublishAt;
     entry.desiredPrivacyStatus = "public_after_thumbnail_fix";
     entry.needsVisibilityPromotion = true;
     entry.lastVisibilityReadbackAt = result.timestamp || now;
@@ -456,6 +465,11 @@ async function main() {
   }
   if (options.apply && options.confirmYoutubeWrite !== "PAUSE_FALLBACK_SCHEDULES") {
     fail("Live YouTube writes require --confirm-youtube-write=PAUSE_FALLBACK_SCHEDULES.");
+  }
+  if (options.holdPublishAt) {
+    const holdTime = Date.parse(options.holdPublishAt);
+    if (!Number.isFinite(holdTime)) fail(`Invalid --hold-publish-at: ${options.holdPublishAt}`);
+    if (holdTime <= Date.now() + 10 * 60 * 1000) fail(`--hold-publish-at must be safely in the future: ${options.holdPublishAt}`);
   }
 
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
@@ -493,6 +507,7 @@ async function main() {
       thumbnailUploadMode: target.thumbnailUploadMode,
       thumbnailFallbackReason: target.thumbnailFallbackReason,
       estimatedQuotaUnits: options.apply ? 52 : 0,
+      holdPublishAt: options.holdPublishAt,
     };
 
     try {
@@ -533,22 +548,28 @@ async function main() {
         fail(`Video channel mismatch: expected ${channel.channelId}, got ${before.snippet?.channelId || "(missing)"}.`);
       }
 
-      if (before.status?.privacyStatus === "private" && !before.status?.publishAt) {
+      if (!options.holdPublishAt && before.status?.privacyStatus === "private" && !before.status?.publishAt) {
         const row = { ...plan, status: "already_paused", authorizedChannel: channelAuthCache.get(channel.key), before, after: before };
         results.push(row);
         appendLedger(options.ledger, row);
         continue;
       }
 
-      await cancelSchedule({ accessToken, video: before });
+      await cancelSchedule({ accessToken, video: before, holdPublishAt: options.holdPublishAt });
       const after = await readVideo({ accessToken, videoId: target.youtubeVideoId });
       if (after.status?.privacyStatus !== "private") {
         fail(`Pause readback privacy mismatch: expected private, got ${after.status?.privacyStatus || "(missing)"}.`);
       }
-      if (after.status?.publishAt) {
+      if (options.holdPublishAt) {
+        const expected = Date.parse(options.holdPublishAt);
+        const actual = Date.parse(after.status?.publishAt || "");
+        if (!Number.isFinite(actual) || Math.abs(actual - expected) > 1000) {
+          fail(`Hold readback publishAt mismatch: expected ${options.holdPublishAt}, got ${after.status?.publishAt || "(missing)"}.`);
+        }
+      } else if (after.status?.publishAt) {
         fail(`Pause readback still has publishAt=${after.status.publishAt}.`);
       }
-      const row = { ...plan, status: "schedule_paused", authorizedChannel: channelAuthCache.get(channel.key), before, after };
+      const row = { ...plan, status: options.holdPublishAt ? "schedule_held" : "schedule_paused", authorizedChannel: channelAuthCache.get(channel.key), before, after };
       results.push(row);
       appendLedger(options.ledger, row);
     } catch (error) {
