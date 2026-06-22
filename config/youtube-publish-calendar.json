@@ -54,6 +54,866 @@
       "youtubeVideoId": "2pj0DnZ-ftc",
       "youtubePlaylistId": "PLzHdIxZgrAa2T5sK1MdIOObs8haHWSPAU",
       "playlistItemId": "UEx6SGRJeFpnckFhMlQ1c0sxTWRJT09iczhoYUhXU1BBVS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "EN",
+      "targetLang": "RU",
+      "channelKey": "en",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "publishAt": "2026-06-23T12:30:00.000Z",
+      "timeZone": "America/New_York",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_en/youtube_metadata.json",
+      "title": "Russian Vocabulary for Beginners: Kitchenware Basics | 50 A1 Words",
+      "playlist_key": "EN__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T12:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943389966",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943389966",
+      "createdAt": "2026-06-22T09:36:42.090Z",
+      "updatedAt": "2026-06-22T09:36:42.090Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES-419",
+      "targetLang": "RU",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "publishAt": "2026-06-23T06:30:00.000Z",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_es-419/youtube_metadata.json",
+      "title": "Vocabulario de Cocina en Ruso (A1): 50 Palabras y Pronunciación",
+      "playlist_key": "ES-419__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943569446",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943569446",
+      "createdAt": "2026-06-22T09:39:51.898Z",
+      "updatedAt": "2026-06-22T09:39:51.898Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "PT-BR",
+      "targetLang": "RU",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "publishAt": "2026-06-23T07:30:00.000Z",
+      "timeZone": "Europe/Lisbon",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_pt-br/youtube_metadata.json",
+      "title": "Vocabulário de Russo A1: Utensílios de Cozinha | 50 Palavras com Pronúncia",
+      "playlist_key": "PT-BR__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T07:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943571331",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943571331",
+      "createdAt": "2026-06-22T09:39:50.750Z",
+      "updatedAt": "2026-06-22T09:39:50.750Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "DE",
+      "targetLang": "RU",
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "publishAt": "2026-06-23T06:30:00.000Z",
+      "timeZone": "Europe/Berlin",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_de/youtube_metadata.json",
+      "title": "Russisch lernen A1: Küchenutensilien – 50 wichtige Vokabeln mit Aussprache",
+      "playlist_key": "DE__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943572842",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943572842",
+      "createdAt": "2026-06-22T09:40:53.866Z",
+      "updatedAt": "2026-06-22T09:40:53.866Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "FR",
+      "targetLang": "RU",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-06-23T06:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_fr/youtube_metadata.json",
+      "title": "Vocabulaire Russe A1 : Les ustensiles de cuisine (50 mots avec prononciation)",
+      "playlist_key": "FR__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943574243",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943574243",
+      "createdAt": "2026-06-22T09:40:00.654Z",
+      "updatedAt": "2026-06-22T09:40:00.654Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "IT",
+      "targetLang": "RU",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-06-23T06:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_it/youtube_metadata.json",
+      "title": "Vocabolario Russo A1: Utensili da Cucina | 50 Parole con Pronuncia",
+      "playlist_key": "IT__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943576159",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943576159",
+      "createdAt": "2026-06-22T09:40:16.773Z",
+      "updatedAt": "2026-06-22T09:40:16.773Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "HI",
+      "targetLang": "RU",
+      "channelKey": "hi",
+      "youtubeChannelId": "UCRWc-CxGQSN_pbC42scuQHA",
+      "publishAt": "2026-06-23T03:00:00.000Z",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_hi/youtube_metadata.json",
+      "title": "रूसी में रसोई के सामान के नाम | 50 Russian Kitchen Vocabulary Words (A1)",
+      "playlist_key": "HI__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T03:00:00.000Z"
+        }
+      ],
+      "githubRunId": "27943577704",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943577704",
+      "createdAt": "2026-06-22T09:40:10.888Z",
+      "updatedAt": "2026-06-22T09:40:10.888Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ID",
+      "targetLang": "RU",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "publishAt": "2026-06-23T01:30:00.000Z",
+      "timeZone": "Asia/Jakarta",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_id/youtube_metadata.json",
+      "title": "Belajar Bahasa Rusia A1: 50 Kosakata Alat Dapur Dasar & Pengucapan",
+      "playlist_key": "ID__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T01:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943579071",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943579071",
+      "createdAt": "2026-06-22T09:40:29.767Z",
+      "updatedAt": "2026-06-22T09:40:29.767Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "JA",
+      "targetLang": "RU",
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "publishAt": "2026-06-22T23:30:00.000Z",
+      "timeZone": "Asia/Tokyo",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_ja/youtube_metadata.json",
+      "title": "ロシア語 A1単語：台所用品の基本 50選（発音・リピート練習・ミニテスト付）",
+      "playlist_key": "JA__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-23T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-25T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-29T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-22T23:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943580584",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943580584",
+      "createdAt": "2026-06-22T09:40:27.018Z",
+      "updatedAt": "2026-06-22T09:40:27.018Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "KO",
+      "targetLang": "RU",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "publishAt": "2026-06-22T23:30:00.000Z",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_ko/youtube_metadata.json",
+      "title": "러시아어 A1 기초 단어 - 주방용품 50단어 (발음, 반복 연습, 미니 테스트)",
+      "playlist_key": "KO__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-23T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-25T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-29T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-22T23:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943582325",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943582325",
+      "createdAt": "2026-06-22T09:40:27.033Z",
+      "updatedAt": "2026-06-22T09:40:27.033Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TR",
+      "targetLang": "RU",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "publishAt": "2026-06-23T05:30:00.000Z",
+      "timeZone": "Europe/Istanbul",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_tr/youtube_metadata.json",
+      "title": "Rusça A1 Kelimeleri: Mutfak Gereçleri | Telaffuzlu 50 Kelime",
+      "playlist_key": "TR__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943583999",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943583999",
+      "createdAt": "2026-06-22T09:40:28.619Z",
+      "updatedAt": "2026-06-22T09:40:28.619Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ZH",
+      "targetLang": "RU",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "publishAt": "2026-06-23T00:30:00.000Z",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_zh/youtube_metadata.json",
+      "title": "俄语A1基础词汇：厨房用品基础 50词跟读与发音练习",
+      "playlist_key": "ZH__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T00:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943585828",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943585828",
+      "createdAt": "2026-06-22T09:40:23.426Z",
+      "updatedAt": "2026-06-22T09:40:23.426Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "VI",
+      "targetLang": "RU",
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "publishAt": "2026-06-23T01:30:00.000Z",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_vi/youtube_metadata.json",
+      "title": "Học Tiếng Nga A1: 50 Từ Vựng Đồ Dùng Bếp Cơ Bản Có Phát Âm",
+      "playlist_key": "VI__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T01:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943587712",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943587712",
+      "createdAt": "2026-06-22T09:40:38.160Z",
+      "updatedAt": "2026-06-22T09:40:38.160Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TH",
+      "targetLang": "RU",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "publishAt": "2026-06-23T01:30:00.000Z",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_th/youtube_metadata.json",
+      "title": "คำศัพท์ภาษารัสเซีย A1: ของใช้ครัวพื้นฐาน 50 คำ พร้อมเสียงอ่าน | FlashcardsLuna",
+      "playlist_key": "TH__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T01:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943589624",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943589624",
+      "createdAt": "2026-06-22T09:40:49.959Z",
+      "updatedAt": "2026-06-22T09:40:49.959Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "MS",
+      "targetLang": "RU",
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "publishAt": "2026-06-23T00:30:00.000Z",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_ms/youtube_metadata.json",
+      "title": "Belajar Bahasa Rusia A1: Asas Alat Dapur | 50 Kosakata & Sebutan",
+      "playlist_key": "MS__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T00:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943591112",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943591112",
+      "createdAt": "2026-06-22T09:40:31.339Z",
+      "updatedAt": "2026-06-22T09:40:31.339Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "PL",
+      "targetLang": "RU",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "publishAt": "2026-06-23T06:30:00.000Z",
+      "timeZone": "Europe/Warsaw",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_pl/youtube_metadata.json",
+      "title": "Rosyjski A1: Akcesoria kuchenne | 50 podstawowych słówek z wymową",
+      "playlist_key": "PL__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943593339",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943593339",
+      "createdAt": "2026-06-22T09:41:46.470Z",
+      "updatedAt": "2026-06-22T09:41:46.470Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "NL",
+      "targetLang": "RU",
+      "channelKey": "nl",
+      "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+      "publishAt": "2026-06-23T06:30:00.000Z",
+      "timeZone": "Europe/Amsterdam",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_nl/youtube_metadata.json",
+      "title": "Russisch Leren: Keukengerei (A1) | 50 Woorden met Uitspraak",
+      "playlist_key": "NL__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943595231",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943595231",
+      "createdAt": "2026-06-22T09:40:19.377Z",
+      "updatedAt": "2026-06-22T09:40:19.377Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "SV",
+      "targetLang": "RU",
+      "channelKey": "sv",
+      "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+      "publishAt": "2026-06-23T06:30:00.000Z",
+      "timeZone": "Europe/Stockholm",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_sv/youtube_metadata.json",
+      "title": "Ryska för nybörjare: Köksredskap (A1) | 50 ord med uttal",
+      "playlist_key": "SV__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943596767",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943596767",
+      "createdAt": "2026-06-22T09:40:27.857Z",
+      "updatedAt": "2026-06-22T09:40:27.857Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "NO",
+      "targetLang": "RU",
+      "channelKey": "no",
+      "youtubeChannelId": "UCK2IIhxCoPUW3wI6xBPYkfA",
+      "publishAt": "2026-06-23T06:30:00.000Z",
+      "timeZone": "Europe/Oslo",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_no/youtube_metadata.json",
+      "title": "Russisk for nybegynnere: Kjøkkenutstyr | 50 viktige ord på russisk (A1)",
+      "playlist_key": "NO__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943598505",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943598505",
+      "createdAt": "2026-06-22T09:40:34.051Z",
+      "updatedAt": "2026-06-22T09:40:34.051Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "DA",
+      "targetLang": "RU",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "publishAt": "2026-06-23T06:30:00.000Z",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_da/youtube_metadata.json",
+      "title": "Russian A1 Vocabulary: Køkkenudstyr | 50 Words with Pronunciation",
+      "playlist_key": "DA__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27943600549",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943600549",
+      "createdAt": "2026-06-22T09:41:23.619Z",
+      "updatedAt": "2026-06-22T09:41:23.619Z"
     }
   ]
 }

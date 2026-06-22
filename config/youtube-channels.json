@@ -102,7 +102,12 @@
       "bannerSlug": "v1-site-ui-vectorengine-direct-v1",
       "profileStatus": "configured_readback",
       "shortDescription": "हिंदी बोलने वालों के लिए फ़्लैशकार्ड वीडियो: 50+ भाषाएँ और अन्य विषय।",
-      "desiredDescription": "FlashcardsLuna हिंदी बोलने वालों को छोटे फ़्लैशकार्ड वीडियो से सीखने में मदद करता है।\n\nहम 50+ भाषाओं से शुरू कर रहे हैं: सुनें, दोहराएँ, अर्थ देखें और छोटे टेस्ट से दोहराएँ।\n\nइसी फ़्लैशकार्ड फ़ॉर्मैट को आगे अन्य विषयों और टॉपिक्स तक भी बढ़ाया जाएगा, ताकि आप एक ही जगह सीखते रहें।\n\nवेबसाइट पर भी अभ्यास करें:\nhttps://flashcardsluna.com/hi/courses"
+      "desiredDescription": "FlashcardsLuna हिंदी बोलने वालों को छोटे फ़्लैशकार्ड वीडियो से सीखने में मदद करता है।\n\nहम 50+ भाषाओं से शुरू कर रहे हैं: सुनें, दोहराएँ, अर्थ देखें और छोटे टेस्ट से दोहराएँ।\n\nइसी फ़्लैशकार्ड फ़ॉर्मैट को आगे अन्य विषयों और टॉपिक्स तक भी बढ़ाया जाएगा, ताकि आप एक ही जगह सीखते रहें।\n\nवेबसाइट पर भी अभ्यास करें:\nhttps://flashcardsluna.com/hi/courses",
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto",
+      "notes": [
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ]
     },
     {
       "key": "id",
@@ -118,7 +123,12 @@
       "bannerSlug": "v1-site-ui-vectorengine-direct-v1",
       "profileStatus": "configured_readback",
       "shortDescription": "Video pelajaran flashcard untuk penutur bahasa Indonesia: 50+ bahasa dan topik lain.",
-      "desiredDescription": "FlashcardsLuna membantu penutur bahasa Indonesia belajar lewat video flashcard singkat.\n\nKami mulai dengan 50+ bahasa: dengarkan, ulangi, cek artinya, lalu ulangi dengan kuis singkat.\n\nFormat flashcard yang sama juga akan dikembangkan untuk mata pelajaran dan topik lain, agar kamu bisa terus belajar di satu tempat.\n\nLatihan juga di situs:\nhttps://flashcardsluna.com/id/courses"
+      "desiredDescription": "FlashcardsLuna membantu penutur bahasa Indonesia belajar lewat video flashcard singkat.\n\nKami mulai dengan 50+ bahasa: dengarkan, ulangi, cek artinya, lalu ulangi dengan kuis singkat.\n\nFormat flashcard yang sama juga akan dikembangkan untuk mata pelajaran dan topik lain, agar kamu bisa terus belajar di satu tempat.\n\nLatihan juga di situs:\nhttps://flashcardsluna.com/id/courses",
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto",
+      "notes": [
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ]
     },
     {
       "key": "fr",
@@ -137,8 +147,11 @@
       "desiredDescription": "FlashcardsLuna aide les francophones à apprendre avec de courtes vidéos de cartes mémoire.\n\nNous commençons par plus de 50 langues : écoutez, répétez, vérifiez le sens et révisez avec de mini-tests.\n\nLe même format de cartes mémoire s'étendra aussi à d'autres matières et sujets, pour continuer à apprendre au même endroit.\n\nEntraînez-vous aussi sur le site :\nhttps://flashcardsluna.com/fr/courses",
       "notes": [
         "Existing FR channel public fields were already configured; public URL https://www.youtube.com/@LunaCardsFrancais returned HTTP 200 on 2026-06-21.",
-        "Google Sheet row 8 status columns were updated on 2026-06-21 to remove stale public-link-fix marker; no Studio re-edit was needed."
-      ]
+        "Google Sheet row 8 status columns were updated on 2026-06-21 to remove stale public-link-fix marker; no Studio re-edit was needed.",
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ],
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto"
     },
     {
       "key": "de",
@@ -154,7 +167,12 @@
       "bannerSlug": "v1-site-ui-vectorengine-direct-v1",
       "profileStatus": "configured_readback",
       "shortDescription": "Karteikarten-Videos für Deutschsprachige: 50+ Sprachen und weitere Themen.",
-      "desiredDescription": "FlashcardsLuna hilft Deutschsprachigen, mit kurzen Karteikarten-Videos zu lernen.\n\nWir starten mit über 50 Sprachen: zuhören, nachsprechen, die Bedeutung prüfen und mit kurzen Tests wiederholen.\n\nDasselbe Karteikartenformat wird später auch auf weitere Fächer und Themen ausgeweitet, damit du an einem Ort weiterlernen kannst.\n\nÜbe auch auf der Website:\nhttps://flashcardsluna.com/de/courses"
+      "desiredDescription": "FlashcardsLuna hilft Deutschsprachigen, mit kurzen Karteikarten-Videos zu lernen.\n\nWir starten mit über 50 Sprachen: zuhören, nachsprechen, die Bedeutung prüfen und mit kurzen Tests wiederholen.\n\nDasselbe Karteikartenformat wird später auch auf weitere Fächer und Themen ausgeweitet, damit du an einem Ort weiterlernen kannst.\n\nÜbe auch auf der Website:\nhttps://flashcardsluna.com/de/courses",
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto",
+      "notes": [
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ]
     },
     {
       "key": "ja",
@@ -186,7 +204,12 @@
       "bannerSlug": "v1-site-ui-vectorengine-direct-v1",
       "profileStatus": "configured_readback",
       "shortDescription": "한국어 사용자를 위한 플래시카드 영상: 50개 이상 언어와 다른 과목.",
-      "desiredDescription": "FlashcardsLuna는 한국어 사용자를 위한 짧은 플래시카드 영상으로 학습을 도와드립니다.\n\n먼저 50개 이상의 언어부터 시작합니다. 듣고, 따라 말하고, 뜻을 확인한 뒤 짧은 테스트로 복습하세요.\n\n같은 플래시카드 형식은 앞으로 다른 과목과 주제로도 확장되어, 한곳에서 계속 배울 수 있습니다.\n\n사이트에서도 연습할 수 있습니다:\nhttps://flashcardsluna.com/ko/courses"
+      "desiredDescription": "FlashcardsLuna는 한국어 사용자를 위한 짧은 플래시카드 영상으로 학습을 도와드립니다.\n\n먼저 50개 이상의 언어부터 시작합니다. 듣고, 따라 말하고, 뜻을 확인한 뒤 짧은 테스트로 복습하세요.\n\n같은 플래시카드 형식은 앞으로 다른 과목과 주제로도 확장되어, 한곳에서 계속 배울 수 있습니다.\n\n사이트에서도 연습할 수 있습니다:\nhttps://flashcardsluna.com/ko/courses",
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto",
+      "notes": [
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ]
     },
     {
       "key": "tr",
@@ -218,7 +241,12 @@
       "bannerSlug": "v1-site-ui-vectorengine-direct-v1",
       "profileStatus": "configured_readback",
       "shortDescription": "面向中文用户的闪卡视频：50+ 种语言和其他学科。",
-      "desiredDescription": "FlashcardsLuna 帮助中文用户通过简短的闪卡视频学习。\n\n我们先从 50+ 种语言开始：听、跟读、查看意思，再用小测验复习。\n\n同样的闪卡形式之后也会扩展到其他学科和主题，让你可以在一个地方持续学习。\n\n也可以在网站练习：\nhttps://flashcardsluna.com/zh/courses"
+      "desiredDescription": "FlashcardsLuna 帮助中文用户通过简短的闪卡视频学习。\n\n我们先从 50+ 种语言开始：听、跟读、查看意思，再用小测验复习。\n\n同样的闪卡形式之后也会扩展到其他学科和主题，让你可以在一个地方持续学习。\n\n也可以在网站练习：\nhttps://flashcardsluna.com/zh/courses",
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto",
+      "notes": [
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ]
     },
     {
       "key": "it",
@@ -241,8 +269,11 @@
       "notes": [
         "Assigned from unassigned-001 on 2026-06-20.",
         "Manual Studio profile canary read back on public /about page on 2026-06-20: name, handle, banner, avatar, description and site link OK; contact email intentionally not transmitted.",
-        "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields."
-      ]
+        "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ],
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto"
     },
     {
       "key": "vi",
@@ -265,8 +296,11 @@
       "notes": [
         "Assigned from unassigned-002 on 2026-06-20.",
         "Manual Studio profile read back on public channel page on 2026-06-20: name, handle, banner, avatar, description and site link OK; contact email intentionally not transmitted.",
-        "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields."
-      ]
+        "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ],
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto"
     },
     {
       "key": "th",
@@ -315,8 +349,11 @@
         "Assigned from unassigned-004 on 2026-06-20.",
         "Studio public fields applied on 2026-06-20: name, handle, avatar, banner, localized description and site link.",
         "YouTube API readback confirmed snippetTitle=LunaCards Bahasa Melayu, brandingTitle=LunaCards Bahasa Melayu, customUrl=@lunacardsmalay, desired description and hasBanner=true.",
-        "Contact email was intentionally not transmitted; browser/account-switch source must be Sheet Current handle, not Channel ID."
-      ]
+        "Contact email was intentionally not transmitted; browser/account-switch source must be Sheet Current handle, not Channel ID.",
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ],
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto"
     },
     {
       "key": "pl",
@@ -339,8 +376,11 @@
       "notes": [
         "Assigned from unassigned-005 on 2026-06-20.",
         "Studio public fields configured/read back on 2026-06-20: name, handle, avatar, banner, description and site link. Contact email intentionally skipped.",
-        "Browser/account-switch source must be Sheet Current handle, not Channel ID."
-      ]
+        "Browser/account-switch source must be Sheet Current handle, not Channel ID.",
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ],
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto"
     },
     {
       "key": "nl",
@@ -363,8 +403,11 @@
       "notes": [
         "Assigned from unassigned-006 on 2026-06-20.",
         "Studio public fields configured/read back on 2026-06-20: name, handle, avatar, banner, description and site link. Contact email intentionally skipped.",
-        "Browser/account-switch source must be Sheet Current handle, not Channel ID."
-      ]
+        "Browser/account-switch source must be Sheet Current handle, not Channel ID.",
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ],
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto"
     },
     {
       "key": "sv",
@@ -387,8 +430,11 @@
       "notes": [
         "Assigned from unassigned-008 on 2026-06-20.",
         "Studio public fields configured/read back on 2026-06-20: name, handle, avatar, banner, description and site link. Contact email intentionally skipped.",
-        "Browser/account-switch source must be Sheet Current handle, not Channel ID."
-      ]
+        "Browser/account-switch source must be Sheet Current handle, not Channel ID.",
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ],
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto"
     },
     {
       "key": "no",
@@ -412,8 +458,11 @@
         "Assigned from unassigned-009 on 2026-06-20.",
         "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
         "Studio public fields configured/read back on 2026-06-20: name, handle, avatar, banner, description and site link. Contact email intentionally skipped.",
-        "Browser/account-switch source must be Sheet Current handle, not Channel ID."
-      ]
+        "Browser/account-switch source must be Sheet Current handle, not Channel ID.",
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ],
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto"
     },
     {
       "key": "da",
@@ -437,8 +486,11 @@
         "Assigned from unassigned-010 on 2026-06-20.",
         "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
         "Studio public fields configured/read back on 2026-06-20: name, handle, avatar, banner, description and site link. Contact email intentionally skipped.",
-        "Browser/account-switch source must be Sheet Current handle, not Channel ID."
-      ]
+        "Browser/account-switch source must be Sheet Current handle, not Channel ID.",
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ],
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto"
     },
     {
       "key": "fi",
