@@ -9,10 +9,12 @@ const options = {
   inputs: [],
   output: "",
   strictWarnings: false,
+  allowAutoFirstFrame: false,
 };
 
 for (const arg of process.argv.slice(2)) {
   if (arg === "--strict-warnings") options.strictWarnings = true;
+  else if (arg === "--allow-auto-first-frame") options.allowAutoFirstFrame = true;
   else if (arg.startsWith("--output=")) options.output = arg.slice("--output=".length);
   else if (arg === "--help" || arg === "-h") options.help = true;
   else options.inputs.push(arg);
@@ -21,9 +23,10 @@ for (const arg of process.argv.slice(2)) {
 function usage() {
   return [
     "Usage:",
-    "  node scripts/check-youtube-thumbnails.mjs <metadata-file-or-dir> [...] [--output=report.json] [--strict-warnings]",
+    "  node scripts/check-youtube-thumbnails.mjs <metadata-file-or-dir> [...] [--output=report.json] [--strict-warnings] [--allow-auto-first-frame]",
     "",
     "Checks that each youtube_metadata.json has a custom 16:9 thumbnail next to it or in metadata.thumbnailPath.",
+    "With --allow-auto-first-frame, metadata.thumbnailUploadMode=first_frame_auto is accepted for channels without custom thumbnail permission.",
   ].join("\n");
 }
 
@@ -126,11 +129,17 @@ function validate(metadataFile) {
   const blockers = [];
   const warnings = [];
   const thumbnailPath = findThumbnailFile(metadataFile, metadata);
+  const autoFirstFrame = metadata.thumbnailUploadMode === "first_frame_auto"
+    || metadata.thumbnailSource === "youtube-auto-first-frame";
   let sizeBytes = 0;
   let dimensions = null;
 
   if (!thumbnailPath) {
-    blockers.push("missing custom thumbnail file");
+    if (options.allowAutoFirstFrame && autoFirstFrame) {
+      warnings.push("custom thumbnail file absent by policy; YouTube auto first-frame thumbnail fallback will be used");
+    } else {
+      blockers.push("missing custom thumbnail file");
+    }
   } else {
     sizeBytes = fs.statSync(thumbnailPath).size;
     if (sizeBytes > MAX_YOUTUBE_THUMBNAIL_BYTES) {
@@ -184,7 +193,13 @@ try {
       blockerCount,
       warningCount,
       strictWarnings: options.strictWarnings,
+      allowAutoFirstFrame: options.allowAutoFirstFrame,
       thumbnailCount: results.filter((result) => result.metrics.thumbnailPath).length,
+      autoFirstFrameCount: results.filter((result) => {
+        const metadata = JSON.parse(fs.readFileSync(result.file, "utf8"));
+        return metadata.thumbnailUploadMode === "first_frame_auto"
+          || metadata.thumbnailSource === "youtube-auto-first-frame";
+      }).length,
     },
     results,
   };

@@ -435,15 +435,19 @@ jobs:
             fi
 
             if [ "$METADATA_STATUS" -eq 0 ]; then
-              npm run check:youtube-thumbnails -- outputs/video-generator --output=outputs/video-generator/youtube-thumbnail-report-github.json || METADATA_STATUS=1
+              if [ "$GENERATE_THUMBNAILS" = "true" ]; then
+                npm run check:youtube-thumbnails -- outputs/video-generator --allow-auto-first-frame --output=outputs/video-generator/youtube-thumbnail-report-github.json || METADATA_STATUS=1
+              fi
             fi
 
             if [ "$METADATA_STATUS" -eq 0 ]; then
-              REVIEW_ARGS=("outputs/video-generator" "--output-prefix=outputs/video-generator/youtube-thumbnail-review-github")
-              if [ "$PUBLISH_MODE" = "scheduled" ]; then
-                REVIEW_ARGS+=("--require-publish-at")
+              if [ "$GENERATE_THUMBNAILS" = "true" ]; then
+                REVIEW_ARGS=("outputs/video-generator" "--output-prefix=outputs/video-generator/youtube-thumbnail-review-github" "--allow-auto-first-frame")
+                if [ "$PUBLISH_MODE" = "scheduled" ]; then
+                  REVIEW_ARGS+=("--require-publish-at")
+                fi
+                npm run build:youtube-thumbnail-review -- "${REVIEW_ARGS[@]}" || METADATA_STATUS=1
               fi
-              npm run build:youtube-thumbnail-review -- "${REVIEW_ARGS[@]}" || METADATA_STATUS=1
             fi
           fi
 
@@ -489,6 +493,7 @@ jobs:
         env:
           CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
+          GENERATE_THUMBNAILS: ${{ github.event.inputs.generate_thumbnails }}
           MODE: ${{ github.event.inputs.mode }}
         run: |
           set -euo pipefail
@@ -498,6 +503,9 @@ jobs:
           fi
           if [ "$ALLOW_REPUBLISH" = "true" ]; then
             PLAN_ARGS+=("--allow-republish")
+          fi
+          if [ "$GENERATE_THUMBNAILS" != "true" ]; then
+            PLAN_ARGS+=("--allow-auto-thumbnail-fallback")
           fi
           if [ "$MODE" = "apply" ]; then
             PLAN_ARGS+=("--require-ai-metadata")
@@ -522,9 +530,12 @@ jobs:
               if (s.publishReadyCount !== s.candidateCount) {
                 throw new Error('Not all publish candidates are publish_ready.');
               }
-              const missingThumbnails = (report.candidates || []).filter((item) => !item.thumbnailPath);
+              const missingThumbnails = (report.candidates || []).filter((item) => (
+                !item.thumbnailUploadPath
+                && item.thumbnailUploadMode !== 'first_frame_auto'
+              ));
               if (missingThumbnails.length) {
-                throw new Error('Apply publish requires custom thumbnails for every candidate.');
+                throw new Error('Apply publish requires custom thumbnails unless the candidate is explicitly marked first_frame_auto.');
               }
             }
           "
@@ -574,6 +585,7 @@ jobs:
             outputs/youtube-publish-schedule-github.json
             outputs/youtube-publish-plan-github.json
             outputs/youtube-publish-ledger.jsonl
+            config/youtube-channels.json
             config/youtube-playlists.json
             config/youtube-publish-calendar.json
             config/youtube-published-videos.json

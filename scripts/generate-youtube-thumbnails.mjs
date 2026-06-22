@@ -10,6 +10,12 @@ import {
   loadDotEnvFile,
 } from "./lib/vectorengine-image.mjs";
 import { BRAND_NAME } from "./lib/brand.mjs";
+import {
+  DEFAULT_CHANNEL_CONFIG_PATH,
+  customThumbnailUploadAllowed,
+  findChannelForSupport,
+  loadYoutubeChannels,
+} from "./lib/youtube-playlists.mjs";
 
 const DEFAULT_SIZE = "1536x864";
 const OUTPUT_NAME = "youtube_thumbnail";
@@ -32,6 +38,7 @@ function parseArgs(argv) {
     output: "",
     logoAsset: process.env.YOUTUBE_THUMBNAIL_LOGO_ASSET || DEFAULT_LOGO_ASSET,
     logoOverlay: process.env.YOUTUBE_THUMBNAIL_LOGO_OVERLAY !== "0",
+    channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -48,6 +55,7 @@ function parseArgs(argv) {
     else if (arg === "--output-name" || arg.startsWith("--output-name=")) options.outputName = readValue();
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = readValue();
     else if (arg === "--logo-asset" || arg.startsWith("--logo-asset=")) options.logoAsset = readValue();
+    else if (arg === "--channel-config" || arg.startsWith("--channel-config=")) options.channelConfig = readValue();
     else if (arg === "--limit" || arg.startsWith("--limit=")) options.limit = Number(readValue());
     else if (arg === "--concurrency" || arg.startsWith("--concurrency=")) options.concurrency = Number(readValue());
     else if (arg === "--confirm-spend") options.confirmSpend = true;
@@ -70,6 +78,7 @@ function usage() {
     "",
     "Creates one VectorEngine GPT Image 2 YouTube thumbnail per youtube_metadata.json.",
     "The final JPEG is written next to metadata as youtube_thumbnail.jpg and metadata.thumbnailPath is updated.",
+    "If a support channel is marked customThumbnailUploadAllowed=false, the script skips paid image generation and records first-frame auto-thumbnail fallback in metadata.",
     `By default, the real logo asset is overlaid when present: ${DEFAULT_LOGO_ASSET}`,
     "Default live concurrency is 2; override with --concurrency=<n> or VECTORENGINE_IMAGE_CONCURRENCY.",
     "",
@@ -243,6 +252,17 @@ function updateMetadataFile(metadataFile, metadata, thumbnailPath, thumbnailMeta
   fs.writeFileSync(metadataFile, `${JSON.stringify(next, null, 2)}\n`, "utf8");
 }
 
+function updateMetadataForAutoFirstFrame(metadataFile, metadata, reason) {
+  const next = {
+    ...metadata,
+    thumbnailUploadMode: "first_frame_auto",
+    thumbnailSource: "youtube-auto-first-frame",
+    thumbnailFallbackReason: reason,
+    thumbnailGeneratedAt: "",
+  };
+  fs.writeFileSync(metadataFile, `${JSON.stringify(next, null, 2)}\n`, "utf8");
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help || options.inputs.length === 0) {
@@ -255,6 +275,7 @@ async function main() {
 
   const files = collectMetadataFiles(options.inputs);
   const selectedFiles = options.limit ? files.slice(0, options.limit) : files;
+  const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const logoPath = options.logoOverlay ? resolveLogoAsset(options.logoAsset) : "";
   const concurrency = Math.max(1, Math.min(Math.floor(Number(options.concurrency) || 1), Math.max(1, selectedFiles.length)));
   const loadedEnvFiles = [];
@@ -263,12 +284,25 @@ async function main() {
     if (loadDotEnvFile(resolved)) loadedEnvFiles.push(relativeProjectPath(resolved));
   }
   const { keyName, apiKey } = getVectorEngineApiKey();
-  if (!options.dryRun && !apiKey) {
-    throw new Error("Missing VectorEngine key. Set VECTORENGINE_API_KEY or VECTOR_ENGINE_API_KEY.");
-  }
 
   async function processMetadata(metadataFile) {
     const metadata = JSON.parse(fs.readFileSync(metadataFile, "utf8"));
+    const channel = findChannelForSupport(channelRegistry.channels, metadata.supportLang);
+    if (channel && !customThumbnailUploadAllowed(channelRegistry, channel)) {
+      const reason = "channel_custom_thumbnail_upload_not_available";
+      if (options.writeMetadata && !options.dryRun) updateMetadataForAutoFirstFrame(metadataFile, metadata, reason);
+      return {
+        status: options.dryRun ? "dry_run_custom_thumbnail_disabled" : "skipped_custom_thumbnail_disabled",
+        metadataFile: relativeProjectPath(metadataFile),
+        setId: metadata.setId,
+        supportLang: metadata.supportLang,
+        targetLang: metadata.targetLang,
+        channelKey: channel.key,
+        thumbnailUploadMode: "first_frame_auto",
+        thumbnailSource: "youtube-auto-first-frame",
+        thumbnailFallbackReason: reason,
+      };
+    }
     const paths = outputPaths(metadataFile, options.outputName);
     const prompt = buildPrompt(metadata);
     const existing = fs.existsSync(paths.thumbnailPath);
@@ -295,6 +329,9 @@ async function main() {
     }
 
     await fsp.mkdir(path.dirname(paths.rawPath), { recursive: true });
+    if (!apiKey) {
+      throw new Error("Missing VectorEngine key. Set VECTORENGINE_API_KEY or VECTOR_ENGINE_API_KEY.");
+    }
     const startedAt = new Date().toISOString();
     const imageBytes = await callVectorEngineImage({
       prompt,
@@ -342,7 +379,13 @@ async function main() {
   const compactRecords = records.filter(Boolean);
 
   const report = {
-    status: compactRecords.some((record) => record.status === "ok" || record.status === "skipped_existing" || record.status === "dry_run")
+    status: compactRecords.some((record) => [
+      "ok",
+      "skipped_existing",
+      "skipped_custom_thumbnail_disabled",
+      "dry_run",
+      "dry_run_custom_thumbnail_disabled",
+    ].includes(record.status))
       ? "ok"
       : "empty",
     generatedAt: new Date().toISOString(),

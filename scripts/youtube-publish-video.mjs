@@ -5,10 +5,12 @@ import {
   DEFAULT_CHANNEL_CONFIG_PATH,
   DEFAULT_PLAYLIST_REGISTRY_PATH,
   buildPlaylistAssignment,
+  customThumbnailUploadAllowed,
   findChannelForSupport,
   findPlaylistEntry,
   loadPlaylistRegistry,
   loadYoutubeChannels,
+  saveYoutubeChannels,
   savePlaylistRegistry,
   upsertPlannedPlaylist,
 } from "./lib/youtube-playlists.mjs";
@@ -240,6 +242,30 @@ function thumbnailPermissionWarning() {
   return "youtube.thumbnail/forbidden: The authenticated user doesn't have permissions to upload and set custom video thumbnails.";
 }
 
+function markChannelCustomThumbnailDisabled(channelRegistry, channelKey, channelConfigPath) {
+  const channel = (channelRegistry.channels || []).find((item) => item.key === channelKey);
+  if (!channel || channel.customThumbnailUploadAllowed === false) return false;
+  channel.customThumbnailUploadAllowed = false;
+  channel.thumbnailFallbackMode = "first_frame_auto";
+  const note = "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio.";
+  channel.notes = Array.isArray(channel.notes) ? channel.notes : [];
+  if (!channel.notes.includes(note)) channel.notes.push(note);
+  saveYoutubeChannels(channelRegistry, channelConfigPath);
+  return true;
+}
+
+function baseUploadStatus(publishAt) {
+  return publishAt ? "scheduled_uploaded" : "published_uploaded";
+}
+
+function uploadStatusWithThumbnailMode({ publishAt, thumbnailSet, thumbnailSetError, thumbnailUploadMode }) {
+  const base = baseUploadStatus(publishAt);
+  if (thumbnailSet) return base;
+  if (thumbnailSetError) return `${base}_thumbnail_forbidden`;
+  if (thumbnailUploadMode === "first_frame_auto") return `${base}_thumbnail_auto`;
+  return base;
+}
+
 async function uploadVideoResumable({ accessToken, videoPath, metadata, privacyStatus, publishAt }) {
   const stat = fs.statSync(videoPath);
   const initUrl = new URL("videos", "https://www.googleapis.com/upload/youtube/v3/");
@@ -346,7 +372,9 @@ function buildPublicationRecord({ metadata, ledgerRow, uploadedVideo, channel, t
     privacyStatus: uploadedVideo.status?.privacyStatus || ledgerRow.privacyStatus,
     publishAt: uploadedVideo.status?.publishAt || publishAt,
   };
-  if (thumbnailSetError) readback.thumbnailStatus = "forbidden";
+  if (thumbnailSet) readback.thumbnailStatus = "custom_set";
+  else if (thumbnailSetError) readback.thumbnailStatus = "forbidden_auto_first_frame";
+  else if (ledgerRow.thumbnailUploadMode === "first_frame_auto") readback.thumbnailStatus = "auto_first_frame";
   if (ledgerRow.needsPlaylistInsert) readback.playlistItemReadback = "pending";
   if (ledgerRow.postUploadError) readback.postUploadError = ledgerRow.postUploadError;
   return {
@@ -370,7 +398,10 @@ function buildPublicationRecord({ metadata, ledgerRow, uploadedVideo, channel, t
     desiredPrivacyStatus: publishAt ? "public" : ledgerRow.privacyStatus,
     needsVisibilityPromotion: false,
     thumbnailSet,
-    thumbnailLogoOverlay: true,
+    thumbnailLogoOverlay: Boolean(ledgerRow.thumbnailLogoOverlay),
+    thumbnailUploadMode: thumbnailSet ? "custom" : (ledgerRow.thumbnailUploadMode || "first_frame_auto"),
+    thumbnailSource: thumbnailSet ? (metadata.thumbnailSource || "") : (ledgerRow.thumbnailSource || "youtube-auto-first-frame"),
+    ...(ledgerRow.thumbnailFallbackReason ? { thumbnailFallbackReason: ledgerRow.thumbnailFallbackReason } : {}),
     ...(ledgerRow.needsPlaylistInsert ? { needsPlaylistInsert: true } : {}),
     ...(ledgerRow.postUploadError ? { postUploadError: ledgerRow.postUploadError } : {}),
     ...(thumbnailSetError ? {
@@ -423,6 +454,18 @@ async function main() {
   const videoPath = resolveExistingPath(options.video || defaultVideoPath(metadataFile, metadata), "video");
   const thumbnailCandidate = options.thumbnail || defaultThumbnailPath(metadataFile, metadata);
   const thumbnailPath = thumbnailCandidate ? resolveExistingPath(thumbnailCandidate, "thumbnail") : "";
+  const canUploadCustomThumbnail = customThumbnailUploadAllowed(channelRegistry, channel);
+  const requestedAutoThumbnail = metadata.thumbnailUploadMode === "first_frame_auto"
+    || metadata.thumbnailSource === "youtube-auto-first-frame";
+  const thumbnailUploadMode = (!canUploadCustomThumbnail || requestedAutoThumbnail || !thumbnailPath)
+    ? "first_frame_auto"
+    : "custom";
+  const thumbnailFallbackReason = !canUploadCustomThumbnail
+    ? "channel_custom_thumbnail_upload_not_available"
+    : (requestedAutoThumbnail
+      ? (metadata.thumbnailFallbackReason || "metadata_requested_first_frame_auto")
+      : (!thumbnailPath ? "custom_thumbnail_not_found" : ""));
+  const thumbnailUploadPath = thumbnailUploadMode === "custom" ? thumbnailPath : "";
   const privacyStatus = options.privacyStatus || metadata.privacyStatus || "public";
   const publishAt = options.publishAt || metadata.publishAt || metadata.scheduledPublishAt || "";
   if (!["private", "unlisted", "public"].includes(privacyStatus)) fail(`Invalid privacy: ${privacyStatus}`);
@@ -452,6 +495,10 @@ async function main() {
     metadataSource: metadata.source || "",
     videoPath,
     thumbnailPath,
+    thumbnailUploadPath,
+    thumbnailUploadMode,
+    thumbnailFallbackReason,
+    customThumbnailUploadAllowed: canUploadCustomThumbnail,
     channelKey: channel.key,
     youtube_channel_id: channel.channelId,
     existingPublication: existingPublication ? {
@@ -466,9 +513,9 @@ async function main() {
     youtube_playlist_id: playlistEntry?.youtube_playlist_id || "",
     privacyStatus,
     publishAt,
-    estimatedQuotaUnits: 1600 + (thumbnailPath ? 50 : 0) + (playlistEntry?.youtube_playlist_id ? 50 : (options.createPlaylist ? 100 : 0)),
+    estimatedQuotaUnits: 1600 + (thumbnailUploadPath ? 50 : 0) + (playlistEntry?.youtube_playlist_id ? 50 : (options.createPlaylist ? 100 : 0)),
     blockers,
-    warnings: thumbnailPath ? [] : ["thumbnail not found; thumbnails.set will be skipped"],
+    warnings: thumbnailUploadMode === "custom" ? [] : [`custom thumbnail upload skipped; ${thumbnailFallbackReason || "YouTube auto first-frame fallback will be used"}`],
   };
 
   if (!options.apply) {
@@ -489,6 +536,11 @@ async function main() {
     metadataFile,
     videoPath,
     thumbnailPath,
+    thumbnailUploadPath,
+    thumbnailUploadMode,
+    thumbnailFallbackReason,
+    thumbnailLogoOverlay: Boolean(metadata.thumbnailLogoOverlay),
+    thumbnailSource: thumbnailUploadMode === "custom" ? (metadata.thumbnailSource || "") : "youtube-auto-first-frame",
     channelKey: channel.key,
     supportLang: metadata.supportLang,
     targetLang: metadata.targetLang,
@@ -579,28 +631,40 @@ async function main() {
 
     let thumbnailResult = null;
     let thumbnailSetError = "";
-    if (thumbnailPath) {
+    if (thumbnailUploadPath) {
       try {
         thumbnailResult = await youtubeMediaUpload({
           accessToken,
           pathName: "thumbnails/set",
           query: { videoId },
-          filePath: thumbnailPath,
+          filePath: thumbnailUploadPath,
         });
       } catch (error) {
         if (!isRecoverableThumbnailPermissionError(error)) throw error;
         thumbnailSetError = thumbnailPermissionWarning();
+        if (markChannelCustomThumbnailDisabled(channelRegistry, channel.key, options.channelConfig)) {
+          console.warn(`::warning::Marked channel ${channel.key} customThumbnailUploadAllowed=false after thumbnails.set forbidden.`);
+        }
         console.warn(`::warning::${thumbnailSetError}`);
       }
     }
 
     const ledgerRow = {
       ...ledgerBase,
-      status: publishAt ? "scheduled_uploaded" : "published_uploaded",
+      status: uploadStatusWithThumbnailMode({
+        publishAt,
+        thumbnailSet: Boolean(thumbnailResult),
+        thumbnailSetError,
+        thumbnailUploadMode: thumbnailSetError ? "first_frame_auto" : thumbnailUploadMode,
+      }),
       youtubeVideoId: videoId,
       youtubePlaylistId: playlistEntry.youtube_playlist_id,
       playlistItemId: playlistItem.id,
       thumbnailSet: Boolean(thumbnailResult),
+      thumbnailUploadMode: thumbnailResult ? "custom" : "first_frame_auto",
+      thumbnailSource: thumbnailResult ? (metadata.thumbnailSource || "") : "youtube-auto-first-frame",
+      thumbnailFallbackReason: thumbnailResult ? "" : (thumbnailSetError ? "youtube_thumbnail_permission_forbidden" : thumbnailFallbackReason),
+      thumbnailLogoOverlay: Boolean(metadata.thumbnailLogoOverlay),
       ...(thumbnailSetError ? {
         needsThumbnailPermission: true,
         thumbnailSetError,

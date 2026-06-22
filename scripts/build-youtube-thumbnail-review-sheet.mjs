@@ -13,6 +13,7 @@ function parseArgs(argv) {
     columns: 4,
     requirePublishAt: false,
     failOnWarnings: false,
+    allowAutoFirstFrame: false,
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -27,6 +28,7 @@ function parseArgs(argv) {
     else if (arg === "--columns" || arg.startsWith("--columns=")) options.columns = Number(readValue());
     else if (arg === "--require-publish-at") options.requirePublishAt = true;
     else if (arg === "--fail-on-warnings") options.failOnWarnings = true;
+    else if (arg === "--allow-auto-first-frame") options.allowAutoFirstFrame = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else options.inputs.push(arg);
   }
@@ -46,6 +48,7 @@ function usage() {
     "  <output-prefix>.svg",
     "",
     "The bundle maps every thumbnail to set/support/target/title/playlist/publishAt for pre-upload review.",
+    "Use --allow-auto-first-frame for channels where YouTube custom thumbnails are unavailable and metadata declares thumbnailUploadMode=first_frame_auto.",
   ].join("\n");
 }
 
@@ -168,6 +171,8 @@ function buildRows(metadataFiles, options) {
     const thumbnailPath = findThumbnailFile(metadataFile, metadata);
     const thumbMetaPath = thumbnailMetadataPath(metadataFile, metadata);
     const thumbMeta = readOptionalJson(thumbMetaPath);
+    const autoFirstFrame = metadata.thumbnailUploadMode === "first_frame_auto"
+      || metadata.thumbnailSource === "youtube-auto-first-frame";
     const rowBlockers = [];
     const rowWarnings = [];
 
@@ -175,7 +180,13 @@ function buildRows(metadataFiles, options) {
     if (!supportLang) rowBlockers.push("missing supportLang");
     if (!targetLang) rowBlockers.push("missing targetLang");
     if (!metadata.title) rowWarnings.push("missing title");
-    if (!thumbnailPath) rowBlockers.push("missing thumbnail");
+    if (!thumbnailPath) {
+      if (options.allowAutoFirstFrame && autoFirstFrame) {
+        rowWarnings.push("custom thumbnail unavailable; YouTube auto first-frame fallback");
+      } else {
+        rowBlockers.push("missing thumbnail");
+      }
+    }
     if (options.requirePublishAt && !publishAt) rowBlockers.push("missing publishAt for scheduled run");
     if (seenKeys.has(key)) rowBlockers.push(`duplicate key also in ${seenKeys.get(key)}`);
     else seenKeys.set(key, relativeProjectPath(metadataFile));
@@ -205,6 +216,8 @@ function buildRows(metadataFiles, options) {
       thumbnailPath: thumbnailPath ? relativeProjectPath(thumbnailPath) : "",
       thumbnailMetadataPath: thumbMetaPath ? relativeProjectPath(thumbMetaPath) : "",
       thumbnailSource: metadata.thumbnailSource || thumbMeta?.provider || "",
+      thumbnailUploadMode: metadata.thumbnailUploadMode || (thumbnailPath ? "custom" : ""),
+      thumbnailFallbackReason: metadata.thumbnailFallbackReason || "",
       thumbnailModel: thumbMeta?.model || "",
       thumbnailLogoOverlay: Boolean(metadata.thumbnailLogoOverlay || thumbMeta?.logoOverlay),
       thumbnailLogoAsset: metadata.thumbnailLogoAsset || thumbMeta?.logoAsset || "",
@@ -238,6 +251,8 @@ function writeCsv(csvPath, rows) {
     "thumbnailPath",
     "thumbnailMetadataPath",
     "thumbnailSource",
+    "thumbnailUploadMode",
+    "thumbnailFallbackReason",
     "thumbnailModel",
     "thumbnailLogoOverlay",
     "metadataFile",
@@ -263,7 +278,7 @@ function writeHtml(htmlPath, rows, report) {
       `<article class="card ${statusClass}">`,
       imgSrc
         ? `<img src="${htmlEscape(imgSrc)}" alt="${htmlEscape(row.key)}">`
-        : `<div class="missing">Missing thumbnail</div>`,
+        : `<div class="missing">${row.thumbnailUploadMode === "first_frame_auto" ? "Auto first-frame thumbnail" : "Missing thumbnail"}</div>`,
       `<div class="meta">`,
       `<div class="k">${row.order}. ${htmlEscape(row.supportLang)} -> ${htmlEscape(row.targetLang)}</div>`,
       `<div class="title">${htmlEscape(row.title || row.deckTitle || row.key)}</div>`,
@@ -362,7 +377,7 @@ function writeSvg(svgPath, rows, report, columns) {
     )).join("\n");
     return `<g>
   <rect x="${x - 8}" y="${y - 8}" width="${thumbW + 16}" height="${thumbH + labelH + 16}" rx="8" fill="#ffffff" stroke="${stroke}"/>
-  ${imgHref ? `<image href="${xmlEscape(imgHref)}" x="${x}" y="${y}" width="${thumbW}" height="${thumbH}" preserveAspectRatio="xMidYMid slice"/>` : `<rect x="${x}" y="${y}" width="${thumbW}" height="${thumbH}" fill="#dfe8f1"/><text x="${x + 88}" y="${y + 96}" class="bad">Missing thumbnail</text>`}
+  ${imgHref ? `<image href="${xmlEscape(imgHref)}" x="${x}" y="${y}" width="${thumbW}" height="${thumbH}" preserveAspectRatio="xMidYMid slice"/>` : `<rect x="${x}" y="${y}" width="${thumbW}" height="${thumbH}" fill="#dfe8f1"/><text x="${x + 58}" y="${y + 96}" class="bad">${row.thumbnailUploadMode === "first_frame_auto" ? "Auto first frame" : "Missing thumbnail"}</text>`}
   <text x="${x}" y="${y + thumbH + 22}" class="key">${row.order}. ${xmlEscape(row.supportLang)} -> ${xmlEscape(row.targetLang)} | ${status}</text>
   ${titleSvg}
   <text x="${x}" y="${y + thumbH + 88}" class="tiny">${xmlEscape(publishAt)}</text>

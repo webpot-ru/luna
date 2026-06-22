@@ -36,6 +36,7 @@
     "plan:youtube-analytics-readback": "node scripts/plan-youtube-analytics-readback.mjs",
     "read:youtube-video-statistics": "node scripts/read-youtube-video-statistics.mjs",
     "apply:youtube-publish": "node scripts/youtube-publish-video.mjs",
+    "set:youtube-thumbnail": "node scripts/youtube-set-video-thumbnail.mjs",
     "update:youtube-visibility": "node scripts/youtube-update-visibility.mjs",
     "export:youtube-channel-studio-tasks": "node scripts/export-youtube-channel-studio-tasks.mjs"
   },

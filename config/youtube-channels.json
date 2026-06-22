@@ -901,6 +901,8 @@
       "finalChannelName": "LunaCards नेपाली",
       "bannerAsset": "outputs/youtube-channel-assets/ne/lunacards-ne-channel-banner-youtube-2560x1440-v1-site-ui-vectorengine-direct-v1.jpg",
       "bannerSlug": "v1-site-ui-vectorengine-direct-v1",
+      "customThumbnailUploadAllowed": true,
+      "thumbnailFallbackMode": "custom_when_available",
       "shortDescription": "नेपाली भाषीहरूका लागि फ्ल्यासकार्ड भिडियो: ५०+ भाषा र अन्य विषयहरू।",
       "desiredDescription": "FlashcardsLuna ले नेपाली भाषीहरूलाई छोटा फ्ल्यासकार्ड भिडियोबाट सिक्न मद्दत गर्छ।\n\nहामी ५० भन्दा बढी भाषाबाट सुरु गर्छौं: सुन्नुहोस्, दोहोर्याउनुहोस्, अर्थ हेर्नुहोस्, अनि छोटो परीक्षणबाट अभ्यास गर्नुहोस्।\n\nयही फ्ल्यासकार्ड ढाँचा पछि अन्य विषय र टपिकहरूमा पनि विस्तार हुनेछ, ताकि तपाईं एउटै ठाउँमा सिकाइ जारी राख्न सक्नुहोस्।\n\nवेबसाइटमा पनि अभ्यास गर्नुहोस्:\nhttps://flashcardsluna.com/ne/courses",
       "profileStatus": "configured_readback",
@@ -909,8 +911,10 @@
       "notes": [
         "Assigned from unassigned-031 on 2026-06-20.",
         "Studio public fields configured/read back on 2026-06-21: name, handle, banner, avatar, player watermark, description and site link; contact email intentionally not transmitted.",
+        "Historical 2026-06-22 first attempt: YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden before channel confirmation, so automation temporarily used the auto first-frame fallback.",
         "For browser work, use the Google Sheet Current handle as the navigation/account-switch source. Do not use Channel ID / UC... as the browser URL source.",
-        "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields."
+        "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
+        "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
       ]
     },
     {

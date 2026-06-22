@@ -48,7 +48,7 @@ export const defaultVoiceMap = {
   KK: "edge_kk-KZ-DauletNeural",
   AZ: "edge_az-AZ-BabekNeural",
   KA: "edge_ka-GE-GiorgiNeural",
-  HY: "edge_hy-AM-AramNeural",
+  HY: "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
   SW: "edge_sw-KE-RafikiNeural",
   PT: "edge_pt-PT-DuarteNeural",
   "PT-BR": "edge_pt-BR-FranciscaNeural",

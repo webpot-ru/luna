@@ -130,6 +130,14 @@ export function normalizeLanguageCode(value) {
   return String(value || "").trim().replace(/_/g, "-").toUpperCase();
 }
 
+export function customThumbnailUploadAllowed(channelRegistry = {}, channel = {}) {
+  const defaultValue = channelRegistry?.defaults?.customThumbnailUploadAllowed;
+  const channelValue = channel?.customThumbnailUploadAllowed;
+  if (channelValue === false) return false;
+  if (defaultValue === false) return false;
+  return true;
+}
+
 export function normalizeSlugPart(value) {
   return String(value || "")
     .trim()
@@ -266,6 +274,10 @@ export function loadYoutubeChannels(filePath = DEFAULT_CHANNEL_CONFIG_PATH) {
   const registry = JSON.parse(fs.readFileSync(filePath, "utf8"));
   if (!Array.isArray(registry.channels)) throw new Error(`Invalid YouTube channel config: ${filePath}`);
   return registry;
+}
+
+export function saveYoutubeChannels(registry, filePath = DEFAULT_CHANNEL_CONFIG_PATH) {
+  fs.writeFileSync(filePath, `${JSON.stringify(registry, null, 2)}\n`, "utf8");
 }
 
 export function findChannelForSupport(channels, supportLang) {

@@ -77,7 +77,7 @@ async function fetchWithRetry(url, options = {}, retries = 3, backoff = 2000) {
   }
 }
 
-// Check status of a TTS task
+// Check status of an AI33 TTS task.
 async function checkTaskStatus(taskId) {
   const data = await fetchWithRetry(new URL(`/v3/task/${taskId}`, baseUrl), {
     headers: { Authorization: apiKey }
@@ -88,12 +88,11 @@ async function checkTaskStatus(taskId) {
   return data.data ?? {};
 }
 
-// Request TTS synthesis
 async function runTtsTask(text, voiceId, langCode) {
   const form = new FormData();
   form.append("text", text);
   form.append("voice_id", voiceId);
-  form.append("language", String(langCode).split('-')[0].toLowerCase());
+  form.append("language", String(langCode).split("-")[0].toLowerCase());
   form.append("speed", "1");
   form.append("similarity", "2");
   form.append("with_transcript", "false");
@@ -111,7 +110,6 @@ async function runTtsTask(text, voiceId, langCode) {
   return data.task_id;
 }
 
-// Download file helper
 async function downloadFile(url, outputPath) {
   const response = await fetch(url);
   if (!response.ok) {
@@ -147,13 +145,15 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
     return cachedPath;
   }
   
-  // If language is Armenian (HY), use AI33 ElevenLabs API
+  // The free edge-tts backend does not currently expose Armenian hy-AM voices.
+  // Keep HY on the explicit AI33 fallback until edge-tts live readback shows hy-AM support.
   if (String(langCode).toUpperCase() === "HY") {
     console.log(`[AI33 TTS] Generating Armenian audio for: "${cleanedText.slice(0, 40)}..."`);
     try {
-      const activeVoiceId = process.env.AI33_VOICE_ID || "elevenlabs_qJBO8ZmKp4te7NTtYgzz";
+      const mappedVoiceId = String(voiceId || "").replace(/^ai33_/, "");
+      const activeVoiceId = process.env.AI33_VOICE_ID || mappedVoiceId || "elevenlabs_qJBO8ZmKp4te7NTtYgzz";
       const taskId = await runTtsTask(cleanedText, activeVoiceId, langCode);
-      
+
       let audioUrl = null;
       for (let i = 0; i < 30; i++) {
         await delay(2000);
@@ -165,11 +165,11 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
           throw new Error("AI33 task failed on server side.");
         }
       }
-      
+
       if (!audioUrl) {
         throw new Error("AI33 task timed out.");
       }
-      
+
       await downloadFile(audioUrl, cachedPath);
       return cachedPath;
     } catch (err) {

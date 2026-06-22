@@ -5,6 +5,7 @@ import {
   DEFAULT_CHANNEL_CONFIG_PATH,
   DEFAULT_PLAYLIST_REGISTRY_PATH,
   buildPlaylistAssignment,
+  customThumbnailUploadAllowed,
   findChannelForSupport,
   findPlaylistEntry,
   loadPlaylistRegistry,
@@ -33,6 +34,7 @@ function parseArgs(argv) {
     allowPlaylistCreate: false,
     allowRepublish: false,
     requireAiMetadata: false,
+    allowAutoThumbnailFallback: false,
     json: false,
   };
 
@@ -41,6 +43,7 @@ function parseArgs(argv) {
     else if (arg === "--allow-playlist-create") options.allowPlaylistCreate = true;
     else if (arg === "--allow-republish") options.allowRepublish = true;
     else if (arg === "--require-ai-metadata") options.requireAiMetadata = true;
+    else if (arg === "--allow-auto-thumbnail-fallback") options.allowAutoThumbnailFallback = true;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
@@ -62,6 +65,7 @@ function usage() {
     "  --allow-playlist-create   Treat missing playlist IDs as publishable if uploader may create them later.",
     "  --allow-republish         Allow uploading a set/support/target already present in config/youtube-published-videos.json.",
     "  --require-ai-metadata     Block template/template-ai-fallback metadata; intended for live apply planning.",
+    "  --allow-auto-thumbnail-fallback  Allow no custom thumbnail and use YouTube auto first-frame fallback.",
     "  --output=<file>           Write dry-run plan to this file. Defaults to outputs/youtube-publish-plan-<timestamp>.json.",
     "  --json                    Print compact JSON summary.",
   ].join("\n");
@@ -144,6 +148,7 @@ function buildCandidate({
   allowPlaylistCreate,
   allowRepublish,
   requireAiMetadata,
+  allowAutoThumbnailFallback,
 }) {
   const assignment = buildPlaylistAssignment(metadata);
   const channel = findChannelForSupport(channelRegistry.channels, metadata.supportLang);
@@ -151,6 +156,17 @@ function buildCandidate({
   const existingPublication = findActivePublication(publicationRegistry, metadata);
   const videoPath = findVideoFile(metadataFile, metadata);
   const thumbnailPath = findThumbnailFile(metadataFile, metadata);
+  const thumbnailAutoRequested = metadata.thumbnailUploadMode === "first_frame_auto"
+    || metadata.thumbnailSource === "youtube-auto-first-frame";
+  const canUploadCustomThumbnail = channel ? customThumbnailUploadAllowed(channelRegistry, channel) : true;
+  const useAutoThumbnail = !canUploadCustomThumbnail || thumbnailAutoRequested || (allowAutoThumbnailFallback && !thumbnailPath);
+  const thumbnailUploadPath = canUploadCustomThumbnail && !useAutoThumbnail ? thumbnailPath : "";
+  const thumbnailUploadMode = thumbnailUploadPath ? "custom" : (useAutoThumbnail ? "first_frame_auto" : "");
+  const thumbnailFallbackReason = !canUploadCustomThumbnail
+    ? "channel_custom_thumbnail_upload_not_available"
+    : (thumbnailAutoRequested
+      ? (metadata.thumbnailFallbackReason || "metadata_requested_first_frame_auto")
+      : (useAutoThumbnail ? "custom_thumbnail_generation_disabled" : ""));
   const privacyStatus = metadata.privacyStatus || "public";
   const publishAt = metadata.publishAt || metadata.scheduledPublishAt || "";
   const blockers = [];
@@ -178,7 +194,13 @@ function buildCandidate({
   if (!playlistEntry) warnings.push("playlist registry entry missing");
   else if (!playlistEntry.youtube_playlist_id && !allowPlaylistCreate) warnings.push("playlist has no youtube_playlist_id yet");
   if (existingPublication && !allowRepublish) blockers.push(activePublicationBlocker(existingPublication));
-  if (!thumbnailPath) warnings.push("thumbnail not found; uploader will skip thumbnails.set");
+  if (!thumbnailPath && useAutoThumbnail) {
+    warnings.push("custom thumbnail not found or disabled; YouTube auto first-frame fallback will be used");
+  } else if (!thumbnailPath) {
+    warnings.push("thumbnail not found; uploader will skip thumbnails.set");
+  } else if (!canUploadCustomThumbnail) {
+    warnings.push("custom thumbnail file exists but channel policy disables thumbnails.set; YouTube auto first-frame fallback will be used");
+  }
 
   const playlistAction = playlistEntry?.youtube_playlist_id
     ? "use_existing_playlist"
@@ -197,6 +219,10 @@ function buildCandidate({
     publishAt,
     channelKey: channel?.key || "",
     youtube_channel_id: channel?.channelId || "",
+    customThumbnailUploadAllowed: canUploadCustomThumbnail,
+    thumbnailUploadMode,
+    thumbnailFallbackReason,
+    thumbnailUploadPath,
     existingPublication: existingPublication ? {
       youtubeVideoId: existingPublication.youtubeVideoId,
       youtubeVideoUrl: existingPublication.youtubeVideoUrl || "",
@@ -216,7 +242,7 @@ function buildCandidate({
     blockers,
     warnings,
     estimatedQuotaUnits: quotaForCandidate({
-      hasThumbnail: Boolean(thumbnailPath),
+      hasThumbnail: Boolean(thumbnailUploadPath),
       playlistEntry,
       allowPlaylistCreate,
     }),
@@ -236,6 +262,7 @@ function printHuman(report) {
     console.log(`  channel=${item.channelKey || "MISSING"} playlist=${item.playlist_key} action=${item.playlist.action}`);
     console.log(`  video=${item.videoPath || "MISSING"}`);
     if (item.thumbnailPath) console.log(`  thumbnail=${item.thumbnailPath}`);
+    if (item.thumbnailUploadMode) console.log(`  thumbnailUploadMode=${item.thumbnailUploadMode}`);
     if (item.blockers.length) console.log(`  blockers=${item.blockers.join("; ")}`);
     if (item.warnings.length) console.log(`  warnings=${item.warnings.join("; ")}`);
   }
@@ -264,6 +291,7 @@ async function main() {
       allowPlaylistCreate: options.allowPlaylistCreate,
       allowRepublish: options.allowRepublish,
       requireAiMetadata: options.requireAiMetadata,
+      allowAutoThumbnailFallback: options.allowAutoThumbnailFallback,
     });
     if (options.writeRegistry && !findPlaylistEntry(playlistRegistry, candidate.playlist_key)) {
       const { created } = upsertPlannedPlaylist(
