@@ -264,10 +264,11 @@
       "shortDescription": "Video lezioni con flashcard per italofoni: 50+ lingue e altre materie.",
       "desiredDescription": "FlashcardsLuna aiuta gli italofoni a imparare con brevi video di flashcard.\n\nIniziamo con oltre 50 lingue: ascolta, ripeti, controlla il significato e ripassa con mini-test veloci.\n\nLo stesso formato con flashcard si estenderà anche ad altre materie e argomenti, così potrai continuare a studiare in un unico posto.\n\nEsercitati anche sul sito:\nhttps://flashcardsluna.com/it/courses",
       "profileStatus": "configured_readback",
-      "oauthTokenFile": ".local/youtube-oauth/tokens/unassigned-001.json",
-      "inventoryTokenKey": "unassigned-001",
+      "oauthTokenFile": ".local/youtube-oauth/tokens/it-youtube-4.json",
+      "inventoryTokenKey": "it-youtube-4",
       "notes": [
         "Assigned from unassigned-001 on 2026-06-20.",
+        "Reauthorized through YouTube API route youtube 4 on 2026-06-22; token file it-youtube-4.json read back channelId UCOFZxCVdm4FqhFgMvKsAlOw.",
         "Manual Studio profile canary read back on public /about page on 2026-06-20: name, handle, banner, avatar, description and site link OK; contact email intentionally not transmitted.",
         "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."

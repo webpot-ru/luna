@@ -30,23 +30,23 @@ The four-project route is an operational grouping for production upload automati
 
 | API project route | Status | GitHub environment | Public channels | Support variants | Planned scheduled public releases/day |
 | --- | --- | --- | ---: | ---: | ---: |
-| `youtube 1` | GitHub OAuth bundle uploaded | `youtube-api-branding` | 13 | 16 | 96 |
+| `youtube 1` | GitHub OAuth bundle uploaded | `youtube-api-branding` | 12 | 15 | 90 |
 | `youtube 2` | GitHub OAuth bundle uploaded | `youtube-api-youtube-2` | 13 | 13 | 78 |
 | `youtube 3` | GitHub OAuth bundle uploaded | `youtube-api-youtube-3` | 13 | 13 | 78 |
-| `youtube 4` | GitHub OAuth bundle uploaded | `youtube-api-youtube-4` | 12 | 12 | 72 |
+| `youtube 4` | GitHub OAuth bundle uploaded | `youtube-api-youtube-4` | 13 | 13 | 78 |
 | **Total** |  |  | **51** | **54** | **324** |
 
-`youtube 4` has 12 public channels because 51 public support channels cannot be split into four groups of 13.
+2026-06-22 route balancing update: `IT` moved from `youtube 1` to `youtube 4` after the primary route hit YouTube Data API quota during the Italian recovery run. The Italian channel was reauthorized through OAuth client `215536805171-...` into `.local/youtube-oauth/tokens/it-youtube-4.json`; read-only `channels.list(mine=true)` matched `UCOFZxCVdm4FqhFgMvKsAlOw` / `LunaCards Italiano` before the route config was changed.
 
 OAuth note for `youtube 1`: browser readback on 2026-06-22 showed project `flashcardmate` / FlashCardMate is **In production** on Google Auth Platform Audience. This does not require creating a new OAuth client id/secret by itself. However, channel refresh tokens minted while the app was still in **Testing** should be re-authorized for the assigned `youtube 1` channels before relying on GitHub scheduled uploads, because Google's Testing publishing status issues refresh tokens that expire in 7 days for external apps with non-basic scopes.
 
-2026-06-22 local reauthorization status: `youtube 1` has been reauthorized locally after the Production switch for all 13 assigned channels (`en`, `es`, `pt`, `ru`, `hi`, `id`, `fr`, `de`, `ja`, `ko`, `tr`, `zh`, `it`) using OAuth client `130628727588-...`. Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. Token contents are local-only and must stay out of git. The `youtube 1` OAuth bundle was rebuilt with the expected client JSON and 13 token files, then uploaded to GitHub repo `webpot-ru/luna`, environment `youtube-api-branding`, secret `YOUTUBE_OAUTH_BUNDLE_TGZ_B64`; readback via `gh secret list` shows update time `2026-06-22T04:52:30Z`.
+2026-06-22 local reauthorization status: `youtube 1` has been reauthorized locally after the Production switch for its originally assigned channels using OAuth client `130628727588-...`; after the IT balancing move it is the active route for 12 public channels (`en`, `es`, `pt`, `ru`, `hi`, `id`, `fr`, `de`, `ja`, `ko`, `tr`, `zh`) / 15 support variants. Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. Token contents are local-only and must stay out of git. The `youtube 1` OAuth bundle was rebuilt with the expected client JSON and 13 original token files, then uploaded to GitHub repo `webpot-ru/luna`, environment `youtube-api-branding`, secret `YOUTUBE_OAUTH_BUNDLE_TGZ_B64`; readback via `gh secret list` shows update time `2026-06-22T04:52:30Z`. The old IT token in that historical bundle must not be used for new IT dispatches because routing now sends `IT` to `youtube-api-youtube-4`.
 
 2026-06-22 local reauthorization status: `youtube 2` has been reauthorized locally for all 13 assigned channels (`vi`, `th`, `ms`, `pl`, `nl`, `sv`, `no`, `da`, `fi`, `cs`, `sk`, `hu`, `ro`) using OAuth client `327715936948-...`. Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. During setup, an initial `sk` attempt produced a token for `sv`; this was caught by channelId readback and corrected before continuing. Token contents remain local-only under `.local/youtube-oauth/tokens/` and must not be printed or committed. The route's GitHub environment `youtube-api-youtube-2` now exists; readback also shows `youtube-api-youtube-3` and `youtube-api-youtube-4`. After explicit user approval acknowledging the refresh-token storage risk, `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` was uploaded to `webpot-ru/luna` environment `youtube-api-youtube-2`; `gh secret list --env youtube-api-youtube-2 --repo webpot-ru/luna` readback shows updated `2026-06-22T06:12:05Z`.
 
 2026-06-22 local reauthorization status: `youtube 3` has been reauthorized locally for all 13 assigned channels (`bg`, `hr`, `sr`, `sl`, `lt`, `lv`, `et`, `is`, `bn`, `tl`, `my`, `km`, `lo`) using OAuth client `1076963270652-...`. Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. During setup, the first `my` attempts selected the `ml` / Malayalam channel; this was caught by channelId readback and corrected before continuing. Token contents remain local-only under `.local/youtube-oauth/tokens/` and must not be printed or committed. After explicit user approval acknowledging the refresh-token storage risk, `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` was uploaded to `webpot-ru/luna` environment `youtube-api-youtube-3`; `gh secret list --env youtube-api-youtube-3 --repo webpot-ru/luna` readback shows updated `2026-06-22T06:58:15Z`.
 
-2026-06-22 local reauthorization status: `youtube 4` has been reauthorized locally for all 12 assigned channels (`ne`, `si`, `ta`, `te`, `kn`, `ml`, `uz`, `kk`, `az`, `ka`, `hy`, `sw`) using OAuth client `215536805171-...`. Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. Token contents remain local-only under `.local/youtube-oauth/tokens/` and must not be printed or committed. After explicit user approval acknowledging the refresh-token storage risk, `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` was uploaded to `webpot-ru/luna` environment `youtube-api-youtube-4`; `gh secret list --env youtube-api-youtube-4 --repo webpot-ru/luna` readback shows updated `2026-06-22T07:35:20Z`.
+2026-06-22 local reauthorization status: `youtube 4` has been reauthorized locally for its original 12 assigned channels (`ne`, `si`, `ta`, `te`, `kn`, `ml`, `uz`, `kk`, `az`, `ka`, `hy`, `sw`) plus moved `it`, using OAuth client `215536805171-...`. Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. Token contents remain local-only under `.local/youtube-oauth/tokens/` and must not be printed or committed. After explicit user approval acknowledging the refresh-token storage risk, `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` was uploaded to `webpot-ru/luna` environment `youtube-api-youtube-4`; initial `gh secret list` readback showed updated `2026-06-22T07:35:20Z`. The moved IT token readback on 2026-06-22 matched `UCOFZxCVdm4FqhFgMvKsAlOw`; the route-4 bundle was rebuilt from the prior route-4 bundle plus `.local/youtube-oauth/tokens/it-youtube-4.json`, uploaded to `youtube-api-youtube-4`, and metadata-only `gh secret list` readback shows updated `2026-06-22T14:57:45Z`. GitHub Actions route-4 readback should be run after this routing commit is on `main`.
 
 ## Assignments
 
@@ -68,7 +68,6 @@ Existing primary project. Keep the high-priority shared channels here first.
 | `ko` | `KO` | Korean. |
 | `tr` | `TR` | Turkish. |
 | `zh` | `ZH` | Chinese. |
-| `it` | `IT` | Italian. |
 
 ### youtube 2
 
@@ -122,6 +121,7 @@ Existing primary project. Keep the high-priority shared channels here first.
 | `ka` | `KA` |
 | `hy` | `HY` |
 | `sw` | `SW` |
+| `it` | `IT` |
 
 ## Operational Rules
 

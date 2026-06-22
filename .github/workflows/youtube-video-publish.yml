@@ -125,10 +125,10 @@ jobs:
       name: >-
         ${{
           github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
-          (contains('|EN|EN-GB|ES|ES-419|PT|PT-BR|RU|HI|ID|FR|DE|JA|KO|TR|ZH|IT|en|en-gb|es|es-419|pt|pt-br|ru|hi|id|fr|de|ja|ko|tr|zh|it|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-branding') ||
+          (contains('|EN|EN-GB|ES|ES-419|PT|PT-BR|RU|HI|ID|FR|DE|JA|KO|TR|ZH|en|en-gb|es|es-419|pt|pt-br|ru|hi|id|fr|de|ja|ko|tr|zh|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-branding') ||
           (contains('|VI|TH|MS|PL|NL|SV|NO|DA|FI|CS|SK|HU|RO|vi|th|ms|pl|nl|sv|no|da|fi|cs|sk|hu|ro|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-2') ||
           (contains('|BG|HR|SR|SL|LT|LV|ET|IS|BN|TL|MY|KM|LO|bg|hr|sr|sl|lt|lv|et|is|bn|tl|my|km|lo|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-3') ||
-          (contains('|NE|SI|TA|TE|KN|ML|UZ|KK|AZ|KA|HY|SW|ne|si|ta|te|kn|ml|uz|kk|az|ka|hy|sw|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-4') ||
+          (contains('|NE|SI|TA|TE|KN|ML|UZ|KK|AZ|KA|HY|SW|IT|ne|si|ta|te|kn|ml|uz|kk|az|ka|hy|sw|it|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-4') ||
           'youtube-api-branding'
         }}
     timeout-minutes: 360
@@ -136,10 +136,10 @@ jobs:
       EFFECTIVE_YOUTUBE_ENVIRONMENT: >-
         ${{
           github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
-          (contains('|EN|EN-GB|ES|ES-419|PT|PT-BR|RU|HI|ID|FR|DE|JA|KO|TR|ZH|IT|en|en-gb|es|es-419|pt|pt-br|ru|hi|id|fr|de|ja|ko|tr|zh|it|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-branding') ||
+          (contains('|EN|EN-GB|ES|ES-419|PT|PT-BR|RU|HI|ID|FR|DE|JA|KO|TR|ZH|en|en-gb|es|es-419|pt|pt-br|ru|hi|id|fr|de|ja|ko|tr|zh|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-branding') ||
           (contains('|VI|TH|MS|PL|NL|SV|NO|DA|FI|CS|SK|HU|RO|vi|th|ms|pl|nl|sv|no|da|fi|cs|sk|hu|ro|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-2') ||
           (contains('|BG|HR|SR|SL|LT|LV|ET|IS|BN|TL|MY|KM|LO|bg|hr|sr|sl|lt|lv|et|is|bn|tl|my|km|lo|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-3') ||
-          (contains('|NE|SI|TA|TE|KN|ML|UZ|KK|AZ|KA|HY|SW|ne|si|ta|te|kn|ml|uz|kk|az|ka|hy|sw|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-4') ||
+          (contains('|NE|SI|TA|TE|KN|ML|UZ|KK|AZ|KA|HY|SW|IT|ne|si|ta|te|kn|ml|uz|kk|az|ka|hy|sw|it|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-4') ||
           'youtube-api-branding'
         }}
 
