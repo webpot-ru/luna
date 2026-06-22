@@ -1,6 +1,6 @@
 # YouTube API Project Routing
 
-Status: **source of truth for local routing plan; `youtube 1`-`youtube 4` OAuth bundles uploaded**.
+Status: **source of truth for local routing plan; `youtube 1`-`youtube 4` OAuth bundles uploaded; publish workflow selects route-specific GitHub environments**.
 
 This document records how the 51 public YouTube support-language channels are assigned to four Google Cloud / YouTube API project routes named `youtube 1`, `youtube 2`, `youtube 3` and `youtube 4`.
 
@@ -30,7 +30,7 @@ The four-project route is an operational grouping for production upload automati
 
 | API project route | Status | GitHub environment | Public channels | Support variants | Planned scheduled public releases/day |
 | --- | --- | --- | ---: | ---: | ---: |
-| `youtube 1` | Existing primary route | `youtube-api-branding` for now | 13 | 16 | 96 |
+| `youtube 1` | GitHub OAuth bundle uploaded | `youtube-api-branding` | 13 | 16 | 96 |
 | `youtube 2` | GitHub OAuth bundle uploaded | `youtube-api-youtube-2` | 13 | 13 | 78 |
 | `youtube 3` | GitHub OAuth bundle uploaded | `youtube-api-youtube-3` | 13 | 13 | 78 |
 | `youtube 4` | GitHub OAuth bundle uploaded | `youtube-api-youtube-4` | 12 | 12 | 72 |
@@ -132,6 +132,9 @@ Existing primary project. Keep the high-priority shared channels here first.
 - Each support-language variant must be assigned to exactly one API project route.
 - Regional variants are preserved in video metadata, playlist keys, titles, descriptions and target/support codes. Only public site support-language URL paths collapse (`EN/EN-GB -> /en`, `ES/ES-419 -> /es`, `PT/PT-BR -> /pt`).
 - A live upload workflow must choose the OAuth bundle/GitHub environment from the channel's route, not from the target language.
+- `.github/workflows/youtube-video-publish.yml` has `youtube_environment` input. Use `auto` for a single support channel; the workflow selects `youtube-api-branding`, `youtube-api-youtube-2`, `youtube-api-youtube-3` or `youtube-api-youtube-4` before restoring `YOUTUBE_OAUTH_BUNDLE_TGZ_B64`.
+- `scripts/resolve-youtube-api-environment.mjs` / `npm run resolve:youtube-api-environment` validates that the requested support code(s) belong to the selected GitHub environment. If a support list spans multiple API routes, the workflow must fail and the work must be split into separate dispatches.
+- Default production dispatch shape is one support channel per run with `youtube_environment=auto`. Use an explicit GitHub environment only for debugging or replacement work, and only when it matches the route in `config/youtube-api-project-routing.json`.
 - If one API project hits quota or returns `quotaExceeded`, stop that route only. Do not blindly retry the same write against another project unless the channel has been deliberately re-authorized under that project and the docs/config are updated.
 - New Google Cloud projects must be production/audited with matching YouTube API disclosure, OAuth consent configuration and GitHub environment secrets before they are used for public scheduled uploads.
 - Token files, refresh tokens, client secrets and `.local` contents must stay out of git and out of this document.
@@ -145,7 +148,7 @@ For each future project route or route replacement:
 3. Create the OAuth client for the runner/browser flow.
 4. Authorize only the assigned support channels for that route.
 5. Store the matching OAuth bundle as a GitHub Environment secret for the route.
-6. Add workflow support for selecting the route-specific environment by `support` channel.
+6. Add or verify workflow support for selecting the route-specific environment by `support` channel.
 7. Run a read-only token/channel identity check: token `channels.list(mine=true)` must match the expected `channelId` in the Sheet and `config/youtube-channels.json`.
 8. Run a dry-run publish plan with quota estimate before any `videos.insert`.
 9. Update `docs/PROJECT_STATE.md` with the exact readback state.

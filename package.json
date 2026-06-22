@@ -10,6 +10,7 @@
     "check:youtube-playlist-naming": "node scripts/check-youtube-playlist-naming.mjs",
     "check:youtube-run-isolation": "node scripts/check-youtube-run-isolation.mjs",
     "check:youtube-api-project-routing": "node scripts/check-youtube-api-project-routing.mjs",
+    "resolve:youtube-api-environment": "node scripts/resolve-youtube-api-environment.mjs",
     "check:vectorengine-gemini": "node scripts/check-vectorengine-gemini.mjs",
     "check:video-public-url": "node scripts/check-video-public-url.mjs",
     "check:video-tts-variant-contract": "node scripts/check-video-tts-variant-contract.mjs",

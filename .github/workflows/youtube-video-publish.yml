@@ -19,6 +19,17 @@ on:
         description: "Support language code(s), comma-separated. ALL is refused for publish safety."
         required: true
         default: "RU"
+      youtube_environment:
+        description: "GitHub environment with the support route OAuth bundle. Use auto for one support channel."
+        required: true
+        default: "auto"
+        type: choice
+        options:
+          - auto
+          - youtube-api-branding
+          - youtube-api-youtube-2
+          - youtube-api-youtube-3
+          - youtube-api-youtube-4
       langs:
         description: "Target language code(s), comma-separated. Leave empty for all targets available for each support language."
         required: false
@@ -110,8 +121,27 @@ concurrency:
 jobs:
   youtube-video-publish:
     runs-on: ubuntu-latest
-    environment: youtube-api-branding
+    environment:
+      name: >-
+        ${{
+          github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
+          (contains('|EN|EN-GB|ES|ES-419|PT|PT-BR|RU|HI|ID|FR|DE|JA|KO|TR|ZH|IT|en|en-gb|es|es-419|pt|pt-br|ru|hi|id|fr|de|ja|ko|tr|zh|it|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-branding') ||
+          (contains('|VI|TH|MS|PL|NL|SV|NO|DA|FI|CS|SK|HU|RO|vi|th|ms|pl|nl|sv|no|da|fi|cs|sk|hu|ro|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-2') ||
+          (contains('|BG|HR|SR|SL|LT|LV|ET|IS|BN|TL|MY|KM|LO|bg|hr|sr|sl|lt|lv|et|is|bn|tl|my|km|lo|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-3') ||
+          (contains('|NE|SI|TA|TE|KN|ML|UZ|KK|AZ|KA|HY|SW|ne|si|ta|te|kn|ml|uz|kk|az|ka|hy|sw|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
     timeout-minutes: 360
+    env:
+      EFFECTIVE_YOUTUBE_ENVIRONMENT: >-
+        ${{
+          github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
+          (contains('|EN|EN-GB|ES|ES-419|PT|PT-BR|RU|HI|ID|FR|DE|JA|KO|TR|ZH|IT|en|en-gb|es|es-419|pt|pt-br|ru|hi|id|fr|de|ja|ko|tr|zh|it|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-branding') ||
+          (contains('|VI|TH|MS|PL|NL|SV|NO|DA|FI|CS|SK|HU|RO|vi|th|ms|pl|nl|sv|no|da|fi|cs|sk|hu|ro|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-2') ||
+          (contains('|BG|HR|SR|SL|LT|LV|ET|IS|BN|TL|MY|KM|LO|bg|hr|sr|sl|lt|lv|et|is|bn|tl|my|km|lo|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-3') ||
+          (contains('|NE|SI|TA|TE|KN|ML|UZ|KK|AZ|KA|HY|SW|ne|si|ta|te|kn|ml|uz|kk|az|ka|hy|sw|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
 
     steps:
       - name: Checkout repository
@@ -122,6 +152,7 @@ jobs:
         env:
           MODE: ${{ github.event.inputs.mode }}
           SUPPORT: ${{ github.event.inputs.support }}
+          YOUTUBE_ENVIRONMENT: ${{ github.event.inputs.youtube_environment }}
           PRIVACY: ${{ github.event.inputs.privacy }}
           PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
           SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
@@ -177,6 +208,19 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Validate YouTube API route environment
+        shell: bash
+        env:
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          YOUTUBE_ENVIRONMENT_INPUT: ${{ github.event.inputs.youtube_environment }}
+        run: |
+          set -euo pipefail
+          node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORT_INPUT" --environment="$EFFECTIVE_YOUTUBE_ENVIRONMENT"
+          if [ "$YOUTUBE_ENVIRONMENT_INPUT" != "auto" ]; then
+            node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORT_INPUT" --environment="$YOUTUBE_ENVIRONMENT_INPUT"
+          fi
+          echo "Effective YouTube API environment: $EFFECTIVE_YOUTUBE_ENVIRONMENT"
+
       - name: Install system dependencies and FFmpeg
         run: |
           sudo apt-get update
@@ -210,7 +254,7 @@ jobs:
           printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
           test -f .local/youtube-oauth/google-oauth-client.json
           test -d .local/youtube-oauth/tokens
-          echo "YouTube OAuth bundle restored for this runner."
+          echo "YouTube OAuth bundle restored for environment $EFFECTIVE_YOUTUBE_ENVIRONMENT."
 
       - name: Download offline deck data from Google Drive
         shell: bash
