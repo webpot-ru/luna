@@ -60,13 +60,46 @@ function extractJsonObject(text) {
   try {
     return JSON.parse(raw);
   } catch {
-    const jsonStart = raw.indexOf("{");
-    const jsonEnd = raw.lastIndexOf("}");
-    if (jsonStart === -1 || jsonEnd === -1 || jsonEnd <= jsonStart) {
+    const jsonText = firstBalancedJsonObject(raw);
+    if (!jsonText) {
       throw new Error(`VectorEngine Gemini did not return JSON: ${raw.slice(0, 500)}`);
     }
-    return JSON.parse(raw.slice(jsonStart, jsonEnd + 1));
+    return JSON.parse(jsonText);
   }
+}
+
+function firstBalancedJsonObject(text) {
+  const raw = String(text || "");
+  const start = raw.indexOf("{");
+  if (start === -1) return "";
+
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  for (let index = start; index < raw.length; index += 1) {
+    const char = raw[index];
+    if (inString) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === "\\") {
+        escaped = true;
+      } else if (char === "\"") {
+        inString = false;
+      }
+      continue;
+    }
+
+    if (char === "\"") {
+      inString = true;
+      continue;
+    }
+    if (char === "{") depth += 1;
+    else if (char === "}") {
+      depth -= 1;
+      if (depth === 0) return raw.slice(start, index + 1);
+    }
+  }
+  return "";
 }
 
 export async function callVectorEngineGeminiJson({

@@ -530,9 +530,12 @@ jobs:
               if (s.publishReadyCount !== s.candidateCount) {
                 throw new Error('Not all publish candidates are publish_ready.');
               }
-              const missingThumbnails = (report.candidates || []).filter((item) => !item.thumbnailUploadPath);
+              const missingThumbnails = (report.candidates || []).filter((item) => (
+                !item.thumbnailUploadPath
+                && item.thumbnailUploadMode !== 'first_frame_auto'
+              ));
               if (missingThumbnails.length) {
-                throw new Error('Apply publish requires real custom thumbnail assets; YouTube automatic thumbnails are not first-frame deterministic.');
+                throw new Error('Apply publish requires custom thumbnails unless the candidate is explicitly marked first_frame_auto.');
               }
             }
           "

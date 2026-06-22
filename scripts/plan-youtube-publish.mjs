@@ -65,7 +65,7 @@ function usage() {
     "  --allow-playlist-create   Treat missing playlist IDs as publishable if uploader may create them later.",
     "  --allow-republish         Allow uploading a set/support/target already present in config/youtube-published-videos.json.",
     "  --require-ai-metadata     Block template/template-ai-fallback metadata; intended for live apply planning.",
-    "  --allow-auto-thumbnail-fallback  Allow no custom thumbnail for non-scheduled/private review uploads only.",
+    "  --allow-auto-thumbnail-fallback  Allow no custom thumbnail and use YouTube automatic thumbnail fallback.",
     "  --output=<file>           Write dry-run plan to this file. Defaults to outputs/youtube-publish-plan-<timestamp>.json.",
     "  --json                    Print compact JSON summary.",
   ].join("\n");
@@ -201,10 +201,6 @@ function buildCandidate({
   } else if (!canUploadCustomThumbnail) {
     warnings.push("custom thumbnail file exists but channel policy disables thumbnails.set; YouTube automatic thumbnail fallback will be used");
   }
-  if (publishAt && useAutoThumbnail) {
-    blockers.push("scheduled public release requires a custom thumbnail; YouTube Data API cannot choose the first video frame for automatic thumbnails");
-  }
-
   const playlistAction = playlistEntry?.youtube_playlist_id
     ? "use_existing_playlist"
     : (allowPlaylistCreate ? "create_playlist_then_insert" : "manual_playlist_id_needed");
