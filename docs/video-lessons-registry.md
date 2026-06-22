@@ -34,6 +34,16 @@ Scale policy from 2026-06-21: do not interpret "20 GitHub workers x 2 video thre
 
 These rows are current YouTube upload/readback facts from the structured GitHub artifact/ledger, not historical planning rows.
 
+### 2026-06-22 scheduled batch recovery audit
+
+GitHub Actions batch `45a006323856320351b1eb5c17b39b7f56875217` created 51 workflow_dispatch runs for `home_kitchen_cookware_pilot_01`: 44 ended `success`, 7 ended `failure`. The success logs contained 246 verified `youtube_publish_video` rows. Only `KO/AZ` had already been merged locally as a schedule-drift guard row, so 245 missing upload rows were reconstructed from GitHub logs and added to the durable registries on 2026-06-22:
+
+- `config/youtube-published-videos.json`: 245 recovered private scheduled upload/readback rows added.
+- `config/youtube-publish-calendar.json`: 245 recovered reservations added, and the existing `KO/AZ` reservation was enriched with `youtubeVideoId`, playlist id and playlist item id without changing its `schedule_restore_needed` status.
+- `config/youtube-playlists.json`: 245 recovered public playlist rows added.
+
+Current machine-readable state for this set is now 50 support groups with six calendar rows each, excluding the Armenian support channel (`HY`) which did not upload. Full per-video `supportLang`, `targetLang`, `publishAt`, `youtubeVideoId`, `youtubePlaylistId` and `playlistItemId` are in `config/youtube-publish-calendar.json` and `config/youtube-published-videos.json`. The known exceptions remain: `ZH/RU` is still held at `2026-07-01T00:00:00Z`; `KO/AZ` has desired calendar slot `2026-06-23T02:30:00.000Z` but the publication row records live drift to `2026-06-22T23:30:00.000Z`; support `HY` failed before upload because Armenian AI33/ElevenLabs TTS returned `HTTP 401 Unauthorized`, leaving video files missing.
+
 | Set ID | Title | Target | Support | Built / Uploaded | GitHub run | Status | Video | Playlist | Readback |
 |---|---|---|---|---|---|---|---|---|---|
 | `home_kitchen_cookware_pilot_01` | रूसी भाषामा भान्साका सामानहरू \| Russian A1 Vocabulary: Kitchenware (50 Words) | RU | NE | 2026-06-22 | `27938028373` | `scheduled_uploaded`, `private` until `2026-06-23T02:45:00Z`, `thumbnailUploadMode=custom`, `thumbnailSet=true` | https://www.youtube.com/watch?v=2pj0DnZ-ftc | https://www.youtube.com/playlist?list=PLzHdIxZgrAa2T5sK1MdIOObs8haHWSPAU | channel `UCL1bQyM5VsxW8-n8KUqln2A` / `@lunacardsnepali`, playlist item `UEx6SGRJeFpnckFhMlQ1c0sxTWRJT09iczhoYUhXU1BBVS41NkI0NEY2RDEwNTU3Q0M2`, YouTube API readback `processed/private/scheduled`; description contains the full course URL `https://flashcardsluna.com/ne/courses/kitchenware-basic/study/standard?langs=ru`; follow-up `youtube.thumbnails.set` succeeded on `2026-06-22T09:05:12Z` with generated `vectorengine-gpt-image-2` thumbnail; durable row in `config/youtube-published-videos.json` |
