@@ -15,6 +15,10 @@ on:
         description: "Comma-separated support channel codes in one YouTube API route, e.g. DE,FR,IT."
         required: true
         default: "DE"
+      video_id:
+        description: "Optional single YouTube video id filter for targeted restore/pause runs."
+        required: false
+        default: ""
       youtube_environment:
         description: "GitHub environment with the route-specific OAuth bundle."
         required: true
@@ -65,6 +69,7 @@ jobs:
         env:
           MODE: ${{ github.event.inputs.mode }}
           SUPPORTS: ${{ github.event.inputs.supports }}
+          VIDEO_ID: ${{ github.event.inputs.video_id }}
           LIMIT: ${{ github.event.inputs.limit }}
           HOLD_PUBLISH_AT: ${{ github.event.inputs.hold_publish_at }}
           TARGET_FILE: ${{ github.event.inputs.target_file }}
@@ -115,6 +120,7 @@ jobs:
         env:
           MODE: ${{ github.event.inputs.mode }}
           SUPPORTS: ${{ github.event.inputs.supports }}
+          VIDEO_ID: ${{ github.event.inputs.video_id }}
           TARGET_FILE: ${{ github.event.inputs.target_file }}
           LIMIT: ${{ github.event.inputs.limit }}
           HOLD_PUBLISH_AT: ${{ github.event.inputs.hold_publish_at }}
@@ -127,6 +133,9 @@ jobs:
             "--report=outputs/youtube-fallback-schedule-pause-report-github.json"
             "--ledger=outputs/youtube-schedule-pause-ledger.jsonl"
           )
+          if [ -n "$VIDEO_ID" ]; then
+            ARGS+=("--video-id=$VIDEO_ID")
+          fi
           if [ "$LIMIT" != "0" ]; then
             ARGS+=("--limit=$LIMIT")
           fi

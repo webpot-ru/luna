@@ -36,8 +36,11 @@
       "pauseStatus": "held_thumbnail_auto",
       "holdPublishAt": "2026-07-01T00:00:00Z",
       "pauseGithubRunId": "27952412532",
-      "restoreAttemptStatus": "quota_failed_unmodified",
-      "restoreAttemptGithubRunId": "27954300773"
+      "restoreAttemptStatus": "succeeded",
+      "restoreAttemptGithubRunId": "27959125360",
+      "restoreAttemptGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27959125360",
+      "restoredPublishAt": "2026-06-22T23:30:00.000Z",
+      "restoreReadbackAt": "2026-06-22T14:13:04.078Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -63,7 +66,9 @@
       "artifactRunId": "",
       "pauseStatus": "held_thumbnail_auto",
       "holdPublishAt": "2026-07-01T00:00:00Z",
-      "pauseGithubRunId": "27952412532"
+      "pauseGithubRunId": "27952412532",
+      "restoreAttemptStatus": "not_attempted_after_quota_exceeded",
+      "restoreBlockedByGithubRunId": "27959125360"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -100,7 +105,12 @@
       "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
       "source": "artifact_ledger",
       "artifactRunId": "27946292126",
-      "pauseStatus": "not_attempted_after_quota_stop"
+      "pauseStatus": "not_attempted_after_quota_stop",
+      "scheduleDriftStatus": "accidentally_moved_by_support_only_restore",
+      "currentLivePublishAt": "2026-06-22T23:30:00.000Z",
+      "desiredPublishAt": "2026-06-23T02:30:00.000Z",
+      "needsScheduleRestore": true,
+      "scheduleDriftGithubRunId": "27959125360"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",

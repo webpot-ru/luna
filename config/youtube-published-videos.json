@@ -167,23 +167,27 @@
       "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
       "channelHandle": "@lunacardsru",
       "privacyStatus": "public",
-      "publicationStatus": "uploaded_public_playlist_insert_pending_quota",
+      "publicationStatus": "uploaded_public_playlist_inserted_manual",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "needsPlaylistInsert": true,
+      "needsPlaylistInsert": false,
       "thumbnailSet": true,
       "githubRunId": "27907996216",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27907996216",
       "uploadedAt": "2026-06-21T14:55:32.494Z",
-      "lastReadbackAt": "2026-06-21T15:13:50Z",
+      "lastReadbackAt": "2026-06-22T14:25:00.000Z",
       "readback": {
         "uploadStatus": "uploaded_oembed_public",
         "privacyStatus": "public_oembed",
         "videoHttpStatus": 200,
         "oembedAuthorUrl": "https://www.youtube.com/@LunaCardsRU",
-        "playlistInsertStatus": "quotaExceeded"
+        "playlistInsertStatus": "public_playlist_page_contains_video",
+        "playlistItemReadback": "manual_public_page_verified",
+        "manualPlaylistInsertVerifiedAt": "2026-06-22T14:25:00.000Z"
       },
-      "error": "Run failed after video upload and playlist creation: YouTube API POST /youtube/v3/playlistItems quotaExceeded."
+      "historicalPostUploadError": "Run failed after video upload and playlist creation: YouTube API POST /youtube/v3/playlistItems quotaExceeded.",
+      "manualPlaylistInsertVerifiedAt": "2026-06-22T14:25:00.000Z",
+      "playlistItemIdSource": "public_playlist_page_contains_video_no_data_api_id"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -829,11 +833,11 @@
       "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
       "channelHandle": "@lunacardskorean",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_hold_thumbnail_auto",
-      "publishAt": "2026-07-01T00:00:00Z",
-      "scheduledPublishAt": "2026-07-01T00:00:00Z",
-      "desiredPrivacyStatus": "public_after_thumbnail_fix",
-      "needsVisibilityPromotion": true,
+      "publicationStatus": "scheduled_uploaded_thumbnail_forbidden",
+      "publishAt": "2026-06-22T23:30:00.000Z",
+      "scheduledPublishAt": "2026-06-22T23:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
       "thumbnailSet": false,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
@@ -850,7 +854,7 @@
       "readback": {
         "uploadStatus": "processed",
         "privacyStatus": "private",
-        "publishAt": "2026-07-01T00:00:00Z",
+        "publishAt": "2026-06-22T23:30:00Z",
         "thumbnailStatus": "youtube_auto_not_first_frame_safe",
         "channelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
         "schedulePause": {
@@ -860,6 +864,13 @@
           "reason": "custom_thumbnail_unavailable_youtube_auto_thumbnail_not_first_frame_safe",
           "readbackAt": "2026-06-22T12:24:44.161Z",
           "githubRunId": "27952412532"
+        },
+        "scheduleRestore": {
+          "status": "schedule_restored",
+          "fromPublishAt": "2026-07-01T00:00:00Z",
+          "publishAt": "2026-06-22T23:30:00Z",
+          "readbackAt": "2026-06-22T14:13:04.078Z",
+          "githubRunId": "27959125360"
         }
       },
       "originalPublishAt": "2026-06-22T23:30:00.000Z",
@@ -868,7 +879,11 @@
       "schedulePauseReason": "custom_thumbnail_unavailable_youtube_auto_thumbnail_not_first_frame_safe",
       "schedulePauseGithubRunId": "27952412532",
       "schedulePauseGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27952412532",
-      "lastVisibilityReadbackAt": "2026-06-22T12:24:44.161Z"
+      "lastVisibilityReadbackAt": "2026-06-22T14:13:04.078Z",
+      "needsThumbnailFix": false,
+      "scheduleRestoredAt": "2026-06-22T14:13:04.078Z",
+      "scheduleRestoreGithubRunId": "27959125360",
+      "scheduleRestoreGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27959125360"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -2391,6 +2406,59 @@
         "playlistItemReadback": "pending",
         "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n"
       }
+    },
+    {
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "KO",
+      "targetLang": "AZ",
+      "playlist_key": "KO__AZ__ordinary-vocabulary__a1-everyday",
+      "title": "아제르바이잔어 A1 기초 어휘 | 주방용품 50단어 발음과 퀴즈",
+      "youtubeVideoId": "f_B-MMrgLDE",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=f_B-MMrgLDE",
+      "youtubePlaylistId": "PLTLLUAacNgjjiZvhrYZL4qHe9kmrY-XIF",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLTLLUAacNgjjiZvhrYZL4qHe9kmrY-XIF",
+      "playlistItemId": "UExUTExVQWFjTmdqamladmhyWVpMNHFIZTlrbXJZLVhJRi41NkI0NEY2RDEwNTU3Q0M2",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "channelHandle": "@lunacardskorean",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded_schedule_restore_needed",
+      "publishAt": "2026-06-22T23:30:00.000Z",
+      "scheduledPublishAt": "2026-06-22T23:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "metadataSource": "gemini-vectorengine",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "27946292126",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27946292126",
+      "uploadedAt": "2026-06-22T10:49:37.288Z",
+      "lastReadbackAt": "2026-06-22T10:49:37.288Z",
+      "readback": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-22T23:30:00Z",
+        "thumbnailStatus": "auto_first_frame",
+        "scheduleDrift": {
+          "status": "needs_restore",
+          "fromPublishAt": "2026-06-23T02:30:00Z",
+          "currentLivePublishAt": "2026-06-22T23:30:00Z",
+          "readbackAt": "2026-06-22T14:13:07.280Z",
+          "githubRunId": "27959125360"
+        }
+      },
+      "originalPublishAt": "2026-06-23T02:30:00.000Z",
+      "currentLivePublishAt": "2026-06-22T23:30:00.000Z",
+      "desiredPublishAt": "2026-06-23T02:30:00.000Z",
+      "needsScheduleRestore": true,
+      "scheduleDriftReason": "accidental_restore_workflow_support_only_filter",
+      "scheduleDriftGithubRunId": "27959125360",
+      "scheduleDriftGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27959125360",
+      "lastVisibilityReadbackAt": "2026-06-22T14:13:07.280Z"
     }
   ]
 }
