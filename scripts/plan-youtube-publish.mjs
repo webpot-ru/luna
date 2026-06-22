@@ -65,7 +65,7 @@ function usage() {
     "  --allow-playlist-create   Treat missing playlist IDs as publishable if uploader may create them later.",
     "  --allow-republish         Allow uploading a set/support/target already present in config/youtube-published-videos.json.",
     "  --require-ai-metadata     Block template/template-ai-fallback metadata; intended for live apply planning.",
-    "  --allow-auto-thumbnail-fallback  Allow no custom thumbnail and use YouTube auto first-frame fallback.",
+    "  --allow-auto-thumbnail-fallback  Allow no custom thumbnail for non-scheduled/private review uploads only.",
     "  --output=<file>           Write dry-run plan to this file. Defaults to outputs/youtube-publish-plan-<timestamp>.json.",
     "  --json                    Print compact JSON summary.",
   ].join("\n");
@@ -195,11 +195,14 @@ function buildCandidate({
   else if (!playlistEntry.youtube_playlist_id && !allowPlaylistCreate) warnings.push("playlist has no youtube_playlist_id yet");
   if (existingPublication && !allowRepublish) blockers.push(activePublicationBlocker(existingPublication));
   if (!thumbnailPath && useAutoThumbnail) {
-    warnings.push("custom thumbnail not found or disabled; YouTube auto first-frame fallback will be used");
+    warnings.push("custom thumbnail not found or disabled; YouTube automatic thumbnail fallback will be used");
   } else if (!thumbnailPath) {
     warnings.push("thumbnail not found; uploader will skip thumbnails.set");
   } else if (!canUploadCustomThumbnail) {
-    warnings.push("custom thumbnail file exists but channel policy disables thumbnails.set; YouTube auto first-frame fallback will be used");
+    warnings.push("custom thumbnail file exists but channel policy disables thumbnails.set; YouTube automatic thumbnail fallback will be used");
+  }
+  if (publishAt && useAutoThumbnail) {
+    blockers.push("scheduled public release requires a custom thumbnail; YouTube Data API cannot choose the first video frame for automatic thumbnails");
   }
 
   const playlistAction = playlistEntry?.youtube_playlist_id

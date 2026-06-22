@@ -829,11 +829,11 @@
       "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
       "channelHandle": "@lunacardskorean",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_forbidden",
-      "publishAt": "2026-06-22T23:30:00.000Z",
-      "scheduledPublishAt": "2026-06-22T23:30:00.000Z",
-      "desiredPrivacyStatus": "public",
-      "needsVisibilityPromotion": false,
+      "publicationStatus": "scheduled_hold_thumbnail_auto",
+      "publishAt": "2026-07-01T00:00:00Z",
+      "scheduledPublishAt": "2026-07-01T00:00:00Z",
+      "desiredPrivacyStatus": "public_after_thumbnail_fix",
+      "needsVisibilityPromotion": true,
       "thumbnailSet": false,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
@@ -848,11 +848,27 @@
       "uploadedAt": "2026-06-22T09:43:03.297Z",
       "lastReadbackAt": "2026-06-22T09:43:03.297Z",
       "readback": {
-        "uploadStatus": "uploaded",
+        "uploadStatus": "processed",
         "privacyStatus": "private",
-        "publishAt": "2026-06-22T23:30:00Z",
-        "thumbnailStatus": "forbidden_auto_first_frame"
-      }
+        "publishAt": "2026-07-01T00:00:00Z",
+        "thumbnailStatus": "youtube_auto_not_first_frame_safe",
+        "channelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+        "schedulePause": {
+          "status": "schedule_held",
+          "originalPublishAt": "2026-06-22T23:30:00.000Z",
+          "holdPublishAt": "2026-07-01T00:00:00Z",
+          "reason": "custom_thumbnail_unavailable_youtube_auto_thumbnail_not_first_frame_safe",
+          "readbackAt": "2026-06-22T12:24:44.161Z",
+          "githubRunId": "27952412532"
+        }
+      },
+      "originalPublishAt": "2026-06-22T23:30:00.000Z",
+      "holdPublishAt": "2026-07-01T00:00:00Z",
+      "schedulePausedAt": "2026-06-22T12:24:44.161Z",
+      "schedulePauseReason": "custom_thumbnail_unavailable_youtube_auto_thumbnail_not_first_frame_safe",
+      "schedulePauseGithubRunId": "27952412532",
+      "schedulePauseGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27952412532",
+      "lastVisibilityReadbackAt": "2026-06-22T12:24:44.161Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -906,11 +922,11 @@
       "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
       "channelHandle": "@lunacardschinese",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_forbidden",
-      "publishAt": "2026-06-23T00:30:00.000Z",
-      "scheduledPublishAt": "2026-06-23T00:30:00.000Z",
-      "desiredPrivacyStatus": "public",
-      "needsVisibilityPromotion": false,
+      "publicationStatus": "scheduled_hold_thumbnail_auto",
+      "publishAt": "2026-07-01T00:00:00Z",
+      "scheduledPublishAt": "2026-07-01T00:00:00Z",
+      "desiredPrivacyStatus": "public_after_thumbnail_fix",
+      "needsVisibilityPromotion": true,
       "thumbnailSet": false,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
@@ -925,11 +941,27 @@
       "uploadedAt": "2026-06-22T09:42:57.670Z",
       "lastReadbackAt": "2026-06-22T09:42:57.670Z",
       "readback": {
-        "uploadStatus": "uploaded",
+        "uploadStatus": "processed",
         "privacyStatus": "private",
-        "publishAt": "2026-06-23T00:30:00Z",
-        "thumbnailStatus": "forbidden_auto_first_frame"
-      }
+        "publishAt": "2026-07-01T00:00:00Z",
+        "thumbnailStatus": "youtube_auto_not_first_frame_safe",
+        "channelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+        "schedulePause": {
+          "status": "schedule_held",
+          "originalPublishAt": "2026-06-23T00:30:00.000Z",
+          "holdPublishAt": "2026-07-01T00:00:00Z",
+          "reason": "custom_thumbnail_unavailable_youtube_auto_thumbnail_not_first_frame_safe",
+          "readbackAt": "2026-06-22T12:24:44.588Z",
+          "githubRunId": "27952412532"
+        }
+      },
+      "originalPublishAt": "2026-06-23T00:30:00.000Z",
+      "holdPublishAt": "2026-07-01T00:00:00Z",
+      "schedulePausedAt": "2026-06-22T12:24:44.588Z",
+      "schedulePauseReason": "custom_thumbnail_unavailable_youtube_auto_thumbnail_not_first_frame_safe",
+      "schedulePauseGithubRunId": "27952412532",
+      "schedulePauseGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27952412532",
+      "lastVisibilityReadbackAt": "2026-06-22T12:24:44.588Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
