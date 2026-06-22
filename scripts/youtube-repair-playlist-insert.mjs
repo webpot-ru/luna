@@ -197,7 +197,7 @@ async function findPlaylistItem({ accessToken, playlistId, videoId }) {
         playlistId,
         maxResults: 50,
         pageToken,
-        fields: "nextPageToken,items(id,snippet(playlistId,resourceId/videoId),contentDetails(videoId))",
+        fields: "nextPageToken,items(id,snippet(playlistId,resourceId(videoId)),contentDetails(videoId))",
       },
     });
     const match = (readback?.items || []).find((item) => (
