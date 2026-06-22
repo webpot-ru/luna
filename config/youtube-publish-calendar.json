@@ -8,5 +8,52 @@
     "Reservations are keyed by setId + supportLang + targetLang + channelKey. Regional variants stay in supportLang/targetLang, while shared EN/ES/PT public channels use one channelKey calendar.",
     "GitHub workflow artifacts are raw evidence. Commit reviewed calendar updates after scheduled plan/apply runs before relying on them in later separate runs."
   ],
-  "reservations": []
+  "reservations": [
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "NE",
+      "targetLang": "RU",
+      "channelKey": "ne",
+      "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+      "publishAt": "2026-06-23T02:45:00.000Z",
+      "timeZone": "Asia/Kathmandu",
+      "localDate": "2026-06-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_ne/youtube_metadata.json",
+      "title": "रूसी भाषामा भान्साका सामानहरू | Russian A1 Vocabulary: Kitchenware (50 Words)",
+      "playlist_key": "NE__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T02:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T02:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T02:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T02:45:00.000Z"
+        }
+      ],
+      "githubRunId": "27938028373",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27938028373",
+      "createdAt": "2026-06-22T07:58:17.769Z",
+      "updatedAt": "2026-06-22T08:13:35.595Z",
+      "youtubeVideoId": "2pj0DnZ-ftc",
+      "youtubePlaylistId": "PLzHdIxZgrAa2T5sK1MdIOObs8haHWSPAU",
+      "playlistItemId": "UEx6SGRJeFpnckFhMlQ1c0sxTWRJT09iczhoYUhXU1BBVS41NkI0NEY2RDEwNTU3Q0M2"
+    }
+  ]
 }

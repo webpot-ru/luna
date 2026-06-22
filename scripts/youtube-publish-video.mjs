@@ -228,6 +228,18 @@ async function youtubeMediaUpload({ accessToken, method = "POST", pathName, quer
   return response.json();
 }
 
+function isRecoverableThumbnailPermissionError(error) {
+  const message = String(error?.message || "");
+  return message.includes("/upload/youtube/v3/thumbnails/set")
+    && message.includes("youtube.thumbnail")
+    && message.includes("forbidden")
+    && message.includes("custom video thumbnails");
+}
+
+function thumbnailPermissionWarning() {
+  return "youtube.thumbnail/forbidden: The authenticated user doesn't have permissions to upload and set custom video thumbnails.";
+}
+
 async function uploadVideoResumable({ accessToken, videoPath, metadata, privacyStatus, publishAt }) {
   const stat = fs.statSync(videoPath);
   const initUrl = new URL("videos", "https://www.googleapis.com/upload/youtube/v3/");
@@ -324,11 +336,19 @@ function githubRunUrl() {
   return runId && repository ? `${serverUrl}/${repository}/actions/runs/${runId}` : "";
 }
 
-function buildPublicationRecord({ metadata, ledgerRow, uploadedVideo, channel, thumbnailSet }) {
+function buildPublicationRecord({ metadata, ledgerRow, uploadedVideo, channel, thumbnailSet, thumbnailSetError = "" }) {
   const videoId = ledgerRow.youtubeVideoId;
   const playlistId = ledgerRow.youtubePlaylistId;
   const runId = process.env.GITHUB_RUN_ID || "";
   const publishAt = ledgerRow.publishAt || "";
+  const readback = {
+    uploadStatus: uploadedVideo.status?.uploadStatus || "",
+    privacyStatus: uploadedVideo.status?.privacyStatus || ledgerRow.privacyStatus,
+    publishAt: uploadedVideo.status?.publishAt || publishAt,
+  };
+  if (thumbnailSetError) readback.thumbnailStatus = "forbidden";
+  if (ledgerRow.needsPlaylistInsert) readback.playlistItemReadback = "pending";
+  if (ledgerRow.postUploadError) readback.postUploadError = ledgerRow.postUploadError;
   return {
     setId: metadata.setId,
     supportLang: metadata.supportLang,
@@ -351,17 +371,19 @@ function buildPublicationRecord({ metadata, ledgerRow, uploadedVideo, channel, t
     needsVisibilityPromotion: false,
     thumbnailSet,
     thumbnailLogoOverlay: true,
+    ...(ledgerRow.needsPlaylistInsert ? { needsPlaylistInsert: true } : {}),
+    ...(ledgerRow.postUploadError ? { postUploadError: ledgerRow.postUploadError } : {}),
+    ...(thumbnailSetError ? {
+      needsThumbnailPermission: true,
+      thumbnailSetError,
+    } : {}),
     metadataSource: metadata.source || "",
     metadataModel: metadata.model || metadata.geminiModel || "",
     githubRunId: runId,
     githubRunUrl: githubRunUrl(),
     uploadedAt: ledgerRow.timestamp,
     lastReadbackAt: ledgerRow.timestamp,
-    readback: {
-      uploadStatus: uploadedVideo.status?.uploadStatus || "",
-      privacyStatus: uploadedVideo.status?.privacyStatus || ledgerRow.privacyStatus,
-      publishAt: uploadedVideo.status?.publishAt || publishAt,
-    },
+    readback,
   };
 }
 
@@ -481,9 +503,12 @@ async function main() {
   let youtubePlaylistId = playlistEntry?.youtube_playlist_id || "";
   let playlistItemId = "";
   let authorizedChannel = null;
+  let uploadedVideo = null;
+  let videoReadback = null;
+  let accessToken = "";
 
   try {
-    const accessToken = await getAccessToken({ clientFile, tokenFile });
+    accessToken = await getAccessToken({ clientFile, tokenFile });
     authorizedChannel = await readAuthorizedChannel({
       accessToken,
       expectedChannelId: channel.channelId,
@@ -518,15 +543,22 @@ async function main() {
     const uploaded = await uploadVideoResumable({ accessToken, videoPath, metadata, privacyStatus, publishAt });
     const videoId = uploaded.id;
     uploadedVideoId = videoId;
-    let thumbnailResult = null;
-    if (thumbnailPath) {
-      thumbnailResult = await youtubeMediaUpload({
-        accessToken,
-        pathName: "thumbnails/set",
-        query: { videoId },
-        filePath: thumbnailPath,
-      });
-    }
+
+    videoReadback = await youtubeJson({
+      accessToken,
+      method: "GET",
+      pathName: "videos",
+      query: {
+        part: "snippet,status",
+        id: videoId,
+        fields: "items(id,snippet(channelId,title),status(privacyStatus,uploadStatus,publishAt))",
+      },
+    });
+    uploadedVideo = assertUploadedVideoChannel({
+      videoReadback,
+      expectedChannelId: channel.channelId,
+      videoId,
+    });
 
     const playlistItem = await youtubeJson({
       accessToken,
@@ -545,21 +577,22 @@ async function main() {
     });
     playlistItemId = playlistItem.id;
 
-    const videoReadback = await youtubeJson({
-      accessToken,
-      method: "GET",
-      pathName: "videos",
-      query: {
-        part: "snippet,status",
-        id: videoId,
-        fields: "items(id,snippet(channelId,title),status(privacyStatus,uploadStatus,publishAt))",
-      },
-    });
-    const uploadedVideo = assertUploadedVideoChannel({
-      videoReadback,
-      expectedChannelId: channel.channelId,
-      videoId,
-    });
+    let thumbnailResult = null;
+    let thumbnailSetError = "";
+    if (thumbnailPath) {
+      try {
+        thumbnailResult = await youtubeMediaUpload({
+          accessToken,
+          pathName: "thumbnails/set",
+          query: { videoId },
+          filePath: thumbnailPath,
+        });
+      } catch (error) {
+        if (!isRecoverableThumbnailPermissionError(error)) throw error;
+        thumbnailSetError = thumbnailPermissionWarning();
+        console.warn(`::warning::${thumbnailSetError}`);
+      }
+    }
 
     const ledgerRow = {
       ...ledgerBase,
@@ -568,6 +601,10 @@ async function main() {
       youtubePlaylistId: playlistEntry.youtube_playlist_id,
       playlistItemId: playlistItem.id,
       thumbnailSet: Boolean(thumbnailResult),
+      ...(thumbnailSetError ? {
+        needsThumbnailPermission: true,
+        thumbnailSetError,
+      } : {}),
       authorizedChannel,
       uploadedVideoChannelId: uploadedVideo.snippet?.channelId || "",
       readback: videoReadback,
@@ -579,11 +616,12 @@ async function main() {
       uploadedVideo,
       channel: authorizedChannel,
       thumbnailSet: Boolean(thumbnailResult),
+      thumbnailSetError,
     }));
     savePublicationRegistry(publicationRegistry, options.publicationRegistry);
     console.log(JSON.stringify(ledgerRow, null, 2));
   } catch (error) {
-    appendLedger(options.ledger, {
+    const failureRow = {
       ...ledgerBase,
       status: "failed",
       youtubeVideoId: uploadedVideoId,
@@ -591,7 +629,45 @@ async function main() {
       playlistItemId,
       authorizedChannel,
       error: error.message,
-    });
+    };
+    appendLedger(options.ledger, failureRow);
+    if (uploadedVideoId) {
+      const fallbackUploadedVideo = uploadedVideo || {
+        snippet: {
+          title: metadata.title,
+          channelId: channel.channelId,
+        },
+        status: {
+          privacyStatus,
+          publishAt,
+          uploadStatus: "unknown",
+        },
+      };
+      const partialLedgerRow = {
+        ...ledgerBase,
+        status: playlistItemId
+          ? (publishAt ? "scheduled_uploaded_post_upload_partial" : "published_uploaded_post_upload_partial")
+          : (publishAt ? "scheduled_uploaded_playlist_insert_pending" : "uploaded_public_playlist_insert_pending"),
+        youtubeVideoId: uploadedVideoId,
+        youtubePlaylistId,
+        playlistItemId,
+        thumbnailSet: false,
+        authorizedChannel,
+        uploadedVideoChannelId: fallbackUploadedVideo.snippet?.channelId || channel.channelId,
+        readback: videoReadback,
+        needsPlaylistInsert: !playlistItemId,
+        postUploadError: error.message,
+      };
+      appendLedger(options.ledger, partialLedgerRow);
+      upsertPublication(publicationRegistry, buildPublicationRecord({
+        metadata,
+        ledgerRow: partialLedgerRow,
+        uploadedVideo: fallbackUploadedVideo,
+        channel: authorizedChannel || { snippet: { customUrl: "" } },
+        thumbnailSet: false,
+      }));
+      savePublicationRegistry(publicationRegistry, options.publicationRegistry);
+    }
     throw error;
   }
 }
