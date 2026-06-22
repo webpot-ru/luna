@@ -548,7 +548,7 @@ async function main() {
         fail(`Video channel mismatch: expected ${channel.channelId}, got ${before.snippet?.channelId || "(missing)"}.`);
       }
 
-      if (!options.holdPublishAt && before.status?.privacyStatus === "private" && !before.status?.publishAt) {
+      if (before.status?.privacyStatus === "private" && !before.status?.publishAt) {
         const row = { ...plan, status: "already_paused", authorizedChannel: channelAuthCache.get(channel.key), before, after: before };
         results.push(row);
         appendLedger(options.ledger, row);
@@ -563,13 +563,19 @@ async function main() {
       if (options.holdPublishAt) {
         const expected = Date.parse(options.holdPublishAt);
         const actual = Date.parse(after.status?.publishAt || "");
-        if (!Number.isFinite(actual) || Math.abs(actual - expected) > 1000) {
+        if (after.status?.publishAt && (!Number.isFinite(actual) || Math.abs(actual - expected) > 1000)) {
           fail(`Hold readback publishAt mismatch: expected ${options.holdPublishAt}, got ${after.status?.publishAt || "(missing)"}.`);
         }
       } else if (after.status?.publishAt) {
         fail(`Pause readback still has publishAt=${after.status.publishAt}.`);
       }
-      const row = { ...plan, status: options.holdPublishAt ? "schedule_held" : "schedule_paused", authorizedChannel: channelAuthCache.get(channel.key), before, after };
+      const row = {
+        ...plan,
+        status: after.status?.publishAt ? "schedule_held" : "schedule_paused",
+        authorizedChannel: channelAuthCache.get(channel.key),
+        before,
+        after,
+      };
       results.push(row);
       appendLedger(options.ledger, row);
     } catch (error) {
