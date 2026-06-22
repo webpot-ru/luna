@@ -2231,6 +2231,178 @@
       "scheduleDriftReason": "accidental_restore_workflow_support_only_filter",
       "scheduleDriftGithubRunId": "27959125360",
       "scheduleDriftGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27959125360"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "IT",
+      "targetLang": "BG",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-06-23T12:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-06-23",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "localDayOffset": 0,
+      "slotOrdinal": 2,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_bg_it/youtube_metadata.json",
+      "title": "Vocabolario Bulgaro A1: Utensili da Cucina | 50 Parole con Pronuncia",
+      "playlist_key": "IT__BG__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T12:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27962775674",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27962775674",
+      "createdAt": "2026-06-22T15:10:17.139Z",
+      "updatedAt": "2026-06-22T15:10:17.139Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "IT",
+      "targetLang": "BN",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-06-23T15:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-06-23",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 0,
+      "slotOrdinal": 3,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_bn_it/youtube_metadata.json",
+      "title": "Impara il Bengalese: Utensili da Cucina (A1) | 50 Parole con Pronuncia",
+      "playlist_key": "IT__BN__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T15:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27962775674",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27962775674",
+      "createdAt": "2026-06-22T15:10:17.140Z",
+      "updatedAt": "2026-06-22T15:10:17.140Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "IT",
+      "targetLang": "CS",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-06-23T18:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-06-23",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 0,
+      "slotOrdinal": 4,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_cs_it/youtube_metadata.json",
+      "title": "Impara il Ceco: Utensili da Cucina (A1) | 50 Vocaboli con Pronuncia",
+      "playlist_key": "IT__CS__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T18:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27962775674",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27962775674",
+      "createdAt": "2026-06-22T15:10:17.142Z",
+      "updatedAt": "2026-06-22T15:10:17.142Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "IT",
+      "targetLang": "DA",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-06-23T21:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-06-23",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_da_it/youtube_metadata.json",
+      "title": "Impara il Danese: Utensili da Cucina (A1) | 50 Parole con Pronuncia",
+      "playlist_key": "IT__DA__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-24T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-26T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-06-30T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-23T21:30:00.000Z"
+        }
+      ],
+      "githubRunId": "27962775674",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27962775674",
+      "createdAt": "2026-06-22T15:10:17.144Z",
+      "updatedAt": "2026-06-22T15:10:17.144Z"
     }
   ]
 }
