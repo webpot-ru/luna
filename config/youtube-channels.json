@@ -705,8 +705,11 @@
         "Assigned from unassigned-018 on 2026-06-20.",
         "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
         "Studio public fields configured/read back on 2026-06-21: name, handle, avatar, banner, watermark, description and site link. Contact email intentionally skipped.",
-        "Browser/account-switch source must be Sheet Current handle, not Channel ID."
-      ]
+        "Browser/account-switch source must be Sheet Current handle, not Channel ID.",
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+      ],
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "first_frame_auto"
     },
     {
       "key": "sl",

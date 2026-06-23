@@ -21243,6 +21243,46 @@
         "publishAt": "2026-06-24T00:30:00Z",
         "thumbnailStatus": "auto_first_frame"
       }
+    },
+    {
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "SR",
+      "targetLang": "EN",
+      "playlist_key": "SR__EN__ordinary-vocabulary__a1-everyday",
+      "title": "Engleski jezik A1: Kuhinjski pribor | 50 reči sa izgovorom",
+      "youtubeVideoId": "6v2wbu_9DMg",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=6v2wbu_9DMg",
+      "youtubePlaylistId": "PLsLGddwB2Eii-X0Ko6MAZ0WTSMw77h8Gp",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLsLGddwB2Eii-X0Ko6MAZ0WTSMw77h8Gp",
+      "playlistItemId": "UExzTEdkZHdCMkVpaS1YMEtvNk1BWjBXVFNNdzc3aDhHcC41NkI0NEY2RDEwNTU3Q0M2",
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "channelHandle": "@lunacardssrpski",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded_thumbnail_forbidden",
+      "publishAt": "2026-06-24T06:30:00.000Z",
+      "scheduledPublishAt": "2026-06-24T06:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": true,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "youtube_thumbnail_permission_forbidden",
+      "needsThumbnailPermission": true,
+      "thumbnailSetError": "youtube.thumbnail/forbidden: The authenticated user doesn't have permissions to upload and set custom video thumbnails.",
+      "metadataSource": "gemini-vectorengine",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "28026825331",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28026825331",
+      "uploadedAt": "2026-06-23T12:44:29.078Z",
+      "lastReadbackAt": "2026-06-23T12:44:29.078Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-24T06:30:00Z",
+        "thumbnailStatus": "forbidden_auto_first_frame"
+      }
     }
   ]
 }
