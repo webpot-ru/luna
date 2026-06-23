@@ -3,7 +3,6 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { execSync, execFileSync } from "node:child_process";
 import { psqlJson } from "./qa-utils.mjs";
-import { generateSlideHtml, getFlagEmoji } from "./card-slide-template.mjs";
 import { getDbLanguageCode, normalizeLanguageCode } from "./video-language-codes.mjs";
 import { defaultVoiceMap, getVoiceForLanguage } from "./tts-voice-map.mjs";
 
@@ -12,6 +11,7 @@ export { defaultVoiceMap, getVoiceForLanguage };
 // Load Environment Variables from local or webpot
 function loadEnv() {
   const localEnv = path.resolve(".env.local");
+  const localAccessImportEnv = path.resolve(".local/access-imports/youtube2026new.env.local");
   
   const parseEnvFile = (envPath) => {
     if (!fs.existsSync(envPath)) return;
@@ -29,6 +29,7 @@ function loadEnv() {
   };
 
   parseEnvFile(localEnv);
+  parseEnvFile(localAccessImportEnv);
 
   // Auto-inject Windows winget FFmpeg path if needed
   if (process.platform === "win32") {
@@ -45,6 +46,10 @@ loadEnv();
 
 const baseUrl = process.env.AI33_BASE_URL || "https://api.ai33.pro";
 const apiKey = process.env.AI33_API_KEY;
+const ai33TtsModelId = process.env.AI33_TTS_MODEL_ID || "eleven_multilingual_v2";
+const ai33TtsOutputFormat = process.env.AI33_TTS_OUTPUT_FORMAT || "mp3_44100_128";
+let ai33TaskStatusEndpoint = "";
+let ai33TaskStatusHeaders = null;
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -77,37 +82,200 @@ async function fetchWithRetry(url, options = {}, retries = 3, backoff = 2000) {
   }
 }
 
-// Check status of an AI33 TTS task.
-async function checkTaskStatus(taskId) {
-  const data = await fetchWithRetry(new URL(`/v3/task/${taskId}`, baseUrl), {
-    headers: { Authorization: apiKey }
-  });
-  if (!data.success) {
-    throw new Error(`Check task success=false for ${taskId}: ${JSON.stringify(data)}`);
-  }
-  return data.data ?? {};
+function ai33ApiKeyHeaders(extra = {}) {
+  return {
+    "xi-api-key": apiKey,
+    ...extra,
+  };
 }
 
-async function runTtsTask(text, voiceId, langCode) {
-  const form = new FormData();
-  form.append("text", text);
-  form.append("voice_id", voiceId);
-  form.append("language", String(langCode).split("-")[0].toLowerCase());
-  form.append("speed", "1");
-  form.append("similarity", "2");
-  form.append("with_transcript", "false");
+function ai33AuthorizationHeaders(extra = {}) {
+  return {
+    Authorization: apiKey,
+    ...extra,
+  };
+}
 
-  const data = await fetchWithRetry(new URL("/v3/text-to-speech", baseUrl), {
-    method: "POST",
-    headers: { Authorization: apiKey },
-    body: form
-  });
+function normalizeAi33VoiceId(value, { stripProviderPrefix = true } = {}) {
+  let normalized = String(value || "").trim().replace(/^ai33_/, "");
+  if (stripProviderPrefix) normalized = normalized.replace(/^elevenlabs_/, "");
+  return normalized;
+}
 
-  if (!data.success || !data.task_id) {
-    throw new Error(`AI33 TTS returned success=false: ${JSON.stringify(data)}`);
+function normalizeAi33TaskResponse(data, taskId) {
+  if (data?.status) return data;
+  if (data?.data?.status) return data.data;
+  if (data?.success === false) {
+    throw new Error(`AI33 task success=false for ${taskId}: ${JSON.stringify(data)}`);
+  }
+  throw new Error(`AI33 task response has no status for ${taskId}: ${JSON.stringify(data)}`);
+}
+
+async function readAi33TaskStatusFrom(endpoint, taskId, headers) {
+  const data = await fetchWithRetry(new URL(endpoint.replace("{taskId}", encodeURIComponent(taskId)), baseUrl), {
+    headers,
+  }, 1);
+  return normalizeAi33TaskResponse(data, taskId);
+}
+
+async function fetchAi33SpeechResponse(url, options = {}) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 45000);
+
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+    const contentType = response.headers.get("content-type") || "";
+    const bodyBuffer = Buffer.from(await response.arrayBuffer());
+
+    if (!response.ok) {
+      const errorText = contentType.includes("json") || contentType.includes("text")
+        ? bodyBuffer.toString("utf8")
+        : `${bodyBuffer.length} bytes`;
+      throw new Error(`HTTP ${response.status}: ${errorText || response.statusText}`);
+    }
+
+    const looksJson = contentType.includes("json") || bodyBuffer.toString("utf8", 0, 1) === "{";
+    if (looksJson) {
+      return { data: JSON.parse(bodyBuffer.toString("utf8")) };
+    }
+
+    if (bodyBuffer.length > 0) {
+      return { audioBuffer: bodyBuffer, contentType };
+    }
+
+    throw new Error("AI33 TTS returned an empty response.");
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+// Check status of an AI33 TTS task.
+async function checkTaskStatus(taskId) {
+  if (ai33TaskStatusEndpoint) {
+    return readAi33TaskStatusFrom(ai33TaskStatusEndpoint, taskId, ai33TaskStatusHeaders || ai33ApiKeyHeaders());
   }
 
-  return data.task_id;
+  const candidates = [
+    { endpoint: "/v1/task/{taskId}", headers: ai33ApiKeyHeaders() },
+    { endpoint: "/v3/task/{taskId}", headers: ai33AuthorizationHeaders() },
+  ];
+
+  const errors = [];
+  for (const candidate of candidates) {
+    try {
+      const taskInfo = await readAi33TaskStatusFrom(candidate.endpoint, taskId, candidate.headers);
+      ai33TaskStatusEndpoint = candidate.endpoint;
+      ai33TaskStatusHeaders = candidate.headers;
+      return taskInfo;
+    } catch (error) {
+      errors.push(`${candidate.endpoint}: ${error.message}`);
+    }
+  }
+  throw new Error(`AI33 task status failed for ${taskId}: ${errors.join(" | ")}`);
+}
+
+async function createAi33Speech(text, voiceId, langCode) {
+  if (!apiKey) {
+    throw new Error("Missing AI33_API_KEY for Armenian HY TTS fallback.");
+  }
+
+  const documentedVoiceId = normalizeAi33VoiceId(voiceId, { stripProviderPrefix: true });
+  const legacyVoiceId = normalizeAi33VoiceId(voiceId, { stripProviderPrefix: false });
+  const attempts = [
+    {
+      label: "v1 ElevenLabs-compatible direct/task TTS",
+      taskEndpoint: "/v1/task/{taskId}",
+      taskHeaders: ai33ApiKeyHeaders(),
+      request: () => {
+        const url = new URL(`/v1/text-to-speech/${encodeURIComponent(documentedVoiceId)}`, baseUrl);
+        url.searchParams.set("output_format", ai33TtsOutputFormat);
+        return {
+          url,
+          options: {
+            method: "POST",
+            headers: ai33ApiKeyHeaders({
+              "Accept": "audio/mpeg, application/json",
+              "Content-Type": "application/json",
+            }),
+            body: JSON.stringify({
+              text,
+              model_id: ai33TtsModelId,
+            }),
+          },
+        };
+      },
+    },
+    {
+      label: "v1 AI33 documented async TTS",
+      taskEndpoint: "/v1/task/{taskId}",
+      taskHeaders: ai33ApiKeyHeaders(),
+      request: () => {
+        const url = new URL(`/v1/text-to-speech/${encodeURIComponent(documentedVoiceId)}`, baseUrl);
+        url.searchParams.set("output_format", ai33TtsOutputFormat);
+        return {
+          url,
+          options: {
+            method: "POST",
+            headers: ai33ApiKeyHeaders({
+              "Accept": "audio/mpeg, application/json",
+              "Content-Type": "application/json",
+            }),
+            body: JSON.stringify({
+              text,
+              model_id: ai33TtsModelId,
+              with_transcript: false,
+            }),
+          },
+        };
+      },
+    },
+    {
+      label: "v3 legacy form TTS",
+      taskEndpoint: "/v3/task/{taskId}",
+      taskHeaders: ai33AuthorizationHeaders(),
+      request: () => {
+        const form = new FormData();
+        form.append("text", text);
+        form.append("voice_id", legacyVoiceId);
+        form.append("language", String(langCode).split("-")[0].toLowerCase());
+        form.append("speed", "1");
+        form.append("similarity", "2");
+        form.append("with_transcript", "false");
+        return {
+          url: new URL("/v3/text-to-speech", baseUrl),
+          options: {
+            method: "POST",
+            headers: ai33AuthorizationHeaders(),
+            body: form,
+          },
+        };
+      },
+    },
+  ];
+
+  const errors = [];
+  for (const attempt of attempts) {
+    try {
+      const { url, options } = attempt.request();
+      const { data, audioBuffer } = await fetchAi33SpeechResponse(url, options);
+      if (audioBuffer) {
+        return { audioBuffer };
+      }
+      if (data.success && data.task_id) {
+        ai33TaskStatusEndpoint = attempt.taskEndpoint;
+        ai33TaskStatusHeaders = attempt.taskHeaders;
+        return { taskId: data.task_id };
+      }
+      errors.push(`${attempt.label}: ${data.message || data.error || data.error_message || "success=false/no task_id"}`);
+    } catch (error) {
+      errors.push(`${attempt.label}: ${error.message}`);
+    }
+  }
+
+  throw new Error(`AI33 TTS did not return a task_id. ${errors.join(" | ")}`);
 }
 
 async function downloadFile(url, outputPath) {
@@ -152,12 +320,17 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
     try {
       const mappedVoiceId = String(voiceId || "").replace(/^ai33_/, "");
       const activeVoiceId = process.env.AI33_VOICE_ID || mappedVoiceId || "elevenlabs_qJBO8ZmKp4te7NTtYgzz";
-      const taskId = await runTtsTask(cleanedText, activeVoiceId, langCode);
+      const speech = await createAi33Speech(cleanedText, activeVoiceId, langCode);
+
+      if (speech.audioBuffer) {
+        fs.writeFileSync(cachedPath, speech.audioBuffer);
+        return cachedPath;
+      }
 
       let audioUrl = null;
       for (let i = 0; i < 30; i++) {
         await delay(2000);
-        const taskInfo = await checkTaskStatus(taskId);
+        const taskInfo = await checkTaskStatus(speech.taskId);
         if (taskInfo.status === "done" && taskInfo.metadata?.audio_url) {
           audioUrl = taskInfo.metadata.audio_url;
           break;
