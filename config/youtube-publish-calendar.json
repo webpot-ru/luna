@@ -26919,6 +26919,49 @@
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024655276",
       "createdAt": "2026-06-23T12:02:52.636Z",
       "updatedAt": "2026-06-23T12:02:52.636Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "JA",
+      "targetLang": "ZH",
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "publishAt": "2026-06-25T08:30:00.000Z",
+      "timeZone": "Asia/Tokyo",
+      "localDate": "2026-06-25",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 1,
+      "slotOrdinal": 9,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_zh_ja/youtube_metadata.json",
+      "title": "【中国語 A1】台所用品の基本単語 50選（発音・リピート練習・ミニテスト付）",
+      "playlist_key": "JA__ZH__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-26T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-28T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-02T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-25T08:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28024640641",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024640641",
+      "createdAt": "2026-06-23T12:02:33.159Z",
+      "updatedAt": "2026-06-23T12:02:33.159Z"
     }
   ]
 }
