@@ -595,8 +595,11 @@ jobs:
     if: ${{ always() && github.event.inputs.mode == 'apply' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Do not share one pending concurrency slot across a bulk publish wave.
+    # GitHub keeps only one pending job per concurrency group; a 50-run batch
+    # can cancel older partial-success persist jobs before they merge artifacts.
     concurrency:
-      group: youtube-publish-state-${{ github.ref_name }}
+      group: youtube-publish-state-${{ github.ref_name }}-${{ github.run_id }}
       cancel-in-progress: false
     permissions:
       contents: write
