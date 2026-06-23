@@ -5,6 +5,7 @@
   "scripts": {
     "check:video-localization": "node scripts/check-video-localization.mjs",
     "check:youtube-metadata": "node scripts/check-youtube-metadata.mjs",
+    "check:youtube-metadata-language": "node scripts/check-youtube-metadata-language.mjs",
     "check:youtube-seo-metadata": "node scripts/check-youtube-seo-metadata.mjs",
     "check:youtube-thumbnails": "node scripts/check-youtube-thumbnails.mjs",
     "check:youtube-playlist-naming": "node scripts/check-youtube-playlist-naming.mjs",

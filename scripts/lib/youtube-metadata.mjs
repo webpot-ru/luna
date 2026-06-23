@@ -208,6 +208,7 @@ export function buildTemplateYouTubeMetadata(input) {
   const courseUrl = getPublicCourseUrl({ setId, supportLang, targetLang });
   const courseDisplayUrl = getPublicCourseDisplayUrl(courseUrl);
   const targetLanguageName = getLanguageNameInLang(targetLang, supportLang);
+  const supportLanguageName = getLanguageNameInLang(supportLang, supportLang);
   const wordCount = cards.length;
   const supportCopy = getSupportCopy(supportLang);
   const firstWords = uniqueStrings(cards.map((card) => card.target_display || card.target_word)).slice(0, 8);
@@ -241,6 +242,7 @@ export function buildTemplateYouTubeMetadata(input) {
     wordCount,
     courseUrl,
     courseDisplayUrl,
+    supportLanguageName,
     title: supportCopy.title(baseContext),
     description: supportCopy.description(baseContext),
     tags,
@@ -252,13 +254,22 @@ export function buildTemplateYouTubeMetadata(input) {
 
 export function buildGeminiPrompt(baseMetadata, cards) {
   const cardWords = uniqueStrings(cards.map((card) => card.target_display || card.target_word)).slice(0, 40);
+  const supportLang = normalizeLanguageCode(baseMetadata.supportLang);
+  const supportLanguageName = cleanText(baseMetadata.supportLanguageName || getLanguageNameInLang(supportLang, supportLang));
+  const isEnglishSupport = supportLang === "EN" || supportLang === "EN-GB";
   return [
     `Create YouTube metadata for a ${BRAND_NAME} vocabulary lesson.`,
     "Return JSON only. Do not use Markdown. Do not add fields outside the schema.",
     "",
     "Audience and language rules:",
-    `- Audience/support language code: ${baseMetadata.supportLang}`,
-    `- Write title, description, tags and hashtags for native speakers of that support language.`,
+    `- Audience/support language: ${supportLanguageName} (${supportLang}).`,
+    `- Write title, description, tags and hashtags primarily in ${supportLanguageName}.`,
+    isEnglishSupport
+      ? "- English output is allowed because this is an English support-language channel."
+      : "- Do not copy English fallback wording from the suggested title/description; use it only as a factual skeleton.",
+    isEnglishSupport
+      ? "- English SEO phrases are allowed if natural."
+      : "- Avoid English boilerplate such as \"A1 Vocabulary\", \"Words with Pronunciation\", \"Learn 50 essential...\", \"Subscribe for more...\".",
     `- Target language: ${baseMetadata.targetLanguageName} (${baseMetadata.targetLang})`,
     `- Deck title: ${baseMetadata.deckTitle}`,
     `- Level: ${baseMetadata.level}`,
@@ -290,8 +301,12 @@ export function buildGeminiPrompt(baseMetadata, cards) {
 
 export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
   const cardWords = uniqueStrings(cards.map((card) => card.target_display || card.target_word)).slice(0, 24);
+  const supportLang = normalizeLanguageCode(baseMetadata.supportLang);
+  const supportLanguageName = cleanText(baseMetadata.supportLanguageName || getLanguageNameInLang(supportLang, supportLang));
+  const isEnglishSupport = supportLang === "EN" || supportLang === "EN-GB";
   const facts = {
-    supportLang: baseMetadata.supportLang,
+    supportLang,
+    supportLanguageName,
     targetLang: baseMetadata.targetLang,
     targetLanguageName: baseMetadata.targetLanguageName,
     deckTitle: baseMetadata.deckTitle,
@@ -311,7 +326,13 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
     JSON.stringify(facts),
     "",
     "Rules:",
-    "- Write title, description, tags and hashtags in the same language as baseTitle/baseDescription.",
+    `- Write title, description, tags and hashtags primarily in the audience/support language: ${supportLanguageName} (${supportLang}).`,
+    isEnglishSupport
+      ? "- English output is allowed because this is an English support-language channel."
+      : "- Do not keep English fallback wording from baseTitle/baseDescription; use those fields only as factual input.",
+    isEnglishSupport
+      ? "- English SEO wording is allowed if natural."
+      : "- Avoid English boilerplate such as \"A1 Vocabulary\", \"Words with Pronunciation\", \"Learn 50 essential...\", \"Subscribe for more...\".",
     "- Make the title a natural search title for beginner learners, not clickbait.",
     "- Make the description several useful short paragraphs and include courseUrl exactly once.",
     `- Mention vocabulary, pronunciation, repeat pauses, mini-test/review, and ${BRAND_NAME} flashcards.`,

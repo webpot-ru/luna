@@ -466,6 +466,10 @@ jobs:
         if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
         run: npm run check:youtube-metadata -- outputs/video-generator
 
+      - name: Validate YouTube metadata language
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        run: npm run check:youtube-metadata-language -- outputs/video-generator --output=outputs/video-generator/youtube-metadata-language-report-github.json
+
       - name: Validate YouTube playlist naming contract
         if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
         run: npm run check:youtube-playlist-naming
