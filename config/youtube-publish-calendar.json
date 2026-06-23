@@ -25526,6 +25526,52 @@
       "youtubeVideoId": "YgUtEYDyc4E",
       "youtubePlaylistId": "PLv2OL0Ok6XoKPAQkr0iqVhCD-oYrWV4Mx",
       "playlistItemId": "UEx2Mk9MME9rNlhvS1BBUWtyMGlxVmhDRC1vWXJXVjRNeC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TH",
+      "targetLang": "PT",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "publishAt": "2026-06-24T16:30:00.000Z",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-06-24",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_pt_th/youtube_metadata.json",
+      "title": "เรียนภาษาโปรตุเกส A1: คำศัพท์ของใช้ครัวพื้นฐาน 50 คำ พร้อมเสียงอ่าน | FlashcardsLuna",
+      "playlist_key": "TH__PT__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-25T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-27T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-01T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-24T16:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28024277854",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024277854",
+      "createdAt": "2026-06-23T11:55:49.369Z",
+      "updatedAt": "2026-06-23T11:55:49.369Z",
+      "youtubeVideoId": "lVJeUjajOYo",
+      "youtubePlaylistId": "PL7CNPPbAeUfOD7wcA_9M3WEYZXRd_XZUF",
+      "playlistItemId": "UEw3Q05QUGJBZVVmT0Q3d2NBXzlNM1dFWVpYUmRfWFpVRi41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
