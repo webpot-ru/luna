@@ -25713,6 +25713,52 @@
       "youtubeVideoId": "lMEhmCp41iQ",
       "youtubePlaylistId": "PL4fX1EHX1YdCkVyVOF1grhSABT0A5F7Yc",
       "playlistItemId": "UEw0ZlgxRUhYMVlkQ2tWeVZPRjFncmhTQUJUMEE1RjdZYy41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "BN",
+      "targetLang": "ZH",
+      "channelKey": "bn",
+      "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
+      "publishAt": "2026-06-24T17:30:00.000Z",
+      "timeZone": "Asia/Dhaka",
+      "localDate": "2026-06-24",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_zh_bn/youtube_metadata.json",
+      "title": "চাইনিজ ভাষা শিক্ষা: রান্নাঘরের সামগ্রী (A1) | 50 Chinese Words with Pronunciation",
+      "playlist_key": "BN__ZH__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-25T17:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-27T17:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-01T17:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-24T17:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28024662324",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024662324",
+      "createdAt": "2026-06-23T12:02:33.027Z",
+      "updatedAt": "2026-06-23T12:02:33.027Z",
+      "youtubeVideoId": "B3zTzXI81Ro",
+      "youtubePlaylistId": "PLwCCtV2GZMEU2RAnK2gDurPUBupJKIeG8",
+      "playlistItemId": "UEx3Q0N0VjJHWk1FVTJSQW5LMmdEdXJQVUJ1cEpLSWVHOC41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
