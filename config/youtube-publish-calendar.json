@@ -27630,6 +27630,52 @@
       "youtubeVideoId": "ucQ5JFdn3Bw",
       "youtubePlaylistId": "PLsLGddwB2EigyHrZsxvDw6C1Pok-ahrmv",
       "playlistItemId": "UExzTEdkZHdCMkVpZ3lIclpzeHZEdzZDMVBvay1haHJtdi41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "SR",
+      "targetLang": "RU",
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "publishAt": "2026-06-24T21:30:00.000Z",
+      "timeZone": "Europe/Belgrade",
+      "localDate": "2026-06-24",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_sr/youtube_metadata.json",
+      "title": "Ruski jezik A1: Kuhinjski pribor | 50 osnovnih reči sa izgovorom",
+      "playlist_key": "SR__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-25T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-27T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-01T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-24T21:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28030352684",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28030352684",
+      "createdAt": "2026-06-23T13:38:33.928Z",
+      "updatedAt": "2026-06-23T13:38:33.928Z",
+      "youtubeVideoId": "_1ZGdvE4lCA",
+      "youtubePlaylistId": "PLsLGddwB2EiiduFjlGeCv4n74P5ubxH4a",
+      "playlistItemId": "UExzTEdkZHdCMkVpaWR1RmpsR2VDdjRuNzRQNXVieEg0YS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
