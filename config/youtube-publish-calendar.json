@@ -25759,6 +25759,52 @@
       "youtubeVideoId": "B3zTzXI81Ro",
       "youtubePlaylistId": "PLwCCtV2GZMEU2RAnK2gDurPUBupJKIeG8",
       "playlistItemId": "UEx3Q0N0VjJHWk1FVTJSQW5LMmdEdXJQVUJ1cEpLSWVHOC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "KO",
+      "targetLang": "PT",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "publishAt": "2026-06-24T14:30:00.000Z",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-06-24",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_pt_ko/youtube_metadata.json",
+      "title": "포르투갈어 A1 기초 단어: 주방용품 50단어 발음 및 복습 (FlashcardsLuna)",
+      "playlist_key": "KO__PT__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-25T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-27T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-01T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-24T14:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28024642458",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024642458",
+      "createdAt": "2026-06-23T12:02:21.069Z",
+      "updatedAt": "2026-06-23T12:02:21.069Z",
+      "youtubeVideoId": "1bpnsROEyFQ",
+      "youtubePlaylistId": "PLTLLUAacNgjgsw_P5hugtP6LACpUVlIwH",
+      "playlistItemId": "UExUTExVQWFjTmdqZ3N3X1A1aHVndFA2TEFDcFVWbEl3SC41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
