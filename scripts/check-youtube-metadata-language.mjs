@@ -83,10 +83,8 @@ const ENGLISH_TEMPLATE_PATTERNS = [
 const ENGLISH_TAG_PATTERNS = [
   /\blearn\s+[a-z]/iu,
   /\b[a-z]+\s+vocabulary\b/iu,
-  /\b[a-z]+\s+a1\b/iu,
   /\b[a-z]+\s+pronunciation\b/iu,
   /\b[a-z]+\s+for beginners\b/iu,
-  /\b[a-z]+\s+flashcards\b/iu,
   /\bkitchen(?:ware)?\s+words\b/iu,
   /\bbasic\s+[a-z]+\s+words\b/iu,
   /\bword list\b/iu,

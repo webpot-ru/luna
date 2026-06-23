@@ -469,6 +469,31 @@ Implementation sequence:
 - `npm run plan:youtube-publish-schedule -- <metadata-file-or-dir> --start-date=YYYY-MM-DD [--limit=50] [--limit-per-channel=50] [--write-metadata] [--write-calendar]` plans scheduled upload times without YouTube writes. With `--write-metadata`, it writes `privacyStatus=private`, `publishAt`, `scheduledPublishAt` and `publishSchedule.analyticsCheckpointsAt` into each scheduled `youtube_metadata.json`; with `--write-calendar`, it also upserts reservations into `config/youtube-publish-calendar.json`. In GitHub scheduled mode the workflow passes `--target-plan=outputs/video-generator/youtube-generation-targets-github.json`, so parallel workers reserve deterministic Nth-free slots from the same global target order rather than all taking the first local slot.
 
 2026-06-23 metadata-language incident: video `GUiTBfY5T-U` (`supportLang=MS`, `targetLang=PT`, channel `@lunacardsmalay`) was uploaded with English title/description text. Root cause: `scripts/lib/youtube-metadata.mjs` had localized metadata templates only for `RU` and `ES/ES-419`; all other support languages used an English template fallback. The VectorEngine/Gemini prompt then said to write in the same language as `baseTitle/baseDescription`, so Gemini could preserve the English fallback while still inserting a localized deck title. Existing `check:youtube-metadata` and `check:youtube-seo-metadata` passed because they validated structure, course URL, tags and SEO intent, not output language. The fix is two-layered: the prompt now names the support language as the required output language and treats English fallback text as factual input only, and `.github/workflows/youtube-video-publish.yml` runs `check:youtube-metadata-language` before playlist/SEO/publish gates. To triage already-uploaded rows from the durable registry, run `npm run check:youtube-metadata-language -- --registry=config/youtube-published-videos.json --output=outputs/youtube-metadata-language-registry-triage-YYYYMMDD.json`; this is title-only because `config/youtube-published-videos.json` does not store full descriptions. Full description audit requires either GitHub artifacts containing `youtube_metadata.json` or a read-only YouTube `videos.list(part=snippet,status)` pass.
+
+Live repair for already-uploaded videos uses:
+
+```bash
+npm run repair:youtube-metadata-language -- \
+  --set=home_kitchen_cookware_pilot_01 \
+  --route=youtube-2 \
+  --local-root=/Users/lali/Documents/LUNA2 \
+  --oauth-root=/Users/lali/Documents/LUNA2 \
+  --output-dir=outputs/youtube-metadata-language-repair-youtube-2-YYYYMMDD \
+  --apply \
+  --confirm-youtube-write \
+  --confirm-ai-spend \
+  --json
+```
+
+Operational rules for this repair:
+
+- dry-run/audit is default; live `videos.update(part=snippet)` requires both `--confirm-youtube-write` and `--confirm-ai-spend`;
+- repair must verify the OAuth token's actual `channels.list(mine=true)` channel id against the expected support channel before any write;
+- repair updates only YouTube snippet metadata and the durable publication registry; it must not reupload videos, move schedules, recreate playlists or change thumbnails;
+- run by route (`youtube-1`..`youtube-4`) so quota errors stop only the affected API project;
+- after any quota stop, wait for quota reset, run a fresh read-only live audit first, then resume only remaining `liveLanguageStatus=fail` rows;
+- non-English support metadata should have title, description, tags and hashtags in the support language. Brand text (`FlashcardsLuna`) is allowed; hidden tag lists are secondary for SEO and must not override visible native-language title/description quality;
+- tags are capped by UTF-8 byte budget, not just JavaScript character count, because YouTube can reject non-Latin tag sets with `invalid metadata` even when the visible character count looks safe.
 - `npm run plan:youtube-analytics-readback` reads `config/youtube-published-videos.json` and produces a checkpoint plan for YouTube Analytics/Data API readback. Default checkpoints are 24h, 72h, 7d and 30d after `publishAt`/upload time. This is how publication-time statistics are tracked without treating fresh-zero analytics as final data.
 - `npm run read:youtube-video-statistics -- --fetch --confirm-youtube-read --due-only` is the current read-only statistics collector. It calls YouTube Data API `videos.list` for due checkpoints, verifies the video channel id, and writes cumulative view/like/comment snapshots to `outputs/youtube-video-statistics-*.json` plus `outputs/youtube-video-statistics-ledger.jsonl`. This is enough to compare publication-time performance over 24h/72h/7d/30d. Watch-time and retention metrics require a later YouTube Analytics API `reports.query` scope/check if needed.
 - `npm run apply:youtube-publish -- --metadata=<youtube_metadata.json> [--video=<mp4>] [--thumbnail=<image>] [--create-playlist]` is dry-run by default. Live YouTube writes require `--apply --confirm-youtube-write`. Production default is `--privacy=public`, and public writes are refused unless `--confirm-public` is also passed. Scheduled uploads require `privacy=private` plus a future `publishAt`.

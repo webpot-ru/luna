@@ -270,6 +270,9 @@ export function buildGeminiPrompt(baseMetadata, cards) {
     isEnglishSupport
       ? "- English SEO phrases are allowed if natural."
       : "- Avoid English boilerplate such as \"A1 Vocabulary\", \"Words with Pronunciation\", \"Learn 50 essential...\", \"Subscribe for more...\".",
+    isEnglishSupport
+      ? "- Tags and hashtags may use normal English search phrases."
+      : `- Tags and hashtags must also be in ${supportLanguageName}. Do not add English search phrases such as "learn ...", "... vocabulary", "... for beginners", or "... in Hindi". Brand text (${BRAND_NAME}) is allowed.`,
     `- Target language: ${baseMetadata.targetLanguageName} (${baseMetadata.targetLang})`,
     `- Deck title: ${baseMetadata.deckTitle}`,
     `- Level: ${baseMetadata.level}`,
@@ -333,6 +336,9 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
     isEnglishSupport
       ? "- English SEO wording is allowed if natural."
       : "- Avoid English boilerplate such as \"A1 Vocabulary\", \"Words with Pronunciation\", \"Learn 50 essential...\", \"Subscribe for more...\".",
+    isEnglishSupport
+      ? "- Tags and hashtags may use normal English search phrases."
+      : `- Tags and hashtags must also be in ${supportLanguageName}. Do not add English search phrases such as "learn ...", "... vocabulary", "... for beginners", or "... in Hindi". Brand text (${BRAND_NAME}) is allowed.`,
     "- Make the title a natural search title for beginner learners, not clickbait.",
     "- Make the description several useful short paragraphs and include courseUrl exactly once.",
     `- Mention vocabulary, pronunciation, repeat pauses, mini-test/review, and ${BRAND_NAME} flashcards.`,
@@ -442,14 +448,18 @@ function normalizeHashtag(value) {
   return text.startsWith("#") ? text.replace(/\s+/gu, "") : `#${text.replace(/\s+/gu, "")}`;
 }
 
-function capTagBudget(tags, maxChars = 450) {
+function utf8ByteLength(value) {
+  return Buffer.byteLength(String(value || ""), "utf8");
+}
+
+function capTagBudget(tags, maxBytes = 450) {
   const result = [];
   let total = 0;
   for (const tag of tags) {
     const clean = truncateAtWord(tag.replace(/^#/u, ""), 45);
     if (!clean) continue;
-    const nextTotal = total + clean.length + (result.length ? 1 : 0);
-    if (nextTotal > maxChars) continue;
+    const nextTotal = total + utf8ByteLength(clean) + (result.length ? 1 : 0);
+    if (nextTotal > maxBytes) continue;
     result.push(clean);
     total = nextTotal;
   }

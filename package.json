@@ -39,6 +39,7 @@
     "apply:youtube-publish": "node scripts/youtube-publish-video.mjs",
     "merge:youtube-publish-state": "node scripts/merge-youtube-publish-state.mjs",
     "repair:youtube-playlist-insert": "node scripts/youtube-repair-playlist-insert.mjs",
+    "repair:youtube-metadata-language": "node scripts/youtube-repair-metadata-language.mjs",
     "set:youtube-thumbnail": "node scripts/youtube-set-video-thumbnail.mjs",
     "pause:youtube-fallback-schedules": "node scripts/youtube-pause-fallback-schedules.mjs",
     "update:youtube-visibility": "node scripts/youtube-update-visibility.mjs",
