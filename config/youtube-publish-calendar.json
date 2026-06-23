@@ -27422,6 +27422,52 @@
       "youtubeVideoId": "6v2wbu_9DMg",
       "youtubePlaylistId": "PLsLGddwB2Eii-X0Ko6MAZ0WTSMw77h8Gp",
       "playlistItemId": "UExzTEdkZHdCMkVpaS1YMEtvNk1BWjBXVFNNdzc3aDhHcC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "SR",
+      "targetLang": "ES",
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "publishAt": "2026-06-24T09:30:00.000Z",
+      "timeZone": "Europe/Belgrade",
+      "localDate": "2026-06-24",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_es_sr/youtube_metadata.json",
+      "title": "Španski jezik A1: Kuhinjski pribor | 50 osnovnih reči sa izgovorom",
+      "playlist_key": "SR__ES__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-25T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-27T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-01T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28027705882",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28027705882",
+      "createdAt": "2026-06-23T12:56:03.375Z",
+      "updatedAt": "2026-06-23T12:56:03.375Z",
+      "youtubeVideoId": "sr10FD8JtRg",
+      "youtubePlaylistId": "PLsLGddwB2Eiibi8T3dS4ISjiiFhidb2AW",
+      "playlistItemId": "UExzTEdkZHdCMkVpaWJpOFQzZFM0SVNqaWlGaGlkYjJBVy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
