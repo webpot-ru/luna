@@ -25480,6 +25480,52 @@
       "youtubeVideoId": "YwYDDwRf89k",
       "youtubePlaylistId": "PLigXQEekIboawCUNpJO0H79bCEpj3ESPq",
       "playlistItemId": "UExpZ1hRRWVrSWJvYXdDVU5wSk8wSDc5YkNFcGozRVNQcS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "FR",
+      "targetLang": "ZH",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-06-24T21:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-06-24",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_zh_fr/youtube_metadata.json",
+      "title": "Vocabulaire Chinois A1 : Les Ustensiles de Cuisine | 50 Mots avec Prononciation",
+      "playlist_key": "FR__ZH__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-25T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-27T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-01T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-24T21:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28024276344",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024276344",
+      "createdAt": "2026-06-23T11:55:45.912Z",
+      "updatedAt": "2026-06-23T11:55:45.912Z",
+      "youtubeVideoId": "YgUtEYDyc4E",
+      "youtubePlaylistId": "PLv2OL0Ok6XoKPAQkr0iqVhCD-oYrWV4Mx",
+      "playlistItemId": "UEx2Mk9MME9rNlhvS1BBUWtyMGlxVmhDRC1vWXJXVjRNeC41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
