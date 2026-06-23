@@ -26050,6 +26050,98 @@
       "youtubeVideoId": "hvUkPFS_91A",
       "youtubePlaylistId": "PLqIsPmxIZy9Q3LCuFxCCxob08mVft2yoY",
       "playlistItemId": "UExxSXNQbXhJWnk5UTNMQ3VGeENDeG9iMDhtVmZ0MnlvWS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "FI",
+      "targetLang": "PT",
+      "channelKey": "fi",
+      "youtubeChannelId": "UCZkiQ6y2W8aCUuaiP3N665A",
+      "publishAt": "2026-06-24T17:30:00.000Z",
+      "timeZone": "Europe/Helsinki",
+      "localDate": "2026-06-24",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 0,
+      "slotOrdinal": 4,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_pt_fi/youtube_metadata.json",
+      "title": "Opi portugalia: Keittiötarvikkeet (A1) – 50 tärkeää sanaa ja ääntäminen",
+      "playlist_key": "FI__PT__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-25T17:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-27T17:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-01T17:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-24T17:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28024651943",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024651943",
+      "createdAt": "2026-06-23T12:02:29.907Z",
+      "updatedAt": "2026-06-23T12:02:29.907Z",
+      "youtubeVideoId": "VJBeDK8nDbU",
+      "youtubePlaylistId": "PL4tskEIKwe47mWp172m5oJ4-aHzDvb33l",
+      "playlistItemId": "UEw0dHNrRUlLd2U0N21XcDE3Mm01b0o0LWFIekR2YjMzbC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "FI",
+      "targetLang": "RU",
+      "channelKey": "fi",
+      "youtubeChannelId": "UCZkiQ6y2W8aCUuaiP3N665A",
+      "publishAt": "2026-06-24T20:30:00.000Z",
+      "timeZone": "Europe/Helsinki",
+      "localDate": "2026-06-24",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_fi/youtube_metadata.json",
+      "title": "Venäjän kieli A1: Keittiötarvikkeet | 50 sanaa ääntämisellä",
+      "playlist_key": "FI__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-25T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-27T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-01T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-24T20:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28024651943",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024651943",
+      "createdAt": "2026-06-23T12:02:29.909Z",
+      "updatedAt": "2026-06-23T12:02:29.909Z",
+      "youtubeVideoId": "1hUgpK_5jXE",
+      "youtubePlaylistId": "PL4tskEIKwe45GSbib0DPkcNOAwvQ-xn-0",
+      "playlistItemId": "UEw0dHNrRUlLd2U0NUdTYmliMERQa2NOT0F3dlEteG4tMC41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
