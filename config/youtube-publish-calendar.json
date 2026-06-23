@@ -25575,6 +25575,98 @@
       "youtubeVideoId": "lVJeUjajOYo",
       "youtubePlaylistId": "PL7CNPPbAeUfOD7wcA_9M3WEYZXRd_XZUF",
       "playlistItemId": "UEw3Q05QUGJBZVVmT0Q3d2NBXzlNM1dFWVpYUmRfWFpVRi41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "BG",
+      "targetLang": "RU",
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "publishAt": "2026-06-24T17:30:00.000Z",
+      "timeZone": "Europe/Sofia",
+      "localDate": "2026-06-24",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 0,
+      "slotOrdinal": 4,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_bg/youtube_metadata.json",
+      "title": "Руски език за начинаещи (A1): Кухненски съдове | 50 думи с произношение",
+      "playlist_key": "BG__RU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-25T17:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-27T17:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-01T17:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-24T17:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28024279431",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024279431",
+      "createdAt": "2026-06-23T11:55:42.321Z",
+      "updatedAt": "2026-06-23T11:55:42.321Z",
+      "youtubeVideoId": "V2id6NmEASI",
+      "youtubePlaylistId": "PLbx8Ii8MSQqoKVfvXYIcXL266iawia-sA",
+      "playlistItemId": "UExieDhJaThNU1Fxb0tWZnZYWUljWEwyNjZpYXdpYS1zQS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "BG",
+      "targetLang": "ZH",
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "publishAt": "2026-06-24T20:30:00.000Z",
+      "timeZone": "Europe/Sofia",
+      "localDate": "2026-06-24",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_zh_bg/youtube_metadata.json",
+      "title": "Китайски език за начинаещи A1: Кухненски съдове (50 думи с произношение)",
+      "playlist_key": "BG__ZH__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-25T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-27T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-01T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-24T20:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28024279431",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024279431",
+      "createdAt": "2026-06-23T11:55:42.323Z",
+      "updatedAt": "2026-06-23T11:55:42.323Z",
+      "youtubeVideoId": "vAoNj8QHQmU",
+      "youtubePlaylistId": "PLbx8Ii8MSQqoaU3IO709jkuXWj9eLedPF",
+      "playlistItemId": "UExieDhJaThNU1Fxb2FVM0lPNzA5amt1WFdqOWVMZWRQRi41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
