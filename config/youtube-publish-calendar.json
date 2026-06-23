@@ -25805,6 +25805,52 @@
       "youtubeVideoId": "1bpnsROEyFQ",
       "youtubePlaylistId": "PLTLLUAacNgjgsw_P5hugtP6LACpUVlIwH",
       "playlistItemId": "UExUTExVQWFjTmdqZ3N3X1A1aHVndFA2TEFDcFVWbEl3SC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "CS",
+      "targetLang": "ZH",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "publishAt": "2026-06-24T21:30:00.000Z",
+      "timeZone": "Europe/Prague",
+      "localDate": "2026-06-24",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_zh_cs/youtube_metadata.json",
+      "title": "Čínština A1: Kuchyňské potřeby | 50 slovíček s výslovností",
+      "playlist_key": "CS__ZH__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-25T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-27T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-01T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-24T21:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28024653492",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024653492",
+      "createdAt": "2026-06-23T12:02:29.296Z",
+      "updatedAt": "2026-06-23T12:02:29.296Z",
+      "youtubeVideoId": "YCjB1XHMLac",
+      "youtubePlaylistId": "PLBqL9gOb0y_DXmHk6vp3kbJlkqMoz_kmu",
+      "playlistItemId": "UExCcUw5Z09iMHlfRFhtSGs2dnAza2JKbGtxTW96X2ttdS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
