@@ -33429,12 +33429,12 @@
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=LDhHpEsyzrY",
       "youtubePlaylistId": "PL7jzfVz1zRZlr69TKwh7z2mYyvSLD7FS5",
       "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PL7jzfVz1zRZlr69TKwh7z2mYyvSLD7FS5",
-      "playlistItemId": "",
+      "playlistItemId": "UEw3anpmVnoxelJabHI2OVRLd2g3ejJtWXl2U0xEN0ZTNS41NkI0NEY2RDEwNTU3Q0M2",
       "channelKey": "az",
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_playlist_insert_pending",
+      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-25T16:30:00.000Z",
       "scheduledPublishAt": "2026-06-25T16:30:00.000Z",
       "desiredPrivacyStatus": "public",
@@ -33444,22 +33444,28 @@
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
       "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
-      "needsPlaylistInsert": true,
-      "postUploadError": "YouTube uploaded video readback returned no items.",
       "metadataSource": "gemini-vectorengine",
       "metadataModel": "gemini-3.5-flash",
       "githubRunId": "28098038219",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28098038219",
       "uploadedAt": "2026-06-24T12:33:46.108Z",
-      "lastReadbackAt": "2026-06-24T12:33:46.108Z",
+      "lastReadbackAt": "2026-06-24T13:14:40.098Z",
       "readback": {
-        "uploadStatus": "unknown",
+        "uploadStatus": "processed",
         "privacyStatus": "private",
-        "publishAt": "2026-06-25T16:30:00.000Z",
+        "publishAt": "2026-06-25T16:30:00Z",
         "thumbnailStatus": "auto_first_frame",
-        "playlistItemReadback": "pending",
-        "postUploadError": "YouTube uploaded video readback returned no items."
-      }
+        "playlistItemReadback": "already_present_verified",
+        "playlistId": "PL7jzfVz1zRZlr69TKwh7z2mYyvSLD7FS5",
+        "playlistPrivacyStatus": "public",
+        "playlistItemId": "UEw3anpmVnoxelJabHI2OVRLd2g3ejJtWXl2U0xEN0ZTNS41NkI0NEY2RDEwNTU3Q0M2",
+        "playlistInsertRepairedAt": "2026-06-24T13:14:40.098Z"
+      },
+      "playlistInsertRepairedAt": "2026-06-24T13:14:40.098Z",
+      "playlistInsertRepairStatus": "already_present_verified",
+      "playlistInsertRepairGithubRunId": "28101160744",
+      "playlistInsertRepairGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28101160744",
+      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video."
     }
   ]
 }
