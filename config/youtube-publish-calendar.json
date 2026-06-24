@@ -36913,6 +36913,52 @@
       "youtubeVideoId": "PkJXMs6x_9I",
       "youtubePlaylistId": "PLPZPjxBw0kuLdfrwaUqVdM-wXmk6tMw9e",
       "playlistItemId": "UExQWlBqeEJ3MGt1TGRmcndhVXFWZE0td1htazZ0TXc5ZS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "RU",
+      "targetLang": "KK",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "publishAt": "2026-06-25T14:30:00.000Z",
+      "timeZone": "Europe/Moscow",
+      "localDate": "2026-06-25",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 0,
+      "slotOrdinal": 3,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_kk_ru/youtube_metadata.json",
+      "title": "Казахский язык: Кухонная посуда (A1) | 50 слов с…",
+      "playlist_key": "RU__KK__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-26T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-02T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-25T14:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28092900005",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28092900005",
+      "createdAt": "2026-06-24T10:49:29.741Z",
+      "updatedAt": "2026-06-24T10:49:29.741Z",
+      "youtubeVideoId": "9u6262j26cA",
+      "youtubePlaylistId": "PLx5nIeqMBQ7n7E5egUp_19dJxC3Jy2ALj",
+      "playlistItemId": "UEx4NW5JZXFNQlE3bjdFNWVnVXBfMTlkSnhDM0p5MkFMai41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
