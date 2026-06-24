@@ -36775,6 +36775,52 @@
       "youtubeVideoId": "E2ieWp3lZs8",
       "youtubePlaylistId": "PL-4RMx8aFFeAC_Tarn_VqxzGeIq_rH106",
       "playlistItemId": "UEwtNFJNeDhhRkZlQUNfVGFybl9WcXh6R2VJcV9ySDEwNi41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "FI",
+      "targetLang": "HI",
+      "channelKey": "fi",
+      "youtubeChannelId": "UCZkiQ6y2W8aCUuaiP3N665A",
+      "publishAt": "2026-06-25T14:30:00.000Z",
+      "timeZone": "Europe/Helsinki",
+      "localDate": "2026-06-25",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 0,
+      "slotOrdinal": 3,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_hi_fi/youtube_metadata.json",
+      "title": "Hindi A1: Keittiötarvikkeet | 50 sanaa ja ääntäminen | FlashcardsLuna",
+      "playlist_key": "FI__HI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-26T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-02T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-25T14:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28093016801",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28093016801",
+      "createdAt": "2026-06-24T10:46:48.644Z",
+      "updatedAt": "2026-06-24T10:46:48.644Z",
+      "youtubeVideoId": "P19-iWjt4yM",
+      "youtubePlaylistId": "PL4tskEIKwe44Jp-ydNszILWvxgwg8pJMj",
+      "playlistItemId": "UEw0dHNrRUlLd2U0NEpwLXlkTnN6SUxXdnhnd2c4cEpNai41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
