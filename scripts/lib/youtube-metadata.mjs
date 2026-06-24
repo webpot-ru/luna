@@ -185,6 +185,27 @@ function getSupportCopy(supportLang) {
       hashtags: [BRAND_HASHTAG, "#AprenderIdiomas", "#Vocabulario"]
     };
   }
+  if (code === "KK") {
+    return {
+      title: ({ targetLanguageName, deckTitle, wordCount }) =>
+        `${targetLanguageName} A1: ${deckTitle} | ${wordCount} сөз және айтылым`,
+      description: ({ targetLanguageName, deckTitle, wordCount, courseUrl }) =>
+        `${BRAND_NAME} қысқа сабағында ${targetLanguageName} тіліндегі «${deckTitle}» тақырыбы бойынша ${wordCount} сөзді үйреніңіз. Әр сөзді тыңдап, мағынасын көріп, үзіліс кезінде дауыстап қайталаңыз. Видео соңындағы шағын қайталау есте сақтауды тексеруге көмектеседі.\n\nБұл A1 деңгейіндегі сөздік жаттығуы күнделікті қысқа практикаға арналған: алдымен видеоны толық көріңіз, содан кейін сайттағы карточкаларды ашып, сөздерді өз қарқыныңызбен қайталаңыз. Формат жазылуы, айтылуы және мағынасын бірге бекітуге көмектеседі.\n\nОсы колоданы және ${BRAND_NAME} сайтындағы басқа тегін жаттығуларды мына сілтеме арқылы ашыңыз:\n${courseUrl}\n\nТіл үйренуге арналған қысқа сөздік видеолар, айтылым жаттығулары және карточкалар үшін каналға жазылыңыз.`,
+      tags: ({ targetLanguageName, deckTitle }) => [
+        `${targetLanguageName} тілі`,
+        `${targetLanguageName} жаңадан бастаушыларға`,
+        `${targetLanguageName} сөздері`,
+        `${targetLanguageName} айтылымы`,
+        `${deckTitle} ${targetLanguageName}`,
+        "ас үй сөздігі",
+        "сөздік қор",
+        "тіл үйрену",
+        "карточкалар",
+        BRAND_NAME
+      ],
+      hashtags: [BRAND_HASHTAG, "#ТілҮйрену", "#СөздікҚор"]
+    };
+  }
   return {
     title: ({ targetLanguageName, deckTitle, wordCount }) =>
       `${targetLanguageName} A1: ${deckTitle} | ${wordCount} words with pronunciation`,
@@ -491,6 +512,27 @@ function normalizeHashtag(value) {
   return text.startsWith("#") ? text.replace(/\s+/gu, "") : `#${text.replace(/\s+/gu, "")}`;
 }
 
+const NON_ENGLISH_METADATA_LEAK_PATTERNS = [
+  /\bwords?\s+with\s+pronunciation\b/iu,
+  /\bvocabulary\s+with\s+pronunciation\b/iu,
+  /\bA1\s+[A-Za-z -]*Vocabulary\b/u,
+  /\blearn\s+\d{1,3}\s+essential\b/iu,
+  /\bfor\s+beginners\b/iu,
+  /\bSubscribe\s+for\s+more\b/iu,
+];
+
+function hasNonEnglishMetadataLeak(metadata) {
+  const supportLang = normalizeLanguageCode(metadata.supportLang);
+  if (supportLang === "EN" || supportLang === "EN-GB") return false;
+  const text = [
+    metadata.title,
+    metadata.description,
+    ...(metadata.tags || []),
+    ...(metadata.hashtags || [])
+  ].map(cleanText).join(" ");
+  return NON_ENGLISH_METADATA_LEAK_PATTERNS.some((pattern) => pattern.test(text));
+}
+
 function utf8ByteLength(value) {
   return Buffer.byteLength(String(value || ""), "utf8");
 }
@@ -593,11 +635,27 @@ export async function generateYouTubeMetadata(input) {
     });
   }
 
-  return normalizeYouTubeMetadata({
+  const normalizedGenerated = normalizeYouTubeMetadata({
     ...template,
     ...generated,
     source: `gemini-${backend}`,
     model,
     generatedAt: new Date().toISOString()
   });
+  if (normalizeLanguageCode(template.supportLang) === "KK" && hasNonEnglishMetadataLeak(normalizedGenerated)) {
+    return normalizeYouTubeMetadata({
+      ...template,
+      source: "human-curated-language-guard",
+      model,
+      generatedAt: new Date().toISOString(),
+      aiMetadata: {
+        attempted: true,
+        backend,
+        model,
+        status: "language_guarded",
+        reason: "ai_output_contained_english_template_markers"
+      }
+    });
+  }
+  return normalizedGenerated;
 }
