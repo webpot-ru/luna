@@ -242,6 +242,57 @@ function buildUploadDescription(metadata) {
   return `${description}\n\n${missing.join(" ")}`.trim();
 }
 
+function utf8ByteLength(value) {
+  return Buffer.byteLength(String(value || ""), "utf8");
+}
+
+function truncateUtf8AtWord(value, maxChars, maxBytes) {
+  const text = cleanText(value);
+  let result = "";
+  for (const char of text) {
+    const next = `${result}${char}`;
+    if (next.length > maxChars || utf8ByteLength(next) > maxBytes - 3) break;
+    result = next;
+  }
+  if (result === text) return result;
+  const lastSpace = result.lastIndexOf(" ");
+  const trimmed = (lastSpace > 20 ? result.slice(0, lastSpace) : result).trim();
+  return `${trimmed || result.trim()}…`;
+}
+
+function capUploadTags(tags, maxBytes = 360) {
+  const result = [];
+  let total = 0;
+  for (const tag of asArray(tags)) {
+    const clean = truncateUtf8AtWord(String(tag || "").replace(/^#/u, ""), 45, 80);
+    if (!clean) continue;
+    const nextTotal = total + utf8ByteLength(clean) + (result.length ? 1 : 0);
+    if (nextTotal > maxBytes) continue;
+    result.push(clean);
+    total = nextTotal;
+  }
+  return result;
+}
+
+function isInvalidMetadataError(error) {
+  return /request metadata is invalid/iu.test(cleanText(error?.message || String(error || "")));
+}
+
+function buildSnippetPayload({ video, metadata, includeTags = true, includeLanguageFields = true }) {
+  const description = buildUploadDescription(metadata).slice(0, 4800);
+  return {
+    id: video.id,
+    snippet: {
+      title: truncateUtf8AtWord(metadata.title || video.snippet?.title || "FlashcardsLuna", 100, 100),
+      description,
+      ...(includeTags ? { tags: capUploadTags(metadata.tags) } : { tags: [] }),
+      categoryId: String(metadata.categoryId || video.snippet?.categoryId || "27"),
+      ...(includeLanguageFields && video.snippet?.defaultLanguage ? { defaultLanguage: video.snippet.defaultLanguage } : {}),
+      ...(includeLanguageFields && video.snippet?.defaultAudioLanguage ? { defaultAudioLanguage: video.snippet.defaultAudioLanguage } : {}),
+    },
+  };
+}
+
 function loadEnvFile(filePath) {
   if (!filePath || !fs.existsSync(filePath)) return;
   const content = fs.readFileSync(filePath, "utf8");
@@ -445,7 +496,7 @@ async function readVideos({ accessToken, ids }) {
 }
 
 async function updateVideoSnippet({ accessToken, video, metadata }) {
-  return youtubeJson({
+  const base = {
     accessToken,
     method: "PUT",
     pathName: "videos",
@@ -453,18 +504,27 @@ async function updateVideoSnippet({ accessToken, video, metadata }) {
       part: "snippet",
       fields: "id,snippet(channelId,title,description,tags,categoryId)",
     },
-    body: {
-      id: video.id,
-      snippet: {
-        title: metadata.title,
-        description: buildUploadDescription(metadata),
-        tags: Array.isArray(metadata.tags) ? metadata.tags : [],
-        categoryId: String(metadata.categoryId || video.snippet?.categoryId || "27"),
-        ...(video.snippet?.defaultLanguage ? { defaultLanguage: video.snippet.defaultLanguage } : {}),
-        ...(video.snippet?.defaultAudioLanguage ? { defaultAudioLanguage: video.snippet.defaultAudioLanguage } : {}),
-      },
-    },
-  });
+  };
+  try {
+    return await youtubeJson({
+      ...base,
+      body: buildSnippetPayload({ video, metadata, includeTags: true, includeLanguageFields: true }),
+    });
+  } catch (error) {
+    if (!isInvalidMetadataError(error)) throw error;
+    try {
+      return await youtubeJson({
+        ...base,
+        body: buildSnippetPayload({ video, metadata, includeTags: true, includeLanguageFields: false }),
+      });
+    } catch (retryError) {
+      if (!isInvalidMetadataError(retryError)) throw retryError;
+      return youtubeJson({
+        ...base,
+        body: buildSnippetPayload({ video, metadata, includeTags: false, includeLanguageFields: false }),
+      });
+    }
+  }
 }
 
 function loadRoutingMap(filePath) {

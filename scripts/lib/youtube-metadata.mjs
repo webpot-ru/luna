@@ -65,6 +65,20 @@ function truncateAtWord(value, maxLength) {
   return `${(lastSpace > 40 ? cut.slice(0, lastSpace) : cut).trim()}…`;
 }
 
+function truncateAtWordUtf8(value, maxChars, maxBytes) {
+  const text = truncateAtWord(value, maxChars);
+  if (utf8ByteLength(text) <= maxBytes) return text;
+  let result = "";
+  for (const char of text) {
+    const next = `${result}${char}`;
+    if (utf8ByteLength(next) > maxBytes - 3) break;
+    result = next;
+  }
+  const lastSpace = result.lastIndexOf(" ");
+  const trimmed = (lastSpace > 20 ? result.slice(0, lastSpace) : result).trim();
+  return `${trimmed || result.trim()}…`;
+}
+
 function boundedAiError(error) {
   return cleanText(error?.message || String(error || "unknown AI metadata error")).slice(0, 600);
 }
@@ -481,7 +495,7 @@ export function normalizeYouTubeMetadata(metadata) {
 
   const normalized = {
     ...metadata,
-    title: truncateAtWord(metadata.title || `${BRAND_NAME} Vocabulary Lesson`, 100),
+    title: truncateAtWordUtf8(metadata.title || `${BRAND_NAME} Vocabulary Lesson`, 100, 100),
     description: description.slice(0, 5000),
     tags,
     hashtags,
