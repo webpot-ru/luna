@@ -472,6 +472,8 @@ Implementation sequence:
 
 2026-06-24 route-4 `KK -> HI` follow-up: run `28106310137` proved the metadata-language gate can still stop a bad fresh build before upload. VectorEngine/Gemini generated a Kazakh-channel title with English-template suffix `50 words with pronunciation` plus English search tags, so the workflow failed before any YouTube write. `scripts/lib/youtube-metadata.mjs` now includes a Kazakh (`KK`) curated template and a language guard: if `KK` AI metadata contains English-template markers, the final metadata is replaced by the Kazakh curated copy and marked `source=human-curated-language-guard`. Do not weaken the language gate to work around these failures; fix prompts/templates/guards and rerun missing-only.
 
+2026-06-24 route-4 retry rule after run `28107347487`: the `KK` guard worked and the retry reached upload. `IT -> HI`, `KA -> HI` and `KK -> HI` are fully playlist-verified; `KN -> HI` uploaded as video `HCqu0hY4eCo` but stopped on post-upload YouTube Data API quota during `videos.list`, so it is an active partial row with `needsPlaylistInsert=true`. Recovery must be playlist/readback-only for `KN -> HI`; do not regenerate or reupload it. The remaining route-4 not-launched pairs in the current 50-pair layer are `ML/NE/SI/SW/TA/TE/UZ -> HI`. Route-level stop rule still applies: on `youtube.quota / quotaExceeded`, stop the affected route instead of moving those support channels to another API project.
+
 Live repair for already-uploaded videos uses:
 
 ```bash
