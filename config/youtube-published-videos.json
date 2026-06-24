@@ -4705,7 +4705,7 @@
       "supportLang": "HI",
       "targetLang": "CS",
       "playlist_key": "HI__CS__ordinary-vocabulary__a1-everyday",
-      "title": "Czech Vocabulary: रसोई के सामान (Kitchenware) | 50 Czech Words with Pronunciation (A1)",
+      "title": "चेक भाषा में रसोई के सामान के नाम | शुरुआती स्तर (A1) के लिए 50 शब्द",
       "youtubeVideoId": "zPp65BSoS50",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=zPp65BSoS50",
       "youtubePlaylistId": "PLV5-i-n5UanVx4wr9yvqSRzasn_MfoKNV",
@@ -4730,13 +4730,22 @@
       "githubRunId": "27946200137",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27946200137",
       "uploadedAt": "2026-06-22T10:38:36.952Z",
-      "lastReadbackAt": "2026-06-22T10:38:36.952Z",
+      "lastReadbackAt": "2026-06-24T03:25:47.791Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-23T15:00:00.000Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "metadataLanguageRepair": {
+        "repairedAt": "2026-06-24T03:25:47.791Z",
+        "reason": "english_fallback_template",
+        "previousTitle": "Czech Vocabulary: रसोई के सामान (Kitchenware) | 50 Czech Words with Pronunciation (A1)",
+        "replacementPath": "outputs/youtube-metadata-language-repair-youtube-1-20260624/hi_cs_zPp65BSoS50/youtube_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      },
+      "lastMetadataRepairAt": "2026-06-24T03:25:47.791Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
