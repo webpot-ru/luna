@@ -79,6 +79,34 @@ function truncateAtWordUtf8(value, maxChars, maxBytes) {
   return `${trimmed || result.trim()}…`;
 }
 
+function visibleLength(value) {
+  return Array.from(String(value || "")).length;
+}
+
+function buildSeoTitleFloor(metadata) {
+  const targetLanguageName = cleanText(metadata.targetLanguageName) || "Language";
+  const deckTitle = cleanText(metadata.deckTitle) || "Vocabulary";
+  const level = cleanText(metadata.level) || "A1";
+  const wordCount = Number(metadata.wordCount) || 50;
+  return `${targetLanguageName} ${level}: ${deckTitle} | ${wordCount} words | ${BRAND_NAME}`;
+}
+
+function ensureSeoTitleFloor(value, metadata) {
+  let title = cleanText(value);
+  if (!title) title = buildSeoTitleFloor(metadata);
+  if (visibleLength(title) < 45) {
+    const wordCount = Number(metadata.wordCount) || 50;
+    const compactBooster = `${wordCount} ${cleanText(metadata.level) || "A1"} words + pronunciation | ${BRAND_NAME}`;
+    if (!title.includes(BRAND_NAME)) title = `${title} | ${compactBooster}`;
+    else if (!title.includes(String(wordCount))) title = `${title} | ${wordCount} ${cleanText(metadata.level) || "A1"}`;
+  }
+  let bounded = truncateAtWordUtf8(title, 100, 100);
+  if (visibleLength(bounded) >= 25) return bounded;
+  bounded = truncateAtWordUtf8(buildSeoTitleFloor(metadata), 100, 100);
+  if (visibleLength(bounded) >= 25) return bounded;
+  return truncateAtWordUtf8(`${cleanText(metadata.level) || "A1"} vocabulary | ${Number(metadata.wordCount) || 50} words | ${BRAND_NAME}`, 100, 100);
+}
+
 function boundedAiError(error) {
   return cleanText(error?.message || String(error || "unknown AI metadata error")).slice(0, 600);
 }
@@ -302,7 +330,7 @@ export function buildGeminiPrompt(baseMetadata, cards) {
     "- Keep it search-friendly but not clickbait.",
     "",
     "Output constraints:",
-    "- title: <= 90 characters.",
+    `- title: 45-90 characters; if the native-language title would be short, add a compact suffix such as "${baseMetadata.wordCount} ${baseMetadata.level} words + pronunciation | ${BRAND_NAME}".`,
     "- description: 700-1400 characters, include the exact course URL once.",
     "- tags: 12-20 short search phrases, no hashtags inside tags.",
     "- hashtags: 3-5 strings beginning with #.",
@@ -354,6 +382,7 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
       ? "- Tags and hashtags may use normal English search phrases."
       : `- Tags and hashtags must also be in ${supportLanguageName}. Do not add English search phrases such as "learn ...", "... vocabulary", "... for beginners", or "... in Hindi". Brand text (${BRAND_NAME}) is allowed.`,
     "- Make the title a natural search title for beginner learners, not clickbait.",
+    `- Keep the title 45-90 characters; if the native-language title is naturally short, add a compact suffix like "${baseMetadata.wordCount} ${baseMetadata.level} words + pronunciation | ${BRAND_NAME}".`,
     "- Make the description several useful short paragraphs and include courseUrl exactly once.",
     `- Mention vocabulary, pronunciation, repeat pauses, mini-test/review, and ${BRAND_NAME} flashcards.`,
     "- Include 3-5 concrete sampleWords in the description if they fit naturally; do not turn the description into a keyword list.",
@@ -495,7 +524,7 @@ export function normalizeYouTubeMetadata(metadata) {
 
   const normalized = {
     ...metadata,
-    title: truncateAtWordUtf8(metadata.title || `${BRAND_NAME} Vocabulary Lesson`, 100, 100),
+    title: ensureSeoTitleFloor(metadata.title || `${BRAND_NAME} Vocabulary Lesson`, metadata),
     description: description.slice(0, 5000),
     tags,
     hashtags,
