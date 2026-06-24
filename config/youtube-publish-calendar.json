@@ -36959,6 +36959,52 @@
       "youtubeVideoId": "9u6262j26cA",
       "youtubePlaylistId": "PLx5nIeqMBQ7n7E5egUp_19dJxC3Jy2ALj",
       "playlistItemId": "UEx4NW5JZXFNQlE3bjdFNWVnVXBfMTlkSnhDM0p5MkFMai41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ET",
+      "targetLang": "HI",
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "publishAt": "2026-06-25T14:30:00.000Z",
+      "timeZone": "Europe/Tallinn",
+      "localDate": "2026-06-25",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 0,
+      "slotOrdinal": 3,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_hi_et/youtube_metadata.json",
+      "title": "Hindi keele õppimine: Köögitarbed | 50 A1-sõna koos hääldusega",
+      "playlist_key": "ET__HI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-26T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-02T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-25T14:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28093117203",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28093117203",
+      "createdAt": "2026-06-24T10:48:56.849Z",
+      "updatedAt": "2026-06-24T10:48:56.849Z",
+      "youtubeVideoId": "l1h00hdimvg",
+      "youtubePlaylistId": "PLSzlbZS0FhfZ8afU4J5p48ee68hz2KcP1",
+      "playlistItemId": "UExTemxiWlMwRmhmWjhhZlU0SjVwNDhlZTY4aHoyS2NQMS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
