@@ -38509,6 +38509,49 @@
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28103616303",
       "createdAt": "2026-06-24T13:55:21.911Z",
       "updatedAt": "2026-06-24T13:55:21.911Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ML",
+      "targetLang": "HI",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "publishAt": "2026-06-25T15:00:00.000Z",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-06-25",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 0,
+      "slotOrdinal": 4,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_hi_ml/youtube_metadata.json",
+      "title": "ഹിന്ദിയിലെ അടുക്കള സാധനങ്ങൾ: 50…",
+      "playlist_key": "ML__HI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-26T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-06-28T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-02T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-25T15:00:00.000Z"
+        }
+      ],
+      "githubRunId": "28106310137",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28106310137",
+      "createdAt": "2026-06-24T14:37:11.029Z",
+      "updatedAt": "2026-06-24T14:37:11.029Z"
     }
   ]
 }
