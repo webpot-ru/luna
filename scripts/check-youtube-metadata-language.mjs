@@ -67,6 +67,7 @@ function isEnglishSupport(code) {
 
 const ENGLISH_TEMPLATE_PATTERNS = [
   { id: "a1-vocabulary-title", pattern: /\b[A-Z][A-Za-z -]+ A1 (?:[A-Za-z -]+\s+)?Vocabulary\b/u },
+  { id: "a1-flashcards-title", pattern: /\b[A-Z][A-Za-z -]+ A1 Flashcards\b/u },
   { id: "english-vocabulary-with-pronunciation", pattern: /\b[A-Z][A-Za-z -]+ (?:A1\s+)?[A-Za-z -]*Vocabulary\s+with\s+Pronunciation\b/u },
   { id: "generic-a1-vocabulary", pattern: /\bA1\s+[A-Za-z -]*Vocabulary\b/u },
   { id: "words-with-pronunciation", pattern: /\b\d{1,3}\s+(?:[A-Z][A-Za-z -]+\s+)?(?:Kitchenware\s+)?Words?\s+with\s+Pronunciation\b/iu },
@@ -76,6 +77,9 @@ const ENGLISH_TEMPLATE_PATTERNS = [
   { id: "listen-repeat-test", pattern: /\bListen\s+to\s+each\s+[A-Z][A-Za-z -]+\s+word,\s+repeat\s+during\s+the\s+pauses\b/iu },
   { id: "test-memory-ending", pattern: /\btest\s+your\s+memory\s+with\s+a\s+quick\s+mini-test\b/iu },
   { id: "daily-practice", pattern: /\bFor\s+daily\s+practice,\s+you\s+can\s+review\s+these\s+words\b/iu },
+  { id: "videos-for-native-speakers", pattern: /\bvideos\s+for\s+native\s+[A-Z0-9 -]+\s+speakers\s+learning\b/iu },
+  { id: "flashcards-pronunciation-repeat-pauses", pattern: /\bflashcards,\s+pronunciation,\s+repeat\s+pauses\b/iu },
+  { id: "playlist-key-marker", pattern: /\bPlaylist\s+key:/iu },
   { id: "subscribe-english-template", pattern: /\bSubscribe\s+to\s+FlashcardsLuna\s+for\s+more\s+short\s+vocabulary\s+lessons\b/iu },
   { id: "beginner-learn-english-template", pattern: /\b(?:learn|study|practice)\s+[A-Z][A-Za-z -]+\s+(?:for\s+beginners|vocabulary|pronunciation)\b/iu },
 ];
@@ -108,6 +112,8 @@ function validateRecord(record) {
   const targetLang = normalizeCode(record.targetLang);
   const title = cleanText(record.title);
   const description = cleanText(record.description);
+  const playlistTitle = cleanText(record.playlistTitle || record.playlist?.title);
+  const playlistDescription = cleanText(record.playlistDescription || record.playlist?.description);
   const tags = asArray(record.tags).map(cleanText).filter(Boolean);
   const hashtags = asArray(record.hashtags).map(cleanText).filter(Boolean);
   const blockers = [];
@@ -119,8 +125,11 @@ function validateRecord(record) {
   if (!title) blockers.push("missing title");
 
   if (supportLang && !isEnglishSupport(supportLang)) {
+    const shouldValidatePlaylistText = record.source !== "registry-title-only";
     const titleMatches = findEnglishTemplateMatches(title);
     const descriptionMatches = findEnglishTemplateMatches(description);
+    const playlistTitleMatches = findEnglishTemplateMatches(playlistTitle);
+    const playlistDescriptionMatches = findEnglishTemplateMatches(playlistDescription);
     const englishTagCount = countEnglishTags(tags);
     const hashtagText = hashtags.join(" ");
     const hashtagMatches = findEnglishTemplateMatches(hashtagText);
@@ -132,6 +141,18 @@ function validateRecord(record) {
     if (descriptionMatches.length) {
       blockers.push(`non-English support ${supportLang} has English-template description markers: ${descriptionMatches.join(",")}`);
       evidence.descriptionMatches = descriptionMatches;
+    }
+    if (shouldValidatePlaylistText && !playlistTitle) {
+      blockers.push(`non-English support ${supportLang} is missing playlistTitle`);
+    } else if (shouldValidatePlaylistText && playlistTitleMatches.length) {
+      blockers.push(`non-English support ${supportLang} has English-template playlist title markers: ${playlistTitleMatches.join(",")}`);
+      evidence.playlistTitleMatches = playlistTitleMatches;
+    }
+    if (shouldValidatePlaylistText && !playlistDescription) {
+      blockers.push(`non-English support ${supportLang} is missing playlistDescription`);
+    } else if (shouldValidatePlaylistText && playlistDescriptionMatches.length) {
+      blockers.push(`non-English support ${supportLang} has English-template playlist description markers: ${playlistDescriptionMatches.join(",")}`);
+      evidence.playlistDescriptionMatches = playlistDescriptionMatches;
     }
     if (englishTagCount >= 4) {
       blockers.push(`non-English support ${supportLang} has ${englishTagCount} English-template tags`);
@@ -155,6 +176,7 @@ function validateRecord(record) {
     supportLang,
     targetLang,
     title,
+    playlistTitle,
     status: blockers.length ? "fail" : "pass",
     blockers,
     warnings,

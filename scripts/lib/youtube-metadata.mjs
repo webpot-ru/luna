@@ -21,10 +21,12 @@ export const YOUTUBE_METADATA_SCHEMA = {
   properties: {
     title: { type: "string" },
     description: { type: "string" },
+    playlistTitle: { type: "string" },
+    playlistDescription: { type: "string" },
     tags: { type: "array", items: { type: "string" } },
     hashtags: { type: "array", items: { type: "string" } }
   },
-  required: ["title", "description", "tags", "hashtags"]
+  required: ["title", "description", "playlistTitle", "playlistDescription", "tags", "hashtags"]
 };
 
 function sqlString(value) {
@@ -353,6 +355,8 @@ export function buildGeminiPrompt(baseMetadata, cards) {
     "Output constraints:",
     `- title: 45-90 characters; if the native-language title would be short, add a compact suffix such as "${baseMetadata.wordCount} ${baseMetadata.level} words + pronunciation | ${BRAND_NAME}".`,
     "- description: 700-1400 characters, include the exact course URL once.",
+    "- playlistTitle: 25-90 characters, in the audience/support language, suitable for a reusable course playlist.",
+    `- playlistDescription: 120-500 characters, in the audience/support language, mention ${BRAND_NAME}, vocabulary practice and the target language.`,
     "- tags: 12-20 short search phrases, no hashtags inside tags.",
     "- hashtags: 3-5 strings beginning with #.",
     "- Keep total tags length under 450 characters.",
@@ -361,7 +365,7 @@ export function buildGeminiPrompt(baseMetadata, cards) {
     `Suggested base description: ${baseMetadata.description}`,
     `Vocabulary sample: ${cardWords.join(", ")}`,
     "",
-    'JSON schema: {"title":"string","description":"string","tags":["string"],"hashtags":["string"]}'
+    'JSON schema: {"title":"string","description":"string","playlistTitle":"string","playlistDescription":"string","tags":["string"],"hashtags":["string"]}'
   ].join("\n");
 }
 
@@ -392,7 +396,7 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
     JSON.stringify(facts),
     "",
     "Rules:",
-    `- Write title, description, tags and hashtags primarily in the audience/support language: ${supportLanguageName} (${supportLang}).`,
+    `- Write title, description, playlistTitle, playlistDescription, tags and hashtags primarily in the audience/support language: ${supportLanguageName} (${supportLang}).`,
     isEnglishSupport
       ? "- English output is allowed because this is an English support-language channel."
       : "- Do not keep English fallback wording from baseTitle/baseDescription; use those fields only as factual input.",
@@ -405,6 +409,8 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
     "- Make the title a natural search title for beginner learners, not clickbait.",
     `- Keep the title 45-90 characters; if the native-language title is naturally short, add a compact suffix like "${baseMetadata.wordCount} ${baseMetadata.level} words + pronunciation | ${BRAND_NAME}".`,
     "- Make the description several useful short paragraphs and include courseUrl exactly once.",
+    "- Make playlistTitle reusable across this target language and course track, not specific to one video.",
+    `- Make playlistDescription 1-2 short sentences for the playlist page in ${supportLanguageName}; include ${BRAND_NAME}, vocabulary practice and the target language.`,
     `- Mention vocabulary, pronunciation, repeat pauses, mini-test/review, and ${BRAND_NAME} flashcards.`,
     "- Include 3-5 concrete sampleWords in the description if they fit naturally; do not turn the description into a keyword list.",
     "- tags: 12-18 short search phrases, no # characters.",
@@ -412,7 +418,7 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
     "- Do not invent paid features, certificates, native teachers, exact duration or guarantees.",
     "",
     "Complete this exact JSON shape:",
-    '{"title":"","description":"","tags":[],"hashtags":[]}'
+    '{"title":"","description":"","playlistTitle":"","playlistDescription":"","tags":[],"hashtags":[]}'
   ].join("\n");
 }
 
@@ -500,7 +506,7 @@ async function callGeminiVectorEngine(prompt, { model = defaultVectorEngineGemin
         prompt,
         "",
         "OUTPUT EXACTLY THIS OBJECT SHAPE WITH REAL VALUES:",
-        '{"title":"...","description":"...","tags":["..."],"hashtags":["#..."]}'
+        '{"title":"...","description":"...","playlistTitle":"...","playlistDescription":"...","tags":["..."],"hashtags":["#..."]}'
       ].join("\n")
     });
   }
@@ -580,11 +586,13 @@ export function normalizeYouTubeMetadata(metadata) {
     const assignment = buildPlaylistAssignment(normalized);
     normalized.playlist_key = normalized.playlist_key || normalized.playlistKey || assignment.key;
     normalized.playlistKey = normalized.playlistKey || normalized.playlist_key;
+    normalized.playlistTitle = cleanText(normalized.playlistTitle || assignment.title);
+    normalized.playlistDescription = cleanText(normalized.playlistDescription || assignment.description);
     normalized.playlist = {
       ...assignment,
       key: normalized.playlist_key,
-      title: normalized.playlistTitle || assignment.title,
-      description: normalized.playlistDescription || assignment.description
+      title: normalized.playlistTitle,
+      description: normalized.playlistDescription
     };
   }
 
