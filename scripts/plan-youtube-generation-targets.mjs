@@ -16,6 +16,7 @@ function parseArgs(argv) {
     setId: "",
     supports: [],
     targets: null,
+    excludeSupports: [],
     excludeTargets: [],
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
     allowRepublish: false,
@@ -36,6 +37,11 @@ function parseArgs(argv) {
     if (arg === "--set" || arg.startsWith("--set=")) options.setId = readValue();
     else if (arg === "--support" || arg.startsWith("--support=")) {
       options.supports = readValue().split(",").map(normalizeCode).filter(Boolean);
+    } else if (arg === "--exclude-supports" || arg.startsWith("--exclude-supports=") || arg === "--exclude-support" || arg.startsWith("--exclude-support=")) {
+      const value = readValue();
+      options.excludeSupports = value.toUpperCase() === "NONE" || value.trim() === ""
+        ? []
+        : value.split(",").map(normalizeCode).filter(Boolean);
     } else if ((arg === "--targets" || arg === "--langs") || arg.startsWith("--targets=") || arg.startsWith("--langs=")) {
       const value = readValue();
       options.targets = value.toUpperCase() === "ALL"
@@ -70,6 +76,7 @@ function usage() {
     "Already active publications in config/youtube-published-videos.json are excluded unless --allow-republish is passed.",
     "",
     "Options:",
+    "  --exclude-supports <codes> Exclude support languages from this plan, e.g. HY while Armenian TTS is blocked.",
     "  --exclude-targets <codes>  Exclude target languages from this plan, e.g. HY while Armenian TTS is blocked.",
     "  --shard-count <n>       Report deterministic shard selection for the eligible target list.",
     "  --shard-index <n>       0-based deterministic shard index.",
@@ -96,6 +103,27 @@ function compactExistingPublication(row) {
     publishAt: row.publishAt || row.scheduledPublishAt || "",
     uploadedAt: row.uploadedAt || "",
     githubRunId: row.githubRunId || "",
+  };
+}
+
+function excludedSupportPlan({ setId, supportLang }) {
+  return {
+    setId,
+    supportLang: normalizeCode(supportLang),
+    requestedTargets: [],
+    eligibleTargets: [],
+    eligibleTargetsCsv: "",
+    shardSelectedTargets: [],
+    shardSelectedTargetsCsv: "",
+    skippedTargets: [],
+    skippedSupportReason: "excluded_support_language",
+    counts: {
+      allTargets: 0,
+      requestedTargets: 0,
+      eligibleTargets: 0,
+      skippedTargets: 0,
+      shardSelectedTargets: 0,
+    },
   };
 }
 
@@ -162,8 +190,13 @@ async function main() {
   const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
   const requestedTargets = options.targets ? normalizeTargetList(options.targets) : null;
   const supports = normalizeTargetList(options.supports);
+  const excludedSupports = new Set(normalizeTargetList(options.excludeSupports));
   const supportReports = [];
   for (const supportLang of supports) {
+    if (excludedSupports.has(supportLang)) {
+      supportReports.push(excludedSupportPlan({ setId: options.setId, supportLang }));
+      continue;
+    }
     supportReports.push(await supportPlan({
       setId: options.setId,
       supportLang,
@@ -182,6 +215,7 @@ async function main() {
     setId: options.setId,
     publicationRegistry: options.publicationRegistry,
     allowRepublish: options.allowRepublish,
+    excludedSupports: normalizeTargetList(options.excludeSupports),
     excludedTargets: normalizeTargetList(options.excludeTargets),
     shardCount: options.shardCount,
     shardIndex: options.shardIndex,
@@ -191,6 +225,7 @@ async function main() {
       requestedTargetCount: supportReports.reduce((sum, row) => sum + row.counts.requestedTargets, 0),
       eligibleTargetCount: supportReports.reduce((sum, row) => sum + row.counts.eligibleTargets, 0),
       shardSelectedTargetCount: supportReports.reduce((sum, row) => sum + row.counts.shardSelectedTargets, 0),
+      skippedExcludedSupportCount: supportReports.filter((row) => row.skippedSupportReason === "excluded_support_language").length,
       skippedExistingPublicationCount: supportReports.reduce((sum, row) => sum + row.skippedTargets.filter((item) => item.reason === "existing_active_publication").length, 0),
       skippedExcludedTargetCount: supportReports.reduce((sum, row) => sum + row.skippedTargets.filter((item) => item.reason === "excluded_target_language").length, 0),
       hasEligibleTargets: supportReports.some((row) => row.eligibleTargets.length > 0),

@@ -19,6 +19,10 @@ on:
         description: "Support language code(s), comma-separated. ALL is refused for publish safety."
         required: true
         default: "RU"
+      exclude_supports:
+        description: "Support language codes to skip before rendering/upload. Default keeps Armenian out until HY TTS is unblocked."
+        required: false
+        default: "HY"
       youtube_environment:
         description: "GitHub environment with the support route OAuth bundle. Use auto for one support channel."
         required: true
@@ -296,6 +300,7 @@ jobs:
         env:
           SET_ID: ${{ github.event.inputs.set_id }}
           SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          EXCLUDE_SUPPORTS_INPUT: ${{ github.event.inputs.exclude_supports }}
           LANGS_INPUT: ${{ github.event.inputs.langs }}
           EXCLUDE_LANGS_INPUT: ${{ github.event.inputs.exclude_langs }}
           WORKER_COUNT: ${{ github.event.inputs.worker_count }}
@@ -304,6 +309,9 @@ jobs:
         run: |
           set -euo pipefail
           PRE_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT_INPUT" "--shard-count" "$WORKER_COUNT" "--shard-index" "$WORKER_INDEX" "--output=outputs/video-generator/youtube-generation-targets-github.json")
+          if [ -n "$EXCLUDE_SUPPORTS_INPUT" ]; then
+            PRE_ARGS+=("--exclude-supports" "$EXCLUDE_SUPPORTS_INPUT")
+          fi
           if [ -n "$LANGS_INPUT" ]; then
             PRE_ARGS+=("--targets" "$LANGS_INPUT")
           fi
@@ -328,6 +336,7 @@ jobs:
                 "",
                 `- Eligible targets before sharding: ${summary.eligibleTargetCount || 0}`,
                 `- Targets assigned to this worker: ${summary.shardSelectedTargetCount || 0}`,
+                `- Skipped excluded support languages: ${summary.skippedExcludedSupportCount || 0}`,
                 `- Skipped active publications: ${summary.skippedExistingPublicationCount || 0}`,
                 `- Skipped excluded target languages: ${summary.skippedExcludedTargetCount || 0}`,
                 "",
