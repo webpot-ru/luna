@@ -64,6 +64,10 @@ function fail(message) {
   throw new Error(message);
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function resolveExistingPath(filePath, label) {
   const resolved = path.resolve(filePath);
   if (!fs.existsSync(resolved)) fail(`${label} not found: ${filePath}`);
@@ -207,6 +211,15 @@ async function findPlaylistItem({ accessToken, playlistId, videoId }) {
     if (match) return match;
     pageToken = readback?.nextPageToken || "";
   } while (pageToken);
+  return null;
+}
+
+async function findPlaylistItemWithRetry({ accessToken, playlistId, videoId, attempts = 6, delayMs = 5000 }) {
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const item = await findPlaylistItem({ accessToken, playlistId, videoId });
+    if (item?.id) return item;
+    if (attempt < attempts) await sleep(delayMs);
+  }
   return null;
 }
 
@@ -378,7 +391,7 @@ async function main() {
       playlistId: row.youtubePlaylistId,
       videoId: row.youtubeVideoId,
     });
-    const verifiedItem = await findPlaylistItem({
+    const verifiedItem = await findPlaylistItemWithRetry({
       accessToken,
       playlistId: row.youtubePlaylistId,
       videoId: row.youtubeVideoId,
