@@ -3699,13 +3699,23 @@
       "channelKey": "et",
       "youtube_channel_id": "UC2nA8gsivL__x6JKl-fs0uw",
       "youtube_playlist_id": "PLSzlbZS0FhfbGK9YX8Z1yRzbuBASxXMvo",
-      "title": "English A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native ET speakers learning English: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Inglise keele sõnavara algajatele | FlashcardsLuna",
+      "description": "Õpi inglise keele sõnavara ja hääldust FlashcardsLuna abil. Praktilised sõnakaardid ja lühikesed harjutused algajatele keeleõppijatele.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:29:45.611Z",
-      "lastReadbackAt": "2026-06-23T09:29:45.611Z",
-      "recoverySource": "github_raw_log_20260623_v3"
+      "lastReadbackAt": "2026-06-25T15:35:42.375Z",
+      "recoverySource": "github_raw_log_20260623_v3",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:35:42.375Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "English A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native ET speakers learning English: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/et_en_PLSzlbZS0FhfbGK9YX8Z1yRzbuBASxXMvo/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "ET__EN-GB__ordinary-vocabulary__a1-everyday",
@@ -3717,12 +3727,22 @@
       "channelKey": "et",
       "youtube_channel_id": "UC2nA8gsivL__x6JKl-fs0uw",
       "youtube_playlist_id": "PLSzlbZS0FhfYlARUhk4JoXqnlOyVlNmax",
-      "title": "British English A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native ET speakers learning British English: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Inglise keele sõnavara algajatele (A1) | FlashcardsLuna",
+      "description": "Harjuta inglise keele sõnavara FlashcardsLuna interaktiivsete sõnakaartide ja videote abil. Siit leiad kasulikud sõnad koos hääldusega algajatele.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-24T08:58:27.786Z",
-      "lastReadbackAt": "2026-06-24T08:58:29.079Z"
+      "lastReadbackAt": "2026-06-25T15:37:21.256Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:37:21.256Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "British English A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native ET speakers learning British English: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/et_en-gb_PLSzlbZS0FhfYlARUhk4JoXqnlOyVlNmax/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "ET__ES__ordinary-vocabulary__a1-everyday",
@@ -3734,13 +3754,23 @@
       "channelKey": "et",
       "youtube_channel_id": "UC2nA8gsivL__x6JKl-fs0uw",
       "youtube_playlist_id": "PLSzlbZS0FhfZrSerlLbndv6hC3wAFRhkq",
-      "title": "Spanish A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native ET speakers learning Spanish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Spanish A1: sõnavara ja hääldus",
+      "description": "FlashcardsLuna videod eesti keelt kõnelevatele õppijatele, kes õpivad Spanish: sõnakaardid, hääldus, kordamispausid ja lühikesed minitestid.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:29:49.269Z",
-      "lastReadbackAt": "2026-06-23T09:29:49.269Z",
-      "recoverySource": "github_raw_log_20260623_v3"
+      "lastReadbackAt": "2026-06-25T15:39:32.179Z",
+      "recoverySource": "github_raw_log_20260623_v3",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:39:32.179Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Spanish A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native ET speakers learning Spanish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/et_es_PLSzlbZS0FhfZrSerlLbndv6hC3wAFRhkq/playlist_metadata.json",
+        "source": "template-ai-fallback",
+        "model": ""
+      }
     },
     {
       "playlist_key": "ET__ES-419__ordinary-vocabulary__a1-everyday",
@@ -3752,12 +3782,22 @@
       "channelKey": "et",
       "youtube_channel_id": "UC2nA8gsivL__x6JKl-fs0uw",
       "youtube_playlist_id": "PLSzlbZS0FhfagFl3_8C9szTsc46wiIu_x",
-      "title": "Latin American Spanish A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native ET speakers learning Latin American Spanish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Ladina-Ameerika hispaania keele sõnavara algajatele (A1)",
+      "description": "Õpi Ladina-Ameerika hispaania keele sõnu ja hääldust FlashcardsLuna abil. Sõnavara harjutused ja kaardid algajatele.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-24T08:58:27.795Z",
-      "lastReadbackAt": "2026-06-24T08:58:33.232Z"
+      "lastReadbackAt": "2026-06-25T15:39:58.009Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:39:58.009Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Latin American Spanish A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native ET speakers learning Latin American Spanish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/et_es-419_PLSzlbZS0FhfagFl3_8C9szTsc46wiIu_x/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "ET__FI__ordinary-vocabulary__a1-everyday",
@@ -3769,12 +3809,22 @@
       "channelKey": "et",
       "youtube_channel_id": "UC2nA8gsivL__x6JKl-fs0uw",
       "youtube_playlist_id": "PLSzlbZS0FhfagIj96OufLvyQlIpmv3-H2",
-      "title": "Finnish A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native ET speakers learning Finnish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Soome keele sõnavara algajatele (A1) | FlashcardsLuna",
+      "description": "Õpi soome keele sõnavara tõhusalt ja lihtsalt. FlashcardsLuna esitusloend sisaldab kasulikke sõnu koos häälduse ja harjutustega algajatele.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-24T08:58:27.795Z",
-      "lastReadbackAt": "2026-06-24T08:58:37.703Z"
+      "lastReadbackAt": "2026-06-25T15:40:21.584Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:40:21.584Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Finnish A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native ET speakers learning Finnish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/et_fi_PLSzlbZS0FhfagIj96OufLvyQlIpmv3-H2/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "ET__FR__ordinary-vocabulary__a1-everyday",
@@ -3786,13 +3836,23 @@
       "channelKey": "et",
       "youtube_channel_id": "UC2nA8gsivL__x6JKl-fs0uw",
       "youtube_playlist_id": "PLSzlbZS0Fhfbeo7LznED3GMzgaIqCkY-q",
-      "title": "French A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native ET speakers learning French: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Prantsuse keele sõnavara algajatele (A1) | FlashcardsLuna",
+      "description": "Õpi prantsuse keele sõnavara tõhusalt FlashcardsLuna abil. Selles esitusloendis on lühikesed videod prantsuse keele algajatele.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:29:52.741Z",
-      "lastReadbackAt": "2026-06-23T09:29:52.741Z",
-      "recoverySource": "github_raw_log_20260623_v3"
+      "lastReadbackAt": "2026-06-25T15:40:37.748Z",
+      "recoverySource": "github_raw_log_20260623_v3",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:40:37.748Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "French A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native ET speakers learning French: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/et_fr_PLSzlbZS0Fhfbeo7LznED3GMzgaIqCkY-q/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "ET__HI__ordinary-vocabulary__a1-everyday",
@@ -3804,12 +3864,22 @@
       "channelKey": "et",
       "youtube_channel_id": "UC2nA8gsivL__x6JKl-fs0uw",
       "youtube_playlist_id": "PLSzlbZS0FhfZ8afU4J5p48ee68hz2KcP1",
-      "title": "Hindi A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native ET speakers learning Hindi: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Hindi keele sõnavara algajatele | FlashcardsLuna",
+      "description": "Õpi hindi keele sõnavara tõhusalt FlashcardsLuna abil. Need videod aitavad algajatel omandada kasulikke sõnu koos õige hääldusega.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-24T10:51:43.615Z",
-      "lastReadbackAt": "2026-06-24T10:51:45.003Z"
+      "lastReadbackAt": "2026-06-25T15:40:56.670Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:40:56.670Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Hindi A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native ET speakers learning Hindi: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/et_hi_PLSzlbZS0FhfZ8afU4J5p48ee68hz2KcP1/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "ET__IT__ordinary-vocabulary__a1-everyday",
@@ -3821,13 +3891,23 @@
       "channelKey": "et",
       "youtube_channel_id": "UC2nA8gsivL__x6JKl-fs0uw",
       "youtube_playlist_id": "PLSzlbZS0Fhfbli_b81yQWdQgQ11wIP7po",
-      "title": "Italian A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native ET speakers learning Italian: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Itaalia keele sõnavara algajatele (A1)",
+      "description": "Itaalia keele sõnavara ja häälduse harjutused algajatele. Õpi kasulikke itaaliakeelseid sõnu teemade kaupa koos FlashcardsLuna interaktiivsete kaartidega.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:29:55.665Z",
-      "lastReadbackAt": "2026-06-23T09:29:55.665Z",
-      "recoverySource": "github_raw_log_20260623_v3"
+      "lastReadbackAt": "2026-06-25T15:41:09.685Z",
+      "recoverySource": "github_raw_log_20260623_v3",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:41:09.685Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Italian A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native ET speakers learning Italian: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/et_it_PLSzlbZS0Fhfbli_b81yQWdQgQ11wIP7po/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "ET__PT__ordinary-vocabulary__a1-everyday",
@@ -3839,13 +3919,23 @@
       "channelKey": "et",
       "youtube_channel_id": "UC2nA8gsivL__x6JKl-fs0uw",
       "youtube_playlist_id": "PLSzlbZS0FhfZweEe3_1rlXgRzt4Y7ae7y",
-      "title": "Portuguese A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native ET speakers learning Portuguese: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Portugali keele sõnavara algajatele | FlashcardsLuna",
+      "description": "Õpi portugali keele sõnavara ja hääldust FlashcardsLuna abil. Selles esitusloendis on lühikesed videod ja õpikaardid algajatele keeleõppijatele.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:29:58.854Z",
-      "lastReadbackAt": "2026-06-23T09:29:58.854Z",
-      "recoverySource": "github_raw_log_20260623_v3"
+      "lastReadbackAt": "2026-06-25T15:41:25.816Z",
+      "recoverySource": "github_raw_log_20260623_v3",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:41:25.816Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Portuguese A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native ET speakers learning Portuguese: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/et_pt_PLSzlbZS0FhfZweEe3_1rlXgRzt4Y7ae7y/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "ET__RU__ordinary-vocabulary__a1-everyday",
@@ -3857,13 +3947,23 @@
       "channelKey": "et",
       "youtube_channel_id": "UC2nA8gsivL__x6JKl-fs0uw",
       "youtube_playlist_id": "PLSzlbZS0FhfairOkQG7zEGF6TM8ytUtGA",
-      "title": "Russian A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native ET speakers learning Russian: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Vene keele sõnavara algajatele | FlashcardsLuna",
+      "description": "Õpi vene keele sõnavara ja hääldust FlashcardsLuna abil. Selles esitusloendis on lühikesed videod ja sõnakaardid vene keele õppimiseks algajatele.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:30:01.987Z",
-      "lastReadbackAt": "2026-06-23T09:30:01.987Z",
-      "recoverySource": "github_raw_log_20260623_v3"
+      "lastReadbackAt": "2026-06-25T15:41:32.028Z",
+      "recoverySource": "github_raw_log_20260623_v3",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:41:32.028Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Russian A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native ET speakers learning Russian: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/et_ru_PLSzlbZS0FhfairOkQG7zEGF6TM8ytUtGA/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "FI__AZ__ordinary-vocabulary__a1-everyday",
@@ -5213,12 +5313,22 @@
       "channelKey": "hr",
       "youtube_channel_id": "UCYUDLf-qwJLx6Z8etHxhvfg",
       "youtube_playlist_id": "PL3_zOFdP7_lJPn-o4SEyztRjDjWyVzF4m",
-      "title": "Azerbaijani A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native HR speakers learning Azerbaijani: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Azerbajdžanski jezik za početnike | FlashcardsLuna",
+      "description": "Naučite azerbajdžanski jezik uz kratke video lekcije i vježbe vokabulara. Koristite FlashcardsLuna kartice za brzo pamćenje novih riječi i pravilan izgovor.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-22T10:41:42.974Z",
-      "lastReadbackAt": "2026-06-22T10:41:42.974Z"
+      "lastReadbackAt": "2026-06-25T15:41:47.194Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:41:47.194Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Azerbaijani A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native HR speakers learning Azerbaijani: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/hr_az_PL3_zOFdP7_lJPn-o4SEyztRjDjWyVzF4m/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "HR__BG__ordinary-vocabulary__a1-everyday",
@@ -5230,12 +5340,22 @@
       "channelKey": "hr",
       "youtube_channel_id": "UCYUDLf-qwJLx6Z8etHxhvfg",
       "youtube_playlist_id": "PL3_zOFdP7_lJHzegp3CgOGZwuNG0oxtxX",
-      "title": "Bulgarian A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native HR speakers learning Bulgarian: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Bugarski jezik za početnike | FlashcardsLuna",
+      "description": "Zbirka videozapisa za učenje bugarskog jezika uz FlashcardsLuna. Vježbajte vokabular, izgovor i provjerite svoje znanje uz jednostavne lekcije za početnike.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-22T10:41:46.300Z",
-      "lastReadbackAt": "2026-06-22T10:41:46.300Z"
+      "lastReadbackAt": "2026-06-25T15:42:03.060Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:42:03.060Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Bulgarian A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native HR speakers learning Bulgarian: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/hr_bg_PL3_zOFdP7_lJHzegp3CgOGZwuNG0oxtxX/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "HR__BN__ordinary-vocabulary__a1-everyday",
@@ -5247,12 +5367,22 @@
       "channelKey": "hr",
       "youtube_channel_id": "UCYUDLf-qwJLx6Z8etHxhvfg",
       "youtube_playlist_id": "PL3_zOFdP7_lIZ-XvUGYmZ4TgkjJU95-5t",
-      "title": "Bengali A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native HR speakers learning Bengali: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Učenje bengalskog jezika | Rječnik i izgovor",
+      "description": "Zbirka video lekcija za učenje bengalskog jezika uz FlashcardsLuna. Vježbajte izgovor, proširite svoj rječnik i testirajte svoje znanje uz jednostavne kartice za učenje.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-22T10:41:50.363Z",
-      "lastReadbackAt": "2026-06-22T10:41:50.363Z"
+      "lastReadbackAt": "2026-06-25T15:42:20.123Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:42:20.123Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Bengali A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native HR speakers learning Bengali: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/hr_bn_PL3_zOFdP7_lIZ-XvUGYmZ4TgkjJU95-5t/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "HR__CS__ordinary-vocabulary__a1-everyday",
@@ -5264,12 +5394,22 @@
       "channelKey": "hr",
       "youtube_channel_id": "UCYUDLf-qwJLx6Z8etHxhvfg",
       "youtube_playlist_id": "PL3_zOFdP7_lL96YCTWWc5bR74GV7RwIxN",
-      "title": "Czech A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native HR speakers learning Czech: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Učenje češkog jezika | Češki za početnike",
+      "description": "Naučite češki jezik uz kratke video lekcije i vokabular na kanalu FlashcardsLuna. Vježbajte izgovor i proširite svoj rječnik kroz jednostavne lekcije za početnike.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-22T10:41:53.540Z",
-      "lastReadbackAt": "2026-06-22T10:41:53.540Z"
+      "lastReadbackAt": "2026-06-25T15:42:35.585Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:42:35.585Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Czech A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native HR speakers learning Czech: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/hr_cs_PL3_zOFdP7_lL96YCTWWc5bR74GV7RwIxN/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "HR__DA__ordinary-vocabulary__a1-everyday",
@@ -5281,12 +5421,22 @@
       "channelKey": "hr",
       "youtube_channel_id": "UCYUDLf-qwJLx6Z8etHxhvfg",
       "youtube_playlist_id": "PL3_zOFdP7_lJgn3a6TbmXBkhl1Ipqm41H",
-      "title": "Danish A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native HR speakers learning Danish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Učenje danskog jezika | Danski za početnike A1",
+      "description": "Naučite danski jezik uz kratke video lekcije i vokabularne vježbe na kanalu FlashcardsLuna. Prilagođeno početnicima za brzo i jednostavno pamćenje riječi uz pravilan izgovor.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-22T10:41:56.872Z",
-      "lastReadbackAt": "2026-06-22T10:41:56.872Z"
+      "lastReadbackAt": "2026-06-25T15:43:06.416Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:43:06.416Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Danish A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native HR speakers learning Danish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/hr_da_PL3_zOFdP7_lJgn3a6TbmXBkhl1Ipqm41H/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "HR__DE__ordinary-vocabulary__a1-everyday",
@@ -5298,12 +5448,22 @@
       "channelKey": "hr",
       "youtube_channel_id": "UCYUDLf-qwJLx6Z8etHxhvfg",
       "youtube_playlist_id": "PL3_zOFdP7_lILqqUFrnbSS47ZeMjFl7TI",
-      "title": "German A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native HR speakers learning German: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Njemački jezik za početnike | A1 Vokabular",
+      "description": "Zbirka video lekcija za učenje njemačkog jezika. Vježbajte vokabular i izgovor uz FlashcardsLuna kartice za učenje.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-22T10:42:00.905Z",
-      "lastReadbackAt": "2026-06-22T10:42:00.905Z"
+      "lastReadbackAt": "2026-06-25T15:43:23.591Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:43:23.591Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "German A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native HR speakers learning German: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/hr_de_PL3_zOFdP7_lILqqUFrnbSS47ZeMjFl7TI/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "HR__EN__ordinary-vocabulary__a1-everyday",
@@ -5315,12 +5475,22 @@
       "channelKey": "hr",
       "youtube_channel_id": "UCYUDLf-qwJLx6Z8etHxhvfg",
       "youtube_playlist_id": "PL3_zOFdP7_lKvFuHWjyTWZmIer5jnQq4M",
-      "title": "English A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native HR speakers learning English: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Engleski vokabular za početnike (A1) | FlashcardsLuna",
+      "description": "Naučite engleski vokabular brzo i jednostavno uz FlashcardsLuna video lekcije. Vježbajte izgovor i provjerite svoje znanje uz tematske kartice za učenje.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:31:36.080Z",
-      "lastReadbackAt": "2026-06-23T09:31:37.176Z"
+      "lastReadbackAt": "2026-06-25T15:43:38.714Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:43:38.714Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "English A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native HR speakers learning English: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/hr_en_PL3_zOFdP7_lKvFuHWjyTWZmIer5jnQq4M/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "HR__EN-GB__ordinary-vocabulary__a1-everyday",
@@ -5332,12 +5502,22 @@
       "channelKey": "hr",
       "youtube_channel_id": "UCYUDLf-qwJLx6Z8etHxhvfg",
       "youtube_playlist_id": "PL3_zOFdP7_lK2W6TM5hGB-owvsp55T3ZR",
-      "title": "British English A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native HR speakers learning British English: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Učenje engleskog jezika (A1) | FlashcardsLuna",
+      "description": "Zbirka video lekcija za učenje engleskog jezika na A1 razini. Vježbajte vokabular i izgovor uz FlashcardsLuna kartice.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-24T08:59:14.132Z",
-      "lastReadbackAt": "2026-06-24T08:59:21.964Z"
+      "lastReadbackAt": "2026-06-25T15:43:54.998Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:43:54.998Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "British English A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native HR speakers learning British English: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/hr_en-gb_PL3_zOFdP7_lK2W6TM5hGB-owvsp55T3ZR/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "HR__ES__ordinary-vocabulary__a1-everyday",
@@ -5349,12 +5529,22 @@
       "channelKey": "hr",
       "youtube_channel_id": "UCYUDLf-qwJLx6Z8etHxhvfg",
       "youtube_playlist_id": "PL3_zOFdP7_lJeDHG5NX39XMB_oQ3DCj0P",
-      "title": "Spanish A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native HR speakers learning Spanish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Španjolski jezik za početnike | A1 vokabular",
+      "description": "Zbirka video lekcija za učenje španjolskog jezika uz FlashcardsLuna. Vježbajte vokabular i izgovor kroz jednostavne vježbe za početnike.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:31:36.088Z",
-      "lastReadbackAt": "2026-06-23T09:31:41.949Z"
+      "lastReadbackAt": "2026-06-25T15:44:09.330Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:44:09.330Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Spanish A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native HR speakers learning Spanish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/hr_es_PL3_zOFdP7_lJeDHG5NX39XMB_oQ3DCj0P/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "HR__ES-419__ordinary-vocabulary__a1-everyday",
@@ -5366,12 +5556,22 @@
       "channelKey": "hr",
       "youtube_channel_id": "UCYUDLf-qwJLx6Z8etHxhvfg",
       "youtube_playlist_id": "PL3_zOFdP7_lKXn8Y9ewstJz_Nxp8WAHfc",
-      "title": "Latin American Spanish A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native HR speakers learning Latin American Spanish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Španjolski jezik (Latinska Amerika) A1 - Vokabular za početnike",
+      "description": "Naučite španjolski jezik (Latinska Amerika) uz kratke video lekcije za početnike. Vježbajte vokabular i izgovor uz FlashcardsLuna kartice za učenje.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-24T08:59:14.133Z",
-      "lastReadbackAt": "2026-06-24T08:59:31.427Z"
+      "lastReadbackAt": "2026-06-25T15:44:25.695Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-06-25T15:44:25.695Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Latin American Spanish A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native HR speakers learning Latin American Spanish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28181718823/iteration-1-apply/hr_es-419_PL3_zOFdP7_lKXn8Y9ewstJz_Nxp8WAHfc/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "HR__ET__ordinary-vocabulary__a1-everyday",
