@@ -1,0 +1,333 @@
+name: YouTube Playlist Metadata Route Orchestrator
+
+on:
+  workflow_dispatch:
+    inputs:
+      set_id:
+        description: "Set ID used to generate localized playlist title/description."
+        required: true
+        default: "home_kitchen_cookware_pilot_01"
+      route:
+        description: "Single YouTube API project route to repair until done or stopped."
+        required: true
+        default: "youtube-3"
+        type: choice
+        options:
+          - youtube-1
+          - youtube-2
+          - youtube-3
+          - youtube-4
+      youtube_environment:
+        description: "GitHub environment with this route's OAuth bundle. Use auto for route default."
+        required: true
+        default: "auto"
+        type: choice
+        options:
+          - auto
+          - youtube-api-branding
+          - youtube-api-youtube-2
+          - youtube-api-youtube-3
+          - youtube-api-youtube-4
+      supports:
+        description: "Optional support language codes to limit repair, comma-separated."
+        required: false
+        default: ""
+      exclude_supports:
+        description: "Support codes to exclude. HY stays skipped until Armenian TTS is unblocked."
+        required: false
+        default: "HY"
+      max_updates:
+        description: "Maximum playlists to generate/apply per internal batch."
+        required: true
+        default: "20"
+      max_iterations:
+        description: "Maximum internal batches in this orchestrated run."
+        required: true
+        default: "12"
+      gemini_backend:
+        description: "Metadata backend."
+        required: true
+        default: "vectorengine"
+        type: choice
+        options:
+          - vectorengine
+          - api
+          - cli
+      confirm_ai_spend:
+        description: "Type GENERATE_PLAYLIST_METADATA to spend AI quota."
+        required: false
+        default: ""
+      confirm_youtube_write:
+        description: "Type APPLY_YOUTUBE_PLAYLIST_UPDATE to update live YouTube playlists."
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: youtube-playlist-metadata-route-orchestrator-${{ github.event.inputs.route }}-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  orchestrate-route:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    environment:
+      name: >-
+        ${{
+          github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
+          (github.event.inputs.route == 'youtube-1' && 'youtube-api-branding') ||
+          (github.event.inputs.route == 'youtube-2' && 'youtube-api-youtube-2') ||
+          (github.event.inputs.route == 'youtube-3' && 'youtube-api-youtube-3') ||
+          (github.event.inputs.route == 'youtube-4' && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
+    env:
+      EFFECTIVE_YOUTUBE_ENVIRONMENT: >-
+        ${{
+          github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
+          (github.event.inputs.route == 'youtube-1' && 'youtube-api-branding') ||
+          (github.event.inputs.route == 'youtube-2' && 'youtube-api-youtube-2') ||
+          (github.event.inputs.route == 'youtube-3' && 'youtube-api-youtube-3') ||
+          (github.event.inputs.route == 'youtube-4' && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Refuse unsafe orchestrator inputs
+        shell: bash
+        env:
+          ROUTE: ${{ github.event.inputs.route }}
+          YOUTUBE_ENVIRONMENT: ${{ github.event.inputs.youtube_environment }}
+          MAX_UPDATES: ${{ github.event.inputs.max_updates }}
+          MAX_ITERATIONS: ${{ github.event.inputs.max_iterations }}
+          CONFIRM_AI_SPEND: ${{ github.event.inputs.confirm_ai_spend }}
+          CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+        run: |
+          set -euo pipefail
+          case "$ROUTE" in
+            youtube-1) EXPECTED_ENV="youtube-api-branding" ;;
+            youtube-2) EXPECTED_ENV="youtube-api-youtube-2" ;;
+            youtube-3) EXPECTED_ENV="youtube-api-youtube-3" ;;
+            youtube-4) EXPECTED_ENV="youtube-api-youtube-4" ;;
+            *) echo "::error::Unsupported route: $ROUTE"; exit 1 ;;
+          esac
+          if [ "$YOUTUBE_ENVIRONMENT" != "auto" ] && [ "$YOUTUBE_ENVIRONMENT" != "$EXPECTED_ENV" ]; then
+            echo "::error::Route $ROUTE must use $EXPECTED_ENV, got $YOUTUBE_ENVIRONMENT"
+            exit 1
+          fi
+          if [ "$EFFECTIVE_YOUTUBE_ENVIRONMENT" != "$EXPECTED_ENV" ]; then
+            echo "::error::Effective environment mismatch for $ROUTE: expected $EXPECTED_ENV got $EFFECTIVE_YOUTUBE_ENVIRONMENT"
+            exit 1
+          fi
+          if ! printf '%s' "$MAX_UPDATES" | grep -Eq '^[0-9]+$'; then
+            echo "::error::max_updates must be an integer."
+            exit 1
+          fi
+          if [ "$MAX_UPDATES" -lt 1 ] || [ "$MAX_UPDATES" -gt 20 ]; then
+            echo "::error::orchestrator max_updates must be between 1 and 20."
+            exit 1
+          fi
+          if ! printf '%s' "$MAX_ITERATIONS" | grep -Eq '^[0-9]+$'; then
+            echo "::error::max_iterations must be an integer."
+            exit 1
+          fi
+          if [ "$MAX_ITERATIONS" -lt 1 ] || [ "$MAX_ITERATIONS" -gt 20 ]; then
+            echo "::error::max_iterations must be between 1 and 20."
+            exit 1
+          fi
+          if [ "$CONFIRM_AI_SPEND" != "GENERATE_PLAYLIST_METADATA" ]; then
+            echo "::error::orchestrator requires confirm_ai_spend=GENERATE_PLAYLIST_METADATA"
+            exit 1
+          fi
+          if [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_YOUTUBE_PLAYLIST_UPDATE" ]; then
+            echo "::error::orchestrator requires confirm_youtube_write=APPLY_YOUTUBE_PLAYLIST_UPDATE"
+            exit 1
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+          echo "YouTube OAuth bundle restored for environment $EFFECTIVE_YOUTUBE_ENVIRONMENT."
+
+      - name: Orchestrate route batches
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          SET_ID: ${{ github.event.inputs.set_id }}
+          ROUTE: ${{ github.event.inputs.route }}
+          SUPPORTS: ${{ github.event.inputs.supports }}
+          EXCLUDE_SUPPORTS: ${{ github.event.inputs.exclude_supports }}
+          MAX_UPDATES: ${{ github.event.inputs.max_updates }}
+          MAX_ITERATIONS: ${{ github.event.inputs.max_iterations }}
+          GEMINI_BACKEND: ${{ github.event.inputs.gemini_backend }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
+          VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
+          VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
+          VECTORENGINE_GEMINI_MODEL: ${{ vars.VECTORENGINE_GEMINI_MODEL }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          output_root="outputs/youtube-playlist-metadata-route-orchestrator/${ROUTE}/${GITHUB_RUN_ID}"
+          mkdir -p "$output_root"
+          summary_jsonl="$output_root/orchestrator-summary.jsonl"
+          : > "$summary_jsonl"
+
+          trim_supports="$(printf '%s' "$SUPPORTS" | xargs)"
+          stopped_reason=""
+
+          for iteration in $(seq 1 "$MAX_ITERATIONS"); do
+            echo "::group::${ROUTE} iteration ${iteration}: audit"
+            git fetch origin "$BRANCH_NAME"
+            git pull --ff-only origin "$BRANCH_NAME"
+
+            audit_dir="$output_root/iteration-${iteration}-audit"
+            audit_args=("--route=$ROUTE" "--exclude-supports=$EXCLUDE_SUPPORTS" "--max-updates=$MAX_UPDATES" "--output-dir=$audit_dir")
+            if [ -n "$trim_supports" ]; then
+              audit_args+=("--supports=$trim_supports")
+            fi
+            npm run repair:youtube-playlist-metadata -- "${audit_args[@]}"
+            audit_report="$audit_dir/youtube-playlist-metadata-repair-report.json"
+            candidate_count="$(node -e "const r=require('./${audit_report}'); console.log(r.summary.candidateCount)")"
+            echo "candidate_count=${candidate_count}"
+            echo "::endgroup::"
+
+            if [ "$candidate_count" = "0" ]; then
+              stopped_reason="complete_no_candidates"
+              node -e "const fs=require('fs'); fs.appendFileSync(process.argv[1], JSON.stringify({iteration:Number(process.argv[2]), route:process.argv[3], status:'complete_no_candidates', candidateCount:0, at:new Date().toISOString()})+'\\n')" "$summary_jsonl" "$iteration" "$ROUTE"
+              break
+            fi
+
+            echo "::group::${ROUTE} iteration ${iteration}: apply"
+            apply_dir="$output_root/iteration-${iteration}-apply"
+            apply_args=("--set=$SET_ID" "--route=$ROUTE" "--exclude-supports=$EXCLUDE_SUPPORTS" "--max-updates=$MAX_UPDATES" "--gemini-backend=$GEMINI_BACKEND" "--output-dir=$apply_dir" "--generate-replacements" "--confirm-ai-spend" "--apply" "--confirm-youtube-write")
+            if [ -n "$trim_supports" ]; then
+              apply_args+=("--supports=$trim_supports")
+            fi
+            if [ "$GEMINI_BACKEND" = "vectorengine" ] && [ -n "${VECTORENGINE_GEMINI_MODEL:-}" ]; then
+              apply_args+=("--model=$VECTORENGINE_GEMINI_MODEL")
+            fi
+            if [ "$GEMINI_BACKEND" = "api" ] && [ -n "${GEMINI_MODEL:-}" ]; then
+              apply_args+=("--model=$GEMINI_MODEL")
+            fi
+
+            set +e
+            npm run repair:youtube-playlist-metadata -- "${apply_args[@]}"
+            apply_exit="$?"
+            set -e
+            apply_report="$apply_dir/youtube-playlist-metadata-repair-report.json"
+
+            node - "$apply_report" "$summary_jsonl" "$iteration" "$ROUTE" "$apply_exit" <<'NODE'
+          const fs = require("fs");
+          const [reportPath, summaryPath, iteration, route, applyExit] = process.argv.slice(2);
+          const report = JSON.parse(fs.readFileSync(reportPath, "utf8"));
+          const bySupport = Object.fromEntries(Object.entries(report.summary.bySupport || {}).map(([key, value]) => [key, {
+            checked: value.checked,
+            updated: value.updated,
+            errors: value.errors
+          }]));
+          const errors = (report.results || [])
+            .filter((item) => item.error)
+            .map((item) => ({
+              playlistKey: item.playlistKey,
+              supportLang: item.supportLang,
+              targetLang: item.targetLang,
+              error: item.error,
+              quotaStopped: Boolean(item.quotaStopped)
+            }));
+          const line = {
+            iteration: Number(iteration),
+            route,
+            applyExit: Number(applyExit),
+            status: report.summary.errors ? "completed_with_errors" : "ok",
+            candidateCount: report.summary.candidateCount,
+            selectedForProcessing: report.summary.selectedForProcessing,
+            replacementGenerated: report.summary.replacementGenerated,
+            updated: report.summary.updated,
+            readbackPassed: report.summary.readbackPassed,
+            errors: report.summary.errors,
+            quotaStopped: Boolean(report.summary.quotaStopped),
+            bySupport,
+            firstErrors: errors.slice(0, 5),
+            at: new Date().toISOString()
+          };
+          console.log(JSON.stringify(line, null, 2));
+          fs.appendFileSync(summaryPath, `${JSON.stringify(line)}\n`);
+          NODE
+
+            npm run check:youtube-playlist-naming
+
+            if git diff --quiet -- config/youtube-playlists.json; then
+              echo "No confirmed playlist metadata state changes to commit for iteration ${iteration}."
+            else
+              git add config/youtube-playlists.json
+              git commit -m "Persist YouTube playlist metadata repair for ${ROUTE}" \
+                -m "Source orchestrator run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+                -m "Iteration: ${iteration}"
+              git pull --ff-only origin "$BRANCH_NAME"
+              git push origin "HEAD:$BRANCH_NAME"
+            fi
+            echo "::endgroup::"
+
+            quota_stopped="$(node -e "const r=require('./${apply_report}'); console.log(r.summary.quotaStopped ? '1' : '0')")"
+            error_count="$(node -e "const r=require('./${apply_report}'); console.log(r.summary.errors || 0)")"
+
+            if [ "$quota_stopped" = "1" ]; then
+              stopped_reason="quota_stopped"
+              echo "::notice::Stopping ${ROUTE}: YouTube quotaExceeded was encountered."
+              break
+            fi
+            if [ "$apply_exit" != "0" ] || [ "$error_count" != "0" ]; then
+              stopped_reason="repair_error"
+              echo "::error::Stopping ${ROUTE}: repair batch returned errors."
+              exit 1
+            fi
+          done
+
+          if [ -z "$stopped_reason" ]; then
+            stopped_reason="max_iterations_reached"
+            echo "::notice::Stopping ${ROUTE}: max_iterations=${MAX_ITERATIONS} reached."
+          fi
+          printf 'stopped_reason=%s\n' "$stopped_reason" >> "$GITHUB_STEP_SUMMARY"
+          printf 'summary_jsonl=%s\n' "$summary_jsonl" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload orchestrator artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-playlist-metadata-route-orchestrator-${{ github.event.inputs.route }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-playlist-metadata-route-orchestrator/**
+            config/youtube-playlists.json
