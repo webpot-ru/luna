@@ -221,3 +221,72 @@ jobs:
           path: |
             outputs/youtube-playlist-metadata-repair/**
             config/youtube-playlists.json
+
+  persist-playlist-metadata-state:
+    needs: youtube-playlist-metadata-repair
+    if: ${{ always() && github.event.inputs.mode == 'apply' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: youtube-playlist-metadata-state-${{ github.ref_name }}-${{ github.run_id }}
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Download playlist metadata state artifact
+        id: download_playlist_metadata_state
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: youtube-playlist-metadata-repair-${{ github.event.inputs.route }}-${{ github.event.inputs.mode }}-${{ github.run_id }}
+          path: .state-artifact
+
+      - name: Merge playlist metadata state into current branch
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [ ! -f .state-artifact/config/youtube-playlists.json ]; then
+            echo "No playlist metadata state artifact found; nothing to persist."
+            exit 0
+          fi
+          git fetch origin "$BRANCH_NAME"
+          git checkout "$BRANCH_NAME"
+          git pull --ff-only origin "$BRANCH_NAME"
+          npm run merge:youtube-playlist-metadata-state -- --artifact-dir=.state-artifact --summary=outputs/youtube-playlist-metadata-state-merge-github.json
+          cat outputs/youtube-playlist-metadata-state-merge-github.json
+
+      - name: Commit and push playlist metadata state
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          ROUTE: ${{ github.event.inputs.route }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- config/youtube-playlists.json; then
+            echo "No YouTube playlist metadata state changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/youtube-playlists.json
+          git commit -m "Persist YouTube playlist metadata repair for ${ROUTE}" \
+            -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          git push origin "HEAD:$BRANCH_NAME"
+
+      - name: Upload playlist metadata state merge summary
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-playlist-metadata-state-merge-${{ github.event.inputs.route }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: ignore
+          path: outputs/youtube-playlist-metadata-state-merge-github.json

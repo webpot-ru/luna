@@ -38,6 +38,7 @@
     "read:youtube-video-statistics": "node scripts/read-youtube-video-statistics.mjs",
     "apply:youtube-publish": "node scripts/youtube-publish-video.mjs",
     "merge:youtube-publish-state": "node scripts/merge-youtube-publish-state.mjs",
+    "merge:youtube-playlist-metadata-state": "node scripts/merge-youtube-playlist-metadata-state.mjs",
     "repair:youtube-playlist-insert": "node scripts/youtube-repair-playlist-insert.mjs",
     "repair:youtube-playlist-metadata": "node scripts/youtube-repair-playlist-metadata.mjs",
     "repair:youtube-metadata-language": "node scripts/youtube-repair-metadata-language.mjs",
