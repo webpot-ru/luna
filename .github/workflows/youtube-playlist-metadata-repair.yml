@@ -1,0 +1,223 @@
+name: YouTube Playlist Metadata Repair
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "audit is read-only; generate spends AI; apply spends AI and updates YouTube playlists."
+        required: true
+        default: "audit"
+        type: choice
+        options:
+          - audit
+          - generate
+          - apply
+      set_id:
+        description: "Set ID used to generate localized playlist title/description."
+        required: true
+        default: "home_kitchen_cookware_pilot_01"
+      route:
+        description: "YouTube API project route to repair in this batch."
+        required: true
+        default: "youtube-4"
+        type: choice
+        options:
+          - youtube-1
+          - youtube-2
+          - youtube-3
+          - youtube-4
+      youtube_environment:
+        description: "GitHub environment with this route's OAuth bundle. Use auto for route default."
+        required: true
+        default: "auto"
+        type: choice
+        options:
+          - auto
+          - youtube-api-branding
+          - youtube-api-youtube-2
+          - youtube-api-youtube-3
+          - youtube-api-youtube-4
+      supports:
+        description: "Optional support language codes to limit repair, comma-separated."
+        required: false
+        default: ""
+      exclude_supports:
+        description: "Support codes to exclude. HY stays skipped until Armenian TTS is unblocked."
+        required: false
+        default: "HY"
+      max_updates:
+        description: "Maximum playlists to generate/apply in this run."
+        required: true
+        default: "20"
+      gemini_backend:
+        description: "Metadata backend."
+        required: true
+        default: "vectorengine"
+        type: choice
+        options:
+          - vectorengine
+          - api
+          - cli
+      confirm_ai_spend:
+        description: "For mode=generate/apply type GENERATE_PLAYLIST_METADATA."
+        required: false
+        default: ""
+      confirm_youtube_write:
+        description: "For mode=apply type APPLY_YOUTUBE_PLAYLIST_UPDATE."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: youtube-playlist-metadata-repair-${{ github.event.inputs.route }}-${{ github.event.inputs.mode }}
+  cancel-in-progress: false
+
+jobs:
+  youtube-playlist-metadata-repair:
+    runs-on: ubuntu-latest
+    environment:
+      name: >-
+        ${{
+          github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
+          (github.event.inputs.route == 'youtube-1' && 'youtube-api-branding') ||
+          (github.event.inputs.route == 'youtube-2' && 'youtube-api-youtube-2') ||
+          (github.event.inputs.route == 'youtube-3' && 'youtube-api-youtube-3') ||
+          (github.event.inputs.route == 'youtube-4' && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
+    timeout-minutes: 180
+    env:
+      EFFECTIVE_YOUTUBE_ENVIRONMENT: >-
+        ${{
+          github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
+          (github.event.inputs.route == 'youtube-1' && 'youtube-api-branding') ||
+          (github.event.inputs.route == 'youtube-2' && 'youtube-api-youtube-2') ||
+          (github.event.inputs.route == 'youtube-3' && 'youtube-api-youtube-3') ||
+          (github.event.inputs.route == 'youtube-4' && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Refuse unsafe repair inputs
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          ROUTE: ${{ github.event.inputs.route }}
+          YOUTUBE_ENVIRONMENT: ${{ github.event.inputs.youtube_environment }}
+          MAX_UPDATES: ${{ github.event.inputs.max_updates }}
+          CONFIRM_AI_SPEND: ${{ github.event.inputs.confirm_ai_spend }}
+          CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+        run: |
+          set -euo pipefail
+          case "$ROUTE" in
+            youtube-1) EXPECTED_ENV="youtube-api-branding" ;;
+            youtube-2) EXPECTED_ENV="youtube-api-youtube-2" ;;
+            youtube-3) EXPECTED_ENV="youtube-api-youtube-3" ;;
+            youtube-4) EXPECTED_ENV="youtube-api-youtube-4" ;;
+            *) echo "::error::Unsupported route: $ROUTE"; exit 1 ;;
+          esac
+          if [ "$YOUTUBE_ENVIRONMENT" != "auto" ] && [ "$YOUTUBE_ENVIRONMENT" != "$EXPECTED_ENV" ]; then
+            echo "::error::Route $ROUTE must use $EXPECTED_ENV, got $YOUTUBE_ENVIRONMENT"
+            exit 1
+          fi
+          if [ "$EFFECTIVE_YOUTUBE_ENVIRONMENT" != "$EXPECTED_ENV" ]; then
+            echo "::error::Effective environment mismatch for $ROUTE: expected $EXPECTED_ENV got $EFFECTIVE_YOUTUBE_ENVIRONMENT"
+            exit 1
+          fi
+          if ! printf '%s' "$MAX_UPDATES" | grep -Eq '^[0-9]+$'; then
+            echo "::error::max_updates must be an integer."
+            exit 1
+          fi
+          if [ "$MAX_UPDATES" -lt 1 ] || [ "$MAX_UPDATES" -gt 50 ]; then
+            echo "::error::max_updates must be between 1 and 50."
+            exit 1
+          fi
+          if [ "$MODE" != "audit" ] && [ "$CONFIRM_AI_SPEND" != "GENERATE_PLAYLIST_METADATA" ]; then
+            echo "::error::mode=$MODE requires confirm_ai_spend=GENERATE_PLAYLIST_METADATA"
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_YOUTUBE_PLAYLIST_UPDATE" ]; then
+            echo "::error::mode=apply requires confirm_youtube_write=APPLY_YOUTUBE_PLAYLIST_UPDATE"
+            exit 1
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+          echo "YouTube OAuth bundle restored for environment $EFFECTIVE_YOUTUBE_ENVIRONMENT."
+
+      - name: Repair playlist metadata
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          SET_ID: ${{ github.event.inputs.set_id }}
+          ROUTE: ${{ github.event.inputs.route }}
+          SUPPORTS: ${{ github.event.inputs.supports }}
+          EXCLUDE_SUPPORTS: ${{ github.event.inputs.exclude_supports }}
+          MAX_UPDATES: ${{ github.event.inputs.max_updates }}
+          GEMINI_BACKEND: ${{ github.event.inputs.gemini_backend }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
+          VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
+          VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
+          VECTORENGINE_GEMINI_MODEL: ${{ vars.VECTORENGINE_GEMINI_MODEL }}
+        run: |
+          set -euo pipefail
+          ARGS=("--set=$SET_ID" "--route=$ROUTE" "--exclude-supports=$EXCLUDE_SUPPORTS" "--max-updates=$MAX_UPDATES" "--gemini-backend=$GEMINI_BACKEND" "--output-dir=outputs/youtube-playlist-metadata-repair")
+          if [ -n "$(printf '%s' "$SUPPORTS" | xargs)" ]; then
+            ARGS+=("--supports=$SUPPORTS")
+          fi
+          if [ "$MODE" = "generate" ] || [ "$MODE" = "apply" ]; then
+            ARGS+=("--generate-replacements" "--confirm-ai-spend")
+            if [ "$GEMINI_BACKEND" = "vectorengine" ] && [ -n "${VECTORENGINE_GEMINI_MODEL:-}" ]; then
+              ARGS+=("--model=$VECTORENGINE_GEMINI_MODEL")
+            fi
+            if [ "$GEMINI_BACKEND" = "api" ] && [ -n "${GEMINI_MODEL:-}" ]; then
+              ARGS+=("--model=$GEMINI_MODEL")
+            fi
+          fi
+          if [ "$MODE" = "apply" ]; then
+            ARGS+=("--apply" "--confirm-youtube-write")
+          fi
+          npm run repair:youtube-playlist-metadata -- "${ARGS[@]}"
+
+      - name: Validate playlist naming contract after repair
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        run: npm run check:youtube-playlist-naming
+
+      - name: Upload non-secret repair artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-playlist-metadata-repair-${{ github.event.inputs.route }}-${{ github.event.inputs.mode }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-playlist-metadata-repair/**
+            config/youtube-playlists.json

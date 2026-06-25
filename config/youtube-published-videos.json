@@ -15395,7 +15395,7 @@
       "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
       "channelHandle": "@lunacardsru",
       "privacyStatus": "public",
-      "publicationStatus": "superseded_by_reupload_pending_user_delete",
+      "publicationStatus": "published_uploaded",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -15406,23 +15406,26 @@
       "githubRunId": "27900462868",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27900462868",
       "uploadedAt": "2026-06-21T09:49:55.288Z",
-      "lastReadbackAt": "2026-06-21T09:49:55.288Z",
+      "lastReadbackAt": "2026-06-25T08:31:36.407Z",
       "visibilityUpdatedAt": "2026-06-21",
-      "visibilityUpdateEvidence": "User reported manual YouTube Studio update to public; Codex did not run API privacy readback. Superseded by GitHub apply run 27901311565 after duplicate ES upload; user should delete old video manually if not needed.",
+      "visibilityUpdateEvidence": "User reported manual YouTube Studio update to public; 2026-06-25 API recovery restored this row as current because successor TMOdF3jl2wQ is missing/videoNotFound.",
       "supersedes": [
         "xOh97WAt53k"
       ],
       "readback": {
         "uploadStatus": "uploaded",
-        "privacyStatus": "public_user_reported",
+        "privacyStatus": "public",
         "videoHttpStatus": 200,
-        "playlistHttpStatus": 200
+        "playlistHttpStatus": 200,
+        "videoApiReadback": "found",
+        "playlistItemReadback": "found",
+        "playlistPrivacyStatus": "public",
+        "recoveredAt": "2026-06-25T08:31:36.407Z"
       },
-      "supersededBy": [
-        "TMOdF3jl2wQ"
-      ],
-      "needsManualDeletion": true,
-      "supersededAt": "2026-06-21T10:29:14.749Z"
+      "needsManualDeletion": false,
+      "recoveryStatus": "restored_current_after_reupload_video_missing",
+      "recoveredAt": "2026-06-25T08:31:36.407Z",
+      "recoveryNote": "YouTube API readback on 2026-06-25 found successor TMOdF3jl2wQ missing/videoNotFound, while dWk3ncNgrFU is public and present in playlist."
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -15439,7 +15442,7 @@
       "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
       "channelHandle": "@lunacardsru",
       "privacyStatus": "public",
-      "publicationStatus": "published_uploaded",
+      "publicationStatus": "missing_video_api_readback_superseded",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -15450,17 +15453,26 @@
       "githubRunId": "27901311565",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27901311565",
       "uploadedAt": "2026-06-21T10:29:14.749Z",
-      "lastReadbackAt": "2026-06-21T10:29:14.749Z",
+      "lastReadbackAt": "2026-06-25T08:31:36.407Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "public",
         "videoHttpStatus": 200,
-        "playlistHttpStatus": 200
+        "playlistHttpStatus": 200,
+        "videoApiReadback": "missing",
+        "playlistItemReadback": "videoNotFound",
+        "recoveredAt": "2026-06-25T08:31:36.407Z"
       },
       "supersedes": [
         "dWk3ncNgrFU",
         "xOh97WAt53k"
-      ]
+      ],
+      "supersededBy": [
+        "dWk3ncNgrFU"
+      ],
+      "recoveryStatus": "superseded_because_youtube_api_video_not_found",
+      "recoveredAt": "2026-06-25T08:31:36.407Z",
+      "recoveryNote": "YouTube API videos.list returned 0 items and playlistItems.list returned videoNotFound on 2026-06-25; older dWk3ncNgrFU remains public and playlist-present."
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",

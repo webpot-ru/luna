@@ -474,6 +474,8 @@ Implementation sequence:
 
 2026-06-24 route-4 retry rule after run `28107347487`: the `KK` guard worked and the retry reached upload. `IT -> HI`, `KA -> HI` and `KK -> HI` are fully playlist-verified; `KN -> HI` uploaded as video `HCqu0hY4eCo` but stopped on post-upload YouTube Data API quota during `videos.list`. On 2026-06-25 the playlist/readback-only repair path verified both carried-over pending rows without reuploading videos: `MY -> HI` run `28155591717` and `KN -> HI` run `28155738571` are now `already_present_verified`, and durable registry readback has `0` `needsPlaylistInsert` rows. The repair script now retries playlist-item readback after insert because YouTube may show read-after-write lag. The remaining route-4 not-launched pairs in the current 50-pair layer are `ML/NE/SI/SW/TA/TE/UZ -> HI`. Route-level stop rule still applies: on `youtube.quota / quotaExceeded`, stop the affected route instead of moving those support channels to another API project.
 
+2026-06-25 recovery rule for deleted/missing reuploads: if a later duplicate/reupload row fails authenticated `videos.list` with no items, but an older superseded row is still live, public and playlist-present for the same `setId/supportLang/targetLang`, restore the older row as current instead of reuploading immediately. This was applied to `RU -> ES`: `TMOdF3jl2wQ` is `videoNotFound`, while `dWk3ncNgrFU` is live and playlist-present.
+
 Live repair for already-uploaded videos uses:
 
 ```bash
@@ -785,6 +787,7 @@ qrcode npm package
 scripts/generate-youtube-metadata.mjs
 scripts/check-youtube-metadata.mjs
 scripts/check-youtube-seo-metadata.mjs
+scripts/youtube-repair-playlist-metadata.mjs
 scripts/lib/youtube-metadata.mjs
 ```
 
@@ -798,6 +801,7 @@ Metadata включает `title`, `description`, `playlistTitle`, `playlistDesc
 - recoverable Gemini/VectorEngine polish failures (`non-JSON`, timeout, HTTP 429/5xx) must not block a valid `mode=plan` by default: the generator retries once with a stricter JSON-only prompt, then writes `source=template-ai-fallback` with bounded `aiMetadata` diagnostics. Live apply is fail-closed through `--require-ai-metadata`; set `YOUTUBE_METADATA_AI_STRICT=1` only when explicitly debugging AI output and willing to fail even plan runs;
 - Gemini output не должен придумывать длительность, платные обещания, сертификаты, guaranteed fluency, teacher/native-speaker claims beyond the actual video facts;
 - for non-English support channels, `playlistTitle` and `playlistDescription` must be in the support/viewer language and must not copy English fallback wording (`FlashcardsLuna videos for native...`, `flashcards, pronunciation, repeat pauses...`, `Playlist key:`). The upload language gate checks these fields for generated metadata files before playlist creation;
+- existing live playlists that already have English fallback title/description must be repaired through `npm run repair:youtube-playlist-metadata` or `.github/workflows/youtube-playlist-metadata-repair.yml`, not by reuploading videos. The repair is route-scoped, excludes `HY` by default until Armenian TTS is unblocked, uses AI only with `GENERATE_PLAYLIST_METADATA`, and uses YouTube `playlists.update` only with `APPLY_YOUTUBE_PLAYLIST_UPDATE` after token/channel/readback checks;
 - `description` должен содержать точный `courseUrl`;
 - `tags` не должны содержать hashtags, а общий YouTube tag budget должен оставаться <= 500 chars;
 - `scripts/check-youtube-metadata.mjs` является обязательным gate перед upload stage.
