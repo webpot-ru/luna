@@ -119,10 +119,68 @@ const RU_LANGUAGE_NAMES = {
   SW: "Суахили",
 };
 
+const KK_LANGUAGE_NAMES = {
+  EN: "Ағылшын",
+  "EN-GB": "Британдық ағылшын",
+  ES: "Испан",
+  "ES-419": "Латын Америкасы испан",
+  RU: "Орыс",
+  DE: "Неміс",
+  FR: "Француз",
+  IT: "Итальян",
+  PT: "Португал",
+  "PT-BR": "Бразилия португал",
+  JA: "Жапон",
+  KO: "Корей",
+  ZH: "Қытай",
+  VI: "Вьетнам",
+  TH: "Тай",
+  TR: "Түрік",
+  ID: "Индонезия",
+  MS: "Малай",
+  PL: "Поляк",
+  NL: "Нидерланд",
+  SV: "Швед",
+  NO: "Норвег",
+  DA: "Дат",
+  FI: "Фин",
+  CS: "Чех",
+  SK: "Словак",
+  HU: "Венгр",
+  RO: "Румын",
+  BG: "Болгар",
+  HR: "Хорват",
+  SR: "Серб",
+  SL: "Словен",
+  LT: "Литва",
+  LV: "Латыш",
+  ET: "Эстон",
+  IS: "Исланд",
+  HI: "Хинди",
+  BN: "Бенгал",
+  TL: "Филиппин",
+  MY: "Бирма",
+  KM: "Кхмер",
+  LO: "Лаос",
+  NE: "Непал",
+  SI: "Сингал",
+  TA: "Тамил",
+  TE: "Телугу",
+  KN: "Каннада",
+  ML: "Малаялам",
+  UZ: "Өзбек",
+  KK: "Қазақ",
+  AZ: "Әзербайжан",
+  KA: "Грузин",
+  HY: "Армян",
+  SW: "Суахили",
+};
+
 function getPlaylistLanguageName(targetLang, supportLang) {
   const target = normalizeLanguageCode(targetLang);
   const support = normalizeLanguageCode(supportLang);
   if (support === "RU") return RU_LANGUAGE_NAMES[target] || EN_LANGUAGE_NAMES[target] || target;
+  if (support === "KK") return KK_LANGUAGE_NAMES[target] || EN_LANGUAGE_NAMES[target] || target;
   return EN_LANGUAGE_NAMES[target] || target;
 }
 
@@ -229,6 +287,10 @@ function buildTitle({ supportLang, targetLang, courseFamily, levelOrTrack }) {
   if (support === "PT" || support === "PT-BR") {
     return `${targetName} ${level || "A1"}: flashcards ${BRAND_NAME}`;
   }
+  if (support === "KK") {
+    if (courseFamily === "ordinary-vocabulary") return `${targetName} тілі A1: сөздік және айтылым`;
+    return `${targetName} тілі ${level || "A1"}: сөздік және айтылым`;
+  }
   if (courseFamily === "ordinary-vocabulary") {
     return `${targetName} ${level || "A1"} Flashcards`;
   }
@@ -240,6 +302,9 @@ function buildDescription({ supportLang, targetLang, courseFamily, levelOrTrack 
   const targetName = getPlaylistLanguageName(targetLang, support);
   if (support === "RU") {
     return `Видео ${BRAND_NAME} для русскоязычных, которые изучают ${targetName}: карточки, произношение, паузы для повторения и короткие мини-тесты. Playlist key: ${courseFamily}/${levelOrTrack}.`;
+  }
+  if (support === "KK") {
+    return `${BRAND_NAME} видеолары қазақ тілді көрермендерге ${targetName} тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.`;
   }
   return `${BRAND_NAME} videos for native ${support} speakers learning ${targetName}: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ${courseFamily}/${levelOrTrack}.`;
 }

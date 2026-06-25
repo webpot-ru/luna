@@ -533,6 +533,8 @@ function hasNonEnglishMetadataLeak(metadata) {
   const text = [
     metadata.title,
     metadata.description,
+    metadata.playlistTitle,
+    metadata.playlistDescription,
     ...(metadata.tags || []),
     ...(metadata.hashtags || [])
   ].map(cleanText).join(" ");
