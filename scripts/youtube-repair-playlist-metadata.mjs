@@ -91,6 +91,10 @@ function fail(message) {
   throw new Error(message);
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function splitCodes(value) {
   return String(value || "")
     .split(",")
@@ -415,6 +419,54 @@ async function updatePlaylist({ accessToken, playlist, title, description }) {
   return response;
 }
 
+function playlistReadbackBlockers({ readback, supportLang, title, description }) {
+  const findings = playlistFindings({
+    supportLang,
+    title: readback.snippet?.title || "",
+    description: readback.snippet?.description || "",
+  });
+  const blockers = [...findings.blockers];
+  if (readback.snippet?.title !== title) blockers.push("readback title did not match replacement");
+  if (readback.snippet?.description !== description) blockers.push("readback description did not match replacement");
+  return { findings, blockers };
+}
+
+async function readUpdatedPlaylistWithRetry({
+  accessToken,
+  playlistId,
+  supportLang,
+  title,
+  description,
+  attempts = 6,
+  delayMs = 10_000,
+}) {
+  let lastReadback = null;
+  let lastFindings = null;
+  let lastBlockers = [];
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const readback = await readPlaylist({ accessToken, playlistId });
+    const { findings, blockers } = playlistReadbackBlockers({
+      readback,
+      supportLang,
+      title,
+      description,
+    });
+    lastReadback = readback;
+    lastFindings = findings;
+    lastBlockers = blockers;
+    if (!blockers.length) {
+      return { readback, findings, blockers, attemptsUsed: attempt };
+    }
+    if (attempt < attempts) await sleep(delayMs);
+  }
+  return {
+    readback: lastReadback,
+    findings: lastFindings,
+    blockers: lastBlockers,
+    attemptsUsed: attempts,
+  };
+}
+
 function loadRouting(filePath) {
   const routeBySupport = new Map();
   const routeEnvironment = new Map();
@@ -516,6 +568,7 @@ function outputRecordFor(entry, before) {
     replacementBlockers: [],
     updated: false,
     readbackStatus: "",
+    readbackAttempts: 0,
     readbackBlockers: [],
     error: "",
   };
@@ -680,20 +733,16 @@ async function main() {
       });
       result.updated = true;
 
-      const readback = await readPlaylist({ accessToken, playlistId: entry.youtube_playlist_id });
-      const readbackFindings = playlistFindings({
+      const readbackResult = await readUpdatedPlaylistWithRetry({
+        accessToken,
+        playlistId: entry.youtube_playlist_id,
         supportLang,
-        title: readback.snippet?.title || "",
-        description: readback.snippet?.description || "",
+        title: replacement.playlistTitle,
+        description: replacement.playlistDescription,
       });
-      result.readbackStatus = readbackFindings.status;
-      result.readbackBlockers = readbackFindings.blockers;
-      if (readback.snippet?.title !== replacement.playlistTitle) {
-        result.readbackBlockers.push("readback title did not match replacement");
-      }
-      if (readback.snippet?.description !== replacement.playlistDescription) {
-        result.readbackBlockers.push("readback description did not match replacement");
-      }
+      result.readbackAttempts = readbackResult.attemptsUsed;
+      result.readbackStatus = readbackResult.blockers.length ? "fail" : readbackResult.findings.status;
+      result.readbackBlockers = readbackResult.blockers;
       if (result.readbackBlockers.length) {
         result.readbackStatus = "fail";
         result.error = "playlist readback failed after update";
