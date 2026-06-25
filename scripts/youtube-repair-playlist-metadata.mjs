@@ -13,6 +13,8 @@ import {
 } from "./lib/youtube-playlists.mjs";
 
 const DEFAULT_OUTPUT_DIR = "outputs/youtube-playlist-metadata-repair";
+const PLAYLIST_LIST_FIELDS = "items(id,snippet(channelId,title,description),status(privacyStatus))";
+const PLAYLIST_RESOURCE_FIELDS = "id,snippet(channelId,title,description),status(privacyStatus)";
 
 function parseArgs(argv) {
   const options = {
@@ -384,7 +386,7 @@ async function readPlaylist({ accessToken, playlistId }) {
     query: {
       part: "snippet,status",
       id: playlistId,
-      fields: "items(id,snippet(channelId,title,description),status(privacyStatus))",
+      fields: PLAYLIST_LIST_FIELDS,
     },
   }), "playlist");
 }
@@ -396,7 +398,7 @@ async function updatePlaylist({ accessToken, playlist, title, description }) {
     pathName: "playlists",
     query: {
       part: "snippet,status",
-      fields: "items(id,snippet(channelId,title,description),status(privacyStatus))",
+      fields: PLAYLIST_RESOURCE_FIELDS,
     },
     body: {
       id: playlist.id,
