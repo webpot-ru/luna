@@ -16,6 +16,7 @@ function parseArgs(argv) {
     setId: "",
     supports: [],
     targets: null,
+    excludeTargets: [],
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
     allowRepublish: false,
     shardCount: 1,
@@ -39,6 +40,11 @@ function parseArgs(argv) {
       const value = readValue();
       options.targets = value.toUpperCase() === "ALL"
         ? null
+        : value.split(",").map(normalizeCode).filter(Boolean);
+    } else if (arg === "--exclude-targets" || arg.startsWith("--exclude-targets=") || arg === "--exclude-langs" || arg.startsWith("--exclude-langs=")) {
+      const value = readValue();
+      options.excludeTargets = value.toUpperCase() === "NONE" || value.trim() === ""
+        ? []
         : value.split(",").map(normalizeCode).filter(Boolean);
     } else if (arg === "--publication-registry" || arg.startsWith("--publication-registry=")) {
       options.publicationRegistry = readValue();
@@ -64,6 +70,7 @@ function usage() {
     "Already active publications in config/youtube-published-videos.json are excluded unless --allow-republish is passed.",
     "",
     "Options:",
+    "  --exclude-targets <codes>  Exclude target languages from this plan, e.g. HY while Armenian TTS is blocked.",
     "  --shard-count <n>       Report deterministic shard selection for the eligible target list.",
     "  --shard-index <n>       0-based deterministic shard index.",
     "  --output <file>         Write the full preflight report.",
@@ -92,7 +99,8 @@ function compactExistingPublication(row) {
   };
 }
 
-async function supportPlan({ setId, supportLang, requestedTargets, publicationRegistry, allowRepublish, shardCount, shardIndex }) {
+async function supportPlan({ setId, supportLang, requestedTargets, excludeTargets, publicationRegistry, allowRepublish, shardCount, shardIndex }) {
+  const excludedTargets = new Set(normalizeTargetList(excludeTargets));
   const allTargets = requestedTargets
     ? normalizeTargetList(requestedTargets)
     : normalizeTargetList(await resolveTargetLanguages(setId, supportLang));
@@ -101,6 +109,13 @@ async function supportPlan({ setId, supportLang, requestedTargets, publicationRe
   const eligibleTargets = [];
 
   for (const targetLang of requested) {
+    if (excludedTargets.has(targetLang)) {
+      skippedTargets.push({
+        targetLang,
+        reason: "excluded_target_language",
+      });
+      continue;
+    }
     const existingPublication = findActivePublication(publicationRegistry, {
       setId,
       supportLang,
@@ -153,6 +168,7 @@ async function main() {
       setId: options.setId,
       supportLang,
       requestedTargets,
+      excludeTargets: options.excludeTargets,
       publicationRegistry,
       allowRepublish: options.allowRepublish,
       shardCount: options.shardCount,
@@ -166,6 +182,7 @@ async function main() {
     setId: options.setId,
     publicationRegistry: options.publicationRegistry,
     allowRepublish: options.allowRepublish,
+    excludedTargets: normalizeTargetList(options.excludeTargets),
     shardCount: options.shardCount,
     shardIndex: options.shardIndex,
     supports: supportReports,
@@ -175,6 +192,7 @@ async function main() {
       eligibleTargetCount: supportReports.reduce((sum, row) => sum + row.counts.eligibleTargets, 0),
       shardSelectedTargetCount: supportReports.reduce((sum, row) => sum + row.counts.shardSelectedTargets, 0),
       skippedExistingPublicationCount: supportReports.reduce((sum, row) => sum + row.skippedTargets.filter((item) => item.reason === "existing_active_publication").length, 0),
+      skippedExcludedTargetCount: supportReports.reduce((sum, row) => sum + row.skippedTargets.filter((item) => item.reason === "excluded_target_language").length, 0),
       hasEligibleTargets: supportReports.some((row) => row.eligibleTargets.length > 0),
       hasShardTargets: supportReports.some((row) => row.shardSelectedTargets.length > 0),
     },
