@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { BRAND_NAME } from "./brand.mjs";
+import { getLanguageNameInLang } from "./card-slide-template.mjs";
 
 export const DEFAULT_PLAYLIST_REGISTRY_PATH = "config/youtube-playlists.json";
 export const DEFAULT_CHANNEL_CONFIG_PATH = "config/youtube-channels.json";
@@ -179,8 +180,11 @@ const KK_LANGUAGE_NAMES = {
 function getPlaylistLanguageName(targetLang, supportLang) {
   const target = normalizeLanguageCode(targetLang);
   const support = normalizeLanguageCode(supportLang);
+  if (support === "EN" || support === "EN-GB") return EN_LANGUAGE_NAMES[target] || target;
   if (support === "RU") return RU_LANGUAGE_NAMES[target] || EN_LANGUAGE_NAMES[target] || target;
   if (support === "KK") return KK_LANGUAGE_NAMES[target] || EN_LANGUAGE_NAMES[target] || target;
+  const localized = getLanguageNameInLang(target, support);
+  if (localized && localized !== target) return localized;
   return EN_LANGUAGE_NAMES[target] || target;
 }
 
@@ -213,6 +217,121 @@ function cleanText(value) {
 function stripLevel(value) {
   return cleanText(value).toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
 }
+
+const NATIVE_PLAYLIST_TEMPLATES = {
+  BG: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: думи и произношение`,
+    description: ({ targetName }) => `${BRAND_NAME} видеа за българскоговорящи, които учат ${targetName}: карти с думи, произношение, паузи за повторение и кратки мини тестове.`
+  },
+  BN: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: শব্দভান্ডার ও উচ্চারণ`,
+    description: ({ targetName }) => `${BRAND_NAME} ভিডিও বাংলা ভাষাভাষীদের ${targetName} শেখাতে সাহায্য করে: ফ্ল্যাশকার্ড, উচ্চারণ, পুনরাবৃত্তির বিরতি এবং ছোট পরীক্ষা।`
+  },
+  CS: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: slovíčka a výslovnost`,
+    description: ({ targetName }) => `Videa ${BRAND_NAME} pro česky mluvící studenty, kteří se učí ${targetName}: kartičky, výslovnost, pauzy na opakování a krátké mini testy.`
+  },
+  DA: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: ordforråd og udtale`,
+    description: ({ targetName }) => `${BRAND_NAME}-videoer for dansktalende, der lærer ${targetName}: flashcards, udtale, gentagelsespauser og korte mini-tests.`
+  },
+  ET: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: sõnavara ja hääldus`,
+    description: ({ targetName }) => `${BRAND_NAME} videod eesti keelt kõnelevatele õppijatele, kes õpivad ${targetName}: sõnakaardid, hääldus, kordamispausid ja lühikesed minitestid.`
+  },
+  FI: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: sanasto ja ääntäminen`,
+    description: ({ targetName }) => `${BRAND_NAME}-videot suomenkielisille oppijoille, jotka opiskelevat ${targetName}: sanakortit, ääntäminen, toistotauot ja lyhyet minitestit.`
+  },
+  HR: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: rječnik i izgovor`,
+    description: ({ targetName }) => `${BRAND_NAME} videozapisi za govornike hrvatskog koji uče ${targetName}: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.`
+  },
+  HU: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: szókincs és kiejtés`,
+    description: ({ targetName }) => `${BRAND_NAME} videók magyar anyanyelvű tanulóknak, akik ${targetName} nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.`
+  },
+  IS: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: orðaforði og framburður`,
+    description: ({ targetName }) => `${BRAND_NAME} myndbönd fyrir íslenskumælandi sem læra ${targetName}: orðaspjöld, framburð, endurtekningarhlé og stutt smápróf.`
+  },
+  KM: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: វាក្យសព្ទ និងការបញ្ចេញសំឡេង`,
+    description: ({ targetName }) => `វីដេអូ ${BRAND_NAME} សម្រាប់អ្នកនិយាយភាសាខ្មែរ ដែលកំពុងរៀន ${targetName}: កាតពាក្យ ការបញ្ចេញសំឡេង ពេលសម្រាកសម្រាប់និយាយតាម និងតេស្តខ្លីៗ។`
+  },
+  LO: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: ຄຳສັບ ແລະ ການອອກສຽງ`,
+    description: ({ targetName }) => `ວິດີໂອ ${BRAND_NAME} ສຳລັບຜູ້ເວົ້າພາສາລາວທີ່ກຳລັງຮຽນ ${targetName}: ບັດຄຳສັບ, ການອອກສຽງ, ຊ່ວງພັກເພື່ອຝຶກຊ້ຳ ແລະ ບົດທົດສອບສັ້ນ.`
+  },
+  LT: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: žodynas ir tarimas`,
+    description: ({ targetName }) => `${BRAND_NAME} vaizdo įrašai lietuviškai kalbantiems, kurie mokosi ${targetName}: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.`
+  },
+  LV: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: vārdu krājums un izruna`,
+    description: ({ targetName }) => `${BRAND_NAME} video latviski runājošiem, kuri mācās ${targetName}: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.`
+  },
+  MS: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: kosa kata dan sebutan`,
+    description: ({ targetName }) => `Video ${BRAND_NAME} untuk penutur bahasa Melayu yang belajar ${targetName}: kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.`
+  },
+  MY: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: ဝေါဟာရနှင့် အသံထွက်`,
+    description: ({ targetName }) => `${BRAND_NAME} ဗီဒီယိုများသည် မြန်မာဘာသာပြောသူများ ${targetName} ကို လေ့လာရန်အတွက် ကတ်များ၊ အသံထွက်၊ ထပ်ဆိုရန် ခဏနားချိန်များနှင့် စမ်းသပ်မေးခွန်းတိုများ ပါဝင်သည်။`
+  },
+  NL: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: woordenschat en uitspraak`,
+    description: ({ targetName }) => `${BRAND_NAME}-video's voor Nederlandstaligen die ${targetName} leren: flashcards, uitspraak, pauzes om te herhalen en korte mini-tests.`
+  },
+  NO: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: ordforråd og uttale`,
+    description: ({ targetName }) => `${BRAND_NAME}-videoer for norsktalende som lærer ${targetName}: flashcards, uttale, pauser for repetisjon og korte minitester.`
+  },
+  PL: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: słownictwo i wymowa`,
+    description: ({ targetName }) => `Filmy ${BRAND_NAME} dla polskojęzycznych osób uczących się ${targetName}: fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.`
+  },
+  RO: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: vocabular și pronunție`,
+    description: ({ targetName }) => `Videoclipuri ${BRAND_NAME} pentru vorbitorii de română care învață ${targetName}: carduri, pronunție, pauze pentru repetare și mini teste scurte.`
+  },
+  SK: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: slovná zásoba a výslovnosť`,
+    description: ({ targetName }) => `Videá ${BRAND_NAME} pre slovensky hovoriacich študentov, ktorí sa učia ${targetName}: kartičky, výslovnosť, pauzy na opakovanie a krátke mini testy.`
+  },
+  SL: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: besedišče in izgovorjava`,
+    description: ({ targetName }) => `Videi ${BRAND_NAME} za slovensko govoreče, ki se učijo ${targetName}: kartice, izgovorjava, premori za ponavljanje in kratki mini testi.`
+  },
+  SR: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: vokabular i izgovor`,
+    description: ({ targetName }) => `${BRAND_NAME} video snimci za govornike srpskog koji uče ${targetName}: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.`
+  },
+  SV: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: ordförråd och uttal`,
+    description: ({ targetName }) => `${BRAND_NAME}-videor för svensktalande som lär sig ${targetName}: flashcards, uttal, pauser för upprepning och korta minitest.`
+  },
+  TH: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: คำศัพท์และการออกเสียง`,
+    description: ({ targetName }) => `วิดีโอ ${BRAND_NAME} สำหรับผู้พูดภาษาไทยที่กำลังเรียน ${targetName}: แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ`
+  },
+  TL: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: bokabularyo at pagbigkas`,
+    description: ({ targetName }) => `Mga video ng ${BRAND_NAME} para sa mga nagsasalita ng Filipino na nag-aaral ng ${targetName}: flashcards, pagbigkas, mga pahinga para ulitin, at maiikling mini-test.`
+  },
+  UZ: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: lug'at va talaffuz`,
+    description: ({ targetName }) => `${BRAND_NAME} videolari o'zbek tilida so'zlashuvchilar uchun ${targetName} o'rganishga yordam beradi: kartochkalar, talaffuz, takrorlash pauzalari va qisqa mini-testlar.`
+  },
+  VI: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}: từ vựng và phát âm`,
+    description: ({ targetName }) => `Video ${BRAND_NAME} dành cho người nói tiếng Việt học ${targetName}: thẻ ghi nhớ, phát âm, khoảng dừng để lặp lại và bài kiểm tra ngắn.`
+  },
+  ZH: {
+    title: ({ targetName, level }) => `${targetName} ${level || "A1"}：词汇和发音`,
+    description: ({ targetName }) => `${BRAND_NAME} 视频帮助中文母语者学习 ${targetName}：单词卡、发音、跟读停顿和简短小测。`
+  }
+};
 
 export function inferCourseFamily(metadata = {}) {
   const explicit = metadata.courseFamily || metadata.playlistCourseFamily;
@@ -291,6 +410,11 @@ function buildTitle({ supportLang, targetLang, courseFamily, levelOrTrack }) {
     if (courseFamily === "ordinary-vocabulary") return `${targetName} тілі A1: сөздік және айтылым`;
     return `${targetName} тілі ${level || "A1"}: сөздік және айтылым`;
   }
+  const template = NATIVE_PLAYLIST_TEMPLATES[support];
+  if (template) {
+    const nativeLevel = (level || "A1").replace(/:\s*Everyday$/u, "");
+    return template.title({ targetName, level: nativeLevel, courseFamily, levelOrTrack });
+  }
   if (courseFamily === "ordinary-vocabulary") {
     return `${targetName} ${level || "A1"} Flashcards`;
   }
@@ -306,6 +430,8 @@ function buildDescription({ supportLang, targetLang, courseFamily, levelOrTrack 
   if (support === "KK") {
     return `${BRAND_NAME} видеолары қазақ тілді көрермендерге ${targetName} тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.`;
   }
+  const template = NATIVE_PLAYLIST_TEMPLATES[support];
+  if (template) return template.description({ targetName, courseFamily, levelOrTrack });
   return `${BRAND_NAME} videos for native ${support} speakers learning ${targetName}: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ${courseFamily}/${levelOrTrack}.`;
 }
 
