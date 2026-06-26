@@ -41562,6 +41562,48 @@
         "playlistItemReadback": "pending",
         "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n"
       }
+    },
+    {
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "SL",
+      "targetLang": "HR",
+      "playlist_key": "SL__HR__ordinary-vocabulary__a1-everyday",
+      "title": "Hrvaški besednjak A1: Kuhinjski pribor (izgovorjava) | FlashcardsLuna",
+      "youtubeVideoId": "VLvGcdx870Q",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=VLvGcdx870Q",
+      "youtubePlaylistId": "PLAqXSp7BC91Y",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLAqXSp7BC91Y",
+      "playlistItemId": "",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "channelHandle": "@lunacardsslovenscina",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded_playlist_insert_pending",
+      "publishAt": "2026-06-27T06:30:00.000Z",
+      "scheduledPublishAt": "2026-06-27T06:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "needsPlaylistInsert": true,
+      "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n",
+      "metadataSource": "gemini-vectorengine",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "28239466666",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28239466666",
+      "uploadedAt": "2026-06-26T13:11:19.327Z",
+      "lastReadbackAt": "2026-06-26T13:11:19.327Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-27T06:30:00Z",
+        "thumbnailStatus": "auto_first_frame",
+        "playlistItemReadback": "pending",
+        "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n"
+      }
     }
   ]
 }
