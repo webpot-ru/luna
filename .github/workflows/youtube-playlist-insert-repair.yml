@@ -160,3 +160,79 @@ jobs:
             outputs/youtube-playlist-insert-repair-ledger.jsonl
             config/youtube-published-videos.json
             config/youtube-playlists.json
+
+  persist-playlist-insert-state:
+    needs: youtube-playlist-insert-repair
+    if: ${{ always() && github.event.inputs.mode == 'apply' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: youtube-playlist-insert-state-${{ github.ref_name }}-${{ github.run_id }}
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Download playlist insert state artifact
+        id: download_playlist_insert_state
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: youtube-playlist-insert-repair-${{ github.event.inputs.set_id }}-${{ github.event.inputs.support }}-${{ github.event.inputs.target }}-${{ github.run_id }}
+          path: .state-artifact
+
+      - name: Merge playlist insert state into current branch
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [ ! -f .state-artifact/config/youtube-published-videos.json ]; then
+            echo "No playlist insert state artifact found; nothing to persist."
+            exit 0
+          fi
+          git fetch origin "$BRANCH_NAME"
+          git checkout "$BRANCH_NAME"
+          git pull --ff-only origin "$BRANCH_NAME"
+          npm run merge:youtube-playlist-insert-state -- --artifact-dir=.state-artifact --summary=outputs/youtube-playlist-insert-state-merge-github.json
+          cat outputs/youtube-playlist-insert-state-merge-github.json
+
+      - name: Commit and push playlist insert state
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          TARGET: ${{ github.event.inputs.target }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- config/youtube-published-videos.json; then
+            echo "No YouTube playlist insert state changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/youtube-published-videos.json
+          git commit -m "Persist YouTube playlist insert repair for ${SET_ID} ${SUPPORT} ${TARGET}" \
+            -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          git push origin "HEAD:$BRANCH_NAME"
+
+      - name: Upload playlist insert state merge summary
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-playlist-insert-state-merge-${{ github.event.inputs.set_id }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: ignore
+          path: outputs/youtube-playlist-insert-state-merge-github.json
