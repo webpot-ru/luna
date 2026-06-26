@@ -102,6 +102,9 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Install Node dependencies
+        run: npm ci || npm install
+
       - name: Validate YouTube API route environment
         shell: bash
         env:
