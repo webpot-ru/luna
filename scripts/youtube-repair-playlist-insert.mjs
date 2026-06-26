@@ -68,6 +68,51 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function envInteger(name, fallback, { min = 0, max = Number.MAX_SAFE_INTEGER } = {}) {
+  const raw = process.env[name];
+  if (raw === undefined || raw === "") return fallback;
+  const value = Number(raw);
+  if (!Number.isFinite(value)) return fallback;
+  return Math.min(max, Math.max(min, Math.floor(value)));
+}
+
+function retryAfterMs(response) {
+  const value = response.headers.get("retry-after");
+  if (!value) return 0;
+  const seconds = Number(value);
+  if (Number.isFinite(seconds)) return Math.max(0, seconds * 1000);
+  const dateMs = Date.parse(value);
+  return Number.isFinite(dateMs) ? Math.max(0, dateMs - Date.now()) : 0;
+}
+
+function isRetryableYouTubeJsonError(status, text) {
+  if ([500, 502, 503, 504].includes(status)) return true;
+  if (status === 429) return true;
+  const lower = String(text || "").toLowerCase();
+  if (status === 409 && (
+    lower.includes("service_unavailable")
+    || lower.includes("\"status\": \"aborted\"")
+    || lower.includes("operation was aborted")
+    || lower.includes("youtube.coreerrordomain")
+  )) return true;
+  return [400, 403].includes(status) && (
+    lower.includes("rate_limit_exceeded")
+    || lower.includes("ratelimitexceeded")
+    || lower.includes("userratelimitexceeded")
+  );
+}
+
+function youtubeJsonRetryDelayMs({ attempt, response }) {
+  const retryAfter = retryAfterMs(response);
+  if (retryAfter > 0) return Math.min(retryAfter, envInteger("YOUTUBE_API_RETRY_MAX_MS", 90000, { min: 1000 }));
+  const baseMs = envInteger("YOUTUBE_API_RETRY_BASE_MS", 3000, { min: 100, max: 120000 });
+  const maxMs = envInteger("YOUTUBE_API_RETRY_MAX_MS", 90000, { min: 1000 });
+  const jitterMs = envInteger("YOUTUBE_API_RETRY_JITTER_MS", 2500, { min: 0, max: 120000 });
+  const exponential = baseMs * (2 ** Math.max(0, attempt - 1));
+  const jitter = jitterMs ? Math.floor(Math.random() * jitterMs) : 0;
+  return Math.min(maxMs, exponential + jitter);
+}
+
 function resolveExistingPath(filePath, label) {
   const resolved = path.resolve(filePath);
   if (!fs.existsSync(resolved)) fail(`${label} not found: ${filePath}`);
@@ -124,17 +169,27 @@ async function youtubeJson({ accessToken, method, pathName, query = {}, body }) 
   for (const [key, value] of Object.entries(query)) {
     if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, String(value));
   }
-  const response = await fetch(url, {
-    method,
-    headers: {
-      authorization: `Bearer ${accessToken}`,
-      ...(body ? { "content-type": "application/json" } : {}),
-    },
-    body: body ? JSON.stringify(body) : undefined,
-  });
-  if (!response.ok) fail(`YouTube API ${method} ${url.pathname} failed (${response.status}): ${await response.text()}`);
-  if (response.status === 204) return null;
-  return response.json();
+  const attempts = envInteger("YOUTUBE_API_RETRY_ATTEMPTS", 6, { min: 1, max: 12 });
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const response = await fetch(url, {
+      method,
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+        ...(body ? { "content-type": "application/json" } : {}),
+      },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    const text = response.status === 204 ? "" : await response.text();
+    if (response.ok) return response.status === 204 ? null : JSON.parse(text);
+    if (attempt < attempts && isRetryableYouTubeJsonError(response.status, text)) {
+      const delayMs = youtubeJsonRetryDelayMs({ attempt, response });
+      console.warn(`YouTube API ${method} ${url.pathname} retryable failure (${response.status}) on attempt ${attempt}/${attempts}; retrying in ${delayMs}ms.`);
+      await sleep(delayMs);
+      continue;
+    }
+    fail(`YouTube API ${method} ${url.pathname} failed (${response.status}): ${text}`);
+  }
+  fail(`YouTube API ${method} ${url.pathname} failed after ${attempts} attempts.`);
 }
 
 function firstItem(response, label) {

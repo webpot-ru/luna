@@ -130,6 +130,12 @@ function isRetryableYouTubeJsonError(status, text) {
   if ([500, 502, 503, 504].includes(status)) return true;
   if (status === 429) return true;
   const lower = String(text || "").toLowerCase();
+  if (status === 409 && (
+    lower.includes("service_unavailable")
+    || lower.includes("\"status\": \"aborted\"")
+    || lower.includes("operation was aborted")
+    || lower.includes("youtube.coreerrordomain")
+  )) return true;
   return [400, 403].includes(status) && (
     lower.includes("rate_limit_exceeded")
     || lower.includes("ratelimitexceeded")

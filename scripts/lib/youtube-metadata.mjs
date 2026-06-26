@@ -46,6 +46,23 @@ function cleanText(value) {
   return String(value || "").replace(/\s+/gu, " ").trim();
 }
 
+function supportUsesEnglishTemplates(supportLang) {
+  const code = normalizeLanguageCode(supportLang);
+  return code === "EN" || code === "EN-GB";
+}
+
+function stripEnglishPlaylistTemplateTail(value, supportLang) {
+  const text = cleanText(value);
+  if (!text || supportUsesEnglishTemplates(supportLang)) return text;
+  const parts = text.split("|").map((part) => cleanText(part)).filter(Boolean);
+  if (parts.length < 2) return text;
+  const filtered = parts.filter((part, index) => {
+    if (index === 0) return true;
+    return !/\b(?:A1\s+)?[A-Z][A-Za-z -]*\s+Vocabulary\b/u.test(part);
+  });
+  return filtered.length ? filtered.join(" | ") : text;
+}
+
 function uniqueStrings(values) {
   const seen = new Set();
   const result = [];
@@ -588,7 +605,7 @@ export function normalizeYouTubeMetadata(metadata) {
     const assignment = buildPlaylistAssignment(normalized);
     normalized.playlist_key = normalized.playlist_key || normalized.playlistKey || assignment.key;
     normalized.playlistKey = normalized.playlistKey || normalized.playlist_key;
-    normalized.playlistTitle = cleanText(normalized.playlistTitle || assignment.title);
+    normalized.playlistTitle = stripEnglishPlaylistTemplateTail(normalized.playlistTitle || assignment.title, normalized.supportLang);
     normalized.playlistDescription = cleanText(normalized.playlistDescription || assignment.description);
     normalized.playlist = {
       ...assignment,
