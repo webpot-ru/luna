@@ -195,9 +195,10 @@ export function normalizeLanguageCode(value) {
 export function customThumbnailUploadAllowed(channelRegistry = {}, channel = {}) {
   const defaultValue = channelRegistry?.defaults?.customThumbnailUploadAllowed;
   const channelValue = channel?.customThumbnailUploadAllowed;
+  if (channelValue === true) return true;
   if (channelValue === false) return false;
-  if (defaultValue === false) return false;
-  return true;
+  if (defaultValue === true) return true;
+  return false;
 }
 
 export function normalizeSlugPart(value) {

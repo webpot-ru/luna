@@ -76,9 +76,9 @@ function usage() {
     "  node scripts/generate-youtube-thumbnails.mjs <metadata-file-or-dir> [...] --dry-run",
     "  node scripts/generate-youtube-thumbnails.mjs outputs/video-generator --confirm-spend",
     "",
-    "Creates one VectorEngine GPT Image 2 YouTube thumbnail per youtube_metadata.json.",
+    "Creates one VectorEngine GPT Image 2 YouTube thumbnail per youtube_metadata.json only for channels explicitly marked customThumbnailUploadAllowed=true.",
     "The final JPEG is written next to metadata as youtube_thumbnail.jpg and metadata.thumbnailPath is updated.",
-    "If a support channel is marked customThumbnailUploadAllowed=false, the script skips paid image generation and records first-frame auto-thumbnail fallback in metadata.",
+    "If a support channel is not explicitly marked customThumbnailUploadAllowed=true, the script skips paid image generation and records first-frame auto-thumbnail fallback in metadata.",
     `By default, the real logo asset is overlaid when present: ${DEFAULT_LOGO_ASSET}`,
     "Default live concurrency is 2; override with --concurrency=<n> or VECTORENGINE_IMAGE_CONCURRENCY.",
     "",
@@ -283,13 +283,17 @@ async function main() {
     const resolved = path.resolve(envFile);
     if (loadDotEnvFile(resolved)) loadedEnvFiles.push(relativeProjectPath(resolved));
   }
-  const { keyName, apiKey } = getVectorEngineApiKey();
+  let vectorEngineCredentials = null;
+  function getLiveVectorEngineCredentials() {
+    if (!vectorEngineCredentials) vectorEngineCredentials = getVectorEngineApiKey();
+    return vectorEngineCredentials;
+  }
 
   async function processMetadata(metadataFile) {
     const metadata = JSON.parse(fs.readFileSync(metadataFile, "utf8"));
     const channel = findChannelForSupport(channelRegistry.channels, metadata.supportLang);
-    if (channel && !customThumbnailUploadAllowed(channelRegistry, channel)) {
-      const reason = "channel_custom_thumbnail_upload_not_available";
+    if (!channel || !customThumbnailUploadAllowed(channelRegistry, channel)) {
+      const reason = channel ? "channel_custom_thumbnail_upload_not_available" : "channel_custom_thumbnail_status_unknown";
       if (options.writeMetadata && !options.dryRun) updateMetadataForAutoFirstFrame(metadataFile, metadata, reason);
       return {
         status: options.dryRun ? "dry_run_custom_thumbnail_disabled" : "skipped_custom_thumbnail_disabled",
@@ -297,7 +301,7 @@ async function main() {
         setId: metadata.setId,
         supportLang: metadata.supportLang,
         targetLang: metadata.targetLang,
-        channelKey: channel.key,
+        channelKey: channel?.key || "",
         thumbnailUploadMode: "first_frame_auto",
         thumbnailSource: "youtube-auto-first-frame",
         thumbnailFallbackReason: reason,
@@ -329,6 +333,7 @@ async function main() {
     }
 
     await fsp.mkdir(path.dirname(paths.rawPath), { recursive: true });
+    const { keyName, apiKey } = getLiveVectorEngineCredentials();
     if (!apiKey) {
       throw new Error("Missing VectorEngine key. Set VECTORENGINE_API_KEY or VECTOR_ENGINE_API_KEY.");
     }

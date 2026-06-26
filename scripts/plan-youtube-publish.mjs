@@ -158,12 +158,12 @@ function buildCandidate({
   const thumbnailPath = findThumbnailFile(metadataFile, metadata);
   const thumbnailAutoRequested = metadata.thumbnailUploadMode === "first_frame_auto"
     || metadata.thumbnailSource === "youtube-auto-first-frame";
-  const canUploadCustomThumbnail = channel ? customThumbnailUploadAllowed(channelRegistry, channel) : true;
+  const canUploadCustomThumbnail = channel ? customThumbnailUploadAllowed(channelRegistry, channel) : false;
   const useAutoThumbnail = !canUploadCustomThumbnail || thumbnailAutoRequested || (allowAutoThumbnailFallback && !thumbnailPath);
   const thumbnailUploadPath = canUploadCustomThumbnail && !useAutoThumbnail ? thumbnailPath : "";
   const thumbnailUploadMode = thumbnailUploadPath ? "custom" : (useAutoThumbnail ? "first_frame_auto" : "");
   const thumbnailFallbackReason = !canUploadCustomThumbnail
-    ? "channel_custom_thumbnail_upload_not_available"
+    ? (channel ? "channel_custom_thumbnail_upload_not_available" : "channel_custom_thumbnail_status_unknown")
     : (thumbnailAutoRequested
       ? (metadata.thumbnailFallbackReason || "metadata_requested_first_frame_auto")
       : (useAutoThumbnail ? "custom_thumbnail_generation_disabled" : ""));
