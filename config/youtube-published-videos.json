@@ -41174,6 +41174,48 @@
         "playlistItemReadback": "pending",
         "postUploadError": "YouTube API GET /youtube/v3/videos failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n"
       }
+    },
+    {
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "IS",
+      "targetLang": "HR",
+      "playlist_key": "IS__HR__ordinary-vocabulary__a1-everyday",
+      "title": "Króatíska A1: Eldhúsáhöld | 50 orð og framburður | FlashcardsLuna",
+      "youtubeVideoId": "6UUu8S8NVn8",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=6UUu8S8NVn8",
+      "youtubePlaylistId": "PLHk3ETH_za7I",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLHk3ETH_za7I",
+      "playlistItemId": "",
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "channelHandle": "@lunacardsislenska",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded_playlist_insert_pending",
+      "publishAt": "2026-06-27T08:30:00.000Z",
+      "scheduledPublishAt": "2026-06-27T08:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "needsPlaylistInsert": true,
+      "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n",
+      "metadataSource": "gemini-vectorengine",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "28239472694",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28239472694",
+      "uploadedAt": "2026-06-26T13:07:41.746Z",
+      "lastReadbackAt": "2026-06-26T13:07:41.746Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-27T08:30:00Z",
+        "thumbnailStatus": "auto_first_frame",
+        "playlistItemReadback": "pending",
+        "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n"
+      }
     }
   ]
 }
