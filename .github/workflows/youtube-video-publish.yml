@@ -570,6 +570,15 @@ jobs:
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
           PRIVACY: ${{ github.event.inputs.privacy }}
           PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
+          YOUTUBE_API_RETRY_ATTEMPTS: "7"
+          YOUTUBE_API_RETRY_BASE_MS: "4000"
+          YOUTUBE_API_RETRY_JITTER_MS: "4000"
+          YOUTUBE_API_RETRY_MAX_MS: "90000"
+          YOUTUBE_PLAYLIST_WRITE_DELAY_MS: "4000"
+          YOUTUBE_PLAYLIST_WRITE_JITTER_MS: "8000"
+          YOUTUBE_VIDEO_READBACK_ATTEMPTS: "6"
+          YOUTUBE_VIDEO_READBACK_BASE_MS: "6000"
+          YOUTUBE_VIDEO_READBACK_MAX_MS: "60000"
         run: |
           set -euo pipefail
           EFFECTIVE_PRIVACY="$PRIVACY"

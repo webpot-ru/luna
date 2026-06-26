@@ -84,6 +84,79 @@ function fail(message) {
   throw new Error(message);
 }
 
+function envInteger(name, fallback, { min = 0, max = Number.MAX_SAFE_INTEGER } = {}) {
+  const raw = process.env[name];
+  if (raw === undefined || raw === "") return fallback;
+  const value = Number.parseInt(raw, 10);
+  if (!Number.isFinite(value)) return fallback;
+  return Math.min(max, Math.max(min, value));
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function retryAfterMs(response) {
+  const value = response.headers.get("retry-after");
+  if (!value) return 0;
+  const seconds = Number(value);
+  if (Number.isFinite(seconds)) return Math.max(0, seconds * 1000);
+  const dateMs = Date.parse(value);
+  return Number.isFinite(dateMs) ? Math.max(0, dateMs - Date.now()) : 0;
+}
+
+function normalizeYouTubePath(pathName) {
+  return String(pathName || "").replace(/^\/+/u, "").split("?")[0];
+}
+
+function isPlaylistWriteRequest(method, pathName) {
+  const verb = String(method || "").toUpperCase();
+  const name = normalizeYouTubePath(pathName);
+  return ["POST", "PUT", "PATCH"].includes(verb) && ["playlists", "playlistItems"].includes(name);
+}
+
+async function delayBeforePlaylistWrite({ method, pathName }) {
+  if (!isPlaylistWriteRequest(method, pathName)) return;
+  const baseMs = envInteger("YOUTUBE_PLAYLIST_WRITE_DELAY_MS", 2500, { min: 0, max: 120000 });
+  const jitterMs = envInteger("YOUTUBE_PLAYLIST_WRITE_JITTER_MS", 5000, { min: 0, max: 120000 });
+  const delayMs = baseMs + (jitterMs ? Math.floor(Math.random() * jitterMs) : 0);
+  if (delayMs > 0) {
+    console.warn(`YouTube playlist write throttle: waiting ${delayMs}ms before ${String(method).toUpperCase()} ${normalizeYouTubePath(pathName)}.`);
+    await sleep(delayMs);
+  }
+}
+
+function isRetryableYouTubeJsonError(status, text) {
+  if ([500, 502, 503, 504].includes(status)) return true;
+  if (status === 429) return true;
+  const lower = String(text || "").toLowerCase();
+  return [400, 403].includes(status) && (
+    lower.includes("rate_limit_exceeded")
+    || lower.includes("ratelimitexceeded")
+    || lower.includes("userratelimitexceeded")
+  );
+}
+
+function youtubeJsonRetryDelayMs({ attempt, response }) {
+  const retryAfter = retryAfterMs(response);
+  if (retryAfter > 0) return Math.min(retryAfter, envInteger("YOUTUBE_API_RETRY_MAX_MS", 90000, { min: 1000 }));
+  const baseMs = envInteger("YOUTUBE_API_RETRY_BASE_MS", 3000, { min: 100, max: 120000 });
+  const maxMs = envInteger("YOUTUBE_API_RETRY_MAX_MS", 90000, { min: 1000 });
+  const jitterMs = envInteger("YOUTUBE_API_RETRY_JITTER_MS", 2500, { min: 0, max: 120000 });
+  const exponential = baseMs * (2 ** Math.max(0, attempt - 1));
+  const jitter = jitterMs ? Math.floor(Math.random() * jitterMs) : 0;
+  return Math.min(maxMs, exponential + jitter);
+}
+
+function parseYouTubeJson(text, label) {
+  if (!text) return null;
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    fail(`${label} returned non-JSON response: ${String(text).slice(0, 500)}`);
+  }
+}
+
 function detectMimeType(filePath) {
   const ext = path.extname(filePath).toLowerCase();
   if (ext === ".png") return "image/png";
@@ -197,17 +270,28 @@ async function youtubeJson({ accessToken, method, pathName, query = {}, body }) 
   for (const [key, value] of Object.entries(query)) {
     if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, String(value));
   }
-  const response = await fetch(url, {
-    method,
-    headers: {
-      authorization: `Bearer ${accessToken}`,
-      ...(body ? { "content-type": "application/json" } : {}),
-    },
-    body: body ? JSON.stringify(body) : undefined,
-  });
-  if (!response.ok) fail(`YouTube API ${method} ${url.pathname} failed (${response.status}): ${await response.text()}`);
-  if (response.status === 204) return null;
-  return response.json();
+  const attempts = envInteger("YOUTUBE_API_RETRY_ATTEMPTS", 6, { min: 1, max: 12 });
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    await delayBeforePlaylistWrite({ method, pathName });
+    const response = await fetch(url, {
+      method,
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+        ...(body ? { "content-type": "application/json" } : {}),
+      },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    const text = response.status === 204 ? "" : await response.text();
+    if (response.ok) return parseYouTubeJson(text, `YouTube API ${method} ${url.pathname}`);
+    if (attempt < attempts && isRetryableYouTubeJsonError(response.status, text)) {
+      const delayMs = youtubeJsonRetryDelayMs({ attempt, response });
+      console.warn(`YouTube API ${method} ${url.pathname} retryable failure (${response.status}) on attempt ${attempt}/${attempts}; retrying in ${delayMs}ms.`);
+      await sleep(delayMs);
+      continue;
+    }
+    fail(`YouTube API ${method} ${url.pathname} failed (${response.status}): ${text}`);
+  }
+  fail(`YouTube API ${method} ${url.pathname} failed after ${attempts} attempts.`);
 }
 
 async function youtubeMediaUpload({ accessToken, method = "POST", pathName, query = {}, filePath }) {
@@ -348,6 +432,45 @@ function assertUploadedVideoChannel({ videoReadback, expectedChannelId, videoId 
     fail(`Uploaded video channel mismatch: expected ${expectedChannelId}, got ${actualChannelId || "(missing)"}.`);
   }
   return item;
+}
+
+async function readUploadedVideoWithRetry({ accessToken, expectedChannelId, videoId }) {
+  const attempts = envInteger("YOUTUBE_VIDEO_READBACK_ATTEMPTS", 5, { min: 1, max: 12 });
+  const baseMs = envInteger("YOUTUBE_VIDEO_READBACK_BASE_MS", 5000, { min: 100, max: 120000 });
+  const maxMs = envInteger("YOUTUBE_VIDEO_READBACK_MAX_MS", 60000, { min: 1000, max: 300000 });
+  let videoReadback = null;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    videoReadback = await youtubeJson({
+      accessToken,
+      method: "GET",
+      pathName: "videos",
+      query: {
+        part: "snippet,status",
+        id: videoId,
+        fields: "items(id,snippet(channelId,title),status(privacyStatus,uploadStatus,publishAt))",
+      },
+    });
+    const item = videoReadback?.items?.[0];
+    if (item) {
+      const uploadedVideo = assertUploadedVideoChannel({
+        videoReadback,
+        expectedChannelId,
+        videoId,
+      });
+      return { videoReadback, uploadedVideo };
+    }
+    if (attempt < attempts) {
+      const delayMs = Math.min(maxMs, baseMs * attempt);
+      console.warn(`YouTube uploaded video readback returned no items for ${videoId} on attempt ${attempt}/${attempts}; retrying in ${delayMs}ms.`);
+      await sleep(delayMs);
+    }
+  }
+  const uploadedVideo = assertUploadedVideoChannel({
+    videoReadback,
+    expectedChannelId,
+    videoId,
+  });
+  return { videoReadback, uploadedVideo };
 }
 
 function appendLedger(ledgerPath, row) {
@@ -596,21 +719,13 @@ async function main() {
     const videoId = uploaded.id;
     uploadedVideoId = videoId;
 
-    videoReadback = await youtubeJson({
+    const uploadedVideoReadback = await readUploadedVideoWithRetry({
       accessToken,
-      method: "GET",
-      pathName: "videos",
-      query: {
-        part: "snippet,status",
-        id: videoId,
-        fields: "items(id,snippet(channelId,title),status(privacyStatus,uploadStatus,publishAt))",
-      },
-    });
-    uploadedVideo = assertUploadedVideoChannel({
-      videoReadback,
       expectedChannelId: channel.channelId,
       videoId,
     });
+    videoReadback = uploadedVideoReadback.videoReadback;
+    uploadedVideo = uploadedVideoReadback.uploadedVideo;
 
     const playlistItem = await youtubeJson({
       accessToken,
