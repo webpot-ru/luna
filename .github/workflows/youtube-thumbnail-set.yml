@@ -83,6 +83,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci || npm install
+
       - name: Validate YouTube environment route
         shell: bash
         env:
