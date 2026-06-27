@@ -27087,7 +27087,7 @@
       "localSlotIndex": 3,
       "localDayOffset": 1,
       "slotOrdinal": 9,
-      "status": "reserved",
+      "status": "cancelled_preupload_stale_reservation",
       "source": "plan-youtube-publish-schedule",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_zh_ja/youtube_metadata.json",
@@ -27114,7 +27114,9 @@
       "githubRunId": "28024640641",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024640641",
       "createdAt": "2026-06-23T12:02:33.159Z",
-      "updatedAt": "2026-06-23T12:02:33.159Z"
+      "updatedAt": "2026-06-27T07:29:39.112Z",
+      "cancelReason": "pre_upload_cancel_after_past_publishAt_gate",
+      "recoveryNote": "Cancelled before retry so scheduler can assign a future publishAt after quota reset."
     },
     {
       "schemaVersion": 1,
@@ -38494,7 +38496,7 @@
       "localSlotIndex": 4,
       "localDayOffset": 0,
       "slotOrdinal": 4,
-      "status": "reserved",
+      "status": "cancelled_preupload_stale_reservation",
       "source": "plan-youtube-publish-schedule",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_hi_sl/youtube_metadata.json",
@@ -38521,7 +38523,9 @@
       "githubRunId": "28103616303",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28103616303",
       "createdAt": "2026-06-24T13:55:21.911Z",
-      "updatedAt": "2026-06-24T13:55:21.911Z"
+      "updatedAt": "2026-06-27T07:29:39.112Z",
+      "cancelReason": "pre_upload_cancel_after_past_publishAt_gate",
+      "recoveryNote": "Cancelled before retry so scheduler can assign a future publishAt after quota reset."
     },
     {
       "schemaVersion": 1,
@@ -38537,7 +38541,7 @@
       "localSlotIndex": 4,
       "localDayOffset": 0,
       "slotOrdinal": 4,
-      "status": "reserved",
+      "status": "cancelled_preupload_stale_reservation",
       "source": "plan-youtube-publish-schedule",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_hi_ml/youtube_metadata.json",
@@ -38564,7 +38568,9 @@
       "githubRunId": "28106310137",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28106310137",
       "createdAt": "2026-06-24T14:37:11.029Z",
-      "updatedAt": "2026-06-24T14:37:11.029Z"
+      "updatedAt": "2026-06-27T07:29:39.112Z",
+      "cancelReason": "pre_upload_cancel_after_past_publishAt_gate",
+      "recoveryNote": "Cancelled before retry so scheduler can assign a future publishAt after quota reset."
     },
     {
       "schemaVersion": 1,
