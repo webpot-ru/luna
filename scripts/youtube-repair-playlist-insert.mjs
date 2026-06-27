@@ -88,9 +88,10 @@ function retryAfterMs(response) {
   return Number.isFinite(dateMs) ? Math.max(0, dateMs - Date.now()) : 0;
 }
 
-function isRetryableYouTubeJsonError(status, text) {
+function isRetryableYouTubeJsonError(status, text, pathName = "") {
   if ([500, 502, 503, 504].includes(status)) return true;
   if (status === 429) return true;
+  if (status === 404 && String(pathName).includes("playlistItems") && isPlaylistNotFoundText(text)) return true;
   const lower = String(text || "").toLowerCase();
   if (status === 409 && (
     lower.includes("service_unavailable")
@@ -103,6 +104,18 @@ function isRetryableYouTubeJsonError(status, text) {
     || lower.includes("ratelimitexceeded")
     || lower.includes("userratelimitexceeded")
   );
+}
+
+function isPlaylistNotFoundText(text) {
+  const lower = String(text || "").toLowerCase();
+  return lower.includes("playlistnotfound")
+    || lower.includes("playlist identified")
+    || lower.includes("playlistid")
+    || lower.includes("playlist cannot be found");
+}
+
+function isPlaylistNotFoundError(error) {
+  return isPlaylistNotFoundText(error?.message || "");
 }
 
 function youtubeJsonRetryDelayMs({ attempt, response }) {
@@ -184,7 +197,7 @@ async function youtubeJson({ accessToken, method, pathName, query = {}, body }) 
     });
     const text = response.status === 204 ? "" : await response.text();
     if (response.ok) return response.status === 204 ? null : JSON.parse(text);
-    if (attempt < attempts && isRetryableYouTubeJsonError(response.status, text)) {
+    if (attempt < attempts && isRetryableYouTubeJsonError(response.status, text, url.pathname)) {
       const delayMs = youtubeJsonRetryDelayMs({ attempt, response });
       console.warn(`YouTube API ${method} ${url.pathname} retryable failure (${response.status}) on attempt ${attempt}/${attempts}; retrying in ${delayMs}ms.`);
       await sleep(delayMs);
@@ -341,15 +354,39 @@ function playlistEntryForRow({ playlistRegistry, row, channel }) {
 async function ensurePlaylistForRow({ accessToken, playlistRegistry, row, channel, now }) {
   let entry = playlistEntryForRow({ playlistRegistry, row, channel });
   if (row.youtubePlaylistId) {
-    const playlist = await readPlaylist({ accessToken, playlistId: row.youtubePlaylistId });
-    return { playlist, playlistRegistryUpdated: false, createdPlaylist: false };
+    try {
+      const playlist = await readPlaylist({ accessToken, playlistId: row.youtubePlaylistId });
+      return { playlist, playlistRegistryUpdated: false, createdPlaylist: false };
+    } catch (error) {
+      if (!isPlaylistNotFoundError(error)) throw error;
+      if (entry.youtube_playlist_id === row.youtubePlaylistId) {
+        entry.youtube_playlist_id = "";
+        entry.status = "planned";
+        entry.lastReadbackAt = now;
+      }
+      row.youtubePlaylistId = "";
+      row.youtubePlaylistUrl = "";
+      row.needsPlaylistCreate = true;
+      row.playlistCreateDeferredError = `Stale playlist ID was not found during repair: ${error.message}`;
+    }
   }
 
   if (entry.youtube_playlist_id) {
     row.youtubePlaylistId = entry.youtube_playlist_id;
     row.youtubePlaylistUrl = `https://www.youtube.com/playlist?list=${entry.youtube_playlist_id}`;
-    const playlist = await readPlaylist({ accessToken, playlistId: entry.youtube_playlist_id });
-    return { playlist, playlistRegistryUpdated: true, createdPlaylist: false };
+    try {
+      const playlist = await readPlaylist({ accessToken, playlistId: entry.youtube_playlist_id });
+      return { playlist, playlistRegistryUpdated: true, createdPlaylist: false };
+    } catch (error) {
+      if (!isPlaylistNotFoundError(error)) throw error;
+      entry.youtube_playlist_id = "";
+      entry.status = "planned";
+      entry.lastReadbackAt = now;
+      row.youtubePlaylistId = "";
+      row.youtubePlaylistUrl = "";
+      row.needsPlaylistCreate = true;
+      row.playlistCreateDeferredError = `Stale playlist registry ID was not found during repair: ${error.message}`;
+    }
   }
 
   const playlist = await createPlaylist({ accessToken, entry, row });
@@ -515,7 +552,7 @@ async function main() {
     });
     assertExpectedState({ row, channel, video: beforeVideo, playlist: beforePlaylist });
 
-    const existingItem = await findPlaylistItem({
+    const existingItem = createdPlaylist ? null : await findPlaylistItem({
       accessToken,
       playlistId: row.youtubePlaylistId,
       videoId: row.youtubeVideoId,
