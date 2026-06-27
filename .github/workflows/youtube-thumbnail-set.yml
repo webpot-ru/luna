@@ -19,6 +19,18 @@ on:
       target:
         description: "Target language in the video lesson."
         required: true
+      generate_if_missing:
+        description: "Generate youtube_thumbnail.jpg through VectorEngine when the source artifact has only automatic-thumbnail metadata."
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      confirm_thumbnail_spend:
+        description: "For VectorEngine thumbnail generation type GENERATE_THUMBNAILS."
+        required: false
+        default: ""
       youtube_environment:
         description: "GitHub environment with the support route OAuth bundle. Use auto for one support channel."
         required: true
@@ -136,6 +148,7 @@ jobs:
           SET_ID: ${{ github.event.inputs.set_id }}
           SUPPORT: ${{ github.event.inputs.support }}
           TARGET: ${{ github.event.inputs.target }}
+          GENERATE_IF_MISSING: ${{ github.event.inputs.generate_if_missing }}
         run: |
           set -euo pipefail
           node - <<'NODE'
@@ -167,14 +180,39 @@ jobs:
           }
           const metadataPath = matches[0];
           const thumbnailPath = path.join(path.dirname(metadataPath), "youtube_thumbnail.jpg");
-          if (!fs.existsSync(thumbnailPath)) {
+          const thumbnailExists = fs.existsSync(thumbnailPath);
+          const generateIfMissing = String(process.env.GENERATE_IF_MISSING || "") === "true";
+          if (!thumbnailExists && !generateIfMissing) {
             console.error(`Missing thumbnail next to metadata: ${thumbnailPath}`);
+            console.error("Set generate_if_missing=true and confirm_thumbnail_spend=GENERATE_THUMBNAILS to generate it on GitHub.");
             process.exit(1);
           }
           fs.appendFileSync(process.env.GITHUB_OUTPUT, `metadata=${metadataPath}\n`);
           fs.appendFileSync(process.env.GITHUB_OUTPUT, `thumbnail=${thumbnailPath}\n`);
-          console.log(JSON.stringify({ metadataPath, thumbnailPath }, null, 2));
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `needs_generation=${thumbnailExists ? "false" : "true"}\n`);
+          console.log(JSON.stringify({ metadataPath, thumbnailPath, thumbnailExists, needsGeneration: !thumbnailExists }, null, 2));
           NODE
+
+      - name: Generate missing thumbnail
+        if: steps.locate.outputs.needs_generation == 'true'
+        shell: bash
+        env:
+          CONFIRM_THUMBNAIL_SPEND: ${{ github.event.inputs.confirm_thumbnail_spend }}
+          METADATA: ${{ steps.locate.outputs.metadata }}
+          VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
+          VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRM_THUMBNAIL_SPEND" != "GENERATE_THUMBNAILS" ]; then
+            echo "::error::Thumbnail generation spends VectorEngine image credits. Set confirm_thumbnail_spend=GENERATE_THUMBNAILS."
+            exit 1
+          fi
+          if [ -z "${VECTORENGINE_API_KEY:-}" ] && [ -z "${VECTOR_ENGINE_API_KEY:-}" ]; then
+            echo "::error::Missing VECTORENGINE_API_KEY / VECTOR_ENGINE_API_KEY for thumbnail generation."
+            exit 1
+          fi
+          npm run generate:youtube-thumbnails -- "$METADATA" --confirm-spend --concurrency=1 --output=outputs/youtube-thumbnail-generation-report-github.json
+          test -f "${{ steps.locate.outputs.thumbnail }}"
 
       - name: Dry-run thumbnail update plan
         shell: bash
