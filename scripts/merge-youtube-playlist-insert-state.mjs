@@ -99,9 +99,13 @@ function compatibleRows(current = {}, incoming = {}) {
 
 function applyPlaylistInsertRepair(current, incoming) {
   const fields = [
+    "youtubePlaylistId",
+    "youtubePlaylistUrl",
     "playlistItemId",
     "publicationStatus",
     "status",
+    "playlistCreateRepairedAt",
+    "playlistCreateRepairStatus",
     "playlistInsertRepairedAt",
     "playlistInsertRepairStatus",
     "playlistInsertRepairGithubRunId",
@@ -118,9 +122,19 @@ function applyPlaylistInsertRepair(current, incoming) {
       changed = true;
     }
   }
+  if (current.needsPlaylistCreate !== undefined) {
+    delete current.needsPlaylistCreate;
+    changed = true;
+  }
   if (current.needsPlaylistInsert !== undefined) {
     delete current.needsPlaylistInsert;
     changed = true;
+  }
+  for (const field of ["playlistCreateDeferredError", "playlistInsertDeferredError"]) {
+    if (current[field] !== undefined && incoming[field] === undefined) {
+      delete current[field];
+      changed = true;
+    }
   }
   if (current.postUploadError !== undefined && incoming.postUploadError === undefined) {
     delete current.postUploadError;
@@ -188,6 +202,69 @@ function mergePublications(currentRegistry, incomingRegistry) {
   return summary;
 }
 
+function mergePlaylists(currentRegistry, incomingRegistry) {
+  const currentRows = currentRegistry.playlists || [];
+  const incomingRows = incomingRegistry.playlists || [];
+  currentRegistry.playlists = currentRows;
+  const byKey = new Map(currentRows.map((row) => [row.playlist_key || row.key || "", row]));
+  const summary = { created: 0, updated: 0, skipped: 0 };
+
+  for (const incoming of incomingRows) {
+    const key = incoming.playlist_key || incoming.key || "";
+    if (!key) {
+      summary.skipped += 1;
+      continue;
+    }
+    const existing = byKey.get(key);
+    if (!existing) {
+      currentRows.push(incoming);
+      byKey.set(key, incoming);
+      summary.created += 1;
+      continue;
+    }
+
+    let changed = false;
+    for (const field of [
+      "supportLang",
+      "targetLang",
+      "courseFamily",
+      "levelOrTrack",
+      "variantOrYear",
+      "channelKey",
+      "youtube_channel_id",
+      "youtube_playlist_id",
+      "title",
+      "description",
+      "titleReviewStatus",
+      "status",
+      "createdAt",
+      "lastReadbackAt",
+    ]) {
+      const next = incoming[field];
+      if ((existing[field] === undefined || existing[field] === "") && next !== undefined && next !== "") {
+        existing[field] = next;
+        changed = true;
+      }
+    }
+    if (String(existing.status || "") === "planned" && String(incoming.status || "").startsWith("created_")) {
+      existing.status = incoming.status;
+      changed = true;
+    }
+    if (existing.youtube_playlist_id && existing.needsPlaylistCreate !== undefined) {
+      delete existing.needsPlaylistCreate;
+      changed = true;
+    }
+    if (existing.youtube_playlist_id && existing.playlistCreateDeferredError !== undefined) {
+      delete existing.playlistCreateDeferredError;
+      changed = true;
+    }
+    if (changed) summary.updated += 1;
+    else summary.skipped += 1;
+  }
+
+  return summary;
+}
+
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
@@ -198,6 +275,8 @@ function main() {
   const artifactDir = path.resolve(options.artifactDir);
   const currentPath = path.join(repoRoot, "config/youtube-published-videos.json");
   const incomingPath = path.join(artifactDir, "config/youtube-published-videos.json");
+  const currentPlaylistsPath = path.join(repoRoot, "config/youtube-playlists.json");
+  const incomingPlaylistsPath = path.join(artifactDir, "config/youtube-playlists.json");
   const summary = {
     artifactDir,
     incomingPath,
@@ -212,6 +291,11 @@ function main() {
       skippedMismatch: 0,
       mismatches: [],
     },
+    playlists: {
+      created: 0,
+      updated: 0,
+      skipped: 0,
+    },
   };
 
   if (!fs.existsSync(incomingPath)) {
@@ -223,6 +307,14 @@ function main() {
     const incomingRegistry = readJson(incomingPath);
     summary.publications = mergePublications(currentRegistry, incomingRegistry);
     if (writeJsonIfChanged(currentPath, currentRegistry)) summary.filesChanged.push("config/youtube-published-videos.json");
+  }
+  if (fs.existsSync(incomingPlaylistsPath)) {
+    const currentPlaylists = fs.existsSync(currentPlaylistsPath)
+      ? readJson(currentPlaylistsPath)
+      : { schemaVersion: 1, playlists: [] };
+    const incomingPlaylists = readJson(incomingPlaylistsPath);
+    summary.playlists = mergePlaylists(currentPlaylists, incomingPlaylists);
+    if (writeJsonIfChanged(currentPlaylistsPath, currentPlaylists)) summary.filesChanged.push("config/youtube-playlists.json");
   }
 
   const summaryPath = path.resolve(repoRoot, options.summary);

@@ -217,13 +217,13 @@ jobs:
           TARGET: ${{ github.event.inputs.target }}
         run: |
           set -euo pipefail
-          if git diff --quiet -- config/youtube-published-videos.json; then
+          if git diff --quiet -- config/youtube-published-videos.json config/youtube-playlists.json; then
             echo "No YouTube playlist insert state changes to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add config/youtube-published-videos.json
+          git add config/youtube-published-videos.json config/youtube-playlists.json
           git commit -m "Persist YouTube playlist insert repair for ${SET_ID} ${SUPPORT} ${TARGET}" \
             -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
           git push origin "HEAD:$BRANCH_NAME"

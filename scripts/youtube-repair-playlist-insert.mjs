@@ -4,11 +4,14 @@ import path from "node:path";
 import {
   DEFAULT_CHANNEL_CONFIG_PATH,
   DEFAULT_PLAYLIST_REGISTRY_PATH,
+  buildPlaylistAssignment,
   findChannelForSupport,
+  findPlaylistEntry,
   loadPlaylistRegistry,
   loadYoutubeChannels,
   normalizeLanguageCode,
   savePlaylistRegistry,
+  upsertPlannedPlaylist,
 } from "./lib/youtube-playlists.mjs";
 import {
   DEFAULT_PUBLICATION_REGISTRY_PATH,
@@ -299,6 +302,72 @@ async function insertPlaylistItem({ accessToken, playlistId, videoId }) {
   });
 }
 
+async function createPlaylist({ accessToken, entry, row }) {
+  const hasSchedule = Boolean(row.publishAt || row.scheduledPublishAt);
+  const privacyStatus = (hasSchedule || row.desiredPrivacyStatus === "public" || row.privacyStatus === "public")
+    ? "public"
+    : "unlisted";
+  return youtubeJson({
+    accessToken,
+    method: "POST",
+    pathName: "playlists",
+    query: {
+      part: "snippet,status",
+      fields: "id,snippet(channelId,title),status(privacyStatus)",
+    },
+    body: {
+      snippet: {
+        title: entry.title,
+        description: entry.description || "",
+      },
+      status: { privacyStatus },
+    },
+  });
+}
+
+function playlistEntryForRow({ playlistRegistry, row, channel }) {
+  const key = row.playlist_key || row.playlistKey || "";
+  let entry = key ? findPlaylistEntry(playlistRegistry, key) : null;
+  if (entry) return entry;
+  const assignment = buildPlaylistAssignment({
+    setId: row.setId,
+    supportLang: row.supportLang,
+    targetLang: row.targetLang,
+  });
+  entry = upsertPlannedPlaylist(playlistRegistry, assignment, channel).entry;
+  return entry;
+}
+
+async function ensurePlaylistForRow({ accessToken, playlistRegistry, row, channel, now }) {
+  let entry = playlistEntryForRow({ playlistRegistry, row, channel });
+  if (row.youtubePlaylistId) {
+    const playlist = await readPlaylist({ accessToken, playlistId: row.youtubePlaylistId });
+    return { playlist, playlistRegistryUpdated: false, createdPlaylist: false };
+  }
+
+  if (entry.youtube_playlist_id) {
+    row.youtubePlaylistId = entry.youtube_playlist_id;
+    row.youtubePlaylistUrl = `https://www.youtube.com/playlist?list=${entry.youtube_playlist_id}`;
+    const playlist = await readPlaylist({ accessToken, playlistId: entry.youtube_playlist_id });
+    return { playlist, playlistRegistryUpdated: true, createdPlaylist: false };
+  }
+
+  const playlist = await createPlaylist({ accessToken, entry, row });
+  entry.youtube_channel_id = playlist.snippet?.channelId || channel.channelId;
+  entry.youtube_playlist_id = playlist.id;
+  entry.status = playlist.status?.privacyStatus ? `created_${playlist.status.privacyStatus}` : "created";
+  entry.lastReadbackAt = now;
+  delete entry.needsPlaylistCreate;
+  delete entry.playlistCreateDeferredError;
+  row.youtubePlaylistId = playlist.id;
+  row.youtubePlaylistUrl = `https://www.youtube.com/playlist?list=${playlist.id}`;
+  row.playlistCreateRepairedAt = now;
+  row.playlistCreateRepairStatus = "created";
+  delete row.needsPlaylistCreate;
+  delete row.playlistCreateDeferredError;
+  return { playlist, playlistRegistryUpdated: true, createdPlaylist: true };
+}
+
 function appendLedger(ledgerPath, row) {
   fs.mkdirSync(path.dirname(ledgerPath), { recursive: true });
   fs.appendFileSync(ledgerPath, `${JSON.stringify(row)}\n`, "utf8");
@@ -433,7 +502,17 @@ async function main() {
     const accessToken = await getAccessToken({ clientFile, tokenFile });
     const authorizedChannel = await readAuthorizedChannel({ accessToken, expectedChannelId: channel.channelId });
     const beforeVideo = await readVideo({ accessToken, videoId: row.youtubeVideoId });
-    const beforePlaylist = await readPlaylist({ accessToken, playlistId: row.youtubePlaylistId });
+    const {
+      playlist: beforePlaylist,
+      playlistRegistryUpdated: playlistEnsureUpdated,
+      createdPlaylist,
+    } = await ensurePlaylistForRow({
+      accessToken,
+      playlistRegistry,
+      row,
+      channel,
+      now,
+    });
     assertExpectedState({ row, channel, video: beforeVideo, playlist: beforePlaylist });
 
     const existingItem = await findPlaylistItem({
@@ -463,7 +542,10 @@ async function main() {
     row.playlistInsertRepairGithubRunId = process.env.GITHUB_RUN_ID || "";
     row.playlistInsertRepairGithubRunUrl = githubRunUrl();
     row.playlistInsertRepairNote = "Previous playlistItems.insert failure was repaired without reuploading the video.";
+    delete row.needsPlaylistCreate;
     delete row.needsPlaylistInsert;
+    delete row.playlistCreateDeferredError;
+    delete row.playlistInsertDeferredError;
     delete row.postUploadError;
     row.readback = {
       ...(row.readback || {}),
@@ -474,8 +556,10 @@ async function main() {
       playlistId: beforePlaylist.id,
       playlistPrivacyStatus: beforePlaylist.status?.privacyStatus || "",
       playlistItemId: verifiedItem.id,
+      ...(createdPlaylist ? { playlistCreateRepairedAt: now } : {}),
       playlistInsertRepairedAt: now,
     };
+    delete row.readback.playlistReadback;
     delete row.readback.postUploadError;
 
     const playlistRegistryUpdated = updatePlaylistRegistry({
@@ -483,7 +567,7 @@ async function main() {
       playlistId: row.youtubePlaylistId,
       playlist: beforePlaylist,
       now,
-    });
+    }) || playlistEnsureUpdated;
 
     savePublicationRegistry(publicationRegistry, options.publicationRegistry);
     if (playlistRegistryUpdated) savePlaylistRegistry(playlistRegistry, options.playlistRegistry);
@@ -498,6 +582,7 @@ async function main() {
         playlist: beforePlaylist,
         existingPlaylistItem: existingItem,
       },
+      createdPlaylist,
       insertResponse: existingItem ? null : insertedItem,
       readback: {
         playlistItem: verifiedItem,
