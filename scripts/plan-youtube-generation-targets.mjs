@@ -2,14 +2,12 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { resolveTargetLanguages } from "./lib/youtube-metadata.mjs";
 import {
   DEFAULT_PUBLICATION_REGISTRY_PATH,
   findActivePublication,
   loadPublicationRegistry,
 } from "./lib/youtube-publication-registry.mjs";
 import { shardItems } from "./lib/work-shards.mjs";
-import { normalizeLanguageCode } from "./lib/youtube-playlists.mjs";
 
 function parseArgs(argv) {
   const options = {
@@ -19,6 +17,7 @@ function parseArgs(argv) {
     excludeSupports: [],
     excludeTargets: [],
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
+    additionalPublicationRegistries: [],
     allowRepublish: false,
     shardCount: 1,
     shardIndex: 0,
@@ -54,6 +53,8 @@ function parseArgs(argv) {
         : value.split(",").map(normalizeCode).filter(Boolean);
     } else if (arg === "--publication-registry" || arg.startsWith("--publication-registry=")) {
       options.publicationRegistry = readValue();
+    } else if (arg === "--additional-publication-registry" || arg.startsWith("--additional-publication-registry=")) {
+      options.additionalPublicationRegistries.push(readValue());
     } else if (arg === "--shard-count" || arg.startsWith("--shard-count=")) {
       options.shardCount = Number(readValue());
     } else if (arg === "--shard-index" || arg.startsWith("--shard-index=")) {
@@ -78,6 +79,8 @@ function usage() {
     "Options:",
     "  --exclude-supports <codes> Exclude support languages from this plan, e.g. HY while Armenian TTS is blocked.",
     "  --exclude-targets <codes>  Exclude target languages from this plan, e.g. HY while Armenian TTS is blocked.",
+    "  --additional-publication-registry <file>",
+    "                          Extra registry/blocklist JSON, for example live YouTube readback evidence.",
     "  --shard-count <n>       Report deterministic shard selection for the eligible target list.",
     "  --shard-index <n>       0-based deterministic shard index.",
     "  --output <file>         Write the full preflight report.",
@@ -87,6 +90,11 @@ function usage() {
 
 function normalizeCode(value) {
   return String(value || "").trim().replace(/_/g, "-").toUpperCase();
+}
+
+async function resolveAllTargetLanguages(setId, supportLang) {
+  const { resolveTargetLanguages } = await import("./lib/youtube-metadata.mjs");
+  return resolveTargetLanguages(setId, supportLang);
 }
 
 function normalizeTargetList(values) {
@@ -104,6 +112,22 @@ function compactExistingPublication(row) {
     uploadedAt: row.uploadedAt || "",
     githubRunId: row.githubRunId || "",
   };
+}
+
+function mergePublicationRegistries(primaryRegistry, additionalRegistryPaths = []) {
+  const merged = {
+    ...primaryRegistry,
+    publications: [...(primaryRegistry.publications || [])],
+  };
+  for (const registryPath of additionalRegistryPaths) {
+    if (!registryPath) continue;
+    if (!fs.existsSync(registryPath)) {
+      throw new Error(`Additional publication registry not found: ${registryPath}`);
+    }
+    const additional = loadPublicationRegistry(registryPath);
+    merged.publications.push(...(additional.publications || []));
+  }
+  return merged;
 }
 
 function excludedSupportPlan({ setId, supportLang }) {
@@ -131,7 +155,7 @@ async function supportPlan({ setId, supportLang, requestedTargets, excludeTarget
   const excludedTargets = new Set(normalizeTargetList(excludeTargets));
   const allTargets = requestedTargets
     ? normalizeTargetList(requestedTargets)
-    : normalizeTargetList(await resolveTargetLanguages(setId, supportLang));
+    : normalizeTargetList(await resolveAllTargetLanguages(setId, supportLang));
   const requested = allTargets;
   const skippedTargets = [];
   const eligibleTargets = [];
@@ -187,7 +211,10 @@ async function main() {
     process.exit(options.help ? 0 : 1);
   }
 
-  const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
+  const publicationRegistry = mergePublicationRegistries(
+    loadPublicationRegistry(options.publicationRegistry),
+    options.additionalPublicationRegistries,
+  );
   const requestedTargets = options.targets ? normalizeTargetList(options.targets) : null;
   const supports = normalizeTargetList(options.supports);
   const excludedSupports = new Set(normalizeTargetList(options.excludeSupports));
@@ -214,6 +241,7 @@ async function main() {
     mode: "generation_target_preflight",
     setId: options.setId,
     publicationRegistry: options.publicationRegistry,
+    additionalPublicationRegistries: options.additionalPublicationRegistries,
     allowRepublish: options.allowRepublish,
     excludedSupports: normalizeTargetList(options.excludeSupports),
     excludedTargets: normalizeTargetList(options.excludeTargets),

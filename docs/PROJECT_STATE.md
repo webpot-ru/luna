@@ -17,6 +17,7 @@ Docs/data/QA/Google Sheets flashcard production pipeline. Existing source-of-tru
 
 ## Current YouTube Channel Prep State
 
+- 2026-06-27 Danish-channel duplicate guard incident: live YouTube Studio review for `LunaCards Dansk` / `UCrnzx48mt-kLWGLymdTCsTw` showed duplicate-looking first-deck uploads for `DA -> HR`, `DA -> HU`, `DA -> ID`, `DA -> IS`, `DA -> JA` and `DA -> KA`. Local registry comparison confirmed six live videos were missing from `config/youtube-published-videos.json` (`0_oD7lVp51Y`, `VBZ47W-_LeU`, `_b5atSlltNk`, `dx-yd0uhXMw`, `GRtNujUk6Q4`, `B61u7kFWhks`), so `allow_republish=false` could not block later reuploads for those same pairs. The workflow now has an apply-mode live YouTube audit (`npm run audit:youtube-live-publications`) that verifies the channel by API readback, scans the uploads playlist, infers pairs from full FlashcardsLuna course links, and passes the audit report to `plan:youtube-generation-targets` as an additional publication registry. Existing visible duplicates still require an explicit keep/hide decision; do not delete or hide them automatically.
 - 2026-06-24 YouTube API Services follow-up: the quota/compliance form was
   accepted into review, then YouTube API Services requested additional
   information within seven business days. Required items are an English script

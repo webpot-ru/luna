@@ -1,8 +1,10 @@
 import fs from "node:fs";
 
-import { normalizeLanguageCode } from "./youtube-playlists.mjs";
-
 export const DEFAULT_PUBLICATION_REGISTRY_PATH = "config/youtube-published-videos.json";
+
+function normalizeLanguageCode(value) {
+  return String(value || "").trim().replace(/_/g, "-").toUpperCase();
+}
 
 export function loadPublicationRegistry(filePath = DEFAULT_PUBLICATION_REGISTRY_PATH) {
   if (!fs.existsSync(filePath)) {

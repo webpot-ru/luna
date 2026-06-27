@@ -20,9 +20,9 @@ on:
         required: true
         default: "RU"
       exclude_supports:
-        description: "Support language codes to skip before rendering/upload. Default keeps Armenian out until HY TTS is unblocked."
+        description: "Support language codes to skip before rendering/upload. Use NONE to disable exclusions."
         required: false
-        default: "HY"
+        default: "NONE"
       youtube_environment:
         description: "GitHub environment with the support route OAuth bundle. Use auto for one support channel."
         required: true
@@ -39,9 +39,9 @@ on:
         required: false
         default: "ES"
       exclude_langs:
-        description: "Target language codes to skip even when otherwise eligible. Default keeps Armenian out until HY TTS is unblocked."
+        description: "Target language codes to skip even when otherwise eligible. Use NONE to disable exclusions."
         required: false
-        default: "HY"
+        default: "NONE"
       concurrency:
         description: "Video build concurrency per support language."
         required: true
@@ -264,6 +264,35 @@ jobs:
           test -d .local/youtube-oauth/tokens
           echo "YouTube OAuth bundle restored for environment $EFFECTIVE_YOUTUBE_ENVIRONMENT."
 
+      - name: Audit live YouTube publications for duplicate guard
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+        run: |
+          set -euo pipefail
+          npm run audit:youtube-live-publications -- \
+            --set "$SET_ID" \
+            --support "$SUPPORT_INPUT" \
+            --output=outputs/youtube-live-publications-github.json \
+            --json
+          node -e '
+            const fs = require("fs");
+            const report = JSON.parse(fs.readFileSync("outputs/youtube-live-publications-github.json", "utf8"));
+            if (process.env.GITHUB_STEP_SUMMARY) {
+              fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
+                "### Live YouTube duplicate guard",
+                "",
+                `- Scanned upload items: ${report.scannedUploadItems || 0}`,
+                `- Matched current set publications: ${report.matchedPublicationCount || 0}`,
+                `- Live videos missing from local registry: ${report.missingFromLocalRegistryCount || 0}`,
+                `- Live duplicate groups detected: ${(report.duplicateGroups || []).length}`,
+                "",
+              ].join("\n"));
+            }
+          '
+
       - name: Download offline deck data from Google Drive
         shell: bash
         run: |
@@ -317,6 +346,9 @@ jobs:
           fi
           if [ -n "$EXCLUDE_LANGS_INPUT" ]; then
             PRE_ARGS+=("--exclude-targets" "$EXCLUDE_LANGS_INPUT")
+          fi
+          if [ -f outputs/youtube-live-publications-github.json ]; then
+            PRE_ARGS+=("--additional-publication-registry" "outputs/youtube-live-publications-github.json")
           fi
           if [ "$ALLOW_REPUBLISH" = "true" ]; then
             PRE_ARGS+=("--allow-republish")
@@ -673,18 +705,40 @@ jobs:
           SET_ID: ${{ github.event.inputs.set_id }}
           SUPPORT: ${{ github.event.inputs.support }}
           LANGS: ${{ github.event.inputs.langs }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          if git diff --quiet -- config/youtube-channels.json config/youtube-playlists.json config/youtube-publish-calendar.json config/youtube-published-videos.json; then
-            echo "No YouTube publish state changes to commit."
+          if [ ! -d .state-artifact/config ]; then
+            echo "No publish state artifact config directory found; nothing to persist."
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add config/youtube-channels.json config/youtube-playlists.json config/youtube-publish-calendar.json config/youtube-published-videos.json
-          git commit -m "Persist YouTube publish state for ${SET_ID} ${SUPPORT} ${LANGS}" \
-            -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          git push origin "HEAD:$BRANCH_NAME"
+          repo_url="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          for attempt in 1 2 3 4 5; do
+            workdir=".persist-work/attempt-${attempt}"
+            mkdir -p "$workdir"
+            echo "Persist attempt ${attempt}: clone fresh ${BRANCH_NAME}, merge artifact, commit, push."
+            git clone --branch "$BRANCH_NAME" --depth 1 "$repo_url" "$workdir"
+            cp -R .state-artifact "$workdir/.state-artifact"
+            (
+              cd "$workdir"
+              npm run merge:youtube-publish-state -- --artifact-dir=.state-artifact --summary=outputs/youtube-publish-state-merge-github.json
+              cat outputs/youtube-publish-state-merge-github.json
+              if git diff --quiet -- config/youtube-channels.json config/youtube-playlists.json config/youtube-publish-calendar.json config/youtube-published-videos.json; then
+                echo "No YouTube publish state changes to commit."
+                exit 0
+              fi
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git add config/youtube-channels.json config/youtube-playlists.json config/youtube-publish-calendar.json config/youtube-published-videos.json
+              git commit -m "Persist YouTube publish state for ${SET_ID} ${SUPPORT} ${LANGS}" \
+                -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+              git push origin "HEAD:$BRANCH_NAME"
+            ) && exit 0
+            echo "Persist attempt ${attempt} failed; retrying from a fresh clone."
+            sleep $((attempt * 5))
+          done
+          echo "::error::Could not persist YouTube publish state after retries."
+          exit 1
 
       - name: Upload publish state merge summary
         if: ${{ always() }}
