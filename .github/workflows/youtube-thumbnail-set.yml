@@ -1,0 +1,222 @@
+name: YouTube Thumbnail Set
+
+on:
+  workflow_dispatch:
+    inputs:
+      video_id:
+        description: "Existing YouTube video id to update with a custom thumbnail."
+        required: true
+      source_run_id:
+        description: "GitHub Actions run id containing youtube_metadata.json and youtube_thumbnail.jpg artifacts."
+        required: true
+      set_id:
+        description: "Set ID used to match the metadata artifact."
+        required: true
+        default: "home_kitchen_cookware_pilot_01"
+      support:
+        description: "Support/viewer language for the target channel."
+        required: true
+      target:
+        description: "Target language in the video lesson."
+        required: true
+      youtube_environment:
+        description: "GitHub environment with the support route OAuth bundle. Use auto for one support channel."
+        required: true
+        default: "auto"
+        type: choice
+        options:
+          - auto
+          - youtube-api-branding
+          - youtube-api-youtube-2
+          - youtube-api-youtube-3
+          - youtube-api-youtube-4
+      confirm_youtube_write:
+        description: "Type SET_YOUTUBE_THUMBNAIL to call youtube.thumbnails.set."
+        required: true
+        default: ""
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: youtube-thumbnail-set-${{ github.event.inputs.video_id }}
+  cancel-in-progress: false
+
+jobs:
+  set-thumbnail:
+    runs-on: ubuntu-latest
+    environment:
+      name: >-
+        ${{
+          github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
+          (contains('|EN|EN-GB|ES|ES-419|PT|PT-BR|RU|HI|ID|FR|DE|JA|KO|TR|ZH|en|en-gb|es|es-419|pt|pt-br|ru|hi|id|fr|de|ja|ko|tr|zh|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-branding') ||
+          (contains('|VI|TH|MS|PL|NL|SV|NO|DA|FI|CS|SK|HU|RO|vi|th|ms|pl|nl|sv|no|da|fi|cs|sk|hu|ro|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-2') ||
+          (contains('|BG|HR|SR|SL|LT|LV|ET|IS|BN|TL|MY|KM|LO|bg|hr|sr|sl|lt|lv|et|is|bn|tl|my|km|lo|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-3') ||
+          (contains('|NE|SI|TA|TE|KN|ML|UZ|KK|AZ|KA|HY|SW|IT|ne|si|ta|te|kn|ml|uz|kk|az|ka|hy|sw|it|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
+    timeout-minutes: 30
+    env:
+      EFFECTIVE_YOUTUBE_ENVIRONMENT: >-
+        ${{
+          github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
+          (contains('|EN|EN-GB|ES|ES-419|PT|PT-BR|RU|HI|ID|FR|DE|JA|KO|TR|ZH|en|en-gb|es|es-419|pt|pt-br|ru|hi|id|fr|de|ja|ko|tr|zh|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-branding') ||
+          (contains('|VI|TH|MS|PL|NL|SV|NO|DA|FI|CS|SK|HU|RO|vi|th|ms|pl|nl|sv|no|da|fi|cs|sk|hu|ro|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-2') ||
+          (contains('|BG|HR|SR|SL|LT|LV|ET|IS|BN|TL|MY|KM|LO|bg|hr|sr|sl|lt|lv|et|is|bn|tl|my|km|lo|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-3') ||
+          (contains('|NE|SI|TA|TE|KN|ML|UZ|KK|AZ|KA|HY|SW|IT|ne|si|ta|te|kn|ml|uz|kk|az|ka|hy|sw|it|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
+
+    steps:
+      - name: Check confirmation
+        shell: bash
+        env:
+          CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRM_YOUTUBE_WRITE" != "SET_YOUTUBE_THUMBNAIL" ]; then
+            echo "::error::Live thumbnail write requires confirm_youtube_write=SET_YOUTUBE_THUMBNAIL"
+            exit 1
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate YouTube environment route
+        shell: bash
+        env:
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          YOUTUBE_ENVIRONMENT_INPUT: ${{ github.event.inputs.youtube_environment }}
+        run: |
+          set -euo pipefail
+          if [ "$YOUTUBE_ENVIRONMENT_INPUT" = "auto" ]; then
+            node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORT_INPUT" --environment="$EFFECTIVE_YOUTUBE_ENVIRONMENT"
+          else
+            node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORT_INPUT" --environment="$YOUTUBE_ENVIRONMENT_INPUT"
+          fi
+          echo "Effective YouTube API environment: $EFFECTIVE_YOUTUBE_ENVIRONMENT"
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+          echo "YouTube OAuth bundle restored for environment $EFFECTIVE_YOUTUBE_ENVIRONMENT."
+
+      - name: Download source run artifacts
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: ${{ github.event.inputs.source_run_id }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/youtube-thumbnail-source
+          gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" --dir /tmp/youtube-thumbnail-source
+          find /tmp/youtube-thumbnail-source -name youtube_metadata.json -o -name youtube_thumbnail.jpg | sort | head -n 40
+
+      - name: Locate matching metadata and thumbnail
+        id: locate
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          TARGET: ${{ github.event.inputs.target }}
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs = require("fs");
+          const path = require("path");
+          const root = "/tmp/youtube-thumbnail-source";
+          const setId = process.env.SET_ID;
+          const support = String(process.env.SUPPORT || "").trim().replace(/_/g, "-").toUpperCase();
+          const target = String(process.env.TARGET || "").trim().replace(/_/g, "-").toUpperCase();
+          const matches = [];
+          function walk(dir) {
+            for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+              const p = path.join(dir, ent.name);
+              if (ent.isDirectory()) walk(p);
+              else if (ent.name === "youtube_metadata.json") {
+                const metadata = JSON.parse(fs.readFileSync(p, "utf8"));
+                const mSet = String(metadata.setId || "");
+                const mSupport = String(metadata.supportLang || "").replace(/_/g, "-").toUpperCase();
+                const mTarget = String(metadata.targetLang || "").replace(/_/g, "-").toUpperCase();
+                if (mSet === setId && mSupport === support && mTarget === target) matches.push(p);
+              }
+            }
+          }
+          walk(root);
+          if (matches.length !== 1) {
+            console.error(`Expected exactly one metadata match, got ${matches.length}`);
+            for (const item of matches) console.error(item);
+            process.exit(1);
+          }
+          const metadataPath = matches[0];
+          const thumbnailPath = path.join(path.dirname(metadataPath), "youtube_thumbnail.jpg");
+          if (!fs.existsSync(thumbnailPath)) {
+            console.error(`Missing thumbnail next to metadata: ${thumbnailPath}`);
+            process.exit(1);
+          }
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `metadata=${metadataPath}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `thumbnail=${thumbnailPath}\n`);
+          console.log(JSON.stringify({ metadataPath, thumbnailPath }, null, 2));
+          NODE
+
+      - name: Dry-run thumbnail update plan
+        shell: bash
+        env:
+          VIDEO_ID: ${{ github.event.inputs.video_id }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          TARGET: ${{ github.event.inputs.target }}
+          SET_ID: ${{ github.event.inputs.set_id }}
+          METADATA: ${{ steps.locate.outputs.metadata }}
+          THUMBNAIL: ${{ steps.locate.outputs.thumbnail }}
+        run: |
+          set -euo pipefail
+          node scripts/youtube-set-video-thumbnail.mjs \
+            --video-id="$VIDEO_ID" \
+            --metadata="$METADATA" \
+            --thumbnail="$THUMBNAIL" \
+            --support="$SUPPORT" \
+            --target="$TARGET" \
+            --set-id="$SET_ID"
+
+      - name: Set YouTube thumbnail
+        shell: bash
+        env:
+          VIDEO_ID: ${{ github.event.inputs.video_id }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          TARGET: ${{ github.event.inputs.target }}
+          SET_ID: ${{ github.event.inputs.set_id }}
+          METADATA: ${{ steps.locate.outputs.metadata }}
+          THUMBNAIL: ${{ steps.locate.outputs.thumbnail }}
+        run: |
+          set -euo pipefail
+          node scripts/youtube-set-video-thumbnail.mjs \
+            --video-id="$VIDEO_ID" \
+            --metadata="$METADATA" \
+            --thumbnail="$THUMBNAIL" \
+            --support="$SUPPORT" \
+            --target="$TARGET" \
+            --set-id="$SET_ID" \
+            --apply \
+            --confirm-youtube-write
+
+      - name: Upload thumbnail-set evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-thumbnail-set-${{ github.event.inputs.video_id }}
+          path: |
+            outputs/youtube-thumbnail-ledger.jsonl
+            config/youtube-channels.json
+            config/youtube-published-videos.json
+          if-no-files-found: ignore
