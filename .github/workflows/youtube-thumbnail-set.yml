@@ -101,6 +101,14 @@ jobs:
           set -euo pipefail
           npm ci || npm install
 
+      - name: Install ffmpeg for generated thumbnails
+        if: github.event.inputs.generate_if_missing == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
       - name: Validate YouTube environment route
         shell: bash
         env:
