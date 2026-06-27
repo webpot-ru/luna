@@ -66987,6 +66987,49 @@
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28289423033",
       "createdAt": "2026-06-27T12:40:27.454Z",
       "updatedAt": "2026-06-27T12:40:27.454Z"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "BG",
+      "targetLang": "NE",
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "publishAt": "2026-06-30T20:30:00.000Z",
+      "timeZone": "Europe/Sofia",
+      "localDate": "2026-06-30",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 2,
+      "slotOrdinal": 17,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ne_bg/youtube_metadata.json",
+      "title": "Непалски език за начинаещи: Кухненски съдове (А1) |…",
+      "playlist_key": "BG__NE__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-01T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-03T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-07T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-30T20:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28289814666",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28289814666",
+      "createdAt": "2026-06-27T12:56:14.585Z",
+      "updatedAt": "2026-06-27T12:56:14.585Z"
     }
   ]
 }
