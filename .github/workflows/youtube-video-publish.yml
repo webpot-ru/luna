@@ -462,6 +462,14 @@ jobs:
           done
 
           if [ "$METADATA_STATUS" -eq 0 ]; then
+            npm run check:youtube-metadata -- outputs/video-generator || METADATA_STATUS=1
+          fi
+
+          if [ "$METADATA_STATUS" -eq 0 ]; then
+            npm run check:youtube-metadata-language -- outputs/video-generator --output=outputs/video-generator/youtube-metadata-language-report-github.json || METADATA_STATUS=1
+          fi
+
+          if [ "$METADATA_STATUS" -eq 0 ]; then
             npm run check:youtube-run-isolation -- outputs/video-generator --shard-count="$WORKER_COUNT" --shard-index="$WORKER_INDEX" --allow-empty --output=outputs/video-generator/youtube-run-isolation-report-github.json
 
             if [ "$PUBLISH_MODE" = "scheduled" ]; then

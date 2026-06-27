@@ -157,6 +157,10 @@ function enrichCalendarRow(row, publication) {
   ]);
 }
 
+function hasCalendarBackingPublication(row, publication) {
+  return Boolean(row?.youtubeVideoId || publication?.youtubeVideoId);
+}
+
 function mergeCalendar(currentCalendar, incomingCalendar, currentPublications) {
   const currentRows = currentCalendar.reservations || [];
   const incomingRows = incomingCalendar.reservations || [];
@@ -174,6 +178,10 @@ function mergeCalendar(currentCalendar, incomingCalendar, currentPublications) {
     const publication = publicationsByAssignment.get(key);
     const existing = byAssignment.get(key);
     if (!existing) {
+      if (!hasCalendarBackingPublication(incoming, publication)) {
+        summary.skipped += 1;
+        continue;
+      }
       const next = { ...incoming };
       enrichCalendarRow(next, publication);
       currentRows.push(next);

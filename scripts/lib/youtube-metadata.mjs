@@ -225,6 +225,25 @@ function getSupportCopy(supportLang) {
       hashtags: [BRAND_HASHTAG, "#ТілҮйрену", "#СөздікҚор"]
     };
   }
+  if (code === "BG") {
+    return {
+      title: ({ targetLanguageName, deckTitle, wordCount }) =>
+        `${targetLanguageName} A1: ${deckTitle} | ${wordCount} думи с произношение`,
+      description: ({ targetLanguageName, deckTitle, wordCount, courseUrl }) =>
+        `Научете ${wordCount} думи на ${targetLanguageName} по темата „${deckTitle}“ с кратък видеоурок на ${BRAND_NAME} за начинаещи. Чуйте всяка дума, вижте значението, повторете по време на паузите и проверете паметта си с кратък мини тест в края.\n\nТози формат за речник A1 е удобен за ежедневна практика: първо изгледайте урока, после отворете картите на сайта и преговаряйте със свое темпо. Така свързвате правопис, произношение и значение без дълго граматично обяснение.\n\nУпражнявайте тази колода и други безплатни курсове на ${BRAND_NAME} тук:\n${courseUrl}\n\nАбонирайте се за още кратки видеоуроци с произношение, паузи за повторение и лесни упражнения за преговор.`,
+      tags: ({ targetLanguageName, deckTitle }) => [
+        `${targetLanguageName} за начинаещи`,
+        `учене на ${targetLanguageName}`,
+        `речник ${targetLanguageName}`,
+        `${deckTitle} ${targetLanguageName}`,
+        "думи с произношение",
+        "езикови карти",
+        "учене на езици",
+        BRAND_NAME
+      ],
+      hashtags: [BRAND_HASHTAG, "#УченеНаЕзици", "#Речник"]
+    };
+  }
   return {
     title: ({ targetLanguageName, deckTitle, wordCount }) =>
       `${targetLanguageName} A1: ${deckTitle} | ${wordCount} words with pronunciation`,
