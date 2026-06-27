@@ -53958,6 +53958,51 @@
         "publishAt": "2026-06-28T20:30:00Z",
         "thumbnailStatus": "custom_set"
       }
+    },
+    {
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ID",
+      "targetLang": "KO",
+      "playlist_key": "ID__KO__ordinary-vocabulary__a1-everyday",
+      "title": "Belajar 50 Kosakata Alat Dapur Bahasa Korea A1 | FlashcardsLuna",
+      "youtubeVideoId": "xPhBY97RiC4",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=xPhBY97RiC4",
+      "youtubePlaylistId": "",
+      "youtubePlaylistUrl": "",
+      "playlistItemId": "",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "channelHandle": "@lunacardsindonesia",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded_playlist_create_pending",
+      "publishAt": "2026-06-28T01:30:00.000Z",
+      "scheduledPublishAt": "2026-06-28T01:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "needsPlaylistCreate": true,
+      "needsPlaylistInsert": true,
+      "playlistCreateDeferredError": "YouTube API POST /youtube/v3/playlists failed (403): { \"error\": { \"code\": 403, \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\", \"errors\": [ { \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\", \"domain\": \"youtube.quota\", \"reason\": \"quotaExceeded\" } ] } }",
+      "postUploadError": "YouTube API GET /youtube/v3/videos failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n",
+      "metadataSource": "gemini-vectorengine",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "28288762254",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28288762254",
+      "uploadedAt": "2026-06-27T12:19:24.372Z",
+      "lastReadbackAt": "2026-06-27T12:19:24.372Z",
+      "readback": {
+        "uploadStatus": "unknown",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-28T01:30:00.000Z",
+        "thumbnailStatus": "auto_first_frame",
+        "playlistReadback": "create_pending",
+        "playlistItemReadback": "pending",
+        "postUploadError": "YouTube API GET /youtube/v3/videos failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n"
+      }
     }
   ]
 }
