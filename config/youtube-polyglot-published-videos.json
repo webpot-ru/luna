@@ -354,6 +354,60 @@
         "publishAt": "",
         "thumbnailStatus": "custom_set"
       }
+    },
+    {
+      "videoType": "polyglot",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:FR:global_europe_core:e9f478a78f5d",
+      "bundleKey": "global_europe_core",
+      "bundleLabel": "Global Europe Core",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "DE",
+        "IT"
+      ],
+      "targetLangsCsv": "EN,ES,DE,IT",
+      "targetLangsHash": "e9f478a78f5d",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "FR",
+      "targetLang": "EN,ES,DE,IT",
+      "playlist_key": "POLYGLOT__FR__global-europe-core__e9f478a78f5d",
+      "title": "Vocabulaire : Ustensiles de cuisine en Anglais, Espagnol, Allemand, Italien | Polyglotte",
+      "youtubeVideoId": "gW8Jwq9XM6o",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=gW8Jwq9XM6o",
+      "youtubePlaylistId": "PLXTw2DqWt9mQ",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLXTw2DqWt9mQ",
+      "playlistItemId": "",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "channelHandle": "@lunacardsfrancais",
+      "privacyStatus": "public",
+      "publicationStatus": "uploaded_public_playlist_insert_pending",
+      "publishAt": "",
+      "scheduledPublishAt": "",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "needsPlaylistInsert": true,
+      "postUploadError": "YouTube uploaded video readback returned no items.",
+      "metadataSource": "vectorengine-gemini-polyglot",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "28329057023",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28329057023",
+      "uploadedAt": "2026-06-28T16:51:56.726Z",
+      "lastReadbackAt": "2026-06-28T16:51:56.726Z",
+      "readback": {
+        "uploadStatus": "unknown",
+        "privacyStatus": "public",
+        "publishAt": "",
+        "thumbnailStatus": "auto_first_frame",
+        "playlistItemReadback": "pending",
+        "postUploadError": "YouTube uploaded video readback returned no items."
+      }
     }
   ]
 }
