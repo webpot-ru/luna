@@ -69313,6 +69313,96 @@
       "youtubeVideoId": "2JQHTArtEKE",
       "youtubePlaylistId": "PLE1zxqVel0fQ",
       "playlistItemId": "UExFMXp4cVZlbDBmUS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "FR",
+      "targetLang": "MY",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-06-29T18:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-06-29",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 0,
+      "slotOrdinal": 4,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_my_fr/youtube_metadata.json",
+      "title": "Apprendre le birman : Les ustensiles de cuisine (Vocabulaire A1)",
+      "playlist_key": "FR__MY__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-30T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-02T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-06T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-29T18:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28330414347",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28330414347",
+      "createdAt": "2026-06-28T17:36:13.608Z",
+      "updatedAt": "2026-06-28T17:36:13.608Z",
+      "youtubeVideoId": "0WyzD-jUdGI",
+      "youtubePlaylistId": "PLejCrrIMnM0c",
+      "playlistItemId": "UExlakNycklNbk0wYy41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "FR",
+      "targetLang": "NB",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-06-29T21:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-06-29",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_nb_fr/youtube_metadata.json",
+      "title": "Vocabulaire norvégien : Ustensiles de cuisine (Débutant A1)",
+      "playlist_key": "FR__NB__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-30T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-02T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-06T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-29T21:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28330414347",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28330414347",
+      "createdAt": "2026-06-28T17:36:13.611Z",
+      "updatedAt": "2026-06-28T17:36:13.611Z",
+      "youtubeVideoId": "ik7K8-q13BU"
     }
   ]
 }
