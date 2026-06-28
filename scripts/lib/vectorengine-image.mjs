@@ -2,8 +2,8 @@ import fs from "node:fs";
 
 export const DEFAULT_VECTORENGINE_BASE_URL = "https://api.vectorengine.ai";
 export const DEFAULT_VECTORENGINE_IMAGE_MODEL = "gpt-image-2";
-export const DEFAULT_VECTORENGINE_IMAGE_TIMEOUT_MS = 180000;
-export const DEFAULT_VECTORENGINE_IMAGE_RETRIES = 2;
+export const DEFAULT_VECTORENGINE_IMAGE_TIMEOUT_MS = 300000;
+export const DEFAULT_VECTORENGINE_IMAGE_RETRIES = 3;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));

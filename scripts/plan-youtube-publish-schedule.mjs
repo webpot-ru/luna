@@ -29,6 +29,8 @@ function parseArgs(argv) {
     startDate: "",
     limit: 0,
     limitPerChannel: 0,
+    minFutureMinutes: 0,
+    reschedulePastReservations: false,
     allowRepublish: false,
     writeMetadata: false,
     writeCalendar: false,
@@ -38,6 +40,7 @@ function parseArgs(argv) {
   for (const arg of argv) {
     if (arg === "--write-metadata") options.writeMetadata = true;
     else if (arg === "--write-calendar") options.writeCalendar = true;
+    else if (arg === "--reschedule-past-reservations") options.reschedulePastReservations = true;
     else if (arg === "--allow-republish") options.allowRepublish = true;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
@@ -50,6 +53,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--start-date=")) options.startDate = arg.slice("--start-date=".length);
     else if (arg.startsWith("--limit=")) options.limit = Number(arg.slice("--limit=".length));
     else if (arg.startsWith("--limit-per-channel=")) options.limitPerChannel = Number(arg.slice("--limit-per-channel=".length));
+    else if (arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(arg.slice("--min-future-minutes=".length));
     else options.inputs.push(arg);
   }
   return options;
@@ -67,6 +71,8 @@ function usage() {
     "  --target-plan=<file>          Optional generation-target preflight report for deterministic shard slot ordinals.",
     "  --limit=<n>                   Plan only the first n metadata files after sorting.",
     "  --limit-per-channel=<n>       Plan only the first n non-duplicate videos per channel.",
+    "  --min-future-minutes=<n>      Require newly assigned slots to be at least n minutes in the future.",
+    "  --reschedule-past-reservations Move reused reservations that are no longer future-safe to a new free slot.",
     "  --write-metadata              Write privacyStatus=private and publishAt into each scheduled youtube_metadata.json.",
     "  --write-calendar              Upsert scheduled reservations into the durable calendar file.",
     "  --allow-republish             Do not skip rows that already have an active publication registry entry.",
@@ -283,12 +289,14 @@ function findFreeSlot({
   baseOccupiedSlotKeys,
   plannedSlotKeys,
   preferredFreeOrdinal,
+  minPublishMillis,
 }) {
   const maxIterations = perChannelPolicy.dailySlotsLocal.length * 366 * 5;
   let freeSeen = 0;
   const hasPreferred = Number.isInteger(preferredFreeOrdinal) && preferredFreeOrdinal >= 0;
   for (let ordinal = 0; ordinal < maxIterations; ordinal += 1) {
     const slot = slotForOrdinal({ perChannelPolicy, baseDate, ordinal });
+    if (Number.isFinite(minPublishMillis) && Date.parse(slot.publishAt) < minPublishMillis) continue;
     const key = slotKey({ channelKey, publishAt: slot.publishAt });
     if (baseOccupiedSlotKeys.has(key)) continue;
     if (hasPreferred && freeSeen < preferredFreeOrdinal) {
@@ -299,6 +307,12 @@ function findFreeSlot({
     freeSeen += 1;
   }
   throw new Error(`No free publish slot found for channel=${channelKey} within ${maxIterations} slot attempts.`);
+}
+
+function isFutureSafePublishAt(publishAt, minPublishMillis) {
+  if (!Number.isFinite(minPublishMillis) || minPublishMillis <= 0) return true;
+  const millis = Date.parse(publishAt || "");
+  return Number.isFinite(millis) && millis >= minPublishMillis;
 }
 
 function loadTargetPlan(filePath, channelRegistry, policy) {
@@ -476,6 +490,12 @@ async function main() {
   }
 
   const policy = JSON.parse(fs.readFileSync(options.policy, "utf8"));
+  if (!Number.isFinite(options.minFutureMinutes) || options.minFutureMinutes < 0) {
+    throw new Error(`--min-future-minutes must be a non-negative number, got: ${options.minFutureMinutes}`);
+  }
+  const minPublishMillis = options.minFutureMinutes > 0
+    ? Date.now() + options.minFutureMinutes * 60 * 1000
+    : 0;
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
   const calendar = loadCalendar(options.calendar);
@@ -593,7 +613,10 @@ async function main() {
     const calendarReservationKey = reservationAssignmentKey(raw);
     const existingCalendarReservation = reservationByAssignment.get(calendarReservationKey);
 
-    if (existingCalendarReservation) {
+    if (
+      existingCalendarReservation
+      && (!options.reschedulePastReservations || isFutureSafePublishAt(existingCalendarReservation.publishAt, minPublishMillis))
+    ) {
       const row = rowFromReservation(raw, existingCalendarReservation, options);
       scheduledCountByChannel.set(raw.channelKey, existingScheduledForChannel + 1);
       plannedSlotKeys.add(slotKey(row));
@@ -617,6 +640,7 @@ async function main() {
       baseOccupiedSlotKeys,
       plannedSlotKeys,
       preferredFreeOrdinal,
+      minPublishMillis,
     });
     const publishAt = slot.publishAt;
     const publishMillis = Date.parse(publishAt);
@@ -639,7 +663,10 @@ async function main() {
       policyPath: options.policy,
       calendarPath: options.calendar,
       calendarReservationKey,
-      calendarReservationAction: options.writeCalendar ? "reserved" : "planned_only",
+      calendarReservationAction: existingCalendarReservation
+        ? (options.writeCalendar ? "rescheduled_past" : "reschedule_past_planned_only")
+        : (options.writeCalendar ? "reserved" : "planned_only"),
+      previousPublishAt: existingCalendarReservation?.publishAt || "",
       analyticsCheckpointsAt,
       existingPublication: null,
       blockers: [],
@@ -719,6 +746,8 @@ async function main() {
       lastPublishAt: scheduledRows.map((row) => row.publishAt).sort().at(-1) || "",
       writeMetadata: options.writeMetadata,
       writeCalendar: options.writeCalendar,
+      minFutureMinutes: options.minFutureMinutes,
+      reschedulePastReservations: options.reschedulePastReservations,
       calendarReservationCount: calendar.reservations?.length || 0,
       calendarWrites,
       baseOccupiedSlotCount: baseOccupiedSlotKeys.size,
