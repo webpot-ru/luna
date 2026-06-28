@@ -758,12 +758,14 @@ Metadata включает `title`, `description`, `tags`, `hashtags`, `categoryI
 
 - template fallback always works without AI/external dependency for local diagnostics and `mode=plan`, but it is not publish-ready metadata;
 - primary template fallbacks (`EN`, `RU`, `ES` / `ES-419`) should stay useful enough for review, but quality fallback must not be treated as a substitute for AI-polished or human-curated upload metadata;
+- non-English support-language fallback metadata must never use English playlist/video templates such as `Everyday Flashcards`, `words with pronunciation`, `videos for native ... speakers`, `flashcards, pronunciation, repeat pauses` or `Playlist key:`. If AI polish is unavailable, `scripts/lib/youtube-metadata.mjs` and `scripts/lib/youtube-playlists.mjs` must use localized `config/video-localization.json` strings for the support language and let `npm run check:youtube-metadata-language` fail closed before any YouTube write;
 - Gemini используется только как AI-polish слой поверх фактов из Course Metadata, списка слов и public course URL;
 - recoverable Gemini/VectorEngine polish failures (`non-JSON`, timeout, HTTP 429/5xx) must not block a valid `mode=plan` by default: the generator retries once with a stricter JSON-only prompt, then writes `source=template-ai-fallback` with bounded `aiMetadata` diagnostics. Live apply is fail-closed through `--require-ai-metadata`; set `YOUTUBE_METADATA_AI_STRICT=1` only when explicitly debugging AI output and willing to fail even plan runs;
 - Gemini output не должен придумывать длительность, платные обещания, сертификаты, guaranteed fluency, teacher/native-speaker claims beyond the actual video facts;
 - `description` должен содержать точный `courseUrl`;
 - `tags` не должны содержать hashtags, а общий YouTube tag budget должен оставаться <= 500 chars;
 - `scripts/check-youtube-metadata.mjs` является обязательным gate перед upload stage.
+- `npm run check:youtube-metadata-language` is mandatory in GitHub upload workflows after metadata generation and before YouTube writes. It blocks obvious English-template titles/descriptions/tags on non-English support-language channels, including playlist title/description fields in `youtube_metadata.json`.
 - `scripts/check-youtube-seo-metadata.mjs` является обязательным SEO gate перед publish/upload workflows: он проверяет search/usefulness contract, точный `courseUrl`, target/deck intent, vocabulary/pronunciation/repeat-mini-test signals, tag/hashtag hygiene, computed course URL equality and playlist-key mismatch checks.
 
 SEO gate разделяет blockers and warnings:

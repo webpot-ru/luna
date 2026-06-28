@@ -446,6 +446,16 @@ function normalizeTimestamp(value) {
   return Number.isFinite(timestamp) ? new Date(timestamp).toISOString() : String(value);
 }
 
+function privacyMatchesExpected(row, actualPrivacyStatus) {
+  const expected = row.privacyStatus || "";
+  if (!expected || actualPrivacyStatus === expected) return true;
+  const publishAt = Date.parse(row.publishAt || row.scheduledPublishAt || "");
+  if (expected === "private" && actualPrivacyStatus === "public" && Number.isFinite(publishAt) && publishAt <= Date.now()) {
+    return true;
+  }
+  return false;
+}
+
 function assertExpectedState({ row, channel, video, playlist }) {
   if (!row.youtubeVideoId) fail("Publication row has no youtubeVideoId.");
   if (!row.youtubePlaylistId) fail("Publication row has no youtubePlaylistId.");
@@ -458,7 +468,7 @@ function assertExpectedState({ row, channel, video, playlist }) {
   if (playlist.snippet?.channelId !== channel.channelId) {
     fail(`Playlist channel mismatch: expected ${channel.channelId}, got ${playlist.snippet?.channelId || "(missing)"}.`);
   }
-  if (row.privacyStatus && video.status?.privacyStatus !== row.privacyStatus) {
+  if (!privacyMatchesExpected(row, video.status?.privacyStatus || "")) {
     fail(`Video privacy mismatch: expected ${row.privacyStatus}, got ${video.status?.privacyStatus || "(missing)"}.`);
   }
   const expectedPublishAt = normalizeTimestamp(row.publishAt || row.scheduledPublishAt);

@@ -15,6 +15,10 @@ const databaseUrl = process.env.DATABASE_URL ?? "postgresql://lunacards:lunacard
 const defaultGeminiApiModel = process.env.GEMINI_MODEL || "gemini-3.5-flash";
 const defaultGeminiCliModel = process.env.GEMINI_CLI_MODEL || "gemini-3.1-pro-preview";
 const defaultVectorEngineGeminiModel = process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash";
+const videoLocalizationPath = path.resolve("config/video-localization.json");
+const videoLocalization = fs.existsSync(videoLocalizationPath)
+  ? JSON.parse(fs.readFileSync(videoLocalizationPath, "utf8"))
+  : {};
 
 export const YOUTUBE_METADATA_SCHEMA = {
   type: "object",
@@ -102,8 +106,73 @@ function extractLevel(setId, metadata) {
   return "A1";
 }
 
+function getVideoLocalization(supportLang) {
+  const code = normalizeLanguageCode(supportLang);
+  return videoLocalization[code] || videoLocalization[code.replace(/-/gu, "_")] || {};
+}
+
+function fillTemplate(template, values) {
+  return String(template || "").replace(/\{([a-z_]+)\}/giu, (_, key) => values[key] ?? "");
+}
+
+function stripHtml(value) {
+  return String(value || "").replace(/<br\s*\/?>/giu, "\n").replace(/<[^>]+>/gu, "");
+}
+
+function genericLocalizedSupportCopy(supportLang) {
+  const loc = getVideoLocalization(supportLang);
+  return {
+    title: ({ targetLanguageName, deckTitle, wordCount }) => {
+      const wordsLabel = cleanText(loc.words_label);
+      return cleanText(`${targetLanguageName} A1: ${deckTitle} | ${wordCount}${wordsLabel ? ` ${wordsLabel}` : ""}`);
+    },
+    description: ({ targetLanguageName, deckTitle, courseUrl }) => {
+      const speech = fillTemplate(loc.intro_speech_template, {
+        target_lang: targetLanguageName,
+        deck_title: deckTitle,
+      });
+      const parts = [
+        speech,
+        stripHtml(loc.intro_desc),
+        loc.outro_speech,
+        loc.outro_subtitle,
+        courseUrl,
+      ].map(cleanText).filter(Boolean);
+      if (parts.length >= 3) return parts.join("\n\n");
+      return `${BRAND_NAME}\n\n${targetLanguageName} A1: ${deckTitle}\n\n${courseUrl}`;
+    },
+    tags: ({ targetLanguageName, deckTitle }) => uniqueStrings([
+      targetLanguageName,
+      deckTitle,
+      cleanText(loc.words_label),
+      cleanText(loc.quiz_title),
+      BRAND_NAME,
+    ]),
+    hashtags: [BRAND_HASHTAG]
+  };
+}
+
 function getSupportCopy(supportLang) {
   const code = String(supportLang).toUpperCase();
+  if (code === "EN" || code === "EN-GB") {
+    return {
+      title: ({ targetLanguageName, deckTitle, wordCount }) =>
+        `${targetLanguageName} A1: ${deckTitle} | ${wordCount} words with pronunciation`,
+      description: ({ targetLanguageName, deckTitle, wordCount, courseUrl }) =>
+        `Learn ${wordCount} ${targetLanguageName} words from the topic "${deckTitle}" with a short ${BRAND_NAME} video lesson for beginners. Listen to each word, read the meaning, repeat during the pauses, and use the quick mini-test at the end to check what you remember.\n\nThis A1 vocabulary format is built for daily practice: watch the lesson once, then open the deck on the site and review the flashcards at your own pace. It helps connect spelling, pronunciation and meaning without a long grammar explanation.\n\nPractice this deck and other free ${BRAND_NAME} courses here:\n${courseUrl}\n\nSubscribe for more short vocabulary videos with pronunciation, flashcards, repeat pauses and simple review exercises for language learners.`,
+      tags: ({ targetLanguageName, deckTitle }) => [
+        `${targetLanguageName} for beginners`,
+        `learn ${targetLanguageName}`,
+        `${targetLanguageName} vocabulary`,
+        `${deckTitle} ${targetLanguageName}`,
+        "words with pronunciation",
+        "flashcards",
+        "language learning",
+        BRAND_NAME
+      ],
+      hashtags: [BRAND_HASHTAG, "#LanguageLearning", "#Vocabulary"]
+    };
+  }
   if (code === "RU") {
     return {
       title: ({ targetLanguageName, deckTitle, wordCount }) =>
@@ -143,23 +212,7 @@ function getSupportCopy(supportLang) {
       hashtags: [BRAND_HASHTAG, "#AprenderIdiomas", "#Vocabulario"]
     };
   }
-  return {
-    title: ({ targetLanguageName, deckTitle, wordCount }) =>
-      `${targetLanguageName} A1: ${deckTitle} | ${wordCount} words with pronunciation`,
-    description: ({ targetLanguageName, deckTitle, wordCount, courseUrl }) =>
-      `Learn ${wordCount} ${targetLanguageName} words from the topic "${deckTitle}" with a short ${BRAND_NAME} video lesson for beginners. Listen to each word, read the meaning, repeat during the pauses, and use the quick mini-test at the end to check what you remember.\n\nThis A1 vocabulary format is built for daily practice: watch the lesson once, then open the deck on the site and review the flashcards at your own pace. It helps connect spelling, pronunciation and meaning without a long grammar explanation.\n\nPractice this deck and other free ${BRAND_NAME} courses here:\n${courseUrl}\n\nSubscribe for more short vocabulary videos with pronunciation, flashcards, repeat pauses and simple review exercises for language learners.`,
-    tags: ({ targetLanguageName, deckTitle }) => [
-      `${targetLanguageName} for beginners`,
-      `learn ${targetLanguageName}`,
-      `${targetLanguageName} vocabulary`,
-      `${deckTitle} ${targetLanguageName}`,
-      "words with pronunciation",
-      "flashcards",
-      "language learning",
-      BRAND_NAME
-    ],
-    hashtags: [BRAND_HASHTAG, "#LanguageLearning", "#Vocabulary"]
-  };
+  return genericLocalizedSupportCopy(code);
 }
 
 export async function resolveTargetLanguages(setId, supportLang) {

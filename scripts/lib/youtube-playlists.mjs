@@ -5,6 +5,10 @@ import { getLanguageNameInLang } from "./card-slide-template.mjs";
 
 export const DEFAULT_PLAYLIST_REGISTRY_PATH = "config/youtube-playlists.json";
 export const DEFAULT_CHANNEL_CONFIG_PATH = "config/youtube-channels.json";
+const videoLocalizationPath = path.resolve("config/video-localization.json");
+const videoLocalization = fs.existsSync(videoLocalizationPath)
+  ? JSON.parse(fs.readFileSync(videoLocalizationPath, "utf8"))
+  : {};
 
 const EN_LANGUAGE_NAMES = {
   EN: "English",
@@ -215,6 +219,23 @@ function cleanText(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
 
+function stripHtml(value) {
+  return String(value || "").replace(/<br\s*\/?>/giu, " ").replace(/<[^>]+>/gu, "");
+}
+
+function fillTemplate(template, values) {
+  return String(template || "").replace(/\{([a-z_]+)\}/giu, (_, key) => values[key] ?? "");
+}
+
+function getVideoLocalization(supportLang) {
+  const code = normalizeLanguageCode(supportLang);
+  return videoLocalization[code] || videoLocalization[code.replace(/-/gu, "_")] || {};
+}
+
+function isEnglishSupport(supportLang) {
+  return ["EN", "EN-GB"].includes(normalizeLanguageCode(supportLang));
+}
+
 function stripLevel(value) {
   return cleanText(value).toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
 }
@@ -416,6 +437,11 @@ function buildTitle({ supportLang, targetLang, courseFamily, levelOrTrack }) {
     const nativeLevel = (level || "A1").replace(/:\s*Everyday$/u, "");
     return template.title({ targetName, level: nativeLevel, courseFamily, levelOrTrack });
   }
+  if (!isEnglishSupport(support)) {
+    const loc = getVideoLocalization(support);
+    const wordsLabel = cleanText(loc.words_label);
+    return cleanText(`${targetName} ${level || "A1"}: ${wordsLabel || BRAND_NAME}`);
+  }
   if (courseFamily === "ordinary-vocabulary") {
     return `${targetName} ${level || "A1"} Flashcards`;
   }
@@ -426,13 +452,27 @@ function buildDescription({ supportLang, targetLang, courseFamily, levelOrTrack 
   const support = normalizeLanguageCode(supportLang);
   const targetName = getPlaylistLanguageName(targetLang, support);
   if (support === "RU") {
-    return `Видео ${BRAND_NAME} для русскоязычных, которые изучают ${targetName}: карточки, произношение, паузы для повторения и короткие мини-тесты. Playlist key: ${courseFamily}/${levelOrTrack}.`;
+    return `Видео ${BRAND_NAME} для русскоязычных, которые изучают ${targetName}: карточки, произношение, паузы для повторения и короткие мини-тесты.`;
   }
   if (support === "KK") {
     return `${BRAND_NAME} видеолары қазақ тілді көрермендерге ${targetName} тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.`;
   }
   const template = NATIVE_PLAYLIST_TEMPLATES[support];
   if (template) return template.description({ targetName, courseFamily, levelOrTrack });
+  if (!isEnglishSupport(support)) {
+    const loc = getVideoLocalization(support);
+    const speech = fillTemplate(loc.intro_speech_template, {
+      target_lang: targetName,
+      deck_title: BRAND_NAME,
+    });
+    const parts = [
+      speech,
+      stripHtml(loc.intro_desc),
+      loc.outro_subtitle,
+    ].map(cleanText).filter(Boolean);
+    if (parts.length) return parts.join(" ");
+    return `${BRAND_NAME}: ${targetName}.`;
+  }
   return `${BRAND_NAME} videos for native ${support} speakers learning ${targetName}: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ${courseFamily}/${levelOrTrack}.`;
 }
 
@@ -447,7 +487,7 @@ export function buildPlaylistAssignment(metadata = {}) {
   const description = cleanText(metadata.playlistDescription || buildDescription({ supportLang, targetLang, courseFamily, levelOrTrack }));
   const titleReviewStatus = ["EN", "RU", "ES", "ES-419", "PT", "PT-BR"].includes(supportLang)
     ? "template_reviewed_family"
-    : "template_needs_native_review";
+    : (NATIVE_PLAYLIST_TEMPLATES[supportLang] ? "template_needs_native_review" : "localization_fallback_needs_native_review");
 
   return {
     key,
