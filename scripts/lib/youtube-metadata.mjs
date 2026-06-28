@@ -92,6 +92,93 @@ function isRecoverableAiMetadataError(error) {
   ].some((pattern) => pattern.test(message));
 }
 
+function isEnglishSupport(code) {
+  return ["EN", "EN-GB"].includes(normalizeLanguageCode(code));
+}
+
+const ENGLISH_TEMPLATE_PATTERNS = [
+  { id: "a1-vocabulary-title", pattern: /\b[A-Z][A-Za-z -]+ A1 (?:[A-Za-z -]+\s+)?Vocabulary\b/u },
+  { id: "a1-flashcards-title", pattern: /\b[A-Z][A-Za-z -]+ A1 Flashcards\b/u },
+  { id: "english-vocabulary-with-pronunciation", pattern: /\b[A-Z][A-Za-z -]+ (?:A1\s+)?[A-Za-z -]*Vocabulary\s+with\s+Pronunciation\b/u },
+  { id: "generic-a1-vocabulary", pattern: /\bA1\s+[A-Za-z -]*Vocabulary\b/u },
+  { id: "words-with-pronunciation", pattern: /\b\d{1,3}\s+(?:[A-Z][A-Za-z -]+\s+)?(?:Kitchenware\s+)?Words?\s+with\s+Pronunciation\b/iu },
+  { id: "kitchen-words-title", pattern: /\bKitchen(?:ware)? Words?\s+with\s+Pronunciation\b/iu },
+  { id: "learn-essential-words", pattern: /\bLearn\s+\d{1,3}\s+essential\s+[A-Z][A-Za-z -]+\s+vocabulary\s+words\b/iu },
+  { id: "short-video-lesson", pattern: /\bThis\s+short\s+video\s+lesson\s+helps\s+you\b/iu },
+  { id: "listen-repeat-test", pattern: /\bListen\s+to\s+each\s+[A-Z][A-Za-z -]+\s+word,\s+repeat\s+during\s+the\s+pauses\b/iu },
+  { id: "test-memory-ending", pattern: /\btest\s+your\s+memory\s+with\s+a\s+quick\s+mini-test\b/iu },
+  { id: "daily-practice", pattern: /\bFor\s+daily\s+practice,\s+you\s+can\s+review\s+these\s+words\b/iu },
+  { id: "videos-for-native-speakers", pattern: /\bvideos\s+for\s+native\s+[A-Z0-9 -]+\s+speakers\s+learning\b/iu },
+  { id: "flashcards-pronunciation-repeat-pauses", pattern: /\bflashcards,\s+pronunciation,\s+repeat\s+pauses\b/iu },
+  { id: "playlist-key-marker", pattern: /\bPlaylist\s+key:/iu },
+  { id: "subscribe-english-template", pattern: /\bSubscribe\s+to\s+FlashcardsLuna\s+for\s+more\s+short\s+vocabulary\s+lessons\b/iu },
+  { id: "beginner-learn-english-template", pattern: /\b(?:learn|study|practice)\s+[A-Z][A-Za-z -]+\s+(?:for\s+beginners|vocabulary|pronunciation)\b/iu },
+];
+
+const ENGLISH_TAG_PATTERNS = [
+  /\blearn\s+[a-z]/iu,
+  /\b[a-z]+\s+vocabulary\b/iu,
+  /\b[a-z]+\s+pronunciation\b/iu,
+  /\b[a-z]+\s+for beginners\b/iu,
+  /\bkitchen(?:ware)?\s+words\b/iu,
+  /\bbasic\s+[a-z]+\s+words\b/iu,
+  /\bword list\b/iu,
+];
+
+function findEnglishTemplateMatches(value) {
+  const text = cleanText(value);
+  const matches = [];
+  for (const item of ENGLISH_TEMPLATE_PATTERNS) {
+    if (item.pattern.test(text)) matches.push(item.id);
+  }
+  return matches;
+}
+
+function countEnglishTags(tags) {
+  return (Array.isArray(tags) ? tags : [])
+    .filter((tag) => ENGLISH_TAG_PATTERNS.some((pattern) => pattern.test(cleanText(tag))))
+    .length;
+}
+
+function validateAiMetadataLanguage(metadata) {
+  const supportLang = normalizeLanguageCode(metadata.supportLang);
+  if (!supportLang || isEnglishSupport(supportLang)) {
+    return { status: "pass", blockers: [], warnings: [] };
+  }
+
+  const titleMatches = findEnglishTemplateMatches(metadata.title);
+  const descriptionMatches = findEnglishTemplateMatches(metadata.description);
+  const playlistTitleMatches = findEnglishTemplateMatches(metadata.playlistTitle || metadata.playlist?.title);
+  const playlistDescriptionMatches = findEnglishTemplateMatches(metadata.playlistDescription || metadata.playlist?.description);
+  const englishTagCount = countEnglishTags(metadata.tags);
+  const blockers = [];
+  const warnings = [];
+
+  if (titleMatches.length) {
+    blockers.push(`non-English support ${supportLang} has English-template title markers: ${titleMatches.join(",")}`);
+  }
+  if (descriptionMatches.length) {
+    blockers.push(`non-English support ${supportLang} has English-template description markers: ${descriptionMatches.join(",")}`);
+  }
+  if (playlistTitleMatches.length) {
+    blockers.push(`non-English support ${supportLang} has English-template playlist title markers: ${playlistTitleMatches.join(",")}`);
+  }
+  if (playlistDescriptionMatches.length) {
+    blockers.push(`non-English support ${supportLang} has English-template playlist description markers: ${playlistDescriptionMatches.join(",")}`);
+  }
+  if (englishTagCount >= 4) {
+    blockers.push(`non-English support ${supportLang} has ${englishTagCount} English-template tags`);
+  } else if (englishTagCount > 0) {
+    warnings.push(`non-English support ${supportLang} has ${englishTagCount} English-looking tags`);
+  }
+
+  return {
+    status: blockers.length ? "fail" : "pass",
+    blockers,
+    warnings,
+  };
+}
+
 function extractLevel(setId, metadata) {
   const signal = stripSentenceTerminator(metadata?.levelSignal);
   if (signal) return signal;
@@ -327,6 +414,7 @@ export function buildGeminiPrompt(baseMetadata, cards) {
     "- The end includes a short mini-test.",
     `- ${BRAND_NAME} provides practice decks on the website.`,
     "- Preserve the exact deck title phrase when naming the topic. Do not replace it with a newly invented deck/category title.",
+    "- For non-English support languages, do not use English template phrases like \"A1 Vocabulary\", \"Vocabulary with Pronunciation\", \"Words with Pronunciation\", \"Everyday Flashcards\", \"for beginners\", \"learn <language>\" or English-only tags.",
     "- Do not invent paid features, certificates, native teacher claims, exact duration, or guarantees.",
     "- Keep it search-friendly but not clickbait.",
     "",
@@ -370,6 +458,7 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
     "",
     "Rules:",
     "- Write title, description, tags and hashtags in the same language as baseTitle/baseDescription.",
+    "- If the support/base language is not English, do not use English template phrases like \"A1 Vocabulary\", \"Vocabulary with Pronunciation\", \"Words with Pronunciation\", \"Everyday Flashcards\", \"for beginners\", \"learn <language>\" or English-only tags.",
     "- Make the title a natural search title for beginner learners, not clickbait.",
     "- Preserve facts.deckTitle as the canonical topic/deck phrase; do not replace it with a new category title.",
     "- Make the description several useful short paragraphs and include courseUrl exactly once.",
@@ -578,11 +667,43 @@ export async function generateYouTubeMetadata(input) {
     });
   }
 
-  return normalizeYouTubeMetadata({
+  const aiMetadata = normalizeYouTubeMetadata({
     ...template,
     ...generated,
     source: `gemini-${backend}`,
     model,
     generatedAt: new Date().toISOString()
   });
+  const languageGate = validateAiMetadataLanguage(aiMetadata);
+  if (languageGate.blockers.length) {
+    if (isStrictAiMetadataMode()) {
+      throw new Error(`AI YouTube metadata failed language gate: ${languageGate.blockers.join("; ")}`);
+    }
+    console.warn(`[YOUTUBE_METADATA_AI_LANGUAGE_FALLBACK] ${backend}/${model}: ${languageGate.blockers.join("; ")}`);
+    return normalizeYouTubeMetadata({
+      ...template,
+      source: `gemini-${backend}-localized-fallback`,
+      model,
+      aiMetadata: {
+        attempted: true,
+        backend,
+        model,
+        status: "fallback",
+        reason: "ai_metadata_failed_language_gate",
+        languageGate
+      },
+      generatedAt: new Date().toISOString()
+    });
+  }
+  if (languageGate.warnings.length) {
+    aiMetadata.aiMetadata = {
+      ...(aiMetadata.aiMetadata || {}),
+      attempted: true,
+      backend,
+      model,
+      status: "warning",
+      languageGate
+    };
+  }
+  return aiMetadata;
 }
