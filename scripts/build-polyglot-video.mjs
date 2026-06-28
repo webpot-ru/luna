@@ -123,6 +123,14 @@ function getPolyglotOutroCopy(polyglotLocalization) {
   };
 }
 
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function normalizeBrandForTts(text) {
+  return String(text || "").replace(new RegExp(`\\b${escapeRegExp(BRAND_NAME)}\\b`, "g"), "flash cards luna");
+}
+
 function getPolyglotModeLabel(polyglotLocalization) {
   return polyglotLocalization.modeLabel;
 }
@@ -405,7 +413,7 @@ async function main() {
   } else {
     console.log("\n--- Pre-fetching Intro and Outro Audio ---");
     const audioIntro = await getTtsAudio({
-      text: polyglotIntroCopy.speech,
+      text: normalizeBrandForTts(polyglotIntroCopy.speech),
       voiceId: voiceSupport,
       langCode: supportLang,
       cacheDir: voiceSupportCache
@@ -591,7 +599,7 @@ async function main() {
     totalVisualDurOutro = 5.0;
   } else {
     const audioOutro = await getTtsAudio({
-      text: outroText,
+      text: normalizeBrandForTts(outroText),
       voiceId: voiceSupport,
       langCode: supportLang,
       cacheDir: voiceSupportCache

@@ -103,8 +103,29 @@ function visibleLength(value) {
   return Array.from(String(value || "")).length;
 }
 
+function decodeEscapedWhitespace(value) {
+  return String(value || "")
+    .replace(/\\r\\n/gu, "\n")
+    .replace(/\\n/gu, "\n")
+    .replace(/\\t/gu, "\t");
+}
+
 function cleanText(value) {
-  return String(value || "").replace(/\s+/gu, " ").trim();
+  return decodeEscapedWhitespace(value).replace(/\s+/gu, " ").trim();
+}
+
+function cleanMultilineText(value) {
+  return decodeEscapedWhitespace(value)
+    .replace(/\r\n?/gu, "\n")
+    .split(/\n{2,}/u)
+    .map((paragraph) => paragraph
+      .split("\n")
+      .map((line) => line.replace(/[ \t]+/gu, " ").trim())
+      .filter(Boolean)
+      .join("\n"))
+    .filter(Boolean)
+    .join("\n\n")
+    .trim();
 }
 
 function boundedAiError(error) {
@@ -337,11 +358,11 @@ async function callPolyglotGeminiMetadata({ prompt, model }) {
 function normalizeAiMetadata(value, candidate, playlistAssignment) {
   const fallback = buildTemplateMetadata(candidate, playlistAssignment);
   const title = boundedTitle(value?.title || fallback.title);
-  const description = cleanText(value?.description || fallback.description);
+  const description = cleanMultilineText(value?.description || fallback.description);
   const tags = Array.isArray(value?.tags) ? value.tags.map(cleanText).filter(Boolean) : fallback.tags;
   const hashtags = Array.isArray(value?.hashtags) ? value.hashtags.map(cleanText).filter(Boolean) : fallback.hashtags;
   const playlistTitle = boundedTitle(value?.playlistTitle || fallback.playlistTitle);
-  const playlistDescription = cleanText(value?.playlistDescription || fallback.playlistDescription);
+  const playlistDescription = cleanMultilineText(value?.playlistDescription || fallback.playlistDescription);
   return {
     ...fallback,
     title,

@@ -223,8 +223,20 @@ function normalizeUploadHashtag(value) {
   return text.startsWith("#") ? text : `#${text}`;
 }
 
+function normalizeUploadDescription(value) {
+  return String(value || "")
+    .replace(/\\r\\n/gu, "\n")
+    .replace(/\\n/gu, "\n")
+    .replace(/\\t/gu, "\t")
+    .replace(/\r\n?/gu, "\n")
+    .replace(/[ \t]+\n/gu, "\n")
+    .replace(/\n[ \t]+/gu, "\n")
+    .replace(/\n{3,}/gu, "\n\n")
+    .trim();
+}
+
 function buildUploadDescription(metadata) {
-  const description = String(metadata.description || "").trim();
+  const description = normalizeUploadDescription(metadata.description);
   const hashtags = Array.isArray(metadata.hashtags)
     ? metadata.hashtags.map(normalizeUploadHashtag).filter(Boolean).slice(0, 3)
     : [];

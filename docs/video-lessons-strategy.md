@@ -1086,6 +1086,10 @@ Outro CTA requirements:
 - localize the line to the support language;
 - do not imply that the YouTube video contains every possible combination.
 
+TTS pronunciation rule: keep the visible, SEO and metadata brand as `FlashcardsLuna`, but normalize the text sent to Edge TTS to `flash cards luna` so support-language voices do not misread the fused brand name. This is a TTS-only transform; do not replace the public written brand in titles, thumbnails, descriptions, intro/outro slides or channel copy.
+
+Metadata formatting rule: Polyglot YouTube descriptions and playlist descriptions must use real paragraph breaks. The metadata generator and upload layer should decode escaped line breaks such as `\n` before writing/uploading, so YouTube never receives visible backslash-n sequences.
+
 Default English source copy for localization:
 
 ```text
