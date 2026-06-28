@@ -42,9 +42,9 @@ on:
         required: false
         default: ""
       exclude_supports:
-        description: "Support codes to exclude. HY stays skipped until Armenian TTS is unblocked."
+        description: "Support codes to exclude. Leave empty/NONE for all routed supports, including HY."
         required: false
-        default: "HY"
+        default: ""
       max_updates:
         description: "Maximum playlists to generate/apply in this run."
         required: true
