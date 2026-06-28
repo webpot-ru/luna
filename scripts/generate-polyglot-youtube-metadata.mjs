@@ -21,6 +21,18 @@ const DEFAULT_PUBLICATION_REGISTRY_PATH = "config/youtube-polyglot-published-vid
 const DEFAULT_PROGRESS_PATH = "config/youtube-polyglot-progress.json";
 const DEFAULT_BUNDLES_PATH = "config/polyglot-video-bundles.json";
 const DEFAULT_OUTPUT_ROOT = "outputs/video-generator";
+const POLYGLOT_YOUTUBE_METADATA_SCHEMA = {
+  type: "object",
+  properties: {
+    title: { type: "string" },
+    description: { type: "string" },
+    tags: { type: "array", items: { type: "string" } },
+    hashtags: { type: "array", items: { type: "string" } },
+    playlistTitle: { type: "string" },
+    playlistDescription: { type: "string" },
+  },
+  required: ["title", "description", "tags", "hashtags", "playlistTitle", "playlistDescription"],
+};
 
 function parseArgs(argv) {
   const options = {
@@ -93,6 +105,24 @@ function visibleLength(value) {
 
 function cleanText(value) {
   return String(value || "").replace(/\s+/gu, " ").trim();
+}
+
+function boundedAiError(error) {
+  return cleanText(error?.message || String(error || "unknown AI metadata error")).slice(0, 800);
+}
+
+function isRecoverableAiMetadataError(error) {
+  return [
+    /did not return JSON/iu,
+    /returned empty text/iu,
+    /Unexpected token/iu,
+    /JSON\.parse/iu,
+    /timed out/iu,
+    /fetch failed/iu,
+    /ECONNRESET/iu,
+    /HTTP 5\d\d/iu,
+    /HTTP 429/iu,
+  ].some((pattern) => pattern.test(boundedAiError(error)));
 }
 
 function stripTerminator(value) {
@@ -243,7 +273,65 @@ function buildPrompt(candidate, playlistAssignment) {
     "- Tags must be an array of 8-18 strings, no hashtags inside tags.",
     "- Hashtags must be an array of 3-5 strings, each starting with # and without spaces.",
     "- Playlist title and description must describe Polyglot mode and the target-language bundle.",
+    "- Keep all JSON string values valid: no raw line breaks inside strings.",
+    "",
+    "Complete this exact JSON shape:",
+    '{"title":"","description":"","tags":[],"hashtags":[],"playlistTitle":"","playlistDescription":""}',
   ].join("\n");
+}
+
+async function callPolyglotGeminiMetadata({ prompt, model }) {
+  const request = {
+    prompt,
+    schema: POLYGLOT_YOUTUBE_METADATA_SCHEMA,
+    model,
+    maxOutputTokens: 4200,
+    temperature: 0.25,
+    systemInstruction: [
+      `You create YouTube metadata for ${BRAND_NAME} Polyglot vocabulary videos.`,
+      "Return exactly one valid JSON object and follow the provided schema.",
+      "No Markdown, no hidden reasoning, no comments, no extra fields.",
+    ].join(" "),
+  };
+  const attempts = [
+    request,
+    {
+      ...request,
+      temperature: 0,
+      maxOutputTokens: 5200,
+      systemInstruction: [
+        "You are a strict JSON compiler.",
+        "Return one complete valid JSON object and nothing else.",
+        "No Markdown, no explanation, no raw line breaks inside strings.",
+      ].join(" "),
+      prompt: [
+        "Return only valid JSON. Do not explain.",
+        "",
+        "METADATA_TASK:",
+        prompt,
+        "",
+        "OUTPUT EXACTLY THIS OBJECT SHAPE WITH REAL VALUES:",
+        '{"title":"...","description":"...","tags":["..."],"hashtags":["#..."],"playlistTitle":"...","playlistDescription":"..."}',
+      ].join("\n"),
+    },
+    {
+      ...request,
+      temperature: 0,
+      maxOutputTokens: 5200,
+      systemInstruction: "Return strict JSON only. No Markdown. No extra text.",
+    },
+  ];
+  let lastError;
+  for (const attempt of attempts) {
+    try {
+      return await callVectorEngineGeminiJson(attempt);
+    } catch (error) {
+      lastError = error;
+      if (!isRecoverableAiMetadataError(error)) throw error;
+      console.warn(`Recoverable VectorEngine metadata error; retrying: ${boundedAiError(error)}`);
+    }
+  }
+  throw lastError;
 }
 
 function normalizeAiMetadata(value, candidate, playlistAssignment) {
@@ -298,11 +386,9 @@ async function main() {
 
   if (options.withGemini) {
     try {
-      const result = await callVectorEngineGeminiJson({
+      const result = await callPolyglotGeminiMetadata({
         prompt: buildPrompt(candidate, initialPlaylist),
         model: options.model,
-        maxOutputTokens: 2200,
-        temperature: 0.35,
       });
       copy = normalizeAiMetadata(result, candidate, initialPlaylist);
       source = "vectorengine-gemini-polyglot";

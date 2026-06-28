@@ -270,6 +270,7 @@ jobs:
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
           VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
           VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
+          VECTORENGINE_SEND_RESPONSE_SCHEMA: "1"
         run: |
           set -euo pipefail
           METADATA_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--bundle" "$BUNDLE" "--privacy" "$PRIVACY")
