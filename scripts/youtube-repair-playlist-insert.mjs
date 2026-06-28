@@ -25,6 +25,7 @@ function parseArgs(argv) {
     setId: "",
     supportLang: "",
     targetLang: "",
+    polyglotKey: "",
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     playlistRegistry: DEFAULT_PLAYLIST_REGISTRY_PATH,
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
@@ -41,6 +42,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--set=")) options.setId = arg.slice("--set=".length);
     else if (arg.startsWith("--support=")) options.supportLang = normalizeLanguageCode(arg.slice("--support=".length));
     else if (arg.startsWith("--target=")) options.targetLang = normalizeLanguageCode(arg.slice("--target=".length));
+    else if (arg.startsWith("--polyglot-key=")) options.polyglotKey = arg.slice("--polyglot-key=".length).trim();
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--playlist-registry=")) options.playlistRegistry = arg.slice("--playlist-registry=".length);
     else if (arg.startsWith("--publication-registry=")) options.publicationRegistry = arg.slice("--publication-registry=".length);
@@ -55,6 +57,7 @@ function usage() {
   return [
     "Usage:",
     "  node scripts/youtube-repair-playlist-insert.mjs --set-id=<set> --support=<IT> --target=<AZ>",
+    "  node scripts/youtube-repair-playlist-insert.mjs --set-id=<set> --support=<RU> --polyglot-key=<polyglot:key> --playlist-registry=config/youtube-polyglot-playlists.json --publication-registry=config/youtube-polyglot-published-videos.json",
     "",
     "Dry-run is default. Live write requires:",
     "  --apply --confirm-youtube-write",
@@ -342,6 +345,9 @@ function playlistEntryForRow({ playlistRegistry, row, channel }) {
   const key = row.playlist_key || row.playlistKey || "";
   let entry = key ? findPlaylistEntry(playlistRegistry, key) : null;
   if (entry) return entry;
+  if (row.videoType === "polyglot" || String(row.polyglotKey || "").startsWith("polyglot:")) {
+    fail(`Polyglot publication row ${row.polyglotKey || "(missing key)"} has no playlist registry entry for playlist_key=${key || "(missing)"}.`);
+  }
   const assignment = buildPlaylistAssignment({
     setId: row.setId,
     supportLang: row.supportLang,
@@ -418,15 +424,22 @@ function githubRunUrl() {
 }
 
 function findPublicationRow(registry, query) {
-  const matches = (registry.publications || []).filter((row) => publicationMatches(row, query));
+  const matches = query.polyglotKey
+    ? (registry.publications || []).filter((row) => (
+      (row.videoType === "polyglot" || String(row.polyglotKey || "").startsWith("polyglot:"))
+        && row.polyglotKey === query.polyglotKey
+        && String(row.setId || "") === String(query.setId || "")
+        && normalizeLanguageCode(row.supportLang) === normalizeLanguageCode(query.supportLang)
+    ))
+    : (registry.publications || []).filter((row) => publicationMatches(row, query));
   const pending = matches.filter((row) => row.youtubeVideoId && (row.needsPlaylistInsert || !row.playlistItemId));
   if (pending.length > 1) {
-    fail(`Multiple pending publication rows found for ${query.setId}/${query.supportLang}/${query.targetLang}. Refuse ambiguous repair.`);
+    fail(`Multiple pending publication rows found for ${query.polyglotKey || `${query.setId}/${query.supportLang}/${query.targetLang}`}. Refuse ambiguous repair.`);
   }
   if (pending.length === 1) return pending[0];
   if (matches.length === 1) return matches[0];
-  if (!matches.length) fail(`No publication row found for ${query.setId}/${query.supportLang}/${query.targetLang}.`);
-  fail(`Multiple publication rows found for ${query.setId}/${query.supportLang}/${query.targetLang}; none is clearly pending.`);
+  if (!matches.length) fail(`No publication row found for ${query.polyglotKey || `${query.setId}/${query.supportLang}/${query.targetLang}`}.`);
+  fail(`Multiple publication rows found for ${query.polyglotKey || `${query.setId}/${query.supportLang}/${query.targetLang}`}; none is clearly pending.`);
 }
 
 function statusAfterRepair(row) {
@@ -491,6 +504,8 @@ function buildPlan({ options, row, channel }) {
   const alreadyComplete = Boolean(row.playlistItemId) && !row.needsPlaylistInsert;
   return {
     action: "youtube_repair_playlist_insert",
+    videoType: row.videoType || "ordinary",
+    polyglotKey: row.polyglotKey || "",
     setId: options.setId,
     supportLang: options.supportLang,
     targetLang: options.targetLang,
@@ -509,7 +524,7 @@ function buildPlan({ options, row, channel }) {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  if (options.help || !options.setId || !options.supportLang || !options.targetLang) {
+  if (options.help || !options.setId || !options.supportLang || (!options.targetLang && !options.polyglotKey)) {
     console.log(usage());
     process.exit(options.help ? 0 : 1);
   }
@@ -526,6 +541,7 @@ async function main() {
     setId: options.setId,
     supportLang: options.supportLang,
     targetLang: options.targetLang,
+    polyglotKey: options.polyglotKey,
   });
   const plan = buildPlan({ options, row, channel });
 

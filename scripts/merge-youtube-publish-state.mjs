@@ -140,7 +140,36 @@ function mergePublications(currentRegistry, incomingRegistry) {
       "githubRunUrl",
       "uploadedAt",
       "lastReadbackAt",
+      "playlistCreateRepairedAt",
+      "playlistCreateRepairStatus",
+      "playlistInsertRepairedAt",
+      "playlistInsertRepairStatus",
+      "playlistInsertRepairGithubRunId",
+      "playlistInsertRepairGithubRunUrl",
+      "playlistInsertRepairNote",
     ]);
+    if (incoming.youtubePlaylistId && incoming.playlistItemId) {
+      for (const field of [
+        "needsPlaylistCreate",
+        "needsPlaylistInsert",
+        "playlistCreateDeferredError",
+        "playlistInsertDeferredError",
+        "postUploadError",
+      ]) {
+        if (existing[field] !== undefined && incoming[field] === undefined) {
+          delete existing[field];
+          changed = true;
+        }
+      }
+      if (existing.readback?.postUploadError && !incoming.readback?.postUploadError) {
+        delete existing.readback.postUploadError;
+        changed = true;
+      }
+      if (existing.readback?.playlistReadback && !incoming.readback?.playlistReadback) {
+        delete existing.readback.playlistReadback;
+        changed = true;
+      }
+    }
     if (existing.thumbnailSet !== true && incoming.thumbnailSet === true) {
       existing.thumbnailSet = true;
       changed = true;

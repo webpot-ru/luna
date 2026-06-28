@@ -39,6 +39,7 @@
     "plan:youtube-publish": "node scripts/plan-youtube-publish.mjs",
     "plan:youtube-generation-targets": "node scripts/plan-youtube-generation-targets.mjs",
     "dispatch:youtube-bulk-publish": "node scripts/dispatch-youtube-bulk-publish.mjs",
+    "dispatch:youtube-polyglot-bulk-publish": "node scripts/dispatch-youtube-polyglot-bulk-publish.mjs",
     "audit:youtube-live-publications": "node scripts/audit-youtube-live-publications.mjs",
     "plan:youtube-publish-schedule": "node scripts/plan-youtube-publish-schedule.mjs",
     "plan:youtube-analytics-readback": "node scripts/plan-youtube-analytics-readback.mjs",
