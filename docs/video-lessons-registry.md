@@ -12,11 +12,18 @@ Accepted playlist/upload contract lives in [Video Lessons Strategy - Playlist ar
 config/youtube-channels.json
 config/youtube-playlists.json
 config/youtube-published-videos.json
+config/youtube-polyglot-published-videos.json
+config/youtube-polyglot-playlists.json
+config/youtube-polyglot-progress.json
 config/youtube-publish-schedule-policy.json
+config/polyglot-video-bundles.json
 outputs/youtube-publish-ledger.jsonl
+outputs/youtube-polyglot-publish-ledger.jsonl
 ```
 
 The committed publication registry is `config/youtube-published-videos.json`; it is the durable machine-readable list of videos that have been uploaded/read back and should survive GitHub artifact expiration. The per-run structured ledger `outputs/youtube-publish-ledger.jsonl` must store stable `playlist_key`, `youtube_video_id`, `youtube_playlist_id`, `playlistItemId`, privacy/status, timestamp and readback result. This Markdown registry can summarize or link to those facts after readback, but it must not be the only state used for idempotent YouTube API writes.
+
+Polyglot videos must not reuse the ordinary `setId + supportLang + targetLang` identity. Polyglot publication/readback state lives in `config/youtube-polyglot-published-videos.json`, Polyglot playlist state lives in `config/youtube-polyglot-playlists.json`, and Polyglot campaign progress lives in `config/youtube-polyglot-progress.json`. Future Polyglot publication/progress/calendar rows must include `videoType=polyglot`, `bundleKey`, `targetLangs`, `targetLangsHash` and `polyglotKey` with key shape `polyglot:{setId}:{supportLang}:{bundleKey}:{targetsHash}`. Ordinary rows without `videoType=polyglot` are not Polyglot duplicates, and Polyglot rows must not be treated as ordinary single-target rows. The physical schedule calendar remains shared as `config/youtube-publish-calendar.json` to prevent ordinary and Polyglot videos from colliding on the same channel slot. Polyglot live apply evidence is written to `outputs/youtube-polyglot-publish-ledger.jsonl` and then persisted by the Polyglot workflow state-merge job.
 
 Production publication policy from 2026-06-21: default video/playlist visibility is `public`. For paced rollout, use scheduled upload: metadata must have `privacyStatus=private` and future `publishAt`, and YouTube will make the video public at that time. `private` and `unlisted` without `publishAt` are allowed only as temporary test/pre-publication states or for copyright checks; they should be promoted to `public` or superseded before batch rollout.
 

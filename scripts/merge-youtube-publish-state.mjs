@@ -49,6 +49,15 @@ function normalizeLanguageCode(value) {
 }
 
 function assignmentKey(row = {}) {
+  if (row.videoType === "polyglot" || String(row.polyglotKey || "").startsWith("polyglot:")) {
+    return row.polyglotKey || [
+      "polyglot",
+      row.setId || "",
+      normalizeLanguageCode(row.supportLang),
+      row.bundleKey || "",
+      row.targetLangsHash || "",
+    ].join(":");
+  }
   return [
     row.setId || "",
     normalizeLanguageCode(row.supportLang),
@@ -58,6 +67,12 @@ function assignmentKey(row = {}) {
 }
 
 function publicationKey(row = {}) {
+  if (row.videoType === "polyglot" || String(row.polyglotKey || "").startsWith("polyglot:")) {
+    return [
+      row.polyglotKey || assignmentKey(row),
+      row.youtubeVideoId || "",
+    ].join("|");
+  }
   return [
     row.setId || "",
     normalizeLanguageCode(row.supportLang),
@@ -100,6 +115,12 @@ function mergePublications(currentRegistry, incomingRegistry) {
 
     let changed = fillMissing(existing, incoming, [
       "title",
+      "videoType",
+      "polyglotKey",
+      "bundleKey",
+      "bundleLabel",
+      "targetLangsCsv",
+      "targetLangsHash",
       "youtubeVideoUrl",
       "youtubePlaylistId",
       "youtubePlaylistUrl",
@@ -170,7 +191,8 @@ function mergeCalendar(currentCalendar, incomingCalendar, currentPublications) {
   const summary = { created: 0, updated: 0, skipped: 0 };
 
   for (const incoming of incomingRows) {
-    if (!incoming?.setId || !incoming?.supportLang || !incoming?.targetLang || !incoming?.channelKey) {
+    const isPolyglot = incoming.videoType === "polyglot" || String(incoming.polyglotKey || "").startsWith("polyglot:");
+    if (!incoming?.setId || !incoming?.supportLang || !incoming?.channelKey || (!incoming?.targetLang && !isPolyglot)) {
       summary.skipped += 1;
       continue;
     }
@@ -247,6 +269,12 @@ function mergePlaylists(currentRegistry, incomingRegistry) {
     let changed = fillMissing(existing, incoming, [
       "supportLang",
       "targetLang",
+      "videoType",
+      "polyglotKey",
+      "bundleKey",
+      "bundleLabel",
+      "targetLangsCsv",
+      "targetLangsHash",
       "courseFamily",
       "levelOrTrack",
       "variantOrYear",
@@ -261,6 +289,62 @@ function mergePlaylists(currentRegistry, incomingRegistry) {
     ]);
     if (String(existing.status || "") === "planned" && String(incoming.status || "").startsWith("created_")) {
       existing.status = incoming.status;
+      changed = true;
+    }
+    if (changed) summary.updated += 1;
+    else summary.skipped += 1;
+  }
+
+  return summary;
+}
+
+function mergePolyglotProgress(currentRegistry, incomingRegistry) {
+  const currentRows = currentRegistry.items || [];
+  const incomingRows = incomingRegistry.items || [];
+  currentRegistry.items = currentRows;
+  const byKey = new Map(currentRows.map((row) => [row.polyglotKey || "", row]));
+  const summary = { created: 0, updated: 0, skipped: 0 };
+
+  for (const incoming of incomingRows) {
+    const key = incoming.polyglotKey || "";
+    if (!key) {
+      summary.skipped += 1;
+      continue;
+    }
+    const existing = byKey.get(key);
+    if (!existing) {
+      currentRows.push(incoming);
+      byKey.set(key, incoming);
+      summary.created += 1;
+      continue;
+    }
+    let changed = fillMissing(existing, incoming, [
+      "videoType",
+      "setId",
+      "supportLang",
+      "bundleKey",
+      "bundleLabel",
+      "targetLangsCsv",
+      "targetLangsHash",
+      "youtubeVideoId",
+      "youtubeVideoUrl",
+      "youtubePlaylistId",
+      "playlistItemId",
+      "channelKey",
+      "privacyStatus",
+      "publishAt",
+      "githubRunId",
+      "githubRunUrl",
+      "createdAt",
+    ]);
+    for (const field of ["status", "updatedAt"]) {
+      if (!isEmpty(incoming[field]) && existing[field] !== incoming[field]) {
+        existing[field] = incoming[field];
+        changed = true;
+      }
+    }
+    if (!Array.isArray(existing.targetLangs) && Array.isArray(incoming.targetLangs)) {
+      existing.targetLangs = incoming.targetLangs;
       changed = true;
     }
     if (changed) summary.updated += 1;
@@ -333,6 +417,9 @@ function main() {
     calendar: { created: 0, updated: 0, skipped: 0 },
     playlists: { created: 0, updated: 0, skipped: 0 },
     channels: { updated: 0, skipped: 0 },
+    polyglotPublications: { created: 0, updated: 0, skipped: 0 },
+    polyglotProgress: { created: 0, updated: 0, skipped: 0 },
+    polyglotPlaylists: { created: 0, updated: 0, skipped: 0 },
   };
 
   const publications = loadPair(repoRoot, artifactDir, "config/youtube-published-videos.json", () => ({
@@ -369,6 +456,39 @@ function main() {
   if (channels.hasIncoming) {
     summary.channels = mergeChannels(channels.current, channels.incoming);
     if (writeJsonIfChanged(channels.currentPath, channels.current)) summary.filesChanged.push("config/youtube-channels.json");
+  }
+
+  const polyglotPublications = loadPair(repoRoot, artifactDir, "config/youtube-polyglot-published-videos.json", () => ({
+    schemaVersion: 1,
+    publications: [],
+  }));
+  if (polyglotPublications.hasIncoming) {
+    summary.polyglotPublications = mergePublications(polyglotPublications.current, polyglotPublications.incoming);
+    if (writeJsonIfChanged(polyglotPublications.currentPath, polyglotPublications.current)) {
+      summary.filesChanged.push("config/youtube-polyglot-published-videos.json");
+    }
+  }
+
+  const polyglotProgress = loadPair(repoRoot, artifactDir, "config/youtube-polyglot-progress.json", () => ({
+    schemaVersion: 1,
+    items: [],
+  }));
+  if (polyglotProgress.hasIncoming) {
+    summary.polyglotProgress = mergePolyglotProgress(polyglotProgress.current, polyglotProgress.incoming);
+    if (writeJsonIfChanged(polyglotProgress.currentPath, polyglotProgress.current)) {
+      summary.filesChanged.push("config/youtube-polyglot-progress.json");
+    }
+  }
+
+  const polyglotPlaylists = loadPair(repoRoot, artifactDir, "config/youtube-polyglot-playlists.json", () => ({
+    schemaVersion: 1,
+    playlists: [],
+  }));
+  if (polyglotPlaylists.hasIncoming) {
+    summary.polyglotPlaylists = mergePlaylists(polyglotPlaylists.current, polyglotPlaylists.incoming);
+    if (writeJsonIfChanged(polyglotPlaylists.currentPath, polyglotPlaylists.current)) {
+      summary.filesChanged.push("config/youtube-polyglot-playlists.json");
+    }
   }
 
   const summaryPath = path.resolve(repoRoot, options.summary);

@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "sourceOfTruth": "docs/video-lessons-strategy.md#polyglot-mode-multilingual-decks",
+  "defaults": {
+    "minTargetLanguages": 3,
+    "maxTargetLanguages": 4
+  },
+  "bundles": [
+    {
+      "key": "global_europe_core",
+      "wave": 1,
+      "label": "Global Europe Core",
+      "targetLangs": ["EN", "ES", "FR", "DE"],
+      "fallbackLangs": ["IT", "PT", "NL"]
+    },
+    {
+      "key": "romance_core",
+      "wave": 1,
+      "label": "Romance Core",
+      "targetLangs": ["ES", "FR", "IT", "PT"],
+      "fallbackLangs": ["EN", "DE"]
+    },
+    {
+      "key": "east_asia_core",
+      "wave": 1,
+      "label": "East Asia Core",
+      "targetLangs": ["ZH", "JA", "KO"],
+      "fallbackLangs": ["EN", "VI"]
+    },
+    {
+      "key": "slavic_core",
+      "wave": 1,
+      "label": "Slavic Core",
+      "targetLangs": ["RU", "PL", "CS", "SK"],
+      "fallbackLangs": ["BG", "HR", "SR", "SL"]
+    },
+    {
+      "key": "southeast_asia_core",
+      "wave": 1,
+      "label": "Southeast Asia Core",
+      "targetLangs": ["TH", "VI", "ID", "MS"],
+      "fallbackLangs": ["TL", "KM", "LO"]
+    },
+    {
+      "key": "germanic_core",
+      "wave": 2,
+      "label": "Germanic Core",
+      "targetLangs": ["EN", "DE", "NL", "SV"],
+      "fallbackLangs": ["NO", "DA"]
+    },
+    {
+      "key": "nordic_core",
+      "wave": 2,
+      "label": "Nordic Core",
+      "targetLangs": ["SV", "NO", "DA", "FI"],
+      "fallbackLangs": ["IS", "EN"]
+    },
+    {
+      "key": "balkan_slavic_core",
+      "wave": 2,
+      "label": "Balkan Slavic Core",
+      "targetLangs": ["BG", "HR", "SR", "SL"],
+      "fallbackLangs": ["RU", "PL", "CS", "SK"]
+    },
+    {
+      "key": "south_asia_indo_aryan_core",
+      "wave": 2,
+      "label": "South Asia Indo-Aryan Core",
+      "targetLangs": ["HI", "BN", "NE", "SI"],
+      "fallbackLangs": ["EN", "TA"]
+    },
+    {
+      "key": "south_asia_dravidian_core",
+      "wave": 2,
+      "label": "South Asia Dravidian Core",
+      "targetLangs": ["TA", "TE", "KN", "ML"],
+      "fallbackLangs": ["HI", "SI"]
+    },
+    {
+      "key": "turkic_core",
+      "wave": 3,
+      "label": "Turkic Core",
+      "targetLangs": ["TR", "AZ", "UZ", "KK"],
+      "fallbackLangs": ["KA", "HY"]
+    },
+    {
+      "key": "caucasus_bridge_core",
+      "wave": 3,
+      "label": "Caucasus Bridge Core",
+      "targetLangs": ["KA", "HY", "AZ", "TR"],
+      "fallbackLangs": ["RU", "UZ"]
+    },
+    {
+      "key": "baltic_core",
+      "wave": 3,
+      "label": "Baltic Core",
+      "targetLangs": ["LT", "LV", "ET"],
+      "fallbackLangs": ["FI", "PL"]
+    }
+  ]
+}

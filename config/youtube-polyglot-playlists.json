@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "sourceOfTruth": "docs/video-lessons-strategy.md#polyglot-mode-multilingual-decks",
+  "purpose": "Separate machine-readable playlist registry for Polyglot YouTube videos only.",
+  "notes": [
+    "Do not mix ordinary single-target playlists into this registry.",
+    "One Polyglot playlist represents one support language plus one resolved target-language bundle.",
+    "Playlist copy must be localized for the support channel language and should be AI-polished before live apply."
+  ],
+  "defaults": {
+    "defaultPlaylistPrivacyStatus": "public",
+    "ledgerPath": "outputs/youtube-polyglot-publish-ledger.jsonl"
+  },
+  "playlists": [
+    {
+      "playlist_key": "POLYGLOT__EN__global-europe-core__874008b65ee7",
+      "videoType": "polyglot",
+      "supportLang": "EN",
+      "bundleKey": "global_europe_core",
+      "bundleLabel": "Global Europe Core",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "DE",
+        "IT"
+      ],
+      "targetLangsCsv": "ES,FR,DE,IT",
+      "targetLangsHash": "874008b65ee7",
+      "channelKey": "en",
+      "youtube_channel_id": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "youtube_playlist_id": "",
+      "title": "Polyglot: Spanish, French, German, Italian",
+      "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Spanish, French, German, Italian. Themed decks, flashcards, pronunciation and review. Bundle: Global Europe Core.",
+      "status": "planned",
+      "titleReviewStatus": "template_needs_native_review",
+      "createdAt": "2026-06-28T11:36:29.277Z",
+      "lastReadbackAt": ""
+    },
+    {
+      "playlist_key": "POLYGLOT__RU__global-europe-core__7a4233775927",
+      "videoType": "polyglot",
+      "supportLang": "RU",
+      "bundleKey": "global_europe_core",
+      "bundleLabel": "Global Europe Core",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "targetLangsHash": "7a4233775927",
+      "channelKey": "ru",
+      "youtube_channel_id": "UC1f5EyXEMejXIumH9104GMA",
+      "youtube_playlist_id": "",
+      "title": "Полиглот: английский, испанский, французский, немецкий",
+      "description": "FlashcardsLuna: плейлист для режима Полиглот. Учите несколько языков одновременно: английский, испанский, французский, немецкий. Тематические колоды, карточки, произношение и повторение. Bundle: Global Europe Core.",
+      "status": "planned",
+      "titleReviewStatus": "template_needs_native_review",
+      "createdAt": "2026-06-28T11:36:29.208Z",
+      "lastReadbackAt": ""
+    }
+  ]
+}

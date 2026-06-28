@@ -18,10 +18,23 @@ import {
   DEFAULT_PUBLICATION_REGISTRY_PATH,
   activePublicationBlocker,
   findActivePublication,
+  isActivePublication,
   loadPublicationRegistry,
   savePublicationRegistry,
   upsertPublication,
 } from "./lib/youtube-publication-registry.mjs";
+import {
+  DEFAULT_POLYGLOT_PLAYLIST_REGISTRY_PATH,
+  buildPolyglotPlaylistAssignment,
+  findPolyglotPlaylistEntry,
+  loadPolyglotPlaylistRegistry,
+  savePolyglotPlaylistRegistry,
+  upsertPlannedPolyglotPlaylist,
+} from "./lib/polyglot-youtube-playlists.mjs";
+
+const DEFAULT_POLYGLOT_PUBLICATION_REGISTRY_PATH = "config/youtube-polyglot-published-videos.json";
+const DEFAULT_POLYGLOT_PROGRESS_REGISTRY_PATH = "config/youtube-polyglot-progress.json";
+const DEFAULT_CALENDAR_PATH = "config/youtube-publish-calendar.json";
 
 function parseArgs(argv) {
   const options = {
@@ -31,6 +44,8 @@ function parseArgs(argv) {
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     playlistRegistry: DEFAULT_PLAYLIST_REGISTRY_PATH,
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
+    progressRegistry: "",
+    calendar: DEFAULT_CALENDAR_PATH,
     ledger: "outputs/youtube-publish-ledger.jsonl",
     apply: false,
     confirmYoutubeWrite: false,
@@ -54,6 +69,8 @@ function parseArgs(argv) {
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--playlist-registry=")) options.playlistRegistry = arg.slice("--playlist-registry=".length);
     else if (arg.startsWith("--publication-registry=")) options.publicationRegistry = arg.slice("--publication-registry=".length);
+    else if (arg.startsWith("--progress-registry=")) options.progressRegistry = arg.slice("--progress-registry=".length);
+    else if (arg.startsWith("--calendar=")) options.calendar = arg.slice("--calendar=".length);
     else if (arg.startsWith("--ledger=")) options.ledger = arg.slice("--ledger=".length);
     else if (arg.startsWith("--privacy=")) options.privacyStatus = arg.slice("--privacy=".length);
     else if (arg.startsWith("--publish-at=")) options.publishAt = arg.slice("--publish-at=".length);
@@ -523,6 +540,7 @@ function buildPublicationRecord({ metadata, ledgerRow, uploadedVideo, channel, t
   const playlistId = ledgerRow.youtubePlaylistId;
   const runId = process.env.GITHUB_RUN_ID || "";
   const publishAt = ledgerRow.publishAt || "";
+  const isPolyglot = isPolyglotMetadata(metadata);
   const readback = {
     uploadStatus: uploadedVideo.status?.uploadStatus || "",
     privacyStatus: uploadedVideo.status?.privacyStatus || ledgerRow.privacyStatus,
@@ -535,9 +553,18 @@ function buildPublicationRecord({ metadata, ledgerRow, uploadedVideo, channel, t
   if (ledgerRow.needsPlaylistInsert) readback.playlistItemReadback = "pending";
   if (ledgerRow.postUploadError) readback.postUploadError = ledgerRow.postUploadError;
   return {
+    ...(isPolyglot ? {
+      videoType: "polyglot",
+      polyglotKey: metadata.polyglotKey || ledgerRow.polyglotKey || "",
+      bundleKey: metadata.bundleKey || "",
+      bundleLabel: metadata.bundleLabel || "",
+      targetLangs: Array.isArray(metadata.targetLangs) ? metadata.targetLangs : [],
+      targetLangsCsv: metadata.targetLangsCsv || "",
+      targetLangsHash: metadata.targetLangsHash || "",
+    } : {}),
     setId: metadata.setId,
     supportLang: metadata.supportLang,
-    targetLang: metadata.targetLang,
+    targetLang: isPolyglot ? (metadata.targetLangsCsv || "") : metadata.targetLang,
     playlist_key: ledgerRow.playlist_key,
     title: uploadedVideo.snippet?.title || metadata.title,
     youtubeVideoId: videoId,
@@ -578,6 +605,139 @@ function buildPublicationRecord({ metadata, ledgerRow, uploadedVideo, channel, t
   };
 }
 
+function isPolyglotMetadata(metadata) {
+  return metadata?.videoType === "polyglot" || String(metadata?.polyglotKey || "").startsWith("polyglot:");
+}
+
+function loadPlaylistRegistryForMetadata(metadata, filePath) {
+  return isPolyglotMetadata(metadata)
+    ? loadPolyglotPlaylistRegistry(filePath)
+    : loadPlaylistRegistry(filePath);
+}
+
+function savePlaylistRegistryForMetadata(metadata, registry, filePath) {
+  if (isPolyglotMetadata(metadata)) savePolyglotPlaylistRegistry(registry, filePath);
+  else savePlaylistRegistry(registry, filePath);
+}
+
+function buildAssignmentForMetadata(metadata) {
+  return isPolyglotMetadata(metadata)
+    ? buildPolyglotPlaylistAssignment(metadata)
+    : buildPlaylistAssignment(metadata);
+}
+
+function findPlaylistEntryForMetadata(metadata, registry, key) {
+  return isPolyglotMetadata(metadata)
+    ? findPolyglotPlaylistEntry(registry, key)
+    : findPlaylistEntry(registry, key);
+}
+
+function upsertPlannedPlaylistForMetadata(metadata, registry, assignment, channel) {
+  return isPolyglotMetadata(metadata)
+    ? upsertPlannedPolyglotPlaylist(registry, assignment, channel)
+    : upsertPlannedPlaylist(registry, assignment, channel);
+}
+
+function findActivePublicationForMetadata(registry, metadata) {
+  if (!isPolyglotMetadata(metadata)) return findActivePublication(registry, metadata);
+  const polyglotKey = metadata.polyglotKey || "";
+  return (registry.publications || [])
+    .filter((row) => row.videoType === "polyglot" || String(row.polyglotKey || "").startsWith("polyglot:"))
+    .filter((row) => row.polyglotKey === polyglotKey)
+    .filter(isActivePublication)
+    .sort((a, b) => String(b.lastReadbackAt || b.uploadedAt || "").localeCompare(String(a.lastReadbackAt || a.uploadedAt || "")))[0] || null;
+}
+
+function activePublicationBlockerForMetadata(metadata, row) {
+  if (!isPolyglotMetadata(metadata)) return activePublicationBlocker(row);
+  return [
+    "already published in config/youtube-polyglot-published-videos.json",
+    `polyglotKey=${metadata.polyglotKey || "missing"}`,
+    `video=${row.youtubeVideoId}`,
+    `status=${row.publicationStatus || row.privacyStatus || "unknown"}`,
+    `run=${row.githubRunId || "unknown"}`,
+    "use visibility workflow or pass --allow-republish for an intentional duplicate/reupload",
+  ].join("; ");
+}
+
+function readJsonFile(filePath, fallback) {
+  if (!filePath || !fs.existsSync(filePath)) return fallback;
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+function writeJsonFile(filePath, value) {
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+}
+
+function upsertPolyglotProgressItem(filePath, { metadata, ledgerRow }) {
+  if (!isPolyglotMetadata(metadata) || !filePath) return;
+  const registry = readJsonFile(filePath, {
+    schemaVersion: 1,
+    sourceOfTruth: "docs/video-lessons-strategy.md#polyglot-mode-multilingual-decks",
+    purpose: "Campaign-level progress ledger for Polyglot deck/support/bundle work.",
+    items: [],
+  });
+  if (!Array.isArray(registry.items)) registry.items = [];
+  const item = {
+    videoType: "polyglot",
+    polyglotKey: metadata.polyglotKey,
+    setId: metadata.setId,
+    supportLang: metadata.supportLang,
+    bundleKey: metadata.bundleKey || "",
+    bundleLabel: metadata.bundleLabel || "",
+    targetLangs: Array.isArray(metadata.targetLangs) ? metadata.targetLangs : [],
+    targetLangsCsv: metadata.targetLangsCsv || "",
+    targetLangsHash: metadata.targetLangsHash || "",
+    status: ledgerRow.status,
+    youtubeVideoId: ledgerRow.youtubeVideoId || "",
+    youtubeVideoUrl: ledgerRow.youtubeVideoId ? `https://www.youtube.com/watch?v=${ledgerRow.youtubeVideoId}` : "",
+    youtubePlaylistId: ledgerRow.youtubePlaylistId || "",
+    playlistItemId: ledgerRow.playlistItemId || "",
+    channelKey: ledgerRow.channelKey || "",
+    privacyStatus: ledgerRow.privacyStatus || "",
+    publishAt: ledgerRow.publishAt || "",
+    updatedAt: ledgerRow.timestamp,
+    githubRunId: process.env.GITHUB_RUN_ID || "",
+    githubRunUrl: githubRunUrl(),
+  };
+  const index = registry.items.findIndex((row) => row.polyglotKey === metadata.polyglotKey);
+  if (index >= 0) registry.items[index] = { ...registry.items[index], ...item };
+  else registry.items.push({ ...item, createdAt: ledgerRow.timestamp });
+  writeJsonFile(filePath, registry);
+}
+
+function upsertPolyglotCalendarReservation(filePath, { metadata, ledgerRow }) {
+  if (!isPolyglotMetadata(metadata) || !ledgerRow.publishAt || !filePath) return;
+  const calendar = readJsonFile(filePath, {
+    schemaVersion: 1,
+    sourceOfTruth: "docs/video-lessons-strategy.md#publishing-calendar",
+    reservations: [],
+  });
+  if (!Array.isArray(calendar.reservations)) calendar.reservations = [];
+  const reservation = {
+    videoType: "polyglot",
+    polyglotKey: metadata.polyglotKey,
+    setId: metadata.setId,
+    supportLang: metadata.supportLang,
+    bundleKey: metadata.bundleKey || "",
+    targetLangs: Array.isArray(metadata.targetLangs) ? metadata.targetLangs : [],
+    targetLangsCsv: metadata.targetLangsCsv || "",
+    channelKey: ledgerRow.channelKey || "",
+    youtube_channel_id: ledgerRow.expectedYoutubeChannelId || "",
+    youtubeVideoId: ledgerRow.youtubeVideoId || "",
+    publishAt: ledgerRow.publishAt,
+    status: ledgerRow.status,
+    updatedAt: ledgerRow.timestamp,
+    githubRunId: process.env.GITHUB_RUN_ID || "",
+  };
+  const index = calendar.reservations.findIndex((row) => row.polyglotKey === metadata.polyglotKey);
+  if (index >= 0) calendar.reservations[index] = { ...calendar.reservations[index], ...reservation };
+  else calendar.reservations.push({ ...reservation, createdAt: ledgerRow.timestamp });
+  calendar.reservations.sort((a, b) => String(a.publishAt || "").localeCompare(String(b.publishAt || "")));
+  writeJsonFile(filePath, calendar);
+}
+
 function dryRun(plan) {
   console.log("YouTube publish dry-run");
   console.log(`metadata=${plan.metadataFile}`);
@@ -602,15 +762,29 @@ async function main() {
 
   const metadataFile = resolveExistingPath(options.metadata, "metadata");
   const metadata = JSON.parse(fs.readFileSync(metadataFile, "utf8"));
+  if (isPolyglotMetadata(metadata)) {
+    if (options.playlistRegistry === DEFAULT_PLAYLIST_REGISTRY_PATH) {
+      options.playlistRegistry = DEFAULT_POLYGLOT_PLAYLIST_REGISTRY_PATH;
+    }
+    if (options.publicationRegistry === DEFAULT_PUBLICATION_REGISTRY_PATH) {
+      options.publicationRegistry = DEFAULT_POLYGLOT_PUBLICATION_REGISTRY_PATH;
+    }
+    if (!options.progressRegistry) {
+      options.progressRegistry = DEFAULT_POLYGLOT_PROGRESS_REGISTRY_PATH;
+    }
+    if (options.ledger === "outputs/youtube-publish-ledger.jsonl") {
+      options.ledger = "outputs/youtube-polyglot-publish-ledger.jsonl";
+    }
+  }
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
-  const playlistRegistry = loadPlaylistRegistry(options.playlistRegistry);
+  const playlistRegistry = loadPlaylistRegistryForMetadata(metadata, options.playlistRegistry);
   const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
   const channel = findChannelForSupport(channelRegistry.channels, metadata.supportLang);
   if (!channel) fail(`No channel configured for supportLang=${metadata.supportLang}`);
   if (!channel.channelId) fail(`Channel ${channel.key} has no channelId.`);
 
-  const assignment = buildPlaylistAssignment(metadata);
-  let playlistEntry = findPlaylistEntry(playlistRegistry, assignment.key);
+  const assignment = buildAssignmentForMetadata(metadata);
+  let playlistEntry = findPlaylistEntryForMetadata(metadata, playlistRegistry, assignment.key);
   const videoPath = resolveExistingPath(options.video || defaultVideoPath(metadataFile, metadata), "video");
   const thumbnailCandidate = options.thumbnail || defaultThumbnailPath(metadataFile, metadata);
   const thumbnailPath = thumbnailCandidate ? resolveExistingPath(thumbnailCandidate, "thumbnail") : "";
@@ -638,16 +812,16 @@ async function main() {
   }
 
   const metadataIssue = polishedMetadataIssue(metadata);
-  const existingPublication = findActivePublication(publicationRegistry, metadata);
+  const existingPublication = findActivePublicationForMetadata(publicationRegistry, metadata);
   const blockers = [
     ...(metadataIssue ? [metadataIssue] : []),
-    ...(existingPublication && !options.allowRepublish ? [activePublicationBlocker(existingPublication)] : []),
+    ...(existingPublication && !options.allowRepublish ? [activePublicationBlockerForMetadata(metadata, existingPublication)] : []),
     ...(publishAt && playlistEntry?.status && String(playlistEntry.status).toLowerCase().includes("unlisted")
       ? ["scheduled public release needs a public playlist; promote existing unlisted playlist before upload or create a new public playlist"]
       : []),
     ...(playlistEntry?.youtube_playlist_id || options.createPlaylist
       ? []
-      : ["playlist has no youtube_playlist_id; pass --create-playlist or fill config/youtube-playlists.json"])
+      : [`playlist has no youtube_playlist_id; pass --create-playlist or fill ${options.playlistRegistry}`])
   ];
 
   const plan = {
@@ -693,6 +867,8 @@ async function main() {
   const ledgerBase = {
     timestamp: new Date().toISOString(),
     action: "youtube_publish_video",
+    videoType: isPolyglotMetadata(metadata) ? "polyglot" : "ordinary",
+    polyglotKey: metadata.polyglotKey || "",
     metadataFile,
     videoPath,
     thumbnailPath,
@@ -703,7 +879,10 @@ async function main() {
     thumbnailSource: thumbnailUploadMode === "custom" ? (metadata.thumbnailSource || "") : "youtube-auto-first-frame",
     channelKey: channel.key,
     supportLang: metadata.supportLang,
-    targetLang: metadata.targetLang,
+    targetLang: isPolyglotMetadata(metadata) ? (metadata.targetLangsCsv || "") : metadata.targetLang,
+    targetLangs: Array.isArray(metadata.targetLangs) ? metadata.targetLangs : [],
+    targetLangsCsv: metadata.targetLangsCsv || "",
+    bundleKey: metadata.bundleKey || "",
     setId: metadata.setId,
     playlist_key: assignment.key,
     expectedYoutubeChannelId: channel.channelId,
@@ -729,7 +908,7 @@ async function main() {
     });
 
     if (!playlistEntry) {
-      const result = upsertPlannedPlaylist(playlistRegistry, assignment, channel);
+      const result = upsertPlannedPlaylistForMetadata(metadata, playlistRegistry, assignment, channel);
       playlistEntry = result.entry;
     }
     if (!playlistEntry.youtube_playlist_id) {
@@ -753,7 +932,7 @@ async function main() {
         playlistEntry.lastReadbackAt = new Date().toISOString();
         delete playlistEntry.needsPlaylistCreate;
         delete playlistEntry.playlistCreateDeferredError;
-        savePlaylistRegistry(playlistRegistry, options.playlistRegistry);
+        savePlaylistRegistryForMetadata(metadata, playlistRegistry, options.playlistRegistry);
       } catch (error) {
         if (!publishAt || !isRecoverablePlaylistWriteError(error)) throw error;
         playlistCreateDeferredError = compactErrorMessage(error);
@@ -761,7 +940,7 @@ async function main() {
         playlistEntry.needsPlaylistCreate = true;
         playlistEntry.playlistCreateDeferredAt = new Date().toISOString();
         playlistEntry.playlistCreateDeferredError = playlistCreateDeferredError;
-        savePlaylistRegistry(playlistRegistry, options.playlistRegistry);
+        savePlaylistRegistryForMetadata(metadata, playlistRegistry, options.playlistRegistry);
         console.warn(`::warning::Deferred playlist creation for ${assignment.key}; video upload will continue and playlist repair must run later.`);
       }
     }
@@ -868,6 +1047,8 @@ async function main() {
       thumbnailSetError,
     }));
     savePublicationRegistry(publicationRegistry, options.publicationRegistry);
+    upsertPolyglotProgressItem(options.progressRegistry, { metadata, ledgerRow });
+    upsertPolyglotCalendarReservation(options.calendar, { metadata, ledgerRow });
     console.log(JSON.stringify(ledgerRow, null, 2));
   } catch (error) {
     const failureRow = {
@@ -920,6 +1101,8 @@ async function main() {
         thumbnailSet: false,
       }));
       savePublicationRegistry(publicationRegistry, options.publicationRegistry);
+      upsertPolyglotProgressItem(options.progressRegistry, { metadata, ledgerRow: partialLedgerRow });
+      upsertPolyglotCalendarReservation(options.calendar, { metadata, ledgerRow: partialLedgerRow });
     }
     throw error;
   }

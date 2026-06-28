@@ -127,6 +127,15 @@ function truncateText(value, maxLength) {
 }
 
 function thumbnailCopy(metadata) {
+  if (metadata.videoType === "polyglot") {
+    const deckTitle = truncateText(stripSentenceTerminator(metadata.deckTitle) || "Vocabulary", 38);
+    const targetNames = truncateText(metadata.targetLanguagesDisplay || metadata.targetLanguageName || metadata.targetLangsCsv || "Several languages", 34);
+    return {
+      brand: BRAND_NAME,
+      headline: metadata.supportLang === "RU" ? "Полиглот" : "Polyglot Mode",
+      topic: `${deckTitle} · ${targetNames}`,
+    };
+  }
   const targetName = truncateText(metadata.targetLanguageName || metadata.targetLang || "Language", 28);
   const level = truncateText(metadata.level || "A1", 12);
   const deckTitle = truncateText(stripSentenceTerminator(metadata.deckTitle) || "Vocabulary", 38);
