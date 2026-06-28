@@ -408,6 +408,55 @@
         "playlistItemReadback": "pending",
         "postUploadError": "YouTube uploaded video readback returned no items."
       }
+    },
+    {
+      "videoType": "polyglot",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:ES:global_europe_core:3afeeb922088",
+      "bundleKey": "global_europe_core",
+      "bundleLabel": "Global Europe Core",
+      "targetLangs": [
+        "EN",
+        "FR",
+        "DE",
+        "IT"
+      ],
+      "targetLangsCsv": "EN,FR,DE,IT",
+      "targetLangsHash": "3afeeb922088",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES",
+      "targetLang": "EN,FR,DE,IT",
+      "playlist_key": "POLYGLOT__ES__global-europe-core__3afeeb922088",
+      "title": "Utensilios de Cocina en Inglés, Francés, Alemán e Italiano | Vocabulario Políglota",
+      "youtubeVideoId": "k5lNuHEVD1c",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=k5lNuHEVD1c",
+      "youtubePlaylistId": "PLYmNqF-eK-GI",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLYmNqF-eK-GI",
+      "playlistItemId": "UExZbU5xRi1lSy1HSS41NkI0NEY2RDEwNTU3Q0M2",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "channelHandle": "@lunacardsespanol",
+      "privacyStatus": "public",
+      "publicationStatus": "published_uploaded",
+      "publishAt": "",
+      "scheduledPublishAt": "",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": true,
+      "thumbnailLogoOverlay": true,
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "vectorengine-gpt-image-2",
+      "metadataSource": "vectorengine-gemini-polyglot",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "28329051205",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28329051205",
+      "uploadedAt": "2026-06-28T16:53:11.267Z",
+      "lastReadbackAt": "2026-06-28T16:53:11.267Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "public",
+        "publishAt": "",
+        "thumbnailStatus": "custom_set"
+      }
     }
   ]
 }
