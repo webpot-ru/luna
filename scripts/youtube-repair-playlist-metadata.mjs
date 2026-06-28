@@ -21,7 +21,7 @@ function parseArgs(argv) {
     setId: "",
     route: "",
     supports: [],
-    excludeSupports: ["HY"],
+    excludeSupports: [],
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     playlistRegistry: DEFAULT_PLAYLIST_REGISTRY_PATH,
     routingConfig: "config/youtube-api-project-routing.json",
@@ -82,7 +82,7 @@ function usage() {
     "  --set=<set_id> --generate-replacements --confirm-ai-spend --apply --confirm-youtube-write",
     "",
     "Defaults:",
-    "  --exclude-supports=HY",
+    "  --exclude-supports=NONE",
     "  --max-updates=20",
   ].join("\n");
 }
