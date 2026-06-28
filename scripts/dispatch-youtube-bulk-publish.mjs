@@ -287,16 +287,16 @@ async function withDispatchLock(state, callback) {
 
 async function dispatchWorkflow(workflow, fields, ref, state) {
   return withDispatchLock(state, async () => {
-  const args = ["workflow", "run", workflow, "--ref", ref];
-  for (const [key, value] of Object.entries(fields)) {
-    args.push("-f", `${key}=${value ?? ""}`);
-  }
-  const startedAt = new Date();
-  await gh(args);
-  await sleep(2500);
+    const args = ["workflow", "run", workflow, "--ref", ref];
+    for (const [key, value] of Object.entries(fields)) {
+      args.push("-f", `${key}=${value ?? ""}`);
+    }
+    const startedAt = new Date();
+    await gh(args);
+    await sleep(2500);
     const run = await findNewestWorkflowRun(workflow, startedAt, state?.claimedRunIds);
     state?.claimedRunIds?.add(run.databaseId);
-  return run;
+    return run;
   });
 }
 
@@ -335,6 +335,27 @@ async function watchRun(runId) {
   }
 }
 
+async function getRunSummary(runId) {
+  const { stdout } = await gh([
+    "run",
+    "view",
+    String(runId),
+    "--json",
+    "databaseId,status,conclusion,url,createdAt,updatedAt",
+  ]);
+  return JSON.parse(stdout || "{}");
+}
+
+async function getFinalRunSummary(runId, attempts = 6) {
+  let lastSummary = null;
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    lastSummary = await getRunSummary(runId);
+    if (lastSummary.status === "completed" || lastSummary.conclusion) return lastSummary;
+    await sleep(5000);
+  }
+  return lastSummary || {};
+}
+
 async function getRunLog(runId) {
   try {
     const { stdout } = await gh(["run", "view", String(runId), "--log"], { maxBuffer: 1024 * 1024 * 80 });
@@ -344,22 +365,76 @@ async function getRunLog(runId) {
   }
 }
 
+function extractErrorHints(logText) {
+  const text = String(logText || "");
+  const lines = text.split(/\r?\n/u);
+  const patterns = [
+    /::error::/iu,
+    /\bError:/u,
+    /\bquotaExceeded\b/iu,
+    /\buploadLimitExceeded\b/iu,
+    /\bforbidden\b/iu,
+    /\bRATE_LIMIT_EXCEEDED\b/iu,
+    /\bSERVICE_UNAVAILABLE\b/iu,
+    /\bABORTED\b/iu,
+    /\bplaylistItems\b/iu,
+    /\bNo eligible\b/iu,
+    /\beligibleTargetCount\b/iu,
+    /\bmetadata_language_gate\b/iu,
+    /\bchannel.*mismatch\b/iu,
+  ];
+  const seen = new Set();
+  const hints = [];
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || !patterns.some((pattern) => pattern.test(trimmed))) continue;
+    const compact = trimmed.length > 500 ? `${trimmed.slice(0, 497)}...` : trimmed;
+    if (seen.has(compact)) continue;
+    seen.add(compact);
+    hints.push(compact);
+    if (hints.length >= 20) break;
+  }
+  return hints;
+}
+
+function classifySuccessfulRun(logText) {
+  const text = String(logText || "");
+  if (
+    /"eligibleTargetCount"\s*:\s*0/iu.test(text) ||
+    /eligibleTargetCount:\s*0/iu.test(text) ||
+    /"shardSelectedTargetCount"\s*:\s*0/iu.test(text) ||
+    /shardSelectedTargetCount:\s*0/iu.test(text) ||
+    /No eligible target/iu.test(text)
+  ) {
+    return {
+      status: "skipped_no_eligible",
+      noUploadReason: "ordinary_preflight_no_eligible_targets",
+    };
+  }
+  return {
+    status: "success",
+  };
+}
+
 function classifyFailure(logText) {
   const text = String(logText || "");
+  const errorHints = extractErrorHints(text);
   if (/quotaExceeded/iu.test(text)) {
     return {
       kind: "quota_exceeded",
       stopRoute: true,
       canRepairPlaylist: false,
+      errorHints,
     };
   }
-  const playlistSignal = /playlistItems|playlists\.insert|playlistItems\.insert|playlistItems\.list|youtube-playlist/iu.test(text);
+  const playlistSignal = /playlistItems|playlists\.insert|playlistItems\.insert|playlistItems\.list|youtube-playlist|needsPlaylistInsert/iu.test(text);
   const transientSignal = /RATE_LIMIT_EXCEEDED|SERVICE_UNAVAILABLE|ABORTED|fetch failed|ECONNRESET|HTTP 5\d\d/iu.test(text);
   if (playlistSignal && transientSignal) {
     return {
       kind: "playlist_transient",
       stopRoute: false,
       canRepairPlaylist: true,
+      errorHints,
     };
   }
   if (/uploadLimitExceeded/iu.test(text)) {
@@ -367,12 +442,46 @@ function classifyFailure(logText) {
       kind: "upload_limit_exceeded",
       stopRoute: true,
       canRepairPlaylist: false,
+      errorHints,
+    };
+  }
+  if (/thumbnail.*forbidden|domain=youtube\.thumbnail|reason=forbidden/iu.test(text)) {
+    return {
+      kind: "thumbnail_forbidden",
+      stopRoute: false,
+      canRepairPlaylist: false,
+      errorHints,
+    };
+  }
+  if (/metadata_language_gate|English-template metadata|metadata.*wrong language/iu.test(text)) {
+    return {
+      kind: "metadata_language_gate",
+      stopRoute: true,
+      canRepairPlaylist: false,
+      errorHints,
+    };
+  }
+  if (/truncated link|broken link|https:\/\/flashcardsluna\.com\/[a-z-]+\/courses\/kitc\.\.\./iu.test(text)) {
+    return {
+      kind: "metadata_url_gate",
+      stopRoute: true,
+      canRepairPlaylist: false,
+      errorHints,
+    };
+  }
+  if (/channel.*mismatch|expected.*channelId|OAuth.*channel/iu.test(text)) {
+    return {
+      kind: "oauth_channel_mismatch",
+      stopRoute: true,
+      canRepairPlaylist: false,
+      errorHints,
     };
   }
   return {
     kind: "unknown_failure",
     stopRoute: false,
     canRepairPlaylist: false,
+    errorHints,
   };
 }
 
@@ -388,15 +497,27 @@ async function runRepairTargets(job, options, result, state) {
   const repairs = [];
   for (const target of job.targets) {
     const fields = repairFieldsForTarget(job, target, options);
-    const repairRun = await dispatchWorkflow(options.repairWorkflow, fields, options.ref, state);
-    const watched = options.watch ? await watchRun(repairRun.databaseId) : { ok: null };
-    repairs.push({
-      target,
-      runId: repairRun.databaseId,
-      url: repairRun.url,
-      ok: watched.ok,
-      fields,
-    });
+    try {
+      const repairRun = await dispatchWorkflow(options.repairWorkflow, fields, options.ref, state);
+      const watched = options.watch ? await watchRun(repairRun.databaseId) : { ok: null };
+      const finalSummary = options.watch ? await getFinalRunSummary(repairRun.databaseId) : repairRun;
+      repairs.push({
+        target,
+        runId: repairRun.databaseId,
+        url: repairRun.url,
+        ok: watched.ok || finalSummary.conclusion === "success",
+        actualStatus: finalSummary.status || repairRun.status || "",
+        actualConclusion: finalSummary.conclusion || repairRun.conclusion || "",
+        fields,
+      });
+    } catch (error) {
+      repairs.push({
+        target,
+        status: "repair_dispatch_error",
+        error: String(error?.message || error),
+        fields,
+      });
+    }
   }
   result.playlistRepair = {
     dispatched: true,
@@ -427,8 +548,17 @@ async function runJob(job, options, state) {
     if (options.watch) {
       const watched = await watchRun(run.databaseId);
       result.watchOk = watched.ok;
-      if (watched.ok) {
-        result.status = "success";
+      if (!watched.ok) result.watchError = watched.error;
+      const finalSummary = await getFinalRunSummary(run.databaseId);
+      const conclusion = finalSummary.conclusion || (watched.ok ? "success" : "");
+      result.actualStatus = finalSummary.status || "";
+      result.actualConclusion = conclusion;
+      if (conclusion === "success") {
+        const log = await getRunLog(run.databaseId);
+        const success = classifySuccessfulRun(log);
+        result.status = success.status;
+        if (success.noUploadReason) result.noUploadReason = success.noUploadReason;
+        if (!watched.ok) result.recoveredFromWatchError = true;
       } else {
         const log = await getRunLog(run.databaseId);
         const failure = classifyFailure(log);
@@ -553,8 +683,11 @@ async function main() {
     const execution = await runPool(report.jobs, options);
     report.execution = execution;
     report.summary.successCount = execution.results.filter((row) => row.status === "success").length;
+    report.summary.skippedNoEligibleCount = execution.results.filter((row) => row.status === "skipped_no_eligible").length;
     report.summary.failedCount = execution.results.filter((row) => row.status === "failed" || row.status === "dispatch_error").length;
     report.summary.skippedRouteStoppedCount = execution.results.filter((row) => row.status === "skipped_route_stopped").length;
+    report.summary.recoveredWatchErrorCount = execution.results.filter((row) => row.recoveredFromWatchError).length;
+    report.summary.playlistRepairDispatchedCount = execution.results.filter((row) => row.playlistRepair?.dispatched).length;
   } else if (options.apply) {
     report.execution = { results: [], stoppedRoutes: [] };
   }
