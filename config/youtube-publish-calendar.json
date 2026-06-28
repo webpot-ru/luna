@@ -70825,6 +70825,50 @@
       "youtubeVideoId": "GltDp7tfGXk",
       "youtubePlaylistId": "PLGqmyHKTOUmA",
       "playlistItemId": "UExHcW15SEtUT1VtQS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ID",
+      "targetLang": "LT",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "publishAt": "2026-06-30T10:30:00.000Z",
+      "timeZone": "Asia/Jakarta",
+      "localDate": "2026-06-30",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 1,
+      "slotOrdinal": 9,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_lt_id/youtube_metadata.json",
+      "title": "Belajar Bahasa Lituania: Alat Dapur Dasar | 50 Kosakata A1",
+      "playlist_key": "ID__LT__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-01T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-03T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-07T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-30T10:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28330425296",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28330425296",
+      "createdAt": "2026-06-28T17:36:42.258Z",
+      "updatedAt": "2026-06-28T17:36:42.258Z",
+      "youtubeVideoId": "Dj5dVFXHoNQ"
     }
   ]
 }
