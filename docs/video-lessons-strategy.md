@@ -359,6 +359,7 @@ Playlist strategy must optimize for viewer clarity, channel growth and automatio
 - isolated course tables outside ordinary deck sets: `oxford_vocabulary_*` (1,197 source rows / 5 releases in current local DB), `hsk_classic_*` (5,000 rows / 6 releases), `hsk3_*` (6,800 rows / 7 releases), and `spanish_a1_*` (1,800 rows / 6 releases);
 - active target/support language universe: 54 active language variants;
 - localized course/deck titles, descriptions, modules and categories live in `content_set_localizations`, so playlist titles, thumbnail copy and descriptions must use localized metadata when available, not internal `content_sets.set_name`.
+- YouTube video metadata must treat Course Metadata as canonical for the deck/topic name. `scripts/lib/video-generator.mjs` resolves metadata in this order: current Docker/Postgres `content_set_localizations` when available, then the GitHub offline deck JSON `courseMetadata`, then legacy offline `titles`, then English Course Metadata and only finally internal `content_sets` fallback. Generated `youtube_metadata.json` includes `deckMetadataSource` so a run artifact shows whether the title came from DB/offline Course Metadata or from a fallback. After editing Course Metadata in Docker/Postgres or Google Sheets, refresh the public offline deck JSON with `scripts/export-and-upload-deck.mjs` before the next GitHub publishing run; GitHub does not start Docker/Postgres and therefore cannot see local DB edits unless the Drive JSON was refreshed.
 
 Therefore do **not** create a playlist per `(supportLang, targetLang, setId)` or per single small ordinary deck. That would create thousands of thin playlists, make channel pages unreadable, and waste YouTube API quota. Official YouTube constraints also push toward a compact playlist registry: `playlists.insert` and `playlistItems.insert` each cost 50 quota units, public playlist creation has daily channel limits, `playlists.insert` can fail with `maxPlaylistExceeded`, and a channel can feature at most 10 homepage shelves through `channelSections`.
 
@@ -457,11 +458,9 @@ Implementation sequence:
 - `scripts/lib/youtube-playlists.mjs` computes stable playlist assignments without importing the heavy video renderer. New `youtube_metadata.json` files generated through `scripts/generate-youtube-metadata.mjs` now include `playlist_key`, `playlistKey` and a `playlist` object.
 - `npm run check:youtube-playlist-naming` is the cheap regression test for playlist naming and regional-variant routing. It blocks accidental collapse of `ES`/`ES-419`, `PT`/`PT-BR` and `EN`/`EN-GB` target playlists, verifies that their titles stay distinct, verifies that shared support variants resolve to one channel (`ES/ES-419 -> es`, `PT/PT-BR -> pt`, `EN/EN-GB -> en`), and checks the playlist registry for duplicate keys with conflicting meanings.
 - `npm run check:youtube-metadata` warns on historical metadata without `playlist_key`, but blocks a present mismatched key.
-- `npm run check:youtube-metadata-language -- outputs/video-generator --output=outputs/video-generator/youtube-metadata-language-report-github.json` is an apply-workflow gate before schedule/calendar writes. Non-English support channels must not upload or reserve calendar slots with English fallback titles/descriptions. If this gate fails, the run may keep build artifacts for inspection, but it must not write active calendar reservations or YouTube upload rows.
 - `npm run check:youtube-seo-metadata -- outputs/video-generator --output=outputs/video-generator/youtube-seo-metadata-report.json` is the SEO/readiness gate for fresh build and publish workflows. It blocks structural metadata risks and writes a non-secret report with quality warnings.
 - `npm run generate:youtube-thumbnails -- outputs/video-generator --confirm-spend --concurrency=2` and `npm run check:youtube-thumbnails -- outputs/video-generator --output=outputs/video-generator/youtube-thumbnail-report.json` are now the custom thumbnail path before publish. Thumbnail generation spends VectorEngine image credits and must stay behind an explicit confirmation gate. VectorEngine image calls support controlled parallelism; default thumbnail concurrency is 2 unless overridden by `thumbnail_concurrency` in GitHub or `VECTORENGINE_IMAGE_CONCURRENCY`.
 - `npm run plan:youtube-generation-targets -- --set <set_id> --support RU[,EN] [--targets ES,IT] --output=<file>` is the cheap pre-generation guard. It checks the durable publication registry before expensive video rendering, VectorEngine metadata or VectorEngine thumbnail generation. Active `setId + supportLang + targetLang` rows in `config/youtube-published-videos.json` are excluded unless `--allow-republish` is passed deliberately. This is why re-running `langs=ES,IT` for the first RU deck now produces `eligibleTargetCount=0` and should skip generation instead of uploading or regenerating duplicates.
-- `npm run audit:youtube-live-publications -- --set <set_id> --support DA --output=<file> --json` is the read-only live YouTube duplicate guard for apply workflows. It restores the route OAuth bundle, verifies the token's `channels.list(mine=true)` channel id, reads the uploads playlist, and infers `setId + supportLang + targetLang` from full FlashcardsLuna course URLs in live video descriptions. `.github/workflows/youtube-video-publish.yml` runs this audit before generation in `mode=apply`; when the report exists, `plan:youtube-generation-targets` receives it through `--additional-publication-registry` so live uploads that were not persisted to `config/youtube-published-videos.json` still block duplicate generation/upload. If the audit reports live duplicates or videos missing from the durable registry, reconcile those rows before launching broad new batches.
 - GitHub batch fan-out uses deterministic sharding, not ad hoc language splits. `.github/workflows/youtube-video-publish.yml` accepts `worker_count` (`1..20`) and `worker_index` (`0..worker_count-1`); `scripts/build-all-deck-videos.mjs` and `scripts/generate-youtube-metadata.mjs` sort the target-language list and assign targets by `index % worker_count`. Each worker writes shard manifests, and `npm run check:youtube-run-isolation -- outputs/video-generator --shard-count=<n> --shard-index=<i>` blocks duplicate `setId + supportLang + targetLang` rows or metadata that belongs to another shard before scheduling, thumbnail generation or YouTube upload. For the next safe capacity test, run five GitHub workers with `worker_count=5`, `worker_index=0..4`, `concurrency=2`, `metadata_concurrency=4`, `thumbnail_concurrency=2`, and `publish_mode=scheduled`; this gives 10 simultaneous video builds, not 10 public releases at once.
 - `npm run plan:youtube-publish -- <metadata-file-or-dir> [--write-registry] [--allow-playlist-create]` produces a dry-run report under `outputs/youtube-publish-plan-*.json`, estimates quota, resolves channel/playlist assignment and can add missing planned playlist entries locally.
 - `config/youtube-publish-schedule-policy.json` is the per-support-language publication policy, and `config/youtube-publish-calendar.json` is the durable global reservation calendar across all 51 configured public support-language channels. The policy assigns each channel an IANA timezone and six default local slots per channel (`08:30`, `11:30`, `14:30`, `17:30`, `20:30`, `23:30`). The calendar stores non-secret `setId + supportLang + targetLang + channelKey + publishAt` reservations so later runs continue from already planned slots instead of starting again at the first slot. Accepted starting cadence is therefore **6 public releases per channel per local day**, not immediate public release after upload. Therefore 50 videos for one ordinary support-language channel take about 9 local days, and the shared `en`/`es`/`pt` channels take about 18 local days for one full 54-variant deck because they receive two support variants. Since all 51 channels are already configured, the correct first production shape is one deck across all 51 channels, not one channel at a time. The safety limit is deck-wave depth and per-channel cadence: do not start many decks at once or bypass schedule/readback; run one-deck/all-channels waves, then watch 24h/72h/7d metrics plus policy health before adding the next deck wave or raising cadence. If the first waves stay healthy, the next review point may consider 8-12 public releases/day/channel, but that is not the starting plan.
@@ -472,7 +471,7 @@ Implementation sequence:
 - `npm run plan:youtube-analytics-readback` reads `config/youtube-published-videos.json` and produces a checkpoint plan for YouTube Analytics/Data API readback. Default checkpoints are 24h, 72h, 7d and 30d after `publishAt`/upload time. This is how publication-time statistics are tracked without treating fresh-zero analytics as final data.
 - `npm run read:youtube-video-statistics -- --fetch --confirm-youtube-read --due-only` is the current read-only statistics collector. It calls YouTube Data API `videos.list` for due checkpoints, verifies the video channel id, and writes cumulative view/like/comment snapshots to `outputs/youtube-video-statistics-*.json` plus `outputs/youtube-video-statistics-ledger.jsonl`. This is enough to compare publication-time performance over 24h/72h/7d/30d. Watch-time and retention metrics require a later YouTube Analytics API `reports.query` scope/check if needed.
 - `npm run apply:youtube-publish -- --metadata=<youtube_metadata.json> [--video=<mp4>] [--thumbnail=<image>] [--create-playlist]` is dry-run by default. Live YouTube writes require `--apply --confirm-youtube-write`. Production default is `--privacy=public`, and public writes are refused unless `--confirm-public` is also passed. Scheduled uploads require `privacy=private` plus a future `publishAt`.
-- The uploader uses the official YouTube Data API only: pre-upload `channels.list(mine=true)` token/channel verification, resumable `videos.insert`, optional `thumbnails.set`, optional `playlists.insert`, `playlistItems.insert`, post-upload `videos.list` readback with `snippet.channelId` equality check, and JSONL append to `outputs/youtube-publish-ledger.jsonl`. Missing playlists are created as `public` for immediate public uploads and for scheduled uploads that will become public at `publishAt`; otherwise they are created as `unlisted`. For scheduled uploads, recoverable playlist write quota/rate failures on `playlists.insert` or `playlistItems.insert` must not force a duplicate-prone video retry: the uploader can continue with the video upload, persist `needsPlaylistCreate=true` and/or `needsPlaylistInsert=true`, and leave playlist repair to `.github/workflows/youtube-playlist-insert-repair.yml`, which can create the missing playlist and insert the existing video later without re-rendering or reuploading. Playlist repair must also handle stale local playlist IDs and short YouTube propagation windows after a new playlist is created: `playlistNotFound` on `playlists.get` means the local ID is stale, while `playlistNotFound` on immediate `playlistItems` reads can be retried before insert/readback. Because YouTube has no separate API field for hashtags, the uploader appends the first 3 normalized `metadata.hashtags` to the upload description when they are not already present.
+- The uploader uses the official YouTube Data API only: pre-upload `channels.list(mine=true)` token/channel verification, resumable `videos.insert`, optional `thumbnails.set`, optional `playlists.insert`, `playlistItems.insert`, post-upload `videos.list` readback with `snippet.channelId` equality check, and JSONL append to `outputs/youtube-publish-ledger.jsonl`. Missing playlists are created as `public` for immediate public uploads and for scheduled uploads that will become public at `publishAt`; otherwise they are created as `unlisted`. Because YouTube has no separate API field for hashtags, the uploader appends the first 3 normalized `metadata.hashtags` to the upload description when they are not already present.
 - `config/youtube-published-videos.json` is the committed durable publication/readback registry. GitHub artifacts and `outputs/youtube-publish-ledger.jsonl` are raw per-run evidence, but not long-term source of truth because `outputs/` is gitignored and workflow artifacts expire.
 - `npm run update:youtube-visibility -- --video-id=<id> --support=<RU> [--playlist-id=<id>] --privacy=public --apply --confirm-youtube-write --confirm-public` updates an already uploaded video and optional playlist through the official YouTube Data API without re-rendering or uploading a duplicate.
 - Smoke proof on 2026-06-20 used the historical EN->ES first-deck test metadata: `npm run check:youtube-metadata` passed with only the expected historical missing-`playlist_key` warning; `npm run plan:youtube-publish -- ... --write-registry --allow-playlist-create` added planned playlist `EN__ES__ordinary-vocabulary__a1-everyday`; uploader dry-run resolved channel `en`, video path and estimated 1700 quota units without live YouTube writes.
@@ -519,7 +518,6 @@ Calendar contract:
 - Shared viewer channels use explicit support-variant priority from `config/youtube-publish-schedule-policy.json`: `en` publishes `EN` before `EN-GB`, `es` publishes `ES-419` before `ES`, and `pt` publishes `PT-BR` before `PT`. This makes the first shared-channel wave prioritize US/base English, Latin American Spanish and Brazilian Portuguese while still preserving regional variants in playlists, metadata and course links.
 - `publishAt` is the UTC YouTube API time; `localDate`, `localTime`, `timeZone`, `localSlotIndex` and `localDayOffset` are stored for human review.
 - Calendar rows are not upload proof. Upload/readback proof remains `config/youtube-published-videos.json` plus YouTube API readback.
-- Active calendar rows must have upload proof or backing publication proof. Failed/cancelled runs that generated metadata but never produced a `youtubeVideoId` must be marked inactive, for example `cancelled_no_upload`, rather than left as active future reservations.
 
 `scripts/plan-youtube-publish-schedule.mjs` must consider existing active calendar reservations, future scheduled publications in `config/youtube-published-videos.json`, and slots assigned earlier in the same run. If a reservation already exists for the same `setId/supportLang/targetLang/channelKey`, the planner reuses that slot and rewrites metadata to match it rather than silently moving the video.
 
@@ -529,9 +527,7 @@ Operational rules:
 
 - After any scheduled plan/apply run, review the artifact-updated `config/youtube-publish-calendar.json` and commit it before launching a later separate wave that relies on those slots.
 - Do not run separate concurrent workflows for the same physical channel with different uncommitted calendars unless they share the same target-plan ordering and non-overlapping target sets.
-- Before broad apply reruns, especially after a failed persist job or manual artifact merge, run the live-publication audit or rely on the workflow's automatic apply-mode audit. The durable JSON registry remains the source of truth, but live YouTube readback is the stopgap that prevents a stale registry from causing duplicate uploads.
 - If a planned upload is intentionally cancelled, mark the calendar reservation inactive (`cancelled`, `deleted`, `failed` or `superseded`) instead of deleting rows; the planner ignores inactive rows.
-- `merge:youtube-publish-state` must not create new active calendar rows from incoming artifacts unless the row or a matching durable publication has a `youtubeVideoId`. This protects future waves from failed/cancelled GitHub jobs that wrote schedule artifacts before upload.
 - Do not put token paths, OAuth files, secrets, raw metadata prompts or private notes into the calendar.
 
 ### 1.4. Background music and Content ID safety
@@ -691,7 +687,7 @@ scripts/lib/video-outro-icons.mjs
 
 Outro feature grid keeps all 8 badges, but the visual hierarchy should stay conversion-focused: subtle glass feature cards, icon wells, a lighter URL pill, and a clean white QR card. Do not turn the feature grid back into heavy button-like cards or emoji badges.
 
-Название колоды и subtitle на intro берутся не из технического `content_sets.set_name`, а из localized Course Metadata:
+Название колоды и subtitle на intro берутся не из технического `content_sets.set_name`, а из localized Course Metadata. Это же правило обязательно для Polyglot-видео: cover/title/subtitle должны быть на языке носителя (`supportLang`) и должны использовать `Course Metadata` из Docker/Postgres/export layer, а не hardcoded English deck title.
 
 ```text
 content_set_localizations.title
@@ -738,6 +734,7 @@ qrcode npm package
 Правило fail-closed:
 
 - если `set_id` есть в `publishedCourseSlugBySetId` и известен `targetLang`, QR ведет сразу на localized study page, например `https://flashcardsluna.com/ru/courses/kitchenware-basic/study/standard?langs=es`;
+- для Polyglot-видео с несколькими target languages используется тот же study route, но `langs` содержит весь список target-языков через запятую и URL-encoding, например `https://flashcardsluna.com/ru/courses/kitchenware-basic/study/standard?langs=en%2Ces%2Cfr%2Cde`;
 - в таком URL первый path segment (`/ru/`) является языком интерфейса / носителя зрителя (`supportLang`), а `langs=es` является изучаемым языком видео (`targetLang`);
 - если `targetLang` неизвестен, но `set_id` опубликован, URL остается localized course page, например `https://flashcardsluna.com/ru/courses/kitchenware-basic`;
 - если `set_id` еще не опубликован на сайте или slug не проверен, QR ведет на localized courses page, например `https://flashcardsluna.com/ru/courses`;
@@ -992,3 +989,110 @@ Rules for this rerun:
 | `--transition` | `flip` | Анимационный переход (`flip` для 3D-переворота, `static` без анимации). |
 | `--quiz-limit` | `3` | Количество карточек в проверочном квизе в конце видео. |
 | `--targets` | *нет* | Список целевых языков через запятую. Если опущен — берутся все активные языки из БД. |
+
+### Polyglot Mode (Multilingual Decks)
+
+Режим **Polyglot** предназначен для YouTube-видеоуроков, в которых зритель учит несколько иностранных языков одновременно на базе одного языка поддержки. Формат должен выглядеть как FlashcardsLuna video lesson, а не как интерактивный веб-экран: без кнопок `Знаю` / `Не знаю`, без quiz/timer UI and without in-video instructions such as "переведите опорное слово".
+
+#### Схема воспроизведения и recall логика
+Для каждого слова из колоды воспроизводится следующая цепочка:
+1. **Опорная карточка:** сверху или рядом остается слово на языке поддержки (например, `RU: кухонные весы`). Она нужна как recall anchor и не должна исчезать между целевыми языками.
+2. **Карточка целевого языка:** сначала показывается language prompt с флагом и названием языка на языке поддержки или в native label (`English`, `Español`, `Français`). Это короткая пауза, чтобы зритель сам вспомнил перевод.
+3. **Flip / reveal:** та же карточка переворачивается или раскрывается и показывает ответ на целевом языке. Транскрипция показывается только по обычной video/export policy: если для языка она learner-facing and non-redundant, а не как обязательный второй ряд для всех языков.
+4. **Следующий целевой язык:** для того же опорного слова повторяется prompt -> reveal. После всех языков видео переходит к следующему слову из той же колоды.
+
+Пример цепочки для одной карточки:
+`RU support card -> EN prompt -> EN answer -> ES prompt -> ES answer -> DE prompt -> DE answer -> FR prompt -> FR answer`.
+
+#### Стартовые Polyglot-связки
+Polyglot-видео не должны строиться как случайные наборы из 54 языковых вариантов. Рабочий план ниже является стартовым source of truth: новые Polyglot-ролики выбирают один bundle из таблицы, а не произвольную ручную комбинацию. По умолчанию используем 3-4 target languages на одно видео; 5 языков допустимы только после отдельной визуальной проверки темпа и читаемости.
+
+| Bundle key | Назначение | Target languages |
+| --- | --- | --- |
+| `global_europe_core` | Самый массовый стартовый набор для широкой аудитории | `EN, ES, FR, DE` |
+| `romance_core` | Романские языки для сравнения похожих слов и форм | `ES, FR, IT, PT` |
+| `germanic_core` | Коммерчески понятный германский набор | `EN, DE, NL, SV` |
+| `nordic_core` | Северные языки отдельным видео, без смешивания с Балтикой | `SV, NO, DA, FI` |
+| `baltic_core` | Балтийские языки отдельным 3-язычным видео | `LT, LV, ET` |
+| `east_asia_core` | Восточная Азия | `ZH, JA, KO` |
+| `southeast_asia_core` | Юго-Восточная Азия / travel-useful set | `TH, VI, ID, MS` |
+| `slavic_core` | Славянские языки, первый компактный набор | `RU, PL, CS, SK` |
+| `balkan_slavic_core` | Южнославянский / Балканский набор | `BG, HR, SR, SL` |
+| `south_asia_indo_aryan_core` | Южная Азия, индоарийские/соседние языки | `HI, BN, NE, SI` |
+| `south_asia_dravidian_core` | Южная Индия, дравидийские языки | `TA, TE, KN, ML` |
+| `turkic_core` | Тюркские языки | `TR, AZ, UZ, KK` |
+| `caucasus_bridge_core` | Кавказ + соседний bridge-language контекст | `KA, HY, AZ, TR` |
+
+Regional variants (`EN-GB`, `ES-419`, `PT-BR`) сохраняются как отдельные target variants in playlists, metadata and `langs=...`, but they are not default members of the broad starter bundles to avoid teaching near-duplicate regional variants inside the same Polyglot lesson. Use them for region-specific or comparison videos, for example `EN + EN-GB`, `ES + ES-419`, `PT + PT-BR`, or swap `ES -> ES-419` / `PT -> PT-BR` when the support channel's audience is better served by the regional target.
+
+If `supportLang` is already present in a bundle, remove it from `targets` and fill the gap with the nearest fallback from the same family. Examples: for `support=DE` and `global_europe_core`, use `EN, ES, FR, IT`; for `support=RU` and `slavic_core`, use `PL, CS, SK, BG`; for `support=EN` and `germanic_core`, use `DE, NL, SV, NO`.
+
+Recommended rollout order:
+
+1. **Wave 1 / flagship:** `global_europe_core`, `romance_core`, `east_asia_core`, `slavic_core`, `southeast_asia_core`.
+2. **Wave 2 / family expansion:** `germanic_core`, `nordic_core`, `balkan_slavic_core`, `south_asia_indo_aryan_core`, `south_asia_dravidian_core`.
+3. **Wave 3 / niche but coherent:** `turkic_core`, `caucasus_bridge_core`, `baltic_core`.
+
+Do not generate every bundle for every support language at once. Start with one visually approved no-audio pilot on `global_europe_core`, then produce the same deck for the first priority support channels before expanding to Wave 2/3.
+
+#### Production scope: decks, support languages and bundles
+Polyglot is an additional YouTube campaign layer, not a replacement for the existing ordinary single-target video pipeline.
+
+Do **not** start by generating `all decks x all support languages x all Polyglot bundles`. With 180 ordinary decks, 51 public support channels and 13 starter bundles, that would create an uncontrolled backlog before performance is proven. The accepted rollout shape is:
+
+1. **Per selected deck, prove one bundle first.** Start with `global_europe_core` on one visually approved support language and no-audio preview, then render with audio only after visual/timing approval.
+2. **Per selected deck, expand by support channel.** After the pilot is approved, create the same Wave 1 flagship bundle for the first priority support channels. Treat this as one Polyglot video per support channel, not all bundles per support channel.
+3. **Per selected deck, expand by bundle wave.** Add the other Wave 1 bundles only after the first bundle is stable. Wave 2/3 bundles are campaign expansions, not the default first pass.
+4. **Across decks, follow ordinary deck priority.** Do not jump to all 180 decks. Use the same deck priority as the normal video pipeline: first current/fresh YouTube deck batches, then next ordinary deck waves.
+5. **Long-term target.** Once retention/click/readback is healthy, each priority deck can have Polyglot coverage for every public support channel, but the first production unit remains `deck + support channel + one selected bundle`.
+
+#### Intro/outro site CTA
+Every Polyglot video must advertise that the viewer can change the language combination on the site. This is part of the format, not optional copy.
+
+Intro CTA requirements:
+
+- show a short localized line in the support language near the beginning, after the title/first visual beat;
+- communicate the feature, not instructions-heavy UI text;
+- keep it short enough not to delay the first card.
+
+Default English source copy for localization:
+
+```text
+Learn several languages at once. On FlashcardsLuna, you can choose your own language mix.
+```
+
+Outro CTA requirements:
+
+- show `flashcardsluna.com` and, when QR is available, a QR/link to the same deck/study route;
+- say that the viewer can add/remove languages and continue the same deck on the site;
+- localize the line to the support language;
+- do not imply that the YouTube video contains every possible combination.
+
+Default English source copy for localization:
+
+```text
+Want another language mix? Open this deck on FlashcardsLuna and choose the languages you want to study together.
+```
+
+#### Запуск генерации
+Для генерации видео в режиме Polyglot разработан скрипт [build-polyglot-video.mjs](file:///Users/lali/Documents/LUNA2/scripts/build-polyglot-video.mjs), использующий специализированный HTML-шаблон [polyglot-slide-template.mjs](file:///Users/lali/Documents/LUNA2/scripts/lib/polyglot-slide-template.mjs).
+
+Пример команды запуска:
+```bash
+node scripts/build-polyglot-video.mjs --set home_kitchen_cookware_pilot_01 --support RU --targets EN,ES,DE,FR
+```
+
+#### Дополнительные флаги CLI
+Скрипт `build-polyglot-video.mjs` поддерживает следующие флаги:
+* `--set <set_id>` — идентификатор колоды (по умолчанию `home_kitchen_cookware_pilot_01`).
+* `--support <lang_code>` — язык поддержки (по умолчанию `RU`).
+* `--targets <langs>` — изучаемые языки через запятую (например, `EN,ES,DE,FR`).
+* `--limit <number>` — ограничение количества обрабатываемых карточек только для preview/review-сборок; production default is full deck (`--limit 0`).
+* `--no-audio` — режим быстрой сборки без обращения к генератору TTS (все озвучки заменяются файлами тишины, полезно для визуального тестирования верстки).
+
+#### Длина видео и полный состав колоды
+Для обычных тематических колод на ~30-40 слов Polyglot-видео должно включать все слова из колоды, как и single-target deck video pipeline. Для `global_europe_core` на 4 target languages это ожидаемо дает ролик порядка 12-18 минут с озвучкой и паузами, что допустимо для YouTube lesson format.
+
+Для больших курсовых выпусков на 150/300 слов не делать одно Polyglot-видео на весь файл: разбивать на части по 25-40 слов или использовать уже существующую part/lesson структуру. Иначе 4-язычный Polyglot превращается в 60+ минут пассивного видео, хуже удерживает внимание и сложнее проверяется перед публикацией.
+
+Сгенерированное видео и кэш-файлы сохраняются в директории `outputs/video-generator/home_kitchen_cookware_pilot_01_polyglot_ru/`.

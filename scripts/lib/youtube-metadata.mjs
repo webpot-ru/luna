@@ -21,12 +21,10 @@ export const YOUTUBE_METADATA_SCHEMA = {
   properties: {
     title: { type: "string" },
     description: { type: "string" },
-    playlistTitle: { type: "string" },
-    playlistDescription: { type: "string" },
     tags: { type: "array", items: { type: "string" } },
     hashtags: { type: "array", items: { type: "string" } }
   },
-  required: ["title", "description", "playlistTitle", "playlistDescription", "tags", "hashtags"]
+  required: ["title", "description", "tags", "hashtags"]
 };
 
 function sqlString(value) {
@@ -44,23 +42,6 @@ function stripSentenceTerminator(value) {
 
 function cleanText(value) {
   return String(value || "").replace(/\s+/gu, " ").trim();
-}
-
-function supportUsesEnglishTemplates(supportLang) {
-  const code = normalizeLanguageCode(supportLang);
-  return code === "EN" || code === "EN-GB";
-}
-
-function stripEnglishPlaylistTemplateTail(value, supportLang) {
-  const text = cleanText(value);
-  if (!text || supportUsesEnglishTemplates(supportLang)) return text;
-  const parts = text.split("|").map((part) => cleanText(part)).filter(Boolean);
-  if (parts.length < 2) return text;
-  const filtered = parts.filter((part, index) => {
-    if (index === 0) return true;
-    return !/\b(?:A1\s+)?[A-Z][A-Za-z -]*\s+Vocabulary\b/u.test(part);
-  });
-  return filtered.length ? filtered.join(" | ") : text;
 }
 
 function uniqueStrings(values) {
@@ -82,48 +63,6 @@ function truncateAtWord(value, maxLength) {
   const cut = text.slice(0, maxLength - 1);
   const lastSpace = cut.lastIndexOf(" ");
   return `${(lastSpace > 40 ? cut.slice(0, lastSpace) : cut).trim()}…`;
-}
-
-function truncateAtWordUtf8(value, maxChars, maxBytes) {
-  const text = truncateAtWord(value, maxChars);
-  if (utf8ByteLength(text) <= maxBytes) return text;
-  let result = "";
-  for (const char of text) {
-    const next = `${result}${char}`;
-    if (utf8ByteLength(next) > maxBytes - 3) break;
-    result = next;
-  }
-  const lastSpace = result.lastIndexOf(" ");
-  const trimmed = (lastSpace > 20 ? result.slice(0, lastSpace) : result).trim();
-  return `${trimmed || result.trim()}…`;
-}
-
-function visibleLength(value) {
-  return Array.from(String(value || "")).length;
-}
-
-function buildSeoTitleFloor(metadata) {
-  const targetLanguageName = cleanText(metadata.targetLanguageName) || "Language";
-  const deckTitle = cleanText(metadata.deckTitle) || "Vocabulary";
-  const level = cleanText(metadata.level) || "A1";
-  const wordCount = Number(metadata.wordCount) || 50;
-  return `${targetLanguageName} ${level}: ${deckTitle} | ${wordCount} words | ${BRAND_NAME}`;
-}
-
-function ensureSeoTitleFloor(value, metadata) {
-  let title = cleanText(value);
-  if (!title) title = buildSeoTitleFloor(metadata);
-  if (visibleLength(title) < 45) {
-    const wordCount = Number(metadata.wordCount) || 50;
-    const compactBooster = `${wordCount} ${cleanText(metadata.level) || "A1"} words + pronunciation | ${BRAND_NAME}`;
-    if (!title.includes(BRAND_NAME)) title = `${title} | ${compactBooster}`;
-    else if (!title.includes(String(wordCount))) title = `${title} | ${wordCount} ${cleanText(metadata.level) || "A1"}`;
-  }
-  let bounded = truncateAtWordUtf8(title, 100, 100);
-  if (visibleLength(bounded) >= 25) return bounded;
-  bounded = truncateAtWordUtf8(buildSeoTitleFloor(metadata), 100, 100);
-  if (visibleLength(bounded) >= 25) return bounded;
-  return truncateAtWordUtf8(`${cleanText(metadata.level) || "A1"} vocabulary | ${Number(metadata.wordCount) || 50} words | ${BRAND_NAME}`, 100, 100);
 }
 
 function boundedAiError(error) {
@@ -204,46 +143,6 @@ function getSupportCopy(supportLang) {
       hashtags: [BRAND_HASHTAG, "#AprenderIdiomas", "#Vocabulario"]
     };
   }
-  if (code === "KK") {
-    return {
-      title: ({ targetLanguageName, deckTitle, wordCount }) =>
-        `${targetLanguageName} A1: ${deckTitle} | ${wordCount} сөз және айтылым`,
-      description: ({ targetLanguageName, deckTitle, wordCount, courseUrl }) =>
-        `${BRAND_NAME} қысқа сабағында ${targetLanguageName} тіліндегі «${deckTitle}» тақырыбы бойынша ${wordCount} сөзді үйреніңіз. Әр сөзді тыңдап, мағынасын көріп, үзіліс кезінде дауыстап қайталаңыз. Видео соңындағы шағын қайталау есте сақтауды тексеруге көмектеседі.\n\nБұл A1 деңгейіндегі сөздік жаттығуы күнделікті қысқа практикаға арналған: алдымен видеоны толық көріңіз, содан кейін сайттағы карточкаларды ашып, сөздерді өз қарқыныңызбен қайталаңыз. Формат жазылуы, айтылуы және мағынасын бірге бекітуге көмектеседі.\n\nОсы колоданы және ${BRAND_NAME} сайтындағы басқа тегін жаттығуларды мына сілтеме арқылы ашыңыз:\n${courseUrl}\n\nТіл үйренуге арналған қысқа сөздік видеолар, айтылым жаттығулары және карточкалар үшін каналға жазылыңыз.`,
-      tags: ({ targetLanguageName, deckTitle }) => [
-        `${targetLanguageName} тілі`,
-        `${targetLanguageName} жаңадан бастаушыларға`,
-        `${targetLanguageName} сөздері`,
-        `${targetLanguageName} айтылымы`,
-        `${deckTitle} ${targetLanguageName}`,
-        "ас үй сөздігі",
-        "сөздік қор",
-        "тіл үйрену",
-        "карточкалар",
-        BRAND_NAME
-      ],
-      hashtags: [BRAND_HASHTAG, "#ТілҮйрену", "#СөздікҚор"]
-    };
-  }
-  if (code === "BG") {
-    return {
-      title: ({ targetLanguageName, deckTitle, wordCount }) =>
-        `${targetLanguageName} A1: ${deckTitle} | ${wordCount} думи с произношение`,
-      description: ({ targetLanguageName, deckTitle, wordCount, courseUrl }) =>
-        `Научете ${wordCount} думи на ${targetLanguageName} по темата „${deckTitle}“ с кратък видеоурок на ${BRAND_NAME} за начинаещи. Чуйте всяка дума, вижте значението, повторете по време на паузите и проверете паметта си с кратък мини тест в края.\n\nТози формат за речник A1 е удобен за ежедневна практика: първо изгледайте урока, после отворете картите на сайта и преговаряйте със свое темпо. Така свързвате правопис, произношение и значение без дълго граматично обяснение.\n\nУпражнявайте тази колода и други безплатни курсове на ${BRAND_NAME} тук:\n${courseUrl}\n\nАбонирайте се за още кратки видеоуроци с произношение, паузи за повторение и лесни упражнения за преговор.`,
-      tags: ({ targetLanguageName, deckTitle }) => [
-        `${targetLanguageName} за начинаещи`,
-        `учене на ${targetLanguageName}`,
-        `речник ${targetLanguageName}`,
-        `${deckTitle} ${targetLanguageName}`,
-        "думи с произношение",
-        "езикови карти",
-        "учене на езици",
-        BRAND_NAME
-      ],
-      hashtags: [BRAND_HASHTAG, "#УченеНаЕзици", "#Речник"]
-    };
-  }
   return {
     title: ({ targetLanguageName, deckTitle, wordCount }) =>
       `${targetLanguageName} A1: ${deckTitle} | ${wordCount} words with pronunciation`,
@@ -309,7 +208,6 @@ export function buildTemplateYouTubeMetadata(input) {
   const courseUrl = getPublicCourseUrl({ setId, supportLang, targetLang });
   const courseDisplayUrl = getPublicCourseDisplayUrl(courseUrl);
   const targetLanguageName = getLanguageNameInLang(targetLang, supportLang);
-  const supportLanguageName = getLanguageNameInLang(supportLang, supportLang);
   const wordCount = cards.length;
   const supportCopy = getSupportCopy(supportLang);
   const firstWords = uniqueStrings(cards.map((card) => card.target_display || card.target_word)).slice(0, 8);
@@ -317,6 +215,7 @@ export function buildTemplateYouTubeMetadata(input) {
   const baseContext = {
     targetLanguageName,
     deckTitle,
+    deckMetadataSource: deckMetadata?.metadataSource || "unknown",
     level,
     wordCount,
     courseUrl,
@@ -339,11 +238,11 @@ export function buildTemplateYouTubeMetadata(input) {
     supportLang,
     targetLanguageName,
     deckTitle,
+    deckMetadataSource: deckMetadata?.metadataSource || "unknown",
     level,
     wordCount,
     courseUrl,
     courseDisplayUrl,
-    supportLanguageName,
     title: supportCopy.title(baseContext),
     description: supportCopy.description(baseContext),
     tags,
@@ -355,27 +254,16 @@ export function buildTemplateYouTubeMetadata(input) {
 
 export function buildGeminiPrompt(baseMetadata, cards) {
   const cardWords = uniqueStrings(cards.map((card) => card.target_display || card.target_word)).slice(0, 40);
-  const supportLang = normalizeLanguageCode(baseMetadata.supportLang);
-  const supportLanguageName = cleanText(baseMetadata.supportLanguageName || getLanguageNameInLang(supportLang, supportLang));
-  const isEnglishSupport = supportLang === "EN" || supportLang === "EN-GB";
   return [
     `Create YouTube metadata for a ${BRAND_NAME} vocabulary lesson.`,
     "Return JSON only. Do not use Markdown. Do not add fields outside the schema.",
     "",
     "Audience and language rules:",
-    `- Audience/support language: ${supportLanguageName} (${supportLang}).`,
-    `- Write title, description, tags and hashtags primarily in ${supportLanguageName}.`,
-    isEnglishSupport
-      ? "- English output is allowed because this is an English support-language channel."
-      : "- Do not copy English fallback wording from the suggested title/description; use it only as a factual skeleton.",
-    isEnglishSupport
-      ? "- English SEO phrases are allowed if natural."
-      : "- Avoid English boilerplate such as \"A1 Vocabulary\", \"Words with Pronunciation\", \"Learn 50 essential...\", \"Subscribe for more...\".",
-    isEnglishSupport
-      ? "- Tags and hashtags may use normal English search phrases."
-      : `- Tags and hashtags must also be in ${supportLanguageName}. Do not add English search phrases such as "learn ...", "... vocabulary", "... for beginners", or "... in Hindi". Brand text (${BRAND_NAME}) is allowed.`,
+    `- Audience/support language code: ${baseMetadata.supportLang}`,
+    `- Write title, description, tags and hashtags for native speakers of that support language.`,
     `- Target language: ${baseMetadata.targetLanguageName} (${baseMetadata.targetLang})`,
     `- Deck title: ${baseMetadata.deckTitle}`,
+    `- Deck metadata source: ${baseMetadata.deckMetadataSource || "unknown"}`,
     `- Level: ${baseMetadata.level}`,
     `- Word count: ${baseMetadata.wordCount}`,
     `- Course URL: ${baseMetadata.courseUrl}`,
@@ -385,14 +273,13 @@ export function buildGeminiPrompt(baseMetadata, cards) {
     "- The learner repeats during pauses.",
     "- The end includes a short mini-test.",
     `- ${BRAND_NAME} provides practice decks on the website.`,
+    "- Preserve the exact deck title phrase when naming the topic. Do not replace it with a newly invented deck/category title.",
     "- Do not invent paid features, certificates, native teacher claims, exact duration, or guarantees.",
     "- Keep it search-friendly but not clickbait.",
     "",
     "Output constraints:",
-    `- title: 45-90 characters; if the native-language title would be short, add a compact suffix such as "${baseMetadata.wordCount} ${baseMetadata.level} words + pronunciation | ${BRAND_NAME}".`,
+    "- title: <= 90 characters.",
     "- description: 700-1400 characters, include the exact course URL once.",
-    "- playlistTitle: 25-90 characters, in the audience/support language, suitable for a reusable course playlist.",
-    `- playlistDescription: 120-500 characters, in the audience/support language, mention ${BRAND_NAME}, vocabulary practice and the target language.`,
     "- tags: 12-20 short search phrases, no hashtags inside tags.",
     "- hashtags: 3-5 strings beginning with #.",
     "- Keep total tags length under 450 characters.",
@@ -401,21 +288,18 @@ export function buildGeminiPrompt(baseMetadata, cards) {
     `Suggested base description: ${baseMetadata.description}`,
     `Vocabulary sample: ${cardWords.join(", ")}`,
     "",
-    'JSON schema: {"title":"string","description":"string","playlistTitle":"string","playlistDescription":"string","tags":["string"],"hashtags":["string"]}'
+    'JSON schema: {"title":"string","description":"string","tags":["string"],"hashtags":["string"]}'
   ].join("\n");
 }
 
 export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
   const cardWords = uniqueStrings(cards.map((card) => card.target_display || card.target_word)).slice(0, 24);
-  const supportLang = normalizeLanguageCode(baseMetadata.supportLang);
-  const supportLanguageName = cleanText(baseMetadata.supportLanguageName || getLanguageNameInLang(supportLang, supportLang));
-  const isEnglishSupport = supportLang === "EN" || supportLang === "EN-GB";
   const facts = {
-    supportLang,
-    supportLanguageName,
+    supportLang: baseMetadata.supportLang,
     targetLang: baseMetadata.targetLang,
     targetLanguageName: baseMetadata.targetLanguageName,
     deckTitle: baseMetadata.deckTitle,
+    deckMetadataSource: baseMetadata.deckMetadataSource || "unknown",
     level: baseMetadata.level,
     wordCount: baseMetadata.wordCount,
     courseUrl: baseMetadata.courseUrl,
@@ -432,21 +316,10 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
     JSON.stringify(facts),
     "",
     "Rules:",
-    `- Write title, description, playlistTitle, playlistDescription, tags and hashtags primarily in the audience/support language: ${supportLanguageName} (${supportLang}).`,
-    isEnglishSupport
-      ? "- English output is allowed because this is an English support-language channel."
-      : "- Do not keep English fallback wording from baseTitle/baseDescription; use those fields only as factual input.",
-    isEnglishSupport
-      ? "- English SEO wording is allowed if natural."
-      : "- Avoid English boilerplate such as \"A1 Vocabulary\", \"Words with Pronunciation\", \"Learn 50 essential...\", \"Subscribe for more...\".",
-    isEnglishSupport
-      ? "- Tags and hashtags may use normal English search phrases."
-      : `- Tags and hashtags must also be in ${supportLanguageName}. Do not add English search phrases such as "learn ...", "... vocabulary", "... for beginners", or "... in Hindi". Brand text (${BRAND_NAME}) is allowed.`,
+    "- Write title, description, tags and hashtags in the same language as baseTitle/baseDescription.",
     "- Make the title a natural search title for beginner learners, not clickbait.",
-    `- Keep the title 45-90 characters; if the native-language title is naturally short, add a compact suffix like "${baseMetadata.wordCount} ${baseMetadata.level} words + pronunciation | ${BRAND_NAME}".`,
+    "- Preserve facts.deckTitle as the canonical topic/deck phrase; do not replace it with a new category title.",
     "- Make the description several useful short paragraphs and include courseUrl exactly once.",
-    "- Make playlistTitle reusable across this target language and course track, not specific to one video.",
-    `- Make playlistDescription 1-2 short sentences for the playlist page in ${supportLanguageName}; include ${BRAND_NAME}, vocabulary practice and the target language.`,
     `- Mention vocabulary, pronunciation, repeat pauses, mini-test/review, and ${BRAND_NAME} flashcards.`,
     "- Include 3-5 concrete sampleWords in the description if they fit naturally; do not turn the description into a keyword list.",
     "- tags: 12-18 short search phrases, no # characters.",
@@ -454,7 +327,7 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
     "- Do not invent paid features, certificates, native teachers, exact duration or guarantees.",
     "",
     "Complete this exact JSON shape:",
-    '{"title":"","description":"","playlistTitle":"","playlistDescription":"","tags":[],"hashtags":[]}'
+    '{"title":"","description":"","tags":[],"hashtags":[]}'
   ].join("\n");
 }
 
@@ -542,7 +415,7 @@ async function callGeminiVectorEngine(prompt, { model = defaultVectorEngineGemin
         prompt,
         "",
         "OUTPUT EXACTLY THIS OBJECT SHAPE WITH REAL VALUES:",
-        '{"title":"...","description":"...","playlistTitle":"...","playlistDescription":"...","tags":["..."],"hashtags":["#..."]}'
+        '{"title":"...","description":"...","tags":["..."],"hashtags":["#..."]}'
       ].join("\n")
     });
   }
@@ -554,41 +427,14 @@ function normalizeHashtag(value) {
   return text.startsWith("#") ? text.replace(/\s+/gu, "") : `#${text.replace(/\s+/gu, "")}`;
 }
 
-const NON_ENGLISH_METADATA_LEAK_PATTERNS = [
-  /\bwords?\s+with\s+pronunciation\b/iu,
-  /\bvocabulary\s+with\s+pronunciation\b/iu,
-  /\bA1\s+[A-Za-z -]*Vocabulary\b/u,
-  /\blearn\s+\d{1,3}\s+essential\b/iu,
-  /\bfor\s+beginners\b/iu,
-  /\bSubscribe\s+for\s+more\b/iu,
-];
-
-function hasNonEnglishMetadataLeak(metadata) {
-  const supportLang = normalizeLanguageCode(metadata.supportLang);
-  if (supportLang === "EN" || supportLang === "EN-GB") return false;
-  const text = [
-    metadata.title,
-    metadata.description,
-    metadata.playlistTitle,
-    metadata.playlistDescription,
-    ...(metadata.tags || []),
-    ...(metadata.hashtags || [])
-  ].map(cleanText).join(" ");
-  return NON_ENGLISH_METADATA_LEAK_PATTERNS.some((pattern) => pattern.test(text));
-}
-
-function utf8ByteLength(value) {
-  return Buffer.byteLength(String(value || ""), "utf8");
-}
-
-function capTagBudget(tags, maxBytes = 450) {
+function capTagBudget(tags, maxChars = 450) {
   const result = [];
   let total = 0;
   for (const tag of tags) {
     const clean = truncateAtWord(tag.replace(/^#/u, ""), 45);
     if (!clean) continue;
-    const nextTotal = total + utf8ByteLength(clean) + (result.length ? 1 : 0);
-    if (nextTotal > maxBytes) continue;
+    const nextTotal = total + clean.length + (result.length ? 1 : 0);
+    if (nextTotal > maxChars) continue;
     result.push(clean);
     total = nextTotal;
   }
@@ -610,7 +456,7 @@ export function normalizeYouTubeMetadata(metadata) {
 
   const normalized = {
     ...metadata,
-    title: ensureSeoTitleFloor(metadata.title || `${BRAND_NAME} Vocabulary Lesson`, metadata),
+    title: truncateAtWord(metadata.title || `${BRAND_NAME} Vocabulary Lesson`, 100),
     description: description.slice(0, 5000),
     tags,
     hashtags,
@@ -624,13 +470,11 @@ export function normalizeYouTubeMetadata(metadata) {
     const assignment = buildPlaylistAssignment(normalized);
     normalized.playlist_key = normalized.playlist_key || normalized.playlistKey || assignment.key;
     normalized.playlistKey = normalized.playlistKey || normalized.playlist_key;
-    normalized.playlistTitle = stripEnglishPlaylistTemplateTail(normalized.playlistTitle || assignment.title, normalized.supportLang);
-    normalized.playlistDescription = cleanText(normalized.playlistDescription || assignment.description);
     normalized.playlist = {
       ...assignment,
       key: normalized.playlist_key,
-      title: normalized.playlistTitle,
-      description: normalized.playlistDescription
+      title: normalized.playlistTitle || assignment.title,
+      description: normalized.playlistDescription || assignment.description
     };
   }
 
@@ -681,27 +525,11 @@ export async function generateYouTubeMetadata(input) {
     });
   }
 
-  const normalizedGenerated = normalizeYouTubeMetadata({
+  return normalizeYouTubeMetadata({
     ...template,
     ...generated,
     source: `gemini-${backend}`,
     model,
     generatedAt: new Date().toISOString()
   });
-  if (normalizeLanguageCode(template.supportLang) === "KK" && hasNonEnglishMetadataLeak(normalizedGenerated)) {
-    return normalizeYouTubeMetadata({
-      ...template,
-      source: "human-curated-language-guard",
-      model,
-      generatedAt: new Date().toISOString(),
-      aiMetadata: {
-        attempted: true,
-        backend,
-        model,
-        status: "language_guarded",
-        reason: "ai_output_contained_english_template_markers"
-      }
-    });
-  }
-  return normalizedGenerated;
 }

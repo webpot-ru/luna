@@ -404,6 +404,10 @@ export function generateSilentAudio(duration, outputPath) {
 
 const deckDataCache = {};
 
+function sqlLiteral(value) {
+  return `'${String(value ?? "").replace(/'/g, "''")}'`;
+}
+
 function getOfflineDeckData(setId) {
   if (deckDataCache[setId] !== undefined) {
     return deckDataCache[setId];
@@ -419,6 +423,90 @@ function getOfflineDeckData(setId) {
     }
   }
   deckDataCache[setId] = null;
+  return null;
+}
+
+function pickLocalizedValue(values, keys) {
+  for (const key of keys) {
+    const value = values?.[key];
+    if (typeof value === "string" && value.trim()) return value.trim();
+  }
+  return "";
+}
+
+function getOfflineCourseMetadata(offlineData, supportCode, supportDbLang) {
+  if (!offlineData) return null;
+  const keys = Array.from(new Set([supportCode, supportDbLang].filter(Boolean)));
+  const courseMetadata = offlineData.courseMetadata || offlineData.course_metadata || null;
+
+  if (courseMetadata) {
+    const title = pickLocalizedValue(courseMetadata.title, keys);
+    if (title) {
+      return {
+        title,
+        description: pickLocalizedValue(courseMetadata.description, keys),
+        levelSignal: pickLocalizedValue(courseMetadata.levelSignal || courseMetadata.level_signal, keys),
+        module: pickLocalizedValue(courseMetadata.module, keys),
+        category: pickLocalizedValue(courseMetadata.category, keys),
+        metadataSource: "offline-course-metadata"
+      };
+    }
+  }
+
+  const title = pickLocalizedValue(offlineData.titles, keys);
+  if (title) {
+    return {
+      title,
+      description: pickLocalizedValue(offlineData.descriptions, keys),
+      levelSignal: pickLocalizedValue(offlineData.levelSignals || offlineData.level_signals, keys),
+      metadataSource: "offline-legacy-titles"
+    };
+  }
+
+  return null;
+}
+
+async function fetchDbCourseMetadata(setId, supportDbLang) {
+  const sql = `
+    select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
+      select
+        title,
+        description,
+        module,
+        category,
+        level_signal as "levelSignal"
+      from content_set_localizations
+      where set_id = ${sqlLiteral(setId)}
+        and language_code = ${sqlLiteral(supportDbLang)}
+      limit 1
+    ) rows;
+  `;
+  const rows = await psqlJson(sql);
+  if (rows?.[0]?.title) {
+    return { ...rows[0], metadataSource: "db-content-set-localizations" };
+  }
+  return null;
+}
+
+async function fetchEnglishCourseMetadata(setId) {
+  const sql = `
+    select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
+      select
+        title,
+        description,
+        module,
+        category,
+        level_signal as "levelSignal"
+      from content_set_localizations
+      where set_id = ${sqlLiteral(setId)}
+        and language_code = 'EN'
+      limit 1
+    ) rows;
+  `;
+  const rows = await psqlJson(sql);
+  if (rows?.[0]?.title) {
+    return { ...rows[0], metadataSource: "db-content-set-localizations-en-fallback" };
+  }
   return null;
 }
 
@@ -487,71 +575,49 @@ export async function fetchDeckCards(setId, targetLang, supportLang) {
 export async function fetchDeckMetadata(setId, supportLang) {
   const supportCode = normalizeLanguageCode(supportLang);
   const supportDbLang = getDbLanguageCode(supportCode);
-  const offlineData = getOfflineDeckData(setId);
-  const offlineTitleKey = offlineData?.titles?.[supportCode] ? supportCode : supportDbLang;
-  if (offlineData && offlineData.titles?.[offlineTitleKey]) {
-    return {
-      title: offlineData.titles[offlineTitleKey],
-      description: offlineData.descriptions?.[offlineTitleKey] ?? "",
-      levelSignal: offlineData.levelSignals?.[offlineTitleKey] ?? ""
-    };
+
+  try {
+    const dbMetadata = await fetchDbCourseMetadata(setId, supportDbLang);
+    if (dbMetadata) return dbMetadata;
+  } catch (error) {
+    console.warn(`[COURSE_METADATA_DB_FALLBACK] ${setId}/${supportDbLang}: ${error.message}`);
   }
 
-  const sql = `
-    select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
-      select
-        title,
-        description,
-        level_signal as "levelSignal"
-      from content_set_localizations 
-      where set_id = '${setId.replace(/'/g, "''")}' 
-        and language_code = '${supportDbLang.replace(/'/g, "''")}'
-      limit 1
-    ) rows;
-  `;
-  const res = await psqlJson(sql);
-  if (res && res[0] && res[0].title) {
-    return res[0];
-  }
+  const offlineMetadata = getOfflineCourseMetadata(getOfflineDeckData(setId), supportCode, supportDbLang);
+  if (offlineMetadata) return offlineMetadata;
 
-  // Fallback to English Course Metadata title before using the internal set name.
-  const englishFallbackSql = `
-    select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
-      select
-        title,
-        description,
-        level_signal as "levelSignal"
-      from content_set_localizations
-      where set_id = '${setId.replace(/'/g, "''")}'
-        and language_code = 'EN'
-      limit 1
-    ) rows;
-  `;
-  const englishFallbackRes = await psqlJson(englishFallbackSql);
-  if (englishFallbackRes && englishFallbackRes[0] && englishFallbackRes[0].title) {
-    return englishFallbackRes[0];
+  try {
+    const englishMetadata = await fetchEnglishCourseMetadata(setId);
+    if (englishMetadata) return englishMetadata;
+  } catch (error) {
+    console.warn(`[COURSE_METADATA_EN_FALLBACK] ${setId}: ${error.message}`);
   }
 
   // Last fallback: internal content set name, then slug.
   const fallbackSql = `
     select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
-      select set_name, slug from content_sets where set_id = '${setId.replace(/'/g, "''")}' limit 1
+      select set_name, slug from content_sets where set_id = ${sqlLiteral(setId)} limit 1
     ) rows;
   `;
-  const fallbackRes = await psqlJson(fallbackSql);
-  if (fallbackRes && fallbackRes[0]) {
-    if (fallbackRes[0].set_name) {
-      return { title: fallbackRes[0].set_name, description: "", levelSignal: "" };
+  try {
+    const fallbackRes = await psqlJson(fallbackSql);
+    if (fallbackRes && fallbackRes[0]) {
+      if (fallbackRes[0].set_name) {
+        return { title: fallbackRes[0].set_name, description: "", levelSignal: "", metadataSource: "db-content-set-name-fallback" };
+      }
+      if (fallbackRes[0].slug) {
+        return {
+          title: fallbackRes[0].slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+          description: "",
+          levelSignal: "",
+          metadataSource: "db-content-set-slug-fallback"
+        };
+      }
     }
-    if (fallbackRes[0].slug) {
-      return {
-        title: fallbackRes[0].slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
-        description: "",
-        levelSignal: ""
-      };
-    }
+  } catch (error) {
+    console.warn(`[COURSE_METADATA_INTERNAL_FALLBACK] ${setId}: ${error.message}`);
   }
-  return { title: "Vocabulary Lesson", description: "", levelSignal: "" };
+  return { title: "Vocabulary Lesson", description: "", levelSignal: "", metadataSource: "hardcoded-fallback" };
 }
 
 export async function fetchDeckTitle(setId, supportLang) {

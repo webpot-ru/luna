@@ -148,21 +148,45 @@ async function main() {
   const deckData = {
     setId,
     titles: {},
+    descriptions: {},
+    levelSignals: {},
+    courseMetadata: {
+      title: {},
+      description: {},
+      module: {},
+      category: {},
+      levelSignal: {}
+    },
     cards: {}
   };
   
-  // Fetch all titles in one query
-  const titleSql = `
+  // Fetch localized Course Metadata in one query. GitHub video generation uses
+  // this offline payload when Docker/Postgres is not available.
+  const metadataSql = `
     select coalesce(json_agg(row_to_json(rows)), '[]'::json) from (
-      select language_code, title 
+      select
+        language_code,
+        title,
+        description,
+        module,
+        category,
+        level_signal
       from content_set_localizations 
       where set_id = '${setId.replace(/'/g, "''")}'
     ) rows;
   `;
-  const titlesResult = await psqlJson(titleSql);
-  for (const row of titlesResult) {
+  const metadataResult = await psqlJson(metadataSql);
+  for (const row of metadataResult) {
     if (row.language_code) {
-      deckData.titles[row.language_code.toUpperCase()] = row.title;
+      const code = row.language_code.toUpperCase();
+      deckData.titles[code] = row.title ?? "";
+      deckData.descriptions[code] = row.description ?? "";
+      deckData.levelSignals[code] = row.level_signal ?? "";
+      deckData.courseMetadata.title[code] = row.title ?? "";
+      deckData.courseMetadata.description[code] = row.description ?? "";
+      deckData.courseMetadata.module[code] = row.module ?? "";
+      deckData.courseMetadata.category[code] = row.category ?? "";
+      deckData.courseMetadata.levelSignal[code] = row.level_signal ?? "";
     }
   }
   
