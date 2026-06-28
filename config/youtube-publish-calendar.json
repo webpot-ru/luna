@@ -67243,6 +67243,52 @@
       "youtubeVideoId": "BDLPQpto5yM",
       "youtubePlaylistId": "PLIPJGvWdBKFs",
       "playlistItemId": "UExJUEpHdldkQktGcy41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES",
+      "targetLang": "ES-419",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "publishAt": "2026-06-30T06:30:00.000Z",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-06-30",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 2,
+      "slotOrdinal": 12,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_es-419_es/youtube_metadata.json",
+      "title": "Vocabulario de Utensilios de Cocina en Español (Latinoamérica) | 50 Palabras Básicas",
+      "playlist_key": "ES__ES-419__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-01T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-03T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-07T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-30T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28325518605",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28325518605",
+      "createdAt": "2026-06-28T14:34:46.957Z",
+      "updatedAt": "2026-06-28T14:34:46.957Z",
+      "youtubeVideoId": "Ys1kAnk2YYk",
+      "youtubePlaylistId": "PLYYUJLj7BTlw",
+      "playlistItemId": "UExZWVVKTGo3QlRsdy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
