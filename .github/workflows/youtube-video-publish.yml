@@ -91,6 +91,10 @@ on:
         description: "Durable schedule reservation calendar JSON path."
         required: false
         default: "config/youtube-publish-calendar.json"
+      schedule_min_future_minutes:
+        description: "For scheduled publishing: move/reuse only slots at least this many minutes in the future."
+        required: false
+        default: "90"
       create_playlists:
         description: "Allow the uploader to create missing unlisted playlists from config/youtube-playlists.json assignments."
         required: true
@@ -389,10 +393,13 @@ jobs:
           VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
           VECTORENGINE_GEMINI_MODEL: ${{ vars.VECTORENGINE_GEMINI_MODEL }}
           VECTORENGINE_IMAGE_MODEL: ${{ vars.VECTORENGINE_IMAGE_MODEL }}
+          VECTORENGINE_IMAGE_TIMEOUT_MS: ${{ vars.VECTORENGINE_IMAGE_TIMEOUT_MS || '300000' }}
+          VECTORENGINE_IMAGE_RETRIES: ${{ vars.VECTORENGINE_IMAGE_RETRIES || '3' }}
           GENERATE_THUMBNAILS: ${{ github.event.inputs.generate_thumbnails }}
           CONFIRM_THUMBNAIL_SPEND: ${{ github.event.inputs.confirm_thumbnail_spend }}
           THUMBNAIL_CONCURRENCY: ${{ github.event.inputs.thumbnail_concurrency }}
           SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
+          SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
           SCHEDULE_POLICY: ${{ github.event.inputs.schedule_policy }}
           SCHEDULE_CALENDAR: ${{ github.event.inputs.schedule_calendar }}
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
@@ -473,7 +480,7 @@ jobs:
             npm run check:youtube-run-isolation -- outputs/video-generator --shard-count="$WORKER_COUNT" --shard-index="$WORKER_INDEX" --allow-empty --output=outputs/video-generator/youtube-run-isolation-report-github.json
 
             if [ "$PUBLISH_MODE" = "scheduled" ]; then
-              SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--target-plan=outputs/video-generator/youtube-generation-targets-github.json" "--write-metadata" "--write-calendar" "--output=outputs/youtube-publish-schedule-github.json")
+              SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--target-plan=outputs/video-generator/youtube-generation-targets-github.json" "--write-metadata" "--write-calendar" "--reschedule-past-reservations" "--min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES" "--output=outputs/youtube-publish-schedule-github.json")
               if [ "$ALLOW_REPUBLISH" = "true" ]; then
                 SCHEDULE_ARGS+=("--allow-republish")
               fi

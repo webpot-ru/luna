@@ -31,6 +31,7 @@ function parseArgs(argv) {
     publishMode: "scheduled",
     privacy: "public",
     scheduleStartDate: "",
+    scheduleMinFutureMinutes: 90,
     createPlaylists: true,
     allowRepublish: false,
     generateThumbnails: true,
@@ -73,6 +74,7 @@ function parseArgs(argv) {
     else if (arg === "--publish-mode" || arg.startsWith("--publish-mode=")) options.publishMode = readValue();
     else if (arg === "--privacy" || arg.startsWith("--privacy=")) options.privacy = readValue();
     else if (arg === "--schedule-start-date" || arg.startsWith("--schedule-start-date=")) options.scheduleStartDate = readValue();
+    else if (arg === "--schedule-min-future-minutes" || arg.startsWith("--schedule-min-future-minutes=")) options.scheduleMinFutureMinutes = Number(readValue());
     else if (arg === "--confirm-thumbnail-spend" || arg.startsWith("--confirm-thumbnail-spend=")) options.confirmThumbnailSpend = readValue();
     else if (arg === "--confirm-youtube-write" || arg.startsWith("--confirm-youtube-write=")) options.confirmYoutubeWrite = readValue();
     else if (arg === "--confirm-public" || arg.startsWith("--confirm-public=")) options.confirmPublic = readValue();
@@ -106,6 +108,8 @@ function usage() {
     "This dispatcher plans one ordinary YouTube publish workflow run per support language,",
     "with the next N eligible targets per support, and optionally dispatches/watches the",
     "existing youtube-video-publish.yml workflow in bounded parallel batches.",
+    "Scheduled child runs pass schedule_min_future_minutes so stale calendar reservations",
+    "are moved to future-safe slots by the child workflow.",
     "",
     "It does not upload videos itself. Playlist-classified failures can dispatch the",
     "playlist-insert repair workflow after a delay only when --confirm-playlist-repair=APPLY_YOUTUBE_PLAYLIST_INSERT is provided.",
@@ -141,6 +145,9 @@ function ensureSafeOptions(options) {
   }
   if (!Number.isInteger(options.maxParallel) || options.maxParallel < 1 || options.maxParallel > 20) {
     throw new Error("--max-parallel must be between 1 and 20.");
+  }
+  if (!Number.isFinite(options.scheduleMinFutureMinutes) || options.scheduleMinFutureMinutes < 0) {
+    throw new Error("--schedule-min-future-minutes must be a non-negative number.");
   }
   if (!["variants", "channel-keys"].includes(options.supportSource)) {
     throw new Error("--support-source must be variants or channel-keys.");
@@ -242,6 +249,7 @@ function workflowFieldsForJob(job, options) {
     privacy: options.privacy,
     publish_mode: options.publishMode,
     schedule_start_date: options.scheduleStartDate,
+    schedule_min_future_minutes: String(options.scheduleMinFutureMinutes),
     create_playlists: boolInput(options.createPlaylists),
     allow_republish: boolInput(options.allowRepublish),
     generate_thumbnails: boolInput(options.generateThumbnails),
@@ -650,6 +658,7 @@ async function buildPlan(options) {
       workflow: options.workflow,
       repairWorkflow: options.repairWorkflow,
       publishMode: options.publishMode,
+      scheduleMinFutureMinutes: options.scheduleMinFutureMinutes,
       allowRepublish: options.allowRepublish,
       generateThumbnails: options.generateThumbnails,
     },
