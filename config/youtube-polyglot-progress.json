@@ -7,5 +7,34 @@
     "One progress item should represent one deck + support language + selected Polyglot bundle.",
     "Use the global publish calendar for physical YouTube slots; use this file for Polyglot campaign accounting."
   ],
-  "items": []
+  "items": [
+    {
+      "videoType": "polyglot",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:RU:global_europe_core:7a4233775927",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "RU",
+      "bundleKey": "global_europe_core",
+      "bundleLabel": "Global Europe Core",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "targetLangsHash": "7a4233775927",
+      "status": "published_uploaded",
+      "youtubeVideoId": "LPqJjLfNoJk",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=LPqJjLfNoJk",
+      "youtubePlaylistId": "PLbhbVjDBYtsQ",
+      "playlistItemId": "UExiaGJWakRCWXRzUS41NkI0NEY2RDEwNTU3Q0M2",
+      "channelKey": "ru",
+      "privacyStatus": "private",
+      "publishAt": "",
+      "updatedAt": "2026-06-28T14:07:25.916Z",
+      "githubRunId": "28324606575",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28324606575",
+      "createdAt": "2026-06-28T14:07:25.916Z"
+    }
+  ]
 }

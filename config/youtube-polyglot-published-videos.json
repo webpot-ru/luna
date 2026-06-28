@@ -7,5 +7,55 @@
     "Polyglot identity is videoType=polyglot plus polyglot:{setId}:{supportLang}:{bundleKey}:{targetsHash}.",
     "The physical channel slot calendar remains config/youtube-publish-calendar.json so ordinary and Polyglot videos cannot reserve the same channel/publishAt slot."
   ],
-  "publications": []
+  "publications": [
+    {
+      "videoType": "polyglot",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:RU:global_europe_core:7a4233775927",
+      "bundleKey": "global_europe_core",
+      "bundleLabel": "Global Europe Core",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "targetLangsHash": "7a4233775927",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "RU",
+      "targetLang": "EN,ES,FR,DE",
+      "playlist_key": "POLYGLOT__RU__global-europe-core__7a4233775927",
+      "title": "Кухонная посуда: Английский, Испанский, Французский, Немецкий | Полиглот FlashcardsLuna",
+      "youtubeVideoId": "LPqJjLfNoJk",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=LPqJjLfNoJk",
+      "youtubePlaylistId": "PLbhbVjDBYtsQ",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLbhbVjDBYtsQ",
+      "playlistItemId": "UExiaGJWakRCWXRzUS41NkI0NEY2RDEwNTU3Q0M2",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "channelHandle": "@lunacardsru",
+      "privacyStatus": "private",
+      "publicationStatus": "published_uploaded",
+      "publishAt": "",
+      "scheduledPublishAt": "",
+      "desiredPrivacyStatus": "private",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": true,
+      "thumbnailLogoOverlay": true,
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "vectorengine-gpt-image-2",
+      "metadataSource": "vectorengine-gemini-polyglot",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "28324606575",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28324606575",
+      "uploadedAt": "2026-06-28T14:07:25.916Z",
+      "lastReadbackAt": "2026-06-28T14:07:25.916Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "private",
+        "publishAt": "",
+        "thumbnailStatus": "custom_set"
+      }
+    }
+  ]
 }
