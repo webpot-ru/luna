@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "sourceOfTruth": "docs/video-lessons-strategy.md#polyglot-mode-multilingual-decks",
+  "purpose": "Durable machine-readable publication/readback registry for Polyglot YouTube videos only.",
+  "notes": [
+    "Do not mix ordinary single-target video rows into this registry.",
+    "Polyglot identity is videoType=polyglot plus polyglot:{setId}:{supportLang}:{bundleKey}:{targetsHash}.",
+    "The physical channel slot calendar remains config/youtube-publish-calendar.json so ordinary and Polyglot videos cannot reserve the same channel/publishAt slot."
+  ],
+  "publications": []
+}

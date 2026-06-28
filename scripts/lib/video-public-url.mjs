@@ -68,21 +68,48 @@ function getTargetStudyLanguageCode(targetLang) {
   return String(targetLang || "").trim().toLowerCase();
 }
 
+function getTargetStudyLanguageCodes({ targetLang, targetLangs } = {}) {
+  const values = Array.isArray(targetLangs)
+    ? targetLangs
+    : String(targetLangs || "").split(",");
+  const normalized = values
+    .map(getTargetStudyLanguageCode)
+    .filter(Boolean);
+  if (normalized.length) return normalized;
+  const single = getTargetStudyLanguageCode(targetLang);
+  return single ? [single] : [];
+}
+
 function getQrCodeModule() {
   qrCodeModule ||= require("qrcode");
   return qrCodeModule.default || qrCodeModule;
 }
 
-export function getPublicCourseUrl({ setId, supportLang, targetLang } = {}) {
+export function getPublicCourseUrl({ setId, supportLang, targetLang, targetLangs } = {}) {
   const baseUrl = getBaseUrl();
   const languagePath = trimSlashes(getSiteLanguagePath(supportLang));
   const coursePath = trimSlashes(config.fallbackCoursePath || DEFAULT_FALLBACK_COURSE_PATH);
   const courseSlug = trimSlashes(config.publishedCourseSlugBySetId?.[setId]);
   const pathParts = [languagePath, coursePath, courseSlug].filter(Boolean);
   const courseUrl = `${baseUrl}/${pathParts.join("/")}`;
-  const targetStudyLang = getTargetStudyLanguageCode(targetLang);
-  if (!courseSlug || !targetStudyLang) return courseUrl;
-  return `${courseUrl}/study/standard?langs=${encodeURIComponent(targetStudyLang)}`;
+  const targetStudyLangs = getTargetStudyLanguageCodes({ targetLang, targetLangs });
+  if (!courseSlug || !targetStudyLangs.length) return courseUrl;
+  return `${courseUrl}/study/standard?langs=${encodeURIComponent(targetStudyLangs.join(","))}`;
+}
+
+export function isSpecificStudyCourseUrl(url) {
+  try {
+    const parsed = new URL(String(url || ""));
+    const parts = parsed.pathname.split("/").filter(Boolean);
+    const hasCoursePath = parts.length >= 5
+      && parts[1] === trimSlashes(config.fallbackCoursePath || DEFAULT_FALLBACK_COURSE_PATH)
+      && Boolean(parts[2])
+      && parts[3] === "study"
+      && parts[4] === "standard";
+    return hasCoursePath && Boolean(parsed.searchParams.get("langs"));
+  } catch {
+    return false;
+  }
 }
 
 export function getPublicCourseDisplayUrl(url) {

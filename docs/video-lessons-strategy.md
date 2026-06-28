@@ -737,7 +737,8 @@ qrcode npm package
 - для Polyglot-видео с несколькими target languages используется тот же study route, но `langs` содержит весь список target-языков через запятую и URL-encoding, например `https://flashcardsluna.com/ru/courses/kitchenware-basic/study/standard?langs=en%2Ces%2Cfr%2Cde`;
 - в таком URL первый path segment (`/ru/`) является языком интерфейса / носителя зрителя (`supportLang`), а `langs=es` является изучаемым языком видео (`targetLang`);
 - если `targetLang` неизвестен, но `set_id` опубликован, URL остается localized course page, например `https://flashcardsluna.com/ru/courses/kitchenware-basic`;
-- если `set_id` еще не опубликован на сайте или slug не проверен, QR ведет на localized courses page, например `https://flashcardsluna.com/ru/courses`;
+- если `set_id` еще не опубликован на сайте или slug не проверен, QR ведет на localized courses page, например `https://flashcardsluna.com/ru/courses`, but this fallback is preview-only;
+- production/upload metadata must use a specific study route with course slug and `langs=...`; `npm run check:youtube-seo-metadata` blocks generic `/courses` fallback URLs before publish;
 - не выводить URL из `content_sets.slug` автоматически: DB slug и public site slug могут отличаться, а несуществующий dynamic route может выглядеть как HTTP 200 из-за Next.js fallback.
 - QR генерируется локально как SVG data URI через `qrcode`; production renderer не должен зависеть от `api.qrserver.com` или заранее сохраненных QR-файлов.
 
@@ -1007,6 +1008,8 @@ Rules for this rerun:
 Пример цепочки для одной карточки:
 `RU support card -> EN prompt -> EN answer -> ES prompt -> ES answer -> DE prompt -> DE answer -> FR prompt -> FR answer`.
 
+Закрепленный визуальный layout для learning slides: две светлые карточки в стиле FlashcardsLuna study UI. Верхняя компактная карточка показывает опорное слово и pill языка поддержки; нижняя большая карточка показывает prompt/reveal текущего целевого языка. Не делать отдельный пустой support-only экран: первый visual beat слова уже должен показывать опорное слово сверху и первый target-language prompt снизу. Не возвращаться к одной большой декоративной карточке с отдельным крупным флагом, дублирующими флагами или нижними инструкциями.
+
 #### Стартовые Polyglot-связки
 Polyglot-видео не должны строиться как случайные наборы из 54 языковых вариантов. Рабочий план ниже является стартовым source of truth: новые Polyglot-ролики выбирают один bundle из таблицы, а не произвольную ручную комбинацию. По умолчанию используем 3-4 target languages на одно видео; 5 языков допустимы только после отдельной визуальной проверки темпа и читаемости.
 
@@ -1026,9 +1029,13 @@ Polyglot-видео не должны строиться как случайны
 | `turkic_core` | Тюркские языки | `TR, AZ, UZ, KK` |
 | `caucasus_bridge_core` | Кавказ + соседний bridge-language контекст | `KA, HY, AZ, TR` |
 
+Machine-readable mirror for automation: `config/polyglot-video-bundles.json`. It must stay aligned with this table and is used by `npm run plan:youtube-polyglot`; the documented strategy remains the source of truth for why the bundles exist and how rollout is staged. The planner resolves support-language collisions by removing `supportLang` from the bundle and adding the configured nearest fallback until the original bundle size is restored.
+
 Regional variants (`EN-GB`, `ES-419`, `PT-BR`) сохраняются как отдельные target variants in playlists, metadata and `langs=...`, but they are not default members of the broad starter bundles to avoid teaching near-duplicate regional variants inside the same Polyglot lesson. Use them for region-specific or comparison videos, for example `EN + EN-GB`, `ES + ES-419`, `PT + PT-BR`, or swap `ES -> ES-419` / `PT -> PT-BR` when the support channel's audience is better served by the regional target.
 
 If `supportLang` is already present in a bundle, remove it from `targets` and fill the gap with the nearest fallback from the same family. Examples: for `support=DE` and `global_europe_core`, use `EN, ES, FR, IT`; for `support=RU` and `slavic_core`, use `PL, CS, SK, BG`; for `support=EN` and `germanic_core`, use `DE, NL, SV, NO`.
+
+English-speaking support channels (`support=EN` and `support=EN-GB`) have a separate market priority. Do not treat `EN, ES, FR, DE` as the visible learning set for English viewers. The flagship English-support Polyglot package is `global_europe_core` after support-language removal, which resolves to `ES, FR, DE, IT`. This should be the first English-channel test and first broad English-channel production bundle. The next English-support packages are `east_asia_core` for Asian-language demand and `romance_core` for travel/comparison demand. `germanic_core` is a later niche expansion for English viewers, not the default starter.
 
 Recommended rollout order:
 
@@ -1061,24 +1068,82 @@ Intro CTA requirements:
 Default English source copy for localization:
 
 ```text
-Learn several languages at once. On FlashcardsLuna, you can choose your own language mix.
+Polyglot mode: learn several languages at once with themed decks on FlashcardsLuna.
+```
+
+Production localization source of truth: `config/polyglot-video-localization.json`. It must contain Polyglot intro/outro copy for every support-language code from `config/video-localization.json`, including regional variants `EN-GB`, `ES-419` and `PT-BR`. `scripts/build-polyglot-video.mjs` must fail closed when a support language is missing from this Polyglot localization file; it must not silently fall back to English. Validate coverage and the no-pricing-copy rule with:
+
+```bash
+npm run check:polyglot-video-localization
 ```
 
 Outro CTA requirements:
 
 - show `flashcardsluna.com` and, when QR is available, a QR/link to the same deck/study route;
-- say that the viewer can add/remove languages and continue the same deck on the site;
+- say that FlashcardsLuna has more than 180 themed decks and that the viewer can learn several languages at the same time in any chosen combination;
+- avoid pricing claims in the video; keep the CTA focused on the language-mix benefit and the exact deck link;
 - localize the line to the support language;
 - do not imply that the YouTube video contains every possible combination.
 
 Default English source copy for localization:
 
 ```text
-Want another language mix? Open this deck on FlashcardsLuna and choose the languages you want to study together.
+FlashcardsLuna has more than 180 themed decks, and you can learn several languages at the same time in any combination you choose. Scan the QR code, open this deck, and build your own language mix.
 ```
 
 #### Запуск генерации
 Для генерации видео в режиме Polyglot разработан скрипт [build-polyglot-video.mjs](file:///Users/lali/Documents/LUNA2/scripts/build-polyglot-video.mjs), использующий специализированный HTML-шаблон [polyglot-slide-template.mjs](file:///Users/lali/Documents/LUNA2/scripts/lib/polyglot-slide-template.mjs).
+
+GitHub/CI orchestration for Polyglot must stay separate from the ordinary single-target workflow. The ordinary workflow `.github/workflows/youtube-video-publish.yml` keeps its existing `langs=<target list>` meaning: separate single-target videos. Polyglot uses `.github/workflows/youtube-polyglot-video-publish.yml` plus separate planner, metadata and upload gates: `scripts/plan-polyglot-youtube-publish.mjs`, `scripts/generate-polyglot-youtube-metadata.mjs`, `scripts/check-polyglot-youtube-metadata.mjs`, `scripts/plan-polyglot-youtube-upload.mjs`. This separate contour treats one support language plus one bundle as a single video candidate.
+
+Polyglot campaign accounting is separate from ordinary video accounting:
+
+- `config/youtube-polyglot-published-videos.json` is the durable publication/readback registry for Polyglot videos only.
+- `config/youtube-polyglot-playlists.json` is the durable playlist registry for Polyglot playlists only. Playlist title/description must be localized for the support channel language and AI-polished before live apply.
+- `config/youtube-polyglot-progress.json` tracks campaign progress by `deck + support language + bundle`: planned, previewed, rendered, uploaded or intentionally skipped.
+- `config/youtube-publish-calendar.json` remains the single physical channel-slot calendar across ordinary and Polyglot videos. This prevents two workflows from reserving the same support channel and `publishAt` slot. Polyglot rows in the global calendar must carry `videoType=polyglot` and `polyglotKey`.
+
+The current Polyglot GitHub workflow is deliberately safe by default:
+
+- `mode=plan` only validates and writes a non-secret plan artifact; it does not render, upload, call YouTube, generate thumbnails or restore OAuth secrets.
+- `mode=render_no_audio` requires `confirm_render=RENDER_POLYGLOT_VIDEO` and creates only a local GitHub artifact preview with silent audio.
+- `mode=render_audio` additionally requires `confirm_tts=GENERATE_TTS_AUDIO` because it may use TTS/provider resources.
+- `mode=apply` is live publication and must be used only after explicit confirmation. It requires full deck `limit=0`, `confirm_render=RENDER_POLYGLOT_VIDEO`, `confirm_tts=GENERATE_TTS_AUDIO`, `confirm_metadata_spend=GENERATE_POLYGLOT_METADATA`, and `confirm_youtube_write=APPLY_POLYGLOT_YOUTUBE_UPLOAD`; public uploads also require `confirm_public=PUBLISH_PUBLIC`. VectorEngine image thumbnail generation is allowed only with `confirm_thumbnail_spend=GENERATE_THUMBNAILS`.
+- Apply generates Edge TTS video, VectorEngine/Gemini video metadata, VectorEngine/Gemini Polyglot playlist title/description, and VectorEngine image thumbnails only for channels whose `customThumbnailUploadAllowed` is not false. Channels without custom thumbnail permission use the accepted YouTube automatic thumbnail fallback without spending image credits.
+- Apply writes only Polyglot machine state for Polyglot videos: `config/youtube-polyglot-published-videos.json`, `config/youtube-polyglot-playlists.json`, `config/youtube-polyglot-progress.json`, plus shared `config/youtube-publish-calendar.json` for scheduled physical slots. The state-merge job persists those files separately from ordinary publication state.
+
+Polyglot idempotency keys must not reuse the ordinary `setId + supportLang + targetLang` key. The planned key shape is:
+
+```text
+polyglot:{setId}:{supportLang}:{bundleKey}:{targetsHash}
+```
+
+Structured Polyglot publication/progress/calendar rows must include `videoType=polyglot`, `bundleKey`, `targetLangs`, `targetLangsHash` and `polyglotKey`. Ordinary rows without `videoType=polyglot` must not block or satisfy Polyglot duplicate checks, and Polyglot rows must not be interpreted as ordinary single-target publications.
+
+Before rendering, run the planner:
+
+```bash
+npm run plan:youtube-polyglot -- --set home_kitchen_cookware_pilot_01 --support RU --bundle global_europe_core --require-offline-deck --output=outputs/video-generator/youtube-polyglot-plan-local.json
+```
+
+Before live apply, the upload contour must also pass:
+
+```bash
+npm run generate:polyglot-youtube-metadata -- --set home_kitchen_cookware_pilot_01 --support RU --bundle global_europe_core --with-gemini --require-ai
+npm run check:polyglot-youtube-metadata -- outputs/video-generator --expected-support=RU --expected-bundle=global_europe_core --expected-targets=EN,ES,FR,DE --require-ai-metadata
+npm run plan:youtube-polyglot-upload -- outputs/video-generator --write-registry --allow-playlist-create --allow-auto-thumbnail-fallback --require-ai-metadata --output=outputs/youtube-polyglot-upload-plan-local.json
+```
+
+Planner gates:
+
+- support/target separation and bundle fallback resolution;
+- full target list in the generated study URL `langs=...`;
+- specific `/courses/<slug>/study/standard?langs=...` route, not the generic `/courses` fallback;
+- localized Polyglot intro/outro support language coverage;
+- localized Course Metadata from the offline deck JSON;
+- offline deck cards for every target language in the resolved bundle;
+- configured support channel;
+- no active Polyglot duplicate in the publication registry/calendar unless `--allow-republish` is explicit.
 
 Пример команды запуска:
 ```bash
