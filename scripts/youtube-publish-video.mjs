@@ -54,6 +54,8 @@ function parseArgs(argv) {
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--playlist-registry=")) options.playlistRegistry = arg.slice("--playlist-registry=".length);
     else if (arg.startsWith("--publication-registry=")) options.publicationRegistry = arg.slice("--publication-registry=".length);
+    else if (arg.startsWith("--progress-registry=")) options.progressRegistry = arg.slice("--progress-registry=".length);
+    else if (arg.startsWith("--calendar=")) options.calendar = arg.slice("--calendar=".length);
     else if (arg.startsWith("--ledger=")) options.ledger = arg.slice("--ledger=".length);
     else if (arg.startsWith("--privacy=")) options.privacyStatus = arg.slice("--privacy=".length);
     else if (arg.startsWith("--publish-at=")) options.publishAt = arg.slice("--publish-at=".length);
