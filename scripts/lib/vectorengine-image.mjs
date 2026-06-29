@@ -3,7 +3,7 @@ import fs from "node:fs";
 export const DEFAULT_VECTORENGINE_BASE_URL = "https://api.vectorengine.ai";
 export const DEFAULT_VECTORENGINE_IMAGE_MODEL = "gpt-image-2";
 export const DEFAULT_VECTORENGINE_IMAGE_TIMEOUT_MS = 300000;
-export const DEFAULT_VECTORENGINE_IMAGE_RETRIES = 3;
+export const DEFAULT_VECTORENGINE_IMAGE_RETRIES = 5;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -95,7 +95,7 @@ export async function callVectorEngineImage({
       if (attempt >= attempts || !isRecoverableImageError(error)) {
         throw error;
       }
-      const delayMs = Math.min(15000, 3000 * attempt);
+      const delayMs = Math.min(45000, 10000 * attempt);
       console.warn(
         `[VECTORENGINE_IMAGE_RETRY] attempt ${attempt}/${attempts} failed; retrying in ${delayMs}ms: ${boundedErrorMessage(error)}`
       );
