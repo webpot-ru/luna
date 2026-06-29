@@ -1,0 +1,227 @@
+name: YouTube Live Publication Audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "plan reads YouTube and uploads an artifact; persist also commits missing live rows into the registry."
+        required: true
+        default: "plan"
+        type: choice
+        options:
+          - plan
+          - persist
+      set_id:
+        description: "Set ID to audit in channel uploads playlists."
+        required: true
+        default: "home_kitchen_cookware_pilot_01"
+      supports:
+        description: "Support codes, route:youtube-1, route:youtube-2, route:youtube-3, route:youtube-4, or ALL."
+        required: true
+        default: "route:youtube-1"
+      support_source:
+        description: "Use support variants or physical channel keys from routing config."
+        required: true
+        default: "variants"
+        type: choice
+        options:
+          - variants
+          - channel-keys
+      exclude_supports:
+        description: "Comma-separated support codes to skip, or NONE."
+        required: false
+        default: "NONE"
+      youtube_environment:
+        description: "GitHub environment with the support route OAuth bundle. Select the route environment for route:* inputs."
+        required: true
+        default: "youtube-api-branding"
+        type: choice
+        options:
+          - youtube-api-branding
+          - youtube-api-youtube-2
+          - youtube-api-youtube-3
+          - youtube-api-youtube-4
+      max_pages:
+        description: "Upload playlist pages to scan per support channel; 10 pages = up to 500 recent videos."
+        required: true
+        default: "10"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: youtube-live-publication-audit-${{ github.ref_name }}-${{ github.event.inputs.supports }}
+  cancel-in-progress: false
+
+jobs:
+  live-publication-audit:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.youtube_environment }}
+    timeout-minutes: 60
+    env:
+      EFFECTIVE_YOUTUBE_ENVIRONMENT: ${{ github.event.inputs.youtube_environment }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+          echo "YouTube OAuth bundle restored for environment $EFFECTIVE_YOUTUBE_ENVIRONMENT."
+
+      - name: Resolve and validate support list
+        id: supports
+        shell: bash
+        env:
+          SUPPORTS_INPUT: ${{ github.event.inputs.supports }}
+          SUPPORT_SOURCE: ${{ github.event.inputs.support_source }}
+          EXCLUDE_SUPPORTS_INPUT: ${{ github.event.inputs.exclude_supports }}
+        run: |
+          set -euo pipefail
+          mkdir -p outputs
+          node scripts/resolve-youtube-support-list.mjs \
+            --supports="$SUPPORTS_INPUT" \
+            --support-source="$SUPPORT_SOURCE" \
+            --exclude-supports="$EXCLUDE_SUPPORTS_INPUT" \
+            --json > outputs/youtube-live-publication-supports.json
+          SUPPORTS_CSV="$(node -e 'const fs=require("fs"); const r=JSON.parse(fs.readFileSync("outputs/youtube-live-publication-supports.json","utf8")); console.log(r.supportsCsv)')"
+          node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORTS_CSV" --environment="$EFFECTIVE_YOUTUBE_ENVIRONMENT"
+          echo "supports_csv=$SUPPORTS_CSV" >> "$GITHUB_OUTPUT"
+          cat outputs/youtube-live-publication-supports.json
+
+      - name: Audit live YouTube publications
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORTS_CSV: ${{ steps.supports.outputs.supports_csv }}
+          MAX_PAGES: ${{ github.event.inputs.max_pages }}
+        run: |
+          set -euo pipefail
+          npm run audit:youtube-live-publications -- \
+            --set "$SET_ID" \
+            --support "$SUPPORTS_CSV" \
+            --max-pages "$MAX_PAGES" \
+            --output=outputs/youtube-live-publications-github.json \
+            --json
+          node -e '
+            const fs = require("fs");
+            const report = JSON.parse(fs.readFileSync("outputs/youtube-live-publications-github.json", "utf8"));
+            if (process.env.GITHUB_STEP_SUMMARY) {
+              fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
+                "### YouTube live publication audit",
+                "",
+                `- Supports: ${report.supports.join(", ")}`,
+                `- Scanned upload items: ${report.scannedUploadItems || 0}`,
+                `- Matched current set publications: ${report.matchedPublicationCount || 0}`,
+                `- Missing from local registry: ${report.missingFromLocalRegistryCount || 0}`,
+                `- Duplicate groups detected: ${(report.duplicateGroups || []).length}`,
+                "",
+              ].join("\n"));
+            }
+          '
+
+      - name: Upload live audit artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-live-publication-audit-${{ github.event.inputs.set_id }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-live-publications-github.json
+            outputs/youtube-live-publication-supports.json
+
+  persist-live-publication-state:
+    needs: live-publication-audit
+    if: ${{ always() && github.event.inputs.mode == 'persist' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: youtube-live-publication-state-${{ github.ref_name }}-${{ github.run_id }}
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Download live audit artifact
+        id: download_live_audit_state
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: youtube-live-publication-audit-${{ github.event.inputs.set_id }}-${{ github.run_id }}
+          path: .state-artifact
+
+      - name: Merge live audit state into current branch
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [ ! -f .state-artifact/outputs/youtube-live-publications-github.json ]; then
+            echo "No live audit artifact found; nothing to persist."
+            exit 0
+          fi
+          git fetch origin "$BRANCH_NAME"
+          git checkout "$BRANCH_NAME"
+          git pull --ff-only origin "$BRANCH_NAME"
+          npm run merge:youtube-publish-state -- --artifact-dir=.state-artifact --summary=outputs/youtube-live-publication-state-merge-github.json
+          cat outputs/youtube-live-publication-state-merge-github.json
+
+      - name: Commit and push live audit state
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORTS: ${{ github.event.inputs.supports }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- config/youtube-published-videos.json; then
+            echo "No YouTube live publication state changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/youtube-published-videos.json
+          git commit -m "Persist YouTube live audit state for ${SET_ID} ${SUPPORTS}" \
+            -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          git push origin "HEAD:$BRANCH_NAME"
+
+      - name: Upload live audit state merge summary
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-live-publication-state-merge-${{ github.event.inputs.set_id }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: ignore
+          path: outputs/youtube-live-publication-state-merge-github.json
