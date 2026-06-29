@@ -107,6 +107,13 @@ Do not schedule unattended automations for:
 - database migrations or Google Sheets writes;
 - cleanup/removal.
 
+## GitHub API Rate Limits and Direct CLI Dispatch
+
+When orchestrating bulk publish waves across many channels, running `dispatch-youtube-bulk-publish.mjs` inside a GitHub Actions workflow can hit `HTTP 403: API rate limit exceeded for installation` because the runner's `GITHUB_TOKEN` is capped at 1,000 requests/hour for GitHub Apps/installations.
+
+**Operational Rule & Fallback:**
+If GitHub Actions dispatcher encounters rate limit errors, dispatch child workflows (`youtube-polyglot-video-publish.yml` or `youtube-video-publish.yml`) directly from the local terminal CLI via `gh workflow run ...` under the user's authenticated OAuth account (`lalishka`), which has a 5,000 requests/hour quota. The compute, rendering, TTS, and video upload tasks remain 100% in the cloud on GitHub Actions runners without straining the local machine.
+
 ## Codex Access Tokens
 
 Do not introduce Codex access tokens into this repository by default. They are for trusted non-interactive Codex local workflows in supported ChatGPT Business/Enterprise workspaces. If they are needed later, store them only in a secret manager or local ignored file, never in Git, docs, logs, or generated artifacts.
