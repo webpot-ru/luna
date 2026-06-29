@@ -72,7 +72,7 @@ on:
       max_parallel:
         description: "Maximum simultaneous child Polyglot workflow runs."
         required: true
-        default: "20"
+        default: "4"
       exclude_supports:
         description: "Comma-separated support codes to skip, or NONE."
         required: false
@@ -132,7 +132,7 @@ on:
         default: ""
 
 permissions:
-  contents: read
+  contents: write
   actions: write
 
 concurrency:
@@ -247,6 +247,43 @@ jobs:
           fi
           npm run dispatch:youtube-polyglot-bulk-publish -- "${ARGS[@]}"
 
+      - name: Recover child Polyglot state from artifacts
+        if: ${{ always() && github.event.inputs.mode == 'dispatch' }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [ ! -f outputs/youtube-polyglot-bulk-publish-dispatcher-report.json ]; then
+            echo "No dispatcher report found; skip child state recovery."
+            exit 0
+          fi
+          git fetch origin "$BRANCH_NAME"
+          git pull --ff-only origin "$BRANCH_NAME"
+          npm run recover:youtube-polyglot-state -- \
+            --report=outputs/youtube-polyglot-bulk-publish-dispatcher-report.json \
+            --artifact-root=outputs/youtube-polyglot-child-state-recovery \
+            --output=outputs/youtube-polyglot-child-state-recovery-summary.json
+
+      - name: Commit recovered child Polyglot state
+        if: ${{ always() && github.event.inputs.mode == 'dispatch' }}
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- config/youtube-channels.json config/youtube-polyglot-playlists.json config/youtube-polyglot-progress.json config/youtube-polyglot-published-videos.json config/youtube-publish-calendar.json; then
+            echo "No recovered Polyglot child state changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/youtube-channels.json config/youtube-polyglot-playlists.json config/youtube-polyglot-progress.json config/youtube-polyglot-published-videos.json config/youtube-publish-calendar.json
+          git commit -m "Recover Polyglot YouTube child publish state" \
+            -m "Source dispatcher run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          git push origin "HEAD:$BRANCH_NAME"
+
       - name: Upload Polyglot dispatcher report
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
@@ -256,4 +293,5 @@ jobs:
           if-no-files-found: warn
           path: |
             outputs/youtube-polyglot-bulk-publish-dispatcher-report.json
+            outputs/youtube-polyglot-child-state-recovery-summary.json
             outputs/youtube-polyglot-bulk-plan/*.json

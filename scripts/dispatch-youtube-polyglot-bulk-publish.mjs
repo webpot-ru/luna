@@ -19,7 +19,7 @@ function parseArgs(argv) {
     bundle: "global_europe_core",
     englishBundle: "global_europe_core",
     bundleOverrides: new Map(),
-    maxParallel: 20,
+    maxParallel: 4,
     ref: process.env.GITHUB_REF_NAME || "main",
     childMode: "apply",
     limit: 0,
@@ -46,6 +46,7 @@ function parseArgs(argv) {
     routingConfig: "config/youtube-api-project-routing.json",
     planScript: "scripts/plan-polyglot-youtube-publish.mjs",
     planOutputDir: "outputs/youtube-polyglot-bulk-plan",
+    plannerTimeoutMs: 120000,
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -84,6 +85,7 @@ function parseArgs(argv) {
     else if (arg === "--routing-config" || arg.startsWith("--routing-config=")) options.routingConfig = readValue();
     else if (arg === "--plan-script" || arg.startsWith("--plan-script=")) options.planScript = readValue();
     else if (arg === "--plan-output-dir" || arg.startsWith("--plan-output-dir=")) options.planOutputDir = readValue();
+    else if (arg === "--planner-timeout-ms" || arg.startsWith("--planner-timeout-ms=")) options.plannerTimeoutMs = Number(readValue());
     else if (arg === "--apply") options.apply = true;
     else if (arg === "--dry-run") options.apply = false;
     else if (arg === "--no-watch") options.watch = false;
@@ -158,6 +160,9 @@ function ensureSafeOptions(options) {
   }
   if (!Number.isInteger(options.limit) || options.limit < 0) {
     throw new Error("--limit must be a non-negative integer.");
+  }
+  if (!Number.isInteger(options.plannerTimeoutMs) || options.plannerTimeoutMs < 10000) {
+    throw new Error("--planner-timeout-ms must be an integer >= 10000.");
   }
   if (options.apply && options.confirmDispatch !== "DISPATCH_YOUTUBE_POLYGLOT_BULK") {
     throw new Error("Live dispatch requires --confirm-dispatch=DISPATCH_YOUTUBE_POLYGLOT_BULK.");
@@ -236,11 +241,26 @@ function bundleForSupport(support, options) {
 }
 
 async function gh(args, options = {}) {
-  const { stdout, stderr } = await execFileAsync("gh", args, {
-    maxBuffer: options.maxBuffer || 1024 * 1024 * 20,
-    env: process.env,
-  });
-  return { stdout, stderr };
+  const attempts = options.retries || 1;
+  let lastError = null;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      const { stdout, stderr } = await execFileAsync("gh", args, {
+        maxBuffer: options.maxBuffer || 1024 * 1024 * 20,
+        env: process.env,
+      });
+      return { stdout, stderr };
+    } catch (error) {
+      lastError = error;
+      const message = String(error?.stderr || error?.stdout || error?.message || error);
+      const retryable = /API rate limit exceeded|secondary rate limit|HTTP 5\d\d|ECONNRESET|ETIMEDOUT|fetch failed|Could not resolve host/iu.test(message);
+      if (!retryable || attempt === attempts) throw error;
+      const waitMs = (options.retryBaseMs || 3000) * attempt;
+      console.warn(`[gh retry] ${args.slice(0, 3).join(" ")} failed on attempt ${attempt}/${attempts}; retrying in ${waitMs}ms. ${message.split(/\r?\n/u)[0]}`);
+      await sleep(waitMs);
+    }
+  }
+  throw lastError;
 }
 
 async function withDispatchLock(state, callback) {
@@ -266,7 +286,7 @@ async function dispatchWorkflow(workflow, fields, ref, state) {
     }
     const startedAt = new Date();
     await gh(args);
-    await sleep(2500);
+    await sleep(4000);
     const run = await findNewestWorkflowRun(workflow, startedAt, state?.claimedRunIds);
     state?.claimedRunIds?.add(run.databaseId);
     return run;
@@ -274,26 +294,29 @@ async function dispatchWorkflow(workflow, fields, ref, state) {
 }
 
 async function findNewestWorkflowRun(workflow, startedAt, claimedRunIds = new Set()) {
-  const { stdout } = await gh([
-    "run",
-    "list",
-    "--workflow",
-    workflow,
-    "--event",
-    "workflow_dispatch",
-    "--limit",
-    "20",
-    "--json",
-    "databaseId,status,conclusion,createdAt,url,headBranch,displayTitle",
-  ]);
-  const runs = JSON.parse(stdout || "[]");
   const minTime = startedAt.getTime() - 15000;
-  const match = runs
-    .filter((run) => Date.parse(run.createdAt) >= minTime)
-    .filter((run) => !claimedRunIds.has(run.databaseId))
-    .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))[0];
-  if (!match) throw new Error(`Could not locate newly dispatched run for ${workflow}.`);
-  return match;
+  for (let attempt = 1; attempt <= 10; attempt += 1) {
+    const { stdout } = await gh([
+      "run",
+      "list",
+      "--workflow",
+      workflow,
+      "--event",
+      "workflow_dispatch",
+      "--limit",
+      "50",
+      "--json",
+      "databaseId,status,conclusion,createdAt,url,headBranch,displayTitle",
+    ], { retries: 4, retryBaseMs: 3000 });
+    const runs = JSON.parse(stdout || "[]");
+    const match = runs
+      .filter((run) => Date.parse(run.createdAt) >= minTime)
+      .filter((run) => !claimedRunIds.has(run.databaseId))
+      .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))[0];
+    if (match) return match;
+    await sleep(2500 * attempt);
+  }
+  throw new Error(`Could not locate newly dispatched run for ${workflow}.`);
 }
 
 async function watchRun(runId) {
@@ -315,7 +338,7 @@ async function getRunSummary(runId) {
     String(runId),
     "--json",
     "databaseId,status,conclusion,url,createdAt,updatedAt",
-  ]);
+  ], { retries: 5, retryBaseMs: 3000 });
   return JSON.parse(stdout || "{}");
 }
 
@@ -331,11 +354,39 @@ async function getFinalRunSummary(runId, attempts = 6) {
 
 async function getRunLog(runId) {
   try {
-    const { stdout } = await gh(["run", "view", String(runId), "--log"], { maxBuffer: 1024 * 1024 * 80 });
+    const { stdout } = await gh(["run", "view", String(runId), "--log"], { maxBuffer: 1024 * 1024 * 80, retries: 4, retryBaseMs: 3000 });
     return stdout;
   } catch (error) {
     return String(error?.stdout || error?.message || error || "");
   }
+}
+
+async function getRunJobs(runId) {
+  try {
+    const { stdout } = await gh([
+      "run",
+      "view",
+      String(runId),
+      "--json",
+      "jobs",
+    ], { retries: 5, retryBaseMs: 3000 });
+    return JSON.parse(stdout || "{}").jobs || [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function compactJobState(jobs) {
+  return jobs.map((job) => ({
+    name: job.name || "",
+    status: job.status || "",
+    conclusion: job.conclusion || "",
+    url: job.url || "",
+  }));
+}
+
+function findJob(jobs, name) {
+  return jobs.find((job) => String(job.name || "") === name) || null;
 }
 
 function extractErrorHints(logText) {
@@ -377,8 +428,14 @@ function classifyFailure(logText) {
   }
   const playlistSignal = /playlistItems|playlists\.insert|playlistItems\.insert|playlistItems\.list|youtube-polyglot-playlist|needsPlaylistInsert/iu.test(text);
   const transientSignal = /RATE_LIMIT_EXCEEDED|SERVICE_UNAVAILABLE|ABORTED|fetch failed|ECONNRESET|HTTP 5\d\d/iu.test(text);
+  if (/uploaded video readback returned no items|uploaded_public_playlist_insert_pending|playlist item readback.*pending/iu.test(text)) {
+    return { kind: "post_upload_readback_pending", stopRoute: false, canRepairPlaylist: true, errorHints };
+  }
   if (playlistSignal && transientSignal) {
     return { kind: "playlist_transient", stopRoute: false, canRepairPlaylist: true, errorHints };
+  }
+  if (/NoAudioReceived|Local edge-tts failed|edge-tts failed/iu.test(text)) {
+    return { kind: "tts_transient_no_audio", stopRoute: false, canRepairPlaylist: false, errorHints };
   }
   if (/uploadLimitExceeded/iu.test(text)) {
     return { kind: "upload_limit_exceeded", stopRoute: true, canRepairPlaylist: false, errorHints };
@@ -496,6 +553,23 @@ async function runJob(job, options, state) {
         result.status = "success";
         if (!watched.ok) result.recoveredFromWatchError = true;
       } else {
+        const jobs = await getRunJobs(run.databaseId);
+        result.jobs = compactJobState(jobs);
+        const videoJob = findJob(jobs, "youtube-polyglot-video");
+        const persistJob = findJob(jobs, "persist-polyglot-publish-state");
+        if (videoJob?.conclusion === "success" && persistJob?.conclusion !== "success") {
+          result.status = "state_persist_failed";
+          result.needsStateRecovery = true;
+          result.failure = {
+            kind: "state_persist_failed",
+            stopRoute: false,
+            canRepairPlaylist: false,
+            errorHints: [
+              `youtube-polyglot-video succeeded, but persist-polyglot-publish-state concluded ${persistJob?.conclusion || "unknown"}. Recover state from the child artifact instead of reuploading.`,
+            ],
+          };
+          return result;
+        }
         const log = await getRunLog(run.databaseId);
         const failure = classifyFailure(log);
         result.status = "failed";
@@ -548,7 +622,11 @@ async function runPlannerForSupport({ support, bundle, route, options }) {
   if (options.allowRepublish) args.push("--allow-republish");
   let plannerError = "";
   try {
-    await execFileAsync(process.execPath, args, { maxBuffer: 1024 * 1024 * 20 });
+    await execFileAsync(process.execPath, args, {
+      maxBuffer: 1024 * 1024 * 20,
+      timeout: options.plannerTimeoutMs,
+      env: process.env,
+    });
   } catch (error) {
     plannerError = String(error?.stderr || error?.stdout || error?.message || error);
   }
@@ -632,6 +710,7 @@ async function buildPlan(options) {
       allowRepublish: options.allowRepublish,
       generateThumbnails: options.generateThumbnails,
       createPlaylists: options.createPlaylists,
+      plannerTimeoutMs: options.plannerTimeoutMs,
     },
     summary: {
       supportCount: supports.length,
@@ -664,6 +743,7 @@ async function main() {
     report.execution = execution;
     report.summary.successCount = execution.results.filter((row) => row.status === "success").length;
     report.summary.failedCount = execution.results.filter((row) => row.status === "failed" || row.status === "dispatch_error").length;
+    report.summary.statePersistFailedCount = execution.results.filter((row) => row.status === "state_persist_failed").length;
     report.summary.skippedRouteStoppedCount = execution.results.filter((row) => row.status === "skipped_route_stopped").length;
     report.summary.recoveredWatchErrorCount = execution.results.filter((row) => row.recoveredFromWatchError).length;
     report.summary.playlistRepairDispatchedCount = execution.results.filter((row) => row.playlistRepair?.dispatched).length;

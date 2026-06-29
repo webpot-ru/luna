@@ -53,6 +53,20 @@ let ai33TaskStatusHeaders = null;
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+function positiveIntegerEnv(name, fallback) {
+  const parsed = Number(process.env[name] || "");
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+function formatExecError(error) {
+  const parts = [error?.message || String(error)];
+  const stdout = Buffer.isBuffer(error?.stdout) ? error.stdout.toString("utf8").trim() : "";
+  const stderr = Buffer.isBuffer(error?.stderr) ? error.stderr.toString("utf8").trim() : "";
+  if (stdout) parts.push(`stdout: ${stdout}`);
+  if (stderr) parts.push(`stderr: ${stderr}`);
+  return parts.join(" | ");
+}
+
 async function fetchWithRetry(url, options = {}, retries = 3, backoff = 2000) {
   for (let attempt = 0; attempt < retries; attempt++) {
     const controller = new AbortController();
@@ -364,20 +378,40 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
     venvPath = localVenvPath;
   }
   
-  try {
-    execFileSync(venvPath, [
-      "--voice", cleanVoiceId,
-      "--text", cleanedText,
-      "--write-media", cachedPath
-    ]);
-  } catch (err) {
+  const retryCount = positiveIntegerEnv("EDGE_TTS_RETRIES", 4);
+  const retryBaseMs = positiveIntegerEnv("EDGE_TTS_RETRY_BASE_MS", 1500);
+  let lastError = null;
+  for (let attempt = 1; attempt <= retryCount; attempt += 1) {
     try {
       if (fs.existsSync(cachedPath)) fs.unlinkSync(cachedPath);
     } catch (e) {}
-    throw new Error(`Local edge-tts failed for text "${text}": ${err.message}`);
+    try {
+      execFileSync(venvPath, [
+        "--voice", cleanVoiceId,
+        "--text", cleanedText,
+        "--write-media", cachedPath
+      ], {
+        stdio: "pipe",
+        timeout: positiveIntegerEnv("EDGE_TTS_TIMEOUT_MS", 90000),
+      });
+      if (fs.existsSync(cachedPath) && fs.statSync(cachedPath).size > 0) {
+        return cachedPath;
+      }
+      throw new Error("edge-tts wrote an empty audio file.");
+    } catch (err) {
+      lastError = err;
+      try {
+        if (fs.existsSync(cachedPath)) fs.unlinkSync(cachedPath);
+      } catch (e) {}
+      if (attempt < retryCount) {
+        const waitMs = retryBaseMs * Math.pow(2, attempt - 1);
+        console.warn(`[Local TTS] edge-tts failed for "${cleanedText.slice(0, 40)}..." attempt ${attempt}/${retryCount}; retrying in ${waitMs}ms. ${formatExecError(err)}`);
+        await delay(waitMs);
+      }
+    }
   }
-  
-  return cachedPath;
+
+  throw new Error(`Local edge-tts failed for text "${text}" after ${retryCount} attempts: ${formatExecError(lastError)}`);
 }
 
 // Get Audio Duration via ffprobe
