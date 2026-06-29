@@ -73181,6 +73181,98 @@
       "youtubeVideoId": "yBkT4eCJMKE",
       "youtubePlaylistId": "PLEEDkZIfvhZQ",
       "playlistItemId": "UExFRURrWklmdmhaUS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "KO",
+      "targetLang": "LO",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "publishAt": "2026-06-29T23:30:00.000Z",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-06-30",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_lo_ko/youtube_metadata.json",
+      "title": "라오스어 기초 단어 공부: 주방용품 기초 50단어 발음 연습",
+      "playlist_key": "KO__LO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-30T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-02T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-06T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-29T23:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28360348015",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28360348015",
+      "createdAt": "2026-06-29T08:56:56.322Z",
+      "updatedAt": "2026-06-29T08:56:56.322Z",
+      "youtubeVideoId": "GEa8CUPEgPM",
+      "youtubePlaylistId": "PLUlScRUaJ6IM",
+      "playlistItemId": "UExVbFNjUlVhSjZJTS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "KO",
+      "targetLang": "LT",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "publishAt": "2026-06-30T02:30:00.000Z",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-06-30",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_lt_ko/youtube_metadata.json",
+      "title": "리투아니아어 A1 기초 단어 공부: 주방용품 기초 50단어",
+      "playlist_key": "KO__LT__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-01T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-03T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-07T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-30T02:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28360348015",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28360348015",
+      "createdAt": "2026-06-29T08:56:56.324Z",
+      "updatedAt": "2026-06-29T08:56:56.324Z",
+      "youtubeVideoId": "iC7uC-jVG38",
+      "youtubePlaylistId": "PLBnxAVjdeEXE",
+      "playlistItemId": "UExCbnhBVmpkZUVYRS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
