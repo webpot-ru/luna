@@ -526,7 +526,7 @@ Known 2026-06-29 dispatcher outcomes:
 
 - Run `28348985652` selected 39 support channels / 195 target videos for routes `youtube 2`, `youtube 3` and `youtube 4`, but GitHub returned workflow-dispatch API rate-limit 403 before creating child runs. Result: no YouTube writes. Fix: bounded workflow-dispatch retries in `scripts/dispatch-youtube-bulk-publish.mjs`.
 - Run `28350091181` also created no child runs because GitHub rejected child dispatches with HTTP 422: the parent sent `schedule_min_future_minutes` before `youtube-video-publish.yml` declared that input. Result: no YouTube writes. Fix: the child workflow declares the input and passes it to the calendar planner.
-- Run `28350633472` is the first corrected live parent dispatcher from commit `0fc7396`: it created child upload workflows. Read status from the current GitHub run list plus persisted commits on `main`; during this wave, child successes were already persisted by commits such as `73e2fc6` (`CS -> NB,NE,NL,PL,PT-BR`) and `abc2a79` (`AZ -> LT,LV,ML,MY,NB`).
+- Run `28350633472` is the first corrected live parent dispatcher from commit `0fc7396`: it created child upload workflows. Read status from the current GitHub run list plus persisted commits on `main`; during this wave, child successes were already persisted by commits such as `73e2fc6` (`CS -> NB,NE,NL,PL,PT-BR`), `abc2a79` (`AZ -> LT,LV,ML,MY,NB`), `91e0f06` (`DA -> NB,NE,NL,PL,PT-BR`) and `3c82229` (`HY -> HI,HR,HU,ID,IS`).
 
 Calendar handling for remote scheduled waves:
 
