@@ -508,6 +508,39 @@ Acceptance gates before any automated YouTube playlist writes:
 
 Do not rely on `docs/video-lessons-registry.md` alone for playlist automation. That markdown table is useful as a human-readable status ledger, but playlist upload/publish needs a structured JSON/JSONL registry to avoid duplicates and title/localization drift.
 
+### Remote GitHub bulk upload runbook
+
+Ordinary remote upload waves are launched by `.github/workflows/youtube-bulk-publish-dispatcher.yml`, but the parent dispatcher is only an orchestrator. A green or still-running parent run does **not** prove that any YouTube video was uploaded. Upload proof comes from the child `.github/workflows/youtube-video-publish.yml` runs, their artifacts, YouTube API readback and the durable persisted state committed back into `config/youtube-published-videos.json`, `config/youtube-publish-calendar.json` and `config/youtube-playlists.json`.
+
+Read a remote wave in this order:
+
+1. Open the parent dispatcher run and download `outputs/youtube-bulk-publish-dispatcher-report.json` when available.
+2. Record `supportCount`, `dispatchJobCount`, `selectedTargetCount`, `successCount`, `failedCount`, `githubRateLimitedCount` and `skippedDispatcherStoppedCount`.
+3. If the parent report has `successCount=0`, inspect the failure class before saying anything was uploaded. GitHub `dispatch_error`, HTTP 403 rate limit or HTTP 422 workflow-input errors happen before YouTube writes; those cases mean `0` videos uploaded, `0` thumbnails generated and no YouTube upload quota spent.
+4. Inspect the child `youtube-video-publish.yml` runs. A child workflow can upload videos even if the parent is still running or later reports a watch/dispatch problem.
+5. Treat the durable source of truth as the merge/persist commits to `main`. A child artifact is evidence; it is not enough for future duplicate prevention until the state is merged into the committed config files.
+6. If child upload succeeds but playlist insert/readback or `persist-publish-state` fails, classify it as repair/recovery work. Do not re-render or reupload that video until live YouTube readback proves the `videoId` is missing.
+7. If the local checkout is dirty or behind `main`, use a clean synchronized temp checkout for documentation/persistence work and fetch the latest `main` before editing.
+
+Known 2026-06-29 dispatcher outcomes:
+
+- Run `28348985652` selected 39 support channels / 195 target videos for routes `youtube 2`, `youtube 3` and `youtube 4`, but GitHub returned workflow-dispatch API rate-limit 403 before creating child runs. Result: no YouTube writes. Fix: bounded workflow-dispatch retries in `scripts/dispatch-youtube-bulk-publish.mjs`.
+- Run `28350091181` also created no child runs because GitHub rejected child dispatches with HTTP 422: the parent sent `schedule_min_future_minutes` before `youtube-video-publish.yml` declared that input. Result: no YouTube writes. Fix: the child workflow declares the input and passes it to the calendar planner.
+- Run `28350633472` is the first corrected live parent dispatcher from commit `0fc7396`: it created child upload workflows. Read status from the current GitHub run list plus persisted commits on `main`; during this wave, child successes were already persisted by commits such as `73e2fc6` (`CS -> NB,NE,NL,PL,PT-BR`) and `abc2a79` (`AZ -> LT,LV,ML,MY,NB`).
+
+Calendar handling for remote scheduled waves:
+
+- Scheduled GitHub runs must pass `--reschedule-past-reservations --min-future-minutes=<schedule_min_future_minutes>` to `scripts/plan-youtube-publish-schedule.mjs`.
+- `schedule_min_future_minutes` is a parent and child workflow contract. If one side sends it and the other side does not declare it, GitHub rejects the child dispatch before any YouTube work starts.
+- A calendar row is not proof of upload. Active reservations without a backing `youtubeVideoId` or equivalent live-readback publication must be repaired, cancelled or rescheduled by the merge logic instead of being treated as already published.
+
+Thumbnail handling for remote waves:
+
+- `generate_thumbnails=true` does not mean generate images for every channel. The GitHub workflow must call VectorEngine image generation only when `config/youtube-channels.json` has `customThumbnailUploadAllowed=true` for the support channel.
+- Channels without custom-thumbnail permission must be recorded with `thumbnailUploadMode=first_frame_auto` / `thumbnailSource=youtube-auto-first-frame`. YouTube chooses the automatic thumbnail; the Data API cannot force the first frame.
+- Private or scheduled videos can return 404 from public `img.youtube.com` thumbnail URLs until YouTube processing/visibility catches up. That is not by itself proof that a custom thumbnail upload failed.
+- Thumbnail-only repair for already uploaded videos belongs to `.github/workflows/youtube-thumbnail-set.yml`; it must not re-render videos, reupload videos or touch unrelated playlist state.
+
 ### Publication schedule and global calendar
 
 `config/youtube-publish-schedule-policy.json` answers **when a channel is allowed to publish**. `config/youtube-publish-calendar.json` answers **which exact future slots are already reserved**. Both are committed, non-secret files and are part of the YouTube publication source of truth.
