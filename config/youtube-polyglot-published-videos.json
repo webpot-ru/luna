@@ -1211,6 +1211,56 @@
         "playlistItemReadback": "pending",
         "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (404): {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Video not found.\",\n    \"errors\": [\n      {\n        \"message\": \"Video not found.\",\n        \"domain\": \"youtube.playlistItem\",\n        \"reason\": \"videoNotFound\"\n      }\n    ]\n  }\n}\n"
       }
+    },
+    {
+      "videoType": "polyglot",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:LT:global_europe_core:7a4233775927",
+      "bundleKey": "global_europe_core",
+      "bundleLabel": "Global Europe Core",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "targetLangsHash": "7a4233775927",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "LT",
+      "targetLang": "EN,ES,FR,DE",
+      "playlist_key": "POLYGLOT__LT__global-europe-core__7a4233775927",
+      "title": "Virtuvės reikmenys 4 kalbomis: anglų, ispanų, prancūzų, vokiečių | Poliglotas",
+      "youtubeVideoId": "DR5wgcHTksM",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=DR5wgcHTksM",
+      "youtubePlaylistId": "PLaaMXcB9uGFM",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLaaMXcB9uGFM",
+      "playlistItemId": "UExhYU1YY0I5dUdGTS41NkI0NEY2RDEwNTU3Q0M2",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "channelHandle": "@lunacardslietuviu",
+      "privacyStatus": "public",
+      "publicationStatus": "published_uploaded_thumbnail_auto",
+      "publishAt": "",
+      "scheduledPublishAt": "",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "metadataSource": "vectorengine-gemini-polyglot",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "28347361466",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28347361466",
+      "uploadedAt": "2026-06-29T03:56:29.045Z",
+      "lastReadbackAt": "2026-06-29T03:56:29.045Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "public",
+        "publishAt": "",
+        "thumbnailStatus": "auto_first_frame"
+      }
     }
   ]
 }
