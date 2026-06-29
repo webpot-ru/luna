@@ -309,6 +309,53 @@ function mergeChannels(currentRegistry, incomingRegistry) {
   return summary;
 }
 
+function mergePolyglotProgress(currentRegistry, incomingRegistry) {
+  const currentRows = currentRegistry.items || [];
+  const incomingRows = incomingRegistry.items || [];
+  currentRegistry.items = currentRows;
+  const byKey = new Map(currentRows.map((row) => [row.polyglotKey || "", row]));
+  const summary = { created: 0, updated: 0, skipped: 0 };
+
+  for (const incoming of incomingRows) {
+    const key = incoming.polyglotKey || "";
+    if (!key) {
+      summary.skipped += 1;
+      continue;
+    }
+    const existing = byKey.get(key);
+    if (!existing) {
+      currentRows.push(incoming);
+      byKey.set(key, incoming);
+      summary.created += 1;
+      continue;
+    }
+
+    let changed = fillMissing(existing, incoming, [
+      "status",
+      "youtubeVideoId",
+      "youtubeVideoUrl",
+      "youtubePlaylistId",
+      "playlistItemId",
+      "channelKey",
+      "privacyStatus",
+      "publishAt",
+      "githubRunId",
+      "githubRunUrl",
+      "createdAt"
+    ]);
+    if (incoming.updatedAt && (!existing.updatedAt || new Date(incoming.updatedAt) > new Date(existing.updatedAt))) {
+      existing.updatedAt = incoming.updatedAt;
+      existing.status = incoming.status;
+      changed = true;
+    }
+    if (changed) summary.updated += 1;
+    else summary.skipped += 1;
+  }
+  return summary;
+}
+
+
+
 function loadPair(repoRoot, artifactDir, relativePath, fallback) {
   const currentPath = path.join(repoRoot, relativePath);
   const incomingPath = path.join(artifactDir, relativePath);
@@ -388,6 +435,42 @@ function main() {
   if (channels.hasIncoming) {
     summary.channels = mergeChannels(channels.current, channels.incoming);
     if (writeJsonIfChanged(channels.currentPath, channels.current)) summary.filesChanged.push("config/youtube-channels.json");
+  }
+
+  // Polyglot publications
+  const polyglotPublications = loadPair(repoRoot, artifactDir, "config/youtube-polyglot-published-videos.json", () => ({
+    schemaVersion: 1,
+    publications: [],
+  }));
+  if (polyglotPublications.hasIncoming) {
+    summary.polyglotPublications = mergePublications(polyglotPublications.current, polyglotPublications.incoming);
+    if (writeJsonIfChanged(polyglotPublications.currentPath, polyglotPublications.current)) {
+      summary.filesChanged.push("config/youtube-polyglot-published-videos.json");
+    }
+  }
+
+  // Polyglot playlists
+  const polyglotPlaylists = loadPair(repoRoot, artifactDir, "config/youtube-polyglot-playlists.json", () => ({
+    schemaVersion: 1,
+    playlists: [],
+  }));
+  if (polyglotPlaylists.hasIncoming) {
+    summary.polyglotPlaylists = mergePlaylists(polyglotPlaylists.current, polyglotPlaylists.incoming);
+    if (writeJsonIfChanged(polyglotPlaylists.currentPath, polyglotPlaylists.current)) {
+      summary.filesChanged.push("config/youtube-polyglot-playlists.json");
+    }
+  }
+
+  // Polyglot progress
+  const polyglotProgress = loadPair(repoRoot, artifactDir, "config/youtube-polyglot-progress.json", () => ({
+    schemaVersion: 1,
+    items: [],
+  }));
+  if (polyglotProgress.hasIncoming) {
+    summary.polyglotProgress = mergePolyglotProgress(polyglotProgress.current, polyglotProgress.incoming);
+    if (writeJsonIfChanged(polyglotProgress.currentPath, polyglotProgress.current)) {
+      summary.filesChanged.push("config/youtube-polyglot-progress.json");
+    }
   }
 
   const summaryPath = path.resolve(repoRoot, options.summary);
