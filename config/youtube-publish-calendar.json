@@ -73089,6 +73089,98 @@
       "createdAt": "2026-06-29T08:23:35.881Z",
       "updatedAt": "2026-06-29T08:23:35.881Z",
       "youtubeVideoId": "2eag0zIUF2k"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "JA",
+      "targetLang": "LO",
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "publishAt": "2026-06-29T23:30:00.000Z",
+      "timeZone": "Asia/Tokyo",
+      "localDate": "2026-06-30",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_lo_ja/youtube_metadata.json",
+      "title": "ラオス語の基本単語 - 台所用品の基本 50語（発音とミニテスト付き）",
+      "playlist_key": "JA__LO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-06-30T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-02T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-06T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-29T23:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28359810860",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28359810860",
+      "createdAt": "2026-06-29T08:47:38.687Z",
+      "updatedAt": "2026-06-29T08:47:38.687Z",
+      "youtubeVideoId": "MBv69S2_kHo",
+      "youtubePlaylistId": "PLBr32QAx5g5o",
+      "playlistItemId": "UExCcjMyUUF4NWc1by41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "JA",
+      "targetLang": "LT",
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "publishAt": "2026-06-30T02:30:00.000Z",
+      "timeZone": "Asia/Tokyo",
+      "localDate": "2026-06-30",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_lt_ja/youtube_metadata.json",
+      "title": "リトアニア語の基本単語：台所用品の基本 50語（発音とミニテスト付き）",
+      "playlist_key": "JA__LT__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-01T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-03T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-07T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-30T02:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28359810860",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28359810860",
+      "createdAt": "2026-06-29T08:47:38.689Z",
+      "updatedAt": "2026-06-29T08:47:38.689Z",
+      "youtubeVideoId": "yBkT4eCJMKE",
+      "youtubePlaylistId": "PLEEDkZIfvhZQ",
+      "playlistItemId": "UExFRURrWklmdmhaUS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
