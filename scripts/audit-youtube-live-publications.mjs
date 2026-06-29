@@ -17,6 +17,7 @@ function parseArgs(argv) {
     courseLinks: DEFAULT_COURSE_LINKS_PATH,
     output: DEFAULT_OUTPUT_PATH,
     maxPages: DEFAULT_MAX_UPLOAD_PLAYLIST_PAGES,
+    allowSupportErrors: false,
     json: false,
   };
 
@@ -41,6 +42,8 @@ function parseArgs(argv) {
       options.output = readValue();
     } else if (arg === "--max-pages" || arg.startsWith("--max-pages=")) {
       options.maxPages = Number(readValue());
+    } else if (arg === "--allow-support-errors") {
+      options.allowSupportErrors = true;
     } else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
   }
@@ -62,8 +65,7 @@ function usage() {
 }
 
 function fail(message) {
-  console.error(message);
-  process.exit(1);
+  throw new Error(message);
 }
 
 function normalizeCode(value) {
@@ -360,14 +362,23 @@ async function main() {
 
   const supports = [...new Set(options.supports.map(normalizeCode).filter(Boolean))];
   const supportReports = [];
+  const supportErrors = [];
   for (const supportLang of supports) {
-    supportReports.push(await auditSupport({
-      options,
-      channelRegistry,
-      publicationRegistry,
-      courseSlug,
-      supportLang,
-    }));
+    try {
+      supportReports.push(await auditSupport({
+        options,
+        channelRegistry,
+        publicationRegistry,
+        courseSlug,
+        supportLang,
+      }));
+    } catch (error) {
+      supportErrors.push({
+        supportLang,
+        errorMessage: error?.message || String(error),
+        quotaExceeded: /quotaExceeded|youtube\.quota|exceeded your .*quota/iu.test(error?.message || String(error)),
+      });
+    }
   }
 
   const publications = supportReports.flatMap((report) => report.matchedPublications);
@@ -383,6 +394,8 @@ async function main() {
     matchedPublicationCount: publications.length,
     missingFromLocalRegistryCount: supportReports.reduce((sum, item) => sum + item.missingFromLocalRegistry.length, 0),
     duplicateGroups: duplicateGroups(publications),
+    supportErrorCount: supportErrors.length,
+    supportErrors,
     supportReports,
     publications,
   };
@@ -398,6 +411,8 @@ async function main() {
       matchedPublicationCount: report.matchedPublicationCount,
       missingFromLocalRegistryCount: report.missingFromLocalRegistryCount,
       duplicateGroupCount: report.duplicateGroups.length,
+      supportErrorCount: report.supportErrorCount,
+      supportErrors: report.supportErrors,
       output: options.output,
     }, null, 2));
   } else {
@@ -405,9 +420,16 @@ async function main() {
     console.log(`matchedPublicationCount=${report.matchedPublicationCount}`);
     console.log(`missingFromLocalRegistryCount=${report.missingFromLocalRegistryCount}`);
     console.log(`duplicateGroupCount=${report.duplicateGroups.length}`);
+    console.log(`supportErrorCount=${report.supportErrorCount}`);
+  }
+
+  if (supportErrors.length > 0 && !options.allowSupportErrors) {
+    console.error(`YouTube live publication audit had ${supportErrors.length} support error(s); report still written to ${options.output}`);
+    process.exitCode = 2;
   }
 }
 
 main().catch((error) => {
-  fail(error?.stack || error?.message || String(error));
+  console.error(error?.stack || error?.message || String(error));
+  process.exit(1);
 });
