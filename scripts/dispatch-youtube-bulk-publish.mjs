@@ -25,7 +25,8 @@ function parseArgs(argv) {
     excludeSupports: [],
     excludeTargets: [],
     targetsPerSupport: 4,
-    maxParallel: 20,
+    maxParallel: 8,
+    maxActivePerRoute: 1,
     ref: process.env.GITHUB_REF_NAME || "main",
     mode: "apply",
     publishMode: "scheduled",
@@ -69,6 +70,7 @@ function parseArgs(argv) {
     else if (arg === "--exclude-targets" || arg.startsWith("--exclude-targets=") || arg === "--exclude-langs" || arg.startsWith("--exclude-langs=")) options.excludeTargets = splitCodes(readValue());
     else if (arg === "--targets-per-support" || arg.startsWith("--targets-per-support=")) options.targetsPerSupport = Number(readValue());
     else if (arg === "--max-parallel" || arg.startsWith("--max-parallel=")) options.maxParallel = Number(readValue());
+    else if (arg === "--max-active-per-route" || arg.startsWith("--max-active-per-route=")) options.maxActivePerRoute = Number(readValue());
     else if (arg === "--ref" || arg.startsWith("--ref=")) options.ref = readValue();
     else if (arg === "--mode" || arg.startsWith("--mode=")) options.mode = readValue();
     else if (arg === "--publish-mode" || arg.startsWith("--publish-mode=")) options.publishMode = readValue();
@@ -145,6 +147,9 @@ function ensureSafeOptions(options) {
   }
   if (!Number.isInteger(options.maxParallel) || options.maxParallel < 1 || options.maxParallel > 20) {
     throw new Error("--max-parallel must be between 1 and 20.");
+  }
+  if (!Number.isInteger(options.maxActivePerRoute) || options.maxActivePerRoute < 1 || options.maxActivePerRoute > 20) {
+    throw new Error("--max-active-per-route must be between 1 and 20.");
   }
   if (!Number.isFinite(options.scheduleMinFutureMinutes) || options.scheduleMinFutureMinutes < 0) {
     throw new Error("--schedule-min-future-minutes must be a non-negative number.");
@@ -278,6 +283,14 @@ async function gh(args, options = {}) {
   return { stdout, stderr };
 }
 
+function compactDispatcherError(error) {
+  return String(error?.stderr || error?.stdout || error?.message || error || "").replace(/\s+/g, " ").trim().slice(0, 1200);
+}
+
+function isGitHubApiRateLimitText(text) {
+  return /api rate limit exceeded|secondary rate limit|abuse detection|you have exceeded a secondary rate limit/iu.test(String(text || ""));
+}
+
 async function withDispatchLock(state, callback) {
   if (!state) return callback();
   const previous = state.dispatchLock || Promise.resolve();
@@ -386,6 +399,9 @@ function extractErrorHints(logText) {
     /\bSERVICE_UNAVAILABLE\b/iu,
     /\bABORTED\b/iu,
     /\bplaylistItems\b/iu,
+    /\bvideoNotFound\b/iu,
+    /\bAPI rate limit exceeded\b/iu,
+    /\bsecondary rate limit\b/iu,
     /\bNo eligible\b/iu,
     /\beligibleTargetCount\b/iu,
     /\bmetadata_language_gate\b/iu,
@@ -427,6 +443,15 @@ function classifySuccessfulRun(logText) {
 function classifyFailure(logText) {
   const text = String(logText || "");
   const errorHints = extractErrorHints(text);
+  if (isGitHubApiRateLimitText(text)) {
+    return {
+      kind: "github_api_rate_limited",
+      stopRoute: false,
+      stopAll: true,
+      canRepairPlaylist: false,
+      errorHints,
+    };
+  }
   if (/quotaExceeded/iu.test(text)) {
     return {
       kind: "quota_exceeded",
@@ -436,7 +461,7 @@ function classifyFailure(logText) {
     };
   }
   const playlistSignal = /playlistItems|playlists\.insert|playlistItems\.insert|playlistItems\.list|youtube-playlist|needsPlaylistInsert/iu.test(text);
-  const transientSignal = /RATE_LIMIT_EXCEEDED|SERVICE_UNAVAILABLE|ABORTED|fetch failed|ECONNRESET|HTTP 5\d\d/iu.test(text);
+  const transientSignal = /RATE_LIMIT_EXCEEDED|SERVICE_UNAVAILABLE|ABORTED|fetch failed|ECONNRESET|HTTP 5\d\d|videoNotFound/iu.test(text);
   if (playlistSignal && transientSignal) {
     return {
       kind: "playlist_transient",
@@ -546,6 +571,11 @@ async function runJob(job, options, state) {
     result.status = "skipped_route_stopped";
     return result;
   }
+  if (state.stopAll) {
+    result.status = "skipped_dispatcher_stopped";
+    result.stopAllReason = state.stopAllReason || "";
+    return result;
+  }
   const fields = workflowFieldsForJob(job, options);
   result.fields = fields;
   try {
@@ -573,14 +603,32 @@ async function runJob(job, options, state) {
         result.status = "failed";
         result.failure = failure;
         if (failure.stopRoute) state.stoppedRoutes.add(job.route);
+        if (failure.stopAll) {
+          state.stopAll = true;
+          state.stopAllReason = failure.kind;
+        }
         if (failure.canRepairPlaylist) {
           await runRepairTargets(job, options, result, state);
         }
       }
     }
   } catch (error) {
-    result.status = "dispatch_error";
-    result.error = String(error?.message || error);
+    const errorText = compactDispatcherError(error);
+    result.error = errorText;
+    if (isGitHubApiRateLimitText(errorText)) {
+      result.status = "github_api_rate_limited";
+      result.failure = {
+        kind: "github_api_rate_limited",
+        stopRoute: false,
+        stopAll: true,
+        canRepairPlaylist: false,
+        errorHints: [errorText].filter(Boolean),
+      };
+      state.stopAll = true;
+      state.stopAllReason = "github_api_rate_limited";
+    } else {
+      result.status = "dispatch_error";
+    }
   }
   return result;
 }
@@ -592,19 +640,68 @@ async function runPool(jobs, options) {
     stoppedRoutes: new Set(),
     claimedRunIds: new Set(),
     dispatchLock: Promise.resolve(),
+    stopAll: false,
+    stopAllReason: "",
   };
-  const workers = Array.from({ length: Math.min(options.maxParallel, pending.length) }, async () => {
+  const active = new Set();
+  const routeActive = new Map();
+  const decrementRoute = (route) => {
+    const next = Math.max(0, (routeActive.get(route) || 0) - 1);
+    if (next) routeActive.set(route, next);
+    else routeActive.delete(route);
+  };
+  const markSkipped = () => {
     while (pending.length) {
       const job = pending.shift();
-      const result = await runJob(job, options, state);
-      results.push(result);
-      if (options.dispatchSpacingSeconds > 0) {
-        await sleep(options.dispatchSpacingSeconds * 1000);
-      }
+      results.push({
+        support: job.support,
+        route: job.route,
+        environment: job.environment,
+        targets: job.targets,
+        langs: job.langs,
+        status: state.stopAll ? "skipped_dispatcher_stopped" : "skipped_route_stopped",
+        stopAllReason: state.stopAllReason || "",
+      });
     }
-  });
-  await Promise.all(workers);
-  return { results, stoppedRoutes: [...state.stoppedRoutes] };
+  };
+
+  while (pending.length || active.size) {
+    let launched = false;
+    while (!state.stopAll && active.size < Math.min(options.maxParallel, jobs.length)) {
+      const index = pending.findIndex((job) => (
+        !state.stoppedRoutes.has(job.route)
+        && (routeActive.get(job.route) || 0) < options.maxActivePerRoute
+      ));
+      if (index === -1) break;
+      const [job] = pending.splice(index, 1);
+      routeActive.set(job.route, (routeActive.get(job.route) || 0) + 1);
+      const task = (async () => {
+        const result = await runJob(job, options, state);
+        results.push(result);
+        if (options.dispatchSpacingSeconds > 0) {
+          await sleep(options.dispatchSpacingSeconds * 1000);
+        }
+      })().finally(() => {
+        decrementRoute(job.route);
+        active.delete(task);
+      });
+      active.add(task);
+      launched = true;
+    }
+
+    if (state.stopAll) break;
+    if (!active.size) break;
+    if (!launched) await Promise.race(active);
+  }
+
+  await Promise.all(active);
+  if (pending.length) markSkipped();
+  return {
+    results,
+    stoppedRoutes: [...state.stoppedRoutes],
+    stopAll: state.stopAll,
+    stopAllReason: state.stopAllReason,
+  };
 }
 
 async function buildPlan(options) {
@@ -654,6 +751,7 @@ async function buildPlan(options) {
       supportSource: options.supportSource,
       targetsPerSupport: options.targetsPerSupport,
       maxParallel: options.maxParallel,
+      maxActivePerRoute: options.maxActivePerRoute,
       ref: options.ref,
       workflow: options.workflow,
       repairWorkflow: options.repairWorkflow,
@@ -668,6 +766,7 @@ async function buildPlan(options) {
       selectedTargetCount: jobs.reduce((sum, job) => sum + job.targets.length, 0),
       skippedSupportCount: supports.length - jobs.length,
       maxParallel: options.maxParallel,
+      maxActivePerRoute: options.maxActivePerRoute,
     },
     supports: supportReports,
     jobs,
@@ -693,8 +792,10 @@ async function main() {
     report.execution = execution;
     report.summary.successCount = execution.results.filter((row) => row.status === "success").length;
     report.summary.skippedNoEligibleCount = execution.results.filter((row) => row.status === "skipped_no_eligible").length;
-    report.summary.failedCount = execution.results.filter((row) => row.status === "failed" || row.status === "dispatch_error").length;
+    report.summary.failedCount = execution.results.filter((row) => ["failed", "dispatch_error", "github_api_rate_limited"].includes(row.status)).length;
     report.summary.skippedRouteStoppedCount = execution.results.filter((row) => row.status === "skipped_route_stopped").length;
+    report.summary.skippedDispatcherStoppedCount = execution.results.filter((row) => row.status === "skipped_dispatcher_stopped").length;
+    report.summary.githubRateLimitedCount = execution.results.filter((row) => row.status === "github_api_rate_limited" || row.failure?.kind === "github_api_rate_limited").length;
     report.summary.recoveredWatchErrorCount = execution.results.filter((row) => row.recoveredFromWatchError).length;
     report.summary.playlistRepairDispatchedCount = execution.results.filter((row) => row.playlistRepair?.dispatched).length;
   } else if (options.apply) {

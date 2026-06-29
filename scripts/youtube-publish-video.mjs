@@ -160,6 +160,8 @@ function isRecoverablePlaylistWriteError(error) {
       || message.includes("userratelimitexceeded")
       || message.includes("rate limit")
       || message.includes("resource_exhausted")
+      || message.includes("videonotfound")
+      || message.includes("video not found")
     )
   );
 }
