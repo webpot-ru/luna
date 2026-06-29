@@ -512,6 +512,12 @@ Do not rely on `docs/video-lessons-registry.md` alone for playlist automation. T
 
 Ordinary remote upload waves are launched by `.github/workflows/youtube-bulk-publish-dispatcher.yml`, but the parent dispatcher is only an orchestrator. A green or still-running parent run does **not** prove that any YouTube video was uploaded. Upload proof comes from the child `.github/workflows/youtube-video-publish.yml` runs, their artifacts, YouTube API readback and the durable persisted state committed back into `config/youtube-published-videos.json`, `config/youtube-publish-calendar.json` and `config/youtube-playlists.json`.
 
+> [!IMPORTANT]
+> **GitHub API Limits vs YouTube Quota**:
+> GitHub API rate limits (including secondary rate limits encountered during heavy multi-run dispatch and watch operations) are entirely separate from YouTube Data API quotas.
+> - If a run or specific support language keys are marked as `skippedDispatcherStoppedCount` or `skipped_dispatcher_stopped`, the YouTube uploads for those targets never started, and no YouTube quota was consumed.
+> - A parent dispatcher success does not guarantee child success, and parent dispatch errors do not necessarily mean YouTube upload failures.
+
 Read a remote wave in this order:
 
 1. Open the parent dispatcher run and download `outputs/youtube-bulk-publish-dispatcher-report.json` when available.
@@ -521,6 +527,18 @@ Read a remote wave in this order:
 5. Treat the durable source of truth as the merge/persist commits to `main`. A child artifact is evidence; it is not enough for future duplicate prevention until the state is merged into the committed config files.
 6. If child upload succeeds but playlist insert/readback or `persist-publish-state` fails, classify it as repair/recovery work. Do not re-render or reupload that video until live YouTube readback proves the `videoId` is missing.
 7. If the local checkout is dirty or behind `main`, use a clean synchronized temp checkout for documentation/persistence work and fetch the latest `main` before editing.
+
+> [!TIP]
+> **Safe Continuation after GitHub API Throttle**:
+> When a large dispatch batch is throttled or interrupted by GitHub API limits:
+> - **Do not blindy retry** the broad 39-support batch.
+> - **Build a remaining list** by comparing the dispatcher report and actual committed `config/youtube-published-videos.json` state.
+> - **Run smaller batches** to reduce API pressure:
+>   - Set `max_parallel` to `3` or `4` max.
+>   - Keep `max_active_per_route=1` to isolate route failures.
+>   - Set dispatcher dispatch spacing (`dispatch_spacing_seconds`) to `60` or `120` seconds.
+> - **Handle playlist errors in repair-only mode**: run the playlist repair workflow without reuploading or re-rendering videos.
+> - **Generate thumbnails selectively**: generate custom thumbnails only for channels mapped as `customThumbnailUploadAllowed=true` in `config/youtube-channels.json`. All other channels must fall back to automatic first-frame modes without triggering paid thumbnail APIs.
 
 Known 2026-06-29 dispatcher outcomes:
 
