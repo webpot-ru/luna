@@ -124,7 +124,7 @@ permissions:
 
 concurrency:
   group: youtube-video-publish-${{ github.event.inputs.set_id }}-${{ github.event.inputs.support }}-${{ github.event.inputs.langs }}-${{ github.event.inputs.worker_count }}-${{ github.event.inputs.worker_index }}-${{ github.event.inputs.publish_mode }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   youtube-video-publish:
@@ -655,6 +655,7 @@ jobs:
             outputs/video-generator/
             outputs/youtube-publish-schedule-github.json
             outputs/youtube-publish-plan-github.json
+            outputs/youtube-live-publications-github.json
             outputs/youtube-publish-ledger.jsonl
             config/youtube-channels.json
             config/youtube-playlists.json

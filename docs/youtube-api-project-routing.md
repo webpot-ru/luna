@@ -137,6 +137,8 @@ Existing primary project. Keep the high-priority shared channels here first.
 - `scripts/resolve-youtube-api-environment.mjs` / `npm run resolve:youtube-api-environment` validates that the requested support code(s) belong to the selected GitHub environment. If a support list spans multiple API routes, the workflow must fail and the work must be split into separate dispatches.
 - Default production dispatch shape is one support channel per run with `youtube_environment=auto`. Use an explicit GitHub environment only for debugging or replacement work, and only when it matches the route in `config/youtube-api-project-routing.json`.
 - If one API project hits quota or returns `quotaExceeded`, stop that route only. Do not blindly retry the same write against another project unless the channel has been deliberately re-authorized under that project and the docs/config are updated.
+- Bulk dispatcher defaults must keep route failure observable before launching more same-route writes: `.github/workflows/youtube-bulk-publish-dispatcher.yml` defaults to `max_active_per_route=1`. Raising it is a deliberate quota-risk decision, not a normal speed setting.
+- GitHub API watcher limits are separate from YouTube API quota. If dispatcher logs show GitHub `API rate limit exceeded` or secondary rate-limit errors, stop new dispatches, keep already-started child runs running, and rely on child artifacts plus `persist-publish-state` for durable state.
 - New Google Cloud projects must be production/audited with matching YouTube API disclosure, OAuth consent configuration and GitHub environment secrets before they are used for public scheduled uploads.
 - Token files, refresh tokens, client secrets and `.local` contents must stay out of git and out of this document.
 

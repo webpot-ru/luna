@@ -34,7 +34,11 @@ on:
       max_parallel:
         description: "Maximum simultaneous youtube-video-publish workflow runs."
         required: true
-        default: "20"
+        default: "8"
+      max_active_per_route:
+        description: "Maximum active youtube-video-publish runs per YouTube API route."
+        required: true
+        default: "1"
       exclude_supports:
         description: "Comma-separated support codes to skip, or NONE."
         required: false
@@ -108,6 +112,7 @@ jobs:
           SUPPORT_SOURCE: ${{ github.event.inputs.support_source }}
           TARGETS_PER_SUPPORT: ${{ github.event.inputs.targets_per_support }}
           MAX_PARALLEL: ${{ github.event.inputs.max_parallel }}
+          MAX_ACTIVE_PER_ROUTE: ${{ github.event.inputs.max_active_per_route }}
           EXCLUDE_SUPPORTS: ${{ github.event.inputs.exclude_supports }}
           EXCLUDE_LANGS: ${{ github.event.inputs.exclude_langs }}
           SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
@@ -125,6 +130,7 @@ jobs:
             "--support-source=$SUPPORT_SOURCE"
             "--targets-per-support=$TARGETS_PER_SUPPORT"
             "--max-parallel=$MAX_PARALLEL"
+            "--max-active-per-route=$MAX_ACTIVE_PER_ROUTE"
             "--exclude-supports=$EXCLUDE_SUPPORTS"
             "--exclude-langs=$EXCLUDE_LANGS"
             "--schedule-start-date=$SCHEDULE_START_DATE"

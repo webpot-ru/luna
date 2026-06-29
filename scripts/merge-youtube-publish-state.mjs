@@ -4,6 +4,7 @@ import path from "node:path";
 
 const DEFAULT_ARTIFACT_DIR = ".state-artifact";
 const DEFAULT_SUMMARY_PATH = "outputs/youtube-publish-state-merge-github.json";
+const LIVE_AUDIT_PUBLICATIONS_PATH = "outputs/youtube-live-publications-github.json";
 
 function parseArgs(argv) {
   const options = {
@@ -449,6 +450,7 @@ function main() {
     polyglotPublications: { created: 0, updated: 0, skipped: 0 },
     polyglotProgress: { created: 0, updated: 0, skipped: 0 },
     polyglotPlaylists: { created: 0, updated: 0, skipped: 0 },
+    liveAudit: { created: 0, updated: 0, skipped: 0, hasIncoming: false, sourcePath: "" },
   };
 
   const publications = loadPair(repoRoot, artifactDir, "config/youtube-published-videos.json", () => ({
@@ -458,6 +460,23 @@ function main() {
   if (publications.hasIncoming) {
     summary.publications = mergePublications(publications.current, publications.incoming);
     if (writeJsonIfChanged(publications.currentPath, publications.current)) summary.filesChanged.push("config/youtube-published-videos.json");
+  }
+
+  const liveAuditPath = path.join(artifactDir, LIVE_AUDIT_PUBLICATIONS_PATH);
+  if (fs.existsSync(liveAuditPath)) {
+    const liveAudit = readJson(liveAuditPath);
+    summary.liveAudit = {
+      ...mergePublications(publications.current, liveAudit),
+      hasIncoming: true,
+      sourcePath: LIVE_AUDIT_PUBLICATIONS_PATH,
+      missingFromLocalRegistryCount: liveAudit.missingFromLocalRegistryCount || 0,
+      matchedPublicationCount: liveAudit.matchedPublicationCount || 0,
+    };
+    if (writeJsonIfChanged(publications.currentPath, publications.current)) {
+      if (!summary.filesChanged.includes("config/youtube-published-videos.json")) {
+        summary.filesChanged.push("config/youtube-published-videos.json");
+      }
+    }
   }
 
   const calendar = loadPair(repoRoot, artifactDir, "config/youtube-publish-calendar.json", () => ({
