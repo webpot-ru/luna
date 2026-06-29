@@ -83,6 +83,10 @@ on:
         description: "For publish_mode=scheduled: first local date per channel, YYYY-MM-DD."
         required: false
         default: ""
+      schedule_min_future_minutes:
+        description: "For publish_mode=scheduled: move/reuse only slots at least this many minutes in the future."
+        required: false
+        default: "90"
       schedule_policy:
         description: "Schedule policy JSON path."
         required: false
@@ -164,6 +168,7 @@ jobs:
           PRIVACY: ${{ github.event.inputs.privacy }}
           PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
           SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
+          SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
           WORKER_COUNT: ${{ github.event.inputs.worker_count }}
           WORKER_INDEX: ${{ github.event.inputs.worker_index }}
           CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
@@ -194,12 +199,12 @@ jobs:
             echo "::error::mode=apply requires confirm_youtube_write=APPLY_YOUTUBE_UPLOAD"
             exit 1
           fi
-          if [ "$PUBLISH_MODE" = "scheduled" ] && [ -z "$SCHEDULE_START_DATE" ]; then
-            echo "::error::publish_mode=scheduled requires schedule_start_date=YYYY-MM-DD"
+          if [ "$PUBLISH_MODE" = "scheduled" ] && [ -n "$SCHEDULE_START_DATE" ] && ! printf '%s' "$SCHEDULE_START_DATE" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
+            echo "::error::schedule_start_date must be YYYY-MM-DD"
             exit 1
           fi
-          if [ "$PUBLISH_MODE" = "scheduled" ] && ! printf '%s' "$SCHEDULE_START_DATE" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
-            echo "::error::schedule_start_date must be YYYY-MM-DD"
+          if [ "$PUBLISH_MODE" = "scheduled" ] && ! printf '%s' "$SCHEDULE_MIN_FUTURE_MINUTES" | grep -Eq '^[0-9]+$'; then
+            echo "::error::schedule_min_future_minutes must be a non-negative integer"
             exit 1
           fi
           if [ "$PRIVACY" = "public" ] && [ "$CONFIRM_PUBLIC" != "PUBLISH_PUBLIC" ]; then
@@ -393,6 +398,7 @@ jobs:
           CONFIRM_THUMBNAIL_SPEND: ${{ github.event.inputs.confirm_thumbnail_spend }}
           THUMBNAIL_CONCURRENCY: ${{ github.event.inputs.thumbnail_concurrency }}
           SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
+          SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
           SCHEDULE_POLICY: ${{ github.event.inputs.schedule_policy }}
           SCHEDULE_CALENDAR: ${{ github.event.inputs.schedule_calendar }}
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
@@ -473,7 +479,7 @@ jobs:
             npm run check:youtube-run-isolation -- outputs/video-generator --shard-count="$WORKER_COUNT" --shard-index="$WORKER_INDEX" --allow-empty --output=outputs/video-generator/youtube-run-isolation-report-github.json
 
             if [ "$PUBLISH_MODE" = "scheduled" ]; then
-              SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--target-plan=outputs/video-generator/youtube-generation-targets-github.json" "--write-metadata" "--write-calendar" "--output=outputs/youtube-publish-schedule-github.json")
+              SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--target-plan=outputs/video-generator/youtube-generation-targets-github.json" "--write-metadata" "--write-calendar" "--reschedule-past-reservations" "--output=outputs/youtube-publish-schedule-github.json")
               if [ "$ALLOW_REPUBLISH" = "true" ]; then
                 SCHEDULE_ARGS+=("--allow-republish")
               fi

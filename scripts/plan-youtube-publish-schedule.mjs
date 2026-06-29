@@ -27,9 +27,11 @@ function parseArgs(argv) {
     targetPlan: "",
     output: "",
     startDate: "",
+    minFutureMinutes: 0,
     limit: 0,
     limitPerChannel: 0,
     allowRepublish: false,
+    reschedulePastReservations: false,
     writeMetadata: false,
     writeCalendar: false,
     json: false,
@@ -39,6 +41,7 @@ function parseArgs(argv) {
     if (arg === "--write-metadata") options.writeMetadata = true;
     else if (arg === "--write-calendar") options.writeCalendar = true;
     else if (arg === "--allow-republish") options.allowRepublish = true;
+    else if (arg === "--reschedule-past-reservations") options.reschedulePastReservations = true;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
@@ -48,6 +51,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--target-plan=")) options.targetPlan = arg.slice("--target-plan=".length);
     else if (arg.startsWith("--output=")) options.output = arg.slice("--output=".length);
     else if (arg.startsWith("--start-date=")) options.startDate = arg.slice("--start-date=".length);
+    else if (arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(arg.slice("--min-future-minutes=".length));
     else if (arg.startsWith("--limit=")) options.limit = Number(arg.slice("--limit=".length));
     else if (arg.startsWith("--limit-per-channel=")) options.limitPerChannel = Number(arg.slice("--limit-per-channel=".length));
     else options.inputs.push(arg);
@@ -62,6 +66,7 @@ function usage() {
     "",
     "Options:",
     "  --start-date=YYYY-MM-DD       First local calendar date to use per channel. Defaults to tomorrow per channel timezone.",
+    "  --min-future-minutes=<n>      Do not schedule or reuse publishAt slots closer than n minutes from now.",
     "  --policy=<file>               Schedule policy JSON. Defaults to config/youtube-publish-schedule-policy.json.",
     "  --calendar=<file>             Durable publication calendar JSON. Defaults to config/youtube-publish-calendar.json.",
     "  --target-plan=<file>          Optional generation-target preflight report for deterministic shard slot ordinals.",
@@ -69,6 +74,7 @@ function usage() {
     "  --limit-per-channel=<n>       Plan only the first n non-duplicate videos per channel.",
     "  --write-metadata              Write privacyStatus=private and publishAt into each scheduled youtube_metadata.json.",
     "  --write-calendar              Upsert scheduled reservations into the durable calendar file.",
+    "  --reschedule-past-reservations Ignore existing calendar reservations that are in the past or too close to publish safely.",
     "  --allow-republish             Do not skip rows that already have an active publication registry entry.",
     "  --output=<file>               Write schedule report. Defaults to outputs/youtube-publish-schedule-<timestamp>.json.",
     "  --json                        Print compact JSON summary.",
@@ -283,6 +289,7 @@ function findFreeSlot({
   baseOccupiedSlotKeys,
   plannedSlotKeys,
   preferredFreeOrdinal,
+  minPublishAtMillis = 0,
 }) {
   const maxIterations = perChannelPolicy.dailySlotsLocal.length * 366 * 5;
   let freeSeen = 0;
@@ -290,6 +297,7 @@ function findFreeSlot({
   for (let ordinal = 0; ordinal < maxIterations; ordinal += 1) {
     const slot = slotForOrdinal({ perChannelPolicy, baseDate, ordinal });
     const key = slotKey({ channelKey, publishAt: slot.publishAt });
+    if (minPublishAtMillis > 0 && Date.parse(slot.publishAt) < minPublishAtMillis) continue;
     if (baseOccupiedSlotKeys.has(key)) continue;
     if (hasPreferred && freeSeen < preferredFreeOrdinal) {
       freeSeen += 1;
@@ -299,6 +307,12 @@ function findFreeSlot({
     freeSeen += 1;
   }
   throw new Error(`No free publish slot found for channel=${channelKey} within ${maxIterations} slot attempts.`);
+}
+
+function reservationIsFutureSafe(row, minPublishAtMillis) {
+  if (minPublishAtMillis <= 0) return true;
+  const publishMillis = Date.parse(row?.publishAt || "");
+  return Number.isFinite(publishMillis) && publishMillis >= minPublishAtMillis;
 }
 
 function loadTargetPlan(filePath, channelRegistry, policy) {
@@ -481,10 +495,17 @@ async function main() {
   const calendar = loadCalendar(options.calendar);
   calendar.policyPath = options.policy;
   const targetPlan = loadTargetPlan(options.targetPlan, channelRegistry, policy);
+  const minPublishAtMillis = options.minFutureMinutes > 0
+    ? Date.now() + (options.minFutureMinutes * 60 * 1000)
+    : 0;
   let metadataFiles = collectMetadataFiles(options.inputs);
   if (options.limit > 0) metadataFiles = metadataFiles.slice(0, options.limit);
 
-  const activeCalendarReservations = (calendar.reservations || []).filter(isActiveCalendarReservation);
+  const activeCalendarReservations = (calendar.reservations || []).filter((reservation) => {
+    if (!isActiveCalendarReservation(reservation)) return false;
+    if (!options.reschedulePastReservations) return true;
+    return reservationIsFutureSafe(reservation, minPublishAtMillis);
+  });
   const reservationByAssignment = new Map();
   const baseOccupiedSlotKeys = new Set();
   for (const reservation of activeCalendarReservations) {
@@ -617,6 +638,7 @@ async function main() {
       baseOccupiedSlotKeys,
       plannedSlotKeys,
       preferredFreeOrdinal,
+      minPublishAtMillis,
     });
     const publishAt = slot.publishAt;
     const publishMillis = Date.parse(publishAt);
@@ -724,6 +746,8 @@ async function main() {
       baseOccupiedSlotCount: baseOccupiedSlotKeys.size,
       limit: options.limit,
       limitPerChannel: options.limitPerChannel,
+      minFutureMinutes: options.minFutureMinutes,
+      reschedulePastReservations: options.reschedulePastReservations,
     },
     channels: channelSummaries,
     rows,
