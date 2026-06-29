@@ -2,7 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { buildPlaylistAssignment } from "./lib/youtube-playlists.mjs";
-import { getPublicCourseUrl } from "./lib/video-public-url.mjs";
+import { getPublicCourseUrl, isSpecificStudyCourseUrl } from "./lib/video-public-url.mjs";
 
 const options = {
   output: "",
@@ -224,6 +224,9 @@ function validate(metadata, file) {
   if (!courseUrl) blockers.push("missing courseUrl");
   if (courseUrl && expectedCourseUrl && courseUrl !== expectedCourseUrl) {
     blockers.push(`courseUrl mismatch: ${courseUrl} != ${expectedCourseUrl}`);
+  }
+  if (courseUrl && !isSpecificStudyCourseUrl(courseUrl)) {
+    blockers.push(`courseUrl is not a specific study route with course slug and langs: ${courseUrl}`);
   }
   if ((courseUrl || expectedCourseUrl) && courseUrlInDescriptionCount === 0) {
     blockers.push("description missing exact courseUrl");

@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import {
   getPublicCourseUrl,
   getPublicSiteLanguagePath,
-  getSiteLanguagePath
+  getSiteLanguagePath,
+  isSpecificStudyCourseUrl
 } from "./lib/video-public-url.mjs";
 
 const sitePathCases = [
@@ -50,8 +51,31 @@ assert.equal(
 );
 
 assert.equal(
+  getPublicCourseUrl({ setId: cookware, supportLang: "RU", targetLangs: ["EN", "ES", "FR", "DE"] }),
+  "https://flashcardsluna.com/ru/courses/kitchenware-basic/study/standard?langs=en%2Ces%2Cfr%2Cde"
+);
+
+assert.equal(
+  isSpecificStudyCourseUrl(getPublicCourseUrl({ setId: cookware, supportLang: "RU", targetLang: "PT-BR" })),
+  true,
+  "ordinary video courseUrl must be a specific study route"
+);
+
+assert.equal(
+  isSpecificStudyCourseUrl(getPublicCourseUrl({ setId: cookware, supportLang: "RU", targetLangs: ["EN", "ES", "FR", "DE"] })),
+  true,
+  "polyglot video courseUrl must be a specific study route"
+);
+
+assert.equal(
   getPublicCourseUrl({ setId: "unknown_set", supportLang: "PT-BR", targetLang: "ES" }),
   "https://flashcardsluna.com/pt/courses"
+);
+
+assert.equal(
+  isSpecificStudyCourseUrl(getPublicCourseUrl({ setId: "unknown_set", supportLang: "PT-BR", targetLang: "ES" })),
+  false,
+  "fallback courses URL is not publish-ready"
 );
 
 console.log("Video public URL checks passed.");

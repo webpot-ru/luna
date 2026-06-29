@@ -46,6 +46,19 @@ async function main() {
         window.renderTask(t);
       }, task);
       
+      // Wait for all images to load (flags)
+      await page.evaluate(async () => {
+        const imgs = Array.from(document.querySelectorAll('img'));
+        const promises = imgs.map(img => {
+          if (img.complete) return Promise.resolve();
+          return new Promise((resolve) => {
+            img.onload = resolve;
+            img.onerror = resolve;
+          });
+        });
+        await Promise.all(promises);
+      });
+      
       // Capture screenshot
       await page.screenshot({ path: task.pngPath, type: 'jpeg', quality: 98 });
     }
