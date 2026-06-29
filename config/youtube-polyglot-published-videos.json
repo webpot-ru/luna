@@ -1157,6 +1157,60 @@
         "publishAt": "",
         "thumbnailStatus": "auto_first_frame"
       }
+    },
+    {
+      "videoType": "polyglot",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:KM:global_europe_core:7a4233775927",
+      "bundleKey": "global_europe_core",
+      "bundleLabel": "Global Europe Core",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "targetLangsHash": "7a4233775927",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "KM",
+      "targetLang": "EN,ES,FR,DE",
+      "playlist_key": "POLYGLOT__KM__global-europe-core__7a4233775927",
+      "title": "រៀនពាក្យ សម្ភារៈផ្ទះបាយ ជា ៤ ភាសា (អង់គ្លេស, អេស្ប៉ាញ, បារាំង, អាល្លឺម៉ង់) | FlashcardsLuna",
+      "youtubeVideoId": "OlbN0CO44T4",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=OlbN0CO44T4",
+      "youtubePlaylistId": "PLeA3naYjsv1E",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLeA3naYjsv1E",
+      "playlistItemId": "",
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "channelHandle": "@lunacardskhmer",
+      "privacyStatus": "public",
+      "publicationStatus": "uploaded_public_playlist_insert_pending",
+      "publishAt": "",
+      "scheduledPublishAt": "",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "needsPlaylistInsert": true,
+      "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (404): {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Video not found.\",\n    \"errors\": [\n      {\n        \"message\": \"Video not found.\",\n        \"domain\": \"youtube.playlistItem\",\n        \"reason\": \"videoNotFound\"\n      }\n    ]\n  }\n}\n",
+      "metadataSource": "vectorengine-gemini-polyglot",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "28347099687",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28347099687",
+      "uploadedAt": "2026-06-29T03:49:27.077Z",
+      "lastReadbackAt": "2026-06-29T03:49:27.077Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "public",
+        "publishAt": "",
+        "thumbnailStatus": "auto_first_frame",
+        "playlistItemReadback": "pending",
+        "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (404): {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Video not found.\",\n    \"errors\": [\n      {\n        \"message\": \"Video not found.\",\n        \"domain\": \"youtube.playlistItem\",\n        \"reason\": \"videoNotFound\"\n      }\n    ]\n  }\n}\n"
+      }
     }
   ]
 }
