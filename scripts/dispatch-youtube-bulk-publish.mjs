@@ -43,6 +43,8 @@ function parseArgs(argv) {
     confirmPlaylistRepair: "",
     dispatchSpacingSeconds: 5,
     playlistRetryDelaySeconds: 180,
+    githubApiRateLimitRetries: Number(process.env.GITHUB_API_RATE_LIMIT_RETRIES || 12),
+    githubApiRateLimitDelaySeconds: Number(process.env.GITHUB_API_RATE_LIMIT_DELAY_SECONDS || 300),
     watch: true,
     apply: false,
     output: DEFAULT_OUTPUT,
@@ -84,6 +86,8 @@ function parseArgs(argv) {
     else if (arg === "--confirm-playlist-repair" || arg.startsWith("--confirm-playlist-repair=")) options.confirmPlaylistRepair = readValue();
     else if (arg === "--dispatch-spacing-seconds" || arg.startsWith("--dispatch-spacing-seconds=")) options.dispatchSpacingSeconds = Number(readValue());
     else if (arg === "--playlist-retry-delay-seconds" || arg.startsWith("--playlist-retry-delay-seconds=")) options.playlistRetryDelaySeconds = Number(readValue());
+    else if (arg === "--github-api-rate-limit-retries" || arg.startsWith("--github-api-rate-limit-retries=")) options.githubApiRateLimitRetries = Number(readValue());
+    else if (arg === "--github-api-rate-limit-delay-seconds" || arg.startsWith("--github-api-rate-limit-delay-seconds=")) options.githubApiRateLimitDelaySeconds = Number(readValue());
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = readValue();
     else if (arg === "--workflow" || arg.startsWith("--workflow=")) options.workflow = readValue();
     else if (arg === "--repair-workflow" || arg.startsWith("--repair-workflow=")) options.repairWorkflow = readValue();
@@ -112,6 +116,8 @@ function usage() {
     "existing youtube-video-publish.yml workflow in bounded parallel batches.",
     "Scheduled child runs pass schedule_min_future_minutes so stale calendar reservations",
     "are moved to future-safe slots by the child workflow.",
+    "GitHub Actions workflow-dispatch installation rate limits are retried with",
+    "GITHUB_API_RATE_LIMIT_RETRIES / GITHUB_API_RATE_LIMIT_DELAY_SECONDS defaults.",
     "",
     "It does not upload videos itself. Playlist-classified failures can dispatch the",
     "playlist-insert repair workflow after a delay only when --confirm-playlist-repair=APPLY_YOUTUBE_PLAYLIST_INSERT is provided.",
@@ -153,6 +159,12 @@ function ensureSafeOptions(options) {
   }
   if (!Number.isFinite(options.scheduleMinFutureMinutes) || options.scheduleMinFutureMinutes < 0) {
     throw new Error("--schedule-min-future-minutes must be a non-negative number.");
+  }
+  if (!Number.isInteger(options.githubApiRateLimitRetries) || options.githubApiRateLimitRetries < 0 || options.githubApiRateLimitRetries > 48) {
+    throw new Error("--github-api-rate-limit-retries must be an integer between 0 and 48.");
+  }
+  if (!Number.isFinite(options.githubApiRateLimitDelaySeconds) || options.githubApiRateLimitDelaySeconds < 0 || options.githubApiRateLimitDelaySeconds > 3600) {
+    throw new Error("--github-api-rate-limit-delay-seconds must be between 0 and 3600.");
   }
   if (!["variants", "channel-keys"].includes(options.supportSource)) {
     throw new Error("--support-source must be variants or channel-keys.");
@@ -312,12 +324,25 @@ async function dispatchWorkflow(workflow, fields, ref, state) {
     for (const [key, value] of Object.entries(fields)) {
       args.push("-f", `${key}=${value ?? ""}`);
     }
-    const startedAt = new Date();
-    await gh(args);
-    await sleep(2500);
-    const run = await findNewestWorkflowRun(workflow, startedAt, state?.claimedRunIds);
-    state?.claimedRunIds?.add(run.databaseId);
-    return run;
+    const retries = Number(state?.githubApiRateLimitRetries || 0);
+    const delayMs = Number(state?.githubApiRateLimitDelaySeconds || 0) * 1000;
+    for (let attempt = 0; attempt <= retries; attempt += 1) {
+      const startedAt = new Date();
+      try {
+        await gh(args);
+        await sleep(2500);
+        const run = await findNewestWorkflowRun(workflow, startedAt, state?.claimedRunIds);
+        state?.claimedRunIds?.add(run.databaseId);
+        return run;
+      } catch (error) {
+        const errorText = compactDispatcherError(error);
+        if (!isGitHubApiRateLimitText(errorText) || attempt >= retries) throw error;
+        const waitSeconds = Math.round(delayMs / 1000);
+        console.log(`GitHub API rate limit while dispatching ${workflow}; retry ${attempt + 1}/${retries} after ${waitSeconds}s.`);
+        await sleep(delayMs);
+      }
+    }
+    throw new Error(`Could not dispatch ${workflow}.`);
   });
 }
 
@@ -642,6 +667,8 @@ async function runPool(jobs, options) {
     dispatchLock: Promise.resolve(),
     stopAll: false,
     stopAllReason: "",
+    githubApiRateLimitRetries: options.githubApiRateLimitRetries,
+    githubApiRateLimitDelaySeconds: options.githubApiRateLimitDelaySeconds,
   };
   const active = new Set();
   const routeActive = new Map();
@@ -756,6 +783,9 @@ async function buildPlan(options) {
       workflow: options.workflow,
       repairWorkflow: options.repairWorkflow,
       publishMode: options.publishMode,
+      scheduleMinFutureMinutes: options.scheduleMinFutureMinutes,
+      githubApiRateLimitRetries: options.githubApiRateLimitRetries,
+      githubApiRateLimitDelaySeconds: options.githubApiRateLimitDelaySeconds,
       allowRepublish: options.allowRepublish,
       generateThumbnails: options.generateThumbnails,
     },
