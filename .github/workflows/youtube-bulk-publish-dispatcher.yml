@@ -51,6 +51,10 @@ on:
         description: "For scheduled uploads: first local date per channel, YYYY-MM-DD."
         required: false
         default: ""
+      schedule_min_future_minutes:
+        description: "For scheduled publishing: move/reuse only slots at least this many minutes in the future."
+        required: false
+        default: "90"
       dispatch_spacing_seconds:
         description: "Delay after each watched dispatch result."
         required: true
@@ -116,6 +120,7 @@ jobs:
           EXCLUDE_SUPPORTS: ${{ github.event.inputs.exclude_supports }}
           EXCLUDE_LANGS: ${{ github.event.inputs.exclude_langs }}
           SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
+          SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
           DISPATCH_SPACING_SECONDS: ${{ github.event.inputs.dispatch_spacing_seconds }}
           PLAYLIST_RETRY_DELAY_SECONDS: ${{ github.event.inputs.playlist_retry_delay_seconds }}
           CONFIRM_DISPATCH: ${{ github.event.inputs.confirm_dispatch }}
@@ -134,6 +139,7 @@ jobs:
             "--exclude-supports=$EXCLUDE_SUPPORTS"
             "--exclude-langs=$EXCLUDE_LANGS"
             "--schedule-start-date=$SCHEDULE_START_DATE"
+            "--schedule-min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES"
             "--dispatch-spacing-seconds=$DISPATCH_SPACING_SECONDS"
             "--playlist-retry-delay-seconds=$PLAYLIST_RETRY_DELAY_SECONDS"
             "--ref=${GITHUB_REF_NAME}"
