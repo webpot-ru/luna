@@ -72545,6 +72545,50 @@
       "youtubeVideoId": "CcM2zdcrWoY",
       "youtubePlaylistId": "PLKgv0x5GVbdg",
       "playlistItemId": "UExLZ3YweDVHVmJkZy41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "DA",
+      "targetLang": "SR",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "publishAt": "2026-07-01T15:30:00.000Z",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-07-01",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 1,
+      "slotOrdinal": 9,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_sr_da/youtube_metadata.json",
+      "title": "Lær serbisk: Køkkenudstyr (A1) | 50 vigtige ord med udtale",
+      "playlist_key": "DA__SR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-02T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-04T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-08T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-31T15:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28358407421",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28358407421",
+      "createdAt": "2026-06-29T08:21:08.874Z",
+      "updatedAt": "2026-06-29T08:21:08.874Z",
+      "youtubeVideoId": "BHxWkesvnro"
     }
   ]
 }
