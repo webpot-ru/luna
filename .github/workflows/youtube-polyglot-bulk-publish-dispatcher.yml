@@ -1,0 +1,297 @@
+name: YouTube Polyglot Bulk Publish Dispatcher
+
+on:
+  workflow_dispatch:
+    inputs:
+      set_id:
+        description: "Set ID of the deck to compile and publish as Polyglot videos."
+        required: true
+        default: "home_kitchen_cookware_pilot_01"
+      mode:
+        description: "dry_run plans only; dispatch starts youtube-polyglot-video-publish.yml runs."
+        required: true
+        default: "dry_run"
+        type: choice
+        options:
+          - dry_run
+          - dispatch
+      supports:
+        description: "Support codes, route:youtube-1, route:youtube-2, or ALL."
+        required: true
+        default: "ALL"
+      support_source:
+        description: "Use physical channel keys for one video per channel, or support variants."
+        required: true
+        default: "channel-keys"
+        type: choice
+        options:
+          - channel-keys
+          - variants
+      bundle:
+        description: "Default Polyglot bundle for non-English support channels."
+        required: true
+        default: "global_europe_core"
+        type: choice
+        options:
+          - global_europe_core
+          - romance_core
+          - east_asia_core
+          - slavic_core
+          - southeast_asia_core
+          - germanic_core
+          - nordic_core
+          - balkan_slavic_core
+          - south_asia_indo_aryan_core
+          - south_asia_dravidian_core
+          - turkic_core
+          - caucasus_bridge_core
+          - baltic_core
+      english_bundle:
+        description: "Bundle for EN/EN-GB; global_europe_core resolves to ES,FR,DE,IT after removing English."
+        required: true
+        default: "global_europe_core"
+        type: choice
+        options:
+          - global_europe_core
+          - romance_core
+          - east_asia_core
+          - slavic_core
+          - southeast_asia_core
+          - germanic_core
+          - nordic_core
+          - balkan_slavic_core
+          - south_asia_indo_aryan_core
+          - south_asia_dravidian_core
+          - turkic_core
+          - caucasus_bridge_core
+          - baltic_core
+      bundle_overrides:
+        description: "Optional comma overrides like HY=caucasus_bridge_core,EN=east_asia_core, or NONE."
+        required: false
+        default: "NONE"
+      max_parallel:
+        description: "Maximum simultaneous child Polyglot workflow runs."
+        required: true
+        default: "4"
+      exclude_supports:
+        description: "Comma-separated support codes to skip, or NONE."
+        required: false
+        default: "NONE"
+      privacy:
+        description: "YouTube video privacy for child apply runs."
+        required: true
+        default: "public"
+        type: choice
+        options:
+          - public
+          - unlisted
+          - private
+      publish_at:
+        description: "Optional ISO timestamp. Only use with a narrow support list and privacy=private."
+        required: false
+        default: ""
+      dispatch_spacing_seconds:
+        description: "Delay after each watched dispatch result."
+        required: true
+        default: "5"
+      playlist_retry_delay_seconds:
+        description: "Delay before Polyglot playlist repair dispatch after playlist-classified transient failure."
+        required: true
+        default: "180"
+      confirm_dispatch:
+        description: "For mode=dispatch type DISPATCH_YOUTUBE_POLYGLOT_BULK."
+        required: false
+        default: ""
+      confirm_render:
+        description: "For live child renders type RENDER_POLYGLOT_VIDEO."
+        required: false
+        default: ""
+      confirm_tts:
+        description: "For live child TTS type GENERATE_TTS_AUDIO."
+        required: false
+        default: ""
+      confirm_metadata_spend:
+        description: "For VectorEngine/Gemini metadata type GENERATE_POLYGLOT_METADATA."
+        required: false
+        default: ""
+      confirm_youtube_write:
+        description: "For child YouTube uploads type APPLY_POLYGLOT_YOUTUBE_UPLOAD."
+        required: false
+        default: ""
+      confirm_thumbnail_spend:
+        description: "For VectorEngine image thumbnails type GENERATE_THUMBNAILS."
+        required: false
+        default: ""
+      confirm_public:
+        description: "For public or scheduled-public uploads type PUBLISH_PUBLIC."
+        required: false
+        default: ""
+      confirm_playlist_repair:
+        description: "Optional playlist repair confirmation: APPLY_YOUTUBE_PLAYLIST_INSERT."
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: youtube-polyglot-bulk-publish-dispatcher-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  polyglot-bulk-dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1440
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download offline deck data from Google Drive
+        shell: bash
+        run: |
+          set -euo pipefail
+          SET_ID="${{ github.event.inputs.set_id }}"
+          FILE_ID=$(node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const mappingPath = path.resolve('data/deck-sources.json');
+            if (fs.existsSync(mappingPath)) {
+              const mapping = JSON.parse(fs.readFileSync(mappingPath, 'utf8'));
+              console.log(mapping['$SET_ID'] || '');
+            }
+          ")
+          if [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
+            echo "Found Google Drive File ID for $SET_ID."
+            mkdir -p data/decks
+            curl -c /tmp/cookies -sL "https://docs.google.com/uc?export=download&id=${FILE_ID}" > /tmp/confirm.html
+            CONFIRM=$(grep -o 'confirm=[^&\" ]*' /tmp/confirm.html | head -n1 | cut -d= -f2 || true)
+            if [ -n "$CONFIRM" ]; then
+              curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&confirm=${CONFIRM}&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
+            else
+              curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
+            fi
+            test -s "data/decks/${SET_ID}.json"
+            echo "Downloaded offline data to data/decks/${SET_ID}.json"
+          else
+            echo "No Google Drive File ID found for $SET_ID in data/deck-sources.json. Dispatcher planner will require committed/local data/decks/${SET_ID}.json."
+          fi
+
+      - name: Plan or dispatch Polyglot YouTube publish wave
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORTS: ${{ github.event.inputs.supports }}
+          SUPPORT_SOURCE: ${{ github.event.inputs.support_source }}
+          BUNDLE: ${{ github.event.inputs.bundle }}
+          ENGLISH_BUNDLE: ${{ github.event.inputs.english_bundle }}
+          BUNDLE_OVERRIDES: ${{ github.event.inputs.bundle_overrides }}
+          MAX_PARALLEL: ${{ github.event.inputs.max_parallel }}
+          EXCLUDE_SUPPORTS: ${{ github.event.inputs.exclude_supports }}
+          PRIVACY: ${{ github.event.inputs.privacy }}
+          PUBLISH_AT: ${{ github.event.inputs.publish_at }}
+          DISPATCH_SPACING_SECONDS: ${{ github.event.inputs.dispatch_spacing_seconds }}
+          PLAYLIST_RETRY_DELAY_SECONDS: ${{ github.event.inputs.playlist_retry_delay_seconds }}
+          CONFIRM_DISPATCH: ${{ github.event.inputs.confirm_dispatch }}
+          CONFIRM_RENDER: ${{ github.event.inputs.confirm_render }}
+          CONFIRM_TTS: ${{ github.event.inputs.confirm_tts }}
+          CONFIRM_METADATA_SPEND: ${{ github.event.inputs.confirm_metadata_spend }}
+          CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+          CONFIRM_THUMBNAIL_SPEND: ${{ github.event.inputs.confirm_thumbnail_spend }}
+          CONFIRM_PUBLIC: ${{ github.event.inputs.confirm_public }}
+          CONFIRM_PLAYLIST_REPAIR: ${{ github.event.inputs.confirm_playlist_repair }}
+        run: |
+          set -euo pipefail
+          ARGS=(
+            "--set=$SET_ID"
+            "--supports=$SUPPORTS"
+            "--support-source=$SUPPORT_SOURCE"
+            "--bundle=$BUNDLE"
+            "--english-bundle=$ENGLISH_BUNDLE"
+            "--bundle-overrides=$BUNDLE_OVERRIDES"
+            "--max-parallel=$MAX_PARALLEL"
+            "--exclude-supports=$EXCLUDE_SUPPORTS"
+            "--ref=${GITHUB_REF_NAME}"
+            "--child-mode=apply"
+            "--limit=0"
+            "--privacy=$PRIVACY"
+            "--publish-at=$PUBLISH_AT"
+            "--dispatch-spacing-seconds=$DISPATCH_SPACING_SECONDS"
+            "--playlist-retry-delay-seconds=$PLAYLIST_RETRY_DELAY_SECONDS"
+            "--confirm-dispatch=$CONFIRM_DISPATCH"
+            "--confirm-render=$CONFIRM_RENDER"
+            "--confirm-tts=$CONFIRM_TTS"
+            "--confirm-metadata-spend=$CONFIRM_METADATA_SPEND"
+            "--confirm-youtube-write=$CONFIRM_YOUTUBE_WRITE"
+            "--confirm-thumbnail-spend=$CONFIRM_THUMBNAIL_SPEND"
+            "--confirm-public=$CONFIRM_PUBLIC"
+            "--confirm-playlist-repair=$CONFIRM_PLAYLIST_REPAIR"
+            "--output=outputs/youtube-polyglot-bulk-publish-dispatcher-report.json"
+          )
+          if [ "$MODE" = "dispatch" ]; then
+            ARGS+=("--apply")
+          else
+            ARGS+=("--dry-run")
+          fi
+          npm run dispatch:youtube-polyglot-bulk-publish -- "${ARGS[@]}"
+
+      - name: Recover child Polyglot state from artifacts
+        if: ${{ always() && github.event.inputs.mode == 'dispatch' }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [ ! -f outputs/youtube-polyglot-bulk-publish-dispatcher-report.json ]; then
+            echo "No dispatcher report found; skip child state recovery."
+            exit 0
+          fi
+          git fetch origin "$BRANCH_NAME"
+          git pull --ff-only origin "$BRANCH_NAME"
+          npm run recover:youtube-polyglot-state -- \
+            --report=outputs/youtube-polyglot-bulk-publish-dispatcher-report.json \
+            --artifact-root=outputs/youtube-polyglot-child-state-recovery \
+            --output=outputs/youtube-polyglot-child-state-recovery-summary.json
+
+      - name: Commit recovered child Polyglot state
+        if: ${{ always() && github.event.inputs.mode == 'dispatch' }}
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- config/youtube-channels.json config/youtube-polyglot-playlists.json config/youtube-polyglot-progress.json config/youtube-polyglot-published-videos.json config/youtube-publish-calendar.json; then
+            echo "No recovered Polyglot child state changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/youtube-channels.json config/youtube-polyglot-playlists.json config/youtube-polyglot-progress.json config/youtube-polyglot-published-videos.json config/youtube-publish-calendar.json
+          git commit -m "Recover Polyglot YouTube child publish state" \
+            -m "Source dispatcher run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          git push origin "HEAD:$BRANCH_NAME"
+
+      - name: Upload Polyglot dispatcher report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-polyglot-bulk-publish-dispatcher-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-polyglot-bulk-publish-dispatcher-report.json
+            outputs/youtube-polyglot-child-state-recovery-summary.json
+            outputs/youtube-polyglot-bulk-plan/*.json

@@ -1,0 +1,234 @@
+name: YouTube Polyglot Playlist Insert Repair
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "plan is registry preflight; apply calls playlistItems.insert only."
+        required: true
+        default: "plan"
+        type: choice
+        options:
+          - plan
+          - apply
+      set_id:
+        description: "Set ID of the already-uploaded Polyglot video row."
+        required: true
+        default: "home_kitchen_cookware_pilot_01"
+      support:
+        description: "Support language/channel code."
+        required: true
+        default: "RU"
+      polyglot_key:
+        description: "Polyglot key from config/youtube-polyglot-published-videos.json."
+        required: true
+        default: ""
+      youtube_environment:
+        description: "GitHub environment with the support route OAuth bundle. Use auto for one support channel."
+        required: true
+        default: "auto"
+        type: choice
+        options:
+          - auto
+          - youtube-api-branding
+          - youtube-api-youtube-2
+          - youtube-api-youtube-3
+          - youtube-api-youtube-4
+      confirm_youtube_write:
+        description: "For mode=apply type APPLY_YOUTUBE_PLAYLIST_INSERT."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: youtube-polyglot-playlist-insert-repair-${{ github.event.inputs.set_id }}-${{ github.event.inputs.support }}-${{ github.event.inputs.polyglot_key }}
+  cancel-in-progress: false
+
+jobs:
+  youtube-polyglot-playlist-insert-repair:
+    runs-on: ubuntu-latest
+    environment:
+      name: >-
+        ${{
+          github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
+          (contains('|EN|EN-GB|ES|ES-419|PT|PT-BR|RU|HI|ID|FR|DE|JA|KO|TR|ZH|en|en-gb|es|es-419|pt|pt-br|ru|hi|id|fr|de|ja|ko|tr|zh|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-branding') ||
+          (contains('|VI|TH|MS|PL|NL|SV|NO|DA|FI|CS|SK|HU|RO|vi|th|ms|pl|nl|sv|no|da|fi|cs|sk|hu|ro|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-2') ||
+          (contains('|BG|HR|SR|SL|LT|LV|ET|IS|BN|TL|MY|KM|LO|bg|hr|sr|sl|lt|lv|et|is|bn|tl|my|km|lo|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-3') ||
+          (contains('|NE|SI|TA|TE|KN|ML|UZ|KK|AZ|KA|HY|SW|IT|ne|si|ta|te|kn|ml|uz|kk|az|ka|hy|sw|it|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
+    timeout-minutes: 30
+    env:
+      EFFECTIVE_YOUTUBE_ENVIRONMENT: >-
+        ${{
+          github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
+          (contains('|EN|EN-GB|ES|ES-419|PT|PT-BR|RU|HI|ID|FR|DE|JA|KO|TR|ZH|en|en-gb|es|es-419|pt|pt-br|ru|hi|id|fr|de|ja|ko|tr|zh|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-branding') ||
+          (contains('|VI|TH|MS|PL|NL|SV|NO|DA|FI|CS|SK|HU|RO|vi|th|ms|pl|nl|sv|no|da|fi|cs|sk|hu|ro|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-2') ||
+          (contains('|BG|HR|SR|SL|LT|LV|ET|IS|BN|TL|MY|KM|LO|bg|hr|sr|sl|lt|lv|et|is|bn|tl|my|km|lo|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-3') ||
+          (contains('|NE|SI|TA|TE|KN|ML|UZ|KK|AZ|KA|HY|SW|IT|ne|si|ta|te|kn|ml|uz|kk|az|ka|hy|sw|it|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Refuse unsafe Polyglot repair inputs
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          POLYGLOT_KEY: ${{ github.event.inputs.polyglot_key }}
+          CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+        run: |
+          set -euo pipefail
+          if [ -z "$(printf '%s' "$SUPPORT" | xargs)" ]; then
+            echo "::error::support is required."
+            exit 1
+          fi
+          if [ -z "$(printf '%s' "$POLYGLOT_KEY" | xargs)" ]; then
+            echo "::error::polyglot_key is required."
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_YOUTUBE_PLAYLIST_INSERT" ]; then
+            echo "::error::mode=apply requires confirm_youtube_write=APPLY_YOUTUBE_PLAYLIST_INSERT"
+            exit 1
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Node dependencies
+        run: npm ci || npm install
+
+      - name: Validate YouTube API route environment
+        shell: bash
+        env:
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          YOUTUBE_ENVIRONMENT_INPUT: ${{ github.event.inputs.youtube_environment }}
+        run: |
+          set -euo pipefail
+          node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORT_INPUT" --environment="$EFFECTIVE_YOUTUBE_ENVIRONMENT"
+          if [ "$YOUTUBE_ENVIRONMENT_INPUT" != "auto" ]; then
+            node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORT_INPUT" --environment="$YOUTUBE_ENVIRONMENT_INPUT"
+          fi
+          echo "Effective YouTube API environment: $EFFECTIVE_YOUTUBE_ENVIRONMENT"
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+          echo "YouTube OAuth bundle restored for environment $EFFECTIVE_YOUTUBE_ENVIRONMENT."
+
+      - name: Repair Polyglot playlist item registry/write
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          POLYGLOT_KEY: ${{ github.event.inputs.polyglot_key }}
+        run: |
+          set -euo pipefail
+          ARGS=(
+            "--set-id=$SET_ID"
+            "--support=$SUPPORT"
+            "--polyglot-key=$POLYGLOT_KEY"
+            "--playlist-registry=config/youtube-polyglot-playlists.json"
+            "--publication-registry=config/youtube-polyglot-published-videos.json"
+            "--ledger=outputs/youtube-polyglot-playlist-insert-repair-ledger.jsonl"
+          )
+          if [ "$MODE" = "apply" ]; then
+            ARGS+=("--apply" "--confirm-youtube-write")
+          fi
+          npm run repair:youtube-playlist-insert -- "${ARGS[@]}"
+
+      - name: Upload non-secret Polyglot repair artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-polyglot-playlist-insert-repair-${{ github.event.inputs.set_id }}-${{ github.event.inputs.support }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-polyglot-playlist-insert-repair-ledger.jsonl
+            config/youtube-polyglot-published-videos.json
+            config/youtube-polyglot-playlists.json
+
+  persist-polyglot-playlist-insert-state:
+    needs: youtube-polyglot-playlist-insert-repair
+    if: ${{ always() && github.event.inputs.mode == 'apply' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: youtube-polyglot-playlist-insert-state-${{ github.ref_name }}-${{ github.run_id }}
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Download Polyglot playlist insert state artifact
+        id: download_polyglot_playlist_insert_state
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: youtube-polyglot-playlist-insert-repair-${{ github.event.inputs.set_id }}-${{ github.event.inputs.support }}-${{ github.run_id }}
+          path: .state-artifact
+
+      - name: Merge Polyglot playlist insert state into current branch
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [ ! -f .state-artifact/config/youtube-polyglot-published-videos.json ]; then
+            echo "No Polyglot playlist insert state artifact found; nothing to persist."
+            exit 0
+          fi
+          git fetch origin "$BRANCH_NAME"
+          git checkout "$BRANCH_NAME"
+          git pull --ff-only origin "$BRANCH_NAME"
+          npm run merge:youtube-publish-state -- --artifact-dir=.state-artifact --summary=outputs/youtube-polyglot-playlist-insert-state-merge-github.json
+          cat outputs/youtube-polyglot-playlist-insert-state-merge-github.json
+
+      - name: Commit and push Polyglot playlist insert state
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT: ${{ github.event.inputs.support }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- config/youtube-polyglot-published-videos.json config/youtube-polyglot-playlists.json; then
+            echo "No Polyglot playlist insert state changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/youtube-polyglot-published-videos.json config/youtube-polyglot-playlists.json
+          git commit -m "Persist Polyglot playlist insert repair for ${SET_ID} ${SUPPORT}"
+          git push origin "HEAD:$BRANCH_NAME"

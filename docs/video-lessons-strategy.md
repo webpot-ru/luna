@@ -1087,6 +1087,152 @@ Want another language mix? Open this deck on FlashcardsLuna and choose the langu
 node scripts/build-polyglot-video.mjs --set home_kitchen_cookware_pilot_01 --support RU --targets EN,ES,DE,FR
 ```
 
+#### GitHub Actions publish contour
+Polyglot publishing must stay separate from the ordinary single-target YouTube workflow.
+
+Source of truth workflows on `main`:
+
+- `.github/workflows/youtube-polyglot-video-publish.yml` - one Polyglot video for one `set_id + support + bundle`.
+- `.github/workflows/youtube-polyglot-bulk-publish-dispatcher.yml` - launches many single Polyglot child runs and watches them.
+- `.github/workflows/youtube-polyglot-playlist-insert-repair.yml` - playlist-only repair for an already uploaded Polyglot video.
+
+Do not use `.github/workflows/youtube-video-publish.yml` for Polyglot. Ordinary videos use `config/youtube-published-videos.json`; Polyglot uses separate publication ledgers:
+
+- `config/youtube-polyglot-published-videos.json`
+- `config/youtube-polyglot-progress.json`
+- `config/youtube-polyglot-playlists.json`
+- shared physical calendar: `config/youtube-publish-calendar.json`
+
+The Polyglot idempotency key is:
+
+```text
+polyglot:{setId}:{supportLang}:{bundleKey}:{targetsHash}
+```
+
+The dispatcher report and GitHub artifacts are operational evidence, not the durable source of truth. Durable state is the Polyglot registry/progress/playlist files above. If a child run uploads a video but the persist job fails or is canceled, the correct recovery is artifact state recovery, not a second upload.
+
+Single-video safe plan from GitHub UI:
+
+```text
+Workflow: YouTube Polyglot Video Publish
+Branch: main
+mode: plan
+set_id: home_kitchen_cookware_pilot_01
+support: RU
+bundle: global_europe_core
+limit: 3
+allow_republish: false
+```
+
+Single-video full public apply requires all explicit confirmations:
+
+```text
+Workflow: YouTube Polyglot Video Publish
+Branch: main
+mode: apply
+set_id: home_kitchen_cookware_pilot_01
+support: RU
+bundle: global_europe_core
+limit: 0
+allow_republish: false
+privacy: public
+create_playlists: true
+generate_thumbnails: true
+confirm_render: RENDER_POLYGLOT_VIDEO
+confirm_tts: GENERATE_TTS_AUDIO
+confirm_metadata_spend: GENERATE_POLYGLOT_METADATA
+confirm_thumbnail_spend: GENERATE_THUMBNAILS
+confirm_youtube_write: APPLY_POLYGLOT_YOUTUBE_UPLOAD
+confirm_public: PUBLISH_PUBLIC
+```
+
+`mode=apply` spends real resources: TTS/provider usage, VectorEngine/Gemini metadata, optional VectorEngine thumbnails and YouTube Data API quota.
+
+Polyglot has a stricter channel eligibility rule than ordinary single-target videos. The parameter `customThumbnailUploadAllowed !== true` acts as a hard blocker for planning and uploading Polyglot videos. Polyglot videos do not use YouTube auto thumbnail fallback under any circumstances. This is because the lack of custom thumbnail permission indicates that the channel may not be phone-verified/advanced-feature enabled and might still be subject to the 15-minute video upload limit (while Polyglot videos often exceed 20 minutes).
+
+Current eligible physical channels for Polyglot are only:
+- `EN/EN-GB`
+- `RU`
+- `ES/ES-419`
+- `PT/PT-BR`
+- `JA`
+- `TR`
+- `TH`
+- `NE`
+- `SW`
+
+All other support channels must be skipped for Polyglot until custom thumbnails are verified and `customThumbnailUploadAllowed=true` is set.
+
+Bulk safe plan from GitHub UI:
+
+```text
+Workflow: YouTube Polyglot Bulk Publish Dispatcher
+Branch: main
+set_id: home_kitchen_cookware_pilot_01
+mode: dry_run
+supports: ALL
+support_source: channel-keys
+bundle: global_europe_core
+english_bundle: global_europe_core
+bundle_overrides: NONE
+max_parallel: 4
+exclude_supports: NONE
+privacy: public
+dispatch_spacing_seconds: 5
+playlist_retry_delay_seconds: 180
+```
+
+Bulk apply must be used conservatively. Default `max_parallel=4` is intentional: higher values can overload GitHub Actions/API readback, TTS and YouTube quota accounting. Do not set `max_parallel=20` for Polyglot unless a previous wave completed cleanly and the run owner explicitly accepts the risk.
+
+Bulk public apply requires:
+
+```text
+mode: dispatch
+confirm_dispatch: DISPATCH_YOUTUBE_POLYGLOT_BULK
+confirm_render: RENDER_POLYGLOT_VIDEO
+confirm_tts: GENERATE_TTS_AUDIO
+confirm_metadata_spend: GENERATE_POLYGLOT_METADATA
+confirm_youtube_write: APPLY_POLYGLOT_YOUTUBE_UPLOAD
+confirm_thumbnail_spend: GENERATE_THUMBNAILS
+confirm_public: PUBLISH_PUBLIC
+confirm_playlist_repair: APPLY_YOUTUBE_PLAYLIST_INSERT
+```
+
+For `support=EN` and `support=EN-GB`, `english_bundle=global_europe_core` resolves visible targets to `ES,FR,DE,IT` after removing English. For Russian canary with `bundle=global_europe_core`, expected targets are `EN,ES,FR,DE`.
+
+Local dry-run equivalent before a broad GitHub launch:
+
+```bash
+npm run dispatch:youtube-polyglot-bulk-publish -- \
+  --set=home_kitchen_cookware_pilot_01 \
+  --supports=RU,EN \
+  --support-source=channel-keys \
+  --bundle=global_europe_core \
+  --english-bundle=global_europe_core \
+  --max-parallel=4 \
+  --planner-timeout-ms=120000 \
+  --dry-run \
+  --output=outputs/youtube-polyglot-bulk-plan.json
+```
+
+Mandatory recovery rules:
+
+- `state_persist_failed` means the upload job may have succeeded but Git state did not persist. Do not rerun `apply` for that support/bundle. Recover child artifacts with `npm run recover:youtube-polyglot-state -- --run-ids=<run_id>` or let the bulk dispatcher recovery step merge them.
+- `uploaded_public_playlist_insert_pending`, `playlist item readback pending` or similar `playlistItems` propagation errors are playlist-only repair candidates. Use `youtube-polyglot-playlist-insert-repair.yml`; do not re-render or reupload the video.
+- Edge TTS `NoAudioReceived` / `edge-tts failed` before upload is a transient render failure. It is safe to rerun the same child after TTS retry hardening, because no YouTube video id should exist yet.
+- `quotaExceeded`, OAuth channel mismatch, metadata language gates, URL completeness gates, support/target separation gates and `customThumbnailUploadAllowed !== true` are hard stops for the affected route/support until the root cause is fixed.
+- The dispatcher may recover child artifacts after a dispatch wave and commit only Polyglot state files. If that commit appears after the run, it is expected and should not be reverted.
+
+Minimum post-run readback:
+
+```bash
+gh run view <dispatcher_run_id> --repo webpot-ru/luna --json status,conclusion,jobs,url,headSha
+npm run check:polyglot-video-localization
+npm run plan:youtube-polyglot -- --set home_kitchen_cookware_pilot_01 --support RU --bundle global_europe_core --require-offline-deck
+```
+
+For completed upload waves, inspect `config/youtube-polyglot-published-videos.json` and `config/youtube-polyglot-progress.json` first. Do not infer completion from the dispatcher summary alone if child persist jobs or recovery commits were still running.
+
 #### Дополнительные флаги CLI
 Скрипт `build-polyglot-video.mjs` поддерживает следующие флаги:
 * `--set <set_id>` — идентификатор колоды (по умолчанию `home_kitchen_cookware_pilot_01`).
@@ -1096,7 +1242,7 @@ node scripts/build-polyglot-video.mjs --set home_kitchen_cookware_pilot_01 --sup
 * `--no-audio` — режим быстрой сборки без обращения к генератору TTS (все озвучки заменяются файлами тишины, полезно для визуального тестирования верстки).
 
 #### Длина видео и полный состав колоды
-Для обычных тематических колод на ~30-40 слов Polyglot-видео должно включать все слова из колоды, как и single-target deck video pipeline. Для `global_europe_core` на 4 target languages это ожидаемо дает ролик порядка 12-18 минут с озвучкой и паузами, что допустимо для YouTube lesson format.
+Для обычных тематических колод на ~30-40 слов Polyglot-видео должно включать все слова из колоды, как и single-target deck video pipeline. Для `global_europe_core` на 4 target languages это может давать ролик длиннее 20 минут с озвучкой и паузами, поэтому Polyglot publish разрешен только на каналах с подтвержденными advanced features / custom thumbnails.
 
 Для больших курсовых выпусков на 150/300 слов не делать одно Polyglot-видео на весь файл: разбивать на части по 25-40 слов или использовать уже существующую part/lesson структуру. Иначе 4-язычный Polyglot превращается в 60+ минут пассивного видео, хуже удерживает внимание и сложнее проверяется перед публикацией.
 
