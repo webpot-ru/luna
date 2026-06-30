@@ -75628,6 +75628,52 @@
       "youtubeVideoId": "8zw6Bwl6nrU",
       "youtubePlaylistId": "PLEtAgjliRb74",
       "playlistItemId": "UExFdEFnamxpUmI3NC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "IS",
+      "targetLang": "NE",
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "publishAt": "2026-07-01T23:30:00.000Z",
+      "timeZone": "Atlantic/Reykjavik",
+      "localDate": "2026-07-01",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ne_is/youtube_metadata.json",
+      "title": "Lærðu nepalska: Eldhúsáhöld (Byrjendastig) | 50 mikilvæg orð",
+      "playlist_key": "IS__NE__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-02T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-04T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-08T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-31T23:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28469917603",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28469917603",
+      "createdAt": "2026-06-30T19:20:28.121Z",
+      "updatedAt": "2026-06-30T19:20:28.121Z",
+      "youtubeVideoId": "sAIMGhp77Vk",
+      "youtubePlaylistId": "PLbduJFDatqpI",
+      "playlistItemId": "UExiZHVKRkRhdHFwSS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
