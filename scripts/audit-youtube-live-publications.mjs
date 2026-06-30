@@ -118,6 +118,14 @@ function findActivePublication(registry, query) {
     .sort((a, b) => String(b.lastReadbackAt || b.uploadedAt || "").localeCompare(String(a.lastReadbackAt || a.uploadedAt || "")))[0] || null;
 }
 
+function findActivePublicationByVideoId(registry, { setId, youtubeVideoId }) {
+  return (registry.publications || [])
+    .filter((row) => String(row?.setId || "") === String(setId || ""))
+    .filter((row) => String(row?.youtubeVideoId || "") === String(youtubeVideoId || ""))
+    .filter(isActivePublication)
+    .sort((a, b) => String(b.lastReadbackAt || b.uploadedAt || "").localeCompare(String(a.lastReadbackAt || a.uploadedAt || "")))[0] || null;
+}
+
 function loadOAuthClient(clientFile) {
   const json = readJson(clientFile, "OAuth client");
   const client = json.installed || json.web || json;
@@ -229,7 +237,7 @@ function normalizeUrlCandidate(value) {
 
 function extractFlashcardsLunaUrls(text) {
   const urls = [];
-  const regex = /https?:\/\/(?:www\.)?flashcardsluna\.com\/[^\s<>"']+/gi;
+  const regex = /https?:\/\/(?:www\.)?flashcardsluna\.com\/[^\s<>"'\])]+/gi;
   let match;
   while ((match = regex.exec(String(text || "")))) {
     urls.push(normalizeUrlCandidate(match[0]));
@@ -237,7 +245,48 @@ function extractFlashcardsLunaUrls(text) {
   return urls;
 }
 
-function inferPublicationFromDescription({ setId, supportLang, courseSlug, item }) {
+function isMultiTargetLang(targetLang) {
+  return String(targetLang || "").includes(",");
+}
+
+function isSingleLanguageCode(targetLang) {
+  return /^[A-Z]{2,3}(?:-[A-Z0-9]{2,4})?$/u.test(normalizeCode(targetLang));
+}
+
+function resolveSupportLangFromUrl({ urlSupportLang, fallbackSupportLang, channelSupportLangs }) {
+  const fallback = normalizeCode(fallbackSupportLang);
+  const candidates = [...new Set((channelSupportLangs || []).map(normalizeCode).filter(Boolean))];
+  if (candidates.length === 1) {
+    return {
+      supportLang: candidates[0],
+      supportLangResolution: "single_channel_support",
+      candidateSupportLangs: candidates,
+      supportLangAmbiguous: false,
+    };
+  }
+
+  const normalizedUrlSupport = normalizeCode(urlSupportLang);
+  if (normalizedUrlSupport && candidates.includes(normalizedUrlSupport)) {
+    const collapsedRegionalVariants = candidates.filter((candidate) => candidate.startsWith(`${normalizedUrlSupport}-`));
+    if (!collapsedRegionalVariants.length) {
+      return {
+        supportLang: normalizedUrlSupport,
+        supportLangResolution: "url_path",
+        candidateSupportLangs: candidates,
+        supportLangAmbiguous: false,
+      };
+    }
+  }
+
+  return {
+    supportLang: normalizedUrlSupport || fallback,
+    supportLangResolution: "ambiguous_shared_channel",
+    candidateSupportLangs: candidates.length ? candidates : [fallback].filter(Boolean),
+    supportLangAmbiguous: true,
+  };
+}
+
+function inferPublicationFromDescription({ setId, supportLang, channelSupportLangs, courseSlug, item }) {
   const title = item.snippet?.title || "";
   const description = item.snippet?.description || "";
   const videoId = item.contentDetails?.videoId || item.snippet?.resourceId?.videoId || "";
@@ -249,13 +298,22 @@ function inferPublicationFromDescription({ setId, supportLang, courseSlug, item 
       continue;
     }
     const pathParts = parsed.pathname.split("/").filter(Boolean);
+    const urlSupportLang = normalizeCode(pathParts[0] || "");
     const urlCourseSlug = pathParts[pathParts.indexOf("courses") + 1] || "";
     const targetLang = parsed.searchParams.get("langs") || parsed.searchParams.get("lang") || "";
     if (urlCourseSlug !== courseSlug || !targetLang) continue;
+    const supportResolution = resolveSupportLangFromUrl({
+      urlSupportLang,
+      fallbackSupportLang: supportLang,
+      channelSupportLangs,
+    });
+    const normalizedTargetLang = normalizeCode(targetLang);
+    const multiTarget = isMultiTargetLang(normalizedTargetLang);
+    const invalidTarget = !multiTarget && !isSingleLanguageCode(normalizedTargetLang);
     return {
       setId,
-      supportLang,
-      targetLang: normalizeCode(targetLang),
+      supportLang: supportResolution.supportLang,
+      targetLang: normalizedTargetLang,
       title,
       youtubeVideoId: videoId,
       youtubeVideoUrl: videoId ? `https://www.youtube.com/watch?v=${videoId}` : "",
@@ -264,6 +322,18 @@ function inferPublicationFromDescription({ setId, supportLang, courseSlug, item 
       lastReadbackAt: new Date().toISOString(),
       readbackSource: "youtube_uploads_playlist",
       liveReadbackOnly: true,
+      urlSupportLang,
+      supportLangResolution: supportResolution.supportLangResolution,
+      supportLangAmbiguous: supportResolution.supportLangAmbiguous,
+      candidateSupportLangs: supportResolution.candidateSupportLangs,
+      canPersistLiveReadback: !supportResolution.supportLangAmbiguous && !multiTarget && !invalidTarget,
+      excludedFromPublicationRegistryReason: supportResolution.supportLangAmbiguous
+        ? "ambiguous_shared_channel_support_variant"
+        : multiTarget
+          ? "multi_target_langs_polyglot_or_bundle_url"
+          : invalidTarget
+            ? "invalid_target_lang_from_url"
+            : "",
     };
   }
   return null;
@@ -308,15 +378,29 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
   });
   const matchedPublications = [];
   const unmatchedVideos = [];
+  const channelSupportLangs = (channel.supportLangs || [supportLang]).map(normalizeCode).filter(Boolean);
   for (const item of items) {
     const inferred = inferPublicationFromDescription({
       setId: options.setId,
       supportLang,
+      channelSupportLangs,
       courseSlug,
       item,
     });
     if (inferred) {
-      const existing = findActivePublication(publicationRegistry, inferred);
+      const existingByVideoId = findActivePublicationByVideoId(publicationRegistry, {
+        setId: inferred.setId,
+        youtubeVideoId: inferred.youtubeVideoId,
+      });
+      const existing = existingByVideoId || findActivePublication(publicationRegistry, inferred);
+      if (existingByVideoId) {
+        inferred.supportLang = normalizeCode(existingByVideoId.supportLang);
+        inferred.targetLang = normalizeCode(existingByVideoId.targetLang);
+        inferred.supportLangResolution = "local_registry_video_id";
+        inferred.supportLangAmbiguous = false;
+        inferred.canPersistLiveReadback = true;
+        inferred.excludedFromPublicationRegistryReason = "";
+      }
       matchedPublications.push({
         ...inferred,
         inLocalPublicationRegistry: Boolean(existing),
@@ -340,6 +424,8 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
     matchedPublications,
     unmatchedVideos,
     missingFromLocalRegistry: matchedPublications.filter((row) => !row.inLocalPublicationRegistry),
+    persistableMissingFromLocalRegistry: matchedPublications.filter((row) => row.canPersistLiveReadback !== false && !row.inLocalPublicationRegistry),
+    nonPersistableMatchedPublications: matchedPublications.filter((row) => row.canPersistLiveReadback === false),
     duplicateGroups: duplicateGroups(matchedPublications),
   };
 }
@@ -370,7 +456,8 @@ async function main() {
     }));
   }
 
-  const publications = supportReports.flatMap((report) => report.matchedPublications);
+  const allPublications = supportReports.flatMap((report) => report.matchedPublications);
+  const publications = allPublications.filter((row) => row.canPersistLiveReadback !== false);
   const report = {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
@@ -380,9 +467,13 @@ async function main() {
     courseSlug,
     supports,
     scannedUploadItems: supportReports.reduce((sum, item) => sum + item.scannedUploadItems, 0),
-    matchedPublicationCount: publications.length,
-    missingFromLocalRegistryCount: supportReports.reduce((sum, item) => sum + item.missingFromLocalRegistry.length, 0),
+    matchedPublicationCount: allPublications.length,
+    persistablePublicationCount: publications.length,
+    missingFromLocalRegistryCount: publications.filter((row) => !row.inLocalPublicationRegistry).length,
+    nonPersistableMatchedPublicationCount: allPublications.length - publications.length,
+    allMissingFromLocalRegistryCount: allPublications.filter((row) => !row.inLocalPublicationRegistry).length,
     duplicateGroups: duplicateGroups(publications),
+    allDuplicateGroups: duplicateGroups(allPublications),
     supportReports,
     publications,
   };
