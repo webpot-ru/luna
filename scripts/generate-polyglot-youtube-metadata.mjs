@@ -48,6 +48,9 @@ function parseArgs(argv) {
     output: "",
     privacyStatus: "public",
     publishAt: "",
+    contentScope: "full",
+    wordLimit: 0,
+    maxDurationSeconds: 0,
     withGemini: false,
     requireAi: false,
     model: process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash",
@@ -77,6 +80,9 @@ function parseArgs(argv) {
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = readValue();
     else if (arg === "--privacy" || arg.startsWith("--privacy=")) options.privacyStatus = readValue();
     else if (arg === "--publish-at" || arg.startsWith("--publish-at=")) options.publishAt = readValue();
+    else if (arg === "--content-scope" || arg.startsWith("--content-scope=")) options.contentScope = readValue();
+    else if (arg === "--word-limit" || arg.startsWith("--word-limit=")) options.wordLimit = Number(readValue());
+    else if (arg === "--max-duration-seconds" || arg.startsWith("--max-duration-seconds=")) options.maxDurationSeconds = Number(readValue());
     else if (arg === "--model" || arg.startsWith("--model=")) options.model = readValue();
     else if (arg === "--with-gemini") options.withGemini = true;
     else if (arg === "--require-ai") options.requireAi = true;
@@ -157,6 +163,14 @@ function assertArgs(options) {
   if (!["private", "unlisted", "public"].includes(options.privacyStatus)) {
     throw new Error(`Invalid --privacy=${options.privacyStatus}`);
   }
+  if (!["full", "short_unverified"].includes(normalizeContentScope(options.contentScope))) {
+    throw new Error(`Invalid --content-scope=${options.contentScope}`);
+  }
+}
+
+function normalizeContentScope(value) {
+  const scope = String(value || "full").trim().toLowerCase().replace(/[^a-z0-9_-]+/g, "_");
+  return scope || "full";
 }
 
 function runPlanner(options) {
@@ -173,6 +187,8 @@ function runPlanner(options) {
     options.support,
     "--bundle",
     options.bundleKey,
+    "--content-scope",
+    normalizeContentScope(options.contentScope),
     "--bundle-config",
     options.bundleConfig,
     "--channel-config",
@@ -185,6 +201,7 @@ function runPlanner(options) {
     output,
   ];
   if (options.allowRepublish) args.push("--allow-republish");
+  if (Number(options.maxDurationSeconds || 0) > 0) args.push("--max-duration-seconds", String(options.maxDurationSeconds));
   if (options.requireOfflineDeck) args.push("--require-offline-deck");
   const result = spawnSync(process.execPath, args, {
     encoding: "utf8",
@@ -200,9 +217,11 @@ function outputDirFor({ outputRoot, setId, supportLang }) {
   return path.resolve(outputRoot, `${setId}_polyglot_${supportLang.toLowerCase()}`);
 }
 
-function videoPathFor({ outputRoot, setId, supportLang, targetLangs }) {
+function videoPathFor({ outputRoot, setId, supportLang, targetLangs, contentScope }) {
   const targetsStr = targetLangs.join("_").toLowerCase();
-  return path.join(outputDirFor({ outputRoot, setId, supportLang }), `polyglot_${targetsStr}_${supportLang.toLowerCase()}.mp4`);
+  const scope = normalizeContentScope(contentScope);
+  const suffix = scope === "full" ? "" : `_${scope}`;
+  return path.join(outputDirFor({ outputRoot, setId, supportLang }), `polyglot_${targetsStr}_${supportLang.toLowerCase()}${suffix}.mp4`);
 }
 
 function boundedTitle(value) {
@@ -396,6 +415,7 @@ async function main() {
   const plan = runPlanner(options);
   const candidate = plan.candidate;
   const supportLang = normalizeLanguageCode(candidate.supportLang);
+  const contentScope = normalizeContentScope(candidate.contentScope || options.contentScope);
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const channel = findChannelForSupport(channelRegistry.channels, supportLang);
   const initialPlaylist = buildPolyglotPlaylistAssignment(candidate);
@@ -441,10 +461,14 @@ async function main() {
     setId: candidate.setId,
     supportLang,
     targetLangs: candidate.targetLangs,
+    contentScope,
   });
   const metadata = {
     videoType: "polyglot",
     polyglotKey: candidate.polyglotKey,
+    contentScope,
+    wordLimit: Number(options.wordLimit || 0),
+    maxDurationSeconds: Number(candidate.maxDurationSeconds || options.maxDurationSeconds || 0),
     setId: candidate.setId,
     supportLang,
     bundleKey: candidate.bundleKey,
@@ -467,7 +491,10 @@ async function main() {
     deckTitle: candidate.deck?.title || "",
     deckDescription: candidate.deck?.description || "",
     deckMetadataSource: candidate.deck?.metadataSource || "",
-    wordCount: candidate.deck?.cardCount || 0,
+    wordCount: Number(options.wordLimit || 0) > 0
+      ? Math.min(Number(options.wordLimit), candidate.deck?.cardCount || Number(options.wordLimit))
+      : candidate.deck?.cardCount || 0,
+    fullDeckWordCount: candidate.deck?.cardCount || 0,
     courseUrl: candidate.studyUrl,
     studyUrl: candidate.studyUrl,
     courseDisplayUrl: candidate.studyUrl,

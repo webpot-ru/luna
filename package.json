@@ -16,6 +16,8 @@
     "check:video-public-url": "node scripts/check-video-public-url.mjs",
     "check:polyglot-video-localization": "node scripts/check-polyglot-video-localization.mjs",
     "check:polyglot-youtube-metadata": "node scripts/check-polyglot-youtube-metadata.mjs",
+    "check:polyglot-video-duration": "node scripts/check-polyglot-video-duration.mjs",
+    "check:youtube-polyglot-state": "node scripts/check-youtube-polyglot-state.mjs",
     "check:video-tts-variant-contract": "node scripts/check-video-tts-variant-contract.mjs",
     "check:codex-workflow": "node scripts/check-codex-workflow-safety.mjs",
     "check:codex-readonly": "node scripts/check-codex-readonly.mjs",

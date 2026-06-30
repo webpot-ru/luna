@@ -41,9 +41,21 @@ on:
           - caucasus_bridge_core
           - baltic_core
       limit:
-        description: "Preview card limit. Use 0 for full deck only after approval."
+        description: "Card limit. Use 0 for full deck; short_unverified apply uses a positive limit."
         required: true
         default: "3"
+      content_scope:
+        description: "full uses normal Polyglot rules; short_unverified allows <=15 minute videos for unverified channels."
+        required: true
+        default: "full"
+        type: choice
+        options:
+          - full
+          - short_unverified
+      max_duration_seconds:
+        description: "Hard duration gate for short_unverified uploads. 895 = 14:55."
+        required: true
+        default: "895"
       allow_republish:
         description: "Allow planning/rendering a Polyglot key already active in registry/calendar."
         required: true
@@ -127,6 +139,8 @@ jobs:
           MODE: ${{ github.event.inputs.mode }}
           SUPPORT: ${{ github.event.inputs.support }}
           LIMIT: ${{ github.event.inputs.limit }}
+          CONTENT_SCOPE: ${{ github.event.inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ github.event.inputs.max_duration_seconds }}
           PRIVACY: ${{ github.event.inputs.privacy }}
           PUBLISH_AT: ${{ github.event.inputs.publish_at }}
           GENERATE_THUMBNAILS: ${{ github.event.inputs.generate_thumbnails }}
@@ -147,6 +161,14 @@ jobs:
             echo "::error::limit must be an integer."
             exit 1
           fi
+          if [ "$CONTENT_SCOPE" != "full" ] && [ "$CONTENT_SCOPE" != "short_unverified" ]; then
+            echo "::error::content_scope must be full or short_unverified."
+            exit 1
+          fi
+          if ! printf '%s' "$MAX_DURATION_SECONDS" | grep -Eq '^[0-9]+$'; then
+            echo "::error::max_duration_seconds must be an integer."
+            exit 1
+          fi
           if [ "$MODE" != "plan" ] && [ "$CONFIRM_RENDER" != "RENDER_POLYGLOT_VIDEO" ]; then
             echo "::error::render modes require confirm_render=RENDER_POLYGLOT_VIDEO"
             exit 1
@@ -155,8 +177,16 @@ jobs:
             echo "::error::render_audio may spend TTS/provider usage and requires confirm_tts=GENERATE_TTS_AUDIO"
             exit 1
           fi
-          if [ "$MODE" = "apply" ] && [ "$LIMIT" != "0" ]; then
-            echo "::error::mode=apply must render the full deck with limit=0; do not upload preview/truncated videos."
+          if [ "$MODE" = "apply" ] && [ "$LIMIT" != "0" ] && [ "$CONTENT_SCOPE" != "short_unverified" ]; then
+            echo "::error::mode=apply with limit != 0 is only allowed for content_scope=short_unverified."
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$CONTENT_SCOPE" = "short_unverified" ] && [ "$LIMIT" = "0" ]; then
+            echo "::error::content_scope=short_unverified requires a positive card limit."
+            exit 1
+          fi
+          if [ "$CONTENT_SCOPE" = "short_unverified" ] && [ "$MAX_DURATION_SECONDS" -gt 895 ]; then
+            echo "::error::short_unverified max_duration_seconds must stay <=895 (14:55) to avoid YouTube's 15-minute unverified limit."
             exit 1
           fi
           if [ "$MODE" = "apply" ] && [ "$CONFIRM_METADATA_SPEND" != "GENERATE_POLYGLOT_METADATA" ]; then
@@ -229,10 +259,12 @@ jobs:
           SET_ID: ${{ github.event.inputs.set_id }}
           SUPPORT: ${{ github.event.inputs.support }}
           BUNDLE: ${{ github.event.inputs.bundle }}
+          CONTENT_SCOPE: ${{ github.event.inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ github.event.inputs.max_duration_seconds }}
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
         run: |
           set -euo pipefail
-          PLAN_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--bundle" "$BUNDLE" "--require-offline-deck" "--output=outputs/video-generator/youtube-polyglot-plan-github.json")
+          PLAN_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--bundle" "$BUNDLE" "--content-scope" "$CONTENT_SCOPE" "--max-duration-seconds" "$MAX_DURATION_SECONDS" "--require-offline-deck" "--output=outputs/video-generator/youtube-polyglot-plan-github.json")
           if [ "$ALLOW_REPUBLISH" = "true" ]; then
             PLAN_ARGS+=("--allow-republish")
           fi
@@ -265,6 +297,9 @@ jobs:
           SET_ID: ${{ github.event.inputs.set_id }}
           SUPPORT: ${{ github.event.inputs.support }}
           BUNDLE: ${{ github.event.inputs.bundle }}
+          LIMIT: ${{ github.event.inputs.limit }}
+          CONTENT_SCOPE: ${{ github.event.inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ github.event.inputs.max_duration_seconds }}
           PRIVACY: ${{ github.event.inputs.privacy }}
           PUBLISH_AT: ${{ github.event.inputs.publish_at }}
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
@@ -273,7 +308,10 @@ jobs:
           VECTORENGINE_SEND_RESPONSE_SCHEMA: "1"
         run: |
           set -euo pipefail
-          METADATA_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--bundle" "$BUNDLE" "--privacy" "$PRIVACY")
+          METADATA_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--bundle" "$BUNDLE" "--content-scope" "$CONTENT_SCOPE" "--max-duration-seconds" "$MAX_DURATION_SECONDS" "--privacy" "$PRIVACY")
+          if [ "$LIMIT" != "0" ]; then
+            METADATA_ARGS+=("--word-limit" "$LIMIT")
+          fi
           if [ -n "$PUBLISH_AT" ]; then
             METADATA_ARGS+=("--publish-at" "$PUBLISH_AT")
           fi
@@ -342,9 +380,10 @@ jobs:
           TARGET_LANGS: ${{ steps.polyglot_plan.outputs.target_langs }}
           LIMIT: ${{ github.event.inputs.limit }}
           MODE: ${{ github.event.inputs.mode }}
+          CONTENT_SCOPE: ${{ github.event.inputs.content_scope }}
         run: |
           set -euo pipefail
-          BUILD_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--targets" "$TARGET_LANGS")
+          BUILD_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--targets" "$TARGET_LANGS" "--content-scope" "$CONTENT_SCOPE")
           if [ "$LIMIT" != "0" ]; then
             BUILD_ARGS+=("--limit" "$LIMIT")
           fi
@@ -352,6 +391,15 @@ jobs:
             BUILD_ARGS+=("--no-audio")
           fi
           node scripts/build-polyglot-video.mjs "${BUILD_ARGS[@]}"
+
+      - name: Check short Polyglot duration
+        if: ${{ github.event.inputs.mode != 'plan' && github.event.inputs.content_scope == 'short_unverified' }}
+        shell: bash
+        env:
+          MAX_DURATION_SECONDS: ${{ github.event.inputs.max_duration_seconds }}
+        run: |
+          set -euo pipefail
+          npm run check:polyglot-video-duration -- outputs/video-generator --max-duration-seconds "$MAX_DURATION_SECONDS" --write-metadata --output=outputs/polyglot-video-duration-check-github.json
 
       - name: Generate Polyglot thumbnail where allowed
         if: ${{ github.event.inputs.mode == 'apply' && github.event.inputs.generate_thumbnails == 'true' }}
@@ -373,6 +421,8 @@ jobs:
           MODE: ${{ github.event.inputs.mode }}
           CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
+          CONTENT_SCOPE: ${{ github.event.inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ github.event.inputs.max_duration_seconds }}
         run: |
           set -euo pipefail
           UPLOAD_PLAN_ARGS=("outputs/video-generator" "--write-registry" "--allow-auto-thumbnail-fallback" "--output=outputs/youtube-polyglot-upload-plan-github.json")
@@ -381,6 +431,9 @@ jobs:
           fi
           if [ "$ALLOW_REPUBLISH" = "true" ]; then
             UPLOAD_PLAN_ARGS+=("--allow-republish")
+          fi
+          if [ "$CONTENT_SCOPE" = "short_unverified" ]; then
+            UPLOAD_PLAN_ARGS+=("--allow-short-unverified" "--max-duration-seconds" "$MAX_DURATION_SECONDS")
           fi
           if [ "$MODE" = "apply" ]; then
             UPLOAD_PLAN_ARGS+=("--require-ai-metadata")
@@ -452,6 +505,7 @@ jobs:
             outputs/video-generator/youtube-polyglot-plan-github.json
             outputs/youtube-polyglot-upload-plan-github.json
             outputs/polyglot-youtube-metadata-check-github.json
+            outputs/polyglot-video-duration-check-github.json
             outputs/polyglot-youtube-thumbnail-*.json
             outputs/youtube-polyglot-publish-ledger.jsonl
             outputs/video-generator/*_polyglot_*
@@ -508,6 +562,7 @@ jobs:
           git pull --ff-only origin "$BRANCH_NAME"
           node scripts/merge-youtube-publish-state.mjs --artifact-dir=.state-artifact --summary=outputs/youtube-polyglot-state-merge-github.json
           cat outputs/youtube-polyglot-state-merge-github.json
+          node scripts/check-youtube-polyglot-state.mjs --set="${{ github.event.inputs.set_id }}" --bundle="${{ github.event.inputs.bundle }}" --json
 
       - name: Commit and push Polyglot publish state
         shell: bash

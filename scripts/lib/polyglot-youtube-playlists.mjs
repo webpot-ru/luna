@@ -92,6 +92,17 @@ export function buildPolyglotPlaylistKey({ supportLang, bundleKey, targetLangsHa
   return ["POLYGLOT", support, bundle, hash].filter(Boolean).join("__");
 }
 
+function normalizeContentScope(value) {
+  const scope = String(value || "full").trim().toLowerCase().replace(/[^a-z0-9_-]+/g, "_");
+  return scope || "full";
+}
+
+export function buildScopedPolyglotPlaylistKey({ supportLang, bundleKey, targetLangsHash, contentScope }) {
+  const key = buildPolyglotPlaylistKey({ supportLang, bundleKey, targetLangsHash });
+  const scope = normalizeContentScope(contentScope);
+  return scope === "full" ? key : `${key}__${normalizeSlugPart(scope)}`;
+}
+
 function titleForSupport({ supportLang, targetLangs, bundleLabel }) {
   const support = normalizeLanguageCode(supportLang);
   const languageList = localizedLanguageList(targetLangs, support);
@@ -131,10 +142,11 @@ export function buildPolyglotPlaylistAssignment(metadata = {}) {
     .filter(Boolean);
   const bundleKey = String(metadata.bundleKey || "").trim();
   const targetLangsHash = String(metadata.targetLangsHash || metadata.targetsHash || "").trim();
+  const contentScope = normalizeContentScope(metadata.contentScope);
   const bundleLabel = cleanText(metadata.bundleLabel || bundleKey);
   const key = metadata.polyglotPlaylistKey
     || metadata.playlist_key
-    || buildPolyglotPlaylistKey({ supportLang, bundleKey, targetLangsHash });
+    || buildScopedPolyglotPlaylistKey({ supportLang, bundleKey, targetLangsHash, contentScope });
   const title = cleanText(metadata.playlistTitle || metadata.playlist?.title || titleForSupport({
     supportLang,
     targetLangs,
@@ -150,6 +162,7 @@ export function buildPolyglotPlaylistAssignment(metadata = {}) {
     key,
     playlist_key: key,
     videoType: "polyglot",
+    contentScope,
     supportLang,
     bundleKey,
     bundleLabel,
@@ -208,6 +221,7 @@ export function upsertPlannedPolyglotPlaylist(registry, assignment, channel = {}
     for (const [field, value] of Object.entries({
       channelKey: channel.key || "",
       youtube_channel_id: channel.channelId || "",
+      contentScope: assignment.contentScope,
       targetLangsCsv: assignment.targetLangsCsv,
       targetLangsHash: assignment.targetLangsHash,
     })) {
@@ -222,6 +236,7 @@ export function upsertPlannedPolyglotPlaylist(registry, assignment, channel = {}
   const entry = {
     playlist_key: assignment.key,
     videoType: "polyglot",
+    contentScope: assignment.contentScope,
     supportLang: assignment.supportLang,
     bundleKey: assignment.bundleKey,
     bundleLabel: assignment.bundleLabel,

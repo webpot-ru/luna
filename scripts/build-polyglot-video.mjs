@@ -168,6 +168,12 @@ let voicesStr = "";
 let transitionMode = "static";
 let noAudio = false;
 let limit = 0; // Production default is the full deck; use --limit for visual previews.
+let contentScope = "full";
+
+function normalizeContentScope(value) {
+  const scope = String(value || "full").trim().toLowerCase().replace(/[^a-z0-9_-]+/g, "_");
+  return scope || "full";
+}
 
 for (let i = 0; i < args.length; i++) {
   if (args[i] === "--set" && args[i + 1]) {
@@ -187,11 +193,14 @@ for (let i = 0; i < args.length; i++) {
   } else if (args[i] === "--limit" && args[i + 1]) {
     limit = parseInt(args[i + 1], 10);
     i++;
+  } else if (args[i] === "--content-scope" && args[i + 1]) {
+    contentScope = normalizeContentScope(args[i + 1]);
+    i++;
   }
 }
 
 if (!setId || !targetsStr) {
-  console.error("Usage: node scripts/build-polyglot-video.mjs --set <set_id> --targets <comma_separated_target_langs> [--support <support_lang>] [--voices <comma_separated_voices>] [--no-audio] [--limit <number>]");
+  console.error("Usage: node scripts/build-polyglot-video.mjs --set <set_id> --targets <comma_separated_target_langs> [--support <support_lang>] [--voices <comma_separated_voices>] [--no-audio] [--limit <number>] [--content-scope <full|short_unverified>]");
   process.exit(1);
 }
 
@@ -324,6 +333,7 @@ async function main() {
   console.log(`Set ID: ${setId}`);
   console.log(`Support Language: ${supportLang} (Voice: ${voiceSupport})`);
   console.log(`Target Languages: ${targetLangs.join(", ")}`);
+  console.log(`Content Scope: ${contentScope}`);
   for (const lang of targetLangs) {
     console.log(`  -> ${lang} voice: ${voiceMap[lang]}`);
   }
@@ -702,7 +712,8 @@ async function main() {
   fs.writeFileSync(imageConcatListPath, imageConcatLines, "utf8");
 
   // 8. FFMPEG Compile
-  const finalVideoPath = path.join(outputDir, `polyglot_${targetsStr.toLowerCase().replace(/,/g, "_")}_${supportLang.toLowerCase()}.mp4`);
+  const scopeSuffix = contentScope === "full" ? "" : `_${contentScope}`;
+  const finalVideoPath = path.join(outputDir, `polyglot_${targetsStr.toLowerCase().replace(/,/g, "_")}_${supportLang.toLowerCase()}${scopeSuffix}.mp4`);
   console.log("\nGenerating final Polyglot video in single-pass...");
   try {
     let encodeParams = "-c:v h264_qsv -preset fast -pix_fmt nv12";

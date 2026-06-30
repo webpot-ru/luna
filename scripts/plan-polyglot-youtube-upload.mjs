@@ -38,6 +38,8 @@ function parseArgs(argv) {
     allowRepublish: false,
     requireAiMetadata: false,
     allowAutoThumbnailFallback: false,
+    allowShortUnverified: false,
+    maxDurationSeconds: 0,
     allowMissingVideo: false,
     json: false,
     help: false,
@@ -55,6 +57,8 @@ function parseArgs(argv) {
     else if (arg === "--allow-republish") options.allowRepublish = true;
     else if (arg === "--require-ai-metadata") options.requireAiMetadata = true;
     else if (arg === "--allow-auto-thumbnail-fallback") options.allowAutoThumbnailFallback = true;
+    else if (arg === "--allow-short-unverified") options.allowShortUnverified = true;
+    else if (arg === "--max-duration-seconds" || arg.startsWith("--max-duration-seconds=")) options.maxDurationSeconds = Number(readValue());
     else if (arg === "--allow-missing-video") options.allowMissingVideo = true;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
@@ -79,6 +83,8 @@ function usage() {
     "  --allow-republish                Allow an active matching Polyglot publication.",
     "  --require-ai-metadata            Block template metadata for live apply.",
     "  --allow-auto-thumbnail-fallback  Accept YouTube auto first-frame fallback.",
+    "  --allow-short-unverified         Allow contentScope=short_unverified on channels without custom thumbnails.",
+    "  --max-duration-seconds <n>       Required duration cap for short_unverified upload planning.",
     "  --allow-missing-video            Plan metadata without a rendered video; never use for apply.",
   ].join("\n");
 }
@@ -147,6 +153,11 @@ function polishedMetadataIssue(metadata) {
   return "";
 }
 
+function normalizeContentScope(value) {
+  const scope = String(value || "full").trim().toLowerCase().replace(/[^a-z0-9_-]+/g, "_");
+  return scope || "full";
+}
+
 function quotaForCandidate({ hasThumbnail, playlistEntry, allowPlaylistCreate }) {
   let quota = 1600;
   if (hasThumbnail) quota += 50;
@@ -165,6 +176,8 @@ function validateCandidate({
   allowRepublish,
   requireAiMetadata,
   allowAutoThumbnailFallback,
+  allowShortUnverified,
+  maxDurationSeconds,
   allowMissingVideo,
 }) {
   const blockers = [];
@@ -180,6 +193,9 @@ function validateCandidate({
   const videoPath = defaultVideoPath(metadataFile, metadata);
   const thumbnailPath = defaultThumbnailPath(metadataFile, metadata);
   const canUploadCustomThumbnail = channel ? customThumbnailUploadAllowed(channelRegistry, channel) : false;
+  const contentScope = normalizeContentScope(metadata.contentScope);
+  const durationSeconds = Number(metadata.videoDurationSeconds || 0);
+  const durationCapSeconds = Number(metadata.maxDurationSeconds || maxDurationSeconds || 0);
   const thumbnailAutoRequested = metadata.thumbnailUploadMode === "first_frame_auto"
     || metadata.thumbnailSource === "youtube-auto-first-frame";
   const useAutoThumbnail = !canUploadCustomThumbnail || thumbnailAutoRequested || (allowAutoThumbnailFallback && !thumbnailPath);
@@ -212,8 +228,18 @@ function validateCandidate({
   if (existingPublication && !allowRepublish) blockers.push(`active Polyglot publication already exists: video=${existingPublication.youtubeVideoId}`);
 
   if (!canUploadCustomThumbnail) {
-    blockers.push("Polyglot upload is blocked because customThumbnailUploadAllowed must be true. Channels without custom thumbnails may still have the 15-minute upload length limit.");
-    warnings.push("YouTube automatic thumbnail fallback is allowed for ordinary videos only, not Polyglot.");
+    if (contentScope === "short_unverified" && allowShortUnverified) {
+      if (!durationCapSeconds) blockers.push("short_unverified upload requires maxDurationSeconds");
+      if (!durationSeconds && !allowMissingVideo) blockers.push("short_unverified upload requires videoDurationSeconds from duration gate");
+      if (durationCapSeconds && durationSeconds && durationSeconds > durationCapSeconds) {
+        blockers.push(`short_unverified video duration ${durationSeconds.toFixed(3)}s exceeds maxDurationSeconds=${durationCapSeconds}`);
+      }
+      if (!allowAutoThumbnailFallback) blockers.push("short_unverified upload requires --allow-auto-thumbnail-fallback");
+      warnings.push(`short_unverified Polyglot uses YouTube auto thumbnail fallback and duration gate ${durationCapSeconds}s for unverified channel ${channel?.key || supportLang}`);
+    } else {
+      blockers.push("Polyglot upload is blocked because customThumbnailUploadAllowed must be true. Channels without custom thumbnails may still have the 15-minute upload length limit.");
+      warnings.push("YouTube automatic thumbnail fallback is allowed for ordinary videos only, not Polyglot.");
+    }
   }
 
   if (!thumbnailPath && useAutoThumbnail) {
@@ -228,6 +254,10 @@ function validateCandidate({
     metadataFile,
     videoType: "polyglot",
     polyglotKey: metadata.polyglotKey,
+    contentScope,
+    wordLimit: Number(metadata.wordLimit || 0),
+    videoDurationSeconds: durationSeconds || null,
+    maxDurationSeconds: durationCapSeconds || null,
     setId: metadata.setId,
     supportLang,
     bundleKey: metadata.bundleKey,
@@ -311,6 +341,8 @@ try {
       allowRepublish: options.allowRepublish,
       requireAiMetadata: options.requireAiMetadata,
       allowAutoThumbnailFallback: options.allowAutoThumbnailFallback,
+      allowShortUnverified: options.allowShortUnverified,
+      maxDurationSeconds: options.maxDurationSeconds,
       allowMissingVideo: options.allowMissingVideo,
     });
     if (options.writeRegistry && !findPolyglotPlaylistEntry(playlistRegistry, candidate.playlist_key)) {

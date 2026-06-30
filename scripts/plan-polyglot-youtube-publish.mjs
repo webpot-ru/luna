@@ -37,6 +37,8 @@ function parseArgs(argv) {
     videoLocalization: DEFAULT_VIDEO_LOCALIZATION_PATH,
     polyglotLocalization: DEFAULT_POLYGLOT_LOCALIZATION_PATH,
     output: "",
+    contentScope: "full",
+    maxDurationSeconds: 0,
     allowRepublish: false,
     requireOfflineDeck: false,
     json: false,
@@ -62,6 +64,8 @@ function parseArgs(argv) {
     else if (arg === "--video-localization" || arg.startsWith("--video-localization=")) options.videoLocalization = readValue();
     else if (arg === "--polyglot-localization" || arg.startsWith("--polyglot-localization=")) options.polyglotLocalization = readValue();
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = readValue();
+    else if (arg === "--content-scope" || arg.startsWith("--content-scope=")) options.contentScope = readValue();
+    else if (arg === "--max-duration-seconds" || arg.startsWith("--max-duration-seconds=")) options.maxDurationSeconds = Number(readValue());
     else if (arg === "--allow-republish") options.allowRepublish = true;
     else if (arg === "--require-offline-deck") options.requireOfflineDeck = true;
     else if (arg === "--json") options.json = true;
@@ -84,6 +88,8 @@ function usage() {
     "  --publication-registry <file> Defaults to config/youtube-polyglot-published-videos.json.",
     "  --progress-registry <file>    Defaults to config/youtube-polyglot-progress.json.",
     "  --output <file>              Write full plan report.",
+    "  --content-scope <scope>      full (default) or short_unverified.",
+    "  --max-duration-seconds <n>   Required upload duration gate for short_unverified.",
     "  --json                       Print compact summary.",
   ].join("\n");
 }
@@ -101,14 +107,22 @@ function targetHash(targetLangs) {
   return crypto.createHash("sha256").update(uniqueCodes(targetLangs).join(",")).digest("hex").slice(0, 12);
 }
 
-function buildPolyglotKey({ setId, supportLang, bundleKey, targetLangsHash }) {
-  return [
+function normalizeContentScope(value) {
+  const scope = String(value || "full").trim().toLowerCase().replace(/[^a-z0-9_-]+/g, "_");
+  return scope || "full";
+}
+
+function buildPolyglotKey({ setId, supportLang, bundleKey, targetLangsHash, contentScope }) {
+  const parts = [
     "polyglot",
     String(setId || "").trim(),
     normalizeLanguageCode(supportLang),
     String(bundleKey || "").trim(),
     targetLangsHash,
-  ].join(":");
+  ];
+  const scope = normalizeContentScope(contentScope);
+  if (scope !== "full") parts.push(scope);
+  return parts.join(":");
 }
 
 function findBundle(bundleConfig, bundleKey) {
@@ -320,6 +334,14 @@ async function main() {
     throw new Error("Polyglot planner accepts exactly one explicit support language per video.");
   }
   const supportLang = supports[0];
+  const contentScope = normalizeContentScope(options.contentScope);
+  if (!["full", "short_unverified"].includes(contentScope)) {
+    throw new Error(`Unsupported --content-scope=${options.contentScope}; expected full or short_unverified.`);
+  }
+  const maxDurationSeconds = Number(options.maxDurationSeconds || 0);
+  if (contentScope === "short_unverified" && (!Number.isFinite(maxDurationSeconds) || maxDurationSeconds <= 0)) {
+    throw new Error("--content-scope=short_unverified requires --max-duration-seconds.");
+  }
 
   const bundleConfig = readJson(options.bundleConfig, null);
   if (!bundleConfig) throw new Error(`Missing Polyglot bundle config: ${options.bundleConfig}`);
@@ -341,6 +363,7 @@ async function main() {
     supportLang,
     bundleKey: bundle.key,
     targetLangsHash,
+    contentScope,
   });
 
   const blockers = [];
@@ -378,7 +401,11 @@ async function main() {
   if (channel) {
     canUploadCustomThumbnail = customThumbnailUploadAllowed(channelRegistry, channel);
     if (!canUploadCustomThumbnail) {
-      blockers.push(`Polyglot is blocked for channel key ${channel.key} because customThumbnailUploadAllowed must be true because channels without custom thumbnails may still have the 15-minute upload length limit`);
+      if (contentScope === "short_unverified") {
+        warnings.push(`short_unverified Polyglot allowed for channel key ${channel.key}; upload must pass maxDurationSeconds=${maxDurationSeconds} and use YouTube auto thumbnail fallback`);
+      } else {
+        blockers.push(`Polyglot is blocked for channel key ${channel.key} because customThumbnailUploadAllowed must be true because channels without custom thumbnails may still have the 15-minute upload length limit`);
+      }
     }
   }
 
@@ -407,6 +434,8 @@ async function main() {
     bundleKey: bundle.key,
     bundleLabel: bundle.label || bundle.key,
     bundleWave: bundle.wave || null,
+    contentScope,
+    maxDurationSeconds,
     targetLangs,
     targetLangsCsv: targetLangs.join(","),
     targetLangsHash,
@@ -419,7 +448,7 @@ async function main() {
     deck: deckPlan,
     studyUrl,
     urlTargetLangs: urlValidation.urlTargets,
-    buildCommand: `node scripts/build-polyglot-video.mjs --set ${options.setId} --support ${supportLang} --targets ${targetLangs.join(",")}`,
+    buildCommand: `node scripts/build-polyglot-video.mjs --set ${options.setId} --support ${supportLang} --targets ${targetLangs.join(",")}${contentScope !== "full" ? ` --content-scope ${contentScope}` : ""}`,
     noAudioPreviewCommand: `node scripts/build-polyglot-video.mjs --set ${options.setId} --support ${supportLang} --targets ${targetLangs.join(",")} --no-audio --limit 3`,
     existingPublication: existingPublication ? {
       youtubeVideoId: existingPublication.youtubeVideoId || "",

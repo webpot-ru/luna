@@ -67,6 +67,14 @@ function publicationKey(row = {}) {
   ].join("|");
 }
 
+function polyglotVideoKey(row = {}) {
+  return [
+    row.setId || "",
+    normalizeLanguageCode(row.supportLang),
+    row.youtubeVideoId || "",
+  ].join("|");
+}
+
 function isEmpty(value) {
   return value === undefined || value === null || value === "";
 }
@@ -82,19 +90,64 @@ function fillMissing(existing, incoming, fields) {
   return changed;
 }
 
+function isPolyglotRow(row = {}) {
+  return row.videoType === "polyglot" || String(row.polyglotKey || "").startsWith("polyglot:");
+}
+
+function assignIfChanged(existing, incoming, field) {
+  if (isEmpty(incoming[field])) return false;
+  const currentValue = JSON.stringify(existing[field] ?? null);
+  const nextValue = JSON.stringify(incoming[field]);
+  if (currentValue === nextValue) return false;
+  existing[field] = incoming[field];
+  return true;
+}
+
+function repairPolyglotPublicationIdentity(existing, incoming) {
+  if (!isPolyglotRow(incoming)) return false;
+  let changed = false;
+  for (const field of [
+    "videoType",
+    "polyglotKey",
+    "bundleKey",
+    "bundleLabel",
+    "contentScope",
+    "wordLimit",
+    "videoDurationSeconds",
+    "maxDurationSeconds",
+    "durationGate",
+    "targetLangs",
+    "targetLangsCsv",
+    "targetLangsHash",
+    "targetLang",
+  ]) {
+    changed = assignIfChanged(existing, incoming, field) || changed;
+  }
+  if (String(incoming.playlist_key || "").startsWith("POLYGLOT__")) {
+    changed = assignIfChanged(existing, incoming, "playlist_key") || changed;
+  } else {
+    changed = fillMissing(existing, incoming, ["playlist_key"]) || changed;
+  }
+  return changed;
+}
+
 function mergePublications(currentRegistry, incomingRegistry) {
   const currentRows = currentRegistry.publications || [];
   const incomingRows = (incomingRegistry.publications || []).filter((row) => row?.youtubeVideoId);
   currentRegistry.publications = currentRows;
   const byKey = new Map(currentRows.map((row) => [publicationKey(row), row]));
+  const byPolyglotVideoKey = new Map(currentRows
+    .filter((row) => row.youtubeVideoId)
+    .map((row) => [polyglotVideoKey(row), row]));
   const summary = { created: 0, updated: 0, skipped: 0 };
 
   for (const incoming of incomingRows) {
     const key = publicationKey(incoming);
-    const existing = byKey.get(key);
+    const existing = byKey.get(key) || (isPolyglotRow(incoming) ? byPolyglotVideoKey.get(polyglotVideoKey(incoming)) : null);
     if (!existing) {
       currentRows.push(incoming);
       byKey.set(key, incoming);
+      if (isPolyglotRow(incoming)) byPolyglotVideoKey.set(polyglotVideoKey(incoming), incoming);
       summary.created += 1;
       continue;
     }
@@ -107,6 +160,20 @@ function mergePublications(currentRegistry, incomingRegistry) {
       "playlistItemId",
       "youtubeChannelId",
       "channelHandle",
+      "playlist_key",
+      "videoType",
+      "polyglotKey",
+      "bundleKey",
+      "bundleLabel",
+      "contentScope",
+      "wordLimit",
+      "videoDurationSeconds",
+      "maxDurationSeconds",
+      "durationGate",
+      "targetLangs",
+      "targetLangsCsv",
+      "targetLangsHash",
+      "targetLang",
       "privacyStatus",
       "publishAt",
       "scheduledPublishAt",
@@ -121,6 +188,7 @@ function mergePublications(currentRegistry, incomingRegistry) {
       "uploadedAt",
       "lastReadbackAt",
     ]);
+    changed = repairPolyglotPublicationIdentity(existing, incoming) || changed;
     if (existing.thumbnailSet !== true && incoming.thumbnailSet === true) {
       existing.thumbnailSet = true;
       changed = true;
@@ -332,6 +400,18 @@ function mergePolyglotProgress(currentRegistry, incomingRegistry) {
 
     let changed = fillMissing(existing, incoming, [
       "status",
+      "videoType",
+      "setId",
+      "supportLang",
+      "bundleKey",
+      "bundleLabel",
+      "contentScope",
+      "wordLimit",
+      "videoDurationSeconds",
+      "maxDurationSeconds",
+      "targetLangs",
+      "targetLangsCsv",
+      "targetLangsHash",
       "youtubeVideoId",
       "youtubeVideoUrl",
       "youtubePlaylistId",
