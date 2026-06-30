@@ -1193,6 +1193,30 @@ All other support channels must be skipped for Polyglot until custom thumbnails 
 
 Short exception for unverified channels, accepted on 2026-06-30: unverified channels may receive a deliberately truncated Polyglot video only through `content_scope=short_unverified`. This is not a full-deck Polyglot release. It exists only to stay under YouTube's default 15-minute limit for accounts/channels that may not have advanced features. Existing long/full Polyglot rows on unverified channels do not satisfy this short-wave requirement, even if they are present in the local registry; cover all 42 unverified physical support channels with the short scope. The first kitchen-deck setting is `limit=30` words and `max_duration_seconds=895` (14:55). The workflow runs `npm run check:polyglot-video-duration` after rendering; upload is blocked if ffprobe reports a duration above the cap. Short videos use separate keys such as `polyglot:<set>:<support>:<bundle>:<hash>:short_unverified` and `POLYGLOT__<SUPPORT>__<bundle>__<hash>__short-unverified`, so a later full-deck release does not collide with the short canary. Short unverified uploads use YouTube automatic thumbnail fallback and must not call `thumbnails.set`.
 
+Current short_unverified completed state for `home_kitchen_cookware_pilot_01` + `global_europe_core`:
+
+| Support channel | Viewer learns | Words | Duration | Thumbnail | Video | GitHub run |
+| --- | --- | ---: | ---: | --- | --- | --- |
+| `BG` | `EN`, `ES`, `FR`, `DE` | `30` | `860.48s` (`14:20.48`) | `first_frame_auto` | https://www.youtube.com/watch?v=OyScukpJbx4 | `28449980062` |
+| `DE` | `EN`, `ES`, `FR`, `IT` | `30` | `871.40s` (`14:31.40`) | `first_frame_auto` | https://www.youtube.com/watch?v=UI3o1n2siyc | `28449909823` |
+| `FR` | `EN`, `ES`, `DE`, `IT` | `30` | `869.12s` (`14:29.12`) | `first_frame_auto` | https://www.youtube.com/watch?v=HKk2f0h3QqU | `28449918196` |
+| `HI` | `EN`, `ES`, `FR`, `DE` | `30` | `864.44s` (`14:24.44`) | `first_frame_auto` | https://www.youtube.com/watch?v=4_d417ux95Q | `28449925808` |
+| `HR` | `EN`, `ES`, `FR`, `DE` | `30` | `860.52s` (`14:20.52`) | `first_frame_auto` | https://www.youtube.com/watch?v=qrihrFI8qqg | `28449988276` |
+| `ID` | `EN`, `ES`, `FR`, `DE` | `30` | `872.52s` (`14:32.52`) | `first_frame_auto` | https://www.youtube.com/watch?v=ynLZY1X6Lqg | `28449933479` |
+| `KN` | `EN`, `ES`, `FR`, `DE` | `30` | `861.00s` (`14:21.00`) | `first_frame_auto` | https://www.youtube.com/watch?v=nUSUmP3VnCU | `28450037559` |
+| `MS` | `EN`, `ES`, `FR`, `DE` | `30` | `868.72s` (`14:28.72`) | `first_frame_auto` | https://www.youtube.com/watch?v=S5-PhbQXzqU | `28449949569` |
+| `NL` | `EN`, `ES`, `FR`, `DE` | `30` | `864.68s` (`14:24.68`) | `first_frame_auto` | https://www.youtube.com/watch?v=BLY1lDMs3O4 | `28449958457` |
+| `PL` | `EN`, `ES`, `FR`, `DE` | `30` | `865.44s` (`14:25.44`) | `first_frame_auto` | https://www.youtube.com/watch?v=NohlWuNRoqU | `28448071203` |
+| `SI` | `EN`, `ES`, `FR`, `DE` | `30` | `856.16s` (`14:16.16`) | `first_frame_auto` | https://www.youtube.com/watch?v=z8aI7yDvoDI | `28450013699` |
+| `SL` | `EN`, `ES`, `FR`, `DE` | `30` | `865.84s` (`14:25.84`) | `first_frame_auto` | https://www.youtube.com/watch?v=eWRZJMaRROo | `28450005359` |
+| `SR` | `EN`, `ES`, `FR`, `DE` | `30` | `869.80s` (`14:29.80`) | `first_frame_auto` | https://www.youtube.com/watch?v=hSwe2oR0-KE | `28449997013` |
+| `SV` | `EN`, `ES`, `FR`, `DE` | `30` | `878.48s` (`14:38.48`) | `first_frame_auto` | https://www.youtube.com/watch?v=dIvMGHfRbdo | `28449968305` |
+| `TA` | `EN`, `ES`, `FR`, `DE` | `30` | `845.48s` (`14:05.48`) | `first_frame_auto` | https://www.youtube.com/watch?v=QwjEQzSYMTg | `28450021787` |
+| `TE` | `EN`, `ES`, `FR`, `DE` | `30` | `839.88s` (`13:59.88`) | `first_frame_auto` | https://www.youtube.com/watch?v=PAvoNVtCsu4 | `28450029529` |
+| `VI` | `EN`, `ES`, `FR`, `DE` | `30` | `859.16s` (`14:19.16`) | `first_frame_auto` | https://www.youtube.com/watch?v=_FuvQtu6aRM | `28449941859` |
+
+Short_unverified wave progress: `17/42` complete, `25/42` remaining. This table must be updated from durable state after each successful short_unverified publish, not from planned or in-progress GitHub runs.
+
 Bulk safe plan from GitHub UI:
 
 ```text
