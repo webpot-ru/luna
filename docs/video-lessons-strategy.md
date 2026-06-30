@@ -534,9 +534,14 @@ For parallel GitHub workers, scheduled mode must pass the generation target pref
 Operational rules:
 
 - After any scheduled plan/apply run, review the artifact-updated `config/youtube-publish-calendar.json` and commit it before launching a later separate wave that relies on those slots.
+- Calendar reconciliation must use `config/youtube-published-videos.json.publications` as the publication registry array. Active calendar checks must ignore reservation statuses containing `cancelled`, `deleted`, `failed` or `superseded`, not only exact status names.
+- Backfill/reactivation is valid only for current non-superseded ordinary publication rows that have `publishAt` or `scheduledPublishAt`. Do not add active calendar rows for read-only live-audit rows (`live_youtube_upload_detected`) or immediate public uploads (`published_uploaded`) when they do not have a scheduled publish time.
+- If a matching inactive reservation already exists for `setId + supportLang + targetLang + channelKey`, reactivate and sync that existing row from the publication registry instead of adding a second reservation row for the same assignment.
 - Do not run separate concurrent workflows for the same physical channel with different uncommitted calendars unless they share the same target-plan ordering and non-overlapping target sets.
 - If a planned upload is intentionally cancelled, mark the calendar reservation inactive (`cancelled`, `deleted`, `failed` or `superseded`) instead of deleting rows; the planner ignores inactive rows.
 - Do not put token paths, OAuth files, secrets, raw metadata prompts or private notes into the calendar.
+
+2026-06-30 ordinary calendar reconciliation snapshot for `home_kitchen_cookware_pilot_01`: `137` existing inactive reservations were reactivated and synced to the publication registry. After the sync, all current non-superseded ordinary publication rows with `publishAt` / `scheduledPublishAt` have active calendar reservations (`missingWithPublishAt=0`) and active assignment duplicates are `0`. The remaining `288` current rows outside the active calendar are intentionally non-scheduled rows: `276` `live_youtube_upload_detected` readback rows and `12` `published_uploaded` public-now rows. The only active same-channel same-`publishAt` collisions are the preexisting shared-channel slot collisions on `pt` (`PT-BR`/`PT`) and `es` (`ES-419`/`ES`); they are not duplicate assignment keys.
 
 ### 1.4. Background music and Content ID safety
 
