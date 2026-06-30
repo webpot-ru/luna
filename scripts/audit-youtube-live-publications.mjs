@@ -359,6 +359,21 @@ function duplicateGroups(publications) {
     }));
 }
 
+function markDuplicateAssignmentRowsNonPersistable(rows) {
+  const groups = duplicateGroups(rows);
+  if (!groups.length) return;
+  const duplicateKeys = new Set(groups.map((group) => group.key));
+  for (const row of rows) {
+    const key = [row.setId, normalizeCode(row.supportLang), normalizeCode(row.targetLang)].join("|");
+    if (!duplicateKeys.has(key)) continue;
+    if (row.supportLangResolution === "local_registry_video_id") continue;
+    row.canPersistLiveReadback = false;
+    row.excludedFromPublicationRegistryReason = row.localRegistryVideoId
+      ? "duplicate_live_video_for_registered_assignment"
+      : "duplicate_live_assignment_requires_review";
+  }
+}
+
 async function auditSupport({ options, channelRegistry, publicationRegistry, courseSlug, supportLang }) {
   const channel = findChannelForSupport(channelRegistry.channels, supportLang);
   if (!channel) fail(`No YouTube channel configured for support=${supportLang}`);
@@ -400,6 +415,9 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
         inferred.supportLangAmbiguous = false;
         inferred.canPersistLiveReadback = true;
         inferred.excludedFromPublicationRegistryReason = "";
+      } else if (existing?.youtubeVideoId && existing.youtubeVideoId !== inferred.youtubeVideoId) {
+        inferred.canPersistLiveReadback = false;
+        inferred.excludedFromPublicationRegistryReason = "duplicate_live_video_for_registered_assignment";
       }
       matchedPublications.push({
         ...inferred,
@@ -414,6 +432,7 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
       });
     }
   }
+  markDuplicateAssignmentRowsNonPersistable(matchedPublications);
 
   return {
     supportLang,
