@@ -66059,6 +66059,98 @@
       "youtubeVideoId": "AGAf6Eh5Mz8",
       "youtubePlaylistId": "PLRLjrn4cixPE",
       "playlistItemId": "UExSTGpybjRjaXhQRS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "JA",
+      "targetLang": "LV",
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "publishAt": "2026-06-30T23:30:00.000Z",
+      "timeZone": "Asia/Tokyo",
+      "localDate": "2026-07-01",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_lv_ja/youtube_metadata.json",
+      "title": "ラトビア語学習：台所用品の基本単語50選（音声・ミニテスト付き）",
+      "playlist_key": "JA__LV__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-01T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-03T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-07T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-30T23:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28455739458",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28455739458",
+      "createdAt": "2026-06-30T15:25:13.641Z",
+      "updatedAt": "2026-06-30T15:25:13.641Z",
+      "youtubeVideoId": "dwOFylzRUWo",
+      "youtubePlaylistId": "PLCW7WUjB_FtQ",
+      "playlistItemId": "UExDVzdXVWpCX0Z0US41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "JA",
+      "targetLang": "ML",
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "publishAt": "2026-07-01T02:30:00.000Z",
+      "timeZone": "Asia/Tokyo",
+      "localDate": "2026-07-01",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ml_ja/youtube_metadata.json",
+      "title": "【マラヤーラム語】台所用品の基本単語 50選（ネイティブ発音・ミニテスト付き）",
+      "playlist_key": "JA__ML__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-02T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-04T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-08T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-31T02:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28455739458",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28455739458",
+      "createdAt": "2026-06-30T15:25:13.643Z",
+      "updatedAt": "2026-06-30T15:25:13.643Z",
+      "youtubeVideoId": "2ruKgrXhMew",
+      "youtubePlaylistId": "PLcJC3K-8Tbys",
+      "playlistItemId": "UExjSkMzSy04VGJ5cy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
