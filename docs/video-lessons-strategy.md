@@ -1197,15 +1197,27 @@ Current short_unverified completed state for `home_kitchen_cookware_pilot_01` + 
 
 | Support channel | Viewer learns | Words | Duration | Thumbnail | Video | GitHub run |
 | --- | --- | ---: | ---: | --- | --- | --- |
+| `AZ` | `EN`, `ES`, `FR`, `DE` | `30` | `862.52s` (`14:22.52`) | `first_frame_auto` | https://www.youtube.com/watch?v=9Et4FZ4kL8k | `28451476837` |
 | `BG` | `EN`, `ES`, `FR`, `DE` | `30` | `860.48s` (`14:20.48`) | `first_frame_auto` | https://www.youtube.com/watch?v=OyScukpJbx4 | `28449980062` |
+| `CS` | `EN`, `ES`, `FR`, `DE` | `30` | `861.20s` (`14:21.20`) | `first_frame_auto` | https://www.youtube.com/watch?v=R9G8UfoiIFo | `28451403524` |
+| `DA` | `EN`, `ES`, `FR`, `DE` | `30` | `862.96s` (`14:22.96`) | `first_frame_auto` | https://www.youtube.com/watch?v=I1IjSfwca9w | `28451386879` |
 | `DE` | `EN`, `ES`, `FR`, `IT` | `30` | `871.40s` (`14:31.40`) | `first_frame_auto` | https://www.youtube.com/watch?v=UI3o1n2siyc | `28449909823` |
+| `ET` | `EN`, `ES`, `FR`, `DE` | `30` | `855.04s` (`14:15.04`) | `first_frame_auto` | https://www.youtube.com/watch?v=QqG-zOmT1Fk | `28451433822` |
+| `FI` | `EN`, `ES`, `FR`, `DE` | `30` | `866.80s` (`14:26.80`) | `first_frame_auto` | https://www.youtube.com/watch?v=dMbpOucVFZE | `28451395045` |
 | `FR` | `EN`, `ES`, `DE`, `IT` | `30` | `869.12s` (`14:29.12`) | `first_frame_auto` | https://www.youtube.com/watch?v=HKk2f0h3QqU | `28449918196` |
 | `HI` | `EN`, `ES`, `FR`, `DE` | `30` | `864.44s` (`14:24.44`) | `first_frame_auto` | https://www.youtube.com/watch?v=4_d417ux95Q | `28449925808` |
 | `HR` | `EN`, `ES`, `FR`, `DE` | `30` | `860.52s` (`14:20.52`) | `first_frame_auto` | https://www.youtube.com/watch?v=qrihrFI8qqg | `28449988276` |
 | `ID` | `EN`, `ES`, `FR`, `DE` | `30` | `872.52s` (`14:32.52`) | `first_frame_auto` | https://www.youtube.com/watch?v=ynLZY1X6Lqg | `28449933479` |
+| `IS` | `EN`, `ES`, `FR`, `DE` | `30` | `854.92s` (`14:14.92`) | `first_frame_auto` | https://www.youtube.com/watch?v=dllen8elefE | `28451442387` |
+| `KK` | `EN`, `ES`, `FR`, `DE` | `30` | `856.80s` (`14:16.80`) | `first_frame_auto` | https://www.youtube.com/watch?v=Pn3beNb8aX0 | `28451468025` |
 | `KN` | `EN`, `ES`, `FR`, `DE` | `30` | `861.00s` (`14:21.00`) | `first_frame_auto` | https://www.youtube.com/watch?v=nUSUmP3VnCU | `28450037559` |
+| `KO` | `EN`, `ES`, `FR`, `DE` | `30` | `871.80s` (`14:31.80`) | `first_frame_auto` | https://www.youtube.com/watch?v=qPn-Fl-osNE | `28451363203` |
+| `LT` | `EN`, `ES`, `FR`, `DE` | `30` | `873.84s` (`14:33.84`) | `first_frame_auto` | https://www.youtube.com/watch?v=F2giOB-J4N0 | `28451412686` |
+| `LV` | `EN`, `ES`, `FR`, `DE` | `30` | `863.44s` (`14:23.44`) | `first_frame_auto` | https://www.youtube.com/watch?v=byoSnCVMayc | `28451421508` |
+| `ML` | `EN`, `ES`, `FR`, `DE` | `30` | `856.60s` (`14:16.60`) | `first_frame_auto` | https://www.youtube.com/watch?v=sdtE0erlbgw | `28451452153` |
 | `MS` | `EN`, `ES`, `FR`, `DE` | `30` | `868.72s` (`14:28.72`) | `first_frame_auto` | https://www.youtube.com/watch?v=S5-PhbQXzqU | `28449949569` |
 | `NL` | `EN`, `ES`, `FR`, `DE` | `30` | `864.68s` (`14:24.68`) | `first_frame_auto` | https://www.youtube.com/watch?v=BLY1lDMs3O4 | `28449958457` |
+| `NO` | `EN`, `ES`, `FR`, `DE` | `30` | `866.48s` (`14:26.48`) | `first_frame_auto` | https://www.youtube.com/watch?v=3BZaKclFS9Q | `28451378967` |
 | `PL` | `EN`, `ES`, `FR`, `DE` | `30` | `865.44s` (`14:25.44`) | `first_frame_auto` | https://www.youtube.com/watch?v=NohlWuNRoqU | `28448071203` |
 | `SI` | `EN`, `ES`, `FR`, `DE` | `30` | `856.16s` (`14:16.16`) | `first_frame_auto` | https://www.youtube.com/watch?v=z8aI7yDvoDI | `28450013699` |
 | `SL` | `EN`, `ES`, `FR`, `DE` | `30` | `865.84s` (`14:25.84`) | `first_frame_auto` | https://www.youtube.com/watch?v=eWRZJMaRROo | `28450005359` |
@@ -1213,9 +1225,11 @@ Current short_unverified completed state for `home_kitchen_cookware_pilot_01` + 
 | `SV` | `EN`, `ES`, `FR`, `DE` | `30` | `878.48s` (`14:38.48`) | `first_frame_auto` | https://www.youtube.com/watch?v=dIvMGHfRbdo | `28449968305` |
 | `TA` | `EN`, `ES`, `FR`, `DE` | `30` | `845.48s` (`14:05.48`) | `first_frame_auto` | https://www.youtube.com/watch?v=QwjEQzSYMTg | `28450021787` |
 | `TE` | `EN`, `ES`, `FR`, `DE` | `30` | `839.88s` (`13:59.88`) | `first_frame_auto` | https://www.youtube.com/watch?v=PAvoNVtCsu4 | `28450029529` |
+| `UZ` | `EN`, `ES`, `FR`, `DE` | `30` | `861.80s` (`14:21.80`) | `first_frame_auto` | https://www.youtube.com/watch?v=FPuntSbNNMo | `28451459940` |
 | `VI` | `EN`, `ES`, `FR`, `DE` | `30` | `859.16s` (`14:19.16`) | `first_frame_auto` | https://www.youtube.com/watch?v=_FuvQtu6aRM | `28449941859` |
+| `ZH` | `EN`, `ES`, `FR`, `DE` | `30` | `855.24s` (`14:15.24`) | `first_frame_auto` | https://www.youtube.com/watch?v=VNHUmL-Sx8c | `28451370832` |
 
-Short_unverified wave progress: `17/42` complete, `25/42` remaining. This table must be updated from durable state after each successful short_unverified publish, not from planned or in-progress GitHub runs.
+Short_unverified wave progress: `31/42` complete, `11/42` remaining. This table must be updated from durable state after each successful short_unverified publish, not from planned or in-progress GitHub runs.
 
 Bulk safe plan from GitHub UI:
 
