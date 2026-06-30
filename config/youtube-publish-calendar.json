@@ -75582,6 +75582,52 @@
       "youtubeVideoId": "A8qlOyWC-tg",
       "youtubePlaylistId": "PLVb22XpPROjY",
       "playlistItemId": "UExWYjIyWHBQUk9qWS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "HR",
+      "targetLang": "TR",
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "publishAt": "2026-07-01T21:30:00.000Z",
+      "timeZone": "Europe/Zagreb",
+      "localDate": "2026-07-01",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_tr_hr/youtube_metadata.json",
+      "title": "Turski jezik za početnike: Kuhinjski pribor (A1) | 50 važnih riječi",
+      "playlist_key": "HR__TR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-02T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-04T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-08T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-31T21:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28469911606",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28469911606",
+      "createdAt": "2026-06-30T19:20:20.469Z",
+      "updatedAt": "2026-06-30T19:20:20.469Z",
+      "youtubeVideoId": "8zw6Bwl6nrU",
+      "youtubePlaylistId": "PLEtAgjliRb74",
+      "playlistItemId": "UExFdEFnamxpUmI3NC41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
