@@ -75674,6 +75674,52 @@
       "youtubeVideoId": "sAIMGhp77Vk",
       "youtubePlaylistId": "PLbduJFDatqpI",
       "playlistItemId": "UExiZHVKRkRhdHFwSS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "KM",
+      "targetLang": "NB",
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "publishAt": "2026-07-01T16:30:00.000Z",
+      "timeZone": "Asia/Phnom_Penh",
+      "localDate": "2026-07-01",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_nb_km/youtube_metadata.json",
+      "title": "រៀនភាសាន័រវែស៖ សម្ភារៈផ្ទះបាយ ៥០ ពាក្យកម្រិតមូលដ្ឋាន (Norwegian A1)",
+      "playlist_key": "KM__NB__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-02T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-04T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-08T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-31T16:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28469924748",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28469924748",
+      "createdAt": "2026-06-30T19:20:38.265Z",
+      "updatedAt": "2026-06-30T19:20:38.265Z",
+      "youtubeVideoId": "l6EW83aGn1Q",
+      "youtubePlaylistId": "PLej9Zw5M18lg",
+      "playlistItemId": "UExlajladzVNMThsZy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
