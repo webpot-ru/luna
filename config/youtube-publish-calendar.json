@@ -75720,6 +75720,52 @@
       "youtubeVideoId": "l6EW83aGn1Q",
       "youtubePlaylistId": "PLej9Zw5M18lg",
       "playlistItemId": "UExlajladzVNMThsZy41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ET",
+      "targetLang": "SI",
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "publishAt": "2026-07-01T20:30:00.000Z",
+      "timeZone": "Europe/Tallinn",
+      "localDate": "2026-07-01",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_si_et/youtube_metadata.json",
+      "title": "Sinhalese sõnavara algajatele: Köögitarbed (50 vajalikku sõna)",
+      "playlist_key": "ET__SI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-02T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-04T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-08T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-31T20:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28469905449",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28469905449",
+      "createdAt": "2026-06-30T19:19:59.290Z",
+      "updatedAt": "2026-06-30T19:19:59.290Z",
+      "youtubeVideoId": "n5q44J12Ubo",
+      "youtubePlaylistId": "PLCYecCViF_cc",
+      "playlistItemId": "UExDWWVjQ1ZpRl9jYy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
