@@ -188,7 +188,7 @@ jobs:
           BRANCH_NAME: ${{ github.ref_name }}
         run: |
           set -euo pipefail
-          if [ ! -f .state-artifact/outputs/youtube-live-publications-github.json ]; then
+          if [ ! -f .state-artifact/outputs/youtube-live-publications-github.json ] && [ ! -f .state-artifact/youtube-live-publications-github.json ]; then
             echo "No live audit artifact found; nothing to persist."
             exit 0
           fi

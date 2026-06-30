@@ -5,6 +5,7 @@ import path from "node:path";
 const DEFAULT_ARTIFACT_DIR = ".state-artifact";
 const DEFAULT_SUMMARY_PATH = "outputs/youtube-publish-state-merge-github.json";
 const LIVE_AUDIT_PUBLICATIONS_PATH = "outputs/youtube-live-publications-github.json";
+const LIVE_AUDIT_PUBLICATIONS_BASENAME = "youtube-live-publications-github.json";
 
 function parseArgs(argv) {
   const options = {
@@ -444,6 +445,14 @@ function loadPair(repoRoot, artifactDir, relativePath, fallback) {
   return { currentPath, incomingPath, current, incoming, hasIncoming: fs.existsSync(incomingPath) };
 }
 
+function resolveArtifactPath(artifactDir, relativePath, basename) {
+  const candidates = [
+    path.join(artifactDir, relativePath),
+    path.join(artifactDir, basename),
+  ];
+  return candidates.find((candidate) => fs.existsSync(candidate)) || "";
+}
+
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
@@ -473,13 +482,13 @@ function main() {
     if (writeJsonIfChanged(publications.currentPath, publications.current)) summary.filesChanged.push("config/youtube-published-videos.json");
   }
 
-  const liveAuditPath = path.join(artifactDir, LIVE_AUDIT_PUBLICATIONS_PATH);
-  if (fs.existsSync(liveAuditPath)) {
+  const liveAuditPath = resolveArtifactPath(artifactDir, LIVE_AUDIT_PUBLICATIONS_PATH, LIVE_AUDIT_PUBLICATIONS_BASENAME);
+  if (liveAuditPath) {
     const liveAudit = readJson(liveAuditPath);
     summary.liveAudit = {
       ...mergePublications(publications.current, liveAudit),
       hasIncoming: true,
-      sourcePath: LIVE_AUDIT_PUBLICATIONS_PATH,
+      sourcePath: path.relative(artifactDir, liveAuditPath),
       missingFromLocalRegistryCount: liveAudit.missingFromLocalRegistryCount || 0,
       matchedPublicationCount: liveAudit.matchedPublicationCount || 0,
     };
