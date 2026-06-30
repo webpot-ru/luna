@@ -66166,6 +66166,52 @@
       "youtubeVideoId": "2ruKgrXhMew",
       "youtubePlaylistId": "PLcJC3K-8Tbys",
       "playlistItemId": "UExjSkMzSy04VGJ5cy41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "NE",
+      "targetLang": "ML",
+      "channelKey": "ne",
+      "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+      "publishAt": "2026-07-01T02:45:00.000Z",
+      "timeZone": "Asia/Kathmandu",
+      "localDate": "2026-07-01",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ml_ne/youtube_metadata.json",
+      "title": "मलयालम शब्दावली: भान्साका सामान | ५० आधारभूत शब्दहरू",
+      "playlist_key": "NE__ML__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-02T02:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-04T02:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-08T02:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-31T02:45:00.000Z"
+        }
+      ],
+      "githubRunId": "28455685646",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28455685646",
+      "createdAt": "2026-06-30T15:24:33.374Z",
+      "updatedAt": "2026-06-30T15:24:33.374Z",
+      "youtubeVideoId": "csz6PrXKx-4",
+      "youtubePlaylistId": "PLHT1mCx03Dbc",
+      "playlistItemId": "UExIVDFtQ3gwM0RiYy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
