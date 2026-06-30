@@ -1218,6 +1218,7 @@ Current short_unverified completed state for `home_kitchen_cookware_pilot_01` + 
 | `KM` | `EN`, `ES`, `FR`, `DE` | `30` | `855.76s` (`14:15.76`) | `first_frame_auto` | https://www.youtube.com/watch?v=NCncHyx2DgI | `28452632555` |
 | `KN` | `EN`, `ES`, `FR`, `DE` | `30` | `861.00s` (`14:21.00`) | `first_frame_auto` | https://www.youtube.com/watch?v=nUSUmP3VnCU | `28450037559` |
 | `KO` | `EN`, `ES`, `FR`, `DE` | `30` | `871.80s` (`14:31.80`) | `first_frame_auto` | https://www.youtube.com/watch?v=qPn-Fl-osNE | `28451363203` |
+| `LO` | `EN`, `ES`, `FR`, `DE` | `30` | `856.20s` (`14:16.20`) | `first_frame_auto` | https://www.youtube.com/watch?v=A7sRDRHFxA0 | `28453930946` |
 | `LT` | `EN`, `ES`, `FR`, `DE` | `30` | `873.84s` (`14:33.84`) | `first_frame_auto` | https://www.youtube.com/watch?v=F2giOB-J4N0 | `28451412686` |
 | `LV` | `EN`, `ES`, `FR`, `DE` | `30` | `863.44s` (`14:23.44`) | `first_frame_auto` | https://www.youtube.com/watch?v=byoSnCVMayc | `28451421508` |
 | `ML` | `EN`, `ES`, `FR`, `DE` | `30` | `856.60s` (`14:16.60`) | `first_frame_auto` | https://www.youtube.com/watch?v=sdtE0erlbgw | `28451452153` |
@@ -1239,7 +1240,7 @@ Current short_unverified completed state for `home_kitchen_cookware_pilot_01` + 
 | `VI` | `EN`, `ES`, `FR`, `DE` | `30` | `859.16s` (`14:19.16`) | `first_frame_auto` | https://www.youtube.com/watch?v=_FuvQtu6aRM | `28449941859` |
 | `ZH` | `EN`, `ES`, `FR`, `DE` | `30` | `855.24s` (`14:15.24`) | `first_frame_auto` | https://www.youtube.com/watch?v=VNHUmL-Sx8c | `28451370832` |
 
-Short_unverified wave progress: `41/42` complete, `1/42` remaining (`LO`). This table must be updated from durable state after each successful short_unverified publish, not from planned or in-progress GitHub runs.
+Short_unverified wave progress: `42/42` complete, `0/42` remaining. This table must be updated from durable state after each successful short_unverified publish, not from planned or in-progress GitHub runs.
 
 Bulk safe plan from GitHub UI:
 
