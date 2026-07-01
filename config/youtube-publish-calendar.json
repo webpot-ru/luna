@@ -78308,6 +78308,52 @@
       "youtubeVideoId": "egEGUAHkeMo",
       "youtubePlaylistId": "PLIxAtnN5SE7g",
       "playlistItemId": "UExJeEF0bk41U0U3Zy41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "AZ",
+      "targetLang": "UZ",
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "publishAt": "2026-07-01T19:30:00.000Z",
+      "timeZone": "Asia/Baku",
+      "localDate": "2026-07-01",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_uz_az/youtube_metadata.json",
+      "title": "Özbək dilində mətbəx ləvazimatı – A1 səviyyəli 50 söz",
+      "playlist_key": "AZ__UZ__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-02T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-04T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-08T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-31T19:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28512427049",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28512427049",
+      "createdAt": "2026-07-01T10:56:27.893Z",
+      "updatedAt": "2026-07-01T10:56:27.893Z",
+      "youtubeVideoId": "-hDkBVH9gI0",
+      "youtubePlaylistId": "PLUKNH4lW2Kz0",
+      "playlistItemId": "UExVS05INGxXMkt6MC41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
