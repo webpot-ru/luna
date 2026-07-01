@@ -40438,18 +40438,18 @@
       "targetLang": "DE",
       "channelKey": "en",
       "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
-      "publishAt": "2026-06-27T03:30:00.000Z",
+      "publishAt": "2026-07-02T03:30:00.000Z",
       "timeZone": "America/New_York",
       "localDate": "2026-06-26",
       "localTime": "23:30",
       "localSlotIndex": 5,
       "localDayOffset": 0,
       "slotOrdinal": 5,
-      "status": "cancelled_preupload_stale_reservation",
-      "source": "plan-youtube-publish-schedule",
+      "status": "reserved",
+      "source": "local-artifact-upload-first-frame",
       "policyPath": "config/youtube-publish-schedule-policy.json",
-      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_de_en-gb/youtube_metadata.json",
-      "title": "German A1 Kitchenware Vocabulary | 50 Words & Pronunciation | FlashcardsLuna",
+      "metadataFile": "outputs/tmp/batch4-artifact-probe-28523880857/youtube-video-publish-apply-home_kitchen_cookware_pilot_01-28523880857/outputs/video-generator/home_kitchen_cookware_pilot_01_de_en-gb/youtube_metadata.json",
+      "title": "German A1 Vocabulary: Kitchenware Basics | 50 Words with Pronunciation",
       "playlist_key": "EN-GB__DE__ordinary-vocabulary__a1-everyday",
       "analyticsCheckpointsAt": [
         {
@@ -40472,7 +40472,7 @@
       "githubRunId": "28227819375",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28227819375",
       "createdAt": "2026-06-26T08:56:02.454Z",
-      "updatedAt": "2026-06-26T09:23:48.245Z",
+      "updatedAt": "2026-07-01T16:13:59.863Z",
       "cancelledAt": "2026-06-26T09:23:48.245Z",
       "cancelReason": "pre_upload_cancel_after_past_publishAt_gate",
       "previousStatus": "reserved",
@@ -87391,7 +87391,7 @@
       "status": "reserved",
       "source": "local-artifact-upload-first-frame",
       "policyPath": "config/youtube-publish-schedule-policy.json",
-      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_en_en-gb/youtube_metadata.json",
+      "metadataFile": "outputs/tmp/batch4-artifact-probe-28523880857/youtube-video-publish-apply-home_kitchen_cookware_pilot_01-28523880857/outputs/video-generator/home_kitchen_cookware_pilot_01_en_en-gb/youtube_metadata.json",
       "title": "English Vocabulary: Kitchenware Basics | 50 Words with Pronunciation",
       "playlist_key": "EN-GB__EN__ordinary-vocabulary__a1-everyday",
       "analyticsCheckpointsAt": [
@@ -87413,7 +87413,7 @@
         }
       ],
       "createdAt": "2026-07-01T16:02:39.593Z",
-      "updatedAt": "2026-07-01T16:02:39.593Z",
+      "updatedAt": "2026-07-01T16:14:00.008Z",
       "youtubeVideoId": "_CWbNB9M7Eg",
       "youtubePlaylistId": "PLEq1asdao19c",
       "playlistItemId": "UExFcTFhc2RhbzE5Yy41NkI0NEY2RDEwNTU3Q0M2"
@@ -87435,7 +87435,7 @@
       "status": "reserved",
       "source": "local-artifact-upload-first-frame",
       "policyPath": "config/youtube-publish-schedule-policy.json",
-      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_es-419_en-gb/youtube_metadata.json",
+      "metadataFile": "outputs/tmp/batch4-artifact-probe-28523880857/youtube-video-publish-apply-home_kitchen_cookware_pilot_01-28523880857/outputs/video-generator/home_kitchen_cookware_pilot_01_es-419_en-gb/youtube_metadata.json",
       "title": "Learn Spanish (Latin America) Kitchenware Basics: 50 Words with Pronunciation",
       "playlist_key": "EN-GB__ES-419__ordinary-vocabulary__a1-everyday",
       "analyticsCheckpointsAt": [
@@ -87457,7 +87457,7 @@
         }
       ],
       "createdAt": "2026-07-01T16:03:00.852Z",
-      "updatedAt": "2026-07-01T16:03:00.852Z",
+      "updatedAt": "2026-07-01T16:14:00.077Z",
       "youtubeVideoId": "fDxDXx09Vds",
       "youtubePlaylistId": "PLM8MhgYut75I",
       "playlistItemId": "UExNOE1oZ1l1dDc1SS41NkI0NEY2RDEwNTU3Q0M2"
@@ -87479,7 +87479,7 @@
       "status": "reserved",
       "source": "local-artifact-upload-first-frame",
       "policyPath": "config/youtube-publish-schedule-policy.json",
-      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_es_en-gb/youtube_metadata.json",
+      "metadataFile": "outputs/tmp/batch4-artifact-probe-28523880857/youtube-video-publish-apply-home_kitchen_cookware_pilot_01-28523880857/outputs/video-generator/home_kitchen_cookware_pilot_01_es_en-gb/youtube_metadata.json",
       "title": "Spanish Vocabulary: Kitchenware Basics | 50 Words with Pronunciation",
       "playlist_key": "EN-GB__ES__ordinary-vocabulary__a1-everyday",
       "analyticsCheckpointsAt": [
@@ -87501,7 +87501,7 @@
         }
       ],
       "createdAt": "2026-07-01T16:03:22.633Z",
-      "updatedAt": "2026-07-01T16:03:22.633Z",
+      "updatedAt": "2026-07-01T16:14:00.167Z",
       "youtubeVideoId": "u1yEwN7ZCQ8",
       "youtubePlaylistId": "PLO49jjfm1OOA",
       "playlistItemId": "UExPNDlqamZtMU9PQS41NkI0NEY2RDEwNTU3Q0M2"
@@ -87523,7 +87523,7 @@
       "status": "reserved",
       "source": "local-artifact-upload-first-frame",
       "policyPath": "config/youtube-publish-schedule-policy.json",
-      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_et_en-gb/youtube_metadata.json",
+      "metadataFile": "outputs/tmp/batch4-artifact-probe-28523880857/youtube-video-publish-apply-home_kitchen_cookware_pilot_01-28523880857/outputs/video-generator/home_kitchen_cookware_pilot_01_et_en-gb/youtube_metadata.json",
       "title": "Estonian A1 Vocabulary: Kitchenware Basics | 50 Words with Pronunciation",
       "playlist_key": "EN-GB__ET__ordinary-vocabulary__a1-everyday",
       "analyticsCheckpointsAt": [
@@ -87545,7 +87545,7 @@
         }
       ],
       "createdAt": "2026-07-01T16:03:47.444Z",
-      "updatedAt": "2026-07-01T16:03:47.444Z",
+      "updatedAt": "2026-07-01T16:14:00.242Z",
       "youtubeVideoId": "lXOmgK5og6k",
       "youtubePlaylistId": "PLBBuKKvR53zk",
       "playlistItemId": "UExCQnVLS3ZSNTN6ay41NkI0NEY2RDEwNTU3Q0M2"

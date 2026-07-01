@@ -150,6 +150,10 @@ function saveJson(filePath, value) {
   fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
 }
 
+function inactiveCalendarStatus(status) {
+  return /cancelled|deleted|failed|superseded/iu.test(String(status || ""));
+}
+
 function syncCalendarFromPublication({ calendarPath, channelConfigPath, publicationRegistryPath, metadataFile }) {
   const metadata = JSON.parse(fs.readFileSync(metadataFile, "utf8"));
   const publicationRegistry = loadPublicationRegistry(publicationRegistryPath);
@@ -196,14 +200,18 @@ function syncCalendarFromPublication({ calendarPath, channelConfigPath, publicat
     calendar.reservations.push(row);
   }
   row.updatedAt = now;
+  const wasInactive = inactiveCalendarStatus(row.status);
+  if (!row.status || wasInactive) row.status = "reserved";
   row.youtubeVideoId = publication.youtubeVideoId;
   row.youtubePlaylistId = publication.youtubePlaylistId || "";
   row.playlistItemId = publication.playlistItemId || "";
-  row.publishAt = publication.publishAt || row.publishAt || metadata.publishAt || "";
+  row.publishAt = publication.publishAt || publication.scheduledPublishAt || metadata.publishAt || metadata.scheduledPublishAt || row.publishAt || "";
   row.title = publication.title || row.title || metadata.title || "";
   row.playlist_key = publication.playlist_key || row.playlist_key || metadata.playlist_key || "";
   row.metadataFile = path.relative(process.cwd(), metadataFile);
-  if (!row.source || row.source === "plan-youtube-publish-schedule") row.source = "local-artifact-upload-first-frame";
+  if (!row.source || row.source === "plan-youtube-publish-schedule" || wasInactive) {
+    row.source = "local-artifact-upload-first-frame";
+  }
   saveJson(calendarPath, calendar);
   return {
     key,
@@ -223,12 +231,21 @@ function uploadOne(metadataFile, options) {
   const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
   const existing = findActivePublication(publicationRegistry, metadata);
   if (existing?.youtubeVideoId) {
+    const calendarSync = options.apply
+      ? syncCalendarFromPublication({
+          calendarPath: options.calendar,
+          channelConfigPath: options.channelConfig,
+          publicationRegistryPath: options.publicationRegistry,
+          metadataFile,
+        })
+      : null;
     return {
       status: "skipped_existing_publication",
       metadataFile,
       supportLang: metadata.supportLang,
       targetLang: metadata.targetLang,
       youtubeVideoId: existing.youtubeVideoId,
+      calendarSync,
     };
   }
 
