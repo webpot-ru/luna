@@ -34,6 +34,22 @@ Scale policy from 2026-06-21: do not interpret "20 GitHub workers x 2 video thre
 
 These rows are current YouTube upload/readback facts from the structured GitHub artifact/ledger, not historical planning rows.
 
+### 2026-07-01 Polyglot `east_asia_core` scheduled wave
+
+Direct GitHub CLI dispatch uploaded and scheduled `home_kitchen_cookware_pilot_01` Polyglot videos for the nine confirmed custom-thumbnail support channels. The wave is `9/9` uploaded with `publicationStatus=scheduled_uploaded` in `config/youtube-polyglot-published-videos.json`, `config/youtube-polyglot-progress.json` and matching physical-channel reservations in `config/youtube-publish-calendar.json`. The initial `NE` run `28508108273` failed before upload on transient `edge-tts NoAudioReceived`; retry run `28510042912` completed render, thumbnail, upload and state persist. Do not reupload these rows; future retries must skip active `polyglotKey`/calendar reservations.
+
+| Support | Targets | Publish at UTC | YouTube |
+| --- | --- | --- | --- |
+| `EN` | `ZH, JA, KO` | `2026-07-02T12:30:00.000Z` | <https://www.youtube.com/watch?v=o8hsruftFcY> |
+| `RU` | `ZH, JA, KO` | `2026-07-01T20:30:00.000Z` | <https://www.youtube.com/watch?v=UEsBbT3Vmaw> |
+| `ES` | `ZH, JA, KO` | `2026-07-02T12:30:00.000Z` | <https://www.youtube.com/watch?v=FFRxZyjcFeU> |
+| `PT` | `ZH, JA, KO` | `2026-07-02T07:30:00.000Z` | <https://www.youtube.com/watch?v=HAy1fGfptJI> |
+| `JA` | `ZH, KO, VI` | `2026-07-01T14:30:00.000Z` | <https://www.youtube.com/watch?v=liqpMXSX6ig> |
+| `TR` | `ZH, JA, KO` | `2026-07-01T20:30:00.000Z` | <https://www.youtube.com/watch?v=72l49J5vn3U> |
+| `TH` | `ZH, JA, KO` | `2026-07-01T16:30:00.000Z` | <https://www.youtube.com/watch?v=5LSw2gkUw-g> |
+| `NE` | `ZH, JA, KO` | `2026-07-01T17:45:00.000Z` | <https://www.youtube.com/watch?v=egEGUAHkeMo> |
+| `SW` | `ZH, JA, KO` | `2026-07-01T20:30:00.000Z` | <https://www.youtube.com/watch?v=38IW6aIiL4o> |
+
 ### 2026-06-22 scheduled batch recovery audit
 
 GitHub Actions batch `45a006323856320351b1eb5c17b39b7f56875217` created 51 workflow_dispatch runs for `home_kitchen_cookware_pilot_01`: 44 ended `success`, 7 ended `failure`. The success logs contained 246 verified `youtube_publish_video` rows. Only `KO/AZ` had already been merged locally as a schedule-drift guard row, so 245 missing upload rows were reconstructed from GitHub logs and added to the durable registries on 2026-06-22:
