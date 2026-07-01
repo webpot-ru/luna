@@ -78354,6 +78354,52 @@
       "youtubeVideoId": "-hDkBVH9gI0",
       "youtubePlaylistId": "PLUKNH4lW2Kz0",
       "playlistItemId": "UExVS05INGxXMkt6MC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "CS",
+      "targetLang": "VI",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "publishAt": "2026-07-01T21:30:00.000Z",
+      "timeZone": "Europe/Prague",
+      "localDate": "2026-07-01",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_vi_cs/youtube_metadata.json",
+      "title": "Vietnamská slovíčka: Kuchyňské potřeby (A1 pro začátečníky)",
+      "playlist_key": "CS__VI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-02T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-04T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-08T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-07-31T21:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28512438449",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28512438449",
+      "createdAt": "2026-07-01T10:56:45.966Z",
+      "updatedAt": "2026-07-01T10:56:45.966Z",
+      "youtubeVideoId": "qD05dxTCwHA",
+      "youtubePlaylistId": "PLOztgI_czOUU",
+      "playlistItemId": "UExPenRnSV9jek9VVS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
