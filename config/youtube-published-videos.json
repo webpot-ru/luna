@@ -50275,7 +50275,7 @@
       "scheduledPublishAt": "2026-06-29T21:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "custom",
       "thumbnailSource": "vectorengine-gpt-image-2",
@@ -50284,22 +50284,38 @@
       "githubRunId": "28285529186",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28285529186",
       "uploadedAt": "2026-06-27T09:58:11.340Z",
-      "lastReadbackAt": "2026-06-28T08:38:24.751Z",
+      "lastReadbackAt": "2026-07-01T10:20:51.866Z",
       "readback": {
         "uploadStatus": "processed",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-29T21:30:00Z",
+        "privacyStatus": "public",
+        "publishAt": "2026-06-29T21:30:00.000Z",
         "playlistItemReadback": "already_present_verified",
         "playlistId": "PLIOvoHXqc0yQ",
         "playlistPrivacyStatus": "public",
         "playlistItemId": "UExJT3ZvSFhxYzB5US41NkI0NEY2RDEwNTU3Q0M2",
-        "playlistInsertRepairedAt": "2026-06-28T08:38:24.751Z"
+        "playlistInsertRepairedAt": "2026-06-28T08:38:24.751Z",
+        "channelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+        "thumbnailStatus": "custom_set"
       },
       "playlistInsertRepairedAt": "2026-06-28T08:38:24.751Z",
       "playlistInsertRepairStatus": "already_present_verified",
       "playlistInsertRepairGithubRunId": "28316732704",
       "playlistInsertRepairGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28316732704",
-      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video."
+      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video.",
+      "lastThumbnailReadbackAt": "2026-07-01T10:20:51.866Z",
+      "thumbnailUploadedAt": "2026-07-01T10:20:51.866Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "imageFileName": "youtube_thumbnail.jpg",
+        "responseItemCount": 1,
+        "githubRunId": "28510554790",
+        "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28510554790",
+        "ledgerStatus": "custom_thumbnail_set",
+        "thumbnailResultKind": "youtube#thumbnailSetResponse",
+        "thumbnailResultItemCount": 1
+      },
+      "githubThumbnailRunId": "28510554790",
+      "githubThumbnailRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28510554790"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -64565,12 +64581,12 @@
       "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
       "channelHandle": "@lunacardsjapan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_post_upload_partial",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-01T02:30:00.000Z",
       "scheduledPublishAt": "2026-07-01T02:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "custom",
       "thumbnailSource": "vectorengine-gpt-image-2",
@@ -64580,13 +64596,28 @@
       "githubRunId": "28455739458",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28455739458",
       "uploadedAt": "2026-06-30T15:37:37.106Z",
-      "lastReadbackAt": "2026-06-30T15:37:37.106Z",
+      "lastReadbackAt": "2026-07-01T10:14:17.072Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-01T02:30:00Z",
-        "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (500): {\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"Internal error encountered.\",\n    \"errors\": [\n      {\n        \"message\": \"Internal error encountered.\",\n        \"domain\": \"global\",\n        \"reason\": \"backendError\"\n      }\n    ],\n    \"status\": \"INTERNAL\"\n  }\n}\n"
-      }
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "publishAt": "2026-07-01T02:30:00.000Z",
+        "channelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+        "thumbnailStatus": "custom_set"
+      },
+      "lastThumbnailReadbackAt": "2026-07-01T10:14:17.072Z",
+      "thumbnailUploadedAt": "2026-07-01T10:14:17.072Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "imageFileName": "youtube_thumbnail.jpg",
+        "responseItemCount": 1,
+        "githubRunId": "28510191661",
+        "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28510191661",
+        "ledgerStatus": "custom_thumbnail_set",
+        "thumbnailResultKind": "youtube#thumbnailSetResponse",
+        "thumbnailResultItemCount": 1
+      },
+      "githubThumbnailRunId": "28510191661",
+      "githubThumbnailRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28510191661"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -64788,12 +64819,12 @@
       "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
       "channelHandle": "@lunacardsnepali",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_post_upload_partial",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-01T02:45:00.000Z",
       "scheduledPublishAt": "2026-07-01T02:45:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "custom",
       "thumbnailSource": "vectorengine-gpt-image-2",
@@ -64803,13 +64834,28 @@
       "githubRunId": "28455685646",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28455685646",
       "uploadedAt": "2026-06-30T15:37:40.269Z",
-      "lastReadbackAt": "2026-06-30T15:37:40.269Z",
+      "lastReadbackAt": "2026-07-01T10:14:15.646Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-01T02:45:00Z",
-        "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (500): {\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"Internal error encountered.\",\n    \"errors\": [\n      {\n        \"message\": \"Internal error encountered.\",\n        \"domain\": \"global\",\n        \"reason\": \"backendError\"\n      }\n    ],\n    \"status\": \"INTERNAL\"\n  }\n}\n"
-      }
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "publishAt": "2026-07-01T02:45:00.000Z",
+        "channelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+        "thumbnailStatus": "custom_set"
+      },
+      "lastThumbnailReadbackAt": "2026-07-01T10:14:15.646Z",
+      "thumbnailUploadedAt": "2026-07-01T10:14:15.646Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "imageFileName": "youtube_thumbnail.jpg",
+        "responseItemCount": 1,
+        "githubRunId": "28510192499",
+        "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28510192499",
+        "ledgerStatus": "custom_thumbnail_set",
+        "thumbnailResultKind": "youtube#thumbnailSetResponse",
+        "thumbnailResultItemCount": 1
+      },
+      "githubThumbnailRunId": "28510192499",
+      "githubThumbnailRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28510192499"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -65788,12 +65834,12 @@
       "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
       "channelHandle": "@lunacardsespanol",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_post_upload_partial",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-01T09:30:00.000Z",
       "scheduledPublishAt": "2026-07-01T09:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "custom",
       "thumbnailSource": "vectorengine-gpt-image-2",
@@ -65803,13 +65849,28 @@
       "githubRunId": "28455726582",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28455726582",
       "uploadedAt": "2026-06-30T16:00:42.831Z",
-      "lastReadbackAt": "2026-06-30T16:00:42.831Z",
+      "lastReadbackAt": "2026-07-01T10:14:10.829Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-01T09:30:00Z",
-        "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (500): {\n  \"error\": {\n    \"code\": 500,\n    \"message\": \"Internal error encountered.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"INTERNAL_ERROR\"\n      }\n    ],\n    \"status\": \"INTERNAL\"\n  }\n}\n"
-      }
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "publishAt": "2026-07-01T09:30:00.000Z",
+        "channelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+        "thumbnailStatus": "custom_set"
+      },
+      "lastThumbnailReadbackAt": "2026-07-01T10:14:10.829Z",
+      "thumbnailUploadedAt": "2026-07-01T10:14:10.829Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "imageFileName": "youtube_thumbnail.jpg",
+        "responseItemCount": 1,
+        "githubRunId": "28510191645",
+        "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28510191645",
+        "ledgerStatus": "custom_thumbnail_set",
+        "thumbnailResultKind": "youtube#thumbnailSetResponse",
+        "thumbnailResultItemCount": 1
+      },
+      "githubThumbnailRunId": "28510191645",
+      "githubThumbnailRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28510191645"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
