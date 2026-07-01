@@ -110,6 +110,10 @@ on:
         required: true
         default: true
         type: boolean
+      source_run_id:
+        description: "Optional failed youtube-video-publish run id to upload already-built artifact videos with first-frame thumbnails; skips render/TTS/VectorEngine."
+        required: false
+        default: ""
       confirm_thumbnail_spend:
         description: "For thumbnail generation type GENERATE_THUMBNAILS."
         required: false
@@ -125,9 +129,10 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
-  group: youtube-video-publish-${{ github.event.inputs.set_id }}-${{ github.event.inputs.support }}-${{ github.event.inputs.langs }}-${{ github.event.inputs.worker_count }}-${{ github.event.inputs.worker_index }}-${{ github.event.inputs.publish_mode }}
+  group: youtube-video-publish-${{ github.event.inputs.set_id }}-${{ github.event.inputs.support }}-${{ github.event.inputs.langs }}-${{ github.event.inputs.worker_count }}-${{ github.event.inputs.worker_index }}-${{ github.event.inputs.publish_mode }}-${{ github.event.inputs.source_run_id }}
   cancel-in-progress: false
 
 jobs:
@@ -233,24 +238,8 @@ jobs:
           fi
           echo "Effective YouTube API environment: $EFFECTIVE_YOUTUBE_ENVIRONMENT"
 
-      - name: Install system dependencies and FFmpeg
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-
-      - name: Install Python TTS dependency
-        run: pip install edge-tts
-
       - name: Install Node dependencies
         run: npm ci || npm install
-
-      - name: Install Playwright Chromium with dependencies
-        run: npx playwright install chromium --with-deps
 
       - name: Restore YouTube OAuth bundle from environment secret
         if: ${{ github.event.inputs.mode == 'apply' }}
@@ -268,7 +257,7 @@ jobs:
           test -d .local/youtube-oauth/tokens
           echo "YouTube OAuth bundle restored for environment $EFFECTIVE_YOUTUBE_ENVIRONMENT."
 
-      - name: Audit live YouTube publications for duplicate guard
+      - name: Audit live YouTube publications for duplicate guard and pre-flight quota check
         if: ${{ github.event.inputs.mode == 'apply' }}
         shell: bash
         env:
@@ -286,7 +275,7 @@ jobs:
             const report = JSON.parse(fs.readFileSync("outputs/youtube-live-publications-github.json", "utf8"));
             if (process.env.GITHUB_STEP_SUMMARY) {
               fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
-                "### Live YouTube duplicate guard",
+                "### Live YouTube duplicate guard & pre-flight check",
                 "",
                 `- Scanned upload items: ${report.scannedUploadItems || 0}`,
                 `- Matched current set publications: ${report.matchedPublicationCount || 0}`,
@@ -297,7 +286,57 @@ jobs:
             }
           '
 
+      - name: Install system dependencies and FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Python TTS dependency
+        run: pip install edge-tts
+
+      - name: Install Playwright Chromium with dependencies
+        if: ${{ github.event.inputs.source_run_id == '' }}
+        run: npx playwright install chromium --with-deps
+
+      - name: Download source publish artifact
+        if: ${{ github.event.inputs.source_run_id != '' }}
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ github.event.inputs.source_run_id }}
+          github-token: ${{ github.token }}
+          name: youtube-video-publish-apply-${{ github.event.inputs.set_id }}-${{ github.event.inputs.source_run_id }}
+          path: .source-artifact
+
+      - name: Prepare source artifact for first-frame upload
+        id: artifact_source
+        if: ${{ github.event.inputs.source_run_id != '' }}
+        shell: bash
+        env:
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+        run: |
+          set -euo pipefail
+          ROOT="$(find .source-artifact -type d -path '*/outputs/video-generator' | head -n1 || true)"
+          if [ -z "$ROOT" ] && [ -d ".source-artifact/outputs/video-generator" ]; then
+            ROOT=".source-artifact/outputs/video-generator"
+          fi
+          if [ -z "$ROOT" ]; then
+            echo "::error::Could not find outputs/video-generator inside source artifact."
+            find .source-artifact -maxdepth 4 -type d | sort
+            exit 1
+          fi
+          mkdir -p outputs
+          cp -R "$ROOT" outputs/video-generator
+          node scripts/upload-youtube-artifact-videos.mjs outputs/video-generator --support="$SUPPORT_INPUT"
+          npm run check:youtube-thumbnails -- outputs/video-generator --output=outputs/video-generator/youtube-thumbnail-first-frame-check-github.json
+          echo "has_targets=true" >> "$GITHUB_OUTPUT"
+
       - name: Download offline deck data from Google Drive
+        if: ${{ github.event.inputs.source_run_id == '' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -329,6 +368,7 @@ jobs:
 
       - name: Plan YouTube generation targets
         id: generation_targets
+        if: ${{ github.event.inputs.source_run_id == '' }}
         shell: bash
         env:
           SET_ID: ${{ github.event.inputs.set_id }}
@@ -381,7 +421,7 @@ jobs:
           '
 
       - name: Build videos, metadata, schedule and thumbnails
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ github.event.inputs.source_run_id == '' && steps.generation_targets.outputs.has_targets == 'true' }}
         shell: bash
         env:
           AI33_API_KEY: ${{ secrets.AI33_API_KEY }}
@@ -528,23 +568,23 @@ jobs:
           fi
 
       - name: Validate YouTube metadata
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         run: npm run check:youtube-metadata -- outputs/video-generator
 
       - name: Validate YouTube metadata language
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         run: npm run check:youtube-metadata-language -- outputs/video-generator --output=outputs/video-generator/youtube-metadata-language-report-github.json
 
       - name: Validate YouTube playlist naming contract
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         run: npm run check:youtube-playlist-naming
 
       - name: Validate video TTS variant contract
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         run: npm run check:video-tts-variant-contract -- --metadata outputs/video-generator --output=outputs/video-generator/video-tts-variant-contract-report-github.json
 
       - name: Validate YouTube SEO metadata
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         shell: bash
         env:
           MODE: ${{ github.event.inputs.mode }}
@@ -557,7 +597,7 @@ jobs:
           npm run check:youtube-seo-metadata -- "${SEO_ARGS[@]}"
 
       - name: Plan YouTube publication
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         shell: bash
         env:
           CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}
@@ -582,7 +622,7 @@ jobs:
           npm run plan:youtube-publish -- "${PLAN_ARGS[@]}"
 
       - name: Gate publish plan
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         shell: bash
         env:
           MODE: ${{ github.event.inputs.mode }}
@@ -610,7 +650,7 @@ jobs:
           "
 
       - name: Upload videos to YouTube
-        if: ${{ github.event.inputs.mode == 'apply' && steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ github.event.inputs.mode == 'apply' && github.event.inputs.source_run_id == '' && steps.generation_targets.outputs.has_targets == 'true' }}
         shell: bash
         env:
           CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}
@@ -651,6 +691,24 @@ jobs:
             npm run apply:youtube-publish -- "${PUBLISH_ARGS[@]}"
           done
 
+      - name: Upload source artifact videos to YouTube with first-frame thumbnails
+        if: ${{ github.event.inputs.mode == 'apply' && github.event.inputs.source_run_id != '' && steps.artifact_source.outputs.has_targets == 'true' }}
+        shell: bash
+        env:
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          YOUTUBE_API_RETRY_ATTEMPTS: "7"
+          YOUTUBE_API_RETRY_BASE_MS: "4000"
+          YOUTUBE_API_RETRY_JITTER_MS: "4000"
+          YOUTUBE_API_RETRY_MAX_MS: "90000"
+          YOUTUBE_PLAYLIST_WRITE_DELAY_MS: "4000"
+          YOUTUBE_PLAYLIST_WRITE_JITTER_MS: "8000"
+          YOUTUBE_VIDEO_READBACK_ATTEMPTS: "6"
+          YOUTUBE_VIDEO_READBACK_BASE_MS: "6000"
+          YOUTUBE_VIDEO_READBACK_MAX_MS: "60000"
+        run: |
+          set -euo pipefail
+          node scripts/upload-youtube-artifact-videos.mjs outputs/video-generator --support="$SUPPORT_INPUT" --apply --confirm-youtube-write --create-playlist
+
       - name: Upload non-secret publish artifacts
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
@@ -664,6 +722,7 @@ jobs:
             outputs/youtube-publish-plan-github.json
             outputs/youtube-live-publications-github.json
             outputs/youtube-publish-ledger.jsonl
+            outputs/video-generator/youtube-thumbnail-first-frame-check-github.json
             config/youtube-channels.json
             config/youtube-playlists.json
             config/youtube-publish-calendar.json
