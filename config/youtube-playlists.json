@@ -33106,12 +33106,22 @@
       "channelKey": "sl",
       "youtube_channel_id": "UCXhLXcLyGuV-hCVuTEIyQsA",
       "youtube_playlist_id": "PLdktVhscisf4",
-      "title": "Hindi A1: Everyday Flashcards",
-      "description": "FlashcardsLuna videos for native SL speakers learning Hindi: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+      "title": "Hindijščina A1: besedišče in izgovorjava",
+      "description": "Videi FlashcardsLuna za slovensko govoreče, ki se učijo Hindijščina: kartice, izgovorjava, premori za ponavljanje in kratki mini testi.",
       "status": "created_public",
-      "titleReviewStatus": "template_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-24T14:02:14.487Z",
-      "lastReadbackAt": "2026-06-27T07:43:42.425Z"
+      "lastReadbackAt": "2026-07-02T02:05:45.160Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-07-02T02:05:45.160Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-3",
+        "previousTitle": "Hindi A1: Everyday Flashcards",
+        "previousDescription": "FlashcardsLuna videos for native SL speakers learning Hindi: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-3/28560302383/iteration-1-apply/sl_hi_PLdktVhscisf4/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "SL__HR__ordinary-vocabulary__a1-everyday",
