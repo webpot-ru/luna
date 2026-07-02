@@ -676,8 +676,12 @@ async function main() {
         model: options.model || undefined,
         privacyStatus: "public",
       });
+      const playlistTitle = cleanText(metadata.playlistTitle || metadata.playlist?.title);
+      const playlistDescription = cleanText(metadata.playlistDescription || metadata.playlist?.description);
       const findings = replacementFindings({
         ...metadata,
+        playlistTitle,
+        playlistDescription,
         supportLang,
         targetLang,
       });
@@ -693,8 +697,8 @@ async function main() {
         targetLang,
         previousTitle: entry.title || "",
         previousDescription: entry.description || "",
-        playlistTitle: cleanText(metadata.playlistTitle),
-        playlistDescription: cleanText(metadata.playlistDescription),
+        playlistTitle,
+        playlistDescription,
         source: metadata.source || "",
         model: metadata.model || "",
         generatedAt: new Date().toISOString(),
