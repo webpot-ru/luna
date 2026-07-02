@@ -29,6 +29,9 @@ function parseArgs(argv) {
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     calendar: DEFAULT_CALENDAR_PATH,
     firstFrameTimestamp: "0",
+    skipMissingVideos: false,
+    moveSkippedMissingVideoDirs: "",
+    output: "",
   };
   for (const arg of argv) {
     if (arg === "--apply") options.apply = true;
@@ -42,6 +45,9 @@ function parseArgs(argv) {
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--calendar=")) options.calendar = arg.slice("--calendar=".length);
     else if (arg.startsWith("--first-frame-timestamp=")) options.firstFrameTimestamp = arg.slice("--first-frame-timestamp=".length);
+    else if (arg === "--skip-missing-videos") options.skipMissingVideos = true;
+    else if (arg.startsWith("--move-skipped-missing-video-dirs=")) options.moveSkippedMissingVideoDirs = arg.slice("--move-skipped-missing-video-dirs=".length);
+    else if (arg.startsWith("--output=")) options.output = arg.slice("--output=".length);
     else options.inputs.push(arg);
   }
   return options;
@@ -150,6 +156,23 @@ function saveJson(filePath, value) {
   fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
 }
 
+function uniqueDestination(dirPath) {
+  if (!fs.existsSync(dirPath)) return dirPath;
+  let index = 2;
+  while (fs.existsSync(`${dirPath}-${index}`)) index += 1;
+  return `${dirPath}-${index}`;
+}
+
+function moveMissingVideoDir(metadataFile, options) {
+  if (!options.moveSkippedMissingVideoDirs) return "";
+  const sourceDir = path.dirname(metadataFile);
+  const destinationRoot = path.resolve(options.moveSkippedMissingVideoDirs);
+  fs.mkdirSync(destinationRoot, { recursive: true });
+  const destination = uniqueDestination(path.join(destinationRoot, path.basename(sourceDir)));
+  fs.renameSync(sourceDir, destination);
+  return destination;
+}
+
 function inactiveCalendarStatus(status) {
   return /cancelled|deleted|failed|superseded/iu.test(String(status || ""));
 }
@@ -250,10 +273,31 @@ function uploadOne(metadataFile, options) {
   }
 
   const videoPath = defaultVideoPath(metadataFile, metadata);
-  if (!videoPath) throw new Error(`Video file missing next to ${metadataFile}`);
+  if (!videoPath) {
+    if (!options.skipMissingVideos) throw new Error(`Video file missing next to ${metadataFile}`);
+    const movedTo = moveMissingVideoDir(metadataFile, options);
+    return {
+      status: "skipped_missing_video",
+      metadataFile,
+      supportLang: metadata.supportLang,
+      targetLang: metadata.targetLang,
+      movedTo,
+    };
+  }
   const thumbnailPath = path.join(path.dirname(metadataFile), "youtube_thumbnail.jpg");
   extractFirstFrame({ videoPath, thumbnailPath, timestamp: options.firstFrameTimestamp });
   writeMetadataForFirstFrame(metadataFile, metadata, thumbnailPath);
+
+  if (!options.apply) {
+    return {
+      status: "planned",
+      metadataFile,
+      supportLang: metadata.supportLang,
+      targetLang: metadata.targetLang,
+      videoPath,
+      thumbnailPath,
+    };
+  }
 
   const args = [
     "scripts/youtube-publish-video.mjs",
@@ -262,19 +306,15 @@ function uploadOne(metadataFile, options) {
     `--thumbnail=${thumbnailPath}`,
     "--create-playlist",
   ];
-  if (options.apply) {
-    if (!options.confirmYoutubeWrite) throw new Error("--apply requires --confirm-youtube-write");
-    args.push("--apply", "--confirm-youtube-write");
-  }
+  if (!options.confirmYoutubeWrite) throw new Error("--apply requires --confirm-youtube-write");
+  args.push("--apply", "--confirm-youtube-write");
   const upload = run(process.execPath, args, { stdio: "pipe" });
-  const calendarSync = options.apply
-    ? syncCalendarFromPublication({
-        calendarPath: options.calendar,
-        channelConfigPath: options.channelConfig,
-        publicationRegistryPath: options.publicationRegistry,
-        metadataFile,
-      })
-    : null;
+  const calendarSync = syncCalendarFromPublication({
+    calendarPath: options.calendar,
+    channelConfigPath: options.channelConfig,
+    publicationRegistryPath: options.publicationRegistry,
+    metadataFile,
+  });
   return {
     status: options.apply ? "uploaded" : "planned",
     metadataFile,
@@ -300,13 +340,19 @@ function main() {
     const result = uploadOne(file, options);
     if (result.status !== "filtered") results.push(result);
   }
-  console.log(JSON.stringify({
+  const report = {
     apply: options.apply,
     inputMetadataCount: files.length,
     processedCount: results.filter((item) => item.status === "uploaded" || item.status === "planned").length,
     skippedExistingCount: results.filter((item) => item.status === "skipped_existing_publication").length,
+    skippedMissingVideoCount: results.filter((item) => item.status === "skipped_missing_video").length,
     results,
-  }, null, 2));
+  };
+  if (options.output) {
+    fs.mkdirSync(path.dirname(path.resolve(options.output)), { recursive: true });
+    saveJson(options.output, report);
+  }
+  console.log(JSON.stringify(report, null, 2));
 }
 
 main();

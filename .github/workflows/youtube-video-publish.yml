@@ -318,6 +318,12 @@ jobs:
         shell: bash
         env:
           SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
+          SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
+          SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
+          SCHEDULE_POLICY: ${{ github.event.inputs.schedule_policy }}
+          SCHEDULE_CALENDAR: ${{ github.event.inputs.schedule_calendar }}
+          ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
         run: |
           set -euo pipefail
           ROOT="$(find .source-artifact -type d -path '*/outputs/video-generator' | head -n1 || true)"
@@ -331,9 +337,32 @@ jobs:
           fi
           mkdir -p outputs
           cp -R "$ROOT" outputs/video-generator
-          node scripts/upload-youtube-artifact-videos.mjs outputs/video-generator --support="$SUPPORT_INPUT"
+          node scripts/upload-youtube-artifact-videos.mjs outputs/video-generator \
+            --support="$SUPPORT_INPUT" \
+            --skip-missing-videos \
+            --move-skipped-missing-video-dirs=outputs/video-generator-skipped-missing-video \
+            --output=outputs/video-generator/youtube-artifact-first-frame-prepare-github.json
+
+          HAS_TARGETS="$(node -e '
+            const fs = require("fs");
+            const report = JSON.parse(fs.readFileSync("outputs/video-generator/youtube-artifact-first-frame-prepare-github.json", "utf8"));
+            process.stdout.write(report.processedCount > 0 ? "true" : "false");
+          ')"
+          echo "has_targets=$HAS_TARGETS" >> "$GITHUB_OUTPUT"
+          if [ "$HAS_TARGETS" != "true" ]; then
+            echo "No source-artifact videos with matching MP4 for support=$SUPPORT_INPUT."
+            exit 0
+          fi
+
+          if [ "$PUBLISH_MODE" = "scheduled" ]; then
+            SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--write-metadata" "--write-calendar" "--reschedule-past-reservations" "--min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES" "--output=outputs/youtube-publish-schedule-github.json")
+            if [ "$ALLOW_REPUBLISH" = "true" ]; then
+              SCHEDULE_ARGS+=("--allow-republish")
+            fi
+            npm run plan:youtube-publish-schedule -- "${SCHEDULE_ARGS[@]}"
+          fi
+
           npm run check:youtube-thumbnails -- outputs/video-generator --output=outputs/video-generator/youtube-thumbnail-first-frame-check-github.json
-          echo "has_targets=true" >> "$GITHUB_OUTPUT"
 
       - name: Download offline deck data from Google Drive
         if: ${{ github.event.inputs.source_run_id == '' }}
@@ -707,7 +736,13 @@ jobs:
           YOUTUBE_VIDEO_READBACK_MAX_MS: "60000"
         run: |
           set -euo pipefail
-          node scripts/upload-youtube-artifact-videos.mjs outputs/video-generator --support="$SUPPORT_INPUT" --apply --confirm-youtube-write --create-playlist
+          node scripts/upload-youtube-artifact-videos.mjs outputs/video-generator \
+            --support="$SUPPORT_INPUT" \
+            --skip-missing-videos \
+            --apply \
+            --confirm-youtube-write \
+            --create-playlist \
+            --output=outputs/video-generator/youtube-artifact-first-frame-apply-github.json
 
       - name: Upload non-secret publish artifacts
         if: ${{ always() }}
@@ -723,6 +758,9 @@ jobs:
             outputs/youtube-live-publications-github.json
             outputs/youtube-publish-ledger.jsonl
             outputs/video-generator/youtube-thumbnail-first-frame-check-github.json
+            outputs/video-generator/youtube-artifact-first-frame-prepare-github.json
+            outputs/video-generator/youtube-artifact-first-frame-apply-github.json
+            outputs/video-generator-skipped-missing-video/
             config/youtube-channels.json
             config/youtube-playlists.json
             config/youtube-publish-calendar.json
