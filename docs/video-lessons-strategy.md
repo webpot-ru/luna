@@ -322,6 +322,10 @@ If linking directly to the course list, append `/courses` to the collapsed base 
 
 This collapse applies only to the public website language path. Do not remove or rewrite regional language variants in decks, data, video generation, playlist keys, titles or metadata. For example, Russian-native viewers learning Brazilian Portuguese should land on `https://flashcardsluna.com/ru/courses/kitchenware-basic/study/standard?langs=pt-br`, while Portuguese-native or Brazilian-Portuguese-native channel links both start from the public site path `https://flashcardsluna.com/pt`; `https://flashcardsluna.com/pt-br` is not a public language section.
 
+Norwegian has an additional public-link alias: data/workbook/DB code `NB` and support code `NO` both point to the public site/study code `no`. Video descriptions, QR links and `courseUrl` must use `?langs=no`, not `?langs=nb`, while playlist/data identities can still use their documented internal codes.
+
+Already-uploaded YouTube descriptions are a separate external repair lane, because local metadata generation fixes do not rewrite live YouTube snippets. Use `npm run repair:youtube-course-url` for deterministic course URL repair. Default mode is registry-only planning and performs no YouTube API calls. `--live-audit` reads live `videos.list` snippets to prove whether the legacy URL is still present. `--apply --confirm-youtube-write` calls `videos.update(part=snippet)` only for exact legacy URL replacements such as `?langs=nb -> ?langs=no`, preserves the existing title/tags/category, performs readback unless `--skip-readback` is passed, and records successful rows in `config/youtube-published-videos.json` under `courseUrlRepair`. When the local machine does not have the route-specific OAuth client bundle, use `.github/workflows/youtube-course-url-repair.yml`; it restores the route environment secret, supports `plan` / `audit` / `apply`, and persists only trusted `courseUrlRepair` fields back into `config/youtube-published-videos.json`.
+
 ### 1.2. Video thumbnails
 
 Видео должны получать отдельную YouTube-обложку, когда канал уже имеет право на custom thumbnails. Thumbnail должен быть визуально из той же системы, что и channel art: light `#f4f7f9` background, white rounded card panels, soft blue accents, deep navy typography, restrained FlashcardsLuna branding and a clean premium flashcard feel. Он не должен быть темным, кричащим или кликбейтным; цель - быстро показать viewer language, target language/level and deck topic.
@@ -673,7 +677,7 @@ Acceptance gate before mass use:
 - `ES-419` озвучивается как broad LatAm Spanish через practical LatAm voice `edge_es-MX-JorgeNeural`;
 - `PT` озвучивается как European Portuguese: `edge_pt-PT-DuarteNeural`;
 - `PT-BR` озвучивается как Brazilian Portuguese: `edge_pt-BR-FranciscaNeural`;
-- `NO` / `NB` озвучивается как Norwegian Bokmål: `edge_nb-NO-FinnNeural`; public/support code can be `NO`, but data lookup uses DB code `NB`;
+- `NO` / `NB` озвучивается как Norwegian Bokmål: `edge_nb-NO-FinnNeural`; public/support code can be `NO`, but data lookup uses DB code `NB`; public study links must use `?langs=no`, not `?langs=nb`;
 - `SR` ordinary decks use Serbian Latin (Gaj) text and `edge_sr-RS-NicholasNeural`; Cyrillic is allowed only inside a separate documented course contract;
 - `HY` remains the only documented non-Edge exception: it uses `ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz` because the free `edge-tts` backend does not currently expose Armenian `hy-AM` voices.
 
@@ -696,7 +700,7 @@ npm run check:video-tts-variant-contract -- --set home_kitchen_cookware_pilot_01
 npm run check:video-tts-variant-contract -- --metadata outputs/video-generator --output=outputs/video-generator/video-tts-variant-contract-report.json
 ```
 
-This gate blocks missing/unknown language codes, wrong TTS voice mappings, missing card readback for the exact target/support pair, script mismatches such as Cyrillic inside ordinary `SR`, Latin fallback inside non-Latin scripts, wrong public support-language paths, and missing `?langs=<target>` study URLs. It emits warnings, not blockers, for dialect risk words that need review, for example Nynorsk markers in `NO`/`NB`, US-only terms in `EN-GB`, Spain-only terms in `ES-419`, and European Portuguese terms in `PT-BR`.
+This gate blocks missing/unknown language codes, wrong TTS voice mappings, missing card readback for the exact target/support pair, script mismatches such as Cyrillic inside ordinary `SR`, Latin fallback inside non-Latin scripts, wrong public support-language paths, and missing/wrong `?langs=<public-study-code>` study URLs. It emits warnings, not blockers, for dialect risk words that need review, for example Nynorsk markers in `NO`/`NB`, US-only terms in `EN-GB`, Spain-only terms in `ES-419`, and European Portuguese terms in `PT-BR`.
 
 The gate is a technical contract check, not native-speaker certification. It guarantees that the video pipeline did not lose the language variant or script contract before TTS; it does not prove every regional lexical choice is perfect.
 
@@ -789,6 +793,7 @@ qrcode npm package
 - если `set_id` есть в `publishedCourseSlugBySetId` и известен `targetLang`, QR ведет сразу на localized study page, например `https://flashcardsluna.com/ru/courses/kitchenware-basic/study/standard?langs=es`;
 - для Polyglot-видео с несколькими target languages используется тот же study route, но `langs` содержит весь список target-языков через запятую и URL-encoding, например `https://flashcardsluna.com/ru/courses/kitchenware-basic/study/standard?langs=en%2Ces%2Cfr%2Cde`;
 - в таком URL первый path segment (`/ru/`) является языком интерфейса / носителя зрителя (`supportLang`), а `langs=es` является изучаемым языком видео (`targetLang`);
+- `langs` использует public study-code mapping из `config/video-public-course-links.json`, а не обязательно сырой internal/data code. Для Norwegian/Bokmål `NO` и `NB` оба должны давать `langs=no`; `langs=nb` считается ошибкой.
 - если `targetLang` неизвестен, но `set_id` опубликован, URL остается localized course page, например `https://flashcardsluna.com/ru/courses/kitchenware-basic`;
 - если `set_id` еще не опубликован на сайте или slug не проверен, QR ведет на localized courses page, например `https://flashcardsluna.com/ru/courses`, but this fallback is preview-only;
 - production/upload metadata must use a specific study route with course slug and `langs=...`; `npm run check:youtube-seo-metadata` blocks generic `/courses` fallback URLs before publish;

@@ -10,7 +10,7 @@ import {
   isKnownLanguageCode,
   normalizeLanguageCode,
 } from "./lib/video-language-codes.mjs";
-import { getPublicCourseUrl, getPublicSiteLanguagePath } from "./lib/video-public-url.mjs";
+import { getPublicCourseUrl, getPublicSiteLanguagePath, getPublicStudyLanguageCode } from "./lib/video-public-url.mjs";
 
 const execFileAsync = promisify(execFile);
 
@@ -498,7 +498,7 @@ function checkUrlContract({ setId, supportLang, targetLang }) {
     }
   }
 
-  const expectedTargetParam = normalizeLanguageCode(targetLang).toLowerCase();
+  const expectedTargetParam = getPublicStudyLanguageCode(targetLang);
   if (!targetParam) {
     blockers.push(`courseUrl missing target study query parameter ?langs=${expectedTargetParam}; set may be missing publishedCourseSlugBySetId`);
   } else if (targetParam !== expectedTargetParam) {
