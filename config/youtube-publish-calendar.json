@@ -90909,6 +90909,52 @@
       "youtubeVideoId": "d0O8OkmN8ak",
       "youtubePlaylistId": "PLG8VAMCArbPM",
       "playlistItemId": "UExHOFZBTUNBcmJQTS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "PT-BR",
+      "targetLang": "NB",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "publishAt": "2026-07-02T10:30:00.000Z",
+      "timeZone": "Europe/Lisbon",
+      "localDate": "2026-07-02",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 1,
+      "slotOrdinal": 7,
+      "status": "reserved",
+      "source": "local-artifact-upload-first-frame",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_nb_pt-br/youtube_metadata.json",
+      "title": "Vocabulário de Norueguês: Utensílios de Cozinha (Nível Básico)",
+      "playlist_key": "PT-BR__NB__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-03T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-05T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-09T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-01T10:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28556511185",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28556511185",
+      "createdAt": "2026-07-02T00:17:56.700Z",
+      "updatedAt": "2026-07-02T00:18:25.216Z",
+      "youtubeVideoId": "NtJf6MuQAAc",
+      "youtubePlaylistId": "PLJHM4ysqpFcI",
+      "playlistItemId": "UExKSE00eXNxcEZjSS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
