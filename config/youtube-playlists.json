@@ -4677,12 +4677,22 @@
       "channelKey": "de",
       "youtube_channel_id": "UCxWOoYT2yaJze-nCX55Cpgw",
       "youtube_playlist_id": "PLWGz_W3Hr048",
-      "title": "Nepali A1: Everyday: Wörter",
-      "description": "Wir lernen Nepali. Lektionsthema: FlashcardsLuna. Hören Sie aufmerksam auf die muttersprachliche Aussprache und wiederholen Sie die Wörter in den Pausen. Am Ende erwartet Sie ein interaktiver Mini-Test! Übe Kartensätze kostenlos auf unserer Website",
+      "title": "Nepalesisch A1: Wörter",
+      "description": "FlashcardsLuna: Nepalesisch Wörter. Hören Sie aufmerksam auf die muttersprachliche Aussprache und wiederholen Sie die Wörter in den Pausen. Am Ende erwartet Sie ein interaktiver Mini-Test! Übe Kartensätze kostenlos auf unserer Website",
       "status": "created_public",
-      "titleReviewStatus": "localization_fallback_needs_native_review",
+      "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-30T18:36:26.654Z",
-      "lastReadbackAt": "2026-06-30T18:36:36.626Z"
+      "lastReadbackAt": "2026-07-02T01:59:18.347Z",
+      "playlistMetadataRepair": {
+        "repairedAt": "2026-07-02T01:59:18.347Z",
+        "reason": "english_fallback_template",
+        "route": "youtube-1",
+        "previousTitle": "Nepali A1: Everyday: Wörter",
+        "previousDescription": "Wir lernen Nepali. Lektionsthema: FlashcardsLuna. Hören Sie aufmerksam auf die muttersprachliche Aussprache und wiederholen Sie die Wörter in den Pausen. Am Ende erwartet Sie ein interaktiver Mini-Test! Übe Kartensätze kostenlos auf unserer Website",
+        "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-1/28560066589/iteration-1-apply/de_ne_PLWGz_W3Hr048/playlist_metadata.json",
+        "source": "gemini-vectorengine",
+        "model": "gemini-3.5-flash"
+      }
     },
     {
       "playlist_key": "DE__NL__ordinary-vocabulary__a1-everyday",
