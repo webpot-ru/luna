@@ -1049,6 +1049,8 @@ Regional variants (`EN-GB`, `ES-419`, `PT-BR`) сохраняются как о�
 
 If `supportLang` is already present in a bundle, remove it from `targets` and fill the gap with the nearest fallback from the same family. Examples: for `support=DE` and `global_europe_core`, use `EN, ES, FR, IT`; for `support=RU` and `slavic_core`, use `PL, CS, SK, BG`; for `support=EN` and `germanic_core`, use `DE, NL, SV, NO`.
 
+2026-07-02 accepted `romance_core` fallback policy: keep `ES, FR, IT, PT` as the visible Romance set, and use `RO` as the configured same-family fallback when the support language is already one of those targets. Examples: `support=ES` resolves to `FR, IT, PT, RO`; `support=PT` resolves to `ES, FR, IT, RO`. Do not use `EN` or `DE` as the default fallback for this bundle.
+
 2026-07-01 accepted `east_asia_core` fallback policy: keep `ZH, JA, KO` as the bundle targets, but use `VI` before `EN` as fallback. This makes `support=JA` resolve to `ZH, KO, VI` for the next eligible-channel `home_kitchen_cookware_pilot_01` wave, avoiding a Japanese-to-Japanese target and avoiding the less coherent `EN` fallback.
 
 Recommended rollout order:
