@@ -83317,6 +83317,47 @@
         "publishAt": "2026-07-02T10:30:00Z",
         "thumbnailStatus": "custom_set"
       }
+    },
+    {
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES-419",
+      "targetLang": "MY",
+      "playlist_key": "ES-419__MY__ordinary-vocabulary__a1-everyday",
+      "title": "Vocabulario en Burmese: Utensilios de cocina (Nivel Básico A1)",
+      "youtubeVideoId": "dLZzNTBpeH8",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=dLZzNTBpeH8",
+      "youtubePlaylistId": "PLD4DvEulHoj4",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLD4DvEulHoj4",
+      "playlistItemId": "",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "channelHandle": "@lunacardsespanol",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded_playlist_insert_pending",
+      "publishAt": "2026-07-03T12:30:00.000Z",
+      "scheduledPublishAt": "2026-07-03T12:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": true,
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "video-first-frame",
+      "needsPlaylistInsert": true,
+      "playlistInsertDeferredError": "YouTube API POST /youtube/v3/playlistItems failed (403): { \"error\": { \"code\": 403, \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\", \"errors\": [ { \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\", \"domain\": \"youtube.quota\", \"reason\": \"quotaExceeded\" } ] } }",
+      "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n",
+      "metadataSource": "gemini-vectorengine",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "28556509878",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28556509878",
+      "uploadedAt": "2026-07-02T00:18:08.964Z",
+      "lastReadbackAt": "2026-07-02T00:18:08.964Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "private",
+        "publishAt": "2026-07-03T12:30:00Z",
+        "playlistItemReadback": "pending",
+        "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n"
+      }
     }
   ]
 }

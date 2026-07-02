@@ -90955,6 +90955,51 @@
       "youtubeVideoId": "NtJf6MuQAAc",
       "youtubePlaylistId": "PLJHM4ysqpFcI",
       "playlistItemId": "UExKSE00eXNxcEZjSS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES-419",
+      "targetLang": "MY",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "publishAt": "2026-07-03T12:30:00.000Z",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-07-03",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "localDayOffset": 2,
+      "slotOrdinal": 14,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_my_es-419/youtube_metadata.json",
+      "title": "Vocabulario en Burmese: Utensilios de cocina (Nivel Básico A1)",
+      "playlist_key": "ES-419__MY__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-04T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-06T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-10T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-02T12:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28556509878",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28556509878",
+      "createdAt": "2026-07-02T00:18:05.340Z",
+      "updatedAt": "2026-07-02T00:18:05.340Z",
+      "youtubeVideoId": "dLZzNTBpeH8",
+      "youtubePlaylistId": "PLD4DvEulHoj4"
     }
   ]
 }
