@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 
 import {
   getPublicCourseUrl,
+  getPublicStudyLanguageCode,
+  getPublicStudyLanguageCodes,
   getPublicSiteLanguagePath,
   getSiteLanguagePath
 } from "./lib/video-public-url.mjs";
@@ -47,6 +49,14 @@ assert.equal(
 assert.equal(
   getPublicCourseUrl({ setId: cookware, supportLang: "RU", targetLang: "PT-BR" }),
   "https://flashcardsluna.com/ru/courses/kitchenware-basic/study/standard?langs=pt-br"
+);
+
+assert.equal(getPublicStudyLanguageCode("NB"), "no", "Norwegian Bokmal target study code must use public site code no");
+assert.deepEqual(getPublicStudyLanguageCodes({ targetLangs: ["NB", "ES", "PT-BR"] }), ["no", "es", "pt-br"]);
+
+assert.equal(
+  getPublicCourseUrl({ setId: cookware, supportLang: "RU", targetLang: "NB" }),
+  "https://flashcardsluna.com/ru/courses/kitchenware-basic/study/standard?langs=no"
 );
 
 assert.equal(

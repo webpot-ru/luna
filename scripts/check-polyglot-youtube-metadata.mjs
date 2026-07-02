@@ -2,12 +2,11 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { isSpecificStudyCourseUrl } from "./lib/video-public-url.mjs";
+import { getPublicStudyLanguageCodes, isSpecificStudyCourseUrl } from "./lib/video-public-url.mjs";
 import {
   buildPolyglotPlaylistAssignment,
   localizedLanguageList,
 } from "./lib/polyglot-youtube-playlists.mjs";
-import { normalizeLanguageCode } from "./lib/youtube-playlists.mjs";
 
 const options = {
   inputs: [],
@@ -80,6 +79,10 @@ function cleanText(value) {
   return String(value || "").replace(/\s+/gu, " ").trim();
 }
 
+function normalizeLanguageCode(value) {
+  return String(value || "").trim().replace(/_/g, "-").toUpperCase();
+}
+
 function normalizedList(value) {
   const values = Array.isArray(value) ? value : String(value || "").split(",");
   return values.map(normalizeLanguageCode).filter(Boolean);
@@ -88,7 +91,7 @@ function normalizedList(value) {
 function courseUrlTargets(url) {
   try {
     const parsed = new URL(String(url || ""));
-    return normalizedList(parsed.searchParams.get("langs") || "");
+    return getPublicStudyLanguageCodes({ targetLangs: parsed.searchParams.get("langs") || "" });
   } catch {
     return [];
   }
@@ -116,6 +119,7 @@ function validate(metadata, file) {
   const hashtags = Array.isArray(metadata.hashtags) ? metadata.hashtags.map(cleanText).filter(Boolean) : [];
   const courseUrl = String(metadata.courseUrl || metadata.studyUrl || "").trim();
   const urlTargets = courseUrlTargets(courseUrl);
+  const expectedUrlTargets = getPublicStudyLanguageCodes({ targetLangs });
   const expectedTargets = normalizedList(options.expectedTargets);
   const assignment = buildPolyglotPlaylistAssignment(metadata);
   const playlistKey = metadata.playlist_key || metadata.playlistKey || metadata.playlist?.key || "";
@@ -147,8 +151,8 @@ function validate(metadata, file) {
   if (descriptionLength > 5000) blockers.push(`description too long: ${descriptionLength}`);
   if (!courseUrl) blockers.push("missing courseUrl/studyUrl");
   if (courseUrl && !isSpecificStudyCourseUrl(courseUrl)) blockers.push(`courseUrl is not a specific study URL: ${courseUrl}`);
-  if (courseUrl && urlTargets.join(",") !== targetLangs.join(",")) {
-    blockers.push(`courseUrl langs mismatch: expected ${targetLangs.join(",")} got ${urlTargets.join(",")}`);
+  if (courseUrl && urlTargets.join(",") !== expectedUrlTargets.join(",")) {
+    blockers.push(`courseUrl langs mismatch: expected ${expectedUrlTargets.join(",")} got ${urlTargets.join(",")}`);
   }
   if (courseUrl && !description.includes(courseUrl)) blockers.push("description missing exact courseUrl");
   if (/free|paid|pricing|subscription|tariff|бесплат|платн|тариф|precio|gratis|pago/iu.test(description)) {

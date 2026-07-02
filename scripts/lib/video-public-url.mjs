@@ -25,6 +25,10 @@ const PUBLIC_SITE_LANGUAGE_PATH_OVERRIDES = {
   NO: "no",
   NB: "no"
 };
+const PUBLIC_STUDY_LANGUAGE_QUERY_OVERRIDES = {
+  NO: "no",
+  NB: "no"
+};
 
 function loadConfig() {
   try {
@@ -64,20 +68,26 @@ export function getSiteLanguagePath(supportLang) {
   return getPublicSiteLanguagePath(supportLang);
 }
 
-function getTargetStudyLanguageCode(targetLang) {
-  return String(targetLang || "").trim().toLowerCase();
+export function getPublicStudyLanguageCode(languageCode) {
+  const lang = normalizeLanguageCode(languageCode);
+  return (
+    config.studyLanguageCodeByTargetLanguage?.[lang] ||
+    PUBLIC_STUDY_LANGUAGE_QUERY_OVERRIDES[lang] ||
+    (lang ? lang.toLowerCase() : "")
+  );
 }
 
-function getTargetStudyLanguageCodes({ targetLang, targetLangs } = {}) {
+export function getPublicStudyLanguageCodes({ targetLang, targetLangs } = {}) {
   const values = Array.isArray(targetLangs)
     ? targetLangs
-    : String(targetLangs || "").split(",");
-  const normalized = values
-    .map(getTargetStudyLanguageCode)
-    .filter(Boolean);
-  if (normalized.length) return normalized;
-  const single = getTargetStudyLanguageCode(targetLang);
-  return single ? [single] : [];
+    : String(targetLangs || "")
+      .split(",")
+      .map((value) => value.trim())
+      .filter(Boolean);
+  const normalized = values.map(getPublicStudyLanguageCode).filter(Boolean);
+  if (normalized.length > 0) return normalized;
+  const singleTarget = getPublicStudyLanguageCode(targetLang);
+  return singleTarget ? [singleTarget] : [];
 }
 
 function getQrCodeModule() {
@@ -92,8 +102,8 @@ export function getPublicCourseUrl({ setId, supportLang, targetLang, targetLangs
   const courseSlug = trimSlashes(config.publishedCourseSlugBySetId?.[setId]);
   const pathParts = [languagePath, coursePath, courseSlug].filter(Boolean);
   const courseUrl = `${baseUrl}/${pathParts.join("/")}`;
-  const targetStudyLangs = getTargetStudyLanguageCodes({ targetLang, targetLangs });
-  if (!courseSlug || !targetStudyLangs.length) return courseUrl;
+  const targetStudyLangs = getPublicStudyLanguageCodes({ targetLang, targetLangs });
+  if (!courseSlug || targetStudyLangs.length === 0) return courseUrl;
   return `${courseUrl}/study/standard?langs=${encodeURIComponent(targetStudyLangs.join(","))}`;
 }
 
