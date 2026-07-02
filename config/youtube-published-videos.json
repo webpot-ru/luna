@@ -56304,7 +56304,7 @@
       "githubRunId": "28289353872",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28289353872",
       "uploadedAt": "2026-06-27T12:47:36.816Z",
-      "lastReadbackAt": "2026-06-28T07:07:43.036Z",
+      "lastReadbackAt": "2026-07-02T11:16:55.137Z",
       "readback": {
         "uploadStatus": "processed",
         "privacyStatus": "private",
@@ -56320,7 +56320,17 @@
       "playlistInsertRepairStatus": "inserted",
       "playlistInsertRepairGithubRunId": "28314665391",
       "playlistInsertRepairGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28314665391",
-      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video."
+      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video.",
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:16:55.137Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/hr/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/hr/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "pass",
+        "readbackAt": "2026-07-02T11:16:55.283Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:16:55.137Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -56714,13 +56724,23 @@
       "githubRunId": "28314636185",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28314636185",
       "uploadedAt": "2026-06-28T07:12:25.474Z",
-      "lastReadbackAt": "2026-06-28T07:12:25.474Z",
+      "lastReadbackAt": "2026-07-02T11:17:03.132Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-30T06:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:17:03.132Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/sl/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/sl/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "fail",
+        "readbackAt": "2026-07-02T11:17:03.279Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:17:03.132Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -56828,13 +56848,23 @@
       "githubRunId": "28314634473",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28314634473",
       "uploadedAt": "2026-06-28T07:12:59.950Z",
-      "lastReadbackAt": "2026-06-28T07:12:59.950Z",
+      "lastReadbackAt": "2026-07-02T11:16:52.661Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-29T20:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:16:52.661Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/bg/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/bg/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "fail",
+        "readbackAt": "2026-07-02T11:16:52.767Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:16:52.661Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -61294,7 +61324,7 @@
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=N3eaUF7RxSw",
       "publicationStatus": "live_youtube_upload_detected",
       "uploadedAt": "2026-06-29T06:11:41Z",
-      "lastReadbackAt": "2026-06-30T13:25:25.396Z",
+      "lastReadbackAt": "2026-07-02T11:16:53.354Z",
       "readbackSource": "youtube_uploads_playlist",
       "liveReadbackOnly": true,
       "urlSupportLang": "BN",
@@ -61306,7 +61336,17 @@
       "canPersistLiveReadback": true,
       "excludedFromPublicationRegistryReason": "",
       "inLocalPublicationRegistry": false,
-      "localRegistryVideoId": ""
+      "localRegistryVideoId": "",
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:16:53.354Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/bn/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/bn/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "fail",
+        "readbackAt": "2026-07-02T11:16:53.493Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:16:53.354Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -62352,7 +62392,7 @@
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=EeWp8RHulI4",
       "publicationStatus": "live_youtube_upload_detected",
       "uploadedAt": "2026-06-30T06:30:25Z",
-      "lastReadbackAt": "2026-06-30T13:25:29.237Z",
+      "lastReadbackAt": "2026-07-02T11:17:04.214Z",
       "readbackSource": "youtube_uploads_playlist",
       "liveReadbackOnly": true,
       "urlSupportLang": "SR",
@@ -62364,7 +62404,17 @@
       "canPersistLiveReadback": true,
       "excludedFromPublicationRegistryReason": "",
       "inLocalPublicationRegistry": false,
-      "localRegistryVideoId": ""
+      "localRegistryVideoId": "",
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:17:04.214Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/sr/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/sr/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "pass",
+        "readbackAt": "2026-07-02T11:17:04.377Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:17:04.214Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -67459,13 +67509,23 @@
       "githubRunId": "28464409048",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28464409048",
       "uploadedAt": "2026-06-30T17:54:54.245Z",
-      "lastReadbackAt": "2026-06-30T17:54:54.245Z",
+      "lastReadbackAt": "2026-07-02T11:16:55.925Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-01T20:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:16:55.925Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/is/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/is/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "fail",
+        "readbackAt": "2026-07-02T11:16:56.058Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:16:55.925Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -67877,13 +67937,23 @@
       "githubRunId": "28464390511",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28464390511",
       "uploadedAt": "2026-06-30T17:54:56.544Z",
-      "lastReadbackAt": "2026-06-30T17:54:56.544Z",
+      "lastReadbackAt": "2026-07-02T11:16:54.064Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-01T05:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:16:54.064Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/et/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/et/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "fail",
+        "readbackAt": "2026-07-02T11:16:54.160Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:16:54.064Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -72927,13 +72997,23 @@
       "githubRunId": "28469924748",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28469924748",
       "uploadedAt": "2026-06-30T19:22:57.703Z",
-      "lastReadbackAt": "2026-06-30T19:22:57.703Z",
+      "lastReadbackAt": "2026-07-02T11:16:57.232Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-01T16:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:16:57.232Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/km/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/km/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "fail",
+        "readbackAt": "2026-07-02T11:16:57.314Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:16:57.232Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -77981,13 +78061,23 @@
       "githubRunId": "28520021146",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28520021146",
       "uploadedAt": "2026-07-01T13:20:27.618Z",
-      "lastReadbackAt": "2026-07-01T13:20:27.618Z",
+      "lastReadbackAt": "2026-07-02T11:16:58.390Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-01T16:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:16:58.390Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/lo/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/lo/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "pass",
+        "readbackAt": "2026-07-02T11:16:58.520Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:16:58.390Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -78437,13 +78527,23 @@
       "githubRunId": "28520034081",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28520034081",
       "uploadedAt": "2026-07-01T13:21:07.071Z",
-      "lastReadbackAt": "2026-07-01T13:21:07.071Z",
+      "lastReadbackAt": "2026-07-02T11:17:00.692Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-02T08:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:17:00.692Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/lv/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/lv/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "pass",
+        "readbackAt": "2026-07-02T11:17:00.777Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:17:00.692Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -78817,13 +78917,23 @@
       "githubRunId": "28520027863",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28520027863",
       "uploadedAt": "2026-07-01T13:22:45.053Z",
-      "lastReadbackAt": "2026-07-01T13:22:45.053Z",
+      "lastReadbackAt": "2026-07-02T11:16:59.385Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-02T08:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:16:59.385Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/lt/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/lt/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "fail",
+        "readbackAt": "2026-07-02T11:16:59.484Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:16:59.385Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -80757,13 +80867,23 @@
       "githubRunId": "28522149731",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28522149731",
       "uploadedAt": "2026-07-01T13:56:12.102Z",
-      "lastReadbackAt": "2026-07-01T13:56:12.102Z",
+      "lastReadbackAt": "2026-07-02T11:17:05.116Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-02T03:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:17:05.116Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/tl/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/tl/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "fail",
+        "readbackAt": "2026-07-02T11:17:05.267Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:17:05.116Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -81907,13 +82027,23 @@
       "githubRunId": "28520053510",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28520053510",
       "uploadedAt": "2026-07-01T13:58:28.518Z",
-      "lastReadbackAt": "2026-07-01T13:58:28.518Z",
+      "lastReadbackAt": "2026-07-02T11:17:02.227Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-02T05:00:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "courseUrlRepair": {
+        "repairedAt": "2026-07-02T11:17:02.227Z",
+        "reason": "norwegian_nb_public_study_url_alias",
+        "previousUrl": "https://flashcardsluna.com/my/courses/kitchenware-basic/study/standard?langs=nb",
+        "replacementUrl": "https://flashcardsluna.com/my/courses/kitchenware-basic/study/standard?langs=no",
+        "source": "scripts/youtube-repair-course-url.mjs",
+        "readbackStatus": "pass",
+        "readbackAt": "2026-07-02T11:17:02.392Z"
+      },
+      "lastMetadataRepairAt": "2026-07-02T11:17:02.227Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
