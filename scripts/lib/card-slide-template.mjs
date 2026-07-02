@@ -443,6 +443,18 @@ export function getLanguageNameInLang(targetLang, supportLang) {
   if (supportMap && supportMap[target]) {
     return supportMap[target];
   }
+  try {
+    const locale = support.toLowerCase();
+    const languageCode = target.toLowerCase();
+    const display = new Intl.DisplayNames([locale], { type: "language", languageDisplay: "standard" }).of(languageCode);
+    const text = String(display || "").trim();
+    if (text && text.toUpperCase() !== target) {
+      const chars = Array.from(text);
+      return `${chars[0].toLocaleUpperCase(locale)}${chars.slice(1).join("")}`;
+    }
+  } catch {
+    // Fall through to the explicit English fallback below.
+  }
   const enMap = translations['EN'];
   return enMap[target] || target;
 }

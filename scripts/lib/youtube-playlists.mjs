@@ -241,6 +241,10 @@ function stripLevel(value) {
 }
 
 const NATIVE_PLAYLIST_TEMPLATES = {
+  AZ: {
+    title: ({ targetName, level }) => `${targetName} dili ${level || "A1"}: söz ehtiyatı və tələffüz`,
+    description: ({ targetName }) => `${BRAND_NAME} videoları Azərbaycan dilində danışanlara ${targetName} dilini öyrənməyə kömək edir: söz kartları, tələffüz, təkrar fasilələri və qısa mini-testlər.`
+  },
   BG: {
     title: ({ targetName, level }) => `${targetName} ${level || "A1"}: думи и произношение`,
     description: ({ targetName }) => `${BRAND_NAME} видеа за българскоговорящи, които учат ${targetName}: карти с думи, произношение, паузи за повторение и кратки мини тестове.`
@@ -414,6 +418,7 @@ function buildTitle({ supportLang, targetLang, courseFamily, levelOrTrack }) {
     .replace(/-/g, " ")
     .replace(/\b\w/g, (match) => match.toUpperCase())
     .trim();
+  const nativeLevel = (level || "A1").replace(/:\s*Everyday$/u, "");
 
   if (support === "RU") {
     if (courseFamily === "ordinary-vocabulary") return `${targetName} A1: бытовой словарь`;
@@ -423,10 +428,10 @@ function buildTitle({ supportLang, targetLang, courseFamily, levelOrTrack }) {
     return `${targetName}: ${BRAND_NAME}`;
   }
   if (support === "ES" || support === "ES-419") {
-    return `${targetName} ${level || "A1"}: tarjetas ${BRAND_NAME}`;
+    return `${targetName} ${nativeLevel}: vocabulario y pronunciación`;
   }
   if (support === "PT" || support === "PT-BR") {
-    return `${targetName} ${level || "A1"}: flashcards ${BRAND_NAME}`;
+    return `${targetName} ${nativeLevel}: vocabulário e pronúncia`;
   }
   if (support === "KK") {
     if (courseFamily === "ordinary-vocabulary") return `${targetName} тілі A1: сөздік және айтылым`;
@@ -434,13 +439,12 @@ function buildTitle({ supportLang, targetLang, courseFamily, levelOrTrack }) {
   }
   const template = NATIVE_PLAYLIST_TEMPLATES[support];
   if (template) {
-    const nativeLevel = (level || "A1").replace(/:\s*Everyday$/u, "");
     return template.title({ targetName, level: nativeLevel, courseFamily, levelOrTrack });
   }
   if (!isEnglishSupport(support)) {
     const loc = getVideoLocalization(support);
     const wordsLabel = cleanText(loc.words_label);
-    return cleanText(`${targetName} ${level || "A1"}: ${wordsLabel || BRAND_NAME}`);
+    return cleanText(`${targetName} ${nativeLevel}: ${wordsLabel || BRAND_NAME}`);
   }
   if (courseFamily === "ordinary-vocabulary") {
     return `${targetName} ${level || "A1"} Flashcards`;
@@ -457,16 +461,19 @@ function buildDescription({ supportLang, targetLang, courseFamily, levelOrTrack 
   if (support === "KK") {
     return `${BRAND_NAME} видеолары қазақ тілді көрермендерге ${targetName} тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.`;
   }
+  if (support === "ES" || support === "ES-419") {
+    return `Vídeos de ${BRAND_NAME} para hablantes de español que aprenden ${targetName}: tarjetas, pronunciación, pausas para repetir y mini tests breves.`;
+  }
+  if (support === "PT" || support === "PT-BR") {
+    return `Vídeos da ${BRAND_NAME} para falantes de português que aprendem ${targetName}: cartões, pronúncia, pausas para repetir e mini-testes rápidos.`;
+  }
   const template = NATIVE_PLAYLIST_TEMPLATES[support];
   if (template) return template.description({ targetName, courseFamily, levelOrTrack });
   if (!isEnglishSupport(support)) {
     const loc = getVideoLocalization(support);
-    const speech = fillTemplate(loc.intro_speech_template, {
-      target_lang: targetName,
-      deck_title: BRAND_NAME,
-    });
+    const wordsLabel = cleanText(loc.words_label);
     const parts = [
-      speech,
+      cleanText(`${BRAND_NAME}: ${targetName}${wordsLabel ? ` ${wordsLabel}` : ""}.`),
       stripHtml(loc.intro_desc),
       loc.outro_subtitle,
     ].map(cleanText).filter(Boolean);

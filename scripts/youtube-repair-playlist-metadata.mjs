@@ -112,9 +112,11 @@ function isEnglishSupport(code) {
 
 const ENGLISH_FALLBACK_PATTERNS = [
   { id: "a1-flashcards-title", pattern: /\b[A-Z][A-Za-z -]+ A1(?::\s*)?(?:Everyday\s+)?Flashcards\b/u },
+  { id: "a1-everyday-playlist-title", pattern: /\b[A-Z][A-Za-z() -]+ A1:\s*Everyday(?::|\b)/u },
   { id: "videos-for-native-speakers", pattern: /\bvideos\s+for\s+native\s+[A-Z0-9 -]+\s+speakers\s+learning\b/iu },
   { id: "flashcards-pronunciation-repeat-pauses", pattern: /\bflashcards,\s+pronunciation,\s+repeat\s+pauses\b/iu },
   { id: "playlist-key-marker", pattern: /\bPlaylist\s+key:/iu },
+  { id: "lesson-topic-brand-fallback", pattern: /\b(?:Lesson topic|Tema da lição|Ders konusu|Dərs mövzusu|Mada ya somo):\s*FlashcardsLuna\b/iu },
 ];
 
 function findEnglishFallbackMarkers(value) {

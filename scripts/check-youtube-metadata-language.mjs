@@ -68,6 +68,7 @@ function isEnglishSupport(code) {
 const ENGLISH_TEMPLATE_PATTERNS = [
   { id: "a1-vocabulary-title", pattern: /\b[A-Z][A-Za-z -]+ A1 (?:[A-Za-z -]+\s+)?Vocabulary\b/u },
   { id: "a1-flashcards-title", pattern: /\b[A-Z][A-Za-z -]+ A1 Flashcards\b/u },
+  { id: "a1-everyday-playlist-title", pattern: /\b[A-Z][A-Za-z() -]+ A1:\s*Everyday(?::|\b)/u },
   { id: "english-vocabulary-with-pronunciation", pattern: /\b[A-Z][A-Za-z -]+ (?:A1\s+)?[A-Za-z -]*Vocabulary\s+with\s+Pronunciation\b/u },
   { id: "generic-a1-vocabulary", pattern: /\bA1\s+[A-Za-z -]*Vocabulary\b/u },
   { id: "words-with-pronunciation", pattern: /\b\d{1,3}\s+(?:[A-Z][A-Za-z -]+\s+)?(?:Kitchenware\s+)?Words?\s+with\s+Pronunciation\b/iu },
@@ -80,6 +81,7 @@ const ENGLISH_TEMPLATE_PATTERNS = [
   { id: "videos-for-native-speakers", pattern: /\bvideos\s+for\s+native\s+[A-Z0-9 -]+\s+speakers\s+learning\b/iu },
   { id: "flashcards-pronunciation-repeat-pauses", pattern: /\bflashcards,\s+pronunciation,\s+repeat\s+pauses\b/iu },
   { id: "playlist-key-marker", pattern: /\bPlaylist\s+key:/iu },
+  { id: "lesson-topic-brand-fallback", pattern: /\b(?:Lesson topic|Tema da lição|Ders konusu|Dərs mövzusu|Mada ya somo):\s*FlashcardsLuna\b/iu },
   { id: "subscribe-english-template", pattern: /\bSubscribe\s+to\s+FlashcardsLuna\s+for\s+more\s+short\s+vocabulary\s+lessons\b/iu },
   { id: "beginner-learn-english-template", pattern: /\b(?:learn|study|practice)\s+[A-Z][A-Za-z -]+\s+(?:for\s+beginners|vocabulary|pronunciation)\b/iu },
 ];
