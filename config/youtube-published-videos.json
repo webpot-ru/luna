@@ -9436,7 +9436,7 @@
       "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
       "channelHandle": "@lunacardskorean",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_schedule_restore_needed",
+      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-22T23:30:00.000Z",
       "scheduledPublishAt": "2026-06-22T23:30:00.000Z",
       "desiredPrivacyStatus": "public",
@@ -9458,21 +9458,24 @@
         "publishAt": "2026-06-22T23:30:00Z",
         "thumbnailStatus": "auto_first_frame",
         "scheduleDrift": {
-          "status": "needs_restore",
+          "status": "accepted_historical_live_publish_completed",
           "fromPublishAt": "2026-06-23T02:30:00Z",
           "currentLivePublishAt": "2026-06-22T23:30:00Z",
           "readbackAt": "2026-06-22T14:13:07.280Z",
-          "githubRunId": "27959125360"
+          "githubRunId": "27959125360",
+          "acceptedAt": "2026-07-02T10:25:06.030Z",
+          "acceptedReason": "desired_publish_at_is_historical_and_live_publish_completed"
         }
       },
       "originalPublishAt": "2026-06-23T02:30:00.000Z",
       "currentLivePublishAt": "2026-06-22T23:30:00.000Z",
       "desiredPublishAt": "2026-06-23T02:30:00.000Z",
-      "needsScheduleRestore": true,
       "scheduleDriftReason": "accidental_restore_workflow_support_only_filter",
       "scheduleDriftGithubRunId": "27959125360",
       "scheduleDriftGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27959125360",
-      "lastVisibilityReadbackAt": "2026-06-22T14:13:07.280Z"
+      "lastVisibilityReadbackAt": "2026-06-22T14:13:07.280Z",
+      "scheduleDriftAcceptedAt": "2026-07-02T10:25:06.030Z",
+      "scheduleDriftClosureReason": "desired_publish_at_is_historical_and_live_publish_completed"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -13001,8 +13004,8 @@
       "channelHandle": "@lunacardsnepali",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-06-23T02:45:00Z",
-      "scheduledPublishAt": "2026-06-23T02:45:00Z",
+      "publishAt": "2026-06-23T02:45:00.000Z",
+      "scheduledPublishAt": "2026-06-23T02:45:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -21644,12 +21647,11 @@
       "channelKey": "zh",
       "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
       "channelHandle": "@lunacardschinese",
-      "privacyStatus": "private",
-      "publicationStatus": "scheduled_hold_thumbnail_auto",
+      "privacyStatus": "public",
+      "publicationStatus": "public",
       "publishAt": "2026-07-01T00:00:00Z",
       "scheduledPublishAt": "2026-07-01T00:00:00Z",
-      "desiredPrivacyStatus": "public_after_thumbnail_fix",
-      "needsVisibilityPromotion": true,
+      "desiredPrivacyStatus": "public",
       "thumbnailSet": false,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
@@ -21676,6 +21678,34 @@
           "reason": "custom_thumbnail_unavailable_youtube_auto_thumbnail_not_first_frame_safe",
           "readbackAt": "2026-06-22T12:24:44.588Z",
           "githubRunId": "27952412532"
+        },
+        "visibility": {
+          "video": {
+            "id": "YwYDDwRf89k",
+            "snippet": {
+              "channelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+              "title": "俄语A1基础词汇：厨房用品基础 50词跟读与发音练习"
+            },
+            "status": {
+              "uploadStatus": "processed",
+              "privacyStatus": "public",
+              "license": "youtube",
+              "embeddable": true,
+              "publicStatsViewable": true,
+              "selfDeclaredMadeForKids": false
+            }
+          },
+          "playlist": {
+            "id": "PLigXQEekIboawCUNpJO0H79bCEpj3ESPq",
+            "snippet": {
+              "channelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+              "title": "俄语A1基础词汇跟读与听力练习",
+              "description": "本播放列表收录了俄语A1级别的基础词汇学习视频。配合 FlashcardsLuna 智能记忆卡片，帮助你轻松掌握俄语常用单词与标准发音。"
+            },
+            "status": {
+              "privacyStatus": "public"
+            }
+          }
         }
       },
       "originalPublishAt": "2026-06-23T00:30:00.000Z",
@@ -21684,7 +21714,10 @@
       "schedulePauseReason": "custom_thumbnail_unavailable_youtube_auto_thumbnail_not_first_frame_safe",
       "schedulePauseGithubRunId": "27952412532",
       "schedulePauseGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27952412532",
-      "lastVisibilityReadbackAt": "2026-06-22T12:24:44.588Z"
+      "lastVisibilityReadbackAt": "2026-07-02T10:25:06.030Z",
+      "visibilityRepairGithubRunId": "28583052120",
+      "visibilityRepairGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28583052120",
+      "visibilityClosureReason": "live_readback_public_after_hold"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",

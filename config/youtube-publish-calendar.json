@@ -11782,14 +11782,14 @@
       "targetLang": "AZ",
       "channelKey": "ko",
       "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
-      "publishAt": "2026-06-23T02:30:00.000Z",
+      "publishAt": "2026-06-22T23:30:00.000Z",
       "timeZone": "Asia/Seoul",
       "localDate": "2026-06-23",
-      "localTime": "11:30",
-      "localSlotIndex": 1,
+      "localTime": "08:30",
+      "localSlotIndex": 0,
       "localDayOffset": 0,
-      "slotOrdinal": 1,
-      "status": "schedule_restore_needed",
+      "slotOrdinal": 0,
+      "status": "reserved",
       "source": "plan-youtube-publish-schedule",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_az_ko/youtube_metadata.json",
@@ -11798,34 +11798,35 @@
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-06-24T02:30:00.000Z"
+          "dueAt": "2026-06-23T23:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-06-26T02:30:00.000Z"
+          "dueAt": "2026-06-25T23:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-06-30T02:30:00.000Z"
+          "dueAt": "2026-06-29T23:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-07-23T02:30:00.000Z"
+          "dueAt": "2026-07-22T23:30:00.000Z"
         }
       ],
       "githubRunId": "27946292126",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27946292126",
       "createdAt": "2026-06-22T10:39:22.824Z",
-      "updatedAt": "2026-06-22T10:49:37.288Z",
+      "updatedAt": "2026-07-02T10:25:06.030Z",
       "currentLivePublishAt": "2026-06-22T23:30:00.000Z",
       "desiredPublishAt": "2026-06-23T02:30:00.000Z",
-      "needsScheduleRestore": true,
       "scheduleDriftReason": "accidental_restore_workflow_support_only_filter",
       "scheduleDriftGithubRunId": "27959125360",
       "scheduleDriftGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27959125360",
       "youtubeVideoId": "f_B-MMrgLDE",
       "youtubePlaylistId": "PLTLLUAacNgjjiZvhrYZL4qHe9kmrY-XIF",
-      "playlistItemId": "UExUTExVQWFjTmdqamladmhyWVpMNHFIZTlrbXJZLVhJRi41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExUTExVQWFjTmdqamladmhyWVpMNHFIZTlrbXJZLVhJRi41NkI0NEY2RDEwNTU3Q0M2",
+      "scheduleDriftAcceptedAt": "2026-07-02T10:25:06.030Z",
+      "scheduleDriftClosureReason": "desired_publish_at_is_historical_and_live_publish_completed"
     },
     {
       "schemaVersion": 1,
@@ -25558,12 +25559,12 @@
       "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
       "publishAt": "2026-07-01T00:00:00Z",
       "timeZone": "Asia/Shanghai",
-      "localDate": "2026-06-23",
-      "localTime": "08:30",
+      "localDate": "2026-07-01",
+      "localTime": "08:00",
       "localSlotIndex": 0,
       "localDayOffset": 0,
       "slotOrdinal": 0,
-      "status": "held_thumbnail_auto",
+      "status": "reserved",
       "source": "plan-youtube-publish-schedule",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ru_zh/youtube_metadata.json",
@@ -25590,16 +25591,18 @@
       "githubRunId": "27943585828",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27943585828",
       "createdAt": "2026-06-22T09:40:23.426Z",
-      "updatedAt": "2026-06-22T12:24:44.588Z",
+      "updatedAt": "2026-07-02T10:25:06.030Z",
       "originalPublishAt": "2026-06-23T00:30:00.000Z",
       "holdPublishAt": "2026-07-01T00:00:00Z",
       "schedulePauseReason": "custom_thumbnail_unavailable_youtube_auto_thumbnail_not_first_frame_safe",
       "schedulePauseGithubRunId": "27952412532",
       "schedulePauseGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27952412532",
-      "needsThumbnailFix": true,
       "youtubeVideoId": "YwYDDwRf89k",
       "youtubePlaylistId": "PLigXQEekIboawCUNpJO0H79bCEpj3ESPq",
-      "playlistItemId": "UExpZ1hRRWVrSWJvYXdDVU5wSk8wSDc5YkNFcGozRVNQcS41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExpZ1hRRWVrSWJvYXdDVU5wSk8wSDc5YkNFcGozRVNQcS41NkI0NEY2RDEwNTU3Q0M2",
+      "visibilityRepairGithubRunId": "28583052120",
+      "visibilityRepairGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28583052120",
+      "visibilityClosureReason": "live_readback_public_after_hold"
     },
     {
       "schemaVersion": 1,
