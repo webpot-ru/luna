@@ -3,12 +3,6 @@ import fs from "node:fs";
 import path from "node:path";
 
 import {
-  DEFAULT_CHANNEL_CONFIG_PATH,
-  findChannelForSupport,
-  loadYoutubeChannels,
-  normalizeLanguageCode,
-} from "./lib/youtube-playlists.mjs";
-import {
   DEFAULT_PUBLICATION_REGISTRY_PATH,
   isActivePublication,
   loadPublicationRegistry,
@@ -20,8 +14,24 @@ import {
 } from "./lib/video-public-url.mjs";
 
 const DEFAULT_OUTPUT_DIR = "outputs/youtube-course-url-repair";
+const DEFAULT_CHANNEL_CONFIG_PATH = "config/youtube-channels.json";
 const DEFAULT_ROUTING_CONFIG = "config/youtube-api-project-routing.json";
 const DEFAULT_TARGET = "NB";
+
+function normalizeLanguageCode(value) {
+  return String(value || "").trim().replace(/_/g, "-").toUpperCase();
+}
+
+function loadYoutubeChannels(filePath = DEFAULT_CHANNEL_CONFIG_PATH) {
+  const registry = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  if (!Array.isArray(registry.channels)) throw new Error(`Invalid YouTube channel config: ${filePath}`);
+  return registry;
+}
+
+function findChannelForSupport(channels, supportLang) {
+  const code = normalizeLanguageCode(supportLang);
+  return channels.find((channel) => (channel.supportLangs || []).map(normalizeLanguageCode).includes(code));
+}
 
 function parseArgs(argv) {
   const options = {

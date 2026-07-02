@@ -1,10 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import {
-  normalizeLanguageCode,
-  normalizeSlugPart,
-} from "./youtube-playlists.mjs";
 import { BRAND_NAME } from "./brand.mjs";
 
 export const DEFAULT_POLYGLOT_PLAYLIST_REGISTRY_PATH = "config/youtube-polyglot-playlists.json";
@@ -51,6 +47,20 @@ const FALLBACK_EN_NAMES = {
   ID: "Indonesian",
   MS: "Malay",
 };
+
+function normalizeLanguageCode(value) {
+  return String(value || "").trim().replace(/_/g, "-").toUpperCase();
+}
+
+function normalizeSlugPart(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/_/g, "-")
+    .replace(/[^a-z0-9-]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
 
 function cleanText(value) {
   return String(value || "").replace(/\s+/gu, " ").trim();

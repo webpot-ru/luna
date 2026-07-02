@@ -7,7 +7,6 @@ import {
   buildPolyglotPlaylistAssignment,
   localizedLanguageList,
 } from "./lib/polyglot-youtube-playlists.mjs";
-import { normalizeLanguageCode } from "./lib/youtube-playlists.mjs";
 
 const options = {
   inputs: [],
@@ -78,6 +77,10 @@ function visibleLength(value) {
 
 function cleanText(value) {
   return String(value || "").replace(/\s+/gu, " ").trim();
+}
+
+function normalizeLanguageCode(value) {
+  return String(value || "").trim().replace(/_/g, "-").toUpperCase();
 }
 
 function normalizedList(value) {
