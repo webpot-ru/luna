@@ -5128,6 +5128,31 @@
       "needsPlaylistCreate": true,
       "playlistCreateDeferredAt": "2026-07-03T11:20:15.677Z",
       "playlistCreateDeferredError": "YouTube API POST /youtube/v3/playlists failed (403): { \"error\": { \"code\": 403, \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\", \"errors\": [ { \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\", \"domain\": \"youtube.quota\", \"reason\": \"quotaExceeded\" } ] } }"
+    },
+    {
+      "playlist_key": "POLYGLOT__IT__slavic-core__93d499d62441__short-unverified",
+      "videoType": "polyglot",
+      "contentScope": "short_unverified",
+      "supportLang": "IT",
+      "bundleKey": "slavic_core",
+      "bundleLabel": "Slavic Core",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsCsv": "RU,PL,CS,SK",
+      "targetLangsHash": "93d499d62441",
+      "channelKey": "it",
+      "youtube_channel_id": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "youtube_playlist_id": "PLBgU3NvY2WRw",
+      "title": "Vocabolario Poliglotta: Russo, Polacco, Ceco e Slovacco",
+      "description": "Una raccolta di lezioni di vocabolario multilingue per studiare simultaneamente russo, polacco, ceco e slovacco. Scopri le somiglianze tra le lingue slave e arricchisci il tuo lessico con il metodo FlashcardsLuna.",
+      "status": "created_public",
+      "titleReviewStatus": "ai_polished",
+      "createdAt": "2026-07-03T11:21:13.269Z",
+      "lastReadbackAt": "2026-07-03T11:21:19.957Z"
     }
   ]
 }
