@@ -105593,6 +105593,52 @@
       "youtubeVideoId": "OTo-YZfHC_E",
       "youtubePlaylistId": "PLeDlMmgT3kXA",
       "playlistItemId": "UExlRGxNbWdUM2tYQS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ET",
+      "targetLang": "TE",
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "publishAt": "2026-07-04T08:30:00.000Z",
+      "timeZone": "Europe/Tallinn",
+      "localDate": "2026-07-04",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 1,
+      "slotOrdinal": 7,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_te_et/youtube_metadata.json",
+      "title": "Telugu keel algajatele: Köögitarbed | 50 olulist sõna",
+      "playlist_key": "ET__TE__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-05T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-07T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-11T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-03T08:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28660298787",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28660298787",
+      "createdAt": "2026-07-03T12:24:49.239Z",
+      "updatedAt": "2026-07-03T12:24:49.239Z",
+      "youtubeVideoId": "tE9xGG98PGA",
+      "youtubePlaylistId": "PLU0f_mUKWpvQ",
+      "playlistItemId": "UExVMGZfbVVLV3B2US41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
