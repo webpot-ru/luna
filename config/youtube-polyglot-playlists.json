@@ -4622,6 +4622,34 @@
       "titleReviewStatus": "ai_polished",
       "createdAt": "2026-07-03T10:07:25.712Z",
       "lastReadbackAt": ""
+    },
+    {
+      "playlist_key": "POLYGLOT__ES__slavic-core__93d499d62441",
+      "videoType": "polyglot",
+      "contentScope": "full",
+      "supportLang": "ES",
+      "bundleKey": "slavic_core",
+      "bundleLabel": "Slavic Core",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsCsv": "RU,PL,CS,SK",
+      "targetLangsHash": "93d499d62441",
+      "channelKey": "es",
+      "youtube_channel_id": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "youtube_playlist_id": "",
+      "title": "Vocabulario Políglota: Ruso, Polaco, Checo y Eslovaco",
+      "description": "Colección de videos para aprender vocabulario de forma simultánea en ruso, polaco, checo y eslovaco. Diseñado para estudiantes que desean dominar múltiples lenguas eslavas comparando palabras y optimizando su tiempo de estudio con el método políglota.",
+      "status": "create_pending_youtube_rate_or_quota",
+      "titleReviewStatus": "ai_polished",
+      "createdAt": "2026-07-03T10:05:45.419Z",
+      "lastReadbackAt": "",
+      "needsPlaylistCreate": true,
+      "playlistCreateDeferredAt": "2026-07-03T10:07:54.049Z",
+      "playlistCreateDeferredError": "YouTube API POST /youtube/v3/playlists failed (429): { \"error\": { \"code\": 429, \"message\": \"Resource has been exhausted (e.g. check quota).\", \"errors\": [ { \"domain\": \"youtube.api.v3.PlaylistInsertResponse.Error\", \"reason\": \"RATE_LIMIT_EXCEEDED\" } ], \"status\": \"RESOURCE_EXHAUSTED\" } }"
     }
   ]
 }
