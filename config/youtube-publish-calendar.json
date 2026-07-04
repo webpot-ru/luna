@@ -108447,6 +108447,52 @@
       "youtubeVideoId": "b-EPMmY3ejI",
       "youtubePlaylistId": "PLJpxca3Tgx1k",
       "playlistItemId": "UExKcHhjYTNUZ3gxay41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "EN",
+      "targetLang": "SV",
+      "channelKey": "en",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "publishAt": "2026-07-05T18:30:00.000Z",
+      "timeZone": "America/New_York",
+      "localDate": "2026-07-05",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "localDayOffset": 1,
+      "slotOrdinal": 8,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_sv_en/youtube_metadata.json",
+      "title": "Swedish Vocabulary: Kitchenware Basics | 50 A1 Words with Pronunciation",
+      "playlist_key": "EN__SV__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-06T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-08T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-12T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-04T18:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28698959224",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28698959224",
+      "createdAt": "2026-07-04T07:22:05.259Z",
+      "updatedAt": "2026-07-04T07:22:05.259Z",
+      "youtubeVideoId": "kNX9fDBIVks",
+      "youtubePlaylistId": "PLFA1NV5H7Cvg",
+      "playlistItemId": "UExGQTFOVjVIN0N2Zy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
