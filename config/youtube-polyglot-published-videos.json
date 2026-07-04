@@ -12181,6 +12181,60 @@
         "publishAt": "2026-07-04T14:30:00Z",
         "thumbnailStatus": "custom_set"
       }
+    },
+    {
+      "videoType": "polyglot",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:DE:slavic_core:93d499d62441:short_unverified",
+      "bundleKey": "slavic_core",
+      "bundleLabel": "Slavic Core",
+      "contentScope": "short_unverified",
+      "wordLimit": 30,
+      "videoDurationSeconds": 864.4,
+      "maxDurationSeconds": 895,
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsCsv": "RU,PL,CS,SK",
+      "targetLangsHash": "93d499d62441",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "DE",
+      "targetLang": "RU,PL,CS,SK",
+      "playlist_key": "POLYGLOT__DE__slavic-core__93d499d62441__short-unverified",
+      "title": "Polyglot Vokabeln: Küchenutensilien in 4 Sprachen (Russisch, Polnisch, Tschechisch, Slowakisch)",
+      "youtubeVideoId": "K3ILZouSXC8",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=K3ILZouSXC8",
+      "youtubePlaylistId": "PLFAxg-x2mwa8",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLFAxg-x2mwa8",
+      "playlistItemId": "UExGQXhnLXgybXdhOC41NkI0NEY2RDEwNTU3Q0M2",
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "channelHandle": "@lunacardsdeutsch",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publishAt": "2026-07-04T09:30:00.000Z",
+      "scheduledPublishAt": "2026-07-04T09:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "metadataSource": "vectorengine-gemini-polyglot",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "28698962897",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28698962897",
+      "uploadedAt": "2026-07-04T07:25:56.286Z",
+      "lastReadbackAt": "2026-07-04T07:25:56.286Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "private",
+        "publishAt": "2026-07-04T09:30:00Z",
+        "thumbnailStatus": "auto_first_frame"
+      }
     }
   ]
 }
