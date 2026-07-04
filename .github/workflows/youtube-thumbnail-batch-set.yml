@@ -185,6 +185,7 @@ jobs:
         shell: bash
         env:
           PLAN_REPORT: outputs/review/youtube-thumbnail-batch-apply-plan-${{ github.run_id }}.json
+          SKIPPED_REPORT: outputs/review/youtube-thumbnail-batch-skipped-already-set-${{ github.run_id }}.json
           YOUTUBE_ENVIRONMENT_INPUT: ${{ github.event.inputs.youtube_environment }}
         run: |
           set -euo pipefail
@@ -201,11 +202,39 @@ jobs:
             console.error("Refusing apply because dry-run has no ready rows.");
             process.exit(1);
           }
+          const rowsToApply = [];
+          const skippedAlreadySetRows = [];
           for (const row of report.readyRows) {
             if (row.routeEnvironment !== process.env.YOUTUBE_ENVIRONMENT_INPUT) {
               console.error(`Route mismatch for ${row.supportLang}->${row.targetLang}: expected ${row.routeEnvironment}, got ${process.env.YOUTUBE_ENVIRONMENT_INPUT}`);
               process.exit(1);
             }
+            if (row.previousThumbnailSet === true || row.currentThumbnailState?.thumbnailSet === true) {
+              skippedAlreadySetRows.push(row);
+              continue;
+            }
+            rowsToApply.push(row);
+          }
+          fs.mkdirSync(path.dirname(process.env.SKIPPED_REPORT), { recursive: true });
+          fs.writeFileSync(process.env.SKIPPED_REPORT, JSON.stringify({
+            generatedAt: new Date().toISOString(),
+            readyRows: report.readyRows.length,
+            skippedAlreadySetRows: skippedAlreadySetRows.length,
+            rowsToApply: rowsToApply.length,
+            skipped: skippedAlreadySetRows.map((row) => ({
+              supportLang: row.supportLang,
+              targetLang: row.targetLang,
+              youtubeVideoId: row.youtubeVideoId,
+              thumbnailSet: row.currentThumbnailState?.thumbnailSet ?? row.previousThumbnailSet ?? null,
+              thumbnailUploadMode: row.currentThumbnailState?.thumbnailUploadMode || row.previousThumbnailUploadMode || "",
+            })),
+          }, null, 2));
+          console.log(`Ready rows: ${report.readyRows.length}; skipping already-set rows: ${skippedAlreadySetRows.length}; applying rows: ${rowsToApply.length}`);
+          if (!rowsToApply.length) {
+            console.log("No missing thumbnail rows remain for this route group.");
+            process.exit(0);
+          }
+          for (const row of rowsToApply) {
             const args = [
               "scripts/youtube-set-video-thumbnail.mjs",
               `--video-id=${row.youtubeVideoId}`,
@@ -231,6 +260,7 @@ jobs:
           if-no-files-found: warn
           path: |
             outputs/review/youtube-thumbnail-batch-apply-plan-${{ github.run_id }}.json
+            outputs/review/youtube-thumbnail-batch-skipped-already-set-${{ github.run_id }}.json
             outputs/youtube-thumbnail-ledger.jsonl
             config/youtube-published-videos.json
             config/youtube-channels.json
