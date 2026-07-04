@@ -341,7 +341,8 @@
         "Assigned from unassigned-003 on 2026-06-20.",
         "Studio public fields applied on 2026-06-20: name, handle, banner, avatar, description and site link. API readback confirmed channelId UCr6WU1cxr5S22hMEsYoRdWA and customUrl @lunacardsthai; public YouTube UI may cache the old visible handle briefly.",
         "For browser work, use the Google Sheet Current handle as the navigation/account-switch source. Do not use Channel ID / UC... as the browser URL source.",
-        "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields."
+        "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
+        "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
       ],
       "customThumbnailUploadAllowed": true,
       "thumbnailFallbackMode": "custom_when_available"
