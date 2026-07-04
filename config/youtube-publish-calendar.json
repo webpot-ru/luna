@@ -108493,6 +108493,52 @@
       "youtubeVideoId": "kNX9fDBIVks",
       "youtubePlaylistId": "PLFA1NV5H7Cvg",
       "playlistItemId": "UExGQTFOVjVIN0N2Zy41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "PT-BR",
+      "targetLang": "SK",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "publishAt": "2026-07-05T13:30:00.000Z",
+      "timeZone": "Europe/Lisbon",
+      "localDate": "2026-07-05",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "localDayOffset": 1,
+      "slotOrdinal": 8,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_sk_pt-br/youtube_metadata.json",
+      "title": "Vocabulário de Eslovaco: Utensílios de Cozinha | Nível Básico",
+      "playlist_key": "PT-BR__SK__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-06T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-08T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-12T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-04T13:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28698956628",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28698956628",
+      "createdAt": "2026-07-04T07:22:16.587Z",
+      "updatedAt": "2026-07-04T07:22:16.587Z",
+      "youtubeVideoId": "Euiyg_Dk55A",
+      "youtubePlaylistId": "PLIC8VsWynyys",
+      "playlistItemId": "UExJQzhWc1d5bnl5cy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
