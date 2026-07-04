@@ -1116,6 +1116,7 @@ Source of truth workflows on `main`:
 - `.github/workflows/youtube-polyglot-video-publish.yml` - one Polyglot video for one `set_id + support + bundle`.
 - `.github/workflows/youtube-polyglot-bulk-publish-dispatcher.yml` - launches many single Polyglot child runs and watches them.
 - `.github/workflows/youtube-polyglot-playlist-insert-repair.yml` - playlist-only repair for an already uploaded Polyglot video.
+- `.github/workflows/youtube-polyglot-thumbnail-batch-set.yml` - thumbnail-only repair/apply for already uploaded Polyglot videos from a prepared Polyglot thumbnail report; it must call only `thumbnails.set` and update only Polyglot thumbnail state.
 
 Do not use `.github/workflows/youtube-video-publish.yml` for Polyglot. Ordinary videos use `config/youtube-published-videos.json`; Polyglot uses separate publication ledgers:
 
@@ -1200,11 +1201,15 @@ Current eligible physical channels for Polyglot are only:
 - `PT/PT-BR`
 - `JA`
 - `TR`
+- `VI`
 - `TH`
+- `MY`
 - `NE`
 - `SW`
 
-All other support channels must be skipped for Polyglot until custom thumbnails are verified and `customThumbnailUploadAllowed=true` is set.
+`KA` / `@LunaCardsGeorgian` and `SR` / `@LunaCardsSrpski` remain unconfirmed and must be skipped for custom-thumbnail work. All other support channels must be skipped for Polyglot until custom thumbnails are verified and `customThumbnailUploadAllowed=true` is set.
+
+2026-07-04 thumbnail-only Polyglot apply rule: use `.github/workflows/youtube-polyglot-thumbnail-batch-set.yml` only for already uploaded Polyglot videos with prepared JPG covers and a dry-run report that validates as ready. The first prepared batch is `outputs/review/youtube-thumbnail-batch-plan-upload-eligible-polyglot-24-20260704.json` plus JPGs under `outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/`; local validation is `24 ready / 0 blocked`, full-scope only, and excludes `KA`/`SR` and `short_unverified`. This workflow must not render video, upload video, update metadata, update playlists, change privacy/schedule, or call image-generation providers.
 
 Short exception for unverified channels, accepted on 2026-06-30: unverified channels may receive a deliberately truncated Polyglot video only through `content_scope=short_unverified`. This is not a full-deck Polyglot release. It exists only to stay under YouTube's default 15-minute limit for accounts/channels that may not have advanced features. Existing long/full Polyglot rows on unverified channels do not satisfy this short-wave requirement, even if they are present in the local registry; cover all 42 unverified physical support channels with the short scope. The first kitchen-deck setting is `limit=30` words and `max_duration_seconds=895` (14:55). The workflow runs `npm run check:polyglot-video-duration` after rendering; upload is blocked if ffprobe reports a duration above the cap. Short videos use separate keys such as `polyglot:<set>:<support>:<bundle>:<hash>:short_unverified` and `POLYGLOT__<SUPPORT>__<bundle>__<hash>__short-unverified`, so a later full-deck release does not collide with the short canary. Short unverified uploads use YouTube automatic thumbnail fallback and must not call `thumbnails.set`.
 

@@ -1,0 +1,1221 @@
+{
+  "generatedAt": "2026-07-04T09:41:40.144Z",
+  "mode": "dry-run",
+  "action": "youtube_polyglot_thumbnail_set_from_manifest",
+  "manifestPath": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/manifest.json",
+  "setId": "home_kitchen_cookware_pilot_01",
+  "summary": {
+    "totalRows": 24,
+    "readyRows": 24,
+    "blockedRows": 0,
+    "status": "ready",
+    "bySupport": [
+      {
+        "supportLang": "EN",
+        "channelKey": "en",
+        "routeEnvironment": "youtube-api-branding",
+        "total": 3,
+        "ready": 3,
+        "bundles": [
+          "east_asia_core",
+          "global_europe_core",
+          "romance_core"
+        ]
+      },
+      {
+        "supportLang": "ES",
+        "channelKey": "es",
+        "routeEnvironment": "youtube-api-branding",
+        "total": 3,
+        "ready": 3,
+        "bundles": [
+          "east_asia_core",
+          "global_europe_core",
+          "romance_core"
+        ]
+      },
+      {
+        "supportLang": "JA",
+        "channelKey": "ja",
+        "routeEnvironment": "youtube-api-branding",
+        "total": 2,
+        "ready": 2,
+        "bundles": [
+          "east_asia_core",
+          "global_europe_core"
+        ]
+      },
+      {
+        "supportLang": "MY",
+        "channelKey": "my",
+        "routeEnvironment": "youtube-api-youtube-3",
+        "total": 1,
+        "ready": 1,
+        "bundles": [
+          "global_europe_core"
+        ]
+      },
+      {
+        "supportLang": "NE",
+        "channelKey": "ne",
+        "routeEnvironment": "youtube-api-youtube-4",
+        "total": 2,
+        "ready": 2,
+        "bundles": [
+          "east_asia_core",
+          "global_europe_core"
+        ]
+      },
+      {
+        "supportLang": "PT",
+        "channelKey": "pt",
+        "routeEnvironment": "youtube-api-branding",
+        "total": 3,
+        "ready": 3,
+        "bundles": [
+          "east_asia_core",
+          "global_europe_core",
+          "romance_core"
+        ]
+      },
+      {
+        "supportLang": "RU",
+        "channelKey": "ru",
+        "routeEnvironment": "youtube-api-branding",
+        "total": 3,
+        "ready": 3,
+        "bundles": [
+          "east_asia_core",
+          "global_europe_core",
+          "romance_core"
+        ]
+      },
+      {
+        "supportLang": "SW",
+        "channelKey": "sw",
+        "routeEnvironment": "youtube-api-youtube-4",
+        "total": 2,
+        "ready": 2,
+        "bundles": [
+          "east_asia_core",
+          "global_europe_core"
+        ]
+      },
+      {
+        "supportLang": "TH",
+        "channelKey": "th",
+        "routeEnvironment": "youtube-api-youtube-2",
+        "total": 2,
+        "ready": 2,
+        "bundles": [
+          "east_asia_core",
+          "global_europe_core"
+        ]
+      },
+      {
+        "supportLang": "TR",
+        "channelKey": "tr",
+        "routeEnvironment": "youtube-api-branding",
+        "total": 3,
+        "ready": 3,
+        "bundles": [
+          "east_asia_core",
+          "global_europe_core",
+          "romance_core"
+        ]
+      }
+    ],
+    "blockedReasons": {}
+  },
+  "readyRows": [
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "EN",
+      "channelKey": "en",
+      "channelHandle": "@flashcardsluna",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "o8hsruftFcY",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=o8hsruftFcY",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/EN__east_asia_core__o8hsruftFcY__polyglot.jpg",
+      "coverSizeBytes": 179700,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "EN",
+      "channelKey": "en",
+      "channelHandle": "@flashcardsluna",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "DE",
+        "IT"
+      ],
+      "targetLangsCsv": "ES,FR,DE,IT",
+      "youtubeVideoId": "Vb8Q1ryU4iE",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=Vb8Q1ryU4iE",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/EN__global_europe_core__Vb8Q1ryU4iE__polyglot.jpg",
+      "coverSizeBytes": 177814,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "EN",
+      "channelKey": "en",
+      "channelHandle": "@flashcardsluna",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "youtubeVideoId": "EdPLBoUBSGs",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=EdPLBoUBSGs",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/EN__romance_core__EdPLBoUBSGs__polyglot.jpg",
+      "coverSizeBytes": 176878,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES",
+      "channelKey": "es",
+      "channelHandle": "@lunacardsespanol",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "FFRxZyjcFeU",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=FFRxZyjcFeU",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/ES__east_asia_core__FFRxZyjcFeU__polyglot.jpg",
+      "coverSizeBytes": 176563,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES",
+      "channelKey": "es",
+      "channelHandle": "@lunacardsespanol",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "FR",
+        "DE",
+        "IT"
+      ],
+      "targetLangsCsv": "EN,FR,DE,IT",
+      "youtubeVideoId": "k5lNuHEVD1c",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=k5lNuHEVD1c",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/ES__global_europe_core__k5lNuHEVD1c__polyglot.jpg",
+      "coverSizeBytes": 175173,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES",
+      "channelKey": "es",
+      "channelHandle": "@lunacardsespanol",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "FR",
+        "IT",
+        "PT",
+        "RO"
+      ],
+      "targetLangsCsv": "FR,IT,PT,RO",
+      "youtubeVideoId": "IcuxCkPP06s",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=IcuxCkPP06s",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/ES__romance_core__IcuxCkPP06s__polyglot.jpg",
+      "coverSizeBytes": 174214,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "JA",
+      "channelKey": "ja",
+      "channelHandle": "@lunacardsjapan",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "KO",
+        "VI"
+      ],
+      "targetLangsCsv": "ZH,KO,VI",
+      "youtubeVideoId": "liqpMXSX6ig",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=liqpMXSX6ig",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/JA__east_asia_core__liqpMXSX6ig__polyglot.jpg",
+      "coverSizeBytes": 179749,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "JA",
+      "channelKey": "ja",
+      "channelHandle": "@lunacardsjapan",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "1kLbszU-80w",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=1kLbszU-80w",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/JA__global_europe_core__1kLbszU-80w__polyglot.jpg",
+      "coverSizeBytes": 177602,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "MY",
+      "channelKey": "my",
+      "channelHandle": "@lunacardsburmese",
+      "routeEnvironment": "youtube-api-youtube-3",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "TUkYm2swvMU",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=TUkYm2swvMU",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/MY__global_europe_core__TUkYm2swvMU__polyglot.jpg",
+      "coverSizeBytes": 171625,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "NE",
+      "channelKey": "ne",
+      "channelHandle": "@lunacardsnepali",
+      "routeEnvironment": "youtube-api-youtube-4",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "egEGUAHkeMo",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=egEGUAHkeMo",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/NE__east_asia_core__egEGUAHkeMo__polyglot.jpg",
+      "coverSizeBytes": 169183,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "NE",
+      "channelKey": "ne",
+      "channelHandle": "@lunacardsnepali",
+      "routeEnvironment": "youtube-api-youtube-4",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "kdiwJhOtAGw",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=kdiwJhOtAGw",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/NE__global_europe_core__kdiwJhOtAGw__polyglot.jpg",
+      "coverSizeBytes": 168139,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "PT",
+      "channelKey": "pt",
+      "channelHandle": "@lunacardsportugues",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "HAy1fGfptJI",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=HAy1fGfptJI",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/PT__east_asia_core__HAy1fGfptJI__polyglot.jpg",
+      "coverSizeBytes": 177168,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "PT",
+      "channelKey": "pt",
+      "channelHandle": "@lunacardsportugues",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "W9YogLcE9y4",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=W9YogLcE9y4",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/PT__global_europe_core__W9YogLcE9y4__polyglot.jpg",
+      "coverSizeBytes": 175756,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "PT",
+      "channelKey": "pt",
+      "channelHandle": "@lunacardsportugues",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "RO"
+      ],
+      "targetLangsCsv": "ES,FR,IT,RO",
+      "youtubeVideoId": "av4qWbUomBA",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=av4qWbUomBA",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/PT__romance_core__av4qWbUomBA__polyglot.jpg",
+      "coverSizeBytes": 175339,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "RU",
+      "channelKey": "ru",
+      "channelHandle": "@lunacardsru",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "UEsBbT3Vmaw",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=UEsBbT3Vmaw",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/RU__east_asia_core__UEsBbT3Vmaw__polyglot.jpg",
+      "coverSizeBytes": 179125,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "RU",
+      "channelKey": "ru",
+      "channelHandle": "@lunacardsru",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "LPqJjLfNoJk",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=LPqJjLfNoJk",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/RU__global_europe_core__LPqJjLfNoJk__polyglot.jpg",
+      "coverSizeBytes": 178650,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "RU",
+      "channelKey": "ru",
+      "channelHandle": "@lunacardsru",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "youtubeVideoId": "Sidcz197wvo",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=Sidcz197wvo",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/RU__romance_core__Sidcz197wvo__polyglot.jpg",
+      "coverSizeBytes": 179513,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "SW",
+      "channelKey": "sw",
+      "channelHandle": "@lunacardsswahili",
+      "routeEnvironment": "youtube-api-youtube-4",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "38IW6aIiL4o",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=38IW6aIiL4o",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/SW__east_asia_core__38IW6aIiL4o__polyglot.jpg",
+      "coverSizeBytes": 178210,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "SW",
+      "channelKey": "sw",
+      "channelHandle": "@lunacardsswahili",
+      "routeEnvironment": "youtube-api-youtube-4",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "oOy7NcwDQEY",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=oOy7NcwDQEY",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/SW__global_europe_core__oOy7NcwDQEY__polyglot.jpg",
+      "coverSizeBytes": 177436,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TH",
+      "channelKey": "th",
+      "channelHandle": "@lunacardsthai",
+      "routeEnvironment": "youtube-api-youtube-2",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "5LSw2gkUw-g",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=5LSw2gkUw-g",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/TH__east_asia_core__5LSw2gkUw-g__polyglot.jpg",
+      "coverSizeBytes": 170836,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TH",
+      "channelKey": "th",
+      "channelHandle": "@lunacardsthai",
+      "routeEnvironment": "youtube-api-youtube-2",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "h0WZwIlstZI",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=h0WZwIlstZI",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/TH__global_europe_core__h0WZwIlstZI__polyglot.jpg",
+      "coverSizeBytes": 170698,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TR",
+      "channelKey": "tr",
+      "channelHandle": "@lunacardsturkce",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "72l49J5vn3U",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=72l49J5vn3U",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/TR__east_asia_core__72l49J5vn3U__polyglot.jpg",
+      "coverSizeBytes": 178069,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TR",
+      "channelKey": "tr",
+      "channelHandle": "@lunacardsturkce",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "-sRdCfoQOxk",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=-sRdCfoQOxk",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/TR__global_europe_core__-sRdCfoQOxk__polyglot.jpg",
+      "coverSizeBytes": 176171,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TR",
+      "channelKey": "tr",
+      "channelHandle": "@lunacardsturkce",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "youtubeVideoId": "wl5VqwTCgZ8",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=wl5VqwTCgZ8",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/TR__romance_core__wl5VqwTCgZ8__polyglot.jpg",
+      "coverSizeBytes": 176832,
+      "blockers": []
+    }
+  ],
+  "blockedRows": [],
+  "rows": [
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "EN",
+      "channelKey": "en",
+      "channelHandle": "@flashcardsluna",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "o8hsruftFcY",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=o8hsruftFcY",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/EN__east_asia_core__o8hsruftFcY__polyglot.jpg",
+      "coverSizeBytes": 179700,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "EN",
+      "channelKey": "en",
+      "channelHandle": "@flashcardsluna",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "DE",
+        "IT"
+      ],
+      "targetLangsCsv": "ES,FR,DE,IT",
+      "youtubeVideoId": "Vb8Q1ryU4iE",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=Vb8Q1ryU4iE",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/EN__global_europe_core__Vb8Q1ryU4iE__polyglot.jpg",
+      "coverSizeBytes": 177814,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "EN",
+      "channelKey": "en",
+      "channelHandle": "@flashcardsluna",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "youtubeVideoId": "EdPLBoUBSGs",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=EdPLBoUBSGs",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/EN__romance_core__EdPLBoUBSGs__polyglot.jpg",
+      "coverSizeBytes": 176878,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES",
+      "channelKey": "es",
+      "channelHandle": "@lunacardsespanol",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "FFRxZyjcFeU",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=FFRxZyjcFeU",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/ES__east_asia_core__FFRxZyjcFeU__polyglot.jpg",
+      "coverSizeBytes": 176563,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES",
+      "channelKey": "es",
+      "channelHandle": "@lunacardsespanol",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "FR",
+        "DE",
+        "IT"
+      ],
+      "targetLangsCsv": "EN,FR,DE,IT",
+      "youtubeVideoId": "k5lNuHEVD1c",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=k5lNuHEVD1c",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/ES__global_europe_core__k5lNuHEVD1c__polyglot.jpg",
+      "coverSizeBytes": 175173,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES",
+      "channelKey": "es",
+      "channelHandle": "@lunacardsespanol",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "FR",
+        "IT",
+        "PT",
+        "RO"
+      ],
+      "targetLangsCsv": "FR,IT,PT,RO",
+      "youtubeVideoId": "IcuxCkPP06s",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=IcuxCkPP06s",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/ES__romance_core__IcuxCkPP06s__polyglot.jpg",
+      "coverSizeBytes": 174214,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "JA",
+      "channelKey": "ja",
+      "channelHandle": "@lunacardsjapan",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "KO",
+        "VI"
+      ],
+      "targetLangsCsv": "ZH,KO,VI",
+      "youtubeVideoId": "liqpMXSX6ig",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=liqpMXSX6ig",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/JA__east_asia_core__liqpMXSX6ig__polyglot.jpg",
+      "coverSizeBytes": 179749,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "JA",
+      "channelKey": "ja",
+      "channelHandle": "@lunacardsjapan",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "1kLbszU-80w",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=1kLbszU-80w",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/JA__global_europe_core__1kLbszU-80w__polyglot.jpg",
+      "coverSizeBytes": 177602,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "MY",
+      "channelKey": "my",
+      "channelHandle": "@lunacardsburmese",
+      "routeEnvironment": "youtube-api-youtube-3",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "TUkYm2swvMU",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=TUkYm2swvMU",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/MY__global_europe_core__TUkYm2swvMU__polyglot.jpg",
+      "coverSizeBytes": 171625,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "NE",
+      "channelKey": "ne",
+      "channelHandle": "@lunacardsnepali",
+      "routeEnvironment": "youtube-api-youtube-4",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "egEGUAHkeMo",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=egEGUAHkeMo",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/NE__east_asia_core__egEGUAHkeMo__polyglot.jpg",
+      "coverSizeBytes": 169183,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "NE",
+      "channelKey": "ne",
+      "channelHandle": "@lunacardsnepali",
+      "routeEnvironment": "youtube-api-youtube-4",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "kdiwJhOtAGw",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=kdiwJhOtAGw",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/NE__global_europe_core__kdiwJhOtAGw__polyglot.jpg",
+      "coverSizeBytes": 168139,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "PT",
+      "channelKey": "pt",
+      "channelHandle": "@lunacardsportugues",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "HAy1fGfptJI",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=HAy1fGfptJI",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/PT__east_asia_core__HAy1fGfptJI__polyglot.jpg",
+      "coverSizeBytes": 177168,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "PT",
+      "channelKey": "pt",
+      "channelHandle": "@lunacardsportugues",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "W9YogLcE9y4",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=W9YogLcE9y4",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/PT__global_europe_core__W9YogLcE9y4__polyglot.jpg",
+      "coverSizeBytes": 175756,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "PT",
+      "channelKey": "pt",
+      "channelHandle": "@lunacardsportugues",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "RO"
+      ],
+      "targetLangsCsv": "ES,FR,IT,RO",
+      "youtubeVideoId": "av4qWbUomBA",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=av4qWbUomBA",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/PT__romance_core__av4qWbUomBA__polyglot.jpg",
+      "coverSizeBytes": 175339,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "RU",
+      "channelKey": "ru",
+      "channelHandle": "@lunacardsru",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "UEsBbT3Vmaw",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=UEsBbT3Vmaw",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/RU__east_asia_core__UEsBbT3Vmaw__polyglot.jpg",
+      "coverSizeBytes": 179125,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "RU",
+      "channelKey": "ru",
+      "channelHandle": "@lunacardsru",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "LPqJjLfNoJk",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=LPqJjLfNoJk",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/RU__global_europe_core__LPqJjLfNoJk__polyglot.jpg",
+      "coverSizeBytes": 178650,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "RU",
+      "channelKey": "ru",
+      "channelHandle": "@lunacardsru",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "youtubeVideoId": "Sidcz197wvo",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=Sidcz197wvo",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/RU__romance_core__Sidcz197wvo__polyglot.jpg",
+      "coverSizeBytes": 179513,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "SW",
+      "channelKey": "sw",
+      "channelHandle": "@lunacardsswahili",
+      "routeEnvironment": "youtube-api-youtube-4",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "38IW6aIiL4o",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=38IW6aIiL4o",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/SW__east_asia_core__38IW6aIiL4o__polyglot.jpg",
+      "coverSizeBytes": 178210,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "SW",
+      "channelKey": "sw",
+      "channelHandle": "@lunacardsswahili",
+      "routeEnvironment": "youtube-api-youtube-4",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "oOy7NcwDQEY",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=oOy7NcwDQEY",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/SW__global_europe_core__oOy7NcwDQEY__polyglot.jpg",
+      "coverSizeBytes": 177436,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TH",
+      "channelKey": "th",
+      "channelHandle": "@lunacardsthai",
+      "routeEnvironment": "youtube-api-youtube-2",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "5LSw2gkUw-g",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=5LSw2gkUw-g",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/TH__east_asia_core__5LSw2gkUw-g__polyglot.jpg",
+      "coverSizeBytes": 170836,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TH",
+      "channelKey": "th",
+      "channelHandle": "@lunacardsthai",
+      "routeEnvironment": "youtube-api-youtube-2",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "h0WZwIlstZI",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=h0WZwIlstZI",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/TH__global_europe_core__h0WZwIlstZI__polyglot.jpg",
+      "coverSizeBytes": 170698,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TR",
+      "channelKey": "tr",
+      "channelHandle": "@lunacardsturkce",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "youtubeVideoId": "72l49J5vn3U",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=72l49J5vn3U",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/TR__east_asia_core__72l49J5vn3U__polyglot.jpg",
+      "coverSizeBytes": 178069,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TR",
+      "channelKey": "tr",
+      "channelHandle": "@lunacardsturkce",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "youtubeVideoId": "-sRdCfoQOxk",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=-sRdCfoQOxk",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/TR__global_europe_core__-sRdCfoQOxk__polyglot.jpg",
+      "coverSizeBytes": 176171,
+      "blockers": []
+    },
+    {
+      "status": "ready",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TR",
+      "channelKey": "tr",
+      "channelHandle": "@lunacardsturkce",
+      "routeEnvironment": "youtube-api-branding",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "youtubeVideoId": "wl5VqwTCgZ8",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=wl5VqwTCgZ8",
+      "thumbnail": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-upload-eligible-covers-20260704/polyglot/TR__romance_core__wl5VqwTCgZ8__polyglot.jpg",
+      "coverSizeBytes": 176832,
+      "blockers": []
+    }
+  ]
+}
