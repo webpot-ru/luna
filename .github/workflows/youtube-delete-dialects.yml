@@ -1,0 +1,93 @@
+name: YouTube Delete Secondary Dialects
+
+on:
+  workflow_dispatch:
+    inputs:
+      route:
+        description: "API project route to process (e.g., youtube-1, youtube-2, youtube-3, youtube-4, or ALL)"
+        required: true
+        default: "youtube-2"
+      youtube_environment:
+        description: "GitHub environment with the OAuth bundle. Must match the route environment."
+        required: true
+        default: "youtube-api-youtube-2"
+        type: choice
+        options:
+          - youtube-api-branding
+          - youtube-api-youtube-2
+          - youtube-api-youtube-3
+          - youtube-api-youtube-4
+      confirm_youtube_write:
+        description: "Type APPLY_YOUTUBE_DELETE to confirm live deletions."
+        required: true
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  delete-dialects:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.youtube_environment }}
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+
+      - name: Run deletion script (Dry-run or Live)
+        shell: bash
+        env:
+          ROUTE: ${{ github.event.inputs.route }}
+          CONFIRM_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+        run: |
+          set -euo pipefail
+          ARGS=("--route=$ROUTE")
+          if [ "$CONFIRM_WRITE" = "APPLY_YOUTUBE_DELETE" ]; then
+            ARGS+=("--apply" "--confirm-youtube-write")
+            echo "Confirming live YouTube deletions..."
+          else
+            echo "Running in DRY-RUN mode..."
+          fi
+          node scripts/youtube-delete-secondary-dialects.mjs "${ARGS[@]}"
+
+      - name: Push updated registry if changed
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- config/youtube-published-videos.json; then
+            echo "No registry changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/youtube-published-videos.json
+          git commit -m "chore: update registry after YouTube secondary dialect video deletions"
+          git push origin "$BRANCH_NAME"
