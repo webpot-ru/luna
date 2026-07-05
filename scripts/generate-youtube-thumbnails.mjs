@@ -311,6 +311,63 @@ async function main() {
     }
     const paths = outputPaths(metadataFile, options.outputName);
     const prompt = buildPrompt(metadata);
+    
+    // Copy pre-rendered prototype thumbnail if it exists to save VectorEngine spend
+    if (!fs.existsSync(paths.thumbnailPath)) {
+      const isPoly = metadata.targetLang && metadata.targetLang.includes(',');
+      let prototypePath = "";
+      if (isPoly) {
+        const polyDir = "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-polyglot-published-covers-20260704/covers";
+        const contentScope = metadata.contentScope || "full";
+        const support = (metadata.supportLang || "").toUpperCase();
+        const bundle = metadata.bundleKey;
+        const tHash = metadata.targetLangsHash;
+        const filename = `${support}__${bundle}__${tHash}__${contentScope}.jpg`;
+        const testPath = path.join(polyDir, filename);
+        if (fs.existsSync(testPath)) {
+          prototypePath = testPath;
+        }
+      } else {
+        const ordinaryDirs = [
+          "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704-scheduled-only-20260705/by-support",
+          "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704/by-support"
+        ];
+        const support = (metadata.supportLang || "").toUpperCase();
+        const target = (metadata.targetLang || "").toUpperCase();
+        
+        for (const baseDir of ordinaryDirs) {
+          if (!fs.existsSync(baseDir)) continue;
+          
+          try {
+            const supportDirs = fs.readdirSync(baseDir).filter(name => name.startsWith(support + "__") || name === support);
+            if (supportDirs.length === 0) continue;
+            
+            const supportDir = path.join(baseDir, supportDirs[0]);
+            const targetDirs = fs.readdirSync(supportDir).filter(name => name.startsWith(`${support}__${target}__`));
+            if (targetDirs.length === 0) continue;
+            
+            const targetDir = path.join(supportDir, targetDirs[0]);
+            const testPath = path.join(targetDir, "youtube_thumbnail.jpg");
+            if (fs.existsSync(testPath)) {
+              prototypePath = testPath;
+              break;
+            }
+          } catch (e) {
+            // Ignore readdir/fs errors and continue search
+          }
+        }
+      }
+      
+      if (prototypePath && fs.existsSync(prototypePath)) {
+        console.log(`Copying pre-rendered thumbnail prototype from: ${prototypePath}`);
+        fs.mkdirSync(path.dirname(paths.thumbnailPath), { recursive: true });
+        fs.copyFileSync(prototypePath, paths.thumbnailPath);
+        if (paths.rawPath) {
+          fs.writeFileSync(paths.rawPath, "dummy-raw-for-prototype");
+        }
+      }
+    }
+
     const existing = fs.existsSync(paths.thumbnailPath);
     if (existing && !options.force) {
       if (options.writeMetadata) updateMetadataFile(metadataFile, metadata, paths.thumbnailPath, paths.thumbnailMetadataPath, logoPath);
