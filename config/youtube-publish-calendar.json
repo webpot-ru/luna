@@ -92639,6 +92639,52 @@
       "youtubeVideoId": "QhNE5KhRV9Q",
       "youtubePlaylistId": "PLHdox9DXu7nY",
       "playlistItemId": "UExIZG94OURYdTduWS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "MY",
+      "targetLang": "TE",
+      "channelKey": "my",
+      "youtubeChannelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "publishAt": "2026-07-06T05:00:00.000Z",
+      "timeZone": "Asia/Yangon",
+      "localDate": "2026-07-06",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 1,
+      "slotOrdinal": 7,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_te_my/youtube_metadata.json",
+      "title": "တီလီဂူဘာသာစကား အခြေခံ မီးဖိုချောင်သုံးပစ္စည်း ဝေါဟာရ ၅၀ လုံး",
+      "playlist_key": "MY__TE__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-07T05:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-09T05:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-13T05:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-05T05:00:00.000Z"
+        }
+      ],
+      "githubRunId": "28742179061",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28742179061",
+      "createdAt": "2026-07-05T13:23:59.273Z",
+      "updatedAt": "2026-07-05T13:23:59.273Z",
+      "youtubeVideoId": "10N-YC0jgUA",
+      "youtubePlaylistId": "PLWWPl5rW77QA",
+      "playlistItemId": "UExXV1BsNXJXNzdRQS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
