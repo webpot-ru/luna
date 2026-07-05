@@ -313,10 +313,11 @@
         "Assigned from unassigned-002 on 2026-06-20.",
         "Manual Studio profile read back on public channel page on 2026-06-20: name, handle, banner, avatar, description and site link OK; contact email intentionally not transmitted.",
         "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
-        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation used first-frame auto-thumbnail fallback until advanced features/custom thumbnails were enabled in Studio.",
+        "2026-07-03 user confirmed advanced features/custom thumbnail capability for the Vietnamese channel; local mirror updated without live YouTube write/readback in this change."
       ],
-      "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "customThumbnailUploadAllowed": true,
+      "thumbnailFallbackMode": "custom_when_available"
     },
     {
       "key": "th",
@@ -729,10 +730,12 @@
         "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
         "Studio public fields configured/read back on 2026-06-21: name, handle, avatar, banner, watermark, description and site link. Contact email intentionally skipped.",
         "Browser/account-switch source must be Sheet Current handle, not Channel ID.",
-        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio.",
+        "2026-07-04 user indicated SR confirmation was pending at that time; user later confirmed custom thumbnail availability for SR.",
+        "SR channel is now treated as custom-thumbnail confirmed for manual upload workflows."
       ],
-      "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "customThumbnailUploadAllowed": true,
+      "thumbnailFallbackMode": "custom_when_available"
     },
     {
       "key": "sl",
@@ -951,10 +954,11 @@
         "Assigned from unassigned-028 on 2026-06-20.",
         "Studio public fields configured/read back on 2026-06-21: name, handle, avatar, banner, watermark, description and site link. Contact email intentionally skipped.",
         "Browser/account-switch source must be Sheet Current handle, not Channel ID.",
-        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation used first-frame auto-thumbnail fallback until advanced features/custom thumbnails were enabled in Studio.",
+        "2026-07-03 user confirmed advanced features/custom thumbnail capability for the Burmese channel; local mirror updated without live YouTube write/readback in this change."
       ],
-      "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "customThumbnailUploadAllowed": true,
+      "thumbnailFallbackMode": "custom_when_available"
     },
     {
       "key": "km",
@@ -1291,7 +1295,8 @@
         "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
         "Studio public fields and avatar/banner/description/link API readback OK 2026-06-21; contact email intentionally not transmitted.",
         "For browser work, use the Google Sheet Current handle as the navigation/account-switch source. Do not use Channel ID / UC... as the browser URL source.",
-        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio.",
+        "2026-07-04 correction: user clarified the Georgian channel is not yet confirmed for advanced features/custom thumbnails; keep customThumbnailUploadAllowed=false until separate Studio/API readback or explicit confirmation."
       ],
       "customThumbnailUploadAllowed": false,
       "thumbnailFallbackMode": "first_frame_auto"
