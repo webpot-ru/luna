@@ -1,10 +1,18 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
-import { execFile } from "node:child_process";
+import { execFile, execSync } from "node:child_process";
 import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
+
+function getCurrentGitBranch() {
+  try {
+    return execSync("git branch --show-current", { encoding: "utf8" }).trim();
+  } catch (e) {
+    return "";
+  }
+}
 
 const DEFAULT_OUTPUT = "outputs/youtube-polyglot-bulk-publish-dispatcher-report.json";
 const POLYGLOT_WORKFLOW = "youtube-polyglot-video-publish.yml";
@@ -20,7 +28,7 @@ function parseArgs(argv) {
     englishBundle: "global_europe_core",
     bundleOverrides: new Map(),
     maxParallel: 4,
-    ref: process.env.GITHUB_REF_NAME || "main",
+    ref: process.env.GITHUB_REF_NAME || getCurrentGitBranch() || "main",
     childMode: "apply",
     limit: 0,
     privacy: "public",

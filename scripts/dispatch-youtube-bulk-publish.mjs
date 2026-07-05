@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
-import { execFile } from "node:child_process";
+import { execFile, execSync } from "node:child_process";
 import { promisify } from "node:util";
 
 import {
@@ -11,6 +11,14 @@ import {
 } from "./lib/youtube-publication-registry.mjs";
 
 const execFileAsync = promisify(execFile);
+
+function getCurrentGitBranch() {
+  try {
+    return execSync("git branch --show-current", { encoding: "utf8" }).trim();
+  } catch (e) {
+    return "";
+  }
+}
 
 const DEFAULT_OUTPUT = "outputs/youtube-bulk-publish-dispatcher-report.json";
 const VIDEO_WORKFLOW = "youtube-video-publish.yml";
@@ -27,7 +35,7 @@ function parseArgs(argv) {
     targetsPerSupport: 4,
     maxParallel: 8,
     maxActivePerRoute: 1,
-    ref: process.env.GITHUB_REF_NAME || "main",
+    ref: process.env.GITHUB_REF_NAME || getCurrentGitBranch() || "main",
     mode: "apply",
     publishMode: "scheduled",
     privacy: "public",

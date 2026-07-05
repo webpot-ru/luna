@@ -114,6 +114,13 @@ When orchestrating bulk publish waves across many channels, running `dispatch-yo
 **Operational Rule & Fallback:**
 If GitHub Actions dispatcher encounters rate limit errors, dispatch child workflows (`youtube-polyglot-video-publish.yml` or `youtube-video-publish.yml`) directly from the local terminal CLI via `gh workflow run ...` under the user's authenticated OAuth account (`lalishka`), which has a 5,000 requests/hour quota. The compute, rendering, TTS, and video upload tasks remain 100% in the cloud on GitHub Actions runners without straining the local machine.
 
+## Branch Selection Safety (Ref Parameter)
+
+When running dispatchers locally (`dispatch-youtube-bulk-publish.mjs` or `dispatch-youtube-polyglot-bulk-publish.mjs`), they automatically attempt to detect the current local Git branch and trigger remote GitHub workflows on it (falling back to `main` only if detection fails).
+
+**Operational Rule:**
+Always verify that the target branch in the console output is correct before confirming bulk operations. To force a specific branch target, pass the `--ref=<branch-name>` parameter explicitly. This prevents child workflows from executing on `main` using stale configurations or scripts before development branch changes are merged.
+
 ## Codex Access Tokens
 
 Do not introduce Codex access tokens into this repository by default. They are for trusted non-interactive Codex local workflows in supported ChatGPT Business/Enterprise workspaces. If they are needed later, store them only in a secret manager or local ignored file, never in Git, docs, logs, or generated artifacts.
