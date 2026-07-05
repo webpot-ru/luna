@@ -642,15 +642,89 @@ Acceptance gate before mass use:
 
 Видео обязано сохранять тот же языковой вариант, который пришел из LunaCards card/data layer. Нельзя схлопывать региональные варианты внутри видео, плейлистов, titles, metadata или `?langs=`:
 
-- `EN` озвучивается как US English: `edge_en-US-GuyNeural`;
-- `EN-GB` озвучивается как British English: `edge_en-GB-RyanNeural`;
-- `ES` озвучивается как Spain Spanish: `edge_es-ES-AlvaroNeural`;
-- `ES-419` озвучивается как broad LatAm Spanish через practical LatAm voice `edge_es-MX-JorgeNeural`;
-- `PT` озвучивается как European Portuguese: `edge_pt-PT-DuarteNeural`;
-- `PT-BR` озвучивается как Brazilian Portuguese: `edge_pt-BR-FranciscaNeural`;
-- `NO` / `NB` озвучивается как Norwegian Bokmål: `edge_nb-NO-FinnNeural`; public/support code can be `NO`, but data lookup uses DB code `NB`; public study links must use `?langs=no`, not `?langs=nb`;
+- `EN` озвучивается как US English: `edge_en-US-JennyNeural` (женский);
+- `EN-GB` озвучивается как British English: `edge_en-GB-SoniaNeural` (женский);
+- `ES` озвучивается как Spain Spanish: `edge_es-ES-AlvaroNeural` (мужской);
+- `ES-419` озвучивается как LatAm Spanish: `edge_es-MX-JorgeNeural` (мужской);
+- `PT` озвучивается как European Portuguese: `edge_pt-PT-DuarteNeural` (мужской);
+- `PT-BR` озвучивается как Brazilian Portuguese: `edge_pt-BR-FranciscaNeural` (женский);
+- `NO` / `NB` озвучивается как Norwegian Bokmål: `edge_nb-NO-PernilleNeural` (женский); public/support code can be `NO`, but data lookup uses DB code `NB`; public study links must use `?langs=no`, not `?langs=nb`;
 - `SR` ordinary decks use Serbian Latin (Gaj) text and `edge_sr-RS-NicholasNeural`; Cyrillic is allowed only inside a separate documented course contract;
 - `HY` remains the only documented non-Edge exception: it uses `ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz` because the free `edge-tts` backend does not currently expose Armenian `hy-AM` voices.
+
+#### Полная карта голосов TTS (Source of Truth)
+
+Ниже представлена полная таблица голосов для всех поддерживаемых языков, разделенная по уровням (Tiers) качества:
+
+##### Tier 1: Идеальное качество (Премиум-класс)
+| Код | Язык | Голос | Статус |
+| --- | --- | --- | --- |
+| **EN** | Английский (США) | `edge_en-US-JennyNeural` | 🌟 Обновлен (женский) |
+| **EN-GB** | Английский (Великобритания) | `edge_en-GB-SoniaNeural` | 🌟 Обновлен (женский) |
+| **ZH** | Китайский | `edge_zh-CN-XiaoxiaoNeural` | 🌟 Обновлен (женский) |
+| **JA** | Японский | `edge_ja-JP-NanamiNeural` | 🌟 Обновлен (женский) |
+| **FR** | Французский | `edge_fr-FR-DeniseNeural` | 🌟 Обновлен (женский) |
+| **ES** | Испанский (Испания) | `edge_es-ES-AlvaroNeural` | Без изменений (мужской) |
+| **ES-419** | Испанский (Латинская Америка) | `edge_es-MX-JorgeNeural` | Без изменений (мужской) |
+| **DE** | Немецкий | `edge_de-DE-ConradNeural` | Без изменений (мужской) |
+| **IT** | Итальянский | `edge_it-IT-DiegoNeural` | Без изменений (мужской) |
+| **PT** | Португальский (Португалия) | `edge_pt-PT-DuarteNeural` | Без изменений (мужской) |
+| **PT-BR** | Португальский (Бразилия) | `edge_pt-BR-FranciscaNeural` | Без изменений (женский) |
+
+##### Tier 2: Очень хорошее качество
+| Код | Язык | Голос | Статус |
+| --- | --- | --- | --- |
+| **RU** | Русский | `edge_ru-RU-SvetlanaNeural` | 🌟 Обновлен (женский) |
+| **KO** | Корейский | `edge_ko-KR-SunHiNeural` | 🌟 Обновлен (женский) |
+| **VI** | Вьетнамский | `edge_vi-VN-HoaiMyNeural` | 🌟 Обновлен (женский) |
+| **TH** | Тайский | `edge_th-TH-PremwadeeNeural` | 🌟 Обновлен (женский) |
+| **SV** | Шведский | `edge_sv-SE-SofieNeural` | 🌟 Обновлен (женский) |
+| **NO** / **NB** | Норвежский | `edge_nb-NO-PernilleNeural` | 🌟 Обновлен (женский) |
+| **DA** | Датский | `edge_da-DK-ChristelNeural` | 🌟 Обновлен (женский) |
+| **FI** | Финский | `edge_fi-FI-NooraNeural` | 🌟 Обновлен (женский) |
+| **PL** | Польский | `edge_pl-PL-AgnieszkaNeural` | 🌟 Обновлен (женский) |
+| **TR** | Турецкий | `edge_tr-TR-AhmetNeural` | Без изменений (мужской) |
+| **NL** | Нидерландский | `edge_nl-NL-ColetteNeural` | Без изменений (женский) |
+| **HI** | Хинди | `edge_hi-IN-MadhurNeural` | Без изменений (мужской) |
+| **ID** | Индонезийский | `edge_id-ID-GadisNeural` | Без изменений (женский) |
+
+##### Tier 3: Хорощее / Удовлетворительное качество
+| Код | Язык | Голос | Статус |
+| --- | --- | --- | --- |
+| **HU** | Венгерский | `edge_hu-HU-NoemiNeural` | 🌟 Обновлен (женский) |
+| **RO** | Румынский | `edge_ro-RO-AlinaNeural` | 🌟 Обновлен (женский) |
+| **BG** | Болгарский | `edge_bg-BG-KalinaNeural` | 🌟 Обновлен (женский) |
+| **HR** | Хорватский | `edge_hr-HR-JasminaNeural` | 🌟 Обновлен (женский) |
+| **SL** | Словенский | `edge_sl-SI-PetraNeural` | 🌟 Обновлен (женский) |
+| **TL** | Тагальский | `edge_fil-PH-BlessicaNeural` | 🌟 Обновлен (женский) |
+| **KK** | Казахский | `edge_kk-KZ-AigulNeural` | 🌟 Обновлен (женский) |
+| **AZ** | Азербайджанский | `edge_az-AZ-BanuNeural` | 🌟 Обновлен (женский) |
+| **KA** | Грузинский | `edge_ka-GE-EkaNeural` | 🌟 Обновлен (женский) |
+| **CS** | Чешский | `edge_cs-CZ-AntoninNeural` | Без изменений (мужской) |
+| **SK** | Словацкий | `edge_sk-SK-LukasNeural` | Без изменений (мужской) |
+| **SR** | Сербский | `edge_sr-RS-NicholasNeural` | Без изменений (мужской) |
+| **MS** | Малайский | `edge_ms-MY-YasminNeural` | Без изменений (женский) |
+| **UZ** | Узбекский | `edge_uz-UZ-MadinaNeural` | Без изменений (женский) |
+
+##### Tier 4: Сложное качество
+| Код | Язык | Голос | Статус |
+| --- | --- | --- | --- |
+| **ET** | Эстонский | `edge_et-EE-AnuNeural` | 🌟 Обновлен (женский) |
+| **LV** | Латышский | `edge_lv-LV-EveritaNeural` | 🌟 Обновлен (женский) |
+| **LT** | Литовский | `edge_lt-LT-OnaNeural` | 🌟 Обновлен (женский) |
+| **IS** | Исландский | `edge_is-IS-GudrunNeural` | 🌟 Обновлен (женский) |
+| **TA** | Тамильский | `edge_ta-IN-PallaviNeural` | 🌟 Обновлен (женский) |
+| **TE** | Телугу | `edge_te-IN-ShrutiNeural` | 🌟 Обновлен (женский) |
+| **KN** | Каннада | `edge_kn-IN-SapnaNeural` | 🌟 Обновлен (женский) |
+| **ML** | Малаялам | `edge_ml-IN-SobhanaNeural` | 🌟 Обновлен (женский) |
+| **KM** | Кхмерский | `edge_km-KH-SreymomNeural` | 🌟 Обновлен (женский) |
+| **LO** | Лаосский | `edge_lo-LA-KeomanyNeural` | 🌟 Обновлен (женский) |
+| **MY** | Бирманский | `edge_my-MM-NilarNeural` | 🌟 Обновлен (женский) |
+| **SW** | Суахили | `edge_sw-KE-ZuriNeural` | 🌟 Обновлен (женский) |
+| **NE** | Непальский | `edge_ne-NP-HemkalaNeural` | 🌟 Обновлен (женский) |
+| **SI** | Сингальский | `edge_si-LK-ThiliniNeural` | 🌟 Обновлен (женский) |
+| **BN** | Бенгальский | `edge_bn-IN-BashkarNeural` | Без изменений (мужской) |
+| **HY** | Армянский | `ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz` | Без изменений (ElevenLabs) |
 
 2026-06-22 voice audit result: Microsoft Azure Speech lists Armenian `hy-AM-AnahitNeural` and `hy-AM-HaykNeural`, but live `edge-tts` 7.2.8 readback returned 0 `hy-AM` voices and a direct `hy-AM-HaykNeural` synthesis smoke failed with `NoAudioReceived`. Therefore do not switch `HY` to Edge until a fresh live `edge-tts` readback proves `hy-AM` is available. The other 54 Edge voice ids in `defaultVoiceMap` were checked against live `edge-tts` voice listing and are present. Some languages have newer Azure `DragonHD` / multilingual variants in the Microsoft list, but the video pipeline intentionally uses standard Edge-compatible `*Neural` voice ids without `:DragonHD...` suffixes so GitHub/Windows generation remains free and predictable. This is a technical availability/locale check, not a native-listening certification that every selected voice is the most pleasant possible voice for every viewer.
 
