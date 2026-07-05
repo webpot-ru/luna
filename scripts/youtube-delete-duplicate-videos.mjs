@@ -259,7 +259,7 @@ async function main() {
 
   // Save updated registry
   if (processedCount > 0) {
-    savePublicationRegistry(options.publicationRegistry, publicationRegistry);
+    savePublicationRegistry(publicationRegistry, options.publicationRegistry);
     console.log(`Saved updated publication registry to ${options.publicationRegistry}`);
   }
 
