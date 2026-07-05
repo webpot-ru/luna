@@ -992,8 +992,8 @@
         "Browser/account-switch source must be Sheet Current handle, not Channel ID.",
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
-      "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "customThumbnailUploadAllowed": true,
+      "thumbnailFallbackMode": "custom_when_available"
     },
     {
       "key": "lo",
