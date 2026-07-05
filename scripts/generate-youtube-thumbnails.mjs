@@ -312,8 +312,8 @@ async function main() {
     const paths = outputPaths(metadataFile, options.outputName);
     const prompt = buildPrompt(metadata);
     
-    // Copy pre-rendered prototype thumbnail if it exists to save VectorEngine spend
-    if (!fs.existsSync(paths.thumbnailPath)) {
+    // Copy pre-rendered prototype thumbnail if it exists to save VectorEngine spend (unconditional overwrite if prototype exists)
+    {
       const isPoly = metadata.targetLang && metadata.targetLang.includes(',');
       let prototypePath = "";
       if (isPoly) {
