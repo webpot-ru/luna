@@ -1351,7 +1351,8 @@
         "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
         "Studio public fields and avatar/banner/description/link API readback OK 2026-06-21; contact email intentionally not transmitted; old COSMIC LIMITS channel was repurposed without deleting existing content.",
         "For browser work, use the Google Sheet Current handle as the navigation/account-switch source. Do not use Channel ID / UC... as the browser URL source.",
-        "Existing COSMIC LIMITS videos/content were not deleted by channel branding work; review content policy separately before uploading LunaCards videos to this repurposed channel."
+        "Existing COSMIC LIMITS videos/content were not deleted by channel branding work; review content policy separately before uploading LunaCards videos to this repurposed channel.",
+        "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
       ],
       "customThumbnailUploadAllowed": true,
       "thumbnailFallbackMode": "custom_when_available"
