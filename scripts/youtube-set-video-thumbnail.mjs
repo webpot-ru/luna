@@ -301,13 +301,53 @@ async function main() {
   const targetLang = normalizeLanguageCode(options.targetLang || metadata.targetLang || "");
   if (!supportLang) fail("--support or metadata.supportLang is required.");
 
-  const prototypePath = `design-prototypes/${setId}_${targetLang.toLowerCase()}_${supportLang.toLowerCase()}/youtube_thumbnail.jpg`;
-  if (fs.existsSync(prototypePath)) {
+  let prototypePath = "";
+  const isPoly = targetLang.includes(",");
+  if (isPoly) {
+    const polyDir = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-polyglot-published-covers-20260704/covers";
+    const contentScope = metadata.contentScope || "full";
+    const bundle = metadata.bundleKey;
+    const tHash = metadata.targetLangsHash;
+    const filename = `${supportLang}__${bundle}__${tHash}__${contentScope}.jpg`;
+    const testPath = path.join(polyDir, filename);
+    if (fs.existsSync(testPath)) {
+      prototypePath = testPath;
+    }
+  } else {
+    const ordinaryDirs = [
+      "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704-scheduled-only-20260705/by-support",
+      "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704/by-support"
+    ];
+    const support = supportLang.toUpperCase();
+    const target = targetLang.toUpperCase();
+    for (const baseDir of ordinaryDirs) {
+      if (!fs.existsSync(baseDir)) continue;
+      try {
+        const supportDirs = fs.readdirSync(baseDir).filter((name) => name.startsWith(support + "__") || name === support);
+        if (supportDirs.length === 0) continue;
+
+        const supportDir = path.join(baseDir, supportDirs[0]);
+        const targetDirs = fs.readdirSync(supportDir).filter((name) => name.startsWith(`${support}__${target}__`));
+        if (targetDirs.length === 0) continue;
+
+        const targetDir = path.join(supportDir, targetDirs[0]);
+        const testPath = path.join(targetDir, "youtube_thumbnail.jpg");
+        if (fs.existsSync(testPath)) {
+          prototypePath = testPath;
+          break;
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+  }
+
+  if (prototypePath && fs.existsSync(prototypePath)) {
     console.log(`Copying pre-rendered thumbnail prototype from ${prototypePath} over ${options.thumbnail}`);
     fs.mkdirSync(path.dirname(options.thumbnail), { recursive: true });
     fs.copyFileSync(prototypePath, options.thumbnail);
   } else {
-    console.log(`No prototype found at ${prototypePath}. Using original thumbnail path.`);
+    console.log(`No prototype found for target ${targetLang} and support ${supportLang}. Using original thumbnail path.`);
   }
 
   const thumbnailPath = resolveExistingPath(options.thumbnail, "thumbnail");
