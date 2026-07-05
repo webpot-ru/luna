@@ -317,7 +317,7 @@ async function main() {
       const isPoly = metadata.targetLang && metadata.targetLang.includes(',');
       let prototypePath = "";
       if (isPoly) {
-        const polyDir = "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-polyglot-published-covers-20260704/covers";
+        const polyDir = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-polyglot-published-covers-20260704/covers";
         const contentScope = metadata.contentScope || "full";
         const support = (metadata.supportLang || "").toUpperCase();
         const bundle = metadata.bundleKey;
@@ -329,8 +329,8 @@ async function main() {
         }
       } else {
         const ordinaryDirs = [
-          "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704-scheduled-only-20260705/by-support",
-          "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704/by-support"
+          "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704-scheduled-only-20260705/by-support",
+          "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704/by-support"
         ];
         const support = (metadata.supportLang || "").toUpperCase();
         const target = (metadata.targetLang || "").toUpperCase();
