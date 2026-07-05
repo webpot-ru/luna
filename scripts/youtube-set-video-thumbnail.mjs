@@ -294,15 +294,24 @@ async function main() {
   if (!options.thumbnail) fail("--thumbnail is required.");
 
   const metadata = options.metadata ? readJson(options.metadata, "YouTube metadata") : {};
-  const thumbnailPath = resolveExistingPath(options.thumbnail, "thumbnail");
-  detectMimeType(thumbnailPath);
-
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
   const setId = options.setId || metadata.setId || "";
   const supportLang = normalizeLanguageCode(options.supportLang || metadata.supportLang || "");
   const targetLang = normalizeLanguageCode(options.targetLang || metadata.targetLang || "");
   if (!supportLang) fail("--support or metadata.supportLang is required.");
+
+  const prototypePath = `design-prototypes/${setId}_${targetLang.toLowerCase()}_${supportLang.toLowerCase()}/youtube_thumbnail.jpg`;
+  if (fs.existsSync(prototypePath)) {
+    console.log(`Copying pre-rendered thumbnail prototype from ${prototypePath} over ${options.thumbnail}`);
+    fs.mkdirSync(path.dirname(options.thumbnail), { recursive: true });
+    fs.copyFileSync(prototypePath, options.thumbnail);
+  } else {
+    console.log(`No prototype found at ${prototypePath}. Using original thumbnail path.`);
+  }
+
+  const thumbnailPath = resolveExistingPath(options.thumbnail, "thumbnail");
+  detectMimeType(thumbnailPath);
   const channel = findChannelForSupport(channelRegistry.channels, supportLang);
   if (!channel) fail(`No YouTube channel configured for support language ${supportLang}.`);
   const publication = findPublication(publicationRegistry, {
