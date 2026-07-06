@@ -7,8 +7,17 @@ on:
         description: "Existing YouTube video id to update with a custom thumbnail."
         required: true
       source_run_id:
-        description: "GitHub Actions run id containing youtube_metadata.json and youtube_thumbnail.jpg artifacts."
-        required: true
+        description: "GitHub Actions run id containing youtube_metadata.json and youtube_thumbnail.jpg artifacts. Not required when use_repo_thumbnail=true."
+        required: false
+        default: ""
+      use_repo_thumbnail:
+        description: "Use pre-rendered thumbnail from by-support/ in the repository instead of a source run artifact. Set to true for home_kitchen_cookware_pilot_01 — no source_run_id needed."
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
       set_id:
         description: "Set ID used to match the metadata artifact."
         required: true
@@ -50,6 +59,7 @@ on:
 permissions:
   contents: read
   actions: read
+  # write needed to commit updated config when persist is added in future
 
 concurrency:
   group: youtube-thumbnail-set-${{ github.event.inputs.video_id }}
@@ -138,19 +148,83 @@ jobs:
           test -d .local/youtube-oauth/tokens
           echo "YouTube OAuth bundle restored for environment $EFFECTIVE_YOUTUBE_ENVIRONMENT."
 
+      - name: Resolve thumbnail from repository by-support/ folder
+        if: github.event.inputs.use_repo_thumbnail == 'true'
+        id: repo_thumbnail
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          TARGET: ${{ github.event.inputs.target }}
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs = require("fs");
+          const path = require("path");
+          const support = String(process.env.SUPPORT || "").trim().toUpperCase();
+          const target  = String(process.env.TARGET  || "").trim().toUpperCase();
+          const setId   = String(process.env.SET_ID  || "").trim();
+
+          // Candidate base directories (ordered by preference)
+          const bases = [
+            `outputs/design-prototypes/youtube-thumbnail-${setId}-ordinary-target-language-large-pair-folders-20260704/by-support`,
+            `outputs/design-prototypes/youtube-thumbnail-${setId}-ordinary-target-language-large-pair-folders-20260704-scheduled-only-20260705/by-support`,
+          ];
+
+          let found = null;
+          for (const base of bases) {
+            if (!fs.existsSync(base)) continue;
+            // Support dir: e.g. SW__Swahili or NE__Nepali
+            const supportDirs = fs.readdirSync(base).filter(d => d.startsWith(support + "__"));
+            for (const sd of supportDirs) {
+              const pairBase = path.join(base, sd);
+              // Pair dir: e.g. SW__SK__Swahili_to_Slovak
+              const pairDirs = fs.readdirSync(pairBase).filter(d => {
+                const parts = d.split("__");
+                return parts[0] === support && parts[1] === target;
+              });
+              for (const pd of pairDirs) {
+                const thumb = path.join(pairBase, pd, "youtube_thumbnail.jpg");
+                if (fs.existsSync(thumb)) { found = thumb; break; }
+              }
+              if (found) break;
+            }
+            if (found) break;
+          }
+
+          if (!found) {
+            console.error(`No pre-rendered thumbnail found in by-support/ for ${support}→${target} (set: ${setId}).`);
+            console.error("Make sure you are on the correct branch (codex/norwegian-course-url-repair-48) and the file is committed.");
+            process.exit(1);
+          }
+
+          // Copy thumbnail to a predictable temp location
+          const dest = `/tmp/repo-thumbnail-${support}-${target}.jpg`;
+          fs.copyFileSync(found, dest);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `thumbnail=${dest}\n`);
+          console.log(`✅ Found repo thumbnail: ${found}`);
+          console.log(`   Copied to: ${dest}`);
+          NODE
+
       - name: Download source run artifacts
+        if: github.event.inputs.use_repo_thumbnail != 'true'
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           SOURCE_RUN_ID: ${{ github.event.inputs.source_run_id }}
         run: |
           set -euo pipefail
+          if [ -z "${SOURCE_RUN_ID:-}" ]; then
+            echo "::error::source_run_id is required when use_repo_thumbnail=false"
+            exit 1
+          fi
           mkdir -p /tmp/youtube-thumbnail-source
           gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" --dir /tmp/youtube-thumbnail-source
           find /tmp/youtube-thumbnail-source -name youtube_metadata.json -o -name youtube_thumbnail.jpg | sort | head -n 40
 
-      - name: Locate matching metadata and thumbnail
+      - name: Locate matching metadata and thumbnail (from artifact)
         id: locate
+        if: github.event.inputs.use_repo_thumbnail != 'true'
         shell: bash
         env:
           SET_ID: ${{ github.event.inputs.set_id }}
@@ -201,6 +275,69 @@ jobs:
           console.log(JSON.stringify({ metadataPath, thumbnailPath, thumbnailExists, needsGeneration: !thumbnailExists }, null, 2));
           NODE
 
+      - name: Locate metadata for repo-thumbnail mode
+        id: locate_repo
+        if: github.event.inputs.use_repo_thumbnail == 'true'
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          TARGET: ${{ github.event.inputs.target }}
+          REPO_THUMBNAIL: ${{ steps.repo_thumbnail.outputs.thumbnail }}
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs = require("fs");
+          const path = require("path");
+          const setId   = String(process.env.SET_ID   || "").trim();
+          const support = String(process.env.SUPPORT  || "").trim().toUpperCase();
+          const target  = String(process.env.TARGET   || "").trim().toUpperCase();
+          const repoThumb = String(process.env.REPO_THUMBNAIL || "").trim();
+
+          // Locate youtube_metadata.json in outputs/video-generator/ or by-support/
+          let metadataPath = null;
+          const candidates = [
+            `outputs/video-generator/${setId}_${support.toLowerCase()}_${target.toLowerCase()}/youtube_metadata.json`,
+            `outputs/video-generator/${setId}_ordinary_${support.toLowerCase()}_${target.toLowerCase()}/youtube_metadata.json`,
+          ];
+          for (const c of candidates) {
+            if (fs.existsSync(c)) { metadataPath = c; break; }
+          }
+          // If not found in video-generator, use the sidecar video.json from by-support as a proxy
+          if (!metadataPath) {
+            const bases = [
+              `outputs/design-prototypes/youtube-thumbnail-${setId}-ordinary-target-language-large-pair-folders-20260704/by-support`,
+            ];
+            for (const base of bases) {
+              if (!fs.existsSync(base)) continue;
+              const supportDirs = fs.readdirSync(base).filter(d => d.startsWith(support + "__"));
+              for (const sd of supportDirs) {
+                const pairBase = path.join(base, sd);
+                const pairDirs = fs.readdirSync(pairBase).filter(d => {
+                  const parts = d.split("__");
+                  return parts[0] === support && parts[1] === target;
+                });
+                for (const pd of pairDirs) {
+                  const sidecar = path.join(pairBase, pd, "video.json");
+                  if (fs.existsSync(sidecar)) { metadataPath = sidecar; break; }
+                }
+                if (metadataPath) break;
+              }
+              if (metadataPath) break;
+            }
+          }
+
+          if (!metadataPath) {
+            console.error(`Could not locate youtube_metadata.json or video.json for ${support}→${target}`);
+            process.exit(1);
+          }
+
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `metadata=${metadataPath}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `thumbnail=${repoThumb}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `needs_generation=false\n`);
+          console.log(JSON.stringify({ metadataPath, thumbnail: repoThumb }, null, 2));
+          NODE
+
       - name: Generate missing thumbnail
         if: steps.locate.outputs.needs_generation == 'true'
         shell: bash
@@ -229,8 +366,8 @@ jobs:
           SUPPORT: ${{ github.event.inputs.support }}
           TARGET: ${{ github.event.inputs.target }}
           SET_ID: ${{ github.event.inputs.set_id }}
-          METADATA: ${{ steps.locate.outputs.metadata }}
-          THUMBNAIL: ${{ steps.locate.outputs.thumbnail }}
+          METADATA: ${{ github.event.inputs.use_repo_thumbnail == 'true' && steps.locate_repo.outputs.metadata || steps.locate.outputs.metadata }}
+          THUMBNAIL: ${{ github.event.inputs.use_repo_thumbnail == 'true' && steps.locate_repo.outputs.thumbnail || steps.locate.outputs.thumbnail }}
         run: |
           set -euo pipefail
           node scripts/youtube-set-video-thumbnail.mjs \
@@ -248,8 +385,8 @@ jobs:
           SUPPORT: ${{ github.event.inputs.support }}
           TARGET: ${{ github.event.inputs.target }}
           SET_ID: ${{ github.event.inputs.set_id }}
-          METADATA: ${{ steps.locate.outputs.metadata }}
-          THUMBNAIL: ${{ steps.locate.outputs.thumbnail }}
+          METADATA: ${{ github.event.inputs.use_repo_thumbnail == 'true' && steps.locate_repo.outputs.metadata || steps.locate.outputs.metadata }}
+          THUMBNAIL: ${{ github.event.inputs.use_repo_thumbnail == 'true' && steps.locate_repo.outputs.thumbnail || steps.locate.outputs.thumbnail }}
         run: |
           set -euo pipefail
           node scripts/youtube-set-video-thumbnail.mjs \
@@ -268,8 +405,8 @@ jobs:
         with:
           name: youtube-thumbnail-set-${{ github.event.inputs.video_id }}
           path: |
-            ${{ steps.locate.outputs.metadata }}
-            ${{ steps.locate.outputs.thumbnail }}
+            ${{ github.event.inputs.use_repo_thumbnail == 'true' && steps.locate_repo.outputs.metadata || steps.locate.outputs.metadata }}
+            ${{ github.event.inputs.use_repo_thumbnail == 'true' && steps.locate_repo.outputs.thumbnail || steps.locate.outputs.thumbnail }}
             outputs/youtube-thumbnail-generation-report-github.json
             outputs/youtube-thumbnail-ledger.jsonl
             config/youtube-channels.json
