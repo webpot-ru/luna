@@ -411,7 +411,7 @@ async function main() {
       };
     }
 
-    throw new Error(`[ERROR] Pre-rendered thumbnail prototype not found for support=${support} target=${target}. VectorEngine thumbnail generation is strictly disabled to prevent spending credits and generating incorrect styles.`);
+    throw new Error(`[ERROR] Pre-rendered thumbnail prototype not found for support=${metadata.supportLang} target=${metadata.targetLang}. VectorEngine thumbnail generation is strictly disabled to prevent spending credits and generating incorrect styles.`);
 
     await fsp.mkdir(path.dirname(paths.rawPath), { recursive: true });
     const { keyName, apiKey } = getLiveVectorEngineCredentials();
