@@ -82,46 +82,46 @@ function main() {
       // Ordinary match
       const target = targetLang.toUpperCase();
 
-      // 1. First, check confirmed-channel-covers/covers folder
-      const confirmedCoversDir = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-confirmed-channel-covers-20260704/covers";
-      if (fs.existsSync(confirmedCoversDir)) {
-        const filesToCheck = [
-          `${supportLang}__${target}__home_kitchen_cookware_pilot_01.jpg`,
-          `${target}__${supportLang}__home_kitchen_cookware_pilot_01.jpg`
-        ];
-        for (const f of filesToCheck) {
-          const testPath = path.join(confirmedCoversDir, f);
+      // 1. First, check the standard by-support directories (pre-rendered final designer covers)
+      const ordinaryDirs = [
+        "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704-scheduled-only-20260705/by-support",
+        "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704/by-support"
+      ];
+      for (const baseDir of ordinaryDirs) {
+        if (!fs.existsSync(baseDir)) continue;
+        try {
+          const supportDirs = fs.readdirSync(baseDir).filter((name) => name.startsWith(supportLang + "__") || name === supportLang);
+          if (supportDirs.length === 0) continue;
+
+          const supportDir = path.join(baseDir, supportDirs[0]);
+          const targetDirs = fs.readdirSync(supportDir).filter((name) => name.startsWith(`${supportLang}__${target}__`));
+          if (targetDirs.length === 0) continue;
+
+          const targetDir = path.join(supportDir, targetDirs[0]);
+          const testPath = path.join(targetDir, "youtube_thumbnail.jpg");
           if (fs.existsSync(testPath)) {
             prototypePath = testPath;
             break;
           }
+        } catch (e) {
+          // Ignore directory read errors
         }
       }
 
-      // 2. If not found, check the standard by-support directories
+      // 2. Second, check confirmed-channel-covers/covers folder as a fallback
       if (!prototypePath) {
-        const ordinaryDirs = [
-          "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704-scheduled-only-20260705/by-support",
-          "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704/by-support"
-        ];
-        for (const baseDir of ordinaryDirs) {
-          if (!fs.existsSync(baseDir)) continue;
-          try {
-            const supportDirs = fs.readdirSync(baseDir).filter((name) => name.startsWith(supportLang + "__") || name === supportLang);
-            if (supportDirs.length === 0) continue;
-
-            const supportDir = path.join(baseDir, supportDirs[0]);
-            const targetDirs = fs.readdirSync(supportDir).filter((name) => name.startsWith(`${supportLang}__${target}__`));
-            if (targetDirs.length === 0) continue;
-
-            const targetDir = path.join(supportDir, targetDirs[0]);
-            const testPath = path.join(targetDir, "youtube_thumbnail.jpg");
+        const confirmedCoversDir = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-confirmed-channel-covers-20260704/covers";
+        if (fs.existsSync(confirmedCoversDir)) {
+          const filesToCheck = [
+            `${supportLang}__${target}__home_kitchen_cookware_pilot_01.jpg`,
+            `${target}__${supportLang}__home_kitchen_cookware_pilot_01.jpg`
+          ];
+          for (const f of filesToCheck) {
+            const testPath = path.join(confirmedCoversDir, f);
             if (fs.existsSync(testPath)) {
               prototypePath = testPath;
               break;
             }
-          } catch (e) {
-            // Ignore directory read errors
           }
         }
       }
