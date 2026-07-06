@@ -144,6 +144,7 @@ function buildPrompt(metadata) {
     `Create one premium YouTube thumbnail for a ${BRAND_NAME} flashcard vocabulary lesson.`,
     "Canvas: 16:9 YouTube thumbnail, high contrast and readable at small size.",
     `Visual style: same premium ${BRAND_NAME} system as the channel art and flashcardsluna.com: light #f4f7f9 background, white rounded flashcard panels, soft blue accents, deep navy typography, subtle violet accent, clean modern educational product feel.`,
+    "Background color requirement: The background MUST be a clean, solid light-gray/off-white color (#f4f7f9). Do NOT make the background blue, dark blue, dark gray, or gradient. Avoid any dark themes.",
     "Layout: big readable text on the left or center-left, elegant flashcard/course-card composition on the right, no clutter, no people, no dark background, no clickbait face, no neon.",
     "Show a few abstract non-text flashcards or icons that suggest vocabulary, audio/pronunciation and a quick quiz. Icons may include headphones, cards, check mark, book, moon-card motif.",
     "Leave a clean safe area in the top-right corner for the real brand logo overlay.",
@@ -328,32 +329,51 @@ async function main() {
           prototypePath = testPath;
         }
       } else {
-        const ordinaryDirs = [
-          "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704-scheduled-only-20260705/by-support",
-          "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704/by-support"
-        ];
         const support = (metadata.supportLang || "").toUpperCase();
         const target = (metadata.targetLang || "").toUpperCase();
         
-        for (const baseDir of ordinaryDirs) {
-          if (!fs.existsSync(baseDir)) continue;
-          
-          try {
-            const supportDirs = fs.readdirSync(baseDir).filter(name => name.startsWith(support + "__") || name === support);
-            if (supportDirs.length === 0) continue;
-            
-            const supportDir = path.join(baseDir, supportDirs[0]);
-            const targetDirs = fs.readdirSync(supportDir).filter(name => name.startsWith(`${support}__${target}__`));
-            if (targetDirs.length === 0) continue;
-            
-            const targetDir = path.join(supportDir, targetDirs[0]);
-            const testPath = path.join(targetDir, "youtube_thumbnail.jpg");
+        // 1. First, check confirmed-channel-covers/covers folder
+        const confirmedCoversDir = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-confirmed-channel-covers-20260704/covers";
+        if (fs.existsSync(confirmedCoversDir)) {
+          const filesToCheck = [
+            `${support}__${target}__home_kitchen_cookware_pilot_01.jpg`,
+            `${target}__${support}__home_kitchen_cookware_pilot_01.jpg`
+          ];
+          for (const f of filesToCheck) {
+            const testPath = path.join(confirmedCoversDir, f);
             if (fs.existsSync(testPath)) {
               prototypePath = testPath;
               break;
             }
-          } catch (e) {
-            // Ignore readdir/fs errors and continue search
+          }
+        }
+
+        // 2. If not found, check the standard by-support directories
+        if (!prototypePath) {
+          const ordinaryDirs = [
+            "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704-scheduled-only-20260705/by-support",
+            "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704/by-support"
+          ];
+          for (const baseDir of ordinaryDirs) {
+            if (!fs.existsSync(baseDir)) continue;
+            
+            try {
+              const supportDirs = fs.readdirSync(baseDir).filter(name => name.startsWith(support + "__") || name === support);
+              if (supportDirs.length === 0) continue;
+              
+              const supportDir = path.join(baseDir, supportDirs[0]);
+              const targetDirs = fs.readdirSync(supportDir).filter(name => name.startsWith(`${support}__${target}__`));
+              if (targetDirs.length === 0) continue;
+              
+              const targetDir = path.join(supportDir, targetDirs[0]);
+              const testPath = path.join(targetDir, "youtube_thumbnail.jpg");
+              if (fs.existsSync(testPath)) {
+                prototypePath = testPath;
+                break;
+              }
+            } catch (e) {
+              // Ignore readdir/fs errors and continue search
+            }
           }
         }
       }
