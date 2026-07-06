@@ -2,8 +2,6 @@ import cp from "node:child_process";
 import fs from "node:fs";
 
 const CHANNELS = [
-  { support: "VI", env: "youtube-api-youtube-2", force: true },
-  { support: "TH", env: "youtube-api-youtube-2", force: true },
   { support: "EN", env: "youtube-api-branding", force: true },
   { support: "ES", env: "youtube-api-branding", force: true },
   { support: "PT", env: "youtube-api-branding", force: true },
