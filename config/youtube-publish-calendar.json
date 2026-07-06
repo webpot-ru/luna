@@ -94604,6 +94604,50 @@
       "updatedAt": "2026-07-05T14:15:40.487Z",
       "youtubeVideoId": "Y4n72Sldhd8",
       "youtubePlaylistId": "PLE3MjaCDogZY"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "LT",
+      "targetLang": "TR",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "publishAt": "2026-07-06T14:30:00.000Z",
+      "timeZone": "Europe/Vilnius",
+      "localDate": "2026-07-06",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 0,
+      "slotOrdinal": 3,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_tr_lt/youtube_metadata.json",
+      "title": "Turkų kalba pradedantiesiems: Virtuvės reikmenys (A1 žodynas)",
+      "playlist_key": "LT__TR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-07T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-09T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-13T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-05T14:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28763050303",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28763050303",
+      "createdAt": "2026-07-06T02:02:42.815Z",
+      "updatedAt": "2026-07-06T02:02:42.815Z",
+      "youtubeVideoId": "V9ObqtBR5lc"
     }
   ]
 }
