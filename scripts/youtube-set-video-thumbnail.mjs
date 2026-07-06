@@ -195,7 +195,8 @@ async function readVideo({ accessToken, videoId, expectedChannelId }) {
       fields: "items(id,snippet(channelId,title,thumbnails),status(privacyStatus,uploadStatus,publishAt))",
     },
   });
-  const item = singleYouTubeItem(readback, "video");
+  const item = readback?.items?.[0];
+  if (!item) return null;
   if (item.id !== videoId) fail(`Video readback mismatch: expected ${videoId}, got ${item.id}.`);
   const actualChannelId = item.snippet?.channelId || "";
   if (actualChannelId !== expectedChannelId) {
@@ -420,6 +421,20 @@ async function main() {
       videoId: options.videoId,
       expectedChannelId: channel.channelId,
     });
+    if (!videoBefore) {
+      console.warn(`[WARNING] YouTube video ${options.videoId} not found for ${supportLang}->${targetLang}. Marking publication as missing_video_api_readback_superseded.`);
+      if (publication) {
+        publication.publicationStatus = "missing_video_api_readback_superseded";
+        publication.thumbnailSet = false;
+        savePublicationRegistry(publicationRegistry, options.publicationRegistry);
+      }
+      appendLedger(options.ledger, {
+        ...ledgerBase,
+        status: "failed",
+        error: "video_not_found_on_youtube"
+      });
+      return;
+    }
     const thumbnailResult = await youtubeMediaUpload({
       accessToken,
       pathName: "thumbnails/set",
