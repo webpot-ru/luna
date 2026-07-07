@@ -84131,7 +84131,7 @@
       "githubRunId": "28522163645",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28522163645",
       "uploadedAt": "2026-07-01T13:56:11.384Z",
-      "lastReadbackAt": "2026-07-06T11:55:33.910Z",
+      "lastReadbackAt": "2026-07-07T12:49:40.761Z",
       "readback": {
         "uploadStatus": "processed",
         "privacyStatus": "public",
@@ -84149,8 +84149,8 @@
         "readbackAt": "2026-07-02T11:10:26.638Z"
       },
       "lastMetadataRepairAt": "2026-07-02T11:10:26.548Z",
-      "lastThumbnailReadbackAt": "2026-07-06T11:55:33.910Z",
-      "thumbnailUploadedAt": "2026-07-06T11:55:33.910Z",
+      "lastThumbnailReadbackAt": "2026-07-07T12:49:40.761Z",
+      "thumbnailUploadedAt": "2026-07-07T12:49:40.761Z",
       "thumbnailUploadEvidence": {
         "source": "youtube.thumbnails.set",
         "imageFileName": "youtube_thumbnail.jpg",
@@ -85645,7 +85645,7 @@
       "githubRunId": "28531781527",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28531781527",
       "uploadedAt": "2026-07-01T16:19:00.888Z",
-      "lastReadbackAt": "2026-07-06T11:59:29.091Z",
+      "lastReadbackAt": "2026-07-07T12:49:34.326Z",
       "readback": {
         "uploadStatus": "processed",
         "privacyStatus": "public",
@@ -85663,8 +85663,8 @@
         "readbackAt": "2026-07-02T11:10:25.797Z"
       },
       "lastMetadataRepairAt": "2026-07-02T11:10:25.715Z",
-      "lastThumbnailReadbackAt": "2026-07-06T11:59:29.091Z",
-      "thumbnailUploadedAt": "2026-07-06T11:59:29.091Z",
+      "lastThumbnailReadbackAt": "2026-07-07T12:49:34.326Z",
+      "thumbnailUploadedAt": "2026-07-07T12:49:34.326Z",
       "thumbnailUploadEvidence": {
         "source": "youtube.thumbnails.set",
         "imageFileName": "youtube_thumbnail.jpg",
@@ -113289,27 +113289,34 @@
       "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
       "channelHandle": "@lunacardsthai",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-08T04:30:00.000Z",
       "scheduledPublishAt": "2026-07-08T04:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailUploadMode": "custom",
       "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "custom_thumbnail_not_found",
       "metadataSource": "gemini-vectorengine",
       "metadataModel": "gemini-3.5-flash",
       "githubRunId": "28864126963",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28864126963",
       "uploadedAt": "2026-07-07T11:58:21.183Z",
-      "lastReadbackAt": "2026-07-07T11:58:21.183Z",
+      "lastReadbackAt": "2026-07-07T12:49:28.382Z",
       "readback": {
-        "uploadStatus": "uploaded",
+        "uploadStatus": "processed",
         "privacyStatus": "private",
         "publishAt": "2026-07-08T04:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "thumbnailStatus": "custom_set",
+        "channelId": "UCr6WU1cxr5S22hMEsYoRdWA"
+      },
+      "lastThumbnailReadbackAt": "2026-07-07T12:49:28.382Z",
+      "thumbnailUploadedAt": "2026-07-07T12:49:28.382Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "imageFileName": "youtube_thumbnail.jpg",
+        "responseItemCount": 1
       }
     },
     {
@@ -113479,27 +113486,34 @@
       "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
       "channelHandle": "@lunacardstiengviet",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-08T01:30:00.000Z",
       "scheduledPublishAt": "2026-07-08T01:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailUploadMode": "custom",
       "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "custom_thumbnail_not_found",
       "metadataSource": "gemini-vectorengine",
       "metadataModel": "gemini-3.5-flash",
       "githubRunId": "28864137910",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28864137910",
       "uploadedAt": "2026-07-07T11:58:21.270Z",
-      "lastReadbackAt": "2026-07-07T11:58:21.270Z",
+      "lastReadbackAt": "2026-07-07T12:49:43.211Z",
       "readback": {
-        "uploadStatus": "uploaded",
+        "uploadStatus": "processed",
         "privacyStatus": "private",
         "publishAt": "2026-07-08T01:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "thumbnailStatus": "custom_set",
+        "channelId": "UCuDc2oBQPppV8Br78CAiKTA"
+      },
+      "lastThumbnailReadbackAt": "2026-07-07T12:49:43.211Z",
+      "thumbnailUploadedAt": "2026-07-07T12:49:43.211Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "imageFileName": "youtube_thumbnail.jpg",
+        "responseItemCount": 1
       }
     },
     {
@@ -113897,27 +113911,34 @@
       "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
       "channelHandle": "@lunacardstiengviet",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-08T04:30:00.000Z",
       "scheduledPublishAt": "2026-07-08T04:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailUploadMode": "custom",
       "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "custom_thumbnail_not_found",
       "metadataSource": "gemini-vectorengine",
       "metadataModel": "gemini-3.5-flash",
       "githubRunId": "28865484202",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28865484202",
       "uploadedAt": "2026-07-07T12:21:44.287Z",
-      "lastReadbackAt": "2026-07-07T12:21:44.287Z",
+      "lastReadbackAt": "2026-07-07T12:49:37.484Z",
       "readback": {
-        "uploadStatus": "uploaded",
+        "uploadStatus": "processed",
         "privacyStatus": "private",
         "publishAt": "2026-07-08T04:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "thumbnailStatus": "custom_set",
+        "channelId": "UCuDc2oBQPppV8Br78CAiKTA"
+      },
+      "lastThumbnailReadbackAt": "2026-07-07T12:49:37.484Z",
+      "thumbnailUploadedAt": "2026-07-07T12:49:37.484Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "imageFileName": "youtube_thumbnail.jpg",
+        "responseItemCount": 1
       }
     },
     {
@@ -114277,27 +114298,34 @@
       "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
       "channelHandle": "@lunacardsthai",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-08T07:30:00.000Z",
       "scheduledPublishAt": "2026-07-08T07:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailUploadMode": "custom",
       "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "custom_thumbnail_not_found",
       "metadataSource": "gemini-vectorengine",
       "metadataModel": "gemini-3.5-flash",
       "githubRunId": "28865473114",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28865473114",
       "uploadedAt": "2026-07-07T12:20:59.321Z",
-      "lastReadbackAt": "2026-07-07T12:20:59.321Z",
+      "lastReadbackAt": "2026-07-07T12:49:31.567Z",
       "readback": {
-        "uploadStatus": "uploaded",
+        "uploadStatus": "processed",
         "privacyStatus": "private",
         "publishAt": "2026-07-08T07:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "thumbnailStatus": "custom_set",
+        "channelId": "UCr6WU1cxr5S22hMEsYoRdWA"
+      },
+      "lastThumbnailReadbackAt": "2026-07-07T12:49:31.567Z",
+      "thumbnailUploadedAt": "2026-07-07T12:49:31.567Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "imageFileName": "youtube_thumbnail.jpg",
+        "responseItemCount": 1
       }
     }
   ]
