@@ -309,7 +309,10 @@ function findPreRenderedThumbnailPrototype(metadata) {
 
       if (cover.videoType !== "ordinary") continue;
       const coverSupportLang = normalizeLanguageCode(cover.viewerSupportLang || cover.supportLang);
-      if (coverSupportLang !== supportLang) continue;
+      const coverSupportLangs = Array.isArray(cover.channelSupportLangs)
+        ? cover.channelSupportLangs.map(normalizeLanguageCode).filter(Boolean)
+        : [];
+      if (coverSupportLang !== supportLang && !coverSupportLangs.includes(supportLang)) continue;
       if (normalizeLanguageCode(cover.targetLang) !== targetLang) continue;
       return cover.absolutePath;
     }
