@@ -97107,6 +97107,144 @@
     {
       "schemaVersion": 1,
       "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "FR",
+      "targetLang": "TR",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-07-08T06:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-08",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_tr_fr/youtube_metadata.json",
+      "title": "Apprendre le turc : Les ustensiles de cuisine (Vocabulaire A1)",
+      "playlist_key": "FR__TR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-09T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-11T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-15T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-07T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28859284380",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28859284380",
+      "createdAt": "2026-07-07T10:27:16.191Z",
+      "updatedAt": "2026-07-07T10:27:16.191Z",
+      "youtubeVideoId": "FE0QidgxWY0",
+      "youtubePlaylistId": "PLSlN-lto34tQ",
+      "playlistItemId": "UExTbE4tbHRvMzR0US41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TR",
+      "targetLang": "SV",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "publishAt": "2026-07-08T05:30:00.000Z",
+      "timeZone": "Europe/Istanbul",
+      "localDate": "2026-07-08",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_sv_tr/youtube_metadata.json",
+      "title": "İsveççe A1 Mutfak Gereçleri: 50 Temel Kelime ve Telaffuz",
+      "playlist_key": "TR__SV__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-09T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-11T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-15T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-07T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28859365256",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28859365256",
+      "createdAt": "2026-07-07T10:28:34.805Z",
+      "updatedAt": "2026-07-07T10:28:34.805Z",
+      "youtubeVideoId": "qoFf_qc0fts",
+      "youtubePlaylistId": "PLY27ciPrB95U",
+      "playlistItemId": "UExZMjdjaVByQjk1VS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "RU",
+      "targetLang": "SW",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "publishAt": "2026-07-08T05:30:00.000Z",
+      "timeZone": "Europe/Moscow",
+      "localDate": "2026-07-08",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_sw_ru/youtube_metadata.json",
+      "title": "Суахили для начинающих: Кухонная посуда | 50 базовых слов с произношением",
+      "playlist_key": "RU__SW__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-09T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-11T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-15T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-07T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28859342370",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28859342370",
+      "createdAt": "2026-07-07T10:28:16.690Z",
+      "updatedAt": "2026-07-07T10:28:16.690Z",
+      "youtubeVideoId": "_2EPil3M4jo",
+      "youtubePlaylistId": "PLWemzh8DR-Cc",
+      "playlistItemId": "UExXZW16aDhEUi1DYy41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
       "supportLang": "DE",
       "targetLang": "TR",
       "channelKey": "de",
