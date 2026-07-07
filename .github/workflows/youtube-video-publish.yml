@@ -566,22 +566,20 @@ jobs:
               else
                 npm run generate:youtube-thumbnails -- outputs/video-generator --confirm-spend --concurrency="$THUMBNAIL_CONCURRENCY" --output=outputs/video-generator/youtube-thumbnail-generation-report-github.json || METADATA_STATUS=1
               fi
+            else
+              npm run copy:pre-rendered-thumbnails -- --input-dir=outputs/video-generator --strict-custom --output=outputs/video-generator/youtube-pre-rendered-thumbnail-copy-report-github.json || METADATA_STATUS=1
             fi
 
             if [ "$METADATA_STATUS" -eq 0 ]; then
-              if [ "$GENERATE_THUMBNAILS" = "true" ]; then
-                npm run check:youtube-thumbnails -- outputs/video-generator --allow-auto-first-frame --output=outputs/video-generator/youtube-thumbnail-report-github.json || METADATA_STATUS=1
-              fi
+              npm run check:youtube-thumbnails -- outputs/video-generator --allow-auto-first-frame --output=outputs/video-generator/youtube-thumbnail-report-github.json || METADATA_STATUS=1
             fi
 
             if [ "$METADATA_STATUS" -eq 0 ]; then
-              if [ "$GENERATE_THUMBNAILS" = "true" ]; then
-                REVIEW_ARGS=("outputs/video-generator" "--output-prefix=outputs/video-generator/youtube-thumbnail-review-github" "--allow-auto-first-frame")
-                if [ "$PUBLISH_MODE" = "scheduled" ]; then
-                  REVIEW_ARGS+=("--require-publish-at")
-                fi
-                npm run build:youtube-thumbnail-review -- "${REVIEW_ARGS[@]}" || METADATA_STATUS=1
+              REVIEW_ARGS=("outputs/video-generator" "--output-prefix=outputs/video-generator/youtube-thumbnail-review-github" "--allow-auto-first-frame")
+              if [ "$PUBLISH_MODE" = "scheduled" ]; then
+                REVIEW_ARGS+=("--require-publish-at")
               fi
+              npm run build:youtube-thumbnail-review -- "${REVIEW_ARGS[@]}" || METADATA_STATUS=1
             fi
           fi
 
