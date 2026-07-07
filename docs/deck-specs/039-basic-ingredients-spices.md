@@ -11,7 +11,7 @@
 | Domain | Food & Eating |
 | Area | Ingredients |
 | Category / situation | Common pantry ingredients, baking ingredients and everyday spices |
-| Status | approved_for_generation |
+| Status | generated |
 
 ## Quality Profile
 
@@ -65,13 +65,15 @@ node scripts/check-word-selection-quality.mjs food_basic_ingredients_spices_a1_a
 node scripts/check-deck-specs.mjs
 ```
 
-Preparation status on 2026-06-12: spec and candidate pool were prepared as the next ordinary Deck Master Plan row after Sort 38. Candidate pool `outputs/candidate-pools/food_basic_ingredients_spices_a1_a2_candidate_pool.jsonl` has 72 rows: 32 selected, 20 backup and 20 excluded/move decisions. `node scripts/check-deck-candidate-pool.mjs food_basic_ingredients_spices_a1_a2` passed, `node scripts/check-word-selection-quality.mjs food_basic_ingredients_spices_a1_a2` passed with one expected heuristic warning (`ingredients/spices` currently classify as `other`), and `node scripts/check-deck-specs.mjs` passed. User continuation approval in-thread moved this single deck to `approved_for_generation`. Generation is not current until the deck is completed through `scripts/run-deck-production.mjs`.
+Preparation status on 2026-06-12: spec and candidate pool were prepared as the next ordinary Deck Master Plan row after Sort 38. Candidate pool `outputs/candidate-pools/food_basic_ingredients_spices_a1_a2_candidate_pool.jsonl` has 72 rows: 32 selected, 20 backup and 20 excluded/move decisions. `node scripts/check-deck-candidate-pool.mjs food_basic_ingredients_spices_a1_a2` passed, `node scripts/check-word-selection-quality.mjs food_basic_ingredients_spices_a1_a2` passed with one expected heuristic warning (`ingredients/spices` currently classify as `other`), and `node scripts/check-deck-specs.mjs` passed. User continuation approval in-thread moved this single deck to `approved_for_generation`.
+
+Generated-state sync on 2026-07-07: local Postgres readback shows `food_basic_ingredients_spices_a1_a2` as `quality_status=generated_checked`, `selection_status=approved`, 32 cards and 1,728 language rows. Exact runner/Google Sheet evidence was not present in this worktree's ignored `outputs/` tree during the sync; backfill from original runner/Drive/readback artifacts before making Sheet-specific delivery claims.
 
 ## Next Deck
 
 Natural next deck(s):
 
-- operational next by Sort after this deck: `Grocery Shopping Words` (Sort 40), if it receives its own spec/candidate pool and approval;
+- operational next by Sort after this deck: Sort 40-49 are now generated in local DB; the next not-ready row is `Travel Basics` (Sort 50), currently `generated` / `candidate_pool` and still requiring evidence review and approval;
 - related later decks: `Vegetable Basics`, `Herbs & Greens`, `Bakery & Pastry`, `Sweets & Snacks`, `Recipes & Food Prep Words`, `Grocery Shopping Words`, `Restaurant Words`, diet/preference decks and advanced cuisine/ingredient decks.
 
 ## QA Notes

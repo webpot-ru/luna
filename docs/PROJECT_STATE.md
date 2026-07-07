@@ -8,6 +8,8 @@ This is the short handoff document for new AI chats and agents. It should stay c
 
 Docs/data/QA/Google Sheets flashcard production pipeline. Existing source-of-truth docs include workflow, decision log and QA process.
 
+Branch hygiene checkpoint on 2026-07-07: the local operational branch is `codex/shorts-localization-phrases`. Current GitHub dispatches for Shorts and native intro/outro localization should use that ref unless an explicit different `--ref` is passed. `origin/main` does not currently contain those branch changes, and this branch has unrelated history with `origin/main`; integrate selected reviewed commits through a fresh main-based cherry-pick/reapply branch, not a blind merge.
+
 ## Current Thumbnail State
 
 - 2026-07-07 deck #1 `home_kitchen_cookware_pilot_01` local thumbnail refresh is canonical for the current approved-channel custom-thumbnail pass. Use `outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-channel-pairs-target-language-first-20260707/` for ordinary covers (`686` JPGs: 13 approved physical channels / 16 support variants, target language + A1 largest) and `outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/` for Polyglot covers (`46` full published rows only, `short_unverified` excluded, target-language bundle largest). Both are deterministic local 1280 x 720 JPG batches under 2 MB using accepted bitmap/imagegen references and `sharp`; no YouTube upload, VectorEngine, GPT Image or paid image generation was performed.

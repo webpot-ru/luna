@@ -26,6 +26,14 @@ Default split:
 
 Do not add a tracked `.worktreeinclude` that copies `.local`, `.env*`, `.secrets`, OAuth tokens, client secrets, database dumps, or generated video outputs into managed worktrees. If a worktree genuinely needs a local secret, treat it as a separate manual setup step and document the exact risk before doing it.
 
+## Branch And Dispatch Ref
+
+Current branch checkpoint on 2026-07-07: the local operational branch is `codex/shorts-localization-phrases`. It contains the Shorts localization pipeline commit `91f1835` and the native-style long-video intro/outro localization commit `3b35295`. The same `3b35295` commit also exists on `codex/norwegian-course-url-repair-48`.
+
+Local dispatch helpers and GitHub workflow launch scripts should use the current local Git branch/ref unless an explicit `--ref=<branch>` or workflow `ref` is passed. For the current Shorts and native intro/outro work, use `codex/shorts-localization-phrases` as the source ref. Do not assume `origin/main` has those changes.
+
+`codex/shorts-localization-phrases` and `origin/main` currently have unrelated histories, so a normal merge into `main` is not a safe integration path. Do not use `--allow-unrelated-histories` as cleanup. To bring selected work to `main`, create a fresh main-based integration branch and cherry-pick or reapply the specific reviewed commits/patches that are needed, then run the relevant checks and open/push that branch.
+
 ## Browser and Developer Mode
 
 Use Browser or Chrome-based checks for visual/readback tasks:

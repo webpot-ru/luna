@@ -74,7 +74,7 @@ DE transcription: /deːɐ̯ tɪʃ/
 | Polish | PL | PL | IPA | Писать IPA. |
 | Dutch | NL | NL | IPA | Писать IPA. |
 | Swedish | SV | SV | IPA | Писать IPA. |
-| Norwegian Bokmål | NO | NB | IPA | В Google Sheets код `NO`; в базе `NB`. IPA для Bokmål с Urban East Norwegian / Oslo-like pronunciation. |
+| Norwegian Bokmål | NO | NB | IPA | `NO` and `NB` are one Norwegian Bokmål contour, not separate languages/products. В Google Sheets/public/support используется `NO`; в базе/data используется `NB`. IPA для Bokmål с Urban East Norwegian / Oslo-like pronunciation. |
 | Danish | DA | DA | IPA | Писать IPA. |
 | Finnish | FI | FI | native orthography | Повторять отображаемое слово. |
 | Czech | CS | CS | native orthography | Повторять отображаемое слово. |
@@ -197,7 +197,7 @@ Strict lookup status on 2026-05-01: the initial `TH`/`LO`/`MY`/`KM`/`HY` audit f
 | Spanish | `ES` = Spanish (Spain). `ES-419` = broad Latin American Spanish. |
 | Portuguese | `PT` = European Portuguese для Португалии. `PT-BR` = Brazilian Portuguese. Не смешивать эти варианты. |
 | Chinese | `ZH` = Simplified Chinese. `ZH-HANT` / Traditional Chinese не активен и добавляется только отдельным решением. |
-| Norwegian | В базе `NB`, в Google Sheets `NO`. Используем Bokmål, не Nynorsk. Для IPA берем Urban East Norwegian / Oslo-like pronunciation. |
+| Norwegian | `NO` and `NB` are the same Norwegian Bokmål contour in this project: в базе `NB`, в Google Sheets/public/support `NO`. Используем Bokmål, не Nynorsk. Для IPA берем Urban East Norwegian / Oslo-like pronunciation. |
 | Filipino | Используем Filipino с кодом `TL`. `FIL/fil` не использовать как основной код. |
 | Kazakh | `native_word` хранится казахской кириллицей. `transcription` хранится латиницей по practical Cyrillic-to-Latin transliteration. |
 | Russian transliteration | `native_word` хранится кириллицей. `transcription` хранится practical Latin transliteration как вспомогательная подсказка; minor romanization variants не блокируют карточку, если слово понятно и есть QA evidence. |

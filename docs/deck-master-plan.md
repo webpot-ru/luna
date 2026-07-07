@@ -163,7 +163,7 @@ This table is the operational plan. `Sort` is a stable integer sequence for exec
 
 Operational order lives here. Other roadmap documents may explain principles or group decks by content theme, but they do not override this table. Target range and generation readiness are not inferred from the queue row; they must be fixed in the deck spec before generation.
 
-Current execution note after 2026-05-02 reset: only decks deliberately rebuilt from the clean DB through `scripts/run-deck-production.mjs` count as current generated decks. Current user-confirmed generated coverage exists for Sort 1 through Sort 38. On 2026-06-12 Sort 38 `Bar & Alcohol Words` completed runner QA/export/delivery/readback/post-final audit/freshness/complete and was delivered as `FlashcardsLuna 038 of 180 - Bar & Alcohol Words` in the required Drive folder (`1iVvIbY79lUX2-ajjlgzGKipsqJ7P08J9WTPYvFFqRik`). The next operational row is Sort 39 `Basic Ingredients & Spices`, currently `planned`; it still needs spec, candidate pool and approval before generation. The 180-deck table remains the operational backlog and order of work.
+Current execution note after 2026-05-02 reset: only decks deliberately rebuilt from the clean DB through the documented production flow and confirmed in current state count as current generated decks. As of the 2026-07-07 local Postgres readback, ordinary Deck Master Plan coverage is current through Sort 49 `Car & Driving Basics`: Sort 1-49 all have `quality_status=generated_checked`, `selection_status=approved` and 54-language coverage in the local DB. This 49-deck count intentionally excludes out-of-plan/current-side rows such as `kids_numbers_counting_a1` and candidate-pool rows. Sort 50 `Travel Basics` exists locally as `generated` / `candidate_pool`, but it is not approved/generated_checked and remains the next not-ready operational row. Physical spec files for Sort 40-49 were backfilled on 2026-07-07 from current DB/master-plan state; if exact runner, candidate-pool or Google Sheet evidence is needed for those rows, backfill it from the original run artifacts/readback before making delivery-specific claims. The 180-deck table remains the operational backlog and order of work.
 
 | Sort | Deck | Content type | Domain | Level label | CEFR | Frequency scope | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -205,18 +205,18 @@ Current execution note after 2026-05-02 reset: only decks deliberately rebuilt f
 | 36 | Takeaway & Dine-In Words | Vocabulary | Food & Eating / Fast Food | Elementary | A2 | survival/common | generated |
 | 37 | Alcoholic Drinks Basics | Vocabulary | Food & Eating / Beverages | Pre-Intermediate | A2-B1 | useful | generated |
 | 38 | Bar & Alcohol Words | Vocabulary | Food & Eating / Beverages | Pre-Intermediate | A2-B1 | useful | generated |
-| 39 | Basic Ingredients & Spices | Vocabulary | Food & Eating / Ingredients | Elementary | A1-A2 | core/common | approved_for_generation |
-| 40 | Grocery Shopping Words | Vocabulary | Food & Eating | Elementary | A2 | common/useful | planned |
-| 41 | Market Shopping Words | Vocabulary | Shopping & Services / Food | Elementary | A2 | common/useful | candidate |
-| 42 | Restaurant Words | Vocabulary | Food & Eating | Elementary | A2 | survival/common | planned |
-| 43 | Advanced Foods & Seafood | Vocabulary | Food & Eating | Intermediate | B1-B2 | useful/advanced | candidate |
-| 44 | Street & City Places | Vocabulary | City & Transport | Elementary | A1-A2 | core/common | planned |
-| 45 | City Transport Basics | Vocabulary | City & Transport | Elementary | A1-A2 | common | planned |
-| 46 | Metro & Public Transport Words | Vocabulary | City & Transport | Elementary | A2 | common/useful | planned |
-| 47 | Direction Words | Vocabulary | City & Transport | Elementary | A1-A2 | survival/common | planned |
-| 48 | Taxi & Ride-share Words | Vocabulary | City & Transport | Elementary | A2 | common/useful | planned |
-| 49 | Car & Driving Basics | Vocabulary | City & Transport | Elementary | A2 | common/useful | candidate |
-| 50 | Travel Basics | Vocabulary | Travel & Accommodation | Basic | A1 | core/common | planned |
+| 39 | Basic Ingredients & Spices | Vocabulary | Food & Eating / Ingredients | Elementary | A1-A2 | core/common | generated |
+| 40 | Grocery Shopping Words | Vocabulary | Food & Eating | Elementary | A2 | common/useful | generated |
+| 41 | Market Shopping Words | Vocabulary | Shopping & Services / Food | Elementary | A2 | common/useful | generated |
+| 42 | Restaurant Words | Vocabulary | Food & Eating | Elementary | A2 | survival/common | generated |
+| 43 | Advanced Foods & Seafood | Vocabulary | Food & Eating | Intermediate | B1-B2 | useful/advanced | generated |
+| 44 | Street & City Places | Vocabulary | City & Transport | Elementary | A1-A2 | core/common | generated |
+| 45 | City Transport Basics | Vocabulary | City & Transport | Elementary | A1-A2 | common | generated |
+| 46 | Metro & Public Transport Words | Vocabulary | City & Transport | Elementary | A2 | common/useful | generated |
+| 47 | Direction Words | Vocabulary | City & Transport | Elementary | A1-A2 | survival/common | generated |
+| 48 | Taxi & Ride-share Words | Vocabulary | City & Transport | Elementary | A2 | common/useful | generated |
+| 49 | Car & Driving Basics | Vocabulary | City & Transport | Elementary | A2 | common/useful | generated |
+| 50 | Travel Basics | Vocabulary | Travel & Accommodation | Basic | A1 | core/common | candidate |
 | 51 | Hotel Check-in Words | Vocabulary | Travel & Accommodation | Elementary | A2 | survival/common | planned |
 | 52 | Airport & Baggage Words | Vocabulary | Travel & Accommodation | Pre-Intermediate | A2-B1 | common/useful | planned |
 | 53 | Airplane & Flight Basics | Vocabulary | Travel & Accommodation | Elementary | A1-A2 | common | candidate |
