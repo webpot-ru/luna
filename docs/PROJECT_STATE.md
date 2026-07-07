@@ -1,6 +1,6 @@
 # Project State
 
-Last updated: 2026-07-02.
+Last updated: 2026-07-07.
 
 This is the short handoff document for new AI chats and agents. It should stay compact and point to source-of-truth documents instead of duplicating them.
 
@@ -10,7 +10,7 @@ Docs/data/QA/Google Sheets flashcard production pipeline. Existing source-of-tru
 
 ## Current Shorts Canary
 
-- 2026-07-07 temporary GitHub Actions entrypoint `.github/workflows/youtube-shorts-canary-publish.yml` exists on `main` only to dispatch the first ordinary Shorts canary through the GitHub environment OAuth bundle. It checks out `workflow_ref=codex/shorts-github-workflow`, renders `home_bathroom_essentials_a1` `RU -> ES` with `shorts_format=word_quiz_3_2_1`, can upload with explicit confirmations, and persists `config/youtube-shorts-published-videos.json` back to the implementation ref. The full Shorts pipeline remains on `codex/shorts-github-workflow` until reviewed/merged.
+- 2026-07-07 temporary GitHub Actions entrypoint `.github/workflows/youtube-shorts-canary-publish.yml` exists on `main` only to dispatch the first ordinary Shorts canary through the GitHub environment OAuth bundle. It checks out `workflow_ref=codex/shorts-github-workflow`, can upload with explicit confirmations, and persists `config/youtube-shorts-published-videos.json` back to the implementation ref. The full Shorts pipeline remains on `codex/shorts-github-workflow` until reviewed/merged. Run `28861890395` published the first public canary Short for `home_kitchen_cookware_pilot_01` `RU -> ES` (`word_quiz_3_2_1`) as `https://www.youtube.com/watch?v=u0tscJ8bCas`; the earlier `home_bathroom_essentials_a1` run failed before upload because that set has no GitHub offline deck source yet. The canary workflow now validates downloaded offline JSON and stages new `config/youtube-shorts-published-videos.json` files before checking for state changes.
 
 ## Current Polyglot Video State
 
