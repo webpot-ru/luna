@@ -97747,6 +97747,52 @@
       "youtubeVideoId": "qZLoKIkFW3M",
       "youtubePlaylistId": "PLRo2C1QC9naU",
       "playlistItemId": "UExSbzJDMVFDOW5hVS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "KO",
+      "targetLang": "UZ",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "publishAt": "2026-07-08T05:30:00.000Z",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-07-08",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "localDayOffset": 0,
+      "slotOrdinal": 2,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_uz_ko/youtube_metadata.json",
+      "title": "우즈베크어 기초 단어: 주방용품 기초 50단어 발음과 퀴즈",
+      "playlist_key": "KO__UZ__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-09T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-11T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-15T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-07T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28865489802",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28865489802",
+      "createdAt": "2026-07-07T12:19:09.900Z",
+      "updatedAt": "2026-07-07T12:19:09.900Z",
+      "youtubeVideoId": "oIaCpVY8sLY",
+      "youtubePlaylistId": "PLfdgyt3_JteY",
+      "playlistItemId": "UExmZGd5dDNfSnRlWS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
