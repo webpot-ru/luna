@@ -117653,6 +117653,47 @@
         "publishAt": "2026-07-09T15:30:00Z",
         "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n"
       }
+    },
+    {
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES-419",
+      "targetLang": "ET",
+      "playlist_key": "ES-419__ET__ordinary-vocabulary__a1-everyday",
+      "title": "Aprender Estonio: Utensilios de cocina (Nivel Básico A1) | 50 palabras con pronunciación",
+      "youtubeVideoId": "rBlcS77TkOM",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=rBlcS77TkOM",
+      "youtubePlaylistId": "PLczOcdGj4OpeN5jp93SZ60CWxdcrB5Qlk",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLczOcdGj4OpeN5jp93SZ60CWxdcrB5Qlk",
+      "playlistItemId": "",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "channelHandle": "@lunacardsespanol",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded_playlist_insert_pending",
+      "publishAt": "2026-07-09T09:30:00.000Z",
+      "scheduledPublishAt": "2026-07-09T09:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "pre-rendered-design-prototype",
+      "needsPlaylistInsert": true,
+      "playlistInsertDeferredError": "YouTube API POST /youtube/v3/playlistItems failed (403): { \"error\": { \"code\": 403, \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\", \"errors\": [ { \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\", \"domain\": \"youtube.quota\", \"reason\": \"quotaExceeded\" } ] } }",
+      "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n",
+      "metadataSource": "gemini-vectorengine",
+      "metadataModel": "gemini-3.5-flash",
+      "githubRunId": "28875823405",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28875823405",
+      "uploadedAt": "2026-07-07T15:02:45.591Z",
+      "lastReadbackAt": "2026-07-07T15:02:45.591Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "private",
+        "publishAt": "2026-07-09T09:30:00Z",
+        "playlistItemReadback": "pending",
+        "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n"
+      }
     }
   ]
 }
