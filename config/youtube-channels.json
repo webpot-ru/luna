@@ -1004,8 +1004,20 @@
         "Browser/account-switch source must be Sheet Current handle, not Channel ID.",
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
-      "customThumbnailUploadAllowed": true,
-      "thumbnailFallbackMode": "custom_when_available"
+      "customThumbnailUploadAllowed": false,
+      "thumbnailFallbackMode": "custom_when_available",
+      "customThumbnailPermissionCheckedAt": "2026-07-07T12:49:28.418Z",
+      "customThumbnailPermissionEvidence": {
+        "source": "youtube.thumbnails.set",
+        "githubRunId": "28867323357",
+        "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28867323357",
+        "supportLang": "KM",
+        "targetLang": "EN",
+        "youtubeVideoId": "ANoeDeLN-yI",
+        "errorDomain": "youtube.thumbnail",
+        "errorReason": "forbidden",
+        "message": "The authenticated user does not have permissions to upload and set custom video thumbnails."
+      }
     },
     {
       "key": "lo",
