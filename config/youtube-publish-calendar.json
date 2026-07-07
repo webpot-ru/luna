@@ -97471,6 +97471,52 @@
       "youtubeVideoId": "QPrIgVXvIOk",
       "youtubePlaylistId": "PLGfPcWlzsR_U",
       "playlistItemId": "UExHZlBjV2x6c1JfVS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "FR",
+      "targetLang": "UZ",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-07-08T09:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-08",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_uz_fr/youtube_metadata.json",
+      "title": "Apprendre l'ouzbek : Les ustensiles de cuisine | 50 mots de vocabulaire A1",
+      "playlist_key": "FR__UZ__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-09T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-11T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-15T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-07T09:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28864110372",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28864110372",
+      "createdAt": "2026-07-07T11:55:11.792Z",
+      "updatedAt": "2026-07-07T11:55:11.792Z",
+      "youtubeVideoId": "DxFdKC1TdZY",
+      "youtubePlaylistId": "PLLRY18DlXZ60",
+      "playlistItemId": "UExMUlkxOERsWFo2MC41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
