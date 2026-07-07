@@ -63,6 +63,7 @@ These rules extend project-specific rules without replacing them.
 - Do not spend money, credits, quotas, API usage, storage, deploy resources, or run expensive generation/processing without confirmation.
 - Do not deploy to production, change external services, run migrations, or perform irreversible data changes without an explicit verification and rollback plan.
 - Do not revert user changes. Keep Git staging/commits narrow and only when explicitly requested.
+- Git hygiene is mandatory: never use `git add .` or `git add -A` in this repository. Before any commit/push, run `git status --short --branch --untracked-files=all`, inspect changed and untracked paths, move obvious temporary junk only through `scripts/move-to-trash.sh`, stage exact intended paths with `git add <path>` or scoped tracked cleanup with `git add -u <path>`, and review `git diff --cached --name-status` before committing. If staged files include unrelated or unclear changes, stop instead of committing.
 - Report what was changed, what was checked, what was not checked, remaining blockers, and the exact state reached.
 - For bug fixes, explain root cause and the verification that proves the fix.
 - If proposing follow-up work for a new chat/agent, provide a self-contained launch prompt unless the task is already complete and verified.

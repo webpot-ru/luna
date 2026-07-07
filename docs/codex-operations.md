@@ -34,6 +34,59 @@ Local dispatch helpers and GitHub workflow launch scripts should use the current
 
 `codex/shorts-localization-phrases` and `origin/main` currently have unrelated histories, so a normal merge into `main` is not a safe integration path. Do not use `--allow-unrelated-histories` as cleanup. To bring selected work to `main`, create a fresh main-based integration branch and cherry-pick or reapply the specific reviewed commits/patches that are needed, then run the relevant checks and open/push that branch.
 
+## Git Commit Hygiene
+
+Mandatory commit/push protocol for Codex chats in this repository:
+
+1. Do not use `git add .` or `git add -A`.
+2. Before staging, inspect the full tree:
+
+```bash
+git status --short --branch --untracked-files=all
+git diff --name-status
+git ls-files --others --exclude-standard
+```
+
+3. Classify paths before staging:
+
+- task changes: files that directly belong to the requested work;
+- user/other-chat changes: leave unstaged unless the user explicitly asks to include them;
+- junk: Finder duplicates such as `* 2.*`, `.playwright-cli/`, `scratch/`, empty accidental files, temporary screenshots/logs or one-off local probes.
+
+4. Never delete junk directly. Move it with the project safe-trash helper:
+
+```bash
+/bin/bash scripts/move-to-trash.sh <relative-path>
+```
+
+5. Stage only exact intended files:
+
+```bash
+git add <file-or-dir>
+```
+
+For tracked cleanup of already tracked files, use a scoped update only after verifying the path:
+
+```bash
+git add -u <specific-path>
+```
+
+6. Before commit, review the staged set:
+
+```bash
+git diff --cached --name-status
+```
+
+If this includes unrelated, unclear, secret, ignored-output, or temporary paths, stop and fix the staging. Do not commit a mixed staged set just because the task is urgent.
+
+7. After commit, run:
+
+```bash
+git status --short --branch --untracked-files=all
+```
+
+Push only when the worktree is clean, or when any remaining dirty paths are explicitly listed as unrelated and intentionally left out. If the branch is not `main`, verify the target ref before any workflow dispatch or push summary.
+
 ## Browser and Developer Mode
 
 Use Browser or Chrome-based checks for visual/readback tasks:
