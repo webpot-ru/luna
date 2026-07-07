@@ -97103,6 +97103,52 @@
       "youtubeVideoId": "MbTIs89stbU",
       "youtubePlaylistId": "PLIX7z_P1uQVY",
       "playlistItemId": "UExJWDd6X1AxdVFWWS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "FR",
+      "targetLang": "TR",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-07-08T06:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-08",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_tr_fr/youtube_metadata.json",
+      "title": "Apprendre le turc : Les ustensiles de cuisine (Vocabulaire A1)",
+      "playlist_key": "FR__TR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-09T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-11T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-15T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-07T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28859284380",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28859284380",
+      "createdAt": "2026-07-07T10:27:16.191Z",
+      "updatedAt": "2026-07-07T10:27:16.191Z",
+      "youtubeVideoId": "FE0QidgxWY0",
+      "youtubePlaylistId": "PLSlN-lto34tQ",
+      "playlistItemId": "UExTbE4tbHRvMzR0US41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
