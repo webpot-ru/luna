@@ -28,11 +28,13 @@ Do not add a tracked `.worktreeinclude` that copies `.local`, `.env*`, `.secrets
 
 ## Branch And Dispatch Ref
 
-Current branch checkpoint on 2026-07-07: the local operational branch is `codex/shorts-localization-phrases`. It contains the Shorts localization pipeline commit `91f1835` and the native-style long-video intro/outro localization commit `3b35295`. The same `3b35295` commit also exists on `codex/norwegian-course-url-repair-48`.
+Current branch checkpoint on 2026-07-07: `codex/shorts-localization-clean` is the clean Shorts PR branch. It is based on `codex/norwegian-course-url-repair-48`, contains Shorts commit `91f1835`, and its PR base must be `codex/norwegian-course-url-repair-48`, not `main`.
 
-Local dispatch helpers and GitHub workflow launch scripts should use the current local Git branch/ref unless an explicit `--ref=<branch>` or workflow `ref` is passed. For the current Shorts and native intro/outro work, use `codex/shorts-localization-phrases` as the source ref. Do not assume `origin/main` has those changes.
+The older `codex/shorts-localization-phrases` branch is not the Shorts PR branch. It contains `91f1835` plus follow-up documentation/evidence/cleanup commits (`9f160a5`, `27c4c8c`, `dcee6f4`, `e0a9e22`), including tracked `outputs/` cleanup, so do not merge it as the Shorts PR. Use it only as a historical/work branch unless a separate reviewed integration plan says otherwise.
 
-`codex/shorts-localization-phrases` and `origin/main` currently have unrelated histories, so a normal merge into `main` is not a safe integration path. Do not use `--allow-unrelated-histories` as cleanup. To bring selected work to `main`, create a fresh main-based integration branch and cherry-pick or reapply the specific reviewed commits/patches that are needed, then run the relevant checks and open/push that branch.
+Local dispatch helpers and GitHub workflow launch scripts should use the current local Git branch/ref unless an explicit `--ref=<branch>` or workflow `ref` is passed. For Shorts PR verification, pass or select `codex/shorts-localization-clean` explicitly. Do not assume `origin/main` has these changes.
+
+The current feature branches and `origin/main` have unrelated histories, so a normal merge into `main` is not a safe integration path. Do not use `--allow-unrelated-histories` as cleanup. To bring selected work to `main`, create a fresh main-based integration branch and cherry-pick or reapply the specific reviewed commits/patches that are needed, then run the relevant checks and open/push that branch.
 
 ## Git Commit Hygiene
 

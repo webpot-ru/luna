@@ -8,7 +8,7 @@ This is the short handoff document for new AI chats and agents. It should stay c
 
 Docs/data/QA/Google Sheets flashcard production pipeline. Existing source-of-truth docs include workflow, decision log and QA process.
 
-Branch hygiene checkpoint on 2026-07-07: the local operational branch is `codex/shorts-localization-phrases`. Current GitHub dispatches for Shorts and native intro/outro localization should use that ref unless an explicit different `--ref` is passed. `origin/main` does not currently contain those branch changes, and this branch has unrelated history with `origin/main`; integrate selected reviewed commits through a fresh main-based cherry-pick/reapply branch, not a blind merge.
+Branch hygiene checkpoint on 2026-07-07: use `codex/shorts-localization-clean` for the clean Shorts PR, with PR base `codex/norwegian-course-url-repair-48`. That branch contains Shorts commit `91f1835` only on top of the native intro/outro localization base `3b35295`. Do not use `codex/shorts-localization-phrases` as the Shorts PR branch; it is a work/dirty branch with follow-up docs/evidence/cleanup commits including tracked `outputs/` cleanup. `origin/main` does not currently contain these branch changes, and the current feature branches have unrelated history with `origin/main`; integrate selected reviewed commits through a fresh main-based cherry-pick/reapply branch, not a blind merge.
 
 Commit hygiene rule: Codex chats must not use `git add .` or `git add -A` in this repository. Stage exact intended paths only, move junk through `scripts/move-to-trash.sh`, and review `git diff --cached --name-status` before every commit. Source of truth: `AGENTS.md` and `docs/codex-operations.md#git-commit-hygiene`.
 
