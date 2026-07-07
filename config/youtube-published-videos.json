@@ -43074,7 +43074,7 @@
       "youtubeChannelId": "UCpZM_1u-nTHydEJz7cnjf7w",
       "channelHandle": "@lunacardsgeorgian",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "missing_video_public_readback_superseded",
       "publishAt": "2026-06-27T13:30:00.000Z",
       "scheduledPublishAt": "2026-06-27T13:30:00.000Z",
       "desiredPrivacyStatus": "public",
@@ -43094,7 +43094,22 @@
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-27T13:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "thumbnailStatus": "auto_first_frame",
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "previousPublicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "previousStatus": "",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
       }
     },
     {
@@ -43226,7 +43241,7 @@
       "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
       "channelHandle": "@lunacardseesti",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "missing_video_public_readback_superseded",
       "publishAt": "2026-06-27T11:30:00.000Z",
       "scheduledPublishAt": "2026-06-27T11:30:00.000Z",
       "desiredPrivacyStatus": "public",
@@ -43246,7 +43261,22 @@
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-27T11:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "thumbnailStatus": "auto_first_frame",
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "previousPublicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "previousStatus": "",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
       }
     },
     {
@@ -47060,7 +47090,7 @@
       "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
       "channelHandle": "@lunacardsslovenscina",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "missing_video_public_readback_superseded",
       "publishAt": "2026-06-27T09:30:00.000Z",
       "scheduledPublishAt": "2026-06-27T09:30:00.000Z",
       "desiredPrivacyStatus": "public",
@@ -47085,13 +47115,28 @@
         "playlistId": "PLcBLdqINA7rM",
         "playlistPrivacyStatus": "public",
         "playlistItemId": "UExjQkxkcUlOQTdyTS41NkI0NEY2RDEwNTU3Q0M2",
-        "playlistInsertRepairedAt": "2026-06-27T07:31:33.322Z"
+        "playlistInsertRepairedAt": "2026-06-27T07:31:33.322Z",
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
       },
       "playlistInsertRepairedAt": "2026-06-27T07:31:33.322Z",
       "playlistInsertRepairStatus": "inserted",
       "playlistInsertRepairGithubRunId": "28282599129",
       "playlistInsertRepairGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28282599129",
-      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video."
+      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video.",
+      "previousPublicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "previousStatus": "",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -47336,7 +47381,7 @@
       "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
       "channelHandle": "@lunacardsslovenscina",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "missing_video_public_readback_superseded",
       "publishAt": "2026-06-27T12:30:00.000Z",
       "scheduledPublishAt": "2026-06-27T12:30:00.000Z",
       "desiredPrivacyStatus": "public",
@@ -47356,7 +47401,22 @@
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-27T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "thumbnailStatus": "auto_first_frame",
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "previousPublicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "previousStatus": "",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
       }
     },
     {

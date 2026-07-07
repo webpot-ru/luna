@@ -51,7 +51,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "fee5io1FOPI",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=fee5io1FOPI",
       "youtubePlaylistId": "PLJKqVNsz5cgY",
@@ -59,10 +59,27 @@
       "channelKey": "bn",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-28T16:49:29.307Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28329043309",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28329043309",
-      "createdAt": "2026-06-28T16:49:29.307Z"
+      "createdAt": "2026-06-28T16:49:29.307Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -275,7 +292,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "t3JiUNZDxQA",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=t3JiUNZDxQA",
       "youtubePlaylistId": "PLcqkiUCaHD84",
@@ -283,10 +300,27 @@
       "channelKey": "hy",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-28T16:56:05.203Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28329064819",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28329064819",
-      "createdAt": "2026-06-28T16:56:05.203Z"
+      "createdAt": "2026-06-28T16:56:05.203Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -303,7 +337,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "-XFvr-SAoAY",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=-XFvr-SAoAY",
       "youtubePlaylistId": "PLQR536UO7Zpw",
@@ -311,10 +345,27 @@
       "channelKey": "kn",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-28T16:56:53.811Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28329139850",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28329139850",
-      "createdAt": "2026-06-28T16:56:53.811Z"
+      "createdAt": "2026-06-28T16:56:53.811Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -331,7 +382,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "4z_pEtX3O1A",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=4z_pEtX3O1A",
       "youtubePlaylistId": "PLKx-GhWYPiqU",
@@ -339,10 +390,27 @@
       "channelKey": "az",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-28T16:49:18.056Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28329039694",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28329039694",
-      "createdAt": "2026-06-28T16:49:18.056Z"
+      "createdAt": "2026-06-28T16:49:18.056Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -415,7 +483,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "bulSoW4svdc",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=bulSoW4svdc",
       "youtubePlaylistId": "PLPSEgS77Q5sg",
@@ -423,10 +491,27 @@
       "channelKey": "et",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-28T16:51:39.598Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28329053049",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28329053049",
-      "createdAt": "2026-06-28T16:51:39.598Z"
+      "createdAt": "2026-06-28T16:51:39.598Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -443,7 +528,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "lhmafnAWBsw",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=lhmafnAWBsw",
       "youtubePlaylistId": "PLAs4kJYhYJXk",
@@ -451,10 +536,27 @@
       "channelKey": "hr",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-28T16:51:25.807Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28329060808",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28329060808",
-      "createdAt": "2026-06-28T16:51:25.807Z"
+      "createdAt": "2026-06-28T16:51:25.807Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -499,7 +601,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "q9wPmDuALZs",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=q9wPmDuALZs",
       "youtubePlaylistId": "PLM3bkjb7w9zc",
@@ -507,10 +609,27 @@
       "channelKey": "is",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-28T16:50:19.626Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28329068653",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28329068653",
-      "createdAt": "2026-06-28T16:50:19.626Z"
+      "createdAt": "2026-06-28T16:50:19.626Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -527,7 +646,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "0GQFDoVQutQ",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=0GQFDoVQutQ",
       "youtubePlaylistId": "PLYiSJomNc8QM",
@@ -535,10 +654,27 @@
       "channelKey": "it",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-28T16:50:34.954Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28329070628",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28329070628",
-      "createdAt": "2026-06-28T16:50:34.954Z"
+      "createdAt": "2026-06-28T16:50:34.954Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -555,7 +691,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "Q6yDRflZ4og",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=Q6yDRflZ4og",
       "youtubePlaylistId": "PLYhGDHlm0MKE",
@@ -563,10 +699,27 @@
       "channelKey": "kk",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-28T16:51:41.834Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28329076836",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28329076836",
-      "createdAt": "2026-06-28T16:51:41.834Z"
+      "createdAt": "2026-06-28T16:51:41.834Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -583,7 +736,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "Q2iwouLDoOQ",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=Q2iwouLDoOQ",
       "youtubePlaylistId": "PLXt5jtkYnqOw",
@@ -591,10 +744,27 @@
       "channelKey": "bg",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-29T03:47:15.395Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28347090821",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28347090821",
-      "createdAt": "2026-06-29T03:47:15.395Z"
+      "createdAt": "2026-06-29T03:47:15.395Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -639,7 +809,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "wy5KKZ1rbGM",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=wy5KKZ1rbGM",
       "youtubePlaylistId": "PLILXu--cu8DQ",
@@ -647,10 +817,27 @@
       "channelKey": "ka",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-29T03:48:52.772Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28347096842",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28347096842",
-      "createdAt": "2026-06-29T03:48:52.772Z"
+      "createdAt": "2026-06-29T03:48:52.772Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -667,7 +854,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "uploaded_public_playlist_insert_pending",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "OlbN0CO44T4",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=OlbN0CO44T4",
       "youtubePlaylistId": "PLeA3naYjsv1E",
@@ -675,10 +862,27 @@
       "channelKey": "km",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-29T03:49:27.077Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28347099687",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28347099687",
-      "createdAt": "2026-06-29T03:49:27.077Z"
+      "createdAt": "2026-06-29T03:49:27.077Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "uploaded_public_playlist_insert_pending",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -695,7 +899,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "DR5wgcHTksM",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=DR5wgcHTksM",
       "youtubePlaylistId": "PLaaMXcB9uGFM",
@@ -703,10 +907,27 @@
       "channelKey": "lt",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-29T03:56:29.045Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28347361466",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28347361466",
-      "createdAt": "2026-06-29T03:56:29.045Z"
+      "createdAt": "2026-06-29T03:56:29.045Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -723,7 +944,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "T3jEqQf3Mlw",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=T3jEqQf3Mlw",
       "youtubePlaylistId": "PLJ1U-hIzzgYQ",
@@ -731,10 +952,27 @@
       "channelKey": "lo",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-29T03:56:38.986Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28347324274",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28347324274",
-      "createdAt": "2026-06-29T03:56:38.986Z"
+      "createdAt": "2026-06-29T03:56:38.986Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -751,7 +989,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "3noczqDJQVU",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=3noczqDJQVU",
       "youtubePlaylistId": "PLKnG6f0Xf_qc",
@@ -759,10 +997,27 @@
       "channelKey": "lv",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-29T03:58:23.132Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28347385319",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28347385319",
-      "createdAt": "2026-06-29T03:58:23.132Z"
+      "createdAt": "2026-06-29T03:58:23.132Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -779,7 +1034,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "dqV860hGUAY",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=dqV860hGUAY",
       "youtubePlaylistId": "PLGouiavsr9ks",
@@ -787,10 +1042,27 @@
       "channelKey": "ml",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-29T04:03:39.110Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28347581430",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28347581430",
-      "createdAt": "2026-06-29T04:03:39.110Z"
+      "createdAt": "2026-06-29T04:03:39.110Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",
@@ -807,7 +1079,7 @@
       ],
       "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
-      "status": "published_uploaded_thumbnail_auto",
+      "status": "missing_video_public_readback_superseded",
       "youtubeVideoId": "TUkYm2swvMU",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=TUkYm2swvMU",
       "youtubePlaylistId": "PLFk3h2nkYPrA",
@@ -815,10 +1087,27 @@
       "channelKey": "my",
       "privacyStatus": "public",
       "publishAt": "",
-      "updatedAt": "2026-06-29T04:04:48.381Z",
+      "updatedAt": "2026-07-07T07:16:15.617Z",
       "githubRunId": "28347602964",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28347602964",
-      "createdAt": "2026-06-29T04:04:48.381Z"
+      "createdAt": "2026-06-29T04:04:48.381Z",
+      "previousPublicationStatus": "",
+      "previousStatus": "published_uploaded_thumbnail_auto",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "videoType": "polyglot",

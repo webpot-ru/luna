@@ -47996,7 +47996,7 @@
       "localSlotIndex": 3,
       "localDayOffset": 0,
       "slotOrdinal": 3,
-      "status": "reserved",
+      "status": "superseded_missing_video_public_readback",
       "source": "plan-youtube-publish-schedule",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_is_ka/youtube_metadata.json",
@@ -48026,7 +48026,24 @@
       "updatedAt": "2026-06-26T12:58:59.363Z",
       "youtubeVideoId": "mfEed-ya5GI",
       "youtubePlaylistId": "PLWHAGxctpC5c",
-      "playlistItemId": "UExXSEFHeGN0cEM1Yy41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExXSEFHeGN0cEM1Yy41NkI0NEY2RDEwNTU3Q0M2",
+      "previousPublicationStatus": "",
+      "previousStatus": "reserved",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "schemaVersion": 1,
@@ -48180,7 +48197,7 @@
       "localSlotIndex": 2,
       "localDayOffset": 0,
       "slotOrdinal": 2,
-      "status": "reserved",
+      "status": "superseded_missing_video_public_readback",
       "source": "plan-youtube-publish-schedule",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_id_et/youtube_metadata.json",
@@ -48210,7 +48227,24 @@
       "updatedAt": "2026-06-26T12:58:41.565Z",
       "youtubeVideoId": "fTXGrfwEgVU",
       "youtubePlaylistId": "PLK0IvM8lRIbU",
-      "playlistItemId": "UExLMEl2TThsUkliVS41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExLMEl2TThsUkliVS41NkI0NEY2RDEwNTU3Q0M2",
+      "previousPublicationStatus": "",
+      "previousStatus": "reserved",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "schemaVersion": 1,
@@ -48686,7 +48720,7 @@
       "localSlotIndex": 1,
       "localDayOffset": 0,
       "slotOrdinal": 1,
-      "status": "reserved",
+      "status": "superseded_missing_video_public_readback",
       "source": "plan-youtube-publish-schedule",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_hu_sl/youtube_metadata.json",
@@ -48716,7 +48750,24 @@
       "updatedAt": "2026-06-26T12:58:26.551Z",
       "youtubeVideoId": "mbbIcQLiqDs",
       "youtubePlaylistId": "PLcBLdqINA7rM",
-      "playlistItemId": "UExjQkxkcUlOQTdyTS41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExjQkxkcUlOQTdyTS41NkI0NEY2RDEwNTU3Q0M2",
+      "previousPublicationStatus": "",
+      "previousStatus": "reserved",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "schemaVersion": 1,
@@ -48732,7 +48783,7 @@
       "localSlotIndex": 2,
       "localDayOffset": 0,
       "slotOrdinal": 2,
-      "status": "reserved",
+      "status": "superseded_missing_video_public_readback",
       "source": "plan-youtube-publish-schedule",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_id_sl/youtube_metadata.json",
@@ -48762,7 +48813,24 @@
       "updatedAt": "2026-06-26T12:58:26.554Z",
       "youtubeVideoId": "IAmBLMoMjZc",
       "youtubePlaylistId": "PLZVSsmq9-N3U",
-      "playlistItemId": "UExaVlNzbXE5LU4zVS41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExaVlNzbXE5LU4zVS41NkI0NEY2RDEwNTU3Q0M2",
+      "previousPublicationStatus": "",
+      "previousStatus": "reserved",
+      "supersededAt": "2026-07-07T07:16:15.617Z",
+      "supersededReason": "2026-07-07 route3/route4 live upload reconciliation; public oEmbed returned 404 for old video ids; local authenticated videos.list was not completed because OAuth refresh returned 401",
+      "supersededBy": {
+        "reason": "route3_route4_gap_reupload_preparation",
+        "report": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      },
+      "readback": {
+        "publicOembedStatus": 404,
+        "authenticatedVideosListReadback": "not_run_local_oauth_401",
+        "liveUploadsAuditRunIds": [
+          "28845854520",
+          "28845853638"
+        ],
+        "reconciliationReport": "outputs/review/youtube-publication-audit-20260707/youtube-route3-route4-upload-gap-report.md"
+      }
     },
     {
       "schemaVersion": 1,

@@ -21,6 +21,11 @@ const DEFAULT_SIZE = "1536x864";
 const OUTPUT_NAME = "youtube_thumbnail";
 const MAX_YOUTUBE_THUMBNAIL_BYTES = 2 * 1024 * 1024;
 const DEFAULT_LOGO_ASSET = "assets/youtube-channel-branding/en/flashcardsluna-site-avatar-512.png";
+const PRE_RENDERED_THUMBNAIL_MANIFESTS = [
+  "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-channel-pairs-target-language-first-20260707/manifest.json",
+  "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/manifest.json",
+];
+const preRenderedManifestCache = new Map();
 
 function parseArgs(argv) {
   const options = {
@@ -239,19 +244,94 @@ function relativeProjectPath(filePath) {
   return path.relative(process.cwd(), filePath).replace(/\\/g, "/");
 }
 
-function updateMetadataFile(metadataFile, metadata, thumbnailPath, thumbnailMetadataPath, logoPath = "") {
+function normalizeLanguageCode(value) {
+  return String(value || "").trim().replace(/_/g, "-").toUpperCase();
+}
+
+function normalizeScope(value) {
+  return String(value || "full").trim().replace(/-/g, "_").toLowerCase() || "full";
+}
+
+function normalizeLangList(value) {
+  const raw = Array.isArray(value)
+    ? value
+    : String(value || "").split(",");
+  return raw.map(normalizeLanguageCode).filter(Boolean).join(",");
+}
+
+function loadPreRenderedManifest(manifestPath) {
+  if (preRenderedManifestCache.has(manifestPath)) return preRenderedManifestCache.get(manifestPath);
+  if (!fs.existsSync(manifestPath)) {
+    preRenderedManifestCache.set(manifestPath, []);
+    return [];
+  }
+  const parsed = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+  const covers = Array.isArray(parsed) ? parsed : (parsed.covers || parsed.items || parsed.records || []);
+  const rows = covers.map((cover) => {
+    const relativePath = cover.relativePath || "";
+    const absolutePath = cover.path || (relativePath ? path.resolve(relativePath) : "");
+    return {
+      ...cover,
+      absolutePath,
+      manifestPath,
+    };
+  });
+  preRenderedManifestCache.set(manifestPath, rows);
+  return rows;
+}
+
+function findPreRenderedThumbnailPrototype(metadata) {
+  const isPoly = String(metadata.targetLang || "").includes(",");
+  const setId = String(metadata.setId || "");
+  const supportLang = normalizeLanguageCode(metadata.supportLang);
+  const targetLang = normalizeLanguageCode(metadata.targetLang);
+  const contentScope = normalizeScope(metadata.contentScope);
+  const bundleKey = String(metadata.bundleKey || "");
+  const targetLangsHash = String(metadata.targetLangsHash || metadata.targetsHash || "");
+  const targetLangsCsv = normalizeLangList(metadata.targetLangs || metadata.targetLang);
+
+  for (const manifestPath of PRE_RENDERED_THUMBNAIL_MANIFESTS) {
+    for (const cover of loadPreRenderedManifest(manifestPath)) {
+      if (!cover.absolutePath || !fs.existsSync(cover.absolutePath)) continue;
+      if (setId && cover.setId && String(cover.setId) !== setId) continue;
+
+      if (isPoly) {
+        if (cover.videoType !== "polyglot") continue;
+        if (normalizeLanguageCode(cover.supportLang) !== supportLang) continue;
+        if (bundleKey && String(cover.bundleKey || cover.registryBundleKey || "") !== bundleKey) continue;
+        if (normalizeScope(cover.contentScope) !== contentScope) continue;
+        const coverHash = String(cover.targetLangsHash || "");
+        const coverLangsCsv = normalizeLangList(cover.targetLangs || cover.targetLangsCsv || cover.targetLang);
+        if (targetLangsHash && coverHash && coverHash !== targetLangsHash) continue;
+        if (!targetLangsHash && targetLangsCsv && coverLangsCsv !== targetLangsCsv) continue;
+        return cover.absolutePath;
+      }
+
+      if (cover.videoType !== "ordinary") continue;
+      const coverSupportLang = normalizeLanguageCode(cover.viewerSupportLang || cover.supportLang);
+      if (coverSupportLang !== supportLang) continue;
+      if (normalizeLanguageCode(cover.targetLang) !== targetLang) continue;
+      return cover.absolutePath;
+    }
+  }
+
+  return "";
+}
+
+function updateMetadataFile(metadataFile, metadata, thumbnailPath, thumbnailMetadataPath, logoPath = "", thumbnailRecord = {}) {
   const next = {
     ...metadata,
     thumbnailPath: relativeProjectPath(thumbnailPath),
     thumbnail: relativeProjectPath(thumbnailPath),
     thumbnailUploadMode: "custom",
-    thumbnailSource: "vectorengine-gpt-image-2",
+    thumbnailSource: thumbnailRecord.thumbnailSource || "vectorengine-gpt-image-2",
     thumbnailFallbackReason: "",
     thumbnailMetadataPath: relativeProjectPath(thumbnailMetadataPath),
     thumbnailLogoOverlay: Boolean(logoPath),
     thumbnailLogoAsset: logoPath ? relativeProjectPath(logoPath) : "",
     thumbnailGeneratedAt: new Date().toISOString(),
   };
+  if (thumbnailRecord.prototypePath) next.thumbnailPrototypePath = relativeProjectPath(thumbnailRecord.prototypePath);
   fs.writeFileSync(metadataFile, `${JSON.stringify(next, null, 2)}\n`, "utf8");
 }
 
@@ -312,21 +392,24 @@ async function main() {
     }
     const paths = outputPaths(metadataFile, options.outputName);
     const prompt = buildPrompt(metadata);
+    let copiedPrototypePath = "";
     
     // Copy pre-rendered prototype thumbnail if it exists to save VectorEngine spend (unconditional overwrite if prototype exists)
     {
       const isPoly = metadata.targetLang && metadata.targetLang.includes(',');
-      let prototypePath = "";
+      let prototypePath = findPreRenderedThumbnailPrototype(metadata);
       if (isPoly) {
-        const polyDir = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-polyglot-published-covers-20260704/covers";
-        const contentScope = metadata.contentScope || "full";
-        const support = (metadata.supportLang || "").toUpperCase();
-        const bundle = metadata.bundleKey;
-        const tHash = metadata.targetLangsHash;
-        const filename = `${support}__${bundle}__${tHash}__${contentScope}.jpg`;
-        const testPath = path.join(polyDir, filename);
-        if (fs.existsSync(testPath)) {
-          prototypePath = testPath;
+        if (!prototypePath) {
+          const polyDir = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-polyglot-published-covers-20260704/covers";
+          const contentScope = metadata.contentScope || "full";
+          const support = (metadata.supportLang || "").toUpperCase();
+          const bundle = metadata.bundleKey;
+          const tHash = metadata.targetLangsHash;
+          const filename = `${support}__${bundle}__${tHash}__${contentScope}.jpg`;
+          const testPath = path.join(polyDir, filename);
+          if (fs.existsSync(testPath)) {
+            prototypePath = testPath;
+          }
         }
       } else {
         const support = (metadata.supportLang || "").toUpperCase();
@@ -337,25 +420,27 @@ async function main() {
           "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704-scheduled-only-20260705/by-support",
           "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704/by-support"
         ];
-        for (const baseDir of ordinaryDirs) {
-          if (!fs.existsSync(baseDir)) continue;
-          
-          try {
-            const supportDirs = fs.readdirSync(baseDir).filter(name => name.startsWith(support + "__") || name === support);
-            if (supportDirs.length === 0) continue;
-            
-            const supportDir = path.join(baseDir, supportDirs[0]);
-            const targetDirs = fs.readdirSync(supportDir).filter(name => name.startsWith(`${support}__${target}__`));
-            if (targetDirs.length === 0) continue;
-            
-            const targetDir = path.join(supportDir, targetDirs[0]);
-            const testPath = path.join(targetDir, "youtube_thumbnail.jpg");
-            if (fs.existsSync(testPath)) {
-              prototypePath = testPath;
-              break;
+        if (!prototypePath) {
+          for (const baseDir of ordinaryDirs) {
+            if (!fs.existsSync(baseDir)) continue;
+
+            try {
+              const supportDirs = fs.readdirSync(baseDir).filter(name => name.startsWith(support + "__") || name === support);
+              if (supportDirs.length === 0) continue;
+
+              const supportDir = path.join(baseDir, supportDirs[0]);
+              const targetDirs = fs.readdirSync(supportDir).filter(name => name.startsWith(`${support}__${target}__`));
+              if (targetDirs.length === 0) continue;
+
+              const targetDir = path.join(supportDir, targetDirs[0]);
+              const testPath = path.join(targetDir, "youtube_thumbnail.jpg");
+              if (fs.existsSync(testPath)) {
+                prototypePath = testPath;
+                break;
+              }
+            } catch (e) {
+              // Ignore readdir/fs errors and continue search
             }
-          } catch (e) {
-            // Ignore readdir/fs errors and continue search
           }
         }
 
@@ -382,6 +467,7 @@ async function main() {
         console.log(`Copying pre-rendered thumbnail prototype from: ${prototypePath}`);
         fs.mkdirSync(path.dirname(paths.thumbnailPath), { recursive: true });
         fs.copyFileSync(prototypePath, paths.thumbnailPath);
+        copiedPrototypePath = prototypePath;
         if (paths.rawPath) {
           fs.writeFileSync(paths.rawPath, "dummy-raw-for-prototype");
         }
@@ -390,11 +476,18 @@ async function main() {
 
     const existing = fs.existsSync(paths.thumbnailPath);
     if (existing && !options.force) {
-      if (options.writeMetadata) updateMetadataFile(metadataFile, metadata, paths.thumbnailPath, paths.thumbnailMetadataPath, logoPath);
+      if (options.writeMetadata) {
+        updateMetadataFile(metadataFile, metadata, paths.thumbnailPath, paths.thumbnailMetadataPath, logoPath, copiedPrototypePath ? {
+          thumbnailSource: "pre-rendered-design-prototype",
+          prototypePath: copiedPrototypePath,
+        } : {});
+      }
       return {
         status: "skipped_existing",
         metadataFile: relativeProjectPath(metadataFile),
         thumbnailPath: relativeProjectPath(paths.thumbnailPath),
+        thumbnailSource: copiedPrototypePath ? "pre-rendered-design-prototype" : "existing",
+        prototypePath: copiedPrototypePath ? relativeProjectPath(copiedPrototypePath) : "",
         logoOverlay: Boolean(logoPath),
         logoAsset: logoPath ? relativeProjectPath(logoPath) : options.logoAsset,
       };
