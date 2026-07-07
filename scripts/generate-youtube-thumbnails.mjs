@@ -269,7 +269,7 @@ function loadPreRenderedManifest(manifestPath) {
   const covers = Array.isArray(parsed) ? parsed : (parsed.covers || parsed.items || parsed.records || []);
   const rows = covers.map((cover) => {
     const relativePath = cover.relativePath || "";
-    const absolutePath = cover.path || (relativePath ? path.resolve(relativePath) : "");
+    const absolutePath = relativePath ? path.resolve(relativePath) : (cover.path || "");
     return {
       ...cover,
       absolutePath,
