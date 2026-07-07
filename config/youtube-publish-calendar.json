@@ -97977,6 +97977,52 @@
       "youtubeVideoId": "S8nWipwCROk",
       "youtubePlaylistId": "PLJz-kTrotB3Y",
       "playlistItemId": "UExKei1rVHJvdEIzWS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "FR",
+      "targetLang": "VI",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-07-08T12:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-08",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "localDayOffset": 0,
+      "slotOrdinal": 2,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_vi_fr/youtube_metadata.json",
+      "title": "Vocabulaire vietnamien : Les ustensiles de cuisine (Débutant A1)",
+      "playlist_key": "FR__VI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-09T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-11T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-15T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-07T12:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28865454184",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28865454184",
+      "createdAt": "2026-07-07T12:18:39.470Z",
+      "updatedAt": "2026-07-07T12:18:39.470Z",
+      "youtubeVideoId": "BR3GNx1L2TM",
+      "youtubePlaylistId": "PLUpOtmkdGU5U",
+      "playlistItemId": "UExVcE90bWtkR1U1VS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
