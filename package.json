@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "check:video-localization": "node scripts/check-video-localization.mjs",
+    "check:shorts-outro-localization": "node scripts/check-shorts-outro-localization.mjs",
+    "check:shorts-format-localization": "node scripts/check-shorts-format-localization.mjs",
     "check:youtube-metadata": "node scripts/check-youtube-metadata.mjs",
     "check:youtube-metadata-language": "node scripts/check-youtube-metadata-language.mjs",
     "check:youtube-seo-metadata": "node scripts/check-youtube-seo-metadata.mjs",
@@ -26,6 +28,7 @@
     "generate:youtube-thumbnails": "node scripts/generate-youtube-thumbnails.mjs",
     "copy:pre-rendered-thumbnails": "node scripts/copy-pre-rendered-thumbnails.mjs",
     "generate:polyglot-youtube-metadata": "node scripts/generate-polyglot-youtube-metadata.mjs",
+    "build:deck-shorts": "node scripts/build-deck-shorts.mjs",
     "build:youtube-thumbnail-review": "node scripts/build-youtube-thumbnail-review-sheet.mjs",
     "plan:youtube-channel-tokens": "node scripts/plan-youtube-channel-tokens.mjs",
     "auth:youtube-channel": "node scripts/youtube-channel-branding.mjs --authorize",

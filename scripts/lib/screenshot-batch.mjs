@@ -1,6 +1,10 @@
-import { chromium } from "playwright";
 import fs from "node:fs";
 import os from "node:os";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+const playwrightModulePath = process.env.PLAYWRIGHT_MODULE_PATH || "playwright";
+const { chromium } = require(playwrightModulePath);
 
 async function main() {
   const listPath = process.argv[2];
@@ -11,6 +15,7 @@ async function main() {
 
   const payload = JSON.parse(fs.readFileSync(listPath, "utf8"));
   const { rendererPath, tasks } = payload;
+  const viewport = payload.viewport || { width: 1920, height: 1080 };
 
   console.log(`[Batch Screenshot] Starting batch screenshot for ${tasks.length} tasks...`);
   const startTime = Date.now();
@@ -30,7 +35,10 @@ async function main() {
     if (taskChunk.length === 0) return;
     
     const page = await browser.newPage();
-    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.setViewportSize({
+      width: Number(viewport.width) || 1920,
+      height: Number(viewport.height) || 1080
+    });
 
     // Load renderer template once
     await page.goto(`file://${rendererPath}`);
