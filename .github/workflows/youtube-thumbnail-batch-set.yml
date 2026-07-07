@@ -55,7 +55,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: youtube-thumbnail-batch-set-${{ github.ref_name }}
+  group: youtube-thumbnail-batch-set-${{ github.ref_name }}-${{ github.event.inputs.youtube_environment }}-${{ github.event.inputs.support }}
   cancel-in-progress: false
 
 jobs:
