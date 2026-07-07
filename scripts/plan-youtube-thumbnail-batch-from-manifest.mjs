@@ -70,6 +70,25 @@ function splitCodes(value) {
     .filter(Boolean);
 }
 
+function supportLangFromCover(cover) {
+  const explicitSupport = normalizeCode(cover.supportLang || cover.support || cover.support_lang);
+  if (explicitSupport) return explicitSupport;
+
+  const channelSupports = [
+    ...ensureArray(cover.channelSupportLangs),
+    ...ensureArray(cover.channel_support_langs),
+  ].map(normalizeCode).filter(Boolean);
+  for (const canonical of ["EN", "ES-419", "PT-BR"]) {
+    if (channelSupports.includes(canonical)) return canonical;
+  }
+
+  return normalizeCode(cover.viewerSupportLang || cover.viewer_support_lang || channelSupports[0]);
+}
+
+function targetLangFromCover(cover) {
+  return normalizeCode(cover.targetLang || cover.target || cover.target_lang);
+}
+
 function readJson(filePath, label) {
   const resolved = path.resolve(filePath);
   if (!fs.existsSync(resolved)) throw new Error(`${label} not found: ${filePath}`);
@@ -226,8 +245,8 @@ function bySupportSummary(rows) {
 }
 
 function planCover({ cover, manifestDir, manifestSetId, options, channelRegistry, publicationRegistry, routeCache }) {
-  const supportLang = normalizeCode(cover.supportLang || cover.support || cover.support_lang);
-  const targetLang = normalizeCode(cover.targetLang || cover.target || cover.target_lang);
+  const supportLang = supportLangFromCover(cover);
+  const targetLang = targetLangFromCover(cover);
   const setId = options.setId || manifestSetId || cover.setId || cover.set_id || "";
   const blockers = [];
 
@@ -337,8 +356,8 @@ function main() {
 
   const manifestRows = ensureArray(manifest.covers)
     .filter((cover) => {
-      const support = normalizeCode(cover.supportLang || cover.support || cover.support_lang);
-      const target = normalizeCode(cover.targetLang || cover.target || cover.target_lang);
+      const support = supportLangFromCover(cover);
+      const target = targetLangFromCover(cover);
       if (supportFilter.size && !supportFilter.has(support)) return false;
       if (targetFilter.size && !targetFilter.has(target)) return false;
       return true;
