@@ -825,6 +825,15 @@ Gate проверяет:
 
 Этот gate не заменяет native-speaker review. Он блокирует видимые технические и script-level ошибки, которые напрямую попадают на YouTube-слайды и в TTS.
 
+2026-07-07 native-style rewrite pass: ordinary horizontal-video intro/outro copy was rewritten through `nativeStyleOverrides` in `scripts/generate-video-localization.mjs` and regenerated into `config/video-localization.json` for all 54 active language contours. The localization JSON currently exposes 55 technical keys because `NB` is kept as a data/internal alias of the same Norwegian Bokmål contour as `NO`; do not describe this as 55 separate project languages. The rewrite covers `intro_desc`, `intro_speech_template`, `outro_title`, `outro_subtitle` and `outro_speech`, keeps `{target_lang}` / `{deck_title}` placeholders, keeps the ordinary QR/description CTA, and avoids the old P1 markers from the 2026-06-15 audit such as EN `in pauses` / `Learn these words forever`, PL `native speakerów`, KK `жаттықтырыңыз`, SK Czech `Procvičujte`, TL malformed CTA and NO/NB `kortstokker`. Polyglot long-video intro/outro copy was separately naturalized in `config/polyglot-video-localization.json` for the same 54 language contours while preserving the required 180+ themed-decks language-mix CTA and avoiding pricing/free wording. Verification commands:
+
+```bash
+npm run check:video-localization
+npm run check:polyglot-video-localization
+```
+
+This is a broad native-style rewrite by the agent and technical gates, not human native-speaker certification. If exact marketing nuance is high-risk for a channel, still run a real native review for that support language before treating it as `approved`.
+
 ### Outro QR destination
 
 Outro CTA должен вести на учебные материалы сайта, а не на главную страницу:

@@ -1159,6 +1159,401 @@ const translations = {
   }
 };
 
+const nativeStyleOverrides = {
+  "EN": {
+    "intro_desc": "Listen to each native pronunciation and repeat during the pauses.<br>A quick mini-test is waiting at the end!",
+    "intro_speech_template": "Let's learn {target_lang}. Today's topic: {deck_title}.",
+    "outro_speech": "Want these words to stick? Open flashcardsluna.com and practise this set, plus other themed flashcard sets, for free. The link is in the description!",
+    "outro_title": "Make these words stick",
+    "outro_subtitle": "Practise this set for free on FlashcardsLuna"
+  },
+  "EN-GB": {
+    "intro_desc": "Listen to each native pronunciation and repeat during the pauses.<br>A quick mini-test is waiting at the end!",
+    "intro_speech_template": "Let's learn {target_lang}. Today's topic: {deck_title}.",
+    "outro_speech": "Want these words to stick? Open flashcardsluna.com and practise this set, plus other themed flashcard sets, for free. The link is in the description!",
+    "outro_title": "Make these words stick",
+    "outro_subtitle": "Practise this set for free on FlashcardsLuna"
+  },
+  "ES": {
+    "intro_desc": "Escucha la pronunciación nativa y repite cada palabra en las pausas.<br>Al final te espera un mini test rápido.",
+    "intro_speech_template": "Vamos a aprender {target_lang}. El tema de hoy es: {deck_title}.",
+    "outro_speech": "¿Quieres que estas palabras se te queden de verdad? Entra en flashcardsluna.com y practica este mazo y otros mazos temáticos gratis. ¡El enlace está en la descripción!",
+    "outro_title": "Haz que estas palabras se queden",
+    "outro_subtitle": "Practica este mazo gratis en FlashcardsLuna"
+  },
+  "ES-419": {
+    "intro_desc": "Escucha la pronunciación nativa y repite cada palabra en las pausas.<br>Al final te espera un mini test rápido.",
+    "intro_speech_template": "Vamos a aprender {target_lang}. El tema de hoy es: {deck_title}.",
+    "outro_speech": "¿Quieres que estas palabras se te queden de verdad? Entra a flashcardsluna.com y practica este mazo y otros mazos temáticos gratis. ¡El enlace está en la descripción!",
+    "outro_title": "Haz que estas palabras se queden",
+    "outro_subtitle": "Practica este mazo gratis en FlashcardsLuna"
+  },
+  "RU": {
+    "intro_desc": "Слушай произношение носителей и повторяй слова в паузах.<br>В конце будет короткий мини-тест.",
+    "intro_speech_template": "Учишь {target_lang}? Тема урока: {deck_title}.",
+    "outro_speech": "Хочешь, чтобы эти слова действительно запомнились? Переходи на флэшкардс луна точка ком и тренируй эту колоду и другие тематические наборы бесплатно. Ссылка в описании!",
+    "outro_title": "Закрепи эти слова",
+    "outro_subtitle": "Тренируй эту колоду бесплатно на FlashcardsLuna"
+  },
+  "DE": {
+    "intro_desc": "Hör dir die Aussprache von Muttersprachlern an und sprich die Wörter in den Pausen nach.<br>Am Ende wartet ein kurzer Mini-Test auf dich.",
+    "intro_speech_template": "Lerne {target_lang}. Heute geht es um: {deck_title}.",
+    "outro_speech": "Möchtest du dir diese Wörter wirklich merken? Öffne flashcardsluna.com und übe dieses Set und weitere thematische Lernsets kostenlos. Den Link findest du in der Beschreibung!",
+    "outro_title": "Diese Wörter bleiben hängen",
+    "outro_subtitle": "Übe dieses Set kostenlos auf FlashcardsLuna"
+  },
+  "FR": {
+    "intro_desc": "Écoutez la prononciation native et répétez chaque mot pendant les pauses.<br>Un mini-test rapide vous attend à la fin.",
+    "intro_speech_template": "Apprenons le {target_lang}. Le thème du jour : {deck_title}.",
+    "outro_speech": "Vous voulez vraiment retenir ces mots ? Ouvrez flashcardsluna.com et entraînez-vous gratuitement avec ce jeu de cartes et d'autres thèmes. Le lien est dans la description !",
+    "outro_title": "Retenez ces mots pour de bon",
+    "outro_subtitle": "Entraînez-vous gratuitement sur FlashcardsLuna"
+  },
+  "IT": {
+    "intro_desc": "Ascolta la pronuncia dei madrelingua e ripeti le parole nelle pause.<br>Alla fine ti aspetta un breve mini-test.",
+    "intro_speech_template": "Impariamo {target_lang}. Il tema di oggi è: {deck_title}.",
+    "outro_speech": "Vuoi ricordare davvero queste parole? Vai su flashcardsluna.com e fai pratica gratis con questo set e con altri set tematici. Link in descrizione!",
+    "outro_title": "Fissa queste parole nella memoria",
+    "outro_subtitle": "Esercitati gratis su FlashcardsLuna"
+  },
+  "PT": {
+    "intro_desc": "Ouve a pronúncia de falantes nativos e repete as palavras nas pausas.<br>No fim há um pequeno teste rápido.",
+    "intro_speech_template": "Vamos aprender {target_lang}. O tema de hoje é: {deck_title}.",
+    "outro_speech": "Queres mesmo fixar estas palavras? Abre flashcardsluna.com e pratica gratuitamente esta lista e outros conjuntos temáticos. O link está na descrição!",
+    "outro_title": "Fixa estas palavras",
+    "outro_subtitle": "Pratica este conjunto grátis no FlashcardsLuna"
+  },
+  "PT-BR": {
+    "intro_desc": "Ouça a pronúncia de falantes nativos e repita as palavras nas pausas.<br>No final, tem um mini teste rápido.",
+    "intro_speech_template": "Vamos aprender {target_lang}. O tema de hoje é: {deck_title}.",
+    "outro_speech": "Quer memorizar essas palavras de verdade? Acesse flashcardsluna.com e pratique este conjunto e outros conjuntos temáticos de graça. O link está na descrição!",
+    "outro_title": "Memorize essas palavras",
+    "outro_subtitle": "Pratique este conjunto grátis no FlashcardsLuna"
+  },
+  "ZH": {
+    "intro_desc": "听母语者发音，并在停顿时跟读每个词。<br>最后有一个快速小测验。",
+    "intro_speech_template": "一起学习{target_lang}。今天的主题是：{deck_title}。",
+    "outro_speech": "想真正记住这些词吗？打开 flashcardsluna.com，免费练习这套卡片和更多主题词卡。链接在视频简介里！",
+    "outro_title": "把这些词记牢",
+    "outro_subtitle": "在 FlashcardsLuna 免费练习这套词卡"
+  },
+  "JA": {
+    "intro_desc": "ネイティブの発音を聞いて、ポーズの間に声に出して繰り返しましょう。<br>最後に短いミニテストがあります。",
+    "intro_speech_template": "{target_lang}を学びましょう。今日のテーマは「{deck_title}」です。",
+    "outro_speech": "この単語をしっかり覚えたいですか？flashcardsluna.comで、このセットや他のテーマ別セットを無料で練習できます。リンクは概要欄にあります！",
+    "outro_title": "この単語を定着させよう",
+    "outro_subtitle": "FlashcardsLunaでこのセットを無料練習"
+  },
+  "KO": {
+    "intro_desc": "원어민 발음을 듣고, 잠깐 멈추는 동안 단어를 따라 말해 보세요.<br>마지막에는 짧은 미니 테스트가 있습니다.",
+    "intro_speech_template": "{target_lang}을 배워 봅시다. 오늘의 주제는 {deck_title}입니다.",
+    "outro_speech": "이 단어들을 제대로 기억하고 싶나요? flashcardsluna.com에서 이 세트와 다른 주제별 카드 세트를 무료로 연습해 보세요. 링크는 설명란에 있습니다!",
+    "outro_title": "이 단어들을 확실히 익히세요",
+    "outro_subtitle": "FlashcardsLuna에서 이 세트를 무료로 연습"
+  },
+  "VI": {
+    "intro_desc": "Nghe phát âm của người bản xứ rồi lặp lại từng từ trong các khoảng dừng.<br>Cuối video sẽ có một bài kiểm tra nhanh.",
+    "intro_speech_template": "Cùng học {target_lang}. Chủ đề hôm nay là: {deck_title}.",
+    "outro_speech": "Bạn muốn nhớ thật chắc những từ này? Hãy mở flashcardsluna.com và luyện miễn phí bộ này cùng nhiều bộ thẻ theo chủ đề khác. Liên kết ở phần mô tả!",
+    "outro_title": "Ghi nhớ chắc những từ này",
+    "outro_subtitle": "Luyện bộ này miễn phí trên FlashcardsLuna"
+  },
+  "TH": {
+    "intro_desc": "ฟังเสียงเจ้าของภาษา แล้วพูดตามแต่ละคำในช่วงที่หยุดพัก<br>ท้ายวิดีโอมีมินิเทสต์สั้น ๆ ให้ลองทำ",
+    "intro_speech_template": "มาเรียน{target_lang}กัน หัวข้อวันนี้คือ {deck_title}",
+    "outro_speech": "อยากจำคำเหล่านี้ให้ขึ้นใจไหม? เข้าไปที่ flashcardsluna.com แล้วฝึกชุดนี้และชุดคำศัพท์ตามหัวข้ออื่น ๆ ได้ฟรี ลิงก์อยู่ในคำอธิบาย!",
+    "outro_title": "จำคำเหล่านี้ให้ขึ้นใจ",
+    "outro_subtitle": "ฝึกชุดนี้ฟรีบน FlashcardsLuna"
+  },
+  "MS": {
+    "intro_desc": "Dengar sebutan penutur jati dan ulang setiap perkataan semasa jeda.<br>Di akhir video ada ujian mini yang ringkas.",
+    "intro_speech_template": "Jom belajar {target_lang}. Topik hari ini: {deck_title}.",
+    "outro_speech": "Nak ingat perkataan ini dengan lebih mantap? Buka flashcardsluna.com dan berlatih set ini serta set bertema lain secara percuma. Pautan ada di ruangan deskripsi!",
+    "outro_title": "Kukuhkan ingatan perkataan ini",
+    "outro_subtitle": "Berlatih set ini percuma di FlashcardsLuna"
+  },
+  "ID": {
+    "intro_desc": "Dengarkan pelafalan penutur asli, lalu ulangi setiap kata saat jeda.<br>Di akhir video ada mini tes singkat.",
+    "intro_speech_template": "Mari belajar {target_lang}. Topik hari ini: {deck_title}.",
+    "outro_speech": "Ingin benar-benar mengingat kata-kata ini? Buka flashcardsluna.com dan latih set ini serta set bertema lainnya secara gratis. Tautannya ada di deskripsi!",
+    "outro_title": "Kuatkan ingatan kata-kata ini",
+    "outro_subtitle": "Latih set ini gratis di FlashcardsLuna"
+  },
+  "PL": {
+    "intro_desc": "Posłuchaj wymowy rodzimych użytkowników języka i powtarzaj słowa w pauzach.<br>Na końcu czeka krótki minitest.",
+    "intro_speech_template": "Uczymy się {target_lang}. Dzisiejszy temat: {deck_title}.",
+    "outro_speech": "Chcesz naprawdę zapamiętać te słowa? Wejdź na flashcardsluna.com i ćwicz ten zestaw oraz inne zestawy tematyczne za darmo. Link znajdziesz w opisie!",
+    "outro_title": "Utrwal te słowa",
+    "outro_subtitle": "Ćwicz ten zestaw za darmo na FlashcardsLuna"
+  },
+  "NL": {
+    "intro_desc": "Luister naar de uitspraak van moedertaalsprekers en herhaal de woorden tijdens de pauzes.<br>Aan het einde wacht een korte minitest.",
+    "intro_speech_template": "We leren {target_lang}. Het onderwerp van vandaag: {deck_title}.",
+    "outro_speech": "Wil je deze woorden echt onthouden? Open flashcardsluna.com en oefen deze set en andere thematische sets gratis. De link staat in de beschrijving!",
+    "outro_title": "Laat deze woorden blijven hangen",
+    "outro_subtitle": "Oefen deze set gratis op FlashcardsLuna"
+  },
+  "SV": {
+    "intro_desc": "Lyssna på uttalet från modersmålstalare och upprepa orden i pauserna.<br>I slutet väntar ett kort minitest.",
+    "intro_speech_template": "Vi lär oss {target_lang}. Dagens tema är: {deck_title}.",
+    "outro_speech": "Vill du verkligen komma ihåg de här orden? Öppna flashcardsluna.com och öva gratis med det här setet och andra tematiska ordset. Länken finns i beskrivningen!",
+    "outro_title": "Få orden att fastna",
+    "outro_subtitle": "Öva det här setet gratis på FlashcardsLuna"
+  },
+  "NO": {
+    "intro_desc": "Lytt til uttalen fra morsmålsbrukere og gjenta ordene i pausene.<br>Til slutt får du en kort minitest.",
+    "intro_speech_template": "Vi lærer {target_lang}. Dagens tema er: {deck_title}.",
+    "outro_speech": "Vil du virkelig huske disse ordene? Åpne flashcardsluna.com og øv gratis med dette settet og andre tematiske ordsett. Lenken ligger i beskrivelsen!",
+    "outro_title": "Få ordene til å sitte",
+    "outro_subtitle": "Øv med dette settet gratis på FlashcardsLuna"
+  },
+  "NB": {
+    "intro_desc": "Lytt til uttalen fra morsmålsbrukere og gjenta ordene i pausene.<br>Til slutt får du en kort minitest.",
+    "intro_speech_template": "Vi lærer {target_lang}. Dagens tema er: {deck_title}.",
+    "outro_speech": "Vil du virkelig huske disse ordene? Åpne flashcardsluna.com og øv gratis med dette settet og andre tematiske ordsett. Lenken ligger i beskrivelsen!",
+    "outro_title": "Få ordene til å sitte",
+    "outro_subtitle": "Øv med dette settet gratis på FlashcardsLuna"
+  },
+  "DA": {
+    "intro_desc": "Lyt til udtalen fra modersmålstalere, og gentag ordene i pauserne.<br>Til sidst får du en kort minitest.",
+    "intro_speech_template": "Vi lærer {target_lang}. Dagens emne er: {deck_title}.",
+    "outro_speech": "Vil du virkelig huske disse ord? Åbn flashcardsluna.com, og øv gratis med dette sæt og andre tematiske ordsæt. Linket er i beskrivelsen!",
+    "outro_title": "Få ordene til at sidde fast",
+    "outro_subtitle": "Øv dette sæt gratis på FlashcardsLuna"
+  },
+  "FI": {
+    "intro_desc": "Kuuntele äidinkielisten puhujien ääntämistä ja toista sanat taukojen aikana.<br>Lopussa on lyhyt minitesti.",
+    "intro_speech_template": "Opetellaan {target_lang}. Tämän päivän aihe on: {deck_title}.",
+    "outro_speech": "Haluatko todella muistaa nämä sanat? Avaa flashcardsluna.com ja harjoittele tätä sanastopakettia sekä muita teemapaketteja ilmaiseksi. Linkki on kuvauksessa!",
+    "outro_title": "Paina nämä sanat mieleen",
+    "outro_subtitle": "Harjoittele tätä pakettia ilmaiseksi FlashcardsLunassa"
+  },
+  "CS": {
+    "intro_desc": "Poslouchejte výslovnost rodilých mluvčích a opakujte slova během pauz.<br>Na konci vás čeká krátký minitest.",
+    "intro_speech_template": "Učíme se {target_lang}. Dnešní téma: {deck_title}.",
+    "outro_speech": "Chcete si tato slova opravdu zapamatovat? Otevřete flashcardsluna.com a procvičujte si zdarma tuto sadu i další tematické sady. Odkaz je v popisu!",
+    "outro_title": "Upevněte si tato slova",
+    "outro_subtitle": "Procvičujte tuto sadu zdarma na FlashcardsLuna"
+  },
+  "SK": {
+    "intro_desc": "Počúvajte výslovnosť rodených hovoriacich a opakujte slová počas prestávok.<br>Na konci vás čaká krátky minitest.",
+    "intro_speech_template": "Učíme sa {target_lang}. Dnešná téma: {deck_title}.",
+    "outro_speech": "Chcete si tieto slová naozaj zapamätať? Otvorte flashcardsluna.com a precvičujte si zadarmo túto sadu aj ďalšie tematické sady. Odkaz je v popise!",
+    "outro_title": "Upevnite si tieto slová",
+    "outro_subtitle": "Precvičujte túto sadu zadarmo na FlashcardsLuna"
+  },
+  "HU": {
+    "intro_desc": "Hallgasd meg az anyanyelvi kiejtést, majd ismételd el a szavakat a szünetekben.<br>A végén egy rövid miniteszt vár.",
+    "intro_speech_template": "Tanuljunk {target_lang}. A mai téma: {deck_title}.",
+    "outro_speech": "Szeretnéd, hogy ezek a szavak tényleg megmaradjanak? Nyisd meg a flashcardsluna.com oldalt, és gyakorold ezt a csomagot és más tematikus csomagokat ingyen. A link a leírásban található!",
+    "outro_title": "Rögzítsd ezeket a szavakat",
+    "outro_subtitle": "Gyakorold ezt a csomagot ingyen a FlashcardsLunán"
+  },
+  "RO": {
+    "intro_desc": "Ascultă pronunția vorbitorilor nativi și repetă cuvintele în pauze.<br>La final te așteaptă un mini-test rapid.",
+    "intro_speech_template": "Învățăm {target_lang}. Tema de azi: {deck_title}.",
+    "outro_speech": "Vrei să reții cu adevărat aceste cuvinte? Intră pe flashcardsluna.com și exersează gratuit acest set și alte seturi tematice. Linkul este în descriere!",
+    "outro_title": "Fixează aceste cuvinte",
+    "outro_subtitle": "Exersează acest set gratuit pe FlashcardsLuna"
+  },
+  "BG": {
+    "intro_desc": "Слушайте произношението на носители на езика и повтаряйте думите в паузите.<br>Накрая ви очаква кратък мини тест.",
+    "intro_speech_template": "Учим {target_lang}. Днешната тема е: {deck_title}.",
+    "outro_speech": "Искате тези думи наистина да останат в паметта ви? Отворете flashcardsluna.com и упражнявайте този комплект и други тематични комплекти безплатно. Връзката е в описанието!",
+    "outro_title": "Затвърдете тези думи",
+    "outro_subtitle": "Упражнявайте този комплект безплатно във FlashcardsLuna"
+  },
+  "HR": {
+    "intro_desc": "Slušaj izgovor izvornih govornika i ponavljaj riječi u pauzama.<br>Na kraju te čeka kratak mini-test.",
+    "intro_speech_template": "Učimo {target_lang}. Današnja tema je: {deck_title}.",
+    "outro_speech": "Želiš stvarno zapamtiti ove riječi? Otvori flashcardsluna.com i besplatno vježbaj ovaj set i druge tematske setove. Poveznica je u opisu!",
+    "outro_title": "Učvrsti ove riječi",
+    "outro_subtitle": "Vježbaj ovaj set besplatno na FlashcardsLuna"
+  },
+  "SR": {
+    "intro_desc": "Slušaj izgovor izvornih govornika i ponavljaj reči u pauzama.<br>Na kraju te čeka kratak mini-test.",
+    "intro_speech_template": "Učimo {target_lang}. Današnja tema je: {deck_title}.",
+    "outro_speech": "Želiš da zaista zapamtiš ove reči? Otvori flashcardsluna.com i besplatno vežbaj ovaj set i druge tematske setove. Link je u opisu!",
+    "outro_title": "Učvrsti ove reči",
+    "outro_subtitle": "Vežbaj ovaj set besplatno na FlashcardsLuna"
+  },
+  "SL": {
+    "intro_desc": "Poslušaj izgovor maternih govorcev in ponovi besede med premori.<br>Na koncu te čaka kratek mini test.",
+    "intro_speech_template": "Učimo se {target_lang}. Današnja tema je: {deck_title}.",
+    "outro_speech": "Želiš te besede res obdržati v spominu? Odpri flashcardsluna.com in brezplačno vadi ta sklop ter druge tematske sklope. Povezava je v opisu!",
+    "outro_title": "Utrdi te besede",
+    "outro_subtitle": "Brezplačno vadi ta sklop na FlashcardsLuna"
+  },
+  "LT": {
+    "intro_desc": "Klausykitės gimtakalbių tarimo ir kartokite žodžius per pauzes.<br>Pabaigoje laukia trumpas mini testas.",
+    "intro_speech_template": "Mokomės {target_lang}. Šios dienos tema: {deck_title}.",
+    "outro_speech": "Norite tikrai įsiminti šiuos žodžius? Atsidarykite flashcardsluna.com ir nemokamai praktikuokitės su šiuo rinkiniu bei kitais teminiais rinkiniais. Nuoroda yra aprašyme!",
+    "outro_title": "Įtvirtinkite šiuos žodžius",
+    "outro_subtitle": "Nemokamai praktikuokitės su šiuo rinkiniu FlashcardsLuna"
+  },
+  "LV": {
+    "intro_desc": "Klausieties dzimtās valodas runātāju izrunu un atkārtojiet vārdus pauzēs.<br>Beigās būs īss minitests.",
+    "intro_speech_template": "Mācāmies {target_lang}. Šodienas tēma: {deck_title}.",
+    "outro_speech": "Vai vēlaties šos vārdus tiešām iegaumēt? Atveriet flashcardsluna.com un bez maksas praktizējiet šo komplektu un citus tematiskos komplektus. Saite ir aprakstā!",
+    "outro_title": "Nostipriniet šos vārdus",
+    "outro_subtitle": "Praktizējiet šo komplektu bez maksas FlashcardsLuna"
+  },
+  "ET": {
+    "intro_desc": "Kuula emakeelsete kõnelejate hääldust ja korda sõnu pauside ajal.<br>Lõpus ootab sind lühike minitest.",
+    "intro_speech_template": "Õpime {target_lang}. Tänane teema on: {deck_title}.",
+    "outro_speech": "Tahad need sõnad päriselt meelde jätta? Ava flashcardsluna.com ja harjuta seda komplekti ning teisi teemakomplekte tasuta. Link on kirjelduses!",
+    "outro_title": "Kinnista need sõnad",
+    "outro_subtitle": "Harjuta seda komplekti tasuta FlashcardsLunas"
+  },
+  "IS": {
+    "intro_desc": "Hlustaðu á framburð móðurmálshafa og endurtaktu orðin í pásunum.<br>Í lokin bíður stutt smápróf.",
+    "intro_speech_template": "Við lærum {target_lang}. Efni dagsins er: {deck_title}.",
+    "outro_speech": "Viltu muna þessi orð fyrir alvöru? Opnaðu flashcardsluna.com og æfðu þetta sett og önnur þemasett ókeypis. Tengillinn er í lýsingunni!",
+    "outro_title": "Festu þessi orð í minni",
+    "outro_subtitle": "Æfðu þetta sett ókeypis á FlashcardsLuna"
+  },
+  "HI": {
+    "intro_desc": "मूल वक्ताओं का उच्चारण सुनें और विराम के दौरान हर शब्द दोहराएँ।<br>अंत में एक छोटा मिनी-टेस्ट होगा।",
+    "intro_speech_template": "आइए {target_lang} सीखें। आज का विषय है: {deck_title}।",
+    "outro_speech": "क्या आप इन शब्दों को सच में याद रखना चाहते हैं? flashcardsluna.com खोलें और इस सेट के साथ-साथ अन्य विषय-आधारित सेटों का मुफ्त अभ्यास करें। लिंक विवरण में है!",
+    "outro_title": "इन शब्दों को पक्का करें",
+    "outro_subtitle": "FlashcardsLuna पर यह सेट मुफ्त अभ्यास करें"
+  },
+  "BN": {
+    "intro_desc": "স্থানীয় বক্তাদের উচ্চারণ শুনুন এবং বিরতির সময় প্রতিটি শব্দ পুনরাবৃত্তি করুন।<br>শেষে একটি ছোট মিনি-টেস্ট থাকবে।",
+    "intro_speech_template": "চলুন {target_lang} শিখি। আজকের বিষয়: {deck_title}।",
+    "outro_speech": "এই শব্দগুলো সত্যিই মনে রাখতে চান? flashcardsluna.com খুলে এই সেট ও আরও বিষয়ভিত্তিক সেট বিনামূল্যে অনুশীলন করুন। লিঙ্কটি বর্ণনায় আছে!",
+    "outro_title": "এই শব্দগুলো মনে গেঁথে নিন",
+    "outro_subtitle": "FlashcardsLuna-তে এই সেট বিনামূল্যে অনুশীলন করুন"
+  },
+  "TL": {
+    "intro_desc": "Pakinggan ang bigkas ng native speaker at ulitin ang bawat salita sa mga pahinga.<br>Sa dulo, may maikling mini-test.",
+    "intro_speech_template": "Pag-aralan natin ang {target_lang}. Paksa natin ngayon: {deck_title}.",
+    "outro_speech": "Gusto mo bang tumatak talaga ang mga salitang ito? Buksan ang flashcardsluna.com at magpraktis nang libre gamit ang set na ito at iba pang set ayon sa paksa. Nasa description ang link!",
+    "outro_title": "Patatagin ang memorya sa mga salitang ito",
+    "outro_subtitle": "Magpraktis nang libre sa FlashcardsLuna"
+  },
+  "MY": {
+    "intro_desc": "မိခင်ဘာသာစကားပြောသူများ၏ အသံထွက်ကို နားထောင်ပြီး ခေတ္တရပ်ချိန်များတွင် စကားလုံးများကို ထပ်ပြောပါ။<br>အဆုံးတွင် မီနီစမ်းသပ်မှုတိုတစ်ခု ရှိပါမည်။",
+    "intro_speech_template": "{target_lang} ကို လေ့လာကြရအောင်။ ယနေ့ခေါင်းစဉ်မှာ {deck_title} ဖြစ်ပါသည်။",
+    "outro_speech": "ဒီစကားလုံးတွေကို တကယ်မှတ်မိချင်ပါသလား။ flashcardsluna.com ကို ဖွင့်ပြီး ဒီ set နဲ့ အခြား ခေါင်းစဉ်အလိုက် set တွေကို အခမဲ့ လေ့ကျင့်ပါ။ လင့်ခ်က ဖော်ပြချက်ထဲမှာ ရှိပါတယ်!",
+    "outro_title": "ဒီစကားလုံးတွေကို မှတ်မိအောင် လေ့ကျင့်ပါ",
+    "outro_subtitle": "FlashcardsLuna တွင် ဒီ set ကို အခမဲ့ လေ့ကျင့်ပါ"
+  },
+  "KM": {
+    "intro_desc": "ស្តាប់ការបញ្ចេញសំឡេងរបស់អ្នកនិយាយដើម ហើយនិយាយតាមពាក្យនីមួយៗនៅពេលផ្អាក។<br>នៅចុងវីដេអូមានតេស្តខ្លីមួយ។",
+    "intro_speech_template": "យើងរៀន {target_lang}។ ប្រធានបទថ្ងៃនេះគឺ៖ {deck_title}។",
+    "outro_speech": "ចង់ចងចាំពាក្យទាំងនេះឱ្យបានពិតប្រាកដទេ? បើក flashcardsluna.com ហើយហាត់រៀន set នេះ និង set តាមប្រធានបទផ្សេងៗដោយឥតគិតថ្លៃ។ តំណភ្ជាប់មាននៅក្នុងការពិពណ៌នា!",
+    "outro_title": "ចងចាំពាក្យទាំងនេះឱ្យបានមាំ",
+    "outro_subtitle": "ហាត់ set នេះដោយឥតគិតថ្លៃលើ FlashcardsLuna"
+  },
+  "LO": {
+    "intro_desc": "ຟັງການອອກສຽງຂອງເຈົ້າຂອງພາສາ ແລ້ວເວົ້າຕາມແຕ່ລະຄໍາໃນຊ່ວງພັກ.<br>ທ້າຍວິດີໂອມີມິນິເທັດສັ້ນໆ.",
+    "intro_speech_template": "ມາຮຽນ {target_lang} ກັນ. ຫົວຂໍ້ມື້ນີ້ແມ່ນ: {deck_title}.",
+    "outro_speech": "ຢາກຈື່ຄໍາເຫຼົ່ານີ້ໃຫ້ແມ່ນບໍ? ເປີດ flashcardsluna.com ແລ້ວຝຶກ set ນີ້ ແລະ set ຕາມຫົວຂໍ້ອື່ນໆໄດ້ຟຣີ. ລິ້ງຢູ່ໃນຄໍາອະທິບາຍ!",
+    "outro_title": "ຝຶກໃຫ້ຈື່ຄໍາເຫຼົ່ານີ້",
+    "outro_subtitle": "ຝຶກ set ນີ້ຟຣີໃນ FlashcardsLuna"
+  },
+  "NE": {
+    "intro_desc": "मूल वक्ताहरूको उच्चारण सुन्नुहोस् र रोकिएको बेला प्रत्येक शब्द दोहोर्याउनुहोस्।<br>अन्त्यमा छोटो मिनी टेस्ट छ।",
+    "intro_speech_template": "आउनुहोस् {target_lang} सिकौँ। आजको विषय: {deck_title}।",
+    "outro_speech": "यी शब्दहरू साँच्चै याद राख्न चाहनुहुन्छ? flashcardsluna.com खोल्नुहोस् र यो सेट तथा अरू विषयगत सेटहरू निःशुल्क अभ्यास गर्नुहोस्। लिंक विवरणमा छ!",
+    "outro_title": "यी शब्दहरू पक्का बनाउनुहोस्",
+    "outro_subtitle": "FlashcardsLuna मा यो सेट निःशुल्क अभ्यास गर्नुहोस्"
+  },
+  "SI": {
+    "intro_desc": "ස්වදේශික කථිකයන්ගේ උච්චාරණය අසා, විරාම අතරතුර වචන නැවත කියන්න.<br>අවසානයේ කෙටි මිනි පරීක්ෂණයක් ඇත.",
+    "intro_speech_template": "අපි {target_lang} ඉගෙන ගනිමු. අද මාතෘකාව: {deck_title}.",
+    "outro_speech": "මෙම වචන ඇත්තටම මතක තබාගන්න අවශ්‍යද? flashcardsluna.com විවෘත කර මෙම set එක සහ වෙනත් තේමාත්මක set නොමිලේ පුහුණු වන්න. සබැඳිය විස්තරයේ ඇත!",
+    "outro_title": "මෙම වචන හොඳින් මතක තබාගන්න",
+    "outro_subtitle": "FlashcardsLuna හි මෙම set එක නොමිලේ පුහුණු වන්න"
+  },
+  "TA": {
+    "intro_desc": "தாய்மொழிப் பேச்சாளர்களின் உச்சரிப்பைக் கேட்டு, இடைவெளிகளில் ஒவ்வொரு சொல்லையும் மீண்டும் சொல்லுங்கள்.<br>கடைசியில் ஒரு சிறிய மினி தேர்வு உள்ளது.",
+    "intro_speech_template": "{target_lang} கற்போம். இன்றைய தலைப்பு: {deck_title}.",
+    "outro_speech": "இந்த சொற்களை உண்மையாக நினைவில் வைத்துக்கொள்ள விரும்புகிறீர்களா? flashcardsluna.com திறந்து, இந்த set மற்றும் பிற தலைப்பு சார்ந்த set-களை இலவசமாகப் பயிற்சி செய்யுங்கள். இணைப்பு விளக்கத்தில் உள்ளது!",
+    "outro_title": "இந்த சொற்களை நன்றாகப் பதியவையுங்கள்",
+    "outro_subtitle": "FlashcardsLuna-வில் இந்த set-ஐ இலவசமாகப் பயிற்சி செய்யுங்கள்"
+  },
+  "TE": {
+    "intro_desc": "మాతృభాషగా మాట్లాడేవారి ఉచ్చారణను వినండి, విరామాల్లో ప్రతి పదాన్ని పునరావృతం చేయండి.<br>చివర్లో చిన్న మినీ టెస్ట్ ఉంటుంది.",
+    "intro_speech_template": "{target_lang} నేర్చుకుందాం. ఈ రోజు విషయం: {deck_title}.",
+    "outro_speech": "ఈ పదాలు నిజంగా గుర్తుండాలని అనుకుంటున్నారా? flashcardsluna.com తెరిచి ఈ set‌తో పాటు ఇతర అంశాల set‌లను ఉచితంగా అభ్యాసం చేయండి. లింక్ వివరణలో ఉంది!",
+    "outro_title": "ఈ పదాలను బాగా గుర్తుపెట్టుకోండి",
+    "outro_subtitle": "FlashcardsLunaలో ఈ set‌ను ఉచితంగా అభ్యాసం చేయండి"
+  },
+  "KN": {
+    "intro_desc": "ಮಾತೃಭಾಷಿಕರ ಉಚ್ಚಾರಣೆಯನ್ನು ಕೇಳಿ, ವಿರಾಮಗಳಲ್ಲಿ ಪ್ರತಿಯೊಂದು ಪದವನ್ನು ಮರುಕಳಿ ಹೇಳಿ.<br>ಕೊನೆಯಲ್ಲಿ ಚಿಕ್ಕ ಮಿನಿ ಪರೀಕ್ಷೆ ಇದೆ.",
+    "intro_speech_template": "{target_lang} ಕಲಿಯೋಣ. ಇಂದಿನ ವಿಷಯ: {deck_title}.",
+    "outro_speech": "ಈ ಪದಗಳು ನಿಜವಾಗಿಯೂ ನೆನಪಿನಲ್ಲಿ ಉಳಿಯಬೇಕೆ? flashcardsluna.com ತೆರೆಯಿರಿ ಮತ್ತು ಈ set ಹಾಗೂ ಇತರ ವಿಷಯಾಧಾರಿತ setಗಳನ್ನು ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ. ಲಿಂಕ್ ವಿವರಣೆಯಲ್ಲಿ ಇದೆ!",
+    "outro_title": "ಈ ಪದಗಳನ್ನು ನೆನಪಿನಲ್ಲಿ ಗಟ್ಟಿಗೊಳಿಸಿ",
+    "outro_subtitle": "FlashcardsLunaನಲ್ಲಿ ಈ set ಅನ್ನು ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ"
+  },
+  "ML": {
+    "intro_desc": "മാതൃഭാഷക്കാരുടെ ഉച്ചാരണം കേട്ട്, ഇടവേളകളിൽ ഓരോ വാക്കും ആവർത്തിക്കുക.<br>അവസാനം ഒരു ചെറിയ മിനി ടെസ്റ്റ് ഉണ്ടാകും.",
+    "intro_speech_template": "{target_lang} പഠിക്കാം. ഇന്നത്തെ വിഷയം: {deck_title}.",
+    "outro_speech": "ഈ വാക്കുകൾ ശരിക്കും ഓർമ്മയിൽ നിൽക്കണമോ? flashcardsluna.com തുറന്ന് ഈ set-ഉം മറ്റു തീം set-ുകളും സൗജന്യമായി പരിശീലിക്കുക. ലിങ്ക് വിവരണത്തിലാണ്!",
+    "outro_title": "ഈ വാക്കുകൾ മനസ്സിൽ ഉറപ്പിക്കുക",
+    "outro_subtitle": "FlashcardsLunaയിൽ ഈ set സൗജന്യമായി പരിശീലിക്കുക"
+  },
+  "UZ": {
+    "intro_desc": "Ona tilida so'zlashuvchilarning talaffuzini tinglang va pauzalarda har bir so'zni takrorlang.<br>Oxirida qisqa mini-test bor.",
+    "intro_speech_template": "{target_lang} tilini o'rganamiz. Bugungi mavzu: {deck_title}.",
+    "outro_speech": "Bu so'zlar haqiqatan ham yodingizda qolishini xohlaysizmi? flashcardsluna.com saytini oching va ushbu to'plam hamda boshqa mavzuli to'plamlarni bepul mashq qiling. Havola tavsifda!",
+    "outro_title": "Bu so'zlarni mustahkamlang",
+    "outro_subtitle": "Ushbu to'plamni FlashcardsLuna'da bepul mashq qiling"
+  },
+  "KK": {
+    "intro_desc": "Тіл иелерінің айтылымын тыңдап, үзілістерде әр сөзді қайталаңыз.<br>Соңында қысқа мини-тест болады.",
+    "intro_speech_template": "{target_lang} тілін үйренейік. Бүгінгі тақырып: {deck_title}.",
+    "outro_speech": "Бұл сөздерді шынымен есте сақтағыңыз келе ме? flashcardsluna.com сайтын ашып, осы жинақты және басқа тақырыптық жинақтарды тегін қайталаңыз. Сілтеме сипаттамада!",
+    "outro_title": "Бұл сөздерді бекітіңіз",
+    "outro_subtitle": "Осы жинақты FlashcardsLuna сайтында тегін қайталаңыз"
+  },
+  "AZ": {
+    "intro_desc": "Ana dili daşıyıcılarının tələffüzünü dinləyin və fasilələrdə hər sözü təkrar edin.<br>Sonda qısa mini-test olacaq.",
+    "intro_speech_template": "{target_lang} öyrənirik. Bugünkü mövzu: {deck_title}.",
+    "outro_speech": "Bu sözləri həqiqətən yadda saxlamaq istəyirsiniz? flashcardsluna.com saytını açın və bu dəsti, eləcə də digər mövzu dəstlərini pulsuz məşq edin. Keçid təsvirdədir!",
+    "outro_title": "Bu sözləri möhkəmləndirin",
+    "outro_subtitle": "Bu dəsti FlashcardsLuna-da pulsuz məşq edin"
+  },
+  "KA": {
+    "intro_desc": "მოუსმინეთ მშობლიურ მეტყველებს და პაუზების დროს თითოეული სიტყვა გაიმეორეთ.<br>ბოლოს მოკლე მინი-ტესტი გელით.",
+    "intro_speech_template": "ვისწავლოთ {target_lang}. დღევანდელი თემაა: {deck_title}.",
+    "outro_speech": "გსურთ ეს სიტყვები ნამდვილად დაგამახსოვრდეთ? გახსენით flashcardsluna.com და უფასოდ ივარჯიშეთ ამ ნაკრებითა და სხვა თემატური ნაკრებებით. ბმული აღწერაშია!",
+    "outro_title": "განამტკიცეთ ეს სიტყვები",
+    "outro_subtitle": "ივარჯიშეთ ამ ნაკრებით უფასოდ FlashcardsLuna-ზე"
+  },
+  "HY": {
+    "intro_desc": "Լսեք լեզվակիրների արտասանությունը և դադարների ընթացքում կրկնեք յուրաքանչյուր բառը։<br>Վերջում կլինի կարճ մինի-թեստ։",
+    "intro_speech_template": "Սովորենք {target_lang}։ Այսօրվա թեման է՝ {deck_title}։",
+    "outro_speech": "Ուզո՞ւմ եք, որ այս բառերը իսկապես հիշվեն։ Բացեք flashcardsluna.com կայքը և անվճար վարժվեք այս հավաքածուով ու այլ թեմատիկ հավաքածուներով։ Հղումը նկարագրության մեջ է։",
+    "outro_title": "Ամրապնդեք այս բառերը",
+    "outro_subtitle": "Այս հավաքածուն անվճար վարժեք FlashcardsLuna-ում"
+  },
+  "TR": {
+    "intro_desc": "Ana dili konuşurlarının telaffuzunu dinleyin ve duraklamalarda her kelimeyi tekrar edin.<br>Sonda kısa bir mini test var.",
+    "intro_speech_template": "{target_lang} öğreniyoruz. Bugünün konusu: {deck_title}.",
+    "outro_speech": "Bu kelimeleri gerçekten aklınızda tutmak ister misiniz? flashcardsluna.com'u açın ve bu seti, ayrıca diğer tematik setleri ücretsiz çalışın. Bağlantı açıklamada!",
+    "outro_title": "Bu kelimeleri pekiştirin",
+    "outro_subtitle": "Bu seti FlashcardsLuna'da ücretsiz çalışın"
+  },
+  "SW": {
+    "intro_desc": "Sikiliza matamshi ya wazungumzaji asilia, kisha rudia kila neno wakati wa mapumziko.<br>Mwishoni kuna jaribio fupi.",
+    "intro_speech_template": "Tujifunze {target_lang}. Mada ya leo ni: {deck_title}.",
+    "outro_speech": "Unataka kuyakumbuka maneno haya vizuri? Fungua flashcardsluna.com na ujifunze seti hii pamoja na seti nyingine za mada bila malipo. Kiungo kiko kwenye maelezo!",
+    "outro_title": "Yaimarishe maneno haya",
+    "outro_subtitle": "Jifunze seti hii bila malipo kwenye FlashcardsLuna"
+  }
+};
+
+for (const [languageCode, values] of Object.entries(nativeStyleOverrides)) {
+  if (!translations[languageCode]) {
+    throw new Error(`Native-style video localization override has unknown language code: ${languageCode}`);
+  }
+  Object.assign(translations[languageCode], values);
+}
+
 const qrScanLabels = {
   "EN": "Scan me",
   "EN-GB": "Scan me",
