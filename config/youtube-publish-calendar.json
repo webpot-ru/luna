@@ -97517,6 +97517,52 @@
       "youtubeVideoId": "DxFdKC1TdZY",
       "youtubePlaylistId": "PLLRY18DlXZ60",
       "playlistItemId": "UExMUlkxOERsWFo2MC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "KO",
+      "targetLang": "TR",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "publishAt": "2026-07-08T02:30:00.000Z",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-07-08",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_tr_ko/youtube_metadata.json",
+      "title": "튀르키예어 A1 기초 단어: 주방용품 기초 50단어 학습",
+      "playlist_key": "KO__TR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-09T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-11T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-15T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-07T02:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28864143475",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28864143475",
+      "createdAt": "2026-07-07T11:55:44.537Z",
+      "updatedAt": "2026-07-07T11:55:44.537Z",
+      "youtubeVideoId": "NUoeLUKro2I",
+      "youtubePlaylistId": "PLRilKNSFTAQU",
+      "playlistItemId": "UExSaWxLTlNGVEFRVS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
