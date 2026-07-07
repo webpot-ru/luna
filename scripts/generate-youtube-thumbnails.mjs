@@ -281,14 +281,18 @@ function loadPreRenderedManifest(manifestPath) {
 }
 
 function findPreRenderedThumbnailPrototype(metadata) {
-  const isPoly = String(metadata.targetLang || "").includes(",");
+  const isPoly = String(metadata.videoType || "") === "polyglot"
+    || Boolean(metadata.polyglotKey)
+    || Boolean(metadata.bundleKey)
+    || Boolean(metadata.targetLangs)
+    || String(metadata.targetLang || "").includes(",");
   const setId = String(metadata.setId || "");
   const supportLang = normalizeLanguageCode(metadata.supportLang);
   const targetLang = normalizeLanguageCode(metadata.targetLang);
   const contentScope = normalizeScope(metadata.contentScope);
   const bundleKey = String(metadata.bundleKey || "");
   const targetLangsHash = String(metadata.targetLangsHash || metadata.targetsHash || "");
-  const targetLangsCsv = normalizeLangList(metadata.targetLangs || metadata.targetLang);
+  const targetLangsCsv = normalizeLangList(metadata.targetLangs || metadata.targetLangsCsv || metadata.targetLang);
 
   for (const manifestPath of PRE_RENDERED_THUMBNAIL_MANIFESTS) {
     for (const cover of loadPreRenderedManifest(manifestPath)) {
