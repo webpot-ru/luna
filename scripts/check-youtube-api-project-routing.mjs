@@ -33,6 +33,7 @@ function sortedUnique(items) {
 const routing = readJson(routingPath);
 const channelsConfig = readJson(channelsPath);
 const languageOrder = readJson(languageOrderPath);
+const targetOnlyRegionalVariants = new Set(['EN-GB', 'ES', 'PT']);
 
 const channels = channelsConfig.channels || [];
 const channelKeys = new Set(channels.map((channel) => channel.key));
@@ -40,7 +41,7 @@ const supportLangsByChannel = new Map(channels.map((channel) => [channel.key, ch
 const expectedVariantList = Array.isArray(languageOrder)
   ? languageOrder.map((entry) => entry.spreadsheetCode || entry.code).filter(Boolean)
   : languageOrder.spreadsheetCodeOrder || languageOrder.languages?.map((entry) => entry.spreadsheetCode || entry.code).filter(Boolean) || [];
-const expectedVariants = new Set(expectedVariantList);
+const expectedVariants = new Set(expectedVariantList.filter((code) => !targetOnlyRegionalVariants.has(code)));
 const releasesPerVariant = routing.dailyCadence?.publicReleasesPerSupportVariantPerDay;
 
 if (!Array.isArray(routing.projects) || routing.projects.length !== 4) {
@@ -63,18 +64,24 @@ const extraChannels = assignedChannels.filter((key) => !channelKeys.has(key)).so
 const duplicateChannels = duplicates(assignedChannels);
 const missingVariants = [...expectedVariants].filter((variant) => !assignedVariants.includes(variant)).sort();
 const duplicateVariants = duplicates(assignedVariants);
+const forbiddenAssignedVariants = assignedVariants.filter((variant) => targetOnlyRegionalVariants.has(variant)).sort();
 
 if (missingChannels.length) fail(`missing support channels: ${missingChannels.join(', ')}`);
 if (extraChannels.length) fail(`extra support channels: ${extraChannels.join(', ')}`);
 if (duplicateChannels.length) fail(`duplicate support channels: ${duplicateChannels.join(', ')}`);
 if (missingVariants.length) fail(`missing support variants: ${missingVariants.join(', ')}`);
 if (duplicateVariants.length) fail(`duplicate support variants: ${duplicateVariants.join(', ')}`);
+if (forbiddenAssignedVariants.length) fail(`target-only regional variants must not be support/native rows: ${forbiddenAssignedVariants.join(', ')}`);
 
 let totalReleases = 0;
 for (const project of routing.projects) {
   const channelCount = project.supportChannelKeys?.length || 0;
   const variantCount = project.supportVariants?.length || 0;
-  const channelVariants = sortedUnique((project.supportChannelKeys || []).flatMap((key) => supportLangsByChannel.get(key) || []));
+  const channelVariants = sortedUnique(
+    (project.supportChannelKeys || [])
+      .flatMap((key) => supportLangsByChannel.get(key) || [])
+      .filter((code) => !targetOnlyRegionalVariants.has(code))
+  );
   const projectVariants = sortedUnique(project.supportVariants || []);
   const expectedDaily = variantCount * releasesPerVariant;
   totalReleases += project.plannedPublicReleasesPerDay || 0;
@@ -91,7 +98,7 @@ for (const project of routing.projects) {
 
   if (channelVariants.join('|') !== projectVariants.join('|')) {
     fail(
-      `${project.label} supportVariants do not match supportLangs from config/youtube-channels.json: expected ${channelVariants.join(', ')}, got ${projectVariants.join(', ')}`
+      `${project.label} supportVariants do not match canonical support/native codes from config/youtube-channels.json: expected ${channelVariants.join(', ')}, got ${projectVariants.join(', ')}`
     );
   }
 }
@@ -110,7 +117,7 @@ if (totalReleases !== routing.dailyCadence?.plannedPublicReleasesPerDay) {
 
 if (!process.exitCode) {
   console.log(
-    `YouTube API project routing OK: ${assignedChannels.length} channels, ${assignedVariants.length} variants, ${totalReleases} planned daily releases across ${routing.projects.length} projects.`
+    `YouTube API project routing OK: ${assignedChannels.length} channels, ${assignedVariants.length} canonical support/native variants, ${totalReleases} planned daily releases across ${routing.projects.length} projects.`
   );
   for (const project of routing.projects) {
     console.log(

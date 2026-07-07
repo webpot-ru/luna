@@ -12,35 +12,35 @@ npm run check:youtube-api-project-routing
 
 ## Purpose
 
-The publishing plan targets **54 de-jure support-language variants** but only **51 public support channels**:
+The publishing plan targets **51 public support/native channels**. Regional dialect variants are not duplicated as support/native publications:
 
-- `EN` and `EN-GB` share channel `en`.
-- `ES` and `ES-419` share channel `es`.
-- `PT` and `PT-BR` share channel `pt`.
+- English support/native uses only `EN` on channel `en`; `EN-GB` remains available only as a target/studied variant.
+- Spanish support/native uses only `ES-419` on channel `es`; `ES` remains available only as a target/studied variant.
+- Portuguese support/native uses only `PT-BR` on channel `pt`; `PT` remains available only as a target/studied variant.
 
-At the current publishing cadence of **6 scheduled public releases per support-language variant per day**, the total target is:
+At the current publishing cadence of **6 scheduled public releases per support/native channel per day**, the total target is:
 
 ```text
-54 variants * 6 releases/day = 324 scheduled public releases/day
+51 support channels * 6 releases/day = 306 scheduled public releases/day
 ```
 
 The four-project route is an operational grouping for production upload automation. It is not a substitute for YouTube API audit/approval, quota extension, policy compliance, or channel daily upload limits.
 
 ## Project Summary
 
-| API project route | Status | GitHub environment | Public channels | Support variants | Planned scheduled public releases/day |
+| API project route | Status | GitHub environment | Public channels | Canonical support/native codes | Planned scheduled public releases/day |
 | --- | --- | --- | ---: | ---: | ---: |
-| `youtube 1` | GitHub OAuth bundle uploaded | `youtube-api-branding` | 12 | 15 | 90 |
+| `youtube 1` | GitHub OAuth bundle uploaded | `youtube-api-branding` | 12 | 12 | 72 |
 | `youtube 2` | GitHub OAuth bundle uploaded | `youtube-api-youtube-2` | 13 | 13 | 78 |
 | `youtube 3` | GitHub OAuth bundle uploaded | `youtube-api-youtube-3` | 13 | 13 | 78 |
 | `youtube 4` | GitHub OAuth bundle uploaded | `youtube-api-youtube-4` | 13 | 13 | 78 |
-| **Total** |  |  | **51** | **54** | **324** |
+| **Total** |  |  | **51** | **51** | **306** |
 
 2026-06-22 route balancing update: `IT` moved from `youtube 1` to `youtube 4` after the primary route hit YouTube Data API quota during the Italian recovery run. The Italian channel was reauthorized through OAuth client `215536805171-...` into `.local/youtube-oauth/tokens/it-youtube-4.json`; read-only `channels.list(mine=true)` matched `UCOFZxCVdm4FqhFgMvKsAlOw` / `LunaCards Italiano` before the route config was changed.
 
 OAuth note for `youtube 1`: browser readback on 2026-06-22 showed project `flashcardmate` / FlashCardMate is **In production** on Google Auth Platform Audience. This does not require creating a new OAuth client id/secret by itself. However, channel refresh tokens minted while the app was still in **Testing** should be re-authorized for the assigned `youtube 1` channels before relying on GitHub scheduled uploads, because Google's Testing publishing status issues refresh tokens that expire in 7 days for external apps with non-basic scopes.
 
-2026-06-22 local reauthorization status: `youtube 1` has been reauthorized locally after the Production switch for its originally assigned channels using OAuth client `130628727588-...`; after the IT balancing move it is the active route for 12 public channels (`en`, `es`, `pt`, `ru`, `hi`, `id`, `fr`, `de`, `ja`, `ko`, `tr`, `zh`) / 15 support variants. Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. Token contents are local-only and must stay out of git. The `youtube 1` OAuth bundle was rebuilt with the expected client JSON and 13 original token files, then uploaded to GitHub repo `webpot-ru/luna`, environment `youtube-api-branding`, secret `YOUTUBE_OAUTH_BUNDLE_TGZ_B64`; readback via `gh secret list` shows update time `2026-06-22T04:52:30Z`. The old IT token in that historical bundle must not be used for new IT dispatches because routing now sends `IT` to `youtube-api-youtube-4`.
+2026-06-22 local reauthorization status: `youtube 1` has been reauthorized locally after the Production switch for its originally assigned channels using OAuth client `130628727588-...`; after the IT balancing move it is the active route for 12 public channels (`en`, `es`, `pt`, `ru`, `hi`, `id`, `fr`, `de`, `ja`, `ko`, `tr`, `zh`) / 12 canonical support/native codes (`EN`, `ES-419`, `PT-BR`, `RU`, `HI`, `ID`, `FR`, `DE`, `JA`, `KO`, `TR`, `ZH`). Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. Token contents are local-only and must stay out of git. The `youtube 1` OAuth bundle was rebuilt with the expected client JSON and 13 original token files, then uploaded to GitHub repo `webpot-ru/luna`, environment `youtube-api-branding`, secret `YOUTUBE_OAUTH_BUNDLE_TGZ_B64`; readback via `gh secret list` shows update time `2026-06-22T04:52:30Z`. The old IT token in that historical bundle must not be used for new IT dispatches because routing now sends `IT` to `youtube-api-youtube-4`.
 
 2026-06-22 local reauthorization status: `youtube 2` has been reauthorized locally for all 13 assigned channels (`vi`, `th`, `ms`, `pl`, `nl`, `sv`, `no`, `da`, `fi`, `cs`, `sk`, `hu`, `ro`) using OAuth client `327715936948-...`. Each token was verified with read-only YouTube `channels.list(mine=true)` and matched the expected configured `channelId`; each token metadata check showed a refresh token and no `refresh_token_expires_in` field. During setup, an initial `sk` attempt produced a token for `sv`; this was caught by channelId readback and corrected before continuing. Token contents remain local-only under `.local/youtube-oauth/tokens/` and must not be printed or committed. The route's GitHub environment `youtube-api-youtube-2` now exists; readback also shows `youtube-api-youtube-3` and `youtube-api-youtube-4`. After explicit user approval acknowledging the refresh-token storage risk, `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` was uploaded to `webpot-ru/luna` environment `youtube-api-youtube-2`; `gh secret list --env youtube-api-youtube-2 --repo webpot-ru/luna` readback shows updated `2026-06-22T06:12:05Z`.
 
@@ -56,9 +56,9 @@ Existing primary project. Keep the high-priority shared channels here first.
 
 | Channel key | Support variants | Notes |
 | --- | --- | --- |
-| `en` | `EN`, `EN-GB` | Shared English channel. |
-| `es` | `ES-419`, `ES` | Shared Spanish channel; Latin American Spanish is first-wave priority. |
-| `pt` | `PT-BR`, `PT` | Shared Portuguese channel; Brazilian Portuguese is first-wave priority. |
+| `en` | `EN` | Canonical English support/native channel; `EN-GB` is target/studied only. |
+| `es` | `ES-419` | Canonical Spanish support/native channel; `ES` is target/studied only. |
+| `pt` | `PT-BR` | Canonical Portuguese support/native channel; `PT` is target/studied only. |
 | `ru` | `RU` | Existing tested Russian channel. |
 | `hi` | `HI` | Hindi. |
 | `id` | `ID` | Indonesian. |
@@ -129,8 +129,8 @@ Existing primary project. Keep the high-priority shared channels here first.
 - `config/youtube-channels.json` remains the machine-readable channel registry.
 - `config/youtube-api-project-routing.json` maps those channels to API project routes and must not contain secrets.
 - Each public support channel must be assigned to exactly one API project route.
-- Each support-language variant must be assigned to exactly one API project route.
-- Regional variants are preserved in video metadata, playlist keys, titles, descriptions and target/support codes. Only public site support-language URL paths collapse (`EN/EN-GB -> /en`, `ES/ES-419 -> /es`, `PT/PT-BR -> /pt`).
+- Each live bulk dispatch support list must use only canonical support/native codes. For shared channels that means `EN`, `ES-419` and `PT-BR`; never dispatch `EN-GB`, `ES` or `PT` as support/native rows.
+- Regional variants are preserved in video metadata, playlist keys, titles, descriptions and target codes when they are the studied language. Only public site support-language URL paths collapse (`EN/EN-GB -> /en`, `ES/ES-419 -> /es`, `PT/PT-BR -> /pt`).
 - A live upload workflow must choose the OAuth bundle/GitHub environment from the channel's route, not from the target language.
 - `.github/workflows/youtube-video-publish.yml` has `youtube_environment` input. Use `auto` for a single support channel; the workflow selects `youtube-api-branding`, `youtube-api-youtube-2`, `youtube-api-youtube-3` or `youtube-api-youtube-4` before restoring `YOUTUBE_OAUTH_BUNDLE_TGZ_B64`.
 - `.github/workflows/youtube-channel-branding-api.yml` also accepts `youtube_environment` for read-only route-specific token/channel readback. When `channels` is provided, it validates that the selected channel keys belong to the chosen GitHub environment before restoring the OAuth bundle.

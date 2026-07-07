@@ -17,12 +17,13 @@ function getCurrentGitBranch() {
 const DEFAULT_OUTPUT = "outputs/youtube-polyglot-bulk-publish-dispatcher-report.json";
 const POLYGLOT_WORKFLOW = "youtube-polyglot-video-publish.yml";
 const POLYGLOT_PLAYLIST_REPAIR_WORKFLOW = "youtube-polyglot-playlist-insert-repair.yml";
+const TARGET_ONLY_REGIONAL_SUPPORTS = new Set(["EN-GB", "ES", "PT"]);
 
 function parseArgs(argv) {
   const options = {
     setId: "home_kitchen_cookware_pilot_01",
     supports: "ALL",
-    supportSource: "channel-keys",
+    supportSource: "variants",
     excludeSupports: [],
     bundle: "global_europe_core",
     englishBundle: "global_europe_core",
@@ -133,6 +134,15 @@ function uniq(values) {
   return [...new Set(values.filter(Boolean))];
 }
 
+function assertCanonicalSupportLanguages(supports) {
+  const forbidden = uniq((supports || []).map(normalizeCode)).filter((code) => TARGET_ONLY_REGIONAL_SUPPORTS.has(code));
+  if (forbidden.length) {
+    throw new Error(
+      `Target-only regional variants cannot be used as support/native languages: ${forbidden.join(", ")}. Use EN, ES-419 or PT-BR for shared English/Spanish/Portuguese viewer channels.`,
+    );
+  }
+}
+
 function parseBundleOverrides(value) {
   const text = String(value || "").trim();
   const map = new Map();
@@ -238,7 +248,9 @@ function resolveSupports(options, routing) {
     supports = splitCodes(requested);
   }
   const excluded = new Set(options.excludeSupports.map(normalizeCode));
-  return uniq(supports.map(normalizeCode)).filter((support) => !excluded.has(support)).sort();
+  const resolved = uniq(supports.map(normalizeCode)).filter((support) => !excluded.has(support)).sort();
+  assertCanonicalSupportLanguages(resolved);
+  return resolved;
 }
 
 function bundleForSupport(support, options) {

@@ -9,6 +9,8 @@ import {
 } from "./lib/youtube-publication-registry.mjs";
 import { shardItems } from "./lib/work-shards.mjs";
 
+const TARGET_ONLY_REGIONAL_SUPPORTS = new Set(["EN-GB", "ES", "PT"]);
+
 function parseArgs(argv) {
   const options = {
     setId: "",
@@ -99,6 +101,15 @@ async function resolveAllTargetLanguages(setId, supportLang) {
 
 function normalizeTargetList(values) {
   return [...new Set((values || []).map(normalizeCode).filter(Boolean))].sort();
+}
+
+function assertCanonicalSupportLanguages(supports) {
+  const forbidden = normalizeTargetList(supports).filter((code) => TARGET_ONLY_REGIONAL_SUPPORTS.has(code));
+  if (forbidden.length) {
+    throw new Error(
+      `Target-only regional variants cannot be used as support/native languages: ${forbidden.join(", ")}. Use EN, ES-419 or PT-BR for shared English/Spanish/Portuguese viewer channels.`,
+    );
+  }
 }
 
 function compactExistingPublication(row) {
@@ -217,6 +228,7 @@ async function main() {
   );
   const requestedTargets = options.targets ? normalizeTargetList(options.targets) : null;
   const supports = normalizeTargetList(options.supports);
+  assertCanonicalSupportLanguages(supports);
   const excludedSupports = new Set(normalizeTargetList(options.excludeSupports));
   const supportReports = [];
   for (const supportLang of supports) {

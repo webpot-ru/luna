@@ -23,6 +23,7 @@ const DEFAULT_POLYGLOT_PROGRESS_PATH = "config/youtube-polyglot-progress.json";
 const DEFAULT_CALENDAR_PATH = "config/youtube-publish-calendar.json";
 const DEFAULT_VIDEO_LOCALIZATION_PATH = "config/video-localization.json";
 const DEFAULT_POLYGLOT_LOCALIZATION_PATH = "config/polyglot-video-localization.json";
+const TARGET_ONLY_REGIONAL_SUPPORTS = new Set(["EN-GB", "ES", "PT"]);
 
 function parseArgs(argv) {
   const options = {
@@ -101,6 +102,15 @@ function readJson(filePath, fallback = null) {
 
 function uniqueCodes(values) {
   return [...new Set((values || []).map(normalizeLanguageCode).filter(Boolean))];
+}
+
+function assertCanonicalSupportLanguage(supportLang) {
+  const support = normalizeLanguageCode(supportLang);
+  if (TARGET_ONLY_REGIONAL_SUPPORTS.has(support)) {
+    throw new Error(
+      `Target-only regional variant cannot be used as a support/native language: ${support}. Use EN, ES-419 or PT-BR for shared English/Spanish/Portuguese viewer channels.`,
+    );
+  }
 }
 
 function targetHash(targetLangs) {
@@ -334,6 +344,7 @@ async function main() {
     throw new Error("Polyglot planner accepts exactly one explicit support language per video.");
   }
   const supportLang = supports[0];
+  assertCanonicalSupportLanguage(supportLang);
   const contentScope = normalizeContentScope(options.contentScope);
   if (!["full", "short_unverified"].includes(contentScope)) {
     throw new Error(`Unsupported --content-scope=${options.contentScope}; expected full or short_unverified.`);

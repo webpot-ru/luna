@@ -111,16 +111,22 @@ function appendToRegistry(setId, lang, supportLang, transition, quizLimit) {
 
 async function runBuild({ setId, targetLang, supportLang, transition, quizLimit }) {
   const cmd = `node scripts/build-deck-video.mjs --set ${setId} --target ${targetLang} --support ${supportLang} --quiz-limit ${quizLimit} --transition ${transition}`;
+  const videoPath = path.resolve(`outputs/video-generator/${setId}_${targetLang.toLowerCase()}_${supportLang.toLowerCase()}/lesson_${targetLang.toLowerCase()}_${supportLang.toLowerCase()}.mp4`);
   console.log(`[START] Compiling video: ${targetLang} (support: ${supportLang})`);
   const start = Date.now();
   try {
     await execAsync(cmd, { maxBuffer: 1024 * 1024 * 50 });
+    if (!fs.existsSync(videoPath) || fs.statSync(videoPath).size <= 1024 * 1024) {
+      throw new Error(`Expected rendered MP4 was not created or is too small: ${videoPath}`);
+    }
     const duration = ((Date.now() - start) / 1000).toFixed(1);
     console.log(`[SUCCESS] Compiled ${targetLang} in ${duration}s.`);
     await appendToRegistry(setId, targetLang, supportLang, transition, quizLimit);
+    return true;
   } catch (err) {
     const duration = ((Date.now() - start) / 1000).toFixed(1);
     console.error(`[ERROR] Failed ${targetLang} after ${duration}s: ${err.message}`);
+    return false;
   }
 }
 
@@ -261,6 +267,7 @@ async function main() {
   const globalStart = Date.now();
   const queue = [...languages];
   const workers = [];
+  const failedBuilds = [];
 
   async function worker() {
     while (queue.length > 0) {
@@ -282,7 +289,8 @@ async function main() {
         continue;
       }
       
-      await runBuild({ setId, targetLang, supportLang, transition, quizLimit });
+      const ok = await runBuild({ setId, targetLang, supportLang, transition, quizLimit });
+      if (!ok) failedBuilds.push(`${supportLang}->${targetLang}`);
     }
   }
 
@@ -291,9 +299,17 @@ async function main() {
   }
 
   await Promise.all(workers);
+
+  if (failedBuilds.length > 0) {
+    console.error(`[ERROR] ${failedBuilds.length} video build(s) failed: ${failedBuilds.join(", ")}`);
+    process.exit(1);
+  }
   
   const totalDuration = ((Date.now() - globalStart) / 1000 / 60).toFixed(1);
   console.log(`\n🎉 Bulk generation complete! Total time: ${totalDuration} minutes.`);
 }
 
-main().catch(console.error);
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

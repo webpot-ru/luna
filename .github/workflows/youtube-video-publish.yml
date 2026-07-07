@@ -826,7 +826,7 @@ jobs:
             exit 0
           fi
           repo_url="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          for attempt in 1 2 3 4 5; do
+          for attempt in $(seq 1 12); do
             workdir=".persist-work/attempt-${attempt}"
             mkdir -p "$workdir"
             echo "Persist attempt ${attempt}: clone fresh ${BRANCH_NAME}, merge artifact, commit, push."
@@ -847,8 +847,10 @@ jobs:
                 -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
               git push origin "HEAD:$BRANCH_NAME"
             ) && exit 0
-            echo "Persist attempt ${attempt} failed; retrying from a fresh clone."
-            sleep $((attempt * 5))
+            echo "Persist attempt ${attempt} failed; retrying from a fresh clone after jittered backoff."
+            sleep_seconds=$((attempt * 8 + RANDOM % 11))
+            echo "Sleeping ${sleep_seconds}s before next persist attempt."
+            sleep "$sleep_seconds"
           done
           echo "::error::Could not persist YouTube publish state after retries."
           exit 1

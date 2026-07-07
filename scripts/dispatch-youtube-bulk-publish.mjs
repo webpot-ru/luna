@@ -23,6 +23,7 @@ function getCurrentGitBranch() {
 const DEFAULT_OUTPUT = "outputs/youtube-bulk-publish-dispatcher-report.json";
 const VIDEO_WORKFLOW = "youtube-video-publish.yml";
 const PLAYLIST_REPAIR_WORKFLOW = "youtube-playlist-insert-repair.yml";
+const TARGET_ONLY_REGIONAL_SUPPORTS = new Set(["EN-GB", "ES", "PT"]);
 
 function parseArgs(argv) {
   const options = {
@@ -140,6 +141,15 @@ function uniq(values) {
   return [...new Set(values.filter(Boolean))];
 }
 
+function assertCanonicalSupportLanguages(supports) {
+  const forbidden = uniq((supports || []).map(normalizeCode)).filter((code) => TARGET_ONLY_REGIONAL_SUPPORTS.has(code));
+  if (forbidden.length) {
+    throw new Error(
+      `Target-only regional variants cannot be used as support/native languages: ${forbidden.join(", ")}. Use EN, ES-419 or PT-BR for shared English/Spanish/Portuguese viewer channels.`,
+    );
+  }
+}
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -207,7 +217,9 @@ function resolveSupports(options, routing) {
     supports = splitCodes(requested);
   }
   const excluded = new Set(options.excludeSupports.map(normalizeCode));
-  return uniq(supports.map(normalizeCode)).filter((support) => !excluded.has(support)).sort();
+  const resolved = uniq(supports.map(normalizeCode)).filter((support) => !excluded.has(support)).sort();
+  assertCanonicalSupportLanguages(resolved);
+  return resolved;
 }
 
 async function resolveAllTargetLanguages(setId, supportLang) {

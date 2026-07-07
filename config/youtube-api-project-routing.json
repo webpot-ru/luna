@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "status": "planning_local_contract",
   "sourceOfTruth": "docs/youtube-api-project-routing.md",
-  "generatedFor": "51 public YouTube support channels / 54 support-language variants",
+  "generatedFor": "51 public YouTube support/native channels / 51 canonical support/native variants",
   "projectLabels": [
     "youtube 1",
     "youtube 2",
@@ -12,12 +12,12 @@
   "dailyCadence": {
     "publicReleasesPerSupportVariantPerDay": 6,
     "publicChannels": 51,
-    "supportLanguageVariants": 54,
-    "plannedPublicReleasesPerDay": 324
+    "supportLanguageVariants": 51,
+    "plannedPublicReleasesPerDay": 306
   },
   "routingRules": [
     "A public support channel is assigned to exactly one YouTube API project route.",
-    "Regional support variants stay attached to their shared public channel: EN/EN-GB -> en, ES/ES-419 -> es, PT/PT-BR -> pt.",
+    "Live dispatch uses one canonical support/native code per shared viewer-language family: EN -> en, ES-419 -> es, PT-BR -> pt. EN-GB, ES, and PT are target/studied variants only.",
     "Do not put OAuth token JSON, client secret JSON, refresh tokens, or .local files in this config.",
     "Each real Google Cloud / YouTube API project must have its own GitHub environment secret bundle before live uploads use that route.",
     "This file is a local routing contract only; creating Google Cloud projects, OAuth clients, production status, quota extension requests, and GitHub secrets are external steps."
@@ -30,7 +30,7 @@
       "githubEnvironment": "youtube-api-branding",
       "notes": [
         "Existing first project route. It currently maps to the already-used GitHub environment until a renamed production environment is introduced.",
-        "Contains the highest-priority shared channels first: EN/EN-GB, ES/ES-419, PT/PT-BR, plus RU and major audience channels."
+        "Contains the highest-priority shared channels first. Live dispatch support/native codes are canonical only: EN, ES-419, PT-BR, plus RU and major audience channels."
       ],
       "supportChannelKeys": [
         "en",
@@ -48,11 +48,8 @@
       ],
       "supportVariants": [
         "EN",
-        "EN-GB",
         "ES-419",
-        "ES",
         "PT-BR",
-        "PT",
         "RU",
         "HI",
         "ID",
@@ -63,7 +60,7 @@
         "TR",
         "ZH"
       ],
-      "plannedPublicReleasesPerDay": 90
+      "plannedPublicReleasesPerDay": 72
     },
     {
       "key": "youtube-2",
