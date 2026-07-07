@@ -1,0 +1,287 @@
+name: YouTube Shorts Canary Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "render builds the canary Short; apply renders and publishes it."
+        required: true
+        default: "render"
+        type: choice
+        options:
+          - render
+          - apply
+      workflow_ref:
+        description: "Branch/ref containing the Shorts pipeline implementation."
+        required: true
+        default: "codex/shorts-github-workflow"
+      set_id:
+        description: "Canary deck set id."
+        required: true
+        default: "home_bathroom_essentials_a1"
+      support:
+        description: "One support/channel language."
+        required: true
+        default: "RU"
+      target:
+        description: "One studied target language."
+        required: true
+        default: "ES"
+      shorts_format:
+        description: "Shorts format id."
+        required: true
+        default: "word_quiz_3_2_1"
+        type: choice
+        options:
+          - word_quiz_3_2_1
+          - audio_first_quiz
+          - say_it_before_me
+          - three_words_one_scene
+          - which_one_is_correct
+          - speed_loop_5_words
+          - phrase_ladder
+          - visual_object_flash
+      privacy:
+        description: "YouTube privacy for apply."
+        required: true
+        default: "public"
+        type: choice
+        options:
+          - public
+          - unlisted
+          - private
+      confirm_render:
+        description: "For render/apply type RENDER_SHORTS_VIDEO."
+        required: false
+        default: ""
+      confirm_tts:
+        description: "For render/apply type GENERATE_TTS_AUDIO."
+        required: false
+        default: ""
+      confirm_youtube_write:
+        description: "For apply type APPLY_SHORTS_YOUTUBE_UPLOAD."
+        required: false
+        default: ""
+      confirm_public:
+        description: "For public apply type PUBLISH_PUBLIC."
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: youtube-shorts-canary-${{ github.event.inputs.set_id }}-${{ github.event.inputs.support }}-${{ github.event.inputs.target }}-${{ github.event.inputs.mode }}
+  cancel-in-progress: false
+
+jobs:
+  shorts-canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    environment:
+      name: >-
+        ${{
+          (contains('|EN|EN-GB|ES|ES-419|PT|PT-BR|RU|HI|ID|FR|DE|JA|KO|TR|ZH|en|en-gb|es|es-419|pt|pt-br|ru|hi|id|fr|de|ja|ko|tr|zh|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-branding') ||
+          (contains('|VI|TH|MS|PL|NL|SV|NO|DA|FI|CS|SK|HU|RO|vi|th|ms|pl|nl|sv|no|da|fi|cs|sk|hu|ro|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-2') ||
+          (contains('|BG|HR|SR|SL|LT|LV|ET|IS|BN|TL|MY|KM|LO|bg|hr|sr|sl|lt|lv|et|is|bn|tl|my|km|lo|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-3') ||
+          (contains('|NE|SI|TA|TE|KN|ML|UZ|KK|AZ|KA|HY|SW|IT|ne|si|ta|te|kn|ml|uz|kk|az|ka|hy|sw|it|', format('|{0}|', github.event.inputs.support)) && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
+
+    steps:
+      - name: Checkout Shorts implementation ref
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.workflow_ref }}
+          fetch-depth: 0
+
+      - name: Refuse unsafe canary inputs
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          TARGET: ${{ github.event.inputs.target }}
+          PRIVACY: ${{ github.event.inputs.privacy }}
+          CONFIRM_RENDER: ${{ github.event.inputs.confirm_render }}
+          CONFIRM_TTS: ${{ github.event.inputs.confirm_tts }}
+          CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+          CONFIRM_PUBLIC: ${{ github.event.inputs.confirm_public }}
+        run: |
+          set -euo pipefail
+          support_clean="$(printf '%s' "$SUPPORT" | tr '[:lower:]' '[:upper:]' | xargs)"
+          target_clean="$(printf '%s' "$TARGET" | tr '[:lower:]' '[:upper:]' | xargs)"
+          if [ "$support_clean" = "ALL" ] || printf '%s' "$support_clean" | grep -q ','; then
+            echo "::error::Canary accepts exactly one support language."
+            exit 1
+          fi
+          if [ "$target_clean" = "ALL" ] || [ -z "$target_clean" ] || printf '%s' "$target_clean" | grep -q ','; then
+            echo "::error::Canary accepts exactly one target language."
+            exit 1
+          fi
+          if [ "$CONFIRM_RENDER" != "RENDER_SHORTS_VIDEO" ]; then
+            echo "::error::Canary requires confirm_render=RENDER_SHORTS_VIDEO"
+            exit 1
+          fi
+          if [ "$CONFIRM_TTS" != "GENERATE_TTS_AUDIO" ]; then
+            echo "::error::Canary may spend TTS/provider usage and requires confirm_tts=GENERATE_TTS_AUDIO"
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_SHORTS_YOUTUBE_UPLOAD" ]; then
+            echo "::error::mode=apply requires confirm_youtube_write=APPLY_SHORTS_YOUTUBE_UPLOAD"
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$PRIVACY" = "public" ] && [ "$CONFIRM_PUBLIC" != "PUBLISH_PUBLIC" ]; then
+            echo "::error::privacy=public requires confirm_public=PUBLISH_PUBLIC"
+            exit 1
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Node dependencies
+        run: npm ci || npm install
+
+      - name: Download offline deck data from Google Drive
+        shell: bash
+        run: |
+          set -euo pipefail
+          SET_ID="${{ github.event.inputs.set_id }}"
+          FILE_ID=$(node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const mappingPath = path.resolve('data/deck-sources.json');
+            if (fs.existsSync(mappingPath)) {
+              const mapping = JSON.parse(fs.readFileSync(mappingPath, 'utf8'));
+              console.log(mapping['$SET_ID'] || '');
+            }
+          ")
+          if [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
+            echo "Found Google Drive File ID for $SET_ID."
+            mkdir -p data/decks
+            curl -c /tmp/cookies -sL "https://docs.google.com/uc?export=download&id=${FILE_ID}" > /tmp/confirm.html
+            CONFIRM=$(grep -o 'confirm=[^&\" ]*' /tmp/confirm.html | head -n1 | cut -d= -f2 || true)
+            if [ -n "$CONFIRM" ]; then
+              curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&confirm=${CONFIRM}&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
+            else
+              curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
+            fi
+            test -s "data/decks/${SET_ID}.json"
+          else
+            echo "No Google Drive File ID found for $SET_ID in data/deck-sources.json."
+          fi
+
+      - name: Validate Shorts localization packs
+        run: |
+          npm run check:shorts-outro-localization
+          npm run check:shorts-format-localization
+
+      - name: Install render dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          npx playwright install chromium --with-deps
+
+      - name: Set up Python for audio render
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Python TTS dependency
+        run: pip install edge-tts
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+
+      - name: Render Shorts canary
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run build:deck-shorts -- \
+            --set "${{ github.event.inputs.set_id }}" \
+            --target "${{ github.event.inputs.target }}" \
+            --support "${{ github.event.inputs.support }}" \
+            --card-limit 5 \
+            --quiz-limit 2 \
+            --transition flip \
+            --shorts-format "${{ github.event.inputs.shorts_format }}"
+
+      - name: Plan Shorts canary upload
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run plan:youtube-publish -- \
+            outputs/shorts-generator \
+            --allow-auto-thumbnail-fallback \
+            --publication-registry=config/youtube-shorts-published-videos.json \
+            --output=outputs/youtube-shorts-canary-publish-plan-github.json
+
+      - name: Upload Shorts canary to YouTube
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        shell: bash
+        env:
+          PRIVACY: ${{ github.event.inputs.privacy }}
+        run: |
+          set -euo pipefail
+          mapfile -d '' METADATA_FILES < <(find outputs/shorts-generator -name youtube_metadata.json -print0 | sort -z)
+          if [ "${#METADATA_FILES[@]}" -ne 1 ]; then
+            echo "::error::Canary apply expects exactly one youtube_metadata.json, got ${#METADATA_FILES[@]}."
+            exit 1
+          fi
+          PUBLISH_ARGS=(
+            "--metadata=${METADATA_FILES[0]}"
+            "--privacy=$PRIVACY"
+            "--publication-registry=config/youtube-shorts-published-videos.json"
+            "--ledger=outputs/youtube-shorts-canary-publish-ledger.jsonl"
+            "--apply"
+            "--confirm-youtube-write"
+          )
+          if [ "$PRIVACY" = "public" ]; then
+            PUBLISH_ARGS+=("--confirm-public")
+          fi
+          npm run apply:youtube-publish -- "${PUBLISH_ARGS[@]}"
+
+      - name: Persist canary Shorts state to implementation ref
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        shell: bash
+        env:
+          WORKFLOW_REF: ${{ github.event.inputs.workflow_ref }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- config/youtube-channels.json config/youtube-shorts-published-videos.json; then
+            echo "No Shorts canary state changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/youtube-channels.json config/youtube-shorts-published-videos.json
+          git commit -m "Persist Shorts canary publish state" \
+            -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          git push origin "HEAD:${WORKFLOW_REF}"
+
+      - name: Upload Shorts canary artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-shorts-canary-${{ github.event.inputs.set_id }}-${{ github.event.inputs.support }}-${{ github.event.inputs.target }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            outputs/youtube-shorts-canary-publish-plan-github.json
+            outputs/youtube-shorts-canary-publish-ledger.jsonl
+            outputs/shorts-generator/
+            config/youtube-shorts-published-videos.json
