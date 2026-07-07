@@ -219,9 +219,12 @@ jobs:
 
       - name: Download offline deck data from Google Drive
         shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
         run: |
           set -euo pipefail
           SET_ID="${{ github.event.inputs.set_id }}"
+          export SET_ID
           FILE_ID=$(node -e "
             const fs = require('fs');
             const path = require('path');
@@ -242,9 +245,22 @@ jobs:
               curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
             fi
             test -s "data/decks/${SET_ID}.json"
+            node -e '
+              const fs = require("fs");
+              const setId = process.env.SET_ID;
+              const file = `data/decks/${setId}.json`;
+              const data = JSON.parse(fs.readFileSync(file, "utf8"));
+              if (data.setId && data.setId !== setId) throw new Error(`offline deck setId mismatch: ${data.setId}`);
+              if (!data.cards || Object.keys(data.cards).length === 0) throw new Error("offline deck JSON has no cards payload");
+              console.log(`Validated offline deck JSON: ${file}`);
+            '
             echo "Downloaded offline data to data/decks/${SET_ID}.json"
           else
             echo "No Google Drive File ID found for $SET_ID in data/deck-sources.json. Render will require a committed/local data/decks/${SET_ID}.json or DB access."
+          fi
+          if [ ! -f "data/decks/${SET_ID}.json" ] && [ "$MODE" != "plan" ]; then
+            echo "::error::Missing data/decks/${SET_ID}.json for GitHub render/apply. Add a Drive mapping in data/deck-sources.json or commit a fallback offline deck JSON."
+            exit 1
           fi
 
       - name: Validate Shorts localization packs
@@ -497,13 +513,16 @@ jobs:
           SHORTS_FORMAT: ${{ github.event.inputs.shorts_format }}
         run: |
           set -euo pipefail
-          if git diff --quiet -- config/youtube-channels.json config/youtube-shorts-published-videos.json; then
+          git add config/youtube-channels.json
+          if [ -f config/youtube-shorts-published-videos.json ]; then
+            git add config/youtube-shorts-published-videos.json
+          fi
+          if git diff --cached --quiet; then
             echo "No Shorts publish state changes to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add config/youtube-channels.json config/youtube-shorts-published-videos.json
           git commit -m "Persist Shorts YouTube publish state for ${SET_ID} ${SUPPORT} ${TARGET} ${SHORTS_FORMAT}" \
             -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
           git push origin "HEAD:$BRANCH_NAME"
