@@ -97793,6 +97793,52 @@
       "youtubeVideoId": "oIaCpVY8sLY",
       "youtubePlaylistId": "PLfdgyt3_JteY",
       "playlistItemId": "UExmZGd5dDNfSnRlWS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ZH",
+      "targetLang": "SR",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "publishAt": "2026-07-08T00:30:00.000Z",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-08",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_sr_zh/youtube_metadata.json",
+      "title": "塞尔维亚语入门：厨房用品基础 50个常用单词与发音练习",
+      "playlist_key": "ZH__SR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-09T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-11T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-15T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-07T00:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28865530892",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28865530892",
+      "createdAt": "2026-07-07T12:19:46.888Z",
+      "updatedAt": "2026-07-07T12:19:46.888Z",
+      "youtubeVideoId": "BLqUDJR0PJc",
+      "youtubePlaylistId": "PLehVWRMnKlYQ",
+      "playlistItemId": "UExlaFZXUk1uS2xZUS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
