@@ -98023,6 +98023,52 @@
       "youtubeVideoId": "BR3GNx1L2TM",
       "youtubePlaylistId": "PLUpOtmkdGU5U",
       "playlistItemId": "UExVcE90bWtkR1U1VS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "TR",
+      "targetLang": "SW",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "publishAt": "2026-07-08T08:30:00.000Z",
+      "timeZone": "Europe/Istanbul",
+      "localDate": "2026-07-08",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_sw_tr/youtube_metadata.json",
+      "title": "Svahili Dili A1 Seviyesi: Mutfak Gereçleri Kelimeleri (50 Kelime)",
+      "playlist_key": "TR__SW__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-09T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-11T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-15T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-07T08:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28865520950",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28865520950",
+      "createdAt": "2026-07-07T12:19:43.063Z",
+      "updatedAt": "2026-07-07T12:19:43.063Z",
+      "youtubeVideoId": "A052w-gVBS0",
+      "youtubePlaylistId": "PLC1L6_5tJa8M",
+      "playlistItemId": "UExDMUw2XzV0SmE4TS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
