@@ -113,8 +113,8 @@ function parseArgs(argv) {
 function usage() {
   return [
     "Usage:",
-    "  npm run dispatch:youtube-bulk-publish -- --set home_kitchen_cookware_pilot_01 --targets-per-support=4 --dry-run",
-    "  npm run dispatch:youtube-bulk-publish -- --apply --confirm-dispatch=DISPATCH_YOUTUBE_BULK --confirm-youtube-write=APPLY_YOUTUBE_UPLOAD --confirm-thumbnail-spend=GENERATE_THUMBNAILS",
+    "  npm run dispatch:youtube-bulk-publish -- --set home_kitchen_cookware_pilot_01 --targets-per-support=4 --schedule-start-date=YYYY-MM-DD --dry-run",
+    "  npm run dispatch:youtube-bulk-publish -- --apply --schedule-start-date=YYYY-MM-DD --confirm-dispatch=DISPATCH_YOUTUBE_BULK --confirm-youtube-write=APPLY_YOUTUBE_UPLOAD --confirm-thumbnail-spend=GENERATE_THUMBNAILS",
     "",
     "This dispatcher plans one ordinary YouTube publish workflow run per support language,",
     "with the next N eligible targets per support, and optionally dispatches/watches the",
@@ -171,6 +171,12 @@ function ensureSafeOptions(options) {
   }
   if (!Number.isFinite(options.scheduleMinFutureMinutes) || options.scheduleMinFutureMinutes < 0) {
     throw new Error("--schedule-min-future-minutes must be a non-negative number.");
+  }
+  if (!["public_now", "scheduled"].includes(options.publishMode)) {
+    throw new Error("--publish-mode must be public_now or scheduled.");
+  }
+  if (options.publishMode === "scheduled" && !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/u.test(String(options.scheduleStartDate || ""))) {
+    throw new Error("--publish-mode=scheduled requires --schedule-start-date=YYYY-MM-DD.");
   }
   if (!["variants", "channel-keys"].includes(options.supportSource)) {
     throw new Error("--support-source must be variants or channel-keys.");
@@ -776,6 +782,7 @@ async function buildPlan(options) {
       workflow: options.workflow,
       repairWorkflow: options.repairWorkflow,
       publishMode: options.publishMode,
+      scheduleStartDate: options.scheduleStartDate,
       scheduleMinFutureMinutes: options.scheduleMinFutureMinutes,
       allowRepublish: options.allowRepublish,
       generateThumbnails: options.generateThumbnails,
