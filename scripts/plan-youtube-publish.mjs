@@ -99,6 +99,9 @@ function collectMetadataFiles(inputs) {
 function findVideoFile(metadataFile, metadata) {
   if (metadata.videoPath && fs.existsSync(metadata.videoPath)) return path.resolve(metadata.videoPath);
   const dir = path.dirname(metadataFile);
+  const shortsPreferred = `shorts_${String(metadata.targetLang || "").toLowerCase()}_${String(metadata.supportLang || "").toLowerCase()}.mp4`;
+  const shortsPreferredPath = path.join(dir, shortsPreferred);
+  if (isShortsMetadata(metadata) && fs.existsSync(shortsPreferredPath)) return shortsPreferredPath;
   const preferred = `lesson_${String(metadata.targetLang || "").toLowerCase()}_${String(metadata.supportLang || "").toLowerCase()}.mp4`;
   const preferredPath = path.join(dir, preferred);
   if (fs.existsSync(preferredPath)) return preferredPath;
@@ -122,17 +125,63 @@ function findThumbnailFile(metadataFile, metadata) {
   return images[0] || "";
 }
 
-function quotaForCandidate({ hasThumbnail, playlistEntry, allowPlaylistCreate }) {
+function quotaForCandidate({ isShorts, hasThumbnail, playlistEntry, allowPlaylistCreate }) {
   let quota = 1600;
   if (hasThumbnail) quota += 50;
+  if (isShorts) return quota;
   if (playlistEntry?.youtube_playlist_id) quota += 50;
   else if (allowPlaylistCreate) quota += 100;
   return quota;
 }
 
+function isActivePublication(row) {
+  if (!row?.youtubeVideoId) return false;
+  const status = String(row.publicationStatus || row.status || "").toLowerCase();
+  if (status.includes("failed")) return false;
+  if (status.includes("deleted")) return false;
+  if (status.includes("superseded")) return false;
+  return true;
+}
+
+function isShortsMetadata(metadata = {}) {
+  return metadata.videoType === "shorts" || String(metadata.shortsKey || "").startsWith("shorts:");
+}
+
+function buildShortsKey(metadata = {}) {
+  if (metadata.shortsKey) return String(metadata.shortsKey);
+  return [
+    "shorts",
+    String(metadata.setId || "").trim(),
+    String(metadata.supportLang || "").trim().replace(/_/g, "-").toUpperCase(),
+    String(metadata.targetLang || "").trim().replace(/_/g, "-").toUpperCase(),
+    String(metadata.shortsFormat || "word_quiz_3_2_1").trim(),
+  ].join(":");
+}
+
+function findActiveShortsPublication(registry, shortsKey) {
+  if (!shortsKey) return null;
+  return (registry.publications || [])
+    .filter((row) => row.videoType === "shorts" || String(row.shortsKey || "").startsWith("shorts:"))
+    .filter((row) => row.shortsKey === shortsKey)
+    .filter(isActivePublication)
+    .sort((a, b) => String(b.lastReadbackAt || b.uploadedAt || "").localeCompare(String(a.lastReadbackAt || a.uploadedAt || "")))[0] || null;
+}
+
+function activeShortsPublicationBlocker(row, metadata) {
+  return [
+    "already published in config/youtube-shorts-published-videos.json",
+    `shortsKey=${row.shortsKey || buildShortsKey(metadata)}`,
+    `video=${row.youtubeVideoId}`,
+    `status=${row.publicationStatus || row.privacyStatus || "unknown"}`,
+    `run=${row.githubRunId || "unknown"}`,
+    "use visibility workflow or pass --allow-republish for an intentional duplicate/reupload",
+  ].join("; ");
+}
+
 function polishedMetadataIssue(metadata) {
   const source = String(metadata.source || "").trim();
   if (!source) return "metadata source missing; live publish requires AI-polished or human-curated metadata";
+  if (isShortsMetadata(metadata) && source.toLowerCase().startsWith("shorts-")) return "";
   if (source.toLowerCase().startsWith("template")) {
     return `metadata source ${source} is plan-only; live publish requires AI-polished or human-curated metadata`;
   }
@@ -150,10 +199,15 @@ function buildCandidate({
   requireAiMetadata,
   allowAutoThumbnailFallback,
 }) {
-  const assignment = buildPlaylistAssignment(metadata);
+  const isShorts = isShortsMetadata(metadata);
+  const assignment = isShorts
+    ? { key: buildShortsKey(metadata), title: metadata.title || buildShortsKey(metadata), description: metadata.description || "" }
+    : buildPlaylistAssignment(metadata);
   const channel = findChannelForSupport(channelRegistry.channels, metadata.supportLang);
-  const playlistEntry = findPlaylistEntry(playlistRegistry, assignment.key);
-  const existingPublication = findActivePublication(publicationRegistry, metadata);
+  const playlistEntry = isShorts ? null : findPlaylistEntry(playlistRegistry, assignment.key);
+  const existingPublication = isShorts
+    ? findActiveShortsPublication(publicationRegistry, assignment.key)
+    : findActivePublication(publicationRegistry, metadata);
   const videoPath = findVideoFile(metadataFile, metadata);
   const thumbnailPath = findThumbnailFile(metadataFile, metadata);
   const thumbnailAutoRequested = metadata.thumbnailUploadMode === "first_frame_auto"
@@ -187,13 +241,15 @@ function buildCandidate({
     if (privacyStatus !== "private") blockers.push("scheduled publishAt requires privacyStatus=private");
     if (!Number.isFinite(publishTime)) blockers.push(`invalid publishAt timestamp: ${publishAt}`);
     else if (publishTime <= Date.now() + 5 * 60 * 1000) blockers.push(`publishAt must be at least 5 minutes in the future: ${publishAt}`);
-    if (playlistEntry?.status && String(playlistEntry.status).toLowerCase().includes("unlisted")) {
+    if (!isShorts && playlistEntry?.status && String(playlistEntry.status).toLowerCase().includes("unlisted")) {
       blockers.push("scheduled public release needs a public playlist; promote existing unlisted playlist before upload or create a new public playlist");
     }
   }
-  if (!playlistEntry) warnings.push("playlist registry entry missing");
-  else if (!playlistEntry.youtube_playlist_id && !allowPlaylistCreate) warnings.push("playlist has no youtube_playlist_id yet");
-  if (existingPublication && !allowRepublish) blockers.push(activePublicationBlocker(existingPublication));
+  if (!isShorts && !playlistEntry) warnings.push("playlist registry entry missing");
+  else if (!isShorts && !playlistEntry.youtube_playlist_id && !allowPlaylistCreate) warnings.push("playlist has no youtube_playlist_id yet");
+  if (existingPublication && !allowRepublish) {
+    blockers.push(isShorts ? activeShortsPublicationBlocker(existingPublication, metadata) : activePublicationBlocker(existingPublication));
+  }
   if (!thumbnailPath && useAutoThumbnail) {
     warnings.push("custom thumbnail not found or disabled; YouTube automatic thumbnail fallback will be used");
   } else if (!thumbnailPath) {
@@ -201,11 +257,15 @@ function buildCandidate({
   } else if (!canUploadCustomThumbnail) {
     warnings.push("custom thumbnail file exists but channel policy disables thumbnails.set; YouTube automatic thumbnail fallback will be used");
   }
-  const playlistAction = playlistEntry?.youtube_playlist_id
-    ? "use_existing_playlist"
-    : (allowPlaylistCreate ? "create_playlist_then_insert" : "manual_playlist_id_needed");
+  const playlistAction = isShorts
+    ? "not_applicable_shorts"
+    : (playlistEntry?.youtube_playlist_id
+      ? "use_existing_playlist"
+      : (allowPlaylistCreate ? "create_playlist_then_insert" : "manual_playlist_id_needed"));
 
   return {
+    videoType: isShorts ? "shorts" : "ordinary",
+    shortsKey: isShorts ? assignment.key : "",
     metadataFile,
     videoPath,
     thumbnailPath,
@@ -231,16 +291,17 @@ function buildCandidate({
       lastReadbackAt: existingPublication.lastReadbackAt || "",
     } : null,
     playlist_key: assignment.key,
-    playlist: {
+    playlist: isShorts ? null : {
       ...assignment,
       youtube_playlist_id: playlistEntry?.youtube_playlist_id || "",
       registryStatus: playlistEntry?.status || "missing",
       action: playlistAction,
     },
-    publish_ready: blockers.length === 0 && (playlistEntry?.youtube_playlist_id || allowPlaylistCreate),
+    publish_ready: blockers.length === 0 && (isShorts || playlistEntry?.youtube_playlist_id || allowPlaylistCreate),
     blockers,
     warnings,
     estimatedQuotaUnits: quotaForCandidate({
+      isShorts,
       hasThumbnail: Boolean(thumbnailUploadPath),
       playlistEntry,
       allowPlaylistCreate,
@@ -258,7 +319,8 @@ function printHuman(report) {
   console.log("");
   for (const item of report.candidates) {
     console.log(`${item.supportLang}->${item.targetLang} ${item.setId}`);
-    console.log(`  channel=${item.channelKey || "MISSING"} playlist=${item.playlist_key} action=${item.playlist.action}`);
+    if (item.videoType === "shorts") console.log(`  channel=${item.channelKey || "MISSING"} shortsKey=${item.shortsKey}`);
+    else console.log(`  channel=${item.channelKey || "MISSING"} playlist=${item.playlist_key} action=${item.playlist.action}`);
     console.log(`  video=${item.videoPath || "MISSING"}`);
     if (item.thumbnailPath) console.log(`  thumbnail=${item.thumbnailPath}`);
     if (item.thumbnailUploadMode) console.log(`  thumbnailUploadMode=${item.thumbnailUploadMode}`);
@@ -292,7 +354,7 @@ async function main() {
       requireAiMetadata: options.requireAiMetadata,
       allowAutoThumbnailFallback: options.allowAutoThumbnailFallback,
     });
-    if (options.writeRegistry && !findPlaylistEntry(playlistRegistry, candidate.playlist_key)) {
+    if (options.writeRegistry && candidate.videoType !== "shorts" && !findPlaylistEntry(playlistRegistry, candidate.playlist_key)) {
       const { created } = upsertPlannedPlaylist(
         playlistRegistry,
         candidate.playlist,
@@ -320,7 +382,7 @@ async function main() {
       candidateCount: candidates.length,
       publishReadyCount: candidates.filter((item) => item.publish_ready).length,
       estimatedQuotaUnits: candidates.reduce((sum, item) => sum + item.estimatedQuotaUnits, 0),
-      missingPlaylistCount: candidates.filter((item) => item.playlist.registryStatus === "missing").length,
+      missingPlaylistCount: candidates.filter((item) => item.videoType !== "shorts" && item.playlist.registryStatus === "missing").length,
       blockerCount: candidates.reduce((sum, item) => sum + item.blockers.length, 0),
       warningCount: candidates.reduce((sum, item) => sum + item.warnings.length, 0),
     },

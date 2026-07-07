@@ -850,6 +850,8 @@ scripts/build-deck-shorts.mjs
 scripts/lib/shorts-slide-template.mjs
 scripts/lib/shorts-outro-translations.mjs
 scripts/lib/screenshot-batch.mjs
+.github/workflows/youtube-shorts-publish.yml
+config/youtube-shorts-published-videos.json
 ```
 
 Запуск локального proof-render:
@@ -873,7 +875,7 @@ Local runtime requirements:
 - TTS cache is shared with ordinary videos in `outputs/video-generator/cache`;
 - renderer uses the same `fetchDeckCards`, `fetchDeckMetadata`, `getVoiceForLanguage`, `getTtsAudio`, `getPublicCourseUrl` and `getPublicCourseDisplayUrl` helpers as the ordinary video pipeline;
 - `scripts/lib/screenshot-batch.mjs` now accepts optional `viewport` from the task JSON while preserving the ordinary widescreen default, image-load wait and JPEG screenshot behavior;
-- generated output includes a local `youtube_metadata.json` handoff with `videoType=shorts` and `publishReady=false`.
+- generated output includes a `youtube_metadata.json` handoff with `videoType=shorts`, stable `shortsKey`, `shortsFormat`, localized Shorts copy, first-frame thumbnail policy and upload-ready title/description/tags. `publishReady` remains `false` as a local-render flag; GitHub upload readiness is decided by the Shorts publish plan gate, not by this field.
 - first LUNA2 local proof artifact: `outputs/shorts-generator/home_bathroom_essentials_a1_es_ru/shorts_es_ru.mp4` plus sibling `youtube_metadata.json`. Verified locally with `ffprobe`: `1080x1920`, `25 fps`, `yuv420p(tv)`, AAC `48000 Hz` stereo, duration `58.52s`. Visual frame smoke-check was done at roughly `2s`, `31s` and `56s`.
 
 Shorts-specific visual rules:
@@ -884,10 +886,22 @@ Shorts-specific visual rules:
 - 3D flip uses `-webkit-backface-visibility: hidden`, `backface-visibility: hidden`, final back-face angle `rotateY(179.9deg)` and explicit inactive-face hiding to avoid the Chromium singular-matrix white-stripe bug seen at exact `180deg`;
 - Shorts uses local emoji flags from `flagMap` instead of remote `flagcdn` images so local/GitHub portrait screenshot batches do not stall on external image loads.
 
-Current limitations before GitHub upload/publish:
+GitHub Actions publish contour, added 2026-07-07:
+
+- workflow: `.github/workflows/youtube-shorts-publish.yml`;
+- scope: ordinary single-language Shorts only, exactly one `set_id`, one support/channel language, one target language and one `shorts_format` per run;
+- modes: `plan` validates inputs/localization and writes `outputs/youtube-shorts-plan-github.json`; `render` installs render/TTS dependencies, builds the 1080 x 1920 MP4 and runs the upload planner; `apply` renders, plans, uploads to YouTube, uploads artifacts, then persists state in a second job;
+- confirmation gates: `render`/`apply` require `confirm_render=RENDER_SHORTS_VIDEO` and `confirm_tts=GENERATE_TTS_AUDIO`; `apply` additionally requires `confirm_youtube_write=APPLY_SHORTS_YOUTUBE_UPLOAD`; public or scheduled upload requires `confirm_public=PUBLISH_PUBLIC`;
+- YouTube route environment: same four support-language environment groups as the ordinary and Polyglot workflows, with `youtube_environment=auto` by default;
+- upload path: shared `scripts/youtube-publish-video.mjs`, but `videoType=shorts` disables playlist creation/insert, uses duplicate guard by `shortsKey`, defaults to YouTube first-frame thumbnail and writes publication rows to `config/youtube-shorts-published-videos.json`;
+- state persistence: workflow artifact includes `config/youtube-shorts-published-videos.json`; `persist-shorts-publish-state` merges it through `scripts/merge-youtube-publish-state.mjs` and commits only `config/youtube-channels.json` / `config/youtube-shorts-published-videos.json` if changed;
+- scheduling: optional exact `publish_at` is supported through the uploader when `privacy=private`; there is no Shorts bulk calendar allocator yet.
+
+Current limitations:
 
 - `scripts/lib/shorts-outro-translations.mjs` is still a transitional local module even though its current return path covers all 54 language contours plus the `NB` technical alias. Long-term localization source of truth should move these `shorts_*` fields into `scripts/generate-video-localization.mjs` and `config/video-localization.json`, then pass `npm run check:video-localization`;
-- ordinary `.github/workflows/youtube-video-publish.yml` must not be used for Shorts upload until `videoType=shorts` registry identity, metadata gates, calendar behavior and playlist/channel assignment are explicitly wired;
+- ordinary `.github/workflows/youtube-video-publish.yml` must not be used for Shorts upload. Use `.github/workflows/youtube-shorts-publish.yml` for ordinary single-language Shorts;
+- Shorts bulk dispatch, calendar-slot allocation and Polyglot Shorts upload are not implemented in this contour;
 - generated Shorts MP4 files should be treated as local/render artifacts, not committed source files, unless a specific evidence artifact is intentionally added.
 
 ### 4.2.1. Shorts Content Strategy: Ordinary And Polyglot Viral Formats
@@ -931,14 +945,14 @@ Pilot plan before building a bulk Shorts registry:
 - ordinary single-language: test `5` formats x `5` support-target pairs x `3` decks. Good first decks: `home_bathroom_essentials_a1`, restaurant words, taxi/ride-share words, grocery shopping words and direction words.
 - Polyglot Shorts: test `5` formats x Wave 1 starter bundles x `3` decks. Do not launch the full matrix.
 - read metrics by format, language pair and deck: average percentage viewed, average view duration, chose-to-view, replay/loop proxy where available, likes, comments, and profile/course-link clicks if available.
-- add `shortsFormat` and, for Polyglot Shorts, `polyglotBundleKey` to the local metadata before upload automation. Until those gates exist, all Shorts remain local proof artifacts and `publishReady=false`.
+- ordinary single-language Shorts now write `shortsFormat` and a stable `shortsKey` and can use `.github/workflows/youtube-shorts-publish.yml` for one-at-a-time render/upload/publish. Polyglot Shorts still need `polyglotBundleKey`, separate `videoType=polyglot_shorts`, a dedicated registry identity and upload workflow before any live launch.
 
 Shorts format phrase localization, added 2026-07-07:
 
 - `scripts/lib/shorts-format-translations.mjs` is the current source of truth for native-style hooks and micro-prompts by Shorts format. It covers the 54 project language contours and audits the extra `NB` technical key as the same Bokmål copy as `NO`.
 - Supported safe automation format ids are `word_quiz_3_2_1`, `audio_first_quiz`, `say_it_before_me`, `three_words_one_scene`, `which_one_is_correct`, `speed_loop_5_words`, `phrase_ladder` and `visual_object_flash`.
 - Each format/language pack must provide `hook`, `answerLabel`, `repeatPrompt`, `commentPrompt` and `profileCta`. Validate coverage with `npm run check:shorts-format-localization`; the report should show `checkedCodes=54`, `checkedLocalizationKeys=55`, `nbNoAliasMerged=true` and zero blockers.
-- `scripts/build-deck-shorts.mjs` accepts `--shorts-format <format_id>` and writes `shortsFormat` plus `shortsFormatCopy` into the local `youtube_metadata.json`. The current visual renderer still uses the default learning/quiz flow; per-format visual timing/templates must be implemented before treating these ids as distinct rendered formats.
+- `scripts/build-deck-shorts.mjs` accepts `--shorts-format <format_id>` and writes `shortsFormat`, `shortsKey` plus `shortsFormatCopy` into `youtube_metadata.json`. The current visual renderer still uses the default learning/quiz flow; per-format visual timing/templates must be implemented before treating these ids as distinct rendered formats in analytics.
 - This phrase pack is AI native-style copy plus deterministic technical gates, not human native-speaker certification. Before a high-stakes channel/paid campaign, run native review for the exact support language and format.
 
 ### Outro QR destination

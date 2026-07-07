@@ -95,6 +95,10 @@ function isPolyglotRow(row = {}) {
   return row.videoType === "polyglot" || String(row.polyglotKey || "").startsWith("polyglot:");
 }
 
+function isShortsRow(row = {}) {
+  return row.videoType === "shorts" || String(row.shortsKey || "").startsWith("shorts:");
+}
+
 function assignIfChanged(existing, incoming, field) {
   if (isEmpty(incoming[field])) return false;
   const currentValue = JSON.stringify(existing[field] ?? null);
@@ -125,6 +129,31 @@ function repairPolyglotPublicationIdentity(existing, incoming) {
     changed = assignIfChanged(existing, incoming, field) || changed;
   }
   if (String(incoming.playlist_key || "").startsWith("POLYGLOT__")) {
+    changed = assignIfChanged(existing, incoming, "playlist_key") || changed;
+  } else {
+    changed = fillMissing(existing, incoming, ["playlist_key"]) || changed;
+  }
+  return changed;
+}
+
+function repairShortsPublicationIdentity(existing, incoming) {
+  if (!isShortsRow(incoming)) return false;
+  let changed = false;
+  for (const field of [
+    "videoType",
+    "shortsKey",
+    "shortsFormat",
+    "cardLimit",
+    "quizLimit",
+    "transitionMode",
+    "targetLanguageName",
+    "levelCode",
+    "courseUrl",
+    "courseDisplayUrl",
+  ]) {
+    changed = assignIfChanged(existing, incoming, field) || changed;
+  }
+  if (String(incoming.playlist_key || "").startsWith("shorts:")) {
     changed = assignIfChanged(existing, incoming, "playlist_key") || changed;
   } else {
     changed = fillMissing(existing, incoming, ["playlist_key"]) || changed;
@@ -164,6 +193,15 @@ function mergePublications(currentRegistry, incomingRegistry) {
       "playlist_key",
       "videoType",
       "polyglotKey",
+      "shortsKey",
+      "shortsFormat",
+      "cardLimit",
+      "quizLimit",
+      "transitionMode",
+      "targetLanguageName",
+      "levelCode",
+      "courseUrl",
+      "courseDisplayUrl",
       "bundleKey",
       "bundleLabel",
       "contentScope",
@@ -190,6 +228,7 @@ function mergePublications(currentRegistry, incomingRegistry) {
       "lastReadbackAt",
     ]);
     changed = repairPolyglotPublicationIdentity(existing, incoming) || changed;
+    changed = repairShortsPublicationIdentity(existing, incoming) || changed;
     if (existing.thumbnailSet !== true && incoming.thumbnailSet === true) {
       existing.thumbnailSet = true;
       changed = true;
@@ -471,6 +510,7 @@ function main() {
     playlists: { created: 0, updated: 0, skipped: 0 },
     channels: { updated: 0, skipped: 0 },
     liveAudit: { created: 0, updated: 0, skipped: 0, hasIncoming: false, sourcePath: "" },
+    shortsPublications: { created: 0, updated: 0, skipped: 0 },
   };
 
   const publications = loadPair(repoRoot, artifactDir, "config/youtube-published-videos.json", () => ({
@@ -524,6 +564,18 @@ function main() {
   if (channels.hasIncoming) {
     summary.channels = mergeChannels(channels.current, channels.incoming);
     if (writeJsonIfChanged(channels.currentPath, channels.current)) summary.filesChanged.push("config/youtube-channels.json");
+  }
+
+  // Shorts publications
+  const shortsPublications = loadPair(repoRoot, artifactDir, "config/youtube-shorts-published-videos.json", () => ({
+    schemaVersion: 1,
+    publications: [],
+  }));
+  if (shortsPublications.hasIncoming) {
+    summary.shortsPublications = mergePublications(shortsPublications.current, shortsPublications.incoming);
+    if (writeJsonIfChanged(shortsPublications.currentPath, shortsPublications.current)) {
+      summary.filesChanged.push("config/youtube-shorts-published-videos.json");
+    }
   }
 
   // Polyglot publications

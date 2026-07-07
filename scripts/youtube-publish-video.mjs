@@ -182,6 +182,10 @@ function statusWithPlaylistState(baseStatus, { youtubePlaylistId, playlistItemId
   return baseStatus;
 }
 
+function uploadStatusWithOptionalPlaylist(baseStatus, { isShorts, youtubePlaylistId, playlistItemId }) {
+  return isShorts ? baseStatus : statusWithPlaylistState(baseStatus, { youtubePlaylistId, playlistItemId });
+}
+
 function youtubeJsonRetryDelayMs({ attempt, response }) {
   const retryAfter = retryAfterMs(response);
   if (retryAfter > 0) return Math.min(retryAfter, envInteger("YOUTUBE_API_RETRY_MAX_MS", 90000, { min: 1000 }));
@@ -231,6 +235,7 @@ function buildUploadDescription(metadata) {
 function polishedMetadataIssue(metadata) {
   const source = String(metadata.source || "").trim();
   if (!source) return "metadata source missing; live publish requires AI-polished or human-curated metadata";
+  if (isShortsMetadata(metadata) && source.toLowerCase().startsWith("shorts-")) return "";
   if (source.toLowerCase().startsWith("template")) {
     return `metadata source ${source} is plan-only; live publish requires AI-polished or human-curated metadata`;
   }
@@ -246,6 +251,8 @@ function resolveExistingPath(filePath, label) {
 
 function defaultVideoPath(metadataFile, metadata) {
   const dir = path.dirname(metadataFile);
+  const shortsPreferred = path.join(dir, `shorts_${String(metadata.targetLang || "").toLowerCase()}_${String(metadata.supportLang || "").toLowerCase()}.mp4`);
+  if (isShortsMetadata(metadata) && fs.existsSync(shortsPreferred)) return shortsPreferred;
   const preferred = path.join(dir, `lesson_${String(metadata.targetLang || "").toLowerCase()}_${String(metadata.supportLang || "").toLowerCase()}.mp4`);
   if (fs.existsSync(preferred)) return preferred;
   const video = fs.readdirSync(dir)
@@ -269,31 +276,57 @@ function isPolyglotMetadata(metadata = {}) {
   return metadata.videoType === "polyglot" || String(metadata.polyglotKey || "").startsWith("polyglot:");
 }
 
+function isShortsMetadata(metadata = {}) {
+  return metadata.videoType === "shorts" || String(metadata.shortsKey || "").startsWith("shorts:");
+}
+
+function buildShortsKey(metadata = {}) {
+  if (metadata.shortsKey) return String(metadata.shortsKey);
+  return [
+    "shorts",
+    String(metadata.setId || "").trim(),
+    String(metadata.supportLang || "").trim().replace(/_/g, "-").toUpperCase(),
+    String(metadata.targetLang || "").trim().replace(/_/g, "-").toUpperCase(),
+    String(metadata.shortsFormat || "word_quiz_3_2_1").trim(),
+  ].join(":");
+}
+
 function loadUploadPlaylistRegistry(filePath, metadata) {
+  if (isShortsMetadata(metadata)) return { schemaVersion: 1, playlists: [] };
   return isPolyglotMetadata(metadata)
     ? loadPolyglotPlaylistRegistry(filePath)
     : loadPlaylistRegistry(filePath);
 }
 
 function buildUploadPlaylistAssignment(metadata) {
+  if (isShortsMetadata(metadata)) {
+    return {
+      key: buildShortsKey(metadata),
+      title: metadata.title || buildShortsKey(metadata),
+      description: metadata.description || "",
+    };
+  }
   return isPolyglotMetadata(metadata)
     ? buildPolyglotPlaylistAssignment(metadata)
     : buildPlaylistAssignment(metadata);
 }
 
 function findUploadPlaylistEntry(registry, assignment, metadata) {
+  if (isShortsMetadata(metadata)) return null;
   return isPolyglotMetadata(metadata)
     ? findPolyglotPlaylistEntry(registry, assignment.key)
     : findPlaylistEntry(registry, assignment.key);
 }
 
 function upsertPlannedUploadPlaylist(registry, assignment, channel, metadata) {
+  if (isShortsMetadata(metadata)) return { entry: null, created: false, updated: false };
   return isPolyglotMetadata(metadata)
     ? upsertPlannedPolyglotPlaylist(registry, assignment, channel)
     : upsertPlannedPlaylist(registry, assignment, channel);
 }
 
 function saveUploadPlaylistRegistry(registry, filePath, metadata) {
+  if (isShortsMetadata(metadata)) return;
   if (isPolyglotMetadata(metadata)) savePolyglotPlaylistRegistry(registry, filePath);
   else savePlaylistRegistry(registry, filePath);
 }
@@ -308,12 +341,23 @@ function findActivePolyglotPublication(registry, polyglotKey) {
 }
 
 function findActiveUploadPublication(registry, metadata) {
+  if (isShortsMetadata(metadata)) return findActiveShortsPublication(registry, buildShortsKey(metadata));
   return isPolyglotMetadata(metadata)
     ? findActivePolyglotPublication(registry, metadata.polyglotKey)
     : findActivePublication(registry, metadata);
 }
 
 function activeUploadPublicationBlocker(row, metadata) {
+  if (isShortsMetadata(metadata)) {
+    return [
+      "already published in config/youtube-shorts-published-videos.json",
+      `shortsKey=${row.shortsKey || buildShortsKey(metadata)}`,
+      `video=${row.youtubeVideoId}`,
+      `status=${row.publicationStatus || row.privacyStatus || "unknown"}`,
+      `run=${row.githubRunId || "unknown"}`,
+      "use visibility/repair workflow or pass --allow-republish for an intentional duplicate/reupload",
+    ].join("; ");
+  }
   if (!isPolyglotMetadata(metadata)) return activePublicationBlocker(row);
   return [
     "already published in config/youtube-polyglot-published-videos.json",
@@ -323,6 +367,15 @@ function activeUploadPublicationBlocker(row, metadata) {
     `run=${row.githubRunId || "unknown"}`,
     "use visibility/repair workflow or pass --allow-republish for an intentional duplicate/reupload",
   ].join("; ");
+}
+
+function findActiveShortsPublication(registry, shortsKey) {
+  if (!shortsKey) return null;
+  return (registry.publications || [])
+    .filter((row) => row.videoType === "shorts" || String(row.shortsKey || "").startsWith("shorts:"))
+    .filter((row) => row.shortsKey === shortsKey)
+    .filter(isActivePublication)
+    .sort((a, b) => String(b.lastReadbackAt || b.uploadedAt || "").localeCompare(String(a.lastReadbackAt || a.uploadedAt || "")))[0] || null;
 }
 
 function loadOAuthClient(clientFile) {
@@ -663,6 +716,7 @@ function buildPublicationRecord({ metadata, ledgerRow, uploadedVideo, channel, t
   const runId = process.env.GITHUB_RUN_ID || "";
   const publishAt = ledgerRow.publishAt || "";
   const isPolyglot = isPolyglotMetadata(metadata);
+  const isShorts = isShortsMetadata(metadata);
   const targetLangs = Array.isArray(metadata.targetLangs)
     ? metadata.targetLangs
     : String(metadata.targetLangsCsv || "").split(",").map((item) => item.trim()).filter(Boolean);
@@ -691,6 +745,18 @@ function buildPublicationRecord({ metadata, ledgerRow, uploadedVideo, channel, t
       targetLangs,
       targetLangsCsv,
       targetLangsHash: metadata.targetLangsHash || metadata.targetsHash || "",
+    } : {}),
+    ...(isShorts ? {
+      videoType: "shorts",
+      shortsKey: buildShortsKey(metadata),
+      shortsFormat: metadata.shortsFormat || "",
+      cardLimit: metadata.cardLimit || 0,
+      quizLimit: metadata.quizLimit || 0,
+      transitionMode: metadata.transitionMode || "",
+      targetLanguageName: metadata.targetLanguageName || "",
+      levelCode: metadata.levelCode || "",
+      courseUrl: metadata.courseUrl || "",
+      courseDisplayUrl: metadata.courseDisplayUrl || "",
     } : {}),
     setId: metadata.setId,
     supportLang: metadata.supportLang,
@@ -742,7 +808,8 @@ function dryRun(plan) {
   console.log(`video=${plan.videoPath || "MISSING"}`);
   console.log(`thumbnail=${plan.thumbnailPath || "none"}`);
   console.log(`channel=${plan.channelKey} ${plan.youtube_channel_id}`);
-  console.log(`playlist=${plan.playlist_key} ${plan.youtube_playlist_id || "(missing id)"}`);
+  if (plan.videoType === "shorts") console.log(`shortsKey=${plan.shortsKey}`);
+  else console.log(`playlist=${plan.playlist_key} ${plan.youtube_playlist_id || "(missing id)"}`);
   console.log(`privacy=${plan.privacyStatus}`);
   if (plan.publishAt) console.log(`publishAt=${plan.publishAt}`);
   console.log(`estimatedQuotaUnits=${plan.estimatedQuotaUnits}`);
@@ -759,6 +826,7 @@ async function main() {
 
   const metadataFile = resolveExistingPath(options.metadata, "metadata");
   const metadata = JSON.parse(fs.readFileSync(metadataFile, "utf8"));
+  const isShorts = isShortsMetadata(metadata);
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const playlistRegistry = loadUploadPlaylistRegistry(options.playlistRegistry, metadata);
   const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
@@ -799,15 +867,17 @@ async function main() {
   const blockers = [
     ...(metadataIssue ? [metadataIssue] : []),
     ...(existingPublication && !options.allowRepublish ? [activeUploadPublicationBlocker(existingPublication, metadata)] : []),
-    ...(publishAt && playlistEntry?.status && String(playlistEntry.status).toLowerCase().includes("unlisted")
+    ...(!isShorts && publishAt && playlistEntry?.status && String(playlistEntry.status).toLowerCase().includes("unlisted")
       ? ["scheduled public release needs a public playlist; promote existing unlisted playlist before upload or create a new public playlist"]
       : []),
-    ...(playlistEntry?.youtube_playlist_id || options.createPlaylist
+    ...(isShorts || playlistEntry?.youtube_playlist_id || options.createPlaylist
       ? []
       : ["playlist has no youtube_playlist_id; pass --create-playlist or fill config/youtube-playlists.json"])
   ];
 
   const plan = {
+    videoType: isShorts ? "shorts" : (isPolyglotMetadata(metadata) ? "polyglot" : "ordinary"),
+    shortsKey: isShorts ? buildShortsKey(metadata) : "",
     metadataFile,
     metadataSource: metadata.source || "",
     videoPath,
@@ -827,10 +897,10 @@ async function main() {
       lastReadbackAt: existingPublication.lastReadbackAt || "",
     } : null,
     playlist_key: assignment.key,
-    youtube_playlist_id: playlistEntry?.youtube_playlist_id || "",
+    youtube_playlist_id: isShorts ? "" : (playlistEntry?.youtube_playlist_id || ""),
     privacyStatus,
     publishAt,
-    estimatedQuotaUnits: 1600 + (thumbnailUploadPath ? 50 : 0) + (playlistEntry?.youtube_playlist_id ? 50 : (options.createPlaylist ? 100 : 0)),
+    estimatedQuotaUnits: 1600 + (thumbnailUploadPath ? 50 : 0) + (isShorts ? 0 : (playlistEntry?.youtube_playlist_id ? 50 : (options.createPlaylist ? 100 : 0))),
     blockers,
     warnings: thumbnailUploadMode === "custom" ? [] : [`custom thumbnail upload skipped; ${thumbnailFallbackReason || "YouTube auto first-frame fallback will be used"}`],
   };
@@ -849,7 +919,7 @@ async function main() {
 
   const ledgerBase = {
     timestamp: new Date().toISOString(),
-    action: "youtube_publish_video",
+    action: isShorts ? "youtube_publish_shorts" : "youtube_publish_video",
     metadataFile,
     videoPath,
     thumbnailPath,
@@ -863,6 +933,9 @@ async function main() {
     targetLang: metadata.targetLang,
     setId: metadata.setId,
     playlist_key: assignment.key,
+    videoType: isShorts ? "shorts" : (isPolyglotMetadata(metadata) ? "polyglot" : "ordinary"),
+    shortsKey: isShorts ? buildShortsKey(metadata) : "",
+    shortsFormat: isShorts ? (metadata.shortsFormat || "") : "",
     expectedYoutubeChannelId: channel.channelId,
     privacyStatus,
     publishAt,
@@ -885,11 +958,11 @@ async function main() {
       expectedChannelId: channel.channelId,
     });
 
-    if (!playlistEntry) {
+    if (!isShorts && !playlistEntry) {
       const result = upsertPlannedUploadPlaylist(playlistRegistry, assignment, channel, metadata);
       playlistEntry = result.entry;
     }
-    if (!playlistEntry.youtube_playlist_id) {
+    if (!isShorts && !playlistEntry.youtube_playlist_id) {
       const playlistPrivacyStatus = (privacyStatus === "public" || publishAt) ? "public" : "unlisted";
       try {
         const playlist = await youtubeJson({
@@ -922,7 +995,7 @@ async function main() {
         console.warn(`::warning::Deferred playlist creation for ${assignment.key}; video upload will continue and playlist repair must run later.`);
       }
     }
-    youtubePlaylistId = playlistEntry.youtube_playlist_id || "";
+    youtubePlaylistId = isShorts ? "" : (playlistEntry.youtube_playlist_id || "");
 
     const uploaded = await uploadVideoResumable({ accessToken, videoPath, metadata, privacyStatus, publishAt });
     const videoId = uploaded.id;
@@ -936,7 +1009,7 @@ async function main() {
     videoReadback = uploadedVideoReadback.videoReadback;
     uploadedVideo = uploadedVideoReadback.uploadedVideo;
 
-    if (youtubePlaylistId) {
+    if (!isShorts && youtubePlaylistId) {
       try {
         const playlistItem = await youtubeJson({
           accessToken,
@@ -989,7 +1062,7 @@ async function main() {
     });
     const ledgerRow = {
       ...ledgerBase,
-      status: statusWithPlaylistState(uploadStatus, { youtubePlaylistId, playlistItemId }),
+      status: uploadStatusWithOptionalPlaylist(uploadStatus, { isShorts, youtubePlaylistId, playlistItemId }),
       youtubeVideoId: videoId,
       youtubePlaylistId,
       playlistItemId,
@@ -1002,12 +1075,12 @@ async function main() {
         needsThumbnailPermission: true,
         thumbnailSetError,
       } : {}),
-      ...(!youtubePlaylistId ? {
+      ...(!isShorts && !youtubePlaylistId ? {
         needsPlaylistCreate: true,
         needsPlaylistInsert: true,
         playlistCreateDeferredError,
       } : {}),
-      ...(youtubePlaylistId && !playlistItemId ? {
+      ...(!isShorts && youtubePlaylistId && !playlistItemId ? {
         needsPlaylistInsert: true,
         playlistInsertDeferredError,
       } : {}),
@@ -1051,12 +1124,12 @@ async function main() {
           uploadStatus: "unknown",
         },
       };
-      const partialBaseStatus = playlistItemId
+      const partialBaseStatus = (isShorts || playlistItemId)
         ? (publishAt ? "scheduled_uploaded_post_upload_partial" : "published_uploaded_post_upload_partial")
         : (publishAt ? "scheduled_uploaded" : "uploaded_public");
       const partialLedgerRow = {
         ...ledgerBase,
-        status: statusWithPlaylistState(partialBaseStatus, { youtubePlaylistId, playlistItemId }),
+        status: uploadStatusWithOptionalPlaylist(partialBaseStatus, { isShorts, youtubePlaylistId, playlistItemId }),
         youtubeVideoId: uploadedVideoId,
         youtubePlaylistId,
         playlistItemId,
@@ -1064,8 +1137,8 @@ async function main() {
         authorizedChannel,
         uploadedVideoChannelId: fallbackUploadedVideo.snippet?.channelId || channel.channelId,
         readback: videoReadback,
-        needsPlaylistCreate: !youtubePlaylistId,
-        needsPlaylistInsert: !playlistItemId,
+        needsPlaylistCreate: isShorts ? false : !youtubePlaylistId,
+        needsPlaylistInsert: isShorts ? false : !playlistItemId,
         ...(playlistCreateDeferredError ? { playlistCreateDeferredError } : {}),
         ...(playlistInsertDeferredError ? { playlistInsertDeferredError } : {}),
         postUploadError: error.message,

@@ -39,6 +39,48 @@ function extractLevel(setId) {
   return "A1";
 }
 
+function clampText(value, maxLength) {
+  const text = String(value || "").replace(/\s+/g, " ").trim();
+  if (text.length <= maxLength) return text;
+  const clipped = text.slice(0, Math.max(0, maxLength - 3)).replace(/\s+\S*$/u, "").trim();
+  return `${clipped || text.slice(0, Math.max(0, maxLength - 3)).trim()}...`;
+}
+
+function buildShortsKey({ setId, supportLang, targetLang, shortsFormat }) {
+  return [
+    "shorts",
+    String(setId || "").trim(),
+    String(supportLang || "").trim().toUpperCase(),
+    String(targetLang || "").trim().toUpperCase(),
+    String(shortsFormat || "").trim(),
+  ].join(":");
+}
+
+function buildShortsTitle({ shortsFormatCopy, targetName, levelCode }) {
+  const hook = stripSentenceTerminator(shortsFormatCopy.hook || "");
+  return clampText(`${hook}: ${targetName} ${levelCode} #Shorts`, 100);
+}
+
+function buildShortsDescription({
+  targetName,
+  levelCode,
+  cleanDeckTitle,
+  cleanNotice,
+  courseDisplayUrl,
+  shortsFormatCopy,
+}) {
+  const commentPrompt = String(shortsFormatCopy.commentPrompt || "").trim();
+  return [
+    `${targetName} ${levelCode}: ${cleanDeckTitle}`,
+    "",
+    commentPrompt,
+    cleanNotice,
+    courseDisplayUrl,
+    "",
+    "#Shorts #FlashcardsLuna #LanguageLearning",
+  ].filter((line) => line !== null && line !== undefined).join("\n").trim();
+}
+
 function getLanguageLabel(targetLang, supportLang, levelCode) {
   const supportUpper = String(supportLang).toUpperCase();
   const langData = localizationData[supportUpper] || localizationData.EN;
@@ -643,10 +685,21 @@ async function main() {
     const cleanNotice = String(translation.notice || "Link in the channel profile!")
       .replace(/^👇\s*/u, "")
       .trim();
+    const shortsTitle = buildShortsTitle({ shortsFormatCopy, targetName, levelCode });
+    const shortsDescription = buildShortsDescription({
+      targetName,
+      levelCode,
+      cleanDeckTitle,
+      cleanNotice,
+      courseDisplayUrl,
+      shortsFormatCopy,
+    });
     const metadataPath = path.join(outputDir, "youtube_metadata.json");
     const metadata = {
       videoType: "shorts",
+      shortsKey: buildShortsKey({ setId, supportLang, targetLang, shortsFormat }),
       generator: "scripts/build-deck-shorts.mjs",
+      source: "shorts-localized-template",
       generatedAt: new Date().toISOString(),
       setId,
       targetLang,
@@ -663,8 +716,21 @@ async function main() {
       courseUrl,
       courseDisplayUrl,
       outputVideo: finalVideoPath,
-      title: `${cleanDeckTitle} · ${targetName} ${levelCode} #Shorts`,
-      description: `${targetName} ${levelCode}: ${cleanDeckTitle}\n\n${cleanNotice}\n${courseDisplayUrl}\n\n#Shorts #FlashcardsLuna`,
+      title: shortsTitle,
+      description: shortsDescription,
+      categoryId: "27",
+      tags: [
+        BRAND_NAME,
+        "Flashcards Luna",
+        "language learning",
+        targetName,
+        cleanDeckTitle,
+        shortsFormat,
+      ].filter(Boolean).slice(0, 10),
+      hashtags: ["#Shorts", "#FlashcardsLuna", "#LanguageLearning"],
+      thumbnailUploadMode: "first_frame_auto",
+      thumbnailSource: "youtube-auto-first-frame",
+      thumbnailFallbackReason: "shorts_first_frame_default",
       publishReady: false,
       publishIntegration: "local-render-only"
     };
