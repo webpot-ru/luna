@@ -27,6 +27,7 @@ function parseArgs(argv) {
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
     ledger: DEFAULT_LEDGER_PATH,
+    thumbnailSource: "",
     apply: false,
     confirmYoutubeWrite: false,
   };
@@ -44,6 +45,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--publication-registry=")) options.publicationRegistry = arg.slice("--publication-registry=".length);
     else if (arg.startsWith("--ledger=")) options.ledger = arg.slice("--ledger=".length);
+    else if (arg.startsWith("--thumbnail-source=")) options.thumbnailSource = arg.slice("--thumbnail-source=".length);
     else throw new Error(`Unknown argument: ${arg}`);
   }
   return options;
@@ -239,11 +241,11 @@ function markChannelCustomThumbnailEnabled(channelRegistry, channelKey) {
   return true;
 }
 
-function updatePublication({ registry, publication, metadata, video, thumbnailPath, thumbnailResult, now }) {
+function updatePublication({ registry, publication, metadata, video, thumbnailPath, thumbnailResult, now, thumbnailSource }) {
   if (!publication) return false;
   publication.thumbnailSet = true;
   publication.thumbnailUploadMode = "custom";
-  publication.thumbnailSource = metadata.thumbnailSource || publication.thumbnailSource || "custom";
+  publication.thumbnailSource = thumbnailSource || metadata.thumbnailSource || publication.thumbnailSource || "custom";
   publication.thumbnailLogoOverlay = Boolean(metadata.thumbnailLogoOverlay ?? publication.thumbnailLogoOverlay);
   publication.publicationStatus = publication.publishAt ? "scheduled_uploaded" : "published_uploaded";
   publication.lastReadbackAt = now;
@@ -278,7 +280,7 @@ function buildPlan(options, metadata, channel, publication, thumbnailPath) {
     title: metadata.title || publication?.title || "",
     thumbnailPath,
     thumbnailSizeBytes: fs.statSync(thumbnailPath).size,
-    thumbnailSource: metadata.thumbnailSource || publication?.thumbnailSource || "",
+    thumbnailSource: options.thumbnailSource || metadata.thumbnailSource || publication?.thumbnailSource || "",
     channelKey: channel.key,
     expectedYoutubeChannelId: channel.channelId,
     publicationFound: Boolean(publication),
@@ -456,6 +458,7 @@ async function main() {
       thumbnailPath,
       thumbnailResult,
       now,
+      thumbnailSource: options.thumbnailSource,
     });
     saveYoutubeChannels(channelRegistry, options.channelConfig);
     savePublicationRegistry(publicationRegistry, options.publicationRegistry);

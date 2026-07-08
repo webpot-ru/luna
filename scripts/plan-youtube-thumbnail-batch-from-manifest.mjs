@@ -86,7 +86,12 @@ function supportLangFromCover(cover) {
 }
 
 function targetLangFromCover(cover) {
-  return normalizeCode(cover.targetLang || cover.target || cover.target_lang);
+  const target = normalizeCode(cover.targetLang || cover.target || cover.target_lang);
+  if (target) return target;
+  const targetLangsCsv = cover.targetLangsCsv || cover.target_langs_csv || "";
+  if (targetLangsCsv) return splitCodes(targetLangsCsv).join(",");
+  const targetLangs = ensureArray(cover.targetLangs || cover.target_langs).map(normalizeCode).filter(Boolean);
+  return targetLangs.join(",");
 }
 
 function readJson(filePath, label) {
@@ -194,6 +199,55 @@ function currentThumbnailState(publication) {
   };
 }
 
+function sameCodeList(left, right) {
+  const normalizeList = (value) => {
+    if (Array.isArray(value)) return value.map(normalizeCode).filter(Boolean).sort().join(",");
+    return String(value || "")
+      .split(",")
+      .map(normalizeCode)
+      .filter(Boolean)
+      .sort()
+      .join(",");
+  };
+  return normalizeList(left) === normalizeList(right);
+}
+
+function coverVideoType(cover) {
+  return String(cover.videoType || cover.video_type || "").trim().toLowerCase() === "polyglot"
+    ? "polyglot"
+    : "ordinary";
+}
+
+function publicationMatchesCover(publication, { cover, setId, supportLang, targetLang }) {
+  const videoType = coverVideoType(cover);
+  if (videoType === "polyglot") {
+    if (publication.videoType !== "polyglot") return false;
+    if (String(publication.setId || "") !== String(setId || "")) return false;
+    if (normalizeCode(publication.supportLang) !== normalizeCode(supportLang)) return false;
+    if (cover.youtubeVideoId && publication.youtubeVideoId === cover.youtubeVideoId) return true;
+    if (cover.polyglotKey && publication.polyglotKey === cover.polyglotKey) return true;
+    if (
+      cover.bundleKey
+      && publication.bundleKey === cover.bundleKey
+      && cover.targetLangsHash
+      && publication.targetLangsHash === cover.targetLangsHash
+    ) {
+      return true;
+    }
+    if (
+      cover.bundleKey
+      && publication.bundleKey === cover.bundleKey
+      && sameCodeList(publication.targetLangsCsv || publication.targetLang || publication.targetLangs, targetLang)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  return publicationMatches(publication, { setId, supportLang, targetLang })
+    && (!publication.videoType || publication.videoType === "ordinary");
+}
+
 function compactPublication(publication) {
   if (!publication) return null;
   return {
@@ -252,7 +306,7 @@ function planCover({ cover, manifestDir, manifestSetId, options, channelRegistry
 
   if (!setId) blockers.push("missing_set_id");
   if (!supportLang) blockers.push("missing_support_lang");
-  if (!targetLang) blockers.push("missing_target_lang");
+  if (!targetLang && coverVideoType(cover) !== "polyglot") blockers.push("missing_target_lang");
 
   const channel = supportLang ? findChannelForSupport(channelRegistry, supportLang) : null;
   if (!channel) blockers.push("no_channel_config");
@@ -273,9 +327,9 @@ function planCover({ cover, manifestDir, manifestSetId, options, channelRegistry
   }
 
   const matchingPublications = ensureArray(publicationRegistry.publications)
-    .filter((publication) => publicationMatches(publication, { setId, supportLang, targetLang }))
+    .filter((publication) => publicationMatchesCover(publication, { cover, setId, supportLang, targetLang }))
     .filter(isActivePublication)
-    .filter((publication) => !publication.videoType || publication.videoType === "ordinary");
+    .filter(Boolean);
   if (matchingPublications.length === 0) blockers.push("no_active_publication");
   if (matchingPublications.length > 1) blockers.push("multiple_active_publications");
   const publication = matchingPublications.length === 1 ? matchingPublications[0] : null;
@@ -309,8 +363,12 @@ function planCover({ cover, manifestDir, manifestSetId, options, channelRegistry
     status,
     blockers,
     setId,
+    videoType: coverVideoType(cover),
     supportLang,
     targetLang,
+    polyglotKey: cover.polyglotKey || "",
+    bundleKey: cover.bundleKey || "",
+    targetLangsCsv: cover.targetLangsCsv || ensureArray(cover.targetLangs).map(normalizeCode).join(","),
     channelKey: channel?.key || "",
     expectedYoutubeChannelId: channel?.channelId || "",
     customThumbnailUploadAllowed: channel?.customThumbnailUploadAllowed === true,
@@ -380,6 +438,7 @@ function main() {
     mode: "dry-run",
     action: "youtube_thumbnail_batch_set_from_manifest",
     manifestPath,
+    publicationRegistryPath: path.resolve(options.publicationRegistry),
     manifestRunId: manifest.runId || "",
     setId: options.setId || manifestSetId || "",
     filters: {
