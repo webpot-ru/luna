@@ -15,6 +15,7 @@ import {
 } from "./lib/youtube-playlists.mjs";
 import {
   DEFAULT_PUBLICATION_REGISTRY_PATH,
+  isActivePublication,
   loadPublicationRegistry,
   publicationMatches,
   savePublicationRegistry,
@@ -419,14 +420,16 @@ function githubRunUrl() {
 
 function findPublicationRow(registry, query) {
   const matches = (registry.publications || []).filter((row) => publicationMatches(row, query));
-  const pending = matches.filter((row) => row.youtubeVideoId && (row.needsPlaylistInsert || !row.playlistItemId));
+  const activeMatches = matches.filter(isActivePublication);
+  const pending = activeMatches.filter((row) => row.youtubeVideoId && (row.needsPlaylistInsert || !row.playlistItemId));
   if (pending.length > 1) {
     fail(`Multiple pending publication rows found for ${query.setId}/${query.supportLang}/${query.targetLang}. Refuse ambiguous repair.`);
   }
   if (pending.length === 1) return pending[0];
-  if (matches.length === 1) return matches[0];
+  if (activeMatches.length === 1) return activeMatches[0];
   if (!matches.length) fail(`No publication row found for ${query.setId}/${query.supportLang}/${query.targetLang}.`);
-  fail(`Multiple publication rows found for ${query.setId}/${query.supportLang}/${query.targetLang}; none is clearly pending.`);
+  if (!activeMatches.length) fail(`No active publication row found for ${query.setId}/${query.supportLang}/${query.targetLang}.`);
+  fail(`Multiple active publication rows found for ${query.setId}/${query.supportLang}/${query.targetLang}; none is clearly pending.`);
 }
 
 function statusAfterRepair(row) {
