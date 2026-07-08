@@ -89889,9 +89889,9 @@
       "timeZone": "America/New_York",
       "localDate": "2026-07-01",
       "localTime": "23:30",
-      "localSlotIndex": null,
-      "localDayOffset": null,
-      "slotOrdinal": null,
+      "localSlotIndex": 4,
+      "localDayOffset": 2,
+      "slotOrdinal": 16,
       "status": "reserved",
       "source": "local-artifact-upload-first-frame",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -89920,7 +89920,9 @@
       "updatedAt": "2026-07-01T16:18:59.749Z",
       "youtubeVideoId": "lOt1cl-AsTY",
       "youtubePlaylistId": "PLdL7qfl6rU0U",
-      "playlistItemId": "UExkTDdxZmw2clUwVS41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExkTDdxZmw2clUwVS41NkI0NEY2RDEwNTU3Q0M2",
+      "githubRunId": "28948848625",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28948848625"
     },
     {
       "schemaVersion": 1,
@@ -89977,9 +89979,9 @@
       "timeZone": "America/New_York",
       "localDate": "2026-07-02",
       "localTime": "14:30",
-      "localSlotIndex": null,
-      "localDayOffset": null,
-      "slotOrdinal": null,
+      "localSlotIndex": 5,
+      "localDayOffset": 2,
+      "slotOrdinal": 17,
       "status": "reserved",
       "source": "local-artifact-upload-first-frame",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -90008,7 +90010,9 @@
       "updatedAt": "2026-07-01T16:19:45.120Z",
       "youtubeVideoId": "1hVuPRClu8E",
       "youtubePlaylistId": "PLFezqeeiTOGU",
-      "playlistItemId": "UExGZXpxZWVpVE9HVS41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExGZXpxZWVpVE9HVS41NkI0NEY2RDEwNTU3Q0M2",
+      "githubRunId": "28948848625",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28948848625"
     },
     {
       "schemaVersion": 1,
@@ -101565,6 +101569,190 @@
       "youtubeVideoId": "jn42EuxxVQ4",
       "youtubePlaylistId": "PLDuqCZZ2ql6k",
       "playlistItemId": "UExEdXFDWloycWw2ay41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "EN",
+      "targetLang": "SW",
+      "channelKey": "en",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "publishAt": "2026-07-11T12:30:00.000Z",
+      "timeZone": "America/New_York",
+      "localDate": "2026-07-11",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 3,
+      "slotOrdinal": 18,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_sw_en/youtube_metadata.json",
+      "title": "Swahili A1: Kitchenware Basics | 50 words with pronunciation",
+      "playlist_key": "EN__SW__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T12:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28948848625",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28948848625",
+      "createdAt": "2026-07-08T14:07:14.701Z",
+      "updatedAt": "2026-07-08T14:07:14.701Z",
+      "youtubeVideoId": "zt4URrI-wkE",
+      "youtubePlaylistId": "PLXitvSFhldDw",
+      "playlistItemId": "UExYaXR2U0ZobGREdy41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "EN",
+      "targetLang": "TA",
+      "channelKey": "en",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "publishAt": "2026-07-11T15:30:00.000Z",
+      "timeZone": "America/New_York",
+      "localDate": "2026-07-11",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 3,
+      "slotOrdinal": 19,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_ta_en/youtube_metadata.json",
+      "title": "Learn Tamil Vocabulary: Kitchenware Basics | 50 Words with Pronunciation",
+      "playlist_key": "EN__TA__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T15:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28948848625",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28948848625",
+      "createdAt": "2026-07-08T14:07:14.707Z",
+      "updatedAt": "2026-07-08T14:07:14.707Z",
+      "youtubeVideoId": "90W9MzM7VFk",
+      "youtubePlaylistId": "PLXNBhJ0luceM",
+      "playlistItemId": "UExYTkJoSjBsdWNlTS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "EN",
+      "targetLang": "TE",
+      "channelKey": "en",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "publishAt": "2026-07-11T18:30:00.000Z",
+      "timeZone": "America/New_York",
+      "localDate": "2026-07-11",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "localDayOffset": 3,
+      "slotOrdinal": 20,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_te_en/youtube_metadata.json",
+      "title": "Telugu A1: Kitchenware Basics | 50 Words with Pronunciation",
+      "playlist_key": "EN__TE__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T18:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28948848625",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28948848625",
+      "createdAt": "2026-07-08T14:07:14.718Z",
+      "updatedAt": "2026-07-08T14:07:14.718Z",
+      "youtubeVideoId": "iyRqnQfG7MU",
+      "youtubePlaylistId": "PLVG9J6m4MVa0",
+      "playlistItemId": "UExWRzlKNm00TVZhMC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "EN",
+      "targetLang": "TH",
+      "channelKey": "en",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "publishAt": "2026-07-11T21:30:00.000Z",
+      "timeZone": "America/New_York",
+      "localDate": "2026-07-11",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 3,
+      "slotOrdinal": 21,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_th_en/youtube_metadata.json",
+      "title": "Thai A1 Vocabulary: Kitchenware Basics | 50 Words with Pronunciation",
+      "playlist_key": "EN__TH__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T21:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28948848625",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28948848625",
+      "createdAt": "2026-07-08T14:07:14.725Z",
+      "updatedAt": "2026-07-08T14:07:14.725Z",
+      "youtubeVideoId": "_y26RVCNcM8",
+      "youtubePlaylistId": "PLN-4UyUZv-Wg",
+      "playlistItemId": "UExOLTRVeVVadi1XZy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
