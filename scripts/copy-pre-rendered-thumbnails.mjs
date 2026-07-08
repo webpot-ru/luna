@@ -5,12 +5,13 @@ import path from "node:path";
 const VIDEO_GENERATOR_DIR = "outputs/video-generator";
 const CHANNEL_CONFIG_PATH = "config/youtube-channels.json";
 const DEFAULT_ORDINARY_MANIFEST = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-channel-pairs-target-language-first-20260707/manifest.json";
+const DEFAULT_COOKING_ACTIONS_MANIFEST = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cooking_actions_a1_a2-approved-channel-pairs-target-language-first-20260707/manifest.json";
 const DEFAULT_POLYGLOT_MANIFEST = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/manifest.json";
 
 function parseArgs(argv) {
   const options = {
     inputDir: VIDEO_GENERATOR_DIR,
-    manifests: [DEFAULT_ORDINARY_MANIFEST, DEFAULT_POLYGLOT_MANIFEST],
+    manifests: [DEFAULT_ORDINARY_MANIFEST, DEFAULT_COOKING_ACTIONS_MANIFEST, DEFAULT_POLYGLOT_MANIFEST],
     strictCustom: false,
     output: "",
   };
