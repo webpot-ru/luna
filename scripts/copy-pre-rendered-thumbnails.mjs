@@ -171,7 +171,7 @@ function main() {
     const targetLang = (metadata.targetLang || "");
 
     const channel = findChannelForSupport(channelRegistry.channels, supportLang);
-    if (!channel || channel.customThumbnailUploadAllowed === false) {
+    if (!channel || channel.customThumbnailUploadAllowed !== true) {
       const updatedMeta = {
         ...metadata,
         thumbnailUploadMode: "first_frame_auto",
