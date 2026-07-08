@@ -9,6 +9,10 @@ import {
   findActivePublication,
   loadPublicationRegistry,
 } from "./lib/youtube-publication-registry.mjs";
+import {
+  isTargetOnlyRegionalSupport,
+  sameViewerLanguageTargetBlocker,
+} from "./lib/youtube-language-pair-policy.mjs";
 
 const execFileAsync = promisify(execFile);
 
@@ -23,7 +27,6 @@ function getCurrentGitBranch() {
 const DEFAULT_OUTPUT = "outputs/youtube-bulk-publish-dispatcher-report.json";
 const VIDEO_WORKFLOW = "youtube-video-publish.yml";
 const PLAYLIST_REPAIR_WORKFLOW = "youtube-playlist-insert-repair.yml";
-const TARGET_ONLY_REGIONAL_SUPPORTS = new Set(["EN-GB", "ES", "PT"]);
 
 function parseArgs(argv) {
   const options = {
@@ -142,7 +145,7 @@ function uniq(values) {
 }
 
 function assertCanonicalSupportLanguages(supports) {
-  const forbidden = uniq((supports || []).map(normalizeCode)).filter((code) => TARGET_ONLY_REGIONAL_SUPPORTS.has(code));
+  const forbidden = uniq((supports || []).map(normalizeCode)).filter((code) => isTargetOnlyRegionalSupport(code));
   if (forbidden.length) {
     throw new Error(
       `Target-only regional variants cannot be used as support/native languages: ${forbidden.join(", ")}. Use EN, ES-419 or PT-BR for shared English/Spanish/Portuguese viewer channels.`,
@@ -239,6 +242,15 @@ async function selectTargets({ setId, support, targets, excludeTargets, registry
   const skipped = [];
   const eligible = [];
   for (const target of requested) {
+    const pairBlocker = sameViewerLanguageTargetBlocker({ supportLang: support, targetLang: target });
+    if (pairBlocker) {
+      skipped.push({
+        target,
+        reason: pairBlocker.reason,
+        message: pairBlocker.message,
+      });
+      continue;
+    }
     if (excludedTargets.has(target)) {
       skipped.push({ target, reason: "excluded_target_language" });
       continue;
