@@ -118071,12 +118071,12 @@
       "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
       "channelHandle": "@lunacardsportugues",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_post_upload_partial",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-09T10:30:00.000Z",
       "scheduledPublishAt": "2026-07-09T10:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "custom",
       "thumbnailSource": "pre-rendered-design-prototype",
@@ -118086,12 +118086,21 @@
       "githubRunId": "28875854729",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28875854729",
       "uploadedAt": "2026-07-07T15:03:05.745Z",
-      "lastReadbackAt": "2026-07-07T15:03:05.745Z",
+      "lastReadbackAt": "2026-07-08T13:12:12.896Z",
       "readback": {
-        "uploadStatus": "uploaded",
+        "uploadStatus": "processed",
         "privacyStatus": "private",
         "publishAt": "2026-07-09T10:30:00Z",
-        "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n"
+        "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n",
+        "channelId": "UCum2kkNUyqu84_yxDxt-ECA",
+        "thumbnailStatus": "custom_set"
+      },
+      "lastThumbnailReadbackAt": "2026-07-08T13:12:12.896Z",
+      "thumbnailUploadedAt": "2026-07-08T13:12:12.896Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "imageFileName": "youtube_thumbnail.jpg",
+        "responseItemCount": 1
       }
     },
     {
