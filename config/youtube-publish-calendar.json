@@ -126043,6 +126043,98 @@
       "youtubeVideoId": "GIMc1nwvQs0",
       "youtubePlaylistId": "PLBKaXeretxlxa1-UiVtm883ZlVN8oJbgS",
       "playlistItemId": "UExCS2FYZXJldHhseGExLVVpVnRtODgzWmxWTjhvSmJnUy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "HI",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "publishAt": "2026-07-10T18:30:00.000Z",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-07-10",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 1,
+      "slotOrdinal": 10,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hi_da/youtube_metadata.json",
+      "title": "Hindi A1: Madlavningsverber | 25 vigtige ord på hindi",
+      "playlist_key": "DA__HI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T18:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030498856",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030498856",
+      "createdAt": "2026-07-09T15:42:55.760Z",
+      "updatedAt": "2026-07-09T15:42:55.760Z",
+      "youtubeVideoId": "bxDZirgGOfQ",
+      "youtubePlaylistId": "PL6IMd0kswUtndM6gUUeDn6hsOjpZ17Wro",
+      "playlistItemId": "UEw2SU1kMGtzd1V0bmRNNmdVVWVEbjZoc09qcFoxN1dyby4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "HR",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "publishAt": "2026-07-10T21:30:00.000Z",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-07-10",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 1,
+      "slotOrdinal": 11,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hr_da/youtube_metadata.json",
+      "title": "Lær kroatisk: 25 vigtige madlavningsverber for begyndere (A1)",
+      "playlist_key": "DA__HR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T21:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030498856",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030498856",
+      "createdAt": "2026-07-09T15:42:55.769Z",
+      "updatedAt": "2026-07-09T15:42:55.769Z",
+      "youtubeVideoId": "xCCntX1lEzA",
+      "youtubePlaylistId": "PLPjZfdTQGWps",
+      "playlistItemId": "UExQalpmZFRRR1dwcy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
