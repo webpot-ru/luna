@@ -115,7 +115,7 @@ async function checkKey({ keyName, apiKey, model }) {
         ].join("\n"),
         generation_config: {
           temperature: 0,
-          max_output_tokens: 256,
+          max_output_tokens: 1024,
           thinking_level: "low"
         },
         response_format: {

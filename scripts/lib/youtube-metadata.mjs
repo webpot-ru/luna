@@ -530,7 +530,7 @@ function parseGeminiTextResponse(data) {
   return text;
 }
 
-async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputTokens = 1600 } = {}) {
+async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputTokens = 3200 } = {}) {
   const apiKeys = configuredGeminiApiKeys();
   if (!apiKeys.length) {
     throw new Error("GEMINI_API_KEY, GEMINI_API_KEY_2 or GOOGLE_API_KEY is required for Gemini API metadata generation.");
