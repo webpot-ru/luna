@@ -125353,6 +125353,98 @@
       "youtubeVideoId": "aJSW0C1WQ-A",
       "youtubePlaylistId": "PLElxV1T8ymC0",
       "playlistItemId": "UExFbHhWMVQ4eW1DMC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SI",
+      "targetLang": "FR",
+      "channelKey": "si",
+      "youtubeChannelId": "UCgGRZU3j02PQ58z5QcnhhMg",
+      "publishAt": "2026-07-11T03:00:00.000Z",
+      "timeZone": "Asia/Colombo",
+      "localDate": "2026-07-11",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 2,
+      "slotOrdinal": 12,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fr_si/youtube_metadata.json",
+      "title": "ප්‍රංශ භාෂාව ඉගෙන ගනිමු: පිසීමේ ක්‍රියා (A1 මූලික මට්ටම - වචන 25)",
+      "playlist_key": "SI__FR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T03:00:00.000Z"
+        }
+      ],
+      "githubRunId": "29030582768",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030582768",
+      "createdAt": "2026-07-09T15:46:46.011Z",
+      "updatedAt": "2026-07-09T15:46:46.011Z",
+      "youtubeVideoId": "CAWjWvho-so",
+      "youtubePlaylistId": "PLEVUaRDdRI36YTMUblMWWq9DbLObyrlCd",
+      "playlistItemId": "UExFVlVhUkRkUkkzNllUTVVibE1XV3E5RGJMT2J5cmxDZC4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SI",
+      "targetLang": "HI",
+      "channelKey": "si",
+      "youtubeChannelId": "UCgGRZU3j02PQ58z5QcnhhMg",
+      "publishAt": "2026-07-11T06:00:00.000Z",
+      "timeZone": "Asia/Colombo",
+      "localDate": "2026-07-11",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 2,
+      "slotOrdinal": 13,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hi_si/youtube_metadata.json",
+      "title": "හින්දි භාෂාවෙන් පිසීමේ ක්‍රියා | මූලික මට්ටමේ වචන 25",
+      "playlist_key": "SI__HI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T06:00:00.000Z"
+        }
+      ],
+      "githubRunId": "29030582768",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030582768",
+      "createdAt": "2026-07-09T15:46:46.019Z",
+      "updatedAt": "2026-07-09T15:46:46.019Z",
+      "youtubeVideoId": "UrVrLG0U85w",
+      "youtubePlaylistId": "PLU_SlhRU_AQU",
+      "playlistItemId": "UExVX1NsaFJVX0FRVS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
