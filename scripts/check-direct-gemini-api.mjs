@@ -5,6 +5,7 @@ import path from "node:path";
 const DEFAULT_MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash";
 const DEFAULT_OUTPUT_DIR = "outputs/tmp/direct-gemini-api-smoke";
 const DEFAULT_KEY_NAMES = ["GEMINI_API_KEY", "GEMINI_API_KEY_2"];
+const DEFAULT_TIMEOUT_MS = 25000;
 
 function cleanText(value) {
   return String(value || "").replace(/\s+/gu, " ").trim();
@@ -116,6 +117,8 @@ function parseGeminiTextResponse(data) {
 async function checkKey({ keyName, apiKey, model }) {
   const startedAt = new Date().toISOString();
   const start = Date.now();
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
   const schema = {
     type: "object",
     properties: {
@@ -129,6 +132,7 @@ async function checkKey({ keyName, apiKey, model }) {
   try {
     const response = await fetch(url, {
       method: "POST",
+      signal: controller.signal,
       headers: {
         "Content-Type": "application/json",
         "x-goog-api-key": apiKey,
@@ -178,6 +182,8 @@ async function checkKey({ keyName, apiKey, model }) {
       elapsedMs: Date.now() - start,
       error: maskSecretInText(boundedError(error), apiKey, keyName),
     };
+  } finally {
+    clearTimeout(timeout);
   }
 }
 

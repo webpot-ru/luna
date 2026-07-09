@@ -21,6 +21,7 @@ const DEFAULT_PUBLICATION_REGISTRY_PATH = "config/youtube-polyglot-published-vid
 const DEFAULT_PROGRESS_PATH = "config/youtube-polyglot-progress.json";
 const DEFAULT_BUNDLES_PATH = "config/polyglot-video-bundles.json";
 const DEFAULT_OUTPUT_ROOT = "outputs/video-generator";
+const DEFAULT_GEMINI_API_TIMEOUT_MS = Number(process.env.GEMINI_API_TIMEOUT_MS || 30000);
 const POLYGLOT_YOUTUBE_METADATA_SCHEMA = {
   type: "object",
   properties: {
@@ -388,11 +389,14 @@ async function callGoogleGeminiJson({ prompt, schema, model, maxOutputTokens = 4
   }
   const errors = [];
   for (const apiKey of apiKeys) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), DEFAULT_GEMINI_API_TIMEOUT_MS);
     try {
       const url = "https://generativelanguage.googleapis.com/v1beta/interactions";
       const text = [systemInstruction, prompt].filter(Boolean).join("\n\n");
       const response = await fetch(url, {
         method: "POST",
+        signal: controller.signal,
         headers: {
           "Content-Type": "application/json",
           "x-goog-api-key": apiKey.value,
@@ -421,6 +425,8 @@ async function callGoogleGeminiJson({ prompt, schema, model, maxOutputTokens = 4
       const message = boundedGeminiApiKeyError(error, apiKey);
       errors.push(`${apiKey.name}: ${message}`);
       console.warn(`[POLYGLOT_METADATA_GEMINI_API_KEY_FAILED] ${apiKey.name}/${model}: ${message}`);
+    } finally {
+      clearTimeout(timeout);
     }
   }
   throw new Error(`Polyglot direct Gemini metadata generation failed for all configured keys: ${errors.join("; ")}`);

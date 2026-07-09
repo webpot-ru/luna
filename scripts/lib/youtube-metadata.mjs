@@ -15,6 +15,7 @@ const databaseUrl = process.env.DATABASE_URL ?? "postgresql://lunacards:lunacard
 const defaultGeminiApiModel = process.env.GEMINI_MODEL || "gemini-3.5-flash";
 const defaultGeminiCliModel = process.env.GEMINI_CLI_MODEL || "gemini-3.1-pro-preview";
 const defaultVectorEngineGeminiModel = process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash";
+const defaultGeminiApiTimeoutMs = Number(process.env.GEMINI_API_TIMEOUT_MS || 30000);
 const videoLocalizationPath = path.resolve("config/video-localization.json");
 const videoLocalization = fs.existsSync(videoLocalizationPath)
   ? JSON.parse(fs.readFileSync(videoLocalizationPath, "utf8"))
@@ -563,10 +564,13 @@ async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputT
   }
   const errors = [];
   for (const apiKey of apiKeys) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), defaultGeminiApiTimeoutMs);
     try {
       const url = "https://generativelanguage.googleapis.com/v1beta/interactions";
       const response = await fetch(url, {
         method: "POST",
+        signal: controller.signal,
         headers: {
           "Content-Type": "application/json",
           "x-goog-api-key": apiKey.value,
@@ -595,6 +599,8 @@ async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputT
       const message = boundedGeminiApiKeyError(error, apiKey);
       errors.push(`${apiKey.name}: ${message}`);
       console.warn(`[YOUTUBE_METADATA_GEMINI_API_KEY_FAILED] ${apiKey.name}/${model}: ${message}`);
+    } finally {
+      clearTimeout(timeout);
     }
   }
   throw new Error(`Gemini API metadata generation failed for all configured direct keys: ${errors.join("; ")}`);
