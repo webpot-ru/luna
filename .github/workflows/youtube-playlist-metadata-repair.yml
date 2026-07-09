@@ -356,7 +356,7 @@ jobs:
             echo "::error::Effective environment mismatch for $ROUTE: expected $EXPECTED_ENV got $EFFECTIVE_YOUTUBE_ENVIRONMENT"
             exit 1
           fi
-          if [ ! -f data/youtube-playlist-covers/20260709-route-safe-eighth-ten-per-channel/manifest.json ]; then
+          if [ ! -f data/youtube-playlist-covers/20260709-route-safe-ninth-ten-per-channel/manifest.json ]; then
             echo "::error::Missing tracked playlist-image manifest"
             exit 1
           fi
@@ -399,7 +399,7 @@ jobs:
         run: |
           set -euo pipefail
           node scripts/youtube-upload-playlist-images.mjs \
-            --manifest=data/youtube-playlist-covers/20260709-route-safe-eighth-ten-per-channel/manifest.json \
+            --manifest=data/youtube-playlist-covers/20260709-route-safe-ninth-ten-per-channel/manifest.json \
             --supports="$SUPPORTS" \
             --limit-per-channel="$LIMIT_PER_CHANNEL" \
             --skip-uploaded \
