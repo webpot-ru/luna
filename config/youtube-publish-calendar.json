@@ -115228,6 +115228,52 @@
       "youtubeVideoId": "fCkkQknbTyE",
       "youtubePlaylistId": "PL7jzfVz1zRZk8c5tgGJ910EX4Ze9TnLbS",
       "playlistItemId": "UEw3anpmVnoxelJaazhjNXRnR0o5MTBFWDRaZTlUbkxiUy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HY",
+      "targetLang": "EN-GB",
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "publishAt": "2026-07-10T04:30:00.000Z",
+      "timeZone": "Asia/Yerevan",
+      "localDate": "2026-07-10",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 1,
+      "slotOrdinal": 6,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_en-gb_hy/youtube_metadata.json",
+      "title": "Անգլերեն սկսնակների համար. Խոհարարական գործ (A1 բառապաշար)",
+      "playlist_key": "HY__EN-GB__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T04:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28989355540",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28989355540",
+      "createdAt": "2026-07-09T02:17:39.541Z",
+      "updatedAt": "2026-07-09T02:17:39.541Z",
+      "youtubeVideoId": "6Mn5jhSAsy4",
+      "youtubePlaylistId": "PLZ_D5i-pU6jk",
+      "playlistItemId": "UExaX0Q1aS1wVTZqay41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
