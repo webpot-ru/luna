@@ -455,6 +455,7 @@ jobs:
         env:
           AI33_API_KEY: ${{ secrets.AI33_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
           VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
@@ -525,10 +526,14 @@ jobs:
             BUILD_LABELS+=("video:$support")
 
             GEMINI_ARGS=()
-            if [ -n "${VECTORENGINE_API_KEY:-}" ] || [ -n "${VECTOR_ENGINE_API_KEY:-}" ]; then
+            if [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GEMINI_API_KEY_2:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
+              GEMINI_BACKENDS="api"
+              if [ -n "${VECTORENGINE_API_KEY:-}" ] || [ -n "${VECTOR_ENGINE_API_KEY:-}" ]; then
+                GEMINI_BACKENDS="api,vectorengine"
+              fi
+              GEMINI_ARGS=("--with-gemini" "--gemini-backend" "$GEMINI_BACKENDS")
+            elif [ -n "${VECTORENGINE_API_KEY:-}" ] || [ -n "${VECTOR_ENGINE_API_KEY:-}" ]; then
               GEMINI_ARGS=("--with-gemini" "--gemini-backend" "vectorengine" "--model" "${VECTORENGINE_GEMINI_MODEL:-gemini-3.5-flash}")
-            elif [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
-              GEMINI_ARGS=("--with-gemini" "--gemini-backend" "api")
             fi
 
             echo "Generating metadata while video renders for support=$support"

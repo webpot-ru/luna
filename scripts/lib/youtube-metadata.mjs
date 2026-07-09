@@ -73,6 +73,53 @@ function boundedAiError(error) {
   return cleanText(error?.message || String(error || "unknown AI metadata error")).slice(0, 600);
 }
 
+function maskSecretInText(value, secret, label) {
+  let text = String(value || "");
+  if (!secret) return text;
+  for (const needle of [secret, encodeURIComponent(secret)]) {
+    if (needle) text = text.split(needle).join(`[${label}]`);
+  }
+  return text;
+}
+
+function boundedGeminiApiKeyError(error, apiKey) {
+  return maskSecretInText(boundedAiError(error), apiKey.value, apiKey.name);
+}
+
+function configuredGeminiApiKeys() {
+  return [
+    ["GEMINI_API_KEY", process.env.GEMINI_API_KEY],
+    ["GEMINI_API_KEY_2", process.env.GEMINI_API_KEY_2],
+    ["GOOGLE_API_KEY", process.env.GOOGLE_API_KEY],
+  ]
+    .map(([name, value]) => ({ name, value: String(value || "").trim() }))
+    .filter((item) => item.value);
+}
+
+function hasGeminiApiKey() {
+  return configuredGeminiApiKeys().length > 0;
+}
+
+function hasVectorEngineGeminiKey() {
+  return Boolean(String(process.env.VECTORENGINE_API_KEY || process.env.VECTOR_ENGINE_API_KEY || "").trim());
+}
+
+function parseGeminiBackendPreference(value) {
+  return uniqueStrings(String(value || "")
+    .split(",")
+    .map((item) => item.trim().toLowerCase())
+    .filter(Boolean))
+    .filter((backend) => ["api", "vectorengine", "cli"].includes(backend));
+}
+
+function defaultGeminiBackendPreference() {
+  if (hasGeminiApiKey()) {
+    return hasVectorEngineGeminiKey() ? ["api", "vectorengine"] : ["api"];
+  }
+  if (hasVectorEngineGeminiKey()) return ["vectorengine"];
+  return ["cli"];
+}
+
 function isStrictAiMetadataMode() {
   return /^(1|true|yes)$/iu.test(String(process.env.YOUTUBE_METADATA_AI_STRICT || ""));
 }
@@ -485,29 +532,39 @@ function parseGeminiTextResponse(data) {
 }
 
 async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputTokens = 1600 } = {}) {
-  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
-  if (!apiKey) {
-    throw new Error("GEMINI_API_KEY or GOOGLE_API_KEY is required for Gemini API metadata generation.");
+  const apiKeys = configuredGeminiApiKeys();
+  if (!apiKeys.length) {
+    throw new Error("GEMINI_API_KEY, GEMINI_API_KEY_2 or GOOGLE_API_KEY is required for Gemini API metadata generation.");
   }
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
-  const response = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: {
-        responseMimeType: "application/json",
-        responseSchema: YOUTUBE_METADATA_SCHEMA,
-        temperature: 0.35,
-        maxOutputTokens
+  const errors = [];
+  for (const apiKey of apiKeys) {
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey.value)}`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            responseMimeType: "application/json",
+            responseSchema: YOUTUBE_METADATA_SCHEMA,
+            temperature: 0.35,
+            maxOutputTokens
+          }
+        })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(`Gemini API HTTP ${response.status}: ${JSON.stringify(data).slice(0, 800)}`);
       }
-    })
-  });
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    throw new Error(`Gemini API HTTP ${response.status}: ${JSON.stringify(data).slice(0, 800)}`);
+      return JSON.parse(parseGeminiTextResponse(data));
+    } catch (error) {
+      const message = boundedGeminiApiKeyError(error, apiKey);
+      errors.push(`${apiKey.name}: ${message}`);
+      console.warn(`[YOUTUBE_METADATA_GEMINI_API_KEY_FAILED] ${apiKey.name}/${model}: ${message}`);
+    }
   }
-  return JSON.parse(parseGeminiTextResponse(data));
+  throw new Error(`Gemini API metadata generation failed for all configured direct keys: ${errors.join("; ")}`);
 }
 
 async function callGeminiCli(prompt, { model = defaultGeminiCliModel } = {}) {
@@ -631,24 +688,38 @@ export async function generateYouTubeMetadata(input) {
   const template = buildTemplateYouTubeMetadata({ ...input, cards, deckMetadata });
   if (!input.withGemini) return template;
 
-  const backend = input.geminiBackend
-    || process.env.GEMINI_BACKEND
-    || (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY ? "api" : "cli");
-  const prompt = backend === "vectorengine"
-    ? buildVectorEngineGeminiPrompt(template, cards)
-    : buildGeminiPrompt(template, cards);
-  const model = input.model || (
-    backend === "api"
-      ? defaultGeminiApiModel
-      : (backend === "vectorengine" ? defaultVectorEngineGeminiModel : defaultGeminiCliModel)
-  );
   let generated;
+  let backend = "";
+  let model = "";
   try {
-    generated = backend === "api"
-      ? await callGeminiApi(prompt, { model })
-      : (backend === "vectorengine"
-        ? await callGeminiVectorEngine(prompt, { model })
-        : await callGeminiCli(prompt, { model }));
+    const backendPreference = parseGeminiBackendPreference(input.geminiBackend || process.env.GEMINI_BACKEND)
+      .concat(input.geminiBackend || process.env.GEMINI_BACKEND ? [] : defaultGeminiBackendPreference());
+    const backends = uniqueStrings(backendPreference);
+    let lastError;
+    for (const currentBackend of backends) {
+      const prompt = currentBackend === "vectorengine"
+        ? buildVectorEngineGeminiPrompt(template, cards)
+        : buildGeminiPrompt(template, cards);
+      const currentModel = input.model || (
+        currentBackend === "api"
+          ? defaultGeminiApiModel
+          : (currentBackend === "vectorengine" ? defaultVectorEngineGeminiModel : defaultGeminiCliModel)
+      );
+      try {
+        generated = currentBackend === "api"
+          ? await callGeminiApi(prompt, { model: currentModel })
+          : (currentBackend === "vectorengine"
+            ? await callGeminiVectorEngine(prompt, { model: currentModel })
+            : await callGeminiCli(prompt, { model: currentModel }));
+        backend = currentBackend;
+        model = currentModel;
+        break;
+      } catch (error) {
+        lastError = error;
+        console.warn(`[YOUTUBE_METADATA_AI_BACKEND_FAILED] ${currentBackend}/${currentModel}: ${boundedAiError(error)}`);
+      }
+    }
+    if (!generated) throw lastError || new Error("No Gemini metadata backend returned metadata.");
   } catch (error) {
     if (isStrictAiMetadataMode() || !isRecoverableAiMetadataError(error)) {
       throw error;

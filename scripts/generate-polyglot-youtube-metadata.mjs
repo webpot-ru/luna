@@ -53,7 +53,7 @@ function parseArgs(argv) {
     maxDurationSeconds: 0,
     withGemini: false,
     requireAi: false,
-    model: process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash",
+    model: process.env.GEMINI_MODEL || process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash",
     allowRepublish: false,
     requireOfflineDeck: true,
     json: false,
@@ -138,6 +138,33 @@ function boundedAiError(error) {
   return cleanText(error?.message || String(error || "unknown AI metadata error")).slice(0, 800);
 }
 
+function maskSecretInText(value, secret, label) {
+  let text = String(value || "");
+  if (!secret) return text;
+  for (const needle of [secret, encodeURIComponent(secret)]) {
+    if (needle) text = text.split(needle).join(`[${label}]`);
+  }
+  return text;
+}
+
+function boundedGeminiApiKeyError(error, apiKey) {
+  return maskSecretInText(boundedAiError(error), apiKey.value, apiKey.name);
+}
+
+function configuredGeminiApiKeys() {
+  return [
+    ["GEMINI_API_KEY", process.env.GEMINI_API_KEY],
+    ["GEMINI_API_KEY_2", process.env.GEMINI_API_KEY_2],
+    ["GOOGLE_API_KEY", process.env.GOOGLE_API_KEY],
+  ]
+    .map(([name, value]) => ({ name, value: String(value || "").trim() }))
+    .filter((item) => item.value);
+}
+
+function hasVectorEngineGeminiKey() {
+  return Boolean(String(process.env.VECTORENGINE_API_KEY || process.env.VECTOR_ENGINE_API_KEY || "").trim());
+}
+
 function isRecoverableAiMetadataError(error) {
   return [
     /did not return JSON/iu,
@@ -150,6 +177,15 @@ function isRecoverableAiMetadataError(error) {
     /HTTP 5\d\d/iu,
     /HTTP 429/iu,
   ].some((pattern) => pattern.test(boundedAiError(error)));
+}
+
+function parseGeminiTextResponse(data) {
+  const parts = data?.candidates?.[0]?.content?.parts || [];
+  const text = parts.map((part) => part.text || "").join("").trim();
+  if (!text) {
+    throw new Error(`Gemini returned no text: ${JSON.stringify(data).slice(0, 500)}`);
+  }
+  return text;
 }
 
 function stripTerminator(value) {
@@ -320,6 +356,57 @@ function buildPrompt(candidate, playlistAssignment) {
   ].join("\n");
 }
 
+async function callGoogleGeminiJson({ prompt, schema, model, maxOutputTokens = 4200, temperature = 0.25, systemInstruction = "" }) {
+  const apiKeys = configuredGeminiApiKeys();
+  if (!apiKeys.length) {
+    throw new Error("GEMINI_API_KEY, GEMINI_API_KEY_2 or GOOGLE_API_KEY is required for direct Gemini API metadata generation.");
+  }
+  const errors = [];
+  for (const apiKey of apiKeys) {
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey.value)}`;
+      const text = [systemInstruction, prompt].filter(Boolean).join("\n\n");
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text }] }],
+          generationConfig: {
+            responseMimeType: "application/json",
+            responseSchema: schema,
+            temperature,
+            maxOutputTokens,
+          },
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(`Gemini API HTTP ${response.status}: ${JSON.stringify(data).slice(0, 800)}`);
+      }
+      return JSON.parse(parseGeminiTextResponse(data));
+    } catch (error) {
+      const message = boundedGeminiApiKeyError(error, apiKey);
+      errors.push(`${apiKey.name}: ${message}`);
+      console.warn(`[POLYGLOT_METADATA_GEMINI_API_KEY_FAILED] ${apiKey.name}/${model}: ${message}`);
+    }
+  }
+  throw new Error(`Polyglot direct Gemini metadata generation failed for all configured keys: ${errors.join("; ")}`);
+}
+
+async function callVectorEnginePolyglotGeminiMetadata(attempts) {
+  let lastError;
+  for (const attempt of attempts) {
+    try {
+      return await callVectorEngineGeminiJson(attempt);
+    } catch (error) {
+      lastError = error;
+      if (!isRecoverableAiMetadataError(error)) throw error;
+      console.warn(`Recoverable VectorEngine metadata error; retrying: ${boundedAiError(error)}`);
+    }
+  }
+  throw lastError;
+}
+
 async function callPolyglotGeminiMetadata({ prompt, model }) {
   const request = {
     prompt,
@@ -361,17 +448,31 @@ async function callPolyglotGeminiMetadata({ prompt, model }) {
       systemInstruction: "Return strict JSON only. No Markdown. No extra text.",
     },
   ];
-  let lastError;
-  for (const attempt of attempts) {
+  const vectorModel = process.env.VECTORENGINE_GEMINI_MODEL || model;
+  const vectorAttempts = attempts.map((attempt) => ({ ...attempt, model: vectorModel }));
+
+  const errors = [];
+  if (configuredGeminiApiKeys().length) {
     try {
-      return await callVectorEngineGeminiJson(attempt);
+      const metadata = await callGoogleGeminiJson(request);
+      return { metadata, source: "google-gemini-polyglot", model };
     } catch (error) {
-      lastError = error;
-      if (!isRecoverableAiMetadataError(error)) throw error;
-      console.warn(`Recoverable VectorEngine metadata error; retrying: ${boundedAiError(error)}`);
+      errors.push(`direct-api: ${boundedAiError(error)}`);
+      console.warn(`[POLYGLOT_METADATA_AI_BACKEND_FAILED] api/${model}: ${boundedAiError(error)}`);
     }
   }
-  throw lastError;
+
+  if (hasVectorEngineGeminiKey()) {
+    try {
+      const metadata = await callVectorEnginePolyglotGeminiMetadata(vectorAttempts);
+      return { metadata, source: "vectorengine-gemini-polyglot", model: vectorModel };
+    } catch (error) {
+      errors.push(`vectorengine: ${boundedAiError(error)}`);
+      console.warn(`[POLYGLOT_METADATA_AI_BACKEND_FAILED] vectorengine/${vectorModel}: ${boundedAiError(error)}`);
+    }
+  }
+
+  throw new Error(`Polyglot Gemini metadata generation failed: ${errors.join("; ") || "no Gemini backend is configured"}`);
 }
 
 function normalizeAiMetadata(value, candidate, playlistAssignment) {
@@ -431,9 +532,9 @@ async function main() {
         prompt: buildPrompt(candidate, initialPlaylist),
         model: options.model,
       });
-      copy = normalizeAiMetadata(result, candidate, initialPlaylist);
-      source = "vectorengine-gemini-polyglot";
-      model = options.model;
+      copy = normalizeAiMetadata(result.metadata, candidate, initialPlaylist);
+      source = result.source;
+      model = result.model;
     } catch (error) {
       aiError = error.message;
       if (options.requireAi) throw error;
