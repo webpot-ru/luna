@@ -124709,6 +124709,52 @@
       "youtubeVideoId": "_HkjtA2spYo",
       "youtubePlaylistId": "PLGH3_M7D_Dwk",
       "playlistItemId": "UExHSDNfTTdEX0R3ay4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "BG",
+      "targetLang": "HU",
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "publishAt": "2026-07-11T08:30:00.000Z",
+      "timeZone": "Europe/Sofia",
+      "localDate": "2026-07-11",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 2,
+      "slotOrdinal": 13,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hu_bg/youtube_metadata.json",
+      "title": "Унгарски език за начинаещи: Действия при готвене | 25 основни думи",
+      "playlist_key": "BG__HU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T08:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030485813",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030485813",
+      "createdAt": "2026-07-09T15:42:57.945Z",
+      "updatedAt": "2026-07-09T15:42:57.945Z",
+      "youtubeVideoId": "VoxycCJAhAo",
+      "youtubePlaylistId": "PLfIDhl4lNP4s",
+      "playlistItemId": "UExmSURobDRsTlA0cy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
