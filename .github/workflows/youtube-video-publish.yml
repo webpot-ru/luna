@@ -47,9 +47,21 @@ on:
         required: true
         default: "2"
       metadata_concurrency:
-        description: "VectorEngine/Gemini metadata generation concurrency per support language."
+        description: "Metadata generation concurrency per support language. Batch direct Gemini uses sequential requests."
         required: true
         default: "4"
+      metadata_gemini_backend:
+        description: "Gemini metadata backend chain. Default api; VectorEngine requires confirm_vectorengine_metadata."
+        required: false
+        default: "api"
+      metadata_batch_size:
+        description: "Direct Gemini API metadata batch size per request."
+        required: false
+        default: "4"
+      metadata_rate_limit_ms:
+        description: "Pause between direct Gemini metadata batches in milliseconds."
+        required: false
+        default: "15000"
       thumbnail_concurrency:
         description: "VectorEngine thumbnail generation concurrency."
         required: true
@@ -116,6 +128,10 @@ on:
         default: ""
       confirm_thumbnail_spend:
         description: "For thumbnail generation type GENERATE_THUMBNAILS."
+        required: false
+        default: ""
+      confirm_vectorengine_metadata:
+        description: "Required as USE_VECTORENGINE_METADATA if metadata_gemini_backend includes vectorengine."
         required: false
         default: ""
       confirm_youtube_write:
@@ -468,6 +484,10 @@ jobs:
           GENERATE_THUMBNAILS: ${{ github.event.inputs.generate_thumbnails }}
           CONFIRM_THUMBNAIL_SPEND: ${{ github.event.inputs.confirm_thumbnail_spend }}
           THUMBNAIL_CONCURRENCY: ${{ github.event.inputs.thumbnail_concurrency }}
+          METADATA_GEMINI_BACKEND: ${{ github.event.inputs.metadata_gemini_backend }}
+          METADATA_BATCH_SIZE: ${{ github.event.inputs.metadata_batch_size }}
+          METADATA_RATE_LIMIT_MS: ${{ github.event.inputs.metadata_rate_limit_ms }}
+          CONFIRM_VECTORENGINE_METADATA: ${{ github.event.inputs.confirm_vectorengine_metadata }}
           SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
           SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
           SCHEDULE_POLICY: ${{ github.event.inputs.schedule_policy }}
@@ -483,10 +503,14 @@ jobs:
           WORKER_COUNT="${{ github.event.inputs.worker_count }}"
           WORKER_INDEX="${{ github.event.inputs.worker_index }}"
           PRIVACY="${{ github.event.inputs.privacy }}"
+          MODE="${{ github.event.inputs.mode }}"
           PUBLISH_MODE="${{ github.event.inputs.publish_mode }}"
           EFFECTIVE_PRIVACY="$PRIVACY"
           if [ "$PUBLISH_MODE" = "scheduled" ]; then
             EFFECTIVE_PRIVACY="private"
+          fi
+          if [ "$MODE" = "apply" ]; then
+            export YOUTUBE_METADATA_AI_STRICT=1
           fi
 
           target_csv_for_support() {
@@ -520,26 +544,36 @@ jobs:
             BUILD_ARGS+=("--langs" "$ELIGIBLE_TARGETS")
             METADATA_ARGS+=("--targets" "$ELIGIBLE_TARGETS")
 
+            GEMINI_ARGS=()
+            METADATA_BACKEND="$(echo "${METADATA_GEMINI_BACKEND:-api}" | xargs | tr '[:upper:]' '[:lower:]')"
+            if [ -n "$METADATA_BACKEND" ] && [ "$METADATA_BACKEND" != "none" ]; then
+              case ",$METADATA_BACKEND," in
+                *,vectorengine,*)
+                  if [ "$CONFIRM_VECTORENGINE_METADATA" != "USE_VECTORENGINE_METADATA" ]; then
+                    echo "::error::VectorEngine metadata spends proxy quota and is disabled unless confirm_vectorengine_metadata=USE_VECTORENGINE_METADATA."
+                    METADATA_STATUS=1
+                    continue
+                  fi
+                  ;;
+              esac
+              if [ "$METADATA_BACKEND" = "api" ] && [ -z "${GEMINI_API_KEY:-}" ] && [ -z "${GEMINI_API_KEY_2:-}" ] && [ -z "${GOOGLE_API_KEY:-}" ]; then
+                echo "::error::metadata_gemini_backend=api requires GEMINI_API_KEY, GEMINI_API_KEY_2 or GOOGLE_API_KEY."
+                METADATA_STATUS=1
+                continue
+              fi
+              GEMINI_ARGS=("--with-gemini" "--gemini-backend" "$METADATA_BACKEND" "--gemini-batch-size" "${METADATA_BATCH_SIZE:-1}" "--gemini-rate-limit-ms" "${METADATA_RATE_LIMIT_MS:-0}")
+            fi
+
+            echo "Generating metadata before video render for support=$support"
+            if ! node scripts/generate-youtube-metadata.mjs "${METADATA_ARGS[@]}" "${GEMINI_ARGS[@]}"; then
+              METADATA_STATUS=1
+              continue
+            fi
+
             echo "Starting video build in background for support=$support targets=$ELIGIBLE_TARGETS"
             node scripts/build-all-deck-videos.mjs "${BUILD_ARGS[@]}" &
             BUILD_PIDS+=("$!")
             BUILD_LABELS+=("video:$support")
-
-            GEMINI_ARGS=()
-            if [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GEMINI_API_KEY_2:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
-              GEMINI_BACKENDS="api"
-              if [ -n "${VECTORENGINE_API_KEY:-}" ] || [ -n "${VECTOR_ENGINE_API_KEY:-}" ]; then
-                GEMINI_BACKENDS="api,vectorengine"
-              fi
-              GEMINI_ARGS=("--with-gemini" "--gemini-backend" "$GEMINI_BACKENDS")
-            elif [ -n "${VECTORENGINE_API_KEY:-}" ] || [ -n "${VECTOR_ENGINE_API_KEY:-}" ]; then
-              GEMINI_ARGS=("--with-gemini" "--gemini-backend" "vectorengine" "--model" "${VECTORENGINE_GEMINI_MODEL:-gemini-3.5-flash}")
-            fi
-
-            echo "Generating metadata while video renders for support=$support"
-            if ! node scripts/generate-youtube-metadata.mjs "${METADATA_ARGS[@]}" "${GEMINI_ARGS[@]}"; then
-              METADATA_STATUS=1
-            fi
           done
 
           if [ "$METADATA_STATUS" -eq 0 ]; then

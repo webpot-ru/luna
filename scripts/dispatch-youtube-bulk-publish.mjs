@@ -48,7 +48,11 @@ function parseArgs(argv) {
     createPlaylists: true,
     allowRepublish: false,
     generateThumbnails: true,
+    metadataGeminiBackend: "api",
+    metadataBatchSize: 4,
+    metadataRateLimitMs: 15000,
     confirmThumbnailSpend: "",
+    confirmVectorengineMetadata: "",
     confirmYoutubeWrite: "",
     confirmPublic: "PUBLISH_PUBLIC",
     confirmDispatch: "",
@@ -90,6 +94,10 @@ function parseArgs(argv) {
     else if (arg === "--schedule-start-date" || arg.startsWith("--schedule-start-date=")) options.scheduleStartDate = readValue();
     else if (arg === "--schedule-min-future-minutes" || arg.startsWith("--schedule-min-future-minutes=")) options.scheduleMinFutureMinutes = Number(readValue());
     else if (arg === "--confirm-thumbnail-spend" || arg.startsWith("--confirm-thumbnail-spend=")) options.confirmThumbnailSpend = readValue();
+    else if (arg === "--metadata-gemini-backend" || arg.startsWith("--metadata-gemini-backend=")) options.metadataGeminiBackend = readValue();
+    else if (arg === "--metadata-batch-size" || arg.startsWith("--metadata-batch-size=")) options.metadataBatchSize = Number(readValue());
+    else if (arg === "--metadata-rate-limit-ms" || arg.startsWith("--metadata-rate-limit-ms=")) options.metadataRateLimitMs = Number(readValue());
+    else if (arg === "--confirm-vectorengine-metadata" || arg.startsWith("--confirm-vectorengine-metadata=")) options.confirmVectorengineMetadata = readValue();
     else if (arg === "--confirm-youtube-write" || arg.startsWith("--confirm-youtube-write=")) options.confirmYoutubeWrite = readValue();
     else if (arg === "--confirm-public" || arg.startsWith("--confirm-public=")) options.confirmPublic = readValue();
     else if (arg === "--confirm-dispatch" || arg.startsWith("--confirm-dispatch=")) options.confirmDispatch = readValue();
@@ -124,6 +132,9 @@ function usage() {
     "existing youtube-video-publish.yml workflow in bounded parallel batches.",
     "Scheduled child runs pass schedule_min_future_minutes so stale calendar reservations",
     "are moved to future-safe slots by the child workflow.",
+    "Metadata defaults to direct Gemini API in small sequential batches:",
+    "--metadata-gemini-backend=api --metadata-batch-size=4 --metadata-rate-limit-ms=15000.",
+    "VectorEngine metadata is reserve-only and requires --confirm-vectorengine-metadata=USE_VECTORENGINE_METADATA.",
     "",
     "It does not upload videos itself. Playlist-classified failures can dispatch the",
     "playlist-insert repair workflow after a delay only when --confirm-playlist-repair=APPLY_YOUTUBE_PLAYLIST_INSERT is provided.",
@@ -192,6 +203,16 @@ function ensureSafeOptions(options) {
   }
   if (options.apply && options.generateThumbnails && options.confirmThumbnailSpend !== "GENERATE_THUMBNAILS") {
     throw new Error("Thumbnail generation may spend VectorEngine credits; pass --confirm-thumbnail-spend=GENERATE_THUMBNAILS.");
+  }
+  const metadataBackend = String(options.metadataGeminiBackend || "").toLowerCase();
+  if (metadataBackend.includes("vectorengine") && options.confirmVectorengineMetadata !== "USE_VECTORENGINE_METADATA") {
+    throw new Error("VectorEngine metadata requires --confirm-vectorengine-metadata=USE_VECTORENGINE_METADATA.");
+  }
+  if (!Number.isInteger(options.metadataBatchSize) || options.metadataBatchSize < 1 || options.metadataBatchSize > 10) {
+    throw new Error("--metadata-batch-size must be between 1 and 10.");
+  }
+  if (!Number.isFinite(options.metadataRateLimitMs) || options.metadataRateLimitMs < 0) {
+    throw new Error("--metadata-rate-limit-ms must be a non-negative number.");
   }
 }
 
@@ -285,7 +306,10 @@ function workflowFieldsForJob(job, options) {
     langs: job.langs,
     exclude_langs: "NONE",
     concurrency: "2",
-    metadata_concurrency: "4",
+    metadata_concurrency: "1",
+    metadata_gemini_backend: options.metadataGeminiBackend,
+    metadata_batch_size: String(options.metadataBatchSize),
+    metadata_rate_limit_ms: String(options.metadataRateLimitMs),
     thumbnail_concurrency: "2",
     worker_count: "1",
     worker_index: "0",
@@ -297,6 +321,7 @@ function workflowFieldsForJob(job, options) {
     allow_republish: boolInput(options.allowRepublish),
     generate_thumbnails: boolInput(options.generateThumbnails),
     confirm_thumbnail_spend: options.confirmThumbnailSpend,
+    confirm_vectorengine_metadata: options.confirmVectorengineMetadata,
     confirm_youtube_write: options.confirmYoutubeWrite,
     confirm_public: options.confirmPublic,
   };
@@ -798,6 +823,9 @@ async function buildPlan(options) {
       scheduleMinFutureMinutes: options.scheduleMinFutureMinutes,
       allowRepublish: options.allowRepublish,
       generateThumbnails: options.generateThumbnails,
+      metadataGeminiBackend: options.metadataGeminiBackend,
+      metadataBatchSize: options.metadataBatchSize,
+      metadataRateLimitMs: options.metadataRateLimitMs,
     },
     summary: {
       supportCount: supports.length,

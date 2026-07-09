@@ -32,6 +32,27 @@ export const YOUTUBE_METADATA_SCHEMA = {
   required: ["title", "description", "tags", "hashtags"]
 };
 
+export const YOUTUBE_METADATA_BATCH_SCHEMA = {
+  type: "object",
+  properties: {
+    items: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          targetLang: { type: "string" },
+          title: { type: "string" },
+          description: { type: "string" },
+          tags: { type: "array", items: { type: "string" } },
+          hashtags: { type: "array", items: { type: "string" } }
+        },
+        required: ["targetLang", "title", "description", "tags", "hashtags"]
+      }
+    }
+  },
+  required: ["items"]
+};
+
 function sqlString(value) {
   return `'${String(value ?? "").replace(/'/g, "''")}'`;
 }
@@ -114,10 +135,7 @@ function parseGeminiBackendPreference(value) {
 }
 
 function defaultGeminiBackendPreference() {
-  if (hasGeminiApiKey()) {
-    return hasVectorEngineGeminiKey() ? ["api", "vectorengine"] : ["api"];
-  }
-  if (hasVectorEngineGeminiKey()) return ["vectorengine"];
+  if (hasGeminiApiKey()) return ["api"];
   return ["cli"];
 }
 
@@ -483,6 +501,47 @@ export function buildGeminiPrompt(baseMetadata, cards) {
   ].join("\n");
 }
 
+export function buildGeminiBatchPrompt(items) {
+  const facts = items.map(({ template, cards }, index) => ({
+    index,
+    supportLang: template.supportLang,
+    targetLang: template.targetLang,
+    targetLanguageName: template.targetLanguageName,
+    deckTitle: template.deckTitle,
+    deckMetadataSource: template.deckMetadataSource || "unknown",
+    level: template.level,
+    wordCount: template.wordCount,
+    courseUrl: template.courseUrl,
+    baseTitle: template.title,
+    baseDescription: template.description,
+    sampleWords: uniqueStrings(cards.map((card) => card.target_display || card.target_word)).slice(0, 24)
+  }));
+  return [
+    `Create YouTube metadata for ${BRAND_NAME} vocabulary lessons.`,
+    "Return JSON only. Do not use Markdown. Do not add fields outside the schema.",
+    "Return exactly one output item for every input item. Preserve each targetLang exactly.",
+    "",
+    "Audience and language rules:",
+    "- For each item, write title, description, tags and hashtags for native speakers of item.supportLang.",
+    "- Preserve the exact deckTitle phrase when naming the topic. Do not invent a new deck/category title.",
+    "- For non-English support languages, do not use English template phrases like \"A1 Vocabulary\", \"Vocabulary with Pronunciation\", \"Words with Pronunciation\", \"Everyday Flashcards\", \"for beginners\", \"learn <language>\" or English-only tags.",
+    "- Do not invent paid features, certificates, native teacher claims, exact duration, or guarantees.",
+    "- Keep it search-friendly but not clickbait.",
+    "",
+    "Output constraints per item:",
+    "- title: <= 90 characters.",
+    "- description: 700-1400 characters, include item.courseUrl exactly once.",
+    "- tags: 12-20 short search phrases, no hashtags inside tags.",
+    "- hashtags: 3-5 strings beginning with #.",
+    "- Keep total tags length under 450 characters.",
+    "",
+    "INPUT_ITEMS_JSON:",
+    JSON.stringify(facts),
+    "",
+    'JSON schema: {"items":[{"targetLang":"string","title":"string","description":"string","tags":["string"],"hashtags":["string"]}]}'
+  ].join("\n");
+}
+
 export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
   const cardWords = uniqueStrings(cards.map((card) => card.target_display || card.target_word)).slice(0, 24);
   const facts = {
@@ -557,7 +616,7 @@ function parseGeminiTextResponse(data) {
   throw new Error(`Gemini returned no parseable JSON text: ${JSON.stringify(data).slice(0, 500)}`);
 }
 
-async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputTokens = 3200 } = {}) {
+async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputTokens = 3200, schema = YOUTUBE_METADATA_SCHEMA } = {}) {
   const apiKeys = configuredGeminiApiKeys();
   if (!apiKeys.length) {
     throw new Error("GEMINI_API_KEY, GEMINI_API_KEY_2 or GOOGLE_API_KEY is required for Gemini API metadata generation.");
@@ -586,7 +645,7 @@ async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputT
           response_format: {
             type: "text",
             mime_type: "application/json",
-            schema: YOUTUBE_METADATA_SCHEMA
+            schema
           }
         })
       });
@@ -721,6 +780,65 @@ export function normalizeYouTubeMetadata(metadata) {
   return normalized;
 }
 
+function mergeGeneratedMetadata({ template, generated, backend, model }) {
+  const aiMetadata = normalizeYouTubeMetadata({
+    ...template,
+    ...generated,
+    source: `gemini-${backend}`,
+    model,
+    generatedAt: new Date().toISOString()
+  });
+  const languageGate = validateAiMetadataLanguage(aiMetadata);
+  if (languageGate.blockers.length) {
+    if (isStrictAiMetadataMode()) {
+      throw new Error(`AI YouTube metadata failed language gate: ${languageGate.blockers.join("; ")}`);
+    }
+    console.warn(`[YOUTUBE_METADATA_AI_LANGUAGE_FALLBACK] ${backend}/${model}: ${languageGate.blockers.join("; ")}`);
+    return normalizeYouTubeMetadata({
+      ...template,
+      source: `gemini-${backend}-localized-fallback`,
+      model,
+      aiMetadata: {
+        attempted: true,
+        backend,
+        model,
+        status: "fallback",
+        reason: "ai_metadata_failed_language_gate",
+        languageGate
+      },
+      generatedAt: new Date().toISOString()
+    });
+  }
+  if (languageGate.warnings.length) {
+    aiMetadata.aiMetadata = {
+      ...(aiMetadata.aiMetadata || {}),
+      attempted: true,
+      backend,
+      model,
+      status: "warning",
+      languageGate
+    };
+  }
+  return aiMetadata;
+}
+
+function templateAiFallbackMetadata({ template, backend, model, error }) {
+  const message = boundedAiError(error);
+  console.warn(`[YOUTUBE_METADATA_AI_FALLBACK] ${backend}/${model}: ${message}`);
+  return normalizeYouTubeMetadata({
+    ...template,
+    source: "template-ai-fallback",
+    aiMetadata: {
+      attempted: true,
+      backend,
+      model,
+      status: "fallback",
+      error: message
+    },
+    generatedAt: new Date().toISOString()
+  });
+}
+
 export async function generateYouTubeMetadata(input) {
   const cards = input.cards || await fetchDeckCards(input.setId, input.targetLang, input.supportLang);
   const deckMetadata = input.deckMetadata || await fetchDeckMetadata(input.setId, input.supportLang);
@@ -779,43 +897,69 @@ export async function generateYouTubeMetadata(input) {
     });
   }
 
-  const aiMetadata = normalizeYouTubeMetadata({
-    ...template,
-    ...generated,
-    source: `gemini-${backend}`,
-    model,
-    generatedAt: new Date().toISOString()
-  });
-  const languageGate = validateAiMetadataLanguage(aiMetadata);
-  if (languageGate.blockers.length) {
-    if (isStrictAiMetadataMode()) {
-      throw new Error(`AI YouTube metadata failed language gate: ${languageGate.blockers.join("; ")}`);
-    }
-    console.warn(`[YOUTUBE_METADATA_AI_LANGUAGE_FALLBACK] ${backend}/${model}: ${languageGate.blockers.join("; ")}`);
-    return normalizeYouTubeMetadata({
-      ...template,
-      source: `gemini-${backend}-localized-fallback`,
-      model,
-      aiMetadata: {
-        attempted: true,
-        backend,
-        model,
-        status: "fallback",
-        reason: "ai_metadata_failed_language_gate",
-        languageGate
-      },
-      generatedAt: new Date().toISOString()
-    });
+  return mergeGeneratedMetadata({ template, generated, backend, model });
+}
+
+export async function generateYouTubeMetadataBatch(inputs, options = {}) {
+  const items = [];
+  for (const input of inputs) {
+    const cards = input.cards || await fetchDeckCards(input.setId, input.targetLang, input.supportLang);
+    const deckMetadata = input.deckMetadata || await fetchDeckMetadata(input.setId, input.supportLang);
+    const template = buildTemplateYouTubeMetadata({ ...input, ...options, cards, deckMetadata });
+    items.push({ input, cards, deckMetadata, template });
   }
-  if (languageGate.warnings.length) {
-    aiMetadata.aiMetadata = {
-      ...(aiMetadata.aiMetadata || {}),
-      attempted: true,
+
+  if (!options.withGemini) return items.map((item) => item.template);
+
+  const backendPreference = parseGeminiBackendPreference(options.geminiBackend || process.env.GEMINI_BACKEND)
+    .concat(options.geminiBackend || process.env.GEMINI_BACKEND ? [] : defaultGeminiBackendPreference());
+  const backends = uniqueStrings(backendPreference);
+  if (backends.length !== 1 || backends[0] !== "api") {
+    throw new Error("Batched YouTube metadata generation supports only --gemini-backend api. Use per-target generation for cli/vectorengine.");
+  }
+
+  const backend = "api";
+  const model = options.model || defaultGeminiApiModel;
+  try {
+    const prompt = buildGeminiBatchPrompt(items);
+    const maxOutputTokens = Math.max(3200, Math.min(12000, items.length * 2400));
+    const generated = await callGeminiApi(prompt, {
+      model,
+      maxOutputTokens,
+      schema: YOUTUBE_METADATA_BATCH_SCHEMA
+    });
+    const generatedItems = Array.isArray(generated?.items) ? generated.items : [];
+    if (generatedItems.length !== items.length) {
+      throw new Error(`Gemini batch metadata returned ${generatedItems.length} items for ${items.length} inputs.`);
+    }
+    const byTarget = new Map();
+    for (const item of generatedItems) {
+      const targetLang = normalizeLanguageCode(item?.targetLang);
+      if (targetLang) byTarget.set(targetLang, item);
+    }
+    return items.map((item, index) => {
+      const targetLang = normalizeLanguageCode(item.template.targetLang);
+      const generatedItem = byTarget.get(targetLang) || generatedItems[index];
+      if (!generatedItem) {
+        throw new Error(`Gemini batch metadata omitted target ${targetLang}.`);
+      }
+      const { targetLang: _ignoredTargetLang, ...metadataFields } = generatedItem;
+      return mergeGeneratedMetadata({
+        template: item.template,
+        generated: metadataFields,
+        backend,
+        model
+      });
+    });
+  } catch (error) {
+    if (isStrictAiMetadataMode() || !isRecoverableAiMetadataError(error)) {
+      throw error;
+    }
+    return items.map((item) => templateAiFallbackMetadata({
+      template: item.template,
       backend,
       model,
-      status: "warning",
-      languageGate
-    };
+      error
+    }));
   }
-  return aiMetadata;
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
-import { generateYouTubeMetadata, resolveTargetLanguages } from "./lib/youtube-metadata.mjs";
+import { generateYouTubeMetadata, generateYouTubeMetadataBatch, resolveTargetLanguages } from "./lib/youtube-metadata.mjs";
 import { shardItems } from "./lib/work-shards.mjs";
 
 function parseArgs(argv) {
@@ -15,6 +15,8 @@ function parseArgs(argv) {
     model: "",
     privacyStatus: "public",
     concurrency: Number(process.env.YOUTUBE_METADATA_CONCURRENCY || 4),
+    geminiBatchSize: Number(process.env.YOUTUBE_METADATA_GEMINI_BATCH_SIZE || 1),
+    geminiRateLimitMs: Number(process.env.YOUTUBE_METADATA_GEMINI_RATE_LIMIT_MS || 0),
     shardCount: 1,
     shardIndex: 0
   };
@@ -34,6 +36,8 @@ function parseArgs(argv) {
     else if (arg === "--model" && argv[i + 1]) args.model = argv[++i];
     else if (arg === "--privacy" && argv[i + 1]) args.privacyStatus = argv[++i];
     else if (arg === "--concurrency" && argv[i + 1]) args.concurrency = Number(argv[++i]);
+    else if (arg === "--gemini-batch-size" && argv[i + 1]) args.geminiBatchSize = Number(argv[++i]);
+    else if (arg === "--gemini-rate-limit-ms" && argv[i + 1]) args.geminiRateLimitMs = Number(argv[++i]);
     else if (arg === "--shard-count" && argv[i + 1]) args.shardCount = Number(argv[++i]);
     else if (arg === "--shard-index" && argv[i + 1]) args.shardIndex = Number(argv[++i]);
   }
@@ -49,9 +53,11 @@ function usage() {
     "  --with-gemini                 Improve template metadata with Gemini.",
     "  --gemini-backend api|cli|vectorengine|api,vectorengine",
     "                                  Use Google API, local Gemini CLI, VectorEngine, or an ordered backend chain.",
-    "                                  Defaults to direct Google keys first, then VectorEngine if configured, otherwise CLI.",
+    "                                  Defaults to direct Google API when direct keys exist, otherwise CLI.",
     "                                  Direct Google keys are tried as GEMINI_API_KEY, GEMINI_API_KEY_2, GOOGLE_API_KEY.",
     "  --model <model>                Override Gemini model.",
+    "  --gemini-batch-size <n>        Direct API only: group up to n targets in one request. Default 1.",
+    "  --gemini-rate-limit-ms <n>     Direct API batch pause between requests. Default 0.",
     "  --privacy private|unlisted|public",
     "  --concurrency <n>              Metadata/SEO generation concurrency. Default 4.",
     "  --shard-count <n>              Deterministic target-language shard count. Default 1.",
@@ -69,6 +75,25 @@ function outputPathFor({ outputDir, setId, targetLang, supportLang }) {
     `${setId}_${targetLang.toLowerCase()}_${supportLang.toLowerCase()}`,
     "youtube_metadata.json"
   );
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function chunks(items, size) {
+  const chunkSize = Math.max(1, Math.floor(Number(size) || 1));
+  const result = [];
+  for (let index = 0; index < items.length; index += chunkSize) {
+    result.push(items.slice(index, index + chunkSize));
+  }
+  return result;
+}
+
+function useDirectApiBatch(args) {
+  if (!args.withGemini || Math.floor(Number(args.geminiBatchSize) || 1) <= 1) return false;
+  const backend = String(args.geminiBackend || process.env.GEMINI_BACKEND || "api").trim().toLowerCase();
+  return backend === "api";
 }
 
 async function main() {
@@ -114,6 +139,55 @@ async function main() {
       shardIndex: shard.shardIndex,
       shardManifestPath,
       results: [],
+    }, null, 2));
+    return;
+  }
+
+  if (useDirectApiBatch(args)) {
+    const results = [];
+    const targetChunks = chunks(targetLangs, args.geminiBatchSize);
+    for (let chunkIndex = 0; chunkIndex < targetChunks.length; chunkIndex += 1) {
+      const chunk = targetChunks[chunkIndex];
+      const metadataItems = await generateYouTubeMetadataBatch(
+        chunk.map((targetLang) => ({
+          setId: args.setId,
+          targetLang,
+          supportLang: args.supportLang,
+          privacyStatus: args.privacyStatus
+        })),
+        {
+          withGemini: args.withGemini,
+          geminiBackend: args.geminiBackend || "api",
+          model: args.model || undefined,
+          privacyStatus: args.privacyStatus
+        }
+      );
+      for (const metadata of metadataItems) {
+        const outputPath = outputPathFor({
+          outputDir: args.outputDir,
+          setId: args.setId,
+          targetLang: metadata.targetLang,
+          supportLang: args.supportLang
+        });
+        fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+        fs.writeFileSync(outputPath, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");
+        results.push({ targetLang: metadata.targetLang, outputPath, source: metadata.source, title: metadata.title });
+        console.log(`[YOUTUBE_METADATA] ${metadata.targetLang}/${args.supportLang}: ${metadata.source} -> ${outputPath}`);
+      }
+      if (chunkIndex < targetChunks.length - 1 && Number(args.geminiRateLimitMs) > 0) {
+        await sleep(Number(args.geminiRateLimitMs));
+      }
+    }
+    console.log(JSON.stringify({
+      status: "ok",
+      count: results.length,
+      concurrency: 1,
+      geminiBatchSize: Math.max(1, Math.floor(Number(args.geminiBatchSize) || 1)),
+      geminiRateLimitMs: Math.max(0, Math.floor(Number(args.geminiRateLimitMs) || 0)),
+      shardCount: shard.shardCount,
+      shardIndex: shard.shardIndex,
+      shardManifestPath,
+      results,
     }, null, 2));
     return;
   }
