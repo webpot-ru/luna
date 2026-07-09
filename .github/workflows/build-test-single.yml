@@ -17,7 +17,41 @@ on:
         default: 'ES'
 
 jobs:
+  direct-gemini-smoke:
+    if: ${{ github.event.inputs.set_id == '__direct_gemini_smoke__' && github.event.inputs.support == 'CHECK_DIRECT_GEMINI' }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Check direct Gemini API keys
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+        GEMINI_MODEL: ${{ github.event.inputs.langs }}
+      run: |
+        set -euo pipefail
+        npm run check:direct-gemini-api -- \
+          --key-names GEMINI_API_KEY,GEMINI_API_KEY_2 \
+          --model "$GEMINI_MODEL" \
+          --confirm-spend
+
+    - name: Upload smoke artifact
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: direct-gemini-api-smoke
+        path: outputs/tmp/direct-gemini-api-smoke/
+        if-no-files-found: ignore
+        retention-days: 3
+
   build-test:
+    if: ${{ github.event.inputs.set_id != '__direct_gemini_smoke__' }}
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
