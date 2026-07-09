@@ -40369,7 +40369,7 @@
       "status": "created_public",
       "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-24T09:40:17.875Z",
-      "lastReadbackAt": "2026-06-26T08:05:54.145Z",
+      "lastReadbackAt": "2026-07-09T04:32:27.448Z",
       "playlistMetadataRepair": {
         "repairedAt": "2026-06-26T08:05:54.145Z",
         "reason": "english_fallback_template",
@@ -40379,6 +40379,15 @@
         "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-2/28225030977/iteration-1-apply/th_et_PL7CNPPbAeUfMzcGTgo5_B_nsGE1P3mONc/playlist_metadata.json",
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
+      },
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:27.448Z",
+        "imageId": "PL7CNPPbAeUfMzcGTgo5_B_nsGE1P3mONc.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/th/TH_ET_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
       }
     },
     {
@@ -40396,7 +40405,7 @@
       "status": "created_public",
       "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-24T10:41:44.390Z",
-      "lastReadbackAt": "2026-06-26T08:06:56.308Z",
+      "lastReadbackAt": "2026-07-09T04:32:31.975Z",
       "playlistMetadataRepair": {
         "repairedAt": "2026-06-26T08:06:56.308Z",
         "reason": "english_fallback_template",
@@ -40406,6 +40415,15 @@
         "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-2/28225030977/iteration-1-apply/th_fi_PL7CNPPbAeUfNjrBsPmmKZ3Qm9glXe4wi8/playlist_metadata.json",
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
+      },
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:31.975Z",
+        "imageId": "PL7CNPPbAeUfNjrBsPmmKZ3Qm9glXe4wi8.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/th/TH_FI_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
       }
     },
     {
@@ -40423,7 +40441,7 @@
       "status": "created_public",
       "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:16:59.623Z",
-      "lastReadbackAt": "2026-06-26T08:07:13.868Z",
+      "lastReadbackAt": "2026-07-09T04:32:36.549Z",
       "recoverySource": "github_raw_log_20260623_v3",
       "playlistMetadataRepair": {
         "repairedAt": "2026-06-26T08:07:13.868Z",
@@ -40434,6 +40452,15 @@
         "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-2/28225030977/iteration-1-apply/th_fr_PL7CNPPbAeUfO54A_zpZAfD4l00gUewPpP/playlist_metadata.json",
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
+      },
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:36.549Z",
+        "imageId": "PL7CNPPbAeUfO54A_zpZAfD4l00gUewPpP.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/th/TH_FR_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
       }
     },
     {
@@ -40451,7 +40478,16 @@
       "status": "created_public",
       "titleReviewStatus": "template_needs_native_review",
       "createdAt": "2026-06-27T09:09:52.105Z",
-      "lastReadbackAt": "2026-06-27T09:09:58.196Z"
+      "lastReadbackAt": "2026-07-09T04:32:41.342Z",
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:41.342Z",
+        "imageId": "PLOwVHulGa1Lo.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/th/TH_HI_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      }
     },
     {
       "playlist_key": "TH__HR__ordinary-vocabulary__a1-everyday",
@@ -40468,7 +40504,16 @@
       "status": "created_public",
       "titleReviewStatus": "template_needs_native_review",
       "createdAt": "2026-06-26T11:38:26.585Z",
-      "lastReadbackAt": "2026-06-26T11:38:27.613Z"
+      "lastReadbackAt": "2026-07-09T04:32:45.928Z",
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:45.928Z",
+        "imageId": "PLZXzcwRa55sU.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/th/TH_HR_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      }
     },
     {
       "playlist_key": "TH__HU__ordinary-vocabulary__a1-everyday",
@@ -43716,7 +43761,7 @@
       "status": "created_public",
       "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-24T09:05:05.615Z",
-      "lastReadbackAt": "2026-06-26T08:21:28.518Z",
+      "lastReadbackAt": "2026-07-09T04:32:50.722Z",
       "playlistMetadataRepair": {
         "repairedAt": "2026-06-26T08:21:28.518Z",
         "reason": "english_fallback_template",
@@ -43726,6 +43771,15 @@
         "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-2/28226096389/iteration-1-apply/vi_et_PLP-RVRjbJRL92avU5G28Ua6WZvGUBRzWc/playlist_metadata.json",
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
+      },
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:50.722Z",
+        "imageId": "PLP-RVRjbJRL92avU5G28Ua6WZvGUBRzWc.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/vi/VI_ET_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
       }
     },
     {
@@ -43743,7 +43797,7 @@
       "status": "created_public",
       "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-24T10:41:44.399Z",
-      "lastReadbackAt": "2026-06-26T08:21:45.016Z",
+      "lastReadbackAt": "2026-07-09T04:32:55.304Z",
       "playlistMetadataRepair": {
         "repairedAt": "2026-06-26T08:21:45.016Z",
         "reason": "english_fallback_template",
@@ -43753,6 +43807,15 @@
         "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-2/28226096389/iteration-1-apply/vi_fi_PLP-RVRjbJRL98LTv-kW2DD9_kCUI2eEZT/playlist_metadata.json",
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
+      },
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:55.304Z",
+        "imageId": "PLP-RVRjbJRL98LTv-kW2DD9_kCUI2eEZT.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/vi/VI_FI_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
       }
     },
     {
@@ -43770,7 +43833,7 @@
       "status": "created_public",
       "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:16:37.339Z",
-      "lastReadbackAt": "2026-06-26T08:22:20.772Z",
+      "lastReadbackAt": "2026-07-09T04:32:59.835Z",
       "recoverySource": "github_raw_log_20260623_v3",
       "playlistMetadataRepair": {
         "repairedAt": "2026-06-26T08:22:20.772Z",
@@ -43781,6 +43844,15 @@
         "replacementPath": "outputs/youtube-playlist-metadata-route-orchestrator/youtube-2/28226096389/iteration-1-apply/vi_fr_PLP-RVRjbJRL8AU7kFPbjkMoYZcXN3wJ-z/playlist_metadata.json",
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
+      },
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:59.835Z",
+        "imageId": "PLP-RVRjbJRL8AU7kFPbjkMoYZcXN3wJ-z.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/vi/VI_FR_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
       }
     },
     {
@@ -43798,7 +43870,16 @@
       "status": "created_public",
       "titleReviewStatus": "template_needs_native_review",
       "createdAt": "2026-06-27T09:11:03.261Z",
-      "lastReadbackAt": "2026-06-27T09:11:14.262Z"
+      "lastReadbackAt": "2026-07-09T04:33:05.539Z",
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:33:05.539Z",
+        "imageId": "PLNDjP38EccYk.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/vi/VI_HI_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      }
     },
     {
       "playlist_key": "VI__HR__ordinary-vocabulary__a1-everyday",
@@ -43815,7 +43896,16 @@
       "status": "created_public",
       "titleReviewStatus": "template_needs_native_review",
       "createdAt": "2026-06-26T11:36:51.659Z",
-      "lastReadbackAt": "2026-06-26T11:36:53.175Z"
+      "lastReadbackAt": "2026-07-09T04:33:12.672Z",
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:33:12.672Z",
+        "imageId": "PLZBOBLz3QRWc.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/vi/VI_HR_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      }
     },
     {
       "playlist_key": "VI__HU__ordinary-vocabulary__a1-everyday",
