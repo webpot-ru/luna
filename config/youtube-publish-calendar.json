@@ -125215,6 +125215,52 @@
       "youtubeVideoId": "7P3uvhir3SU",
       "youtubePlaylistId": "PL8q4vfdwFMEqTTbW2R-cwLHfAJxhFLlXp",
       "playlistItemId": "UEw4cTR2ZmR3Rk1FcVRUYlcyUi1jd0xIZkFKeGhGTGxYcC4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "LO",
+      "targetLang": "FR",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "publishAt": "2026-07-11T01:30:00.000Z",
+      "timeZone": "Asia/Vientiane",
+      "localDate": "2026-07-11",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 2,
+      "slotOrdinal": 12,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fr_lo/youtube_metadata.json",
+      "title": "ຄໍາສັບພາສາຝຣັ່ງ ລະດັບພື້ນຖານ: ການກະທຳເຮັດອາຫານ (25 ຄໍາ)",
+      "playlist_key": "LO__FR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T01:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030559529",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030559529",
+      "createdAt": "2026-07-09T15:43:28.743Z",
+      "updatedAt": "2026-07-09T15:43:28.743Z",
+      "youtubeVideoId": "jCtVe9xkx8E",
+      "youtubePlaylistId": "PL7X-KEhNMxcPjf9JZ1ltaSlO8igmz7GX0",
+      "playlistItemId": "UEw3WC1LRWhOTXhjUGpmOUpaMWx0YVNsTzhpZ216N0dYMC4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
