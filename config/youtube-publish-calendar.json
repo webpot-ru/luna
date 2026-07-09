@@ -125123,6 +125123,98 @@
       "youtubeVideoId": "32WsnhjZ6pA",
       "youtubePlaylistId": "PLPKiz2vsEgHc",
       "playlistItemId": "UExQS2l6MnZzRWdIYy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "MS",
+      "targetLang": "FR",
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "publishAt": "2026-07-11T00:30:00.000Z",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "localDate": "2026-07-11",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 2,
+      "slotOrdinal": 12,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fr_ms/youtube_metadata.json",
+      "title": "Belajar Bahasa Perancis: Kosa Kata Aksi Memasak (Tahap Asas A1)",
+      "playlist_key": "MS__FR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T00:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030534841",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030534841",
+      "createdAt": "2026-07-09T15:43:32.184Z",
+      "updatedAt": "2026-07-09T15:43:32.184Z",
+      "youtubeVideoId": "qMZVNll9Sik",
+      "youtubePlaylistId": "PL8q4vfdwFMErRr7wbDMSUv12Ghk7OTcY1",
+      "playlistItemId": "UEw4cTR2ZmR3Rk1FclJyN3diRE1TVXYxMkdoazdPVGNZMS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "MS",
+      "targetLang": "HI",
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "publishAt": "2026-07-11T03:30:00.000Z",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "localDate": "2026-07-11",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 2,
+      "slotOrdinal": 13,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hi_ms/youtube_metadata.json",
+      "title": "Belajar Bahasa Hindi: Kosa Kata Aksi Memasak (Tahap Asas)",
+      "playlist_key": "MS__HI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T03:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030534841",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030534841",
+      "createdAt": "2026-07-09T15:43:32.191Z",
+      "updatedAt": "2026-07-09T15:43:32.191Z",
+      "youtubeVideoId": "7P3uvhir3SU",
+      "youtubePlaylistId": "PL8q4vfdwFMEqTTbW2R-cwLHfAJxhFLlXp",
+      "playlistItemId": "UEw4cTR2ZmR3Rk1FcVRUYlcyUi1jd0xIZkFKeGhGTGxYcC4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
