@@ -113342,6 +113342,52 @@
       "youtubeVideoId": "l_61S-O9cy4",
       "youtubePlaylistId": "PLOhl_fqw6f2R3Dxr1GGHj0OTmSlzzf6RN",
       "playlistItemId": "UExPaGxfZnF3NmYyUjNEeHIxR0dIajBPVG1TbHp6ZjZSTi4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SV",
+      "targetLang": "CS",
+      "channelKey": "sv",
+      "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+      "publishAt": "2026-07-10T15:30:00.000Z",
+      "timeZone": "Europe/Stockholm",
+      "localDate": "2026-07-10",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 1,
+      "slotOrdinal": 9,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_cs_sv/youtube_metadata.json",
+      "title": "Lär dig tjeckiska: Matlagningsverb (A1)",
+      "playlist_key": "SV__CS__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T15:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28987823832",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28987823832",
+      "createdAt": "2026-07-09T01:36:05.007Z",
+      "updatedAt": "2026-07-09T01:36:05.007Z",
+      "youtubeVideoId": "95UultJoIU0",
+      "youtubePlaylistId": "PLw7wGOQyFMKAE5xVkf0z2lhrd3VfGOOTo",
+      "playlistItemId": "UEx3N3dHT1F5Rk1LQUU1eFZrZjB6MmxocmQzVmZHT09Uby4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
