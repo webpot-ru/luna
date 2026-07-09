@@ -127239,6 +127239,98 @@
       "youtubeVideoId": "6eGbJzSpqwI",
       "youtubePlaylistId": "PLQI5S4G1AD8g",
       "playlistItemId": "UExRSTVTNEcxQUQ4Zy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "IT",
+      "targetLang": "HR",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-07-11T06:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-07-11",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 2,
+      "slotOrdinal": 12,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hr_it/youtube_metadata.json",
+      "title": "Imparare il Croato: Azioni in Cucina | Vocabolario A1",
+      "playlist_key": "IT__HR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030509712",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030509712",
+      "createdAt": "2026-07-09T15:43:17.779Z",
+      "updatedAt": "2026-07-09T15:43:17.779Z",
+      "youtubeVideoId": "5gB9UONFUDk",
+      "youtubePlaylistId": "PLN8JUpV8uePo",
+      "playlistItemId": "UExOOEpVcFY4dWVQby4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "IT",
+      "targetLang": "HU",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-07-11T09:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-07-11",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 2,
+      "slotOrdinal": 13,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hu_it/youtube_metadata.json",
+      "title": "Imparare l'Ungherese: Azioni in Cucina - Vocabolario A1",
+      "playlist_key": "IT__HU__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T09:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030509712",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030509712",
+      "createdAt": "2026-07-09T15:43:17.786Z",
+      "updatedAt": "2026-07-09T15:43:17.786Z",
+      "youtubeVideoId": "Egf-K9_qOxo",
+      "youtubePlaylistId": "PLFhUYtpdP4AM",
+      "playlistItemId": "UExGaFVZdHBkUDRBTS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
