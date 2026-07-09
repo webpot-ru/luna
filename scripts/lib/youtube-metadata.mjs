@@ -523,11 +523,37 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
 }
 
 function parseGeminiTextResponse(data) {
-  const text = String(data?.output_text || "").trim();
-  if (!text) {
-    throw new Error(`Gemini returned no text: ${JSON.stringify(data).slice(0, 500)}`);
+  const candidates = [];
+  const visit = (value, depth = 0) => {
+    if (depth > 10 || value == null) return;
+    if (typeof value === "string") {
+      candidates.push(value.trim());
+      return;
+    }
+    if (Array.isArray(value)) {
+      for (const item of value) visit(item, depth + 1);
+      return;
+    }
+    if (typeof value === "object") {
+      for (const item of Object.values(value)) visit(item, depth + 1);
+    }
+  };
+  visit(data?.output_text);
+  visit(data?.outputText);
+  visit(data?.text);
+  visit(data?.steps);
+  visit(data?.output);
+  visit(data?.response);
+  for (const candidate of candidates) {
+    if (!candidate.includes("{")) continue;
+    const start = candidate.indexOf("{");
+    const end = candidate.lastIndexOf("}");
+    if (start === -1 || end <= start) continue;
+    const text = candidate.slice(start, end + 1);
+    JSON.parse(text);
+    return text;
   }
-  return text;
+  throw new Error(`Gemini returned no parseable JSON text: ${JSON.stringify(data).slice(0, 500)}`);
 }
 
 async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputTokens = 3200 } = {}) {
