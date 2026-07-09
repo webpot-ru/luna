@@ -114492,6 +114492,98 @@
       "youtubeVideoId": "1g2rJze-dJU",
       "youtubePlaylistId": "PL7CNPPbAeUfMhP41okDiYL8vbatwT1B0r",
       "playlistItemId": "UEw3Q05QUGJBZVVmTWhQNDFva0RpWUw4dmJhdHdUMUIwci4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "IT",
+      "targetLang": "EN-GB",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-07-09T21:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-07-09",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_en-gb_it/youtube_metadata.json",
+      "title": "Vocabolario Inglese: Azioni in cucina (A1) | 25 parole con pronuncia",
+      "playlist_key": "IT__EN-GB__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-10T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-12T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-16T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-08T21:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28989358997",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28989358997",
+      "createdAt": "2026-07-09T02:17:45.085Z",
+      "updatedAt": "2026-07-09T02:17:45.085Z",
+      "youtubeVideoId": "vpmjqZ2fYaw",
+      "youtubePlaylistId": "PLBYghFsxRVBOOCsrgvYgAQlnG_O2PtH3V",
+      "playlistItemId": "UExCWWdoRnN4UlZCT09Dc3JndllnQVFsbkdfTzJQdEgzVi4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "IT",
+      "targetLang": "ES-419",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-07-10T09:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-07-10",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 1,
+      "slotOrdinal": 7,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_es-419_it/youtube_metadata.json",
+      "title": "Spagnolo (America Latina) per Principianti: Azioni in cucina | Vocabolario A1",
+      "playlist_key": "IT__ES-419__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T09:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28989358997",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28989358997",
+      "createdAt": "2026-07-09T02:17:45.096Z",
+      "updatedAt": "2026-07-09T02:17:45.096Z",
+      "youtubeVideoId": "uUT6DTNI9jU",
+      "youtubePlaylistId": "PLBYghFsxRVBP9utWTHjYWfNnVO2Cjm6Tx",
+      "playlistItemId": "UExCWWdoRnN4UlZCUDl1dFdUSGpZV2ZOblZPMkNqbTZUeC4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
