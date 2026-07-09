@@ -115182,6 +115182,52 @@
       "youtubeVideoId": "XxgEr19CJ7A",
       "youtubePlaylistId": "PLSzlbZS0FhfYlARUhk4JoXqnlOyVlNmax",
       "playlistItemId": "UExTemxiWlMwRmhmWWxBUlVoazRKb1hxbmxPeVZsTm1heC4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "AZ",
+      "targetLang": "ES-419",
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "publishAt": "2026-07-10T07:30:00.000Z",
+      "timeZone": "Asia/Baku",
+      "localDate": "2026-07-10",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 1,
+      "slotOrdinal": 7,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_es-419_az/youtube_metadata.json",
+      "title": "İspan Dilində Bişirmə Hərəkətləri (A1) | İspan Dili Öyrən",
+      "playlist_key": "AZ__ES-419__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T07:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28989351806",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28989351806",
+      "createdAt": "2026-07-09T02:17:34.981Z",
+      "updatedAt": "2026-07-09T02:17:34.981Z",
+      "youtubeVideoId": "fCkkQknbTyE",
+      "youtubePlaylistId": "PL7jzfVz1zRZk8c5tgGJ910EX4Ze9TnLbS",
+      "playlistItemId": "UEw3anpmVnoxelJaazhjNXRnR0o5MTBFWDRaZTlUbkxiUy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
