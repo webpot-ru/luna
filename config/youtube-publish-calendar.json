@@ -125813,6 +125813,98 @@
       "youtubeVideoId": "Xyh2icXeMV0",
       "youtubePlaylistId": "PLGxxT5Jqzvmp5NgB2coZe1NojxLcq8UAD",
       "playlistItemId": "UExHeHhUNUpxenZtcDVOZ0IyY29aZTFOb2p4TGNxOFVBRC4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SW",
+      "targetLang": "FR",
+      "channelKey": "sw",
+      "youtubeChannelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
+      "publishAt": "2026-07-11T05:30:00.000Z",
+      "timeZone": "Africa/Nairobi",
+      "localDate": "2026-07-11",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 2,
+      "slotOrdinal": 12,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fr_sw/youtube_metadata.json",
+      "title": "Jifunze Kifaransa: Vitendo vya kupika (Kiwango cha Msingi A1)",
+      "playlist_key": "SW__FR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030594268",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030594268",
+      "createdAt": "2026-07-09T15:46:20.449Z",
+      "updatedAt": "2026-07-09T15:46:20.449Z",
+      "youtubeVideoId": "g9zFI4yh73g",
+      "youtubePlaylistId": "PL-Si0pQz2zY3W9kJcj_w6CDoLIOnUem2f",
+      "playlistItemId": "UEwtU2kwcFF6MnpZM1c5a0pjal93NkNEb0xJT25VZW0yZi4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SW",
+      "targetLang": "HI",
+      "channelKey": "sw",
+      "youtubeChannelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
+      "publishAt": "2026-07-11T08:30:00.000Z",
+      "timeZone": "Africa/Nairobi",
+      "localDate": "2026-07-11",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 2,
+      "slotOrdinal": 13,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hi_sw/youtube_metadata.json",
+      "title": "Jifunze Kihindi: Vitendo vya kupika (Kiwango cha msingi)",
+      "playlist_key": "SW__HI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T08:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030594268",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030594268",
+      "createdAt": "2026-07-09T15:46:20.455Z",
+      "updatedAt": "2026-07-09T15:46:20.455Z",
+      "youtubeVideoId": "Gl8uOIc9-wA",
+      "youtubePlaylistId": "PLcqb2YT8bBYk",
+      "playlistItemId": "UExjcWIyWVQ4YkJZay41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
