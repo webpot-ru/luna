@@ -110030,6 +110030,52 @@
       "youtubeVideoId": "3QPic4nmip4",
       "youtubePlaylistId": "PLgZZTTzYOUoWBNetNIyK9eDD09UUNSOIw",
       "playlistItemId": "UExnWlpUVHpZT1VvV0JOZXROSXlLOWVERDA5VVVOU09Jdy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PL",
+      "targetLang": "CS",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "publishAt": "2026-07-10T12:30:00.000Z",
+      "timeZone": "Europe/Warsaw",
+      "localDate": "2026-07-10",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "localDayOffset": 1,
+      "slotOrdinal": 8,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_cs_pl/youtube_metadata.json",
+      "title": "Język czeski: Czynności kuchenne – Słownictwo A1 dla początkujących",
+      "playlist_key": "PL__CS__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T12:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28987820130",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28987820130",
+      "createdAt": "2026-07-09T01:35:45.255Z",
+      "updatedAt": "2026-07-09T01:35:45.255Z",
+      "youtubeVideoId": "0LmDTMjqnIE",
+      "youtubePlaylistId": "PLBKaXeretxlzydWDk_JgE3ylE84Fidxak",
+      "playlistItemId": "UExCS2FYZXJldHhsenlkV0RrX0pnRTN5bEU4NEZpZHhhay4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
