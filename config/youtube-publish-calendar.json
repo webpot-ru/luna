@@ -115412,6 +115412,98 @@
       "youtubeVideoId": "_zpqQaJzyYQ",
       "youtubePlaylistId": "PL3_zOFdP7_lKXn8Y9ewstJz_Nxp8WAHfc",
       "playlistItemId": "UEwzX3pPRmRQN19sS1huOFk5ZXdzdEp6X054cDhXQUhmYy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "BG",
+      "targetLang": "ES",
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "publishAt": "2026-07-10T05:30:00.000Z",
+      "timeZone": "Europe/Sofia",
+      "localDate": "2026-07-10",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 1,
+      "slotOrdinal": 6,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_es_bg/youtube_metadata.json",
+      "title": "Испански за начинаещи: Действия при готвене (A1) | 25 важни думи",
+      "playlist_key": "BG__ES__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28989355457",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28989355457",
+      "createdAt": "2026-07-09T02:17:29.873Z",
+      "updatedAt": "2026-07-09T02:17:29.873Z",
+      "youtubeVideoId": "hLnF9rh5mAc",
+      "youtubePlaylistId": "PLbx8Ii8MSQqr0r82l5VllQ2x78V9_HYd4",
+      "playlistItemId": "UExieDhJaThNU1FxcjByODJsNVZsbFEyeDc4VjlfSFlkNC4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "BG",
+      "targetLang": "ES-419",
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "publishAt": "2026-07-10T08:30:00.000Z",
+      "timeZone": "Europe/Sofia",
+      "localDate": "2026-07-10",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 1,
+      "slotOrdinal": 7,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_es-419_bg/youtube_metadata.json",
+      "title": "Испански (Латинска Америка) за начинаещи: Действия при готвене",
+      "playlist_key": "BG__ES-419__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T08:30:00.000Z"
+        }
+      ],
+      "githubRunId": "28989355457",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28989355457",
+      "createdAt": "2026-07-09T02:17:29.879Z",
+      "updatedAt": "2026-07-09T02:17:29.879Z",
+      "youtubeVideoId": "-b0mNo6sL4M",
+      "youtubePlaylistId": "PLbx8Ii8MSQqpWu_pseO8PbsjEqgxmuiCT",
+      "playlistItemId": "UExieDhJaThNU1FxcFd1X3BzZU84UGJzakVxZ3htdWlDVC4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
