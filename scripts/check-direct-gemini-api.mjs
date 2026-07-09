@@ -118,7 +118,7 @@ async function checkKey({ keyName, apiKey, model }) {
           responseMimeType: "application/json",
           responseSchema: schema,
           temperature: 0,
-          maxOutputTokens: 64
+          maxOutputTokens: 256
         }
       })
     });
