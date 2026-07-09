@@ -125905,6 +125905,52 @@
       "youtubeVideoId": "Gl8uOIc9-wA",
       "youtubePlaylistId": "PLcqb2YT8bBYk",
       "playlistItemId": "UExjcWIyWVQ4YkJZay41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "LT",
+      "targetLang": "FR",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "publishAt": "2026-07-10T20:30:00.000Z",
+      "timeZone": "Europe/Vilnius",
+      "localDate": "2026-07-10",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 1,
+      "slotOrdinal": 11,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fr_lt/youtube_metadata.json",
+      "title": "Prancūzų kalbos žodžiai pradedantiesiems: Gaminimo veiksmai (A1)",
+      "playlist_key": "LT__FR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T20:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030571417",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030571417",
+      "createdAt": "2026-07-09T15:46:17.807Z",
+      "updatedAt": "2026-07-09T15:46:17.807Z",
+      "youtubeVideoId": "WxP3SIQQty4",
+      "youtubePlaylistId": "PLAy7CrRODEjmnL6y9ljj33sknQSr3_phQ",
+      "playlistItemId": "UExBeTdDclJPREVqbW5MNnk5bGpqMzNza25RU3IzX3BoUS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
