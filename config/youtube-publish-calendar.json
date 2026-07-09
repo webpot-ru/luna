@@ -126273,6 +126273,52 @@
       "youtubeVideoId": "Em1rX7wunLU",
       "youtubePlaylistId": "PLqIsPmxIZy9TMkWEVJ5tQIxGEYRKqbWlq",
       "playlistItemId": "UExxSXNQbXhJWnk5VE1rV0VWSjV0UUl4R0VZUktxYldscS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SR",
+      "targetLang": "FR",
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "publishAt": "2026-07-10T18:30:00.000Z",
+      "timeZone": "Europe/Belgrade",
+      "localDate": "2026-07-10",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 1,
+      "slotOrdinal": 10,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fr_sr/youtube_metadata.json",
+      "title": "Francuski jezik za početnike: Kuhinjske radnje (A1)",
+      "playlist_key": "SR__FR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T18:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030619925",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030619925",
+      "createdAt": "2026-07-09T15:47:36.949Z",
+      "updatedAt": "2026-07-09T15:47:36.949Z",
+      "youtubeVideoId": "AubbYTEAKfc",
+      "youtubePlaylistId": "PLsLGddwB2Eihr1oX98AP-f2OUpV7Fhrf0",
+      "playlistItemId": "UExzTEdkZHdCMkVpaHIxb1g5OEFQLWYyT1VwVjdGaHJmMC4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
