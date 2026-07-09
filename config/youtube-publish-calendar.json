@@ -125951,6 +125951,98 @@
       "youtubeVideoId": "WxP3SIQQty4",
       "youtubePlaylistId": "PLAy7CrRODEjmnL6y9ljj33sknQSr3_phQ",
       "playlistItemId": "UExBeTdDclJPREVqbW5MNnk5bGpqMzNza25RU3IzX3BoUS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PL",
+      "targetLang": "ES-419",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "publishAt": "2026-07-11T12:30:00.000Z",
+      "timeZone": "Europe/Warsaw",
+      "localDate": "2026-07-11",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "localDayOffset": 2,
+      "slotOrdinal": 14,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_es-419_pl/youtube_metadata.json",
+      "title": "Hiszpański (Ameryka Łacińska) A1: Czynności kuchenne – Słownictwo dla początkujących",
+      "playlist_key": "PL__ES-419__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T12:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030571277",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030571277",
+      "createdAt": "2026-07-09T15:45:47.047Z",
+      "updatedAt": "2026-07-09T15:45:47.047Z",
+      "youtubeVideoId": "e8mlQJlmJ3g",
+      "youtubePlaylistId": "PLBKaXeretxlzB_m2bxddbkzYlah7jasST",
+      "playlistItemId": "UExCS2FYZXJldHhsekJfbTJieGRkYmt6WWxhaDdqYXNTVC4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PL",
+      "targetLang": "ET",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "publishAt": "2026-07-11T15:30:00.000Z",
+      "timeZone": "Europe/Warsaw",
+      "localDate": "2026-07-11",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 2,
+      "slotOrdinal": 15,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_et_pl/youtube_metadata.json",
+      "title": "Estoński A1: Czynności kuchenne – Słownictwo i wymowa",
+      "playlist_key": "PL__ET__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T15:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030571277",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030571277",
+      "createdAt": "2026-07-09T15:45:47.054Z",
+      "updatedAt": "2026-07-09T15:45:47.054Z",
+      "youtubeVideoId": "GIMc1nwvQs0",
+      "youtubePlaylistId": "PLBKaXeretxlxa1-UiVtm883ZlVN8oJbgS",
+      "playlistItemId": "UExCS2FYZXJldHhseGExLVVpVnRtODgzWmxWTjhvSmJnUy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
