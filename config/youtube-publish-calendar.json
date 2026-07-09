@@ -126733,6 +126733,98 @@
       "youtubeVideoId": "zwIIAhTAy_w",
       "youtubePlaylistId": "PLUvcM_ngZFlg",
       "playlistItemId": "UExVdmNNX25nWkZsZy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "VI",
+      "targetLang": "FR",
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "publishAt": "2026-07-11T16:30:00.000Z",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "localDate": "2026-07-11",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 2,
+      "slotOrdinal": 17,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fr_vi/youtube_metadata.json",
+      "title": "Từ vựng Tiếng Pháp: Động tác nấu ăn (Trình độ sơ cấp A1)",
+      "playlist_key": "VI__FR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T16:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030632922",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030632922",
+      "createdAt": "2026-07-09T15:47:48.353Z",
+      "updatedAt": "2026-07-09T15:47:48.353Z",
+      "youtubeVideoId": "6HkdCtrM2nQ",
+      "youtubePlaylistId": "PLP-RVRjbJRL8AU7kFPbjkMoYZcXN3wJ-z",
+      "playlistItemId": "UExQLVJWUmpiSlJMOEFVN2tGUGJqa01vWVpjWE4zd0otei4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "VI",
+      "targetLang": "HI",
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "publishAt": "2026-07-12T01:30:00.000Z",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "localDate": "2026-07-12",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 3,
+      "slotOrdinal": 18,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hi_vi/youtube_metadata.json",
+      "title": "Học Tiếng Hindi: 25 Từ Vựng Về Động Tác Nấu Ăn (Trình Độ Sơ Cấp)",
+      "playlist_key": "VI__HI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-13T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-15T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-19T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-11T01:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030632922",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030632922",
+      "createdAt": "2026-07-09T15:47:48.361Z",
+      "updatedAt": "2026-07-09T15:47:48.361Z",
+      "youtubeVideoId": "bCShteJCyjw",
+      "youtubePlaylistId": "PLNDjP38EccYk",
+      "playlistItemId": "UExORGpQMzhFY2NZay4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
