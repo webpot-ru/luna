@@ -76,6 +76,7 @@ concurrency:
 
 jobs:
   youtube-playlist-metadata-repair:
+    if: ${{ github.event.inputs.confirm_youtube_write != 'APPLY_YOUTUBE_PLAYLIST_IMAGES' }}
     runs-on: ubuntu-latest
     environment:
       name: >-
@@ -224,7 +225,7 @@ jobs:
 
   persist-playlist-metadata-state:
     needs: youtube-playlist-metadata-repair
-    if: ${{ always() && github.event.inputs.mode == 'apply' }}
+    if: ${{ always() && github.event.inputs.mode == 'apply' && github.event.inputs.confirm_youtube_write != 'APPLY_YOUTUBE_PLAYLIST_IMAGES' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     concurrency:
@@ -290,3 +291,147 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
           path: outputs/youtube-playlist-metadata-state-merge-github.json
+
+  youtube-playlist-image-upload:
+    if: ${{ github.event.inputs.mode == 'apply' && github.event.inputs.confirm_youtube_write == 'APPLY_YOUTUBE_PLAYLIST_IMAGES' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: >-
+        ${{
+          github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
+          (github.event.inputs.route == 'youtube-1' && 'youtube-api-branding') ||
+          (github.event.inputs.route == 'youtube-2' && 'youtube-api-youtube-2') ||
+          (github.event.inputs.route == 'youtube-3' && 'youtube-api-youtube-3') ||
+          (github.event.inputs.route == 'youtube-4' && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
+    timeout-minutes: 90
+    permissions:
+      contents: write
+      actions: read
+    env:
+      EFFECTIVE_YOUTUBE_ENVIRONMENT: >-
+        ${{
+          github.event.inputs.youtube_environment != 'auto' && github.event.inputs.youtube_environment ||
+          (github.event.inputs.route == 'youtube-1' && 'youtube-api-branding') ||
+          (github.event.inputs.route == 'youtube-2' && 'youtube-api-youtube-2') ||
+          (github.event.inputs.route == 'youtube-3' && 'youtube-api-youtube-3') ||
+          (github.event.inputs.route == 'youtube-4' && 'youtube-api-youtube-4') ||
+          'youtube-api-branding'
+        }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Refuse unsafe playlist-image inputs
+        shell: bash
+        env:
+          ROUTE: ${{ github.event.inputs.route }}
+          YOUTUBE_ENVIRONMENT: ${{ github.event.inputs.youtube_environment }}
+          SUPPORTS: ${{ github.event.inputs.supports }}
+          LIMIT_PER_CHANNEL: ${{ github.event.inputs.max_updates }}
+        run: |
+          set -euo pipefail
+          case "$ROUTE" in
+            youtube-1) EXPECTED_ENV="youtube-api-branding" ;;
+            youtube-2) EXPECTED_ENV="youtube-api-youtube-2" ;;
+            youtube-3) EXPECTED_ENV="youtube-api-youtube-3" ;;
+            youtube-4) EXPECTED_ENV="youtube-api-youtube-4" ;;
+            *) echo "::error::Unsupported route: $ROUTE"; exit 1 ;;
+          esac
+          if [ "$YOUTUBE_ENVIRONMENT" != "auto" ] && [ "$YOUTUBE_ENVIRONMENT" != "$EXPECTED_ENV" ]; then
+            echo "::error::Route $ROUTE must use $EXPECTED_ENV, got $YOUTUBE_ENVIRONMENT"
+            exit 1
+          fi
+          if [ "$EFFECTIVE_YOUTUBE_ENVIRONMENT" != "$EXPECTED_ENV" ]; then
+            echo "::error::Effective environment mismatch for $ROUTE: expected $EXPECTED_ENV got $EFFECTIVE_YOUTUBE_ENVIRONMENT"
+            exit 1
+          fi
+          if [ ! -f data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/manifest.json ]; then
+            echo "::error::Missing tracked playlist-image manifest"
+            exit 1
+          fi
+          if ! printf '%s' "$LIMIT_PER_CHANNEL" | grep -Eq '^[0-9]+$'; then
+            echo "::error::max_updates is reused as limit_per_channel and must be an integer"
+            exit 1
+          fi
+          if [ "$LIMIT_PER_CHANNEL" -lt 1 ] || [ "$LIMIT_PER_CHANNEL" -gt 10 ]; then
+            echo "::error::For playlist-image mode, max_updates/limit_per_channel must be between 1 and 10"
+            exit 1
+          fi
+
+      - name: Validate route environment
+        shell: bash
+        env:
+          SUPPORTS: ${{ github.event.inputs.supports }}
+        run: node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORTS" --environment="$EFFECTIVE_YOUTUBE_ENVIRONMENT"
+
+      - name: Restore YouTube OAuth bundle from secret
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+          echo "YouTube OAuth bundle restored for playlist-image upload."
+
+      - name: Upload playlist images
+        shell: bash
+        env:
+          SUPPORTS: ${{ github.event.inputs.supports }}
+          LIMIT_PER_CHANNEL: ${{ github.event.inputs.max_updates }}
+          ROUTE: ${{ github.event.inputs.route }}
+        run: |
+          set -euo pipefail
+          node scripts/youtube-upload-playlist-images.mjs \
+            --manifest=data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/manifest.json \
+            --supports="$SUPPORTS" \
+            --limit-per-channel="$LIMIT_PER_CHANNEL" \
+            --skip-uploaded \
+            --output-dir="outputs/youtube-playlist-image-upload-github/$ROUTE" \
+            --apply \
+            --confirm-youtube-write
+
+      - name: Commit and push playlist image state
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          ROUTE: ${{ github.event.inputs.route }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- config/youtube-playlists.json; then
+            echo "No playlist image state changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/youtube-playlists.json
+          git commit -m "Persist YouTube playlist image upload for ${ROUTE}" \
+            -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          git push origin "HEAD:$BRANCH_NAME"
+
+      - name: Upload playlist image report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-playlist-image-upload-${{ github.event.inputs.route }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            outputs/youtube-playlist-image-upload-github/**
+            config/youtube-playlists.json
