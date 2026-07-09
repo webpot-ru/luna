@@ -124663,6 +124663,52 @@
       "youtubeVideoId": "rq0k6KuPrzs",
       "youtubePlaylistId": "PLfZbFyLggv2Y",
       "playlistItemId": "UExmWmJGeUxnZ3YyWS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "AZ",
+      "targetLang": "HR",
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "publishAt": "2026-07-11T04:30:00.000Z",
+      "timeZone": "Asia/Baku",
+      "localDate": "2026-07-11",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 2,
+      "slotOrdinal": 12,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hr_az/youtube_metadata.json",
+      "title": "Xorvatca Bişirmə Hərəkətləri | A1 Səviyyə Xorvat Dili Sözləri",
+      "playlist_key": "AZ__HR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T04:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030486078",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030486078",
+      "createdAt": "2026-07-09T15:42:20.931Z",
+      "updatedAt": "2026-07-09T15:42:20.931Z",
+      "youtubeVideoId": "_HkjtA2spYo",
+      "youtubePlaylistId": "PLGH3_M7D_Dwk",
+      "playlistItemId": "UExHSDNfTTdEX0R3ay4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
