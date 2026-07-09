@@ -127147,6 +127147,98 @@
       "youtubeVideoId": "QZ1dqoAOK6U",
       "youtubePlaylistId": "PL-4RMx8aFFeDRvgUajHFdCCNf_QIXJDtq",
       "playlistItemId": "UEwtNFJNeDhhRkZlRFJ2Z1VhakhGZENDTmZfUUlYSkR0cS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "NE",
+      "targetLang": "FR",
+      "channelKey": "ne",
+      "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+      "publishAt": "2026-07-11T02:45:00.000Z",
+      "timeZone": "Asia/Kathmandu",
+      "localDate": "2026-07-11",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 2,
+      "slotOrdinal": 12,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fr_ne/youtube_metadata.json",
+      "title": "फ्रान्सेली भाषामा पकाउने क्रियाहरू | A1 शब्दावली (25 शब्दहरू)",
+      "playlist_key": "NE__FR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T02:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T02:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T02:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T02:45:00.000Z"
+        }
+      ],
+      "githubRunId": "29030571286",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030571286",
+      "createdAt": "2026-07-09T15:45:39.659Z",
+      "updatedAt": "2026-07-09T15:45:39.659Z",
+      "youtubeVideoId": "NCR0wWYo6O0",
+      "youtubePlaylistId": "PLzHdIxZgrAa36-GEz8t1sE0TnybZU-7KV",
+      "playlistItemId": "UEx6SGRJeFpnckFhMzYtR0V6OHQxc0UwVG55YlpVLTdLVi4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "NE",
+      "targetLang": "HI",
+      "channelKey": "ne",
+      "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+      "publishAt": "2026-07-11T05:45:00.000Z",
+      "timeZone": "Asia/Kathmandu",
+      "localDate": "2026-07-11",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 2,
+      "slotOrdinal": 13,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hi_ne/youtube_metadata.json",
+      "title": "नेपालीबाट हिन्दी सिक्नुहोस्: पकाउने क्रिया | २५ आधारभूत शब्दहरू",
+      "playlist_key": "NE__HI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T05:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T05:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T05:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T05:45:00.000Z"
+        }
+      ],
+      "githubRunId": "29030571286",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030571286",
+      "createdAt": "2026-07-09T15:45:39.665Z",
+      "updatedAt": "2026-07-09T15:45:39.665Z",
+      "youtubeVideoId": "6eGbJzSpqwI",
+      "youtubePlaylistId": "PLQI5S4G1AD8g",
+      "playlistItemId": "UExRSTVTNEcxQUQ4Zy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
