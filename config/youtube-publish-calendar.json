@@ -126457,6 +126457,98 @@
       "youtubeVideoId": "zFck7PEhUU8",
       "youtubePlaylistId": "PLNHC00kNVG0brk9VpC6ZWAZUqYIlUy7Ty",
       "playlistItemId": "UExOSEMwMGtOVkcwYnJrOVZwQzZaV0FaVXFZSWxVeTdUeS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "CS",
+      "targetLang": "HI",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "publishAt": "2026-07-10T18:30:00.000Z",
+      "timeZone": "Europe/Prague",
+      "localDate": "2026-07-10",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 1,
+      "slotOrdinal": 10,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hi_cs/youtube_metadata.json",
+      "title": "Hindština: Kuchyňské úkony | Základní slovíčka pro začátečníky",
+      "playlist_key": "CS__HI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T18:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030486526",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030486526",
+      "createdAt": "2026-07-09T15:42:20.616Z",
+      "updatedAt": "2026-07-09T15:42:20.616Z",
+      "youtubeVideoId": "0Dsozo1Uh30",
+      "youtubePlaylistId": "PLBqL9gOb0y_CW2D2fEdypGwFFUkJUHj-c",
+      "playlistItemId": "UExCcUw5Z09iMHlfQ1cyRDJmRWR5cEd3RkZVa0pVSGotYy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "CS",
+      "targetLang": "HR",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "publishAt": "2026-07-10T21:30:00.000Z",
+      "timeZone": "Europe/Prague",
+      "localDate": "2026-07-10",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 1,
+      "slotOrdinal": 11,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hr_cs/youtube_metadata.json",
+      "title": "Chorvatština pro začátečníky: Kuchyňské úkony (slovíčka)",
+      "playlist_key": "CS__HR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T21:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030486526",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030486526",
+      "createdAt": "2026-07-09T15:42:20.622Z",
+      "updatedAt": "2026-07-09T15:42:20.622Z",
+      "youtubeVideoId": "h5CKfLC4NI0",
+      "youtubePlaylistId": "PLGQNo6iq8KOo",
+      "playlistItemId": "UExHUU5vNmlxOEtPby4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
