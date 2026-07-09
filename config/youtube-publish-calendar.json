@@ -115602,6 +115602,51 @@
       "youtubeVideoId": "jwLOTHrC_yQ",
       "youtubePlaylistId": "PLvHaZVfMVmm6qt7ebXSlMF8opR4UJjggF",
       "playlistItemId": "UEx2SGFaVmZNVm1tNnF0N2ViWFNsTUY4b3BSNFVKamdnRi4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES-419",
+      "targetLang": "SR",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "publishAt": "2026-07-13T12:30:00.000Z",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "localDayOffset": 4,
+      "slotOrdinal": 26,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_sr_es-419/youtube_metadata.json",
+      "title": "Serbio básico: Utensilios de cocina | 50 palabras con pronunciación",
+      "playlist_key": "ES-419__SR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-14T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-16T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-20T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-12T12:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29013867685",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29013867685",
+      "createdAt": "2026-07-09T11:25:42.073Z",
+      "updatedAt": "2026-07-09T11:25:42.073Z",
+      "youtubeVideoId": "Z8JXy94YT_4",
+      "youtubePlaylistId": "PLdJ6emd1wJ7Y"
     }
   ]
 }
