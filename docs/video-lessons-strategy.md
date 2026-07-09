@@ -978,6 +978,12 @@ GitHub metadata workflow сначала использует direct Google Gemin
 npm run check:vectorengine-gemini -- --confirm-spend
 ```
 
+Direct Google Gemini API smoke uses the manual GitHub workflow `.github/workflows/gemini-direct-api-smoke.yml` or the local command below when keys are present in the environment. It is intentionally tiny and sequential: one `generateContent` request for `GEMINI_API_KEY` and one for `GEMINI_API_KEY_2`, no retries, no production metadata fan-out. Use it only with explicit spend confirmation:
+
+```bash
+npm run check:direct-gemini-api -- --key-names GEMINI_API_KEY,GEMINI_API_KEY_2 --model gemini-3.5-flash --confirm-spend
+```
+
 Если ключ лежит во внешнем env-файле, можно явно указать его без печати секрета:
 
 ```bash

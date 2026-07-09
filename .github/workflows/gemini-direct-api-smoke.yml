@@ -1,0 +1,51 @@
+name: Gemini Direct API Smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: 'Gemini model for the direct API smoke'
+        required: true
+        default: 'gemini-3.5-flash'
+      confirm_spend:
+        description: 'Must be CHECK_DIRECT_GEMINI'
+        required: true
+        default: ''
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check direct Gemini API keys
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_MODEL: ${{ github.event.inputs.model }}
+          CONFIRM_SPEND: ${{ github.event.inputs.confirm_spend }}
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRM_SPEND" != "CHECK_DIRECT_GEMINI" ]; then
+            echo "::error::confirm_spend must be CHECK_DIRECT_GEMINI"
+            exit 1
+          fi
+          npm run check:direct-gemini-api -- \
+            --key-names GEMINI_API_KEY,GEMINI_API_KEY_2 \
+            --model "$GEMINI_MODEL" \
+            --confirm-spend
+
+      - name: Upload smoke artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-gemini-api-smoke
+          path: outputs/tmp/direct-gemini-api-smoke/
+          if-no-files-found: ignore
+          retention-days: 3
