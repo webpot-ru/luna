@@ -125675,6 +125675,98 @@
       "youtubeVideoId": "xx6nEi3asGk",
       "youtubePlaylistId": "PLYKUKa5n9XUKAHdoyEwoyu_EijASmm_Do",
       "playlistItemId": "UExZS1VLYTVuOVhVS0FIZG95RXdveXVfRWlqQVNtbV9Eby4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SV",
+      "targetLang": "ES-419",
+      "channelKey": "sv",
+      "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+      "publishAt": "2026-07-11T15:30:00.000Z",
+      "timeZone": "Europe/Stockholm",
+      "localDate": "2026-07-11",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 2,
+      "slotOrdinal": 15,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_es-419_sv/youtube_metadata.json",
+      "title": "Lär dig spanska (Latinamerika): 25 viktiga matlagningsverb för nybörjare",
+      "playlist_key": "SV__ES-419__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T15:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030608135",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030608135",
+      "createdAt": "2026-07-09T15:46:42.475Z",
+      "updatedAt": "2026-07-09T15:46:42.475Z",
+      "youtubeVideoId": "kr5GcRaXp_Y",
+      "youtubePlaylistId": "PLw7wGOQyFMKDCqK6-Bn1dKMlLiTNww1ii",
+      "playlistItemId": "UEx3N3dHT1F5Rk1LRENxSzYtQm4xZEtNbExpVE53dzFpaS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SV",
+      "targetLang": "ET",
+      "channelKey": "sv",
+      "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+      "publishAt": "2026-07-11T18:30:00.000Z",
+      "timeZone": "Europe/Stockholm",
+      "localDate": "2026-07-11",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 2,
+      "slotOrdinal": 16,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_et_sv/youtube_metadata.json",
+      "title": "Lär dig estniska: Matlagningsverb för nybörjare (A1)",
+      "playlist_key": "SV__ET__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T18:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030608135",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030608135",
+      "createdAt": "2026-07-09T15:46:42.481Z",
+      "updatedAt": "2026-07-09T15:46:42.481Z",
+      "youtubeVideoId": "LJk_2m2UM-4",
+      "youtubePlaylistId": "PLw7wGOQyFMKDjElT-iy9tJ6u3u79-uaAM",
+      "playlistItemId": "UEx3N3dHT1F5Rk1LRGpFbFQtaXk5dEo2dTN1NzktdWFBTS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
