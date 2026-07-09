@@ -126135,6 +126135,52 @@
       "youtubeVideoId": "xCCntX1lEzA",
       "youtubePlaylistId": "PLPjZfdTQGWps",
       "playlistItemId": "UExQalpmZFRRR1dwcy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HR",
+      "targetLang": "HY",
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "publishAt": "2026-07-11T09:30:00.000Z",
+      "timeZone": "Europe/Zagreb",
+      "localDate": "2026-07-11",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 2,
+      "slotOrdinal": 13,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hy_hr/youtube_metadata.json",
+      "title": "Nauči armenski: Kuhinjske radnje | 25 osnovnih riječi za početnike",
+      "playlist_key": "HR__HY__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T09:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030522419",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030522419",
+      "createdAt": "2026-07-09T15:43:17.310Z",
+      "updatedAt": "2026-07-09T15:43:17.310Z",
+      "youtubeVideoId": "Xg2nQ8j12-I",
+      "youtubePlaylistId": "PLHJZ29xvT7bE",
+      "playlistItemId": "UExISloyOXh2VDdiRS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
