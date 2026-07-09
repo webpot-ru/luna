@@ -80,8 +80,7 @@ function timestamp() {
 }
 
 function parseGeminiTextResponse(data) {
-  const parts = data?.candidates?.[0]?.content?.parts || [];
-  const text = parts.map((part) => part.text || "").join("").trim();
+  const text = String(data?.output_text || "").trim();
   if (!text) {
     throw new Error(`Gemini returned empty text: ${JSON.stringify(data).slice(0, 500)}`);
   }
@@ -100,25 +99,29 @@ async function checkKey({ keyName, apiKey, model }) {
     },
     required: ["status", "provider", "modelFamily"]
   };
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const url = "https://generativelanguage.googleapis.com/v1beta/interactions";
   try {
     const response = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-key": apiKey,
+      },
       body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: [
-              "Return a tiny JSON health check for this direct Google Gemini API connection.",
-              'Use exactly: {"status":"ok","provider":"google","modelFamily":"gemini"}'
-            ].join("\n")
-          }]
-        }],
-        generationConfig: {
-          responseMimeType: "application/json",
-          responseSchema: schema,
+        model,
+        input: [
+          "Return a tiny JSON health check for this direct Google Gemini API connection.",
+          'Use exactly: {"status":"ok","provider":"google","modelFamily":"gemini"}'
+        ].join("\n"),
+        generation_config: {
           temperature: 0,
-          maxOutputTokens: 256
+          max_output_tokens: 256,
+          thinking_level: "low"
+        },
+        response_format: {
+          type: "text",
+          mime_type: "application/json",
+          schema
         }
       })
     });

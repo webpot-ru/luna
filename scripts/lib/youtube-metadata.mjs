@@ -523,8 +523,7 @@ export function buildVectorEngineGeminiPrompt(baseMetadata, cards) {
 }
 
 function parseGeminiTextResponse(data) {
-  const parts = data?.candidates?.[0]?.content?.parts || [];
-  const text = parts.map((part) => part.text || "").join("").trim();
+  const text = String(data?.output_text || "").trim();
   if (!text) {
     throw new Error(`Gemini returned no text: ${JSON.stringify(data).slice(0, 500)}`);
   }
@@ -539,17 +538,25 @@ async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputT
   const errors = [];
   for (const apiKey of apiKeys) {
     try {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey.value)}`;
+      const url = "https://generativelanguage.googleapis.com/v1beta/interactions";
       const response = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": apiKey.value,
+        },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            responseMimeType: "application/json",
-            responseSchema: YOUTUBE_METADATA_SCHEMA,
+          model,
+          input: prompt,
+          generation_config: {
             temperature: 0.35,
-            maxOutputTokens
+            max_output_tokens: maxOutputTokens,
+            thinking_level: "low"
+          },
+          response_format: {
+            type: "text",
+            mime_type: "application/json",
+            schema: YOUTUBE_METADATA_SCHEMA
           }
         })
       });
