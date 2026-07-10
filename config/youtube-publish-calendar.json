@@ -127331,6 +127331,98 @@
       "youtubeVideoId": "Egf-K9_qOxo",
       "youtubePlaylistId": "PLFhUYtpdP4AM",
       "playlistItemId": "UExGaFVZdHBkUDRBTS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KM",
+      "targetLang": "HI",
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "publishAt": "2026-07-11T04:30:00.000Z",
+      "timeZone": "Asia/Phnom_Penh",
+      "localDate": "2026-07-11",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 2,
+      "slotOrdinal": 13,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hi_km/youtube_metadata.json",
+      "title": "រៀនភាសាហិណ្ឌី៖ សកម្មភាពចម្អិន (កម្រិតមូលដ្ឋាន)",
+      "playlist_key": "KM__HI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-12T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-14T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-18T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-10T04:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030546759",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030546759",
+      "createdAt": "2026-07-09T15:43:34.041Z",
+      "updatedAt": "2026-07-09T15:43:34.041Z",
+      "youtubeVideoId": "k0nm2cW7Jv8",
+      "youtubePlaylistId": "PLOhl_fqw6f2S55KmBezYhQJnu7P00Xrwq",
+      "playlistItemId": "UExPaGxfZnF3NmYyUzU1S21CZXpZaFFKbnU3UDAwWHJ3cS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SL",
+      "targetLang": "FR",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "publishAt": "2026-07-10T18:30:00.000Z",
+      "timeZone": "Europe/Ljubljana",
+      "localDate": "2026-07-10",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 1,
+      "slotOrdinal": 10,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fr_sl/youtube_metadata.json",
+      "title": "Francoščina za začetnike: Kuhinjska opravila (A1 besedišče)",
+      "playlist_key": "SL__FR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T18:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29030606992",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29030606992",
+      "createdAt": "2026-07-09T15:46:30.769Z",
+      "updatedAt": "2026-07-09T15:46:30.769Z",
+      "youtubeVideoId": "-SeOTOpFz1I",
+      "youtubePlaylistId": "PLrRO7cv1Ua_RhlQhaI_WNFaUpK2Bmz6rY",
+      "playlistItemId": "UExyUk83Y3YxVWFfUmhsUWhhSV9XTkZhVXBLMkJtejZyWS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
