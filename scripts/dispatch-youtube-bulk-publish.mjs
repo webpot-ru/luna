@@ -297,7 +297,7 @@ async function selectTargets({ setId, support, targets, excludeTargets, registry
 }
 
 function workflowFieldsForJob(job, options) {
-  return {
+  const fields = {
     mode: options.mode,
     set_id: options.setId,
     support: job.support,
@@ -306,11 +306,9 @@ function workflowFieldsForJob(job, options) {
     langs: job.langs,
     exclude_langs: "NONE",
     concurrency: "2",
-    metadata_concurrency: "1",
     metadata_gemini_backend: options.metadataGeminiBackend,
     metadata_batch_size: String(options.metadataBatchSize),
     metadata_rate_limit_ms: String(options.metadataRateLimitMs),
-    thumbnail_concurrency: "2",
     worker_count: "1",
     worker_index: "0",
     privacy: options.privacy,
@@ -325,6 +323,9 @@ function workflowFieldsForJob(job, options) {
     confirm_youtube_write: options.confirmYoutubeWrite,
     confirm_public: options.confirmPublic,
   };
+  return Object.fromEntries(
+    Object.entries(fields).filter(([, value]) => value !== "" && value !== null && value !== undefined),
+  );
 }
 
 function repairFieldsForTarget(job, target, options) {

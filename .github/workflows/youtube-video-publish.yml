@@ -46,10 +46,6 @@ on:
         description: "Video build concurrency per support language."
         required: true
         default: "2"
-      metadata_concurrency:
-        description: "Metadata generation concurrency per support language. Batch direct Gemini uses sequential requests."
-        required: true
-        default: "4"
       metadata_gemini_backend:
         description: "Gemini metadata backend chain. Default api; VectorEngine requires confirm_vectorengine_metadata."
         required: false
@@ -62,10 +58,6 @@ on:
         description: "Pause between direct Gemini metadata batches in milliseconds."
         required: false
         default: "15000"
-      thumbnail_concurrency:
-        description: "VectorEngine thumbnail generation concurrency."
-        required: true
-        default: "2"
       worker_count:
         description: "Total deterministic workers/runners for this support/lang set. Use 5 for a 5-server test, up to 20."
         required: true
@@ -95,14 +87,6 @@ on:
         description: "For publish_mode=scheduled: first local date per channel, YYYY-MM-DD."
         required: false
         default: ""
-      schedule_policy:
-        description: "Schedule policy JSON path."
-        required: false
-        default: "config/youtube-publish-schedule-policy.json"
-      schedule_calendar:
-        description: "Durable schedule reservation calendar JSON path."
-        required: false
-        default: "config/youtube-publish-calendar.json"
       schedule_min_future_minutes:
         description: "For scheduled publishing: move/reuse only slots at least this many minutes in the future."
         required: false
@@ -337,8 +321,8 @@ jobs:
           PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
           SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
           SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
-          SCHEDULE_POLICY: ${{ github.event.inputs.schedule_policy }}
-          SCHEDULE_CALENDAR: ${{ github.event.inputs.schedule_calendar }}
+          SCHEDULE_POLICY: config/youtube-publish-schedule-policy.json
+          SCHEDULE_CALENDAR: config/youtube-publish-calendar.json
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
         run: |
           set -euo pipefail
@@ -483,15 +467,15 @@ jobs:
           VECTORENGINE_IMAGE_RETRIES: ${{ vars.VECTORENGINE_IMAGE_RETRIES || '3' }}
           GENERATE_THUMBNAILS: ${{ github.event.inputs.generate_thumbnails }}
           CONFIRM_THUMBNAIL_SPEND: ${{ github.event.inputs.confirm_thumbnail_spend }}
-          THUMBNAIL_CONCURRENCY: ${{ github.event.inputs.thumbnail_concurrency }}
+          THUMBNAIL_CONCURRENCY: "2"
           METADATA_GEMINI_BACKEND: ${{ github.event.inputs.metadata_gemini_backend }}
           METADATA_BATCH_SIZE: ${{ github.event.inputs.metadata_batch_size }}
           METADATA_RATE_LIMIT_MS: ${{ github.event.inputs.metadata_rate_limit_ms }}
           CONFIRM_VECTORENGINE_METADATA: ${{ github.event.inputs.confirm_vectorengine_metadata }}
           SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
           SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
-          SCHEDULE_POLICY: ${{ github.event.inputs.schedule_policy }}
-          SCHEDULE_CALENDAR: ${{ github.event.inputs.schedule_calendar }}
+          SCHEDULE_POLICY: config/youtube-publish-schedule-policy.json
+          SCHEDULE_CALENDAR: config/youtube-publish-calendar.json
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
         run: |
           set -euo pipefail
@@ -499,7 +483,7 @@ jobs:
           SUPPORT_INPUT="${{ github.event.inputs.support }}"
           LANGS_INPUT="${{ github.event.inputs.langs }}"
           CONCURRENCY="${{ github.event.inputs.concurrency }}"
-          METADATA_CONCURRENCY="${{ github.event.inputs.metadata_concurrency }}"
+          METADATA_CONCURRENCY="1"
           WORKER_COUNT="${{ github.event.inputs.worker_count }}"
           WORKER_INDEX="${{ github.event.inputs.worker_index }}"
           PRIVACY="${{ github.event.inputs.privacy }}"
