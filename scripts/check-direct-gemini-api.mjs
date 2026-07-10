@@ -5,7 +5,7 @@ import path from "node:path";
 const DEFAULT_MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash";
 const DEFAULT_OUTPUT_DIR = "outputs/tmp/direct-gemini-api-smoke";
 const DEFAULT_KEY_NAMES = ["GEMINI_API_KEY", "GEMINI_API_KEY_2"];
-const DEFAULT_TIMEOUT_MS = 25000;
+const DEFAULT_TIMEOUT_MS = 90000;
 
 function cleanText(value) {
   return String(value || "").replace(/\s+/gu, " ").trim();
@@ -102,16 +102,35 @@ function parseGeminiTextResponse(data) {
   visit(data?.steps);
   visit(data?.output);
   visit(data?.response);
+  visit(data?.candidates);
   for (const candidate of candidates) {
-    if (!candidate.includes("{")) continue;
-    const start = candidate.indexOf("{");
-    const end = candidate.lastIndexOf("}");
-    if (start === -1 || end <= start) continue;
-    const text = candidate.slice(start, end + 1);
-    JSON.parse(text);
-    return text;
+    const text = firstBalancedJsonObject(candidate);
+    if (!text) continue;
+    return JSON.parse(text);
   }
   throw new Error(`Gemini returned no parseable JSON text: ${JSON.stringify(data).slice(0, 500)}`);
+}
+
+function firstBalancedJsonObject(value) {
+  const text = String(value || "");
+  const start = text.indexOf("{");
+  if (start === -1) return "";
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  for (let index = start; index < text.length; index += 1) {
+    const char = text[index];
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (char === "\\") escaped = true;
+      else if (char === '"') inString = false;
+      continue;
+    }
+    if (char === '"') inString = true;
+    else if (char === "{") depth += 1;
+    else if (char === "}" && --depth === 0) return text.slice(start, index + 1);
+  }
+  return "";
 }
 
 async function checkKey({ keyName, apiKey, model }) {
@@ -119,16 +138,7 @@ async function checkKey({ keyName, apiKey, model }) {
   const start = Date.now();
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
-  const schema = {
-    type: "object",
-    properties: {
-      status: { type: "string" },
-      provider: { type: "string" },
-      modelFamily: { type: "string" }
-    },
-    required: ["status", "provider", "modelFamily"]
-  };
-  const url = "https://generativelanguage.googleapis.com/v1beta/interactions";
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -138,20 +148,19 @@ async function checkKey({ keyName, apiKey, model }) {
         "x-goog-api-key": apiKey,
       },
       body: JSON.stringify({
-        model,
-        input: [
-          "Return a tiny JSON health check for this direct Google Gemini API connection.",
-          'Use exactly: {"status":"ok","provider":"google","modelFamily":"gemini"}'
-        ].join("\n"),
-        generation_config: {
-          temperature: 0,
-          max_output_tokens: 1024,
-          thinking_level: "low"
-        },
-        response_format: {
-          type: "text",
-          mime_type: "application/json",
-          schema
+        contents: [{
+          role: "user",
+          parts: [{
+            text: [
+              "Return a tiny JSON health check for this direct Google Gemini API connection.",
+              'Use exactly: {"status":"ok","provider":"google","modelFamily":"gemini"}'
+            ].join("\n")
+          }]
+        }],
+        generationConfig: {
+          responseMimeType: "application/json",
+          thinkingConfig: { thinkingLevel: "minimal" },
+          maxOutputTokens: 128,
         }
       })
     });

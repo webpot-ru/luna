@@ -92,8 +92,11 @@ function chunks(items, size) {
 
 function useDirectApiBatch(args) {
   if (!args.withGemini || Math.floor(Number(args.geminiBatchSize) || 1) <= 1) return false;
-  const backend = String(args.geminiBackend || process.env.GEMINI_BACKEND || "api").trim().toLowerCase();
-  return backend === "api";
+  const backends = String(args.geminiBackend || process.env.GEMINI_BACKEND || "api")
+    .split(",")
+    .map((backend) => backend.trim().toLowerCase())
+    .filter(Boolean);
+  return backends[0] === "api" && backends.every((backend) => backend === "api" || backend === "vectorengine");
 }
 
 async function main() {

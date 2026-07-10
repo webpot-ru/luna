@@ -15,7 +15,7 @@ const databaseUrl = process.env.DATABASE_URL ?? "postgresql://lunacards:lunacard
 const defaultGeminiApiModel = process.env.GEMINI_MODEL || "gemini-3.5-flash";
 const defaultGeminiCliModel = process.env.GEMINI_CLI_MODEL || "gemini-3.1-pro-preview";
 const defaultVectorEngineGeminiModel = process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash";
-const defaultGeminiApiTimeoutMs = Number(process.env.GEMINI_API_TIMEOUT_MS || 30000);
+const defaultGeminiApiTimeoutMs = Number(process.env.GEMINI_API_TIMEOUT_MS || 120000);
 const videoLocalizationPath = path.resolve("config/video-localization.json");
 const videoLocalization = fs.existsSync(videoLocalizationPath)
   ? JSON.parse(fs.readFileSync(videoLocalizationPath, "utf8"))
@@ -604,19 +604,39 @@ function parseGeminiTextResponse(data) {
   visit(data?.steps);
   visit(data?.output);
   visit(data?.response);
+  visit(data?.candidates);
   for (const candidate of candidates) {
-    if (!candidate.includes("{")) continue;
-    const start = candidate.indexOf("{");
-    const end = candidate.lastIndexOf("}");
-    if (start === -1 || end <= start) continue;
-    const text = candidate.slice(start, end + 1);
+    const text = firstBalancedJsonObject(candidate);
+    if (!text) continue;
     JSON.parse(text);
     return text;
   }
   throw new Error(`Gemini returned no parseable JSON text: ${JSON.stringify(data).slice(0, 500)}`);
 }
 
-async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputTokens = 3200, schema = YOUTUBE_METADATA_SCHEMA } = {}) {
+function firstBalancedJsonObject(value) {
+  const text = String(value || "");
+  const start = text.indexOf("{");
+  if (start === -1) return "";
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  for (let index = start; index < text.length; index += 1) {
+    const char = text[index];
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (char === "\\") escaped = true;
+      else if (char === '"') inString = false;
+      continue;
+    }
+    if (char === '"') inString = true;
+    else if (char === "{") depth += 1;
+    else if (char === "}" && --depth === 0) return text.slice(start, index + 1);
+  }
+  return "";
+}
+
+async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputTokens = 3200 } = {}) {
   const apiKeys = configuredGeminiApiKeys();
   if (!apiKeys.length) {
     throw new Error("GEMINI_API_KEY, GEMINI_API_KEY_2 or GOOGLE_API_KEY is required for Gemini API metadata generation.");
@@ -626,7 +646,7 @@ async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputT
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), defaultGeminiApiTimeoutMs);
     try {
-      const url = "https://generativelanguage.googleapis.com/v1beta/interactions";
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
       const response = await fetch(url, {
         method: "POST",
         signal: controller.signal,
@@ -635,17 +655,11 @@ async function callGeminiApi(prompt, { model = defaultGeminiApiModel, maxOutputT
           "x-goog-api-key": apiKey.value,
         },
         body: JSON.stringify({
-          model,
-          input: prompt,
-          generation_config: {
-            temperature: 0.35,
-            max_output_tokens: maxOutputTokens,
-            thinking_level: "low"
-          },
-          response_format: {
-            type: "text",
-            mime_type: "application/json",
-            schema
+          contents: [{ role: "user", parts: [{ text: prompt }] }],
+          generationConfig: {
+            responseMimeType: "application/json",
+            thinkingConfig: { thinkingLevel: "minimal" },
+            maxOutputTokens,
           }
         })
       });
@@ -914,19 +928,21 @@ export async function generateYouTubeMetadataBatch(inputs, options = {}) {
   const backendPreference = parseGeminiBackendPreference(options.geminiBackend || process.env.GEMINI_BACKEND)
     .concat(options.geminiBackend || process.env.GEMINI_BACKEND ? [] : defaultGeminiBackendPreference());
   const backends = uniqueStrings(backendPreference);
-  if (backends.length !== 1 || backends[0] !== "api") {
-    throw new Error("Batched YouTube metadata generation supports only --gemini-backend api. Use per-target generation for cli/vectorengine.");
+  const supportsDirectBatchChain = backends[0] === "api"
+    && backends.every((backend) => backend === "api" || backend === "vectorengine");
+  if (!supportsDirectBatchChain) {
+    throw new Error("Batched YouTube metadata generation supports api or api,vectorengine. Use per-target generation for cli/vectorengine-only.");
   }
 
-  const backend = "api";
-  const model = options.model || defaultGeminiApiModel;
+  const directBackend = "api";
+  const directModel = options.model || defaultGeminiApiModel;
+  let directError;
   try {
     const prompt = buildGeminiBatchPrompt(items);
     const maxOutputTokens = Math.max(3200, Math.min(12000, items.length * 2400));
     const generated = await callGeminiApi(prompt, {
-      model,
+      model: directModel,
       maxOutputTokens,
-      schema: YOUTUBE_METADATA_BATCH_SCHEMA
     });
     const generatedItems = Array.isArray(generated?.items) ? generated.items : [];
     if (generatedItems.length !== items.length) {
@@ -947,19 +963,50 @@ export async function generateYouTubeMetadataBatch(inputs, options = {}) {
       return mergeGeneratedMetadata({
         template: item.template,
         generated: metadataFields,
-        backend,
-        model
+        backend: directBackend,
+        model: directModel
       });
     });
   } catch (error) {
-    if (isStrictAiMetadataMode() || !isRecoverableAiMetadataError(error)) {
-      throw error;
-    }
-    return items.map((item) => templateAiFallbackMetadata({
-      template: item.template,
-      backend,
-      model,
-      error
-    }));
+    directError = error;
+    console.warn(`[YOUTUBE_METADATA_AI_BACKEND_FAILED] ${directBackend}/${directModel}: ${boundedAiError(error)}`);
   }
+
+  if (backends.includes("vectorengine")) {
+    const vectorBackend = "vectorengine";
+    const vectorModel = defaultVectorEngineGeminiModel;
+    try {
+      const results = [];
+      for (const item of items) {
+        const generated = await callGeminiVectorEngine(
+          buildVectorEngineGeminiPrompt(item.template, item.cards),
+          { model: vectorModel },
+        );
+        results.push(mergeGeneratedMetadata({
+          template: item.template,
+          generated,
+          backend: vectorBackend,
+          model: vectorModel,
+        }));
+      }
+      return results;
+    } catch (error) {
+      console.warn(`[YOUTUBE_METADATA_AI_BACKEND_FAILED] ${vectorBackend}/${vectorModel}: ${boundedAiError(error)}`);
+      if (isStrictAiMetadataMode() || !isRecoverableAiMetadataError(error)) throw error;
+      return items.map((item) => templateAiFallbackMetadata({
+        template: item.template,
+        backend: vectorBackend,
+        model: vectorModel,
+        error,
+      }));
+    }
+  }
+
+  if (isStrictAiMetadataMode() || !isRecoverableAiMetadataError(directError)) throw directError;
+  return items.map((item) => templateAiFallbackMetadata({
+    template: item.template,
+    backend: directBackend,
+    model: directModel,
+    error: directError,
+  }));
 }

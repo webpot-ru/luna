@@ -48,7 +48,7 @@ function parseArgs(argv) {
     createPlaylists: true,
     allowRepublish: false,
     generateThumbnails: true,
-    metadataGeminiBackend: "api",
+    metadataGeminiBackend: "api,vectorengine",
     metadataBatchSize: 4,
     metadataRateLimitMs: 15000,
     confirmThumbnailSpend: "",
@@ -205,7 +205,7 @@ function ensureSafeOptions(options) {
     throw new Error("Thumbnail generation may spend VectorEngine credits; pass --confirm-thumbnail-spend=GENERATE_THUMBNAILS.");
   }
   const metadataBackend = String(options.metadataGeminiBackend || "").toLowerCase();
-  if (metadataBackend.includes("vectorengine") && options.confirmVectorengineMetadata !== "USE_VECTORENGINE_METADATA") {
+  if (options.apply && metadataBackend.includes("vectorengine") && options.confirmVectorengineMetadata !== "USE_VECTORENGINE_METADATA") {
     throw new Error("VectorEngine metadata requires --confirm-vectorengine-metadata=USE_VECTORENGINE_METADATA.");
   }
   if (!Number.isInteger(options.metadataBatchSize) || options.metadataBatchSize < 1 || options.metadataBatchSize > 10) {
