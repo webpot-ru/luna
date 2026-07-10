@@ -127423,6 +127423,98 @@
       "youtubeVideoId": "-SeOTOpFz1I",
       "youtubePlaylistId": "PLrRO7cv1Ua_RhlQhaI_WNFaUpK2Bmz6rY",
       "playlistItemId": "UExyUk83Y3YxVWFfUmhsUWhhSV9XTkZhVXBLMkJtejZyWS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES-419",
+      "targetLang": "SV",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "publishAt": "2026-07-13T15:30:00.000Z",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 3,
+      "slotOrdinal": 21,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_sv_es-419/youtube_metadata.json",
+      "title": "Vocabulario de Sueco: Utensilios de Cocina (A1) | 50 Palabras Básicas",
+      "playlist_key": "ES-419__SV__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-14T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-16T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-20T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-12T15:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29080254041",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29080254041",
+      "createdAt": "2026-07-10T08:41:16.418Z",
+      "updatedAt": "2026-07-10T08:41:16.418Z",
+      "youtubeVideoId": "B8ShhlKuGqw",
+      "youtubePlaylistId": "PLJJKqg-cdoak",
+      "playlistItemId": "UExKSktxZy1jZG9hay41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ES-419",
+      "targetLang": "SW",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "publishAt": "2026-07-13T18:30:00.000Z",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-07-13",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 3,
+      "slotOrdinal": 22,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_sw_es-419/youtube_metadata.json",
+      "title": "Aprender Suajili: Utensilios de cocina | Vocabulario A1 con pronunciación",
+      "playlist_key": "ES-419__SW__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-14T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-16T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-20T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-12T18:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29080254041",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29080254041",
+      "createdAt": "2026-07-10T08:41:16.433Z",
+      "updatedAt": "2026-07-10T08:41:16.433Z",
+      "youtubeVideoId": "A-YGKeRKpag",
+      "youtubePlaylistId": "PLLTbvxy59YYs",
+      "playlistItemId": "UExMVGJ2eHk1OVlZcy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
