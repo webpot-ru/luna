@@ -51,11 +51,11 @@ on:
         required: false
         default: "api"
       metadata_batch_size:
-        description: "Direct Gemini API metadata batch size per request."
+        description: "Metadata targets per direct API / VectorEngine fallback batch."
         required: false
-        default: "4"
+        default: "5"
       metadata_rate_limit_ms:
-        description: "Pause between direct Gemini metadata batches in milliseconds."
+        description: "Pause between metadata batches in milliseconds."
         required: false
         default: "15000"
       worker_count:
