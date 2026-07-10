@@ -129677,6 +129677,52 @@
       "youtubeVideoId": "SzNSiBirQc8",
       "youtubePlaylistId": "PLx5nIeqMBQ7mdOdrr6jJShjYKZeHtRhGk",
       "playlistItemId": "UEx4NW5JZXFNQlE3bWRPZHJyNmpKU2hqWUtaZUh0UmhHay4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TR",
+      "targetLang": "AZ",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "publishAt": "2026-07-10T14:30:00.000Z",
+      "timeZone": "Europe/Istanbul",
+      "localDate": "2026-07-10",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "localDayOffset": 0,
+      "slotOrdinal": 3,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_az_tr/youtube_metadata.json",
+      "title": "Azerbaycan Dili Kelimeleri: Pişirme eylemleri (Görsel ve Sesli)",
+      "playlist_key": "TR__AZ__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-11T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-13T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-17T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-09T14:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29090500471",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29090500471",
+      "createdAt": "2026-07-10T11:50:07.976Z",
+      "updatedAt": "2026-07-10T11:50:07.976Z",
+      "youtubeVideoId": "WvvBUnYLUI8",
+      "youtubePlaylistId": "PL3W-a-xbXEZlCIbUsbo6zZQb8awFcitVy",
+      "playlistItemId": "UEwzVy1hLXhiWEVabENJYlVzYm82elpRYjhhd0ZjaXRWeS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
