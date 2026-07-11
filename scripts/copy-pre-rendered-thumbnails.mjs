@@ -113,18 +113,27 @@ function sameTargetList(left, right) {
   return normalizeList(left) === normalizeList(right);
 }
 
+function metadataTargetLangsCsv(metadata) {
+  if (metadata.targetLangsCsv) return String(metadata.targetLangsCsv);
+  if (Array.isArray(metadata.targetLangs)) return metadata.targetLangs.join(",");
+  return String(metadata.targetLang || "");
+}
+
 function findCover(covers, metadata) {
   const supportLang = normalizeCode(metadata.supportLang);
   const targetLang = normalizeCode(metadata.targetLang);
+  const targetLangsCsv = metadataTargetLangsCsv(metadata);
   const setId = String(metadata.setId || "");
-  const isPolyglot = String(metadata.targetLang || "").includes(",");
+  const isPolyglot = metadata.videoType === "polyglot"
+    || Boolean(metadata.bundleKey)
+    || String(targetLangsCsv).includes(",");
   return covers.find((cover) => {
     if (setId && cover.setId && cover.setId !== setId) return false;
     if (cover.uploadEligible === false) return false;
     if (!coverSupportCodes(cover).includes(supportLang)) return false;
     if (isPolyglot || cover.videoType === "polyglot") {
       if (metadata.bundleKey && cover.bundleKey && metadata.bundleKey !== cover.bundleKey) return false;
-      return sameTargetList(metadata.targetLang, cover.targetLangsCsv || (cover.targetLangs || []).join(","));
+      return sameTargetList(targetLangsCsv, cover.targetLangsCsv || (cover.targetLangs || []).join(","));
     }
     return normalizeCode(cover.targetLang) === targetLang;
   });
@@ -168,7 +177,7 @@ function main() {
     }
 
     const supportLang = normalizeCode(metadata.supportLang);
-    const targetLang = (metadata.targetLang || "");
+    const targetLang = metadataTargetLangsCsv(metadata);
 
     const channel = findChannelForSupport(channelRegistry.channels, supportLang);
     if (!channel || channel.customThumbnailUploadAllowed !== true) {
