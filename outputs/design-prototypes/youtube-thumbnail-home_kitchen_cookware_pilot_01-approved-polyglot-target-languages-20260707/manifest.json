@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-07-07T05:39:55.952Z",
+  "generatedAt": "2026-07-11T12:51:27.511Z",
   "runId": "youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707",
-  "note": "Canonical local deterministic Polyglot thumbnail set for deck 1 approved custom-thumbnail channels. Includes full published Polyglot rows only; excludes short_unverified rows. No paid image generation and no YouTube upload.",
+  "note": "Canonical local deterministic Polyglot thumbnail set for deck 1 approved custom-thumbnail channels. Includes published covers plus approved planned cover slots. No paid image generation and no YouTube upload.",
   "scope": {
     "setId": "home_kitchen_cookware_pilot_01",
     "approvedPhysicalChannelCount": 13,
     "approvedSupportVariantCount": 16,
-    "renderedCoverCount": 46,
-    "selectionRule": "setId match + approved supportLang + youtubeVideoId + contentScope != short_unverified + not superseded",
+    "renderedCoverCount": 51,
+    "selectionRule": "setId match + approved supportLang + approved bundle/target list + contentScope=full; includes planned slots awaiting video upload",
     "visualTemplate": "polyglot-target-languages-large-lines"
   },
   "sources": {
@@ -40,15 +40,15 @@
       "es": 4,
       "ja": 4,
       "km": 3,
-      "my": 3,
+      "my": 4,
       "ne": 4,
       "pt": 4,
       "ru": 4,
-      "sr": 2,
+      "sr": 4,
       "sw": 4,
       "th": 4,
       "tr": 4,
-      "vi": 2
+      "vi": 4
     },
     "bySupportLang": {
       "EN": 2,
@@ -57,26 +57,27 @@
       "ES-419": 2,
       "JA": 4,
       "KM": 3,
-      "MY": 3,
+      "MY": 4,
       "NE": 4,
       "PT": 2,
       "PT-BR": 2,
       "RU": 4,
-      "SR": 2,
+      "SR": 4,
       "SW": 4,
       "TH": 4,
       "TR": 4,
-      "VI": 2
+      "VI": 4
     },
     "byBundleKey": {
-      "east_asia_core": 9,
-      "global_europe_core": 11,
+      "east_asia_core": 12,
+      "global_europe_core": 13,
       "romance_core": 13,
       "slavic_core": 13
     },
     "byPreviousThumbnailMode": {
       "custom": 18,
-      "first_frame_auto": 28
+      "first_frame_auto": 28,
+      "(empty)": 5
     }
   },
   "channels": [
@@ -106,7 +107,7 @@
     },
     {
       "channelKey": "my",
-      "renderedCoverCount": 3,
+      "renderedCoverCount": 4,
       "contactSheet": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/contact-sheets/my-polyglot-contact-sheet.jpg",
       "relativeContactSheet": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/contact-sheets/my-polyglot-contact-sheet.jpg"
     },
@@ -130,7 +131,7 @@
     },
     {
       "channelKey": "sr",
-      "renderedCoverCount": 2,
+      "renderedCoverCount": 4,
       "contactSheet": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/contact-sheets/sr-polyglot-contact-sheet.jpg",
       "relativeContactSheet": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/contact-sheets/sr-polyglot-contact-sheet.jpg"
     },
@@ -154,7 +155,7 @@
     },
     {
       "channelKey": "vi",
-      "renderedCoverCount": 2,
+      "renderedCoverCount": 4,
       "contactSheet": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/contact-sheets/vi-polyglot-contact-sheet.jpg",
       "relativeContactSheet": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/contact-sheets/vi-polyglot-contact-sheet.jpg"
     }
@@ -1990,6 +1991,203 @@
       "relativePath": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/vi__VI__vi/VI__slavic_core__93d499d62441__ZdEvUVPj89M__full.jpg",
       "sidecarPath": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/vi__VI__vi/VI__slavic_core__93d499d62441__ZdEvUVPj89M__full.json",
       "sizeBytes": 177609
+    },
+    {
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:VI:global_europe_core:7a4233775927",
+      "supportLang": "VI",
+      "channelKey": "vi",
+      "channelHandle": "LunaCardsTiengViet",
+      "channelFolder": "vi__VI__vi",
+      "bundleKey": "global_europe_core",
+      "registryBundleKey": "global_europe_core",
+      "bundleLabel": "Global Europe Core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "targetLanguageLines": [
+        "Tiếng Anh · Tiếng Tây Ban Nha",
+        "Tiếng Pháp · Tiếng Đức"
+      ],
+      "title": "Đồ dùng bếp cơ bản",
+      "description": "Bát đĩa và dụng cụ. Trình độ cơ bản.",
+      "module": "Nhà · Bếp",
+      "category": "Nhà · Bếp",
+      "youtubeVideoId": "",
+      "youtubeVideoUrl": "",
+      "privacyStatus": "planned",
+      "publicationStatus": "approved_cover_planned",
+      "previousThumbnailSet": false,
+      "previousThumbnailUploadMode": "",
+      "visualTemplate": "polyglot-target-languages-large-lines",
+      "uploadEligible": true,
+      "path": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/vi__VI__vi/VI__global_europe_core__7a4233775927__pending__full.jpg",
+      "relativePath": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/vi__VI__vi/VI__global_europe_core__7a4233775927__pending__full.jpg",
+      "sidecarPath": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/vi__VI__vi/VI__global_europe_core__7a4233775927__pending__full.json",
+      "sizeBytes": 225105
+    },
+    {
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:VI:east_asia_core:69af08ca98ea",
+      "supportLang": "VI",
+      "channelKey": "vi",
+      "channelHandle": "LunaCardsTiengViet",
+      "channelFolder": "vi__VI__vi",
+      "bundleKey": "east_asia_core",
+      "registryBundleKey": "east_asia_core",
+      "bundleLabel": "East Asia Core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "targetLanguageLines": [
+        "Tiếng Trung · Tiếng Nhật",
+        "Tiếng Hàn"
+      ],
+      "title": "Đồ dùng bếp cơ bản",
+      "description": "Bát đĩa và dụng cụ. Trình độ cơ bản.",
+      "module": "Nhà · Bếp",
+      "category": "Nhà · Bếp",
+      "youtubeVideoId": "",
+      "youtubeVideoUrl": "",
+      "privacyStatus": "planned",
+      "publicationStatus": "approved_cover_planned",
+      "previousThumbnailSet": false,
+      "previousThumbnailUploadMode": "",
+      "visualTemplate": "polyglot-target-languages-large-lines",
+      "uploadEligible": true,
+      "path": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/vi__VI__vi/VI__east_asia_core__69af08ca98ea__pending__full.jpg",
+      "relativePath": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/vi__VI__vi/VI__east_asia_core__69af08ca98ea__pending__full.jpg",
+      "sidecarPath": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/vi__VI__vi/VI__east_asia_core__69af08ca98ea__pending__full.json",
+      "sizeBytes": 218498
+    },
+    {
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:SR:global_europe_core:7a4233775927",
+      "supportLang": "SR",
+      "channelKey": "sr",
+      "channelHandle": "LunaCardsSrpski",
+      "channelFolder": "sr__SR__sr",
+      "bundleKey": "global_europe_core",
+      "registryBundleKey": "global_europe_core",
+      "bundleLabel": "Global Europe Core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "targetLanguageLines": [
+        "Engleski · Španski",
+        "Francuski · Nemački"
+      ],
+      "title": "Kuhinjski pribor",
+      "description": "Posuđe i pribor. Nivo za početnike.",
+      "module": "Dom · Kuhinja",
+      "category": "Dom · Kuhinja",
+      "youtubeVideoId": "",
+      "youtubeVideoUrl": "",
+      "privacyStatus": "planned",
+      "publicationStatus": "approved_cover_planned",
+      "previousThumbnailSet": false,
+      "previousThumbnailUploadMode": "",
+      "visualTemplate": "polyglot-target-languages-large-lines",
+      "uploadEligible": true,
+      "path": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/sr__SR__sr/SR__global_europe_core__7a4233775927__pending__full.jpg",
+      "relativePath": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/sr__SR__sr/SR__global_europe_core__7a4233775927__pending__full.jpg",
+      "sidecarPath": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/sr__SR__sr/SR__global_europe_core__7a4233775927__pending__full.json",
+      "sizeBytes": 218330
+    },
+    {
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:SR:east_asia_core:69af08ca98ea",
+      "supportLang": "SR",
+      "channelKey": "sr",
+      "channelHandle": "LunaCardsSrpski",
+      "channelFolder": "sr__SR__sr",
+      "bundleKey": "east_asia_core",
+      "registryBundleKey": "east_asia_core",
+      "bundleLabel": "East Asia Core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "targetLanguageLines": [
+        "Kineski · Japanski",
+        "Korejski"
+      ],
+      "title": "Kuhinjski pribor",
+      "description": "Posuđe i pribor. Nivo za početnike.",
+      "module": "Dom · Kuhinja",
+      "category": "Dom · Kuhinja",
+      "youtubeVideoId": "",
+      "youtubeVideoUrl": "",
+      "privacyStatus": "planned",
+      "publicationStatus": "approved_cover_planned",
+      "previousThumbnailSet": false,
+      "previousThumbnailUploadMode": "",
+      "visualTemplate": "polyglot-target-languages-large-lines",
+      "uploadEligible": true,
+      "path": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/sr__SR__sr/SR__east_asia_core__69af08ca98ea__pending__full.jpg",
+      "relativePath": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/sr__SR__sr/SR__east_asia_core__69af08ca98ea__pending__full.jpg",
+      "sidecarPath": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/sr__SR__sr/SR__east_asia_core__69af08ca98ea__pending__full.json",
+      "sizeBytes": 214209
+    },
+    {
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:MY:east_asia_core:69af08ca98ea",
+      "supportLang": "MY",
+      "channelKey": "my",
+      "channelHandle": "LunaCardsBurmese",
+      "channelFolder": "my__MY__my",
+      "bundleKey": "east_asia_core",
+      "registryBundleKey": "east_asia_core",
+      "bundleLabel": "East Asia Core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "targetLanguageLines": [
+        "တရုတ် · ဂျပန်",
+        "ကိုရီးယား"
+      ],
+      "title": "မီးဖိုချောင်သုံး အခြေခံပစ္စည်းများ",
+      "description": "ပန်းကန်နှင့် ကိရိယာများ။ အခြေခံအဆင့်။",
+      "module": "အိမ် · မီးဖိုချောင်",
+      "category": "အိမ် · မီးဖိုချောင်",
+      "youtubeVideoId": "",
+      "youtubeVideoUrl": "",
+      "privacyStatus": "planned",
+      "publicationStatus": "approved_cover_planned",
+      "previousThumbnailSet": false,
+      "previousThumbnailUploadMode": "",
+      "visualTemplate": "polyglot-target-languages-large-lines",
+      "uploadEligible": true,
+      "path": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/my__MY__my/MY__east_asia_core__69af08ca98ea__pending__full.jpg",
+      "relativePath": "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/my__MY__my/MY__east_asia_core__69af08ca98ea__pending__full.jpg",
+      "sidecarPath": "/Users/lali/Documents/LUNA2/outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/by-channel/my__MY__my/MY__east_asia_core__69af08ca98ea__pending__full.json",
+      "sizeBytes": 220074
     }
   ]
 }

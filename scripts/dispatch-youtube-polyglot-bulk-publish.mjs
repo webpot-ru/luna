@@ -36,7 +36,7 @@ function parseArgs(argv) {
     publishAt: "",
     createPlaylists: true,
     allowRepublish: false,
-    generateThumbnails: true,
+    generateThumbnails: false,
     confirmDispatch: "",
     confirmRender: "",
     confirmTts: "",
