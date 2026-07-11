@@ -152051,6 +152051,52 @@
       "youtubeVideoId": "TVvEHZ-Dp9c",
       "youtubePlaylistId": "PLHuoSm2mMKP8",
       "playlistItemId": "UExIdW9TbTJtTUtQOC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "LO",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "publishAt": "2026-07-12T21:30:00.000Z",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-07-12",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 1,
+      "slotOrdinal": 11,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lo_da/youtube_metadata.json",
+      "title": "Lær lao: Madlavningsverber på grundniveau (A1) | 25 ord",
+      "playlist_key": "DA__LO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-13T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-15T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-19T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-11T21:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29148392100",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29148392100",
+      "createdAt": "2026-07-11T09:52:24.159Z",
+      "updatedAt": "2026-07-11T09:52:24.159Z",
+      "youtubeVideoId": "bKkzb1wGqLA",
+      "youtubePlaylistId": "PLUJ9UOLoGr74",
+      "playlistItemId": "UExVSjlVT0xvR3I3NC4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
