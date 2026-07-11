@@ -88,9 +88,9 @@ on:
         default: true
         type: boolean
       generate_thumbnails:
-        description: "Generate VectorEngine image thumbnails where the channel allows custom thumbnails."
+        description: "Deprecated: Polyglot apply uses committed approved JPG covers; keep false."
         required: true
-        default: true
+        default: false
         type: boolean
       confirm_metadata_spend:
         description: "For apply AI metadata generation type GENERATE_POLYGLOT_METADATA."
@@ -197,8 +197,8 @@ jobs:
             echo "::error::mode=apply requires confirm_youtube_write=APPLY_POLYGLOT_YOUTUBE_UPLOAD"
             exit 1
           fi
-          if [ "$MODE" = "apply" ] && [ "$GENERATE_THUMBNAILS" = "true" ] && [ "$CONFIRM_THUMBNAIL_SPEND" != "GENERATE_THUMBNAILS" ]; then
-            echo "::error::VectorEngine image thumbnails require confirm_thumbnail_spend=GENERATE_THUMBNAILS"
+          if [ "$MODE" = "apply" ] && [ "$GENERATE_THUMBNAILS" = "true" ]; then
+            echo "::error::Polyglot apply uses committed approved JPG covers; set generate_thumbnails=false. VectorEngine thumbnails are disabled."
             exit 1
           fi
           if [ "$PRIVACY" = "public" ] && [ "$CONFIRM_PUBLIC" != "PUBLISH_PUBLIC" ] && [ "$MODE" = "apply" ]; then
@@ -405,18 +405,19 @@ jobs:
           set -euo pipefail
           npm run check:polyglot-video-duration -- outputs/video-generator --max-duration-seconds "$MAX_DURATION_SECONDS" --write-metadata --output=outputs/polyglot-video-duration-check-github.json
 
-      - name: Generate Polyglot thumbnail where allowed
-        if: ${{ github.event.inputs.mode == 'apply' && github.event.inputs.generate_thumbnails == 'true' }}
+      - name: Copy approved pre-rendered Polyglot thumbnails
+        if: ${{ github.event.inputs.mode == 'apply' }}
         shell: bash
-        env:
-          VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
-          VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
         run: |
           set -euo pipefail
-          npm run generate:youtube-thumbnails -- outputs/video-generator --confirm-spend --output=outputs/polyglot-youtube-thumbnail-generation-github.json
+          node scripts/copy-pre-rendered-thumbnails.mjs \
+            --input-dir outputs/video-generator \
+            --manifest outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/manifest.json \
+            --strict-custom \
+            --output=outputs/polyglot-pre-rendered-thumbnail-copy-github.json
 
       - name: Check Polyglot thumbnails or accepted fallback
-        if: ${{ github.event.inputs.mode == 'apply' && github.event.inputs.generate_thumbnails == 'true' }}
+        if: ${{ github.event.inputs.mode == 'apply' }}
         run: npm run check:youtube-thumbnails -- outputs/video-generator --allow-auto-first-frame --output=outputs/polyglot-youtube-thumbnail-check-github.json
 
       - name: Plan Polyglot YouTube upload
@@ -510,6 +511,7 @@ jobs:
             outputs/youtube-polyglot-upload-plan-github.json
             outputs/polyglot-youtube-metadata-check-github.json
             outputs/polyglot-video-duration-check-github.json
+            outputs/polyglot-pre-rendered-thumbnail-copy-github.json
             outputs/polyglot-youtube-thumbnail-*.json
             outputs/youtube-polyglot-publish-ledger.jsonl
             outputs/video-generator/*_polyglot_*
