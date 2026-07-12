@@ -131195,6 +131195,52 @@
       "youtubeVideoId": "Jf6EhJHzhb8",
       "youtubePlaylistId": "PL0KxNKcY3YJYVKx37Ko8G40lnr-qizwNv",
       "playlistItemId": "UEwwS3hOS2NZM1lKWVZLeDM3S284RzQwbG5yLXFpendOdi4wOTA3OTZBNzVEMTUzOTMy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "BG",
+      "targetLang": "LV",
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "publishAt": "2026-07-22T05:30:00.000Z",
+      "timeZone": "Europe/Sofia",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lv_bg/youtube_metadata.json",
+      "title": "Научете латвийски: Действия при готвене | Латвийски език за начинаещи",
+      "playlist_key": "BG__LV__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191454844",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191454844",
+      "createdAt": "2026-07-12T11:48:42.397Z",
+      "updatedAt": "2026-07-12T11:48:42.397Z",
+      "youtubeVideoId": "q_tbH_kM3QA",
+      "youtubePlaylistId": "PLErMSq4gtklI",
+      "playlistItemId": "UExFck1TcTRndGtsSS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
