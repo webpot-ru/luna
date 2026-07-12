@@ -133081,6 +133081,52 @@
       "youtubeVideoId": "64RN5MfkfW0",
       "youtubePlaylistId": "PLigXQEekIboa8UG64Dz2d1dCF37lfYiH4",
       "playlistItemId": "UExpZ1hRRWVrSWJvYThVRzY0RHoyZDFkQ0YzN2xmWWlINC4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "targetLang": "ES-419",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "publishAt": "2026-07-22T19:30:00.000Z",
+      "timeZone": "Europe/Lisbon",
+      "localDate": "2026-07-22",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 0,
+      "slotOrdinal": 4,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_es-419_pt-br/youtube_metadata.json",
+      "title": "Espanhol (América Latina): Ações de Cozinhar (Vocabulário Básico)",
+      "playlist_key": "PT-BR__ES-419__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T19:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191555727",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191555727",
+      "createdAt": "2026-07-12T11:53:44.817Z",
+      "updatedAt": "2026-07-12T11:53:44.817Z",
+      "youtubeVideoId": "MlCn1VafEPQ",
+      "youtubePlaylistId": "PLo82WO05fbhQ3zNp7zp-oU1e8ZJ_Wxal_",
+      "playlistItemId": "UExvODJXTzA1ZmJoUTN6TnA3enAtb1UxZThaSl9XeGFsXy41MjE1MkI0OTQ2QzJGNzNG"
     }
   ]
 }
