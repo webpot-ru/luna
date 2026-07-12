@@ -133357,6 +133357,52 @@
       "youtubeVideoId": "NgK84bbvByA",
       "youtubePlaylistId": "PLfsrFkxXPOGw",
       "playlistItemId": "UExmc3JGa3hYUE9Hdy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TR",
+      "targetLang": "EN-GB",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "publishAt": "2026-07-22T05:30:00.000Z",
+      "timeZone": "Europe/Istanbul",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_en-gb_tr/youtube_metadata.json",
+      "title": "İngilizce Pişirme Eylemleri Kelimeleri | A1 Başlangıç Seviyesi",
+      "playlist_key": "TR__EN-GB__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191583328",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191583328",
+      "createdAt": "2026-07-12T11:56:28.926Z",
+      "updatedAt": "2026-07-12T11:56:28.926Z",
+      "youtubeVideoId": "fFqXCcGFOto",
+      "youtubePlaylistId": "PL3W-a-xbXEZn0ouNjvyCgUNNzkMgNrwwi",
+      "playlistItemId": "UEwzVy1hLXhiWEVabjBvdU5qdnlDZ1VOTnprTWdOcnd3aS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
