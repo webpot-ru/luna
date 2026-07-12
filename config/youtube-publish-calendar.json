@@ -134185,6 +134185,52 @@
       "youtubeVideoId": "3prOZL0mTPQ",
       "youtubePlaylistId": "PLB0tS_axe0wU",
       "playlistItemId": "UExCMHRTX2F4ZTB3VS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HU",
+      "targetLang": "LV",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "publishAt": "2026-07-22T09:30:00.000Z",
+      "timeZone": "Europe/Budapest",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lv_hu/youtube_metadata.json",
+      "title": "Lett nyelvtanulás kezdőknek: Főzési műveletek (A1 szókincs)",
+      "playlist_key": "HU__LV__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T09:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192520826",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192520826",
+      "createdAt": "2026-07-12T12:24:27.570Z",
+      "updatedAt": "2026-07-12T12:24:27.570Z",
+      "youtubeVideoId": "iYbuTUIvUts",
+      "youtubePlaylistId": "PLeY-wrUz6SEg",
+      "playlistItemId": "UExlWS13clV6NlNFZy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
