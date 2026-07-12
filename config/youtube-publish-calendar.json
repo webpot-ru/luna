@@ -131839,6 +131839,52 @@
       "youtubeVideoId": "Zo_fZ4DwM6s",
       "youtubePlaylistId": "PLZfCIgJdnrpc",
       "playlistItemId": "UExaZkNJZ0pkbnJwYy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HI",
+      "targetLang": "FI",
+      "channelKey": "hi",
+      "youtubeChannelId": "UCRWc-CxGQSN_pbC42scuQHA",
+      "publishAt": "2026-07-22T03:00:00.000Z",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fi_hi/youtube_metadata.json",
+      "title": "फ़िनिश भाषा सीखें: पकाने की क्रियाएँ (बुनियादी स्तर शब्दावली)",
+      "playlist_key": "HI__FI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T03:00:00.000Z"
+        }
+      ],
+      "githubRunId": "29191507872",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191507872",
+      "createdAt": "2026-07-12T11:50:43.659Z",
+      "updatedAt": "2026-07-12T11:50:43.659Z",
+      "youtubeVideoId": "Ao6pixp2DTA",
+      "youtubePlaylistId": "PLV5-i-n5UanWi4ygXnfjHCWCvwOx6mUGo",
+      "playlistItemId": "UExWNS1pLW41VWFuV2k0eWdYbmZqSENXQ3Z3T3g2bVVHby4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
