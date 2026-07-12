@@ -133449,6 +133449,52 @@
       "youtubeVideoId": "_XOEPQooV-Q",
       "youtubePlaylistId": "PLx5nIeqMBQ7mE1hZLLpMymDEUz1ylIbzy",
       "playlistItemId": "UEx4NW5JZXFNQlE3bUUxaFpMTHBNeW1ERVV6MXlsSWJ6eS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SW",
+      "targetLang": "LO",
+      "channelKey": "sw",
+      "youtubeChannelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
+      "publishAt": "2026-07-22T05:30:00.000Z",
+      "timeZone": "Africa/Nairobi",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lo_sw/youtube_metadata.json",
+      "title": "Jifunze Kilaosi: Vitendo vya kupika | Msamiati wa Kiwango cha Msingi",
+      "playlist_key": "SW__LO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191558937",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191558937",
+      "createdAt": "2026-07-12T11:53:57.784Z",
+      "updatedAt": "2026-07-12T11:53:57.784Z",
+      "youtubeVideoId": "nGLukG6p9dw",
+      "youtubePlaylistId": "PLY_6cKtp2KI4",
+      "playlistItemId": "UExZXzZjS3RwMktJNC4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
