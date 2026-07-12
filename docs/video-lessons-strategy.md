@@ -1266,7 +1266,7 @@ polyglot:{setId}:{supportLang}:{bundleKey}:{targetsHash}
 
 The dispatcher report and GitHub artifacts are operational evidence, not the durable source of truth. Durable state is the Polyglot registry/progress/playlist files above. If a child run uploads a video but the persist job fails or is canceled, the correct recovery is artifact state recovery, not a second upload.
 
-`npm run check:youtube-polyglot-state` is the local fail-closed registry gate for Polyglot state. It verifies that active Polyglot publication rows have `videoType=polyglot`, a valid `polyglotKey`, bundle/target hash fields, `POLYGLOT__...` playlist keys, matching Polyglot playlist rows and matching progress items. Run it after state recovery and before launching a dependent bundle wave:
+`npm run check:youtube-polyglot-state` is the local fail-closed registry gate for Polyglot state. It verifies that active Polyglot publication rows have `videoType=polyglot`, a valid `polyglotKey`, bundle/target hash fields, `POLYGLOT__...` playlist keys, matching Polyglot playlist rows and matching progress items. The child persistence job must scope this gate to its exact `set + bundle + support`, so unrelated historical registry debt cannot discard a newly uploaded video. Run the unscoped gate after state-repair waves and before launching a dependent bundle wave:
 
 ```bash
 npm run check:youtube-polyglot-state -- --set=home_kitchen_cookware_pilot_01 --bundle=global_europe_core

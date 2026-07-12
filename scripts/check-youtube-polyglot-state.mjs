@@ -12,6 +12,7 @@ function parseArgs(argv) {
     progress: DEFAULT_PROGRESS,
     setId: "",
     bundle: "",
+    support: "",
     json: false,
     help: false,
   };
@@ -23,6 +24,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--progress=")) options.progress = arg.slice("--progress=".length);
     else if (arg.startsWith("--set=")) options.setId = arg.slice("--set=".length);
     else if (arg.startsWith("--bundle=")) options.bundle = arg.slice("--bundle=".length);
+    else if (arg.startsWith("--support=")) options.support = normalizeCode(arg.slice("--support=".length));
     else throw new Error(`Unknown argument: ${arg}`);
   }
   return options;
@@ -31,7 +33,7 @@ function parseArgs(argv) {
 function usage() {
   return [
     "Usage:",
-    "  node scripts/check-youtube-polyglot-state.mjs [--set=<set_id>] [--bundle=<bundle_key>]",
+    "  node scripts/check-youtube-polyglot-state.mjs [--set=<set_id>] [--bundle=<bundle_key>] [--support=<code>]",
     "",
     "Checks that Polyglot publication/progress/playlist state uses Polyglot keys",
     "and does not contain ordinary-video playlist identity.",
@@ -60,6 +62,7 @@ function isActive(row) {
 function scoped(row, options) {
   if (options.setId && row.setId && row.setId !== options.setId) return false;
   if (options.bundle && row.bundleKey !== options.bundle) return false;
+  if (options.support && normalizeCode(row.supportLang) !== options.support) return false;
   return true;
 }
 

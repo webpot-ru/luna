@@ -568,7 +568,7 @@ jobs:
           git pull --ff-only origin "$BRANCH_NAME"
           node scripts/merge-youtube-publish-state.mjs --artifact-dir=.state-artifact --summary=outputs/youtube-polyglot-state-merge-github.json
           cat outputs/youtube-polyglot-state-merge-github.json
-          node scripts/check-youtube-polyglot-state.mjs --set="${{ github.event.inputs.set_id }}" --bundle="${{ github.event.inputs.bundle }}" --json
+          node scripts/check-youtube-polyglot-state.mjs --set="${{ github.event.inputs.set_id }}" --bundle="${{ github.event.inputs.bundle }}" --support="${{ github.event.inputs.support }}" --json
 
       - name: Commit and push Polyglot publish state
         shell: bash
