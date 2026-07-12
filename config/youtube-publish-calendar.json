@@ -132989,6 +132989,52 @@
       "youtubeVideoId": "IBxI7C84ZFc",
       "youtubePlaylistId": "PLJmDpnNN4QhM",
       "playlistItemId": "UExKbURwbk5ONFFoTS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "NE",
+      "targetLang": "LO",
+      "channelKey": "ne",
+      "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+      "publishAt": "2026-07-22T02:45:00.000Z",
+      "timeZone": "Asia/Kathmandu",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lo_ne/youtube_metadata.json",
+      "title": "लाओ भाषामा पकाउने क्रियाहरू | २५ आधारभूत शब्दहरू र उच्चारण",
+      "playlist_key": "NE__LO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T02:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T02:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T02:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T02:45:00.000Z"
+        }
+      ],
+      "githubRunId": "29191532813",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191532813",
+      "createdAt": "2026-07-12T11:53:11.967Z",
+      "updatedAt": "2026-07-12T11:53:11.967Z",
+      "youtubeVideoId": "HnRcwLxamPo",
+      "youtubePlaylistId": "PLSDJ54h8Bk5g",
+      "playlistItemId": "UExTREo1NGg4Qms1Zy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
