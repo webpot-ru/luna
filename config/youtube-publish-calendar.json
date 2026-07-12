@@ -133403,6 +133403,52 @@
       "youtubeVideoId": "fFqXCcGFOto",
       "youtubePlaylistId": "PL3W-a-xbXEZn0ouNjvyCgUNNzkMgNrwwi",
       "playlistItemId": "UEwzVy1hLXhiWEVabjBvdU5qdnlDZ1VOTnprTWdOcnd3aS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "targetLang": "ET",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "publishAt": "2026-07-22T05:30:00.000Z",
+      "timeZone": "Europe/Moscow",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_et_ru/youtube_metadata.json",
+      "title": "Эстонский язык для начинающих: Действия при готовке | Учим эстонские слова",
+      "playlist_key": "RU__ET__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191567725",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191567725",
+      "createdAt": "2026-07-12T11:55:20.633Z",
+      "updatedAt": "2026-07-12T11:55:20.633Z",
+      "youtubeVideoId": "_XOEPQooV-Q",
+      "youtubePlaylistId": "PLx5nIeqMBQ7mE1hZLLpMymDEUz1ylIbzy",
+      "playlistItemId": "UEx4NW5JZXFNQlE3bUUxaFpMTHBNeW1ERVV6MXlsSWJ6eS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
