@@ -114,6 +114,8 @@ When orchestrating bulk publish waves across many channels, running `dispatch-yo
 **Operational Rule & Fallback:**
 If GitHub Actions dispatcher encounters rate limit errors, dispatch child workflows (`youtube-polyglot-video-publish.yml` or `youtube-video-publish.yml`) directly from the local terminal CLI via `gh workflow run ...` under the user's authenticated OAuth account (`lalishka`), which has a 5,000 requests/hour quota. The compute, rendering, TTS, and video upload tasks remain 100% in the cloud on GitHub Actions runners without straining the local machine.
 
+For the Polyglot bulk dispatcher, the GitHub Actions `concurrency.group` must include the immutable shard identity (`ref`, `bundle`, exact `supports`, `publish_at`). GitHub retains at most one running and one pending run per group and cancels older pending runs even when `cancel-in-progress=false`; a branch-wide group would silently drop approved shards. A cancelled dispatcher is not evidence of child render, upload or durable state. Do not relaunch it without a fresh preflight and approval.
+
 ## Branch Selection Safety (Ref Parameter)
 
 When running dispatchers locally (`dispatch-youtube-bulk-publish.mjs` or `dispatch-youtube-polyglot-bulk-publish.mjs`), they automatically attempt to detect the current local Git branch and trigger remote GitHub workflows on it (falling back to `main` only if detection fails).

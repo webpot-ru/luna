@@ -136,7 +136,8 @@ permissions:
   actions: write
 
 concurrency:
-  group: youtube-polyglot-bulk-publish-dispatcher-${{ github.ref_name }}
+  # Avoid GitHub cancelling unrelated pending shards in the same approved wave.
+  group: youtube-polyglot-bulk-publish-dispatcher-${{ github.ref_name }}-${{ inputs.bundle }}-${{ inputs.supports }}-${{ inputs.publish_at }}
   cancel-in-progress: false
 
 jobs:

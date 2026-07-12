@@ -1248,7 +1248,7 @@ Polyglot publishing must stay separate from the ordinary single-target YouTube w
 Source of truth workflows on `main`:
 
 - `.github/workflows/youtube-polyglot-video-publish.yml` - one Polyglot video for one `set_id + support + bundle`.
-- `.github/workflows/youtube-polyglot-bulk-publish-dispatcher.yml` - launches many single Polyglot child runs and watches them.
+- `.github/workflows/youtube-polyglot-bulk-publish-dispatcher.yml` - launches many single Polyglot child runs; Codex dispatch uses `--no-watch` and later does one bounded readback.
 - `.github/workflows/youtube-polyglot-playlist-insert-repair.yml` - playlist-only repair for an already uploaded Polyglot video.
 
 Do not use `.github/workflows/youtube-video-publish.yml` for Polyglot. Ordinary videos use `config/youtube-published-videos.json`; Polyglot uses separate publication ledgers:
@@ -1414,6 +1414,8 @@ playlist_retry_delay_seconds: 180
 ```
 
 Bulk apply must be used conservatively. Default `max_parallel=4` is intentional: higher values can overload GitHub Actions/API readback, TTS and YouTube quota accounting. Do not set `max_parallel=20` for Polyglot unless a previous wave completed cleanly and the run owner explicitly accepts the risk.
+
+The bulk dispatcher concurrency key includes the exact shard (`ref`, `bundle`, support list and `publish_at`). Do not change it to a branch-wide key: GitHub cancels older pending runs in the same concurrency group, so a broad key loses approved shards before any child job is created.
 
 Bulk public apply requires:
 
