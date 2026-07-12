@@ -133127,6 +133127,52 @@
       "youtubeVideoId": "MlCn1VafEPQ",
       "youtubePlaylistId": "PLo82WO05fbhQ3zNp7zp-oU1e8ZJ_Wxal_",
       "playlistItemId": "UExvODJXTzA1ZmJoUTN6TnA3enAtb1UxZThaSl9XeGFsXy41MjE1MkI0OTQ2QzJGNzNG"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "LV",
+      "targetLang": "LT",
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "publishAt": "2026-07-22T05:30:00.000Z",
+      "timeZone": "Europe/Riga",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lt_lv/youtube_metadata.json",
+      "title": "Lietuviešu valoda iesācējiem: Gatavošanas darbības (A1)",
+      "playlist_key": "LV__LT__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191549094",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191549094",
+      "createdAt": "2026-07-12T11:53:23.736Z",
+      "updatedAt": "2026-07-12T11:53:23.736Z",
+      "youtubeVideoId": "aAEDDYfmwZ4",
+      "youtubePlaylistId": "PLHDN3sunBDjU",
+      "playlistItemId": "UExIRE4zc3VuQkRqVS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
