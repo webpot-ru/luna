@@ -132437,6 +132437,52 @@
       "youtubeVideoId": "NMM6pji1eBA",
       "youtubePlaylistId": "PLDaEqYYBxsmsMXDYROvtVAwc4fhlVabz7",
       "playlistItemId": "UExEYUVxWVlCeHNtc01YRFlST3Z0VkF3YzRmaGxWYWJ6Ny4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KO",
+      "targetLang": "FI",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "publishAt": "2026-07-21T23:30:00.000Z",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fi_ko/youtube_metadata.json",
+      "title": "핀란드어 초급 단어 공부: 요리 동작 25가지 어휘와 발음 연습",
+      "playlist_key": "KO__FI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-22T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-24T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-28T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-20T23:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191542479",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191542479",
+      "createdAt": "2026-07-12T11:53:04.292Z",
+      "updatedAt": "2026-07-12T11:53:04.292Z",
+      "youtubeVideoId": "PN8U_sZg-wc",
+      "youtubePlaylistId": "PLTLLUAacNgjh7_l5s3TDdkkxXWY_J_up8",
+      "playlistItemId": "UExUTExVQWFjTmdqaDdfbDVzM1REZGtreFhXWV9KX3VwOC4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
