@@ -82,7 +82,7 @@ function usage() {
     "  --allow-playlist-create          Treat missing playlist IDs as publishable if uploader may create them.",
     "  --allow-republish                Allow an active matching Polyglot publication.",
     "  --require-ai-metadata            Block template metadata for live apply.",
-    "  --allow-auto-thumbnail-fallback  Accept YouTube auto first-frame fallback.",
+    "  --allow-auto-thumbnail-fallback  Accept YouTube auto-thumbnail fallback for full or short Polyglot uploads.",
     "  --allow-short-unverified         Allow contentScope=short_unverified on channels without custom thumbnails.",
     "  --max-duration-seconds <n>       Required duration cap for short_unverified upload planning.",
     "  --allow-missing-video            Plan metadata without a rendered video; never use for apply.",
@@ -237,8 +237,10 @@ function validateCandidate({
       if (!allowAutoThumbnailFallback) blockers.push("short_unverified upload requires --allow-auto-thumbnail-fallback");
       warnings.push(`short_unverified Polyglot uses YouTube auto thumbnail fallback and duration gate ${durationCapSeconds}s for unverified channel ${channel?.key || supportLang}`);
     } else {
-      blockers.push("Polyglot upload is blocked because customThumbnailUploadAllowed must be true. Channels without custom thumbnails may still have the 15-minute upload length limit.");
-      warnings.push("YouTube automatic thumbnail fallback is allowed for ordinary videos only, not Polyglot.");
+      if (!allowAutoThumbnailFallback) {
+        blockers.push("full Polyglot upload without custom-thumbnail permission requires --allow-auto-thumbnail-fallback");
+      }
+      warnings.push(`full Polyglot uses YouTube automatic thumbnail fallback for channel ${channel?.key || supportLang}; do not call thumbnails.set, and stop this support after a YouTube duration-limit rejection`);
     }
   }
 
