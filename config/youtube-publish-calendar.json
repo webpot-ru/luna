@@ -134047,6 +134047,52 @@
       "youtubeVideoId": "W24IPkkYHWU",
       "youtubePlaylistId": "PLczOcdGj4OpeAoVzjVyUD43zUF489ZfkR",
       "playlistItemId": "UExjek9jZEdqNE9wZUFvVnpqVnlVRDQzelVGNDg5WmZrUi41MjE1MkI0OTQ2QzJGNzNG"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "IS",
+      "targetLang": "ML",
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "publishAt": "2026-07-22T11:30:00.000Z",
+      "timeZone": "Atlantic/Reykjavik",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ml_is/youtube_metadata.json",
+      "title": "Lærðu malajalam: Eldunaraðgerðir (Grunnstig A1) | 25 mikilvæg orð",
+      "playlist_key": "IS__ML__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T11:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192529450",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192529450",
+      "createdAt": "2026-07-12T12:24:37.096Z",
+      "updatedAt": "2026-07-12T12:24:37.096Z",
+      "youtubeVideoId": "B45PBMCEEvU",
+      "youtubePlaylistId": "PLPrW-wmO5LjM",
+      "playlistItemId": "UExQclctd21PNUxqTS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
