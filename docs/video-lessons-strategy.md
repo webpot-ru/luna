@@ -1325,7 +1325,7 @@ confirm_public: PUBLISH_PUBLIC
 
 `mode=apply` spends real resources: TTS/provider usage, VectorEngine/Gemini metadata, optional VectorEngine thumbnails and YouTube Data API quota.
 
-Polyglot has a stricter channel eligibility rule than ordinary single-target videos. The parameter `customThumbnailUploadAllowed !== true` acts as a hard blocker for planning and uploading Polyglot videos. Polyglot videos do not use YouTube auto thumbnail fallback under any circumstances. This is because the lack of custom thumbnail permission indicates that the channel may not be phone-verified/advanced-feature enabled and might still be subject to the 15-minute video upload limit (while Polyglot videos often exceed 20 minutes).
+2026-07-12 user decision: `customThumbnailUploadAllowed=false` does not block a full Polyglot upload. It selects `thumbnailUploadMode=first_frame_auto` / `thumbnailSource=youtube-auto-first-frame`; no image generation and no `thumbnails.set` attempt are allowed for that channel. The workflow may still receive a YouTube duration-limit rejection for a long full video; on the first such rejection for a support channel, stop that support and report rather than retrying or sending more full videos for it.
 
 Current eligible physical support/native channels for full-scope Polyglot are only:
 - `EN`
@@ -1341,9 +1341,7 @@ Current eligible physical support/native channels for full-scope Polyglot are on
 - `MY`
 - `SR`
 
-2026-07-05 update: `SR` / `@LunaCardsSrpski` is now confirmed for custom thumbnails. `KA` / `@LunaCardsGeorgian` remains a Studio/profile readback channel but is not yet confirmed for advanced features/custom thumbnails. `KA` must stay outside the full-scope Polyglot eligible set and keep `customThumbnailUploadAllowed=false` until a successful `thumbnails.set` readback proves permission or the user explicitly confirms Studio advanced/custom-thumbnail approval.
-
-All other support channels, including `KA`, must be skipped for full-scope Polyglot until custom thumbnails are verified and `customThumbnailUploadAllowed=true` is set.
+2026-07-05 update: `SR` / `@LunaCardsSrpski` is now confirmed for custom thumbnails. `KA` / `@LunaCardsGeorgian` remains unconfirmed, so it must use automatic thumbnails; it is not excluded from full-scope Polyglot solely because of that setting.
 
 Short exception for unverified channels, accepted on 2026-06-30: unverified channels may receive a deliberately truncated Polyglot video only through `content_scope=short_unverified`. This is not a full-deck Polyglot release. It exists only to stay under YouTube's default 15-minute limit for accounts/channels that may not have advanced features. Existing long/full Polyglot rows on unverified channels do not satisfy this short-wave requirement, even if they are present in the local registry. The completed first kitchen-deck short wave covered 42 then-unverified physical support channels; after the 2026-07-05 correction, `VI`, `MY` and `SR` are eligible for future full-scope planning, while `KA` / `@LunaCardsGeorgian` remains unconfirmed for custom thumbnails. Existing short_unverified rows remain historical/current publication rows. The first kitchen-deck setting is `limit=30` words and `max_duration_seconds=895` (14:55). The workflow runs `npm run check:polyglot-video-duration` after rendering; upload is blocked if ffprobe reports a duration above the cap. Short videos use separate keys such as `polyglot:<set>:<support>:<bundle>:<hash>:short_unverified` and `POLYGLOT__<SUPPORT>__<bundle>__<hash>__short-unverified`, so a later full-deck release does not collide with the short canary. Short unverified uploads use YouTube automatic thumbnail fallback and must not call `thumbnails.set`.
 

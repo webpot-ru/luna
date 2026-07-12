@@ -415,7 +415,7 @@ async function main() {
       if (contentScope === "short_unverified") {
         warnings.push(`short_unverified Polyglot allowed for channel key ${channel.key}; upload must pass maxDurationSeconds=${maxDurationSeconds} and use YouTube auto thumbnail fallback`);
       } else {
-        blockers.push(`Polyglot is blocked for channel key ${channel.key} because customThumbnailUploadAllowed must be true because channels without custom thumbnails may still have the 15-minute upload length limit`);
+        warnings.push(`full Polyglot for channel key ${channel.key} will use YouTube automatic thumbnail fallback; do not call thumbnails.set, and stop this support after a YouTube duration-limit rejection`);
       }
     }
   }
@@ -455,7 +455,7 @@ async function main() {
     channelKey: channel?.key || "",
     youtubeChannelId: channel?.channelId || "",
     customThumbnailUploadAllowed: canUploadCustomThumbnail,
-    polyglotChannelEligibility: canUploadCustomThumbnail ? "eligible" : "blocked_until_phone_verified",
+    polyglotChannelEligibility: canUploadCustomThumbnail ? "eligible_custom_thumbnail" : "eligible_auto_thumbnail",
     deck: deckPlan,
     studyUrl,
     urlTargetLangs: urlValidation.urlTargets,
