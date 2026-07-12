@@ -131425,6 +131425,52 @@
       "youtubeVideoId": "s_iJx2V6fl4",
       "youtubePlaylistId": "PLCQEAESCXXXQ",
       "playlistItemId": "UExDUUVBRVNDWFhYUS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KA",
+      "targetLang": "LT",
+      "channelKey": "ka",
+      "youtubeChannelId": "UCpZM_1u-nTHydEJz7cnjf7w",
+      "publishAt": "2026-07-22T04:30:00.000Z",
+      "timeZone": "Asia/Tbilisi",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lt_ka/youtube_metadata.json",
+      "title": "ისწავლეთ ლიეტუვური: მომზადების მოქმედებები | საბაზისო ლექსიკა A1",
+      "playlist_key": "KA__LT__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T04:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191487473",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191487473",
+      "createdAt": "2026-07-12T11:49:48.278Z",
+      "updatedAt": "2026-07-12T11:49:48.278Z",
+      "youtubeVideoId": "pF8LuqBIQ2E",
+      "youtubePlaylistId": "PLAZRJIkuWwDw",
+      "playlistItemId": "UExBWlJKSWt1V3dEdy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
