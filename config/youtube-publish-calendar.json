@@ -131793,6 +131793,52 @@
       "youtubeVideoId": "IEi7kVg8kSM",
       "youtubePlaylistId": "PLVGfjqQr-tFg",
       "playlistItemId": "UExWR2ZqcVFyLXRGZy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "MS",
+      "targetLang": "LO",
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "publishAt": "2026-07-22T00:30:00.000Z",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lo_ms/youtube_metadata.json",
+      "title": "Belajar Bahasa Laos: Aksi memasak (Kosa Kata Asas)",
+      "playlist_key": "MS__LO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T00:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191504881",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191504881",
+      "createdAt": "2026-07-12T11:50:39.949Z",
+      "updatedAt": "2026-07-12T11:50:39.949Z",
+      "youtubeVideoId": "Zo_fZ4DwM6s",
+      "youtubePlaylistId": "PLZfCIgJdnrpc",
+      "playlistItemId": "UExaZkNJZ0pkbnJwYy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
