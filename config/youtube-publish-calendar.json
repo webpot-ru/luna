@@ -133679,6 +133679,52 @@
       "youtubeVideoId": "brqK2Sixub4",
       "youtubePlaylistId": "PLTscf85he4pg",
       "playlistItemId": "UExUc2NmODVoZTRwZy41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "BG",
+      "targetLang": "ML",
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "publishAt": "2026-07-22T08:30:00.000Z",
+      "timeZone": "Europe/Sofia",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ml_bg/youtube_metadata.json",
+      "title": "Научете малаялам: Действия при готвене | Лексика за начинаещи (А1)",
+      "playlist_key": "BG__ML__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T08:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192482980",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192482980",
+      "createdAt": "2026-07-12T12:23:23.217Z",
+      "updatedAt": "2026-07-12T12:23:23.217Z",
+      "youtubeVideoId": "DmaofKVfuUs",
+      "youtubePlaylistId": "PLaKZQRSzR_rE",
+      "playlistItemId": "UExhS1pRUlN6Ul9yRS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
