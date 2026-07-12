@@ -131655,6 +131655,52 @@
       "youtubeVideoId": "sYOM3gxjsd8",
       "youtubePlaylistId": "PLVYZCFRQxCdk",
       "playlistItemId": "UExWWVpDRlJReENkay4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "IT",
+      "targetLang": "ML",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-07-22T06:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ml_it/youtube_metadata.json",
+      "title": "Imparare il Malayalam: Azioni in cucina | Vocabolario A1",
+      "playlist_key": "IT__ML__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191476271",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191476271",
+      "createdAt": "2026-07-12T11:49:46.298Z",
+      "updatedAt": "2026-07-12T11:49:46.298Z",
+      "youtubeVideoId": "88YkpqLJVO0",
+      "youtubePlaylistId": "PLc3Jzpb5WclQ",
+      "playlistItemId": "UExjM0p6cGI1V2NsUS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
