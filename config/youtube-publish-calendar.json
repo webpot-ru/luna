@@ -135657,6 +135657,52 @@
       "youtubeVideoId": "eHmaUdBtUqE",
       "youtubePlaylistId": "PLG7AtsZCWJ9o",
       "playlistItemId": "UExHN0F0c1pDV0o5by4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SK",
+      "targetLang": "LT",
+      "channelKey": "sk",
+      "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
+      "publishAt": "2026-07-22T09:30:00.000Z",
+      "timeZone": "Europe/Bratislava",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lt_sk/youtube_metadata.json",
+      "title": "Litovčina pre začiatočníkov: Kuchynské úkony (A1 slovná zásoba)",
+      "playlist_key": "SK__LT__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T09:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192610699",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192610699",
+      "createdAt": "2026-07-12T12:30:08.402Z",
+      "updatedAt": "2026-07-12T12:30:08.402Z",
+      "youtubeVideoId": "zWgUcE4LHPc",
+      "youtubePlaylistId": "PLN_BbO-xg90Y",
+      "playlistItemId": "UExOX0JiTy14ZzkwWS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
