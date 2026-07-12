@@ -134599,6 +134599,52 @@
       "youtubeVideoId": "14sln4yu8GE",
       "youtubePlaylistId": "PLY_S-Egdjk1w",
       "playlistItemId": "UExZX1MtRWdkamsxdy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "targetLang": "ET",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "publishAt": "2026-07-22T22:30:00.000Z",
+      "timeZone": "Europe/Lisbon",
+      "localDate": "2026-07-22",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "localDayOffset": 0,
+      "slotOrdinal": 5,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_et_pt-br/youtube_metadata.json",
+      "title": "Aprender Estoniano: Ações de Cozinhar (Vocabulário Básico)",
+      "playlist_key": "PT-BR__ET__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T22:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192601777",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192601777",
+      "createdAt": "2026-07-12T12:29:07.913Z",
+      "updatedAt": "2026-07-12T12:29:07.913Z",
+      "youtubeVideoId": "Xq9VnS2a7pI",
+      "youtubePlaylistId": "PLo82WO05fbhQf3YMks72kBzRsHIpbVeAb",
+      "playlistItemId": "UExvODJXTzA1ZmJoUWYzWU1rczcya0J6UnNISXBiVmVBYi41MjE1MkI0OTQ2QzJGNzNG"
     }
   ]
 }
