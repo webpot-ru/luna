@@ -132851,6 +132851,52 @@
       "youtubeVideoId": "AoLHwV6hkGA",
       "youtubePlaylistId": "PLDdMUwUi14uw",
       "playlistItemId": "UExEZE1Vd1VpMTR1dy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "UZ",
+      "targetLang": "KO",
+      "channelKey": "uz",
+      "youtubeChannelId": "UClFSxvtwOnc_pPv2rCnT-bg",
+      "publishAt": "2026-07-22T03:30:00.000Z",
+      "timeZone": "Asia/Tashkent",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ko_uz/youtube_metadata.json",
+      "title": "Koreys tili so'z boyligi: Taom tayyorlash (Asosiy daraja)",
+      "playlist_key": "UZ__KO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T03:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191605522",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191605522",
+      "createdAt": "2026-07-12T11:57:52.433Z",
+      "updatedAt": "2026-07-12T11:57:52.433Z",
+      "youtubeVideoId": "CjOnoQlzLnI",
+      "youtubePlaylistId": "PLCjfNpQLD3G4",
+      "playlistItemId": "UExDamZOcFFMRDNHNC4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
