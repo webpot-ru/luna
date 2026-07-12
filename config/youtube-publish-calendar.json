@@ -135059,6 +135059,52 @@
       "youtubeVideoId": "pBZy_Eq9kgY",
       "youtubePlaylistId": "PLXXaNvHpBpck",
       "playlistItemId": "UExYWGFOdkhwQnBjay4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "targetLang": "FI",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "publishAt": "2026-07-22T08:30:00.000Z",
+      "timeZone": "Europe/Moscow",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fi_ru/youtube_metadata.json",
+      "title": "Финский язык для начинающих: Действия при готовке | 25 слов с произношением",
+      "playlist_key": "RU__FI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T08:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192614857",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192614857",
+      "createdAt": "2026-07-12T12:30:19.358Z",
+      "updatedAt": "2026-07-12T12:30:19.358Z",
+      "youtubeVideoId": "9COTegGEDP8",
+      "youtubePlaylistId": "PLx5nIeqMBQ7lLYf2_hLvCbe7MFvALnTZ_",
+      "playlistItemId": "UEx4NW5JZXFNQlE3bExZZjJfaEx2Q2JlN01GdkFMblRaXy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
