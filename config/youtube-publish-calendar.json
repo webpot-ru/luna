@@ -135519,6 +135519,52 @@
       "youtubeVideoId": "OicLRvHk28I",
       "youtubePlaylistId": "PLb9CkKtQIf1M",
       "playlistItemId": "UExiOUNrS3RRSWYxTS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "UZ",
+      "targetLang": "LO",
+      "channelKey": "uz",
+      "youtubeChannelId": "UClFSxvtwOnc_pPv2rCnT-bg",
+      "publishAt": "2026-07-22T06:30:00.000Z",
+      "timeZone": "Asia/Tashkent",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lo_uz/youtube_metadata.json",
+      "title": "Laos tilini o'rganish: Taom tayyorlash mavzusida 25 ta muhim so'z",
+      "playlist_key": "UZ__LO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192648907",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192648907",
+      "createdAt": "2026-07-12T12:32:09.888Z",
+      "updatedAt": "2026-07-12T12:32:09.888Z",
+      "youtubeVideoId": "VGq4TrNlLMs",
+      "youtubePlaylistId": "PLHyGgcJ_25LA",
+      "playlistItemId": "UExIeUdnY0pfMjVMQS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
