@@ -132667,6 +132667,52 @@
       "youtubeVideoId": "ZvioN9o_hGE",
       "youtubePlaylistId": "PLJKQWiNcdQcU",
       "playlistItemId": "UExKS1FXaU5jZFFjVS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "VI",
+      "targetLang": "LO",
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "publishAt": "2026-07-22T01:30:00.000Z",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lo_vi/youtube_metadata.json",
+      "title": "Từ Vựng Tiếng Lào Sơ Cấp: Động Tác Nấu Ăn (25 Từ Cơ Bản)",
+      "playlist_key": "VI__LO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T01:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191612300",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191612300",
+      "createdAt": "2026-07-12T11:58:31.558Z",
+      "updatedAt": "2026-07-12T11:58:31.558Z",
+      "youtubeVideoId": "tbLaePyvH_0",
+      "youtubePlaylistId": "PLLfugxQwmCnw",
+      "playlistItemId": "UExMZnVneFF3bUNudy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
