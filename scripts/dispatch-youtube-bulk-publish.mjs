@@ -233,16 +233,19 @@ function loadRouting(configPath) {
 
 function resolveSupports(options, routing) {
   let supports = [];
+  const supportsForProject = (project) => {
+    if (options.supportSource !== "channel-keys") return project.supportVariants || [];
+    // Physical channel keys must still dispatch their canonical native support code.
+    return (project.supportChannelKeys || []).map((key, index) => project.supportVariants?.[index] || key);
+  };
   const requested = String(options.supports || "ALL").trim();
   if (!requested || requested.toUpperCase() === "ALL") {
-    const field = options.supportSource === "channel-keys" ? "supportChannelKeys" : "supportVariants";
-    supports = routing.projects.flatMap((project) => project[field] || []);
+    supports = routing.projects.flatMap(supportsForProject);
   } else if (/^route:/iu.test(requested)) {
     const route = requested.slice("route:".length).trim();
     const project = routing.projects.find((item) => item.key === route || item.label === route);
     if (!project) throw new Error(`Unknown route selector: ${requested}`);
-    const field = options.supportSource === "channel-keys" ? "supportChannelKeys" : "supportVariants";
-    supports = project[field] || [];
+    supports = supportsForProject(project);
   } else {
     supports = splitCodes(requested);
   }
