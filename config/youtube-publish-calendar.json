@@ -135841,6 +135841,52 @@
       "youtubeVideoId": "IjOUuaqnvFs",
       "youtubePlaylistId": "PLTLLUAacNgjhPSB3NyKVBI3iwJ1A9Vrfh",
       "playlistItemId": "UExUTExVQWFjTmdqaFBTQjNOeUtWQkkzaXdKMUE5VnJmaC4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ID",
+      "targetLang": "FR",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "publishAt": "2026-07-22T04:30:00.000Z",
+      "timeZone": "Asia/Jakarta",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fr_id/youtube_metadata.json",
+      "title": "Kosakata Bahasa Prancis: Aksi memasak | Belajar Bahasa Prancis Tingkat Dasar",
+      "playlist_key": "ID__FR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T04:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192550461",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192550461",
+      "createdAt": "2026-07-12T12:26:15.812Z",
+      "updatedAt": "2026-07-12T12:26:15.812Z",
+      "youtubeVideoId": "-qP2sIdTGPw",
+      "youtubePlaylistId": "PLf6QJ7eQtIOsAtNCbGUFIHc-2NbdIrYvt",
+      "playlistItemId": "UExmNlFKN2VRdElPc0F0TkNiR1VGSUhjLTJOYmRJcll2dC4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
