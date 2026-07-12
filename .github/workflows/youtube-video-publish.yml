@@ -47,9 +47,9 @@ on:
         required: true
         default: "2"
       metadata_gemini_backend:
-        description: "Gemini metadata backend chain. Default api; VectorEngine requires confirm_vectorengine_metadata."
+        description: "Metadata backend chain. Default api,vectorengine: direct Gemini keys first, then VectorEngine; VectorEngine requires confirm_vectorengine_metadata."
         required: false
-        default: "api"
+        default: "api,vectorengine"
       metadata_batch_size:
         description: "Direct Gemini API metadata batch size per request."
         required: false
@@ -529,7 +529,7 @@ jobs:
             METADATA_ARGS+=("--targets" "$ELIGIBLE_TARGETS")
 
             GEMINI_ARGS=()
-            METADATA_BACKEND="$(echo "${METADATA_GEMINI_BACKEND:-api}" | xargs | tr '[:upper:]' '[:lower:]')"
+            METADATA_BACKEND="$(echo "${METADATA_GEMINI_BACKEND:-api,vectorengine}" | xargs | tr '[:upper:]' '[:lower:]')"
             if [ -n "$METADATA_BACKEND" ] && [ "$METADATA_BACKEND" != "none" ]; then
               case ",$METADATA_BACKEND," in
                 *,vectorengine,*)

@@ -205,6 +205,11 @@ function ensureSafeOptions(options) {
     throw new Error("Thumbnail generation may spend VectorEngine credits; pass --confirm-thumbnail-spend=GENERATE_THUMBNAILS.");
   }
   const metadataBackend = String(options.metadataGeminiBackend || "").toLowerCase();
+  if (options.apply && metadataBackend === "api") {
+    throw new Error(
+      "Live metadata dispatch must use api,vectorengine: try both direct Gemini keys first, then the confirmed VectorEngine fallback.",
+    );
+  }
   if (options.apply && metadataBackend.includes("vectorengine") && options.confirmVectorengineMetadata !== "USE_VECTORENGINE_METADATA") {
     throw new Error("VectorEngine metadata requires --confirm-vectorengine-metadata=USE_VECTORENGINE_METADATA.");
   }
