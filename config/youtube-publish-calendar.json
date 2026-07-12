@@ -133955,6 +133955,52 @@
       "youtubeVideoId": "PmIRjCRWmZE",
       "youtubePlaylistId": "PLLlZm2CRRYO4",
       "playlistItemId": "UExMbFptMkNSUllPNC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "FR",
+      "targetLang": "HI",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-07-22T09:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_hi_fr/youtube_metadata.json",
+      "title": "Vocabulaire Hindi A1 : Actions de cuisine (25 mots essentiels)",
+      "playlist_key": "FR__HI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T09:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192523753",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192523753",
+      "createdAt": "2026-07-12T12:24:35.193Z",
+      "updatedAt": "2026-07-12T12:24:35.193Z",
+      "youtubeVideoId": "Bs9IJd3WeAo",
+      "youtubePlaylistId": "PLv2OL0Ok6XoJAQBUoVO7IdUL56lW4odFr",
+      "playlistItemId": "UEx2Mk9MME9rNlhvSkFRQlVvVk83SWRVTDU2bFc0b2RGci4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
