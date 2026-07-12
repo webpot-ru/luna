@@ -131379,6 +131379,52 @@
       "youtubeVideoId": "ACgecqPecK0",
       "youtubePlaylistId": "PL0KxNKcY3YJZQH5VZH-xp-gv3clv0EUMX",
       "playlistItemId": "UEwwS3hOS2NZM1lKWlFINVZaSC14cC1ndjNjbHYwRVVNWC4wMTcyMDhGQUE4NTIzM0Y5"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "AZ",
+      "targetLang": "LT",
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "publishAt": "2026-07-22T04:30:00.000Z",
+      "timeZone": "Asia/Baku",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lt_az/youtube_metadata.json",
+      "title": "Litva dili: Bişirmə hərəkətləri | Söz ehtiyatı (Əsas səviyyə)",
+      "playlist_key": "AZ__LT__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T04:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191452070",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191452070",
+      "createdAt": "2026-07-12T11:48:53.100Z",
+      "updatedAt": "2026-07-12T11:48:53.100Z",
+      "youtubeVideoId": "s_iJx2V6fl4",
+      "youtubePlaylistId": "PLCQEAESCXXXQ",
+      "playlistItemId": "UExDUUVBRVNDWFhYUS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
