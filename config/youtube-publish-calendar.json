@@ -134277,6 +134277,52 @@
       "youtubeVideoId": "8qhx_p8CMMI",
       "youtubePlaylistId": "PLZ4kKKlSaSyk",
       "playlistItemId": "UExaNGtLS2xTYVN5ay4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KN",
+      "targetLang": "MS",
+      "channelKey": "kn",
+      "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+      "publishAt": "2026-07-22T06:00:00.000Z",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ms_kn/youtube_metadata.json",
+      "title": "ಕನ್ನಡದ ಮೂಲಕ ಮಲಯ್ ಭಾಷೆ ಕಲಿಯಿರಿ: ಅಡುಗೆ ಕ್ರಿಯೆಗಳು | ಮಲಯ್ ಪದಕೋಶ",
+      "playlist_key": "KN__MS__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T06:00:00.000Z"
+        }
+      ],
+      "githubRunId": "29192539637",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192539637",
+      "createdAt": "2026-07-12T12:25:58.380Z",
+      "updatedAt": "2026-07-12T12:25:58.380Z",
+      "youtubeVideoId": "nVMNaW9N3e4",
+      "youtubePlaylistId": "PLWPesfr0qKD4",
+      "playlistItemId": "UExXUGVzZnIwcUtENC41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
