@@ -131287,6 +131287,52 @@
       "youtubeVideoId": "PR0CukfDQMo",
       "youtubePlaylistId": "PLW4_cItpDqQI",
       "playlistItemId": "UExXNF9jSXRwRHFRSS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DE",
+      "targetLang": "FR",
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "publishAt": "2026-07-22T06:30:00.000Z",
+      "timeZone": "Europe/Berlin",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fr_de/youtube_metadata.json",
+      "title": "Französisch lernen: Kochaktionen | Wortschatz-Flashcards mit Aussprache",
+      "playlist_key": "DE__FR__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191460732",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191460732",
+      "createdAt": "2026-07-12T11:49:19.027Z",
+      "updatedAt": "2026-07-12T11:49:19.027Z",
+      "youtubeVideoId": "Y5Yq9B0fdzM",
+      "youtubePlaylistId": "PL4fX1EHX1YdDaRLgiCIXduty64sLNpRVM",
+      "playlistItemId": "UEw0ZlgxRUhYMVlkRGFSTGdpQ0lYZHV0eTY0c0xOcFJWTS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
