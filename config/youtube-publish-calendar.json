@@ -133541,6 +133541,52 @@
       "youtubeVideoId": "CC_9xrAkqO8",
       "youtubePlaylistId": "PLOgn-tNfHHtA",
       "playlistItemId": "UExPZ24tdE5mSEh0QS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "CS",
+      "targetLang": "LV",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "publishAt": "2026-07-22T09:30:00.000Z",
+      "timeZone": "Europe/Prague",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lv_cs/youtube_metadata.json",
+      "title": "Lotyština pro začátečníky: Kuchyňské úkony (slovní zásoba)",
+      "playlist_key": "CS__LV__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T09:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192485817",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192485817",
+      "createdAt": "2026-07-12T12:23:14.972Z",
+      "updatedAt": "2026-07-12T12:23:14.972Z",
+      "youtubeVideoId": "zSQboGHNWuA",
+      "youtubePlaylistId": "PLWm7ugQL-qpc",
+      "playlistItemId": "UExXbTd1Z1FMLXFwYy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
