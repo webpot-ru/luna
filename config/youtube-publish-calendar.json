@@ -131563,6 +131563,52 @@
       "youtubeVideoId": "zRTgnYA1s9A",
       "youtubePlaylistId": "PLVbPwJBRn8zo",
       "playlistItemId": "UExWYlB3SkJSbjh6by4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ET",
+      "targetLang": "LT",
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "publishAt": "2026-07-22T05:30:00.000Z",
+      "timeZone": "Europe/Tallinn",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lt_et/youtube_metadata.json",
+      "title": "Õpi leedu keelt: Köögitoimingud (A1 sõnavara ja hääldus)",
+      "playlist_key": "ET__LT__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191479174",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191479174",
+      "createdAt": "2026-07-12T11:49:41.668Z",
+      "updatedAt": "2026-07-12T11:49:41.668Z",
+      "youtubeVideoId": "m7EhZ-8lrys",
+      "youtubePlaylistId": "PLWUbQqsK1CwY",
+      "playlistItemId": "UExXVWJRcXNLMUN3WS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
