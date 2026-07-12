@@ -132621,6 +132621,52 @@
       "youtubeVideoId": "rCcsz7e8dHk",
       "youtubePlaylistId": "PLAX192TtWDYU",
       "playlistItemId": "UExBWDE5MlR0V0RZVS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TA",
+      "targetLang": "KO",
+      "channelKey": "ta",
+      "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+      "publishAt": "2026-07-22T03:00:00.000Z",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ko_ta/youtube_metadata.json",
+      "title": "கொரியன் மொழியில் சமையல் செயல்கள் | 25 சொற்கள் மற்றும் உச்சரிப்பு",
+      "playlist_key": "TA__KO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T03:00:00.000Z"
+        }
+      ],
+      "githubRunId": "29191570606",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191570606",
+      "createdAt": "2026-07-12T11:55:33.944Z",
+      "updatedAt": "2026-07-12T11:55:33.944Z",
+      "youtubeVideoId": "ZvioN9o_hGE",
+      "youtubePlaylistId": "PLJKQWiNcdQcU",
+      "playlistItemId": "UExKS1FXaU5jZFFjVS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
