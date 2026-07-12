@@ -132253,6 +132253,52 @@
       "youtubeVideoId": "6qU_nWO0M00",
       "youtubePlaylistId": "PLUxi_a_KNl0U",
       "playlistItemId": "UExVeGlfYV9LTmwwVS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RO",
+      "targetLang": "LO",
+      "channelKey": "ro",
+      "youtubeChannelId": "UCvc_hya6nn2z8Q2WzHCuBWw",
+      "publishAt": "2026-07-22T05:30:00.000Z",
+      "timeZone": "Europe/Bucharest",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lo_ro/youtube_metadata.json",
+      "title": "Limba laoțiană: Acțiuni de gătit | Vocabular A1 pentru începători",
+      "playlist_key": "RO__LO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T05:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191552437",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191552437",
+      "createdAt": "2026-07-12T11:53:31.867Z",
+      "updatedAt": "2026-07-12T11:53:31.867Z",
+      "youtubeVideoId": "fJWGUw5CYj8",
+      "youtubePlaylistId": "PLNpTiASgugXk",
+      "playlistItemId": "UExOcFRpQVNndWdYay4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
