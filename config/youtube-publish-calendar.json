@@ -131977,6 +131977,52 @@
       "youtubeVideoId": "43kCXiUW_CQ",
       "youtubePlaylistId": "PLD1cvji3WSvY",
       "playlistItemId": "UExEMWN2amkzV1N2WS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "FR",
+      "targetLang": "FI",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-07-22T06:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fi_fr/youtube_metadata.json",
+      "title": "Apprendre le finnois : 25 verbes et actions de cuisine (A1)",
+      "playlist_key": "FR__FI__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191495959",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191495959",
+      "createdAt": "2026-07-12T11:50:26.190Z",
+      "updatedAt": "2026-07-12T11:50:26.190Z",
+      "youtubeVideoId": "wrJACSuTZl0",
+      "youtubePlaylistId": "PLv2OL0Ok6XoJs6iKxHefNdDSr2ejQ-gxe",
+      "playlistItemId": "UEx2Mk9MME9rNlhvSnM2aUt4SGVmTmREU3IyZWpRLWd4ZS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
