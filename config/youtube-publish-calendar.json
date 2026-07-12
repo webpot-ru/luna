@@ -132943,6 +132943,52 @@
       "youtubeVideoId": "tKo8B5axOhs",
       "youtubePlaylistId": "PLHtsP_Slzphw",
       "playlistItemId": "UExIdHNQX1NsenBody4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "BN",
+      "targetLang": "LT",
+      "channelKey": "bn",
+      "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
+      "publishAt": "2026-07-22T02:30:00.000Z",
+      "timeZone": "Asia/Dhaka",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lt_bn/youtube_metadata.json",
+      "title": "লিথুয়ানীয় ভোকাবুলারি: রান্নার কাজ (প্রাথমিক স্তর) | FlashcardsLuna",
+      "playlist_key": "BN__LT__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T02:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191467465",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191467465",
+      "createdAt": "2026-07-12T11:49:24.262Z",
+      "updatedAt": "2026-07-12T11:49:24.262Z",
+      "youtubeVideoId": "IBxI7C84ZFc",
+      "youtubePlaylistId": "PLJmDpnNN4QhM",
+      "playlistItemId": "UExKbURwbk5ONFFoTS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
