@@ -135611,6 +135611,52 @@
       "youtubeVideoId": "gvf-4tZlQE0",
       "youtubePlaylistId": "PLigXQEekIboYL0wOYZ_Ss68GuLrRKCujO",
       "playlistItemId": "UExpZ1hRRWVrSWJvWUwwd09ZWl9TczY4R3VMclJLQ3VqTy4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TL",
+      "targetLang": "KO",
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "publishAt": "2026-07-22T03:30:00.000Z",
+      "timeZone": "Asia/Manila",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ko_tl/youtube_metadata.json",
+      "title": "Matuto ng Korean: Gawaing Pagluluto (25 Salita para sa mga Baguhan)",
+      "playlist_key": "TL__KO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T03:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192652304",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192652304",
+      "createdAt": "2026-07-12T12:32:40.710Z",
+      "updatedAt": "2026-07-12T12:32:40.710Z",
+      "youtubeVideoId": "eHmaUdBtUqE",
+      "youtubePlaylistId": "PLG7AtsZCWJ9o",
+      "playlistItemId": "UExHN0F0c1pDV0o5by4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
