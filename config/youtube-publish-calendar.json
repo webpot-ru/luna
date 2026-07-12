@@ -134323,6 +134323,52 @@
       "youtubeVideoId": "nVMNaW9N3e4",
       "youtubePlaylistId": "PLWPesfr0qKD4",
       "playlistItemId": "UExXUGVzZnIwcUtENC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ET",
+      "targetLang": "LV",
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "publishAt": "2026-07-22T08:30:00.000Z",
+      "timeZone": "Europe/Tallinn",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lv_et/youtube_metadata.json",
+      "title": "Läti keel algajatele: Köögitoimingud (A1 sõnavara)",
+      "playlist_key": "ET__LV__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T08:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192507499",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192507499",
+      "createdAt": "2026-07-12T12:24:04.648Z",
+      "updatedAt": "2026-07-12T12:24:04.648Z",
+      "youtubeVideoId": "Owpil2phQWU",
+      "youtubePlaylistId": "PLSry1AlNhdy0",
+      "playlistItemId": "UExTcnkxQWxOaGR5MC41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
