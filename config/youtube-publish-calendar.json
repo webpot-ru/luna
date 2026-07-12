@@ -132805,6 +132805,52 @@
       "youtubeVideoId": "e37v58tQB9I",
       "youtubePlaylistId": "PLFBYvLdE2ClM",
       "playlistItemId": "UExGQll2TGRFMkNsTS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SV",
+      "targetLang": "KM",
+      "channelKey": "sv",
+      "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+      "publishAt": "2026-07-22T06:30:00.000Z",
+      "timeZone": "Europe/Stockholm",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_km_sv/youtube_metadata.json",
+      "title": "Lär dig kambodjanska: Matlagningsverb för nybörjare (A1)",
+      "playlist_key": "SV__KM__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191580002",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191580002",
+      "createdAt": "2026-07-12T11:56:20.981Z",
+      "updatedAt": "2026-07-12T11:56:20.981Z",
+      "youtubeVideoId": "AoLHwV6hkGA",
+      "youtubePlaylistId": "PLDdMUwUi14uw",
+      "playlistItemId": "UExEZE1Vd1VpMTR1dy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
