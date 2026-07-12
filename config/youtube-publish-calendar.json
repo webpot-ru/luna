@@ -132483,6 +132483,52 @@
       "youtubeVideoId": "PN8U_sZg-wc",
       "youtubePlaylistId": "PLTLLUAacNgjh7_l5s3TDdkkxXWY_J_up8",
       "playlistItemId": "UExUTExVQWFjTmdqaDdfbDVzM1REZGtreFhXWV9KX3VwOC4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SR",
+      "targetLang": "KO",
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "publishAt": "2026-07-22T06:30:00.000Z",
+      "timeZone": "Europe/Belgrade",
+      "localDate": "2026-07-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ko_sr/youtube_metadata.json",
+      "title": "Korejski jezik za početnike: Kuhinjske radnje | Osnovni rečnik sa izgovorom",
+      "playlist_key": "SR__KO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29191591274",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29191591274",
+      "createdAt": "2026-07-12T11:56:42.010Z",
+      "updatedAt": "2026-07-12T11:56:42.010Z",
+      "youtubeVideoId": "35dnj3qODWE",
+      "youtubePlaylistId": "PLbHVKH_ZAWXo",
+      "playlistItemId": "UExiSFZLSF9aQVdYby4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
