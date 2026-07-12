@@ -1248,7 +1248,7 @@ Polyglot publishing must stay separate from the ordinary single-target YouTube w
 Source of truth workflows on `main`:
 
 - `.github/workflows/youtube-polyglot-video-publish.yml` - one Polyglot video for one `set_id + support + bundle`.
-- `.github/workflows/youtube-polyglot-bulk-publish-dispatcher.yml` - launches many single Polyglot child runs; Codex dispatch uses `--no-watch` and later does one bounded readback.
+- `.github/workflows/youtube-polyglot-bulk-publish-dispatcher.yml` - launches many single Polyglot child runs and always passes `--no-watch`; Codex later does one bounded readback.
 - `.github/workflows/youtube-polyglot-playlist-insert-repair.yml` - playlist-only repair for an already uploaded Polyglot video.
 
 Do not use `.github/workflows/youtube-video-publish.yml` for Polyglot. Ordinary videos use `config/youtube-published-videos.json`; Polyglot uses separate publication ledgers:

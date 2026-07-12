@@ -229,6 +229,7 @@ jobs:
             "--limit=0"
             "--privacy=$PRIVACY"
             "--publish-at=$PUBLISH_AT"
+            "--no-watch"
             "--dispatch-spacing-seconds=$DISPATCH_SPACING_SECONDS"
             "--playlist-retry-delay-seconds=$PLAYLIST_RETRY_DELAY_SECONDS"
             "--confirm-dispatch=$CONFIRM_DISPATCH"
