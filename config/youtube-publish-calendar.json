@@ -134553,6 +134553,52 @@
       "youtubeVideoId": "gPHHLbuJrHU",
       "youtubePlaylistId": "PL4fX1EHX1YdCEYrWvdXT_Y4xyXdQT1gM1",
       "playlistItemId": "UEw0ZlgxRUhYMVlkQ0VZcld2ZFhUX1k0eHlYZFFUMWdNMS4yODlGNEE0NkRGMEEzMEQy"
+    },
+    {
+      "schemaVersion": 1,
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "NO",
+      "targetLang": "LO",
+      "channelKey": "no",
+      "youtubeChannelId": "UCK2IIhxCoPUW3wI6xBPYkfA",
+      "publishAt": "2026-07-22T09:30:00.000Z",
+      "timeZone": "Europe/Oslo",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "localDayOffset": 0,
+      "slotOrdinal": 1,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_lo_no/youtube_metadata.json",
+      "title": "Lær laotisk: Matlagingsverb på laotisk (Grunnivå A1)",
+      "playlist_key": "NO__LO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T09:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29192563222",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29192563222",
+      "createdAt": "2026-07-12T12:27:42.173Z",
+      "updatedAt": "2026-07-12T12:27:42.173Z",
+      "youtubeVideoId": "14sln4yu8GE",
+      "youtubePlaylistId": "PLY_S-Egdjk1w",
+      "playlistItemId": "UExZX1MtRWdkamsxdy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
