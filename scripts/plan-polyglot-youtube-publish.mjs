@@ -15,9 +15,17 @@ import {
   isActivePublication,
   loadPublicationRegistry,
 } from "./lib/youtube-publication-registry.mjs";
+import {
+  assignmentKey,
+  isPolyglotRow,
+  polyglotSlotKey,
+  polyglotTargetSetKey,
+  resolvePolyglotBundleTargets,
+} from "./lib/youtube-publication-control.mjs";
 
 const DEFAULT_BUNDLES_PATH = "config/polyglot-video-bundles.json";
 const DEFAULT_POLYGLOT_PUBLICATION_REGISTRY_PATH = "config/youtube-polyglot-published-videos.json";
+const DEFAULT_ORDINARY_PUBLICATION_REGISTRY_PATH = "config/youtube-published-videos.json";
 const DEFAULT_POLYGLOT_PROGRESS_PATH = "config/youtube-polyglot-progress.json";
 const DEFAULT_CALENDAR_PATH = "config/youtube-publish-calendar.json";
 const DEFAULT_VIDEO_LOCALIZATION_PATH = "config/video-localization.json";
@@ -31,6 +39,7 @@ function parseArgs(argv) {
     bundleConfig: DEFAULT_BUNDLES_PATH,
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     publicationRegistry: DEFAULT_POLYGLOT_PUBLICATION_REGISTRY_PATH,
+    ordinaryPublicationRegistry: DEFAULT_ORDINARY_PUBLICATION_REGISTRY_PATH,
     progressRegistry: DEFAULT_POLYGLOT_PROGRESS_PATH,
     calendar: DEFAULT_CALENDAR_PATH,
     videoLocalization: DEFAULT_VIDEO_LOCALIZATION_PATH,
@@ -56,6 +65,7 @@ function parseArgs(argv) {
     else if (arg === "--bundle-config" || arg.startsWith("--bundle-config=")) options.bundleConfig = readValue();
     else if (arg === "--channel-config" || arg.startsWith("--channel-config=")) options.channelConfig = readValue();
     else if (arg === "--publication-registry" || arg.startsWith("--publication-registry=")) options.publicationRegistry = readValue();
+    else if (arg === "--ordinary-publication-registry" || arg.startsWith("--ordinary-publication-registry=")) options.ordinaryPublicationRegistry = readValue();
     else if (arg === "--progress-registry" || arg.startsWith("--progress-registry=")) options.progressRegistry = readValue();
     else if (arg === "--calendar" || arg.startsWith("--calendar=")) options.calendar = readValue();
     else if (arg === "--video-localization" || arg.startsWith("--video-localization=")) options.videoLocalization = readValue();
@@ -81,6 +91,7 @@ function usage() {
     "  --require-offline-deck       Require data/decks/<set_id>.json and localized Course Metadata.",
     "  --allow-republish            Do not block an active matching Polyglot publication/calendar row.",
     "  --publication-registry <file> Defaults to config/youtube-polyglot-published-videos.json.",
+    "  --ordinary-publication-registry <file> Legacy multi-target readback ledger used for canonical duplicate blocking.",
     "  --progress-registry <file>    Defaults to config/youtube-polyglot-progress.json.",
     "  --output <file>              Write full plan report.",
     "  --json                       Print compact summary.",
@@ -113,36 +124,6 @@ function buildPolyglotKey({ setId, supportLang, bundleKey, targetLangsHash }) {
 function findBundle(bundleConfig, bundleKey) {
   const key = String(bundleKey || "").trim();
   return (bundleConfig.bundles || []).find((bundle) => bundle.key === key) || null;
-}
-
-function resolveBundleTargets(bundle, supportLang) {
-  const support = normalizeLanguageCode(supportLang);
-  const desiredCount = uniqueCodes(bundle.targetLangs).length;
-  const targetLangs = [];
-  const removed = [];
-  const fallbackAdded = [];
-
-  for (const code of uniqueCodes(bundle.targetLangs)) {
-    if (code === support) {
-      removed.push(code);
-      continue;
-    }
-    targetLangs.push(code);
-  }
-
-  for (const code of uniqueCodes(bundle.fallbackLangs)) {
-    if (targetLangs.length >= desiredCount) break;
-    if (code === support || targetLangs.includes(code)) continue;
-    targetLangs.push(code);
-    fallbackAdded.push(code);
-  }
-
-  return {
-    targetLangs,
-    removedSupportTargets: removed,
-    fallbackAdded,
-    desiredCount,
-  };
 }
 
 function pickLocalizedValue(values, supportLang) {
@@ -255,11 +236,16 @@ function isActiveCalendarReservation(row) {
   return true;
 }
 
-function findActivePolyglotPublication(publicationRegistry, polyglotKey) {
-  return (publicationRegistry.publications || [])
-    .filter((row) => row.videoType === "polyglot" || String(row.polyglotKey || "").startsWith("polyglot:"))
-    .filter((row) => row.polyglotKey === polyglotKey)
-    .filter(isActivePublication)[0] || null;
+function findActivePolyglotPublication(publicationRegistries, candidate) {
+  const candidateKey = assignmentKey(candidate);
+  const candidateSlot = polyglotSlotKey(candidate);
+  const candidateTargetSet = polyglotTargetSetKey(candidate);
+  return publicationRegistries.flatMap((registry) => registry.publications || [])
+    .filter(isPolyglotRow)
+    .filter(isActivePublication)
+    .find((row) => assignmentKey(row) === candidateKey
+      || polyglotSlotKey(row) === candidateSlot
+      || polyglotTargetSetKey(row) === candidateTargetSet) || null;
 }
 
 function findActivePolyglotCalendarReservation(calendar, polyglotKey) {
@@ -328,11 +314,12 @@ async function main() {
   const baseLocalization = readJson(options.videoLocalization, {});
   const polyglotLocalization = readJson(options.polyglotLocalization, {});
   const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
+  const ordinaryPublicationRegistry = loadPublicationRegistry(options.ordinaryPublicationRegistry);
   const progressRegistry = loadProgressRegistry(options.progressRegistry);
   const calendar = loadCalendar(options.calendar);
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
 
-  const resolved = resolveBundleTargets(bundle, supportLang);
+  const resolved = resolvePolyglotBundleTargets(bundle, supportLang);
   const targetLangs = resolved.targetLangs;
   const targetLangsHash = targetHash(targetLangs);
   const polyglotKey = buildPolyglotKey({
@@ -377,7 +364,15 @@ async function main() {
   const urlValidation = validateStudyUrl(studyUrl, targetLangs);
   blockers.push(...urlValidation.blockers);
 
-  const existingPublication = findActivePolyglotPublication(publicationRegistry, polyglotKey);
+  const existingPublication = findActivePolyglotPublication([publicationRegistry, ordinaryPublicationRegistry], {
+    videoType: "polyglot",
+    polyglotKey,
+    setId: options.setId,
+    supportLang,
+    bundleKey: bundle.key,
+    targetLangs,
+    targetLangsHash,
+  });
   if (existingPublication && !options.allowRepublish) {
     blockers.push(`active Polyglot publication already exists for ${polyglotKey}: video=${existingPublication.youtubeVideoId}`);
   }

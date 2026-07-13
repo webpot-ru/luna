@@ -107,6 +107,40 @@ Do not schedule unattended automations for:
 - database migrations or Google Sheets writes;
 - cleanup/removal.
 
+## Safe YouTube Publish Protocol
+
+For ordinary or Polyglot publication, first run the read-only publication-control workflow or an equivalent authenticated four-route audit. The preflight must prove complete uploads-playlist pagination and report every live video and URL, durable ordinary/Polyglot registry coverage, calendar reservations, ordinary tails, the four required long/full Polyglot bundle tails, `contentScope`, thumbnail state, duplicate blockers and empty calendar dates before any render, TTS, metadata, image or YouTube write is approved. One Polyglot slot is `set + canonical support + bundle + contentScope`; target-hash drift inside an occupied slot is a blocker, not permission to reupload.
+
+After explicit approval, dispatch each approved batch exactly once with `--no-watch`. Do not poll child runs continuously, retry failed uploads, or launch a replacement dispatch without separate approval. Perform one bounded status/readback pass later (normally after 10-15 minutes or on the user's next check). If a run fails after render, TTS, metadata or image generation, stop and report the exact stage and artifact; do not automatically repeat paid work or reupload a possibly accepted video.
+
+Current apply invariants are enforced in code: one workflow owns one physical support channel across branches, different channels may run in parallel, `worker_count=1`, `allow_republish=false`, scheduled publication is the default, direct `publish_at` is disabled, and the uploader requires a healthy strict live-control report no older than 30 minutes. `.github/workflows/youtube-publication-control.yml` is the canonical all-route read-only answer to “what is public, scheduled, private-unscheduled, missing or duplicated”.
+
+The authenticated audit must call `videos.list(status)` for every scanned uploads-playlist ID, not only rows already matched to a registry assignment. A matched row with `uploadStatus=not_returned` is a blocker. A returned-status upload at or after the selected deck/channel audit window that cannot be classified by registry ID or course URL is also a blocker. A reviewed non-product video may be excluded only by exact YouTube ID in `config/youtube-live-audit-exclusions.json` with `status=reviewed_non_product` and a reason; title patterns and silent ignores are forbidden. All remaining unclassified IDs stay visible in the publication snapshot.
+
+The control workflow always uploads `youtube-publication-snapshot.json` plus a compact Markdown map. Its optional `persist_snapshot=true` job commits only `config/youtube-publication-snapshot.json` and `docs/youtube-publication-map.md` to the selected branch after the four-route audit; it performs no YouTube, metadata, render, TTS or image write. Keep the default `false` for a strictly read-only audit. A persisted snapshot is historical inventory, never an apply token: live upload still requires a new per-support strict report with `videos.list`, `paginationComplete=true`, no duplicate/registry/calendar blockers and age below 30 minutes.
+
+Use `npm run reconcile:youtube-calendar-snapshot` to compare a complete persisted snapshot with `config/youtube-publish-calendar.json`. It is dry-run by default. `--apply` changes only the local calendar file and must skip every live duplicate group, ambiguous assignment, different-video assignment and occupied physical-channel slot. After apply, rebuild the route reports from the same audit artifacts and require zero assignment duplicates and slot collisions. This command never changes a YouTube schedule; any remote reschedule remains a separately approved YouTube write.
+
+Custom cover preparation is also separate from publish apply. `.github/workflows/youtube-cover-assets-build.yml` and `npm run build:youtube-cover-assets` render deterministic overlays from the approved tracked bases and upload/build files only; they do not call Imagine, VectorEngine, Gemini image or YouTube. Apply may copy only exact JPGs present in `config/youtube-cover-assets.json` whose files are tracked by Git. A channel with `customThumbnailUploadAllowed=false` remains untouched; `true` permits a reviewed committed asset but is not permission to upload it without the normal YouTube-write approval.
+
+The ordinary bulk dispatcher always sends `generate_thumbnails=false`; runtime image generation is forbidden. A combined cover manifest must be filtered by the cover row's own `setId` before any thumbnail plan/apply, so Deck #1 and Deck #2 assets cannot be cross-assigned.
+
+Playlist registry recovery from the publication snapshot is local-only. `npm run reconcile:youtube-playlist-registry-snapshot` is dry-run by default; `--apply` may add only exact `support + target` rows backed by live ordinary video IDs, with blank `youtube_playlist_id`, status `planned_registry_from_live_snapshot` and `needsPlaylistDiscovery=true`. A blank ID never authorizes `playlists.insert`: first perform route-authenticated read-only playlist discovery and reconcile any existing playlist. `scripts/youtube-upload-playlist-images.mjs` may resolve a later-discovered durable ID, but fails on manifest/registry ID disagreement and refuses apply unless the exact cover file is tracked by Git. Playlist-image apply is a separately approved YouTube write and must use the channel's route OAuth; do not combine discovery, playlist creation and image upload into one blind recovery step.
+
+## GitHub API Rate Limits and Direct CLI Dispatch
+
+When orchestrating bulk publish waves across many channels, running `dispatch-youtube-bulk-publish.mjs` inside a GitHub Actions workflow can hit `HTTP 403: API rate limit exceeded for installation` because the runner's `GITHUB_TOKEN` is capped at 1,000 requests/hour for GitHub Apps/installations.
+
+**Operational Rule & Fallback:**
+If GitHub Actions dispatcher encounters rate limit errors, dispatch child workflows (`youtube-polyglot-video-publish.yml` or `youtube-video-publish.yml`) directly from the local terminal CLI via `gh workflow run ...` under the user's authenticated OAuth account (`lalishka`), which has a 5,000 requests/hour quota. The compute, rendering, TTS, and video upload tasks remain 100% in the cloud on GitHub Actions runners without straining the local machine.
+
+## Branch Selection Safety (Ref Parameter)
+
+When running dispatchers locally (`dispatch-youtube-bulk-publish.mjs` or `dispatch-youtube-polyglot-bulk-publish.mjs`), they automatically attempt to detect the current local Git branch and trigger remote GitHub workflows on it (falling back to `main` only if detection fails).
+
+**Operational Rule:**
+Always verify that the target branch in the console output is correct before confirming bulk operations. To force a specific branch target, pass the `--ref=<branch-name>` parameter explicitly. This prevents child workflows from executing on `main` using stale configurations or scripts before development branch changes are merged.
+
 ## Codex Access Tokens
 
 Do not introduce Codex access tokens into this repository by default. They are for trusted non-interactive Codex local workflows in supported ChatGPT Business/Enterprise workspaces. If they are needed later, store them only in a secret manager or local ignored file, never in Git, docs, logs, or generated artifacts.

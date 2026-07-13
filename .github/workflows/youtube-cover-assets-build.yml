@@ -1,0 +1,78 @@
+name: YouTube Cover Assets Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      set_ids:
+        description: "Comma-separated deck set IDs."
+        required: true
+        default: "home_kitchen_cookware_pilot_01,home_kitchen_cooking_actions_a1_a2"
+      supports:
+        description: "Comma-separated confirmed custom-thumbnail support channels."
+        required: true
+        default: "UZ,SI,KA"
+      types:
+        description: "Video cover types: ordinary,polyglot."
+        required: true
+        default: "ordinary,polyglot"
+      include_playlist:
+        description: "Also build square playlist covers on a macOS runner. No YouTube writes."
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  video-covers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci || npm install
+      - name: Install Unicode fonts for deterministic overlays
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-core fonts-noto-extra
+      - name: Build video cover artifacts without external image providers
+        env:
+          SET_IDS: ${{ github.event.inputs.set_ids }}
+          SUPPORTS: ${{ github.event.inputs.supports }}
+          TYPES: ${{ github.event.inputs.types }}
+        run: |
+          node scripts/build-youtube-cover-assets.mjs \
+            --set="$SET_IDS" \
+            --support="$SUPPORTS" \
+            --types="$TYPES" \
+            --output-root=outputs/youtube-cover-assets-github \
+            --json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: youtube-video-cover-assets-${{ github.run_id }}
+          retention-days: 14
+          path: outputs/youtube-cover-assets-github
+
+  playlist-covers:
+    if: ${{ github.event.inputs.include_playlist == 'true' }}
+    runs-on: macos-14
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build playlist cover artifacts with CoreText
+        env:
+          SUPPORTS: ${{ github.event.inputs.supports }}
+        run: |
+          swift scripts/generate-youtube-playlist-covers.swift \
+            --base assets/youtube-cover-templates/playlist-universal-approved-base.jpg \
+            --output outputs/youtube-playlist-cover-assets-github \
+            --supports "$SUPPORTS" \
+            --created-only
+      - uses: actions/upload-artifact@v4
+        with:
+          name: youtube-playlist-cover-assets-${{ github.run_id }}
+          retention-days: 14
+          path: outputs/youtube-playlist-cover-assets-github

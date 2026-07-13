@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "sourceOfTruth": "docs/video-lessons-strategy.md#publication-schedule-and-global-calendar",
+  "purpose": "Exact reviewed non-product channel uploads that may be excluded from current-set duplicate blocking without hiding them from inventory.",
+  "policy": {
+    "exactVideoIdOnly": true,
+    "allowedStatus": "reviewed_non_product",
+    "requiresReason": true
+  },
+  "entries": []
+}
