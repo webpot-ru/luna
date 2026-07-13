@@ -2,7 +2,9 @@
   "schemaVersion": 1,
   "operation": "reschedule",
   "setId": "home_kitchen_cooking_actions_a1_a2",
-  "reason": "Repair the July 16-20 scheduling gap using the exact future private video status readback. Targets are existing uploads only; do not render, upload, or alter thumbnails.",
+  "reason": "Repair the scheduled-publication gap using exact future private video status readback. Targets are existing uploads only; do not render, upload, or alter thumbnails.",
+  "plannedAt": "2026-07-13T01:59:04.101Z",
+  "minimumFutureMinutes": 90,
   "sourceAuditRuns": [
     29217422305,
     29217430352,
@@ -63,6 +65,12 @@
     "VI": 2,
     "ZH": 2
   },
+  "byLocalDate": {
+    "2026-07-13": 91,
+    "2026-07-14": 13,
+    "2026-07-15": 5,
+    "2026-07-16": 5
+  },
   "targets": [
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -72,9 +80,9 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "youtubeVideoId": "s_iJx2V6fl4",
       "originalPublishAt": "2026-07-22T04:30:00Z",
-      "nextPublishAt": "2026-07-16T04:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T07:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Asia/Baku"
     },
     {
@@ -85,9 +93,9 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "youtubeVideoId": "PmIRjCRWmZE",
       "originalPublishAt": "2026-07-22T07:30:00Z",
-      "nextPublishAt": "2026-07-16T07:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T10:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Baku"
     },
     {
@@ -98,9 +106,9 @@
       "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
       "youtubeVideoId": "q_tbH_kM3QA",
       "originalPublishAt": "2026-07-22T05:30:00Z",
-      "nextPublishAt": "2026-07-16T05:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T11:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Europe/Sofia"
     },
     {
@@ -111,9 +119,9 @@
       "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
       "youtubeVideoId": "DmaofKVfuUs",
       "originalPublishAt": "2026-07-22T08:30:00Z",
-      "nextPublishAt": "2026-07-16T08:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T14:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Europe/Sofia"
     },
     {
@@ -124,9 +132,9 @@
       "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
       "youtubeVideoId": "IBxI7C84ZFc",
       "originalPublishAt": "2026-07-22T02:30:00Z",
-      "nextPublishAt": "2026-07-16T02:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T08:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Dhaka"
     },
     {
@@ -137,9 +145,9 @@
       "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
       "youtubeVideoId": "brqK2Sixub4",
       "originalPublishAt": "2026-07-22T05:30:00Z",
-      "nextPublishAt": "2026-07-16T05:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T11:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Asia/Dhaka"
     },
     {
@@ -150,8 +158,8 @@
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "youtubeVideoId": "PR0CukfDQMo",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "08:30",
       "timeZone": "Europe/Prague"
     },
@@ -163,8 +171,8 @@
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "youtubeVideoId": "zSQboGHNWuA",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T09:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "11:30",
       "timeZone": "Europe/Prague"
     },
@@ -176,8 +184,8 @@
       "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
       "youtubeVideoId": "PUjN9VVHO4w",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "08:30",
       "timeZone": "Europe/Copenhagen"
     },
@@ -189,8 +197,8 @@
       "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
       "youtubeVideoId": "Pcp6GBXpwzU",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T09:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "11:30",
       "timeZone": "Europe/Copenhagen"
     },
@@ -202,8 +210,8 @@
       "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
       "youtubeVideoId": "Y5Yq9B0fdzM",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "08:30",
       "timeZone": "Europe/Berlin"
     },
@@ -215,8 +223,8 @@
       "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
       "youtubeVideoId": "gPHHLbuJrHU",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T09:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "11:30",
       "timeZone": "Europe/Berlin"
     },
@@ -228,9 +236,9 @@
       "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
       "youtubeVideoId": "yIWYo4WZhKM",
       "originalPublishAt": "2026-07-22T12:30:00Z",
-      "nextPublishAt": "2026-07-16T12:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T18:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "America/New_York"
     },
     {
@@ -241,9 +249,9 @@
       "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
       "youtubeVideoId": "TsgEMHTUqRw",
       "originalPublishAt": "2026-07-22T15:30:00Z",
-      "nextPublishAt": "2026-07-16T15:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T21:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "America/New_York"
     },
     {
@@ -254,9 +262,9 @@
       "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
       "youtubeVideoId": "abuHXLvMBW8",
       "originalPublishAt": "2026-07-22T18:30:00Z",
-      "nextPublishAt": "2026-07-16T18:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "14:30",
+      "nextPublishAt": "2026-07-14T00:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "20:30",
       "timeZone": "America/New_York"
     },
     {
@@ -267,9 +275,9 @@
       "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
       "youtubeVideoId": "Jf6EhJHzhb8",
       "originalPublishAt": "2026-07-22T21:30:00Z",
-      "nextPublishAt": "2026-07-16T21:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "17:30",
+      "nextPublishAt": "2026-07-14T03:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "23:30",
       "timeZone": "America/New_York"
     },
     {
@@ -280,9 +288,9 @@
       "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
       "youtubeVideoId": "ACgecqPecK0",
       "originalPublishAt": "2026-07-23T00:30:00Z",
-      "nextPublishAt": "2026-07-17T00:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "20:30",
+      "nextPublishAt": "2026-07-14T12:30:00.000Z",
+      "localDate": "2026-07-14",
+      "localTime": "08:30",
       "timeZone": "America/New_York"
     },
     {
@@ -293,9 +301,9 @@
       "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
       "youtubeVideoId": "IV8GH7OPOww",
       "originalPublishAt": "2026-07-23T03:30:00Z",
-      "nextPublishAt": "2026-07-17T03:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "23:30",
+      "nextPublishAt": "2026-07-14T15:30:00.000Z",
+      "localDate": "2026-07-14",
+      "localTime": "11:30",
       "timeZone": "America/New_York"
     },
     {
@@ -306,9 +314,9 @@
       "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
       "youtubeVideoId": "W-2OjyIEOxk",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-15T21:30:00.000Z",
+      "localDate": "2026-07-15",
+      "localTime": "23:30",
       "timeZone": "Europe/Madrid"
     },
     {
@@ -319,9 +327,9 @@
       "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
       "youtubeVideoId": "X6CcvRzjn_E",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
+      "nextPublishAt": "2026-07-16T06:30:00.000Z",
       "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "localTime": "08:30",
       "timeZone": "Europe/Madrid"
     },
     {
@@ -332,9 +340,9 @@
       "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
       "youtubeVideoId": "o6hLAvBe0dI",
       "originalPublishAt": "2026-07-22T12:30:00Z",
-      "nextPublishAt": "2026-07-16T12:30:00.000Z",
+      "nextPublishAt": "2026-07-16T09:30:00.000Z",
       "localDate": "2026-07-16",
-      "localTime": "14:30",
+      "localTime": "11:30",
       "timeZone": "Europe/Madrid"
     },
     {
@@ -345,9 +353,9 @@
       "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
       "youtubeVideoId": "zGQGti-vSzM",
       "originalPublishAt": "2026-07-22T15:30:00Z",
-      "nextPublishAt": "2026-07-16T15:30:00.000Z",
+      "nextPublishAt": "2026-07-16T12:30:00.000Z",
       "localDate": "2026-07-16",
-      "localTime": "17:30",
+      "localTime": "14:30",
       "timeZone": "Europe/Madrid"
     },
     {
@@ -358,9 +366,9 @@
       "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
       "youtubeVideoId": "gzGDC6zdTYo",
       "originalPublishAt": "2026-07-22T18:30:00Z",
-      "nextPublishAt": "2026-07-16T18:30:00.000Z",
+      "nextPublishAt": "2026-07-16T15:30:00.000Z",
       "localDate": "2026-07-16",
-      "localTime": "20:30",
+      "localTime": "17:30",
       "timeZone": "Europe/Madrid"
     },
     {
@@ -371,9 +379,9 @@
       "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
       "youtubeVideoId": "W24IPkkYHWU",
       "originalPublishAt": "2026-07-22T21:30:00Z",
-      "nextPublishAt": "2026-07-16T21:30:00.000Z",
+      "nextPublishAt": "2026-07-16T18:30:00.000Z",
       "localDate": "2026-07-16",
-      "localTime": "23:30",
+      "localTime": "20:30",
       "timeZone": "Europe/Madrid"
     },
     {
@@ -384,9 +392,9 @@
       "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
       "youtubeVideoId": "m7EhZ-8lrys",
       "originalPublishAt": "2026-07-22T05:30:00Z",
-      "nextPublishAt": "2026-07-16T05:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T08:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Europe/Tallinn"
     },
     {
@@ -397,9 +405,9 @@
       "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
       "youtubeVideoId": "Owpil2phQWU",
       "originalPublishAt": "2026-07-22T08:30:00Z",
-      "nextPublishAt": "2026-07-16T08:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T11:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Europe/Tallinn"
     },
     {
@@ -410,9 +418,9 @@
       "youtubeChannelId": "UCZkiQ6y2W8aCUuaiP3N665A",
       "youtubeVideoId": "4Peht4DCT8A",
       "originalPublishAt": "2026-07-22T05:30:00Z",
-      "nextPublishAt": "2026-07-16T05:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T08:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Europe/Helsinki"
     },
     {
@@ -423,9 +431,9 @@
       "youtubeChannelId": "UCZkiQ6y2W8aCUuaiP3N665A",
       "youtubeVideoId": "tqntejmknfM",
       "originalPublishAt": "2026-07-22T08:30:00Z",
-      "nextPublishAt": "2026-07-16T08:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T11:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Europe/Helsinki"
     },
     {
@@ -436,8 +444,8 @@
       "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
       "youtubeVideoId": "wrJACSuTZl0",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "08:30",
       "timeZone": "Europe/Paris"
     },
@@ -449,8 +457,8 @@
       "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
       "youtubeVideoId": "Bs9IJd3WeAo",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T09:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "11:30",
       "timeZone": "Europe/Paris"
     },
@@ -462,9 +470,9 @@
       "youtubeChannelId": "UCRWc-CxGQSN_pbC42scuQHA",
       "youtubeVideoId": "Ao6pixp2DTA",
       "originalPublishAt": "2026-07-22T03:00:00Z",
-      "nextPublishAt": "2026-07-16T03:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T06:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Asia/Kolkata"
     },
     {
@@ -475,9 +483,9 @@
       "youtubeChannelId": "UCRWc-CxGQSN_pbC42scuQHA",
       "youtubeVideoId": "92kZl5m1y1o",
       "originalPublishAt": "2026-07-22T06:00:00Z",
-      "nextPublishAt": "2026-07-16T06:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T09:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Kolkata"
     },
     {
@@ -488,9 +496,9 @@
       "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
       "youtubeVideoId": "IEi7kVg8kSM",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T12:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Europe/Zagreb"
     },
     {
@@ -501,9 +509,9 @@
       "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
       "youtubeVideoId": "f3jokPBrvxg",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T15:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Europe/Zagreb"
     },
     {
@@ -514,8 +522,8 @@
       "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
       "youtubeVideoId": "sYOM3gxjsd8",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "08:30",
       "timeZone": "Europe/Budapest"
     },
@@ -527,8 +535,8 @@
       "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
       "youtubeVideoId": "iYbuTUIvUts",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T09:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "11:30",
       "timeZone": "Europe/Budapest"
     },
@@ -540,9 +548,9 @@
       "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
       "youtubeVideoId": "e37v58tQB9I",
       "originalPublishAt": "2026-07-22T04:30:00Z",
-      "nextPublishAt": "2026-07-16T04:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T10:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Yerevan"
     },
     {
@@ -553,9 +561,9 @@
       "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
       "youtubeVideoId": "LSPnSpNNjJo",
       "originalPublishAt": "2026-07-22T07:30:00Z",
-      "nextPublishAt": "2026-07-16T07:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T13:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Asia/Yerevan"
     },
     {
@@ -566,9 +574,9 @@
       "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
       "youtubeVideoId": "0GfaVqA4pfg",
       "originalPublishAt": "2026-07-22T01:30:00Z",
-      "nextPublishAt": "2026-07-16T01:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T04:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Asia/Jakarta"
     },
     {
@@ -579,9 +587,9 @@
       "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
       "youtubeVideoId": "-qP2sIdTGPw",
       "originalPublishAt": "2026-07-22T04:30:00Z",
-      "nextPublishAt": "2026-07-16T04:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T07:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Jakarta"
     },
     {
@@ -592,9 +600,9 @@
       "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
       "youtubeVideoId": "6qU_nWO0M00",
       "originalPublishAt": "2026-07-22T08:30:00Z",
-      "nextPublishAt": "2026-07-16T08:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T11:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Atlantic/Reykjavik"
     },
     {
@@ -605,9 +613,9 @@
       "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
       "youtubeVideoId": "B45PBMCEEvU",
       "originalPublishAt": "2026-07-22T11:30:00Z",
-      "nextPublishAt": "2026-07-16T11:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T14:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Atlantic/Reykjavik"
     },
     {
@@ -618,9 +626,9 @@
       "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
       "youtubeVideoId": "88YkpqLJVO0",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T12:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Europe/Rome"
     },
     {
@@ -631,9 +639,9 @@
       "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
       "youtubeVideoId": "esj5rdUn8SA",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T15:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Europe/Rome"
     },
     {
@@ -644,9 +652,9 @@
       "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
       "youtubeVideoId": "NMM6pji1eBA",
       "originalPublishAt": "2026-07-21T23:30:00Z",
-      "nextPublishAt": "2026-07-15T23:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T05:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Tokyo"
     },
     {
@@ -657,9 +665,9 @@
       "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
       "youtubeVideoId": "axQoUHq9RmE",
       "originalPublishAt": "2026-07-22T02:30:00Z",
-      "nextPublishAt": "2026-07-16T02:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T08:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Asia/Tokyo"
     },
     {
@@ -670,9 +678,9 @@
       "youtubeChannelId": "UCpZM_1u-nTHydEJz7cnjf7w",
       "youtubeVideoId": "pF8LuqBIQ2E",
       "originalPublishAt": "2026-07-22T04:30:00Z",
-      "nextPublishAt": "2026-07-16T04:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T07:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Asia/Tbilisi"
     },
     {
@@ -683,9 +691,9 @@
       "youtubeChannelId": "UCpZM_1u-nTHydEJz7cnjf7w",
       "youtubeVideoId": "PXacnmUEURE",
       "originalPublishAt": "2026-07-22T07:30:00Z",
-      "nextPublishAt": "2026-07-16T07:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T10:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Tbilisi"
     },
     {
@@ -696,9 +704,9 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "youtubeVideoId": "zRTgnYA1s9A",
       "originalPublishAt": "2026-07-22T03:30:00Z",
-      "nextPublishAt": "2026-07-16T03:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Asia/Almaty"
     },
     {
@@ -709,9 +717,9 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "youtubeVideoId": "8qhx_p8CMMI",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T09:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Almaty"
     },
     {
@@ -722,9 +730,9 @@
       "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
       "youtubeVideoId": "tKo8B5axOhs",
       "originalPublishAt": "2026-07-22T01:30:00Z",
-      "nextPublishAt": "2026-07-16T01:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T07:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Phnom_Penh"
     },
     {
@@ -735,9 +743,9 @@
       "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
       "youtubeVideoId": "BegUAk4UZBM",
       "originalPublishAt": "2026-07-22T04:30:00Z",
-      "nextPublishAt": "2026-07-16T04:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T10:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Asia/Phnom_Penh"
     },
     {
@@ -748,9 +756,9 @@
       "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
       "youtubeVideoId": "u6VrkLfFbSI",
       "originalPublishAt": "2026-07-22T03:00:00Z",
-      "nextPublishAt": "2026-07-16T03:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T15:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "20:30",
       "timeZone": "Asia/Kolkata"
     },
     {
@@ -761,9 +769,9 @@
       "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
       "youtubeVideoId": "nVMNaW9N3e4",
       "originalPublishAt": "2026-07-22T06:00:00Z",
-      "nextPublishAt": "2026-07-16T06:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T18:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "23:30",
       "timeZone": "Asia/Kolkata"
     },
     {
@@ -774,9 +782,9 @@
       "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
       "youtubeVideoId": "PN8U_sZg-wc",
       "originalPublishAt": "2026-07-21T23:30:00Z",
-      "nextPublishAt": "2026-07-15T23:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T05:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Seoul"
     },
     {
@@ -787,9 +795,9 @@
       "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
       "youtubeVideoId": "IjOUuaqnvFs",
       "originalPublishAt": "2026-07-22T02:30:00Z",
-      "nextPublishAt": "2026-07-16T02:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T08:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Asia/Seoul"
     },
     {
@@ -800,9 +808,9 @@
       "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
       "youtubeVideoId": "43kCXiUW_CQ",
       "originalPublishAt": "2026-07-22T01:30:00Z",
-      "nextPublishAt": "2026-07-16T01:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T04:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Asia/Vientiane"
     },
     {
@@ -813,9 +821,9 @@
       "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
       "youtubeVideoId": "5Vs-NCYFJcg",
       "originalPublishAt": "2026-07-22T04:30:00Z",
-      "nextPublishAt": "2026-07-16T04:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T07:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Vientiane"
     },
     {
@@ -826,8 +834,8 @@
       "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
       "youtubeVideoId": "H8h8x_BfH94",
       "originalPublishAt": "2026-07-22T05:30:00Z",
-      "nextPublishAt": "2026-07-16T05:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T05:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "08:30",
       "timeZone": "Europe/Vilnius"
     },
@@ -839,8 +847,8 @@
       "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
       "youtubeVideoId": "owV6F7G-ZdY",
       "originalPublishAt": "2026-07-22T08:30:00Z",
-      "nextPublishAt": "2026-07-16T08:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T08:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "11:30",
       "timeZone": "Europe/Vilnius"
     },
@@ -852,9 +860,9 @@
       "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
       "youtubeVideoId": "aAEDDYfmwZ4",
       "originalPublishAt": "2026-07-22T05:30:00Z",
-      "nextPublishAt": "2026-07-16T05:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T11:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Europe/Riga"
     },
     {
@@ -865,9 +873,9 @@
       "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
       "youtubeVideoId": "Lv7Yy6tt0Zo",
       "originalPublishAt": "2026-07-22T08:30:00Z",
-      "nextPublishAt": "2026-07-16T08:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T14:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Europe/Riga"
     },
     {
@@ -878,9 +886,9 @@
       "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
       "youtubeVideoId": "amEIZ9RwnJY",
       "originalPublishAt": "2026-07-22T03:00:00Z",
-      "nextPublishAt": "2026-07-16T03:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T15:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "20:30",
       "timeZone": "Asia/Kolkata"
     },
     {
@@ -891,9 +899,9 @@
       "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
       "youtubeVideoId": "2o0YvAS-dMo",
       "originalPublishAt": "2026-07-22T06:00:00Z",
-      "nextPublishAt": "2026-07-16T06:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T18:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "23:30",
       "timeZone": "Asia/Kolkata"
     },
     {
@@ -904,9 +912,9 @@
       "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
       "youtubeVideoId": "Zo_fZ4DwM6s",
       "originalPublishAt": "2026-07-22T00:30:00Z",
-      "nextPublishAt": "2026-07-16T00:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Kuala_Lumpur"
     },
     {
@@ -917,9 +925,9 @@
       "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
       "youtubeVideoId": "3prOZL0mTPQ",
       "originalPublishAt": "2026-07-22T03:30:00Z",
-      "nextPublishAt": "2026-07-16T03:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T09:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Asia/Kuala_Lumpur"
     },
     {
@@ -930,9 +938,9 @@
       "youtubeChannelId": "UCP7ua8Qn3qCjABUkMV5GICg",
       "youtubeVideoId": "Majro4cbWP0",
       "originalPublishAt": "2026-07-22T02:00:00Z",
-      "nextPublishAt": "2026-07-16T02:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T05:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Asia/Yangon"
     },
     {
@@ -943,9 +951,9 @@
       "youtubeChannelId": "UCP7ua8Qn3qCjABUkMV5GICg",
       "youtubeVideoId": "zNnf95pR5jk",
       "originalPublishAt": "2026-07-22T05:00:00Z",
-      "nextPublishAt": "2026-07-16T05:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T08:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Yangon"
     },
     {
@@ -956,9 +964,9 @@
       "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
       "youtubeVideoId": "HnRcwLxamPo",
       "originalPublishAt": "2026-07-22T02:45:00Z",
-      "nextPublishAt": "2026-07-16T02:45:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T08:45:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Kathmandu"
     },
     {
@@ -969,9 +977,9 @@
       "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
       "youtubeVideoId": "UwvoRZQCHy0",
       "originalPublishAt": "2026-07-22T05:45:00Z",
-      "nextPublishAt": "2026-07-16T05:45:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T11:45:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Asia/Kathmandu"
     },
     {
@@ -982,8 +990,8 @@
       "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
       "youtubeVideoId": "nxpv1ASnRmo",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "08:30",
       "timeZone": "Europe/Amsterdam"
     },
@@ -995,8 +1003,8 @@
       "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
       "youtubeVideoId": "45Qnf_cle8A",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T09:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "11:30",
       "timeZone": "Europe/Amsterdam"
     },
@@ -1008,9 +1016,9 @@
       "youtubeChannelId": "UCK2IIhxCoPUW3wI6xBPYkfA",
       "youtubeVideoId": "Tjd0HShH5_A",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T18:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "20:30",
       "timeZone": "Europe/Oslo"
     },
     {
@@ -1021,9 +1029,9 @@
       "youtubeChannelId": "UCK2IIhxCoPUW3wI6xBPYkfA",
       "youtubeVideoId": "14sln4yu8GE",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T21:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "23:30",
       "timeZone": "Europe/Oslo"
     },
     {
@@ -1034,9 +1042,9 @@
       "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
       "youtubeVideoId": "-k-pO1XO_ro",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T18:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "20:30",
       "timeZone": "Europe/Warsaw"
     },
     {
@@ -1047,9 +1055,9 @@
       "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
       "youtubeVideoId": "q8bMOin0ddk",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T21:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "23:30",
       "timeZone": "Europe/Warsaw"
     },
     {
@@ -1060,9 +1068,9 @@
       "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
       "youtubeVideoId": "wDibhaiNTtg",
       "originalPublishAt": "2026-07-22T07:30:00Z",
-      "nextPublishAt": "2026-07-16T07:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-14T19:30:00.000Z",
+      "localDate": "2026-07-14",
+      "localTime": "20:30",
       "timeZone": "Europe/Lisbon"
     },
     {
@@ -1073,9 +1081,9 @@
       "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
       "youtubeVideoId": "CEAykOerHB8",
       "originalPublishAt": "2026-07-22T10:30:00Z",
-      "nextPublishAt": "2026-07-16T10:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-14T22:30:00.000Z",
+      "localDate": "2026-07-14",
+      "localTime": "23:30",
       "timeZone": "Europe/Lisbon"
     },
     {
@@ -1086,9 +1094,9 @@
       "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
       "youtubeVideoId": "joSwTjhpJos",
       "originalPublishAt": "2026-07-22T13:30:00Z",
-      "nextPublishAt": "2026-07-16T13:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "14:30",
+      "nextPublishAt": "2026-07-15T07:30:00.000Z",
+      "localDate": "2026-07-15",
+      "localTime": "08:30",
       "timeZone": "Europe/Lisbon"
     },
     {
@@ -1099,9 +1107,9 @@
       "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
       "youtubeVideoId": "7ruou3j2uzk",
       "originalPublishAt": "2026-07-22T16:30:00Z",
-      "nextPublishAt": "2026-07-16T16:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "17:30",
+      "nextPublishAt": "2026-07-15T10:30:00.000Z",
+      "localDate": "2026-07-15",
+      "localTime": "11:30",
       "timeZone": "Europe/Lisbon"
     },
     {
@@ -1112,9 +1120,9 @@
       "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
       "youtubeVideoId": "MlCn1VafEPQ",
       "originalPublishAt": "2026-07-22T19:30:00Z",
-      "nextPublishAt": "2026-07-16T19:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "20:30",
+      "nextPublishAt": "2026-07-15T13:30:00.000Z",
+      "localDate": "2026-07-15",
+      "localTime": "14:30",
       "timeZone": "Europe/Lisbon"
     },
     {
@@ -1125,9 +1133,9 @@
       "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
       "youtubeVideoId": "Xq9VnS2a7pI",
       "originalPublishAt": "2026-07-22T22:30:00Z",
-      "nextPublishAt": "2026-07-16T22:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "23:30",
+      "nextPublishAt": "2026-07-15T16:30:00.000Z",
+      "localDate": "2026-07-15",
+      "localTime": "17:30",
       "timeZone": "Europe/Lisbon"
     },
     {
@@ -1138,8 +1146,8 @@
       "youtubeChannelId": "UCvc_hya6nn2z8Q2WzHCuBWw",
       "youtubeVideoId": "fJWGUw5CYj8",
       "originalPublishAt": "2026-07-22T05:30:00Z",
-      "nextPublishAt": "2026-07-16T05:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-14T05:30:00.000Z",
+      "localDate": "2026-07-14",
       "localTime": "08:30",
       "timeZone": "Europe/Bucharest"
     },
@@ -1151,8 +1159,8 @@
       "youtubeChannelId": "UCvc_hya6nn2z8Q2WzHCuBWw",
       "youtubeVideoId": "ptDLE0nfZVc",
       "originalPublishAt": "2026-07-22T08:30:00Z",
-      "nextPublishAt": "2026-07-16T08:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-14T08:30:00.000Z",
+      "localDate": "2026-07-14",
       "localTime": "11:30",
       "timeZone": "Europe/Bucharest"
     },
@@ -1164,8 +1172,8 @@
       "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
       "youtubeVideoId": "_XOEPQooV-Q",
       "originalPublishAt": "2026-07-22T05:30:00Z",
-      "nextPublishAt": "2026-07-16T05:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T05:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "08:30",
       "timeZone": "Europe/Moscow"
     },
@@ -1177,8 +1185,8 @@
       "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
       "youtubeVideoId": "9COTegGEDP8",
       "originalPublishAt": "2026-07-22T08:30:00Z",
-      "nextPublishAt": "2026-07-16T08:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T08:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "11:30",
       "timeZone": "Europe/Moscow"
     },
@@ -1190,9 +1198,9 @@
       "youtubeChannelId": "UCgGRZU3j02PQ58z5QcnhhMg",
       "youtubeVideoId": "CC_9xrAkqO8",
       "originalPublishAt": "2026-07-22T03:00:00Z",
-      "nextPublishAt": "2026-07-16T03:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T09:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Colombo"
     },
     {
@@ -1203,9 +1211,9 @@
       "youtubeChannelId": "UCgGRZU3j02PQ58z5QcnhhMg",
       "youtubeVideoId": "vHn9Yv40oHQ",
       "originalPublishAt": "2026-07-22T06:00:00Z",
-      "nextPublishAt": "2026-07-16T06:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T12:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Asia/Colombo"
     },
     {
@@ -1216,9 +1224,9 @@
       "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
       "youtubeVideoId": "FOUwuyt1aOE",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-14T12:30:00.000Z",
+      "localDate": "2026-07-14",
+      "localTime": "14:30",
       "timeZone": "Europe/Bratislava"
     },
     {
@@ -1229,9 +1237,9 @@
       "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
       "youtubeVideoId": "zWgUcE4LHPc",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-14T15:30:00.000Z",
+      "localDate": "2026-07-14",
+      "localTime": "17:30",
       "timeZone": "Europe/Bratislava"
     },
     {
@@ -1242,8 +1250,8 @@
       "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
       "youtubeVideoId": "NgK84bbvByA",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "08:30",
       "timeZone": "Europe/Ljubljana"
     },
@@ -1255,8 +1263,8 @@
       "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
       "youtubeVideoId": "RX1zIgz8mh4",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T09:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "11:30",
       "timeZone": "Europe/Ljubljana"
     },
@@ -1268,8 +1276,8 @@
       "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
       "youtubeVideoId": "35dnj3qODWE",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "08:30",
       "timeZone": "Europe/Belgrade"
     },
@@ -1281,8 +1289,8 @@
       "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
       "youtubeVideoId": "3sKuHxrEgsI",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T09:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "11:30",
       "timeZone": "Europe/Belgrade"
     },
@@ -1294,9 +1302,9 @@
       "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
       "youtubeVideoId": "AoLHwV6hkGA",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T21:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "23:30",
       "timeZone": "Europe/Stockholm"
     },
     {
@@ -1307,9 +1315,9 @@
       "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
       "youtubeVideoId": "2L2X0uUQaBA",
       "originalPublishAt": "2026-07-22T09:30:00Z",
-      "nextPublishAt": "2026-07-16T09:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-14T06:30:00.000Z",
+      "localDate": "2026-07-14",
+      "localTime": "08:30",
       "timeZone": "Europe/Stockholm"
     },
     {
@@ -1320,9 +1328,9 @@
       "youtubeChannelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
       "youtubeVideoId": "nGLukG6p9dw",
       "originalPublishAt": "2026-07-22T05:30:00Z",
-      "nextPublishAt": "2026-07-16T05:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T11:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Africa/Nairobi"
     },
     {
@@ -1333,9 +1341,9 @@
       "youtubeChannelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
       "youtubeVideoId": "epHUualu-MQ",
       "originalPublishAt": "2026-07-22T08:30:00Z",
-      "nextPublishAt": "2026-07-16T08:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T14:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "17:30",
       "timeZone": "Africa/Nairobi"
     },
     {
@@ -1346,9 +1354,9 @@
       "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
       "youtubeVideoId": "ZvioN9o_hGE",
       "originalPublishAt": "2026-07-22T03:00:00Z",
-      "nextPublishAt": "2026-07-16T03:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T06:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Asia/Kolkata"
     },
     {
@@ -1359,9 +1367,9 @@
       "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
       "youtubeVideoId": "32Dsp1RLj9w",
       "originalPublishAt": "2026-07-22T06:00:00Z",
-      "nextPublishAt": "2026-07-16T06:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T09:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Kolkata"
     },
     {
@@ -1372,9 +1380,9 @@
       "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
       "youtubeVideoId": "rCcsz7e8dHk",
       "originalPublishAt": "2026-07-22T03:00:00Z",
-      "nextPublishAt": "2026-07-16T03:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T15:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "20:30",
       "timeZone": "Asia/Kolkata"
     },
     {
@@ -1385,9 +1393,9 @@
       "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
       "youtubeVideoId": "OicLRvHk28I",
       "originalPublishAt": "2026-07-22T06:00:00Z",
-      "nextPublishAt": "2026-07-16T06:00:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T18:00:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "23:30",
       "timeZone": "Asia/Kolkata"
     },
     {
@@ -1398,9 +1406,9 @@
       "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
       "youtubeVideoId": "F745wXCEKWk",
       "originalPublishAt": "2026-07-22T01:30:00Z",
-      "nextPublishAt": "2026-07-16T01:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-14T04:30:00.000Z",
+      "localDate": "2026-07-14",
+      "localTime": "11:30",
       "timeZone": "Asia/Bangkok"
     },
     {
@@ -1411,9 +1419,9 @@
       "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
       "youtubeVideoId": "pBZy_Eq9kgY",
       "originalPublishAt": "2026-07-22T04:30:00Z",
-      "nextPublishAt": "2026-07-16T04:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-14T07:30:00.000Z",
+      "localDate": "2026-07-14",
+      "localTime": "14:30",
       "timeZone": "Asia/Bangkok"
     },
     {
@@ -1424,9 +1432,9 @@
       "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
       "youtubeVideoId": "Z8O6GlKUloM",
       "originalPublishAt": "2026-07-22T00:30:00Z",
-      "nextPublishAt": "2026-07-16T00:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T03:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Asia/Manila"
     },
     {
@@ -1437,9 +1445,9 @@
       "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
       "youtubeVideoId": "eHmaUdBtUqE",
       "originalPublishAt": "2026-07-22T03:30:00Z",
-      "nextPublishAt": "2026-07-16T03:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Manila"
     },
     {
@@ -1450,8 +1458,8 @@
       "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
       "youtubeVideoId": "fFqXCcGFOto",
       "originalPublishAt": "2026-07-22T05:30:00Z",
-      "nextPublishAt": "2026-07-16T05:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T05:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "08:30",
       "timeZone": "Europe/Istanbul"
     },
@@ -1463,8 +1471,8 @@
       "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
       "youtubeVideoId": "SXPpp3Kz7n0",
       "originalPublishAt": "2026-07-22T08:30:00Z",
-      "nextPublishAt": "2026-07-16T08:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T08:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "11:30",
       "timeZone": "Europe/Istanbul"
     },
@@ -1476,8 +1484,8 @@
       "youtubeChannelId": "UClFSxvtwOnc_pPv2rCnT-bg",
       "youtubeVideoId": "CjOnoQlzLnI",
       "originalPublishAt": "2026-07-22T03:30:00Z",
-      "nextPublishAt": "2026-07-16T03:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T03:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "08:30",
       "timeZone": "Asia/Tashkent"
     },
@@ -1489,8 +1497,8 @@
       "youtubeChannelId": "UClFSxvtwOnc_pPv2rCnT-bg",
       "youtubeVideoId": "VGq4TrNlLMs",
       "originalPublishAt": "2026-07-22T06:30:00Z",
-      "nextPublishAt": "2026-07-16T06:30:00.000Z",
-      "localDate": "2026-07-16",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
       "localTime": "11:30",
       "timeZone": "Asia/Tashkent"
     },
@@ -1502,9 +1510,9 @@
       "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
       "youtubeVideoId": "tbLaePyvH_0",
       "originalPublishAt": "2026-07-22T01:30:00Z",
-      "nextPublishAt": "2026-07-16T01:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-14T04:30:00.000Z",
+      "localDate": "2026-07-14",
+      "localTime": "11:30",
       "timeZone": "Asia/Ho_Chi_Minh"
     },
     {
@@ -1515,9 +1523,9 @@
       "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
       "youtubeVideoId": "A-tuLyCleds",
       "originalPublishAt": "2026-07-22T04:30:00Z",
-      "nextPublishAt": "2026-07-16T04:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-14T07:30:00.000Z",
+      "localDate": "2026-07-14",
+      "localTime": "14:30",
       "timeZone": "Asia/Ho_Chi_Minh"
     },
     {
@@ -1528,9 +1536,9 @@
       "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
       "youtubeVideoId": "64RN5MfkfW0",
       "originalPublishAt": "2026-07-22T00:30:00Z",
-      "nextPublishAt": "2026-07-16T00:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "08:30",
+      "nextPublishAt": "2026-07-13T03:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "11:30",
       "timeZone": "Asia/Shanghai"
     },
     {
@@ -1541,9 +1549,9 @@
       "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
       "youtubeVideoId": "gvf-4tZlQE0",
       "originalPublishAt": "2026-07-22T03:30:00Z",
-      "nextPublishAt": "2026-07-16T03:30:00.000Z",
-      "localDate": "2026-07-16",
-      "localTime": "11:30",
+      "nextPublishAt": "2026-07-13T06:30:00.000Z",
+      "localDate": "2026-07-13",
+      "localTime": "14:30",
       "timeZone": "Asia/Shanghai"
     }
   ]
