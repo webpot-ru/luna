@@ -21,6 +21,10 @@ on:
         description: "Type APPLY_YOUTUBE_DELETE to confirm live deletions."
         required: true
         default: ""
+      target_file:
+        description: "Optional exact JSON allowlist. When set, only IDs in this file may be deleted."
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -65,9 +69,13 @@ jobs:
         env:
           ROUTE: ${{ github.event.inputs.route }}
           CONFIRM_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+          TARGET_FILE: ${{ github.event.inputs.target_file }}
         run: |
           set -euo pipefail
           ARGS=("--route=$ROUTE")
+          if [ -n "$TARGET_FILE" ]; then
+            ARGS+=("--target-file=$TARGET_FILE")
+          fi
           if [ "$CONFIRM_WRITE" = "APPLY_YOUTUBE_DELETE" ]; then
             ARGS+=("--apply" "--confirm-youtube-write")
             echo "Confirming live YouTube deletions..."

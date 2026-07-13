@@ -19,6 +19,7 @@ function parseArgs(argv) {
     route: "",
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
+    targetFile: "",
     apply: false,
     confirmYoutubeWrite: false,
   };
@@ -31,6 +32,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--route=")) options.route = arg.slice("--route=".length);
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--publication-registry=")) options.publicationRegistry = arg.slice("--publication-registry=".length);
+    else if (arg.startsWith("--target-file=")) options.targetFile = arg.slice("--target-file=".length);
     else throw new Error(`Unknown argument: ${arg}`);
   }
   return options;
@@ -39,7 +41,7 @@ function parseArgs(argv) {
 function usage() {
   return [
     "Usage:",
-    "  node scripts/youtube-delete-duplicate-videos.mjs [--support=VI] [--route=youtube-2]",
+    "  node scripts/youtube-delete-duplicate-videos.mjs [--support=VI] [--route=youtube-2] [--target-file=config/file.json]",
     "",
     "Dry-run is default. Live deletion requires:",
     "  --apply --confirm-youtube-write",
@@ -114,6 +116,27 @@ async function deleteVideo(accessToken, videoId) {
   return true;
 }
 
+async function getVideoStatus(accessToken, videoId) {
+  const url = new URL("videos", "https://www.googleapis.com/youtube/v3/");
+  url.searchParams.set("part", "status");
+  url.searchParams.set("id", videoId);
+  const response = await fetch(url, { headers: { authorization: `Bearer ${accessToken}` } });
+  if (!response.ok) throw new Error(`YouTube API videos.list failed (${response.status}): ${await response.text()}`);
+  const body = await response.json();
+  if (body.items?.length !== 1) throw new Error(`YouTube API videos.list returned ${body.items?.length || 0} items for ${videoId}`);
+  return body.items[0].status || {};
+}
+
+function loadExactTargets(filePath) {
+  if (!filePath) return null;
+  if (!fs.existsSync(filePath)) throw new Error(`Target file not found: ${filePath}`);
+  const target = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  if (!Array.isArray(target.videos) || target.videos.length === 0) throw new Error("Target file must contain a non-empty videos array");
+  const ids = new Set(target.videos.map(row => row.youtubeVideoId).filter(Boolean));
+  if (ids.size !== target.videos.length) throw new Error("Target file contains missing or duplicate youtubeVideoId values");
+  return { ...target, ids };
+}
+
 function assignmentKey(row = {}) {
   return [
     row.setId || "",
@@ -137,60 +160,74 @@ async function main() {
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
   const routing = JSON.parse(fs.readFileSync("config/youtube-api-project-routing.json", "utf8"));
+  const exactTargets = loadExactTargets(options.targetFile);
+
+  if (exactTargets?.route && options.route && exactTargets.route !== options.route) {
+    throw new Error(`Target file route ${exactTargets.route} does not match --route=${options.route}`);
+  }
+  if (exactTargets?.supportLang && options.supportLang && normalizeLanguageCode(exactTargets.supportLang) !== options.supportLang) {
+    throw new Error(`Target file supportLang ${exactTargets.supportLang} does not match --support=${options.supportLang}`);
+  }
 
   const active = publicationRegistry.publications.filter(r => {
     const s = (r.publicationStatus || r.status || '').toLowerCase();
     return r.youtubeVideoId && !s.includes('superseded') && !s.includes('deleted') && !s.includes('failed');
   });
 
-  // Find duplicates
-  const byKey = new Map();
-  for (const row of active) {
-    const key = assignmentKey(row);
-    const rows = byKey.get(key) || [];
-    rows.push(row);
-    byKey.set(key, rows);
-  }
-
-  const dupes = [...byKey.entries()].filter(([, rows]) => rows.length > 1);
   const candidates = [];
 
-  for (const [key, rows] of dupes) {
-    const sorted = rows.slice().sort((a, b) => {
-      const aLive = (a.publicationStatus||'').includes('live_youtube_upload_detected') ? 1 : 0;
-      const bLive = (b.publicationStatus||'').includes('live_youtube_upload_detected') ? 1 : 0;
-      if (aLive !== bLive) return aLive - bLive;
-      const aHasDate = (a.publishAt || a.scheduledPublishAt) ? 0 : 1;
-      const bHasDate = (b.publishAt || b.scheduledPublishAt) ? 0 : 1;
-      if (aHasDate !== bHasDate) return aHasDate - bHasDate;
-      return String(b.uploadedAt || b.lastReadbackAt || '').localeCompare(String(a.uploadedAt || a.lastReadbackAt || ''));
-    });
+  if (exactTargets) {
+    const channel = findChannelForSupport(channelRegistry.channels, exactTargets.supportLang);
+    const route = routing.projects.find(project => (project.supportChannelKeys || []).includes(channel?.key))?.key || "";
+    if (!channel || route !== exactTargets.route) throw new Error(`Exact target route/channel verification failed for ${exactTargets.supportLang}`);
 
-    const [keep, ...del] = sorted;
-    
-    // Find channel and route
-    const channel = findChannelForSupport(channelRegistry.channels, keep.supportLang);
-    let route = "";
-    if (channel) {
-      for (const r of routing.projects) {
-        if ((r.supportChannelKeys || []).includes(channel.key)) {
-          route = r.key;
-          break;
-        }
-      }
+    for (const target of exactTargets.videos) {
+      const keep = active.find(row => row.youtubeVideoId === target.canonicalVideoId
+        && row.setId === exactTargets.setId
+        && normalizeLanguageCode(row.supportLang) === normalizeLanguageCode(exactTargets.supportLang)
+        && normalizeLanguageCode(row.targetLang) === normalizeLanguageCode(target.targetLang));
+      if (!keep) throw new Error(`Canonical registry row missing for ${target.youtubeVideoId} -> ${target.canonicalVideoId}`);
+      candidates.push({
+        key: assignmentKey(keep),
+        channel,
+        route,
+        keep,
+        del: [{
+          setId: exactTargets.setId,
+          supportLang: exactTargets.supportLang,
+          targetLang: target.targetLang,
+          youtubeVideoId: target.youtubeVideoId,
+          title: "live duplicate outside canonical registry",
+          publicationStatus: "live_youtube_upload_detected",
+        }],
+      });
     }
+  } else {
+    const byKey = new Map();
+    for (const row of active) {
+      const key = assignmentKey(row);
+      const rows = byKey.get(key) || [];
+      rows.push(row);
+      byKey.set(key, rows);
+    }
+    for (const [key, rows] of [...byKey.entries()].filter(([, rows]) => rows.length > 1)) {
+      const sorted = rows.slice().sort((a, b) => String(b.uploadedAt || b.lastReadbackAt || "").localeCompare(String(a.uploadedAt || a.lastReadbackAt || "")));
+      const [keep, ...del] = sorted;
+      const channel = findChannelForSupport(channelRegistry.channels, keep.supportLang);
+      const route = routing.projects.find(project => (project.supportChannelKeys || []).includes(channel?.key))?.key || "";
+      if (options.supportLang && normalizeLanguageCode(keep.supportLang) !== options.supportLang) continue;
+      if (options.route && route !== options.route) continue;
+      candidates.push({ key, channel, route, keep, del });
+    }
+  }
 
-    // Apply filters
-    if (options.supportLang && normalizeLanguageCode(keep.supportLang) !== options.supportLang) continue;
-    if (options.route && route !== options.route) continue;
-
-    candidates.push({
-      key,
-      channel,
-      route,
-      keep,
-      del,
-    });
+  if (exactTargets) {
+    const selected = new Set(candidates.flatMap(candidate => candidate.del.map(row => row.youtubeVideoId)));
+    const missing = [...exactTargets.ids].filter(id => !selected.has(id));
+    const unexpected = [...selected].filter(id => !exactTargets.ids.has(id));
+    if (missing.length || unexpected.length) {
+      throw new Error(`Exact target verification failed; missing=${missing.join(",") || "none"}; unexpected=${unexpected.join(",") || "none"}`);
+    }
   }
 
   console.log(`Found ${candidates.length} duplicate groups to process (with ${candidates.reduce((sum, c) => sum + c.del.length, 0)} videos to delete).`);
@@ -207,36 +244,42 @@ async function main() {
     return;
   }
 
-  // Deletion logic
+  // Resolve and verify every target before the first irreversible deletion.
   console.log("\nSTARTING LIVE DELETIONS...");
   const clientFile = channelRegistry.defaults?.oauthClientFile || ".local/youtube-oauth/google-oauth-client.json";
   let processedCount = 0;
   let errorCount = 0;
 
+  const verifiedTargets = [];
   for (const c of candidates) {
     if (!c.channel) {
       console.error(`Skipping group ${c.key} because channel config is missing.`);
-      errorCount++;
-      continue;
+      throw new Error(`Missing channel config for ${c.key}`);
     }
 
     const tokenFile = tokenFileFor(channelRegistry, c.channel);
     if (!fs.existsSync(tokenFile)) {
       console.error(`Skipping group ${c.key} because token file is missing locally: ${tokenFile}`);
-      errorCount++;
-      continue;
+      throw new Error(`Missing token file for ${c.key}`);
     }
 
     let accessToken;
     try {
       accessToken = await getAccessToken({ clientFile, tokenFile });
     } catch (e) {
-      console.error(`Skipping group ${c.key} because token refresh failed: ${e.message}`);
-      errorCount++;
-      continue;
+      throw new Error(`Token refresh failed for ${c.key}: ${e.message}`);
     }
 
     for (const d of c.del) {
+      const status = await getVideoStatus(accessToken, d.youtubeVideoId);
+      if (exactTargets?.expectedPrivacyStatus && status.privacyStatus !== exactTargets.expectedPrivacyStatus) {
+        throw new Error(`Refusing to delete ${d.youtubeVideoId}: expected ${exactTargets.expectedPrivacyStatus}, got ${status.privacyStatus || "missing"}`);
+      }
+      verifiedTargets.push({ c, d, accessToken });
+    }
+  }
+
+  for (const { c, d, accessToken } of verifiedTargets) {
       console.log(`Deleting video ${d.youtubeVideoId} for ${c.key}...`);
       try {
         await deleteVideo(accessToken, d.youtubeVideoId);
@@ -254,7 +297,6 @@ async function main() {
         console.error(`Failed to delete video ${d.youtubeVideoId}: ${e.message}`);
         errorCount++;
       }
-    }
   }
 
   // Save updated registry
