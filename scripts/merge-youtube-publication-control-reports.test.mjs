@@ -55,6 +55,7 @@ for (let route = 1; route <= 4; route += 1) {
       potentialCurrentSet: true,
       youtubeStatus: { privacyStatus: "public", uploadStatus: "processed" },
     }] : [],
+    deletedTombstones: route <= 2 ? [{ youtubeVideoId: "deleted-video", supportLang: "EN", evidence: "test" }] : [],
     calendarDayGaps: [],
   };
   fs.writeFileSync(path.join(input, `youtube-publication-control-youtube-${route}.json`), `${JSON.stringify(report, null, 2)}\n`);
@@ -79,6 +80,8 @@ assert.equal(aggregate.summary.polyglotTailCount, 1);
 assert.equal(aggregate.publications.length, 4);
 assert.equal(aggregate.unclassifiedUploads.length, 1);
 assert.equal(aggregate.summary.unclassifiedUploadCount, 1);
+assert.equal(aggregate.summary.youtubeDeletedTombstoneCount, 1);
+assert.equal(aggregate.deletedTombstones.length, 1);
 assert.equal(aggregate.summary.videoStatusReadbackComplete, true);
 assert.equal(aggregate.summary.paginationComplete, true);
 assert.equal(aggregate.sourceRuns[0].githubRunUrl, "https://github.com/webpot-ru/luna/actions/runs/123456789");

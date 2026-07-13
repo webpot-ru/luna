@@ -14,6 +14,8 @@ Merge completed route artifacts with `npm run merge:youtube-duplicate-deletions 
 
 After a complete post-write audit, reconcile live publication truth into the durable ledgers with `npm run reconcile:youtube-publication-registry-control -- --report=<deck1-all-routes.json> --report=<deck2-all-routes.json>` and review the dry-run before adding `--apply`. This local-only recovery requires full pagination and all-ID status readback, refuses live duplicate assignments, writes ordinary and Polyglot rows to separate registries, reactivates exact observed live IDs, and inactivates registry-only conflicts. Always rebuild the four route reports plus `config/youtube-publication-snapshot.json` / `docs/youtube-publication-map.md` from the same evidence afterward. It performs no YouTube API write.
 
+A YouTube uploads-playlist row titled exactly `Deleted video` whose ID is simultaneously absent from authenticated `videos.list` is a confirmed deletion tombstone, not live product coverage and not a retryable status failure. The control report exposes the exact tombstone ID, and registry reconciliation marks only that ID inactive before recomputing product tails. Regional Polyglot target drift remains a separate replacement lane: use a reviewed tracked replacement plan, delete the occupied obsolete slot only after separate approval, re-audit, and only then schedule the corrected upload. Current Deck #1 regional plan: `config/youtube-polyglot-replacement-plans/2026-07-13-deck1-romance-regional-2.json`.
+
 Для исключения «каши» из десятков языков поддержки на одном канале и предотвращения путаницы в алгоритмах рекомендаций YouTube принята **Стратегия разделения каналов по языку зрителя (Support Language / Market)**.
 
 ### Архитектура каналов:

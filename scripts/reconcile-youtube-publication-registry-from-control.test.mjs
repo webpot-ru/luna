@@ -37,17 +37,25 @@ const livePolyglot = {
   durableRegistryPresent: true,
 };
 const completeSummary = { complete: true, paginationComplete: true, videoStatusReadbackComplete: true };
+const deletedTombstone = {
+  youtubeVideoId: "polyglot-deleted",
+  setId: "deck1",
+  supportLang: "MY",
+  videoType: "polyglot",
+  evidence: "uploads_playlist_title_deleted_video_and_videos_list_not_returned",
+};
 
 fs.writeFileSync(ordinaryPath, `${JSON.stringify({ publications: [
   { ...liveOrdinary, youtubeVideoId: "ordinary-stale", liveReadbackPresent: false, durableRegistryPresent: true },
   { ...livePolyglot, publicationStatus: "superseded", liveReadbackPresent: false },
+  { ...livePolyglot, youtubeVideoId: "polyglot-deleted", publicationStatus: "published", liveReadbackPresent: false },
 ] }, null, 2)}\n`);
 fs.writeFileSync(polyglotPath, `${JSON.stringify({ publications: [] }, null, 2)}\n`);
 fs.writeFileSync(channelsPath, `${JSON.stringify({ channels: [
   { key: "en", channelId: "channel-en", supportLangs: ["EN"] },
   { key: "my", channelId: "channel-my", supportLangs: ["MY"] },
 ] }, null, 2)}\n`);
-fs.writeFileSync(report1Path, `${JSON.stringify({ summary: completeSummary, publications: [liveOrdinary, livePolyglot], blockers: [] }, null, 2)}\n`);
+fs.writeFileSync(report1Path, `${JSON.stringify({ summary: completeSummary, publications: [liveOrdinary, livePolyglot], deletedTombstones: [deletedTombstone], blockers: [] }, null, 2)}\n`);
 fs.writeFileSync(report2Path, `${JSON.stringify({ summary: completeSummary, publications: [], blockers: [] }, null, 2)}\n`);
 
 const args = [
@@ -82,5 +90,6 @@ assert.equal(ordinary.find((row) => row.youtubeVideoId === "ordinary-live")?.pub
 assert.match(ordinary.find((row) => row.youtubeVideoId === "ordinary-stale")?.publicationStatus || "", /^superseded_registry_not_observed/);
 assert.equal(polyglot.find((row) => row.youtubeVideoId === "polyglot-live")?.publicationStatus, "live_youtube_upload_detected");
 assert.match(polyglot.find((row) => row.youtubeVideoId === "polyglot-live")?.polyglotKey || "", /^polyglot:deck1:MY:global_europe_core:/);
+assert.equal(polyglot.find((row) => row.youtubeVideoId === "polyglot-deleted")?.publicationStatus, "deleted_youtube_tombstone_confirmed");
 
 console.log("youtube publication registry control reconciliation tests passed");

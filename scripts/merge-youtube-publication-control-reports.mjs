@@ -61,6 +61,7 @@ function main() {
     : `ordinary|${row.setId}|${row.supportLang}|${row.targetLang}`);
   const publications = uniqueRows(routes.flatMap(({ report }) => report.publications || []), (row) => row.youtubeVideoId);
   const unclassifiedUploads = uniqueRows(routes.flatMap(({ report }) => report.unclassifiedUploads || []), (row) => row.youtubeVideoId);
+  const deletedTombstones = uniqueRows(routes.flatMap(({ report }) => report.deletedTombstones || []), (row) => row.youtubeVideoId);
   const blockers = routes.flatMap(({ file, report }) => (report.blockers || []).map((row) => ({ routeArtifact: file, ...row })));
   const calendarDayGaps = routes.flatMap(({ file, report }) => (report.calendarDayGaps || []).map((row) => ({ routeArtifact: file, ...row })));
   const sourceRuns = options.sourceRuns.map(parseSourceRun);
@@ -82,6 +83,7 @@ function main() {
     calendarSlotCollisionCount: routes.reduce((sum, item) => sum + Number(item.report.summary?.calendarSlotCollisionCount || 0), 0),
     liveVideoMissingDurableRegistryCount: routes.reduce((sum, item) => sum + Number(item.report.summary?.liveVideoMissingDurableRegistryCount || 0), 0),
     liveStatusNotReturnedCount: routes.reduce((sum, item) => sum + Number(item.report.summary?.liveStatusNotReturnedCount || 0), 0),
+    youtubeDeletedTombstoneCount: deletedTombstones.length,
     unclassifiedUploadCount: unclassifiedUploads.length,
     unclassifiedRecentUploadCount: routes.reduce((sum, item) => sum + Number(item.report.summary?.unclassifiedRecentUploadCount || 0), 0),
     calendarDayGapCount: calendarDayGaps.reduce((sum, item) => sum + (item.missingDates?.length || 0), 0),
@@ -105,6 +107,7 @@ function main() {
     blockers,
     publications,
     unclassifiedUploads,
+    deletedTombstones,
     tails,
     calendarDayGaps,
   };
@@ -130,6 +133,7 @@ function main() {
     `- Calendar slot collisions: ${summary.calendarSlotCollisionCount}`,
     `- Live videos missing durable registry: ${summary.liveVideoMissingDurableRegistryCount}`,
     `- Live video statuses not returned: ${summary.liveStatusNotReturnedCount}`,
+    `- Confirmed YouTube deleted tombstones: ${summary.youtubeDeletedTombstoneCount}`,
     `- Unclassified uploads: ${summary.unclassifiedUploadCount} (recent blockers ${summary.unclassifiedRecentUploadCount})`,
     `- Calendar day gaps: ${summary.calendarDayGapCount}`,
     "",
