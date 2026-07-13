@@ -17,6 +17,7 @@ function parseArgs(argv) {
     courseLinks: DEFAULT_COURSE_LINKS_PATH,
     output: DEFAULT_OUTPUT_PATH,
     maxPages: DEFAULT_MAX_UPLOAD_PLAYLIST_PAGES,
+    includeVideoStatus: false,
     json: false,
   };
 
@@ -41,6 +42,8 @@ function parseArgs(argv) {
       options.output = readValue();
     } else if (arg === "--max-pages" || arg.startsWith("--max-pages=")) {
       options.maxPages = Number(readValue());
+    } else if (arg === "--include-video-status") {
+      options.includeVideoStatus = true;
     } else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
   }
@@ -57,6 +60,7 @@ function usage() {
     "YouTube upload exists live but was not persisted into config/youtube-published-videos.json.",
     `Default scan depth is ${DEFAULT_MAX_UPLOAD_PLAYLIST_PAGES} upload-playlist pages (up to ${DEFAULT_MAX_UPLOAD_PLAYLIST_PAGES * 50} recent videos per channel); override with --max-pages when needed.`,
     "",
+    "Use --include-video-status to add videos.list privacyStatus/publishAt readback for matched videos.",
     "This command performs YouTube Data API read calls only. It does not upload, update, hide or delete videos.",
   ].join("\n");
 }
@@ -223,6 +227,31 @@ async function readUploadPlaylistItems({ accessToken, uploadsPlaylistId, maxPage
     if (!pageToken) break;
   }
   return items;
+}
+
+async function readVideoStatuses({ accessToken, videoIds }) {
+  const statuses = new Map();
+  for (let index = 0; index < videoIds.length; index += 50) {
+    const ids = videoIds.slice(index, index + 50).filter(Boolean);
+    if (!ids.length) continue;
+    const response = await youtubeJson({
+      accessToken,
+      pathName: "videos",
+      query: {
+        part: "status",
+        id: ids.join(","),
+        fields: "items(id,status(privacyStatus,publishAt,uploadStatus))",
+      },
+    });
+    for (const item of response.items || []) {
+      statuses.set(item.id, {
+        privacyStatus: item.status?.privacyStatus || "",
+        publishAt: item.status?.publishAt || "",
+        uploadStatus: item.status?.uploadStatus || "",
+      });
+    }
+  }
+  return statuses;
 }
 
 function courseSlugForSet(courseLinks, setId) {
@@ -433,6 +462,19 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
     }
   }
   markDuplicateAssignmentRowsNonPersistable(matchedPublications);
+  if (options.includeVideoStatus) {
+    const statuses = await readVideoStatuses({
+      accessToken,
+      videoIds: matchedPublications.map((row) => row.youtubeVideoId),
+    });
+    for (const row of matchedPublications) {
+      row.youtubeStatus = statuses.get(row.youtubeVideoId) || {
+        privacyStatus: "",
+        publishAt: "",
+        uploadStatus: "not_returned",
+      };
+    }
+  }
 
   return {
     supportLang,
@@ -493,6 +535,8 @@ async function main() {
     allMissingFromLocalRegistryCount: allPublications.filter((row) => !row.inLocalPublicationRegistry).length,
     duplicateGroups: duplicateGroups(publications),
     allDuplicateGroups: duplicateGroups(allPublications),
+    videoStatusReadback: options.includeVideoStatus,
+    scheduledVideoCount: allPublications.filter((row) => row.youtubeStatus?.publishAt).length,
     supportReports,
     publications,
   };

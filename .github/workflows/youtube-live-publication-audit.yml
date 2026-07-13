@@ -45,6 +45,11 @@ on:
         description: "Upload playlist pages to scan per support channel; 10 pages = up to 500 recent videos."
         required: true
         default: "10"
+      include_video_status:
+        description: "Also read matched videos status.privacyStatus/publishAt. Read-only; costs additional videos.list quota."
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -117,12 +122,17 @@ jobs:
           MAX_PAGES: ${{ github.event.inputs.max_pages }}
         run: |
           set -euo pipefail
-          npm run audit:youtube-live-publications -- \
-            --set "$SET_ID" \
-            --support "$SUPPORTS_CSV" \
-            --max-pages "$MAX_PAGES" \
-            --output=outputs/youtube-live-publications-github.json \
-            --json
+          AUDIT_ARGS=(
+            "--set" "$SET_ID"
+            "--support" "$SUPPORTS_CSV"
+            "--max-pages" "$MAX_PAGES"
+            "--output=outputs/youtube-live-publications-github.json"
+            "--json"
+          )
+          if [ "${{ github.event.inputs.include_video_status }}" = "true" ]; then
+            AUDIT_ARGS+=(--include-video-status)
+          fi
+          npm run audit:youtube-live-publications -- "${AUDIT_ARGS[@]}"
           node -e '
             const fs = require("fs");
             const report = JSON.parse(fs.readFileSync("outputs/youtube-live-publications-github.json", "utf8"));
