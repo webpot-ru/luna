@@ -1,0 +1,114 @@
+name: YouTube Reschedule Private Videos
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "plan validates the explicit target file; apply updates only private videos' publishAt."
+        required: true
+        default: "plan"
+        type: choice
+        options: [plan, apply]
+      supports:
+        description: "Comma-separated support codes from exactly one API route."
+        required: true
+        default: "DE"
+      youtube_environment:
+        description: "GitHub environment with the route OAuth bundle."
+        required: true
+        default: "youtube-api-branding"
+        type: choice
+        options: [youtube-api-branding, youtube-api-youtube-2, youtube-api-youtube-3, youtube-api-youtube-4]
+      target_file:
+        description: "Committed non-secret reschedule target file."
+        required: true
+        default: "config/youtube-schedule-repair-deck2-20260713.json"
+      limit:
+        description: "Maximum selected targets; 0 means all route targets."
+        required: true
+        default: "0"
+      confirm_youtube_write:
+        description: "For apply type RESCHEDULE_PRIVATE_VIDEOS."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  reschedule-private-videos:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.youtube_environment }}
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Validate route-scoped request
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          SUPPORTS: ${{ github.event.inputs.supports }}
+          TARGET_FILE: ${{ github.event.inputs.target_file }}
+          LIMIT: ${{ github.event.inputs.limit }}
+          YOUTUBE_ENVIRONMENT: ${{ github.event.inputs.youtube_environment }}
+          CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+        run: |
+          set -euo pipefail
+          test -f "$TARGET_FILE"
+          if [ "$(printf '%s' "$SUPPORTS" | tr '[:lower:]' '[:upper:]' | xargs)" = "ALL" ]; then
+            echo "::error::supports=ALL is refused; dispatch one route at a time."
+            exit 1
+          fi
+          if ! printf '%s' "$LIMIT" | grep -Eq '^[0-9]+$'; then
+            echo "::error::limit must be an integer."
+            exit 1
+          fi
+          node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORTS" --environment="$YOUTUBE_ENVIRONMENT"
+          node -e 'const fs=require("fs"); const target=JSON.parse(fs.readFileSync(process.env.TARGET_FILE,"utf8")); const allowed=new Set(process.env.SUPPORTS.split(",").map(x=>x.trim().toUpperCase())); const rows=(target.targets||[]).filter(x=>allowed.has(String(x.supportLang||"").toUpperCase())); if(!rows.length) throw new Error("No target rows for requested supports."); if(rows.some(x=>!x.youtubeVideoId||!x.originalPublishAt||!x.nextPublishAt)) throw new Error("Invalid target row.");'
+          if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "RESCHEDULE_PRIVATE_VIDEOS" ]; then
+            echo "::error::mode=apply requires confirm_youtube_write=RESCHEDULE_PRIVATE_VIDEOS"
+            exit 1
+          fi
+      - name: Restore YouTube OAuth bundle
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}"
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+      - name: Reschedule existing private videos
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          SUPPORTS: ${{ github.event.inputs.supports }}
+          TARGET_FILE: ${{ github.event.inputs.target_file }}
+          LIMIT: ${{ github.event.inputs.limit }}
+        run: |
+          set -euo pipefail
+          mkdir -p outputs
+          ARGS=(
+            "--operation=reschedule"
+            "--target-file=$TARGET_FILE"
+            "--support=$SUPPORTS"
+            "--report=outputs/youtube-private-video-reschedule-report.json"
+            "--ledger=outputs/youtube-private-video-reschedule-ledger.jsonl"
+          )
+          if [ "$LIMIT" != "0" ]; then ARGS+=("--limit=$LIMIT"); fi
+          if [ "$MODE" = "apply" ]; then ARGS+=("--apply" "--confirm-youtube-write=RESCHEDULE_PRIVATE_VIDEOS"); fi
+          npm run pause:youtube-fallback-schedules -- "${ARGS[@]}"
+      - name: Upload reschedule report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-private-video-reschedule-${{ github.event.inputs.mode }}-${{ github.run_id }}
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-private-video-reschedule-report.json
+            outputs/youtube-private-video-reschedule-ledger.jsonl

@@ -26,6 +26,7 @@ function parseArgs(argv) {
     videoId: "",
     limit: 0,
     holdPublishAt: "",
+    operation: "pause",
     apply: false,
     writeRegistry: false,
     confirmYoutubeWrite: "",
@@ -47,6 +48,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--video-id=")) options.videoId = arg.slice("--video-id=".length);
     else if (arg.startsWith("--limit=")) options.limit = Number(arg.slice("--limit=".length)) || 0;
     else if (arg.startsWith("--hold-publish-at=")) options.holdPublishAt = arg.slice("--hold-publish-at=".length);
+    else if (arg.startsWith("--operation=")) options.operation = arg.slice("--operation=".length);
     else if (arg.startsWith("--confirm-youtube-write=")) options.confirmYoutubeWrite = arg.slice("--confirm-youtube-write=".length);
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -58,7 +60,7 @@ function usage() {
     "Usage:",
     "  node scripts/youtube-pause-fallback-schedules.mjs [--apply --confirm-youtube-write=PAUSE_FALLBACK_SCHEDULES]",
     "",
-    "Cancels scheduled public release for fallback-thumbnail videos only.",
+    "Cancels fallback-thumbnail schedules, or reschedules an explicit target file.",
     "Criteria: scheduled upload, privacy private, thumbnailSet=false, thumbnailUploadMode=first_frame_auto.",
     "",
     "Options:",
@@ -68,6 +70,7 @@ function usage() {
     "  --target-file=<json>      Use an explicit non-secret target list instead of registry/artifacts.",
     "  --export-target-file=<json>  Write the selected non-secret target list and exit.",
     "  --hold-publish-at=<iso>   Instead of clearing publishAt, move the schedule to this future hold time.",
+    "  --operation=pause|reschedule  reschedule requires target nextPublishAt values.",
     "  --write-registry          Update existing local registry rows after readback.",
   ].join("\n");
 }
@@ -160,6 +163,7 @@ function targetFileRows(filePath) {
     privacyStatus: row.privacyStatus || "private",
     thumbnailSet: row.thumbnailSet ?? false,
     thumbnailUploadMode: row.thumbnailUploadMode || "first_frame_auto",
+    nextPublishAt: row.nextPublishAt || row.publishAt || "",
   }));
 }
 
@@ -179,6 +183,7 @@ function normalizeTarget(row) {
     publicationStatus: row.publicationStatus || row.status || "",
     thumbnailUploadMode: row.thumbnailUploadMode || "",
     thumbnailFallbackReason: row.thumbnailFallbackReason || "",
+    nextPublishAt: row.nextPublishAt || "",
   };
 }
 
@@ -346,30 +351,23 @@ function isQuotaError(error) {
   return /quotaExceeded|youtube\.quota|quota/i.test(String(error?.message || error));
 }
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 function sameTimestamp(left, right) {
   const leftTime = Date.parse(left || "");
   const rightTime = Date.parse(right || "");
   return Number.isFinite(leftTime) && Number.isFinite(rightTime) && Math.abs(leftTime - rightTime) <= 1000;
 }
 
-function pauseReadbackOk(status, holdPublishAt = "") {
+function scheduleReadbackOk(status, { operation, expectedPublishAt = "" }) {
   if (status?.privacyStatus !== "private") return false;
-  if (!holdPublishAt) return !status?.publishAt;
-  return !status?.publishAt || sameTimestamp(status.publishAt, holdPublishAt);
+  if (operation === "reschedule") return sameTimestamp(status.publishAt, expectedPublishAt);
+  if (!expectedPublishAt) return !status?.publishAt;
+  return !status?.publishAt || sameTimestamp(status.publishAt, expectedPublishAt);
 }
 
-async function readVideoUntilPaused({ accessToken, videoId, holdPublishAt }) {
-  let last = null;
-  for (let attempt = 0; attempt < 6; attempt += 1) {
-    last = await readVideo({ accessToken, videoId });
-    if (pauseReadbackOk(last.status || {}, holdPublishAt)) return last;
-    if (attempt < 5) await sleep(2000);
-  }
-  return last;
+async function readVideoUntilExpected({ accessToken, videoId, operation, expectedPublishAt }) {
+  const readback = await readVideo({ accessToken, videoId });
+  if (scheduleReadbackOk(readback.status || {}, { operation, expectedPublishAt })) return readback;
+  return readback;
 }
 
 function summarize(results) {
@@ -379,16 +377,18 @@ function summarize(results) {
     paused: results.filter((r) => r.status === "schedule_paused").length,
     alreadyPaused: results.filter((r) => r.status === "already_paused").length,
     held: results.filter((r) => r.status === "schedule_held").length,
+    rescheduled: results.filter((r) => r.status === "schedule_rescheduled").length,
     failed: results.filter((r) => r.status === "failed").length,
   };
   summary.bySupport = {};
   for (const result of results) {
     const key = result.supportLang || "UNKNOWN";
-    summary.bySupport[key] = summary.bySupport[key] || { total: 0, paused: 0, alreadyPaused: 0, held: 0, failed: 0 };
+    summary.bySupport[key] = summary.bySupport[key] || { total: 0, paused: 0, alreadyPaused: 0, held: 0, rescheduled: 0, failed: 0 };
     summary.bySupport[key].total += 1;
     if (result.status === "schedule_paused") summary.bySupport[key].paused += 1;
     if (result.status === "already_paused") summary.bySupport[key].alreadyPaused += 1;
     if (result.status === "schedule_held") summary.bySupport[key].held += 1;
+    if (result.status === "schedule_rescheduled") summary.bySupport[key].rescheduled += 1;
     if (result.status === "failed") summary.bySupport[key].failed += 1;
   }
   return summary;
@@ -489,8 +489,10 @@ async function main() {
     console.log(usage());
     return;
   }
-  if (options.apply && options.confirmYoutubeWrite !== "PAUSE_FALLBACK_SCHEDULES") {
-    fail("Live YouTube writes require --confirm-youtube-write=PAUSE_FALLBACK_SCHEDULES.");
+  if (!['pause', 'reschedule'].includes(options.operation)) fail(`Invalid --operation=${options.operation}.`);
+  const requiredConfirmation = options.operation === "reschedule" ? "RESCHEDULE_PRIVATE_VIDEOS" : "PAUSE_FALLBACK_SCHEDULES";
+  if (options.apply && options.confirmYoutubeWrite !== requiredConfirmation) {
+    fail(`Live YouTube writes require --confirm-youtube-write=${requiredConfirmation}.`);
   }
   if (options.holdPublishAt) {
     const holdTime = Date.parse(options.holdPublishAt);
@@ -518,10 +520,17 @@ async function main() {
 
   for (const target of targets) {
     const timestamp = new Date().toISOString();
+    const effectivePublishAt = options.operation === "reschedule" ? target.nextPublishAt : options.holdPublishAt;
+    if (options.operation === "reschedule") {
+      const scheduledTime = Date.parse(effectivePublishAt);
+      if (!Number.isFinite(scheduledTime) || scheduledTime <= Date.now() + 10 * 60 * 1000) {
+        fail(`Reschedule target must have a future nextPublishAt: ${target.youtubeVideoId}`);
+      }
+    }
     const channel = findChannelForSupport(channelRegistry.channels, target.supportLang);
     const base = {
       timestamp,
-      action: "pause_fallback_schedule",
+      action: options.operation === "reschedule" ? "reschedule_private_video" : "pause_fallback_schedule",
       apply: options.apply,
       setId: target.setId,
       supportLang: target.supportLang,
@@ -530,10 +539,11 @@ async function main() {
       artifactRunId: target.artifactRunId,
       youtubeVideoId: target.youtubeVideoId,
       originalPublishAt: target.publishAt,
+      nextPublishAt: effectivePublishAt,
       thumbnailUploadMode: target.thumbnailUploadMode,
       thumbnailFallbackReason: target.thumbnailFallbackReason,
       estimatedQuotaUnits: options.apply ? 52 : 0,
-      holdPublishAt: options.holdPublishAt,
+      holdPublishAt: effectivePublishAt,
     };
 
     try {
@@ -574,14 +584,15 @@ async function main() {
         fail(`Video channel mismatch: expected ${channel.channelId}, got ${before.snippet?.channelId || "(missing)"}.`);
       }
 
-      if (before.status?.privacyStatus === "private" && !before.status?.publishAt) {
+      if (options.operation === "pause" && before.status?.privacyStatus === "private" && !before.status?.publishAt) {
         const row = { ...plan, status: "already_paused", authorizedChannel: channelAuthCache.get(channel.key), before, after: before };
         results.push(row);
         appendLedger(options.ledger, row);
         continue;
       }
       if (
-        options.holdPublishAt
+        options.operation === "pause"
+        && options.holdPublishAt
         && before.status?.privacyStatus === "private"
         && sameTimestamp(before.status?.publishAt, options.holdPublishAt)
       ) {
@@ -591,27 +602,38 @@ async function main() {
         continue;
       }
 
-      await cancelSchedule({ accessToken, video: before, holdPublishAt: options.holdPublishAt });
-      const after = await readVideoUntilPaused({
+      if (options.operation === "reschedule" && before.status?.privacyStatus === "private" && sameTimestamp(before.status?.publishAt, effectivePublishAt)) {
+        const row = { ...plan, status: "schedule_rescheduled", authorizedChannel: channelAuthCache.get(channel.key), before, after: before, idempotent: true };
+        results.push(row);
+        appendLedger(options.ledger, row);
+        continue;
+      }
+      if (options.operation === "reschedule" && (!sameTimestamp(before.status?.publishAt, target.publishAt) || before.status?.privacyStatus !== "private")) {
+        fail(`Refusing schedule move: expected private publishAt=${target.publishAt}, got ${before.status?.privacyStatus || "(missing)"} ${before.status?.publishAt || "(missing)"}.`);
+      }
+
+      await cancelSchedule({ accessToken, video: before, holdPublishAt: effectivePublishAt });
+      const after = await readVideoUntilExpected({
         accessToken,
         videoId: target.youtubeVideoId,
-        holdPublishAt: options.holdPublishAt,
+        operation: options.operation,
+        expectedPublishAt: effectivePublishAt,
       });
       if (after.status?.privacyStatus !== "private") {
         fail(`Pause readback privacy mismatch: expected private, got ${after.status?.privacyStatus || "(missing)"}.`);
       }
-      if (options.holdPublishAt) {
-        const expected = Date.parse(options.holdPublishAt);
+      if (effectivePublishAt) {
+        const expected = Date.parse(effectivePublishAt);
         const actual = Date.parse(after.status?.publishAt || "");
-        if (after.status?.publishAt && (!Number.isFinite(actual) || Math.abs(actual - expected) > 1000)) {
-          fail(`Hold readback publishAt mismatch: expected ${options.holdPublishAt}, got ${after.status?.publishAt || "(missing)"}.`);
+        if (!after.status?.publishAt || !Number.isFinite(actual) || Math.abs(actual - expected) > 1000) {
+          fail(`Schedule readback publishAt mismatch: expected ${effectivePublishAt}, got ${after.status?.publishAt || "(missing)"}.`);
         }
       } else if (after.status?.publishAt) {
         fail(`Pause readback still has publishAt=${after.status.publishAt}.`);
       }
       const row = {
         ...plan,
-        status: after.status?.publishAt ? "schedule_held" : "schedule_paused",
+        status: options.operation === "reschedule" ? "schedule_rescheduled" : (after.status?.publishAt ? "schedule_held" : "schedule_paused"),
         authorizedChannel: channelAuthCache.get(channel.key),
         before,
         after,
