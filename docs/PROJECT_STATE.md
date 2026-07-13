@@ -1,5 +1,7 @@
 # Project State
 
+- 2026-07-13 ordinary publication hardening follow-up: the bulk dispatcher now disables runtime thumbnail generation by default and explicitly passes `--no-generate-thumbnails`; approved Git-tracked JPGs remain the only custom-cover source. Thumbnail batch planning now filters combined manifests by each cover row's own `setId`, preventing Deck #1/Deck #2 cross-assignment. `npm run test:youtube-ordinary-canonicalization` is the regression gate. No GitHub dispatch or YouTube write was performed for this fix.
+
 Last updated: 2026-07-13.
 
 This is the short handoff document for new AI chats and agents. It should stay compact and point to source-of-truth documents instead of duplicating them.

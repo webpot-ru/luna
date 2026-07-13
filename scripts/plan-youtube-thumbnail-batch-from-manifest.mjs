@@ -218,6 +218,10 @@ function coverVideoType(cover) {
     : "ordinary";
 }
 
+function coverSetId(cover, manifestSetId = "") {
+  return String(cover.setId || cover.set_id || manifestSetId || "").trim();
+}
+
 function publicationMatchesCover(publication, { cover, setId, supportLang, targetLang }) {
   const videoType = coverVideoType(cover);
   if (videoType === "polyglot") {
@@ -301,7 +305,7 @@ function bySupportSummary(rows) {
 function planCover({ cover, manifestDir, manifestSetId, options, channelRegistry, publicationRegistry, routeCache }) {
   const supportLang = supportLangFromCover(cover);
   const targetLang = targetLangFromCover(cover);
-  const setId = options.setId || manifestSetId || cover.setId || cover.set_id || "";
+  const setId = coverSetId(cover, manifestSetId) || options.setId || "";
   const blockers = [];
 
   if (!setId) blockers.push("missing_set_id");
@@ -414,8 +418,10 @@ function main() {
 
   const manifestRows = ensureArray(manifest.covers)
     .filter((cover) => {
+      const setId = coverSetId(cover, manifestSetId);
       const support = supportLangFromCover(cover);
       const target = targetLangFromCover(cover);
+      if (options.setId && setId !== options.setId) return false;
       if (supportFilter.size && !supportFilter.has(support)) return false;
       if (targetFilter.size && !targetFilter.has(target)) return false;
       return true;

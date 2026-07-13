@@ -72,7 +72,7 @@ on:
         required: false
         default: ""
       confirm_thumbnail_spend:
-        description: "For VectorEngine thumbnail generation type GENERATE_THUMBNAILS."
+        description: "Deprecated compatibility input. Runtime thumbnail generation is disabled; leave empty."
         required: false
         default: ""
       confirm_playlist_repair:
@@ -142,6 +142,7 @@ jobs:
             "--schedule-min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES"
             "--dispatch-spacing-seconds=$DISPATCH_SPACING_SECONDS"
             "--playlist-retry-delay-seconds=$PLAYLIST_RETRY_DELAY_SECONDS"
+            "--no-generate-thumbnails"
             "--no-watch"
             "--ref=${GITHUB_REF_NAME}"
             "--mode=apply"
