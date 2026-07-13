@@ -1,6 +1,6 @@
 # Карта публикаций YouTube
 
-Сформировано: 2026-07-13T15:28:58.864Z
+Сформировано: 2026-07-13T16:01:54.813Z
 
 Source of truth: live YouTube API readback через четыре GitHub OAuth route плюс durable registry/calendar comparison. Полный per-video список и точные URL находятся в `config/youtube-publication-snapshot.json`.
 
@@ -11,7 +11,7 @@ Source of truth: live YouTube API readback через четыре GitHub OAuth 
 | Deck | API routes | Live видео | Public | Scheduled | Private без будущей даты | Статус не прочитан | Durable-only | Хвосты ordinary | Хвосты Polyglot full | Live дубли | Registry-only дубли | Calendar blockers | Strict evidence |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | `home_kitchen_cooking_actions_a1_a2` | 4/4 | 1230 | 1164 | 66 | 0 | 0 | 0 | 1470 | 204 | 0 | 0 | 0 | yes |
-| `home_kitchen_cookware_pilot_01` | 4/4 | 2903 | 2892 | 11 | 0 | 0 | 34 | 18 | 6 | 0 | 0 | 0 | yes |
+| `home_kitchen_cookware_pilot_01` | 4/4 | 2903 | 2893 | 10 | 0 | 0 | 12 | 18 | 9 | 0 | 0 | 0 | yes |
 
 ## Обложки плейлистов
 
@@ -152,49 +152,49 @@ GitHub runs:
 
 ## home_kitchen_cookware_pilot_01
 
-Live API window: 2026-07-13T14:51:02.587Z .. 2026-07-13T14:51:06.368Z.
+Live API window: 2026-07-13T16:00:21.112Z .. 2026-07-13T16:00:22.385Z.
 
 GitHub runs:
 
-- all: [29259656589](https://github.com/webpot-ru/luna/actions/runs/29259656589)
+- all: [29264567055](https://github.com/webpot-ru/luna/actions/runs/29264567055)
 
 ### Каналы
 
 | Support | Live видео | Public | Scheduled | Private | Статус ? | Durable-only | Ordinary tails | Polyglot tails | Live дубли | Registry-only | Следующая публикация | Последняя в очереди |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |
-| AZ | 57 | 57 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | - | - |
+| AZ | 57 | 57 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | - | - |
 | BG | 55 | 55 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | 0 | - | - |
-| BN | 57 | 57 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | - | - |
-| CS | 56 | 56 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | - | - |
-| DA | 52 | 52 | 0 | 0 | 0 | 1 | 5 | 0 | 0 | 0 | - | - |
+| BN | 57 | 57 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | - | - |
+| CS | 56 | 56 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | - | - |
+| DA | 52 | 52 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | - | - |
 | DE | 58 | 58 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | - | - |
 | EN | 56 | 56 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
-| ES-419 | 59 | 50 | 9 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 2026-07-13T15:30:00Z | 2026-07-14T21:30:00Z |
-| ET | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
-| FI | 57 | 57 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | - | - |
-| FR | 58 | 58 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | 0 | - | - |
+| ES-419 | 59 | 51 | 8 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 2026-07-13T18:30:00Z | 2026-07-14T21:30:00Z |
+| ET | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
+| FI | 57 | 57 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | - | - |
+| FR | 58 | 58 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | - | - |
 | HI | 58 | 58 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | - | - |
-| HR | 55 | 55 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | 0 | - | - |
-| HU | 57 | 57 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | - | - |
-| HY | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
-| ID | 58 | 58 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
-| IS | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
-| IT | 57 | 57 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | 0 | - | - |
+| HR | 55 | 55 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | 0 | - | - |
+| HU | 57 | 57 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | - | - |
+| HY | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
+| ID | 58 | 58 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
+| IS | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
+| IT | 57 | 57 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | - | - |
 | JA | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | - | - |
-| KA | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
-| KK | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
+| KA | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
+| KK | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
 | KM | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
-| KN | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
+| KN | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
 | KO | 58 | 58 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | - | - |
-| LO | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
-| LT | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
-| LV | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
-| ML | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
+| LO | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
+| LT | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
+| LV | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
+| ML | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
 | MS | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
 | MY | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
 | NE | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
-| NL | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
-| NO | 57 | 57 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | - | - |
+| NL | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
+| NO | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
 | PL | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
 | PT-BR | 58 | 56 | 2 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 2026-07-13T16:30:00Z | 2026-07-13T19:30:00Z |
 | RO | 57 | 57 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | - | - |
@@ -222,9 +222,9 @@ GitHub runs:
 
 - AZ: ordinary 1 [NO]; Polyglot full 0.
 - BG: ordinary 1 [NO]; Polyglot full 0.
-- BN: ordinary 1 [NO]; Polyglot full 0.
-- CS: ordinary 1 [NO]; Polyglot full 0.
-- DA: ordinary 5 [HR, HU, ID, JA, NO]; Polyglot full 0.
+- BN: ordinary 1 [NO]; Polyglot full 1 [global_europe_core].
+- CS: ordinary 1 [NO]; Polyglot full 1 [global_europe_core].
+- DA: ordinary 5 [HR, HU, ID, JA, NO]; Polyglot full 1 [global_europe_core].
 - DE: ordinary 1 [NO]; Polyglot full 0.
 - FI: ordinary 1 [NO]; Polyglot full 0.
 - FR: ordinary 1 [NO]; Polyglot full 1 [romance_core].
@@ -240,13 +240,9 @@ GitHub runs:
 
 ## Нераспознанные загрузки
 
-- Всего в uploads-плейлистах, но без подтвержденной продуктовой identity: 179.
-- Свежих неразобранных блокеров apply: 1.
-- videos.list не вернул статус: 109.
+- Всего в uploads-плейлистах, но без подтвержденной продуктовой identity: 201.
+- Свежих неразобранных блокеров apply: 0.
+- videos.list не вернул статус: 131.
 - Полный точный список, ID, URL и статус находятся в верхнеуровневом `unclassifiedUploads` файла `config/youtube-publication-snapshot.json`.
 
-По каналам: AZ=3, BG=3, BN=2, CS=2, DA=2, DE=5, EN=70, ET=3, FI=2, FR=3, HI=4, HR=3, HU=2, HY=1, ID=2, IS=3, IT=3, KA=3, KK=2, KM=3, KN=3, KO=4, LO=2, LT=3, LV=3, ML=2, MS=2, NL=2, NO=1, PL=4, RO=4, SI=3, SK=4, SL=2, SV=4, TA=3, TE=3, TL=3, UZ=2, ZH=4.
-
-Свежие блокеры:
-
-- EN | https://www.youtube.com/watch?v=Ii_EULOIfdw | flashcardsluna youtube api visual demo 20260701 elevenlabs bella
+По каналам: AZ=4, BG=3, BN=3, CS=3, DA=3, DE=5, EN=70, ET=4, FI=3, FR=4, HI=4, HR=4, HU=3, HY=2, ID=3, IS=4, IT=4, KA=4, KK=3, KM=3, KN=4, KO=4, LO=3, LT=4, LV=4, ML=3, MS=2, NL=3, NO=2, PL=4, RO=4, SI=3, SK=4, SL=2, SV=4, TA=3, TE=3, TL=3, UZ=2, ZH=4.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-13T15:28:58.864Z",
+  "generatedAt": "2026-07-13T16:01:54.813Z",
   "sourceOfTruth": "GitHub-hosted read-only YouTube Data API uploads-playlist and videos.list readback reconciled with durable publication registries and calendar.",
   "policy": {
     "youtubeWrites": 0,
@@ -10,23 +10,23 @@
   },
   "totals": {
     "deckCount": 2,
-    "scannedUploadVideoCount": 4312,
+    "scannedUploadVideoCount": 4334,
     "classifiedProductVideoCount": 4133,
     "liveVideoCount": 4133,
-    "livePublicCount": 4056,
-    "liveScheduledCount": 77,
+    "livePublicCount": 4057,
+    "liveScheduledCount": 76,
     "livePrivateUnscheduledCount": 0,
     "liveStatusUnknownCount": 0,
-    "durableOnlyVideoCount": 34,
-    "tailCount": 1698,
+    "durableOnlyVideoCount": 12,
+    "tailCount": 1701,
     "liveDuplicateGroupCount": 0,
     "registryOnlyDuplicateGroupCount": 0,
     "liveScheduleMissingCalendarCount": 0,
-    "unclassifiedUploadCount": 179,
+    "unclassifiedUploadCount": 201,
     "unclassifiedRecentEvaluationComplete": true,
-    "unclassifiedRecentUploadCount": 1,
+    "unclassifiedRecentUploadCount": 0,
     "unclassifiedStatusReadbackComplete": true,
-    "unclassifiedStatusNotReturnedCount": 109,
+    "unclassifiedStatusNotReturnedCount": 131,
     "preparedPlaylistCoverCount": 162,
     "uploadEligiblePlaylistCoverCount": 134,
     "plannedPlaylistCoverCount": 28,
@@ -3124,6 +3124,26 @@
   },
   "unclassifiedUploads": [
     {
+      "youtubeVideoId": "4z_pEtX3O1A",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=4z_pEtX3O1A",
+      "supportLang": "AZ",
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:49:23Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:39:14.888Z",
+      "sourceSetIds": [
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
       "youtubeVideoId": "TARzFTiwyJU",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=TARzFTiwyJU",
       "supportLang": "AZ",
@@ -3250,6 +3270,26 @@
       ]
     },
     {
+      "youtubeVideoId": "fee5io1FOPI",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=fee5io1FOPI",
+      "supportLang": "BN",
+      "channelKey": "bn",
+      "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:49:35Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:38:48.535Z",
+      "sourceSetIds": [
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
       "youtubeVideoId": "5MT07nbJ-vU",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=5MT07nbJ-vU",
       "supportLang": "BN",
@@ -3292,6 +3332,26 @@
       ]
     },
     {
+      "youtubeVideoId": "JNtOvJjTVn8",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=JNtOvJjTVn8",
+      "supportLang": "CS",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:51:15Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:37:10.162Z",
+      "sourceSetIds": [
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
       "youtubeVideoId": "PmmzHVSWS_s",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=PmmzHVSWS_s",
       "supportLang": "CS",
@@ -3330,6 +3390,26 @@
       "auditWindowStart": "2026-06-22T10:37:10.162Z",
       "sourceSetIds": [
         "home_kitchen_cooking_actions_a1_a2",
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
+      "youtubeVideoId": "E6YqBZYSA_M",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=E6YqBZYSA_M",
+      "supportLang": "DA",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:50:51Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T09:43:20.321Z",
+      "sourceSetIds": [
         "home_kitchen_cookware_pilot_01"
       ]
     },
@@ -4940,13 +5020,33 @@
       "privacyStatus": "unlisted",
       "publishAt": "",
       "uploadStatus": "processed",
-      "potentialCurrentSet": true,
+      "potentialCurrentSet": false,
       "potentialCurrentSetEvaluated": true,
-      "reviewedNonProduct": false,
-      "reviewReason": "",
+      "reviewedNonProduct": true,
+      "reviewReason": "FlashcardsLuna YouTube API visual demo; not a deck publication.",
       "auditWindowStart": "2026-06-22T09:38:56.251Z",
       "sourceSetIds": [
         "home_kitchen_cooking_actions_a1_a2",
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
+      "youtubeVideoId": "bulSoW4svdc",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=bulSoW4svdc",
+      "supportLang": "ET",
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:51:46Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:39:17.103Z",
+      "sourceSetIds": [
         "home_kitchen_cookware_pilot_01"
       ]
     },
@@ -5014,6 +5114,26 @@
       ]
     },
     {
+      "youtubeVideoId": "IAocPjf2MP0",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=IAocPjf2MP0",
+      "supportLang": "FI",
+      "channelKey": "fi",
+      "youtubeChannelId": "UCZkiQ6y2W8aCUuaiP3N665A",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-29T03:47:32Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:41:14.597Z",
+      "sourceSetIds": [
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
       "youtubeVideoId": "pyMXHFvQB_w",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=pyMXHFvQB_w",
       "supportLang": "FI",
@@ -5052,6 +5172,26 @@
       "auditWindowStart": "2026-06-22T10:41:14.597Z",
       "sourceSetIds": [
         "home_kitchen_cooking_actions_a1_a2",
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
+      "youtubeVideoId": "gW8Jwq9XM6o",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=gW8Jwq9XM6o",
+      "supportLang": "FR",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:52:05Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T09:42:15.678Z",
+      "sourceSetIds": [
         "home_kitchen_cookware_pilot_01"
       ]
     },
@@ -5203,6 +5343,26 @@
       ]
     },
     {
+      "youtubeVideoId": "lhmafnAWBsw",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=lhmafnAWBsw",
+      "supportLang": "HR",
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:51:29Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:41:42.974Z",
+      "sourceSetIds": [
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
       "youtubeVideoId": "TsUSp8I-dAc",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=TsUSp8I-dAc",
       "supportLang": "HR",
@@ -5266,6 +5426,26 @@
       ]
     },
     {
+      "youtubeVideoId": "EMUczoYhjdo",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=EMUczoYhjdo",
+      "supportLang": "HU",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:51:00Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:43:56.795Z",
+      "sourceSetIds": [
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
       "youtubeVideoId": "y9U0zZlsO38",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=y9U0zZlsO38",
       "supportLang": "HU",
@@ -5308,6 +5488,26 @@
       ]
     },
     {
+      "youtubeVideoId": "t3JiUNZDxQA",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=t3JiUNZDxQA",
+      "supportLang": "HY",
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:56:13Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-27T11:23:51.463Z",
+      "sourceSetIds": [
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
       "youtubeVideoId": "nGmKVT-_EHg",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=nGmKVT-_EHg",
       "supportLang": "HY",
@@ -5325,6 +5525,26 @@
       "auditWindowStart": "2026-06-27T11:23:51.463Z",
       "sourceSetIds": [
         "home_kitchen_cooking_actions_a1_a2",
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
+      "youtubeVideoId": "uUkSb3CTSiA",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=uUkSb3CTSiA",
+      "supportLang": "ID",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:50:49Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T09:43:08.456Z",
+      "sourceSetIds": [
         "home_kitchen_cookware_pilot_01"
       ]
     },
@@ -5367,6 +5587,26 @@
       "auditWindowStart": "2026-06-22T09:43:08.456Z",
       "sourceSetIds": [
         "home_kitchen_cooking_actions_a1_a2",
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
+      "youtubeVideoId": "q9wPmDuALZs",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=q9wPmDuALZs",
+      "supportLang": "IS",
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:50:23Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:40:46.273Z",
+      "sourceSetIds": [
         "home_kitchen_cookware_pilot_01"
       ]
     },
@@ -5434,6 +5674,26 @@
       ]
     },
     {
+      "youtubeVideoId": "0GQFDoVQutQ",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=0GQFDoVQutQ",
+      "supportLang": "IT",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:50:39Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T09:42:53.546Z",
+      "sourceSetIds": [
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
       "youtubeVideoId": "GDrLsuLMRho",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=GDrLsuLMRho",
       "supportLang": "IT",
@@ -5497,6 +5757,26 @@
       ]
     },
     {
+      "youtubeVideoId": "wy5KKZ1rbGM",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=wy5KKZ1rbGM",
+      "supportLang": "KA",
+      "channelKey": "ka",
+      "youtubeChannelId": "UCpZM_1u-nTHydEJz7cnjf7w",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-29T03:48:58Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:44:19.525Z",
+      "sourceSetIds": [
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
       "youtubeVideoId": "5ROejKmxdh4",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=5ROejKmxdh4",
       "supportLang": "KA",
@@ -5556,6 +5836,26 @@
       "auditWindowStart": "2026-06-22T10:44:19.525Z",
       "sourceSetIds": [
         "home_kitchen_cooking_actions_a1_a2",
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
+      "youtubeVideoId": "Q6yDRflZ4og",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=Q6yDRflZ4og",
+      "supportLang": "KK",
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:51:50Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:51:33.693Z",
+      "sourceSetIds": [
         "home_kitchen_cookware_pilot_01"
       ]
     },
@@ -5661,6 +5961,26 @@
       "auditWindowStart": "2026-06-22T10:53:39.530Z",
       "sourceSetIds": [
         "home_kitchen_cooking_actions_a1_a2",
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
+      "youtubeVideoId": "-XFvr-SAoAY",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=-XFvr-SAoAY",
+      "supportLang": "KN",
+      "channelKey": "kn",
+      "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-28T16:57:02Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:52:28.778Z",
+      "sourceSetIds": [
         "home_kitchen_cookware_pilot_01"
       ]
     },
@@ -5812,6 +6132,26 @@
       ]
     },
     {
+      "youtubeVideoId": "T3jEqQf3Mlw",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=T3jEqQf3Mlw",
+      "supportLang": "LO",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-29T03:56:45Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:51:25.755Z",
+      "sourceSetIds": [
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
       "youtubeVideoId": "iHdZV86ykXU",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=iHdZV86ykXU",
       "supportLang": "LO",
@@ -5850,6 +6190,26 @@
       "auditWindowStart": "2026-06-22T10:51:25.755Z",
       "sourceSetIds": [
         "home_kitchen_cooking_actions_a1_a2",
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
+      "youtubeVideoId": "DR5wgcHTksM",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=DR5wgcHTksM",
+      "supportLang": "LT",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-29T03:56:32Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:53:24.760Z",
+      "sourceSetIds": [
         "home_kitchen_cookware_pilot_01"
       ]
     },
@@ -5917,6 +6277,26 @@
       ]
     },
     {
+      "youtubeVideoId": "3noczqDJQVU",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=3noczqDJQVU",
+      "supportLang": "LV",
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-29T03:58:27Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:53:42.453Z",
+      "sourceSetIds": [
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
       "youtubeVideoId": "tYopEKm0YtU",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=tYopEKm0YtU",
       "supportLang": "LV",
@@ -5976,6 +6356,26 @@
       "auditWindowStart": "2026-06-22T10:53:42.453Z",
       "sourceSetIds": [
         "home_kitchen_cooking_actions_a1_a2",
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
+      "youtubeVideoId": "dqV860hGUAY",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=dqV860hGUAY",
+      "supportLang": "ML",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-29T04:03:45Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T10:55:04.187Z",
+      "sourceSetIds": [
         "home_kitchen_cookware_pilot_01"
       ]
     },
@@ -6064,6 +6464,26 @@
       ]
     },
     {
+      "youtubeVideoId": "F_byTg0huhU",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=F_byTg0huhU",
+      "supportLang": "NL",
+      "channelKey": "nl",
+      "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-29T04:11:24Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T09:42:40.709Z",
+      "sourceSetIds": [
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
       "youtubeVideoId": "FB-NrvhadDA",
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=FB-NrvhadDA",
       "supportLang": "NL",
@@ -6102,6 +6522,26 @@
       "auditWindowStart": "2026-06-22T09:42:40.709Z",
       "sourceSetIds": [
         "home_kitchen_cooking_actions_a1_a2",
+        "home_kitchen_cookware_pilot_01"
+      ]
+    },
+    {
+      "youtubeVideoId": "oP_iodVOXrY",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=oP_iodVOXrY",
+      "supportLang": "NO",
+      "channelKey": "no",
+      "youtubeChannelId": "UCK2IIhxCoPUW3wI6xBPYkfA",
+      "title": "Deleted video",
+      "uploadedAt": "2026-06-29T04:13:54Z",
+      "privacyStatus": "",
+      "publishAt": "",
+      "uploadStatus": "not_returned",
+      "potentialCurrentSet": false,
+      "potentialCurrentSetEvaluated": true,
+      "reviewedNonProduct": false,
+      "reviewReason": "",
+      "auditWindowStart": "2026-06-22T09:43:26.352Z",
+      "sourceSetIds": [
         "home_kitchen_cookware_pilot_01"
       ]
     },
@@ -47312,9 +47752,9 @@
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
-      "auditStartedAt": "2026-07-13T14:51:02.587Z",
-      "auditCompletedAt": "2026-07-13T14:51:06.368Z",
-      "aggregateGeneratedAt": "2026-07-13T15:28:57.856Z",
+      "auditStartedAt": "2026-07-13T16:00:21.112Z",
+      "auditCompletedAt": "2026-07-13T16:00:22.385Z",
+      "aggregateGeneratedAt": "2026-07-13T16:00:42.642Z",
       "evidence": {
         "routeCount": 4,
         "expectedRouteCount": 4,
@@ -47339,8 +47779,8 @@
               "ZH"
             ],
             "supportCount": 12,
-            "generatedAt": "2026-07-13T15:08:15.996Z",
-            "liveAuditGeneratedAt": "2026-07-13T14:51:02.587Z",
+            "generatedAt": "2026-07-13T16:00:21.948Z",
+            "liveAuditGeneratedAt": "2026-07-13T16:00:21.593Z",
             "videoStatusReadback": true,
             "paginationComplete": true
           },
@@ -47362,8 +47802,8 @@
               "VI"
             ],
             "supportCount": 13,
-            "generatedAt": "2026-07-13T15:08:16.443Z",
-            "liveAuditGeneratedAt": "2026-07-13T14:51:06.288Z",
+            "generatedAt": "2026-07-13T16:00:22.737Z",
+            "liveAuditGeneratedAt": "2026-07-13T16:00:22.385Z",
             "videoStatusReadback": true,
             "paginationComplete": true
           },
@@ -47385,8 +47825,8 @@
               "TL"
             ],
             "supportCount": 13,
-            "generatedAt": "2026-07-13T15:28:37.387Z",
-            "liveAuditGeneratedAt": "2026-07-13T14:51:05.730Z",
+            "generatedAt": "2026-07-13T16:00:21.463Z",
+            "liveAuditGeneratedAt": "2026-07-13T16:00:21.112Z",
             "videoStatusReadback": true,
             "paginationComplete": true
           },
@@ -47408,8 +47848,8 @@
               "UZ"
             ],
             "supportCount": 13,
-            "generatedAt": "2026-07-13T15:08:17.434Z",
-            "liveAuditGeneratedAt": "2026-07-13T14:51:06.368Z",
+            "generatedAt": "2026-07-13T16:00:22.381Z",
+            "liveAuditGeneratedAt": "2026-07-13T16:00:22.029Z",
             "videoStatusReadback": true,
             "paginationComplete": true
           }
@@ -47418,8 +47858,8 @@
           {
             "setId": "home_kitchen_cookware_pilot_01",
             "route": "all",
-            "githubRunId": "29259656589",
-            "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29259656589"
+            "githubRunId": "29264567055",
+            "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29264567055"
           }
         ]
       },
@@ -47428,30 +47868,31 @@
         "expectedRouteCount": 4,
         "receivedRouteCount": 4,
         "healthy": false,
-        "blockerCount": 25,
-        "tailCount": 24,
+        "blockerCount": 2,
+        "tailCount": 27,
         "ordinaryTailCount": 18,
-        "polyglotTailCount": 6,
-        "activeVideoCount": 2937,
-        "publicCount": 2919,
-        "scheduledCount": 11,
+        "polyglotTailCount": 9,
+        "activeVideoCount": 2915,
+        "publicCount": 2898,
+        "scheduledCount": 10,
         "privateUnscheduledCount": 7,
         "liveScheduleMissingCalendarCount": 0,
         "calendarAssignmentDuplicateCount": 0,
         "calendarSlotCollisionCount": 0,
         "liveVideoMissingDurableRegistryCount": 0,
-        "liveStatusNotReturnedCount": 22,
+        "liveStatusNotReturnedCount": 0,
+        "youtubeDeletedTombstoneCount": 0,
         "calendarDayGapCount": 0,
         "videoStatusReadbackComplete": true,
         "paginationComplete": true,
         "duplicateGroupCount": 0,
-        "registryAndLiveUnionCount": 2937,
+        "registryAndLiveUnionCount": 2915,
         "liveVideoCount": 2903,
-        "livePublicCount": 2892,
-        "liveScheduledCount": 11,
+        "livePublicCount": 2893,
+        "liveScheduledCount": 10,
         "livePrivateUnscheduledCount": 0,
         "liveStatusUnknownCount": 0,
-        "durableOnlyVideoCount": 34,
+        "durableOnlyVideoCount": 12,
         "liveDuplicateGroupCount": 0,
         "registryOnlyDuplicateGroupCount": 0
       },
@@ -47459,7 +47900,7 @@
         {
           "supportLang": "AZ",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47493,7 +47934,7 @@
         {
           "supportLang": "BN",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47501,7 +47942,7 @@
           "privateUnscheduledCount": 0,
           "statusUnknownCount": 0,
           "ordinaryTailCount": 1,
-          "polyglotTailCount": 0,
+          "polyglotTailCount": 1,
           "liveDuplicateGroupCount": 0,
           "registryOnlyDuplicateGroupCount": 0,
           "nextPublishAt": "",
@@ -47510,7 +47951,7 @@
         {
           "supportLang": "CS",
           "liveVideoCount": 56,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 3,
           "publicCount": 56,
@@ -47518,7 +47959,7 @@
           "privateUnscheduledCount": 0,
           "statusUnknownCount": 0,
           "ordinaryTailCount": 1,
-          "polyglotTailCount": 0,
+          "polyglotTailCount": 1,
           "liveDuplicateGroupCount": 0,
           "registryOnlyDuplicateGroupCount": 0,
           "nextPublishAt": "",
@@ -47527,7 +47968,7 @@
         {
           "supportLang": "DA",
           "liveVideoCount": 52,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 49,
           "polyglotCount": 3,
           "publicCount": 52,
@@ -47535,7 +47976,7 @@
           "privateUnscheduledCount": 0,
           "statusUnknownCount": 0,
           "ordinaryTailCount": 5,
-          "polyglotTailCount": 0,
+          "polyglotTailCount": 1,
           "liveDuplicateGroupCount": 0,
           "registryOnlyDuplicateGroupCount": 0,
           "nextPublishAt": "",
@@ -47581,21 +48022,21 @@
           "durableOnlyCount": 1,
           "ordinaryCount": 54,
           "polyglotCount": 5,
-          "publicCount": 50,
-          "scheduledCount": 9,
+          "publicCount": 51,
+          "scheduledCount": 8,
           "privateUnscheduledCount": 0,
           "statusUnknownCount": 0,
           "ordinaryTailCount": 0,
           "polyglotTailCount": 0,
           "liveDuplicateGroupCount": 0,
           "registryOnlyDuplicateGroupCount": 0,
-          "nextPublishAt": "2026-07-13T15:30:00Z",
+          "nextPublishAt": "2026-07-13T18:30:00Z",
           "lastScheduledPublishAt": "2026-07-14T21:30:00Z"
         },
         {
           "supportLang": "ET",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47612,7 +48053,7 @@
         {
           "supportLang": "FI",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47629,7 +48070,7 @@
         {
           "supportLang": "FR",
           "liveVideoCount": 58,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 5,
           "publicCount": 58,
@@ -47663,7 +48104,7 @@
         {
           "supportLang": "HR",
           "liveVideoCount": 55,
-          "durableOnlyCount": 3,
+          "durableOnlyCount": 2,
           "ordinaryCount": 51,
           "polyglotCount": 4,
           "publicCount": 55,
@@ -47680,7 +48121,7 @@
         {
           "supportLang": "HU",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47697,7 +48138,7 @@
         {
           "supportLang": "HY",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47714,7 +48155,7 @@
         {
           "supportLang": "ID",
           "liveVideoCount": 58,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 5,
           "publicCount": 58,
@@ -47731,7 +48172,7 @@
         {
           "supportLang": "IS",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47748,7 +48189,7 @@
         {
           "supportLang": "IT",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47782,7 +48223,7 @@
         {
           "supportLang": "KA",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47799,7 +48240,7 @@
         {
           "supportLang": "KK",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47833,7 +48274,7 @@
         {
           "supportLang": "KN",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47867,7 +48308,7 @@
         {
           "supportLang": "LO",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47884,7 +48325,7 @@
         {
           "supportLang": "LT",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47901,7 +48342,7 @@
         {
           "supportLang": "LV",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47918,7 +48359,7 @@
         {
           "supportLang": "ML",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -47986,7 +48427,7 @@
         {
           "supportLang": "NL",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -48003,7 +48444,7 @@
         {
           "supportLang": "NO",
           "liveVideoCount": 57,
-          "durableOnlyCount": 1,
+          "durableOnlyCount": 0,
           "ordinaryCount": 53,
           "polyglotCount": 4,
           "publicCount": 57,
@@ -48479,6 +48920,34 @@
           "targetLangs": []
         },
         {
+          "videoType": "polyglot",
+          "setId": "home_kitchen_cookware_pilot_01",
+          "supportLang": "DA",
+          "targetLang": "",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ]
+        },
+        {
+          "videoType": "polyglot",
+          "setId": "home_kitchen_cookware_pilot_01",
+          "supportLang": "CS",
+          "targetLang": "",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ]
+        },
+        {
           "videoType": "ordinary",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "BG",
@@ -48527,6 +48996,20 @@
           "videoType": "polyglot",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "SL",
+          "targetLang": "",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ]
+        },
+        {
+          "videoType": "polyglot",
+          "setId": "home_kitchen_cookware_pilot_01",
+          "supportLang": "BN",
           "targetLang": "",
           "bundleKey": "global_europe_core",
           "contentScope": "full",
@@ -48875,30 +49358,6 @@
           "durableRegistryPresent": true,
           "liveReadbackPresent": true,
           "statusEvidence": "videos.list"
-        },
-        {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "AZ",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "4z_pEtX3O1A",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=4z_pEtX3O1A",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
         },
         {
           "videoType": "ordinary",
@@ -51205,30 +51664,6 @@
           "statusEvidence": "videos.list"
         },
         {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "BN",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "fee5io1FOPI",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=fee5io1FOPI",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
-        },
-        {
           "videoType": "ordinary",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "BN",
@@ -52286,30 +52721,6 @@
           "durableRegistryPresent": true,
           "liveReadbackPresent": true,
           "statusEvidence": "videos.list"
-        },
-        {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "CS",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "JNtOvJjTVn8",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=JNtOvJjTVn8",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
         },
         {
           "videoType": "ordinary",
@@ -53445,30 +53856,6 @@
           "durableRegistryPresent": true,
           "liveReadbackPresent": true,
           "statusEvidence": "videos.list"
-        },
-        {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "DA",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "E6YqBZYSA_M",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=E6YqBZYSA_M",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
         },
         {
           "videoType": "ordinary",
@@ -57333,8 +57720,8 @@
           "contentScope": "",
           "youtubeVideoId": "B8ShhlKuGqw",
           "youtubeVideoUrl": "https://www.youtube.com/watch?v=B8ShhlKuGqw",
-          "state": "scheduled",
-          "privacyStatus": "private",
+          "state": "public",
+          "privacyStatus": "public",
           "publishAt": "2026-07-13T15:30:00Z",
           "thumbnailSet": null,
           "thumbnailUploadMode": "",
@@ -58006,30 +58393,6 @@
           "durableRegistryPresent": true,
           "liveReadbackPresent": true,
           "statusEvidence": "videos.list"
-        },
-        {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "ET",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "bulSoW4svdc",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=bulSoW4svdc",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
         },
         {
           "videoType": "ordinary",
@@ -59153,30 +59516,6 @@
           "statusEvidence": "videos.list"
         },
         {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "FI",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "IAocPjf2MP0",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=IAocPjf2MP0",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
-        },
-        {
           "videoType": "ordinary",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "FI",
@@ -60220,30 +60559,6 @@
           "durableRegistryPresent": true,
           "liveReadbackPresent": true,
           "statusEvidence": "videos.list"
-        },
-        {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "FR",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "DE",
-            "IT"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "gW8Jwq9XM6o",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=gW8Jwq9XM6o",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
         },
         {
           "videoType": "polyglot",
@@ -62446,30 +62761,6 @@
           "statusEvidence": "videos.list"
         },
         {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "HR",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "lhmafnAWBsw",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=lhmafnAWBsw",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
-        },
-        {
           "videoType": "ordinary",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "HR",
@@ -63684,30 +63975,6 @@
           "durableRegistryPresent": true,
           "liveReadbackPresent": true,
           "statusEvidence": "videos.list"
-        },
-        {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "HU",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "EMUczoYhjdo",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=EMUczoYhjdo",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
         },
         {
           "videoType": "ordinary",
@@ -64926,30 +65193,6 @@
           "statusEvidence": "videos.list"
         },
         {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "HY",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "t3JiUNZDxQA",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=t3JiUNZDxQA",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
-        },
-        {
           "videoType": "ordinary",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "HY",
@@ -65955,30 +66198,6 @@
           "durableRegistryPresent": true,
           "liveReadbackPresent": true,
           "statusEvidence": "videos.list"
-        },
-        {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "ID",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "uUkSb3CTSiA",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=uUkSb3CTSiA",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
         },
         {
           "videoType": "polyglot",
@@ -67088,30 +67307,6 @@
           "statusEvidence": "videos.list"
         },
         {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "IS",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "q9wPmDuALZs",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=q9wPmDuALZs",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
-        },
-        {
           "videoType": "ordinary",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "IS",
@@ -68155,30 +68350,6 @@
           "durableRegistryPresent": true,
           "liveReadbackPresent": true,
           "statusEvidence": "videos.list"
-        },
-        {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "IT",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "0GQFDoVQutQ",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=0GQFDoVQutQ",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
         },
         {
           "videoType": "ordinary",
@@ -70423,30 +70594,6 @@
           "statusEvidence": "videos.list"
         },
         {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "KA",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "wy5KKZ1rbGM",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=wy5KKZ1rbGM",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
-        },
-        {
           "videoType": "ordinary",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "KA",
@@ -71547,30 +71694,6 @@
           "durableRegistryPresent": true,
           "liveReadbackPresent": true,
           "statusEvidence": "videos.list"
-        },
-        {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "KK",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "Q6yDRflZ4og",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=Q6yDRflZ4og",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
         },
         {
           "videoType": "ordinary",
@@ -73801,30 +73924,6 @@
           "statusEvidence": "videos.list"
         },
         {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "KN",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "-XFvr-SAoAY",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=-XFvr-SAoAY",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
-        },
-        {
           "videoType": "ordinary",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "KN",
@@ -76053,30 +76152,6 @@
           "statusEvidence": "videos.list"
         },
         {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "LO",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "T3jEqQf3Mlw",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=T3jEqQf3Mlw",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
-        },
-        {
           "videoType": "ordinary",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "LO",
@@ -77293,30 +77368,6 @@
           "statusEvidence": "videos.list"
         },
         {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "LT",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "DR5wgcHTksM",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=DR5wgcHTksM",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
-        },
-        {
           "videoType": "ordinary",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "LT",
@@ -78419,30 +78470,6 @@
           "statusEvidence": "videos.list"
         },
         {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "LV",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "3noczqDJQVU",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=3noczqDJQVU",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
-        },
-        {
           "videoType": "ordinary",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "LV",
@@ -79429,30 +79456,6 @@
           "durableRegistryPresent": true,
           "liveReadbackPresent": true,
           "statusEvidence": "videos.list"
-        },
-        {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "ML",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "dqV860hGUAY",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=dqV860hGUAY",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
         },
         {
           "videoType": "ordinary",
@@ -83963,30 +83966,6 @@
           "statusEvidence": "videos.list"
         },
         {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "NL",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "F_byTg0huhU",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=F_byTg0huhU",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
-        },
-        {
           "videoType": "ordinary",
           "setId": "home_kitchen_cookware_pilot_01",
           "supportLang": "NL",
@@ -85068,30 +85047,6 @@
           "durableRegistryPresent": true,
           "liveReadbackPresent": true,
           "statusEvidence": "videos.list"
-        },
-        {
-          "videoType": "polyglot",
-          "setId": "home_kitchen_cookware_pilot_01",
-          "supportLang": "NO",
-          "targetLang": "",
-          "targetLangs": [
-            "EN",
-            "ES",
-            "FR",
-            "DE"
-          ],
-          "bundleKey": "global_europe_core",
-          "contentScope": "full",
-          "youtubeVideoId": "oP_iodVOXrY",
-          "youtubeVideoUrl": "https://www.youtube.com/watch?v=oP_iodVOXrY",
-          "state": "public",
-          "privacyStatus": "public",
-          "publishAt": "",
-          "thumbnailSet": false,
-          "thumbnailUploadMode": "first_frame_auto",
-          "durableRegistryPresent": true,
-          "liveReadbackPresent": false,
-          "statusEvidence": "durable_registry_only"
         },
         {
           "videoType": "ordinary",
