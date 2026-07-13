@@ -4,13 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "plan is read-only; apply pauses scheduled fallback-thumbnail videos."
+        description: "plan is read-only; apply pauses fallback schedules or moves explicit private-video targets."
         required: true
         default: "plan"
         type: choice
         options:
           - plan
           - apply
+      operation:
+        description: "pause uses fallback-thumbnail criteria; reschedule uses explicit target nextPublishAt values."
+        required: true
+        default: "pause"
+        type: choice
+        options:
+          - pause
+          - reschedule
       supports:
         description: "Comma-separated support channel codes in one YouTube API route, e.g. DE,FR,IT."
         required: true
@@ -30,7 +38,7 @@ on:
           - youtube-api-youtube-3
           - youtube-api-youtube-4
       target_file:
-        description: "Committed non-secret pause target file."
+        description: "Committed non-secret pause or reschedule target file."
         required: true
         default: "config/youtube-fallback-schedule-pause-targets-20260622.json"
       limit:
@@ -42,7 +50,7 @@ on:
         required: false
         default: ""
       confirm_youtube_write:
-        description: "For mode=apply type PAUSE_FALLBACK_SCHEDULES."
+        description: "For apply: PAUSE_FALLBACK_SCHEDULES or RESCHEDULE_PRIVATE_VIDEOS by operation."
         required: false
         default: ""
 
@@ -68,6 +76,7 @@ jobs:
         shell: bash
         env:
           MODE: ${{ github.event.inputs.mode }}
+          OPERATION: ${{ github.event.inputs.operation }}
           SUPPORTS: ${{ github.event.inputs.supports }}
           VIDEO_ID: ${{ github.event.inputs.video_id }}
           LIMIT: ${{ github.event.inputs.limit }}
@@ -89,13 +98,19 @@ jobs:
             echo "::error::limit must be an integer."
             exit 1
           fi
+          if [ "$OPERATION" != "pause" ] && [ "$OPERATION" != "reschedule" ]; then
+            echo "::error::operation must be pause or reschedule."
+            exit 1
+          fi
           if [ -n "$HOLD_PUBLISH_AT" ]; then
             node -e "const t=Date.parse(process.env.HOLD_PUBLISH_AT); if (!Number.isFinite(t) || t <= Date.now() + 600000) { throw new Error('hold_publish_at must be a future ISO timestamp'); }"
           fi
           test -f "$TARGET_FILE"
           node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORTS" --environment="$YOUTUBE_ENVIRONMENT"
-          if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "PAUSE_FALLBACK_SCHEDULES" ]; then
-            echo "::error::mode=apply requires confirm_youtube_write=PAUSE_FALLBACK_SCHEDULES"
+          REQUIRED_CONFIRMATION="PAUSE_FALLBACK_SCHEDULES"
+          if [ "$OPERATION" = "reschedule" ]; then REQUIRED_CONFIRMATION="RESCHEDULE_PRIVATE_VIDEOS"; fi
+          if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "$REQUIRED_CONFIRMATION" ]; then
+            echo "::error::mode=apply requires confirm_youtube_write=$REQUIRED_CONFIRMATION"
             exit 1
           fi
 
@@ -115,10 +130,11 @@ jobs:
           test -d .local/youtube-oauth/tokens
           echo "YouTube OAuth bundle restored."
 
-      - name: Pause fallback schedules
+      - name: Pause fallback schedules or reschedule private videos
         shell: bash
         env:
           MODE: ${{ github.event.inputs.mode }}
+          OPERATION: ${{ github.event.inputs.operation }}
           SUPPORTS: ${{ github.event.inputs.supports }}
           VIDEO_ID: ${{ github.event.inputs.video_id }}
           TARGET_FILE: ${{ github.event.inputs.target_file }}
@@ -128,6 +144,7 @@ jobs:
           set -euo pipefail
           mkdir -p outputs
           ARGS=(
+            "--operation=$OPERATION"
             "--target-file=$TARGET_FILE"
             "--support=$SUPPORTS"
             "--report=outputs/youtube-fallback-schedule-pause-report-github.json"
@@ -143,7 +160,9 @@ jobs:
             ARGS+=("--hold-publish-at=$HOLD_PUBLISH_AT")
           fi
           if [ "$MODE" = "apply" ]; then
-            ARGS+=("--apply" "--confirm-youtube-write=PAUSE_FALLBACK_SCHEDULES")
+            REQUIRED_CONFIRMATION="PAUSE_FALLBACK_SCHEDULES"
+            if [ "$OPERATION" = "reschedule" ]; then REQUIRED_CONFIRMATION="RESCHEDULE_PRIVATE_VIDEOS"; fi
+            ARGS+=("--apply" "--confirm-youtube-write=$REQUIRED_CONFIRMATION")
           fi
           npm run pause:youtube-fallback-schedules -- "${ARGS[@]}"
 
