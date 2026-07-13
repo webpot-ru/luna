@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { sameViewerLanguageTargetBlocker } from "./lib/youtube-language-pair-policy.mjs";
+import { languageSpreadsheetCodes } from "./lib/language-order.mjs";
 import {
   buildPublicationControlReport,
   normalizeCode,
@@ -63,9 +64,8 @@ function readJson(filePath, fallback = {}) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
-async function targetsForSupport(setId, supportLang, requestedTargets) {
-  const metadata = await import("./lib/youtube-metadata.mjs");
-  const raw = requestedTargets || await metadata.resolveTargetLanguages(setId, supportLang);
+function targetsForSupport(supportLang, requestedTargets) {
+  const raw = requestedTargets || languageSpreadsheetCodes;
   return [...new Set(raw.map(normalizeCode).filter(Boolean))]
     .filter((targetLang) => !sameViewerLanguageTargetBlocker({ supportLang, targetLang }))
     .sort();
@@ -148,7 +148,7 @@ async function main() {
   }
   const desiredTargetsBySupport = {};
   for (const supportLang of options.supports) {
-    desiredTargetsBySupport[supportLang] = await targetsForSupport(options.setId, supportLang, options.targets);
+    desiredTargetsBySupport[supportLang] = targetsForSupport(supportLang, options.targets);
   }
   const bundleConfig = readJson(options.polyglotBundleConfig, { defaults: {}, bundles: [] });
   const polyglotProduct = polyglotAssignmentsForSupports({
@@ -187,6 +187,7 @@ async function main() {
   });
   report.productPolicy = {
     ordinaryTargets: options.targets ? "explicit" : "all_eligible",
+    ordinaryTargetSource: options.targets ? "workflow_input" : "config/language-order.json",
     polyglotBundleKeys: polyglotProduct.bundleKeys,
   };
   report.evidence = {
