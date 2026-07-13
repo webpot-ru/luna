@@ -8,6 +8,8 @@
 
 ## 1. Стратегия дистрибуции на YouTube (YouTube Distribution)
 
+Exact duplicate deletion uses `.github/workflows/youtube-delete-duplicates.yml` with a tracked KEEP/DELETE manifest. Live apply without the manifest is rejected. Each OAuth route validates all listed IDs, channel ownership and current view counts before its first delete, performs no delete retries, and uploads evidence plus registry/calendar candidates instead of racing parallel pushes. Durable state is merged only after completed-run readback. The approved 2026-07-13 Deck #1/#2 plan is `config/youtube-duplicate-delete-plans/2026-07-13-decks-1-2-32.json`.
+
 Для исключения «каши» из десятков языков поддержки на одном канале и предотвращения путаницы в алгоритмах рекомендаций YouTube принята **Стратегия разделения каналов по языку зрителя (Support Language / Market)**.
 
 ### Архитектура каналов:

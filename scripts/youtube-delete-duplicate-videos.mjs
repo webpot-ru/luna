@@ -19,6 +19,9 @@ function parseArgs(argv) {
     route: "",
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
+    publishCalendar: "config/youtube-publish-calendar.json",
+    targetFile: "",
+    reportFile: "outputs/youtube-duplicate-deletion-report.json",
     apply: false,
     confirmYoutubeWrite: false,
   };
@@ -31,6 +34,9 @@ function parseArgs(argv) {
     else if (arg.startsWith("--route=")) options.route = arg.slice("--route=".length);
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--publication-registry=")) options.publicationRegistry = arg.slice("--publication-registry=".length);
+    else if (arg.startsWith("--publish-calendar=")) options.publishCalendar = arg.slice("--publish-calendar=".length);
+    else if (arg.startsWith("--target-file=")) options.targetFile = arg.slice("--target-file=".length);
+    else if (arg.startsWith("--report-file=")) options.reportFile = arg.slice("--report-file=".length);
     else throw new Error(`Unknown argument: ${arg}`);
   }
   return options;
@@ -39,11 +45,137 @@ function parseArgs(argv) {
 function usage() {
   return [
     "Usage:",
-    "  node scripts/youtube-delete-duplicate-videos.mjs [--support=VI] [--route=youtube-2]",
+    "  node scripts/youtube-delete-duplicate-videos.mjs --target-file=<json> --route=youtube-2",
     "",
     "Dry-run is default. Live deletion requires:",
     "  --apply --confirm-youtube-write",
   ].join("\n");
+}
+
+function loadExactTargets(targetFile) {
+  if (!targetFile || !fs.existsSync(targetFile)) {
+    throw new Error(`Exact deletion target file not found: ${targetFile || "<empty>"}`);
+  }
+  const payload = JSON.parse(fs.readFileSync(targetFile, "utf8"));
+  if (payload.schemaVersion !== 1 || !Array.isArray(payload.targets) || payload.targets.length === 0) {
+    throw new Error("Exact deletion target file must use schemaVersion=1 with a non-empty targets array.");
+  }
+  if (Number(payload.expectedTargetCount || 0) !== payload.targets.length) {
+    throw new Error(`Target count mismatch: expected ${payload.expectedTargetCount}, found ${payload.targets.length}.`);
+  }
+
+  const required = ["setId", "videoType", "supportLang", "targetLang", "keepVideoId", "deleteVideoId", "route"];
+  const deleteIds = new Set();
+  const keepIds = new Set();
+  const assignmentKeys = new Set();
+  for (const [index, target] of payload.targets.entries()) {
+    for (const field of required) {
+      if (!String(target[field] || "").trim()) throw new Error(`Target ${index + 1} is missing ${field}.`);
+    }
+    if (!/^youtube-[1-4]$/.test(target.route)) throw new Error(`Target ${index + 1} has invalid route ${target.route}.`);
+    if (!/^[A-Za-z0-9_-]{11}$/.test(target.keepVideoId) || !/^[A-Za-z0-9_-]{11}$/.test(target.deleteVideoId)) {
+      throw new Error(`Target ${index + 1} has an invalid YouTube video id.`);
+    }
+    if (target.keepVideoId === target.deleteVideoId) throw new Error(`Target ${index + 1} keeps and deletes the same video.`);
+    if (deleteIds.has(target.deleteVideoId)) throw new Error(`Duplicate deleteVideoId: ${target.deleteVideoId}`);
+    const key = [target.setId, target.videoType, normalizeLanguageCode(target.supportLang), target.targetLang].join("|");
+    if (assignmentKeys.has(key)) throw new Error(`Duplicate assignment in target file: ${key}`);
+    assignmentKeys.add(key);
+    deleteIds.add(target.deleteVideoId);
+    keepIds.add(target.keepVideoId);
+  }
+  for (const id of deleteIds) {
+    if (keepIds.has(id)) throw new Error(`Video ${id} appears in both KEEP and DELETE columns.`);
+  }
+  return payload;
+}
+
+function bundleKeyForTargetLang(targetLang) {
+  return new Map([
+    ["EN,ES,FR,DE", "global_europe_core"],
+    ["ES,FR,IT,PT", "romance_core"],
+    ["ZH,JA,KO", "east_asia_core"],
+    ["RU,PL,CS,SK", "slavic_core"],
+  ]).get(targetLang) || "";
+}
+
+function routeForChannel(routing, channel) {
+  return routing.projects.find(project => (project.supportChannelKeys || []).includes(channel?.key))?.key || "";
+}
+
+async function readVideos(accessToken, ids) {
+  const url = new URL("videos", "https://www.googleapis.com/youtube/v3/");
+  url.searchParams.set("part", "id,snippet,status,statistics");
+  url.searchParams.set("id", ids.join(","));
+  const response = await fetch(url, { headers: { authorization: `Bearer ${accessToken}` } });
+  if (!response.ok) throw new Error(`YouTube API preflight failed (${response.status}): ${await response.text()}`);
+  return (await response.json()).items || [];
+}
+
+function updateDurableState({ publicationRegistry, publishCalendar, candidate, liveById, deletedAt }) {
+  const { keep, del, channel, route } = candidate;
+  const keepLive = liveById.get(keep.youtubeVideoId);
+  const deleteLive = liveById.get(del[0].youtubeVideoId);
+  let keepRow = publicationRegistry.publications.find(row => row.youtubeVideoId === keep.youtubeVideoId);
+  if (!keepRow) {
+    keepRow = {
+      schemaVersion: 1,
+      setId: keep.setId,
+      videoType: keep.videoType,
+      supportLang: keep.supportLang,
+      targetLang: keep.targetLang,
+      targetLangs: keep.videoType === "polyglot" ? keep.targetLang.split(",") : [],
+      bundleKey: keep.videoType === "polyglot" ? bundleKeyForTargetLang(keep.targetLang) : "",
+      polyglotKey: keep.videoType === "polyglot" ? bundleKeyForTargetLang(keep.targetLang) : "",
+      contentScope: keep.videoType === "polyglot" ? "full" : "",
+      youtubeVideoId: keep.youtubeVideoId,
+      youtubeVideoUrl: `https://www.youtube.com/watch?v=${keep.youtubeVideoId}`,
+      title: keepLive?.snippet?.title || "",
+      channelKey: channel.key,
+      youtubeChannelId: channel.channelId,
+      privacyStatus: keepLive?.status?.privacyStatus || "",
+      publishAt: keepLive?.status?.publishAt || "",
+      publicationStatus: keepLive?.status?.privacyStatus === "private" ? "scheduled_uploaded" : "live_youtube_upload_detected",
+      source: "exact_duplicate_delete_reconciliation",
+      reconciledAt: deletedAt,
+    };
+    publicationRegistry.publications.push(keepRow);
+  }
+
+  let deleteRow = publicationRegistry.publications.find(row => row.youtubeVideoId === del[0].youtubeVideoId);
+  if (!deleteRow) {
+    deleteRow = {
+      schemaVersion: 1,
+      setId: del[0].setId,
+      videoType: del[0].videoType,
+      supportLang: del[0].supportLang,
+      targetLang: del[0].targetLang,
+      targetLangs: del[0].videoType === "polyglot" ? del[0].targetLang.split(",") : [],
+      bundleKey: del[0].videoType === "polyglot" ? bundleKeyForTargetLang(del[0].targetLang) : "",
+      polyglotKey: del[0].videoType === "polyglot" ? bundleKeyForTargetLang(del[0].targetLang) : "",
+      contentScope: del[0].videoType === "polyglot" ? "full" : "",
+      youtubeVideoId: del[0].youtubeVideoId,
+      youtubeVideoUrl: `https://www.youtube.com/watch?v=${del[0].youtubeVideoId}`,
+      title: deleteLive?.snippet?.title || "",
+      channelKey: channel.key,
+      youtubeChannelId: channel.channelId,
+      route,
+    };
+    publicationRegistry.publications.push(deleteRow);
+  }
+  deleteRow.publicationStatus = "deleted_duplicate";
+  deleteRow.deletedAt = deletedAt;
+  deleteRow.duplicateOfVideoId = keep.youtubeVideoId;
+  deleteRow.source = "exact_duplicate_delete_reconciliation";
+
+  for (const reservation of publishCalendar.reservations || []) {
+    if (reservation.youtubeVideoId !== del[0].youtubeVideoId) continue;
+    reservation.youtubeVideoId = keep.youtubeVideoId;
+    reservation.status = "reserved";
+    reservation.duplicateVideoIdDeleted = del[0].youtubeVideoId;
+    reservation.updatedAt = deletedAt;
+    reservation.source = "exact_duplicate_delete_reconciliation";
+  }
 }
 
 function loadOAuthClient(clientFile) {
@@ -133,9 +265,13 @@ async function main() {
     console.error("Error: --apply requires --confirm-youtube-write");
     process.exit(1);
   }
+  if (options.apply && !options.targetFile) {
+    throw new Error("Live deletion requires --target-file. Unscoped registry-wide deletion is disabled.");
+  }
 
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
+  const publishCalendar = JSON.parse(fs.readFileSync(options.publishCalendar, "utf8"));
   const routing = JSON.parse(fs.readFileSync("config/youtube-api-project-routing.json", "utf8"));
 
   const active = publicationRegistry.publications.filter(r => {
@@ -152,10 +288,35 @@ async function main() {
     byKey.set(key, rows);
   }
 
-  const dupes = [...byKey.entries()].filter(([, rows]) => rows.length > 1);
   const candidates = [];
 
-  for (const [key, rows] of dupes) {
+  if (options.targetFile) {
+    const exactPlan = loadExactTargets(options.targetFile);
+    if (!options.route || !/^youtube-[1-4]$/.test(options.route)) {
+      throw new Error("Exact target mode requires one explicit --route=youtube-N.");
+    }
+    for (const target of exactPlan.targets.filter(row => row.route === options.route)) {
+      if (target.videoType === "polyglot" && !bundleKeyForTargetLang(target.targetLang)) {
+        throw new Error(`Unknown Polyglot bundle target set: ${target.targetLang}`);
+      }
+      const channel = findChannelForSupport(channelRegistry.channels, target.supportLang);
+      if (!channel) throw new Error(`No configured channel for support ${target.supportLang}.`);
+      const actualRoute = routeForChannel(routing, channel);
+      if (actualRoute !== target.route) {
+        throw new Error(`Route mismatch for ${target.supportLang}: plan=${target.route}, config=${actualRoute || "missing"}.`);
+      }
+      candidates.push({
+        key: [target.setId, target.videoType, target.supportLang, target.targetLang].join("|"),
+        channel,
+        route: actualRoute,
+        keep: { ...target, youtubeVideoId: target.keepVideoId },
+        del: [{ ...target, youtubeVideoId: target.deleteVideoId }],
+      });
+    }
+  } else {
+    const dupes = [...byKey.entries()].filter(([, rows]) => rows.length > 1);
+
+    for (const [key, rows] of dupes) {
     const sorted = rows.slice().sort((a, b) => {
       const aLive = (a.publicationStatus||'').includes('live_youtube_upload_detected') ? 1 : 0;
       const bLive = (b.publicationStatus||'').includes('live_youtube_upload_detected') ? 1 : 0;
@@ -170,30 +331,24 @@ async function main() {
     
     // Find channel and route
     const channel = findChannelForSupport(channelRegistry.channels, keep.supportLang);
-    let route = "";
-    if (channel) {
-      for (const r of routing.projects) {
-        if ((r.supportChannelKeys || []).includes(channel.key)) {
-          route = r.key;
-          break;
-        }
-      }
-    }
+      const route = routeForChannel(routing, channel);
 
     // Apply filters
     if (options.supportLang && normalizeLanguageCode(keep.supportLang) !== options.supportLang) continue;
     if (options.route && route !== options.route) continue;
 
-    candidates.push({
+      candidates.push({
       key,
       channel,
       route,
       keep,
       del,
-    });
+      });
+    }
   }
 
   console.log(`Found ${candidates.length} duplicate groups to process (with ${candidates.reduce((sum, c) => sum + c.del.length, 0)} videos to delete).`);
+  if (options.targetFile && candidates.length === 0) throw new Error(`Exact target file has no rows for ${options.route}.`);
 
   if (!options.apply) {
     console.log("\nDRY-RUN MODE (No deletions will be performed). Run with --apply --confirm-youtube-write to perform deletions.");
@@ -208,10 +363,44 @@ async function main() {
   }
 
   // Deletion logic
-  console.log("\nSTARTING LIVE DELETIONS...");
+  console.log("\nSTARTING LIVE DELETION PREFLIGHT...");
   const clientFile = channelRegistry.defaults?.oauthClientFile || ".local/youtube-oauth/google-oauth-client.json";
+  const accessTokens = new Map();
+  const liveById = new Map();
+  const byChannel = new Map();
+  for (const candidate of candidates) {
+    const rows = byChannel.get(candidate.channel.key) || [];
+    rows.push(candidate);
+    byChannel.set(candidate.channel.key, rows);
+  }
+  for (const channelCandidates of byChannel.values()) {
+    const channel = channelCandidates[0].channel;
+    const tokenFile = tokenFileFor(channelRegistry, channel);
+    const accessToken = await getAccessToken({ clientFile, tokenFile });
+    accessTokens.set(channel.key, accessToken);
+    const ids = channelCandidates.flatMap(candidate => [candidate.keep.youtubeVideoId, candidate.del[0].youtubeVideoId]);
+    const items = await readVideos(accessToken, ids);
+    for (const item of items) liveById.set(item.id, item);
+    for (const candidate of channelCandidates) {
+      const keepLive = liveById.get(candidate.keep.youtubeVideoId);
+      const deleteLive = liveById.get(candidate.del[0].youtubeVideoId);
+      if (!keepLive || !deleteLive) throw new Error(`Preflight did not return both videos for ${candidate.key}.`);
+      if (keepLive.snippet?.channelId !== channel.channelId || deleteLive.snippet?.channelId !== channel.channelId) {
+        throw new Error(`Channel mismatch during preflight for ${candidate.key}.`);
+      }
+      const keepViews = Number(keepLive.statistics?.viewCount || 0);
+      const deleteViews = Number(deleteLive.statistics?.viewCount || 0);
+      if (deleteViews > keepViews) {
+        throw new Error(`Popularity changed for ${candidate.key}: DELETE has ${deleteViews} views, KEEP has ${keepViews}.`);
+      }
+      console.log(`PREFLIGHT OK ${candidate.key}: KEEP ${candidate.keep.youtubeVideoId} (${keepViews}), DELETE ${candidate.del[0].youtubeVideoId} (${deleteViews}).`);
+    }
+  }
+  console.log("ALL PREFLIGHT CHECKS PASSED. STARTING LIVE DELETIONS...");
   let processedCount = 0;
   let errorCount = 0;
+  let stopped = false;
+  const report = { schemaVersion: 1, generatedAt: new Date().toISOString(), route: options.route, targetFile: options.targetFile, deleted: [], errors: [] };
 
   for (const c of candidates) {
     if (!c.channel) {
@@ -220,50 +409,40 @@ async function main() {
       continue;
     }
 
-    const tokenFile = tokenFileFor(channelRegistry, c.channel);
-    if (!fs.existsSync(tokenFile)) {
-      console.error(`Skipping group ${c.key} because token file is missing locally: ${tokenFile}`);
-      errorCount++;
-      continue;
-    }
-
-    let accessToken;
-    try {
-      accessToken = await getAccessToken({ clientFile, tokenFile });
-    } catch (e) {
-      console.error(`Skipping group ${c.key} because token refresh failed: ${e.message}`);
-      errorCount++;
-      continue;
-    }
+    const accessToken = accessTokens.get(c.channel.key);
 
     for (const d of c.del) {
       console.log(`Deleting video ${d.youtubeVideoId} for ${c.key}...`);
       try {
         await deleteVideo(accessToken, d.youtubeVideoId);
         
-        // Find the exact row in publication registry and mark it as deleted
-        const registryRow = publicationRegistry.publications.find(
-          p => p.youtubeVideoId === d.youtubeVideoId && p.setId === d.setId
-        );
-        if (registryRow) {
-          registryRow.publicationStatus = "deleted_duplicate";
-          registryRow.deletedAt = new Date().toISOString();
-        }
+        const deletedAt = new Date().toISOString();
+        updateDurableState({ publicationRegistry, publishCalendar, candidate: c, liveById, deletedAt });
+        report.deleted.push({ key: c.key, keepVideoId: c.keep.youtubeVideoId, deleteVideoId: d.youtubeVideoId, deletedAt });
         processedCount++;
       } catch (e) {
         console.error(`Failed to delete video ${d.youtubeVideoId}: ${e.message}`);
+        report.errors.push({ key: c.key, keepVideoId: c.keep.youtubeVideoId, deleteVideoId: d.youtubeVideoId, error: e.message });
         errorCount++;
+        stopped = true;
+        break;
       }
     }
+    if (stopped) break;
   }
+
+  fs.mkdirSync(path.dirname(options.reportFile), { recursive: true });
+  fs.writeFileSync(options.reportFile, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 
   // Save updated registry
   if (processedCount > 0) {
     savePublicationRegistry(publicationRegistry, options.publicationRegistry);
+    fs.writeFileSync(options.publishCalendar, `${JSON.stringify(publishCalendar, null, 2)}\n`, "utf8");
     console.log(`Saved updated publication registry to ${options.publicationRegistry}`);
   }
 
   console.log(`Deletion summary: successfully processed ${processedCount} videos, encountered ${errorCount} errors.`);
+  if (errorCount > 0) process.exitCode = 1;
 }
 
 main().catch(err => {

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-07-13T11:00:00Z",
+  "expectedTargetCount": 32,
+  "purpose": "Exact user-approved removal of 32 confirmed Deck 1 and Deck 2 duplicate videos.",
+  "selectionPolicy": "Keep the video with more views; on a tie prefer durable registry, then earlier publication, then stable ID.",
+  "targets": [
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "ordinary", "supportLang": "EN", "targetLang": "NO", "keepVideoId": "WXJibqBNXqs", "deleteVideoId": "UWrybIrC1GM", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "ordinary", "supportLang": "ES-419", "targetLang": "AZ", "keepVideoId": "9LDjPJPFGkg", "deleteVideoId": "z1c3voGyUL4", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "ordinary", "supportLang": "PT-BR", "targetLang": "HU", "keepVideoId": "MzxVtTQ-iiU", "deleteVideoId": "tihNABOX1ug", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "ordinary", "supportLang": "PT-BR", "targetLang": "HR", "keepVideoId": "yx5d0FIYso4", "deleteVideoId": "7dbLkq9IyK0", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "ordinary", "supportLang": "PT-BR", "targetLang": "EN", "keepVideoId": "FF8I9YAeZrc", "deleteVideoId": "42tjeth7lAY", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "ordinary", "supportLang": "SW", "targetLang": "NO", "keepVideoId": "K4mE1GkR3l8", "deleteVideoId": "qulwzxMb6sY", "route": "youtube-4" },
+
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "ES-419", "targetLang": "ES,FR,IT,PT", "keepVideoId": "4E3lliVWsbA", "deleteVideoId": "unM5m2K1gwk", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "PT-BR", "targetLang": "ES,FR,IT,PT", "keepVideoId": "L6qSQzb-YFY", "deleteVideoId": "k9YPEGn_jFY", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "HI", "targetLang": "RU,PL,CS,SK", "keepVideoId": "K-eOwLLk444", "deleteVideoId": "375-Y5REamo", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "ID", "targetLang": "RU,PL,CS,SK", "keepVideoId": "oTa4DBXmScs", "deleteVideoId": "AWuZY7DBCto", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "FR", "targetLang": "RU,PL,CS,SK", "keepVideoId": "624J068RRmc", "deleteVideoId": "fiyB2e6cTR4", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "DE", "targetLang": "RU,PL,CS,SK", "keepVideoId": "K3ILZouSXC8", "deleteVideoId": "PhLyTsDPzL0", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "KO", "targetLang": "RU,PL,CS,SK", "keepVideoId": "fWPkg-37ZwM", "deleteVideoId": "ibeNRukriYI", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "ZH", "targetLang": "RU,PL,CS,SK", "keepVideoId": "S44eqfMl-Sk", "deleteVideoId": "sMz0r-1QPHc", "route": "youtube-1" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "VI", "targetLang": "ZH,JA,KO", "keepVideoId": "OV5CAWpDLFI", "deleteVideoId": "SGXn8aa_7Xs", "route": "youtube-2" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "VI", "targetLang": "EN,ES,FR,DE", "keepVideoId": "_FuvQtu6aRM", "deleteVideoId": "-S-SHVrn74U", "route": "youtube-2" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "SR", "targetLang": "ZH,JA,KO", "keepVideoId": "RgeghsHzXcQ", "deleteVideoId": "jDFFlB6U4Ro", "route": "youtube-3" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "SR", "targetLang": "EN,ES,FR,DE", "keepVideoId": "fI4PgvlKTv0", "deleteVideoId": "hSwe2oR0-KE", "route": "youtube-3" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "MY", "targetLang": "ZH,JA,KO", "keepVideoId": "1OKbKl88nx8", "deleteVideoId": "yQ3894R4b_4", "route": "youtube-3" },
+    { "setId": "home_kitchen_cookware_pilot_01", "videoType": "polyglot", "supportLang": "MY", "targetLang": "EN,ES,FR,DE", "keepVideoId": "M7kl3T-lzZk", "deleteVideoId": "B2pJBKf78rM", "route": "youtube-3" },
+
+    { "setId": "home_kitchen_cooking_actions_a1_a2", "videoType": "ordinary", "supportLang": "ES-419", "targetLang": "FR", "keepVideoId": "LMZnf4SMO18", "deleteVideoId": "W24IPkkYHWU", "route": "youtube-1" },
+    { "setId": "home_kitchen_cooking_actions_a1_a2", "videoType": "ordinary", "supportLang": "ES-419", "targetLang": "FI", "keepVideoId": "azi7X37qFUg", "deleteVideoId": "gzGDC6zdTYo", "route": "youtube-1" },
+    { "setId": "home_kitchen_cooking_actions_a1_a2", "videoType": "ordinary", "supportLang": "ES-419", "targetLang": "ET", "keepVideoId": "C71sRC7wHxc", "deleteVideoId": "zGQGti-vSzM", "route": "youtube-1" },
+    { "setId": "home_kitchen_cooking_actions_a1_a2", "videoType": "ordinary", "supportLang": "ES-419", "targetLang": "EN", "keepVideoId": "JNSkFMcADzs", "deleteVideoId": "X6CcvRzjn_E", "route": "youtube-1" },
+    { "setId": "home_kitchen_cooking_actions_a1_a2", "videoType": "ordinary", "supportLang": "ES-419", "targetLang": "EN-GB", "keepVideoId": "o6hLAvBe0dI", "deleteVideoId": "sYR0B214ivU", "route": "youtube-1" },
+    { "setId": "home_kitchen_cooking_actions_a1_a2", "videoType": "ordinary", "supportLang": "ES-419", "targetLang": "DE", "keepVideoId": "5CYu9H3ad_E", "deleteVideoId": "W-2OjyIEOxk", "route": "youtube-1" },
+    { "setId": "home_kitchen_cooking_actions_a1_a2", "videoType": "ordinary", "supportLang": "PT-BR", "targetLang": "ET", "keepVideoId": "nzoYvwkCvwQ", "deleteVideoId": "Xq9VnS2a7pI", "route": "youtube-1" },
+    { "setId": "home_kitchen_cooking_actions_a1_a2", "videoType": "ordinary", "supportLang": "PT-BR", "targetLang": "ES-419", "keepVideoId": "MlCn1VafEPQ", "deleteVideoId": "xkpdF4QzM4o", "route": "youtube-1" },
+    { "setId": "home_kitchen_cooking_actions_a1_a2", "videoType": "ordinary", "supportLang": "PT-BR", "targetLang": "ES", "keepVideoId": "7ruou3j2uzk", "deleteVideoId": "HjvUol0I4MI", "route": "youtube-1" },
+    { "setId": "home_kitchen_cooking_actions_a1_a2", "videoType": "ordinary", "supportLang": "PT-BR", "targetLang": "EN", "keepVideoId": "CEAykOerHB8", "deleteVideoId": "IKlShjdl8Do", "route": "youtube-1" },
+    { "setId": "home_kitchen_cooking_actions_a1_a2", "videoType": "ordinary", "supportLang": "PT-BR", "targetLang": "EN-GB", "keepVideoId": "G_FE62lQ8gU", "deleteVideoId": "joSwTjhpJos", "route": "youtube-1" },
+    { "setId": "home_kitchen_cooking_actions_a1_a2", "videoType": "ordinary", "supportLang": "PT-BR", "targetLang": "DE", "keepVideoId": "wDibhaiNTtg", "deleteVideoId": "x2fNqjEi0sQ", "route": "youtube-1" }
+  ]
+}
