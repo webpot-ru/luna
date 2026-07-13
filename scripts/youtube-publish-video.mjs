@@ -37,6 +37,7 @@ import {
   savePublicationRegistry,
   upsertPublication,
 } from "./lib/youtube-publication-registry.mjs";
+import { estimateYoutubeUploadQuota } from "./lib/youtube-quota-model.mjs";
 
 function parseArgs(argv) {
   const options = {
@@ -821,6 +822,8 @@ function dryRun(plan) {
   console.log(`privacy=${plan.privacyStatus}`);
   if (plan.publishAt) console.log(`publishAt=${plan.publishAt}`);
   console.log(`estimatedQuotaUnits=${plan.estimatedQuotaUnits}`);
+  console.log(`estimatedVideoUploadCalls=${plan.estimatedVideoUploadCalls}`);
+  console.log(`estimatedGeneralQuotaUnits=${plan.estimatedGeneralQuotaUnits}`);
   if (plan.blockers.length) console.log(`blockers=${plan.blockers.join("; ")}`);
   if (plan.warnings.length) console.log(`warnings=${plan.warnings.join("; ")}`);
 }
@@ -909,7 +912,11 @@ async function main() {
     youtube_playlist_id: playlistEntry?.youtube_playlist_id || "",
     privacyStatus,
     publishAt,
-    estimatedQuotaUnits: 1600 + (thumbnailUploadPath ? 50 : 0) + (playlistEntry?.youtube_playlist_id ? 50 : (options.createPlaylist ? 100 : 0)),
+    ...estimateYoutubeUploadQuota({
+      hasThumbnail: Boolean(thumbnailUploadPath),
+      hasExistingPlaylist: Boolean(playlistEntry?.youtube_playlist_id),
+      allowPlaylistCreate: options.createPlaylist,
+    }),
     blockers,
     warnings: thumbnailUploadMode === "custom" ? [] : [`custom thumbnail upload skipped; ${thumbnailFallbackReason || "YouTube auto first-frame fallback will be used"}`],
   };

@@ -21,6 +21,7 @@ import {
   isActivePublication,
   loadPublicationRegistry,
 } from "./lib/youtube-publication-registry.mjs";
+import { estimateYoutubeUploadQuota } from "./lib/youtube-quota-model.mjs";
 
 const DEFAULT_POLYGLOT_PUBLICATION_REGISTRY_PATH = "config/youtube-polyglot-published-videos.json";
 const VIDEO_EXTENSIONS = new Set([".mp4", ".mov", ".m4v", ".webm"]);
@@ -148,11 +149,11 @@ function polishedMetadataIssue(metadata) {
 }
 
 function quotaForCandidate({ hasThumbnail, playlistEntry, allowPlaylistCreate }) {
-  let quota = 1600;
-  if (hasThumbnail) quota += 50;
-  if (playlistEntry?.youtube_playlist_id) quota += 50;
-  else if (allowPlaylistCreate) quota += 100;
-  return quota;
+  return estimateYoutubeUploadQuota({
+    hasThumbnail,
+    hasExistingPlaylist: Boolean(playlistEntry?.youtube_playlist_id),
+    allowPlaylistCreate,
+  });
 }
 
 function validateCandidate({
@@ -255,7 +256,7 @@ function validateCandidate({
     publish_ready: blockers.length === 0 && (playlistEntry?.youtube_playlist_id || allowPlaylistCreate),
     blockers,
     warnings,
-    estimatedQuotaUnits: quotaForCandidate({
+    ...quotaForCandidate({
       hasThumbnail: Boolean(thumbnailUploadPath),
       playlistEntry,
       allowPlaylistCreate,
@@ -268,6 +269,8 @@ function printHuman(report) {
   console.log(`Candidates: ${report.summary.candidateCount}`);
   console.log(`Publish-ready: ${report.summary.publishReadyCount}`);
   console.log(`Estimated max quota units: ${report.summary.estimatedQuotaUnits}`);
+  console.log(`Estimated video upload calls: ${report.summary.estimatedVideoUploadCalls}`);
+  console.log(`Estimated general quota units: ${report.summary.estimatedGeneralQuotaUnits}`);
   console.log(`Missing planned playlists: ${report.summary.missingPlaylistCount}`);
   console.log(`Report: ${report.outputPath}`);
   console.log("");
@@ -335,6 +338,8 @@ try {
       candidateCount: candidates.length,
       publishReadyCount: candidates.filter((item) => item.publish_ready).length,
       estimatedQuotaUnits: candidates.reduce((sum, item) => sum + item.estimatedQuotaUnits, 0),
+      estimatedVideoUploadCalls: candidates.reduce((sum, item) => sum + item.estimatedVideoUploadCalls, 0),
+      estimatedGeneralQuotaUnits: candidates.reduce((sum, item) => sum + item.estimatedGeneralQuotaUnits, 0),
       missingPlaylistCount: candidates.filter((item) => item.playlist.registryStatus === "missing").length,
       blockerCount: candidates.reduce((sum, item) => sum + item.blockers.length, 0),
       warningCount: candidates.reduce((sum, item) => sum + item.warnings.length, 0),

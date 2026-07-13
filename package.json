@@ -60,6 +60,7 @@
     "test:youtube-publication-snapshot": "node scripts/build-youtube-publication-snapshot.test.mjs",
     "test:youtube-delete-duplicates": "node scripts/youtube-delete-duplicate-videos.test.mjs",
     "test:youtube-delete-obsolete-polyglot": "node scripts/youtube-delete-obsolete-polyglot-videos.test.mjs",
+    "test:youtube-quota-model": "node scripts/lib/youtube-quota-model.test.mjs",
     "merge:youtube-duplicate-deletions": "node scripts/merge-youtube-duplicate-deletion-reports.mjs",
     "reconcile:youtube-publication-registry-control": "node scripts/reconcile-youtube-publication-registry-from-control.mjs",
     "test:youtube-publication-registry-control-reconcile": "node scripts/reconcile-youtube-publication-registry-from-control.test.mjs",
