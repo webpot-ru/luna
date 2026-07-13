@@ -86,7 +86,7 @@ function findChannel(channels, supportLang) {
 function targetCodesForDeck(deck) {
   const metadata = deck.courseMetadata || deck.course_metadata || {};
   const source = metadata.title || deck.titles || {};
-  return [...new Set(Object.keys(source).map(normalizeCode).filter(Boolean))];
+  return [...new Set(Object.keys(source).map(normalizeCode).map((code) => code === "NB" ? "NO" : code).filter(Boolean))];
 }
 
 function buildCoverPlan({
@@ -96,12 +96,16 @@ function buildCoverPlan({
   channels,
   supports,
   types,
+  targets = [],
+  bundles = [],
   polyglotConfig,
   outputRoot,
 }) {
   const covers = [];
   const skipped = [];
   const enabledTypes = new Set(types);
+  const selectedTargets = new Set(targets.map(normalizeCode));
+  const selectedBundles = new Set(bundles.map(cleanText));
   const bundleKeys = polyglotConfig.defaults?.productionBundleKeys || [];
   const bundleByKey = new Map((polyglotConfig.bundles || []).map((bundle) => [bundle.key, bundle]));
   const deckTargets = targetCodesForDeck(deck);
@@ -119,6 +123,7 @@ function buildCoverPlan({
 
     if (enabledTypes.has("ordinary")) {
       for (const targetLang of deckTargets) {
+        if (selectedTargets.size && !selectedTargets.has(targetLang)) continue;
         if (sameViewerLanguageTargetBlocker({ supportLang, targetLang })) continue;
         const targetName = languageLabel(targetLang, supportLang);
         const relativePath = [
@@ -160,6 +165,7 @@ function buildCoverPlan({
 
     if (enabledTypes.has("polyglot")) {
       for (const bundleKey of bundleKeys) {
+        if (selectedBundles.size && !selectedBundles.has(bundleKey)) continue;
         const bundle = bundleByKey.get(bundleKey);
         if (!bundle) throw new Error(`Unknown production Polyglot bundle: ${bundleKey}`);
         const targetLangs = resolvePolyglotBundleTargets(bundle, supportLang).targetLangs;

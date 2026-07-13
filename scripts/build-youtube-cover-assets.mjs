@@ -26,6 +26,8 @@ function parseArgs(argv) {
     setIds: [],
     supports: [],
     types: [],
+    targets: [],
+    bundles: [],
     outputRoot: "",
     concurrency: 4,
     dryRun: false,
@@ -40,6 +42,8 @@ function parseArgs(argv) {
     else if (arg === "--set" || arg.startsWith("--set=")) options.setIds.push(...value().split(",").filter(Boolean));
     else if (arg === "--support" || arg.startsWith("--support=")) options.supports.push(...value().split(",").map(normalizeCode).filter(Boolean));
     else if (arg === "--types" || arg.startsWith("--types=")) options.types.push(...value().split(",").map((item) => item.trim().toLowerCase()).filter(Boolean));
+    else if (arg === "--targets" || arg.startsWith("--targets=")) options.targets.push(...value().split(",").map(normalizeCode).filter(Boolean));
+    else if (arg === "--bundles" || arg.startsWith("--bundles=")) options.bundles.push(...value().split(",").map((item) => item.trim()).filter(Boolean));
     else if (arg === "--output-root" || arg.startsWith("--output-root=")) options.outputRoot = value();
     else if (arg === "--concurrency" || arg.startsWith("--concurrency=")) options.concurrency = Number(value());
     else if (arg === "--dry-run") options.dryRun = true;
@@ -143,7 +147,7 @@ function summaryFor(plan, options) {
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log("Usage: node scripts/build-youtube-cover-assets.mjs [--set id[,id]] [--support UZ,SI,KA] [--types ordinary,polyglot] [--output-root path] [--dry-run]");
+    console.log("Usage: node scripts/build-youtube-cover-assets.mjs [--set id[,id]] [--support UZ,SI,KA] [--types ordinary,polyglot] [--targets NO] [--bundles romance_core] [--output-root path] [--dry-run]");
     return;
   }
   if (!Number.isInteger(options.concurrency) || options.concurrency < 1 || options.concurrency > 12) {
@@ -172,6 +176,8 @@ async function main() {
       channels: channelConfig.channels || [],
       supports: options.supports,
       types: options.types,
+      targets: options.targets,
+      bundles: options.bundles,
       polyglotConfig,
       outputRoot: options.outputRoot,
     });

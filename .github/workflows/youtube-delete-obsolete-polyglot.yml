@@ -1,0 +1,73 @@
+name: YouTube Delete Obsolete Polyglot Videos
+
+on:
+  workflow_dispatch:
+    inputs:
+      route:
+        description: "Exact OAuth route from the tracked replacement plan."
+        required: true
+        default: "youtube-1"
+      youtube_environment:
+        description: "GitHub environment matching the route."
+        required: true
+        default: "youtube-api-branding"
+        type: choice
+        options:
+          - youtube-api-branding
+          - youtube-api-youtube-2
+          - youtube-api-youtube-3
+          - youtube-api-youtube-4
+      confirm_youtube_write:
+        description: "Type APPLY_YOUTUBE_DELETE to confirm exact irreversible deletions."
+        required: true
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  delete-obsolete-polyglot:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.youtube_environment }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci || npm install
+      - name: Restore YouTube OAuth bundle
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}"
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+      - name: Delete exact obsolete videos
+        shell: bash
+        env:
+          ROUTE: ${{ inputs.route }}
+          CONFIRM_WRITE: ${{ inputs.confirm_youtube_write }}
+        run: |
+          set -euo pipefail
+          test "$CONFIRM_WRITE" = "APPLY_YOUTUBE_DELETE"
+          node scripts/youtube-delete-obsolete-polyglot-videos.mjs \
+            --target-file=config/youtube-polyglot-replacement-plans/2026-07-13-deck1-romance-regional-2.json \
+            --route="$ROUTE" \
+            --report-file="outputs/youtube-obsolete-polyglot-deletion-$ROUTE.json" \
+            --apply \
+            --confirm-youtube-write
+      - name: Upload exact deletion evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-obsolete-polyglot-deletion-${{ inputs.route }}-${{ github.run_id }}
+          if-no-files-found: error
+          path: |
+            outputs/youtube-obsolete-polyglot-deletion-${{ inputs.route }}.json
+            config/youtube-polyglot-published-videos.json
+            config/youtube-publish-calendar.json

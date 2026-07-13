@@ -13,7 +13,7 @@ import {
 const deck = {
   setId: "test-deck",
   courseMetadata: {
-    title: { EN: "Deck", ES: "Baraja", UZ: "Dasta", SI: "කාඩ්පත්", KA: "ბარათები" },
+    title: { EN: "Deck", ES: "Baraja", NB: "Kort", UZ: "Dasta", SI: "කාඩ්පත්", KA: "ბარათები" },
     description: { EN: "Everyday words.", UZ: "Kundalik so'zlar.", SI: "දෛනික වචන.", KA: "ყოველდღიური სიტყვები." },
     module: { EN: "Home", UZ: "Uy", SI: "නිවස", KA: "სახლი" },
     category: { EN: "Kitchen", UZ: "Oshxona", SI: "කුස්සිය", KA: "სამზარეულო" },
@@ -48,10 +48,12 @@ const plan = buildCoverPlan({
   outputRoot: "data/test-covers",
 });
 assert.equal(plan.skipped.length, 0);
-assert.equal(plan.covers.filter((cover) => cover.videoType === "ordinary").length, 12);
+assert.equal(plan.covers.filter((cover) => cover.videoType === "ordinary").length, 15);
 assert.equal(plan.covers.filter((cover) => cover.videoType === "polyglot").length, 3);
 assert.equal(new Set(plan.covers.map((cover) => cover.relativePath)).size, plan.covers.length);
 assert.ok(!plan.covers.some((cover) => cover.videoType === "ordinary" && cover.supportLang === cover.targetLang));
+assert.ok(plan.covers.some((cover) => cover.videoType === "ordinary" && cover.targetLang === "NO"));
+assert.ok(!plan.covers.some((cover) => cover.videoType === "ordinary" && cover.targetLang === "NB"));
 assert.ok(plan.covers.every((cover) => cover.uploadEligible === true));
 const ordinary = plan.covers.find((cover) => cover.videoType === "ordinary");
 const polyglot = plan.covers.find((cover) => cover.videoType === "polyglot");
@@ -61,6 +63,23 @@ assert.equal(xmlEscape("A&B <C>"), "A&amp;B &lt;C&gt;");
 assert.ok(fittedFontSize("A very long language label", 200, 68, 24) >= 24);
 assert.match(fontFamilyForText("සිංහල"), /Sinhala MN/);
 assert.doesNotMatch(fontFamilyForText("English"), /Sinhala MN/);
+
+const filteredPlan = buildCoverPlan({
+  setId: "test-deck",
+  setConfig,
+  deck,
+  channels,
+  supports: ["UZ"],
+  types: ["ordinary", "polyglot"],
+  targets: ["ES"],
+  bundles: ["global"],
+  polyglotConfig,
+  outputRoot: "data/test-covers",
+});
+assert.deepEqual(filteredPlan.covers.map((cover) => [cover.videoType, cover.targetLang || cover.bundleKey]), [
+  ["ordinary", "ES"],
+  ["polyglot", "global"],
+]);
 
 const blockedPlan = buildCoverPlan({
   setId: "test-deck",
