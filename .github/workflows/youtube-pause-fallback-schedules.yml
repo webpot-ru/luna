@@ -14,9 +14,10 @@ on:
       operation:
         description: "pause uses fallback-thumbnail criteria; reschedule uses explicit target nextPublishAt values."
         required: true
-        default: "pause"
+        default: "auto"
         type: choice
         options:
+          - auto
           - pause
           - reschedule
       supports:
