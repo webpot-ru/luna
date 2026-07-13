@@ -76,7 +76,7 @@ jobs:
         shell: bash
         env:
           MODE: ${{ github.event.inputs.mode }}
-          OPERATION: ${{ github.event.inputs.operation }}
+          OPERATION: ${{ github.event.inputs.operation || 'auto' }}
           SUPPORTS: ${{ github.event.inputs.supports }}
           VIDEO_ID: ${{ github.event.inputs.video_id }}
           LIMIT: ${{ github.event.inputs.limit }}
@@ -98,8 +98,8 @@ jobs:
             echo "::error::limit must be an integer."
             exit 1
           fi
-          if [ "$OPERATION" != "pause" ] && [ "$OPERATION" != "reschedule" ]; then
-            echo "::error::operation must be pause or reschedule."
+          if [ "$OPERATION" != "auto" ] && [ "$OPERATION" != "pause" ] && [ "$OPERATION" != "reschedule" ]; then
+            echo "::error::operation must be auto, pause or reschedule."
             exit 1
           fi
           if [ -n "$HOLD_PUBLISH_AT" ]; then
@@ -107,8 +107,12 @@ jobs:
           fi
           test -f "$TARGET_FILE"
           node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORTS" --environment="$YOUTUBE_ENVIRONMENT"
+          EFFECTIVE_OPERATION="$OPERATION"
+          if [ "$EFFECTIVE_OPERATION" = "auto" ]; then
+            EFFECTIVE_OPERATION="$(node -e 'const fs=require("fs"); const x=JSON.parse(fs.readFileSync(process.env.TARGET_FILE,"utf8")); const rows=x.targets||[]; console.log(rows.length && rows.every(r=>r.nextPublishAt) ? "reschedule" : "pause")')"
+          fi
           REQUIRED_CONFIRMATION="PAUSE_FALLBACK_SCHEDULES"
-          if [ "$OPERATION" = "reschedule" ]; then REQUIRED_CONFIRMATION="RESCHEDULE_PRIVATE_VIDEOS"; fi
+          if [ "$EFFECTIVE_OPERATION" = "reschedule" ]; then REQUIRED_CONFIRMATION="RESCHEDULE_PRIVATE_VIDEOS"; fi
           if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "$REQUIRED_CONFIRMATION" ]; then
             echo "::error::mode=apply requires confirm_youtube_write=$REQUIRED_CONFIRMATION"
             exit 1
@@ -134,7 +138,7 @@ jobs:
         shell: bash
         env:
           MODE: ${{ github.event.inputs.mode }}
-          OPERATION: ${{ github.event.inputs.operation }}
+          OPERATION: ${{ github.event.inputs.operation || 'auto' }}
           SUPPORTS: ${{ github.event.inputs.supports }}
           VIDEO_ID: ${{ github.event.inputs.video_id }}
           TARGET_FILE: ${{ github.event.inputs.target_file }}
@@ -161,7 +165,11 @@ jobs:
           fi
           if [ "$MODE" = "apply" ]; then
             REQUIRED_CONFIRMATION="PAUSE_FALLBACK_SCHEDULES"
-            if [ "$OPERATION" = "reschedule" ]; then REQUIRED_CONFIRMATION="RESCHEDULE_PRIVATE_VIDEOS"; fi
+            EFFECTIVE_OPERATION="$OPERATION"
+            if [ "$EFFECTIVE_OPERATION" = "auto" ]; then
+              EFFECTIVE_OPERATION="$(node -e 'const fs=require("fs"); const x=JSON.parse(fs.readFileSync(process.env.TARGET_FILE,"utf8")); const rows=x.targets||[]; console.log(rows.length && rows.every(r=>r.nextPublishAt) ? "reschedule" : "pause")')"
+            fi
+            if [ "$EFFECTIVE_OPERATION" = "reschedule" ]; then REQUIRED_CONFIRMATION="RESCHEDULE_PRIVATE_VIDEOS"; fi
             ARGS+=("--apply" "--confirm-youtube-write=$REQUIRED_CONFIRMATION")
           fi
           npm run pause:youtube-fallback-schedules -- "${ARGS[@]}"

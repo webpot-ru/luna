@@ -26,7 +26,7 @@ function parseArgs(argv) {
     videoId: "",
     limit: 0,
     holdPublishAt: "",
-    operation: "pause",
+    operation: "auto",
     apply: false,
     writeRegistry: false,
     confirmYoutubeWrite: "",
@@ -489,11 +489,7 @@ async function main() {
     console.log(usage());
     return;
   }
-  if (!['pause', 'reschedule'].includes(options.operation)) fail(`Invalid --operation=${options.operation}.`);
-  const requiredConfirmation = options.operation === "reschedule" ? "RESCHEDULE_PRIVATE_VIDEOS" : "PAUSE_FALLBACK_SCHEDULES";
-  if (options.apply && options.confirmYoutubeWrite !== requiredConfirmation) {
-    fail(`Live YouTube writes require --confirm-youtube-write=${requiredConfirmation}.`);
-  }
+  if (!['auto', 'pause', 'reschedule'].includes(options.operation)) fail(`Invalid --operation=${options.operation}.`);
   if (options.holdPublishAt) {
     const holdTime = Date.parse(options.holdPublishAt);
     if (!Number.isFinite(holdTime)) fail(`Invalid --hold-publish-at: ${options.holdPublishAt}`);
@@ -503,6 +499,15 @@ async function main() {
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const clientFile = channelRegistry.defaults?.oauthClientFile || ".local/youtube-oauth/google-oauth-client.json";
   const targets = collectTargets(options);
+  if (options.operation === "auto") {
+    options.operation = targets.length > 0 && targets.every((target) => Boolean(target.nextPublishAt))
+      ? "reschedule"
+      : "pause";
+  }
+  const requiredConfirmation = options.operation === "reschedule" ? "RESCHEDULE_PRIVATE_VIDEOS" : "PAUSE_FALLBACK_SCHEDULES";
+  if (options.apply && options.confirmYoutubeWrite !== requiredConfirmation) {
+    fail(`Live YouTube writes require --confirm-youtube-write=${requiredConfirmation}.`);
+  }
   if (process.env.PAUSE_FALLBACK_DEBUG) console.error(`[pause-debug] collected targets=${targets.length}`);
   if (options.exportTargetFile) {
     const exportSummary = exportTargetFile(options.exportTargetFile, options, targets);
