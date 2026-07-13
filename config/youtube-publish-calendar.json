@@ -45421,7 +45421,7 @@
       "localDayOffset": 0,
       "slotOrdinal": 0,
       "status": "reserved",
-      "source": "plan-youtube-publish-schedule",
+      "source": "exact_duplicate_delete_reconciliation",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_hr_pt/youtube_metadata.json",
       "title": "Vocabulário de Croata A1: Utensílios de cozinha | 50 palavras com pronúncia",
@@ -45447,10 +45447,11 @@
       "githubRunId": "28235158097",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28235158097",
       "createdAt": "2026-06-26T11:31:39.403Z",
-      "updatedAt": "2026-06-26T11:31:39.403Z",
-      "youtubeVideoId": "7dbLkq9IyK0",
+      "updatedAt": "2026-07-13T13:41:28.284Z",
+      "youtubeVideoId": "yx5d0FIYso4",
       "youtubePlaylistId": "PLe6qiNCGapM8",
-      "playlistItemId": "UExlNnFpTkNHYXBNOC41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExlNnFpTkNHYXBNOC41NkI0NEY2RDEwNTU3Q0M2",
+      "duplicateVideoIdDeleted": "7dbLkq9IyK0"
     },
     {
       "schemaVersion": 1,
@@ -45467,7 +45468,7 @@
       "localDayOffset": 0,
       "slotOrdinal": 1,
       "status": "reserved",
-      "source": "plan-youtube-publish-schedule",
+      "source": "exact_duplicate_delete_reconciliation",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_hu_pt/youtube_metadata.json",
       "title": "Aprender Húngaro A1: 50 Utensílios de Cozinha | FlashcardsLuna",
@@ -45493,10 +45494,11 @@
       "githubRunId": "28235158097",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28235158097",
       "createdAt": "2026-06-26T11:31:39.409Z",
-      "updatedAt": "2026-06-26T11:31:39.409Z",
-      "youtubeVideoId": "tihNABOX1ug",
+      "updatedAt": "2026-07-13T13:41:27.633Z",
+      "youtubeVideoId": "MzxVtTQ-iiU",
       "youtubePlaylistId": "PLUv2IsPvXRoU",
-      "playlistItemId": "UExVdjJJc1B2WFJvVS41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExVdjJJc1B2WFJvVS41NkI0NEY2RDEwNTU3Q0M2",
+      "duplicateVideoIdDeleted": "tihNABOX1ug"
     },
     {
       "schemaVersion": 1,
@@ -89267,7 +89269,7 @@
       "localDayOffset": 1,
       "slotOrdinal": 4,
       "status": "reserved",
-      "source": "polyglot-publish-state-recovery",
+      "source": "exact_duplicate_delete_reconciliation",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_polyglot_sr/youtube_metadata.json",
       "title": "Kuhinjski pribor na kineskom, japanskom i korejskom | Poliglot vokabular",
@@ -89293,10 +89295,11 @@
       "githubRunId": "28528051209",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28528051209",
       "createdAt": "2026-07-01T15:21:47.874Z",
-      "updatedAt": "2026-07-01T16:02:31.146Z",
-      "youtubeVideoId": "jDFFlB6U4Ro",
+      "updatedAt": "2026-07-13T13:41:45.158Z",
+      "youtubeVideoId": "RgeghsHzXcQ",
       "youtubePlaylistId": "PLIXbHghI8ITc",
-      "playlistItemId": "UExJWGJIZ2hJOElUYy41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExJWGJIZ2hJOElUYy41NkI0NEY2RDEwNTU3Q0M2",
+      "duplicateVideoIdDeleted": "jDFFlB6U4Ro"
     },
     {
       "schemaVersion": 1,
@@ -130761,7 +130764,7 @@
       "localDayOffset": 0,
       "slotOrdinal": 2,
       "status": "reserved",
-      "source": "youtube-schedule-repair-readback",
+      "source": "exact_duplicate_delete_reconciliation",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_en-gb_pt-br/youtube_metadata.json",
       "title": "Inglês Britânico: Ações de cozinhar | 25 Palavras Essenciais",
@@ -130787,15 +130790,16 @@
       "githubRunId": "29220698095",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29220698095",
       "createdAt": "2026-07-12T09:14:01.355Z",
-      "updatedAt": "2026-07-13T03:23:55.887Z",
-      "youtubeVideoId": "joSwTjhpJos",
+      "updatedAt": "2026-07-13T13:41:45.382Z",
+      "youtubeVideoId": "G_FE62lQ8gU",
       "youtubePlaylistId": "PLo82WO05fbhTnY5BYZn5mvxumzYuwR2B6",
       "playlistItemId": "UExvODJXTzA1ZmJoVG5ZNUJZWm41bXZ4dW16WXV3UjJCNi41MjE1MkI0OTQ2QzJGNzNG",
       "scheduleRepair": {
         "originalPublishAt": "2026-07-22T13:30:00Z",
         "readbackAt": "2026-07-13T03:23:55.887Z",
         "runId": "29220698095"
-      }
+      },
+      "duplicateVideoIdDeleted": "joSwTjhpJos"
     },
     {
       "schemaVersion": 1,
@@ -130863,7 +130867,7 @@
       "localDayOffset": 0,
       "slotOrdinal": 0,
       "status": "reserved",
-      "source": "youtube-schedule-repair-readback",
+      "source": "exact_duplicate_delete_reconciliation",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_de_es-419/youtube_metadata.json",
       "title": "Aprender Alemán Básico: Acciones de cocina | Vocabulario de Cocina con Pronunciación",
@@ -130889,15 +130893,16 @@
       "githubRunId": "29220698095",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29220698095",
       "createdAt": "2026-07-12T09:09:55.798Z",
-      "updatedAt": "2026-07-13T03:23:55.887Z",
-      "youtubeVideoId": "W-2OjyIEOxk",
+      "updatedAt": "2026-07-13T13:41:41.738Z",
+      "youtubeVideoId": "5CYu9H3ad_E",
       "youtubePlaylistId": "PLczOcdGj4OpduFLNbgi-HANgWnCm1G-2z",
       "playlistItemId": "UExjek9jZEdqNE9wZHVGTE5iZ2ktSEFOZ1duQ20xRy0yei41MjE1MkI0OTQ2QzJGNzNG",
       "scheduleRepair": {
         "originalPublishAt": "2026-07-22T06:30:00Z",
         "readbackAt": "2026-07-13T03:23:55.887Z",
         "runId": "29220698095"
-      }
+      },
+      "duplicateVideoIdDeleted": "W-2OjyIEOxk"
     },
     {
       "schemaVersion": 1,
@@ -130914,7 +130919,7 @@
       "localDayOffset": 0,
       "slotOrdinal": 1,
       "status": "reserved",
-      "source": "youtube-schedule-repair-readback",
+      "source": "exact_duplicate_delete_reconciliation",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_en_es-419/youtube_metadata.json",
       "title": "Aprender Inglés Básico: Acciones de cocina | Vocabulario de Cocina con Pronunciación",
@@ -130940,15 +130945,16 @@
       "githubRunId": "29220698095",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29220698095",
       "createdAt": "2026-07-12T09:09:55.849Z",
-      "updatedAt": "2026-07-13T03:23:55.887Z",
-      "youtubeVideoId": "X6CcvRzjn_E",
+      "updatedAt": "2026-07-13T13:41:40.286Z",
+      "youtubeVideoId": "JNSkFMcADzs",
       "youtubePlaylistId": "PLczOcdGj4OpeJXYWPP0WMa0QtvI3uzN8Z",
       "playlistItemId": "UExjek9jZEdqNE9wZUpYWVdQUDBXTWEwUXR2STN1ek44Wi41MjE1MkI0OTQ2QzJGNzNG",
       "scheduleRepair": {
         "originalPublishAt": "2026-07-22T09:30:00Z",
         "readbackAt": "2026-07-13T03:23:55.887Z",
         "runId": "29220698095"
-      }
+      },
+      "duplicateVideoIdDeleted": "X6CcvRzjn_E"
     },
     {
       "schemaVersion": 1,
@@ -131016,7 +131022,7 @@
       "localDayOffset": 0,
       "slotOrdinal": 3,
       "status": "reserved",
-      "source": "youtube-schedule-repair-readback",
+      "source": "exact_duplicate_delete_reconciliation",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_et_es-419/youtube_metadata.json",
       "title": "Aprender Estonio Básico: Acciones de cocina | Vocabulario con Pronunciación",
@@ -131042,15 +131048,16 @@
       "githubRunId": "29220698095",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29220698095",
       "createdAt": "2026-07-12T09:09:55.890Z",
-      "updatedAt": "2026-07-13T03:23:55.887Z",
-      "youtubeVideoId": "zGQGti-vSzM",
+      "updatedAt": "2026-07-13T13:41:39.422Z",
+      "youtubeVideoId": "C71sRC7wHxc",
       "youtubePlaylistId": "PLczOcdGj4OpeN5jp93SZ60CWxdcrB5Qlk",
       "playlistItemId": "UExjek9jZEdqNE9wZU41anA5M1NaNjBDV3hkY3JCNVFsay41MjE1MkI0OTQ2QzJGNzNG",
       "scheduleRepair": {
         "originalPublishAt": "2026-07-22T15:30:00Z",
         "readbackAt": "2026-07-13T03:23:55.887Z",
         "runId": "29220698095"
-      }
+      },
+      "duplicateVideoIdDeleted": "zGQGti-vSzM"
     },
     {
       "schemaVersion": 1,
@@ -132495,7 +132502,7 @@
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "status": "reserved",
-      "source": "youtube-schedule-repair-readback",
+      "source": "exact_duplicate_delete_reconciliation",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fi_es-419/youtube_metadata.json",
       "title": "Vocabulario en Finés: Acciones de Cocina (Nivel Básico A1)",
@@ -132521,15 +132528,16 @@
       "githubRunId": "29220698095",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29220698095",
       "createdAt": "2026-07-12T11:49:48.282Z",
-      "updatedAt": "2026-07-13T03:23:55.887Z",
-      "youtubeVideoId": "gzGDC6zdTYo",
+      "updatedAt": "2026-07-13T13:41:38.417Z",
+      "youtubeVideoId": "azi7X37qFUg",
       "youtubePlaylistId": "PLczOcdGj4Opd1IDESEI-e5oI1Vj1CXU6j",
       "playlistItemId": "UExjek9jZEdqNE9wZDFJREVTRUktZTVvSTFWajFDWFU2ai41MjE1MkI0OTQ2QzJGNzNG",
       "scheduleRepair": {
         "originalPublishAt": "2026-07-22T18:30:00Z",
         "readbackAt": "2026-07-13T03:23:55.887Z",
         "runId": "29220698095"
-      }
+      },
+      "duplicateVideoIdDeleted": "gzGDC6zdTYo"
     },
     {
       "schemaVersion": 1,
@@ -134382,7 +134390,7 @@
       "localDayOffset": 0,
       "slotOrdinal": 5,
       "status": "reserved",
-      "source": "youtube-schedule-repair-readback",
+      "source": "exact_duplicate_delete_reconciliation",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_fr_es-419/youtube_metadata.json",
       "title": "Vocabulario en Francés: Acciones de Cocina (Nivel Básico A1)",
@@ -134408,15 +134416,16 @@
       "githubRunId": "29220698095",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29220698095",
       "createdAt": "2026-07-12T12:24:05.446Z",
-      "updatedAt": "2026-07-13T03:23:55.887Z",
-      "youtubeVideoId": "W24IPkkYHWU",
+      "updatedAt": "2026-07-13T13:41:37.475Z",
+      "youtubeVideoId": "LMZnf4SMO18",
       "youtubePlaylistId": "PLczOcdGj4OpeAoVzjVyUD43zUF489ZfkR",
       "playlistItemId": "UExjek9jZEdqNE9wZUFvVnpqVnlVRDQzelVGNDg5WmZrUi41MjE1MkI0OTQ2QzJGNzNG",
       "scheduleRepair": {
         "originalPublishAt": "2026-07-22T21:30:00Z",
         "readbackAt": "2026-07-13T03:23:55.887Z",
         "runId": "29220698095"
-      }
+      },
+      "duplicateVideoIdDeleted": "W24IPkkYHWU"
     },
     {
       "schemaVersion": 1,
@@ -135045,7 +135054,7 @@
       "localDayOffset": 0,
       "slotOrdinal": 5,
       "status": "reserved",
-      "source": "youtube-schedule-repair-readback",
+      "source": "exact_duplicate_delete_reconciliation",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_et_pt-br/youtube_metadata.json",
       "title": "Aprender Estoniano: Ações de Cozinhar (Vocabulário Básico)",
@@ -135071,15 +135080,16 @@
       "githubRunId": "29220698095",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29220698095",
       "createdAt": "2026-07-12T12:29:07.913Z",
-      "updatedAt": "2026-07-13T03:23:55.887Z",
-      "youtubeVideoId": "Xq9VnS2a7pI",
+      "updatedAt": "2026-07-13T13:41:42.559Z",
+      "youtubeVideoId": "nzoYvwkCvwQ",
       "youtubePlaylistId": "PLo82WO05fbhQf3YMks72kBzRsHIpbVeAb",
       "playlistItemId": "UExvODJXTzA1ZmJoUWYzWU1rczcya0J6UnNISXBiVmVBYi41MjE1MkI0OTQ2QzJGNzNG",
       "scheduleRepair": {
         "originalPublishAt": "2026-07-22T22:30:00Z",
         "readbackAt": "2026-07-13T03:23:55.887Z",
         "runId": "29220698095"
-      }
+      },
+      "duplicateVideoIdDeleted": "Xq9VnS2a7pI"
     },
     {
       "schemaVersion": 1,
