@@ -11,6 +11,7 @@ const DEFAULT_PUBLICATION_REGISTRY_PATH = "config/youtube-published-videos.json"
 const DEFAULT_ARTIFACT_ROOT = "outputs/review/youtube-tomorrow-20260623";
 const DEFAULT_REPORT_PATH = "outputs/tmp/youtube-fallback-schedule-pause-report.json";
 const DEFAULT_LEDGER_PATH = "outputs/youtube-schedule-pause-ledger.jsonl";
+const SCHEDULE_READBACK_DELAY_MS = 15_000;
 
 function parseArgs(argv) {
   const options = {
@@ -365,6 +366,8 @@ function scheduleReadbackOk(status, { operation, expectedPublishAt = "" }) {
 }
 
 async function readVideoUntilExpected({ accessToken, videoId, operation, expectedPublishAt }) {
+  // YouTube can return the prior publishAt immediately after a successful videos.update.
+  await new Promise((resolve) => setTimeout(resolve, SCHEDULE_READBACK_DELAY_MS));
   const readback = await readVideo({ accessToken, videoId });
   if (scheduleReadbackOk(readback.status || {}, { operation, expectedPublishAt })) return readback;
   return readback;
