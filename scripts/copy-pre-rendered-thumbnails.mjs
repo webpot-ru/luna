@@ -1,17 +1,21 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 
 const VIDEO_GENERATOR_DIR = "outputs/video-generator";
 const CHANNEL_CONFIG_PATH = "config/youtube-channels.json";
 const DEFAULT_ORDINARY_MANIFEST = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-channel-pairs-target-language-first-20260707/manifest.json";
 const DEFAULT_COOKING_ACTIONS_MANIFEST = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cooking_actions_a1_a2-approved-channel-pairs-target-language-first-20260707/manifest.json";
 const DEFAULT_POLYGLOT_MANIFEST = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/manifest.json";
+const DEFAULT_COVER_REGISTRY = "config/youtube-cover-assets.json";
 
 function parseArgs(argv) {
   const options = {
     inputDir: VIDEO_GENERATOR_DIR,
-    manifests: [DEFAULT_ORDINARY_MANIFEST, DEFAULT_COOKING_ACTIONS_MANIFEST, DEFAULT_POLYGLOT_MANIFEST],
+    manifests: [],
+    coverRegistry: DEFAULT_COVER_REGISTRY,
+    requireGitTracked: false,
     strictCustom: false,
     output: "",
   };
@@ -23,15 +27,36 @@ function parseArgs(argv) {
       return argv[index];
     };
     if (arg === "--input-dir" || arg.startsWith("--input-dir=")) options.inputDir = readValue();
+    else if (arg === "--cover-registry" || arg.startsWith("--cover-registry=")) options.coverRegistry = readValue();
     else if (arg === "--manifest" || arg.startsWith("--manifest=")) options.manifests.push(readValue());
     else if (arg === "--manifests" || arg.startsWith("--manifests=")) {
       options.manifests.push(...String(readValue()).split(",").map((item) => item.trim()).filter(Boolean));
     } else if (arg === "--strict-custom") options.strictCustom = true;
+    else if (arg === "--require-git-tracked") options.requireGitTracked = true;
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = readValue();
     else throw new Error(`Unknown argument: ${arg}`);
   }
   options.manifests = [...new Set(options.manifests.filter(Boolean))];
   return options;
+}
+
+function registryManifestPaths(registryPath) {
+  if (!registryPath || !fs.existsSync(registryPath)) {
+    return [DEFAULT_ORDINARY_MANIFEST, DEFAULT_COOKING_ACTIONS_MANIFEST, DEFAULT_POLYGLOT_MANIFEST];
+  }
+  const registry = JSON.parse(fs.readFileSync(registryPath, "utf8"));
+  const activeStatus = registry.policy?.activeStatus || "approved";
+  return (registry.manifests || [])
+    .filter((row) => row.status === activeStatus)
+    .map((row) => row.path)
+    .filter(Boolean);
+}
+
+function isGitTracked(filePath) {
+  return spawnSync("git", ["ls-files", "--error-unmatch", "--", filePath], {
+    encoding: "utf8",
+    stdio: "ignore",
+  }).status === 0;
 }
 
 function loadChannels() {
@@ -61,6 +86,7 @@ function findChannelForSupport(channels, supportLang) {
     const values = [
       c.key,
       c.supportLang,
+      ...(Array.isArray(c.supportLangs) ? c.supportLangs : []),
       ...(Array.isArray(c.supportVariants) ? c.supportVariants : []),
       ...(Array.isArray(c.channelSupportLangs) ? c.channelSupportLangs : []),
     ];
@@ -83,10 +109,13 @@ function collectMetadataFiles(dir, files = []) {
   return files;
 }
 
-function loadCovers(manifestPaths) {
+function loadCovers(manifestPaths, { requireGitTracked = false } = {}) {
   const covers = [];
   for (const manifestPath of manifestPaths) {
     if (!fs.existsSync(manifestPath)) continue;
+    if (requireGitTracked && !isGitTracked(manifestPath)) {
+      throw new Error(`Approved cover manifest is not Git-tracked: ${manifestPath}`);
+    }
     const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
     for (const cover of manifest.covers || []) {
       covers.push({ ...cover, manifestPath });
@@ -116,15 +145,19 @@ function sameTargetList(left, right) {
 function findCover(covers, metadata) {
   const supportLang = normalizeCode(metadata.supportLang);
   const targetLang = normalizeCode(metadata.targetLang);
+  const targetLangsCsv = String(metadata.targetLangsCsv || (metadata.targetLangs || []).join(",") || metadata.targetLang || "");
   const setId = String(metadata.setId || "");
-  const isPolyglot = String(metadata.targetLang || "").includes(",");
+  const isPolyglot = metadata.videoType === "polyglot"
+    || Boolean(metadata.polyglotKey)
+    || Boolean(metadata.bundleKey)
+    || targetLangsCsv.includes(",");
   return covers.find((cover) => {
     if (setId && cover.setId && cover.setId !== setId) return false;
     if (cover.uploadEligible === false) return false;
     if (!coverSupportCodes(cover).includes(supportLang)) return false;
     if (isPolyglot || cover.videoType === "polyglot") {
       if (metadata.bundleKey && cover.bundleKey && metadata.bundleKey !== cover.bundleKey) return false;
-      return sameTargetList(metadata.targetLang, cover.targetLangsCsv || (cover.targetLangs || []).join(","));
+      return sameTargetList(targetLangsCsv, cover.targetLangsCsv || (cover.targetLangs || []).join(","));
     }
     return normalizeCode(cover.targetLang) === targetLang;
   });
@@ -138,14 +171,19 @@ function resolveCoverPath(cover) {
 function main() {
   const options = parseArgs(process.argv.slice(2));
   console.log("=== Starting copy of pre-rendered custom thumbnails ===");
+  options.manifests = [...new Set([
+    ...options.manifests,
+    ...registryManifestPaths(options.coverRegistry),
+  ].filter(Boolean))];
   const channelRegistry = loadChannels();
   const metadataFiles = collectMetadataFiles(options.inputDir);
-  const covers = loadCovers(options.manifests);
+  const covers = loadCovers(options.manifests, { requireGitTracked: options.requireGitTracked });
   const report = {
     generatedAt: new Date().toISOString(),
     inputDir: options.inputDir,
     manifests: options.manifests.filter((manifestPath) => fs.existsSync(manifestPath)),
     strictCustom: options.strictCustom,
+    requireGitTracked: options.requireGitTracked,
     totalMetadataFiles: metadataFiles.length,
     copiedCount: 0,
     autoFallbackCount: 0,
@@ -197,6 +235,9 @@ function main() {
     const prototypePath = cover ? resolveCoverPath(cover) : "";
 
     if (prototypePath && fs.existsSync(prototypePath)) {
+      if (options.requireGitTracked && !isGitTracked(prototypePath)) {
+        throw new Error(`Approved cover JPG is not Git-tracked: ${prototypePath}`);
+      }
       const destDir = path.dirname(metaFile);
       const destThumb = path.join(destDir, "youtube_thumbnail.jpg");
 

@@ -6,9 +6,9 @@ import { promisify } from "node:util";
 
 import {
   DEFAULT_PUBLICATION_REGISTRY_PATH,
-  findActivePublication,
   loadPublicationRegistry,
 } from "./lib/youtube-publication-registry.mjs";
+import { assignmentKey, isActive, isPolyglotRow } from "./lib/youtube-publication-control.mjs";
 import {
   isTargetOnlyRegionalSupport,
   sameViewerLanguageTargetBlocker,
@@ -59,7 +59,7 @@ function parseArgs(argv) {
     confirmPlaylistRepair: "",
     dispatchSpacingSeconds: 5,
     playlistRetryDelaySeconds: 180,
-    watch: true,
+    watch: false,
     apply: false,
     output: DEFAULT_OUTPUT,
     workflow: VIDEO_WORKFLOW,
@@ -111,6 +111,7 @@ function parseArgs(argv) {
     else if (arg === "--routing-config" || arg.startsWith("--routing-config=")) options.routingConfig = readValue();
     else if (arg === "--apply") options.apply = true;
     else if (arg === "--dry-run") options.apply = false;
+    else if (arg === "--watch") options.watch = true;
     else if (arg === "--no-watch") options.watch = false;
     else if (arg === "--no-create-playlists") options.createPlaylists = false;
     else if (arg === "--allow-republish") options.allowRepublish = true;
@@ -128,8 +129,9 @@ function usage() {
     "  npm run dispatch:youtube-bulk-publish -- --apply --schedule-start-date=YYYY-MM-DD --confirm-dispatch=DISPATCH_YOUTUBE_BULK --confirm-youtube-write=APPLY_YOUTUBE_UPLOAD --confirm-thumbnail-spend=GENERATE_THUMBNAILS",
     "",
     "This dispatcher plans one ordinary YouTube publish workflow run per support language,",
-    "with the next N eligible targets per support, and optionally dispatches/watches the",
+    "with the next N eligible targets per support, and optionally dispatches the",
     "existing youtube-video-publish.yml workflow in bounded parallel batches.",
+    "Dispatch is fire-and-forget by default; use --watch only for an explicitly approved bounded diagnostic.",
     "Scheduled child runs pass schedule_min_future_minutes so stale calendar reservations",
     "are moved to future-safe slots by the child workflow.",
     "Metadata defaults to direct Gemini API in small sequential batches:",
@@ -189,8 +191,8 @@ function ensureSafeOptions(options) {
   if (!["public_now", "scheduled"].includes(options.publishMode)) {
     throw new Error("--publish-mode must be public_now or scheduled.");
   }
-  if (options.publishMode === "scheduled" && !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/u.test(String(options.scheduleStartDate || ""))) {
-    throw new Error("--publish-mode=scheduled requires --schedule-start-date=YYYY-MM-DD.");
+  if (options.publishMode === "scheduled" && options.scheduleStartDate && !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/u.test(String(options.scheduleStartDate))) {
+    throw new Error("--schedule-start-date must be YYYY-MM-DD when provided; omit it for automatic earliest-gap filling.");
   }
   if (!["variants", "channel-keys"].includes(options.supportSource)) {
     throw new Error("--support-source must be variants or channel-keys.");
@@ -200,6 +202,9 @@ function ensureSafeOptions(options) {
   }
   if (options.apply && options.mode === "apply" && options.confirmYoutubeWrite !== "APPLY_YOUTUBE_UPLOAD") {
     throw new Error("YouTube upload dispatch requires --confirm-youtube-write=APPLY_YOUTUBE_UPLOAD.");
+  }
+  if (options.apply && options.allowRepublish) {
+    throw new Error("Live bulk apply refuses --allow-republish. Repair, supersede or delete the prior publication first.");
   }
   if (options.apply && options.generateThumbnails && options.confirmThumbnailSpend !== "GENERATE_THUMBNAILS") {
     throw new Error("Thumbnail generation may spend VectorEngine credits; pass --confirm-thumbnail-spend=GENERATE_THUMBNAILS.");
@@ -277,6 +282,10 @@ async function selectTargets({ setId, support, targets, excludeTargets, registry
   const requested = targets ? uniq(targets.map(normalizeCode)).sort() : uniq(await resolveAllTargetLanguages(setId, support)).sort();
   const skipped = [];
   const eligible = [];
+  const activePublicationsByKey = new Map((registry.publications || [])
+    .filter(isActive)
+    .filter((row) => !isPolyglotRow(row))
+    .map((row) => [assignmentKey(row), row]));
   for (const target of requested) {
     const pairBlocker = sameViewerLanguageTargetBlocker({ supportLang: support, targetLang: target });
     if (pairBlocker) {
@@ -291,7 +300,7 @@ async function selectTargets({ setId, support, targets, excludeTargets, registry
       skipped.push({ target, reason: "excluded_target_language" });
       continue;
     }
-    const existing = findActivePublication(registry, { setId, supportLang: support, targetLang: target });
+    const existing = activePublicationsByKey.get(assignmentKey({ setId, supportLang: support, targetLang: target }));
     if (existing && !allowRepublish) {
       skipped.push({
         target,
@@ -831,6 +840,7 @@ async function buildPlan(options) {
       targetsPerSupport: options.targetsPerSupport,
       maxParallel: options.maxParallel,
       maxActivePerRoute: options.maxActivePerRoute,
+      watch: options.watch,
       ref: options.ref,
       workflow: options.workflow,
       repairWorkflow: options.repairWorkflow,

@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
+import { pathToFileURL } from "node:url";
 import {
   DEFAULT_CHANNEL_CONFIG_PATH,
   DEFAULT_PLAYLIST_REGISTRY_PATH,
@@ -275,7 +277,24 @@ function channelByKey(channelRegistry, channelKey) {
 function selectCandidates({ manifest, supports, playlistKeys, limitPerChannel, playlistRegistry, skipUploaded }) {
   const supportSet = new Set(supports);
   const keySet = new Set(playlistKeys);
-  let rows = (manifest.records || []).filter((row) => row.uploadEligible && row.playlistId && row.coverPath);
+  let rows = (manifest.records || [])
+    .filter((row) => row.playlistKey && row.coverPath)
+    .filter((row) => !row.uploadBlocker || row.uploadBlocker === "missing_youtube_playlist_id")
+    .map((row) => {
+      const entry = findRegistryEntry(playlistRegistry, row.playlistKey);
+      const manifestPlaylistId = String(row.playlistId || "");
+      const registryPlaylistId = String(entry?.youtube_playlist_id || "");
+      if (manifestPlaylistId && registryPlaylistId && manifestPlaylistId !== registryPlaylistId) {
+        fail(`Playlist id mismatch for ${row.playlistKey}: manifest=${manifestPlaylistId} registry=${registryPlaylistId}`);
+      }
+      return {
+        ...row,
+        manifestPlaylistId,
+        playlistId: registryPlaylistId || manifestPlaylistId,
+        playlistIdSource: registryPlaylistId ? "durable_registry" : "manifest",
+      };
+    })
+    .filter((row) => row.playlistId);
   if (supportSet.size) rows = rows.filter((row) => supportSet.has(String(row.channelKey || "").toLowerCase()));
   if (keySet.size) rows = rows.filter((row) => keySet.has(row.playlistKey));
   if (skipUploaded) {
@@ -296,6 +315,17 @@ function selectCandidates({ manifest, supports, playlistKeys, limitPerChannel, p
     limited.push(row);
   }
   return limited;
+}
+
+function isGitTracked(filePath) {
+  const absolute = path.resolve(filePath);
+  const relative = path.relative(process.cwd(), absolute);
+  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) return false;
+  return spawnSync("git", ["ls-files", "--error-unmatch", "--", relative], {
+    cwd: process.cwd(),
+    encoding: "utf8",
+    stdio: "ignore",
+  }).status === 0;
 }
 
 function summarize(results) {
@@ -366,10 +396,12 @@ async function main() {
   };
 
   const accessTokenByChannelKey = new Map();
-  const clientFile = resolveExternalPath(channelRegistry.defaults?.oauthClientFile || ".local/youtube-oauth/google-oauth-client.json", {
-    root: options.oauthRoot,
-    label: "OAuth client",
-  });
+  const clientFile = options.apply
+    ? resolveExternalPath(channelRegistry.defaults?.oauthClientFile || ".local/youtube-oauth/google-oauth-client.json", {
+      root: options.oauthRoot,
+      label: "OAuth client",
+    })
+    : "";
 
   for (const candidate of candidates) {
     const result = {
@@ -395,6 +427,10 @@ async function main() {
       const coverPath = path.resolve(candidate.coverPath);
       if (!fs.existsSync(coverPath)) fail(`Missing cover image: ${candidate.coverPath}`);
       assertImageShape(coverPath);
+      result.coverGitTracked = isGitTracked(coverPath);
+      if (options.apply && !result.coverGitTracked) {
+        fail(`Refusing untracked playlist cover in apply mode: ${candidate.coverPath}`);
+      }
       result.youtubeChannelId = channel.channelId;
 
       if (!options.apply) continue;
@@ -426,6 +462,7 @@ async function main() {
           method: "existing_readback",
           sourceManifest: options.manifest,
           sourceCoverPath: candidate.coverPath,
+          sourceCoverGitTracked: result.coverGitTracked,
           playlistImagesEndpoint: "playlistImages",
         };
         entry.lastReadbackAt = readbackAt;
@@ -469,6 +506,7 @@ async function main() {
         method,
         sourceManifest: options.manifest,
         sourceCoverPath: candidate.coverPath,
+        sourceCoverGitTracked: result.coverGitTracked,
         playlistImagesEndpoint: "playlistImages",
       };
       entry.lastReadbackAt = uploadedAt;
@@ -498,7 +536,11 @@ async function main() {
   console.log(JSON.stringify({ status: report.summary.failed ? "completed_with_errors" : "ok", reportPath, summary: report.summary }, null, 2));
 }
 
-main().catch((error) => {
-  console.error(error.stack || error.message);
-  process.exit(1);
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((error) => {
+    console.error(error.stack || error.message);
+    process.exit(1);
+  });
+}
+
+export { isGitTracked, selectCandidates };

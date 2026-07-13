@@ -4,12 +4,13 @@ import AppKit
 import Foundation
 
 let repoRoot = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-let defaultBase = "outputs/design-prototypes/youtube-playlist-cover-universal-language-learning-base-ai-20260709/base-no-text-universal-v1-1024.jpg"
+let defaultBase = "assets/youtube-cover-templates/playlist-universal-approved-base.jpg"
 let defaultOutput = "outputs/design-prototypes/youtube-playlist-covers-upload-eligible-20260709-coretext"
 
 var basePath = defaultBase
 var outputPath = defaultOutput
 var includeUncreated = true
+var selectedSupports = Set<String>()
 
 var args = CommandLine.arguments.dropFirst()
 while let arg = args.first {
@@ -27,6 +28,11 @@ while let arg = args.first {
         }
     case "--created-only":
         includeUncreated = false
+    case "--supports":
+        if let value = args.first {
+            selectedSupports = Set(value.split(separator: ",").map { String($0).uppercased() })
+            args = args.dropFirst()
+        }
     default:
         break
     }
@@ -105,6 +111,9 @@ func localizedBeginner(_ support: String) -> String {
         "TH": "สำหรับผู้เริ่มต้น",
         "NE": "सुरुवातीका लागि",
         "MY": "စတင်လေ့လာသူများအတွက်",
+        "UZ": "boshlovchilar uchun",
+        "SI": "ආරම්භකයින් සඳහා",
+        "KA": "დამწყებთათვის",
     ][support] ?? ""
 }
 
@@ -125,6 +134,9 @@ func localizedFooter(_ support: String) -> String {
         "TH": "คำศัพท์ในชีวิตประจำวัน",
         "NE": "दैनिक शब्दहरू",
         "MY": "နေ့စဉ်သုံး ဝေါဟာရ",
+        "UZ": "kundalik so‘zlar",
+        "SI": "දෛනික වචන මාලාව",
+        "KA": "ყოველდღიური ლექსიკა",
     ][support] ?? "everyday vocabulary"
 }
 
@@ -346,6 +358,10 @@ var skipped: [[String: Any]] = []
 var pathsByChannel: [String: [URL]] = [:]
 
 for playlist in playlists {
+    let support = (playlist["supportLang"] as? String ?? "").uppercased()
+    if !selectedSupports.isEmpty && !selectedSupports.contains(support) {
+        continue
+    }
     let channelKey = playlist["channelKey"] as? String ?? ""
     let channel = channelByKey[channelKey]
     guard channel?["customThumbnailUploadAllowed"] as? Bool == true else {
@@ -405,13 +421,14 @@ try buildContactSheet(paths: allPaths, output: outputRoot.appendingPathComponent
 
 let manifest: [String: Any] = [
     "schemaVersion": 1,
-    "generatedAt": "2026-07-09",
+    "generatedAt": ISO8601DateFormatter().string(from: Date()),
     "baseImage": basePath,
     "outputRoot": outputPath,
     "renderer": "swift-coretext",
     "selection": [
         "customThumbnailUploadAllowed": true,
         "includeUncreated": includeUncreated,
+        "supports": selectedSupports.sorted(),
     ],
     "records": records,
     "skipped": skipped,

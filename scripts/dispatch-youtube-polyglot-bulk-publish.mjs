@@ -26,13 +26,16 @@ function parseArgs(argv) {
     supportSource: "variants",
     excludeSupports: [],
     bundle: "global_europe_core",
-    englishBundle: "global_europe_core",
+    englishBundle: "same_as_bundle",
     bundleOverrides: new Map(),
     maxParallel: 4,
     ref: process.env.GITHUB_REF_NAME || getCurrentGitBranch() || "main",
     childMode: "apply",
     limit: 0,
+    publishMode: "scheduled",
     privacy: "public",
+    scheduleStartDate: "",
+    scheduleMinFutureMinutes: 90,
     publishAt: "",
     createPlaylists: true,
     allowRepublish: false,
@@ -47,7 +50,7 @@ function parseArgs(argv) {
     confirmPlaylistRepair: "",
     dispatchSpacingSeconds: 5,
     playlistRetryDelaySeconds: 180,
-    watch: true,
+    watch: false,
     apply: false,
     output: DEFAULT_OUTPUT,
     workflow: POLYGLOT_WORKFLOW,
@@ -76,7 +79,10 @@ function parseArgs(argv) {
     else if (arg === "--ref" || arg.startsWith("--ref=")) options.ref = readValue();
     else if (arg === "--child-mode" || arg.startsWith("--child-mode=")) options.childMode = readValue();
     else if (arg === "--limit" || arg.startsWith("--limit=")) options.limit = Number(readValue());
+    else if (arg === "--publish-mode" || arg.startsWith("--publish-mode=")) options.publishMode = readValue();
     else if (arg === "--privacy" || arg.startsWith("--privacy=")) options.privacy = readValue();
+    else if (arg === "--schedule-start-date" || arg.startsWith("--schedule-start-date=")) options.scheduleStartDate = readValue();
+    else if (arg === "--schedule-min-future-minutes" || arg.startsWith("--schedule-min-future-minutes=")) options.scheduleMinFutureMinutes = Number(readValue());
     else if (arg === "--publish-at" || arg.startsWith("--publish-at=")) options.publishAt = readValue();
     else if (arg === "--confirm-dispatch" || arg.startsWith("--confirm-dispatch=")) options.confirmDispatch = readValue();
     else if (arg === "--confirm-render" || arg.startsWith("--confirm-render=")) options.confirmRender = readValue();
@@ -97,6 +103,7 @@ function parseArgs(argv) {
     else if (arg === "--planner-timeout-ms" || arg.startsWith("--planner-timeout-ms=")) options.plannerTimeoutMs = Number(readValue());
     else if (arg === "--apply") options.apply = true;
     else if (arg === "--dry-run") options.apply = false;
+    else if (arg === "--watch") options.watch = true;
     else if (arg === "--no-watch") options.watch = false;
     else if (arg === "--no-create-playlists") options.createPlaylists = false;
     else if (arg === "--allow-republish") options.allowRepublish = true;
@@ -115,6 +122,9 @@ function usage() {
     "",
     "Plans one Polyglot video per support channel and optionally dispatches the",
     "separate youtube-polyglot-video-publish.yml workflow in bounded parallel batches.",
+    "Apply defaults to publish_mode=scheduled and lets the shared channel calendar",
+    "reserve the earliest free slot; direct --publish-at is disabled for apply.",
+    "Dispatch is fire-and-forget by default; use --watch only for an explicitly approved bounded diagnostic.",
     "It never uploads videos directly. Playlist-classified transient failures can",
     "dispatch youtube-polyglot-playlist-insert-repair.yml after a delay without reuploading.",
   ].join("\n");
@@ -182,6 +192,15 @@ function ensureSafeOptions(options) {
   if (!Number.isInteger(options.plannerTimeoutMs) || options.plannerTimeoutMs < 10000) {
     throw new Error("--planner-timeout-ms must be an integer >= 10000.");
   }
+  if (!["scheduled", "public_now"].includes(options.publishMode)) {
+    throw new Error("--publish-mode must be scheduled or public_now.");
+  }
+  if (options.scheduleStartDate && !/^\d{4}-\d{2}-\d{2}$/.test(options.scheduleStartDate)) {
+    throw new Error("--schedule-start-date must be YYYY-MM-DD.");
+  }
+  if (!Number.isInteger(options.scheduleMinFutureMinutes) || options.scheduleMinFutureMinutes < 0) {
+    throw new Error("--schedule-min-future-minutes must be a non-negative integer.");
+  }
   if (options.apply && options.confirmDispatch !== "DISPATCH_YOUTUBE_POLYGLOT_BULK") {
     throw new Error("Live dispatch requires --confirm-dispatch=DISPATCH_YOUTUBE_POLYGLOT_BULK.");
   }
@@ -203,14 +222,17 @@ function ensureSafeOptions(options) {
   if (options.apply && options.confirmYoutubeWrite !== "APPLY_POLYGLOT_YOUTUBE_UPLOAD") {
     throw new Error("Live Polyglot bulk dispatch requires --confirm-youtube-write=APPLY_POLYGLOT_YOUTUBE_UPLOAD.");
   }
-  if (options.apply && options.privacy === "public" && options.confirmPublic !== "PUBLISH_PUBLIC") {
+  if (options.apply && options.allowRepublish) {
+    throw new Error("Live Polyglot apply refuses --allow-republish. Repair, supersede or delete the prior publication first.");
+  }
+  if (options.apply && options.publishAt) {
+    throw new Error("Live Polyglot apply refuses --publish-at. Use --publish-mode=scheduled so the shared calendar selects the slot.");
+  }
+  if (options.apply && options.publishMode === "scheduled" && options.confirmPublic !== "PUBLISH_PUBLIC") {
+    throw new Error("Scheduled Polyglot uploads require --confirm-public=PUBLISH_PUBLIC.");
+  }
+  if (options.apply && options.publishMode === "public_now" && options.privacy === "public" && options.confirmPublic !== "PUBLISH_PUBLIC") {
     throw new Error("Public Polyglot uploads require --confirm-public=PUBLISH_PUBLIC.");
-  }
-  if (options.apply && options.publishAt && options.privacy !== "private") {
-    throw new Error("--publish-at requires --privacy=private.");
-  }
-  if (options.apply && options.publishAt && options.confirmPublic !== "PUBLISH_PUBLIC") {
-    throw new Error("Scheduled uploads become public and require --confirm-public=PUBLISH_PUBLIC.");
   }
   if (options.apply && options.generateThumbnails && options.confirmThumbnailSpend !== "GENERATE_THUMBNAILS") {
     throw new Error("Thumbnail generation may spend VectorEngine credits; pass --confirm-thumbnail-spend=GENERATE_THUMBNAILS.");
@@ -256,7 +278,9 @@ function resolveSupports(options, routing) {
 function bundleForSupport(support, options) {
   const normalized = normalizeCode(support);
   if (options.bundleOverrides.has(normalized)) return options.bundleOverrides.get(normalized);
-  if (normalized === "EN" || normalized === "EN-GB") return options.englishBundle;
+  if ((normalized === "EN" || normalized === "EN-GB") && options.englishBundle !== "same_as_bundle") {
+    return options.englishBundle;
+  }
   return options.bundle;
 }
 
@@ -486,6 +510,9 @@ function workflowFieldsForJob(job, options) {
     confirm_render: options.confirmRender,
     confirm_tts: options.confirmTts,
     privacy: options.privacy,
+    publish_mode: options.publishMode,
+    schedule_start_date: options.scheduleStartDate,
+    schedule_min_future_minutes: String(options.scheduleMinFutureMinutes),
     publish_at: options.publishAt,
     create_playlists: boolInput(options.createPlaylists),
     generate_thumbnails: boolInput(options.generateThumbnails),
@@ -720,12 +747,16 @@ async function buildPlan(options) {
       englishBundle: options.englishBundle,
       bundleOverrides: Object.fromEntries(options.bundleOverrides),
       maxParallel: options.maxParallel,
+      watch: options.watch,
       ref: options.ref,
       workflow: options.workflow,
       repairWorkflow: options.repairWorkflow,
       childMode: options.childMode,
       limit: options.limit,
+      publishMode: options.publishMode,
       privacy: options.privacy,
+      scheduleStartDate: options.scheduleStartDate,
+      scheduleMinFutureMinutes: options.scheduleMinFutureMinutes,
       publishAt: options.publishAt,
       allowRepublish: options.allowRepublish,
       generateThumbnails: options.generateThumbnails,

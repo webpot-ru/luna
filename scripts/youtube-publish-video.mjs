@@ -2,6 +2,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import {
+  assignmentKey as publicationControlAssignmentKey,
+  isPolyglotRow,
+  normalizedTargetLangs,
+  polyglotSlotKey,
+  polyglotTargetSetKey,
+} from "./lib/youtube-publication-control.mjs";
+import {
   DEFAULT_CHANNEL_CONFIG_PATH,
   DEFAULT_PLAYLIST_REGISTRY_PATH,
   buildPlaylistAssignment,
@@ -10,6 +17,7 @@ import {
   findPlaylistEntry,
   loadPlaylistRegistry,
   loadYoutubeChannels,
+  normalizeLanguageCode,
   saveYoutubeChannels,
   savePlaylistRegistry,
   upsertPlannedPlaylist,
@@ -24,7 +32,6 @@ import {
 import {
   DEFAULT_PUBLICATION_REGISTRY_PATH,
   activePublicationBlocker,
-  findActivePublication,
   isActivePublication,
   loadPublicationRegistry,
   savePublicationRegistry,
@@ -39,6 +46,7 @@ function parseArgs(argv) {
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     playlistRegistry: DEFAULT_PLAYLIST_REGISTRY_PATH,
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
+    publicationControlReport: "",
     ledger: "outputs/youtube-publish-ledger.jsonl",
     apply: false,
     confirmYoutubeWrite: false,
@@ -62,6 +70,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--playlist-registry=")) options.playlistRegistry = arg.slice("--playlist-registry=".length);
     else if (arg.startsWith("--publication-registry=")) options.publicationRegistry = arg.slice("--publication-registry=".length);
+    else if (arg.startsWith("--publication-control-report=")) options.publicationControlReport = arg.slice("--publication-control-report=".length);
     else if (arg.startsWith("--progress-registry=")) options.progressRegistry = arg.slice("--progress-registry=".length);
     else if (arg.startsWith("--calendar=")) options.calendar = arg.slice("--calendar=".length);
     else if (arg.startsWith("--ledger=")) options.ledger = arg.slice("--ledger=".length);
@@ -79,7 +88,7 @@ function usage() {
     "  node scripts/youtube-publish-video.mjs --metadata=<youtube_metadata.json> [--video=<mp4>] [--thumbnail=<image>]",
     "",
     "Dry-run is default. Live write requires:",
-    "  --apply --confirm-youtube-write",
+    "  --apply --confirm-youtube-write --publication-control-report=<fresh-strict-report.json>",
     "",
     "Options:",
     "  --create-playlist         Create the playlist if registry has no youtube_playlist_id.",
@@ -87,11 +96,64 @@ function usage() {
     "  --privacy=private|unlisted|public",
     "  --publish-at=<ISO>        Schedule publish time. Requires privacy=private.",
     "  --confirm-public          Required if privacy=public.",
+    "  --publication-control-report=<file> Required for apply; must be a fresh strict live API control report.",
   ].join("\n");
 }
 
 function fail(message) {
   throw new Error(message);
+}
+
+function requireFreshPublicationControl(reportPath, metadata) {
+  if (!reportPath) fail("Live publish requires --publication-control-report from a fresh strict authenticated readback.");
+  const resolved = path.resolve(reportPath);
+  if (!fs.existsSync(resolved)) fail(`Publication control report not found: ${reportPath}`);
+  const report = JSON.parse(fs.readFileSync(resolved, "utf8"));
+  const generatedAt = Date.parse(report.generatedAt || "");
+  const liveGeneratedAt = Date.parse(report.evidence?.liveAuditGeneratedAt || "");
+  const maxAgeMillis = 30 * 60 * 1000;
+  const now = Date.now();
+  if (
+    report.summary?.healthy !== true
+    || report.evidence?.strict !== true
+    || report.evidence?.videoStatusReadback !== true
+    || report.evidence?.paginationComplete !== true
+  ) {
+    fail("Publication control report is not a healthy strict live-status readback.");
+  }
+  if (
+    !Number.isFinite(generatedAt)
+    || !Number.isFinite(liveGeneratedAt)
+    || now - generatedAt > maxAgeMillis
+    || now - liveGeneratedAt > maxAgeMillis
+    || generatedAt > now + 60_000
+    || liveGeneratedAt > now + 60_000
+  ) {
+    fail("Publication control report is stale or missing fresh live-audit timestamps.");
+  }
+  if (String(report.setId || "") !== String(metadata.setId || "")) {
+    fail(`Publication control set mismatch: expected ${metadata.setId || "missing"}, got ${report.setId || "missing"}.`);
+  }
+  const support = normalizeLanguageCode(metadata.supportLang);
+  const supports = new Set((report.supports || []).map(normalizeLanguageCode));
+  if (!supports.has(support)) fail(`Publication control report does not cover support=${support}.`);
+  const candidateKey = publicationControlAssignmentKey(metadata);
+  const candidateTargets = normalizedTargetLangs(metadata).join(",");
+  const candidatePolyglotSlot = polyglotSlotKey(metadata);
+  const activeConflict = (report.publications || []).find((row) => {
+    if (row.assignmentKey === candidateKey) return true;
+    if (metadata.videoType !== "polyglot" && !metadata.polyglotKey) return false;
+    return row.videoType === "polyglot"
+      && (row.polyglotSlotKey === candidatePolyglotSlot || (
+        String(row.setId || "") === String(metadata.setId || "")
+        && normalizeLanguageCode(row.supportLang) === support
+        && polyglotTargetSetKey(row) === polyglotTargetSetKey(metadata)
+        && normalizedTargetLangs(row).join(",") === candidateTargets
+      ));
+  });
+  if (activeConflict) {
+    fail(`Publication control reports an active assignment for this candidate: ${activeConflict.assignmentKey || candidateKey}; video=${activeConflict.youtubeVideoId || "unknown"}.`);
+  }
 }
 
 function envInteger(name, fallback, { min = 0, max = Number.MAX_SAFE_INTEGER } = {}) {
@@ -298,19 +360,32 @@ function saveUploadPlaylistRegistry(registry, filePath, metadata) {
   else savePlaylistRegistry(registry, filePath);
 }
 
-function findActivePolyglotPublication(registry, polyglotKey) {
-  if (!polyglotKey) return null;
+function findActivePolyglotPublication(registry, metadata) {
+  const candidateKey = publicationControlAssignmentKey(metadata);
+  const candidateSlot = polyglotSlotKey(metadata);
+  const candidateTargetSet = polyglotTargetSetKey(metadata);
   return (registry.publications || [])
-    .filter((row) => row.videoType === "polyglot" || String(row.polyglotKey || "").startsWith("polyglot:"))
-    .filter((row) => row.polyglotKey === polyglotKey)
+    .filter(isPolyglotRow)
     .filter(isActivePublication)
+    .filter((row) => publicationControlAssignmentKey(row) === candidateKey
+      || polyglotSlotKey(row) === candidateSlot
+      || polyglotTargetSetKey(row) === candidateTargetSet)
+    .sort((a, b) => String(b.lastReadbackAt || b.uploadedAt || "").localeCompare(String(a.lastReadbackAt || a.uploadedAt || "")))[0] || null;
+}
+
+function findActiveOrdinaryPublication(registry, metadata) {
+  const candidateKey = publicationControlAssignmentKey(metadata);
+  return (registry.publications || [])
+    .filter((row) => !isPolyglotRow(row))
+    .filter(isActivePublication)
+    .filter((row) => publicationControlAssignmentKey(row) === candidateKey)
     .sort((a, b) => String(b.lastReadbackAt || b.uploadedAt || "").localeCompare(String(a.lastReadbackAt || a.uploadedAt || "")))[0] || null;
 }
 
 function findActiveUploadPublication(registry, metadata) {
   return isPolyglotMetadata(metadata)
-    ? findActivePolyglotPublication(registry, metadata.polyglotKey)
-    : findActivePublication(registry, metadata);
+    ? findActivePolyglotPublication(registry, metadata)
+    : findActiveOrdinaryPublication(registry, metadata);
 }
 
 function activeUploadPublicationBlocker(row, metadata) {
@@ -756,9 +831,13 @@ async function main() {
     console.log(usage());
     process.exit(options.help ? 0 : 1);
   }
+  if (options.apply && options.allowRepublish) {
+    fail("Live publish refuses --allow-republish. Repair, supersede or delete the prior publication first.");
+  }
 
   const metadataFile = resolveExistingPath(options.metadata, "metadata");
   const metadata = JSON.parse(fs.readFileSync(metadataFile, "utf8"));
+  if (options.apply) requireFreshPublicationControl(options.publicationControlReport, metadata);
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const playlistRegistry = loadUploadPlaylistRegistry(options.playlistRegistry, metadata);
   const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);

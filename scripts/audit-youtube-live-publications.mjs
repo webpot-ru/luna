@@ -1,12 +1,19 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
+import {
+  assignmentKey as semanticAssignmentKey,
+  duplicateVideoGroups,
+} from "./lib/youtube-publication-control.mjs";
 
 const DEFAULT_CHANNEL_CONFIG_PATH = "config/youtube-channels.json";
 const DEFAULT_COURSE_LINKS_PATH = "config/video-public-course-links.json";
 const DEFAULT_OUTPUT_PATH = "outputs/youtube-live-publications.json";
 const DEFAULT_PUBLICATION_REGISTRY_PATH = "config/youtube-published-videos.json";
+const DEFAULT_POLYGLOT_PUBLICATION_REGISTRY_PATH = "config/youtube-polyglot-published-videos.json";
 const DEFAULT_MAX_UPLOAD_PLAYLIST_PAGES = 10;
+const DEFAULT_AUDIT_EXCLUSIONS_PATH = "config/youtube-live-audit-exclusions.json";
 
 function parseArgs(argv) {
   const options = {
@@ -14,10 +21,12 @@ function parseArgs(argv) {
     supports: [],
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
+    polyglotPublicationRegistry: DEFAULT_POLYGLOT_PUBLICATION_REGISTRY_PATH,
     courseLinks: DEFAULT_COURSE_LINKS_PATH,
     output: DEFAULT_OUTPUT_PATH,
     maxPages: DEFAULT_MAX_UPLOAD_PLAYLIST_PAGES,
     includeVideoStatus: false,
+    auditExclusions: DEFAULT_AUDIT_EXCLUSIONS_PATH,
     json: false,
   };
 
@@ -36,12 +45,16 @@ function parseArgs(argv) {
       options.channelConfig = readValue();
     } else if (arg === "--publication-registry" || arg.startsWith("--publication-registry=")) {
       options.publicationRegistry = readValue();
+    } else if (arg === "--polyglot-publication-registry" || arg.startsWith("--polyglot-publication-registry=")) {
+      options.polyglotPublicationRegistry = readValue();
     } else if (arg === "--course-links" || arg.startsWith("--course-links=")) {
       options.courseLinks = readValue();
     } else if (arg === "--output" || arg.startsWith("--output=")) {
       options.output = readValue();
     } else if (arg === "--max-pages" || arg.startsWith("--max-pages=")) {
       options.maxPages = Number(readValue());
+    } else if (arg === "--audit-exclusions" || arg.startsWith("--audit-exclusions=")) {
+      options.auditExclusions = readValue();
     } else if (arg === "--include-video-status") {
       options.includeVideoStatus = true;
     } else if (arg === "--json") options.json = true;
@@ -124,7 +137,7 @@ function findActivePublication(registry, query) {
 
 function findActivePublicationByVideoId(registry, { setId, youtubeVideoId }) {
   return (registry.publications || [])
-    .filter((row) => String(row?.setId || "") === String(setId || ""))
+    .filter((row) => !setId || String(row?.setId || "") === String(setId))
     .filter((row) => String(row?.youtubeVideoId || "") === String(youtubeVideoId || ""))
     .filter(isActivePublication)
     .sort((a, b) => String(b.lastReadbackAt || b.uploadedAt || "").localeCompare(String(a.lastReadbackAt || a.uploadedAt || "")))[0] || null;
@@ -210,6 +223,7 @@ async function readAuthorizedChannel({ accessToken, expectedChannelId }) {
 async function readUploadPlaylistItems({ accessToken, uploadsPlaylistId, maxPages }) {
   const items = [];
   let pageToken = "";
+  let pagesRead = 0;
   for (let page = 0; page < maxPages; page += 1) {
     const response = await youtubeJson({
       accessToken,
@@ -222,11 +236,17 @@ async function readUploadPlaylistItems({ accessToken, uploadsPlaylistId, maxPage
         fields: "nextPageToken,items(snippet(publishedAt,title,description,resourceId(videoId)),contentDetails(videoId,videoPublishedAt))",
       },
     });
+    pagesRead += 1;
     items.push(...(response.items || []));
     pageToken = response.nextPageToken || "";
     if (!pageToken) break;
   }
-  return items;
+  return {
+    items,
+    pagesRead,
+    paginationComplete: !pageToken,
+    nextPageTokenPresent: Boolean(pageToken),
+  };
 }
 
 async function readVideoStatuses({ accessToken, videoIds }) {
@@ -256,6 +276,12 @@ async function readVideoStatuses({ accessToken, videoIds }) {
 
 function courseSlugForSet(courseLinks, setId) {
   return String(courseLinks.publishedCourseSlugBySetId?.[setId] || "").trim();
+}
+
+function courseSetBySlug(courseLinks) {
+  return new Map(Object.entries(courseLinks.publishedCourseSlugBySetId || {})
+    .map(([setId, slug]) => [String(slug || "").trim(), setId])
+    .filter(([slug]) => slug));
 }
 
 function normalizeUrlCandidate(value) {
@@ -315,7 +341,7 @@ function resolveSupportLangFromUrl({ urlSupportLang, fallbackSupportLang, channe
   };
 }
 
-function inferPublicationFromDescription({ setId, supportLang, channelSupportLangs, courseSlug, item }) {
+function inferPublicationFromDescription({ supportLang, channelSupportLangs, courseSetLookup, item }) {
   const title = item.snippet?.title || "";
   const description = item.snippet?.description || "";
   const videoId = item.contentDetails?.videoId || item.snippet?.resourceId?.videoId || "";
@@ -330,7 +356,8 @@ function inferPublicationFromDescription({ setId, supportLang, channelSupportLan
     const urlSupportLang = normalizeCode(pathParts[0] || "");
     const urlCourseSlug = pathParts[pathParts.indexOf("courses") + 1] || "";
     const targetLang = parsed.searchParams.get("langs") || parsed.searchParams.get("lang") || "";
-    if (urlCourseSlug !== courseSlug || !targetLang) continue;
+    const inferredSetId = courseSetLookup.get(urlCourseSlug) || "";
+    if (!inferredSetId || !targetLang) continue;
     const supportResolution = resolveSupportLangFromUrl({
       urlSupportLang,
       fallbackSupportLang: supportLang,
@@ -340,7 +367,7 @@ function inferPublicationFromDescription({ setId, supportLang, channelSupportLan
     const multiTarget = isMultiTargetLang(normalizedTargetLang);
     const invalidTarget = !multiTarget && !isSingleLanguageCode(normalizedTargetLang);
     return {
-      setId,
+      setId: inferredSetId,
       supportLang: supportResolution.supportLang,
       targetLang: normalizedTargetLang,
       title,
@@ -368,24 +395,69 @@ function inferPublicationFromDescription({ setId, supportLang, channelSupportLan
   return null;
 }
 
-function duplicateGroups(publications) {
-  const byPair = new Map();
-  for (const row of publications) {
-    const key = [row.setId, normalizeCode(row.supportLang), normalizeCode(row.targetLang)].join("|");
-    const rows = byPair.get(key) || [];
-    rows.push(row);
-    byPair.set(key, rows);
+function publicationFromRegistryItem(existing, item) {
+  const youtubeVideoId = item.contentDetails?.videoId || item.snippet?.resourceId?.videoId || existing.youtubeVideoId || "";
+  return {
+    ...existing,
+    youtubeVideoId,
+    youtubeVideoUrl: `https://www.youtube.com/watch?v=${youtubeVideoId}`,
+    title: item.snippet?.title || existing.title || "",
+    uploadedAt: item.snippet?.publishedAt || item.contentDetails?.videoPublishedAt || existing.uploadedAt || "",
+    supportLangResolution: "local_registry_video_id",
+    supportLangAmbiguous: false,
+    canPersistLiveReadback: true,
+    excludedFromPublicationRegistryReason: "",
+    inLocalPublicationRegistry: true,
+    localRegistryVideoId: youtubeVideoId,
+  };
+}
+
+function earliestAuditWindowStart(publicationRegistry, { setId, channelSupportLangs, matchedPublications = [] }) {
+  const channelSupports = new Set((channelSupportLangs || []).map(normalizeCode));
+  const dates = [
+    ...(publicationRegistry.publications || [])
+      .filter(isActivePublication)
+      .filter((row) => String(row.setId || "") === String(setId || ""))
+      .filter((row) => channelSupports.has(normalizeCode(row.supportLang)))
+      .flatMap((row) => [row.uploadedAt, row.createdAt, row.lastReadbackAt].filter(Boolean)),
+    ...matchedPublications.flatMap((row) => [row.uploadedAt].filter(Boolean)),
+  ].filter((value) => Number.isFinite(Date.parse(value))).sort();
+  return dates[0] || "";
+}
+
+function markPotentialCurrentSetUnmatched(row, { auditWindowStart, exclusionByVideoId }) {
+  const exclusion = exclusionByVideoId.get(row.youtubeVideoId);
+  row.auditWindowStart = auditWindowStart || "";
+  row.reviewedNonProduct = Boolean(exclusion);
+  row.reviewReason = exclusion?.reason || "";
+  const statusReturned = String(row.youtubeStatus?.uploadStatus || "").toLowerCase() !== "not_returned";
+  row.potentialCurrentSet = Boolean(
+    !exclusion
+    && statusReturned
+    && auditWindowStart
+    && Number.isFinite(Date.parse(row.uploadedAt || ""))
+    && Date.parse(row.uploadedAt) >= Date.parse(auditWindowStart),
+  );
+  return row;
+}
+
+function validateAuditExclusions(exclusions = {}) {
+  const entries = exclusions.entries || [];
+  if (!Array.isArray(entries)) throw new Error("YouTube live-audit exclusions entries must be an array");
+  const seen = new Set();
+  for (const [index, row] of entries.entries()) {
+    const prefix = `YouTube live-audit exclusion entries[${index}]`;
+    if (row?.status !== "reviewed_non_product") throw new Error(`${prefix} must use status=reviewed_non_product`);
+    if (!String(row.youtubeVideoId || "").trim()) throw new Error(`${prefix} requires youtubeVideoId`);
+    if (!String(row.reason || "").trim()) throw new Error(`${prefix} requires a review reason`);
+    if (seen.has(row.youtubeVideoId)) throw new Error(`${prefix} duplicates youtubeVideoId=${row.youtubeVideoId}`);
+    seen.add(row.youtubeVideoId);
   }
-  return [...byPair.entries()]
-    .filter(([, rows]) => rows.length > 1)
-    .map(([key, rows]) => ({
-      key,
-      setId: rows[0].setId,
-      supportLang: normalizeCode(rows[0].supportLang),
-      targetLang: normalizeCode(rows[0].targetLang),
-      videoIds: rows.map((row) => row.youtubeVideoId).filter(Boolean),
-      titles: rows.map((row) => row.title).filter(Boolean),
-    }));
+  return new Map(entries.map((row) => [row.youtubeVideoId, row]));
+}
+
+function duplicateGroups(publications) {
+  return duplicateVideoGroups(publications, semanticAssignmentKey);
 }
 
 function markDuplicateAssignmentRowsNonPersistable(rows) {
@@ -393,7 +465,7 @@ function markDuplicateAssignmentRowsNonPersistable(rows) {
   if (!groups.length) return;
   const duplicateKeys = new Set(groups.map((group) => group.key));
   for (const row of rows) {
-    const key = [row.setId, normalizeCode(row.supportLang), normalizeCode(row.targetLang)].join("|");
+    const key = semanticAssignmentKey(row);
     if (!duplicateKeys.has(key)) continue;
     if (row.supportLangResolution === "local_registry_video_id") continue;
     row.canPersistLiveReadback = false;
@@ -403,7 +475,7 @@ function markDuplicateAssignmentRowsNonPersistable(rows) {
   }
 }
 
-async function auditSupport({ options, channelRegistry, publicationRegistry, courseSlug, supportLang }) {
+async function auditSupport({ options, channelRegistry, publicationRegistry, courseSetLookup, exclusionByVideoId, supportLang }) {
   const channel = findChannelForSupport(channelRegistry.channels, supportLang);
   if (!channel) fail(`No YouTube channel configured for support=${supportLang}`);
   if (!channel.channelId) fail(`Configured channel for support=${supportLang} has no channelId`);
@@ -415,20 +487,38 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
   const uploadsPlaylistId = authorizedChannel.contentDetails?.relatedPlaylists?.uploads || "";
   if (!uploadsPlaylistId) fail(`YouTube channel ${channel.channelId} did not expose an uploads playlist.`);
 
-  const items = await readUploadPlaylistItems({
+  const uploadReadback = await readUploadPlaylistItems({
     accessToken,
     uploadsPlaylistId,
     maxPages: options.maxPages,
   });
+  const items = uploadReadback.items;
+  const statuses = options.includeVideoStatus
+    ? await readVideoStatuses({
+      accessToken,
+      videoIds: items.map((item) => item.contentDetails?.videoId || item.snippet?.resourceId?.videoId || ""),
+    })
+    : new Map();
   const matchedPublications = [];
+  const knownOtherPublications = [];
   const unmatchedVideos = [];
   const channelSupportLangs = (channel.supportLangs || [supportLang]).map(normalizeCode).filter(Boolean);
   for (const item of items) {
+    const youtubeVideoId = item.contentDetails?.videoId || item.snippet?.resourceId?.videoId || "";
+    const existingAnySet = findActivePublicationByVideoId(publicationRegistry, { youtubeVideoId });
+    if (existingAnySet) {
+      const known = publicationFromRegistryItem(existingAnySet, item);
+      if (options.includeVideoStatus) {
+        known.youtubeStatus = statuses.get(youtubeVideoId) || { privacyStatus: "", publishAt: "", uploadStatus: "not_returned" };
+      }
+      if (String(known.setId || "") === String(options.setId)) matchedPublications.push(known);
+      else knownOtherPublications.push(known);
+      continue;
+    }
     const inferred = inferPublicationFromDescription({
-      setId: options.setId,
       supportLang,
       channelSupportLangs,
-      courseSlug,
+      courseSetLookup,
       item,
     });
     if (inferred) {
@@ -440,6 +530,11 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
       if (existingByVideoId) {
         inferred.supportLang = normalizeCode(existingByVideoId.supportLang);
         inferred.targetLang = normalizeCode(existingByVideoId.targetLang);
+        for (const field of ["videoType", "polyglotKey", "bundleKey", "contentScope", "targetLangs", "targetLangsCsv", "targetLangsHash", "channelKey"]) {
+          if (existingByVideoId[field] !== undefined && existingByVideoId[field] !== null && existingByVideoId[field] !== "") {
+            inferred[field] = existingByVideoId[field];
+          }
+        }
         inferred.supportLangResolution = "local_registry_video_id";
         inferred.supportLangAmbiguous = false;
         inferred.canPersistLiveReadback = true;
@@ -448,32 +543,39 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
         inferred.canPersistLiveReadback = false;
         inferred.excludedFromPublicationRegistryReason = "duplicate_live_video_for_registered_assignment";
       }
-      matchedPublications.push({
+      const matched = {
         ...inferred,
         inLocalPublicationRegistry: Boolean(existing),
         localRegistryVideoId: existing?.youtubeVideoId || "",
-      });
+      };
+      if (options.includeVideoStatus) {
+        matched.youtubeStatus = statuses.get(youtubeVideoId) || { privacyStatus: "", publishAt: "", uploadStatus: "not_returned" };
+      }
+      if (String(matched.setId || "") === String(options.setId)) matchedPublications.push(matched);
+      else knownOtherPublications.push(matched);
     } else {
       unmatchedVideos.push({
-        youtubeVideoId: item.contentDetails?.videoId || item.snippet?.resourceId?.videoId || "",
+        youtubeVideoId,
+        youtubeVideoUrl: youtubeVideoId ? `https://www.youtube.com/watch?v=${youtubeVideoId}` : "",
+        supportLang: normalizeCode(supportLang),
+        channelKey: channel.key,
+        youtubeChannelId: channel.channelId,
         title: item.snippet?.title || "",
         uploadedAt: item.snippet?.publishedAt || item.contentDetails?.videoPublishedAt || "",
+        youtubeStatus: options.includeVideoStatus
+          ? (statuses.get(youtubeVideoId) || { privacyStatus: "", publishAt: "", uploadStatus: "not_returned" })
+          : null,
       });
     }
   }
   markDuplicateAssignmentRowsNonPersistable(matchedPublications);
-  if (options.includeVideoStatus) {
-    const statuses = await readVideoStatuses({
-      accessToken,
-      videoIds: matchedPublications.map((row) => row.youtubeVideoId),
-    });
-    for (const row of matchedPublications) {
-      row.youtubeStatus = statuses.get(row.youtubeVideoId) || {
-        privacyStatus: "",
-        publishAt: "",
-        uploadStatus: "not_returned",
-      };
-    }
+  const auditWindowStart = earliestAuditWindowStart(publicationRegistry, {
+    setId: options.setId,
+    channelSupportLangs,
+    matchedPublications,
+  });
+  for (const row of unmatchedVideos) {
+    markPotentialCurrentSetUnmatched(row, { auditWindowStart, exclusionByVideoId });
   }
 
   return {
@@ -481,9 +583,14 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
     channelKey: channel.key,
     youtubeChannelId: channel.channelId,
     uploadsPlaylistId,
+    pagesRead: uploadReadback.pagesRead,
+    paginationComplete: uploadReadback.paginationComplete,
+    nextPageTokenPresent: uploadReadback.nextPageTokenPresent,
     scannedUploadItems: items.length,
     matchedPublications,
+    knownOtherPublicationCount: knownOtherPublications.length,
     unmatchedVideos,
+    potentialCurrentSetUnmatchedCount: unmatchedVideos.filter((row) => row.potentialCurrentSet).length,
     missingFromLocalRegistry: matchedPublications.filter((row) => !row.inLocalPublicationRegistry),
     persistableMissingFromLocalRegistry: matchedPublications.filter((row) => row.canPersistLiveReadback !== false && !row.inLocalPublicationRegistry),
     nonPersistableMatchedPublications: matchedPublications.filter((row) => row.canPersistLiveReadback === false),
@@ -500,10 +607,23 @@ async function main() {
   if (!Number.isFinite(options.maxPages) || options.maxPages < 1) fail("--max-pages must be a positive number");
 
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
-  const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
+  const ordinaryPublicationRegistry = loadPublicationRegistry(options.publicationRegistry);
+  const polyglotPublicationRegistry = loadPublicationRegistry(options.polyglotPublicationRegistry);
+  const publicationRegistry = {
+    schemaVersion: 1,
+    publications: [
+      ...(ordinaryPublicationRegistry.publications || []),
+      ...(polyglotPublicationRegistry.publications || []),
+    ],
+  };
   const courseLinks = readJson(options.courseLinks, "video public course links");
   const courseSlug = courseSlugForSet(courseLinks, options.setId);
   if (!courseSlug) fail(`No published course slug configured for set=${options.setId}`);
+  const courseSetLookup = courseSetBySlug(courseLinks);
+  const exclusions = fs.existsSync(options.auditExclusions)
+    ? readJson(options.auditExclusions, "YouTube live-audit exclusions")
+    : { entries: [] };
+  const exclusionByVideoId = validateAuditExclusions(exclusions);
 
   const supports = [...new Set(options.supports.map(normalizeCode).filter(Boolean))];
   const supportReports = [];
@@ -512,7 +632,8 @@ async function main() {
       options,
       channelRegistry,
       publicationRegistry,
-      courseSlug,
+      courseSetLookup,
+      exclusionByVideoId,
       supportLang,
     }));
   }
@@ -532,11 +653,15 @@ async function main() {
     persistablePublicationCount: publications.length,
     missingFromLocalRegistryCount: publications.filter((row) => !row.inLocalPublicationRegistry).length,
     nonPersistableMatchedPublicationCount: allPublications.length - publications.length,
+    unclassifiedUploadCount: supportReports.reduce((sum, item) => sum + item.unmatchedVideos.length, 0),
+    unclassifiedRecentUploadCount: supportReports.reduce((sum, item) => sum + item.potentialCurrentSetUnmatchedCount, 0),
     allMissingFromLocalRegistryCount: allPublications.filter((row) => !row.inLocalPublicationRegistry).length,
     duplicateGroups: duplicateGroups(publications),
     allDuplicateGroups: duplicateGroups(allPublications),
     videoStatusReadback: options.includeVideoStatus,
     scheduledVideoCount: allPublications.filter((row) => row.youtubeStatus?.publishAt).length,
+    paginationComplete: supportReports.every((item) => item.paginationComplete === true),
+    truncatedSupportCount: supportReports.filter((item) => item.paginationComplete !== true).length,
     supportReports,
     publications,
   };
@@ -551,7 +676,11 @@ async function main() {
       scannedUploadItems: report.scannedUploadItems,
       matchedPublicationCount: report.matchedPublicationCount,
       missingFromLocalRegistryCount: report.missingFromLocalRegistryCount,
+      unclassifiedUploadCount: report.unclassifiedUploadCount,
+      unclassifiedRecentUploadCount: report.unclassifiedRecentUploadCount,
       duplicateGroupCount: report.duplicateGroups.length,
+      paginationComplete: report.paginationComplete,
+      truncatedSupportCount: report.truncatedSupportCount,
       output: options.output,
     }, null, 2));
   } else {
@@ -559,9 +688,21 @@ async function main() {
     console.log(`matchedPublicationCount=${report.matchedPublicationCount}`);
     console.log(`missingFromLocalRegistryCount=${report.missingFromLocalRegistryCount}`);
     console.log(`duplicateGroupCount=${report.duplicateGroups.length}`);
+    console.log(`paginationComplete=${report.paginationComplete}`);
   }
 }
 
-main().catch((error) => {
-  fail(error?.stack || error?.message || String(error));
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((error) => {
+    fail(error?.stack || error?.message || String(error));
+  });
+}
+
+export {
+  courseSetBySlug,
+  earliestAuditWindowStart,
+  inferPublicationFromDescription,
+  markPotentialCurrentSetUnmatched,
+  publicationFromRegistryItem,
+  validateAuditExclusions,
+};

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "sourceOfTruth": "docs/video-lessons-strategy.md#youtube-cover-assets",
+  "policy": {
+    "imageProviderCallsAllowed": false,
+    "publishWorkflowMayGenerateImages": false,
+    "videoDimensions": "1280x720",
+    "playlistDimensions": "1024x1024",
+    "reviewThenCommitThenApply": true
+  },
+  "defaults": {
+    "setIds": [
+      "home_kitchen_cookware_pilot_01",
+      "home_kitchen_cooking_actions_a1_a2"
+    ],
+    "supports": [
+      "UZ",
+      "SI",
+      "KA"
+    ],
+    "types": [
+      "ordinary",
+      "polyglot"
+    ],
+    "outputRoot": "data/youtube-cover-assets/approved-template-overlay-uz-si-ka-20260713"
+  },
+  "sets": {
+    "home_kitchen_cookware_pilot_01": {
+      "deckDataPath": "data/decks/home_kitchen_cookware_pilot_01.json",
+      "ordinaryBasePath": "assets/youtube-cover-templates/deck1-ordinary-approved-base.png",
+      "polyglotBasePath": "assets/youtube-cover-templates/deck1-polyglot-approved-base.png",
+      "ordinaryTemplate": "ordinary-target-language-first-large-headline-v1",
+      "polyglotTemplate": "polyglot-target-languages-large-lines-v1",
+      "showModuleOnOrdinary": false
+    },
+    "home_kitchen_cooking_actions_a1_a2": {
+      "deckDataPath": "data/decks/home_kitchen_cooking_actions_a1_a2.json",
+      "ordinaryBasePath": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "polyglotBasePath": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "ordinaryTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "polyglotTemplate": "polyglot-target-languages-large-lines-v1-deck2-action-base",
+      "showModuleOnOrdinary": true
+    }
+  },
+  "playlist": {
+    "basePath": "assets/youtube-cover-templates/playlist-universal-approved-base.jpg",
+    "renderer": "scripts/generate-youtube-playlist-covers.swift"
+  }
+}

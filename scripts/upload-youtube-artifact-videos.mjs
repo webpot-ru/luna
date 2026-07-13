@@ -26,6 +26,7 @@ function parseArgs(argv) {
     support: "",
     target: "",
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
+    publicationControlReport: "",
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     calendar: DEFAULT_CALENDAR_PATH,
     firstFrameTimestamp: "0",
@@ -42,6 +43,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--support=")) options.support = normalizeLanguageCode(arg.slice("--support=".length));
     else if (arg.startsWith("--target=")) options.target = normalizeLanguageCode(arg.slice("--target=".length));
     else if (arg.startsWith("--publication-registry=")) options.publicationRegistry = arg.slice("--publication-registry=".length);
+    else if (arg.startsWith("--publication-control-report=")) options.publicationControlReport = arg.slice("--publication-control-report=".length);
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--calendar=")) options.calendar = arg.slice("--calendar=".length);
     else if (arg.startsWith("--first-frame-timestamp=")) options.firstFrameTimestamp = arg.slice("--first-frame-timestamp=".length);
@@ -62,7 +64,7 @@ function usage() {
     "scripts/youtube-publish-video.mjs to upload already-built videos.",
     "",
     "Dry-run is default. Live write requires:",
-    "  --apply --confirm-youtube-write --create-playlist",
+    "  --apply --confirm-youtube-write --create-playlist --publication-control-report=<fresh-strict-report.json>",
   ].join("\n");
 }
 
@@ -307,6 +309,8 @@ function uploadOne(metadataFile, options) {
     "--create-playlist",
   ];
   if (!options.confirmYoutubeWrite) throw new Error("--apply requires --confirm-youtube-write");
+  if (!options.publicationControlReport) throw new Error("--apply requires --publication-control-report from a fresh strict authenticated readback");
+  args.push(`--publication-control-report=${options.publicationControlReport}`);
   args.push("--apply", "--confirm-youtube-write");
   const upload = run(process.execPath, args, { stdio: "pipe" });
   const calendarSync = syncCalendarFromPublication({

@@ -1100,10 +1100,11 @@
         "Studio public fields configured/read back on 2026-06-21: name, handle, banner, avatar, player watermark, description and site link; contact email intentionally not transmitted.",
         "For browser work, use the Google Sheet Current handle as the navigation/account-switch source. Do not use Channel ID / UC... as the browser URL source.",
         "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
-        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation used first-frame auto-thumbnail fallback until advanced features/custom thumbnails were enabled in Studio.",
+        "2026-07-13: user explicitly confirmed advanced features/custom video and playlist thumbnails are enabled; this supersedes the earlier forbidden fallback note."
       ],
-      "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "customThumbnailUploadAllowed": true,
+      "thumbnailFallbackMode": "custom_when_available"
     },
     {
       "key": "ta",
@@ -1240,10 +1241,11 @@
         "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
         "Studio public fields and avatar/banner/description/link API readback OK 2026-06-21; contact email intentionally not transmitted.",
         "For browser work, use the Google Sheet Current handle as the navigation/account-switch source. Do not use Channel ID / UC... as the browser URL source.",
-        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation used first-frame auto-thumbnail fallback until advanced features/custom thumbnails were enabled in Studio.",
+        "2026-07-13: user explicitly confirmed advanced features/custom video and playlist thumbnails are enabled; this supersedes the earlier forbidden fallback note."
       ],
-      "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "customThumbnailUploadAllowed": true,
+      "thumbnailFallbackMode": "custom_when_available"
     },
     {
       "key": "kk",
@@ -1328,10 +1330,11 @@
         "Studio public fields and avatar/banner/description/link API readback OK 2026-06-21; contact email intentionally not transmitted.",
         "For browser work, use the Google Sheet Current handle as the navigation/account-switch source. Do not use Channel ID / UC... as the browser URL source.",
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio.",
-        "2026-07-04 correction: user clarified the Georgian channel is not yet confirmed for advanced features/custom thumbnails; keep customThumbnailUploadAllowed=false until separate Studio/API readback or explicit confirmation."
+        "2026-07-04 correction: user clarified the Georgian channel was not yet confirmed for advanced features/custom thumbnails at that time.",
+        "2026-07-13: user explicitly confirmed advanced features/custom video and playlist thumbnails are now enabled; this supersedes the earlier forbidden/pending notes."
       ],
-      "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "customThumbnailUploadAllowed": true,
+      "thumbnailFallbackMode": "custom_when_available"
     },
     {
       "key": "hy",

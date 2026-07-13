@@ -102,9 +102,9 @@ on:
         default: false
         type: boolean
       generate_thumbnails:
-        description: "Generate custom YouTube thumbnails through VectorEngine GPT Image 2."
+        description: "Deprecated. Apply uses committed approved JPG covers only; keep false."
         required: true
-        default: true
+        default: false
         type: boolean
       source_run_id:
         description: "Optional failed youtube-video-publish run id to upload already-built artifact videos with first-frame thumbnails; skips render/TTS/VectorEngine."
@@ -132,7 +132,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: youtube-video-publish-${{ github.event.inputs.set_id }}-${{ github.event.inputs.support }}-${{ github.event.inputs.langs }}-${{ github.event.inputs.worker_count }}-${{ github.event.inputs.worker_index }}-${{ github.event.inputs.publish_mode }}-${{ github.event.inputs.source_run_id }}
+  group: youtube-publish-channel-${{ github.event.inputs.support }}-${{ github.event.inputs.mode == 'apply' && 'apply' || github.run_id }}
   cancel-in-progress: false
 
 jobs:
@@ -177,10 +177,24 @@ jobs:
           WORKER_INDEX: ${{ github.event.inputs.worker_index }}
           CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
           CONFIRM_PUBLIC: ${{ github.event.inputs.confirm_public }}
+          ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
         run: |
           set -euo pipefail
           if [ "$(printf '%s' "$SUPPORT" | tr '[:lower:]' '[:upper:]' | xargs)" = "ALL" ]; then
             echo "::error::This workflow refuses support=ALL. Pass an explicit support list like RU,EN,ES."
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && printf '%s' "$SUPPORT" | grep -q ','; then
+            echo "::error::mode=apply accepts exactly one support channel so the channel lock is authoritative."
+            exit 1
+          fi
+          SUPPORT_CANONICAL="$(printf '%s' "$SUPPORT" | tr '[:lower:]' '[:upper:]' | xargs)"
+          if [ "$MODE" = "apply" ] && [ "$SUPPORT" != "$SUPPORT_CANONICAL" ]; then
+            echo "::error::mode=apply requires a trimmed uppercase canonical support code so the concurrency lock cannot be bypassed."
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && { [ "$SUPPORT_CANONICAL" = "EN-GB" ] || [ "$SUPPORT_CANONICAL" = "ES" ] || [ "$SUPPORT_CANONICAL" = "PT" ]; }; then
+            echo "::error::EN-GB, ES and PT are target-only variants. Use canonical support EN, ES-419 or PT-BR."
             exit 1
           fi
           if ! printf '%s' "$WORKER_COUNT" | grep -Eq '^[0-9]+$'; then
@@ -199,15 +213,19 @@ jobs:
             echo "::error::worker_index must be 0..worker_count-1."
             exit 1
           fi
+          if [ "$MODE" = "apply" ] && { [ "$WORKER_COUNT" != "1" ] || [ "$WORKER_INDEX" != "0" ]; }; then
+            echo "::error::mode=apply requires worker_count=1 and worker_index=0; parallelize across support channels, not inside one channel."
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$ALLOW_REPUBLISH" = "true" ]; then
+            echo "::error::allow_republish is disabled for apply. Repair, supersede or delete the prior publication first."
+            exit 1
+          fi
           if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_YOUTUBE_UPLOAD" ]; then
             echo "::error::mode=apply requires confirm_youtube_write=APPLY_YOUTUBE_UPLOAD"
             exit 1
           fi
-          if [ "$PUBLISH_MODE" = "scheduled" ] && [ -z "$SCHEDULE_START_DATE" ]; then
-            echo "::error::publish_mode=scheduled requires schedule_start_date=YYYY-MM-DD"
-            exit 1
-          fi
-          if [ "$PUBLISH_MODE" = "scheduled" ] && ! printf '%s' "$SCHEDULE_START_DATE" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
+          if [ "$PUBLISH_MODE" = "scheduled" ] && [ -n "$SCHEDULE_START_DATE" ] && ! printf '%s' "$SCHEDULE_START_DATE" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
             echo "::error::schedule_start_date must be YYYY-MM-DD"
             exit 1
           fi
@@ -268,6 +286,7 @@ jobs:
           npm run audit:youtube-live-publications -- \
             --set "$SET_ID" \
             --support "$SUPPORT_INPUT" \
+            --include-video-status \
             --output=outputs/youtube-live-publications-github.json \
             --json
           node -e '
@@ -285,6 +304,21 @@ jobs:
               ].join("\n"));
             }
           '
+
+      - name: Gate live publications, durable registry and calendar
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          LANGS_INPUT: ${{ github.event.inputs.langs }}
+        run: |
+          set -euo pipefail
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT_INPUT" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json" "--strict")
+          if [ -n "$LANGS_INPUT" ]; then
+            CONTROL_ARGS+=("--targets=$LANGS_INPUT" "--block-existing-targets")
+          fi
+          npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
 
       - name: Install system dependencies and FFmpeg
         run: |
@@ -355,7 +389,7 @@ jobs:
           fi
 
           if [ "$PUBLISH_MODE" = "scheduled" ]; then
-            SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--write-metadata" "--write-calendar" "--reschedule-past-reservations" "--min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES" "--output=outputs/youtube-publish-schedule-github.json")
+            SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--write-metadata" "--write-calendar" "--reschedule-past-reservations" "--fill-earliest" "--min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES" "--output=outputs/youtube-publish-schedule-github.json")
             if [ "$ALLOW_REPUBLISH" = "true" ]; then
               SCHEDULE_ARGS+=("--allow-republish")
             fi
@@ -572,7 +606,7 @@ jobs:
             npm run check:youtube-run-isolation -- outputs/video-generator --shard-count="$WORKER_COUNT" --shard-index="$WORKER_INDEX" --allow-empty --output=outputs/video-generator/youtube-run-isolation-report-github.json
 
             if [ "$PUBLISH_MODE" = "scheduled" ]; then
-              SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--target-plan=outputs/video-generator/youtube-generation-targets-github.json" "--write-metadata" "--write-calendar" "--reschedule-past-reservations" "--min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES" "--output=outputs/youtube-publish-schedule-github.json")
+              SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--target-plan=outputs/video-generator/youtube-generation-targets-github.json" "--write-metadata" "--write-calendar" "--reschedule-past-reservations" "--fill-earliest" "--min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES" "--output=outputs/youtube-publish-schedule-github.json")
               if [ "$ALLOW_REPUBLISH" = "true" ]; then
                 SCHEDULE_ARGS+=("--allow-republish")
               fi
@@ -580,17 +614,10 @@ jobs:
             fi
 
             if [ "$GENERATE_THUMBNAILS" = "true" ]; then
-              if [ "$CONFIRM_THUMBNAIL_SPEND" != "GENERATE_THUMBNAILS" ]; then
-                echo "::error::Thumbnail generation spends VectorEngine image credits. Set confirm_thumbnail_spend=GENERATE_THUMBNAILS."
-                METADATA_STATUS=1
-              elif [ -z "${VECTORENGINE_API_KEY:-}" ] && [ -z "${VECTOR_ENGINE_API_KEY:-}" ]; then
-                echo "::error::Missing VECTORENGINE_API_KEY / VECTOR_ENGINE_API_KEY for thumbnail generation."
-                METADATA_STATUS=1
-              else
-                npm run generate:youtube-thumbnails -- outputs/video-generator --confirm-spend --concurrency="$THUMBNAIL_CONCURRENCY" --output=outputs/video-generator/youtube-thumbnail-generation-report-github.json || METADATA_STATUS=1
-              fi
+              echo "::error::Apply uses committed approved JPG covers. Generate/review cover assets in the separate no-provider build workflow, then set generate_thumbnails=false."
+              METADATA_STATUS=1
             else
-              npm run copy:pre-rendered-thumbnails -- --input-dir=outputs/video-generator --strict-custom --output=outputs/video-generator/youtube-pre-rendered-thumbnail-copy-report-github.json || METADATA_STATUS=1
+              npm run copy:pre-rendered-thumbnails -- --input-dir=outputs/video-generator --strict-custom --require-git-tracked --output=outputs/video-generator/youtube-pre-rendered-thumbnail-copy-report-github.json || METADATA_STATUS=1
             fi
 
             if [ "$METADATA_STATUS" -eq 0 ]; then
@@ -699,6 +726,20 @@ jobs:
             }
           "
 
+      - name: Refresh live publication control immediately before upload
+        if: ${{ github.event.inputs.mode == 'apply' && (steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true') }}
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          LANGS_INPUT: ${{ github.event.inputs.langs }}
+        run: |
+          set -euo pipefail
+          npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORT_INPUT" --include-video-status --output=outputs/youtube-live-publications-github.json --json
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT_INPUT" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json" "--strict")
+          if [ -n "$LANGS_INPUT" ]; then CONTROL_ARGS+=("--targets=$LANGS_INPUT" "--block-existing-targets"); fi
+          npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
+
       - name: Upload videos to YouTube
         if: ${{ github.event.inputs.mode == 'apply' && github.event.inputs.source_run_id == '' && steps.generation_targets.outputs.has_targets == 'true' }}
         shell: bash
@@ -728,7 +769,7 @@ jobs:
             exit 1
           fi
           for metadata_file in "${METADATA_FILES[@]}"; do
-            PUBLISH_ARGS=("--metadata=$metadata_file" "--privacy=$EFFECTIVE_PRIVACY" "--apply" "--confirm-youtube-write")
+            PUBLISH_ARGS=("--metadata=$metadata_file" "--privacy=$EFFECTIVE_PRIVACY" "--publication-control-report=outputs/youtube-publication-control-github.json" "--apply" "--confirm-youtube-write")
             if [ "$CREATE_PLAYLISTS" = "true" ]; then
               PUBLISH_ARGS+=("--create-playlist")
             fi
@@ -760,6 +801,7 @@ jobs:
           node scripts/upload-youtube-artifact-videos.mjs outputs/video-generator \
             --support="$SUPPORT_INPUT" \
             --skip-missing-videos \
+            --publication-control-report=outputs/youtube-publication-control-github.json \
             --apply \
             --confirm-youtube-write \
             --create-playlist \
@@ -777,6 +819,7 @@ jobs:
             outputs/youtube-publish-schedule-github.json
             outputs/youtube-publish-plan-github.json
             outputs/youtube-live-publications-github.json
+            outputs/youtube-publication-control-github.json
             outputs/youtube-publish-ledger.jsonl
             outputs/video-generator/youtube-thumbnail-first-frame-check-github.json
             outputs/video-generator/youtube-artifact-first-frame-prepare-github.json

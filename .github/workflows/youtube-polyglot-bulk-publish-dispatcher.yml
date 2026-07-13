@@ -28,7 +28,7 @@ on:
           - channel-keys
           - variants
       bundle:
-        description: "Default Polyglot bundle for non-English support channels."
+        description: "Default Polyglot bundle for every support channel unless explicitly overridden."
         required: true
         default: "global_europe_core"
         type: choice
@@ -47,11 +47,12 @@ on:
           - caucasus_bridge_core
           - baltic_core
       english_bundle:
-        description: "Bundle for EN/EN-GB; global_europe_core resolves to ES,FR,DE,IT after removing English."
+        description: "Optional explicit EN exception; same_as_bundle keeps EN in the selected bulk wave."
         required: true
-        default: "global_europe_core"
+        default: "same_as_bundle"
         type: choice
         options:
+          - same_as_bundle
           - global_europe_core
           - romance_core
           - east_asia_core
@@ -86,12 +87,28 @@ on:
           - public
           - unlisted
           - private
+      publish_mode:
+        description: "scheduled reserves the earliest free shared channel-calendar slot."
+        required: true
+        default: "scheduled"
+        type: choice
+        options:
+          - scheduled
+          - public_now
+      schedule_start_date:
+        description: "Optional earliest local date, YYYY-MM-DD; existing earlier free dates still win."
+        required: false
+        default: ""
+      schedule_min_future_minutes:
+        description: "Only reserve a slot at least this many minutes in the future."
+        required: false
+        default: "90"
       publish_at:
-        description: "Optional ISO timestamp. Only use with a narrow support list and privacy=private."
+        description: "Deprecated plan-only ISO timestamp; live apply rejects direct timestamps."
         required: false
         default: ""
       dispatch_spacing_seconds:
-        description: "Delay after each watched dispatch result."
+        description: "Delay between fire-and-forget child dispatches."
         required: true
         default: "5"
       playlist_retry_delay_seconds:
@@ -132,7 +149,7 @@ on:
         default: ""
 
 permissions:
-  contents: write
+  contents: read
   actions: write
 
 concurrency:
@@ -201,6 +218,9 @@ jobs:
           MAX_PARALLEL: ${{ github.event.inputs.max_parallel }}
           EXCLUDE_SUPPORTS: ${{ github.event.inputs.exclude_supports }}
           PRIVACY: ${{ github.event.inputs.privacy }}
+          PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
+          SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
+          SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
           PUBLISH_AT: ${{ github.event.inputs.publish_at }}
           DISPATCH_SPACING_SECONDS: ${{ github.event.inputs.dispatch_spacing_seconds }}
           PLAYLIST_RETRY_DELAY_SECONDS: ${{ github.event.inputs.playlist_retry_delay_seconds }}
@@ -227,9 +247,13 @@ jobs:
             "--child-mode=apply"
             "--limit=0"
             "--privacy=$PRIVACY"
+            "--publish-mode=$PUBLISH_MODE"
+            "--schedule-start-date=$SCHEDULE_START_DATE"
+            "--schedule-min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES"
             "--publish-at=$PUBLISH_AT"
             "--dispatch-spacing-seconds=$DISPATCH_SPACING_SECONDS"
             "--playlist-retry-delay-seconds=$PLAYLIST_RETRY_DELAY_SECONDS"
+            "--no-watch"
             "--confirm-dispatch=$CONFIRM_DISPATCH"
             "--confirm-render=$CONFIRM_RENDER"
             "--confirm-tts=$CONFIRM_TTS"
@@ -247,43 +271,6 @@ jobs:
           fi
           npm run dispatch:youtube-polyglot-bulk-publish -- "${ARGS[@]}"
 
-      - name: Recover child Polyglot state from artifacts
-        if: ${{ always() && github.event.inputs.mode == 'dispatch' }}
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          BRANCH_NAME: ${{ github.ref_name }}
-        run: |
-          set -euo pipefail
-          if [ ! -f outputs/youtube-polyglot-bulk-publish-dispatcher-report.json ]; then
-            echo "No dispatcher report found; skip child state recovery."
-            exit 0
-          fi
-          git fetch origin "$BRANCH_NAME"
-          git pull --ff-only origin "$BRANCH_NAME"
-          npm run recover:youtube-polyglot-state -- \
-            --report=outputs/youtube-polyglot-bulk-publish-dispatcher-report.json \
-            --artifact-root=outputs/youtube-polyglot-child-state-recovery \
-            --output=outputs/youtube-polyglot-child-state-recovery-summary.json
-
-      - name: Commit recovered child Polyglot state
-        if: ${{ always() && github.event.inputs.mode == 'dispatch' }}
-        shell: bash
-        env:
-          BRANCH_NAME: ${{ github.ref_name }}
-        run: |
-          set -euo pipefail
-          if git diff --quiet -- config/youtube-channels.json config/youtube-polyglot-playlists.json config/youtube-polyglot-progress.json config/youtube-polyglot-published-videos.json config/youtube-publish-calendar.json; then
-            echo "No recovered Polyglot child state changes to commit."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add config/youtube-channels.json config/youtube-polyglot-playlists.json config/youtube-polyglot-progress.json config/youtube-polyglot-published-videos.json config/youtube-publish-calendar.json
-          git commit -m "Recover Polyglot YouTube child publish state" \
-            -m "Source dispatcher run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          git push origin "HEAD:$BRANCH_NAME"
-
       - name: Upload Polyglot dispatcher report
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
@@ -293,5 +280,4 @@ jobs:
           if-no-files-found: warn
           path: |
             outputs/youtube-polyglot-bulk-publish-dispatcher-report.json
-            outputs/youtube-polyglot-child-state-recovery-summary.json
             outputs/youtube-polyglot-bulk-plan/*.json
