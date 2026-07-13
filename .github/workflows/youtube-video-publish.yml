@@ -46,14 +46,18 @@ on:
         description: "Video build concurrency per support language."
         required: true
         default: "2"
-      metadata_concurrency:
-        description: "VectorEngine/Gemini metadata generation concurrency per support language."
-        required: true
+      metadata_gemini_backend:
+        description: "Metadata backend chain. Default api,vectorengine: direct Gemini keys first, then VectorEngine; VectorEngine requires confirm_vectorengine_metadata."
+        required: false
+        default: "api,vectorengine"
+      metadata_batch_size:
+        description: "Direct Gemini API metadata batch size per request."
+        required: false
         default: "4"
-      thumbnail_concurrency:
-        description: "VectorEngine thumbnail generation concurrency."
-        required: true
-        default: "2"
+      metadata_rate_limit_ms:
+        description: "Pause between direct Gemini metadata batches in milliseconds."
+        required: false
+        default: "15000"
       worker_count:
         description: "Total deterministic workers/runners for this support/lang set. Use 5 for a 5-server test, up to 20."
         required: true
@@ -84,17 +88,9 @@ on:
         required: false
         default: ""
       schedule_min_future_minutes:
-        description: "For publish_mode=scheduled: move/reuse only slots at least this many minutes in the future."
+        description: "For scheduled publishing: move/reuse only slots at least this many minutes in the future."
         required: false
         default: "90"
-      schedule_policy:
-        description: "Schedule policy JSON path."
-        required: false
-        default: "config/youtube-publish-schedule-policy.json"
-      schedule_calendar:
-        description: "Durable schedule reservation calendar JSON path."
-        required: false
-        default: "config/youtube-publish-calendar.json"
       create_playlists:
         description: "Allow the uploader to create missing unlisted playlists from config/youtube-playlists.json assignments."
         required: true
@@ -106,12 +102,20 @@ on:
         default: false
         type: boolean
       generate_thumbnails:
-        description: "Generate custom YouTube thumbnails through VectorEngine GPT Image 2."
+        description: "Deprecated. Apply uses committed approved JPG covers only; keep false."
         required: true
-        default: true
+        default: false
         type: boolean
+      source_run_id:
+        description: "Optional failed youtube-video-publish run id to upload already-built artifact videos with first-frame thumbnails; skips render/TTS/VectorEngine."
+        required: false
+        default: ""
       confirm_thumbnail_spend:
         description: "For thumbnail generation type GENERATE_THUMBNAILS."
+        required: false
+        default: ""
+      confirm_vectorengine_metadata:
+        description: "Required as USE_VECTORENGINE_METADATA if metadata_gemini_backend includes vectorengine."
         required: false
         default: ""
       confirm_youtube_write:
@@ -125,9 +129,10 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
-  group: youtube-video-publish-${{ github.event.inputs.set_id }}-${{ github.event.inputs.support }}-${{ github.event.inputs.langs }}-${{ github.event.inputs.worker_count }}-${{ github.event.inputs.worker_index }}-${{ github.event.inputs.publish_mode }}
+  group: youtube-publish-channel-${{ github.event.inputs.support }}-${{ github.event.inputs.mode == 'apply' && 'apply' || github.run_id }}
   cancel-in-progress: false
 
 jobs:
@@ -168,15 +173,28 @@ jobs:
           PRIVACY: ${{ github.event.inputs.privacy }}
           PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
           SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
-          SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
           WORKER_COUNT: ${{ github.event.inputs.worker_count }}
           WORKER_INDEX: ${{ github.event.inputs.worker_index }}
           CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
           CONFIRM_PUBLIC: ${{ github.event.inputs.confirm_public }}
+          ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
         run: |
           set -euo pipefail
           if [ "$(printf '%s' "$SUPPORT" | tr '[:lower:]' '[:upper:]' | xargs)" = "ALL" ]; then
             echo "::error::This workflow refuses support=ALL. Pass an explicit support list like RU,EN,ES."
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && printf '%s' "$SUPPORT" | grep -q ','; then
+            echo "::error::mode=apply accepts exactly one support channel so the channel lock is authoritative."
+            exit 1
+          fi
+          SUPPORT_CANONICAL="$(printf '%s' "$SUPPORT" | tr '[:lower:]' '[:upper:]' | xargs)"
+          if [ "$MODE" = "apply" ] && [ "$SUPPORT" != "$SUPPORT_CANONICAL" ]; then
+            echo "::error::mode=apply requires a trimmed uppercase canonical support code so the concurrency lock cannot be bypassed."
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && { [ "$SUPPORT_CANONICAL" = "EN-GB" ] || [ "$SUPPORT_CANONICAL" = "ES" ] || [ "$SUPPORT_CANONICAL" = "PT" ]; }; then
+            echo "::error::EN-GB, ES and PT are target-only variants. Use canonical support EN, ES-419 or PT-BR."
             exit 1
           fi
           if ! printf '%s' "$WORKER_COUNT" | grep -Eq '^[0-9]+$'; then
@@ -195,16 +213,20 @@ jobs:
             echo "::error::worker_index must be 0..worker_count-1."
             exit 1
           fi
+          if [ "$MODE" = "apply" ] && { [ "$WORKER_COUNT" != "1" ] || [ "$WORKER_INDEX" != "0" ]; }; then
+            echo "::error::mode=apply requires worker_count=1 and worker_index=0; parallelize across support channels, not inside one channel."
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$ALLOW_REPUBLISH" = "true" ]; then
+            echo "::error::allow_republish is disabled for apply. Repair, supersede or delete the prior publication first."
+            exit 1
+          fi
           if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_YOUTUBE_UPLOAD" ]; then
             echo "::error::mode=apply requires confirm_youtube_write=APPLY_YOUTUBE_UPLOAD"
             exit 1
           fi
           if [ "$PUBLISH_MODE" = "scheduled" ] && [ -n "$SCHEDULE_START_DATE" ] && ! printf '%s' "$SCHEDULE_START_DATE" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
             echo "::error::schedule_start_date must be YYYY-MM-DD"
-            exit 1
-          fi
-          if [ "$PUBLISH_MODE" = "scheduled" ] && ! printf '%s' "$SCHEDULE_MIN_FUTURE_MINUTES" | grep -Eq '^[0-9]+$'; then
-            echo "::error::schedule_min_future_minutes must be a non-negative integer"
             exit 1
           fi
           if [ "$PRIVACY" = "public" ] && [ "$CONFIRM_PUBLIC" != "PUBLISH_PUBLIC" ]; then
@@ -234,24 +256,8 @@ jobs:
           fi
           echo "Effective YouTube API environment: $EFFECTIVE_YOUTUBE_ENVIRONMENT"
 
-      - name: Install system dependencies and FFmpeg
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-
-      - name: Install Python TTS dependency
-        run: pip install edge-tts
-
       - name: Install Node dependencies
         run: npm ci || npm install
-
-      - name: Install Playwright Chromium with dependencies
-        run: npx playwright install chromium --with-deps
 
       - name: Restore YouTube OAuth bundle from environment secret
         if: ${{ github.event.inputs.mode == 'apply' }}
@@ -269,7 +275,7 @@ jobs:
           test -d .local/youtube-oauth/tokens
           echo "YouTube OAuth bundle restored for environment $EFFECTIVE_YOUTUBE_ENVIRONMENT."
 
-      - name: Audit live YouTube publications for duplicate guard
+      - name: Audit live YouTube publications for duplicate guard and pre-flight quota check
         if: ${{ github.event.inputs.mode == 'apply' }}
         shell: bash
         env:
@@ -280,6 +286,7 @@ jobs:
           npm run audit:youtube-live-publications -- \
             --set "$SET_ID" \
             --support "$SUPPORT_INPUT" \
+            --include-video-status \
             --output=outputs/youtube-live-publications-github.json \
             --json
           node -e '
@@ -287,7 +294,7 @@ jobs:
             const report = JSON.parse(fs.readFileSync("outputs/youtube-live-publications-github.json", "utf8"));
             if (process.env.GITHUB_STEP_SUMMARY) {
               fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
-                "### Live YouTube duplicate guard",
+                "### Live YouTube duplicate guard & pre-flight check",
                 "",
                 `- Scanned upload items: ${report.scannedUploadItems || 0}`,
                 `- Matched current set publications: ${report.matchedPublicationCount || 0}`,
@@ -298,7 +305,101 @@ jobs:
             }
           '
 
+      - name: Gate live publications, durable registry and calendar
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          LANGS_INPUT: ${{ github.event.inputs.langs }}
+        run: |
+          set -euo pipefail
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT_INPUT" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json" "--strict")
+          if [ -n "$LANGS_INPUT" ]; then
+            CONTROL_ARGS+=("--targets=$LANGS_INPUT" "--block-existing-targets")
+          fi
+          npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
+
+      - name: Install system dependencies and FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Python TTS dependency
+        run: pip install edge-tts
+
+      - name: Install Playwright Chromium with dependencies
+        if: ${{ github.event.inputs.source_run_id == '' }}
+        run: npx playwright install chromium --with-deps
+
+      - name: Download source publish artifact
+        if: ${{ github.event.inputs.source_run_id != '' }}
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ github.event.inputs.source_run_id }}
+          github-token: ${{ github.token }}
+          name: youtube-video-publish-apply-${{ github.event.inputs.set_id }}-${{ github.event.inputs.source_run_id }}
+          path: .source-artifact
+
+      - name: Prepare source artifact for first-frame upload
+        id: artifact_source
+        if: ${{ github.event.inputs.source_run_id != '' }}
+        shell: bash
+        env:
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
+          SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
+          SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
+          SCHEDULE_POLICY: config/youtube-publish-schedule-policy.json
+          SCHEDULE_CALENDAR: config/youtube-publish-calendar.json
+          ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
+        run: |
+          set -euo pipefail
+          ROOT="$(find .source-artifact -type d -path '*/outputs/video-generator' | head -n1 || true)"
+          if [ -z "$ROOT" ] && [ -d ".source-artifact/outputs/video-generator" ]; then
+            ROOT=".source-artifact/outputs/video-generator"
+          fi
+          if [ -z "$ROOT" ]; then
+            echo "::error::Could not find outputs/video-generator inside source artifact."
+            find .source-artifact -maxdepth 4 -type d | sort
+            exit 1
+          fi
+          mkdir -p outputs
+          cp -R "$ROOT" outputs/video-generator
+          node scripts/upload-youtube-artifact-videos.mjs outputs/video-generator \
+            --support="$SUPPORT_INPUT" \
+            --skip-missing-videos \
+            --move-skipped-missing-video-dirs=outputs/video-generator-skipped-missing-video \
+            --output=outputs/video-generator/youtube-artifact-first-frame-prepare-github.json
+
+          HAS_TARGETS="$(node -e '
+            const fs = require("fs");
+            const report = JSON.parse(fs.readFileSync("outputs/video-generator/youtube-artifact-first-frame-prepare-github.json", "utf8"));
+            process.stdout.write(report.processedCount > 0 ? "true" : "false");
+          ')"
+          echo "has_targets=$HAS_TARGETS" >> "$GITHUB_OUTPUT"
+          if [ "$HAS_TARGETS" != "true" ]; then
+            echo "No source-artifact videos with matching MP4 for support=$SUPPORT_INPUT."
+            exit 0
+          fi
+
+          if [ "$PUBLISH_MODE" = "scheduled" ]; then
+            SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--write-metadata" "--write-calendar" "--reschedule-past-reservations" "--fill-earliest" "--min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES" "--output=outputs/youtube-publish-schedule-github.json")
+            if [ "$ALLOW_REPUBLISH" = "true" ]; then
+              SCHEDULE_ARGS+=("--allow-republish")
+            fi
+            npm run plan:youtube-publish-schedule -- "${SCHEDULE_ARGS[@]}"
+          fi
+
+          npm run check:youtube-thumbnails -- outputs/video-generator --output=outputs/video-generator/youtube-thumbnail-first-frame-check-github.json
+
       - name: Download offline deck data from Google Drive
+        if: ${{ github.event.inputs.source_run_id == '' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -330,6 +431,7 @@ jobs:
 
       - name: Plan YouTube generation targets
         id: generation_targets
+        if: ${{ github.event.inputs.source_run_id == '' }}
         shell: bash
         env:
           SET_ID: ${{ github.event.inputs.set_id }}
@@ -382,11 +484,12 @@ jobs:
           '
 
       - name: Build videos, metadata, schedule and thumbnails
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ github.event.inputs.source_run_id == '' && steps.generation_targets.outputs.has_targets == 'true' }}
         shell: bash
         env:
           AI33_API_KEY: ${{ secrets.AI33_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
           VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
@@ -394,13 +497,19 @@ jobs:
           VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
           VECTORENGINE_GEMINI_MODEL: ${{ vars.VECTORENGINE_GEMINI_MODEL }}
           VECTORENGINE_IMAGE_MODEL: ${{ vars.VECTORENGINE_IMAGE_MODEL }}
+          VECTORENGINE_IMAGE_TIMEOUT_MS: ${{ vars.VECTORENGINE_IMAGE_TIMEOUT_MS || '300000' }}
+          VECTORENGINE_IMAGE_RETRIES: ${{ vars.VECTORENGINE_IMAGE_RETRIES || '3' }}
           GENERATE_THUMBNAILS: ${{ github.event.inputs.generate_thumbnails }}
           CONFIRM_THUMBNAIL_SPEND: ${{ github.event.inputs.confirm_thumbnail_spend }}
-          THUMBNAIL_CONCURRENCY: ${{ github.event.inputs.thumbnail_concurrency }}
+          THUMBNAIL_CONCURRENCY: "2"
+          METADATA_GEMINI_BACKEND: ${{ github.event.inputs.metadata_gemini_backend }}
+          METADATA_BATCH_SIZE: ${{ github.event.inputs.metadata_batch_size }}
+          METADATA_RATE_LIMIT_MS: ${{ github.event.inputs.metadata_rate_limit_ms }}
+          CONFIRM_VECTORENGINE_METADATA: ${{ github.event.inputs.confirm_vectorengine_metadata }}
           SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
           SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
-          SCHEDULE_POLICY: ${{ github.event.inputs.schedule_policy }}
-          SCHEDULE_CALENDAR: ${{ github.event.inputs.schedule_calendar }}
+          SCHEDULE_POLICY: config/youtube-publish-schedule-policy.json
+          SCHEDULE_CALENDAR: config/youtube-publish-calendar.json
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
         run: |
           set -euo pipefail
@@ -408,14 +517,18 @@ jobs:
           SUPPORT_INPUT="${{ github.event.inputs.support }}"
           LANGS_INPUT="${{ github.event.inputs.langs }}"
           CONCURRENCY="${{ github.event.inputs.concurrency }}"
-          METADATA_CONCURRENCY="${{ github.event.inputs.metadata_concurrency }}"
+          METADATA_CONCURRENCY="1"
           WORKER_COUNT="${{ github.event.inputs.worker_count }}"
           WORKER_INDEX="${{ github.event.inputs.worker_index }}"
           PRIVACY="${{ github.event.inputs.privacy }}"
+          MODE="${{ github.event.inputs.mode }}"
           PUBLISH_MODE="${{ github.event.inputs.publish_mode }}"
           EFFECTIVE_PRIVACY="$PRIVACY"
           if [ "$PUBLISH_MODE" = "scheduled" ]; then
             EFFECTIVE_PRIVACY="private"
+          fi
+          if [ "$MODE" = "apply" ]; then
+            export YOUTUBE_METADATA_AI_STRICT=1
           fi
 
           target_csv_for_support() {
@@ -449,22 +562,36 @@ jobs:
             BUILD_ARGS+=("--langs" "$ELIGIBLE_TARGETS")
             METADATA_ARGS+=("--targets" "$ELIGIBLE_TARGETS")
 
+            GEMINI_ARGS=()
+            METADATA_BACKEND="$(echo "${METADATA_GEMINI_BACKEND:-api,vectorengine}" | xargs | tr '[:upper:]' '[:lower:]')"
+            if [ -n "$METADATA_BACKEND" ] && [ "$METADATA_BACKEND" != "none" ]; then
+              case ",$METADATA_BACKEND," in
+                *,vectorengine,*)
+                  if [ "$CONFIRM_VECTORENGINE_METADATA" != "USE_VECTORENGINE_METADATA" ]; then
+                    echo "::error::VectorEngine metadata spends proxy quota and is disabled unless confirm_vectorengine_metadata=USE_VECTORENGINE_METADATA."
+                    METADATA_STATUS=1
+                    continue
+                  fi
+                  ;;
+              esac
+              if [ "$METADATA_BACKEND" = "api" ] && [ -z "${GEMINI_API_KEY:-}" ] && [ -z "${GEMINI_API_KEY_2:-}" ] && [ -z "${GOOGLE_API_KEY:-}" ]; then
+                echo "::error::metadata_gemini_backend=api requires GEMINI_API_KEY, GEMINI_API_KEY_2 or GOOGLE_API_KEY."
+                METADATA_STATUS=1
+                continue
+              fi
+              GEMINI_ARGS=("--with-gemini" "--gemini-backend" "$METADATA_BACKEND" "--gemini-batch-size" "${METADATA_BATCH_SIZE:-1}" "--gemini-rate-limit-ms" "${METADATA_RATE_LIMIT_MS:-0}")
+            fi
+
+            echo "Generating metadata before video render for support=$support"
+            if ! node scripts/generate-youtube-metadata.mjs "${METADATA_ARGS[@]}" "${GEMINI_ARGS[@]}"; then
+              METADATA_STATUS=1
+              continue
+            fi
+
             echo "Starting video build in background for support=$support targets=$ELIGIBLE_TARGETS"
             node scripts/build-all-deck-videos.mjs "${BUILD_ARGS[@]}" &
             BUILD_PIDS+=("$!")
             BUILD_LABELS+=("video:$support")
-
-            GEMINI_ARGS=()
-            if [ -n "${VECTORENGINE_API_KEY:-}" ] || [ -n "${VECTOR_ENGINE_API_KEY:-}" ]; then
-              GEMINI_ARGS=("--with-gemini" "--gemini-backend" "vectorengine" "--model" "${VECTORENGINE_GEMINI_MODEL:-gemini-3.5-flash}")
-            elif [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
-              GEMINI_ARGS=("--with-gemini" "--gemini-backend" "api")
-            fi
-
-            echo "Generating metadata while video renders for support=$support"
-            if ! node scripts/generate-youtube-metadata.mjs "${METADATA_ARGS[@]}" "${GEMINI_ARGS[@]}"; then
-              METADATA_STATUS=1
-            fi
           done
 
           if [ "$METADATA_STATUS" -eq 0 ]; then
@@ -479,7 +606,7 @@ jobs:
             npm run check:youtube-run-isolation -- outputs/video-generator --shard-count="$WORKER_COUNT" --shard-index="$WORKER_INDEX" --allow-empty --output=outputs/video-generator/youtube-run-isolation-report-github.json
 
             if [ "$PUBLISH_MODE" = "scheduled" ]; then
-              SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--target-plan=outputs/video-generator/youtube-generation-targets-github.json" "--write-metadata" "--write-calendar" "--reschedule-past-reservations" "--output=outputs/youtube-publish-schedule-github.json")
+              SCHEDULE_ARGS=("outputs/video-generator" "--start-date=$SCHEDULE_START_DATE" "--policy=$SCHEDULE_POLICY" "--calendar=$SCHEDULE_CALENDAR" "--target-plan=outputs/video-generator/youtube-generation-targets-github.json" "--write-metadata" "--write-calendar" "--reschedule-past-reservations" "--fill-earliest" "--min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES" "--output=outputs/youtube-publish-schedule-github.json")
               if [ "$ALLOW_REPUBLISH" = "true" ]; then
                 SCHEDULE_ARGS+=("--allow-republish")
               fi
@@ -487,31 +614,22 @@ jobs:
             fi
 
             if [ "$GENERATE_THUMBNAILS" = "true" ]; then
-              if [ "$CONFIRM_THUMBNAIL_SPEND" != "GENERATE_THUMBNAILS" ]; then
-                echo "::error::Thumbnail generation spends VectorEngine image credits. Set confirm_thumbnail_spend=GENERATE_THUMBNAILS."
-                METADATA_STATUS=1
-              elif [ -z "${VECTORENGINE_API_KEY:-}" ] && [ -z "${VECTOR_ENGINE_API_KEY:-}" ]; then
-                echo "::error::Missing VECTORENGINE_API_KEY / VECTOR_ENGINE_API_KEY for thumbnail generation."
-                METADATA_STATUS=1
-              else
-                npm run generate:youtube-thumbnails -- outputs/video-generator --confirm-spend --concurrency="$THUMBNAIL_CONCURRENCY" --output=outputs/video-generator/youtube-thumbnail-generation-report-github.json || METADATA_STATUS=1
-              fi
+              echo "::error::Apply uses committed approved JPG covers. Generate/review cover assets in the separate no-provider build workflow, then set generate_thumbnails=false."
+              METADATA_STATUS=1
+            else
+              npm run copy:pre-rendered-thumbnails -- --input-dir=outputs/video-generator --strict-custom --require-git-tracked --output=outputs/video-generator/youtube-pre-rendered-thumbnail-copy-report-github.json || METADATA_STATUS=1
             fi
 
             if [ "$METADATA_STATUS" -eq 0 ]; then
-              if [ "$GENERATE_THUMBNAILS" = "true" ]; then
-                npm run check:youtube-thumbnails -- outputs/video-generator --allow-auto-first-frame --output=outputs/video-generator/youtube-thumbnail-report-github.json || METADATA_STATUS=1
-              fi
+              npm run check:youtube-thumbnails -- outputs/video-generator --allow-auto-first-frame --output=outputs/video-generator/youtube-thumbnail-report-github.json || METADATA_STATUS=1
             fi
 
             if [ "$METADATA_STATUS" -eq 0 ]; then
-              if [ "$GENERATE_THUMBNAILS" = "true" ]; then
-                REVIEW_ARGS=("outputs/video-generator" "--output-prefix=outputs/video-generator/youtube-thumbnail-review-github" "--allow-auto-first-frame")
-                if [ "$PUBLISH_MODE" = "scheduled" ]; then
-                  REVIEW_ARGS+=("--require-publish-at")
-                fi
-                npm run build:youtube-thumbnail-review -- "${REVIEW_ARGS[@]}" || METADATA_STATUS=1
+              REVIEW_ARGS=("outputs/video-generator" "--output-prefix=outputs/video-generator/youtube-thumbnail-review-github" "--allow-auto-first-frame")
+              if [ "$PUBLISH_MODE" = "scheduled" ]; then
+                REVIEW_ARGS+=("--require-publish-at")
               fi
+              npm run build:youtube-thumbnail-review -- "${REVIEW_ARGS[@]}" || METADATA_STATUS=1
             fi
           fi
 
@@ -527,23 +645,23 @@ jobs:
           fi
 
       - name: Validate YouTube metadata
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         run: npm run check:youtube-metadata -- outputs/video-generator
 
       - name: Validate YouTube metadata language
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         run: npm run check:youtube-metadata-language -- outputs/video-generator --output=outputs/video-generator/youtube-metadata-language-report-github.json
 
       - name: Validate YouTube playlist naming contract
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         run: npm run check:youtube-playlist-naming
 
       - name: Validate video TTS variant contract
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         run: npm run check:video-tts-variant-contract -- --metadata outputs/video-generator --output=outputs/video-generator/video-tts-variant-contract-report-github.json
 
       - name: Validate YouTube SEO metadata
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         shell: bash
         env:
           MODE: ${{ github.event.inputs.mode }}
@@ -556,7 +674,7 @@ jobs:
           npm run check:youtube-seo-metadata -- "${SEO_ARGS[@]}"
 
       - name: Plan YouTube publication
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         shell: bash
         env:
           CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}
@@ -581,7 +699,7 @@ jobs:
           npm run plan:youtube-publish -- "${PLAN_ARGS[@]}"
 
       - name: Gate publish plan
-        if: ${{ steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true' }}
         shell: bash
         env:
           MODE: ${{ github.event.inputs.mode }}
@@ -608,8 +726,22 @@ jobs:
             }
           "
 
+      - name: Refresh live publication control immediately before upload
+        if: ${{ github.event.inputs.mode == 'apply' && (steps.generation_targets.outputs.has_targets == 'true' || steps.artifact_source.outputs.has_targets == 'true') }}
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          LANGS_INPUT: ${{ github.event.inputs.langs }}
+        run: |
+          set -euo pipefail
+          npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORT_INPUT" --include-video-status --output=outputs/youtube-live-publications-github.json --json
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT_INPUT" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json" "--strict")
+          if [ -n "$LANGS_INPUT" ]; then CONTROL_ARGS+=("--targets=$LANGS_INPUT" "--block-existing-targets"); fi
+          npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
+
       - name: Upload videos to YouTube
-        if: ${{ github.event.inputs.mode == 'apply' && steps.generation_targets.outputs.has_targets == 'true' }}
+        if: ${{ github.event.inputs.mode == 'apply' && github.event.inputs.source_run_id == '' && steps.generation_targets.outputs.has_targets == 'true' }}
         shell: bash
         env:
           CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}
@@ -637,7 +769,7 @@ jobs:
             exit 1
           fi
           for metadata_file in "${METADATA_FILES[@]}"; do
-            PUBLISH_ARGS=("--metadata=$metadata_file" "--privacy=$EFFECTIVE_PRIVACY" "--apply" "--confirm-youtube-write")
+            PUBLISH_ARGS=("--metadata=$metadata_file" "--privacy=$EFFECTIVE_PRIVACY" "--publication-control-report=outputs/youtube-publication-control-github.json" "--apply" "--confirm-youtube-write")
             if [ "$CREATE_PLAYLISTS" = "true" ]; then
               PUBLISH_ARGS+=("--create-playlist")
             fi
@@ -649,6 +781,31 @@ jobs:
             fi
             npm run apply:youtube-publish -- "${PUBLISH_ARGS[@]}"
           done
+
+      - name: Upload source artifact videos to YouTube with first-frame thumbnails
+        if: ${{ github.event.inputs.mode == 'apply' && github.event.inputs.source_run_id != '' && steps.artifact_source.outputs.has_targets == 'true' }}
+        shell: bash
+        env:
+          SUPPORT_INPUT: ${{ github.event.inputs.support }}
+          YOUTUBE_API_RETRY_ATTEMPTS: "7"
+          YOUTUBE_API_RETRY_BASE_MS: "4000"
+          YOUTUBE_API_RETRY_JITTER_MS: "4000"
+          YOUTUBE_API_RETRY_MAX_MS: "90000"
+          YOUTUBE_PLAYLIST_WRITE_DELAY_MS: "4000"
+          YOUTUBE_PLAYLIST_WRITE_JITTER_MS: "8000"
+          YOUTUBE_VIDEO_READBACK_ATTEMPTS: "6"
+          YOUTUBE_VIDEO_READBACK_BASE_MS: "6000"
+          YOUTUBE_VIDEO_READBACK_MAX_MS: "60000"
+        run: |
+          set -euo pipefail
+          node scripts/upload-youtube-artifact-videos.mjs outputs/video-generator \
+            --support="$SUPPORT_INPUT" \
+            --skip-missing-videos \
+            --publication-control-report=outputs/youtube-publication-control-github.json \
+            --apply \
+            --confirm-youtube-write \
+            --create-playlist \
+            --output=outputs/video-generator/youtube-artifact-first-frame-apply-github.json
 
       - name: Upload non-secret publish artifacts
         if: ${{ always() }}
@@ -662,7 +819,12 @@ jobs:
             outputs/youtube-publish-schedule-github.json
             outputs/youtube-publish-plan-github.json
             outputs/youtube-live-publications-github.json
+            outputs/youtube-publication-control-github.json
             outputs/youtube-publish-ledger.jsonl
+            outputs/video-generator/youtube-thumbnail-first-frame-check-github.json
+            outputs/video-generator/youtube-artifact-first-frame-prepare-github.json
+            outputs/video-generator/youtube-artifact-first-frame-apply-github.json
+            outputs/video-generator-skipped-missing-video/
             config/youtube-channels.json
             config/youtube-playlists.json
             config/youtube-publish-calendar.json
@@ -728,7 +890,7 @@ jobs:
             exit 0
           fi
           repo_url="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          for attempt in 1 2 3 4 5; do
+          for attempt in $(seq 1 12); do
             workdir=".persist-work/attempt-${attempt}"
             mkdir -p "$workdir"
             echo "Persist attempt ${attempt}: clone fresh ${BRANCH_NAME}, merge artifact, commit, push."
@@ -749,8 +911,10 @@ jobs:
                 -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
               git push origin "HEAD:$BRANCH_NAME"
             ) && exit 0
-            echo "Persist attempt ${attempt} failed; retrying from a fresh clone."
-            sleep $((attempt * 5))
+            echo "Persist attempt ${attempt} failed; retrying from a fresh clone after jittered backoff."
+            sleep_seconds=$((attempt * 8 + RANDOM % 11))
+            echo "Sleeping ${sleep_seconds}s before next persist attempt."
+            sleep "$sleep_seconds"
           done
           echo "::error::Could not persist YouTube publish state after retries."
           exit 1

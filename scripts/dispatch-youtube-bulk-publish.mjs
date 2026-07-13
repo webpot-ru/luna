@@ -1,16 +1,28 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
-import { execFile } from "node:child_process";
+import { execFile, execSync } from "node:child_process";
 import { promisify } from "node:util";
 
 import {
   DEFAULT_PUBLICATION_REGISTRY_PATH,
-  findActivePublication,
   loadPublicationRegistry,
 } from "./lib/youtube-publication-registry.mjs";
+import { assignmentKey, isActive, isPolyglotRow } from "./lib/youtube-publication-control.mjs";
+import {
+  isTargetOnlyRegionalSupport,
+  sameViewerLanguageTargetBlocker,
+} from "./lib/youtube-language-pair-policy.mjs";
 
 const execFileAsync = promisify(execFile);
+
+function getCurrentGitBranch() {
+  try {
+    return execSync("git branch --show-current", { encoding: "utf8" }).trim();
+  } catch (e) {
+    return "";
+  }
+}
 
 const DEFAULT_OUTPUT = "outputs/youtube-bulk-publish-dispatcher-report.json";
 const VIDEO_WORKFLOW = "youtube-video-publish.yml";
@@ -27,7 +39,7 @@ function parseArgs(argv) {
     targetsPerSupport: 4,
     maxParallel: 8,
     maxActivePerRoute: 1,
-    ref: process.env.GITHUB_REF_NAME || "main",
+    ref: process.env.GITHUB_REF_NAME || getCurrentGitBranch() || "main",
     mode: "apply",
     publishMode: "scheduled",
     privacy: "public",
@@ -36,16 +48,18 @@ function parseArgs(argv) {
     createPlaylists: true,
     allowRepublish: false,
     generateThumbnails: true,
+    metadataGeminiBackend: "api,vectorengine",
+    metadataBatchSize: 4,
+    metadataRateLimitMs: 15000,
     confirmThumbnailSpend: "",
+    confirmVectorengineMetadata: "",
     confirmYoutubeWrite: "",
     confirmPublic: "PUBLISH_PUBLIC",
     confirmDispatch: "",
     confirmPlaylistRepair: "",
     dispatchSpacingSeconds: 5,
     playlistRetryDelaySeconds: 180,
-    githubApiRateLimitRetries: Number(process.env.GITHUB_API_RATE_LIMIT_RETRIES || 12),
-    githubApiRateLimitDelaySeconds: Number(process.env.GITHUB_API_RATE_LIMIT_DELAY_SECONDS || 300),
-    watch: true,
+    watch: false,
     apply: false,
     output: DEFAULT_OUTPUT,
     workflow: VIDEO_WORKFLOW,
@@ -80,14 +94,16 @@ function parseArgs(argv) {
     else if (arg === "--schedule-start-date" || arg.startsWith("--schedule-start-date=")) options.scheduleStartDate = readValue();
     else if (arg === "--schedule-min-future-minutes" || arg.startsWith("--schedule-min-future-minutes=")) options.scheduleMinFutureMinutes = Number(readValue());
     else if (arg === "--confirm-thumbnail-spend" || arg.startsWith("--confirm-thumbnail-spend=")) options.confirmThumbnailSpend = readValue();
+    else if (arg === "--metadata-gemini-backend" || arg.startsWith("--metadata-gemini-backend=")) options.metadataGeminiBackend = readValue();
+    else if (arg === "--metadata-batch-size" || arg.startsWith("--metadata-batch-size=")) options.metadataBatchSize = Number(readValue());
+    else if (arg === "--metadata-rate-limit-ms" || arg.startsWith("--metadata-rate-limit-ms=")) options.metadataRateLimitMs = Number(readValue());
+    else if (arg === "--confirm-vectorengine-metadata" || arg.startsWith("--confirm-vectorengine-metadata=")) options.confirmVectorengineMetadata = readValue();
     else if (arg === "--confirm-youtube-write" || arg.startsWith("--confirm-youtube-write=")) options.confirmYoutubeWrite = readValue();
     else if (arg === "--confirm-public" || arg.startsWith("--confirm-public=")) options.confirmPublic = readValue();
     else if (arg === "--confirm-dispatch" || arg.startsWith("--confirm-dispatch=")) options.confirmDispatch = readValue();
     else if (arg === "--confirm-playlist-repair" || arg.startsWith("--confirm-playlist-repair=")) options.confirmPlaylistRepair = readValue();
     else if (arg === "--dispatch-spacing-seconds" || arg.startsWith("--dispatch-spacing-seconds=")) options.dispatchSpacingSeconds = Number(readValue());
     else if (arg === "--playlist-retry-delay-seconds" || arg.startsWith("--playlist-retry-delay-seconds=")) options.playlistRetryDelaySeconds = Number(readValue());
-    else if (arg === "--github-api-rate-limit-retries" || arg.startsWith("--github-api-rate-limit-retries=")) options.githubApiRateLimitRetries = Number(readValue());
-    else if (arg === "--github-api-rate-limit-delay-seconds" || arg.startsWith("--github-api-rate-limit-delay-seconds=")) options.githubApiRateLimitDelaySeconds = Number(readValue());
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = readValue();
     else if (arg === "--workflow" || arg.startsWith("--workflow=")) options.workflow = readValue();
     else if (arg === "--repair-workflow" || arg.startsWith("--repair-workflow=")) options.repairWorkflow = readValue();
@@ -95,6 +111,7 @@ function parseArgs(argv) {
     else if (arg === "--routing-config" || arg.startsWith("--routing-config=")) options.routingConfig = readValue();
     else if (arg === "--apply") options.apply = true;
     else if (arg === "--dry-run") options.apply = false;
+    else if (arg === "--watch") options.watch = true;
     else if (arg === "--no-watch") options.watch = false;
     else if (arg === "--no-create-playlists") options.createPlaylists = false;
     else if (arg === "--allow-republish") options.allowRepublish = true;
@@ -108,16 +125,18 @@ function parseArgs(argv) {
 function usage() {
   return [
     "Usage:",
-    "  npm run dispatch:youtube-bulk-publish -- --set home_kitchen_cookware_pilot_01 --targets-per-support=4 --dry-run",
-    "  npm run dispatch:youtube-bulk-publish -- --apply --confirm-dispatch=DISPATCH_YOUTUBE_BULK --confirm-youtube-write=APPLY_YOUTUBE_UPLOAD --confirm-thumbnail-spend=GENERATE_THUMBNAILS",
+    "  npm run dispatch:youtube-bulk-publish -- --set home_kitchen_cookware_pilot_01 --targets-per-support=4 --schedule-start-date=YYYY-MM-DD --dry-run",
+    "  npm run dispatch:youtube-bulk-publish -- --apply --schedule-start-date=YYYY-MM-DD --confirm-dispatch=DISPATCH_YOUTUBE_BULK --confirm-youtube-write=APPLY_YOUTUBE_UPLOAD --confirm-thumbnail-spend=GENERATE_THUMBNAILS",
     "",
     "This dispatcher plans one ordinary YouTube publish workflow run per support language,",
-    "with the next N eligible targets per support, and optionally dispatches/watches the",
+    "with the next N eligible targets per support, and optionally dispatches the",
     "existing youtube-video-publish.yml workflow in bounded parallel batches.",
+    "Dispatch is fire-and-forget by default; use --watch only for an explicitly approved bounded diagnostic.",
     "Scheduled child runs pass schedule_min_future_minutes so stale calendar reservations",
     "are moved to future-safe slots by the child workflow.",
-    "GitHub Actions workflow-dispatch installation rate limits are retried with",
-    "GITHUB_API_RATE_LIMIT_RETRIES / GITHUB_API_RATE_LIMIT_DELAY_SECONDS defaults.",
+    "Metadata defaults to direct Gemini API in small sequential batches:",
+    "--metadata-gemini-backend=api --metadata-batch-size=4 --metadata-rate-limit-ms=15000.",
+    "VectorEngine metadata is reserve-only and requires --confirm-vectorengine-metadata=USE_VECTORENGINE_METADATA.",
     "",
     "It does not upload videos itself. Playlist-classified failures can dispatch the",
     "playlist-insert repair workflow after a delay only when --confirm-playlist-repair=APPLY_YOUTUBE_PLAYLIST_INSERT is provided.",
@@ -136,6 +155,15 @@ function splitCodes(value) {
 
 function uniq(values) {
   return [...new Set(values.filter(Boolean))];
+}
+
+function assertCanonicalSupportLanguages(supports) {
+  const forbidden = uniq((supports || []).map(normalizeCode)).filter((code) => isTargetOnlyRegionalSupport(code));
+  if (forbidden.length) {
+    throw new Error(
+      `Target-only regional variants cannot be used as support/native languages: ${forbidden.join(", ")}. Use EN, ES-419 or PT-BR for shared English/Spanish/Portuguese viewer channels.`,
+    );
+  }
 }
 
 function sleep(ms) {
@@ -160,11 +188,11 @@ function ensureSafeOptions(options) {
   if (!Number.isFinite(options.scheduleMinFutureMinutes) || options.scheduleMinFutureMinutes < 0) {
     throw new Error("--schedule-min-future-minutes must be a non-negative number.");
   }
-  if (!Number.isInteger(options.githubApiRateLimitRetries) || options.githubApiRateLimitRetries < 0 || options.githubApiRateLimitRetries > 48) {
-    throw new Error("--github-api-rate-limit-retries must be an integer between 0 and 48.");
+  if (!["public_now", "scheduled"].includes(options.publishMode)) {
+    throw new Error("--publish-mode must be public_now or scheduled.");
   }
-  if (!Number.isFinite(options.githubApiRateLimitDelaySeconds) || options.githubApiRateLimitDelaySeconds < 0 || options.githubApiRateLimitDelaySeconds > 3600) {
-    throw new Error("--github-api-rate-limit-delay-seconds must be between 0 and 3600.");
+  if (options.publishMode === "scheduled" && options.scheduleStartDate && !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/u.test(String(options.scheduleStartDate))) {
+    throw new Error("--schedule-start-date must be YYYY-MM-DD when provided; omit it for automatic earliest-gap filling.");
   }
   if (!["variants", "channel-keys"].includes(options.supportSource)) {
     throw new Error("--support-source must be variants or channel-keys.");
@@ -175,8 +203,26 @@ function ensureSafeOptions(options) {
   if (options.apply && options.mode === "apply" && options.confirmYoutubeWrite !== "APPLY_YOUTUBE_UPLOAD") {
     throw new Error("YouTube upload dispatch requires --confirm-youtube-write=APPLY_YOUTUBE_UPLOAD.");
   }
+  if (options.apply && options.allowRepublish) {
+    throw new Error("Live bulk apply refuses --allow-republish. Repair, supersede or delete the prior publication first.");
+  }
   if (options.apply && options.generateThumbnails && options.confirmThumbnailSpend !== "GENERATE_THUMBNAILS") {
     throw new Error("Thumbnail generation may spend VectorEngine credits; pass --confirm-thumbnail-spend=GENERATE_THUMBNAILS.");
+  }
+  const metadataBackend = String(options.metadataGeminiBackend || "").toLowerCase();
+  if (options.apply && metadataBackend === "api") {
+    throw new Error(
+      "Live metadata dispatch must use api,vectorengine: try both direct Gemini keys first, then the confirmed VectorEngine fallback.",
+    );
+  }
+  if (options.apply && metadataBackend.includes("vectorengine") && options.confirmVectorengineMetadata !== "USE_VECTORENGINE_METADATA") {
+    throw new Error("VectorEngine metadata requires --confirm-vectorengine-metadata=USE_VECTORENGINE_METADATA.");
+  }
+  if (!Number.isInteger(options.metadataBatchSize) || options.metadataBatchSize < 1 || options.metadataBatchSize > 10) {
+    throw new Error("--metadata-batch-size must be between 1 and 10.");
+  }
+  if (!Number.isFinite(options.metadataRateLimitMs) || options.metadataRateLimitMs < 0) {
+    throw new Error("--metadata-rate-limit-ms must be a non-negative number.");
   }
 }
 
@@ -196,22 +242,34 @@ function loadRouting(configPath) {
 }
 
 function resolveSupports(options, routing) {
+  const supportsForProject = (project) => {
+    if (options.supportSource !== "channel-keys") return project.supportVariants || [];
+    const keys = project.supportChannelKeys || [];
+    const variants = project.supportVariants || [];
+    if (keys.length !== variants.length) {
+      throw new Error(
+        `Route ${project.key} has mismatched supportChannelKeys/supportVariants lengths (${keys.length}/${variants.length}).`,
+      );
+    }
+    // Dispatches must use the canonical native code, never the physical channel key.
+    return keys.map((_, index) => variants[index]);
+  };
   let supports = [];
   const requested = String(options.supports || "ALL").trim();
   if (!requested || requested.toUpperCase() === "ALL") {
-    const field = options.supportSource === "channel-keys" ? "supportChannelKeys" : "supportVariants";
-    supports = routing.projects.flatMap((project) => project[field] || []);
+    supports = routing.projects.flatMap(supportsForProject);
   } else if (/^route:/iu.test(requested)) {
     const route = requested.slice("route:".length).trim();
     const project = routing.projects.find((item) => item.key === route || item.label === route);
     if (!project) throw new Error(`Unknown route selector: ${requested}`);
-    const field = options.supportSource === "channel-keys" ? "supportChannelKeys" : "supportVariants";
-    supports = project[field] || [];
+    supports = supportsForProject(project);
   } else {
     supports = splitCodes(requested);
   }
   const excluded = new Set(options.excludeSupports.map(normalizeCode));
-  return uniq(supports.map(normalizeCode)).filter((support) => !excluded.has(support)).sort();
+  const resolved = uniq(supports.map(normalizeCode)).filter((support) => !excluded.has(support)).sort();
+  assertCanonicalSupportLanguages(resolved);
+  return resolved;
 }
 
 async function resolveAllTargetLanguages(setId, supportLang) {
@@ -224,12 +282,25 @@ async function selectTargets({ setId, support, targets, excludeTargets, registry
   const requested = targets ? uniq(targets.map(normalizeCode)).sort() : uniq(await resolveAllTargetLanguages(setId, support)).sort();
   const skipped = [];
   const eligible = [];
+  const activePublicationsByKey = new Map((registry.publications || [])
+    .filter(isActive)
+    .filter((row) => !isPolyglotRow(row))
+    .map((row) => [assignmentKey(row), row]));
   for (const target of requested) {
+    const pairBlocker = sameViewerLanguageTargetBlocker({ supportLang: support, targetLang: target });
+    if (pairBlocker) {
+      skipped.push({
+        target,
+        reason: pairBlocker.reason,
+        message: pairBlocker.message,
+      });
+      continue;
+    }
     if (excludedTargets.has(target)) {
       skipped.push({ target, reason: "excluded_target_language" });
       continue;
     }
-    const existing = findActivePublication(registry, { setId, supportLang: support, targetLang: target });
+    const existing = activePublicationsByKey.get(assignmentKey({ setId, supportLang: support, targetLang: target }));
     if (existing && !allowRepublish) {
       skipped.push({
         target,
@@ -250,7 +321,7 @@ async function selectTargets({ setId, support, targets, excludeTargets, registry
 }
 
 function workflowFieldsForJob(job, options) {
-  return {
+  const fields = {
     mode: options.mode,
     set_id: options.setId,
     support: job.support,
@@ -259,8 +330,9 @@ function workflowFieldsForJob(job, options) {
     langs: job.langs,
     exclude_langs: "NONE",
     concurrency: "2",
-    metadata_concurrency: "4",
-    thumbnail_concurrency: "2",
+    metadata_gemini_backend: options.metadataGeminiBackend,
+    metadata_batch_size: String(options.metadataBatchSize),
+    metadata_rate_limit_ms: String(options.metadataRateLimitMs),
     worker_count: "1",
     worker_index: "0",
     privacy: options.privacy,
@@ -271,9 +343,13 @@ function workflowFieldsForJob(job, options) {
     allow_republish: boolInput(options.allowRepublish),
     generate_thumbnails: boolInput(options.generateThumbnails),
     confirm_thumbnail_spend: options.confirmThumbnailSpend,
+    confirm_vectorengine_metadata: options.confirmVectorengineMetadata,
     confirm_youtube_write: options.confirmYoutubeWrite,
     confirm_public: options.confirmPublic,
   };
+  return Object.fromEntries(
+    Object.entries(fields).filter(([, value]) => value !== "" && value !== null && value !== undefined),
+  );
 }
 
 function repairFieldsForTarget(job, target, options) {
@@ -324,25 +400,12 @@ async function dispatchWorkflow(workflow, fields, ref, state) {
     for (const [key, value] of Object.entries(fields)) {
       args.push("-f", `${key}=${value ?? ""}`);
     }
-    const retries = Number(state?.githubApiRateLimitRetries || 0);
-    const delayMs = Number(state?.githubApiRateLimitDelaySeconds || 0) * 1000;
-    for (let attempt = 0; attempt <= retries; attempt += 1) {
-      const startedAt = new Date();
-      try {
-        await gh(args);
-        await sleep(2500);
-        const run = await findNewestWorkflowRun(workflow, startedAt, state?.claimedRunIds);
-        state?.claimedRunIds?.add(run.databaseId);
-        return run;
-      } catch (error) {
-        const errorText = compactDispatcherError(error);
-        if (!isGitHubApiRateLimitText(errorText) || attempt >= retries) throw error;
-        const waitSeconds = Math.round(delayMs / 1000);
-        console.log(`GitHub API rate limit while dispatching ${workflow}; retry ${attempt + 1}/${retries} after ${waitSeconds}s.`);
-        await sleep(delayMs);
-      }
-    }
-    throw new Error(`Could not dispatch ${workflow}.`);
+    const startedAt = new Date();
+    await gh(args);
+    await sleep(2500);
+    const run = await findNewestWorkflowRun(workflow, startedAt, state?.claimedRunIds);
+    state?.claimedRunIds?.add(run.databaseId);
+    return run;
   });
 }
 
@@ -667,8 +730,6 @@ async function runPool(jobs, options) {
     dispatchLock: Promise.resolve(),
     stopAll: false,
     stopAllReason: "",
-    githubApiRateLimitRetries: options.githubApiRateLimitRetries,
-    githubApiRateLimitDelaySeconds: options.githubApiRateLimitDelaySeconds,
   };
   const active = new Set();
   const routeActive = new Map();
@@ -779,15 +840,18 @@ async function buildPlan(options) {
       targetsPerSupport: options.targetsPerSupport,
       maxParallel: options.maxParallel,
       maxActivePerRoute: options.maxActivePerRoute,
+      watch: options.watch,
       ref: options.ref,
       workflow: options.workflow,
       repairWorkflow: options.repairWorkflow,
       publishMode: options.publishMode,
+      scheduleStartDate: options.scheduleStartDate,
       scheduleMinFutureMinutes: options.scheduleMinFutureMinutes,
-      githubApiRateLimitRetries: options.githubApiRateLimitRetries,
-      githubApiRateLimitDelaySeconds: options.githubApiRateLimitDelaySeconds,
       allowRepublish: options.allowRepublish,
       generateThumbnails: options.generateThumbnails,
+      metadataGeminiBackend: options.metadataGeminiBackend,
+      metadataBatchSize: options.metadataBatchSize,
+      metadataRateLimitMs: options.metadataRateLimitMs,
     },
     summary: {
       supportCount: supports.length,

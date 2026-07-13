@@ -1,0 +1,171 @@
+name: YouTube Publication Control
+
+on:
+  workflow_dispatch:
+    inputs:
+      set_id:
+        description: "Deck set ID to reconcile across all 51 channels."
+        required: true
+        default: "home_kitchen_cooking_actions_a1_a2"
+      targets:
+        description: "Optional target-language subset. Empty means the full canonical target set."
+        required: false
+        default: ""
+      max_pages:
+        description: "Upload-playlist pages per channel (50 videos each)."
+        required: true
+        default: "10"
+      persist_snapshot:
+        description: "Commit only the generated publication snapshot/map to this branch after a complete read-only audit."
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  audit-route:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - route: youtube-1
+            environment: youtube-api-branding
+            supports: EN,ES-419,PT-BR,RU,HI,ID,FR,DE,JA,KO,TR,ZH
+          - route: youtube-2
+            environment: youtube-api-youtube-2
+            supports: VI,TH,MS,PL,NL,SV,NO,DA,FI,CS,SK,HU,RO
+          - route: youtube-3
+            environment: youtube-api-youtube-3
+            supports: BG,HR,SR,SL,LT,LV,ET,IS,BN,TL,MY,KM,LO
+          - route: youtube-4
+            environment: youtube-api-youtube-4
+            supports: NE,SI,TA,TE,KN,ML,UZ,KK,AZ,KA,HY,SW,IT
+    runs-on: ubuntu-latest
+    environment: ${{ matrix.environment }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci || npm install
+      - name: Restore route OAuth bundle
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}"
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+      - name: Read live publications and build route control report
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          TARGETS: ${{ github.event.inputs.targets }}
+          MAX_PAGES: ${{ github.event.inputs.max_pages }}
+          SUPPORTS: ${{ matrix.supports }}
+          ROUTE: ${{ matrix.route }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORTS" --max-pages "$MAX_PAGES" --include-video-status --output="outputs/youtube-live-publications-$ROUTE.json" --json
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORTS" "--live-audit=outputs/youtube-live-publications-$ROUTE.json" "--output=outputs/youtube-publication-control-$ROUTE.json" "--strict")
+          if [ -n "$TARGETS" ]; then CONTROL_ARGS+=("--targets=$TARGETS"); fi
+          npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-publication-control-${{ github.event.inputs.set_id }}-${{ matrix.route }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-live-publications-${{ matrix.route }}.json
+            outputs/youtube-publication-control-${{ matrix.route }}.json
+
+  aggregate:
+    needs: audit-route
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: youtube-publication-control-${{ github.event.inputs.set_id }}-*-${{ github.run_id }}
+          path: .control-artifacts
+      - name: Build all-route report
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+        run: |
+          set -euo pipefail
+          npm run merge:youtube-publication-control -- \
+            --input=.control-artifacts \
+            --expected-routes=4 \
+            --source-run="$SET_ID:all:${GITHUB_RUN_ID}" \
+            --output=outputs/youtube-publication-control-all-routes.json \
+            --markdown=outputs/youtube-publication-control-all-routes.md
+          if jq -e '.summary.complete == true' outputs/youtube-publication-control-all-routes.json >/dev/null; then
+            npm run build:youtube-publication-snapshot -- \
+              --report=outputs/youtube-publication-control-all-routes.json \
+              --output=outputs/youtube-publication-snapshot.json \
+              --markdown=outputs/youtube-publication-map.md
+          else
+            echo "::warning::All-route audit is incomplete; refusing to build or persist a durable snapshot."
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-publication-control-${{ github.event.inputs.set_id }}-all-routes-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-publication-control-all-routes.json
+            outputs/youtube-publication-control-all-routes.md
+            outputs/youtube-publication-snapshot.json
+            outputs/youtube-publication-map.md
+
+  persist-snapshot:
+    needs: aggregate
+    if: ${{ github.event.inputs.persist_snapshot == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: youtube-publication-snapshot-${{ github.ref_name }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          name: youtube-publication-control-${{ github.event.inputs.set_id }}-all-routes-${{ github.run_id }}
+          path: .snapshot-artifact
+      - name: Persist generated snapshot only
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          cp .snapshot-artifact/youtube-publication-snapshot.json config/youtube-publication-snapshot.json
+          cp .snapshot-artifact/youtube-publication-map.md docs/youtube-publication-map.md
+          git status --short --branch --untracked-files=all
+          git diff --name-status
+          git add config/youtube-publication-snapshot.json docs/youtube-publication-map.md
+          git diff --cached --name-status
+          if git diff --cached --quiet; then
+            echo "Publication snapshot is unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Refresh YouTube publication snapshot"
+          git push origin "HEAD:$BRANCH_NAME"
+          git status --short --branch --untracked-files=all

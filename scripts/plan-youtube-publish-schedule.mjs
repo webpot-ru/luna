@@ -9,29 +9,39 @@ import {
 } from "./lib/youtube-playlists.mjs";
 import {
   DEFAULT_PUBLICATION_REGISTRY_PATH,
-  findActivePublication,
+  isActivePublication,
   loadPublicationRegistry,
 } from "./lib/youtube-publication-registry.mjs";
+import {
+  assignmentKey,
+  effectiveScheduleStartDate,
+  isPolyglotRow,
+  polyglotSlotKey,
+  polyglotTargetSetKey,
+} from "./lib/youtube-publication-control.mjs";
 
 const DEFAULT_POLICY_PATH = "config/youtube-publish-schedule-policy.json";
 const DEFAULT_CALENDAR_PATH = "config/youtube-publish-calendar.json";
 const DEFAULT_TARGET_PLAN_PATH = "outputs/video-generator/youtube-generation-targets-github.json";
+const DEFAULT_POLYGLOT_PUBLICATION_REGISTRY_PATH = "config/youtube-polyglot-published-videos.json";
 
 function parseArgs(argv) {
   const options = {
     inputs: [],
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
+    polyglotPublicationRegistry: DEFAULT_POLYGLOT_PUBLICATION_REGISTRY_PATH,
     policy: DEFAULT_POLICY_PATH,
     calendar: DEFAULT_CALENDAR_PATH,
     targetPlan: "",
     output: "",
     startDate: "",
-    minFutureMinutes: 0,
     limit: 0,
     limitPerChannel: 0,
-    allowRepublish: false,
+    minFutureMinutes: 0,
     reschedulePastReservations: false,
+    fillEarliest: false,
+    allowRepublish: false,
     writeMetadata: false,
     writeCalendar: false,
     json: false,
@@ -40,20 +50,22 @@ function parseArgs(argv) {
   for (const arg of argv) {
     if (arg === "--write-metadata") options.writeMetadata = true;
     else if (arg === "--write-calendar") options.writeCalendar = true;
-    else if (arg === "--allow-republish") options.allowRepublish = true;
     else if (arg === "--reschedule-past-reservations") options.reschedulePastReservations = true;
+    else if (arg === "--fill-earliest") options.fillEarliest = true;
+    else if (arg === "--allow-republish") options.allowRepublish = true;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--publication-registry=")) options.publicationRegistry = arg.slice("--publication-registry=".length);
+    else if (arg.startsWith("--polyglot-publication-registry=")) options.polyglotPublicationRegistry = arg.slice("--polyglot-publication-registry=".length);
     else if (arg.startsWith("--policy=")) options.policy = arg.slice("--policy=".length);
     else if (arg.startsWith("--calendar=")) options.calendar = arg.slice("--calendar=".length);
     else if (arg.startsWith("--target-plan=")) options.targetPlan = arg.slice("--target-plan=".length);
     else if (arg.startsWith("--output=")) options.output = arg.slice("--output=".length);
     else if (arg.startsWith("--start-date=")) options.startDate = arg.slice("--start-date=".length);
-    else if (arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(arg.slice("--min-future-minutes=".length));
     else if (arg.startsWith("--limit=")) options.limit = Number(arg.slice("--limit=".length));
     else if (arg.startsWith("--limit-per-channel=")) options.limitPerChannel = Number(arg.slice("--limit-per-channel=".length));
+    else if (arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(arg.slice("--min-future-minutes=".length));
     else options.inputs.push(arg);
   }
   return options;
@@ -66,15 +78,17 @@ function usage() {
     "",
     "Options:",
     "  --start-date=YYYY-MM-DD       First local calendar date to use per channel. Defaults to tomorrow per channel timezone.",
-    "  --min-future-minutes=<n>      Do not schedule or reuse publishAt slots closer than n minutes from now.",
     "  --policy=<file>               Schedule policy JSON. Defaults to config/youtube-publish-schedule-policy.json.",
     "  --calendar=<file>             Durable publication calendar JSON. Defaults to config/youtube-publish-calendar.json.",
+    "  --polyglot-publication-registry=<file> Polyglot durable publication registry used by the shared channel calendar.",
     "  --target-plan=<file>          Optional generation-target preflight report for deterministic shard slot ordinals.",
     "  --limit=<n>                   Plan only the first n metadata files after sorting.",
     "  --limit-per-channel=<n>       Plan only the first n non-duplicate videos per channel.",
+    "  --min-future-minutes=<n>      Require newly assigned slots to be at least n minutes in the future.",
+    "  --reschedule-past-reservations Move reused reservations that are no longer future-safe to a new free slot.",
+    "  --fill-earliest              Ignore a later requested start date and fill the earliest policy date first.",
     "  --write-metadata              Write privacyStatus=private and publishAt into each scheduled youtube_metadata.json.",
     "  --write-calendar              Upsert scheduled reservations into the durable calendar file.",
-    "  --reschedule-past-reservations Ignore existing calendar reservations that are in the past or too close to publish safely.",
     "  --allow-republish             Do not skip rows that already have an active publication registry entry.",
     "  --output=<file>               Write schedule report. Defaults to outputs/youtube-publish-schedule-<timestamp>.json.",
     "  --json                        Print compact JSON summary.",
@@ -194,6 +208,7 @@ function channelPolicy(policy, channelKey) {
       ? override.performanceCheckpointsHours
       : (defaults.performanceCheckpointsHours || [24, 72, 168, 720]),
     notes: override.notes || "",
+    fillEarliestAvailable: override.fillEarliestAvailable ?? defaults.fillEarliestAvailable ?? false,
   };
 }
 
@@ -248,12 +263,34 @@ function isActiveCalendarReservation(row) {
 }
 
 function reservationAssignmentKey(row) {
-  return [
-    row.setId || "",
-    normalizeLanguageCode(row.supportLang),
-    normalizeLanguageCode(row.targetLang),
-    row.channelKey || "",
-  ].join("|");
+  const semanticKey = isPolyglotRow(row) ? polyglotSlotKey(row) : assignmentKey(row);
+  return [semanticKey, row.channelKey || ""].join("|");
+}
+
+function isPolyglotMetadata(metadata = {}) {
+  return metadata.videoType === "polyglot" || String(metadata.polyglotKey || "").startsWith("polyglot:");
+}
+
+function findActivePolyglotPublication(registries, metadata) {
+  const candidateKey = assignmentKey(metadata);
+  const candidateSlot = polyglotSlotKey(metadata);
+  const candidateTargetSet = polyglotTargetSetKey(metadata);
+  return registries.flatMap((registry) => registry.publications || [])
+    .filter(isPolyglotRow)
+    .filter(isActivePublication)
+    .filter((row) => assignmentKey(row) === candidateKey
+      || polyglotSlotKey(row) === candidateSlot
+      || polyglotTargetSetKey(row) === candidateTargetSet)
+    .sort((a, b) => String(b.lastReadbackAt || b.uploadedAt || "").localeCompare(String(a.lastReadbackAt || a.uploadedAt || "")))[0] || null;
+}
+
+function findActiveOrdinaryPublication(registry, metadata) {
+  const candidateKey = assignmentKey(metadata);
+  return (registry.publications || [])
+    .filter((row) => !isPolyglotRow(row))
+    .filter(isActivePublication)
+    .filter((row) => assignmentKey(row) === candidateKey)
+    .sort((a, b) => String(b.lastReadbackAt || b.uploadedAt || "").localeCompare(String(a.lastReadbackAt || a.uploadedAt || "")))[0] || null;
 }
 
 function slotKey({ channelKey, publishAt }) {
@@ -289,16 +326,64 @@ function findFreeSlot({
   baseOccupiedSlotKeys,
   plannedSlotKeys,
   preferredFreeOrdinal,
-  minPublishAtMillis = 0,
+  minPublishMillis,
+  fillDayGaps,
 }) {
   const maxIterations = perChannelPolicy.dailySlotsLocal.length * 366 * 5;
+  const baseOccupiedDates = new Set();
+  const channelPrefix = `${channelKey}|`;
+  for (const occupiedKey of baseOccupiedSlotKeys) {
+    if (!occupiedKey.startsWith(channelPrefix)) continue;
+    const publishAt = occupiedKey.slice(channelPrefix.length);
+    const publishMillis = Date.parse(publishAt);
+    if (!Number.isFinite(publishMillis) || (Number.isFinite(minPublishMillis) && publishMillis < minPublishMillis)) continue;
+    const localDate = ymdInZone(new Date(publishMillis), perChannelPolicy.timeZone);
+    if (localDate >= baseDate) baseOccupiedDates.add(localDate);
+  }
+
+  const priorityCandidates = [];
+  if (fillDayGaps && baseOccupiedDates.size) {
+    const lastOccupiedDate = [...baseOccupiedDates].sort().at(-1);
+    for (let localDate = baseDate, dayOffset = 0; localDate < lastOccupiedDate; localDate = addDaysYmd(localDate, 1), dayOffset += 1) {
+      if (baseOccupiedDates.has(localDate)) continue;
+      for (let slotIndex = 0; slotIndex < perChannelPolicy.dailySlotsLocal.length; slotIndex += 1) {
+        const localTime = perChannelPolicy.dailySlotsLocal[slotIndex];
+        const publishAt = wallTimeToUtcIso({ ymd: localDate, hhmm: localTime, timeZone: perChannelPolicy.timeZone });
+        if (Number.isFinite(minPublishMillis) && Date.parse(publishAt) < minPublishMillis) continue;
+        const key = slotKey({ channelKey, publishAt });
+        if (!baseOccupiedSlotKeys.has(key)) {
+          priorityCandidates.push({
+            publishAt,
+            timeZone: perChannelPolicy.timeZone,
+            localDate,
+            localTime,
+            localSlotIndex: slotIndex,
+            localDayOffset: dayOffset,
+            slotOrdinal: dayOffset * perChannelPolicy.dailySlotsLocal.length + slotIndex,
+            key,
+          });
+          break;
+        }
+      }
+    }
+  }
+
   let freeSeen = 0;
-  const hasPreferred = Number.isInteger(preferredFreeOrdinal) && preferredFreeOrdinal >= 0;
+  const hasPreferred = !fillDayGaps && Number.isInteger(preferredFreeOrdinal) && preferredFreeOrdinal >= 0;
+  const priorityKeys = new Set(priorityCandidates.map((candidate) => candidate.key));
+  for (const slot of priorityCandidates) {
+    if (hasPreferred && freeSeen < preferredFreeOrdinal) {
+      freeSeen += 1;
+      continue;
+    }
+    if (!plannedSlotKeys.has(slot.key)) return slot;
+    freeSeen += 1;
+  }
   for (let ordinal = 0; ordinal < maxIterations; ordinal += 1) {
     const slot = slotForOrdinal({ perChannelPolicy, baseDate, ordinal });
+    if (Number.isFinite(minPublishMillis) && Date.parse(slot.publishAt) < minPublishMillis) continue;
     const key = slotKey({ channelKey, publishAt: slot.publishAt });
-    if (minPublishAtMillis > 0 && Date.parse(slot.publishAt) < minPublishAtMillis) continue;
-    if (baseOccupiedSlotKeys.has(key)) continue;
+    if (baseOccupiedSlotKeys.has(key) || priorityKeys.has(key)) continue;
     if (hasPreferred && freeSeen < preferredFreeOrdinal) {
       freeSeen += 1;
       continue;
@@ -309,10 +394,10 @@ function findFreeSlot({
   throw new Error(`No free publish slot found for channel=${channelKey} within ${maxIterations} slot attempts.`);
 }
 
-function reservationIsFutureSafe(row, minPublishAtMillis) {
-  if (minPublishAtMillis <= 0) return true;
-  const publishMillis = Date.parse(row?.publishAt || "");
-  return Number.isFinite(publishMillis) && publishMillis >= minPublishAtMillis;
+function isFutureSafePublishAt(publishAt, minPublishMillis) {
+  if (!Number.isFinite(minPublishMillis) || minPublishMillis <= 0) return true;
+  const millis = Date.parse(publishAt || "");
+  return Number.isFinite(millis) && millis >= minPublishMillis;
 }
 
 function loadTargetPlan(filePath, channelRegistry, policy) {
@@ -407,6 +492,14 @@ function reservationFromRow(row, existing = {}) {
   return {
     ...existing,
     schemaVersion: 1,
+    videoType: row.videoType || "ordinary",
+    polyglotKey: row.polyglotKey || "",
+    bundleKey: row.bundleKey || "",
+    bundleLabel: row.bundleLabel || "",
+    contentScope: row.contentScope || "",
+    targetLangs: row.targetLangs || [],
+    targetLangsCsv: row.targetLangsCsv || "",
+    targetLangsHash: row.targetLangsHash || "",
     setId: row.setId || "",
     supportLang: normalizeLanguageCode(row.supportLang),
     targetLang: normalizeLanguageCode(row.targetLang),
@@ -490,29 +583,34 @@ async function main() {
   }
 
   const policy = JSON.parse(fs.readFileSync(options.policy, "utf8"));
+  if (!Number.isFinite(options.minFutureMinutes) || options.minFutureMinutes < 0) {
+    throw new Error(`--min-future-minutes must be a non-negative number, got: ${options.minFutureMinutes}`);
+  }
+  const minPublishMillis = options.minFutureMinutes > 0
+    ? Date.now() + options.minFutureMinutes * 60 * 1000
+    : 0;
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
+  const polyglotPublicationRegistry = loadPublicationRegistry(options.polyglotPublicationRegistry);
   const calendar = loadCalendar(options.calendar);
   calendar.policyPath = options.policy;
   const targetPlan = loadTargetPlan(options.targetPlan, channelRegistry, policy);
-  const minPublishAtMillis = options.minFutureMinutes > 0
-    ? Date.now() + (options.minFutureMinutes * 60 * 1000)
-    : 0;
   let metadataFiles = collectMetadataFiles(options.inputs);
   if (options.limit > 0) metadataFiles = metadataFiles.slice(0, options.limit);
 
-  const activeCalendarReservations = (calendar.reservations || []).filter((reservation) => {
-    if (!isActiveCalendarReservation(reservation)) return false;
-    if (!options.reschedulePastReservations) return true;
-    return reservationIsFutureSafe(reservation, minPublishAtMillis);
-  });
+  const activeCalendarReservations = (calendar.reservations || []).filter(isActiveCalendarReservation);
   const reservationByAssignment = new Map();
   const baseOccupiedSlotKeys = new Set();
   for (const reservation of activeCalendarReservations) {
     reservationByAssignment.set(reservationAssignmentKey(reservation), reservation);
     baseOccupiedSlotKeys.add(slotKey(reservation));
   }
-  for (const publication of publicationRegistry.publications || []) {
+  for (const publication of (publicationRegistry.publications || []).filter(isActivePublication)) {
+    const publishAt = publication.publishAt || publication.scheduledPublishAt || "";
+    const channelKey = publication.channelKey || "";
+    if (publishAt && channelKey) baseOccupiedSlotKeys.add(slotKey({ channelKey, publishAt }));
+  }
+  for (const publication of (polyglotPublicationRegistry.publications || []).filter(isActivePublication)) {
     const publishAt = publication.publishAt || publication.scheduledPublishAt || "";
     const channelKey = publication.channelKey || "";
     if (publishAt && channelKey) baseOccupiedSlotKeys.add(slotKey({ channelKey, publishAt }));
@@ -522,10 +620,26 @@ async function main() {
     const metadata = JSON.parse(fs.readFileSync(metadataFile, "utf8"));
     const channel = findChannelForSupport(channelRegistry.channels, metadata.supportLang);
     const supportLang = normalizeLanguageCode(metadata.supportLang);
-    const targetLang = normalizeLanguageCode(metadata.targetLang);
-    const existingPublication = findActivePublication(publicationRegistry, metadata);
+    const polyglot = isPolyglotMetadata(metadata);
+    const targetLangs = Array.isArray(metadata.targetLangs)
+      ? metadata.targetLangs.map(normalizeLanguageCode).filter(Boolean)
+      : String(metadata.targetLangsCsv || "").split(",").map(normalizeLanguageCode).filter(Boolean);
+    const targetLang = polyglot
+      ? targetLangs.join(",")
+      : normalizeLanguageCode(metadata.targetLang);
+    const existingPublication = polyglot
+      ? findActivePolyglotPublication([polyglotPublicationRegistry, publicationRegistry], metadata)
+      : findActiveOrdinaryPublication(publicationRegistry, metadata);
     return {
       metadataFile,
+      videoType: polyglot ? "polyglot" : "ordinary",
+      polyglotKey: polyglot ? String(metadata.polyglotKey || "") : "",
+      bundleKey: polyglot ? String(metadata.bundleKey || "") : "",
+      bundleLabel: polyglot ? String(metadata.bundleLabel || "") : "",
+      contentScope: polyglot ? String(metadata.contentScope || "full") : "",
+      targetLangs: polyglot ? targetLangs : [],
+      targetLangsCsv: polyglot ? targetLangs.join(",") : "",
+      targetLangsHash: polyglot ? String(metadata.targetLangsHash || "") : "",
       setId: metadata.setId || "",
       supportLang,
       targetLang,
@@ -608,13 +722,24 @@ async function main() {
     }
 
     const perChannelPolicy = channelPolicy(policy, raw.channelKey);
-    const baseDate = options.startDate
-      ? options.startDate
-      : addDaysYmd(ymdInZone(new Date(), perChannelPolicy.timeZone), perChannelPolicy.defaultStartDelayDays);
+    const automaticBaseDate = addDaysYmd(
+      ymdInZone(new Date(), perChannelPolicy.timeZone),
+      perChannelPolicy.defaultStartDelayDays,
+    );
+    const requestedBaseDate = options.startDate || automaticBaseDate;
+    const fillEarliest = options.fillEarliest || perChannelPolicy.fillEarliestAvailable;
+    const baseDate = effectiveScheduleStartDate({
+      automaticStartDate: automaticBaseDate,
+      requestedStartDate: requestedBaseDate,
+      fillEarliest,
+    });
     const calendarReservationKey = reservationAssignmentKey(raw);
     const existingCalendarReservation = reservationByAssignment.get(calendarReservationKey);
 
-    if (existingCalendarReservation) {
+    if (
+      existingCalendarReservation
+      && (!options.reschedulePastReservations || isFutureSafePublishAt(existingCalendarReservation.publishAt, minPublishMillis))
+    ) {
       const row = rowFromReservation(raw, existingCalendarReservation, options);
       scheduledCountByChannel.set(raw.channelKey, existingScheduledForChannel + 1);
       plannedSlotKeys.add(slotKey(row));
@@ -638,7 +763,8 @@ async function main() {
       baseOccupiedSlotKeys,
       plannedSlotKeys,
       preferredFreeOrdinal,
-      minPublishAtMillis,
+      minPublishMillis,
+      fillDayGaps: fillEarliest,
     });
     const publishAt = slot.publishAt;
     const publishMillis = Date.parse(publishAt);
@@ -652,6 +778,9 @@ async function main() {
       ...raw,
       status: "scheduled",
       publishAt,
+      requestedStartDate: requestedBaseDate,
+      effectiveStartDate: baseDate,
+      startDateAdjustedToEarliest: requestedBaseDate !== baseDate,
       timeZone: slot.timeZone,
       localDate: slot.localDate,
       localTime: slot.localTime,
@@ -661,7 +790,10 @@ async function main() {
       policyPath: options.policy,
       calendarPath: options.calendar,
       calendarReservationKey,
-      calendarReservationAction: options.writeCalendar ? "reserved" : "planned_only",
+      calendarReservationAction: existingCalendarReservation
+        ? (options.writeCalendar ? "rescheduled_past" : "reschedule_past_planned_only")
+        : (options.writeCalendar ? "reserved" : "planned_only"),
+      previousPublishAt: existingCalendarReservation?.publishAt || "",
       analyticsCheckpointsAt,
       existingPublication: null,
       blockers: [],
@@ -722,6 +854,7 @@ async function main() {
     sourceInputs: options.inputs,
     channelConfig: options.channelConfig,
     publicationRegistry: options.publicationRegistry,
+    polyglotPublicationRegistry: options.polyglotPublicationRegistry,
     policy: options.policy,
     calendar: options.calendar,
     targetPlan: {
@@ -741,13 +874,15 @@ async function main() {
       lastPublishAt: scheduledRows.map((row) => row.publishAt).sort().at(-1) || "",
       writeMetadata: options.writeMetadata,
       writeCalendar: options.writeCalendar,
+      minFutureMinutes: options.minFutureMinutes,
+      requestedStartDate: options.startDate || "auto",
+      fillEarliest: options.fillEarliest,
+      reschedulePastReservations: options.reschedulePastReservations,
       calendarReservationCount: calendar.reservations?.length || 0,
       calendarWrites,
       baseOccupiedSlotCount: baseOccupiedSlotKeys.size,
       limit: options.limit,
       limitPerChannel: options.limitPerChannel,
-      minFutureMinutes: options.minFutureMinutes,
-      reschedulePastReservations: options.reschedulePastReservations,
     },
     channels: channelSummaries,
     rows,

@@ -15,6 +15,7 @@
     "maxVideosPerDay": 6,
     "minimumSpacingMinutes": 180,
     "defaultStartDelayDays": 1,
+    "fillEarliestAvailable": true,
     "performanceCheckpointsHours": [
       24,
       72,
@@ -28,6 +29,7 @@
     "Shared support channels can declare supportPriority. Current first-wave priority is EN before EN-GB, ES-419 before ES, and PT-BR before PT, so US/base English, Latin American Spanish and Brazilian Portuguese publish first inside their shared channel calendars.",
     "Six slots per support channel means 50 videos for one channel take about 9 local days. Across many channels, each channel has its own local calendar.",
     "Accepted starting cadence is one deck wave across all 51 support channels at six public releases per channel per local day. Do not run multiple deck waves at once or raise cadence until 24h/72h/7d readback and policy health are acceptable.",
+    "fillEarliestAvailable=true means a later operator start date cannot leave empty calendar days: the planner starts from the earliest policy date and fills occupied slots forward.",
     "Analytics readback is not immediate. Track planned publishAt now, then collect YouTube Analytics/Data API snapshots at 24h, 72h, 7d and 30d."
   ],
   "channels": {

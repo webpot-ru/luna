@@ -56,7 +56,7 @@ on:
         required: false
         default: "90"
       dispatch_spacing_seconds:
-        description: "Delay after each watched dispatch result."
+        description: "Delay between fire-and-forget child dispatches."
         required: true
         default: "5"
       playlist_retry_delay_seconds:
@@ -142,6 +142,7 @@ jobs:
             "--schedule-min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES"
             "--dispatch-spacing-seconds=$DISPATCH_SPACING_SECONDS"
             "--playlist-retry-delay-seconds=$PLAYLIST_RETRY_DELAY_SECONDS"
+            "--no-watch"
             "--ref=${GITHUB_REF_NAME}"
             "--mode=apply"
             "--publish-mode=scheduled"

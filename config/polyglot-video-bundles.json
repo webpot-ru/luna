@@ -3,7 +3,13 @@
   "sourceOfTruth": "docs/video-lessons-strategy.md#polyglot-mode-multilingual-decks",
   "defaults": {
     "minTargetLanguages": 3,
-    "maxTargetLanguages": 4
+    "maxTargetLanguages": 4,
+    "productionBundleKeys": [
+      "global_europe_core",
+      "romance_core",
+      "east_asia_core",
+      "slavic_core"
+    ]
   },
   "bundles": [
     {

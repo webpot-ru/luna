@@ -1,126 +1,293 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 
-const ROOT = process.cwd();
-const MANIFEST_PATH = path.join(
-  ROOT,
-  "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-ordinary-target-language-large-pair-folders-20260704/manifest.json"
-);
-const VIDEO_GENERATOR_DIR = path.join(ROOT, "outputs/video-generator");
+const VIDEO_GENERATOR_DIR = "outputs/video-generator";
+const CHANNEL_CONFIG_PATH = "config/youtube-channels.json";
+const DEFAULT_ORDINARY_MANIFEST = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-channel-pairs-target-language-first-20260707/manifest.json";
+const DEFAULT_COOKING_ACTIONS_MANIFEST = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cooking_actions_a1_a2-approved-channel-pairs-target-language-first-20260707/manifest.json";
+const DEFAULT_POLYGLOT_MANIFEST = "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/manifest.json";
+const DEFAULT_COVER_REGISTRY = "config/youtube-cover-assets.json";
 
-function loadJson(filePath) {
-  if (!fs.existsSync(filePath)) return null;
-  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+function parseArgs(argv) {
+  const options = {
+    inputDir: VIDEO_GENERATOR_DIR,
+    manifests: [],
+    coverRegistry: DEFAULT_COVER_REGISTRY,
+    requireGitTracked: false,
+    strictCustom: false,
+    output: "",
+  };
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index];
+    const readValue = () => {
+      if (arg.includes("=")) return arg.split("=").slice(1).join("=");
+      index += 1;
+      return argv[index];
+    };
+    if (arg === "--input-dir" || arg.startsWith("--input-dir=")) options.inputDir = readValue();
+    else if (arg === "--cover-registry" || arg.startsWith("--cover-registry=")) options.coverRegistry = readValue();
+    else if (arg === "--manifest" || arg.startsWith("--manifest=")) options.manifests.push(readValue());
+    else if (arg === "--manifests" || arg.startsWith("--manifests=")) {
+      options.manifests.push(...String(readValue()).split(",").map((item) => item.trim()).filter(Boolean));
+    } else if (arg === "--strict-custom") options.strictCustom = true;
+    else if (arg === "--require-git-tracked") options.requireGitTracked = true;
+    else if (arg === "--output" || arg.startsWith("--output=")) options.output = readValue();
+    else throw new Error(`Unknown argument: ${arg}`);
+  }
+  options.manifests = [...new Set(options.manifests.filter(Boolean))];
+  return options;
 }
 
-function findMetadataFiles(dir) {
-  const results = [];
-  if (!fs.existsSync(dir)) return results;
-  const list = fs.readdirSync(dir, { withFileTypes: true });
-  for (const entry of list) {
-    const fullPath = path.join(dir, entry.name);
+function registryManifestPaths(registryPath) {
+  if (!registryPath || !fs.existsSync(registryPath)) {
+    return [DEFAULT_ORDINARY_MANIFEST, DEFAULT_COOKING_ACTIONS_MANIFEST, DEFAULT_POLYGLOT_MANIFEST];
+  }
+  const registry = JSON.parse(fs.readFileSync(registryPath, "utf8"));
+  const activeStatus = registry.policy?.activeStatus || "approved";
+  return (registry.manifests || [])
+    .filter((row) => row.status === activeStatus)
+    .map((row) => row.path)
+    .filter(Boolean);
+}
+
+function isGitTracked(filePath) {
+  return spawnSync("git", ["ls-files", "--error-unmatch", "--", filePath], {
+    encoding: "utf8",
+    stdio: "ignore",
+  }).status === 0;
+}
+
+function loadChannels() {
+  if (!fs.existsSync(CHANNEL_CONFIG_PATH)) {
+    console.error(`[ERROR] Channel config not found at: ${CHANNEL_CONFIG_PATH}`);
+    return { channels: [] };
+  }
+  return JSON.parse(fs.readFileSync(CHANNEL_CONFIG_PATH, "utf8"));
+}
+
+function normalizeCode(value) {
+  return String(value || "").trim().replace(/_/g, "-").toUpperCase();
+}
+
+function supportToChannelKey(supportLang) {
+  const code = normalizeCode(supportLang);
+  if (code === "EN" || code === "EN-GB") return "en";
+  if (code === "ES" || code === "ES-419") return "es";
+  if (code === "PT" || code === "PT-BR") return "pt";
+  return code.toLowerCase();
+}
+
+function findChannelForSupport(channels, supportLang) {
+  const code = normalizeCode(supportLang);
+  const key = supportToChannelKey(code);
+  return channels.find((c) => {
+    const values = [
+      c.key,
+      c.supportLang,
+      ...(Array.isArray(c.supportLangs) ? c.supportLangs : []),
+      ...(Array.isArray(c.supportVariants) ? c.supportVariants : []),
+      ...(Array.isArray(c.channelSupportLangs) ? c.channelSupportLangs : []),
+    ];
+    return String(c.key || "").toLowerCase() === key
+      || values.map(normalizeCode).includes(code);
+  });
+}
+
+function collectMetadataFiles(dir, files = []) {
+  if (!fs.existsSync(dir)) return files;
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      results.push(...findMetadataFiles(fullPath));
-    } else if (entry.name === "youtube_metadata.json") {
-      results.push(fullPath);
+      collectMetadataFiles(full, files);
+    } else if (entry.isFile() && entry.name === "youtube_metadata.json") {
+      files.push(full);
     }
   }
-  return results;
+  return files;
 }
 
-function supportFolderName(support) {
-  const map = {
-    "EN": "EN__English",
-    "EN-GB": "EN-GB__English-United-Kingdom",
-    "ES": "ES__Spanish",
-    "ES-419": "ES-419__Spanish-Latin-America",
-    "PT": "PT__Portuguese",
-    "PT-BR": "PT-BR__Portuguese-Brazil",
-    "JA": "JA__Japanese",
-    "TR": "TR__Turkish",
-    "VI": "VI__Vietnamese",
-    "TH": "TH__Thai",
-    "MY": "MY__Burmese",
-    "NE": "NE__Nepali",
-    "SW": "SW__Swahili",
-    "RU": "RU__Russian",
-    "SR": "SR__Serbian-Latin"
-  };
-  return map[support] || support;
-}
-
-function pairFolderName(support, target) {
-  const nameMap = {
-    "AZ": "Azerbaijani", "BG": "Bulgarian", "BN": "Bangla", "CS": "Czech",
-    "DA": "Danish", "DE": "German", "EN": "English", "EN-GB": "English-United-Kingdom",
-    "ES": "Spanish", "ES-419": "Spanish-Latin-America", "ET": "Estonian",
-    "FI": "Finnish", "FR": "French", "HI": "Hindi", "HR": "Croatian",
-    "HU": "Hungarian", "HY": "Armenian", "ID": "Indonesian", "IS": "Icelandic",
-    "IT": "Italian", "JA": "Japanese", "KA": "Georgian", "KK": "Kazakh",
-    "KM": "Khmer", "KN": "Kannada", "KO": "Korean", "LO": "Lao",
-    "LT": "Lithuanian", "LV": "Latvian", "ML": "Malayalam", "MS": "Malay",
-    "MY": "Burmese", "NB": "Norwegian-Bokmal", "NE": "Nepali", "NL": "Dutch",
-    "NO": "Norwegian-Bokmal", "PL": "Polish", "PT-BR": "Portuguese-Brazil",
-    "PT": "Portuguese", "RO": "Romanian", "RU": "Russian", "SI": "Sinhala",
-    "SK": "Slovak", "SL": "Slovenian", "SR": "Serbian-Latin", "SV": "Swedish",
-    "TH": "Thai", "VI": "Vietnamese", "ZH": "Chinese"
-  };
-  const sName = nameMap[support] || support;
-  const tName = nameMap[target] || target;
-  return `${support}__${target}__${sName}_to_${tName}`;
-}
-
-async function main() {
-  const manifest = loadJson(MANIFEST_PATH);
-  if (!manifest) {
-    console.error(`Manifest not found at ${MANIFEST_PATH}`);
-    process.exit(1);
+function loadCovers(manifestPaths, { requireGitTracked = false } = {}) {
+  const covers = [];
+  for (const manifestPath of manifestPaths) {
+    if (!fs.existsSync(manifestPath)) continue;
+    if (requireGitTracked && !isGitTracked(manifestPath)) {
+      throw new Error(`Approved cover manifest is not Git-tracked: ${manifestPath}`);
+    }
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+    for (const cover of manifest.covers || []) {
+      covers.push({ ...cover, manifestPath });
+    }
   }
+  return covers;
+}
 
-  const metadataFiles = findMetadataFiles(VIDEO_GENERATOR_DIR);
-  console.log(`Found ${metadataFiles.length} metadata files in outputs/video-generator/`);
+function coverSupportCodes(cover) {
+  return [
+    cover.supportLang,
+    cover.viewerSupportLang,
+    ...(Array.isArray(cover.channelSupportLangs) ? cover.channelSupportLangs : []),
+  ].map(normalizeCode).filter(Boolean);
+}
 
-  let copiedCount = 0;
+function sameTargetList(left, right) {
+  const normalizeList = (value) => String(value || "")
+    .split(",")
+    .map(normalizeCode)
+    .filter(Boolean)
+    .sort()
+    .join(",");
+  return normalizeList(left) === normalizeList(right);
+}
+
+function findCover(covers, metadata) {
+  const supportLang = normalizeCode(metadata.supportLang);
+  const targetLang = normalizeCode(metadata.targetLang);
+  const targetLangsCsv = String(metadata.targetLangsCsv || (metadata.targetLangs || []).join(",") || metadata.targetLang || "");
+  const setId = String(metadata.setId || "");
+  const isPolyglot = metadata.videoType === "polyglot"
+    || Boolean(metadata.polyglotKey)
+    || Boolean(metadata.bundleKey)
+    || targetLangsCsv.includes(",");
+  return covers.find((cover) => {
+    if (setId && cover.setId && cover.setId !== setId) return false;
+    if (cover.uploadEligible === false) return false;
+    if (!coverSupportCodes(cover).includes(supportLang)) return false;
+    if (isPolyglot || cover.videoType === "polyglot") {
+      if (metadata.bundleKey && cover.bundleKey && metadata.bundleKey !== cover.bundleKey) return false;
+      return sameTargetList(targetLangsCsv, cover.targetLangsCsv || (cover.targetLangs || []).join(","));
+    }
+    return normalizeCode(cover.targetLang) === targetLang;
+  });
+}
+
+function resolveCoverPath(cover) {
+  const candidates = [cover.relativePath, cover.path].filter(Boolean);
+  return candidates.find((candidate) => fs.existsSync(candidate)) || "";
+}
+
+function main() {
+  const options = parseArgs(process.argv.slice(2));
+  console.log("=== Starting copy of pre-rendered custom thumbnails ===");
+  options.manifests = [...new Set([
+    ...options.manifests,
+    ...registryManifestPaths(options.coverRegistry),
+  ].filter(Boolean))];
+  const channelRegistry = loadChannels();
+  const metadataFiles = collectMetadataFiles(options.inputDir);
+  const covers = loadCovers(options.manifests, { requireGitTracked: options.requireGitTracked });
+  const report = {
+    generatedAt: new Date().toISOString(),
+    inputDir: options.inputDir,
+    manifests: options.manifests.filter((manifestPath) => fs.existsSync(manifestPath)),
+    strictCustom: options.strictCustom,
+    requireGitTracked: options.requireGitTracked,
+    totalMetadataFiles: metadataFiles.length,
+    copiedCount: 0,
+    autoFallbackCount: 0,
+    missingCoverCount: 0,
+    rows: [],
+  };
+
+  if (metadataFiles.length === 0) {
+    console.log(`[INFO] No youtube_metadata.json files found in ${options.inputDir}. Make sure you generated videos first!`);
+    return;
+  }
 
   for (const metaFile of metadataFiles) {
-    const meta = loadJson(metaFile);
-    if (!meta) continue;
+    let metadata;
+    try {
+      metadata = JSON.parse(fs.readFileSync(metaFile, "utf8"));
+    } catch (e) {
+      console.error(`[ERROR] Could not parse: ${metaFile}`);
+      continue;
+    }
 
-    const { supportLang, targetLang, setId } = meta;
-    if (!supportLang || !targetLang) continue;
+    const supportLang = normalizeCode(metadata.supportLang);
+    const targetLang = (metadata.targetLang || "");
 
-    // Resolve pre-rendered cover directory in manifest
-    const sFolder = supportFolderName(supportLang);
-    const pFolder = pairFolderName(supportLang, targetLang);
-    const sourceCoverPath = path.join(
-      path.dirname(MANIFEST_PATH),
-      "by-support",
-      sFolder,
-      pFolder,
-      "youtube_thumbnail.jpg"
-    );
+    const channel = findChannelForSupport(channelRegistry.channels, supportLang);
+    if (!channel || channel.customThumbnailUploadAllowed !== true) {
+      const updatedMeta = {
+        ...metadata,
+        thumbnailUploadMode: "first_frame_auto",
+        thumbnailSource: "youtube-auto-first-frame",
+        thumbnailFallbackReason: channel
+          ? "channel_custom_thumbnail_upload_not_available"
+          : "channel_custom_thumbnail_status_unknown",
+      };
+      fs.writeFileSync(metaFile, `${JSON.stringify(updatedMeta, null, 2)}\n`, "utf8");
+      console.log(`[AUTO] Channel for support ${supportLang} does not allow custom thumbnails.`);
+      report.autoFallbackCount++;
+      report.rows.push({
+        metadataFile: metaFile,
+        supportLang,
+        targetLang,
+        status: "auto_first_frame",
+        reason: updatedMeta.thumbnailFallbackReason,
+      });
+      continue;
+    }
 
-    if (fs.existsSync(sourceCoverPath)) {
-      const destCoverPath = path.join(path.dirname(metaFile), "youtube_thumbnail.jpg");
-      fs.copyFileSync(sourceCoverPath, destCoverPath);
-      
-      // Update metadata json to point to the local thumbnail
-      meta.thumbnailPath = "youtube_thumbnail.jpg";
-      meta.thumbnailUploadMode = "custom";
-      fs.writeFileSync(metaFile, JSON.stringify(meta, null, 2) + "\n", "utf8");
-      
-      console.log(`Copied cover for ${supportLang}->${targetLang} to ${path.relative(ROOT, destCoverPath)}`);
-      copiedCount++;
+    const cover = findCover(covers, metadata);
+    const prototypePath = cover ? resolveCoverPath(cover) : "";
+
+    if (prototypePath && fs.existsSync(prototypePath)) {
+      if (options.requireGitTracked && !isGitTracked(prototypePath)) {
+        throw new Error(`Approved cover JPG is not Git-tracked: ${prototypePath}`);
+      }
+      const destDir = path.dirname(metaFile);
+      const destThumb = path.join(destDir, "youtube_thumbnail.jpg");
+
+      fs.copyFileSync(prototypePath, destThumb);
+
+      // Update metadata fields to satisfy validation and upload gates
+      const updatedMeta = {
+        ...metadata,
+        thumbnailPath: "youtube_thumbnail.jpg",
+        thumbnail: "youtube_thumbnail.jpg",
+        thumbnailUploadMode: "custom",
+        thumbnailSource: "pre-rendered-design-prototype",
+        thumbnailFallbackReason: "",
+        thumbnailLogoOverlay: false,
+        thumbnailGeneratedAt: new Date().toISOString(),
+        thumbnailPrototypeManifest: cover.manifestPath,
+        thumbnailPrototypePath: prototypePath,
+      };
+
+      fs.writeFileSync(metaFile, `${JSON.stringify(updatedMeta, null, 2)}\n`, "utf8");
+      console.log(`[SUCCESS] Copied thumbnail for ${supportLang} -> ${targetLang} from ${prototypePath}`);
+      report.copiedCount++;
+      report.rows.push({
+        metadataFile: metaFile,
+        supportLang,
+        targetLang,
+        status: "copied",
+        coverPath: prototypePath,
+        manifestPath: cover.manifestPath,
+      });
     } else {
-      console.log(`Pre-rendered cover NOT found for ${supportLang}->${targetLang} at: ${path.relative(ROOT, sourceCoverPath)}`);
+      console.log(`[WARN] Pre-rendered thumbnail NOT found for ${supportLang} -> ${targetLang}`);
+      report.missingCoverCount++;
+      report.rows.push({
+        metadataFile: metaFile,
+        supportLang,
+        targetLang,
+        status: "missing_cover",
+      });
     }
   }
 
-  console.log(`\nSuccessfully matched and copied ${copiedCount} pre-rendered covers to video generator outputs.`);
+  if (options.output) {
+    fs.mkdirSync(path.dirname(options.output), { recursive: true });
+    fs.writeFileSync(options.output, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  }
+  console.log(`=== Done! Copied ${report.copiedCount} custom thumbnails to ${options.inputDir}; auto fallback ${report.autoFallbackCount}; missing covers ${report.missingCoverCount} ===`);
+  if (options.strictCustom && report.missingCoverCount > 0) {
+    throw new Error(`Missing pre-rendered custom thumbnails for ${report.missingCoverCount} metadata file(s).`);
+  }
 }
 
-main().catch(err => {
-  console.error(err);
-  process.exit(1);
-});
+main();

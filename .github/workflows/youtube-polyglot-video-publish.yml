@@ -41,9 +41,21 @@ on:
           - caucasus_bridge_core
           - baltic_core
       limit:
-        description: "Preview card limit. Use 0 for full deck only after approval."
+        description: "Card limit. Use 0 for full deck; short_unverified apply uses a positive limit."
         required: true
         default: "3"
+      content_scope:
+        description: "full uses normal Polyglot rules; short_unverified allows <=15 minute videos for unverified channels."
+        required: true
+        default: "full"
+        type: choice
+        options:
+          - full
+          - short_unverified
+      max_duration_seconds:
+        description: "Hard duration gate for short_unverified uploads. 895 = 14:55."
+        required: true
+        default: "895"
       allow_republish:
         description: "Allow planning/rendering a Polyglot key already active in registry/calendar."
         required: true
@@ -58,7 +70,7 @@ on:
         required: false
         default: ""
       privacy:
-        description: "YouTube video privacy. Scheduled publish support uses private + publish_at."
+        description: "Initial YouTube privacy. Ignored for publish_mode=scheduled, which uploads private until publishAt."
         required: true
         default: "public"
         type: choice
@@ -66,8 +78,24 @@ on:
           - public
           - unlisted
           - private
+      publish_mode:
+        description: "public_now publishes immediately; scheduled reserves the earliest free shared channel-calendar slot."
+        required: true
+        default: "scheduled"
+        type: choice
+        options:
+          - scheduled
+          - public_now
+      schedule_start_date:
+        description: "Optional YYYY-MM-DD hint. A later date cannot leave earlier policy slots empty."
+        required: false
+        default: ""
+      schedule_min_future_minutes:
+        description: "Minimum lead time for a newly reserved scheduled slot."
+        required: true
+        default: "90"
       publish_at:
-        description: "Optional ISO timestamp for scheduled upload. Requires privacy=private."
+        description: "Deprecated for apply. Use publish_mode=scheduled and the shared calendar."
         required: false
         default: ""
       create_playlists:
@@ -76,9 +104,9 @@ on:
         default: true
         type: boolean
       generate_thumbnails:
-        description: "Generate VectorEngine image thumbnails where the channel allows custom thumbnails."
+        description: "Deprecated: Polyglot apply uses committed approved JPG covers; keep false."
         required: true
-        default: true
+        default: false
         type: boolean
       confirm_metadata_spend:
         description: "For apply AI metadata generation type GENERATE_POLYGLOT_METADATA."
@@ -101,8 +129,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: youtube-polyglot-video-${{ github.event.inputs.set_id }}-${{ github.event.inputs.support }}-${{ github.event.inputs.bundle }}-${{ github.event.inputs.mode }}
-  cancel-in-progress: true
+  group: youtube-publish-channel-${{ github.event.inputs.support }}-${{ github.event.inputs.mode == 'apply' && 'apply' || github.run_id }}
+  cancel-in-progress: false
 
 jobs:
   youtube-polyglot-video:
@@ -127,7 +155,12 @@ jobs:
           MODE: ${{ github.event.inputs.mode }}
           SUPPORT: ${{ github.event.inputs.support }}
           LIMIT: ${{ github.event.inputs.limit }}
+          CONTENT_SCOPE: ${{ github.event.inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ github.event.inputs.max_duration_seconds }}
           PRIVACY: ${{ github.event.inputs.privacy }}
+          PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
+          SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
+          SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
           PUBLISH_AT: ${{ github.event.inputs.publish_at }}
           GENERATE_THUMBNAILS: ${{ github.event.inputs.generate_thumbnails }}
           CONFIRM_RENDER: ${{ github.event.inputs.confirm_render }}
@@ -143,8 +176,24 @@ jobs:
             echo "::error::Polyglot workflow accepts exactly one explicit support language."
             exit 1
           fi
+          if [ "$MODE" = "apply" ] && [ "$SUPPORT" != "$support_clean" ]; then
+            echo "::error::mode=apply requires a trimmed uppercase canonical support code so the concurrency lock cannot be bypassed."
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && { [ "$support_clean" = "EN-GB" ] || [ "$support_clean" = "ES" ] || [ "$support_clean" = "PT" ]; }; then
+            echo "::error::EN-GB, ES and PT are target-only variants. Use canonical support EN, ES-419 or PT-BR."
+            exit 1
+          fi
           if ! printf '%s' "$LIMIT" | grep -Eq '^[0-9]+$'; then
             echo "::error::limit must be an integer."
+            exit 1
+          fi
+          if [ "$CONTENT_SCOPE" != "full" ] && [ "$CONTENT_SCOPE" != "short_unverified" ]; then
+            echo "::error::content_scope must be full or short_unverified."
+            exit 1
+          fi
+          if ! printf '%s' "$MAX_DURATION_SECONDS" | grep -Eq '^[0-9]+$'; then
+            echo "::error::max_duration_seconds must be an integer."
             exit 1
           fi
           if [ "$MODE" != "plan" ] && [ "$CONFIRM_RENDER" != "RENDER_POLYGLOT_VIDEO" ]; then
@@ -155,8 +204,16 @@ jobs:
             echo "::error::render_audio may spend TTS/provider usage and requires confirm_tts=GENERATE_TTS_AUDIO"
             exit 1
           fi
-          if [ "$MODE" = "apply" ] && [ "$LIMIT" != "0" ]; then
-            echo "::error::mode=apply must render the full deck with limit=0; do not upload preview/truncated videos."
+          if [ "$MODE" = "apply" ] && [ "$LIMIT" != "0" ] && [ "$CONTENT_SCOPE" != "short_unverified" ]; then
+            echo "::error::mode=apply with limit != 0 is only allowed for content_scope=short_unverified."
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$CONTENT_SCOPE" = "short_unverified" ] && [ "$LIMIT" = "0" ]; then
+            echo "::error::content_scope=short_unverified requires a positive card limit."
+            exit 1
+          fi
+          if [ "$CONTENT_SCOPE" = "short_unverified" ] && [ "$MAX_DURATION_SECONDS" -gt 895 ]; then
+            echo "::error::short_unverified max_duration_seconds must stay <=895 (14:55) to avoid YouTube's 15-minute unverified limit."
             exit 1
           fi
           if [ "$MODE" = "apply" ] && [ "$CONFIRM_METADATA_SPEND" != "GENERATE_POLYGLOT_METADATA" ]; then
@@ -167,20 +224,36 @@ jobs:
             echo "::error::mode=apply requires confirm_youtube_write=APPLY_POLYGLOT_YOUTUBE_UPLOAD"
             exit 1
           fi
-          if [ "$MODE" = "apply" ] && [ "$GENERATE_THUMBNAILS" = "true" ] && [ "$CONFIRM_THUMBNAIL_SPEND" != "GENERATE_THUMBNAILS" ]; then
-            echo "::error::VectorEngine image thumbnails require confirm_thumbnail_spend=GENERATE_THUMBNAILS"
+          if [ "$MODE" = "apply" ] && [ "${{ github.event.inputs.allow_republish }}" = "true" ]; then
+            echo "::error::allow_republish is disabled for apply. Repair, supersede or delete the prior publication first."
             exit 1
           fi
-          if [ "$PRIVACY" = "public" ] && [ "$CONFIRM_PUBLIC" != "PUBLISH_PUBLIC" ] && [ "$MODE" = "apply" ]; then
+          if [ "$MODE" = "apply" ] && [ "$GENERATE_THUMBNAILS" = "true" ]; then
+            echo "::error::Polyglot apply uses committed approved JPG covers; set generate_thumbnails=false. VectorEngine thumbnails are disabled."
+            exit 1
+          fi
+          if [ "$PUBLISH_MODE" != "scheduled" ] && [ "$PUBLISH_MODE" != "public_now" ]; then
+            echo "::error::publish_mode must be scheduled or public_now"
+            exit 1
+          fi
+          if [ -n "$SCHEDULE_START_DATE" ] && ! printf '%s' "$SCHEDULE_START_DATE" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
+            echo "::error::schedule_start_date must be YYYY-MM-DD"
+            exit 1
+          fi
+          if ! printf '%s' "$SCHEDULE_MIN_FUTURE_MINUTES" | grep -Eq '^[0-9]+$'; then
+            echo "::error::schedule_min_future_minutes must be a non-negative integer"
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ -n "$PUBLISH_AT" ]; then
+            echo "::error::direct publish_at is disabled for apply; use publish_mode=scheduled so the shared calendar selects the slot"
+            exit 1
+          fi
+          if [ "$PUBLISH_MODE" = "scheduled" ] && [ "$CONFIRM_PUBLIC" != "PUBLISH_PUBLIC" ] && [ "$MODE" = "apply" ]; then
+            echo "::error::scheduled uploads become public and require confirm_public=PUBLISH_PUBLIC"
+            exit 1
+          fi
+          if [ "$PUBLISH_MODE" = "public_now" ] && [ "$PRIVACY" = "public" ] && [ "$CONFIRM_PUBLIC" != "PUBLISH_PUBLIC" ] && [ "$MODE" = "apply" ]; then
             echo "::error::privacy=public requires confirm_public=PUBLISH_PUBLIC"
-            exit 1
-          fi
-          if [ -n "$PUBLISH_AT" ] && [ "$PRIVACY" != "private" ]; then
-            echo "::error::publish_at requires privacy=private"
-            exit 1
-          fi
-          if [ -n "$PUBLISH_AT" ] && [ "$MODE" = "apply" ] && [ "$CONFIRM_PUBLIC" != "PUBLISH_PUBLIC" ]; then
-            echo "::error::scheduled uploads become public at publish_at and require confirm_public=PUBLISH_PUBLIC"
             exit 1
           fi
 
@@ -191,6 +264,21 @@ jobs:
 
       - name: Install Node dependencies
         run: npm ci || npm install
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
 
       - name: Download offline deck data from Google Drive
         shell: bash
@@ -229,10 +317,12 @@ jobs:
           SET_ID: ${{ github.event.inputs.set_id }}
           SUPPORT: ${{ github.event.inputs.support }}
           BUNDLE: ${{ github.event.inputs.bundle }}
+          CONTENT_SCOPE: ${{ github.event.inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ github.event.inputs.max_duration_seconds }}
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
         run: |
           set -euo pipefail
-          PLAN_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--bundle" "$BUNDLE" "--require-offline-deck" "--output=outputs/video-generator/youtube-polyglot-plan-github.json")
+          PLAN_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--bundle" "$BUNDLE" "--content-scope" "$CONTENT_SCOPE" "--max-duration-seconds" "$MAX_DURATION_SECONDS" "--require-offline-deck" "--output=outputs/video-generator/youtube-polyglot-plan-github.json")
           if [ "$ALLOW_REPUBLISH" = "true" ]; then
             PLAN_ARGS+=("--allow-republish")
           fi
@@ -258,6 +348,19 @@ jobs:
             }
           '
 
+      - name: Audit and gate live Polyglot publication state
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          TARGET_LANGS: ${{ steps.polyglot_plan.outputs.target_langs }}
+          POLYGLOT_KEY: ${{ steps.polyglot_plan.outputs.polyglot_key }}
+        run: |
+          set -euo pipefail
+          npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORT" --include-video-status --output=outputs/youtube-live-publications-github.json --json
+          npm run check:youtube-publication-control -- --set "$SET_ID" --support "$SUPPORT" --targets "$TARGET_LANGS" --proposed-polyglot-key "$POLYGLOT_KEY" --live-audit=outputs/youtube-live-publications-github.json --output=outputs/youtube-publication-control-github.json --strict
+
       - name: Generate Polyglot YouTube metadata
         shell: bash
         env:
@@ -265,15 +368,30 @@ jobs:
           SET_ID: ${{ github.event.inputs.set_id }}
           SUPPORT: ${{ github.event.inputs.support }}
           BUNDLE: ${{ github.event.inputs.bundle }}
+          LIMIT: ${{ github.event.inputs.limit }}
+          CONTENT_SCOPE: ${{ github.event.inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ github.event.inputs.max_duration_seconds }}
           PRIVACY: ${{ github.event.inputs.privacy }}
+          PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
           PUBLISH_AT: ${{ github.event.inputs.publish_at }}
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
           VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
           VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
           VECTORENGINE_SEND_RESPONSE_SCHEMA: "1"
         run: |
           set -euo pipefail
-          METADATA_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--bundle" "$BUNDLE" "--privacy" "$PRIVACY")
+          EFFECTIVE_PRIVACY="$PRIVACY"
+          if [ "$PUBLISH_MODE" = "scheduled" ]; then
+            EFFECTIVE_PRIVACY="private"
+          fi
+          METADATA_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--bundle" "$BUNDLE" "--content-scope" "$CONTENT_SCOPE" "--max-duration-seconds" "$MAX_DURATION_SECONDS" "--privacy" "$EFFECTIVE_PRIVACY")
+          if [ "$LIMIT" != "0" ]; then
+            METADATA_ARGS+=("--word-limit" "$LIMIT")
+          fi
           if [ -n "$PUBLISH_AT" ]; then
             METADATA_ARGS+=("--publish-at" "$PUBLISH_AT")
           fi
@@ -284,6 +402,28 @@ jobs:
             METADATA_ARGS+=("--with-gemini" "--require-ai")
           fi
           npm run generate:polyglot-youtube-metadata -- "${METADATA_ARGS[@]}"
+
+      - name: Reserve earliest shared channel-calendar slot
+        if: ${{ github.event.inputs.publish_mode == 'scheduled' }}
+        shell: bash
+        env:
+          SCHEDULE_START_DATE: ${{ github.event.inputs.schedule_start_date }}
+          SCHEDULE_MIN_FUTURE_MINUTES: ${{ github.event.inputs.schedule_min_future_minutes }}
+        run: |
+          set -euo pipefail
+          npm run plan:youtube-publish-schedule -- \
+            outputs/video-generator \
+            --start-date="$SCHEDULE_START_DATE" \
+            --policy=config/youtube-publish-schedule-policy.json \
+            --calendar=config/youtube-publish-calendar.json \
+            --publication-registry=config/youtube-published-videos.json \
+            --polyglot-publication-registry=config/youtube-polyglot-published-videos.json \
+            --write-metadata \
+            --write-calendar \
+            --reschedule-past-reservations \
+            --fill-earliest \
+            --min-future-minutes="$SCHEDULE_MIN_FUTURE_MINUTES" \
+            --output=outputs/youtube-polyglot-publish-schedule-github.json
 
       - name: Check Polyglot YouTube metadata
         shell: bash
@@ -317,21 +457,6 @@ jobs:
         if: ${{ github.event.inputs.mode == 'render_audio' || github.event.inputs.mode == 'apply' }}
         run: pip install edge-tts
 
-      - name: Restore YouTube OAuth bundle from environment secret
-        if: ${{ github.event.inputs.mode == 'apply' }}
-        env:
-          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
-            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
-            exit 1
-          fi
-          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
-          test -f .local/youtube-oauth/google-oauth-client.json
-          test -d .local/youtube-oauth/tokens
-
       - name: Render Polyglot video locally
         if: ${{ github.event.inputs.mode != 'plan' }}
         shell: bash
@@ -340,11 +465,13 @@ jobs:
           SET_ID: ${{ github.event.inputs.set_id }}
           SUPPORT: ${{ github.event.inputs.support }}
           TARGET_LANGS: ${{ steps.polyglot_plan.outputs.target_langs }}
+          POLYGLOT_KEY: ${{ steps.polyglot_plan.outputs.polyglot_key }}
           LIMIT: ${{ github.event.inputs.limit }}
           MODE: ${{ github.event.inputs.mode }}
+          CONTENT_SCOPE: ${{ github.event.inputs.content_scope }}
         run: |
           set -euo pipefail
-          BUILD_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--targets" "$TARGET_LANGS")
+          BUILD_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--targets" "$TARGET_LANGS" "--content-scope" "$CONTENT_SCOPE")
           if [ "$LIMIT" != "0" ]; then
             BUILD_ARGS+=("--limit" "$LIMIT")
           fi
@@ -353,18 +480,29 @@ jobs:
           fi
           node scripts/build-polyglot-video.mjs "${BUILD_ARGS[@]}"
 
-      - name: Generate Polyglot thumbnail where allowed
-        if: ${{ github.event.inputs.mode == 'apply' && github.event.inputs.generate_thumbnails == 'true' }}
+      - name: Check short Polyglot duration
+        if: ${{ github.event.inputs.mode != 'plan' && github.event.inputs.content_scope == 'short_unverified' }}
         shell: bash
         env:
-          VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
-          VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
+          MAX_DURATION_SECONDS: ${{ github.event.inputs.max_duration_seconds }}
         run: |
           set -euo pipefail
-          npm run generate:youtube-thumbnails -- outputs/video-generator --confirm-spend --output=outputs/polyglot-youtube-thumbnail-generation-github.json
+          npm run check:polyglot-video-duration -- outputs/video-generator --max-duration-seconds "$MAX_DURATION_SECONDS" --write-metadata --output=outputs/polyglot-video-duration-check-github.json
+
+      - name: Copy approved pre-rendered Polyglot thumbnails
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/copy-pre-rendered-thumbnails.mjs \
+            --input-dir outputs/video-generator \
+            --manifest outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-approved-polyglot-target-languages-20260707/manifest.json \
+            --strict-custom \
+            --require-git-tracked \
+            --output=outputs/polyglot-pre-rendered-thumbnail-copy-github.json
 
       - name: Check Polyglot thumbnails or accepted fallback
-        if: ${{ github.event.inputs.mode == 'apply' && github.event.inputs.generate_thumbnails == 'true' }}
+        if: ${{ github.event.inputs.mode == 'apply' }}
         run: npm run check:youtube-thumbnails -- outputs/video-generator --allow-auto-first-frame --output=outputs/polyglot-youtube-thumbnail-check-github.json
 
       - name: Plan Polyglot YouTube upload
@@ -373,6 +511,8 @@ jobs:
           MODE: ${{ github.event.inputs.mode }}
           CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
+          CONTENT_SCOPE: ${{ github.event.inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ github.event.inputs.max_duration_seconds }}
         run: |
           set -euo pipefail
           UPLOAD_PLAN_ARGS=("outputs/video-generator" "--write-registry" "--allow-auto-thumbnail-fallback" "--output=outputs/youtube-polyglot-upload-plan-github.json")
@@ -381,6 +521,9 @@ jobs:
           fi
           if [ "$ALLOW_REPUBLISH" = "true" ]; then
             UPLOAD_PLAN_ARGS+=("--allow-republish")
+          fi
+          if [ "$CONTENT_SCOPE" = "short_unverified" ]; then
+            UPLOAD_PLAN_ARGS+=("--allow-short-unverified" "--max-duration-seconds" "$MAX_DURATION_SECONDS")
           fi
           if [ "$MODE" = "apply" ]; then
             UPLOAD_PLAN_ARGS+=("--require-ai-metadata")
@@ -403,14 +546,27 @@ jobs:
             if (s.publishReadyCount !== s.candidateCount) throw new Error("Not all Polyglot candidates are publish_ready.");
           '
 
+      - name: Refresh live Polyglot publication control immediately before upload
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          SUPPORT: ${{ github.event.inputs.support }}
+          TARGET_LANGS: ${{ steps.polyglot_plan.outputs.target_langs }}
+          POLYGLOT_KEY: ${{ steps.polyglot_plan.outputs.polyglot_key }}
+        run: |
+          set -euo pipefail
+          npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORT" --include-video-status --output=outputs/youtube-live-publications-github.json --json
+          npm run check:youtube-publication-control -- --set "$SET_ID" --support "$SUPPORT" --targets "$TARGET_LANGS" --proposed-polyglot-key "$POLYGLOT_KEY" --live-audit=outputs/youtube-live-publications-github.json --output=outputs/youtube-publication-control-github.json --strict
+
       - name: Upload Polyglot video to YouTube
         if: ${{ github.event.inputs.mode == 'apply' }}
         shell: bash
         env:
           CREATE_PLAYLISTS: ${{ github.event.inputs.create_playlists }}
           ALLOW_REPUBLISH: ${{ github.event.inputs.allow_republish }}
-          PRIVACY: ${{ github.event.inputs.privacy }}
-          PUBLISH_AT: ${{ github.event.inputs.publish_at }}
+          INPUT_PRIVACY: ${{ github.event.inputs.privacy }}
+          PUBLISH_MODE: ${{ github.event.inputs.publish_mode }}
         run: |
           set -euo pipefail
           mapfile -d '' METADATA_FILES < <(find outputs/video-generator -name youtube_metadata.json -print0 | sort -z)
@@ -418,9 +574,14 @@ jobs:
             echo "::error::Polyglot apply expects exactly one youtube_metadata.json, got ${#METADATA_FILES[@]}."
             exit 1
           fi
+          PRIVACY="$INPUT_PRIVACY"
+          if [ "$PUBLISH_MODE" = "scheduled" ]; then
+            PRIVACY="private"
+          fi
           PUBLISH_ARGS=(
             "--metadata=${METADATA_FILES[0]}"
             "--privacy=$PRIVACY"
+            "--publication-control-report=outputs/youtube-publication-control-github.json"
             "--playlist-registry=config/youtube-polyglot-playlists.json"
             "--publication-registry=config/youtube-polyglot-published-videos.json"
             "--progress-registry=config/youtube-polyglot-progress.json"
@@ -429,9 +590,6 @@ jobs:
             "--apply"
             "--confirm-youtube-write"
           )
-          if [ -n "$PUBLISH_AT" ]; then
-            PUBLISH_ARGS+=("--publish-at=$PUBLISH_AT")
-          fi
           if [ "$CREATE_PLAYLISTS" = "true" ]; then
             PUBLISH_ARGS+=("--create-playlist")
           fi
@@ -452,8 +610,13 @@ jobs:
             outputs/video-generator/youtube-polyglot-plan-github.json
             outputs/youtube-polyglot-upload-plan-github.json
             outputs/polyglot-youtube-metadata-check-github.json
+            outputs/polyglot-video-duration-check-github.json
+            outputs/polyglot-pre-rendered-thumbnail-copy-github.json
             outputs/polyglot-youtube-thumbnail-*.json
             outputs/youtube-polyglot-publish-ledger.jsonl
+            outputs/youtube-live-publications-github.json
+            outputs/youtube-publication-control-github.json
+            outputs/youtube-polyglot-publish-schedule-github.json
             outputs/video-generator/*_polyglot_*
             config/youtube-channels.json
             config/youtube-polyglot-playlists.json
@@ -467,8 +630,10 @@ jobs:
     if: ${{ always() && github.event.inputs.mode == 'apply' }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    # Keep each state job pending independently; GitHub retains only one pending
+    # job per shared concurrency group during a large publish wave.
     concurrency:
-      group: youtube-polyglot-publish-state-${{ github.ref_name }}
+      group: youtube-publish-state-${{ github.ref_name }}-${{ github.run_id }}
       cancel-in-progress: false
     permissions:
       contents: write
@@ -508,6 +673,7 @@ jobs:
           git pull --ff-only origin "$BRANCH_NAME"
           node scripts/merge-youtube-publish-state.mjs --artifact-dir=.state-artifact --summary=outputs/youtube-polyglot-state-merge-github.json
           cat outputs/youtube-polyglot-state-merge-github.json
+          node scripts/check-youtube-polyglot-state.mjs --set="${{ github.event.inputs.set_id }}" --bundle="${{ github.event.inputs.bundle }}" --json
 
       - name: Commit and push Polyglot publish state
         shell: bash
@@ -516,18 +682,42 @@ jobs:
           SET_ID: ${{ github.event.inputs.set_id }}
           SUPPORT: ${{ github.event.inputs.support }}
           BUNDLE: ${{ github.event.inputs.bundle }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          if git diff --quiet -- config/youtube-channels.json config/youtube-polyglot-playlists.json config/youtube-polyglot-progress.json config/youtube-polyglot-published-videos.json config/youtube-publish-calendar.json; then
-            echo "No Polyglot publish state changes to commit."
+          if [ ! -d .state-artifact/config ]; then
+            echo "No Polyglot publish state artifact config directory found; nothing to persist."
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add config/youtube-channels.json config/youtube-polyglot-playlists.json config/youtube-polyglot-progress.json config/youtube-polyglot-published-videos.json config/youtube-publish-calendar.json
-          git commit -m "Persist Polyglot YouTube publish state for ${SET_ID} ${SUPPORT} ${BUNDLE}" \
-            -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          git push origin "HEAD:$BRANCH_NAME"
+          repo_url="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          for attempt in $(seq 1 12); do
+            workdir=".persist-work/attempt-${attempt}"
+            mkdir -p "$workdir"
+            echo "Persist attempt ${attempt}: clone fresh ${BRANCH_NAME}, merge Polyglot artifact, commit, push."
+            git clone --branch "$BRANCH_NAME" --depth 1 "$repo_url" "$workdir"
+            cp -R .state-artifact "$workdir/.state-artifact"
+            (
+              cd "$workdir"
+              node scripts/merge-youtube-publish-state.mjs --artifact-dir=.state-artifact --summary=outputs/youtube-polyglot-state-merge-github.json
+              cat outputs/youtube-polyglot-state-merge-github.json
+              if git diff --quiet -- config/youtube-channels.json config/youtube-polyglot-playlists.json config/youtube-polyglot-progress.json config/youtube-polyglot-published-videos.json config/youtube-publish-calendar.json; then
+                echo "No Polyglot publish state changes to commit."
+                exit 0
+              fi
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git add config/youtube-channels.json config/youtube-polyglot-playlists.json config/youtube-polyglot-progress.json config/youtube-polyglot-published-videos.json config/youtube-publish-calendar.json
+              git commit -m "Persist Polyglot YouTube publish state for ${SET_ID} ${SUPPORT} ${BUNDLE}" \
+                -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+              git push origin "HEAD:$BRANCH_NAME"
+            ) && exit 0
+            echo "Persist attempt ${attempt} failed; retrying from a fresh clone after jittered backoff."
+            sleep_seconds=$((attempt * 8 + RANDOM % 11))
+            echo "Sleeping ${sleep_seconds}s before next persist attempt."
+            sleep "$sleep_seconds"
+          done
+          echo "::error::Could not persist Polyglot YouTube publish state after retries."
+          exit 1
 
       - name: Upload Polyglot state merge summary
         if: ${{ always() }}
