@@ -207,6 +207,12 @@ function isVisibleLiveRow(row = {}) {
   return String(status.uploadStatus || "").toLowerCase() !== "not_returned";
 }
 
+function isYoutubeDeletedTombstone(row = {}) {
+  return row.youtubeDeletedTombstone === true
+    || (String(row.title || "").trim() === "Deleted video"
+      && String(row.youtubeStatus?.uploadStatus || "").toLowerCase() === "not_returned");
+}
+
 function mergeNonEmpty(base, incoming) {
   const merged = { ...base };
   for (const [key, value] of Object.entries(incoming || {})) {
@@ -327,17 +333,24 @@ export function buildPublicationControlReport({
 } = {}) {
   const nowMillis = now instanceof Date ? now.getTime() : Date.parse(now);
   const supportSet = new Set((supports || []).map(canonicalSupportCode).filter(Boolean));
-  const selectedOrdinaryRegistryRows = (ordinaryRegistry.publications || []).filter(isActive).filter((row) => selectedRow(row, { setId, supports: supportSet }));
+  const liveRows = auditRows(liveAudit || {}).filter((row) => selectedRow(row, { setId, supports: supportSet }));
+  const deletedTombstoneRows = liveRows.filter(isYoutubeDeletedTombstone);
+  const deletedTombstoneVideoIds = new Set(deletedTombstoneRows.map((row) => row.youtubeVideoId).filter(Boolean));
+  const selectedOrdinaryRegistryRows = (ordinaryRegistry.publications || []).filter(isActive)
+    .filter((row) => selectedRow(row, { setId, supports: supportSet }))
+    .filter((row) => !deletedTombstoneVideoIds.has(row.youtubeVideoId));
   const ordinaryRows = selectedOrdinaryRegistryRows.filter((row) => !isPolyglotRow(row));
   const legacyPolyglotRows = selectedOrdinaryRegistryRows.filter(isPolyglotRow);
   const polyglotRows = [
     ...legacyPolyglotRows,
-    ...(polyglotRegistry.publications || []).filter(isActive).filter((row) => selectedRow(row, { setId, supports: supportSet })),
+    ...(polyglotRegistry.publications || []).filter(isActive)
+      .filter((row) => selectedRow(row, { setId, supports: supportSet }))
+      .filter((row) => !deletedTombstoneVideoIds.has(row.youtubeVideoId)),
   ];
-  const liveRows = auditRows(liveAudit || {}).filter((row) => selectedRow(row, { setId, supports: supportSet }));
   const visibleLiveRows = liveRows.filter(isVisibleLiveRow);
   const statusNotReturnedRows = liveRows.filter((row) => row.youtubeStatus
-    && String(row.youtubeStatus.uploadStatus || "").toLowerCase() === "not_returned");
+    && String(row.youtubeStatus.uploadStatus || "").toLowerCase() === "not_returned"
+    && !isYoutubeDeletedTombstone(row));
   const unclassifiedUploads = unclassifiedAuditRows(liveAudit || {})
     .filter((row) => !supportSet.size || supportSet.has(canonicalSupportCode(row.supportLang)));
   const unclassifiedRecentUploads = unclassifiedUploads.filter((row) => row.potentialCurrentSet === true
@@ -548,12 +561,25 @@ export function buildPublicationControlReport({
       polyglotBundleTargetMismatchCount: polyglotBundleMismatches.length,
       liveAuditPaginationComplete: liveAudit?.paginationComplete === true,
       liveStatusNotReturnedCount: statusNotReturnedRows.length,
+      youtubeDeletedTombstoneCount: deletedTombstoneRows.length,
       unclassifiedUploadCount: unclassifiedUploads.length,
       unclassifiedRecentUploadCount: unclassifiedRecentUploads.length,
       calendarDayGapCount: dayGaps.reduce((sum, item) => sum + item.missingDates.length, 0),
     },
     blockers,
     publications,
+    deletedTombstones: deletedTombstoneRows.map((row) => ({
+      youtubeVideoId: row.youtubeVideoId || "",
+      youtubeVideoUrl: row.youtubeVideoUrl || (row.youtubeVideoId ? `https://www.youtube.com/watch?v=${row.youtubeVideoId}` : ""),
+      setId: row.setId || setId,
+      supportLang: canonicalSupportCode(row.supportLang),
+      videoType: isPolyglotRow(row) ? "polyglot" : "ordinary",
+      targetLang: normalizeCode(row.targetLang),
+      targetLangs: normalizedTargetLangs(row),
+      bundleKey: polyglotBundleKey(row),
+      contentScope: isPolyglotRow(row) ? polyglotContentScope(row) : "",
+      evidence: "uploads_playlist_title_deleted_video_and_videos_list_not_returned",
+    })),
     unclassifiedUploads,
     tails,
     calendarDayGaps: dayGaps,

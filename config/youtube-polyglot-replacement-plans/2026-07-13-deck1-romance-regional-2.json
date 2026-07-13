@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-07-13T16:00:00Z",
+  "mode": "read_only_replacement_plan",
+  "setId": "home_kitchen_cookware_pilot_01",
+  "purpose": "Replace legacy romance_core videos that teach the canonical support language back to the same shared-channel audience.",
+  "requiresSeparateApproval": [
+    "youtube_delete",
+    "render_metadata_tts",
+    "youtube_scheduled_upload"
+  ],
+  "items": [
+    {
+      "route": "youtube-1",
+      "supportLang": "ES-419",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "occupiedVideoId": "4E3lliVWsbA",
+      "occupiedVideoUrl": "https://www.youtube.com/watch?v=4E3lliVWsbA",
+      "currentTargetLangs": ["ES", "FR", "IT", "PT"],
+      "replacementTargetLangs": ["EN", "FR", "IT", "PT"]
+    },
+    {
+      "route": "youtube-1",
+      "supportLang": "PT-BR",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "occupiedVideoId": "L6qSQzb-YFY",
+      "occupiedVideoUrl": "https://www.youtube.com/watch?v=L6qSQzb-YFY",
+      "currentTargetLangs": ["ES", "FR", "IT", "PT"],
+      "replacementTargetLangs": ["EN", "ES", "FR", "IT"]
+    }
+  ],
+  "executionOrder": [
+    "Review both occupied videos and approve the exact delete IDs.",
+    "Delete only the approved obsolete IDs with no retries.",
+    "Run a fresh four-route read-only publication audit and require both romance_core slots to become tails.",
+    "Render and upload the corrected replacements as scheduled publications using reviewed tracked covers where permitted.",
+    "Run a final read-only audit and merge durable state from completed artifacts."
+  ]
+}

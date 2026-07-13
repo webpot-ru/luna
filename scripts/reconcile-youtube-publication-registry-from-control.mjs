@@ -126,6 +126,19 @@ function main() {
   const polyglot = readJson(options.polyglotRegistry);
   const channels = readJson(options.channelConfig).channels || [];
   const reconciledAt = new Date().toISOString();
+  const deletedTombstones = reports.flatMap(report => report.deletedTombstones || []).filter(row => row.youtubeVideoId);
+  let tombstoneRowsMarked = 0;
+  for (const tombstone of deletedTombstones) {
+    for (const registryRows of [ordinary.publications, polyglot.publications]) {
+      for (const row of registryRows) {
+        if (row.youtubeVideoId !== tombstone.youtubeVideoId || !isActive(row)) continue;
+        markInactive(row, "deleted_youtube_tombstone_confirmed", "", reconciledAt);
+        row.deletedAt = reconciledAt;
+        row.deletionEvidence = tombstone.evidence || "youtube_deleted_tombstone";
+        tombstoneRowsMarked++;
+      }
+    }
+  }
   const liveRows = reports.flatMap(report => report.publications || []).filter(row => row.liveReadbackPresent === true && row.youtubeVideoId);
   const liveVideoIds = new Set(liveRows.map(row => row.youtubeVideoId));
   const liveRowsByVideoId = new Map(liveRows.map(row => [row.youtubeVideoId, row]));
@@ -229,6 +242,7 @@ function main() {
     ordinaryAdded,
     polyglotAdded,
     restoredLiveRows,
+    tombstoneRowsMarked,
     staleRows,
     migratedPolyglotRows: misplacedPolyglotRows.length,
     ordinaryPublicationCount: ordinary.publications.length,

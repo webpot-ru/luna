@@ -4,10 +4,14 @@ import assert from "node:assert/strict";
 import {
   courseSetBySlug,
   inferPublicationFromDescription,
+  isYoutubeDeletedTombstone,
   markPotentialCurrentSetUnmatched,
   publicationFromRegistryItem,
   validateAuditExclusions,
 } from "./audit-youtube-live-publications.mjs";
+
+assert.equal(isYoutubeDeletedTombstone({ title: "Deleted video", youtubeStatus: { uploadStatus: "not_returned" } }), true);
+assert.equal(isYoutubeDeletedTombstone({ title: "Deleted video", youtubeStatus: { uploadStatus: "uploaded" } }), false);
 
 const exclusions = validateAuditExclusions({
   entries: [{ youtubeVideoId: "reviewed-demo", status: "reviewed_non_product", reason: "manual API demo" }],

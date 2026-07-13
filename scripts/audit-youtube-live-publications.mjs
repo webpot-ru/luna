@@ -412,6 +412,11 @@ function publicationFromRegistryItem(existing, item) {
   };
 }
 
+function isYoutubeDeletedTombstone(row = {}) {
+  return String(row.title || "").trim() === "Deleted video"
+    && String(row.youtubeStatus?.uploadStatus || "").toLowerCase() === "not_returned";
+}
+
 function earliestAuditWindowStart(publicationRegistry, { setId, channelSupportLangs, matchedPublications = [] }) {
   const channelSupports = new Set((channelSupportLangs || []).map(normalizeCode));
   const dates = [
@@ -511,6 +516,7 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
       if (options.includeVideoStatus) {
         known.youtubeStatus = statuses.get(youtubeVideoId) || { privacyStatus: "", publishAt: "", uploadStatus: "not_returned" };
       }
+      known.youtubeDeletedTombstone = isYoutubeDeletedTombstone(known);
       if (String(known.setId || "") === String(options.setId)) matchedPublications.push(known);
       else knownOtherPublications.push(known);
       continue;
@@ -551,6 +557,7 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
       if (options.includeVideoStatus) {
         matched.youtubeStatus = statuses.get(youtubeVideoId) || { privacyStatus: "", publishAt: "", uploadStatus: "not_returned" };
       }
+      matched.youtubeDeletedTombstone = isYoutubeDeletedTombstone(matched);
       if (String(matched.setId || "") === String(options.setId)) matchedPublications.push(matched);
       else knownOtherPublications.push(matched);
     } else {
@@ -702,6 +709,7 @@ export {
   courseSetBySlug,
   earliestAuditWindowStart,
   inferPublicationFromDescription,
+  isYoutubeDeletedTombstone,
   markPotentialCurrentSetUnmatched,
   publicationFromRegistryItem,
   validateAuditExclusions,

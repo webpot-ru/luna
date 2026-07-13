@@ -256,6 +256,28 @@ const statusNotReturned = buildPublicationControlReport({
 assert.equal(statusNotReturned.summary.liveStatusNotReturnedCount, 1);
 assert.ok(statusNotReturned.blockers.some((item) => item.type === "live_video_status_not_returned"));
 
+const deletedTombstone = buildPublicationControlReport({
+  ...base,
+  ordinaryRegistry: { publications: [canonical] },
+  liveAudit: {
+    paginationComplete: true,
+    supportReports: [{
+      supportLang: "EN",
+      matchedPublications: [{
+        ...canonical,
+        title: "Deleted video",
+        youtubeDeletedTombstone: true,
+        youtubeStatus: { uploadStatus: "not_returned", privacyStatus: "", publishAt: "" },
+      }],
+    }],
+  },
+  requireCompleteLiveAudit: true,
+});
+assert.equal(deletedTombstone.summary.youtubeDeletedTombstoneCount, 1);
+assert.equal(deletedTombstone.summary.liveStatusNotReturnedCount, 0);
+assert.equal(deletedTombstone.blockers.some((item) => item.type === "live_video_status_not_returned"), false);
+assert.deepEqual(deletedTombstone.tails.map((row) => row.targetLang), ["DE", "FR"]);
+
 const unclassifiedRecentUpload = buildPublicationControlReport({
   ...base,
   liveAudit: {
