@@ -7,8 +7,18 @@ import { BRAND_NAME } from "./brand.mjs";
 const localizationPath = path.resolve("config/video-localization.json");
 const localizationData = JSON.parse(fs.readFileSync(localizationPath, "utf8"));
 const defaultOutroUrl = "https://flashcardsluna.com/en/courses";
-const defaultOutroQrImageUrl = getQrCodeImageUrl(defaultOutroUrl);
-const outroIconDataUris = getOutroIconDataUris();
+let defaultOutroQrImageUrlCache = "";
+let outroIconDataUrisCache = null;
+
+function getDefaultOutroQrImageUrl() {
+  defaultOutroQrImageUrlCache ||= getQrCodeImageUrl(defaultOutroUrl);
+  return defaultOutroQrImageUrlCache;
+}
+
+function getOutroIconDataUriMap() {
+  outroIconDataUrisCache ||= getOutroIconDataUris();
+  return outroIconDataUrisCache;
+}
 
 export const flagMap = {
   'EN': '🇺🇸',
@@ -433,6 +443,18 @@ export function getLanguageNameInLang(targetLang, supportLang) {
   if (supportMap && supportMap[target]) {
     return supportMap[target];
   }
+  try {
+    const locale = support.toLowerCase();
+    const languageCode = target.toLowerCase();
+    const display = new Intl.DisplayNames([locale], { type: "language", languageDisplay: "standard" }).of(languageCode);
+    const text = String(display || "").trim();
+    if (text && text.toUpperCase() !== target) {
+      const chars = Array.from(text);
+      return `${chars[0].toLocaleUpperCase(locale)}${chars.slice(1).join("")}`;
+    }
+  } catch {
+    // Fall through to the explicit English fallback below.
+  }
   const enMap = translations['EN'];
   return enMap[target] || target;
 }
@@ -729,7 +751,8 @@ export function generateSlideHtml(options) {
 
 export function generateUnifiedRendererHtml() {
   const localizationJson = JSON.stringify(localizationData);
-  const outroIconJson = JSON.stringify(outroIconDataUris);
+  const defaultOutroQrImageUrl = getDefaultOutroQrImageUrl();
+  const outroIconJson = JSON.stringify(getOutroIconDataUriMap());
   const outroIconNameJson = JSON.stringify(outroIconNames);
   return `<!DOCTYPE html>
 <html>
