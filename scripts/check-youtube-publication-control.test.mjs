@@ -314,4 +314,23 @@ const strictReport = JSON.parse(fs.readFileSync(outputPath, "utf8"));
 assert.equal(strictReport.evidence.strict, true);
 assert.equal(strictReport.evidence.videoStatusReadback, true);
 
+const defaultTargetsOutputPath = path.join(root, "control-default-targets.json");
+const defaultTargetsCli = spawnSync(process.execPath, [
+  "scripts/check-youtube-publication-control.mjs",
+  "--set=test-deck",
+  "--support=EN",
+  `--ordinary-registry=${emptyRegistry}`,
+  `--polyglot-registry=${emptyRegistry}`,
+  `--calendar=${emptyCalendar}`,
+  `--live-audit=${liveAuditPath}`,
+  `--output=${defaultTargetsOutputPath}`,
+  "--strict",
+], { cwd: process.cwd(), encoding: "utf8" });
+assert.equal(defaultTargetsCli.status, 0, defaultTargetsCli.stderr || defaultTargetsCli.stdout);
+assert.doesNotMatch(defaultTargetsCli.stderr, /psql|127\.0\.0\.1|55433/u);
+const defaultTargetsReport = JSON.parse(fs.readFileSync(defaultTargetsOutputPath, "utf8"));
+assert.equal(defaultTargetsReport.productPolicy.ordinaryTargetSource, "config/language-order.json");
+assert.equal(defaultTargetsReport.summary.ordinaryTailCount, 52);
+assert.ok(!defaultTargetsReport.tails.some((row) => ["EN", "EN-GB"].includes(row.targetLang)));
+
 console.log("youtube publication control tests passed");

@@ -8,6 +8,12 @@
 
 ## 1. Стратегия дистрибуции на YouTube (YouTube Distribution)
 
+Exact duplicate deletion uses `.github/workflows/youtube-delete-duplicates.yml` with a tracked KEEP/DELETE manifest. Live apply without the manifest is rejected. Each OAuth route validates all listed IDs, channel ownership and current view counts before its first delete, performs no delete retries, and uploads evidence plus registry/calendar candidates instead of racing parallel pushes. Durable state is merged only after completed-run readback. The approved 2026-07-13 Deck #1/#2 plan is `config/youtube-duplicate-delete-plans/2026-07-13-decks-1-2-32.json`.
+
+Merge completed route artifacts with `npm run merge:youtube-duplicate-deletions -- --report=<route1> --report=<route2> --report=<route3> --report=<route4> --apply`. The merger requires all four unique routes, rejects unapproved or incomplete IDs, canonicalizes historical support aliases by video ID, marks DELETE rows inactive and moves any existing calendar reference from DELETE to KEEP without changing `publishAt`. A fresh authenticated read-only audit remains the final live verification gate.
+
+After a complete post-write audit, reconcile live publication truth into the durable ledgers with `npm run reconcile:youtube-publication-registry-control -- --report=<deck1-all-routes.json> --report=<deck2-all-routes.json>` and review the dry-run before adding `--apply`. This local-only recovery requires full pagination and all-ID status readback, refuses live duplicate assignments, writes ordinary and Polyglot rows to separate registries, reactivates exact observed live IDs, and inactivates registry-only conflicts. Always rebuild the four route reports plus `config/youtube-publication-snapshot.json` / `docs/youtube-publication-map.md` from the same evidence afterward. It performs no YouTube API write.
+
 Для исключения «каши» из десятков языков поддержки на одном канале и предотвращения путаницы в алгоритмах рекомендаций YouTube принята **Стратегия разделения каналов по языку зрителя (Support Language / Market)**.
 
 ### Архитектура каналов:
