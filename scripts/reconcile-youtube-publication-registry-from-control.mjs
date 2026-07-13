@@ -15,6 +15,7 @@ function parseArgs(argv) {
     reports: [],
     ordinaryRegistry: "config/youtube-published-videos.json",
     polyglotRegistry: "config/youtube-polyglot-published-videos.json",
+    polyglotProgress: "config/youtube-polyglot-progress.json",
     channelConfig: "config/youtube-channels.json",
     apply: false,
   };
@@ -23,6 +24,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--report=")) options.reports.push(arg.slice("--report=".length));
     else if (arg.startsWith("--ordinary-registry=")) options.ordinaryRegistry = arg.slice("--ordinary-registry=".length);
     else if (arg.startsWith("--polyglot-registry=")) options.polyglotRegistry = arg.slice("--polyglot-registry=".length);
+    else if (arg.startsWith("--polyglot-progress=")) options.polyglotProgress = arg.slice("--polyglot-progress=".length);
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -124,10 +126,21 @@ function main() {
 
   const ordinary = readJson(options.ordinaryRegistry);
   const polyglot = readJson(options.polyglotRegistry);
+  const polyglotProgress = readJson(options.polyglotProgress);
   const channels = readJson(options.channelConfig).channels || [];
   const reconciledAt = new Date().toISOString();
   const deletedTombstones = reports.flatMap(report => report.deletedTombstones || []).filter(row => row.youtubeVideoId);
   let tombstoneRowsMarked = 0;
+  let tombstoneProgressItemsMarked = 0;
+  const markProgressDeleted = (item, evidence = "youtube_deleted_tombstone") => {
+    if (!item?.youtubeVideoId || String(item.status || "").startsWith("deleted_")) return;
+    item.status = "deleted_youtube_tombstone_confirmed";
+    item.deletedAt = reconciledAt;
+    item.updatedAt = reconciledAt;
+    item.deletionEvidence = evidence;
+    item.source = "publication_control_live_registry_reconciliation";
+    tombstoneProgressItemsMarked++;
+  };
   for (const tombstone of deletedTombstones) {
     for (const registryRows of [ordinary.publications, polyglot.publications]) {
       for (const row of registryRows) {
@@ -138,6 +151,19 @@ function main() {
         tombstoneRowsMarked++;
       }
     }
+    for (const item of polyglotProgress.items || []) {
+      if (item.youtubeVideoId !== tombstone.youtubeVideoId) continue;
+      markProgressDeleted(item, tombstone.evidence || "youtube_deleted_tombstone");
+    }
+  }
+  const confirmedDeletedVideoIds = new Map(
+    [...ordinary.publications, ...polyglot.publications]
+      .filter(row => row.youtubeVideoId && row.publicationStatus === "deleted_youtube_tombstone_confirmed")
+      .map(row => [row.youtubeVideoId, row.deletionEvidence || "durable_registry_deleted_youtube_tombstone_confirmed"]),
+  );
+  for (const item of polyglotProgress.items || []) {
+    const evidence = confirmedDeletedVideoIds.get(item.youtubeVideoId);
+    if (evidence) markProgressDeleted(item, evidence);
   }
   const liveRows = reports.flatMap(report => report.publications || []).filter(row => row.liveReadbackPresent === true && row.youtubeVideoId);
   const liveVideoIds = new Set(liveRows.map(row => row.youtubeVideoId));
@@ -234,6 +260,7 @@ function main() {
   if (options.apply) {
     fs.writeFileSync(options.ordinaryRegistry, `${JSON.stringify(ordinary, null, 2)}\n`, "utf8");
     fs.writeFileSync(options.polyglotRegistry, `${JSON.stringify(polyglot, null, 2)}\n`, "utf8");
+    fs.writeFileSync(options.polyglotProgress, `${JSON.stringify(polyglotProgress, null, 2)}\n`, "utf8");
   }
   console.log(JSON.stringify({
     mode: options.apply ? "apply" : "dry-run",
@@ -243,6 +270,7 @@ function main() {
     polyglotAdded,
     restoredLiveRows,
     tombstoneRowsMarked,
+    tombstoneProgressItemsMarked,
     staleRows,
     migratedPolyglotRows: misplacedPolyglotRows.length,
     ordinaryPublicationCount: ordinary.publications.length,
