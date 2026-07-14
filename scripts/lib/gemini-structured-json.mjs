@@ -1,5 +1,6 @@
 const DEFAULT_MODEL = "gemini-3.5-flash";
 const DEFAULT_TIMEOUT_MS = 120000;
+export const GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS = 60000;
 
 function cleanText(value) {
   return String(value || "").replace(/\s+/gu, " ").trim();
@@ -9,7 +10,24 @@ function boundedError(error) {
   return cleanText(error?.message || String(error || "unknown Gemini error")).slice(0, 800);
 }
 
+const RESPONSE_INTEGRITY_ERROR_CODES = new Set([
+  "GEMINI_INCOMPLETE_RESPONSE",
+  "GEMINI_INVALID_JSON",
+  "GEMINI_INVALID_RESPONSE",
+]);
+
+function responseIntegrityError(code, message, cause) {
+  const error = new Error(message, cause ? { cause } : undefined);
+  error.code = code;
+  return error;
+}
+
+function isResponseIntegrityError(error) {
+  return RESPONSE_INTEGRITY_ERROR_CODES.has(String(error?.code || ""));
+}
+
 export function isRecoverableGeminiProviderError(error) {
+  if (isResponseIntegrityError(error)) return true;
   const message = boundedError(error);
   return [
     /no direct Gemini API keys configured/iu,
@@ -18,6 +36,8 @@ export function isRecoverableGeminiProviderError(error) {
     /did not return every requestId/iu,
     /did not return the exact requestId set/iu,
     /Unexpected token/iu,
+    /Unexpected end of JSON input/iu,
+    /Unterminated string/iu,
     /JSON\.parse/iu,
     /timed out/iu,
     /fetch failed/iu,
@@ -32,6 +52,7 @@ export function isRecoverableGeminiProviderError(error) {
 }
 
 function isDirectKeyRotationError(error) {
+  if (isResponseIntegrityError(error)) return true;
   const message = boundedError(error);
   return [
     /HTTP 403/iu,
@@ -75,12 +96,20 @@ export function getDirectGeminiApiKeys(env = process.env) {
 }
 
 function parseGeminiTextResponse(data) {
-  const parts = data?.candidates?.[0]?.content?.parts || [];
+  const candidate = data?.candidates?.[0];
+  const parts = candidate?.content?.parts || [];
   const text = parts.map((part) => part.text || "").join("").trim();
   if (!text) {
     throw new Error(`Gemini API returned no text: ${JSON.stringify(data).slice(0, 500)}`);
   }
-  return text;
+  const finishReason = String(candidate?.finishReason || "").trim().toUpperCase();
+  if (finishReason && finishReason !== "STOP") {
+    throw responseIntegrityError(
+      "GEMINI_INCOMPLETE_RESPONSE",
+      `Gemini API returned an incomplete response: finishReason=${finishReason}, textLength=${text.length}.`,
+    );
+  }
+  return { text, finishReason: finishReason || "UNKNOWN" };
 }
 
 export async function callGeminiApiJsonWithKeys({
@@ -90,6 +119,7 @@ export async function callGeminiApiJsonWithKeys({
   maxOutputTokens = 1600,
   temperature = 0.35,
   systemInstruction = "Return strict JSON only. Do not use Markdown.",
+  validateValue,
   apiKeys = getDirectGeminiApiKeys(),
   fetchImpl = globalThis.fetch,
   timeoutMs = Number(process.env.GEMINI_TIMEOUT_MS || DEFAULT_TIMEOUT_MS),
@@ -139,8 +169,30 @@ export async function callGeminiApiJsonWithKeys({
       if (!response.ok) {
         throw new Error(`Gemini API HTTP ${response.status} via ${keyName}: ${JSON.stringify(data).slice(0, 800)}`);
       }
+      const parsedResponse = parseGeminiTextResponse(data);
+      let value;
+      try {
+        value = JSON.parse(parsedResponse.text);
+      } catch (error) {
+        throw responseIntegrityError(
+          "GEMINI_INVALID_JSON",
+          `Gemini API returned invalid JSON via ${keyName}: finishReason=${parsedResponse.finishReason}; ${boundedError(error)}`,
+          error,
+        );
+      }
+      if (typeof validateValue === "function") {
+        try {
+          await validateValue(value);
+        } catch (error) {
+          throw responseIntegrityError(
+            "GEMINI_INVALID_RESPONSE",
+            `Gemini API response validation failed via ${keyName}: ${boundedError(error)}`,
+            error,
+          );
+        }
+      }
       return {
-        value: JSON.parse(parseGeminiTextResponse(data)),
+        value,
         provider: "api",
         keyName,
         keyIndex: index,

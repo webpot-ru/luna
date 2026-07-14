@@ -6,6 +6,7 @@ import { spawnSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 
 import {
+  GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS,
   callGeminiApiJsonWithKeys,
   getDirectGeminiApiKeys,
   parseGeminiBackendChain,
@@ -20,6 +21,7 @@ import {
 
 const APPLY_CONFIRM = "GENERATE_YOUTUBE_CAMPAIGN_METADATA";
 const VECTOR_CONFIRM = "USE_VECTORENGINE_METADATA";
+export const CAMPAIGN_MAX_OUTPUT_TOKENS = GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS;
 const ITEM_SCHEMA = {
   type: "object",
   properties: {
@@ -172,7 +174,9 @@ export function buildCampaignMetadataPrompt(tasks) {
     "Do not merge, omit or duplicate tasks.",
     "For Polyglot tasks, playlistTitle and playlistDescription are required; ordinary tasks may leave them empty.",
     "Titles must be natural, <=100 characters and not clickbait.",
+    "Descriptions must be concise: 3-5 short sentences and no more than 900 Unicode characters.",
     "Descriptions must include the task courseUrl exactly once and describe vocabulary, pronunciation, repeat pauses and review.",
+    "Polyglot playlistDescription must be no more than 600 Unicode characters.",
     "Do not invent prices, certificates, native teachers, fluency guarantees or exact durations.",
     "tags: 12-18 strings without #. hashtags: 3-5 strings beginning with # and containing no spaces.",
     "TASKS_JSON:",
@@ -217,22 +221,29 @@ async function generateBatch(tasks, options) {
   const backends = parseGeminiBackendChain(options.geminiBackend, {
     hasDirectApiKey: getDirectGeminiApiKeys().length > 0,
   });
+  const taskRequests = tasks.map((task) => task.request);
+  const validateValue = (value) => validateCampaignMetadataResponse(value, taskRequests);
   const request = {
-    prompt: buildCampaignMetadataPrompt(tasks.map((task) => task.request)),
+    prompt: buildCampaignMetadataPrompt(taskRequests),
     schema: batchSchema(tasks.length),
     model: options.model,
-    maxOutputTokens: Math.min(16000, 1200 + tasks.length * 1400),
+    maxOutputTokens: CAMPAIGN_MAX_OUTPUT_TOKENS,
     temperature: 0.25,
     systemInstruction: `Return strict JSON for all ${tasks.length} FlashcardsLuna metadata tasks. No Markdown or omitted items.`,
+    validateValue,
   };
   const result = await runGeminiBackendChain({
     backends,
     providers: {
       api: async () => callGeminiApiJsonWithKeys(request),
-      vectorengine: async () => ({ value: await callVectorEngineGeminiJson(request), model: options.model }),
+      vectorengine: async () => {
+        const value = await callVectorEngineGeminiJson(request);
+        validateValue(value);
+        return { value, model: options.model };
+      },
     },
   });
-  return { ...result, byId: validateCampaignMetadataResponse(result.value, tasks.map((task) => task.request)) };
+  return { ...result, byId: validateValue(result.value) };
 }
 
 function finalizeMetadata(task, generated, provider) {

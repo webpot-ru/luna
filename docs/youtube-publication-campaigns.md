@@ -90,7 +90,7 @@ npm run claim:youtube-publication-campaign -- \
 
 Campaign apply сначала выполняет отдельную metadata matrix по 4 OAuth routes. Внутри route ordinary и Polyglot tasks смешиваются в synchronous Gemini batches до 10 независимых `requestId` на один запрос. Стандартная волна 306 видео требует 32 route-batched requests (`8 + 8 + 8 + 8`), а не 102 child-worker requests. Теоретический global minimum равен 31, но route split сохраняется, потому что secrets и provider access принадлежат разным GitHub Environments.
 
-Порядок: direct `GEMINI_API_KEY`/`GOOGLE_API_KEY`, затем `GEMINI_API_KEY_2`; VectorEngine допускается только с `USE_VECTORENGINE_METADATA`. Exact request-id set и language/SEO gates обязательны. Если metadata phase падает, TTS, render и YouTube upload jobs не стартуют.
+Порядок: direct `GEMINI_API_KEY`/`GOOGLE_API_KEY`, затем `GEMINI_API_KEY_2`; VectorEngine допускается только с `USE_VECTORENGINE_METADATA`. Для `gemini-3.5-flash` campaign batch передает `maxOutputTokens=60000` при модельном output limit `65536`; это запас для полного JSON, а prompt ограничивает description 3-5 короткими предложениями / 900 Unicode characters и Polyglot playlist description 600 characters. `finishReason` кроме `STOP`, invalid/truncated JSON и неполный exact request-id set являются response-integrity failure: один переход на второй direct key, затем на подтвержденный VectorEngine, без слепого retry того же ключа. Exact request-id set и language/SEO gates обязательны. Если metadata phase падает, TTS, render и YouTube upload jobs не стартуют.
 
 ## One finalizer
 
@@ -110,4 +110,4 @@ Standalone ordinary/Polyglot workflows сохраняют собственный
 
 ## Current implementation state
 
-На 2026-07-14 PR `#13` смержил scoped-claim fix. Read-only run `29313476327` после failed apply имеет `0` blockers/duplicates/gaps и тот же exact 1230-video ID set, что pre-apply run `29310491576`; ни один из 306 failed-campaign assignment keys не live. Старые claims superseded, recovery campaign `yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-292f8fd5645e` / manifest `ab9a7655815a7b387ff49356b63aadecbe569a703da8c083e349b3de08d1d341` содержит те же `306/306` assignments и schedule `2026-07-14T13:30:00Z..2026-07-17T18:30:00Z`. Новый publication dispatch не выполнялся и требует отдельного approval.
+На 2026-07-14 run `29317134907` финализирован как второй zero-upload failure: 4/4 metadata routes получили обрезанный JSON из-за локального output cap, все 306 render/upload children были пропущены, finalizer зафиксировал `0` completed/observed/artifacts/receipt errors. Исправленная локальная recovery campaign `yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-51321f6fa942` / manifest `e5a188973d684038cd0196795acb01761ebec314c37e9c6cf3ba4577d728819a` сохраняет те же `306/306` assignments, route split `72/78/78/78` и schedule `2026-07-14T11:45:00Z..2026-07-17T18:30:00Z`. До exact commit/push и нового dispatch provider/YouTube writes для этой recovery равны нулю.
