@@ -1279,7 +1279,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_forbidden",
       "publishAt": "2026-06-23T06:30:00.000Z",
       "scheduledPublishAt": "2026-06-23T06:30:00.000Z",
@@ -1299,11 +1299,11 @@
       "uploadedAt": "2026-06-22T10:37:10.162Z",
       "lastReadbackAt": "2026-06-22T10:37:10.162Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-23T06:30:00.000Z",
-        "thumbnailStatus": "forbidden_auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -1319,7 +1319,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-23T09:30:00.000Z",
       "scheduledPublishAt": "2026-06-23T09:30:00.000Z",
@@ -1337,10 +1337,9 @@
       "uploadedAt": "2026-06-22T10:37:15.092Z",
       "lastReadbackAt": "2026-06-23T16:03:36.659Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-23T09:30:00.000Z",
-        "thumbnailStatus": "auto_first_frame"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "metadataLanguageRepair": {
         "repairedAt": "2026-06-23T16:03:36.659Z",
@@ -1350,7 +1349,8 @@
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
       },
-      "lastMetadataRepairAt": "2026-06-23T16:03:36.659Z"
+      "lastMetadataRepairAt": "2026-06-23T16:03:36.659Z",
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -1366,7 +1366,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-23T12:30:00.000Z",
       "scheduledPublishAt": "2026-06-23T12:30:00.000Z",
@@ -1384,11 +1384,11 @@
       "uploadedAt": "2026-06-22T10:37:19.360Z",
       "lastReadbackAt": "2026-06-22T10:37:19.360Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-23T12:30:00.000Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -1404,7 +1404,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-23T15:30:00.000Z",
       "scheduledPublishAt": "2026-06-23T15:30:00.000Z",
@@ -1422,11 +1422,11 @@
       "uploadedAt": "2026-06-22T10:37:24.552Z",
       "lastReadbackAt": "2026-06-22T10:37:24.552Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-23T15:30:00.000Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -1442,7 +1442,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-23T18:30:00.000Z",
       "scheduledPublishAt": "2026-06-23T18:30:00.000Z",
@@ -1460,10 +1460,9 @@
       "uploadedAt": "2026-06-22T10:37:31.049Z",
       "lastReadbackAt": "2026-06-23T16:03:42.681Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-23T18:30:00.000Z",
-        "thumbnailStatus": "auto_first_frame"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "metadataLanguageRepair": {
         "repairedAt": "2026-06-23T16:03:42.681Z",
@@ -1473,7 +1472,8 @@
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
       },
-      "lastMetadataRepairAt": "2026-06-23T16:03:42.681Z"
+      "lastMetadataRepairAt": "2026-06-23T16:03:42.681Z",
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -1489,7 +1489,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-23T21:30:00.000Z",
       "scheduledPublishAt": "2026-06-23T21:30:00.000Z",
@@ -1507,11 +1507,11 @@
       "uploadedAt": "2026-06-22T10:37:35.608Z",
       "lastReadbackAt": "2026-06-22T10:37:35.608Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-23T21:30:00.000Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -1570,7 +1570,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-24T09:30:00.000Z",
       "scheduledPublishAt": "2026-06-24T09:30:00.000Z",
@@ -1589,11 +1589,11 @@
       "lastReadbackAt": "2026-06-23T09:15:25.874Z",
       "recoverySource": "github_raw_log_20260623_v3",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-24T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -1609,7 +1609,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-24T12:30:00.000Z",
       "scheduledPublishAt": "2026-06-24T12:30:00.000Z",
@@ -1628,10 +1628,9 @@
       "lastReadbackAt": "2026-06-23T16:03:59.376Z",
       "recoverySource": "github_raw_log_20260623_v3",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-24T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "metadataLanguageRepair": {
         "repairedAt": "2026-06-23T16:03:59.376Z",
@@ -1641,7 +1640,8 @@
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
       },
-      "lastMetadataRepairAt": "2026-06-23T16:03:59.376Z"
+      "lastMetadataRepairAt": "2026-06-23T16:03:59.376Z",
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -1699,7 +1699,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-24T18:30:00.000Z",
       "scheduledPublishAt": "2026-06-24T18:30:00.000Z",
@@ -1718,11 +1718,11 @@
       "lastReadbackAt": "2026-06-23T09:15:34.991Z",
       "recoverySource": "github_raw_log_20260623_v3",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-24T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -22140,7 +22140,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_forbidden",
       "publishAt": "2026-06-24T21:30:00.000Z",
       "scheduledPublishAt": "2026-06-24T21:30:00.000Z",
@@ -22160,11 +22160,11 @@
       "uploadedAt": "2026-06-23T12:04:50.036Z",
       "lastReadbackAt": "2026-06-23T12:04:50.036Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-24T21:30:00Z",
-        "thumbnailStatus": "forbidden_auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -26614,7 +26614,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-25T09:30:00.000Z",
       "scheduledPublishAt": "2026-06-25T09:30:00.000Z",
@@ -26632,11 +26632,11 @@
       "uploadedAt": "2026-06-24T09:00:51.379Z",
       "lastReadbackAt": "2026-06-24T09:00:51.379Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-25T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -26728,7 +26728,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-25T12:30:00.000Z",
       "scheduledPublishAt": "2026-06-25T12:30:00.000Z",
@@ -26746,11 +26746,11 @@
       "uploadedAt": "2026-06-24T09:01:07.246Z",
       "lastReadbackAt": "2026-06-24T09:01:07.246Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-25T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -31387,7 +31387,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-25T15:30:00.000Z",
       "scheduledPublishAt": "2026-06-25T15:30:00.000Z",
@@ -31405,11 +31405,11 @@
       "uploadedAt": "2026-06-24T10:27:58.828Z",
       "lastReadbackAt": "2026-06-24T10:27:58.828Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-25T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -33284,7 +33284,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-25T18:30:00.000Z",
       "scheduledPublishAt": "2026-06-25T18:30:00.000Z",
@@ -33302,11 +33302,11 @@
       "uploadedAt": "2026-06-24T12:22:45.658Z",
       "lastReadbackAt": "2026-06-24T12:22:45.658Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-25T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -34804,7 +34804,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-27T06:30:00.000Z",
       "scheduledPublishAt": "2026-06-27T06:30:00.000Z",
@@ -34822,11 +34822,11 @@
       "uploadedAt": "2026-06-26T09:40:30.135Z",
       "lastReadbackAt": "2026-06-26T09:40:30.135Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-27T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -34842,7 +34842,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-27T09:30:00.000Z",
       "scheduledPublishAt": "2026-06-27T09:30:00.000Z",
@@ -34860,11 +34860,11 @@
       "uploadedAt": "2026-06-26T09:40:35.221Z",
       "lastReadbackAt": "2026-06-26T09:40:35.221Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-27T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -34880,7 +34880,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-27T12:30:00.000Z",
       "scheduledPublishAt": "2026-06-27T12:30:00.000Z",
@@ -34898,11 +34898,11 @@
       "uploadedAt": "2026-06-26T09:40:39.117Z",
       "lastReadbackAt": "2026-06-26T09:40:39.117Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-27T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -34918,7 +34918,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-27T15:30:00.000Z",
       "scheduledPublishAt": "2026-06-27T15:30:00.000Z",
@@ -34936,11 +34936,11 @@
       "uploadedAt": "2026-06-26T09:40:43.040Z",
       "lastReadbackAt": "2026-06-26T09:40:43.040Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-27T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -34956,7 +34956,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-27T18:30:00.000Z",
       "scheduledPublishAt": "2026-06-27T18:30:00.000Z",
@@ -34974,11 +34974,11 @@
       "uploadedAt": "2026-06-26T09:40:47.764Z",
       "lastReadbackAt": "2026-06-26T09:40:47.764Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-27T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -34994,7 +34994,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-27T21:30:00.000Z",
       "scheduledPublishAt": "2026-06-27T21:30:00.000Z",
@@ -35012,11 +35012,11 @@
       "uploadedAt": "2026-06-26T09:40:51.482Z",
       "lastReadbackAt": "2026-06-26T09:40:51.482Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-27T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -52203,7 +52203,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-28T06:30:00.000Z",
       "scheduledPublishAt": "2026-06-28T06:30:00.000Z",
@@ -52221,11 +52221,11 @@
       "uploadedAt": "2026-06-27T11:19:13.509Z",
       "lastReadbackAt": "2026-06-27T11:19:13.509Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-28T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -52241,7 +52241,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-28T09:30:00.000Z",
       "scheduledPublishAt": "2026-06-28T09:30:00.000Z",
@@ -52259,11 +52259,11 @@
       "uploadedAt": "2026-06-27T11:19:33.788Z",
       "lastReadbackAt": "2026-06-27T11:19:33.788Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-28T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -52279,7 +52279,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-28T12:30:00.000Z",
       "scheduledPublishAt": "2026-06-28T12:30:00.000Z",
@@ -52297,11 +52297,11 @@
       "uploadedAt": "2026-06-27T11:19:55.315Z",
       "lastReadbackAt": "2026-06-27T11:19:55.315Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-28T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -52317,7 +52317,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-28T15:30:00.000Z",
       "scheduledPublishAt": "2026-06-28T15:30:00.000Z",
@@ -52335,11 +52335,11 @@
       "uploadedAt": "2026-06-27T11:20:17.367Z",
       "lastReadbackAt": "2026-06-27T11:20:17.367Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-28T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -52355,7 +52355,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-28T18:30:00.000Z",
       "scheduledPublishAt": "2026-06-28T18:30:00.000Z",
@@ -52373,11 +52373,11 @@
       "uploadedAt": "2026-06-27T11:20:34.136Z",
       "lastReadbackAt": "2026-06-27T11:20:34.136Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-28T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -52393,7 +52393,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-28T21:30:00.000Z",
       "scheduledPublishAt": "2026-06-28T21:30:00.000Z",
@@ -52411,21 +52411,16 @@
       "uploadedAt": "2026-06-27T11:20:50.593Z",
       "lastReadbackAt": "2026-06-28T07:07:38.245Z",
       "readback": {
-        "uploadStatus": "processed",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-28T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame",
-        "playlistItemReadback": "inserted",
-        "playlistId": "PLW4_cItpDqQI",
-        "playlistPrivacyStatus": "public",
-        "playlistItemId": "UExXNF9jSXRwRHFRSS41NkI0NEY2RDEwNTU3Q0M2",
-        "playlistInsertRepairedAt": "2026-06-28T07:07:38.245Z"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "playlistInsertRepairedAt": "2026-06-28T07:07:38.245Z",
       "playlistInsertRepairStatus": "inserted",
       "playlistInsertRepairGithubRunId": "28314663437",
       "playlistInsertRepairGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28314663437",
-      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video."
+      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video.",
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -59187,7 +59182,14 @@
       "readbackSource": "youtube_uploads_playlist",
       "liveReadbackOnly": true,
       "inLocalPublicationRegistry": false,
-      "localRegistryVideoId": ""
+      "localRegistryVideoId": "",
+      "privacyStatus": "public",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -59202,7 +59204,14 @@
       "readbackSource": "youtube_uploads_playlist",
       "liveReadbackOnly": true,
       "inLocalPublicationRegistry": false,
-      "localRegistryVideoId": ""
+      "localRegistryVideoId": "",
+      "privacyStatus": "public",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -59217,7 +59226,14 @@
       "readbackSource": "youtube_uploads_playlist",
       "liveReadbackOnly": true,
       "inLocalPublicationRegistry": false,
-      "localRegistryVideoId": ""
+      "localRegistryVideoId": "",
+      "privacyStatus": "public",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -59232,7 +59248,14 @@
       "readbackSource": "youtube_uploads_playlist",
       "liveReadbackOnly": true,
       "inLocalPublicationRegistry": false,
-      "localRegistryVideoId": ""
+      "localRegistryVideoId": "",
+      "privacyStatus": "public",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -59247,7 +59270,14 @@
       "readbackSource": "youtube_uploads_playlist",
       "liveReadbackOnly": true,
       "inLocalPublicationRegistry": false,
-      "localRegistryVideoId": ""
+      "localRegistryVideoId": "",
+      "privacyStatus": "public",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -60584,7 +60614,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-30T06:30:00.000Z",
       "scheduledPublishAt": "2026-06-30T06:30:00.000Z",
@@ -60602,11 +60632,11 @@
       "uploadedAt": "2026-06-29T05:36:37.221Z",
       "lastReadbackAt": "2026-06-29T05:36:37.221Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-30T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -60622,7 +60652,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-30T09:30:00.000Z",
       "scheduledPublishAt": "2026-06-30T09:30:00.000Z",
@@ -60640,11 +60670,11 @@
       "uploadedAt": "2026-06-29T05:36:54.742Z",
       "lastReadbackAt": "2026-06-29T05:36:54.742Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-30T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -60660,7 +60690,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-30T12:30:00.000Z",
       "scheduledPublishAt": "2026-06-30T12:30:00.000Z",
@@ -60678,11 +60708,11 @@
       "uploadedAt": "2026-06-29T05:37:09.716Z",
       "lastReadbackAt": "2026-06-29T05:37:09.716Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-30T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -60698,7 +60728,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-30T15:30:00.000Z",
       "scheduledPublishAt": "2026-06-30T15:30:00.000Z",
@@ -60716,11 +60746,11 @@
       "uploadedAt": "2026-06-29T05:37:27.848Z",
       "lastReadbackAt": "2026-06-29T05:37:27.848Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-30T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -60736,7 +60766,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-30T18:30:00.000Z",
       "scheduledPublishAt": "2026-06-30T18:30:00.000Z",
@@ -60754,11 +60784,11 @@
       "uploadedAt": "2026-06-29T05:37:46.574Z",
       "lastReadbackAt": "2026-06-29T05:37:46.574Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-30T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -62498,7 +62528,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-06-30T21:30:00.000Z",
       "scheduledPublishAt": "2026-06-30T21:30:00.000Z",
@@ -62516,11 +62546,11 @@
       "uploadedAt": "2026-06-29T07:02:49.717Z",
       "lastReadbackAt": "2026-06-29T07:02:49.717Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-06-30T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -62536,7 +62566,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-01T06:30:00.000Z",
       "scheduledPublishAt": "2026-07-01T06:30:00.000Z",
@@ -62554,11 +62584,11 @@
       "uploadedAt": "2026-06-29T07:03:08.496Z",
       "lastReadbackAt": "2026-06-29T07:03:08.496Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-01T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -62574,7 +62604,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-01T09:30:00.000Z",
       "scheduledPublishAt": "2026-07-01T09:30:00.000Z",
@@ -62592,11 +62622,11 @@
       "uploadedAt": "2026-06-29T07:03:38.846Z",
       "lastReadbackAt": "2026-06-29T07:03:38.846Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-01T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -62612,7 +62642,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-01T12:30:00.000Z",
       "scheduledPublishAt": "2026-07-01T12:30:00.000Z",
@@ -62630,11 +62660,11 @@
       "uploadedAt": "2026-06-29T07:04:44.404Z",
       "lastReadbackAt": "2026-06-29T07:04:44.404Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-01T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -63386,7 +63416,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto_playlist_create_pending",
       "publishAt": "2026-07-01T15:30:00.000Z",
       "scheduledPublishAt": "2026-07-01T15:30:00.000Z",
@@ -63407,13 +63437,11 @@
       "uploadedAt": "2026-06-29T07:59:44.637Z",
       "lastReadbackAt": "2026-06-29T07:59:44.637Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-01T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame",
-        "playlistReadback": "create_pending",
-        "playlistItemReadback": "pending"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -63429,7 +63457,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto_playlist_create_pending",
       "publishAt": "2026-07-01T18:30:00.000Z",
       "scheduledPublishAt": "2026-07-01T18:30:00.000Z",
@@ -63450,13 +63478,11 @@
       "uploadedAt": "2026-06-29T08:04:24.191Z",
       "lastReadbackAt": "2026-06-29T08:04:24.191Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-01T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame",
-        "playlistReadback": "create_pending",
-        "playlistItemReadback": "pending"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -63472,7 +63498,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto_playlist_create_pending",
       "publishAt": "2026-07-01T21:30:00.000Z",
       "scheduledPublishAt": "2026-07-01T21:30:00.000Z",
@@ -63493,13 +63519,11 @@
       "uploadedAt": "2026-06-29T08:09:02.075Z",
       "lastReadbackAt": "2026-06-29T08:09:02.075Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-01T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame",
-        "playlistReadback": "create_pending",
-        "playlistItemReadback": "pending"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -63515,7 +63539,7 @@
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
       "channelHandle": "@lunacardscesky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto_playlist_create_pending",
       "publishAt": "2026-07-02T06:30:00.000Z",
       "scheduledPublishAt": "2026-07-02T06:30:00.000Z",
@@ -63536,13 +63560,11 @@
       "uploadedAt": "2026-06-29T08:13:43.147Z",
       "lastReadbackAt": "2026-06-29T08:13:43.147Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-02T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame",
-        "playlistReadback": "create_pending",
-        "playlistItemReadback": "pending"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -78689,7 +78711,15 @@
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-07-13T15:28:25.283Z",
       "targetLang": "EN-GB",
-      "targetLangs": []
+      "targetLangs": [],
+      "title": "Angličtina (Spojené království) pro začátečníky: Kuchyňské potřeby | Slovíčka s výslovností",
+      "uploadedAt": "2026-07-06T14:03:48Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
@@ -78711,7 +78741,15 @@
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-07-13T15:28:25.283Z",
       "targetLang": "ES",
-      "targetLangs": []
+      "targetLangs": [],
+      "title": "Španělština pro začátečníky: Kuchyňské potřeby | 50 slovíček",
+      "uploadedAt": "2026-07-06T14:04:02Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
@@ -78733,7 +78771,15 @@
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-07-13T15:28:25.283Z",
       "targetLang": "PT",
-      "targetLangs": []
+      "targetLangs": [],
+      "title": "Portugalština pro začátečníky: Kuchyňské potřeby (50 slovíček)",
+      "uploadedAt": "2026-07-06T14:04:21Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
@@ -78755,7 +78801,15 @@
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-07-13T15:28:25.283Z",
       "targetLang": "TE",
-      "targetLangs": []
+      "targetLangs": [],
+      "title": "Telugu pro začátečníky: Kuchyňské potřeby (50 slovíček)",
+      "uploadedAt": "2026-07-01T06:30:07Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
@@ -78777,7 +78831,15 @@
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-07-13T15:28:25.283Z",
       "targetLang": "TH",
-      "targetLangs": []
+      "targetLangs": [],
+      "title": "Thajština pro začátečníky: Kuchyňské potřeby (50 základních slovíček)",
+      "uploadedAt": "2026-07-01T09:30:01Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
@@ -78799,7 +78861,15 @@
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-07-13T15:28:25.283Z",
       "targetLang": "TL",
-      "targetLangs": []
+      "targetLangs": [],
+      "title": "Filipínština pro začátečníky: Kuchyňské potřeby (A1)",
+      "uploadedAt": "2026-07-01T12:30:03Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
@@ -78821,7 +78891,15 @@
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-07-13T15:28:25.283Z",
       "targetLang": "TR",
-      "targetLangs": []
+      "targetLangs": [],
+      "title": "Turečtina pro začátečníky: Kuchyňské potřeby (50 základních slovíček)",
+      "uploadedAt": "2026-07-01T15:30:16Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
@@ -78843,7 +78921,15 @@
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-07-13T15:28:25.283Z",
       "targetLang": "UZ",
-      "targetLangs": []
+      "targetLangs": [],
+      "title": "Uzbecká slovíčka: Kuchyňské potřeby (Uzbečtina pro začátečníky)",
+      "uploadedAt": "2026-07-01T18:30:08Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
@@ -78865,7 +78951,15 @@
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-07-13T15:28:25.283Z",
       "targetLang": "VI",
-      "targetLangs": []
+      "targetLangs": [],
+      "title": "Vietnamská slovíčka: Kuchyňské potřeby (A1 pro začátečníky)",
+      "uploadedAt": "2026-07-01T21:30:32Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
