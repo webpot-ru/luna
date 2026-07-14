@@ -53,7 +53,7 @@ on:
       metadata_batch_size:
         description: "Direct Gemini API metadata batch size per request."
         required: false
-        default: "4"
+        default: "10"
       metadata_rate_limit_ms:
         description: "Pause between direct Gemini metadata batches in milliseconds."
         required: false

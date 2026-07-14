@@ -15,6 +15,10 @@ on:
         description: 'Target language(s) comma-separated for the test video'
         required: true
         default: 'ES'
+      confirm_vectorengine_metadata:
+        description: 'Type USE_VECTORENGINE_METADATA to allow final metadata fallback.'
+        required: false
+        default: ''
 
 jobs:
   build-test:
@@ -75,6 +79,7 @@ jobs:
     - name: Generate YouTube metadata
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
         GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
         VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
@@ -83,10 +88,14 @@ jobs:
         VECTORENGINE_GEMINI_MODEL: ${{ vars.VECTORENGINE_GEMINI_MODEL }}
       run: |
         GEMINI_ARGS=""
-        if [ -n "${VECTORENGINE_API_KEY:-}" ] || [ -n "${VECTOR_ENGINE_API_KEY:-}" ]; then
+        if [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GEMINI_API_KEY_2:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
+          if { [ -n "${VECTORENGINE_API_KEY:-}" ] || [ -n "${VECTOR_ENGINE_API_KEY:-}" ]; } && [ "${{ github.event.inputs.confirm_vectorengine_metadata }}" = "USE_VECTORENGINE_METADATA" ]; then
+            GEMINI_ARGS="--with-gemini --gemini-backend api,vectorengine"
+          else
+            GEMINI_ARGS="--with-gemini --gemini-backend api"
+          fi
+        elif { [ -n "${VECTORENGINE_API_KEY:-}" ] || [ -n "${VECTOR_ENGINE_API_KEY:-}" ]; } && [ "${{ github.event.inputs.confirm_vectorengine_metadata }}" = "USE_VECTORENGINE_METADATA" ]; then
           GEMINI_ARGS="--with-gemini --gemini-backend vectorengine --model ${VECTORENGINE_GEMINI_MODEL:-gemini-3.5-flash}"
-        elif [ -n "${GEMINI_API_KEY:-}" ] || [ -n "${GOOGLE_API_KEY:-}" ]; then
-          GEMINI_ARGS="--with-gemini --gemini-backend api"
         fi
         node scripts/generate-youtube-metadata.mjs --set "${{ github.event.inputs.set_id }}" --support "${{ github.event.inputs.support }}" --targets "${{ github.event.inputs.langs }}" --privacy public $GEMINI_ARGS
         npm run check:youtube-metadata -- outputs/video-generator

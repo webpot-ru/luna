@@ -50,11 +50,12 @@ on:
         required: true
         default: "20"
       gemini_backend:
-        description: "Metadata backend."
+        description: "Ordered metadata backend chain."
         required: true
-        default: "vectorengine"
+        default: "api,vectorengine"
         type: choice
         options:
+          - api,vectorengine
           - vectorengine
           - api
           - cli
@@ -181,6 +182,7 @@ jobs:
           MAX_UPDATES: ${{ github.event.inputs.max_updates }}
           GEMINI_BACKEND: ${{ github.event.inputs.gemini_backend }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
           VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
