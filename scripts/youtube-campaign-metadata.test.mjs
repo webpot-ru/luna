@@ -9,6 +9,7 @@ import { spawnSync } from "node:child_process";
 import {
   CAMPAIGN_MAX_OUTPUT_TOKENS,
   buildCampaignMetadataPrompt,
+  loadReusableMetadataCheckpoint,
   validateCampaignMetadataResponse,
 } from "./generate-youtube-campaign-metadata.mjs";
 
@@ -70,15 +71,38 @@ fs.writeFileSync(path.join(artifactDir, metadataRelative), body);
 fs.writeFileSync(path.join(artifactDir, "index.json"), `${JSON.stringify({
   campaignId: "campaign",
   manifestHash: "hash",
+  routeKey: "youtube-1",
+  batchSize: 10,
+  assignmentCount: 1,
   entries: [{
     assignmentKey: assignment.assignmentKey,
     videoType: "ordinary",
     supportLang: "EN",
+    targetLang: "DE",
+    bundleKey: "",
     artifactPath: metadataRelative,
     destination: "outputs/video-generator/deck_de_en/youtube_metadata.json",
     sha256: crypto.createHash("sha256").update(body).digest("hex"),
   }],
 }, null, 2)}\n`);
+const reusable = loadReusableMetadataCheckpoint({
+  outputRoot: artifactDir,
+  campaignId: "campaign",
+  manifestHash: "hash",
+  routeKey: "youtube-1",
+  batchSize: 10,
+  taskPlans: [{ assignment }],
+});
+assert.equal(reusable.size, 1);
+assert.equal(reusable.get(assignment.assignmentKey).sha256, crypto.createHash("sha256").update(body).digest("hex"));
+assert.throws(() => loadReusableMetadataCheckpoint({
+  outputRoot: artifactDir,
+  campaignId: "campaign",
+  manifestHash: "wrong-hash",
+  routeKey: "youtube-1",
+  batchSize: 10,
+  taskPlans: [{ assignment }],
+}), /manifest hash mismatch/);
 const copy = spawnSync(process.execPath, [
   path.join(process.cwd(), "scripts/copy-youtube-campaign-metadata.mjs"),
   "--campaign-id=campaign",

@@ -37,6 +37,10 @@ on:
         description: "Apply only: exact immutable campaign manifest hash."
         required: false
         default: ""
+      metadata_resume_run_id:
+        description: "Apply recovery only: prior campaign run whose validated completed metadata batches may be reused."
+        required: false
+        default: ""
       confirm_campaign_apply:
         description: "Apply only: type APPLY_YOUTUBE_PUBLICATION_CAMPAIGN."
         required: false
@@ -124,6 +128,10 @@ jobs:
             echo "::error::apply requires campaign_id and campaign_manifest_hash"
             exit 1
           fi
+          if [ -n "${{ inputs.metadata_resume_run_id }}" ] && ! [[ "${{ inputs.metadata_resume_run_id }}" =~ ^[0-9]+$ ]]; then
+            echo "::error::metadata_resume_run_id must be an exact numeric GitHub run id"
+            exit 1
+          fi
           npm run prepare:youtube-publication-campaign-run -- \
             --campaign-id="${{ inputs.campaign_id }}" \
             --manifest-hash="${{ inputs.campaign_manifest_hash }}" \
@@ -145,6 +153,7 @@ jobs:
     if: ${{ inputs.mode == 'apply' }}
     needs: preflight
     runs-on: ubuntu-latest
+    timeout-minutes: 180
     environment: ${{ matrix.youtube_environment }}
     strategy:
       fail-fast: false
@@ -199,6 +208,17 @@ jobs:
             exit 1
           fi
 
+      - name: Restore validated metadata checkpoint from an approved recovery source
+        id: restore_metadata_checkpoint
+        if: ${{ inputs.metadata_resume_run_id != '' }}
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: youtube-campaign-metadata-${{ inputs.campaign_id }}-${{ matrix.route_key }}
+          path: outputs/youtube-campaign-metadata/${{ matrix.route_key }}
+          run-id: ${{ inputs.metadata_resume_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Generate route-batched campaign metadata before render/TTS
         shell: bash
         env:
@@ -211,11 +231,17 @@ jobs:
           VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
           VECTORENGINE_GEMINI_MODEL: ${{ vars.VECTORENGINE_GEMINI_MODEL }}
           VECTORENGINE_SEND_RESPONSE_SCHEMA: "1"
+          GEMINI_TIMEOUT_MS: "600000"
+          VECTORENGINE_TIMEOUT_MS: "600000"
           YOUTUBE_METADATA_AI_STRICT: "1"
         run: |
           set -euo pipefail
           BACKEND="api"
           VECTOR_ARGS=()
+          RESUME_ARGS=()
+          if [ -n "${{ inputs.metadata_resume_run_id }}" ]; then
+            RESUME_ARGS+=("--resume-existing")
+          fi
           if [ "${{ inputs.confirm_vectorengine_metadata }}" = "USE_VECTORENGINE_METADATA" ]; then
             BACKEND="api,vectorengine"
             VECTOR_ARGS+=("--confirm-vectorengine=USE_VECTORENGINE_METADATA")
@@ -232,15 +258,17 @@ jobs:
             --rate-limit-ms=15000 \
             --gemini-backend="$BACKEND" \
             "${VECTOR_ARGS[@]}" \
+            "${RESUME_ARGS[@]}" \
             --apply \
             --confirm=GENERATE_YOUTUBE_CAMPAIGN_METADATA
 
       - name: Upload exact campaign metadata artifact
+        if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
           name: youtube-campaign-metadata-${{ inputs.campaign_id }}-${{ matrix.route_key }}
           retention-days: 30
-          if-no-files-found: error
+          if-no-files-found: warn
           path: outputs/youtube-campaign-metadata/${{ matrix.route_key }}
 
   ordinary:
