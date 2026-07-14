@@ -40,7 +40,7 @@ function parseArgs(argv) {
   const options = {
     registry: "config/youtube-publication-campaigns.json",
     outputRoot: "outputs/youtube-campaign-metadata",
-    batchSize: 10,
+    batchSize: 5,
     rateLimitMs: 15000,
     geminiBackend: "api",
     model: process.env.GEMINI_MODEL || process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash",

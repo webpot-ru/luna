@@ -12,7 +12,7 @@ on:
       exclude_langs: { required: false, type: string, default: "NONE" }
       concurrency: { required: false, type: string, default: "2" }
       metadata_gemini_backend: { required: false, type: string, default: "api,vectorengine" }
-      metadata_batch_size: { required: false, type: string, default: "10" }
+      metadata_batch_size: { required: false, type: string, default: "5" }
       metadata_rate_limit_ms: { required: false, type: string, default: "15000" }
       worker_count: { required: false, type: string, default: "1" }
       worker_index: { required: false, type: string, default: "0" }
