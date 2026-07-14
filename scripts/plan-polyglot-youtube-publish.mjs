@@ -2,6 +2,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 import { getDbLanguageCode } from "./lib/video-language-codes.mjs";
 import { getPublicCourseUrl, isSpecificStudyCourseUrl } from "./lib/video-public-url.mjs";
@@ -254,11 +255,31 @@ function findActivePolyglotPublication(publicationRegistries, candidate) {
       || polyglotTargetSetKey(row) === candidateTargetSet) || null;
 }
 
-function findActivePolyglotCalendarReservation(calendar, polyglotKey) {
-  return (calendar.reservations || [])
+export function findActivePolyglotCalendarReservation(calendar, candidate) {
+  const activeRows = (calendar.reservations || [])
     .filter((row) => row.videoType === "polyglot" || String(row.polyglotKey || "").startsWith("polyglot:"))
-    .filter((row) => row.polyglotKey === polyglotKey)
-    .filter(isActiveCalendarReservation)[0] || null;
+    .filter(isActiveCalendarReservation);
+  const candidateSlot = polyglotSlotKey(candidate);
+  const candidateTargetSet = polyglotTargetSetKey(candidate);
+  return activeRows.find((row) => polyglotSlotKey(row) === candidateSlot)
+    || activeRows.find((row) => polyglotTargetSetKey(row) === candidateTargetSet)
+    || null;
+}
+
+export function isOwnedPolyglotCampaignClaim({
+  reservation,
+  candidate,
+  campaignId,
+  campaignManifestHash,
+}) {
+  return Boolean(
+    campaignId
+    && reservation
+    && reservation.campaignId === campaignId
+    && reservation.campaignManifestHash === campaignManifestHash
+    && polyglotSlotKey(reservation) === polyglotSlotKey(candidate)
+    && polyglotTargetSetKey(reservation) === polyglotTargetSetKey(candidate)
+  );
 }
 
 function isActiveProgressItem(row) {
@@ -370,7 +391,7 @@ async function main() {
   const urlValidation = validateStudyUrl(studyUrl, targetLangs);
   blockers.push(...urlValidation.blockers);
 
-  const existingPublication = findActivePolyglotPublication([publicationRegistry, ordinaryPublicationRegistry], {
+  const candidateIdentity = {
     videoType: "polyglot",
     polyglotKey,
     setId: options.setId,
@@ -378,16 +399,19 @@ async function main() {
     bundleKey: bundle.key,
     targetLangs,
     targetLangsHash,
-  });
+    contentScope: "full",
+  };
+  const existingPublication = findActivePolyglotPublication([publicationRegistry, ordinaryPublicationRegistry], candidateIdentity);
   if (existingPublication && !options.allowRepublish) {
     blockers.push(`active Polyglot publication already exists for ${polyglotKey}: video=${existingPublication.youtubeVideoId}`);
   }
-  const existingCalendarReservation = findActivePolyglotCalendarReservation(calendar, polyglotKey);
-  const ownedCampaignClaim = Boolean(
-    options.campaignId
-    && existingCalendarReservation?.campaignId === options.campaignId
-    && existingCalendarReservation?.campaignManifestHash === options.campaignManifestHash
-  );
+  const existingCalendarReservation = findActivePolyglotCalendarReservation(calendar, candidateIdentity);
+  const ownedCampaignClaim = isOwnedPolyglotCampaignClaim({
+    reservation: existingCalendarReservation,
+    candidate: candidateIdentity,
+    campaignId: options.campaignId,
+    campaignManifestHash: options.campaignManifestHash,
+  });
   if (options.campaignId && !ownedCampaignClaim) {
     blockers.push(`missing or mismatched durable campaign claim for ${options.campaignId}`);
   } else if (!options.campaignId && existingCalendarReservation?.campaignId) {
@@ -401,10 +425,7 @@ async function main() {
   }
 
   const candidate = {
-    videoType: "polyglot",
-    polyglotKey,
-    setId: options.setId,
-    supportLang,
+    ...candidateIdentity,
     bundleKey: bundle.key,
     bundleLabel: bundle.label || bundle.key,
     bundleWave: bundle.wave || null,
@@ -485,7 +506,10 @@ async function main() {
   if (blockers.length) process.exit(1);
 }
 
-main().catch((error) => {
-  console.error(error.stack || error.message);
-  process.exit(1);
-});
+const isCli = process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
+if (isCli) {
+  main().catch((error) => {
+    console.error(error.stack || error.message);
+    process.exit(1);
+  });
+}
