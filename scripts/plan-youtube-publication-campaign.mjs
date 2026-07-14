@@ -23,6 +23,7 @@ function parseArgs(argv) {
     else if (arg === "--start-date" || arg.startsWith("--start-date=")) options.startDate = value();
     else if (arg === "--min-future-minutes" || arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(value());
     else if (arg === "--max-snapshot-age-minutes" || arg.startsWith("--max-snapshot-age-minutes=")) options.maxSnapshotAgeMinutes = Number(value());
+    else if (arg === "--replacement-campaign-id" || arg.startsWith("--replacement-campaign-id=")) options.replacementCampaignId = value();
     else if (arg === "--snapshot" || arg.startsWith("--snapshot=")) options.snapshotPath = value();
     else if (arg === "--calendar" || arg.startsWith("--calendar=")) options.calendarPath = value();
     else if (arg === "--campaign-registry" || arg.startsWith("--campaign-registry=")) options.campaignRegistryPath = value();
@@ -43,7 +44,7 @@ function parseArgs(argv) {
 }
 
 function usage() {
-  return "node scripts/plan-youtube-publication-campaign.mjs --set=<set_id> [--supports=ALL] [--ordinary-per-channel=5] [--polyglot-per-channel=1] [--start-date=YYYY-MM-DD]";
+  return "node scripts/plan-youtube-publication-campaign.mjs --set=<set_id> [--supports=ALL] [--ordinary-per-channel=5] [--polyglot-per-channel=1] [--start-date=YYYY-MM-DD] [--replacement-campaign-id=<id>]";
 }
 
 function main() {
