@@ -2,7 +2,13 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import {
+  loadCanonicalSupportRouting,
+  resolveCanonicalSupports,
+} from "./lib/youtube-support-routing.mjs";
+
 const DEFAULT_ROUTING_PATH = "config/youtube-api-project-routing.json";
+const DEFAULT_CHANNELS_PATH = "config/youtube-channels.json";
 
 function parseArgs(argv) {
   const options = {
@@ -10,6 +16,7 @@ function parseArgs(argv) {
     supportSource: "variants",
     excludeSupports: [],
     routing: DEFAULT_ROUTING_PATH,
+    channels: DEFAULT_CHANNELS_PATH,
     json: false,
   };
   for (const arg of argv) {
@@ -20,6 +27,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--support-source=")) options.supportSource = readValue();
     else if (arg.startsWith("--exclude-supports=")) options.excludeSupports = splitCodes(readValue());
     else if (arg.startsWith("--routing=")) options.routing = readValue();
+    else if (arg.startsWith("--channels=")) options.channels = readValue();
     else throw new Error(`Unknown argument: ${arg}`);
   }
   return options;
@@ -49,33 +57,16 @@ function uniq(values) {
   return [...new Set(values.filter(Boolean))];
 }
 
-function loadRouting(configPath) {
-  const parsed = JSON.parse(fs.readFileSync(path.resolve(configPath), "utf8"));
-  return { ...parsed, projects: parsed.projects || [] };
-}
-
 function resolveSupports(options, routing) {
   if (!["variants", "channel-keys"].includes(options.supportSource)) {
     throw new Error("--support-source must be variants or channel-keys.");
   }
 
-  const requested = String(options.supports || "ALL").trim();
-  const field = options.supportSource === "channel-keys" ? "supportChannelKeys" : "supportVariants";
-  let supports = [];
-
-  if (!requested || requested.toUpperCase() === "ALL") {
-    supports = routing.projects.flatMap((project) => project[field] || []);
-  } else if (/^route:/iu.test(requested)) {
-    const route = requested.slice("route:".length).trim();
-    const project = routing.projects.find((item) => item.key === route || item.label === route);
-    if (!project) throw new Error(`Unknown route selector: ${requested}`);
-    supports = project[field] || [];
-  } else {
-    supports = splitCodes(requested);
-  }
-
-  const excluded = new Set(options.excludeSupports.map(normalizeCode));
-  return uniq(supports.map(normalizeCode)).filter((support) => !excluded.has(support)).sort();
+  return resolveCanonicalSupports({
+    requested: options.supports,
+    excludeSupports: options.excludeSupports,
+    routing,
+  });
 }
 
 function main() {
@@ -85,7 +76,10 @@ function main() {
     return;
   }
 
-  const routing = loadRouting(options.routing);
+  const routing = loadCanonicalSupportRouting({
+    routingPath: options.routing,
+    channelsPath: options.channels,
+  });
   const supports = resolveSupports(options, routing);
   if (!supports.length) throw new Error("No support languages resolved.");
   const result = {

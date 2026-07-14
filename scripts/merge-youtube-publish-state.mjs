@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { calendarAssignmentKey as semanticCalendarAssignmentKey } from "./lib/youtube-publication-control.mjs";
 
 const DEFAULT_ARTIFACT_DIR = ".state-artifact";
@@ -209,6 +210,12 @@ function mergePublications(currentRegistry, incomingRegistry, { authoritativeRea
       "metadataModel",
       "githubRunId",
       "githubRunUrl",
+      "campaignId",
+      "campaignManifestHash",
+      "postUploadError",
+      "playlistCreateDeferredError",
+      "playlistInsertDeferredError",
+      "thumbnailSetError",
       "uploadedAt",
       "lastReadbackAt",
     ]);
@@ -492,13 +499,7 @@ function resolveArtifactPath(artifactDir, relativePath, basename) {
   return candidates.find((candidate) => fs.existsSync(candidate)) || "";
 }
 
-function main() {
-  const options = parseArgs(process.argv.slice(2));
-  if (options.help) {
-    console.log(usage());
-    return;
-  }
-
+function mergeYoutubePublishState(options) {
   const repoRoot = path.resolve(options.repoRoot);
   const artifactDir = path.resolve(options.artifactDir);
   const summary = {
@@ -621,7 +622,19 @@ function main() {
 
   const summaryPath = path.resolve(repoRoot, options.summary);
   writeJsonIfChanged(summaryPath, summary);
-  console.log(JSON.stringify(summary, null, 2));
+  return summary;
 }
 
-main();
+function main() {
+  const options = parseArgs(process.argv.slice(2));
+  if (options.help) {
+    console.log(usage());
+    return;
+  }
+  console.log(JSON.stringify(mergeYoutubePublishState(options), null, 2));
+}
+
+const isCli = process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
+if (isCli) main();
+
+export { mergeYoutubePublishState };

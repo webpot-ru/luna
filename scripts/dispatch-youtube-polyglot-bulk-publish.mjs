@@ -4,6 +4,11 @@ import path from "node:path";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 
+import {
+  loadCanonicalSupportRouting,
+  resolveCanonicalSupports,
+} from "./lib/youtube-support-routing.mjs";
+
 const execFileAsync = promisify(execFile);
 
 const DEFAULT_OUTPUT = "outputs/youtube-polyglot-bulk-publish-dispatcher-report.json";
@@ -47,6 +52,7 @@ function parseArgs(argv) {
     workflow: POLYGLOT_WORKFLOW,
     repairWorkflow: POLYGLOT_PLAYLIST_REPAIR_WORKFLOW,
     routingConfig: "config/youtube-api-project-routing.json",
+    channelConfig: "config/youtube-channels.json",
     planScript: "scripts/plan-polyglot-youtube-publish.mjs",
     planOutputDir: "outputs/youtube-polyglot-bulk-plan",
     plannerTimeoutMs: 120000,
@@ -89,6 +95,7 @@ function parseArgs(argv) {
     else if (arg === "--workflow" || arg.startsWith("--workflow=")) options.workflow = readValue();
     else if (arg === "--repair-workflow" || arg.startsWith("--repair-workflow=")) options.repairWorkflow = readValue();
     else if (arg === "--routing-config" || arg.startsWith("--routing-config=")) options.routingConfig = readValue();
+    else if (arg === "--channel-config" || arg.startsWith("--channel-config=")) options.channelConfig = readValue();
     else if (arg === "--plan-script" || arg.startsWith("--plan-script=")) options.planScript = readValue();
     else if (arg === "--plan-output-dir" || arg.startsWith("--plan-output-dir=")) options.planOutputDir = readValue();
     else if (arg === "--planner-timeout-ms" || arg.startsWith("--planner-timeout-ms=")) options.plannerTimeoutMs = Number(readValue());
@@ -225,34 +232,12 @@ function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
-function loadRouting(configPath) {
-  const parsed = readJson(configPath);
-  const projects = parsed.projects || [];
-  const supportToRoute = new Map();
-  for (const project of projects) {
-    for (const support of project.supportVariants || []) supportToRoute.set(normalizeCode(support), project);
-    for (const support of project.supportChannelKeys || []) supportToRoute.set(normalizeCode(support), project);
-  }
-  return { parsed, projects, supportToRoute };
-}
-
 function resolveSupports(options, routing) {
-  let supports = [];
-  const requested = String(options.supports || "ALL").trim();
-  if (!requested || requested.toUpperCase() === "ALL") {
-    const field = options.supportSource === "channel-keys" ? "supportChannelKeys" : "supportVariants";
-    supports = routing.projects.flatMap((project) => project[field] || []);
-  } else if (/^route:/iu.test(requested)) {
-    const route = requested.slice("route:".length).trim();
-    const project = routing.projects.find((item) => item.key === route || item.label === route);
-    if (!project) throw new Error(`Unknown route selector: ${requested}`);
-    const field = options.supportSource === "channel-keys" ? "supportChannelKeys" : "supportVariants";
-    supports = project[field] || [];
-  } else {
-    supports = splitCodes(requested);
-  }
-  const excluded = new Set(options.excludeSupports.map(normalizeCode));
-  return uniq(supports.map(normalizeCode)).filter((support) => !excluded.has(support)).sort();
+  return resolveCanonicalSupports({
+    requested: options.supports,
+    excludeSupports: options.excludeSupports,
+    routing,
+  });
 }
 
 function bundleForSupport(support, options) {
@@ -680,7 +665,10 @@ async function runPlannerForSupport({ support, bundle, route, options }) {
 }
 
 async function buildPlan(options) {
-  const routing = loadRouting(options.routingConfig);
+  const routing = loadCanonicalSupportRouting({
+    routingPath: options.routingConfig,
+    channelsPath: options.channelConfig,
+  });
   const supports = resolveSupports(options, routing);
   const supportReports = [];
   const jobs = [];

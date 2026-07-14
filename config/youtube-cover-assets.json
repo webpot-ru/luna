@@ -50,7 +50,9 @@
       "id": "deck1-tail-sr-no-20260713",
       "setId": "home_kitchen_cookware_pilot_01",
       "videoType": "ordinary",
-      "supports": ["SR"],
+      "supports": [
+        "SR"
+      ],
       "status": "approved",
       "path": "data/youtube-cover-assets/deck1-tail-sr-no-20260713/manifest.json"
     },
@@ -58,7 +60,9 @@
       "id": "deck1-tail-ja-east-20260713",
       "setId": "home_kitchen_cookware_pilot_01",
       "videoType": "polyglot",
-      "supports": ["JA"],
+      "supports": [
+        "JA"
+      ],
       "status": "approved",
       "path": "data/youtube-cover-assets/deck1-tail-ja-east-20260713/manifest.json"
     },
@@ -66,9 +70,23 @@
       "id": "deck1-replacement-romance-regional-20260713",
       "setId": "home_kitchen_cookware_pilot_01",
       "videoType": "polyglot",
-      "supports": ["ES-419", "PT-BR"],
+      "supports": [
+        "ES-419",
+        "PT-BR"
+      ],
       "status": "approved",
       "path": "data/youtube-cover-assets/deck1-replacement-romance-regional-20260713/manifest.json"
+    },
+    {
+      "id": "campaign-yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-30b96a246c69",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "videoTypes": [
+        "ordinary",
+        "polyglot"
+      ],
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-30b96a246c69",
+      "status": "approved",
+      "path": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-30b96a246c69/manifest.json"
     }
   ],
   "playlistManifests": [

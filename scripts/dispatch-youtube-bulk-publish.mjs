@@ -13,6 +13,10 @@ import {
   isTargetOnlyRegionalSupport,
   sameViewerLanguageTargetBlocker,
 } from "./lib/youtube-language-pair-policy.mjs";
+import {
+  loadCanonicalSupportRouting,
+  resolveCanonicalSupports,
+} from "./lib/youtube-support-routing.mjs";
 
 const execFileAsync = promisify(execFile);
 
@@ -66,6 +70,7 @@ function parseArgs(argv) {
     repairWorkflow: PLAYLIST_REPAIR_WORKFLOW,
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
     routingConfig: "config/youtube-api-project-routing.json",
+    channelConfig: "config/youtube-channels.json",
     dryRunReason: "",
   };
 
@@ -109,6 +114,7 @@ function parseArgs(argv) {
     else if (arg === "--repair-workflow" || arg.startsWith("--repair-workflow=")) options.repairWorkflow = readValue();
     else if (arg === "--publication-registry" || arg.startsWith("--publication-registry=")) options.publicationRegistry = readValue();
     else if (arg === "--routing-config" || arg.startsWith("--routing-config=")) options.routingConfig = readValue();
+    else if (arg === "--channel-config" || arg.startsWith("--channel-config=")) options.channelConfig = readValue();
     else if (arg === "--apply") options.apply = true;
     else if (arg === "--dry-run") options.apply = false;
     else if (arg === "--watch") options.watch = true;
@@ -227,48 +233,12 @@ function ensureSafeOptions(options) {
   }
 }
 
-function loadRouting(configPath) {
-  const parsed = JSON.parse(fs.readFileSync(configPath, "utf8"));
-  const projects = parsed.projects || [];
-  const supportToRoute = new Map();
-  for (const project of projects) {
-    for (const support of project.supportVariants || []) {
-      supportToRoute.set(normalizeCode(support), project);
-    }
-    for (const support of project.supportChannelKeys || []) {
-      supportToRoute.set(normalizeCode(support), project);
-    }
-  }
-  return { parsed, projects, supportToRoute };
-}
-
 function resolveSupports(options, routing) {
-  const supportsForProject = (project) => {
-    if (options.supportSource !== "channel-keys") return project.supportVariants || [];
-    const keys = project.supportChannelKeys || [];
-    const variants = project.supportVariants || [];
-    if (keys.length !== variants.length) {
-      throw new Error(
-        `Route ${project.key} has mismatched supportChannelKeys/supportVariants lengths (${keys.length}/${variants.length}).`,
-      );
-    }
-    // Dispatches must use the canonical native code, never the physical channel key.
-    return keys.map((_, index) => variants[index]);
-  };
-  let supports = [];
-  const requested = String(options.supports || "ALL").trim();
-  if (!requested || requested.toUpperCase() === "ALL") {
-    supports = routing.projects.flatMap(supportsForProject);
-  } else if (/^route:/iu.test(requested)) {
-    const route = requested.slice("route:".length).trim();
-    const project = routing.projects.find((item) => item.key === route || item.label === route);
-    if (!project) throw new Error(`Unknown route selector: ${requested}`);
-    supports = supportsForProject(project);
-  } else {
-    supports = splitCodes(requested);
-  }
-  const excluded = new Set(options.excludeSupports.map(normalizeCode));
-  const resolved = uniq(supports.map(normalizeCode)).filter((support) => !excluded.has(support)).sort();
+  const resolved = resolveCanonicalSupports({
+    requested: options.supports,
+    excludeSupports: options.excludeSupports,
+    routing,
+  });
   assertCanonicalSupportLanguages(resolved);
   return resolved;
 }
@@ -794,7 +764,10 @@ async function runPool(jobs, options) {
 }
 
 async function buildPlan(options) {
-  const routing = loadRouting(options.routingConfig);
+  const routing = loadCanonicalSupportRouting({
+    routingPath: options.routingConfig,
+    channelsPath: options.channelConfig,
+  });
   const registry = loadPublicationRegistry(options.publicationRegistry);
   const supports = resolveSupports(options, routing);
   const jobs = [];
