@@ -451,6 +451,8 @@ jobs:
           VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
           VECTORENGINE_GEMINI_MODEL: ${{ vars.VECTORENGINE_GEMINI_MODEL }}
           VECTORENGINE_SEND_RESPONSE_SCHEMA: "1"
+          GEMINI_TIMEOUT_MS: "600000"
+          VECTORENGINE_TIMEOUT_MS: "600000"
           CONFIRM_VECTORENGINE_METADATA: ${{ inputs.confirm_vectorengine_metadata }}
           CAMPAIGN_ID: ${{ inputs.campaign_id }}
           CAMPAIGN_MANIFEST_HASH: ${{ inputs.campaign_manifest_hash }}

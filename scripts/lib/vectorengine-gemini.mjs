@@ -2,6 +2,8 @@ const DEFAULT_BASE_URL = "https://api.vectorengine.ai";
 const DEFAULT_MODEL = "gemini-3.5-flash";
 const DEFAULT_METHOD = "generateContent";
 const DEFAULT_TIMEOUT_MS = 120000;
+const LARGE_RESPONSE_TIMEOUT_MS = 600000;
+const LARGE_RESPONSE_TOKEN_THRESHOLD = 10000;
 
 function cleanBaseUrl(value) {
   return String(value || DEFAULT_BASE_URL).replace(/\/+$/u, "");
@@ -11,6 +13,16 @@ function normalizeTimeoutMs(value) {
   const parsed = Number(value);
   if (!Number.isFinite(parsed) || parsed < 1000) return DEFAULT_TIMEOUT_MS;
   return parsed;
+}
+
+export function resolveVectorEngineTimeoutMs({ maxOutputTokens = 1600, timeoutMs, env = process.env } = {}) {
+  const configured = timeoutMs ?? env.VECTORENGINE_TIMEOUT_MS;
+  if (configured !== undefined && configured !== null && String(configured).trim() !== "") {
+    return normalizeTimeoutMs(configured);
+  }
+  return Number(maxOutputTokens) >= LARGE_RESPONSE_TOKEN_THRESHOLD
+    ? LARGE_RESPONSE_TIMEOUT_MS
+    : DEFAULT_TIMEOUT_MS;
 }
 
 export function getVectorEngineGeminiKey() {
@@ -110,7 +122,7 @@ export async function callVectorEngineGeminiJson({
   baseUrl = process.env.VECTORENGINE_BASE_URL || DEFAULT_BASE_URL,
   maxOutputTokens = 1600,
   temperature = 0.35,
-  timeoutMs = normalizeTimeoutMs(process.env.VECTORENGINE_TIMEOUT_MS || DEFAULT_TIMEOUT_MS),
+  timeoutMs,
   systemInstruction = "Return strict JSON only. Do not use Markdown."
 } = {}) {
   const { apiKey } = getVectorEngineGeminiKey();
@@ -123,8 +135,9 @@ export async function callVectorEngineGeminiJson({
   const normalizedMethod = method === "streamGenerateContent" ? "streamGenerateContent" : "generateContent";
   const altParam = normalizedMethod === "streamGenerateContent" ? "&alt=sse" : "";
   const endpoint = `${cleanUrl}/v1beta/models/${encodeURIComponent(model)}:${normalizedMethod}?key=${encodeURIComponent(apiKey)}${altParam}`;
+  const effectiveTimeoutMs = resolveVectorEngineTimeoutMs({ maxOutputTokens, timeoutMs });
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  const timeout = setTimeout(() => controller.abort(), effectiveTimeoutMs);
   const body = {
     systemInstruction: {
       parts: [{ text: systemInstruction }]
@@ -161,7 +174,7 @@ export async function callVectorEngineGeminiJson({
     bodyText = await response.text();
   } catch (error) {
     if (error?.name === "AbortError") {
-      throw new Error(`VectorEngine Gemini timed out after ${timeoutMs}ms for model ${model}.`);
+      throw new Error(`VectorEngine Gemini timed out after ${effectiveTimeoutMs}ms for model ${model}.`);
     }
     throw error;
   } finally {

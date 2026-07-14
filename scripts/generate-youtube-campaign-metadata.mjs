@@ -45,6 +45,7 @@ function parseArgs(argv) {
     geminiBackend: "api",
     model: process.env.GEMINI_MODEL || process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash",
     apply: false,
+    resumeExisting: false,
     confirm: "",
     confirmVectorengine: "",
   };
@@ -63,6 +64,7 @@ function parseArgs(argv) {
     else if (arg === "--confirm" || arg.startsWith("--confirm=")) options.confirm = value();
     else if (arg === "--confirm-vectorengine" || arg.startsWith("--confirm-vectorengine=")) options.confirmVectorengine = value();
     else if (arg === "--apply") options.apply = true;
+    else if (arg === "--resume-existing") options.resumeExisting = true;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else throw new Error(`Unknown argument: ${arg}`);
@@ -82,6 +84,79 @@ function boundedText(value, max) {
   const text = String(value || "").replace(/\s+/gu, " ").trim();
   if (Array.from(text).length <= max) return text;
   return `${Array.from(text).slice(0, Math.max(1, max - 3)).join("").trim()}...`;
+}
+
+function checkpointIndexPath(outputRoot) {
+  return path.join(outputRoot, "index.json");
+}
+
+function writeMetadataCheckpoint(report, outputRoot) {
+  fs.mkdirSync(outputRoot, { recursive: true });
+  const indexPath = checkpointIndexPath(outputRoot);
+  const snapshot = {
+    ...report,
+    completedAssignmentCount: report.entries.length,
+    updatedAt: new Date().toISOString(),
+    entries: [...report.entries].sort((left, right) => left.assignmentKey.localeCompare(right.assignmentKey)),
+  };
+  const temporaryPath = `${indexPath}.tmp`;
+  fs.writeFileSync(temporaryPath, `${JSON.stringify(snapshot, null, 2)}\n`, "utf8");
+  fs.renameSync(temporaryPath, indexPath);
+  report.updatedAt = snapshot.updatedAt;
+}
+
+function resolveCheckpointArtifact(outputRoot, artifactPath) {
+  const root = path.resolve(outputRoot);
+  const resolved = path.resolve(root, String(artifactPath || ""));
+  if (resolved === root || !resolved.startsWith(`${root}${path.sep}`)) {
+    throw new Error(`Campaign metadata checkpoint artifact escapes output root: ${artifactPath || "missing"}`);
+  }
+  return resolved;
+}
+
+export function loadReusableMetadataCheckpoint({
+  outputRoot,
+  campaignId,
+  manifestHash,
+  routeKey,
+  batchSize,
+  taskPlans,
+}) {
+  const indexPath = checkpointIndexPath(outputRoot);
+  if (!fs.existsSync(indexPath)) return new Map();
+  const checkpoint = JSON.parse(fs.readFileSync(indexPath, "utf8"));
+  if (checkpoint.campaignId !== campaignId) throw new Error("Campaign metadata checkpoint campaign id mismatch");
+  if (checkpoint.manifestHash !== manifestHash) throw new Error("Campaign metadata checkpoint manifest hash mismatch");
+  if (checkpoint.routeKey !== routeKey) throw new Error("Campaign metadata checkpoint route mismatch");
+  if (Number(checkpoint.batchSize) !== Number(batchSize)) throw new Error("Campaign metadata checkpoint batch size mismatch");
+  if (Number(checkpoint.assignmentCount) !== taskPlans.length) throw new Error("Campaign metadata checkpoint assignment count mismatch");
+
+  const expected = new Map(taskPlans.map((task) => [task.assignment.assignmentKey, task]));
+  const reusable = new Map();
+  for (const entry of checkpoint.entries || []) {
+    const task = expected.get(entry.assignmentKey);
+    if (!task) throw new Error(`Campaign metadata checkpoint has unexpected assignment: ${entry.assignmentKey || "missing"}`);
+    if (reusable.has(entry.assignmentKey)) throw new Error(`Campaign metadata checkpoint duplicates assignment: ${entry.assignmentKey}`);
+    if (entry.videoType !== task.assignment.videoType
+      || entry.supportLang !== task.assignment.supportLang
+      || String(entry.targetLang || "") !== String(task.assignment.targetLang || "")
+      || String(entry.bundleKey || "") !== String(task.assignment.bundleKey || "")) {
+      throw new Error(`Campaign metadata checkpoint assignment identity mismatch: ${entry.assignmentKey}`);
+    }
+    if (entry.destination !== destinationFor(task.assignment)) {
+      throw new Error(`Campaign metadata checkpoint destination mismatch: ${entry.assignmentKey}`);
+    }
+    const artifactPath = resolveCheckpointArtifact(outputRoot, entry.artifactPath);
+    if (!fs.existsSync(artifactPath)) throw new Error(`Campaign metadata checkpoint artifact is missing: ${entry.artifactPath}`);
+    const body = fs.readFileSync(artifactPath, "utf8");
+    if (sha256(body) !== entry.sha256) throw new Error(`Campaign metadata checkpoint checksum mismatch: ${entry.assignmentKey}`);
+    const metadata = JSON.parse(body);
+    if (metadata.campaignId !== campaignId || metadata.campaignManifestHash !== manifestHash) {
+      throw new Error(`Campaign metadata checkpoint ownership mismatch: ${entry.assignmentKey}`);
+    }
+    reusable.set(entry.assignmentKey, structuredClone(entry));
+  }
+  return reusable;
 }
 
 function readClaimedCampaign(options) {
@@ -326,50 +401,99 @@ export async function buildCampaignMetadata(options) {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
     mode: options.apply ? "apply" : "read_only_plan",
+    status: options.apply ? "in_progress" : "planned",
+    complete: !options.apply,
     campaignId: campaign.campaignId,
     manifestHash: campaign.manifestHash,
     routeKey: options.routeKey,
     assignmentCount: taskPlans.length,
     batchSize: options.batchSize,
     batchCount: Math.ceil(taskPlans.length / options.batchSize),
-    providerCalls: options.apply ? Math.ceil(taskPlans.length / options.batchSize) : 0,
+    plannedProviderCalls: options.apply ? Math.ceil(taskPlans.length / options.batchSize) : 0,
+    providerCalls: 0,
+    attemptedBatchCount: 0,
+    reusedBatchCount: 0,
+    reusedAssignmentCount: 0,
     entries: [],
   };
   if (!options.apply) return report;
+  const reusableEntries = options.resumeExisting
+    ? loadReusableMetadataCheckpoint({
+      outputRoot: options.outputRoot,
+      campaignId: campaign.campaignId,
+      manifestHash: campaign.manifestHash,
+      routeKey: options.routeKey,
+      batchSize: options.batchSize,
+      taskPlans,
+    })
+    : new Map();
+  report.resumeExisting = options.resumeExisting;
+  writeMetadataCheckpoint(report, options.outputRoot);
 
-  for (let offset = 0; offset < taskPlans.length; offset += options.batchSize) {
-    const tasks = taskPlans.slice(offset, offset + options.batchSize);
-    const provider = await generateBatch(tasks, options);
-    for (const task of tasks) {
-      const metadata = finalizeMetadata(task, provider.byId.get(task.assignment.assignmentKey), {
-        backend: provider.backend,
-        backendChain: backendNames,
-        model: provider.model || options.model,
-        batchSize: tasks.length,
-      });
-      const artifactPath = path.join(options.outputRoot, "metadata", `${safeSegment(task.assignment.assignmentKey)}.json`);
-      fs.mkdirSync(path.dirname(artifactPath), { recursive: true });
-      const body = `${JSON.stringify(metadata, null, 2)}\n`;
-      fs.writeFileSync(artifactPath, body, "utf8");
-      report.entries.push({
-        assignmentKey: task.assignment.assignmentKey,
-        videoType: task.assignment.videoType,
-        supportLang: task.assignment.supportLang,
-        targetLang: task.assignment.targetLang,
-        bundleKey: task.assignment.bundleKey || "",
-        artifactPath: path.relative(options.outputRoot, artifactPath),
-        destination: destinationFor(task.assignment),
-        sha256: sha256(body),
-        source: metadata.source,
-      });
+  try {
+    for (let offset = 0; offset < taskPlans.length; offset += options.batchSize) {
+      const tasks = taskPlans.slice(offset, offset + options.batchSize);
+      const reusableBatch = tasks.map((task) => reusableEntries.get(task.assignment.assignmentKey));
+      const reusableCount = reusableBatch.filter(Boolean).length;
+      if (reusableCount > 0 && reusableCount !== tasks.length) {
+        throw new Error(`Campaign metadata checkpoint contains a partial batch at offset ${offset}`);
+      }
+      if (reusableCount === tasks.length) {
+        report.entries.push(...reusableBatch);
+        report.reusedBatchCount += 1;
+        report.reusedAssignmentCount += tasks.length;
+        writeMetadataCheckpoint(report, options.outputRoot);
+        continue;
+      }
+
+      report.activeBatchIndex = Math.floor(offset / options.batchSize);
+      report.attemptedBatchCount += 1;
+      report.providerCalls += 1;
+      writeMetadataCheckpoint(report, options.outputRoot);
+      const provider = await generateBatch(tasks, options);
+      for (const task of tasks) {
+        const metadata = finalizeMetadata(task, provider.byId.get(task.assignment.assignmentKey), {
+          backend: provider.backend,
+          backendChain: backendNames,
+          model: provider.model || options.model,
+          batchSize: tasks.length,
+        });
+        const artifactPath = path.join(options.outputRoot, "metadata", `${safeSegment(task.assignment.assignmentKey)}.json`);
+        fs.mkdirSync(path.dirname(artifactPath), { recursive: true });
+        const body = `${JSON.stringify(metadata, null, 2)}\n`;
+        fs.writeFileSync(artifactPath, body, "utf8");
+        report.entries.push({
+          assignmentKey: task.assignment.assignmentKey,
+          videoType: task.assignment.videoType,
+          supportLang: task.assignment.supportLang,
+          targetLang: task.assignment.targetLang,
+          bundleKey: task.assignment.bundleKey || "",
+          artifactPath: path.relative(options.outputRoot, artifactPath),
+          destination: destinationFor(task.assignment),
+          sha256: sha256(body),
+          source: metadata.source,
+        });
+      }
+      delete report.activeBatchIndex;
+      writeMetadataCheckpoint(report, options.outputRoot);
+      if (offset + options.batchSize < taskPlans.length && options.rateLimitMs > 0) {
+        await new Promise((resolve) => setTimeout(resolve, options.rateLimitMs));
+      }
     }
-    if (offset + options.batchSize < taskPlans.length && options.rateLimitMs > 0) {
-      await new Promise((resolve) => setTimeout(resolve, options.rateLimitMs));
-    }
+  } catch (error) {
+    report.status = "failed";
+    report.complete = false;
+    report.error = boundedText(error?.message || error, 1200);
+    report.failedBatchIndex = report.activeBatchIndex;
+    delete report.activeBatchIndex;
+    writeMetadataCheckpoint(report, options.outputRoot);
+    throw error;
   }
-  report.entries.sort((left, right) => left.assignmentKey.localeCompare(right.assignmentKey));
-  fs.mkdirSync(options.outputRoot, { recursive: true });
-  fs.writeFileSync(path.join(options.outputRoot, "index.json"), `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  report.status = "complete";
+  report.complete = true;
+  delete report.error;
+  delete report.failedBatchIndex;
+  writeMetadataCheckpoint(report, options.outputRoot);
   return report;
 }
 
@@ -386,7 +510,10 @@ async function main() {
     routeKey: report.routeKey,
     assignmentCount: report.assignmentCount,
     batchCount: report.batchCount,
+    plannedProviderCalls: report.plannedProviderCalls,
     providerCalls: report.providerCalls,
+    reusedBatchCount: report.reusedBatchCount,
+    reusedAssignmentCount: report.reusedAssignmentCount,
     outputRoot: options.outputRoot,
   };
   console.log(JSON.stringify(options.json ? report : summary, null, 2));

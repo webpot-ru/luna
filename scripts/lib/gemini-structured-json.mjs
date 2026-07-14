@@ -1,5 +1,7 @@
 const DEFAULT_MODEL = "gemini-3.5-flash";
 const DEFAULT_TIMEOUT_MS = 120000;
+const LARGE_RESPONSE_TIMEOUT_MS = 600000;
+const LARGE_RESPONSE_TOKEN_THRESHOLD = 10000;
 export const GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS = 60000;
 
 function cleanText(value) {
@@ -55,11 +57,27 @@ function isDirectKeyRotationError(error) {
   if (isResponseIntegrityError(error)) return true;
   const message = boundedError(error);
   return [
+    /timed out/iu,
+    /fetch failed/iu,
+    /ECONNRESET/iu,
+    /ENETUNREACH/iu,
     /HTTP 403/iu,
     /HTTP 429/iu,
+    /HTTP 5\d\d/iu,
     /PERMISSION_DENIED/iu,
     /RESOURCE_EXHAUSTED/iu,
   ].some((pattern) => pattern.test(message));
+}
+
+export function resolveGeminiTimeoutMs({ maxOutputTokens = 1600, timeoutMs, env = process.env } = {}) {
+  const configured = timeoutMs ?? env.GEMINI_TIMEOUT_MS;
+  if (configured !== undefined && configured !== null && String(configured).trim() !== "") {
+    const parsed = Number(configured);
+    if (Number.isFinite(parsed) && parsed >= 1000) return parsed;
+  }
+  return Number(maxOutputTokens) >= LARGE_RESPONSE_TOKEN_THRESHOLD
+    ? LARGE_RESPONSE_TIMEOUT_MS
+    : DEFAULT_TIMEOUT_MS;
 }
 
 export function parseGeminiBackendChain(value, { hasDirectApiKey = false } = {}) {
@@ -122,17 +140,14 @@ export async function callGeminiApiJsonWithKeys({
   validateValue,
   apiKeys = getDirectGeminiApiKeys(),
   fetchImpl = globalThis.fetch,
-  timeoutMs = Number(process.env.GEMINI_TIMEOUT_MS || DEFAULT_TIMEOUT_MS),
+  timeoutMs,
 } = {}) {
   if (!prompt) throw new Error("Gemini API prompt is required.");
   if (!Array.isArray(apiKeys) || apiKeys.length === 0) {
     throw new Error("No direct Gemini API keys configured.");
   }
   if (typeof fetchImpl !== "function") throw new Error("Gemini API fetch implementation is unavailable.");
-  const parsedTimeoutMs = Number(timeoutMs);
-  const effectiveTimeoutMs = Number.isFinite(parsedTimeoutMs) && parsedTimeoutMs >= 1000
-    ? parsedTimeoutMs
-    : DEFAULT_TIMEOUT_MS;
+  const effectiveTimeoutMs = resolveGeminiTimeoutMs({ maxOutputTokens, timeoutMs });
 
   let lastError;
   for (let index = 0; index < apiKeys.length; index += 1) {

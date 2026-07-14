@@ -6,8 +6,10 @@ import {
   callGeminiApiJsonWithKeys,
   getDirectGeminiApiKeys,
   parseGeminiBackendChain,
+  resolveGeminiTimeoutMs,
   runGeminiBackendChain,
 } from "./lib/gemini-structured-json.mjs";
+import { resolveVectorEngineTimeoutMs } from "./lib/vectorengine-gemini.mjs";
 import { generateYouTubeMetadataBatch } from "./lib/youtube-metadata.mjs";
 
 assert.deepEqual(parseGeminiBackendChain("api,vectorengine"), ["api", "vectorengine"]);
@@ -23,6 +25,11 @@ assert.deepEqual(getDirectGeminiApiKeys({
   GOOGLE_API_KEY: "legacy-primary",
   GEMINI_API_KEY_2: "secondary",
 }).map((item) => item.name), ["GOOGLE_API_KEY", "GEMINI_API_KEY_2"]);
+assert.equal(resolveGeminiTimeoutMs({ maxOutputTokens: 60000, env: {} }), 600000);
+assert.equal(resolveGeminiTimeoutMs({ maxOutputTokens: 1600, env: {} }), 120000);
+assert.equal(resolveGeminiTimeoutMs({ maxOutputTokens: 60000, env: { GEMINI_TIMEOUT_MS: "240000" } }), 240000);
+assert.equal(resolveVectorEngineTimeoutMs({ maxOutputTokens: 60000, env: {} }), 600000);
+assert.equal(resolveVectorEngineTimeoutMs({ maxOutputTokens: 1600, env: {} }), 120000);
 
 const parsedArgs = parseArgs([
   "--set", "deck",
@@ -83,6 +90,61 @@ const directResult = await callGeminiApiJsonWithKeys({
 assert.equal(fetchCalls.length, 2);
 assert.equal(directResult.keyName, "GEMINI_API_KEY_2");
 assert.deepEqual(directResult.value, { status: "ok" });
+
+let timeoutRotationCalls = 0;
+const timeoutRotationResult = await callGeminiApiJsonWithKeys({
+  prompt: "Return JSON",
+  schema: { type: "object" },
+  timeoutMs: 1000,
+  apiKeys: [
+    { name: "GEMINI_API_KEY", apiKey: "first-key" },
+    { name: "GEMINI_API_KEY_2", apiKey: "second-key" },
+  ],
+  fetchImpl: async () => {
+    timeoutRotationCalls += 1;
+    if (timeoutRotationCalls === 1) {
+      const error = new Error("aborted");
+      error.name = "AbortError";
+      throw error;
+    }
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({ candidates: [{ finishReason: "STOP", content: { parts: [{ text: '{"status":"ok"}' }] } }] }),
+    };
+  },
+});
+assert.equal(timeoutRotationCalls, 2);
+assert.equal(timeoutRotationResult.keyName, "GEMINI_API_KEY_2");
+assert.deepEqual(timeoutRotationResult.value, { status: "ok" });
+
+let serviceUnavailableCalls = 0;
+const serviceUnavailableResult = await callGeminiApiJsonWithKeys({
+  prompt: "Return JSON",
+  schema: { type: "object" },
+  apiKeys: [
+    { name: "GEMINI_API_KEY", apiKey: "first-key" },
+    { name: "GEMINI_API_KEY_2", apiKey: "second-key" },
+  ],
+  fetchImpl: async () => {
+    serviceUnavailableCalls += 1;
+    if (serviceUnavailableCalls === 1) {
+      return {
+        ok: false,
+        status: 503,
+        json: async () => ({ error: { status: "UNAVAILABLE" } }),
+      };
+    }
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({ candidates: [{ finishReason: "STOP", content: { parts: [{ text: '{"status":"ok"}' }] } }] }),
+    };
+  },
+});
+assert.equal(serviceUnavailableCalls, 2);
+assert.equal(serviceUnavailableResult.keyName, "GEMINI_API_KEY_2");
+assert.deepEqual(serviceUnavailableResult.value, { status: "ok" });
 
 let nonRecoverableCalls = 0;
 await assert.rejects(() => callGeminiApiJsonWithKeys({
