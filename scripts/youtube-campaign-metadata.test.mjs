@@ -7,6 +7,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 
 import {
+  CAMPAIGN_MAX_OUTPUT_TOKENS,
   buildCampaignMetadataPrompt,
   validateCampaignMetadataResponse,
 } from "./generate-youtube-campaign-metadata.mjs";
@@ -18,6 +19,8 @@ const tasks = [
 const prompt = buildCampaignMetadataPrompt(tasks);
 assert.match(prompt, /2 independent FlashcardsLuna/);
 assert.match(prompt, /ordinary\|deck\|EN\|DE/);
+assert.match(prompt, /no more than 900 Unicode characters/);
+assert.equal(CAMPAIGN_MAX_OUTPUT_TOKENS, 60000);
 const response = {
   items: tasks.map((task) => ({
     requestId: task.requestId,

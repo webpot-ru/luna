@@ -104,7 +104,7 @@ await assert.rejects(() => callGeminiApiJsonWithKeys({
 assert.equal(nonRecoverableCalls, 1);
 
 let invalidJsonCalls = 0;
-await assert.rejects(() => callGeminiApiJsonWithKeys({
+const invalidJsonRecovery = await callGeminiApiJsonWithKeys({
   prompt: "Return JSON",
   schema: { type: "object" },
   apiKeys: [
@@ -116,11 +116,105 @@ await assert.rejects(() => callGeminiApiJsonWithKeys({
     return {
       ok: true,
       status: 200,
-      json: async () => ({ candidates: [{ content: { parts: [{ text: "not-json" }] } }] }),
+      json: async () => ({
+        candidates: [{
+          finishReason: "STOP",
+          content: { parts: [{ text: invalidJsonCalls === 1 ? '{"status":"cut' : '{"status":"ok"}' }] },
+        }],
+      }),
     };
   },
-}), /Unexpected token/);
-assert.equal(invalidJsonCalls, 1);
+});
+assert.equal(invalidJsonCalls, 2);
+assert.equal(invalidJsonRecovery.keyName, "GEMINI_API_KEY_2");
+assert.deepEqual(invalidJsonRecovery.value, { status: "ok" });
+
+let maxTokensCalls = 0;
+const maxTokensRecovery = await callGeminiApiJsonWithKeys({
+  prompt: "Return JSON",
+  schema: { type: "object" },
+  apiKeys: [
+    { name: "GEMINI_API_KEY", apiKey: "first-key" },
+    { name: "GEMINI_API_KEY_2", apiKey: "second-key" },
+  ],
+  fetchImpl: async () => {
+    maxTokensCalls += 1;
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({
+        candidates: [{
+          finishReason: maxTokensCalls === 1 ? "MAX_TOKENS" : "STOP",
+          content: { parts: [{ text: maxTokensCalls === 1 ? '{"status":"cut' : '{"status":"ok"}' }] },
+        }],
+      }),
+    };
+  },
+});
+assert.equal(maxTokensCalls, 2);
+assert.equal(maxTokensRecovery.keyName, "GEMINI_API_KEY_2");
+assert.deepEqual(maxTokensRecovery.value, { status: "ok" });
+
+let validationCalls = 0;
+const validationRecovery = await callGeminiApiJsonWithKeys({
+  prompt: "Return JSON",
+  schema: { type: "object" },
+  validateValue: (value) => {
+    if (value.status !== "ok") throw new Error("did not return the exact requestId set");
+  },
+  apiKeys: [
+    { name: "GEMINI_API_KEY", apiKey: "first-key" },
+    { name: "GEMINI_API_KEY_2", apiKey: "second-key" },
+  ],
+  fetchImpl: async () => {
+    validationCalls += 1;
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({
+        candidates: [{
+          finishReason: "STOP",
+          content: { parts: [{ text: validationCalls === 1 ? '{"status":"incomplete"}' : '{"status":"ok"}' }] },
+        }],
+      }),
+    };
+  },
+});
+assert.equal(validationCalls, 2);
+assert.equal(validationRecovery.keyName, "GEMINI_API_KEY_2");
+assert.deepEqual(validationRecovery.value, { status: "ok" });
+
+const malformedBackendCalls = [];
+const malformedBackendRecovery = await runGeminiBackendChain({
+  backends: ["api", "vectorengine"],
+  providers: {
+    api: async () => {
+      malformedBackendCalls.push("api");
+      return callGeminiApiJsonWithKeys({
+        prompt: "Return JSON",
+        schema: { type: "object" },
+        apiKeys: [
+          { name: "GEMINI_API_KEY", apiKey: "first-key" },
+          { name: "GEMINI_API_KEY_2", apiKey: "second-key" },
+        ],
+        fetchImpl: async () => ({
+          ok: true,
+          status: 200,
+          json: async () => ({
+            candidates: [{ finishReason: "STOP", content: { parts: [{ text: '{"status":"cut' }] } }],
+          }),
+        }),
+      });
+    },
+    vectorengine: async () => {
+      malformedBackendCalls.push("vectorengine");
+      return { value: { status: "ok" } };
+    },
+  },
+});
+assert.deepEqual(malformedBackendCalls, ["api", "vectorengine"]);
+assert.equal(malformedBackendRecovery.backend, "vectorengine");
+assert.deepEqual(malformedBackendRecovery.value, { status: "ok" });
 
 const targets = ["FR", "DE", "IT", "ES", "PT", "JA", "KO", "ZH", "RU", "TR"];
 let batchProviderCalls = 0;

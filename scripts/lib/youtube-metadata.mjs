@@ -7,6 +7,7 @@ import { getLanguageNameInLang } from "./card-slide-template.mjs";
 import { getPublicCourseDisplayUrl, getPublicCourseUrl } from "./video-public-url.mjs";
 import { callVectorEngineGeminiJson } from "./vectorengine-gemini.mjs";
 import {
+  GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS,
   callGeminiApiJsonWithKeys,
   getDirectGeminiApiKeys,
   isRecoverableGeminiProviderError,
@@ -538,7 +539,7 @@ export function buildYouTubeMetadataBatchPrompt(preparedItems) {
     "Shared rules:",
     "- Make each title a natural search title for beginner learners, not clickbait.",
     "- Preserve deckTitle as the canonical topic phrase.",
-    "- Make each description several useful short paragraphs and include its courseUrl exactly once.",
+    "- Make each description 3-5 short sentences, no more than 900 Unicode characters, and include its courseUrl exactly once.",
     `- Mention vocabulary, pronunciation, repeat pauses, mini-test/review, and ${BRAND_NAME} flashcards.`,
     "- Include 3-5 sampleWords naturally when they fit.",
     "- tags: 12-18 short search phrases without # characters.",
@@ -679,7 +680,7 @@ export async function generateYouTubeMetadataBatch(inputs, options = {}) {
   const explicitModel = options.model || inputs[0].model || "";
   const prompt = buildYouTubeMetadataBatchPrompt(preparedItems);
   const schema = batchSchemaFor(preparedItems.length);
-  const maxOutputTokens = Math.min(16000, 1000 + preparedItems.length * 1400);
+  const maxOutputTokens = GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS;
   const defaultProviders = {
     api: async () => callGeminiApiJsonWithKeys({
       prompt,
@@ -688,6 +689,7 @@ export async function generateYouTubeMetadataBatch(inputs, options = {}) {
       maxOutputTokens,
       temperature: 0.3,
       systemInstruction: `Return strict JSON for all ${preparedItems.length} ${BRAND_NAME} metadata tasks. No Markdown or omitted items.`,
+      validateValue: (value) => validateBatchPayload(value, preparedItems),
     }),
     vectorengine: async () => ({
       value: await callVectorEngineGeminiJson({
