@@ -6,6 +6,12 @@ import { spawnSync } from "node:child_process";
 import { BRAND_NAME } from "./lib/brand.mjs";
 import { callVectorEngineGeminiJson } from "./lib/vectorengine-gemini.mjs";
 import {
+  callGeminiApiJsonWithKeys,
+  getDirectGeminiApiKeys,
+  parseGeminiBackendChain,
+  runGeminiBackendChain,
+} from "./lib/gemini-structured-json.mjs";
+import {
   DEFAULT_POLYGLOT_PLAYLIST_REGISTRY_PATH,
   buildPolyglotPlaylistAssignment,
   localizedLanguageList,
@@ -50,7 +56,8 @@ function parseArgs(argv) {
     publishAt: "",
     withGemini: false,
     requireAi: false,
-    model: process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash",
+    geminiBackend: process.env.GEMINI_BACKEND || "api,vectorengine",
+    model: process.env.GEMINI_MODEL || process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash",
     allowRepublish: false,
     requireOfflineDeck: true,
     json: false,
@@ -78,6 +85,7 @@ function parseArgs(argv) {
     else if (arg === "--privacy" || arg.startsWith("--privacy=")) options.privacyStatus = readValue();
     else if (arg === "--publish-at" || arg.startsWith("--publish-at=")) options.publishAt = readValue();
     else if (arg === "--model" || arg.startsWith("--model=")) options.model = readValue();
+    else if (arg === "--gemini-backend" || arg.startsWith("--gemini-backend=")) options.geminiBackend = readValue();
     else if (arg === "--with-gemini") options.withGemini = true;
     else if (arg === "--require-ai") options.requireAi = true;
     else if (arg === "--allow-republish") options.allowRepublish = true;
@@ -96,6 +104,7 @@ function usage() {
     "",
     "Generates Polyglot youtube_metadata.json without uploading or writing external services.",
     "Template metadata is plan-only. Live apply should use --with-gemini --require-ai.",
+    "AI provider order defaults to direct Gemini keys, then one VectorEngine fallback.",
   ].join("\n");
 }
 
@@ -126,24 +135,6 @@ function cleanMultilineText(value) {
     .filter(Boolean)
     .join("\n\n")
     .trim();
-}
-
-function boundedAiError(error) {
-  return cleanText(error?.message || String(error || "unknown AI metadata error")).slice(0, 800);
-}
-
-function isRecoverableAiMetadataError(error) {
-  return [
-    /did not return JSON/iu,
-    /returned empty text/iu,
-    /Unexpected token/iu,
-    /JSON\.parse/iu,
-    /timed out/iu,
-    /fetch failed/iu,
-    /ECONNRESET/iu,
-    /HTTP 5\d\d/iu,
-    /HTTP 429/iu,
-  ].some((pattern) => pattern.test(boundedAiError(error)));
 }
 
 function stripTerminator(value) {
@@ -301,12 +292,15 @@ function buildPrompt(candidate, playlistAssignment) {
   ].join("\n");
 }
 
-async function callPolyglotGeminiMetadata({ prompt, model }) {
+async function callPolyglotGeminiMetadata({ prompt, model, geminiBackend }) {
+  const backends = parseGeminiBackendChain(geminiBackend, {
+    hasDirectApiKey: getDirectGeminiApiKeys().length > 0,
+  });
   const request = {
     prompt,
     schema: POLYGLOT_YOUTUBE_METADATA_SCHEMA,
     model,
-    maxOutputTokens: 4200,
+    maxOutputTokens: 5200,
     temperature: 0.25,
     systemInstruction: [
       `You create YouTube metadata for ${BRAND_NAME} Polyglot vocabulary videos.`,
@@ -314,45 +308,16 @@ async function callPolyglotGeminiMetadata({ prompt, model }) {
       "No Markdown, no hidden reasoning, no comments, no extra fields.",
     ].join(" "),
   };
-  const attempts = [
-    request,
-    {
-      ...request,
-      temperature: 0,
-      maxOutputTokens: 5200,
-      systemInstruction: [
-        "You are a strict JSON compiler.",
-        "Return one complete valid JSON object and nothing else.",
-        "No Markdown, no explanation, no raw line breaks inside strings.",
-      ].join(" "),
-      prompt: [
-        "Return only valid JSON. Do not explain.",
-        "",
-        "METADATA_TASK:",
-        prompt,
-        "",
-        "OUTPUT EXACTLY THIS OBJECT SHAPE WITH REAL VALUES:",
-        '{"title":"...","description":"...","tags":["..."],"hashtags":["#..."],"playlistTitle":"...","playlistDescription":"..."}',
-      ].join("\n"),
+  return runGeminiBackendChain({
+    backends,
+    providers: {
+      api: async () => callGeminiApiJsonWithKeys(request),
+      vectorengine: async () => ({
+        value: await callVectorEngineGeminiJson(request),
+        model,
+      }),
     },
-    {
-      ...request,
-      temperature: 0,
-      maxOutputTokens: 5200,
-      systemInstruction: "Return strict JSON only. No Markdown. No extra text.",
-    },
-  ];
-  let lastError;
-  for (const attempt of attempts) {
-    try {
-      return await callVectorEngineGeminiJson(attempt);
-    } catch (error) {
-      lastError = error;
-      if (!isRecoverableAiMetadataError(error)) throw error;
-      console.warn(`Recoverable VectorEngine metadata error; retrying: ${boundedAiError(error)}`);
-    }
-  }
-  throw lastError;
+  });
 }
 
 function normalizeAiMetadata(value, candidate, playlistAssignment) {
@@ -410,10 +375,11 @@ async function main() {
       const result = await callPolyglotGeminiMetadata({
         prompt: buildPrompt(candidate, initialPlaylist),
         model: options.model,
+        geminiBackend: options.geminiBackend,
       });
-      copy = normalizeAiMetadata(result, candidate, initialPlaylist);
-      source = "vectorengine-gemini-polyglot";
-      model = options.model;
+      copy = normalizeAiMetadata(result.value, candidate, initialPlaylist);
+      source = `gemini-${result.backend}-polyglot`;
+      model = result.model || options.model;
     } catch (error) {
       aiError = error.message;
       if (options.requireAi) throw error;

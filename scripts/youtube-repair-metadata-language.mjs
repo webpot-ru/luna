@@ -29,7 +29,7 @@ function parseArgs(argv) {
     outputDir: "",
     localRoot: "",
     oauthRoot: "",
-    geminiBackend: "vectorengine",
+    geminiBackend: "api,vectorengine",
     model: "",
     maxUpdates: Infinity,
     apply: false,
