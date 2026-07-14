@@ -328,6 +328,27 @@ function validateWave(assignments, expectedSupportCount, ordinaryPerChannel, pol
   return blockers;
 }
 
+function zeroUploadReplacementBlockers(campaign, campaignId) {
+  if (!campaign) return [`replacement campaign not found: ${campaignId}`];
+  const blockers = [];
+  if (campaign.status !== "reconciliation_required") {
+    blockers.push(`replacement campaign must be reconciliation_required, got ${campaign.status || "missing"}`);
+  }
+  const summary = campaign.finalizeSummary || {};
+  for (const key of ["completedCount", "observedCount", "artifactCount", "receiptErrorCount"]) {
+    if (Number(summary[key] || 0) !== 0) blockers.push(`replacement campaign ${key} must be zero`);
+  }
+  const assignments = campaign.assignments || [];
+  if (!assignments.length) blockers.push("replacement campaign has no assignments");
+  if (assignments.some((row) => row.status !== "claimed")) {
+    blockers.push("replacement campaign assignments must all remain claimed");
+  }
+  if (assignments.some((row) => row.youtubeVideoId || row.youtubeVideoUrl)) {
+    blockers.push("replacement campaign already contains a YouTube video receipt");
+  }
+  return blockers;
+}
+
 export function buildPublicationCampaign(options = {}) {
   const now = options.now instanceof Date ? options.now : new Date(options.now || Date.now());
   const setId = options.setId;
@@ -357,6 +378,29 @@ export function buildPublicationCampaign(options = {}) {
   const deck = exactDeck(snapshot, setId);
   const calendar = readJson(paths.calendar, { schemaVersion: 1, reservations: [] });
   const campaignRegistry = readJson(paths.campaignRegistry, { schemaVersion: 1, campaigns: [] });
+  const replacementCampaignId = String(options.replacementCampaignId || "").trim();
+  const replacementCampaign = replacementCampaignId
+    ? (campaignRegistry.campaigns || []).find((row) => row.campaignId === replacementCampaignId)
+    : null;
+  const replacementBlockers = replacementCampaignId
+    ? zeroUploadReplacementBlockers(replacementCampaign, replacementCampaignId)
+    : [];
+  const planningCalendar = replacementCampaign
+    ? {
+        ...calendar,
+        reservations: (calendar.reservations || []).map((row) => row.campaignId === replacementCampaignId
+          ? { ...row, status: "superseded_zero_upload_recovery_preview" }
+          : row),
+      }
+    : calendar;
+  const planningCampaignRegistry = replacementCampaign
+    ? {
+        ...campaignRegistry,
+        campaigns: (campaignRegistry.campaigns || []).map((row) => row.campaignId === replacementCampaignId
+          ? { ...row, status: "superseded_zero_upload_recovery_preview" }
+          : row),
+      }
+    : campaignRegistry;
   const policy = readJson(paths.policy);
   const ordinaryPlaylistRegistry = readJson(paths.ordinaryPlaylists, { schemaVersion: 1, playlists: [] });
   const polyglotPlaylistRegistry = readJson(paths.polyglotPlaylists, { schemaVersion: 1, playlists: [] });
@@ -380,9 +424,9 @@ export function buildPublicationCampaign(options = {}) {
   const historicalDeckSource = offlineDeckExists && !offlineDeckTracked
     ? historicalGitBlobSource(paths.offlineDeck)
     : { available: false, matchesLocalFile: false, commit: "", blobId: "", localBlobId: "" };
-  const claims = campaignClaimSets(campaignRegistry);
+  const claims = campaignClaimSets(planningCampaignRegistry);
   const freshness = snapshotBlockers(deck, snapshot.generatedAt, now, maxSnapshotAgeMinutes);
-  const blockers = [...freshness.blockers];
+  const blockers = [...freshness.blockers, ...replacementBlockers];
   const warnings = [];
   if (!playlistDiscoveryExists) blockers.push(`route-authenticated playlist discovery snapshot is missing: ${paths.playlistDiscovery}`);
   const playlistFreshness = playlistDiscoveryExists
@@ -422,7 +466,7 @@ export function buildPublicationCampaign(options = {}) {
     selected.push(...ordinary, ...polyglot);
   }
 
-  const baseOccupiedSlotKeys = new Set((calendar.reservations || []).filter(isActiveCalendarReservation).map(slotKey));
+  const baseOccupiedSlotKeys = new Set((planningCalendar.reservations || []).filter(isActiveCalendarReservation).map(slotKey));
   for (const key of claims.slots) baseOccupiedSlotKeys.add(key);
   const plannedSlotKeys = new Set();
   const minPublishMillis = now.getTime() + minFutureMinutes * 60_000;
@@ -542,6 +586,7 @@ export function buildPublicationCampaign(options = {}) {
       startDate: requestedStartDate || "auto",
       minFutureMinutes,
       maxSnapshotAgeMinutes,
+      ...(replacementCampaignId ? { replacementCampaignId } : {}),
     },
     evidence: {
       snapshotGeneratedAt: snapshot.generatedAt,
@@ -559,6 +604,15 @@ export function buildPublicationCampaign(options = {}) {
         offlineDeckTracked,
         historicalGitBlob: historicalDeckSource,
       },
+      ...(replacementCampaignId ? {
+        replacementCampaign: {
+          campaignId: replacementCampaignId,
+          manifestHash: replacementCampaign?.manifestHash || "",
+          status: replacementCampaign?.status || "missing",
+          assignmentCount: replacementCampaign?.assignments?.length || 0,
+          finalizeSummary: replacementCampaign?.finalizeSummary || null,
+        },
+      } : {}),
       sourceFingerprints,
     },
     summary: {
