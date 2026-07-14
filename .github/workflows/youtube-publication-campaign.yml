@@ -1,0 +1,398 @@
+name: YouTube Publication Campaign
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "plan is read-only/no-spend; apply runs one already-claimed immutable campaign."
+        required: true
+        default: plan
+        type: choice
+        options: [plan, apply]
+      set_id:
+        description: "Deck set id used by plan mode."
+        required: true
+        default: home_kitchen_cooking_actions_a1_a2
+      supports:
+        description: "Canonical support selector for plan mode."
+        required: true
+        default: ALL
+      ordinary_per_channel:
+        description: "Next missing ordinary videos per physical channel."
+        required: true
+        default: "5"
+      polyglot_per_channel:
+        description: "Next missing full Polyglot videos per physical channel."
+        required: true
+        default: "1"
+      schedule_start_date:
+        description: "YYYY-MM-DD hint; claims still fill earlier empty policy slots first."
+        required: false
+        default: ""
+      campaign_id:
+        description: "Apply only: exact durable claimed campaign id."
+        required: false
+        default: ""
+      campaign_manifest_hash:
+        description: "Apply only: exact immutable campaign manifest hash."
+        required: false
+        default: ""
+      confirm_campaign_apply:
+        description: "Apply only: type APPLY_YOUTUBE_PUBLICATION_CAMPAIGN."
+        required: false
+        default: ""
+      confirm_vectorengine_metadata:
+        description: "Apply only: USE_VECTORENGINE_METADATA permits VectorEngine only after both direct Gemini keys fail."
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: youtube-publication-campaign-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    outputs:
+      set_id: ${{ steps.apply_preflight.outputs.set_id }}
+      ordinary_matrix: ${{ steps.apply_preflight.outputs.ordinary_matrix }}
+      polyglot_matrix: ${{ steps.apply_preflight.outputs.polyglot_matrix }}
+      metadata_matrix: ${{ steps.apply_preflight.outputs.metadata_matrix }}
+      offline_deck_sha256: ${{ steps.apply_preflight.outputs.offline_deck_sha256 }}
+      offline_deck_git_commit: ${{ steps.apply_preflight.outputs.offline_deck_git_commit }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci || npm install
+
+      - name: Restore immutable offline deck for read-only plan
+        if: ${{ inputs.mode == 'plan' }}
+        shell: bash
+        env:
+          SET_ID: ${{ inputs.set_id }}
+        run: |
+          set -euo pipefail
+          DECK_PATH="data/decks/${SET_ID}.json"
+          if [ ! -s "$DECK_PATH" ]; then
+            mkdir -p data/decks
+            HISTORICAL_COMMIT=""
+            while IFS= read -r CANDIDATE; do
+              if git cat-file -e "${CANDIDATE}:${DECK_PATH}" 2>/dev/null; then
+                HISTORICAL_COMMIT="$CANDIDATE"
+                break
+              fi
+            done < <(git log --all --format=%H -- "$DECK_PATH")
+            if [ -n "$HISTORICAL_COMMIT" ]; then
+              git show "${HISTORICAL_COMMIT}:${DECK_PATH}" > "$DECK_PATH"
+            fi
+          fi
+          test -s "$DECK_PATH"
+
+      - name: Build read-only immutable campaign plan
+        if: ${{ inputs.mode == 'plan' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ARGS=("--set=${{ inputs.set_id }}" "--supports=${{ inputs.supports }}" "--ordinary-per-channel=${{ inputs.ordinary_per_channel }}" "--polyglot-per-channel=${{ inputs.polyglot_per_channel }}" "--min-future-minutes=90" "--max-snapshot-age-minutes=30" "--output=outputs/youtube-publication-campaign-plan.json" --require-apply-ready --json)
+          if [ -n "${{ inputs.schedule_start_date }}" ]; then
+            ARGS+=("--start-date=${{ inputs.schedule_start_date }}")
+          fi
+          npm run plan:youtube-publication-campaign -- "${ARGS[@]}"
+
+      - name: Validate claimed campaign and build exact worker matrices
+        id: apply_preflight
+        if: ${{ inputs.mode == 'apply' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.confirm_campaign_apply }}" != "APPLY_YOUTUBE_PUBLICATION_CAMPAIGN" ]; then
+            echo "::error::apply requires confirm_campaign_apply=APPLY_YOUTUBE_PUBLICATION_CAMPAIGN"
+            exit 1
+          fi
+          if [ -z "${{ inputs.campaign_id }}" ] || [ -z "${{ inputs.campaign_manifest_hash }}" ]; then
+            echo "::error::apply requires campaign_id and campaign_manifest_hash"
+            exit 1
+          fi
+          npm run prepare:youtube-publication-campaign-run -- \
+            --campaign-id="${{ inputs.campaign_id }}" \
+            --manifest-hash="${{ inputs.campaign_manifest_hash }}" \
+            --github-output="$GITHUB_OUTPUT" \
+            --output=outputs/youtube-publication-campaign-run-preflight.json
+
+      - name: Upload preflight evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-publication-campaign-preflight-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 30
+          path: |
+            outputs/youtube-publication-campaign-plan.json
+            outputs/youtube-publication-campaign-run-preflight.json
+
+  metadata:
+    if: ${{ inputs.mode == 'apply' }}
+    needs: preflight
+    runs-on: ubuntu-latest
+    environment: ${{ matrix.youtube_environment }}
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix: ${{ fromJSON(needs.preflight.outputs.metadata_matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci || npm install
+
+      - name: Resolve offline deck data for campaign metadata
+        shell: bash
+        env:
+          SET_ID: ${{ needs.preflight.outputs.set_id }}
+          EXPECTED_DECK_SHA256: ${{ needs.preflight.outputs.offline_deck_sha256 }}
+          HISTORICAL_DECK_COMMIT: ${{ needs.preflight.outputs.offline_deck_git_commit }}
+        run: |
+          set -euo pipefail
+          FILE_ID=$(node -e '
+            const fs = require("fs");
+            const mapping = fs.existsSync("data/deck-sources.json")
+              ? JSON.parse(fs.readFileSync("data/deck-sources.json", "utf8"))
+              : {};
+            process.stdout.write(String(mapping[process.env.SET_ID] || ""));
+          ')
+          if [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
+            mkdir -p data/decks
+            curl -c /tmp/cookies -sL "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o /tmp/confirm.html
+            CONFIRM=$(grep -o 'confirm=[^&" ]*' /tmp/confirm.html | head -n1 | cut -d= -f2 || true)
+            if [ -n "$CONFIRM" ]; then
+              curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&confirm=${CONFIRM}&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
+            else
+              curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
+            fi
+          fi
+          if [ ! -s "data/decks/${SET_ID}.json" ] && [ -n "$HISTORICAL_DECK_COMMIT" ]; then
+            mkdir -p data/decks
+            git show "${HISTORICAL_DECK_COMMIT}:data/decks/${SET_ID}.json" > "data/decks/${SET_ID}.json"
+          fi
+          test -s "data/decks/${SET_ID}.json"
+          test -n "$EXPECTED_DECK_SHA256"
+          ACTUAL_DECK_SHA256="$(sha256sum "data/decks/${SET_ID}.json" | cut -d' ' -f1)"
+          if [ "$ACTUAL_DECK_SHA256" != "$EXPECTED_DECK_SHA256" ]; then
+            echo "::error::Offline deck checksum mismatch for $SET_ID"
+            exit 1
+          fi
+
+      - name: Generate route-batched campaign metadata before render/TTS
+        shell: bash
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
+          VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
+          VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
+          VECTORENGINE_GEMINI_MODEL: ${{ vars.VECTORENGINE_GEMINI_MODEL }}
+          VECTORENGINE_SEND_RESPONSE_SCHEMA: "1"
+          YOUTUBE_METADATA_AI_STRICT: "1"
+        run: |
+          set -euo pipefail
+          BACKEND="api"
+          VECTOR_ARGS=()
+          if [ "${{ inputs.confirm_vectorengine_metadata }}" = "USE_VECTORENGINE_METADATA" ]; then
+            BACKEND="api,vectorengine"
+            VECTOR_ARGS+=("--confirm-vectorengine=USE_VECTORENGINE_METADATA")
+          elif [ -n "${{ inputs.confirm_vectorengine_metadata }}" ]; then
+            echo "::error::confirm_vectorengine_metadata must be empty or USE_VECTORENGINE_METADATA"
+            exit 1
+          fi
+          npm run generate:youtube-campaign-metadata -- \
+            --campaign-id="${{ inputs.campaign_id }}" \
+            --manifest-hash="${{ inputs.campaign_manifest_hash }}" \
+            --route-key="${{ matrix.route_key }}" \
+            --output-root="outputs/youtube-campaign-metadata/${{ matrix.route_key }}" \
+            --batch-size=10 \
+            --rate-limit-ms=15000 \
+            --gemini-backend="$BACKEND" \
+            "${VECTOR_ARGS[@]}" \
+            --apply \
+            --confirm=GENERATE_YOUTUBE_CAMPAIGN_METADATA
+
+      - name: Upload exact campaign metadata artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-campaign-metadata-${{ inputs.campaign_id }}-${{ matrix.route_key }}
+          retention-days: 30
+          if-no-files-found: error
+          path: outputs/youtube-campaign-metadata/${{ matrix.route_key }}
+
+  ordinary:
+    if: ${{ inputs.mode == 'apply' }}
+    needs: [preflight, metadata]
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.preflight.outputs.ordinary_matrix) }}
+    uses: ./.github/workflows/youtube-video-publish.yml
+    with:
+      mode: apply
+      set_id: ${{ needs.preflight.outputs.set_id }}
+      support: ${{ matrix.support }}
+      youtube_environment: ${{ matrix.youtube_environment }}
+      langs: ${{ matrix.langs }}
+      concurrency: "2"
+      metadata_gemini_backend: api,vectorengine
+      metadata_batch_size: "10"
+      metadata_rate_limit_ms: "15000"
+      worker_count: "1"
+      worker_index: "0"
+      privacy: private
+      publish_mode: scheduled
+      schedule_start_date: ${{ matrix.schedule_start_date }}
+      schedule_min_future_minutes: "90"
+      create_playlists: true
+      allow_republish: false
+      generate_thumbnails: false
+      confirm_vectorengine_metadata: ${{ inputs.confirm_vectorengine_metadata }}
+      confirm_youtube_write: APPLY_YOUTUBE_UPLOAD
+      confirm_public: PUBLISH_PUBLIC
+      campaign_id: ${{ inputs.campaign_id }}
+      campaign_manifest_hash: ${{ inputs.campaign_manifest_hash }}
+      campaign_metadata_route: ${{ matrix.route_key }}
+    secrets: inherit
+
+  polyglot:
+    if: ${{ always() && inputs.mode == 'apply' && needs.preflight.result == 'success' && needs.metadata.result == 'success' && needs.ordinary.result == 'success' }}
+    needs: [preflight, metadata, ordinary]
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.preflight.outputs.polyglot_matrix) }}
+    uses: ./.github/workflows/youtube-polyglot-video-publish.yml
+    with:
+      mode: apply
+      set_id: ${{ needs.preflight.outputs.set_id }}
+      support: ${{ matrix.support }}
+      bundle: ${{ matrix.bundle }}
+      limit: "0"
+      content_scope: full
+      max_duration_seconds: "895"
+      privacy: private
+      publish_mode: scheduled
+      publish_at: ""
+      schedule_start_date: ${{ matrix.schedule_start_date }}
+      schedule_min_future_minutes: "90"
+      create_playlists: true
+      allow_republish: false
+      generate_thumbnails: false
+      confirm_render: RENDER_POLYGLOT_VIDEO
+      confirm_tts: GENERATE_TTS_AUDIO
+      confirm_metadata_spend: GENERATE_POLYGLOT_METADATA
+      confirm_vectorengine_metadata: ${{ inputs.confirm_vectorengine_metadata }}
+      confirm_youtube_write: APPLY_POLYGLOT_YOUTUBE_UPLOAD
+      confirm_public: PUBLISH_PUBLIC
+      campaign_id: ${{ inputs.campaign_id }}
+      campaign_manifest_hash: ${{ inputs.campaign_manifest_hash }}
+      campaign_metadata_route: ${{ matrix.route_key }}
+    secrets: inherit
+
+  finalize:
+    if: ${{ always() && inputs.mode == 'apply' && needs.preflight.result == 'success' }}
+    needs: [preflight, ordinary, polyglot]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Refresh branch before the single state merge
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin "${{ github.ref_name }}"
+          git checkout "${{ github.ref_name }}"
+          git pull --ff-only origin "${{ github.ref_name }}"
+
+      - name: Download ordinary state artifacts
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          pattern: youtube-video-publish-apply-*
+          path: .campaign-artifacts
+
+      - name: Download Polyglot state artifacts
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          pattern: youtube-polyglot-*-apply
+          path: .campaign-artifacts
+
+      - name: Merge every receipt once and finalize durable campaign state
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run finalize:youtube-publication-campaign -- \
+            --campaign-id="${{ inputs.campaign_id }}" \
+            --artifacts-root=.campaign-artifacts \
+            --ordinary-result="${{ needs.ordinary.result }}" \
+            --polyglot-result="${{ needs.polyglot.result }}" \
+            --output=outputs/youtube-publication-campaign-finalize.json
+
+      - name: Commit and push exact durable state
+        shell: bash
+        run: |
+          set -euo pipefail
+          STATE_FILES=(
+            config/youtube-publication-campaigns.json
+            config/youtube-publish-calendar.json
+            config/youtube-published-videos.json
+            config/youtube-playlists.json
+            config/youtube-polyglot-published-videos.json
+            config/youtube-polyglot-playlists.json
+            config/youtube-polyglot-progress.json
+            config/youtube-channels.json
+          )
+          git add "${STATE_FILES[@]}"
+          if git diff --cached --quiet; then
+            echo "No durable campaign state changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Finalize YouTube publication campaign ${{ inputs.campaign_id }}" \
+            -m "Source workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          git push origin "HEAD:${{ github.ref_name }}"
+
+      - name: Upload final campaign report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-publication-campaign-final-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-publication-campaign-finalize.json
+            outputs/youtube-publication-campaign-merge-*.json
+
+      - name: Fail closed after durable reconciliation if campaign is incomplete
+        shell: bash
+        run: |
+          set -euo pipefail
+          node -e 'const r=require("./outputs/youtube-publication-campaign-finalize.json"); if (!r.complete) { console.error(JSON.stringify(r, null, 2)); process.exit(1); }'

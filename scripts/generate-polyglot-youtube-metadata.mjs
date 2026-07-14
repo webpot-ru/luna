@@ -59,6 +59,8 @@ function parseArgs(argv) {
     geminiBackend: process.env.GEMINI_BACKEND || "api,vectorengine",
     model: process.env.GEMINI_MODEL || process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash",
     allowRepublish: false,
+    campaignId: "",
+    campaignManifestHash: "",
     requireOfflineDeck: true,
     json: false,
     help: false,
@@ -89,6 +91,8 @@ function parseArgs(argv) {
     else if (arg === "--with-gemini") options.withGemini = true;
     else if (arg === "--require-ai") options.requireAi = true;
     else if (arg === "--allow-republish") options.allowRepublish = true;
+    else if (arg === "--campaign-id" || arg.startsWith("--campaign-id=")) options.campaignId = readValue();
+    else if (arg === "--campaign-manifest-hash" || arg.startsWith("--campaign-manifest-hash=")) options.campaignManifestHash = readValue();
     else if (arg === "--no-require-offline-deck") options.requireOfflineDeck = false;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
@@ -148,6 +152,9 @@ function assertArgs(options) {
   if (!["private", "unlisted", "public"].includes(options.privacyStatus)) {
     throw new Error(`Invalid --privacy=${options.privacyStatus}`);
   }
+  if (Boolean(options.campaignId) !== Boolean(options.campaignManifestHash)) {
+    throw new Error("--campaign-id and --campaign-manifest-hash must be supplied together.");
+  }
 }
 
 function runPlanner(options) {
@@ -176,6 +183,9 @@ function runPlanner(options) {
     output,
   ];
   if (options.allowRepublish) args.push("--allow-republish");
+  if (options.campaignId) {
+    args.push("--campaign-id", options.campaignId, "--campaign-manifest-hash", options.campaignManifestHash);
+  }
   if (options.requireOfflineDeck) args.push("--require-offline-deck");
   const result = spawnSync(process.execPath, args, {
     encoding: "utf8",

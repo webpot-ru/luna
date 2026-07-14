@@ -153,7 +153,7 @@ function countEnglishTags(tags) {
     .length;
 }
 
-function validateAiMetadataLanguage(metadata) {
+export function validateAiMetadataLanguage(metadata) {
   const supportLang = normalizeLanguageCode(metadata.supportLang);
   if (!supportLang || isEnglishSupport(supportLang)) {
     return { status: "pass", blockers: [], warnings: [] };

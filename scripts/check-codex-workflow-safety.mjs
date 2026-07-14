@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 
 const args = new Set(process.argv.slice(2));
@@ -58,6 +58,26 @@ function collectStrings(value, output = []) {
     for (const item of Object.values(value)) collectStrings(item, output);
   }
   return output;
+}
+
+function countWorkflowDispatchInputs(source) {
+  let inDispatch = false;
+  let inInputs = false;
+  let count = 0;
+  for (const line of source.split(/\r?\n/)) {
+    if (/^  workflow_dispatch:\s*$/.test(line)) {
+      inDispatch = true;
+      inInputs = false;
+      continue;
+    }
+    if (inDispatch && /^  \S/.test(line)) break;
+    if (inDispatch && /^    inputs:\s*$/.test(line)) {
+      inInputs = true;
+      continue;
+    }
+    if (inInputs && /^      [A-Za-z0-9_-]+:\s*(?:$|\{)/.test(line)) count += 1;
+  }
+  return count;
 }
 
 function checkPretool() {
@@ -119,6 +139,14 @@ function checkWorkflow() {
   const visibleSecretPaths = changedPaths.filter((filePath) => pathMatchesAny(filePath, secretPathPatterns));
   if (visibleSecretPaths.length > 0) {
     errors.push(`Git-visible local secret paths detected: ${visibleSecretPaths.join(', ')}`);
+  }
+
+  for (const fileName of readdirSync('.github/workflows').filter((name) => /\.ya?ml$/.test(name))) {
+    const workflowPath = `.github/workflows/${fileName}`;
+    const dispatchInputCount = countWorkflowDispatchInputs(readFileSync(workflowPath, 'utf8'));
+    if (dispatchInputCount > 25) {
+      errors.push(`${workflowPath} declares ${dispatchInputCount} workflow_dispatch inputs; GitHub permits at most 25.`);
+    }
   }
 
   const worktreeIncludePath = '.worktreeinclude';

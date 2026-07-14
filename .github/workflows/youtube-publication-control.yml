@@ -20,6 +20,18 @@ on:
         required: true
         default: false
         type: boolean
+      campaign_ordinary_per_channel:
+        description: "Optional no-spend campaign plan: next ordinary videos per physical channel; 0 disables campaign planning."
+        required: true
+        default: "0"
+      campaign_polyglot_per_channel:
+        description: "Optional no-spend campaign plan: next full Polyglot videos per physical channel; 0 disables campaign planning."
+        required: true
+        default: "0"
+      campaign_schedule_start_date:
+        description: "Optional YYYY-MM-DD hint; the planner still fills earlier empty policy slots first."
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -47,6 +59,8 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -75,6 +89,19 @@ jobs:
           CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORTS" "--live-audit=outputs/youtube-live-publications-$ROUTE.json" "--output=outputs/youtube-publication-control-$ROUTE.json" "--strict")
           if [ -n "$TARGETS" ]; then CONTROL_ARGS+=("--targets=$TARGETS"); fi
           npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
+      - name: Read every owned playlist and playlist item for stable identity discovery
+        env:
+          SUPPORTS: ${{ matrix.supports }}
+          ROUTE: ${{ matrix.route }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run audit:youtube-playlists -- \
+            --support="$SUPPORTS" \
+            --route-key="$ROUTE" \
+            --max-playlist-pages=20 \
+            --max-item-pages=10 \
+            --output="outputs/youtube-playlist-discovery-$ROUTE.json"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -84,6 +111,7 @@ jobs:
           path: |
             outputs/youtube-live-publications-${{ matrix.route }}.json
             outputs/youtube-publication-control-${{ matrix.route }}.json
+            outputs/youtube-playlist-discovery-${{ matrix.route }}.json
 
   aggregate:
     needs: audit-route
@@ -91,6 +119,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -110,6 +140,10 @@ jobs:
             --source-run="$SET_ID:all:${GITHUB_RUN_ID}" \
             --output=outputs/youtube-publication-control-all-routes.json \
             --markdown=outputs/youtube-publication-control-all-routes.md
+          npm run merge:youtube-playlist-discovery -- \
+            --input=.control-artifacts \
+            --expected-routes=4 \
+            --output=outputs/youtube-playlist-discovery-snapshot.json
           if jq -e '.summary.complete == true' outputs/youtube-publication-control-all-routes.json >/dev/null; then
             npm run build:youtube-publication-snapshot -- \
               --report=outputs/youtube-publication-control-all-routes.json \
@@ -118,6 +152,47 @@ jobs:
           else
             echo "::warning::All-route audit is incomplete; refusing to build or persist a durable snapshot."
           fi
+      - name: Build one no-spend immutable campaign plan from the same live evidence
+        if: ${{ github.event.inputs.campaign_ordinary_per_channel != '0' || github.event.inputs.campaign_polyglot_per_channel != '0' }}
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          ORDINARY_PER_CHANNEL: ${{ github.event.inputs.campaign_ordinary_per_channel }}
+          POLYGLOT_PER_CHANNEL: ${{ github.event.inputs.campaign_polyglot_per_channel }}
+          START_DATE: ${{ github.event.inputs.campaign_schedule_start_date }}
+        run: |
+          set -euo pipefail
+          test -s outputs/youtube-publication-snapshot.json
+          test -s outputs/youtube-playlist-discovery-snapshot.json
+          DECK_PATH="data/decks/${SET_ID}.json"
+          if [ ! -s "$DECK_PATH" ]; then
+            mkdir -p data/decks
+            HISTORICAL_COMMIT=""
+            while IFS= read -r CANDIDATE; do
+              if git cat-file -e "${CANDIDATE}:${DECK_PATH}" 2>/dev/null; then
+                HISTORICAL_COMMIT="$CANDIDATE"
+                break
+              fi
+            done < <(git log --all --format=%H -- "$DECK_PATH")
+            if [ -n "$HISTORICAL_COMMIT" ]; then
+              git show "${HISTORICAL_COMMIT}:${DECK_PATH}" > "$DECK_PATH"
+            fi
+          fi
+          test -s "$DECK_PATH"
+          ARGS=(
+            "--set=$SET_ID"
+            "--supports=ALL"
+            "--ordinary-per-channel=$ORDINARY_PER_CHANNEL"
+            "--polyglot-per-channel=$POLYGLOT_PER_CHANNEL"
+            "--min-future-minutes=90"
+            "--max-snapshot-age-minutes=30"
+            "--snapshot=outputs/youtube-publication-snapshot.json"
+            "--playlist-discovery=outputs/youtube-playlist-discovery-snapshot.json"
+            "--output=outputs/youtube-publication-campaign-plan.json"
+            --json
+          )
+          if [ -n "$START_DATE" ]; then ARGS+=("--start-date=$START_DATE"); fi
+          npm run plan:youtube-publication-campaign -- "${ARGS[@]}"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -129,6 +204,8 @@ jobs:
             outputs/youtube-publication-control-all-routes.md
             outputs/youtube-publication-snapshot.json
             outputs/youtube-publication-map.md
+            outputs/youtube-playlist-discovery-snapshot.json
+            outputs/youtube-publication-campaign-plan.json
 
   persist-snapshot:
     needs: aggregate
@@ -156,9 +233,10 @@ jobs:
           set -euo pipefail
           cp .snapshot-artifact/youtube-publication-snapshot.json config/youtube-publication-snapshot.json
           cp .snapshot-artifact/youtube-publication-map.md docs/youtube-publication-map.md
+          cp .snapshot-artifact/youtube-playlist-discovery-snapshot.json config/youtube-playlist-discovery-snapshot.json
           git status --short --branch --untracked-files=all
           git diff --name-status
-          git add config/youtube-publication-snapshot.json docs/youtube-publication-map.md
+          git add config/youtube-publication-snapshot.json config/youtube-playlist-discovery-snapshot.json docs/youtube-publication-map.md
           git diff --cached --name-status
           if git diff --cached --quiet; then
             echo "Publication snapshot is unchanged."

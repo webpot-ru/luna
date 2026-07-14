@@ -47,6 +47,8 @@ function parseArgs(argv) {
     output: "",
     allowRepublish: false,
     requireOfflineDeck: false,
+    campaignId: "",
+    campaignManifestHash: "",
     json: false,
     help: false,
   };
@@ -73,6 +75,8 @@ function parseArgs(argv) {
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = readValue();
     else if (arg === "--allow-republish") options.allowRepublish = true;
     else if (arg === "--require-offline-deck") options.requireOfflineDeck = true;
+    else if (arg === "--campaign-id" || arg.startsWith("--campaign-id=")) options.campaignId = readValue();
+    else if (arg === "--campaign-manifest-hash" || arg.startsWith("--campaign-manifest-hash=")) options.campaignManifestHash = readValue();
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
   }
@@ -90,6 +94,8 @@ function usage() {
     "Options:",
     "  --require-offline-deck       Require data/decks/<set_id>.json and localized Course Metadata.",
     "  --allow-republish            Do not block an active matching Polyglot publication/calendar row.",
+    "  --campaign-id <id>           Require an exact durable calendar claim for this campaign.",
+    "  --campaign-manifest-hash <h> Require the exact immutable campaign manifest hash.",
     "  --publication-registry <file> Defaults to config/youtube-polyglot-published-videos.json.",
     "  --ordinary-publication-registry <file> Legacy multi-target readback ledger used for canonical duplicate blocking.",
     "  --progress-registry <file>    Defaults to config/youtube-polyglot-progress.json.",
@@ -377,7 +383,16 @@ async function main() {
     blockers.push(`active Polyglot publication already exists for ${polyglotKey}: video=${existingPublication.youtubeVideoId}`);
   }
   const existingCalendarReservation = findActivePolyglotCalendarReservation(calendar, polyglotKey);
-  if (existingCalendarReservation && !options.allowRepublish) {
+  const ownedCampaignClaim = Boolean(
+    options.campaignId
+    && existingCalendarReservation?.campaignId === options.campaignId
+    && existingCalendarReservation?.campaignManifestHash === options.campaignManifestHash
+  );
+  if (options.campaignId && !ownedCampaignClaim) {
+    blockers.push(`missing or mismatched durable campaign claim for ${options.campaignId}`);
+  } else if (!options.campaignId && existingCalendarReservation?.campaignId) {
+    blockers.push(`Polyglot calendar slot is reserved by campaign ${existingCalendarReservation.campaignId}`);
+  } else if (existingCalendarReservation && !options.allowRepublish && !ownedCampaignClaim) {
     blockers.push(`active Polyglot calendar reservation already exists for ${polyglotKey}: publishAt=${existingCalendarReservation.publishAt || "reserved"}`);
   }
   const existingProgressItem = findActivePolyglotProgressItem(progressRegistry, polyglotKey);
@@ -400,6 +415,8 @@ async function main() {
     fallbackAdded: resolved.fallbackAdded,
     channelKey: channel?.key || "",
     youtubeChannelId: channel?.channelId || "",
+    campaignId: options.campaignId,
+    campaignManifestHash: options.campaignManifestHash,
     deck: deckPlan,
     studyUrl,
     urlTargetLangs: urlValidation.urlTargets,
@@ -415,6 +432,8 @@ async function main() {
       publishAt: existingCalendarReservation.publishAt || "",
       status: existingCalendarReservation.status || "",
       channelKey: existingCalendarReservation.channelKey || "",
+      campaignId: existingCalendarReservation.campaignId || "",
+      campaignManifestHash: existingCalendarReservation.campaignManifestHash || "",
     } : null,
     existingProgressItem: existingProgressItem ? {
       status: existingProgressItem.status || "",
@@ -433,6 +452,8 @@ async function main() {
     physicalCalendar: options.calendar,
     allowRepublish: options.allowRepublish,
     requireOfflineDeck: options.requireOfflineDeck,
+    campaignId: options.campaignId,
+    campaignManifestHash: options.campaignManifestHash,
     candidate,
     blockers,
     warnings,

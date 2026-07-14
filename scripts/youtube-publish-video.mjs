@@ -38,6 +38,11 @@ import {
   upsertPublication,
 } from "./lib/youtube-publication-registry.mjs";
 import { estimateYoutubeUploadQuota } from "./lib/youtube-quota-model.mjs";
+import {
+  descriptionWithPlaylistIdentity,
+  normalizePlaylistText,
+  playlistIdentityMarker,
+} from "./lib/youtube-playlist-discovery.mjs";
 
 function parseArgs(argv) {
   const options = {
@@ -361,6 +366,37 @@ function saveUploadPlaylistRegistry(registry, filePath, metadata) {
   else savePlaylistRegistry(registry, filePath);
 }
 
+function reconcileCampaignPlaylistIdentity({ metadata, assignment, registry, playlistEntry, channel }) {
+  if (!metadata.campaignId) return { playlistEntry, blockers: [], registryChanged: false };
+  const plan = metadata.campaignPlaylist || {};
+  const blockers = [];
+  if (plan.playlistKey !== assignment.key) blockers.push(`campaign playlist key mismatch: expected=${assignment.key} actual=${plan.playlistKey || "missing"}`);
+  if (!plan.ready || !["resolved_existing", "verified_absent"].includes(plan.state)) blockers.push("campaign playlist discovery state is not apply-ready");
+  if (plan.state === "resolved_existing" && !plan.youtubePlaylistId) blockers.push("campaign resolved-existing playlist has no ID");
+  if (plan.state === "verified_absent" && plan.createAllowed !== true) blockers.push("campaign verified-absent playlist is not create-allowed");
+  let entry = playlistEntry;
+  let registryChanged = false;
+  if (!entry) {
+    entry = upsertPlannedUploadPlaylist(registry, assignment, channel, metadata).entry;
+    registryChanged = true;
+  }
+  const currentId = String(entry.youtube_playlist_id || "");
+  const plannedId = String(plan.youtubePlaylistId || "");
+  if (plan.state === "resolved_existing") {
+    if (currentId && currentId !== plannedId) blockers.push(`campaign playlist ID conflicts with registry: planned=${plannedId} registry=${currentId}`);
+    if (!currentId && plannedId) {
+      entry.youtube_playlist_id = plannedId;
+      entry.status = "discovered_existing_campaign_preflight";
+      entry.needsPlaylistDiscovery = false;
+      entry.lastReadbackAt = plan.discoveryGeneratedAt || new Date().toISOString();
+      registryChanged = true;
+    }
+  } else if (currentId) {
+    blockers.push(`campaign planned playlist creation but registry now contains ID=${currentId}`);
+  }
+  return { playlistEntry: entry, blockers, registryChanged };
+}
+
 function findActivePolyglotPublication(registry, metadata) {
   const candidateKey = publicationControlAssignmentKey(metadata);
   const candidateSlot = polyglotSlotKey(metadata);
@@ -473,6 +509,42 @@ async function youtubeJson({ accessToken, method, pathName, query = {}, body }) 
     fail(`YouTube API ${method} ${url.pathname} failed (${response.status}): ${text}`);
   }
   fail(`YouTube API ${method} ${url.pathname} failed after ${attempts} attempts.`);
+}
+
+async function discoverPlaylistImmediatelyBeforeCreate({ accessToken, assignment, campaignPlaylist }) {
+  const playlists = [];
+  let pageToken = "";
+  for (let page = 0; page < 1000; page += 1) {
+    const response = await youtubeJson({
+      accessToken,
+      method: "GET",
+      pathName: "playlists",
+      query: {
+        part: "snippet,status",
+        mine: "true",
+        maxResults: 50,
+        pageToken,
+        fields: "nextPageToken,items(id,snippet(title,description,channelId),status(privacyStatus))",
+      },
+    });
+    playlists.push(...(response.items || []));
+    pageToken = response.nextPageToken || "";
+    if (!pageToken) break;
+  }
+  if (pageToken) fail("Playlist discovery exceeded 1000 pages; refusing playlist creation without complete readback.");
+  const expectedTitles = new Set([
+    normalizePlaylistText(campaignPlaylist?.title),
+    normalizePlaylistText(assignment.title),
+  ].filter(Boolean));
+  const marker = normalizePlaylistText(playlistIdentityMarker(assignment.key));
+  const matches = playlists.filter((row) => (
+    expectedTitles.has(normalizePlaylistText(row.snippet?.title))
+    || normalizePlaylistText(row.snippet?.description).includes(marker)
+  ));
+  if (matches.length > 1) {
+    fail(`Multiple live playlists match ${assignment.key} immediately before create: ${matches.map((row) => row.id).join(",")}`);
+  }
+  return matches[0] || null;
 }
 
 async function youtubeMediaUpload({ accessToken, method = "POST", pathName, query = {}, filePath }) {
@@ -698,6 +770,8 @@ function buildPolyglotProgressItem(publication) {
     updatedAt: publication.lastReadbackAt || publication.uploadedAt || new Date().toISOString(),
     githubRunId: publication.githubRunId,
     githubRunUrl: publication.githubRunUrl,
+    campaignId: publication.campaignId || "",
+    campaignManifestHash: publication.campaignManifestHash || "",
     createdAt: publication.uploadedAt || publication.lastReadbackAt || new Date().toISOString(),
   };
 }
@@ -803,6 +877,8 @@ function buildPublicationRecord({ metadata, ledgerRow, uploadedVideo, channel, t
     } : {}),
     metadataSource: metadata.source || "",
     metadataModel: metadata.model || metadata.geminiModel || "",
+    campaignId: metadata.campaignId || "",
+    campaignManifestHash: metadata.campaignManifestHash || "",
     githubRunId: runId,
     githubRunUrl: githubRunUrl(),
     uploadedAt: ledgerRow.timestamp,
@@ -850,6 +926,14 @@ async function main() {
 
   const assignment = buildUploadPlaylistAssignment(metadata);
   let playlistEntry = findUploadPlaylistEntry(playlistRegistry, assignment, metadata);
+  const campaignPlaylistIdentity = reconcileCampaignPlaylistIdentity({
+    metadata,
+    assignment,
+    registry: playlistRegistry,
+    playlistEntry,
+    channel,
+  });
+  playlistEntry = campaignPlaylistIdentity.playlistEntry;
   const videoPath = resolveExistingPath(options.video || defaultVideoPath(metadataFile, metadata), "video");
   const thumbnailCandidate = options.thumbnail || defaultThumbnailPath(metadataFile, metadata);
   const thumbnailPath = thumbnailCandidate ? resolveExistingPath(thumbnailCandidate, "thumbnail") : "";
@@ -879,6 +963,7 @@ async function main() {
   const metadataIssue = polishedMetadataIssue(metadata);
   const existingPublication = findActiveUploadPublication(publicationRegistry, metadata);
   const blockers = [
+    ...campaignPlaylistIdentity.blockers,
     ...(metadataIssue ? [metadataIssue] : []),
     ...(existingPublication && !options.allowRepublish ? [activeUploadPublicationBlocker(existingPublication, metadata)] : []),
     ...(publishAt && playlistEntry?.status && String(playlistEntry.status).toLowerCase().includes("unlisted")
@@ -975,6 +1060,28 @@ async function main() {
       const result = upsertPlannedUploadPlaylist(playlistRegistry, assignment, channel, metadata);
       playlistEntry = result.entry;
     }
+    if (campaignPlaylistIdentity.registryChanged) {
+      saveUploadPlaylistRegistry(playlistRegistry, options.playlistRegistry, metadata);
+    }
+    if (!playlistEntry.youtube_playlist_id) {
+      if (metadata.campaignId) {
+        if (metadata.campaignPlaylist?.state !== "verified_absent" || metadata.campaignPlaylist?.createAllowed !== true) {
+          fail(`Campaign playlist ${assignment.key} is not authorized for creation by complete discovery.`);
+        }
+        const discovered = await discoverPlaylistImmediatelyBeforeCreate({
+          accessToken,
+          assignment,
+          campaignPlaylist: metadata.campaignPlaylist,
+        });
+        if (discovered?.id) {
+          playlistEntry.youtube_playlist_id = discovered.id;
+          playlistEntry.status = "discovered_existing_immediately_before_create";
+          playlistEntry.needsPlaylistDiscovery = false;
+          playlistEntry.lastReadbackAt = new Date().toISOString();
+          saveUploadPlaylistRegistry(playlistRegistry, options.playlistRegistry, metadata);
+        }
+      }
+    }
     if (!playlistEntry.youtube_playlist_id) {
       const playlistPrivacyStatus = (privacyStatus === "public" || publishAt) ? "public" : "unlisted";
       try {
@@ -986,7 +1093,10 @@ async function main() {
           body: {
             snippet: {
               title: playlistEntry.title || assignment.title,
-              description: playlistEntry.description || assignment.description,
+              description: descriptionWithPlaylistIdentity(
+                playlistEntry.description || assignment.description,
+                assignment.key,
+              ),
             },
             status: { privacyStatus: playlistPrivacyStatus },
           },

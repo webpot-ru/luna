@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import {
   DEFAULT_CHANNEL_CONFIG_PATH,
   findChannelForSupport,
@@ -44,6 +45,8 @@ function parseArgs(argv) {
     allowRepublish: false,
     writeMetadata: false,
     writeCalendar: false,
+    campaignId: "",
+    campaignManifestHash: "",
     json: false,
   };
 
@@ -66,6 +69,8 @@ function parseArgs(argv) {
     else if (arg.startsWith("--limit=")) options.limit = Number(arg.slice("--limit=".length));
     else if (arg.startsWith("--limit-per-channel=")) options.limitPerChannel = Number(arg.slice("--limit-per-channel=".length));
     else if (arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(arg.slice("--min-future-minutes=".length));
+    else if (arg.startsWith("--campaign-id=")) options.campaignId = arg.slice("--campaign-id=".length);
+    else if (arg.startsWith("--campaign-manifest-hash=")) options.campaignManifestHash = arg.slice("--campaign-manifest-hash=".length);
     else options.inputs.push(arg);
   }
   return options;
@@ -90,6 +95,8 @@ function usage() {
     "  --write-metadata              Write privacyStatus=private and publishAt into each scheduled youtube_metadata.json.",
     "  --write-calendar              Upsert scheduled reservations into the durable calendar file.",
     "  --allow-republish             Do not skip rows that already have an active publication registry entry.",
+    "  --campaign-id=<id>            Require and reuse only calendar claims owned by this campaign.",
+    "  --campaign-manifest-hash=<h>  Require the exact immutable campaign manifest hash.",
     "  --output=<file>               Write schedule report. Defaults to outputs/youtube-publish-schedule-<timestamp>.json.",
     "  --json                        Print compact JSON summary.",
   ].join("\n");
@@ -482,6 +489,8 @@ function rowFromReservation(raw, reservation, options) {
     calendarReservationAction: "reused",
     analyticsCheckpointsAt,
     existingPublication: null,
+    campaignId: reservation.campaignId || raw.campaignId || "",
+    campaignManifestHash: reservation.campaignManifestHash || raw.campaignManifestHash || "",
     blockers: [],
     publishMillis,
   };
@@ -500,6 +509,8 @@ function reservationFromRow(row, existing = {}) {
     targetLangs: row.targetLangs || [],
     targetLangsCsv: row.targetLangsCsv || "",
     targetLangsHash: row.targetLangsHash || "",
+    campaignId: row.campaignId || existing.campaignId || "",
+    campaignManifestHash: row.campaignManifestHash || existing.campaignManifestHash || "",
     setId: row.setId || "",
     supportLang: normalizeLanguageCode(row.supportLang),
     targetLang: normalizeLanguageCode(row.targetLang),
@@ -545,6 +556,8 @@ function writeScheduledMetadata(row) {
   metadata.privacyStatus = "private";
   metadata.publishAt = row.publishAt;
   metadata.scheduledPublishAt = row.publishAt;
+  if (row.campaignId) metadata.campaignId = row.campaignId;
+  if (row.campaignManifestHash) metadata.campaignManifestHash = row.campaignManifestHash;
   metadata.publishSchedule = {
     schemaVersion: 1,
     status: "scheduled",
@@ -640,6 +653,8 @@ async function main() {
       targetLangs: polyglot ? targetLangs : [],
       targetLangsCsv: polyglot ? targetLangs.join(",") : "",
       targetLangsHash: polyglot ? String(metadata.targetLangsHash || "") : "",
+      campaignId: options.campaignId || String(metadata.campaignId || ""),
+      campaignManifestHash: options.campaignManifestHash || String(metadata.campaignManifestHash || ""),
       setId: metadata.setId || "",
       supportLang,
       targetLang,
@@ -656,6 +671,7 @@ async function main() {
     return {
       ...row,
       targetPlanSlotOrdinal: targetPlan.ordinalsByAssignmentKey.get(key) ?? null,
+      existingCalendarReservation: reservationByAssignment.get(key) || null,
     };
   }).sort((a, b) => [
     a.channelKey,
@@ -686,6 +702,17 @@ async function main() {
     const blockers = [...raw.blockers];
     if (raw.existingPublication && !options.allowRepublish) {
       blockers.push(`existing active publication ${raw.existingPublication.youtubeVideoId}`);
+    }
+    if (options.campaignId) {
+      if (!raw.existingCalendarReservation) {
+        blockers.push(`campaign assignment is not claimed in the durable calendar: ${options.campaignId}`);
+      } else if (raw.existingCalendarReservation.campaignId !== options.campaignId) {
+        blockers.push(`calendar claim belongs to another campaign: ${raw.existingCalendarReservation.campaignId || "unowned"}`);
+      } else if (raw.existingCalendarReservation.campaignManifestHash !== options.campaignManifestHash) {
+        blockers.push("calendar claim manifest hash does not match the requested campaign");
+      }
+    } else if (raw.existingCalendarReservation?.campaignId) {
+      blockers.push(`calendar assignment is reserved by campaign ${raw.existingCalendarReservation.campaignId}`);
     }
     const skipped = blockers.length > 0;
     if (skipped) {
@@ -734,7 +761,7 @@ async function main() {
       fillEarliest,
     });
     const calendarReservationKey = reservationAssignmentKey(raw);
-    const existingCalendarReservation = reservationByAssignment.get(calendarReservationKey);
+    const existingCalendarReservation = raw.existingCalendarReservation;
 
     if (
       existingCalendarReservation
@@ -905,7 +932,20 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(error.stack || error.message);
-  process.exit(1);
-});
+export {
+  addDaysYmd,
+  channelPolicy,
+  findFreeSlot,
+  isActiveCalendarReservation,
+  slotKey,
+  wallTimeToUtcIso,
+  ymdInZone,
+};
+
+const isCli = process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
+if (isCli) {
+  main().catch((error) => {
+    console.error(error.stack || error.message);
+    process.exit(1);
+  });
+}
