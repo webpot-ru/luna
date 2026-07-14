@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { generateVectorEngineCampaignMetadataSubBatches } from "./generate-youtube-campaign-metadata.mjs";
 import { callVectorEngineGeminiJson, getVectorEngineGeminiKey } from "./lib/vectorengine-gemini.mjs";
 
 const DEFAULT_MODEL = process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash";
@@ -32,7 +33,9 @@ function parseArgs(argv) {
     envFiles: [".env", ".env.local", ".env.vectorengine.local"],
     model: DEFAULT_MODEL,
     outDir: DEFAULT_OUTPUT_DIR,
-    confirmSpend: false
+    confirmSpend: false,
+    campaignMetadataCanary: false,
+    subBatchSize: 2,
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -46,6 +49,8 @@ function parseArgs(argv) {
     if (arg === "--env-file" || arg.startsWith("--env-file=")) args.envFiles.push(readValue());
     else if (arg === "--model" || arg.startsWith("--model=")) args.model = readValue();
     else if (arg === "--out-dir" || arg.startsWith("--out-dir=")) args.outDir = readValue();
+    else if (arg === "--sub-batch-size" || arg.startsWith("--sub-batch-size=")) args.subBatchSize = Number(readValue());
+    else if (arg === "--campaign-metadata-canary") args.campaignMetadataCanary = true;
     else if (arg === "--confirm-spend") args.confirmSpend = true;
     else if (arg === "--help" || arg === "-h") args.help = true;
     else throw new Error(`Unknown argument: ${arg}`);
@@ -59,6 +64,7 @@ function printHelp() {
 
 Usage:
   node scripts/check-vectorengine-gemini.mjs --confirm-spend
+  node scripts/check-vectorengine-gemini.mjs --campaign-metadata-canary --sub-batch-size=2 --confirm-spend
   node scripts/check-vectorengine-gemini.mjs --env-file /path/to/.env --confirm-spend
 
 Env:
@@ -106,26 +112,70 @@ async function main() {
     required: ["status", "provider", "modelFamily"]
   };
   const startedAt = new Date().toISOString();
-  const result = await callVectorEngineGeminiJson({
-    model: args.model,
-    schema,
-    maxOutputTokens: 256,
-    temperature: 0,
-    systemInstruction: "Return strict JSON only. Do not use Markdown.",
-    prompt: [
-      "Return a tiny JSON health check for this API connection.",
-      'Use exactly: {"status":"ok","provider":"vectorengine","modelFamily":"gemini"}'
-    ].join("\n")
-  });
+  let result;
+  let mode = "tiny_health";
+  if (args.campaignMetadataCanary) {
+    mode = "campaign_metadata";
+    process.env.VECTORENGINE_SEND_RESPONSE_SCHEMA = "1";
+    result = await generateVectorEngineCampaignMetadataSubBatches([
+      {
+        requestId: "canary|ordinary|EN|DE",
+        videoType: "ordinary",
+        supportLang: "EN",
+        targetLang: "DE",
+        targetLanguageName: "German",
+        deckTitle: "Cooking Actions",
+        level: "A1",
+        wordCount: 25,
+        courseUrl: "https://flashcardsluna.com/en/courses/cooking-actions/study/standard?langs=de",
+        baseTitle: "Learn Cooking Actions in German",
+        baseDescription: "Practice essential German cooking verbs with pronunciation and repeat pauses.",
+        sampleWords: ["cook", "cut", "mix", "boil"],
+      },
+      {
+        requestId: "canary|ordinary|ES-419|FR",
+        videoType: "ordinary",
+        supportLang: "ES-419",
+        targetLang: "FR",
+        targetLanguageName: "French",
+        deckTitle: "Cooking Actions",
+        level: "A1",
+        wordCount: 25,
+        courseUrl: "https://flashcardsluna.com/es/courses/cooking-actions/study/standard?langs=fr",
+        baseTitle: "Aprende acciones de cocina en frances",
+        baseDescription: "Practica verbos esenciales de cocina en frances con pronunciacion y pausas para repetir.",
+        sampleWords: ["cocinar", "cortar", "mezclar", "hervir"],
+      },
+    ], {
+      model: args.model,
+      subBatchSize: args.subBatchSize,
+    });
+    if (result.value.items.length !== 2 || result.providerCallCount !== Math.ceil(2 / args.subBatchSize)) {
+      throw new Error(`Unexpected VectorEngine campaign metadata canary response: ${JSON.stringify(result.value)}`);
+    }
+  } else {
+    result = await callVectorEngineGeminiJson({
+      model: args.model,
+      schema,
+      maxOutputTokens: 256,
+      temperature: 0,
+      systemInstruction: "Return strict JSON only. Do not use Markdown.",
+      prompt: [
+        "Return a tiny JSON health check for this API connection.",
+        '{"status":"ok","provider":"vectorengine","modelFamily":"gemini"}'
+      ].join("\n")
+    });
 
-  if (result.status !== "ok" || result.provider !== "vectorengine" || result.modelFamily !== "gemini") {
-    throw new Error(`Unexpected VectorEngine Gemini smoke response: ${JSON.stringify(result)}`);
+    if (result.status !== "ok" || result.provider !== "vectorengine" || result.modelFamily !== "gemini") {
+      throw new Error(`Unexpected VectorEngine Gemini smoke response: ${JSON.stringify(result)}`);
+    }
   }
 
   fs.mkdirSync(args.outDir, { recursive: true });
-  const outputPath = path.join(args.outDir, `vectorengine-gemini-smoke-${timestamp()}.json`);
+  const outputPath = path.join(args.outDir, `vectorengine-gemini-${mode}-${timestamp()}.json`);
   fs.writeFileSync(outputPath, `${JSON.stringify({
     status: "ok",
+    mode,
     provider: "vectorengine",
     backend: "gemini",
     model: args.model,
@@ -138,6 +188,7 @@ async function main() {
 
   console.log(JSON.stringify({
     status: "ok",
+    mode,
     backend: "vectorengine-gemini",
     model: args.model,
     keyName,

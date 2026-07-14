@@ -8,7 +8,9 @@ import { spawnSync } from "node:child_process";
 
 import {
   CAMPAIGN_MAX_OUTPUT_TOKENS,
+  DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE,
   buildCampaignMetadataPrompt,
+  generateVectorEngineCampaignMetadataSubBatches,
   loadReusableMetadataCheckpoint,
   validateCampaignMetadataResponse,
 } from "./generate-youtube-campaign-metadata.mjs";
@@ -33,6 +35,50 @@ const response = {
 };
 assert.equal(validateCampaignMetadataResponse(response, tasks).size, 2);
 assert.throws(() => validateCampaignMetadataResponse({ items: [response.items[0]] }, tasks), /response mismatch/);
+assert.equal(DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE, 2);
+const campaignWorkflow = fs.readFileSync(".github/workflows/youtube-publication-campaign.yml", "utf8");
+assert.match(
+  campaignWorkflow,
+  /  metadata:\n[\s\S]*?strategy:\n\s+fail-fast: false\n\s+max-parallel: 1\n\s+matrix:/u,
+  "campaign metadata routes must be serialized to protect the shared Gemini keys",
+);
+
+const vectorTasks = Array.from({ length: 5 }, (_, index) => ({
+  requestId: `ordinary|deck|EN|T${index + 1}`,
+  videoType: "ordinary",
+  supportLang: "EN",
+  targetLang: `T${index + 1}`,
+}));
+const vectorCalls = [];
+const vectorResult = await generateVectorEngineCampaignMetadataSubBatches(vectorTasks, {
+  model: "gemini-test",
+  callProvider: async (request) => {
+    const count = request.schema.properties.items.minItems;
+    const offset = vectorCalls.reduce((sum, value) => sum + value, 0);
+    vectorCalls.push(count);
+    return {
+      items: vectorTasks.slice(offset, offset + count).map((task) => ({
+        requestId: task.requestId,
+        title: "Title",
+        description: "Description",
+        tags: ["tag"],
+        hashtags: ["#tag"],
+      })),
+    };
+  },
+});
+assert.deepEqual(vectorCalls, [2, 2, 1]);
+assert.equal(vectorResult.providerCallCount, 3);
+assert.deepEqual(vectorResult.value.items.map((item) => item.requestId), vectorTasks.map((task) => task.requestId));
+assert.equal(vectorResult.batchSizeByRequestId.get(vectorTasks[0].requestId), 2);
+assert.equal(vectorResult.batchSizeByRequestId.get(vectorTasks[4].requestId), 1);
+await assert.rejects(() => generateVectorEngineCampaignMetadataSubBatches(vectorTasks.slice(0, 2), {
+  callProvider: async () => ({ items: [response.items[0]] }),
+}), /Unexpected campaign metadata requestId|response mismatch/);
+await assert.rejects(() => generateVectorEngineCampaignMetadataSubBatches(vectorTasks, {
+  subBatchSize: 3,
+  callProvider: async () => ({ items: [] }),
+}), /sub-batch size must be an integer between 1 and 2/);
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), "youtube-campaign-metadata-copy-"));
 const configDir = path.join(root, "config");

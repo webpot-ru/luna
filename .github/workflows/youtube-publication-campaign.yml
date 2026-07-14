@@ -157,7 +157,7 @@ jobs:
     environment: ${{ matrix.youtube_environment }}
     strategy:
       fail-fast: false
-      max-parallel: 2
+      max-parallel: 1
       matrix: ${{ fromJSON(needs.preflight.outputs.metadata_matrix) }}
     steps:
       - uses: actions/checkout@v4
@@ -255,6 +255,7 @@ jobs:
             --route-key="${{ matrix.route_key }}" \
             --output-root="outputs/youtube-campaign-metadata/${{ matrix.route_key }}" \
             --batch-size=5 \
+            --vectorengine-sub-batch-size=2 \
             --rate-limit-ms=15000 \
             --gemini-backend="$BACKEND" \
             "${VECTOR_ARGS[@]}" \

@@ -22,6 +22,8 @@ import {
 const APPLY_CONFIRM = "GENERATE_YOUTUBE_CAMPAIGN_METADATA";
 const VECTOR_CONFIRM = "USE_VECTORENGINE_METADATA";
 export const CAMPAIGN_MAX_OUTPUT_TOKENS = GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS;
+export const MAX_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE = 2;
+export const DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE = 2;
 const ITEM_SCHEMA = {
   type: "object",
   properties: {
@@ -41,6 +43,9 @@ function parseArgs(argv) {
     registry: "config/youtube-publication-campaigns.json",
     outputRoot: "outputs/youtube-campaign-metadata",
     batchSize: 5,
+    vectorengineSubBatchSize: Number(
+      process.env.VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE || DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE,
+    ),
     rateLimitMs: 15000,
     geminiBackend: "api",
     model: process.env.GEMINI_MODEL || process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash",
@@ -58,6 +63,9 @@ function parseArgs(argv) {
     else if (arg === "--registry" || arg.startsWith("--registry=")) options.registry = value();
     else if (arg === "--output-root" || arg.startsWith("--output-root=")) options.outputRoot = value();
     else if (arg === "--batch-size" || arg.startsWith("--batch-size=")) options.batchSize = Number(value());
+    else if (arg === "--vectorengine-sub-batch-size" || arg.startsWith("--vectorengine-sub-batch-size=")) {
+      options.vectorengineSubBatchSize = Number(value());
+    }
     else if (arg === "--rate-limit-ms" || arg.startsWith("--rate-limit-ms=")) options.rateLimitMs = Number(value());
     else if (arg === "--gemini-backend" || arg.startsWith("--gemini-backend=")) options.geminiBackend = value();
     else if (arg === "--model" || arg.startsWith("--model=")) options.model = value();
@@ -292,30 +300,76 @@ export function validateCampaignMetadataResponse(value, tasks) {
   return byId;
 }
 
+function buildCampaignMetadataRequest(taskRequests, options) {
+  const validateValue = (value) => validateCampaignMetadataResponse(value, taskRequests);
+  return {
+    prompt: buildCampaignMetadataPrompt(taskRequests),
+    schema: batchSchema(taskRequests.length),
+    model: options.model,
+    maxOutputTokens: CAMPAIGN_MAX_OUTPUT_TOKENS,
+    temperature: 0.25,
+    systemInstruction: `Return strict JSON for all ${taskRequests.length} FlashcardsLuna metadata tasks. No Markdown or omitted items.`,
+    validateValue,
+  };
+}
+
+export async function generateVectorEngineCampaignMetadataSubBatches(taskRequests, {
+  model,
+  subBatchSize = DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE,
+  callProvider = callVectorEngineGeminiJson,
+} = {}) {
+  if (!Array.isArray(taskRequests) || taskRequests.length === 0) {
+    throw new Error("VectorEngine campaign metadata requires at least one task.");
+  }
+  if (!Number.isInteger(subBatchSize) || subBatchSize < 1 || subBatchSize > MAX_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE) {
+    throw new Error(`VectorEngine campaign sub-batch size must be an integer between 1 and ${MAX_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE}.`);
+  }
+
+  const itemsById = new Map();
+  const batchSizeByRequestId = new Map();
+  let providerCallCount = 0;
+  for (let offset = 0; offset < taskRequests.length; offset += subBatchSize) {
+    const subBatch = taskRequests.slice(offset, offset + subBatchSize);
+    const request = buildCampaignMetadataRequest(subBatch, { model });
+    const value = await callProvider(request);
+    providerCallCount += 1;
+    const byId = validateCampaignMetadataResponse(value, subBatch);
+    for (const task of subBatch) {
+      const item = byId.get(task.requestId);
+      if (itemsById.has(task.requestId)) {
+        throw new Error(`Duplicate VectorEngine campaign metadata requestId across sub-batches: ${task.requestId}`);
+      }
+      itemsById.set(task.requestId, item);
+      batchSizeByRequestId.set(task.requestId, subBatch.length);
+    }
+  }
+
+  const value = { items: taskRequests.map((task) => itemsById.get(task.requestId)) };
+  validateCampaignMetadataResponse(value, taskRequests);
+  return {
+    value,
+    model,
+    providerCallCount,
+    vectorengineSubBatchSize: subBatchSize,
+    batchSizeByRequestId,
+  };
+}
+
 async function generateBatch(tasks, options) {
   const backends = parseGeminiBackendChain(options.geminiBackend, {
     hasDirectApiKey: getDirectGeminiApiKeys().length > 0,
   });
   const taskRequests = tasks.map((task) => task.request);
   const validateValue = (value) => validateCampaignMetadataResponse(value, taskRequests);
-  const request = {
-    prompt: buildCampaignMetadataPrompt(taskRequests),
-    schema: batchSchema(tasks.length),
-    model: options.model,
-    maxOutputTokens: CAMPAIGN_MAX_OUTPUT_TOKENS,
-    temperature: 0.25,
-    systemInstruction: `Return strict JSON for all ${tasks.length} FlashcardsLuna metadata tasks. No Markdown or omitted items.`,
-    validateValue,
-  };
+  const request = buildCampaignMetadataRequest(taskRequests, options);
   const result = await runGeminiBackendChain({
     backends,
     providers: {
       api: async () => callGeminiApiJsonWithKeys(request),
-      vectorengine: async () => {
-        const value = await callVectorEngineGeminiJson(request);
-        validateValue(value);
-        return { value, model: options.model };
-      },
+      vectorengine: async () => generateVectorEngineCampaignMetadataSubBatches(taskRequests, {
+        model: options.model,
+        subBatchSize: options.vectorengineSubBatchSize,
+      }),
     },
   });
   return { ...result, byId: validateValue(result.value) };
@@ -379,6 +433,11 @@ export async function buildCampaignMetadata(options) {
   if (!Number.isInteger(options.batchSize) || options.batchSize < 1 || options.batchSize > 10) {
     throw new Error("--batch-size must be an integer between 1 and 10");
   }
+  if (!Number.isInteger(options.vectorengineSubBatchSize)
+    || options.vectorengineSubBatchSize < 1
+    || options.vectorengineSubBatchSize > MAX_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE) {
+    throw new Error(`--vectorengine-sub-batch-size must be an integer between 1 and ${MAX_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE}`);
+  }
   if (!Number.isFinite(options.rateLimitMs) || options.rateLimitMs < 0) throw new Error("--rate-limit-ms must be non-negative");
   const backendNames = String(options.geminiBackend || "").toLowerCase().split(",").map((item) => item.trim()).filter(Boolean);
   if (backendNames.includes("vectorengine") && options.confirmVectorengine !== VECTOR_CONFIRM) {
@@ -410,6 +469,10 @@ export async function buildCampaignMetadata(options) {
     batchSize: options.batchSize,
     batchCount: Math.ceil(taskPlans.length / options.batchSize),
     plannedProviderCalls: options.apply ? Math.ceil(taskPlans.length / options.batchSize) : 0,
+    vectorengineSubBatchSize: options.vectorengineSubBatchSize,
+    maxVectorengineProviderCalls: options.apply
+      ? Math.ceil(taskPlans.length / options.vectorengineSubBatchSize)
+      : 0,
     providerCalls: 0,
     attemptedBatchCount: 0,
     reusedBatchCount: 0,
@@ -456,7 +519,7 @@ export async function buildCampaignMetadata(options) {
           backend: provider.backend,
           backendChain: backendNames,
           model: provider.model || options.model,
-          batchSize: tasks.length,
+          batchSize: provider.batchSizeByRequestId?.get(task.assignment.assignmentKey) || tasks.length,
         });
         const artifactPath = path.join(options.outputRoot, "metadata", `${safeSegment(task.assignment.assignmentKey)}.json`);
         fs.mkdirSync(path.dirname(artifactPath), { recursive: true });
