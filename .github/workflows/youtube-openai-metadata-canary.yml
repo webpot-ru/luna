@@ -1,0 +1,55 @@
+name: YouTube OpenAI Metadata Canary
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_openai_metadata:
+        description: "Type USE_OPENAI_METADATA to spend one OpenAI metadata request."
+        required: true
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: youtube-openai-metadata-canary
+  cancel-in-progress: false
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci || npm install
+
+      - name: Run exactly one OpenAI metadata request
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_METADATA_MODEL: ${{ vars.OPENAI_METADATA_MODEL }}
+          OPENAI_SERVICE_TIER: ${{ vars.OPENAI_SERVICE_TIER }}
+          OPENAI_TIMEOUT_MS: "600000"
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.confirm_openai_metadata }}" != "USE_OPENAI_METADATA" ]; then
+            echo "::error::confirm_openai_metadata must equal USE_OPENAI_METADATA"
+            exit 1
+          fi
+          node scripts/check-openai-youtube-metadata.mjs \
+            --confirm=USE_OPENAI_METADATA \
+            --output=outputs/openai-youtube-metadata-canary/report.json
+
+      - name: Upload canary evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-openai-metadata-canary-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: outputs/openai-youtube-metadata-canary/report.json

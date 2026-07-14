@@ -84,6 +84,7 @@
     "test:youtube-publication-campaign-rearm": "node scripts/rearm-youtube-publication-campaign.test.mjs",
     "test:youtube-campaign-playlist-uploader": "node scripts/youtube-campaign-playlist-uploader.test.mjs",
     "test:youtube-campaign-metadata": "node scripts/youtube-campaign-metadata.test.mjs",
+    "test:youtube-openai-metadata-canary": "node scripts/check-openai-youtube-metadata.test.mjs",
     "test:youtube-polyglot-campaign-claim": "node scripts/plan-polyglot-youtube-publish.test.mjs",
     "test:youtube-polyglot-state": "node scripts/check-youtube-polyglot-state.test.mjs",
     "test:polyglot-video-duration": "node scripts/check-polyglot-video-duration.test.mjs",
