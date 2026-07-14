@@ -217,9 +217,12 @@ function validate(metadata, file) {
   if (!metadata.targetLang) blockers.push("missing targetLang");
   if (!title) blockers.push("missing title");
   if (!description) blockers.push("missing description");
-  if (titleLength < 25) blockers.push(`title too short for search intent: ${titleLength}`);
+  const isCjk = ["ZH", "JA", "KO"].includes(String(metadata.supportLang).toUpperCase());
+  const minTitleLength = isCjk ? 15 : 25;
+  const minDescLength = isCjk ? 150 : 250;
+  if (titleLength < minTitleLength) blockers.push(`title too short for search intent: ${titleLength}`);
   if (titleLength > 100) blockers.push(`title too long for YouTube upload: ${titleLength}`);
-  if (descriptionLength < 250) blockers.push(`description too short for search/usefulness: ${descriptionLength}`);
+  if (descriptionLength < minDescLength) blockers.push(`description too short for search/usefulness: ${descriptionLength}`);
   if (descriptionLength > 5000) blockers.push(`description too long for YouTube upload: ${descriptionLength}`);
   if (!courseUrl) blockers.push("missing courseUrl");
   if (courseUrl && expectedCourseUrl && courseUrl !== expectedCourseUrl) {
