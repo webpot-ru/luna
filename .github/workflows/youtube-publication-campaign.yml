@@ -49,6 +49,10 @@ on:
         description: "Apply only: USE_VECTORENGINE_METADATA permits VectorEngine only after both direct Gemini keys fail."
         required: false
         default: ""
+      confirm_openai_metadata:
+        description: "Apply only: USE_OPENAI_METADATA permits OpenAI Responses metadata generation."
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -222,6 +226,10 @@ jobs:
       - name: Generate route-batched campaign metadata before render/TTS
         shell: bash
         env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_METADATA_MODEL: ${{ vars.OPENAI_METADATA_MODEL }}
+          OPENAI_SERVICE_TIER: ${{ vars.OPENAI_SERVICE_TIER }}
+          OPENAI_TIMEOUT_MS: "600000"
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
@@ -237,13 +245,21 @@ jobs:
         run: |
           set -euo pipefail
           BACKEND="api"
+          OPENAI_ARGS=()
           VECTOR_ARGS=()
           RESUME_ARGS=()
+          if [ "${{ inputs.confirm_openai_metadata }}" = "USE_OPENAI_METADATA" ]; then
+            BACKEND="openai,api"
+            OPENAI_ARGS+=("--confirm-openai=USE_OPENAI_METADATA")
+          elif [ -n "${{ inputs.confirm_openai_metadata }}" ]; then
+            echo "::error::confirm_openai_metadata must be empty or USE_OPENAI_METADATA"
+            exit 1
+          fi
           if [ -n "${{ inputs.metadata_resume_run_id }}" ]; then
             RESUME_ARGS+=("--resume-existing")
           fi
           if [ "${{ inputs.confirm_vectorengine_metadata }}" = "USE_VECTORENGINE_METADATA" ]; then
-            BACKEND="api,vectorengine"
+            BACKEND="${BACKEND},vectorengine"
             VECTOR_ARGS+=("--confirm-vectorengine=USE_VECTORENGINE_METADATA")
           elif [ -n "${{ inputs.confirm_vectorengine_metadata }}" ]; then
             echo "::error::confirm_vectorengine_metadata must be empty or USE_VECTORENGINE_METADATA"
@@ -258,6 +274,9 @@ jobs:
             --vectorengine-sub-batch-size=2 \
             --rate-limit-ms=15000 \
             --gemini-backend="$BACKEND" \
+            --openai-model="${OPENAI_METADATA_MODEL:-gpt-5.4-mini-2026-03-17}" \
+            --openai-service-tier="${OPENAI_SERVICE_TIER:-auto}" \
+            "${OPENAI_ARGS[@]}" \
             "${VECTOR_ARGS[@]}" \
             "${RESUME_ARGS[@]}" \
             --apply \

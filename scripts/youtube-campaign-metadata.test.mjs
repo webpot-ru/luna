@@ -8,12 +8,14 @@ import { spawnSync } from "node:child_process";
 
 import {
   CAMPAIGN_MAX_OUTPUT_TOKENS,
+  OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS,
   DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE,
   buildCampaignMetadataPrompt,
   generateVectorEngineCampaignMetadataSubBatches,
   loadReusableMetadataCheckpoint,
   validateCampaignMetadataResponse,
 } from "./generate-youtube-campaign-metadata.mjs";
+import { callOpenAiStructuredJson, resolveOpenAiServiceTier } from "./lib/openai-structured-json.mjs";
 
 const tasks = [
   { requestId: "ordinary|deck|EN|DE", videoType: "ordinary", supportLang: "EN", targetLang: "DE" },
@@ -24,6 +26,7 @@ assert.match(prompt, /2 independent FlashcardsLuna/);
 assert.match(prompt, /ordinary\|deck\|EN\|DE/);
 assert.match(prompt, /no more than 900 Unicode characters/);
 assert.equal(CAMPAIGN_MAX_OUTPUT_TOKENS, 60000);
+assert.equal(OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS, 12000);
 const response = {
   items: tasks.map((task) => ({
     requestId: task.requestId,
@@ -42,6 +45,66 @@ assert.match(
   /  metadata:\n[\s\S]*?strategy:\n\s+fail-fast: false\n\s+max-parallel: 1\n\s+matrix:/u,
   "campaign metadata routes must be serialized to protect the shared Gemini keys",
 );
+assert.match(campaignWorkflow, /OPENAI_API_KEY: \$\{\{ secrets\.OPENAI_API_KEY \}\}/u);
+assert.match(campaignWorkflow, /BACKEND="openai,api"/u);
+assert.match(campaignWorkflow, /--confirm-openai=USE_OPENAI_METADATA/u);
+
+const openAiBodies = [];
+const openAiResult = await callOpenAiStructuredJson({
+  apiKey: "test-key",
+  model: "gpt-test",
+  serviceTier: "auto",
+  prompt,
+  schema: {
+    type: "object",
+    properties: {
+      items: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            requestId: { type: "string" },
+            title: { type: "string" },
+          },
+        },
+      },
+    },
+  },
+  validateValue: (value) => assert.equal(value.items.length, 1),
+  fetchImpl: async (_url, init) => {
+    openAiBodies.push(JSON.parse(init.body));
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({
+        id: "resp-test",
+        status: "completed",
+        model: "gpt-test-2026-01-01",
+        service_tier: "data_sharing_incentive",
+        output: [{
+          type: "message",
+          content: [{ type: "output_text", text: JSON.stringify({ items: [{ requestId: tasks[0].requestId, title: "Title" }] }) }],
+        }],
+        usage: {
+          input_tokens: 100,
+          output_tokens: 25,
+          total_tokens: 125,
+          output_tokens_details: { reasoning_tokens: 5 },
+        },
+      }),
+    };
+  },
+});
+assert.equal(openAiResult.provider, "openai");
+assert.equal(openAiResult.serviceTier, "data_sharing_incentive");
+assert.equal(openAiResult.usage.totalTokens, 125);
+assert.equal(openAiBodies[0].store, false);
+assert.equal(openAiBodies[0].service_tier, "auto");
+assert.equal(openAiBodies[0].text.format.strict, true);
+assert.equal(openAiBodies[0].text.format.schema.additionalProperties, false);
+assert.deepEqual(openAiBodies[0].text.format.schema.required, ["items"]);
+assert.equal(openAiBodies[0].text.format.schema.properties.items.items.additionalProperties, false);
+assert.throws(() => resolveOpenAiServiceTier("batch"), /Expected auto, default or flex/);
 
 const vectorTasks = Array.from({ length: 5 }, (_, index) => ({
   requestId: `ordinary|deck|EN|T${index + 1}`,

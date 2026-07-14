@@ -40,6 +40,8 @@ function parseArgs(argv) {
     confirmRender: "",
     confirmTts: "",
     confirmMetadataSpend: "",
+    confirmOpenAiMetadata: "",
+    confirmVectorengineMetadata: "",
     confirmThumbnailSpend: "",
     confirmYoutubeWrite: "",
     confirmPublic: "PUBLISH_PUBLIC",
@@ -85,6 +87,8 @@ function parseArgs(argv) {
     else if (arg === "--confirm-render" || arg.startsWith("--confirm-render=")) options.confirmRender = readValue();
     else if (arg === "--confirm-tts" || arg.startsWith("--confirm-tts=")) options.confirmTts = readValue();
     else if (arg === "--confirm-metadata-spend" || arg.startsWith("--confirm-metadata-spend=")) options.confirmMetadataSpend = readValue();
+    else if (arg === "--confirm-openai-metadata" || arg.startsWith("--confirm-openai-metadata=")) options.confirmOpenAiMetadata = readValue();
+    else if (arg === "--confirm-vectorengine-metadata" || arg.startsWith("--confirm-vectorengine-metadata=")) options.confirmVectorengineMetadata = readValue();
     else if (arg === "--confirm-thumbnail-spend" || arg.startsWith("--confirm-thumbnail-spend=")) options.confirmThumbnailSpend = readValue();
     else if (arg === "--confirm-youtube-write" || arg.startsWith("--confirm-youtube-write=")) options.confirmYoutubeWrite = readValue();
     else if (arg === "--confirm-public" || arg.startsWith("--confirm-public=")) options.confirmPublic = readValue();
@@ -123,6 +127,8 @@ function usage() {
     "Apply defaults to publish_mode=scheduled and lets the shared channel calendar",
     "reserve the earliest free slot; direct --publish-at is disabled for apply.",
     "Dispatch is fire-and-forget by default; use --watch only for an explicitly approved bounded diagnostic.",
+    "OpenAI Responses metadata is enabled only with --confirm-openai-metadata=USE_OPENAI_METADATA.",
+    "VectorEngine remains the third provider and requires --confirm-vectorengine-metadata=USE_VECTORENGINE_METADATA.",
     "It never uploads videos directly. Playlist-classified transient failures can",
     "dispatch youtube-polyglot-playlist-insert-repair.yml after a delay without reuploading.",
   ].join("\n");
@@ -207,6 +213,12 @@ function ensureSafeOptions(options) {
   }
   if (options.apply && options.confirmMetadataSpend !== "GENERATE_POLYGLOT_METADATA") {
     throw new Error("Live Polyglot bulk dispatch requires --confirm-metadata-spend=GENERATE_POLYGLOT_METADATA.");
+  }
+  if (options.apply && options.confirmOpenAiMetadata !== "USE_OPENAI_METADATA") {
+    throw new Error("Live Polyglot bulk dispatch requires --confirm-openai-metadata=USE_OPENAI_METADATA.");
+  }
+  if (options.apply && options.confirmVectorengineMetadata !== "USE_VECTORENGINE_METADATA") {
+    throw new Error("Live Polyglot bulk dispatch requires --confirm-vectorengine-metadata=USE_VECTORENGINE_METADATA.");
   }
   if (options.apply && options.confirmYoutubeWrite !== "APPLY_POLYGLOT_YOUTUBE_UPLOAD") {
     throw new Error("Live Polyglot bulk dispatch requires --confirm-youtube-write=APPLY_POLYGLOT_YOUTUBE_UPLOAD.");
@@ -482,6 +494,8 @@ function workflowFieldsForJob(job, options) {
     create_playlists: boolInput(options.createPlaylists),
     generate_thumbnails: boolInput(options.generateThumbnails),
     confirm_metadata_spend: options.confirmMetadataSpend,
+    confirm_openai_metadata: options.confirmOpenAiMetadata,
+    confirm_vectorengine_metadata: options.confirmVectorengineMetadata,
     confirm_thumbnail_spend: options.confirmThumbnailSpend,
     confirm_youtube_write: options.confirmYoutubeWrite,
     confirm_public: options.confirmPublic,

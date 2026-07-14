@@ -64,4 +64,11 @@ assert.equal(defaultReport.supports[0].bundle, "romance_core");
 const explicitOverride = run(["--english-bundle=global_europe_core"], "override");
 assert.equal(explicitOverride.supports[0].bundle, "global_europe_core");
 
+const dispatcherSource = fs.readFileSync("scripts/dispatch-youtube-polyglot-bulk-publish.mjs", "utf8");
+assert.match(dispatcherSource, /--confirm-openai-metadata=USE_OPENAI_METADATA/u);
+assert.match(dispatcherSource, /--confirm-vectorengine-metadata=USE_VECTORENGINE_METADATA/u);
+const workflowSource = fs.readFileSync(".github/workflows/youtube-polyglot-video-publish.yml", "utf8");
+assert.match(workflowSource, /METADATA_CHAIN="openai,\$METADATA_CHAIN"/u);
+assert.match(workflowSource, /METADATA_CHAIN="\$METADATA_CHAIN,vectorengine"/u);
+
 console.log("youtube Polyglot bulk dispatcher tests passed");

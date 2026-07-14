@@ -33,6 +33,7 @@ export function isRecoverableGeminiProviderError(error) {
   const message = boundedError(error);
   return [
     /no direct Gemini API keys configured/iu,
+    /no OpenAI API key configured/iu,
     /returned no text/iu,
     /did not return JSON/iu,
     /did not return every requestId/iu,
@@ -86,11 +87,11 @@ export function parseGeminiBackendChain(value, { hasDirectApiKey = false } = {})
     .split(",")
     .map((backend) => backend.trim().toLowerCase())
     .filter(Boolean);
-  const supported = new Set(["api", "vectorengine", "cli"]);
+  const supported = new Set(["openai", "api", "vectorengine", "cli"]);
   const result = [];
   for (const backend of requested) {
     if (!supported.has(backend)) {
-      throw new Error(`Unsupported Gemini backend: ${backend}. Expected api, vectorengine or cli.`);
+      throw new Error(`Unsupported metadata backend: ${backend}. Expected openai, api, vectorengine or cli.`);
     }
     if (!result.includes(backend)) result.push(backend);
   }
