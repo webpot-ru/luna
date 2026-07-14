@@ -15,7 +15,8 @@ import { generateYouTubeMetadataBatch } from "./lib/youtube-metadata.mjs";
 assert.deepEqual(parseGeminiBackendChain("api,vectorengine"), ["api", "vectorengine"]);
 assert.deepEqual(parseGeminiBackendChain("api,api,vectorengine"), ["api", "vectorengine"]);
 assert.deepEqual(parseGeminiBackendChain("", { hasDirectApiKey: true }), ["api"]);
-assert.throws(() => parseGeminiBackendChain("api,unknown"), /Unsupported Gemini backend/);
+assert.deepEqual(parseGeminiBackendChain("openai,api,vectorengine"), ["openai", "api", "vectorengine"]);
+assert.throws(() => parseGeminiBackendChain("api,unknown"), /Unsupported metadata backend/);
 assert.deepEqual(getDirectGeminiApiKeys({
   GEMINI_API_KEY: "primary",
   GEMINI_API_KEY_2: "secondary",
@@ -324,6 +325,52 @@ try {
   assert.equal(metadata.length, 10);
   assert.ok(metadata.every((item) => item.source === "gemini-api-batch"));
   assert.ok(metadata.every((item) => item.aiMetadata.batchSize === 10));
+} finally {
+  if (previousStrict === undefined) delete process.env.YOUTUBE_METADATA_AI_STRICT;
+  else process.env.YOUTUBE_METADATA_AI_STRICT = previousStrict;
+}
+
+process.env.YOUTUBE_METADATA_AI_STRICT = "1";
+try {
+  const openAiTargets = ["FR", "DE"];
+  const metadata = await generateYouTubeMetadataBatch(openAiTargets.map((targetLang) => ({
+    setId: "test_deck_a1",
+    supportLang: "EN",
+    targetLang,
+    withGemini: true,
+    geminiBackend: "openai,api,vectorengine",
+    privacyStatus: "private",
+    cards: [{ target_display: `${targetLang} sample`, target_word: `${targetLang} sample` }],
+    deckMetadata: {
+      title: "Kitchen Basics",
+      description: "A1 beginner vocabulary",
+      levelSignal: "A1",
+      metadataSource: "test",
+    },
+  })), {
+    providers: {
+      openai: async () => ({
+        value: {
+          items: openAiTargets.map((targetLang, index) => ({
+            requestId: `metadata-${index}-${targetLang}`,
+            title: `Learn ${targetLang} Kitchen Basics`,
+            description: `Practise ${targetLang} kitchen vocabulary with pronunciation, repeat pauses and a mini-test.`,
+            tags: [targetLang, "kitchen vocabulary", "pronunciation"],
+            hashtags: ["#FlashcardsLuna", "#Vocabulary", "#Languages"],
+          })),
+        },
+        model: "gpt-test",
+        serviceTier: "data_sharing_incentive",
+        responseId: "resp-test",
+        usage: { inputTokens: 100, outputTokens: 25, totalTokens: 125, reasoningTokens: 5 },
+      }),
+      api: async () => { throw new Error("Gemini must not run after successful OpenAI metadata."); },
+      vectorengine: async () => { throw new Error("VectorEngine must not run after successful OpenAI metadata."); },
+    },
+  });
+  assert.ok(metadata.every((item) => item.source === "openai-responses-batch"));
+  assert.ok(metadata.every((item) => item.aiMetadata.serviceTier === "data_sharing_incentive"));
+  assert.ok(metadata.every((item) => item.aiMetadata.usage.totalTokens === 125));
 } finally {
   if (previousStrict === undefined) delete process.env.YOUTUBE_METADATA_AI_STRICT;
   else process.env.YOUTUBE_METADATA_AI_STRICT = previousStrict;

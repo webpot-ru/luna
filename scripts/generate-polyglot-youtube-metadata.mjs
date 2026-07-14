@@ -5,6 +5,7 @@ import { spawnSync } from "node:child_process";
 
 import { BRAND_NAME } from "./lib/brand.mjs";
 import { callVectorEngineGeminiJson } from "./lib/vectorengine-gemini.mjs";
+import { callOpenAiStructuredJson } from "./lib/openai-structured-json.mjs";
 import {
   callGeminiApiJsonWithKeys,
   getDirectGeminiApiKeys,
@@ -58,6 +59,8 @@ function parseArgs(argv) {
     requireAi: false,
     geminiBackend: process.env.GEMINI_BACKEND || "api,vectorengine",
     model: process.env.GEMINI_MODEL || process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash",
+    openAiModel: process.env.OPENAI_METADATA_MODEL || "gpt-5.4-mini-2026-03-17",
+    openAiServiceTier: process.env.OPENAI_SERVICE_TIER || "auto",
     allowRepublish: false,
     campaignId: "",
     campaignManifestHash: "",
@@ -87,6 +90,8 @@ function parseArgs(argv) {
     else if (arg === "--privacy" || arg.startsWith("--privacy=")) options.privacyStatus = readValue();
     else if (arg === "--publish-at" || arg.startsWith("--publish-at=")) options.publishAt = readValue();
     else if (arg === "--model" || arg.startsWith("--model=")) options.model = readValue();
+    else if (arg === "--openai-model" || arg.startsWith("--openai-model=")) options.openAiModel = readValue();
+    else if (arg === "--openai-service-tier" || arg.startsWith("--openai-service-tier=")) options.openAiServiceTier = readValue();
     else if (arg === "--gemini-backend" || arg.startsWith("--gemini-backend=")) options.geminiBackend = readValue();
     else if (arg === "--with-gemini") options.withGemini = true;
     else if (arg === "--require-ai") options.requireAi = true;
@@ -108,7 +113,7 @@ function usage() {
     "",
     "Generates Polyglot youtube_metadata.json without uploading or writing external services.",
     "Template metadata is plan-only. Live apply should use --with-gemini --require-ai.",
-    "AI provider order defaults to direct Gemini keys, then one VectorEngine fallback.",
+    "AI provider order is explicit. Production bulk runs use OpenAI Responses, direct Gemini keys, then one confirmed VectorEngine fallback.",
   ].join("\n");
 }
 
@@ -302,7 +307,7 @@ function buildPrompt(candidate, playlistAssignment) {
   ].join("\n");
 }
 
-async function callPolyglotGeminiMetadata({ prompt, model, geminiBackend }) {
+async function callPolyglotGeminiMetadata({ prompt, model, geminiBackend, openAiModel, openAiServiceTier }) {
   const backends = parseGeminiBackendChain(geminiBackend, {
     hasDirectApiKey: getDirectGeminiApiKeys().length > 0,
   });
@@ -321,6 +326,11 @@ async function callPolyglotGeminiMetadata({ prompt, model, geminiBackend }) {
   return runGeminiBackendChain({
     backends,
     providers: {
+      openai: async () => callOpenAiStructuredJson({
+        ...request,
+        model: openAiModel,
+        serviceTier: openAiServiceTier,
+      }),
       api: async () => callGeminiApiJsonWithKeys(request),
       vectorengine: async () => ({
         value: await callVectorEngineGeminiJson(request),
@@ -379,6 +389,7 @@ async function main() {
   let source = "template-polyglot";
   let model = "";
   let aiError = "";
+  let aiMetadata = null;
 
   if (options.withGemini) {
     try {
@@ -386,14 +397,28 @@ async function main() {
         prompt: buildPrompt(candidate, initialPlaylist),
         model: options.model,
         geminiBackend: options.geminiBackend,
+        openAiModel: options.openAiModel,
+        openAiServiceTier: options.openAiServiceTier,
       });
       copy = normalizeAiMetadata(result.value, candidate, initialPlaylist);
-      source = `gemini-${result.backend}-polyglot`;
+      source = result.backend === "openai"
+        ? "openai-responses-polyglot"
+        : `gemini-${result.backend}-polyglot`;
       model = result.model || options.model;
+      aiMetadata = {
+        attempted: true,
+        backend: result.backend,
+        backendChain: parseGeminiBackendChain(options.geminiBackend),
+        serviceTier: result.backend === "openai" ? result.serviceTier : undefined,
+        responseId: result.backend === "openai" ? result.responseId : undefined,
+        usage: result.backend === "openai" ? result.usage : undefined,
+        status: "pass",
+      };
     } catch (error) {
       aiError = error.message;
       if (options.requireAi) throw error;
       source = "template-polyglot-ai-fallback";
+      aiMetadata = { attempted: true, status: "fallback", error: aiError };
     }
   } else if (options.requireAi) {
     throw new Error("Live Polyglot metadata requires --with-gemini --require-ai.");
@@ -438,6 +463,7 @@ async function main() {
     scheduledPublishAt: options.publishAt || "",
     source,
     model,
+    aiMetadata,
     aiError,
     generatedAt: new Date().toISOString(),
     deckTitle: candidate.deck?.title || "",

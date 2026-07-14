@@ -6,6 +6,7 @@ import { fetchDeckCards, fetchDeckMetadata } from "./video-generator.mjs";
 import { getLanguageNameInLang } from "./card-slide-template.mjs";
 import { getPublicCourseDisplayUrl, getPublicCourseUrl } from "./video-public-url.mjs";
 import { callVectorEngineGeminiJson } from "./vectorengine-gemini.mjs";
+import { callOpenAiStructuredJson } from "./openai-structured-json.mjs";
 import {
   GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS,
   callGeminiApiJsonWithKeys,
@@ -23,6 +24,7 @@ const databaseUrl = process.env.DATABASE_URL ?? "postgresql://lunacards:lunacard
 const defaultGeminiApiModel = process.env.GEMINI_MODEL || "gemini-3.5-flash";
 const defaultGeminiCliModel = process.env.GEMINI_CLI_MODEL || "gemini-3.1-pro-preview";
 const defaultVectorEngineGeminiModel = process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash";
+const defaultOpenAiModel = process.env.OPENAI_METADATA_MODEL || "gpt-5.4-mini-2026-03-17";
 const videoLocalizationPath = path.resolve("config/video-localization.json");
 const videoLocalization = fs.existsSync(videoLocalizationPath)
   ? JSON.parse(fs.readFileSync(videoLocalizationPath, "utf8"))
@@ -682,6 +684,15 @@ export async function generateYouTubeMetadataBatch(inputs, options = {}) {
   const schema = batchSchemaFor(preparedItems.length);
   const maxOutputTokens = GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS;
   const defaultProviders = {
+    openai: async () => callOpenAiStructuredJson({
+      prompt,
+      schema,
+      model: explicitModel || defaultOpenAiModel,
+      maxOutputTokens,
+      serviceTier: process.env.OPENAI_SERVICE_TIER || "auto",
+      systemInstruction: `Return strict JSON for all ${preparedItems.length} ${BRAND_NAME} metadata tasks. No Markdown or omitted items.`,
+      validateValue: (value) => validateBatchPayload(value, preparedItems),
+    }),
     api: async () => callGeminiApiJsonWithKeys({
       prompt,
       schema,
@@ -741,16 +752,21 @@ export async function generateYouTubeMetadataBatch(inputs, options = {}) {
   }
 
   const model = chainResult.model || explicitModel || (
-    chainResult.backend === "api"
+    chainResult.backend === "openai"
+      ? defaultOpenAiModel
+      : chainResult.backend === "api"
       ? defaultGeminiApiModel
       : (chainResult.backend === "vectorengine" ? defaultVectorEngineGeminiModel : defaultGeminiCliModel)
   );
+  const sourcePrefix = chainResult.backend === "openai"
+    ? "openai-responses"
+    : `gemini-${chainResult.backend}`;
   return preparedItems.map(({ requestId, template }) => {
     const generated = chainResult.value.get(requestId);
     const aiMetadata = normalizeYouTubeMetadata({
       ...template,
       ...generated,
-      source: `gemini-${chainResult.backend}-batch`,
+      source: `${sourcePrefix}-batch`,
       model,
       aiMetadata: {
         attempted: true,
@@ -758,6 +774,9 @@ export async function generateYouTubeMetadataBatch(inputs, options = {}) {
         backendChain: backends,
         batchSize: preparedItems.length,
         directKeyName: chainResult.backend === "api" ? chainResult.keyName : undefined,
+        serviceTier: chainResult.backend === "openai" ? chainResult.serviceTier : undefined,
+        responseId: chainResult.backend === "openai" ? chainResult.responseId : undefined,
+        usage: chainResult.backend === "openai" ? chainResult.usage : undefined,
         status: "pass",
       },
       generatedAt: new Date().toISOString(),
@@ -770,7 +789,7 @@ export async function generateYouTubeMetadataBatch(inputs, options = {}) {
       console.warn(`[YOUTUBE_METADATA_AI_LANGUAGE_FALLBACK] ${chainResult.backend}/${model}: ${languageGate.blockers.join("; ")}`);
       return normalizeYouTubeMetadata({
         ...template,
-        source: `gemini-${chainResult.backend}-localized-fallback`,
+        source: `${sourcePrefix}-localized-fallback`,
         model,
         aiMetadata: {
           attempted: true,

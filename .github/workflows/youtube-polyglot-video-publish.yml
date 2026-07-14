@@ -22,6 +22,7 @@ on:
       confirm_render: { required: false, type: string, default: "" }
       confirm_tts: { required: false, type: string, default: "" }
       confirm_metadata_spend: { required: false, type: string, default: "" }
+      confirm_openai_metadata: { required: false, type: string, default: "" }
       confirm_vectorengine_metadata: { required: false, type: string, default: "" }
       confirm_youtube_write: { required: false, type: string, default: "" }
       confirm_public: { required: false, type: string, default: "" }
@@ -139,6 +140,10 @@ on:
         description: "For apply AI metadata generation type GENERATE_POLYGLOT_METADATA."
         required: false
         default: ""
+      confirm_openai_metadata:
+        description: "USE_OPENAI_METADATA permits OpenAI Responses metadata generation."
+        required: false
+        default: ""
       confirm_vectorengine_metadata:
         description: "USE_VECTORENGINE_METADATA permits VectorEngine only after both direct Gemini keys fail."
         required: false
@@ -204,6 +209,7 @@ jobs:
           CONFIRM_RENDER: ${{ inputs.confirm_render }}
           CONFIRM_TTS: ${{ inputs.confirm_tts }}
           CONFIRM_METADATA_SPEND: ${{ inputs.confirm_metadata_spend }}
+          CONFIRM_OPENAI_METADATA: ${{ inputs.confirm_openai_metadata }}
           CONFIRM_VECTORENGINE_METADATA: ${{ inputs.confirm_vectorengine_metadata }}
           CONFIRM_THUMBNAIL_SPEND: ${{ inputs.confirm_thumbnail_spend }}
           CONFIRM_YOUTUBE_WRITE: ${{ inputs.confirm_youtube_write }}
@@ -268,6 +274,10 @@ jobs:
           fi
           if [ "$MODE" = "apply" ] && [ "$CONFIRM_METADATA_SPEND" != "GENERATE_POLYGLOT_METADATA" ]; then
             echo "::error::mode=apply requires confirm_metadata_spend=GENERATE_POLYGLOT_METADATA"
+            exit 1
+          fi
+          if [ -n "$CONFIRM_OPENAI_METADATA" ] && [ "$CONFIRM_OPENAI_METADATA" != "USE_OPENAI_METADATA" ]; then
+            echo "::error::confirm_openai_metadata must be empty or USE_OPENAI_METADATA"
             exit 1
           fi
           if [ -n "$CONFIRM_VECTORENGINE_METADATA" ] && [ "$CONFIRM_VECTORENGINE_METADATA" != "USE_VECTORENGINE_METADATA" ]; then
@@ -444,8 +454,12 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          GEMINI_BACKEND: "api,vectorengine"
+          GEMINI_BACKEND: "openai,api,vectorengine"
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_METADATA_MODEL: ${{ vars.OPENAI_METADATA_MODEL }}
+          OPENAI_SERVICE_TIER: ${{ vars.OPENAI_SERVICE_TIER }}
+          OPENAI_TIMEOUT_MS: "600000"
           VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
           VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
           VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
@@ -453,6 +467,7 @@ jobs:
           VECTORENGINE_SEND_RESPONSE_SCHEMA: "1"
           GEMINI_TIMEOUT_MS: "600000"
           VECTORENGINE_TIMEOUT_MS: "600000"
+          CONFIRM_OPENAI_METADATA: ${{ inputs.confirm_openai_metadata }}
           CONFIRM_VECTORENGINE_METADATA: ${{ inputs.confirm_vectorengine_metadata }}
           CAMPAIGN_ID: ${{ inputs.campaign_id }}
           CAMPAIGN_MANIFEST_HASH: ${{ inputs.campaign_manifest_hash }}
@@ -488,11 +503,14 @@ jobs:
           if [ "$MODE" = "apply" ]; then
             METADATA_ARGS+=("--with-gemini" "--require-ai")
           fi
-          if [ "$CONFIRM_VECTORENGINE_METADATA" = "USE_VECTORENGINE_METADATA" ]; then
-            METADATA_ARGS+=("--gemini-backend" "api,vectorengine")
-          else
-            METADATA_ARGS+=("--gemini-backend" "api")
+          METADATA_CHAIN="api"
+          if [ "$CONFIRM_OPENAI_METADATA" = "USE_OPENAI_METADATA" ]; then
+            METADATA_CHAIN="openai,$METADATA_CHAIN"
           fi
+          if [ "$CONFIRM_VECTORENGINE_METADATA" = "USE_VECTORENGINE_METADATA" ]; then
+            METADATA_CHAIN="$METADATA_CHAIN,vectorengine"
+          fi
+          METADATA_ARGS+=("--gemini-backend" "$METADATA_CHAIN")
           npm run generate:polyglot-youtube-metadata -- "${METADATA_ARGS[@]}"
 
       - name: Reserve earliest shared channel-calendar slot

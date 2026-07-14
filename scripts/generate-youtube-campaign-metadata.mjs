@@ -13,6 +13,7 @@ import {
   runGeminiBackendChain,
 } from "./lib/gemini-structured-json.mjs";
 import { callVectorEngineGeminiJson } from "./lib/vectorengine-gemini.mjs";
+import { callOpenAiStructuredJson, resolveOpenAiServiceTier } from "./lib/openai-structured-json.mjs";
 import {
   generateYouTubeMetadataBatch,
   normalizeYouTubeMetadata,
@@ -21,7 +22,9 @@ import {
 
 const APPLY_CONFIRM = "GENERATE_YOUTUBE_CAMPAIGN_METADATA";
 const VECTOR_CONFIRM = "USE_VECTORENGINE_METADATA";
+const OPENAI_CONFIRM = "USE_OPENAI_METADATA";
 export const CAMPAIGN_MAX_OUTPUT_TOKENS = GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS;
+export const OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS = 12000;
 export const MAX_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE = 2;
 export const DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE = 2;
 const ITEM_SCHEMA = {
@@ -49,10 +52,13 @@ function parseArgs(argv) {
     rateLimitMs: 15000,
     geminiBackend: "api",
     model: process.env.GEMINI_MODEL || process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash",
+    openaiModel: process.env.OPENAI_METADATA_MODEL || "gpt-5.4-mini-2026-03-17",
+    openaiServiceTier: resolveOpenAiServiceTier(),
     apply: false,
     resumeExisting: false,
     confirm: "",
     confirmVectorengine: "",
+    confirmOpenai: "",
   };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -69,8 +75,11 @@ function parseArgs(argv) {
     else if (arg === "--rate-limit-ms" || arg.startsWith("--rate-limit-ms=")) options.rateLimitMs = Number(value());
     else if (arg === "--gemini-backend" || arg.startsWith("--gemini-backend=")) options.geminiBackend = value();
     else if (arg === "--model" || arg.startsWith("--model=")) options.model = value();
+    else if (arg === "--openai-model" || arg.startsWith("--openai-model=")) options.openaiModel = value();
+    else if (arg === "--openai-service-tier" || arg.startsWith("--openai-service-tier=")) options.openaiServiceTier = resolveOpenAiServiceTier(value());
     else if (arg === "--confirm" || arg.startsWith("--confirm=")) options.confirm = value();
     else if (arg === "--confirm-vectorengine" || arg.startsWith("--confirm-vectorengine=")) options.confirmVectorengine = value();
+    else if (arg === "--confirm-openai" || arg.startsWith("--confirm-openai=")) options.confirmOpenai = value();
     else if (arg === "--apply") options.apply = true;
     else if (arg === "--resume-existing") options.resumeExisting = true;
     else if (arg === "--json") options.json = true;
@@ -365,6 +374,12 @@ async function generateBatch(tasks, options) {
   const result = await runGeminiBackendChain({
     backends,
     providers: {
+      openai: async () => callOpenAiStructuredJson({
+        ...request,
+        model: options.openaiModel,
+        maxOutputTokens: OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS,
+        serviceTier: options.openaiServiceTier,
+      }),
       api: async () => callGeminiApiJsonWithKeys(request),
       vectorengine: async () => generateVectorEngineCampaignMetadataSubBatches(taskRequests, {
         model: options.model,
@@ -376,7 +391,9 @@ async function generateBatch(tasks, options) {
 }
 
 function finalizeMetadata(task, generated, provider) {
-  const source = `gemini-${provider.backend}-campaign-batch`;
+  const source = provider.backend === "openai"
+    ? "openai-responses-campaign-batch"
+    : `gemini-${provider.backend}-campaign-batch`;
   const merged = normalizeYouTubeMetadata({
     ...task.template,
     title: generated.title,
@@ -396,6 +413,7 @@ function finalizeMetadata(task, generated, provider) {
       backendChain: provider.backendChain,
       batchSize: provider.batchSize,
       status: "pass",
+      serviceTier: provider.serviceTier || "",
     },
   });
   merged.campaignPlaylist = structuredClone(task.assignment.playlist || {});
@@ -443,6 +461,9 @@ export async function buildCampaignMetadata(options) {
   if (backendNames.includes("vectorengine") && options.confirmVectorengine !== VECTOR_CONFIRM) {
     throw new Error(`VectorEngine requires --confirm-vectorengine=${VECTOR_CONFIRM}`);
   }
+  if (backendNames.includes("openai") && options.confirmOpenai !== OPENAI_CONFIRM) {
+    throw new Error(`OpenAI requires --confirm-openai=${OPENAI_CONFIRM}`);
+  }
   if (options.apply && options.confirm !== APPLY_CONFIRM) throw new Error(`--apply requires --confirm=${APPLY_CONFIRM}`);
 
   const hydratedAssignments = assignments.map((row) => ({
@@ -474,6 +495,14 @@ export async function buildCampaignMetadata(options) {
       ? Math.ceil(taskPlans.length / options.vectorengineSubBatchSize)
       : 0,
     providerCalls: 0,
+    openaiUsage: {
+      requests: 0,
+      inputTokens: 0,
+      outputTokens: 0,
+      totalTokens: 0,
+      reasoningTokens: 0,
+      serviceTiers: {},
+    },
     attemptedBatchCount: 0,
     reusedBatchCount: 0,
     reusedAssignmentCount: 0,
@@ -514,12 +543,22 @@ export async function buildCampaignMetadata(options) {
       report.providerCalls += 1;
       writeMetadataCheckpoint(report, options.outputRoot);
       const provider = await generateBatch(tasks, options);
+      if (provider.backend === "openai") {
+        report.openaiUsage.requests += 1;
+        report.openaiUsage.inputTokens += Number(provider.usage?.inputTokens || 0);
+        report.openaiUsage.outputTokens += Number(provider.usage?.outputTokens || 0);
+        report.openaiUsage.totalTokens += Number(provider.usage?.totalTokens || 0);
+        report.openaiUsage.reasoningTokens += Number(provider.usage?.reasoningTokens || 0);
+        const serviceTier = String(provider.serviceTier || options.openaiServiceTier || "unknown");
+        report.openaiUsage.serviceTiers[serviceTier] = (report.openaiUsage.serviceTiers[serviceTier] || 0) + 1;
+      }
       for (const task of tasks) {
         const metadata = finalizeMetadata(task, provider.byId.get(task.assignment.assignmentKey), {
           backend: provider.backend,
           backendChain: backendNames,
           model: provider.model || options.model,
           batchSize: provider.batchSizeByRequestId?.get(task.assignment.assignmentKey) || tasks.length,
+          serviceTier: provider.serviceTier || "",
         });
         const artifactPath = path.join(options.outputRoot, "metadata", `${safeSegment(task.assignment.assignmentKey)}.json`);
         fs.mkdirSync(path.dirname(artifactPath), { recursive: true });
@@ -578,6 +617,7 @@ async function main() {
     reusedBatchCount: report.reusedBatchCount,
     reusedAssignmentCount: report.reusedAssignmentCount,
     outputRoot: options.outputRoot,
+    openaiUsage: report.openaiUsage,
   };
   console.log(JSON.stringify(options.json ? report : summary, null, 2));
 }

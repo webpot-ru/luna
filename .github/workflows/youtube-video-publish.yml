@@ -25,6 +25,7 @@ on:
       generate_thumbnails: { required: false, type: boolean, default: false }
       source_run_id: { required: false, type: string, default: "" }
       confirm_thumbnail_spend: { required: false, type: string, default: "" }
+      confirm_openai_metadata: { required: false, type: string, default: "" }
       confirm_vectorengine_metadata: { required: false, type: string, default: "" }
       confirm_youtube_write: { required: false, type: string, default: "" }
       confirm_public: { required: false, type: string, default: "" }
@@ -140,8 +141,8 @@ on:
         description: "Optional failed youtube-video-publish run id to upload already-built artifact videos with first-frame thumbnails; skips render/TTS/VectorEngine."
         required: false
         default: ""
-      confirm_thumbnail_spend:
-        description: "For thumbnail generation type GENERATE_THUMBNAILS."
+      confirm_openai_metadata:
+        description: "Required as USE_OPENAI_METADATA if metadata_gemini_backend includes openai."
         required: false
         default: ""
       confirm_vectorengine_metadata:
@@ -547,6 +548,10 @@ jobs:
           GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_METADATA_MODEL: ${{ vars.OPENAI_METADATA_MODEL }}
+          OPENAI_SERVICE_TIER: ${{ vars.OPENAI_SERVICE_TIER }}
+          OPENAI_TIMEOUT_MS: "600000"
           VECTORENGINE_API_KEY: ${{ secrets.VECTORENGINE_API_KEY }}
           VECTOR_ENGINE_API_KEY: ${{ secrets.VECTOR_ENGINE_API_KEY }}
           VECTORENGINE_BASE_URL: ${{ vars.VECTORENGINE_BASE_URL }}
@@ -562,6 +567,7 @@ jobs:
           METADATA_GEMINI_BACKEND: ${{ inputs.metadata_gemini_backend }}
           METADATA_BATCH_SIZE: ${{ inputs.metadata_batch_size }}
           METADATA_RATE_LIMIT_MS: ${{ inputs.metadata_rate_limit_ms }}
+          CONFIRM_OPENAI_METADATA: ${{ inputs.confirm_openai_metadata }}
           CONFIRM_VECTORENGINE_METADATA: ${{ inputs.confirm_vectorengine_metadata }}
           SCHEDULE_START_DATE: ${{ inputs.schedule_start_date }}
           SCHEDULE_MIN_FUTURE_MINUTES: ${{ inputs.schedule_min_future_minutes }}
@@ -636,6 +642,15 @@ jobs:
               METADATA_BACKEND="$(echo "${METADATA_GEMINI_BACKEND:-api,vectorengine}" | xargs | tr '[:upper:]' '[:lower:]')"
               if [ -n "$METADATA_BACKEND" ] && [ "$METADATA_BACKEND" != "none" ]; then
                 case ",$METADATA_BACKEND," in
+                  *,openai,*)
+                    if [ "$CONFIRM_OPENAI_METADATA" != "USE_OPENAI_METADATA" ]; then
+                      echo "::error::OpenAI metadata requires confirm_openai_metadata=USE_OPENAI_METADATA."
+                      METADATA_STATUS=1
+                      continue
+                    fi
+                    ;;
+                esac
+                case ",$METADATA_BACKEND," in
                   *,vectorengine,*)
                     if [ "$CONFIRM_VECTORENGINE_METADATA" != "USE_VECTORENGINE_METADATA" ]; then
                       echo "::error::VectorEngine metadata spends proxy quota and is disabled unless confirm_vectorengine_metadata=USE_VECTORENGINE_METADATA."
@@ -644,6 +659,11 @@ jobs:
                     fi
                     ;;
                 esac
+                if [ "$METADATA_BACKEND" = "openai" ] && [ -z "${OPENAI_API_KEY:-}" ]; then
+                  echo "::error::metadata_gemini_backend=openai requires OPENAI_API_KEY."
+                  METADATA_STATUS=1
+                  continue
+                fi
                 if [ "$METADATA_BACKEND" = "api" ] && [ -z "${GEMINI_API_KEY:-}" ] && [ -z "${GEMINI_API_KEY_2:-}" ] && [ -z "${GOOGLE_API_KEY:-}" ]; then
                   echo "::error::metadata_gemini_backend=api requires GEMINI_API_KEY, GEMINI_API_KEY_2 or GOOGLE_API_KEY."
                   METADATA_STATUS=1

@@ -52,10 +52,11 @@ function parseArgs(argv) {
     createPlaylists: true,
     allowRepublish: false,
     generateThumbnails: false,
-    metadataGeminiBackend: "api,vectorengine",
+    metadataGeminiBackend: "openai,api,vectorengine",
     metadataBatchSize: 5,
     metadataRateLimitMs: 15000,
     confirmThumbnailSpend: "",
+    confirmOpenAiMetadata: "",
     confirmVectorengineMetadata: "",
     confirmYoutubeWrite: "",
     confirmPublic: "PUBLISH_PUBLIC",
@@ -102,6 +103,7 @@ function parseArgs(argv) {
     else if (arg === "--metadata-gemini-backend" || arg.startsWith("--metadata-gemini-backend=")) options.metadataGeminiBackend = readValue();
     else if (arg === "--metadata-batch-size" || arg.startsWith("--metadata-batch-size=")) options.metadataBatchSize = Number(readValue());
     else if (arg === "--metadata-rate-limit-ms" || arg.startsWith("--metadata-rate-limit-ms=")) options.metadataRateLimitMs = Number(readValue());
+    else if (arg === "--confirm-openai-metadata" || arg.startsWith("--confirm-openai-metadata=")) options.confirmOpenAiMetadata = readValue();
     else if (arg === "--confirm-vectorengine-metadata" || arg.startsWith("--confirm-vectorengine-metadata=")) options.confirmVectorengineMetadata = readValue();
     else if (arg === "--confirm-youtube-write" || arg.startsWith("--confirm-youtube-write=")) options.confirmYoutubeWrite = readValue();
     else if (arg === "--confirm-public" || arg.startsWith("--confirm-public=")) options.confirmPublic = readValue();
@@ -140,8 +142,9 @@ function usage() {
     "Dispatch is fire-and-forget by default; use --watch only for an explicitly approved bounded diagnostic.",
     "Scheduled child runs pass schedule_min_future_minutes so stale calendar reservations",
     "are moved to future-safe slots by the child workflow.",
-    "Metadata defaults to direct Gemini API in small sequential batches:",
-    "--metadata-gemini-backend=api,vectorengine --metadata-batch-size=5 --metadata-rate-limit-ms=15000.",
+    "Metadata defaults to one OpenAI Responses request per 5 tasks, then direct Gemini, then VectorEngine:",
+    "--metadata-gemini-backend=openai,api,vectorengine --metadata-batch-size=5 --metadata-rate-limit-ms=15000.",
+    "OpenAI requires --confirm-openai-metadata=USE_OPENAI_METADATA.",
     "VectorEngine metadata is reserve-only and requires --confirm-vectorengine-metadata=USE_VECTORENGINE_METADATA.",
     "Approved committed JPG covers are copied by the child workflow; runtime thumbnail generation is disabled.",
     "",
@@ -213,14 +216,17 @@ function ensureSafeOptions(options) {
   if (options.apply && options.allowRepublish) {
     throw new Error("Live bulk apply refuses --allow-republish. Repair, supersede or delete the prior publication first.");
   }
-  if (options.apply && options.generateThumbnails && options.confirmThumbnailSpend !== "GENERATE_THUMBNAILS") {
-    throw new Error("Thumbnail generation may spend VectorEngine credits; pass --confirm-thumbnail-spend=GENERATE_THUMBNAILS.");
+  if (options.apply && options.generateThumbnails) {
+    throw new Error("Live ordinary bulk apply uses committed approved JPG covers; pass --no-generate-thumbnails.");
   }
   const metadataBackend = String(options.metadataGeminiBackend || "").toLowerCase();
   if (options.apply && metadataBackend === "api") {
     throw new Error(
       "Live metadata dispatch must use api,vectorengine: try both direct Gemini keys first, then the confirmed VectorEngine fallback.",
     );
+  }
+  if (options.apply && metadataBackend.includes("openai") && options.confirmOpenAiMetadata !== "USE_OPENAI_METADATA") {
+    throw new Error("OpenAI metadata requires --confirm-openai-metadata=USE_OPENAI_METADATA.");
   }
   if (options.apply && metadataBackend.includes("vectorengine") && options.confirmVectorengineMetadata !== "USE_VECTORENGINE_METADATA") {
     throw new Error("VectorEngine metadata requires --confirm-vectorengine-metadata=USE_VECTORENGINE_METADATA.");
@@ -313,7 +319,7 @@ function workflowFieldsForJob(job, options) {
     create_playlists: boolInput(options.createPlaylists),
     allow_republish: boolInput(options.allowRepublish),
     generate_thumbnails: boolInput(options.generateThumbnails),
-    confirm_thumbnail_spend: options.confirmThumbnailSpend,
+    confirm_openai_metadata: options.confirmOpenAiMetadata,
     confirm_vectorengine_metadata: options.confirmVectorengineMetadata,
     confirm_youtube_write: options.confirmYoutubeWrite,
     confirm_public: options.confirmPublic,

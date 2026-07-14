@@ -45,5 +45,10 @@ runNode([
 ]);
 const dispatcherReport = JSON.parse(fs.readFileSync(dispatcherOutput, "utf8"));
 assert.equal(dispatcherReport.options.generateThumbnails, false);
+assert.equal(dispatcherReport.options.metadataGeminiBackend, "openai,api,vectorengine");
+
+const ordinaryWorkflow = fs.readFileSync(".github/workflows/youtube-video-publish.yml", "utf8");
+assert.match(ordinaryWorkflow, /confirm_openai_metadata: \{ required: false, type: string, default: "" \}/u);
+assert.match(ordinaryWorkflow, /OPENAI_API_KEY: \$\{\{ secrets\.OPENAI_API_KEY \}\}/u);
 
 console.log("youtube ordinary canonicalization regression checks passed");
