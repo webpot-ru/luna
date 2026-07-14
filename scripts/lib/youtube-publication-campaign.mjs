@@ -641,10 +641,10 @@ export function buildPublicationCampaign(options = {}) {
       estimatedQuotaUnitsMaximum: estimatedVideoUploadCalls + estimatedGeneralQuotaUnitsMaximum,
       byRoute,
       directGeminiRequestsCurrentWorkerLayout:
-        supports.length * (Math.ceil(ordinaryPerChannel / 10) + polyglotPerChannel),
-      directGeminiRequestsCampaignRouteBatchSize10: Object.values(routeCounts)
-        .reduce((total, count) => total + Math.ceil(count / 10), 0),
-      directGeminiRequestsCampaignWideBatchSize10: Math.ceil(assignments.length / 10),
+        supports.length * (Math.ceil(ordinaryPerChannel / 5) + polyglotPerChannel),
+      directGeminiRequestsCampaignRouteBatchSize5: Object.values(routeCounts)
+        .reduce((total, count) => total + Math.ceil(count / 5), 0),
+      directGeminiRequestsCampaignWideBatchSize5: Math.ceil(assignments.length / 5),
       providerCallsDuringPlan: 0,
       youtubeWritesDuringPlan: 0,
     },

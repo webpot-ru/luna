@@ -254,7 +254,7 @@ jobs:
             --manifest-hash="${{ inputs.campaign_manifest_hash }}" \
             --route-key="${{ matrix.route_key }}" \
             --output-root="outputs/youtube-campaign-metadata/${{ matrix.route_key }}" \
-            --batch-size=10 \
+            --batch-size=5 \
             --rate-limit-ms=15000 \
             --gemini-backend="$BACKEND" \
             "${VECTOR_ARGS[@]}" \
@@ -287,7 +287,7 @@ jobs:
       langs: ${{ matrix.langs }}
       concurrency: "2"
       metadata_gemini_backend: api,vectorengine
-      metadata_batch_size: "10"
+      metadata_batch_size: "5"
       metadata_rate_limit_ms: "15000"
       worker_count: "1"
       worker_index: "0"

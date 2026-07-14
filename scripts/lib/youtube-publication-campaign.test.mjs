@@ -93,8 +93,8 @@ assert.deepEqual(
 assert(Object.values(first.estimatedUsage.byRoute).every((row) => row.estimatedVideoUploadCalls <= 100));
 assert(Object.values(first.estimatedUsage.byRoute).every((row) => row.estimatedGeneralQuotaUnitsMaximum <= 10_000));
 assert.equal(first.estimatedUsage.directGeminiRequestsCurrentWorkerLayout, 102);
-assert.equal(first.estimatedUsage.directGeminiRequestsCampaignRouteBatchSize10, 32);
-assert.equal(first.estimatedUsage.directGeminiRequestsCampaignWideBatchSize10, 31);
+assert.equal(first.estimatedUsage.directGeminiRequestsCampaignRouteBatchSize5, 63);
+assert.equal(first.estimatedUsage.directGeminiRequestsCampaignWideBatchSize5, 62);
 assert(first.assignments.every((row) => row.thumbnail.mode === "first_frame_auto" && row.thumbnail.ready));
 assert(first.assignments.every((row) => row.playlist.state === "verified_absent" && row.playlist.createAllowed));
 
