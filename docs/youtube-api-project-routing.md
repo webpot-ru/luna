@@ -26,6 +26,8 @@ At the current publishing cadence of **6 scheduled public releases per support-l
 
 The four-project route is an operational grouping for production upload automation. It is not a substitute for YouTube API audit/approval, quota extension, policy compliance, or channel daily upload limits.
 
+Terminology rule: call these routes `youtube-1`, `youtube-2`, `youtube-3` and `youtube-4` in plans and reports. Do not write only "Project 2" or "project 3": those phrases are easily confused with Deck #2 / Deck #3. A deck must always be named by `Deck #N / set_id`; an API route must always be named by its route key.
+
 ## Project Summary
 
 | API project route | Status | GitHub environment | Public channels | Support variants | Planned scheduled public releases/day |

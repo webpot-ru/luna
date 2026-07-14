@@ -11,6 +11,20 @@
       "slavic_core"
     ]
   },
+  "productLine": {
+    "coreBundleKeys": [
+      "global_europe_core",
+      "romance_core",
+      "east_asia_core",
+      "slavic_core"
+    ],
+    "expansionRequiresExplicitApproval": true,
+    "notes": [
+      "The four core bundles are the standard Polyglot product line per deck and physical viewer-language channel.",
+      "Wave numbers rank rollout candidates; they do not automatically add a bundle to the standard four-video product line.",
+      "southeast_asia_core and later bundles remain optional expansion products until explicitly approved."
+    ]
+  },
   "bundles": [
     {
       "key": "global_europe_core",

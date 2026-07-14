@@ -37228,3 +37228,27 @@ Reasoning: `lunacards.com` is already registered by another party and points to 
 Implementation: added `scripts/lib/brand.mjs` with `BRAND_NAME=FlashcardsLuna`; updated video intro/outro HTML templates, thumbnail prompt, YouTube metadata prompt/template/tags/hashtags, playlist title/description helpers, build log banners, `config/youtube-channel-positioning-copy.json`, local desired channel descriptions in `config/youtube-channels.json`, and existing playlist registry descriptions. Existing `currentHandle`, `targetHandle`, `finalChannelName`, live channel URLs, channel IDs and accepted banner workflow were intentionally not rewritten.
 
 Current implication: new generated videos and metadata should show `FlashcardsLuna`. Live YouTube channel names, handles, banners, avatar/watermark and the existing channel identity should continue to show `LunaCards` unless the user opens a separate explicit channel-identity redesign task.
+
+## 2026-07-10: YouTube Coverage Model, Safe Publish Protocol And Reusable Covers
+
+Decision: define the YouTube product as 51 physical viewer-language channels serving 54 target/studied language variants. New support/native publications use only canonical `EN`, `ES-419`, `PT-BR` and the 48 one-code channels. Regional siblings `EN-GB`, `ES` and `PT` remain target-only variants on other channels.
+
+Reasoning: a physical channel represents a viewer-language audience, while a target variant represents a distinct learning product. Keeping those identities separate preserves regional study choices without creating duplicate native channels. It also corrects the full ordinary matrix: 48 singleton channels have 53 valid targets and the three shared-language channels have 52, for `2700` videos per complete deck wave.
+
+Decision: ordinary and Polyglot apply work follows the safe publish protocol in `docs/codex-operations.md`: read-only audit, no-spend preflight, exact batch/route/shard/schedule/cover/cost plan, explicit approval, one dispatch with no Codex watch loop, delayed readback, and separate approval for any recovery or retry. Production publication is scheduled unless an immediate-public canary is explicitly approved.
+
+Operational clarification: after dispatch, Codex must capture exact run ids and end the active turn. The normal status path is one one-shot follow-up after 10-15 minutes, not `gh run watch`, repeated polling, an open local `sleep`, a background shell process or streamed runner logs. If the saved runs are still active at readback, report once and stop; another check requires a new user request. This keeps GitHub execution asynchronous and avoids spending Codex/LLM credits on passive observation.
+
+Decision: video and playlist images use reusable approved bitmap bases plus deterministic localized overlays. Ordinary video thumbnails are `1280 x 720`; playlist images are `1024 x 1024`. Paid per-pair image generation is not the normal production path. The existing Deck #2 Polyglot approved manifest is now included in the default pre-rendered thumbnail copy helper.
+
+Superseded decisions: the 2026-06-21 preference for automatic VectorEngine metadata fallback and the overlapping metadata/render speed path are historical. Current ordinary apply uses direct Gemini metadata first, in sequential batches, and fails before render/TTS when metadata fails. VectorEngine metadata requires separate confirmation.
+
+Open implementation gaps: broad Polyglot bulk publishing does not yet allocate independent scheduled slots from the shared calendar; approved thumbnail manifests are still hardcoded instead of registered in one scalable config; playlist-image upload lacks a pixel-shape gate and does not persist API readback dimensions.
+
+## 2026-07-10: Polyglot Core Product Line Is Four Bundles
+
+Decision: define Polyglot deck completeness as four core bundle slots per physical viewer-language channel: `global_europe_core`, `romance_core`, `east_asia_core` and `slavic_core`. With 51 physical channels, one complete Polyglot deck has 204 core slots. `southeast_asia_core` and the remaining bundle catalog are optional expansions and require explicit approval for broad production.
+
+Reasoning: the bundle catalog contains 13 reusable market combinations and previously labeled five of them Wave 1, while the accepted first-deck cover/product expectation was four videos per channel. Separating the four-slot product baseline from rollout-wave ranking prevents a fifth experimental bundle from silently becoming required work.
+
+Implementation: `config/polyglot-video-bundles.json.productLine.coreBundleKeys` is the machine baseline and `npm run audit:youtube-product-line` reports ordinary coverage, physical and strict-canonical Polyglot coverage, full versus `short_unverified` scope, duplicate slots, legacy support/bundle rows and playlist/progress debts without calling GitHub or YouTube APIs.

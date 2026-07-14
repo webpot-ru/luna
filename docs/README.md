@@ -37,7 +37,7 @@
 | [Database Schema](database-schema.md) | Source of truth, schema v0 | Postgres-схема рабочей базы: languages, meaning units, entries, examples, sets, QA, batches and exports. |
 | [Language Transcription Policy](language-transcription-policy.md) | Source of truth, display policy v1 | Список языков, коды и единый формат `transcription`, который показывается в карточке. |
 | [Card Taxonomy](card-taxonomy.md) | Source of truth | Тематические domains, vocabulary-only situational domains, Home, Personal Life, Food & Eating, City & Transport, Shopping & Services, Money & Banking, Documents, Work & Study, Technology, Nature, Health, Travel, Leisure, Emergency taxonomy v0 и proposed additions. |
-| [Video Lessons Strategy](video-lessons-strategy.md) | Source of truth | Стратегия создания, технические спецификации и дистрибуция видеоуроков для YouTube, включая accepted playlist/upload automation contract. |
+| [Video Lessons Strategy](video-lessons-strategy.md) | Source of truth | Цель YouTube-контура, модель 51 channel / 54 target variants, ordinary и Polyglot publication units, video/playlist cover contracts, metadata, schedule и upload automation. |
 | [Video Lessons Registry](video-lessons-registry.md) | Human-readable video registry | Реестр сгенерированных видеоуроков и ссылок на YouTube; не использовать как machine-readable ledger для playlist/upload API. |
 | [YouTube Publication Map](youtube-publication-map.md) | Generated live-readback map | Компактная актуальная карта public/scheduled/private видео, очереди, хвостов, точных групп дублей и готовности playlist-cover assets; полный per-video/per-cover JSON находится в `config/youtube-publication-snapshot.json`. |
 | [YouTube Publication Campaigns](youtube-publication-campaigns.md) | Source of truth | Единый anti-duplicate контур для смешанных ordinary + Polyglot волн по 51 каналу: fresh audit, immutable plan, calendar claims, route-batched metadata и один durable finalizer. |
@@ -46,7 +46,6 @@
 | [Windows Handover & Setup Spec](windows-handover-spec.md) | Operations Guide | Руководство по развертыванию проекта и продолжению сборки видеоуроков на Windows. |
 | [Multi-Device Management Spec](multi-device-management.md) | Operations Guide | Руководство по настройке окружения на нескольких компьютерах и удаленному управлению сборкой видеоуроков через GitHub Actions. |
 | [YouTube API Quota Extension Form Draft](youtube-api-quota-extension-form.md) | Working draft | Рабочий черновик заявки YouTube API Services Audit and Quota Extension: поля формы, quota request, endpoints, evidence and submit blockers. |
-| [Project Skills](../project-skills/README.md) | Project-local agent workflow helpers | Reusable Codex skills for deck delivery, QA evidence, final linguistic audit, and external lexical-source workflows. They do not replace source-of-truth docs. |
 
 
 ## Текущий статус после reset
@@ -140,3 +139,9 @@
 - [PROJECT_STATE.md](PROJECT_STATE.md) — short current-state handoff for new chats and agents.
 
 For non-trivial work, start with this index, then `PROJECT_STATE.md`, then the relevant source-of-truth document. Keep durable decisions and current state in docs, not only in chat.
+
+## DESIGN.md Agent Bridge
+
+Status: DESIGN.md agent bridge installed 2026-07-08.
+
+[`../DESIGN.md`](../DESIGN.md) is the project-root visual source for AI/UI agents. It uses the plain Markdown DESIGN.md pattern from https://github.com/VoltAgent/awesome-design-md, but it does not replace this documentation index or the topic-specific source-of-truth documents. For visual/frontend work, read `AGENTS.md`, this `docs/README.md`, `docs/PROJECT_STATE.md`, the relevant topic document, and then `DESIGN.md`.

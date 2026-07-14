@@ -14,6 +14,41 @@ Use these rules for Codex work inside this repository:
 
 Do not use this document as permission to access files outside the project, install plugins, change global Codex settings, authorize external apps, deploy, spend API credits, or perform YouTube writes. Those still need explicit user confirmation when they cross the project or cost/risk boundary.
 
+## Model and Subagent Routing
+
+This repository inherits the user's global Codex model and agent defaults; do not add a project-local main-model pin unless a future project-specific requirement justifies the override. Use low-cost read-only agents only for independent codebase exploration, documentation/source checks, run-evidence inspection or other bounded research. Keep implementation and orchestration on the normal balanced main model, and reserve the strongest reviewer for genuinely high-risk architecture, security, publishing or correctness review.
+
+Use at most three parallel subagents with one level of depth, and only when the work separates into independent, high-value lanes. Model choice changes cost, latency and review depth only. It does not grant permission to dispatch GitHub workflows, render, call paid providers, retry failed batches, use OAuth, upload, publish, mutate registries or cross any secret, quota or external-write boundary. Project approval, preflight, no-retry and readback rules always take precedence over global delegation behavior.
+
+## Visible Task Orchestration
+
+Only the root task opened by the user as the LUNA2 project orchestrator has standing permission to create, continue, steer and, after verified integration, archive user-visible Codex tasks for long-running independent scopes. Any task received through `<codex_delegation>` is a child with `NO_FURTHER_VISIBLE_DELEGATION`: it must not create another visible task or hand its scope to a new chat, though it may use bounded internal subagents. Before creating a child task, inspect existing LUNA2 tasks and durable project state; reuse an existing exact-scope task when safe instead of creating a duplicate.
+
+Each visible child task must state the exact project root, scope, allowed files/registries/channels, read-only or mutating ownership, required docs, verification gates and stop conditions. Do not let visible tasks share dirty files, the same registry rows, the same publish batch or the same external account mutation. Normally keep the root orchestrator plus no more than two active visible children across the whole task tree, and have the root orchestrator verify and integrate every result.
+
+Read-only inventory is a bounded first phase rather than a terminal deliverable unless the user explicitly requested audit-only work. When the next safe local action is known, the root orchestrator must continue it or steer one existing exact-scope child. A read-only child returns evidence to the root; it does not create a separate implementation task.
+
+Creating or steering a visible task is not approval to dispatch GitHub workflows, call paid providers, render, retry, use OAuth, upload, schedule or publish. Those boundaries remain governed by the exact no-spend preflight and approval protocol below. Completed tasks may be archived after their durable result and handoff are recorded; never delete task history.
+
+## Safe YouTube Publish Protocol
+
+For ordinary, Polyglot, thumbnail-only, playlist-image and repair waves, Codex must use this sequence:
+
+1. **Read-only audit.** Read the relevant registries, current branch/ref, route assignment, existing publications, calendar reservations, approved cover manifests and recent run evidence. Do not dispatch or call paid providers.
+2. **No-spend preflight.** Produce the exact `set_id`, canonical support list, target/bundle list, excluded same-viewer pairs, route split, candidate count, shard/worker plan, schedule date, thumbnail source and maximum quota/cost estimate.
+3. **Approval boundary.** Wait for explicit approval of that exact batch before any GitHub dispatch, render, TTS, paid metadata/image call or YouTube write. Approval of one batch is not approval of retries, repairs or a following batch.
+4. **Single apply.** Dispatch the approved jobs once, against an explicit verified `--ref`. For Codex-operated local dispatch, use `--no-watch`; do not keep a polling loop open. Capture the dispatcher and child run ids, then end the active execution turn instead of streaming GitHub runner output into the chat.
+5. **One-shot delayed readback.** Check once after the agreed interval, normally 10-15 minutes, or when the user asks. Prefer a Codex-supported one-shot scheduled follow-up that wakes a fresh bounded readback turn. Do not implement the delay with `gh run watch`, repeated `gh run view`, an open `sleep 900`, a local background process or a recurring automation. If one-shot scheduling is unavailable, return control to the user immediately and wait for a later `проверь` request.
+6. **Bounded status result.** At the delayed check, read only the saved exact run ids plus the durable registries/artifacts. If jobs are still running, report that once and stop; do not automatically schedule another check unless the user asks. Fetch full logs only for failed jobs that need diagnosis, not for normal progress display.
+7. **Stop on failure.** If metadata, image, TTS, render, upload or persist fails, do not launch a replacement workflow automatically. Report the stage, affected pairs, whether a YouTube video id exists, quota impact and the smallest recovery lane.
+8. **Recovery requires new approval.** Post-upload state recovery, thumbnail-only repair, playlist-only repair and true re-render/re-upload are distinct actions. Never re-upload when an existing video id or live-readback row can be recovered.
+
+"No retries" here means no new orchestration dispatch, rerender, repair workflow or reupload without separate approval. Some existing helpers still contain bounded HTTP/provider/readback retries inside a single workflow attempt. Those internal retries must be disclosed in preflight when they can spend quota; changing or disabling them is a separate code decision.
+
+GitHub Actions runner time and external API usage continue independently after dispatch. The purpose of `--no-watch` plus one-shot readback is to avoid spending Codex/LLM context and credits on passive progress output; it does not make the GitHub render/upload itself free.
+
+Publication mode for approved production waves is scheduled unless the user explicitly approves an immediate-public canary. Scheduled means upload as private with a future `publishAt`; setting `privacy=public` is not equivalent to scheduled publication.
+
 ## Local vs Worktree
 
 Default split:
