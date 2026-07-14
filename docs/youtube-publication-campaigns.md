@@ -48,6 +48,8 @@ Campaign source deck тоже неизменяем: plan фиксирует SHA-
 
 Ordinary identity: `setId + canonical supportLang + targetLang`. Polyglot identity: `setId + canonical supportLang + bundleKey + contentScope`; изменение target hash внутри занятого bundle slot является blocker.
 
+Legacy per-video planners may still emit a compatibility `polyglotKey` without the trailing `contentScope`. Campaign ownership must never compare that raw string with a scoped durable key. It resolves the reservation by canonical `polyglotSlotKey` (`set + support + bundle + contentScope`) and then separately requires the exact canonical target set, campaign ID and manifest hash. A matching slot with target drift remains visible but does not satisfy campaign ownership.
+
 Активная campaign claim блокирует повторный выбор assignment и физического `channelKey + publishAt` slot до `finalized` или отдельной подтвержденной reconciliation-процедуры.
 
 ## Safe publish sequence
@@ -102,4 +104,6 @@ Standalone ordinary/Polyglot workflows сохраняют собственный
 
 ## Current implementation state
 
-На 2026-07-14 campaign-код реализован локально в ветке `codex/youtube-publication-campaign-20260714`; внешнего GitHub apply и YouTube write этим изменением не выполнялось. Текущий no-spend Deck #2 plan выбирает все `306` assignments и route split `72/78/78/78`, но имеет ровно `74` blocker: `1` stale publication snapshot, `1` отсутствующий playlist-discovery snapshot и `72` approved custom-cover assignment, чьи новые JPG ещё не Git-tracked. Registry-only срез уже содержит playlist ID для `219/306`; оставшиеся `87` (`68` ordinary + `19` Polyglot) нельзя автоматически считать новыми плейлистами, пока live discovery не докажет existing/absent. Deck JSON больше не blocker: exact historical Git blob подтвержден. Перед первым production use нужны exact commit/push, свежий four-route audit с video+playlist discovery, regenerated no-spend campaign plan и отдельное approval.
+На 2026-07-14 implementation и exact claim смержены PR `#12`. Read-only run `29310491576` доказал `0` live/registry duplicates, `0` calendar gaps/collisions, complete video/playlist readback and exact apply-ready `306` assignments. Первый apply run `29311978459` прошел shared preflight, но все четыре metadata jobs остановились в локальном Polyglot planner из-за raw-key mismatch: durable claim имел `:full`, compatibility key planner-а не имел. Это произошло до provider calls, render, TTS и YouTube writes. Finalizer commit `ecca9ccb` сохранил campaign как `reconciliation_required`, все `306` assignments остаются claimed, receipts/artifacts/video IDs отсутствуют.
+
+Fix сравнивает canonical slot, exact target set/content scope, campaign ID и manifest hash. `npm run test:youtube-polyglot-campaign-claim` проверяет scoped/unscoped compatibility, wrong campaign/hash, target drift и wrong scope; фактический claimed `DE/global_europe_core` planner dry-run проходит с blocker `0`. Автоматический retry запрещен. Recovery начинается с нового read-only audit, exact zero-upload reconciliation и отдельного подтверждения re-arm/dispatch.
