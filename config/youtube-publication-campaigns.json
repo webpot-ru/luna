@@ -30360,7 +30360,7 @@
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-51321f6fa942",
       "manifestHash": "e5a188973d684038cd0196795acb01761ebec314c37e9c6cf3ba4577d728819a",
       "setId": "home_kitchen_cooking_actions_a1_a2",
-      "status": "claimed",
+      "status": "reconciliation_required",
       "claimedAt": "2026-07-14T08:44:22.806Z",
       "generatedAt": "2026-07-14T08:43:36.001Z",
       "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-51321f6fa942.json",
@@ -45524,7 +45524,21 @@
           },
           "status": "claimed"
         }
-      ]
+      ],
+      "finalizedAt": "2026-07-14T09:23:17.206Z",
+      "finalizeSummary": {
+        "expectedCount": 306,
+        "completedCount": 0,
+        "observedCount": 0,
+        "missingCount": 306,
+        "duplicateAssignmentCount": 0,
+        "duplicateVideoIdCount": 0,
+        "unexpectedPublicationCount": 0,
+        "receiptErrorCount": 0,
+        "ordinaryResult": "skipped",
+        "polyglotResult": "skipped",
+        "artifactCount": 0
+      }
     }
   ]
 }
