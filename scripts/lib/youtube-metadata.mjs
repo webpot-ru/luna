@@ -16,7 +16,7 @@ import {
   runGeminiBackendChain,
 } from "./gemini-structured-json.mjs";
 import { buildPlaylistAssignment } from "./youtube-playlists.mjs";
-import { getDbLanguageCode, normalizeLanguageCode } from "./video-language-codes.mjs";
+import { getDbLanguageCode, getSpreadsheetLanguageCode, normalizeLanguageCode } from "./video-language-codes.mjs";
 import { BRAND_HASHTAG, BRAND_NAME } from "./brand.mjs";
 
 const execFileAsync = promisify(execFile);
@@ -328,7 +328,7 @@ export async function resolveTargetLanguages(setId, supportLang) {
     const langs = Object.keys(deckData.cards?.[supportKey] || {});
     if (langs.length > 0) {
       return langs
-        .map((lang) => normalizeLanguageCode(lang))
+        .map((lang) => getSpreadsheetLanguageCode(lang))
         .filter((lang) => getDbLanguageCode(lang) !== supportDbLang)
         .sort();
     }
@@ -347,7 +347,7 @@ export async function resolveTargetLanguages(setId, supportLang) {
     ) rows;
   `;
   const rows = await psqlJson(sql);
-  return rows.map((row) => String(row.language_code).toUpperCase());
+  return rows.map((row) => getSpreadsheetLanguageCode(row.language_code));
 }
 
 export function buildTemplateYouTubeMetadata(input) {

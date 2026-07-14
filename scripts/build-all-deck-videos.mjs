@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { exec, execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { getDbLanguageCode, normalizeLanguageCode } from "./lib/video-language-codes.mjs";
+import { getDbLanguageCode, getSpreadsheetLanguageCode, normalizeLanguageCode } from "./lib/video-language-codes.mjs";
 import { BRAND_NAME } from "./lib/brand.mjs";
 import { shardItems } from "./lib/work-shards.mjs";
 
@@ -190,7 +190,7 @@ async function main() {
       const supportKey = deckData.cards?.[supportLang] ? supportLang : supportDbLang;
       if (deckData.cards?.[supportKey]) {
         languages = Object.keys(deckData.cards[supportKey])
-          .map(code => normalizeLanguageCode(code))
+          .map(code => getSpreadsheetLanguageCode(code))
           .filter(code => getDbLanguageCode(code) !== supportDbLang);
       } else {
         console.warn(`Warning: support language "${supportLang}" has no target languages in offline JSON.`);
@@ -216,7 +216,7 @@ async function main() {
     `;
     try {
       const rows = await psqlJson(sql);
-      languages = rows.map(r => r.language_code);
+      languages = rows.map(r => getSpreadsheetLanguageCode(r.language_code));
     } catch (e) {
       console.error("Database query failed:", e.message);
       process.exit(1);
