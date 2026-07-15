@@ -434,7 +434,7 @@ jobs:
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `polyglot_key=${c.polyglotKey || ""}\n`);
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `effective_content_scope=${effectiveScope}\n`);
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `effective_max_duration=${effectiveMax}\n`);
-            const alreadyPublished = report.existingPublication ? "true" : "false";
+            const alreadyPublished = c.existingPublication ? "true" : "false";
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `already_published=${alreadyPublished}\n`);
             if (process.env.GITHUB_STEP_SUMMARY) {
               fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
