@@ -434,6 +434,8 @@ jobs:
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `polyglot_key=${c.polyglotKey || ""}\n`);
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `effective_content_scope=${effectiveScope}\n`);
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `effective_max_duration=${effectiveMax}\n`);
+            const alreadyPublished = report.existingPublication ? "true" : "false";
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `already_published=${alreadyPublished}\n`);
             if (process.env.GITHUB_STEP_SUMMARY) {
               fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
                 "### Polyglot plan",
@@ -446,13 +448,14 @@ jobs:
                 `- Targets: ${c.targetLangsCsv || ""}`,
                 `- Cards: ${c.deck?.cardCount || 0}`,
                 `- Study URL: ${c.studyUrl || ""}`,
+                `- Already published: ${alreadyPublished}`,
                 "",
               ].join("\n"));
             }
           '
 
       - name: Audit and gate live Polyglot publication state
-        if: ${{ inputs.mode == 'apply' }}
+        if: ${{ inputs.mode == 'apply' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
           SET_ID: ${{ inputs.set_id }}
@@ -465,6 +468,7 @@ jobs:
           npm run check:youtube-publication-control -- --set "$SET_ID" --support "$SUPPORT" --targets "$TARGET_LANGS" --proposed-polyglot-key "$POLYGLOT_KEY" --live-audit=outputs/youtube-live-publications-github.json --output=outputs/youtube-publication-control-github.json --strict
 
       - name: Generate Polyglot YouTube metadata
+        if: ${{ steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
           MODE: ${{ inputs.mode }}
@@ -541,7 +545,7 @@ jobs:
           npm run generate:polyglot-youtube-metadata -- "${METADATA_ARGS[@]}"
 
       - name: Reserve earliest shared channel-calendar slot
-        if: ${{ inputs.publish_mode == 'scheduled' }}
+        if: ${{ inputs.publish_mode == 'scheduled' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
           SCHEDULE_START_DATE: ${{ inputs.schedule_start_date }}
@@ -557,6 +561,7 @@ jobs:
           npm run plan:youtube-publish-schedule -- "${SCHEDULE_ARGS[@]}"
 
       - name: Check Polyglot YouTube metadata
+        if: ${{ steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
           MODE: ${{ inputs.mode }}
@@ -572,24 +577,24 @@ jobs:
           npm run check:polyglot-youtube-metadata -- "${CHECK_ARGS[@]}"
 
       - name: Install render dependencies
-        if: ${{ inputs.mode != 'plan' }}
+        if: ${{ inputs.mode != 'plan' && steps.polyglot_plan.outputs.already_published != 'true' }}
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
           npx playwright install chromium --with-deps
 
       - name: Set up Python for audio render
-        if: ${{ inputs.mode == 'render_audio' || inputs.mode == 'apply' }}
+        if: ${{ (inputs.mode == 'render_audio' || inputs.mode == 'apply') && steps.polyglot_plan.outputs.already_published != 'true' }}
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
       - name: Install Python TTS dependency
-        if: ${{ inputs.mode == 'render_audio' || inputs.mode == 'apply' }}
+        if: ${{ (inputs.mode == 'render_audio' || inputs.mode == 'apply') && steps.polyglot_plan.outputs.already_published != 'true' }}
         run: pip install edge-tts
 
       - name: Render Polyglot video locally
-        if: ${{ inputs.mode != 'plan' }}
+        if: ${{ inputs.mode != 'plan' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
           AI33_API_KEY: ${{ secrets.AI33_API_KEY }}
@@ -612,7 +617,7 @@ jobs:
           node scripts/build-polyglot-video.mjs "${BUILD_ARGS[@]}"
 
       - name: Check Polyglot duration and long-video capability
-        if: ${{ inputs.mode != 'plan' }}
+        if: ${{ inputs.mode != 'plan' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
           MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || inputs.max_duration_seconds }}
@@ -622,7 +627,7 @@ jobs:
           npm run check:polyglot-video-duration -- outputs/video-generator --content-scope "$CONTENT_SCOPE" --max-duration-seconds "$MAX_DURATION_SECONDS" --write-metadata --output=outputs/polyglot-video-duration-check-github.json
 
       - name: Copy approved pre-rendered Polyglot thumbnails
-        if: ${{ inputs.mode == 'apply' }}
+        if: ${{ inputs.mode == 'apply' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -633,10 +638,11 @@ jobs:
             --output=outputs/polyglot-pre-rendered-thumbnail-copy-github.json
 
       - name: Check Polyglot thumbnails or accepted fallback
-        if: ${{ inputs.mode == 'apply' }}
+        if: ${{ inputs.mode == 'apply' && steps.polyglot_plan.outputs.already_published != 'true' }}
         run: npm run check:youtube-thumbnails -- outputs/video-generator --allow-auto-first-frame --output=outputs/polyglot-youtube-thumbnail-check-github.json
 
       - name: Plan Polyglot YouTube upload
+        if: ${{ steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
           MODE: ${{ inputs.mode }}
@@ -664,7 +670,7 @@ jobs:
           npm run plan:youtube-polyglot-upload -- "${UPLOAD_PLAN_ARGS[@]}"
 
       - name: Gate Polyglot upload plan
-        if: ${{ inputs.mode == 'apply' }}
+        if: ${{ inputs.mode == 'apply' && steps.polyglot_plan.outputs.already_published != 'true' }}
         run: |
           set -euo pipefail
           node -e '
@@ -678,7 +684,7 @@ jobs:
           '
 
       - name: Refresh live Polyglot publication control immediately before upload
-        if: ${{ inputs.mode == 'apply' }}
+        if: ${{ inputs.mode == 'apply' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
           SET_ID: ${{ inputs.set_id }}
@@ -691,7 +697,7 @@ jobs:
           npm run check:youtube-publication-control -- --set "$SET_ID" --support "$SUPPORT" --targets "$TARGET_LANGS" --proposed-polyglot-key "$POLYGLOT_KEY" --live-audit=outputs/youtube-live-publications-github.json --output=outputs/youtube-publication-control-github.json --strict
 
       - name: Upload Polyglot video to YouTube
-        if: ${{ inputs.mode == 'apply' }}
+        if: ${{ inputs.mode == 'apply' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
           CREATE_PLAYLISTS: ${{ inputs.create_playlists }}
