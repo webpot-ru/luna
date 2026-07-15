@@ -382,7 +382,11 @@ export function buildPublicationControlReport({
     const status = videoStatus(row);
     const publishAt = status.publishAt || row.publishAt || "";
     if (status.privacyStatus !== "private" || Date.parse(publishAt) <= nowMillis) return false;
-    const reservation = calendarByVideoId.get(row.youtubeVideoId) || calendarByAssignment.get(calendarAssignmentKey(row));
+    let reservation = calendarByVideoId.get(row.youtubeVideoId) || calendarByAssignment.get(calendarAssignmentKey(row));
+    if (!reservation && polyglotContentScope(row) === "short_unverified") {
+      const fullRow = { ...row, contentScope: "full" };
+      reservation = calendarByAssignment.get(calendarAssignmentKey(fullRow));
+    }
     return !reservation || Math.abs(Date.parse(reservation.publishAt) - Date.parse(publishAt)) > 1000;
   }).map((row) => ({
     youtubeVideoId: row.youtubeVideoId,
