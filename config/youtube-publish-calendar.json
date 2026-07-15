@@ -240811,6 +240811,62 @@
       "youtubeVideoId": "7k3fJpaU8kI",
       "youtubePlaylistId": "PLIfCrVT6jQ3s",
       "playlistItemId": "UExJZkNyVlQ2alEzcy41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "videoType": "ordinary",
+      "polyglotKey": "",
+      "bundleKey": "",
+      "bundleLabel": "",
+      "contentScope": "",
+      "targetLangs": [],
+      "targetLangsCsv": "",
+      "targetLangsHash": "",
+      "campaignId": "",
+      "campaignManifestHash": "",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "IT",
+      "targetLang": "NO",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-07-16T06:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-07-16",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_no_it/youtube_metadata.json",
+      "title": "Norvegese A1 - Utensili da cucina | 50 parole base",
+      "playlist_key": "IT__NO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29428589853",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29428589853",
+      "createdAt": "2026-07-15T15:35:52.188Z",
+      "updatedAt": "2026-07-15T15:35:52.188Z",
+      "youtubeVideoId": "L1-ezqs3Ba8",
+      "youtubePlaylistId": "PLUKnh-bJbJpI",
+      "playlistItemId": "UExVS25oLWJKYkpwSS4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
