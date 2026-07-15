@@ -87,6 +87,8 @@ npm run claim:youtube-publication-campaign -- \
 6. Один fire-and-forget `.github/workflows/youtube-publication-campaign.yml` в `mode=apply` с exact `campaign_id`, `campaign_manifest_hash` и `confirm_campaign_apply=APPLY_YOUTUBE_PUBLICATION_CAMPAIGN`.
 7. Не смотреть child runs непрерывно. Один bounded readback позже. На failure после metadata/render/TTS/image остановиться и сообщить artifact/stage; не retry и не reupload.
 
+`youtube-video-publish.yml` и `youtube-polyglot-video-publish.yml` являются только внутренними reusable workers: их ручной `workflow_dispatch mode=apply` намеренно запрещён. Это исключает независимые calendar claims, per-child live control и competing state commits; новые волны запускаются только через уже claimed campaign.
+
 ## Точный repair scheduled даты
 
 `youtube-repair-scheduled-publish-at.yml` обслуживает только committed plan `config/youtube-schedule-repair-plans/deck1-polyglot-calendar-conflicts-20260715.json`. Он не создаёт новую публикацию: перед `videos.update(status)` сверяет владельца канала, `private` и прежний `publishAt`; после записи один раз перечитывает тот же ролик. В workflow нет render, TTS, metadata, thumbnails, playlist operations, uploads или deletes. Если первый ID даёт mismatch или API error, второй не пытается менять. Уже перенесённый на точную целевую дату ID остаётся read-only.

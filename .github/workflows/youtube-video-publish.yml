@@ -216,6 +216,7 @@ jobs:
           CAMPAIGN_ID: ${{ inputs.campaign_id }}
           CAMPAIGN_MANIFEST_HASH: ${{ inputs.campaign_manifest_hash }}
           CAMPAIGN_METADATA_ROUTE: ${{ inputs.campaign_metadata_route }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
           if [ "$(printf '%s' "$SUPPORT" | tr '[:lower:]' '[:upper:]' | xargs)" = "ALL" ]; then
@@ -265,6 +266,10 @@ jobs:
           fi
           if [ -n "$CAMPAIGN_ID" ] && [ -z "$CAMPAIGN_METADATA_ROUTE" ]; then
             echo "::error::campaign-owned calls require campaign_metadata_route."
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "::error::Direct apply is disabled. Use youtube-publication-campaign.yml with an already-claimed campaign."
             exit 1
           fi
           if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_YOUTUBE_UPLOAD" ]; then

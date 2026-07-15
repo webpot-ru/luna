@@ -85,6 +85,16 @@ assert.match(
 );
 assert.match(
   workerWorkflow,
+  /Plan Polyglot candidate[\s\S]*?LIMIT: \$\{\{ inputs\.limit \}\}/u,
+  "the Polyglot planner must receive the requested card limit before it computes an effective limit",
+);
+assert.match(
+  workerWorkflow,
+  /GITHUB_EVENT_NAME: \$\{\{ github\.event_name \}\}[\s\S]*?Direct apply is disabled/u,
+  "manual Polyglot apply must be blocked so only the campaign workflow can create a bulk wave",
+);
+assert.match(
+  workerWorkflow,
   /CONTENT_SCOPE: \$\{\{ steps\.polyglot_plan\.outputs\.effective_content_scope \|\| inputs\.content_scope \}\}/u,
   "the renderer must receive the planner's effective content scope",
 );
