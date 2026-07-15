@@ -32,6 +32,8 @@ on:
       campaign_id: { required: false, type: string, default: "" }
       campaign_manifest_hash: { required: false, type: string, default: "" }
       campaign_metadata_route: { required: false, type: string, default: "" }
+      offline_deck_git_commit: { required: false, type: string, default: "" }
+      offline_deck_sha256: { required: false, type: string, default: "" }
   workflow_dispatch:
     inputs:
       mode:
@@ -460,6 +462,9 @@ jobs:
       - name: Download offline deck data from Google Drive
         if: ${{ inputs.source_run_id == '' }}
         shell: bash
+        env:
+          HISTORICAL_DECK_COMMIT: ${{ inputs.offline_deck_git_commit }}
+          EXPECTED_DECK_SHA256: ${{ inputs.offline_deck_sha256 }}
         run: |
           set -euo pipefail
           SET_ID="${{ inputs.set_id }}"
@@ -482,20 +487,31 @@ jobs:
             else
               curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
             fi
-            test -s "data/decks/${SET_ID}.json"
             echo "Downloaded offline data to data/decks/${SET_ID}.json"
           else
             echo "No Google Drive File ID found for $SET_ID in data/deck-sources.json."
-            if [ ! -s "data/decks/${SET_ID}.json" ]; then
+          fi
+
+          if [ ! -s "data/decks/${SET_ID}.json" ]; then
+            COMMIT_TO_USE="$HISTORICAL_DECK_COMMIT"
+            if [ -z "$COMMIT_TO_USE" ]; then
               echo "Checking Git history for data/decks/${SET_ID}.json..."
-              HISTORICAL_COMMIT=$(git log --all --format=%H -- "data/decks/${SET_ID}.json" | head -n1 || true)
-              if [ -n "$HISTORICAL_COMMIT" ]; then
-                echo "Found historical commit $HISTORICAL_COMMIT containing data/decks/${SET_ID}.json. Restoring..."
-                mkdir -p data/decks
-                git show "${HISTORICAL_COMMIT}:data/decks/${SET_ID}.json" > "data/decks/${SET_ID}.json"
-              else
-                echo "No historical commit found containing data/decks/${SET_ID}.json."
-              fi
+              COMMIT_TO_USE=$(git log --all --format=%H -- "data/decks/${SET_ID}.json" | head -n1 || true)
+            fi
+            if [ -n "$COMMIT_TO_USE" ]; then
+              echo "Restoring offline deck from commit $COMMIT_TO_USE..."
+              mkdir -p data/decks
+              git show "${COMMIT_TO_USE}:data/decks/${SET_ID}.json" > "data/decks/${SET_ID}.json"
+            else
+              echo "No commit found containing data/decks/${SET_ID}.json."
+            fi
+          fi
+
+          if [ -s "data/decks/${SET_ID}.json" ] && [ -n "$EXPECTED_DECK_SHA256" ]; then
+            ACTUAL_DECK_SHA256="$(sha256sum "data/decks/${SET_ID}.json" | cut -d' ' -f1)"
+            if [ "$ACTUAL_DECK_SHA256" != "$EXPECTED_DECK_SHA256" ]; then
+              echo "::error::Offline deck checksum mismatch for $SET_ID"
+              exit 1
             fi
           fi
 

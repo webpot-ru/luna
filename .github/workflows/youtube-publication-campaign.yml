@@ -324,6 +324,8 @@ jobs:
       campaign_id: ${{ inputs.campaign_id }}
       campaign_manifest_hash: ${{ inputs.campaign_manifest_hash }}
       campaign_metadata_route: ${{ matrix.route_key }}
+      offline_deck_git_commit: ${{ needs.preflight.outputs.offline_deck_git_commit }}
+      offline_deck_sha256: ${{ needs.preflight.outputs.offline_deck_sha256 }}
     secrets: inherit
 
   polyglot:
@@ -359,6 +361,8 @@ jobs:
       campaign_id: ${{ inputs.campaign_id }}
       campaign_manifest_hash: ${{ inputs.campaign_manifest_hash }}
       campaign_metadata_route: ${{ matrix.route_key }}
+      offline_deck_git_commit: ${{ needs.preflight.outputs.offline_deck_git_commit }}
+      offline_deck_sha256: ${{ needs.preflight.outputs.offline_deck_sha256 }}
     secrets: inherit
 
   finalize:

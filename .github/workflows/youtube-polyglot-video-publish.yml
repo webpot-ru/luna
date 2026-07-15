@@ -29,6 +29,8 @@ on:
       campaign_id: { required: false, type: string, default: "" }
       campaign_manifest_hash: { required: false, type: string, default: "" }
       campaign_metadata_route: { required: false, type: string, default: "" }
+      offline_deck_git_commit: { required: false, type: string, default: "" }
+      offline_deck_sha256: { required: false, type: string, default: "" }
   workflow_dispatch:
     inputs:
       mode:
@@ -353,6 +355,9 @@ jobs:
 
       - name: Download offline deck data from Google Drive
         shell: bash
+        env:
+          HISTORICAL_DECK_COMMIT: ${{ inputs.offline_deck_git_commit }}
+          EXPECTED_DECK_SHA256: ${{ inputs.offline_deck_sha256 }}
         run: |
           set -euo pipefail
           SET_ID="${{ inputs.set_id }}"
@@ -375,10 +380,23 @@ jobs:
             else
               curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
             fi
-            test -s "data/decks/${SET_ID}.json"
             echo "Downloaded offline data to data/decks/${SET_ID}.json"
           else
-            echo "No Google Drive File ID found for $SET_ID in data/deck-sources.json. Planner will require a committed/local data/decks/${SET_ID}.json."
+            echo "No Google Drive File ID found for $SET_ID in data/deck-sources.json."
+          fi
+
+          if [ ! -s "data/decks/${SET_ID}.json" ] && [ -n "$HISTORICAL_DECK_COMMIT" ]; then
+            echo "Restoring offline deck from historical commit $HISTORICAL_DECK_COMMIT"
+            mkdir -p data/decks
+            git show "${HISTORICAL_DECK_COMMIT}:data/decks/${SET_ID}.json" > "data/decks/${SET_ID}.json"
+          fi
+
+          if [ -s "data/decks/${SET_ID}.json" ] && [ -n "$EXPECTED_DECK_SHA256" ]; then
+            ACTUAL_DECK_SHA256="$(sha256sum "data/decks/${SET_ID}.json" | cut -d' ' -f1)"
+            if [ "$ACTUAL_DECK_SHA256" != "$EXPECTED_DECK_SHA256" ]; then
+              echo "::error::Offline deck checksum mismatch for $SET_ID"
+              exit 1
+            fi
           fi
 
       - name: Plan Polyglot candidate
