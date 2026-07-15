@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
-import { scheduledStatusBody, validateRepairPlan } from "./youtube-repair-scheduled-publish-at.mjs";
+import {
+  readScheduleUntilExpected,
+  scheduledStatusBody,
+  validateRepairPlan,
+} from "./youtube-repair-scheduled-publish-at.mjs";
 
 const plan = validateRepairPlan({
   schemaVersion: 1,
@@ -50,5 +54,36 @@ assert.deepEqual(scheduledStatusBody({
   selfDeclaredMadeForKids: false,
   containsSyntheticMedia: true,
 });
+
+const expectedPublishAt = "2026-07-17T21:30:00.000Z";
+const stale = { status: { privacyStatus: "private", publishAt: "2026-07-16T21:30:00.000Z" } };
+const moved = { status: { privacyStatus: "private", publishAt: expectedPublishAt } };
+const observedDelays = [];
+const reads = [stale, stale, moved];
+const propagation = await readScheduleUntilExpected({
+  read: async () => reads.shift(),
+  publishAt: expectedPublishAt,
+  firstDelayMs: 15_000,
+  retryDelayMs: 10_000,
+  wait: async (milliseconds) => observedDelays.push(milliseconds),
+});
+assert.equal(propagation.matched, true);
+assert.equal(propagation.attempts, 3);
+assert.deepEqual(propagation.delays, [15_000, 10_000, 10_000]);
+assert.deepEqual(observedDelays, [15_000, 10_000, 10_000]);
+assert.equal(propagation.after, moved);
+
+const mismatchReads = [stale, stale];
+const mismatch = await readScheduleUntilExpected({
+  read: async () => mismatchReads.shift() || stale,
+  publishAt: expectedPublishAt,
+  attempts: 2,
+  firstDelayMs: 0,
+  retryDelayMs: 0,
+  wait: async () => assert.fail("zero-delay readback must not wait"),
+});
+assert.equal(mismatch.matched, false);
+assert.equal(mismatch.attempts, 2);
+assert.equal(mismatch.after, stale);
 
 console.log("youtube-repair-scheduled-publish-at tests passed");

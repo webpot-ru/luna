@@ -91,7 +91,7 @@ npm run claim:youtube-publication-campaign -- \
 
 ## Точный repair scheduled даты
 
-`youtube-repair-scheduled-publish-at.yml` обслуживает только committed plan `config/youtube-schedule-repair-plans/deck1-polyglot-calendar-conflicts-20260715.json`. Он не создаёт новую публикацию: перед `videos.update(status)` сверяет владельца канала, `private` и прежний `publishAt`; после записи один раз перечитывает тот же ролик. В workflow нет render, TTS, metadata, thumbnails, playlist operations, uploads или deletes. Если первый ID даёт mismatch или API error, второй не пытается менять. Уже перенесённый на точную целевую дату ID остаётся read-only.
+`youtube-repair-scheduled-publish-at.yml` обслуживает только committed plan `config/youtube-schedule-repair-plans/deck1-polyglot-calendar-conflicts-20260715.json`. Он не создаёт новую публикацию: перед единственным `videos.update(status)` сверяет владельца канала, `private` и прежний `publishAt`. После write workflow делает bounded propagation readback: ждёт 15 секунд, затем читает тот же ID максимум три раза с двумя дополнительными паузами по 10 секунд. Он никогда не повторяет `videos.update`; в failure evidence сохраняет `before`, ответ update и все post-update readback. В workflow нет render, TTS, metadata, thumbnails, playlist operations, uploads или deletes. Если первый ID даёт mismatch или API error, второй не пытается менять. Уже перенесённый на точную целевую дату ID остаётся read-only.
 
 ## Metadata batching
 
