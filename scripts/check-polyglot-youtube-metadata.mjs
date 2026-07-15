@@ -147,7 +147,9 @@ function validate(metadata, file) {
     warnings.push("title should visibly mark Polyglot mode");
   }
   if (!description) blockers.push("missing description");
-  if (descriptionLength < 250) blockers.push(`description too short: ${descriptionLength}`);
+  const isCjk = ["ZH", "JA", "KO"].includes(supportLang);
+  const minDescLength = isCjk ? 150 : 250;
+  if (descriptionLength < minDescLength) blockers.push(`description too short: ${descriptionLength}`);
   if (descriptionLength > 5000) blockers.push(`description too long: ${descriptionLength}`);
   if (!courseUrl) blockers.push("missing courseUrl/studyUrl");
   if (courseUrl && !isSpecificStudyCourseUrl(courseUrl)) blockers.push(`courseUrl is not a specific study URL: ${courseUrl}`);

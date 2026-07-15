@@ -45,7 +45,9 @@ function validate(metadata, file) {
   if (!metadata.supportLang) blockers.push("missing supportLang");
   if (titleLength < 8) blockers.push("title too short");
   if (titleLength > 100) blockers.push(`title too long: ${titleLength}`);
-  if (descriptionLength < 180) blockers.push(`description too short: ${descriptionLength}`);
+  const isCjk = ["ZH", "JA", "KO"].includes(String(metadata.supportLang).toUpperCase());
+  const minDescLength = isCjk ? 100 : 180;
+  if (descriptionLength < minDescLength) blockers.push(`description too short: ${descriptionLength}`);
   if (descriptionLength > 5000) blockers.push(`description too long: ${descriptionLength}`);
   if (!String(metadata.description || "").includes("flashcardsluna.com")) blockers.push("description missing flashcardsluna.com link");
   if (tags.length < 5) blockers.push(`too few tags: ${tags.length}`);
