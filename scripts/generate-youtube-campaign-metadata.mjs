@@ -266,7 +266,7 @@ export function buildCampaignMetadataPrompt(tasks) {
     "Do not merge, omit or duplicate tasks.",
     "For Polyglot tasks, playlistTitle and playlistDescription are required; ordinary tasks may leave them empty.",
     "Titles must be natural, <=100 characters and not clickbait.",
-    "Descriptions must be concise: 3-5 short sentences and no more than 900 Unicode characters.",
+    "Descriptions must be concise: 3-5 short sentences and 250-900 Unicode characters; ZH, JA and KO descriptions may be 150-900 Unicode characters.",
     "Descriptions must include the task courseUrl exactly once and describe vocabulary, pronunciation, repeat pauses and review.",
     "Polyglot playlistDescription must be no more than 600 Unicode characters.",
     "Do not invent prices, certificates, native teachers, fluency guarantees or exact durations.",
@@ -394,10 +394,19 @@ function finalizeMetadata(task, generated, provider) {
   const source = provider.backend === "openai"
     ? "openai-responses-campaign-batch"
     : `gemini-${provider.backend}-campaign-batch`;
+  const supportLang = String(task.assignment.supportLang || "").toUpperCase();
+  const minimumDescriptionLength = ["ZH", "JA", "KO"].includes(supportLang) ? 150 : 250;
+  const generatedDescription = String(generated.description || "").trim();
+  const description = Array.from(generatedDescription).length >= minimumDescriptionLength
+    ? generatedDescription
+    : String(task.template.description || "").trim();
+  if (Array.from(description).length < minimumDescriptionLength) {
+    throw new Error(`${task.assignment.assignmentKey}: description is below ${minimumDescriptionLength} Unicode characters after localized template fallback`);
+  }
   const merged = normalizeYouTubeMetadata({
     ...task.template,
     title: generated.title,
-    description: generated.description,
+    description,
     tags: generated.tags,
     hashtags: generated.hashtags,
     source,
@@ -416,6 +425,7 @@ function finalizeMetadata(task, generated, provider) {
       serviceTier: provider.serviceTier || "",
     },
   });
+  merged.aiMetadata.descriptionFallbackToTemplate = description !== generatedDescription;
   merged.campaignPlaylist = structuredClone(task.assignment.playlist || {});
   merged.playlist_key = task.assignment.playlist?.playlistKey || merged.playlist_key || "";
   merged.youtubePlaylistId = task.assignment.playlist?.youtubePlaylistId || "";

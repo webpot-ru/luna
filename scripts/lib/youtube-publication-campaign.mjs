@@ -8,7 +8,10 @@ import {
   calendarAssignmentKey,
   canonicalSupportCode,
   effectiveScheduleStartDate,
+  isPolyglotRow,
   normalizeCode,
+  polyglotContentScope,
+  polyglotProductSlotKey,
 } from "./youtube-publication-control.mjs";
 import {
   assertCanonicalSupportCount,
@@ -24,6 +27,7 @@ import {
 } from "../plan-youtube-publish-schedule.mjs";
 import {
   buildPlaylistAssignment,
+  longVideoUploadAllowed,
   findPlaylistEntry,
 } from "./youtube-playlists.mjs";
 import {
@@ -44,6 +48,8 @@ const ACTIVE_CAMPAIGN_STATUSES = new Set([
   "upload_accepted",
   "reconciliation_required",
 ]);
+const SHORT_UNVERIFIED_MAX_DURATION_SECONDS = 895;
+const DEFAULT_SHORT_UNVERIFIED_CARD_LIMIT = 0;
 
 function readJson(filePath, fallback = null) {
   if (!fs.existsSync(filePath)) {
@@ -259,7 +265,12 @@ function resolveCandidatePlaylist({ candidate, ordinaryRegistry, polyglotRegistr
     ? findPolyglotPlaylistEntry(polyglotRegistry, assignment.key)
     : findPlaylistEntry(ordinaryRegistry, assignment.key);
   const discoveryChannel = findDiscoveryChannel(playlistDiscovery, candidate.supportLang);
-  const discovery = resolvePlaylistDiscovery({ assignment, registryEntry, discoveryChannel });
+  const discovery = resolvePlaylistDiscovery({
+    assignment,
+    registryEntry,
+    discoveryChannel,
+    requirePublic: true,
+  });
   return {
     ...discovery,
     title: assignment.title,
@@ -274,10 +285,14 @@ function analyticsCheckpoints(publishAt, hours) {
   return hours.map((value) => ({ hoursAfterPublish: value, dueAt: new Date(base + value * 3_600_000).toISOString() }));
 }
 
-function buildCandidate({ tail, channel, route }) {
+function buildCandidate({ tail, channel, route, channelRegistry }) {
   if (tail.videoType === "polyglot") {
     const targetLangs = (tail.targetLangs || []).map(normalizeCode).filter(Boolean);
     const targetLangsHash = targetHash(targetLangs);
+    const requestedContentScope = tail.contentScope || "full";
+    const longVideoAllowed = longVideoUploadAllowed(channelRegistry, channel);
+    const useShortUnverified = requestedContentScope === "full" && !longVideoAllowed;
+    const shortCardLimit = Number(channelRegistry?.defaults?.shortUnverifiedPolyglotCardLimit ?? DEFAULT_SHORT_UNVERIFIED_CARD_LIMIT);
     const candidate = {
       videoType: "polyglot",
       setId: tail.setId,
@@ -287,7 +302,12 @@ function buildCandidate({ tail, channel, route }) {
       targetLangsCsv: targetLangs.join(","),
       targetLangsHash,
       bundleKey: tail.bundleKey,
-      contentScope: tail.contentScope || "full",
+      requestedContentScope,
+      contentScope: useShortUnverified ? "short_unverified" : requestedContentScope,
+      cardLimit: useShortUnverified ? shortCardLimit : 0,
+      maxDurationSeconds: useShortUnverified ? SHORT_UNVERIFIED_MAX_DURATION_SECONDS : 0,
+      longVideoUploadAllowed: longVideoAllowed,
+      autoFallbackReason: useShortUnverified ? "long_video_upload_not_confirmed" : "",
       channelKey: channel.key,
       youtubeChannelId: channel.channelId,
       youtubeEnvironment: route.githubEnvironment || route.environment || "",
@@ -311,6 +331,23 @@ function buildCandidate({ tail, channel, route }) {
   candidate.assignmentKey = assignmentKey(candidate);
   candidate.calendarAssignmentKey = calendarAssignmentKey(candidate);
   return candidate;
+}
+
+function activePublicationMatchesCandidate(publication, candidate) {
+  if (publication?.videoType !== candidate.videoType || publication?.setId !== candidate.setId) return false;
+  if (canonicalSupportCode(publication.supportLang) !== candidate.supportLang) return false;
+  if (!publication.youtubeVideoId || publication.liveReadbackPresent === false) return false;
+  if (/deleted|failed|cancelled/iu.test(String(publication.state || publication.privacyStatus || ""))) return false;
+  if (candidate.videoType !== "polyglot") return normalizeCode(publication.targetLang) === candidate.targetLang;
+  if (publication.bundleKey && publication.bundleKey !== candidate.bundleKey) return false;
+  if (publication.bundleKey) return polyglotProductSlotKey(publication) === polyglotProductSlotKey(candidate);
+  return sameTargetList(publication.targetLangs, candidate.targetLangs);
+}
+
+function crossScopePublicationMatchesCandidate(publication, candidate) {
+  return activePublicationMatchesCandidate(publication, candidate)
+    && isPolyglotRow(publication)
+    && polyglotContentScope(publication) !== candidate.contentScope;
 }
 
 function validateWave(assignments, expectedSupportCount, ordinaryPerChannel, polyglotPerChannel) {
@@ -454,12 +491,20 @@ export function buildPublicationCampaign(options = {}) {
     const route = routing.supportToRoute.get(support);
     const tails = tailsBySupport.get(support);
     const ordinary = tails.ordinary
-      .map((tail) => buildCandidate({ tail, channel, route }))
+      .map((tail) => buildCandidate({ tail, channel, route, channelRegistry: routing.channelRegistry }))
       .filter((candidate) => !claims.assignments.has(candidate.assignmentKey))
       .slice(0, ordinaryPerChannel);
-    const polyglot = tails.polyglot
-      .map((tail) => buildCandidate({ tail, channel, route }))
+    const polyglotCandidates = tails.polyglot
+      .map((tail) => buildCandidate({ tail, channel, route, channelRegistry: routing.channelRegistry }));
+    for (const candidate of polyglotCandidates) {
+      const conflicting = deck.publications.find((publication) => crossScopePublicationMatchesCandidate(publication, candidate));
+      if (conflicting) {
+        blockers.push(`${support}: ${candidate.bundleKey} ${candidate.contentScope} is blocked by active ${polyglotContentScope(conflicting)} Polyglot video ${conflicting.youtubeVideoId || "without durable ID"}`);
+      }
+    }
+    const polyglot = polyglotCandidates
       .filter((candidate) => !claims.assignments.has(candidate.assignmentKey))
+      .filter((candidate) => !deck.publications.some((publication) => activePublicationMatchesCandidate(publication, candidate)))
       .slice(0, polyglotPerChannel);
     if (ordinary.length !== ordinaryPerChannel) blockers.push(`${support}: only ${ordinary.length}/${ordinaryPerChannel} unclaimed ordinary tails available`);
     if (polyglot.length !== polyglotPerChannel) blockers.push(`${support}: only ${polyglot.length}/${polyglotPerChannel} unclaimed full Polyglot tails available`);

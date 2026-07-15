@@ -609,22 +609,35 @@ export async function fetchDeckCards(setId, targetLang, supportLang) {
 export async function fetchDeckMetadata(setId, supportLang) {
   const supportCode = normalizeLanguageCode(supportLang);
   const supportDbLang = getDbLanguageCode(supportCode);
+  const offlineMetadata = getOfflineCourseMetadata(getOfflineDeckData(setId), supportCode, supportDbLang);
+  const runningInGitHubActions = process.env.GITHUB_ACTIONS === "true";
+  const hasExplicitDatabaseUrl = Boolean(String(process.env.DATABASE_URL || "").trim());
 
-  try {
-    const dbMetadata = await fetchDbCourseMetadata(setId, supportDbLang);
-    if (dbMetadata) return dbMetadata;
-  } catch (error) {
-    console.warn(`[COURSE_METADATA_DB_FALLBACK] ${setId}/${supportDbLang}: ${error.message}`);
+  // GitHub receives an immutable offline deck and has no project-local Postgres.
+  // A missing localized metadata row must fail before render, not fall through to psql.
+  if (runningInGitHubActions) {
+    if (offlineMetadata) return offlineMetadata;
+    throw new Error(`GitHub metadata generation requires offline Course Metadata for ${setId}/${supportCode}`);
   }
 
-  const offlineMetadata = getOfflineCourseMetadata(getOfflineDeckData(setId), supportCode, supportDbLang);
+  if (hasExplicitDatabaseUrl) {
+    try {
+      const dbMetadata = await fetchDbCourseMetadata(setId, supportDbLang);
+      if (dbMetadata) return dbMetadata;
+    } catch (error) {
+      console.warn(`[COURSE_METADATA_DB_FALLBACK] ${setId}/${supportDbLang}: ${error.message}`);
+    }
+  }
+
   if (offlineMetadata) return offlineMetadata;
 
-  try {
-    const englishMetadata = await fetchEnglishCourseMetadata(setId);
-    if (englishMetadata) return englishMetadata;
-  } catch (error) {
-    console.warn(`[COURSE_METADATA_EN_FALLBACK] ${setId}: ${error.message}`);
+  if (hasExplicitDatabaseUrl) {
+    try {
+      const englishMetadata = await fetchEnglishCourseMetadata(setId);
+      if (englishMetadata) return englishMetadata;
+    } catch (error) {
+      console.warn(`[COURSE_METADATA_EN_FALLBACK] ${setId}: ${error.message}`);
+    }
   }
 
   // Last fallback: internal content set name, then slug.

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
+import fs from "node:fs";
 
 import {
   findActivePolyglotCalendarReservation,
@@ -75,5 +76,22 @@ assert.equal(
   null,
   "a different content scope must not satisfy the full-video claim",
 );
+
+const workerWorkflow = fs.readFileSync(".github/workflows/youtube-polyglot-video-publish.yml", "utf8");
+assert.match(
+  workerWorkflow,
+  /LIMIT: \$\{\{ steps\.polyglot_plan\.outputs\.effective_card_limit \|\| inputs\.limit \}\}/u,
+  "the renderer must receive the planner's effective card limit",
+);
+assert.match(
+  workerWorkflow,
+  /CONTENT_SCOPE: \$\{\{ steps\.polyglot_plan\.outputs\.effective_content_scope \|\| inputs\.content_scope \}\}/u,
+  "the renderer must receive the planner's effective content scope",
+);
+
+const campaignWorkflow = fs.readFileSync(".github/workflows/youtube-publication-campaign.yml", "utf8");
+assert.match(campaignWorkflow, /limit: \$\{\{ matrix\.card_limit \}\}/u);
+assert.match(campaignWorkflow, /content_scope: \$\{\{ matrix\.content_scope \}\}/u);
+assert.match(campaignWorkflow, /max_duration_seconds: \$\{\{ matrix\.max_duration_seconds \}\}/u);
 
 console.log("youtube Polyglot campaign claim tests passed");

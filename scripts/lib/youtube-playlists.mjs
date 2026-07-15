@@ -205,6 +205,16 @@ export function customThumbnailUploadAllowed(channelRegistry = {}, channel = {})
   return false;
 }
 
+// YouTube's long-video entitlement is related to, but not inferred from, the
+// custom-thumbnail permission. Keep the two capability records independent.
+export function longVideoUploadAllowed(channelRegistry = {}, channel = {}) {
+  const defaultValue = channelRegistry?.defaults?.longVideoUploadAllowed;
+  const channelValue = channel?.longVideoUploadAllowed;
+  if (channelValue === true) return true;
+  if (channelValue === false) return false;
+  return defaultValue === true;
+}
+
 export function normalizeSlugPart(value) {
   return String(value || "")
     .trim()

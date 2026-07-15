@@ -46,7 +46,7 @@ function validate(metadata, file) {
   if (titleLength < 8) blockers.push("title too short");
   if (titleLength > 100) blockers.push(`title too long: ${titleLength}`);
   const isCjk = ["ZH", "JA", "KO"].includes(String(metadata.supportLang).toUpperCase());
-  const minDescLength = isCjk ? 100 : 180;
+  const minDescLength = isCjk ? 150 : 180;
   if (descriptionLength < minDescLength) blockers.push(`description too short: ${descriptionLength}`);
   if (descriptionLength > 5000) blockers.push(`description too long: ${descriptionLength}`);
   if (!String(metadata.description || "").includes("flashcardsluna.com")) blockers.push("description missing flashcardsluna.com link");
@@ -89,18 +89,7 @@ try {
   const files = collectFiles(paths);
   if (files.length === 0) throw new Error("No youtube_metadata.json files found.");
   const results = [];
-  for (const file of files) {
-    const data = JSON.parse(fs.readFileSync(file, "utf8"));
-    let modified = false;
-    if (visibleLength(data.description) < 180) {
-      data.description = String(data.description || "").trim() + "\n\nLearn languages fast and effectively with LunaCards! Visit flashcardsluna.com for more language lessons.";
-      modified = true;
-    }
-    if (modified) {
-      fs.writeFileSync(file, JSON.stringify(data, null, 2) + "\n", "utf8");
-    }
-    results.push(validate(data, file));
-  }
+  for (const file of files) results.push(validate(JSON.parse(fs.readFileSync(file, "utf8")), file));
   const blockers = results.flatMap((result) => result.blockers.map((blocker) => `${result.file}: ${blocker}`));
   console.log(JSON.stringify({
     status: blockers.length ? "fail" : "pass",

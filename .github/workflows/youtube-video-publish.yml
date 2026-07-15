@@ -571,6 +571,29 @@ jobs:
             }
           '
 
+      - name: Preflight scheduled public playlists before metadata and render
+        if: ${{ inputs.mode == 'apply' && inputs.publish_mode == 'scheduled' && steps.generation_targets.outputs.has_targets == 'true' }}
+        shell: bash
+        env:
+          SUPPORT: ${{ inputs.support }}
+        run: |
+          set -euo pipefail
+          ROUTE_KEY="$(node --input-type=module -e '
+            import { canonicalSupportRouteKey, loadCanonicalSupportRouting } from "./scripts/lib/youtube-support-routing.mjs";
+            const route = canonicalSupportRouteKey(loadCanonicalSupportRouting(), process.env.SUPPORT);
+            if (!route) throw new Error(`Missing route for ${process.env.SUPPORT}`);
+            process.stdout.write(route);
+          ')"
+          npm run audit:youtube-playlists -- \
+            --support="$SUPPORT" \
+            --route-key="$ROUTE_KEY" \
+            --output=outputs/youtube-ordinary-playlist-discovery-github.json
+          npm run check:youtube-scheduled-playlist-visibility -- \
+            --generation-targets=outputs/video-generator/youtube-generation-targets-github.json \
+            --discovery=outputs/youtube-ordinary-playlist-discovery-github.json \
+            --require-public \
+            --output=outputs/youtube-ordinary-playlist-visibility-github.json
+
       - name: Build videos, metadata, schedule and thumbnails
         if: ${{ inputs.source_run_id == '' && steps.generation_targets.outputs.has_targets == 'true' }}
         shell: bash

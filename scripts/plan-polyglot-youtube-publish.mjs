@@ -10,6 +10,7 @@ import {
   DEFAULT_CHANNEL_CONFIG_PATH,
   customThumbnailUploadAllowed,
   findChannelForSupport,
+  longVideoUploadAllowed,
   loadYoutubeChannels,
   normalizeLanguageCode,
 } from "./lib/youtube-playlists.mjs";
@@ -20,6 +21,7 @@ import {
 import {
   assignmentKey,
   isPolyglotRow,
+  polyglotProductSlotKey,
   polyglotSlotKey,
   polyglotTargetSetKey,
   resolvePolyglotBundleTargets,
@@ -32,6 +34,8 @@ const DEFAULT_POLYGLOT_PROGRESS_PATH = "config/youtube-polyglot-progress.json";
 const DEFAULT_CALENDAR_PATH = "config/youtube-publish-calendar.json";
 const DEFAULT_VIDEO_LOCALIZATION_PATH = "config/video-localization.json";
 const DEFAULT_POLYGLOT_LOCALIZATION_PATH = "config/polyglot-video-localization.json";
+const SHORT_UNVERIFIED_MAX_DURATION_SECONDS = 895;
+const DEFAULT_SHORT_UNVERIFIED_CARD_LIMIT = 0;
 
 function parseArgs(argv) {
   const options = {
@@ -51,6 +55,9 @@ function parseArgs(argv) {
     requireOfflineDeck: false,
     campaignId: "",
     campaignManifestHash: "",
+    contentScope: "full",
+    maxDurationSeconds: SHORT_UNVERIFIED_MAX_DURATION_SECONDS,
+    cardLimit: 0,
     json: false,
     help: false,
   };
@@ -79,6 +86,9 @@ function parseArgs(argv) {
     else if (arg === "--require-offline-deck") options.requireOfflineDeck = true;
     else if (arg === "--campaign-id" || arg.startsWith("--campaign-id=")) options.campaignId = readValue();
     else if (arg === "--campaign-manifest-hash" || arg.startsWith("--campaign-manifest-hash=")) options.campaignManifestHash = readValue();
+    else if (arg === "--content-scope" || arg.startsWith("--content-scope=")) options.contentScope = readValue();
+    else if (arg === "--max-duration-seconds" || arg.startsWith("--max-duration-seconds=")) options.maxDurationSeconds = Number(readValue());
+    else if (arg === "--card-limit" || arg.startsWith("--card-limit=")) options.cardLimit = Number(readValue());
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
   }
@@ -246,12 +256,14 @@ function isActiveCalendarReservation(row) {
 
 function findActivePolyglotPublication(publicationRegistries, candidate) {
   const candidateKey = assignmentKey(candidate);
+  const candidateProductSlot = polyglotProductSlotKey(candidate);
   const candidateSlot = polyglotSlotKey(candidate);
   const candidateTargetSet = polyglotTargetSetKey(candidate);
   return publicationRegistries.flatMap((registry) => registry.publications || [])
     .filter(isPolyglotRow)
     .filter(isActivePublication)
     .find((row) => assignmentKey(row) === candidateKey
+      || polyglotProductSlotKey(row) === candidateProductSlot
       || polyglotSlotKey(row) === candidateSlot
       || polyglotTargetSetKey(row) === candidateTargetSet) || null;
 }
@@ -331,8 +343,6 @@ function validateStudyUrl(url, targetLangs) {
   return { blockers, urlTargets };
 }
 
-const SHORT_UNVERIFIED_MAX_DURATION_SECONDS = 870;
-
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help || !options.setId || !options.support || !options.bundleKey) {
@@ -400,19 +410,37 @@ async function main() {
   if (!channel) blockers.push(`no YouTube support channel configured for supportLang=${supportLang}`);
   else if (!channel.channelId) blockers.push(`YouTube support channel ${channel.key} has no channelId`);
 
-  // Auto-fallback: if full scope is requested but channel is not phone-verified,
-  // automatically switch to short_unverified in campaign mode (or if contentScope was already short_unverified).
   const contentScope = String(options.contentScope || "full");
-  const maxDurationSeconds = Number(options.maxDurationSeconds || 0);
+  const maxDurationSeconds = Number(options.maxDurationSeconds || SHORT_UNVERIFIED_MAX_DURATION_SECONDS);
+  if (!["full", "short_unverified"].includes(contentScope)) {
+    blockers.push(`contentScope must be full or short_unverified, got ${contentScope}`);
+  }
+  if (!Number.isFinite(maxDurationSeconds) || maxDurationSeconds <= 0 || maxDurationSeconds > SHORT_UNVERIFIED_MAX_DURATION_SECONDS) {
+    blockers.push(`maxDurationSeconds must be between 1 and ${SHORT_UNVERIFIED_MAX_DURATION_SECONDS}`);
+  }
+  if (!Number.isInteger(options.cardLimit) || options.cardLimit < 0) blockers.push("cardLimit must be a non-negative integer");
   let effectiveContentScope = contentScope;
   let effectiveMaxDuration = maxDurationSeconds;
-  if (channel && contentScope === "full" && options.campaignId) {
-    const canUpload = customThumbnailUploadAllowed(channelRegistry, channel);
-    if (!canUpload) {
+  let effectiveCardLimit = options.cardLimit;
+  const longVideoAllowed = channel ? longVideoUploadAllowed(channelRegistry, channel) : false;
+  const configuredShortCardLimit = Number(channelRegistry?.defaults?.shortUnverifiedPolyglotCardLimit ?? DEFAULT_SHORT_UNVERIFIED_CARD_LIMIT);
+  if (!Number.isInteger(configuredShortCardLimit) || configuredShortCardLimit < 0) {
+    blockers.push("channel defaults.shortUnverifiedPolyglotCardLimit must be a non-negative integer");
+  }
+  if (channel && contentScope === "full" && !longVideoAllowed) {
+    if (options.campaignId) {
       effectiveContentScope = "short_unverified";
       effectiveMaxDuration = SHORT_UNVERIFIED_MAX_DURATION_SECONDS;
-      warnings.push(`Channel ${channel.key} is not phone-verified; auto-falling back to content_scope=short_unverified with max_duration_seconds=${SHORT_UNVERIFIED_MAX_DURATION_SECONDS} for campaign ${options.campaignId}`);
+      effectiveCardLimit = configuredShortCardLimit;
+      warnings.push(`Channel ${channel.key} is not confirmed for long uploads; campaign uses content_scope=short_unverified, card_limit=${configuredShortCardLimit || "dynamic"}, max_duration_seconds=${SHORT_UNVERIFIED_MAX_DURATION_SECONDS}`);
+    } else {
+      blockers.push(`Channel ${channel.key} is not confirmed for uploads longer than 15 minutes; replan as short_unverified with a non-negative card limit (0 means measured full-deck prefix)`);
     }
+  }
+  if (effectiveContentScope === "short_unverified") {
+    if (effectiveCardLimit === 0) effectiveCardLimit = configuredShortCardLimit;
+    if (!Number.isInteger(effectiveCardLimit) || effectiveCardLimit < 0) blockers.push("short_unverified card limit must be a non-negative integer; 0 means measured full-deck prefix");
+    if (effectiveMaxDuration > SHORT_UNVERIFIED_MAX_DURATION_SECONDS) blockers.push(`short_unverified max duration must be <= ${SHORT_UNVERIFIED_MAX_DURATION_SECONDS}`);
   }
 
   const studyUrl = getPublicCourseUrl({ setId: options.setId, supportLang, targetLangs });
@@ -428,6 +456,8 @@ async function main() {
     targetLangs,
     targetLangsHash,
     contentScope: effectiveContentScope,
+    cardLimit: effectiveCardLimit,
+    maxDurationSeconds: effectiveMaxDuration,
   };
   const existingPublication = findActivePolyglotPublication([publicationRegistry, ordinaryPublicationRegistry], candidateIdentity);
   if (existingPublication && !options.allowRepublish) {
@@ -469,15 +499,17 @@ async function main() {
     channelKey: channel?.key || "",
     youtubeChannelId: channel?.channelId || "",
     customThumbnailUploadAllowed: channel ? customThumbnailUploadAllowed(channelRegistry, channel) : false,
-    polyglotChannelEligibility: (channel && customThumbnailUploadAllowed(channelRegistry, channel)) ? "eligible" : "blocked_until_phone_verified",
+    longVideoUploadAllowed: longVideoAllowed,
+    polyglotLongVideoEligibility: longVideoAllowed ? "confirmed_allowed" : "short_unverified_only",
     autoFallbackContentScope: effectiveContentScope !== contentScope ? effectiveContentScope : null,
     autoFallbackMaxDurationSeconds: effectiveContentScope !== contentScope ? effectiveMaxDuration : null,
+    autoFallbackCardLimit: effectiveContentScope !== contentScope ? effectiveCardLimit : null,
     campaignId: options.campaignId,
     campaignManifestHash: options.campaignManifestHash,
     deck: deckPlan,
     studyUrl,
     urlTargetLangs: urlValidation.urlTargets,
-    buildCommand: `node scripts/build-polyglot-video.mjs --set ${options.setId} --support ${supportLang} --targets ${targetLangs.join(",")}`,
+    buildCommand: `node scripts/build-polyglot-video.mjs --set ${options.setId} --support ${supportLang} --targets ${targetLangs.join(",")}${effectiveCardLimit ? ` --limit ${effectiveCardLimit}` : ""}`,
     noAudioPreviewCommand: `node scripts/build-polyglot-video.mjs --set ${options.setId} --support ${supportLang} --targets ${targetLangs.join(",")} --no-audio --limit 3`,
     existingPublication: existingPublication ? {
       youtubeVideoId: existingPublication.youtubeVideoId || "",
@@ -522,6 +554,7 @@ async function main() {
       bundleKey: bundle.key,
       contentScope: effectiveContentScope,
       maxDurationSeconds: effectiveMaxDuration,
+      cardLimit: effectiveCardLimit,
       targetLangs: targetLangs.join(","),
       targetLangsHash,
       cardCount: deckPlan.cardCount,

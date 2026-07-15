@@ -20,6 +20,7 @@ import { getDbLanguageCode, normalizeLanguageCode } from "./lib/video-language-c
 import { getPublicCourseDisplayUrl, getPublicCourseUrl, getQrCodeImageUrl } from "./lib/video-public-url.mjs";
 import { outroIconNames } from "./lib/video-outro-icons.mjs";
 import { BRAND_NAME } from "./lib/brand.mjs";
+import { selectMaximumPolyglotCardPrefix } from "./lib/polyglot-duration-selection.mjs";
 
 const localizationPath = path.resolve("config/video-localization.json");
 const localizationData = JSON.parse(fs.readFileSync(localizationPath, "utf8"));
@@ -168,6 +169,7 @@ let voicesStr = "";
 let transitionMode = "static";
 let noAudio = false;
 let limit = 0; // Production default is the full deck; use --limit for visual previews.
+let maxDurationSeconds = 0;
 
 for (let i = 0; i < args.length; i++) {
   if (args[i] === "--set" && args[i + 1]) {
@@ -187,11 +189,18 @@ for (let i = 0; i < args.length; i++) {
   } else if (args[i] === "--limit" && args[i + 1]) {
     limit = parseInt(args[i + 1], 10);
     i++;
+  } else if (args[i] === "--max-duration-seconds" && args[i + 1]) {
+    maxDurationSeconds = Number(args[i + 1]);
+    i++;
   }
 }
 
 if (!setId || !targetsStr) {
-  console.error("Usage: node scripts/build-polyglot-video.mjs --set <set_id> --targets <comma_separated_target_langs> [--support <support_lang>] [--voices <comma_separated_voices>] [--no-audio] [--limit <number>]");
+  console.error("Usage: node scripts/build-polyglot-video.mjs --set <set_id> --targets <comma_separated_target_langs> [--support <support_lang>] [--voices <comma_separated_voices>] [--no-audio] [--limit <number>] [--max-duration-seconds <number>]");
+  process.exit(1);
+}
+if (!Number.isFinite(maxDurationSeconds) || maxDurationSeconds < 0) {
+  console.error("--max-duration-seconds must be a non-negative number.");
   process.exit(1);
 }
 
@@ -448,9 +457,12 @@ async function main() {
   };
   queueSegment('intro', introOptions, wavIntro, totalVisualDurIntro, `intro-slide`, totalVisualDurIntro - audioDurIntro);
 
+  const cardSegmentRanges = [];
+
   // 3. Loop over cards and generate translations & audio segments
   console.log("\n--- Processing Cards for Polyglot Lesson ---");
   for (let index = 0; index < cards.length; index++) {
+    const cardSegmentStart = segments.length;
     const card = cards[index];
     const cardNum = index + 1;
     const cardIdStr = String(cardNum).padStart(2, "0");
@@ -583,6 +595,7 @@ async function main() {
       
       queueSegment('card', targetAnswerOptions, wavTarget, visualDurTarget, `card-${cardIdStr}-target-${targetLang.toLowerCase()}-answer`, visualDurTarget - audioDurTarget);
     }
+    cardSegmentRanges.push({ start: cardSegmentStart, end: segments.length });
   }
 
   // 4. Outro Phase
@@ -643,6 +656,51 @@ async function main() {
     outroQrImageSrc,
     badges: outroBadges
   };
+
+  let durationSelection = null;
+  if (maxDurationSeconds > 0) {
+    const cardDurationsSeconds = cardSegmentRanges.map(({ start, end }) => (
+      segments.slice(start, end).reduce((total, segment) => total + segment.duration, 0)
+    ));
+    durationSelection = selectMaximumPolyglotCardPrefix({
+      introDurationSeconds: totalVisualDurIntro,
+      outroDurationSeconds: totalVisualDurOutro,
+      cardDurationsSeconds,
+      maxDurationSeconds,
+    });
+    if (durationSelection.selectedCardCount === 0 && cardDurationsSeconds.length > 0) {
+      throw new Error(`No Polyglot card fits the ${maxDurationSeconds}s limit after measured intro/outro.`);
+    }
+    if (durationSelection.truncated) {
+      const selectedEnd = durationSelection.selectedCardCount === 0
+        ? 1
+        : cardSegmentRanges[durationSelection.selectedCardCount - 1].end;
+      segments.splice(selectedEnd);
+      cards = cards.slice(0, durationSelection.selectedCardCount);
+      console.log(`Measured short-video selection: ${cards.length}/${durationSelection.availableCardCount} cards, projected ${durationSelection.projectedDurationSeconds}s of ${maxDurationSeconds}s.`);
+    }
+    const finalIntroWordsLabel = getIntroWordsLabel(cards.length, supportLang, wordsLabel);
+    introOptions.subtitle = buildIntroMetadataSubtitle(
+      deckMetadata,
+      cards.length,
+      finalIntroWordsLabel,
+      targetLangs.length,
+      introLanguagesLabel,
+      prefix
+    );
+    for (const segment of segments) {
+      if (!Number.isInteger(segment.taskOptions?.currentIndex)) continue;
+      segment.taskOptions.totalCards = cards.length;
+      segment.taskOptions.progressPercent = ((segment.taskOptions.currentIndex / cards.length) * 100).toFixed(1);
+    }
+    fs.writeFileSync(path.join(outputDir, "polyglot-duration-selection.json"), `${JSON.stringify({
+      schemaVersion: 1,
+      selectionMethod: noAudio ? "no_audio_visual_prefix" : "measured_tts_audio_prefix",
+      supportLang,
+      targetLangs,
+      ...durationSelection,
+    }, null, 2)}\n`, "utf8");
+  }
 
   queueSegment('outro', outroOptions, wavOutro, totalVisualDurOutro, `outro-ad`, totalVisualDurOutro - audioDurOutro);
 

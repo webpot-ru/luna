@@ -24,7 +24,8 @@ const tasks = [
 const prompt = buildCampaignMetadataPrompt(tasks);
 assert.match(prompt, /2 independent FlashcardsLuna/);
 assert.match(prompt, /ordinary\|deck\|EN\|DE/);
-assert.match(prompt, /no more than 900 Unicode characters/);
+assert.match(prompt, /250-900 Unicode characters/);
+assert.match(prompt, /ZH, JA and KO descriptions may be 150-900 Unicode characters/);
 assert.equal(CAMPAIGN_MAX_OUTPUT_TOKENS, 60000);
 assert.equal(OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS, 12000);
 const response = {

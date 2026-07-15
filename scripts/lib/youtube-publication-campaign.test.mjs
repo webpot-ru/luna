@@ -23,6 +23,7 @@ channels.channels = channels.channels.map((channel) => ({
   ...channel,
   customThumbnailUploadAllowed: false,
   thumbnailFallbackMode: "first_frame_auto",
+  longVideoUploadAllowed: false,
 }));
 const routingFixture = readJson("config/youtube-api-project-routing.json");
 const canonicalRouting = loadCanonicalSupportRouting();
@@ -96,7 +97,34 @@ assert.equal(first.estimatedUsage.directGeminiRequestsCurrentWorkerLayout, 102);
 assert.equal(first.estimatedUsage.directGeminiRequestsCampaignRouteBatchSize5, 63);
 assert.equal(first.estimatedUsage.directGeminiRequestsCampaignWideBatchSize5, 62);
 assert(first.assignments.every((row) => row.thumbnail.mode === "first_frame_auto" && row.thumbnail.ready));
+assert(first.assignments.filter((row) => row.videoType === "polyglot").every((row) => (
+  row.contentScope === "short_unverified" && row.cardLimit === 0 && row.maxDurationSeconds === 895
+)), "unverified channels must claim an explicit <=14:55 short Polyglot product");
 assert(first.assignments.every((row) => row.playlist.state === "verified_absent" && row.playlist.createAllowed));
+
+const crossScopeSnapshot = readJson(paths.snapshotPath);
+const crossScopeDeck = crossScopeSnapshot.decks.find((deck) => deck.setId === "home_kitchen_cooking_actions_a1_a2");
+crossScopeDeck.publications.push({
+  setId: "home_kitchen_cooking_actions_a1_a2",
+  supportLang: "EN",
+  videoType: "polyglot",
+  bundleKey: "global_europe_core",
+  contentScope: "short_unverified",
+  targetLangs: ["ES", "FR", "DE", "IT"],
+  youtubeVideoId: "active-short-video",
+  liveReadbackPresent: true,
+});
+const fullEligibleChannels = readJson(paths.channelsPath);
+fullEligibleChannels.channels = fullEligibleChannels.channels.map((channel) => (
+  channel.key === "en" ? { ...channel, longVideoUploadAllowed: true } : channel
+));
+const crossScopePlan = buildPublicationCampaign({
+  ...baseOptions,
+  snapshotPath: writeJson("snapshot-cross-scope.json", crossScopeSnapshot),
+  channelsPath: writeJson("channels-full-en.json", fullEligibleChannels),
+});
+assert.equal(crossScopePlan.summary.applyReady, false);
+assert(crossScopePlan.blockers.some((row) => row.includes("EN: global_europe_core full is blocked by active short_unverified Polyglot video active-short-video")));
 
 const oneExistingDiscovery = readJson(paths.playlistDiscoveryPath);
 const firstAssignment = first.assignments[0];
@@ -106,6 +134,7 @@ firstChannelDiscovery.playlists.push({
   title: firstAssignment.playlist.title,
   description: "",
   youtubeChannelId: firstAssignment.youtubeChannelId,
+  privacyStatus: "public",
   videoIds: [],
 });
 const oneExistingPlan = buildPublicationCampaign({

@@ -31,6 +31,10 @@ function playlistKey(row = {}) {
   return String(row.playlist_key || row.playlistKey || row.key || "").trim();
 }
 
+function playlistPrivacyStatus(row = {}) {
+  return String(row?.privacyStatus || row?.privacy_status || row?.status?.privacyStatus || "").trim().toLowerCase();
+}
+
 function sourceVideoIds(row = {}) {
   row ||= {};
   return new Set([
@@ -44,7 +48,7 @@ export function findDiscoveryChannel(snapshot = {}, supportLang) {
   return (snapshot.channels || []).find((row) => canonicalSupportCode(row.supportLang) === support) || null;
 }
 
-export function resolvePlaylistDiscovery({ assignment, registryEntry, discoveryChannel }) {
+export function resolvePlaylistDiscovery({ assignment, registryEntry, discoveryChannel, requirePublic = false }) {
   const expectedKey = String(assignment?.key || assignment?.playlist_key || "").trim();
   const expectedTitle = normalizePlaylistText(assignment?.title);
   const expectedMarker = normalizePlaylistText(playlistIdentityMarker(expectedKey));
@@ -78,13 +82,18 @@ export function resolvePlaylistDiscovery({ assignment, registryEntry, discoveryC
     if (expectedTitle && normalizePlaylistText(exact[0].title) !== expectedTitle) {
       warnings.push("durable playlist title differs from the current deterministic title; ID remains authoritative");
     }
+    const privacyStatus = playlistPrivacyStatus(exact[0]);
+    if (requirePublic && privacyStatus !== "public") {
+      blockers.push(`scheduled public release requires a public playlist; current privacy=${privacyStatus || "unknown"}`);
+    }
     return {
-      ready: true,
-      state: "resolved_existing",
+      ready: blockers.length === 0,
+      state: blockers.length ? "blocked" : "resolved_existing",
       blockers,
       warnings,
       playlistKey: expectedKey,
       youtubePlaylistId: registryPlaylistId,
+      playlistPrivacyStatus: privacyStatus,
       createAllowed: false,
       matchEvidence: ["durable_registry_id"],
     };
@@ -108,6 +117,10 @@ export function resolvePlaylistDiscovery({ assignment, registryEntry, discoveryC
   if (matches.length === 1) {
     const resolvedId = playlistId(matches[0].row);
     if (!resolvedId) blockers.push(`matched live playlist has no ID for ${expectedKey}`);
+    const privacyStatus = playlistPrivacyStatus(matches[0].row);
+    if (requirePublic && privacyStatus !== "public") {
+      blockers.push(`scheduled public release requires a public playlist; current privacy=${privacyStatus || "unknown"}`);
+    }
     return {
       ready: blockers.length === 0,
       state: blockers.length ? "blocked" : "resolved_existing",
@@ -115,6 +128,7 @@ export function resolvePlaylistDiscovery({ assignment, registryEntry, discoveryC
       warnings,
       playlistKey: expectedKey,
       youtubePlaylistId: resolvedId,
+      playlistPrivacyStatus: privacyStatus,
       createAllowed: false,
       matchEvidence: matches[0].evidence,
     };
@@ -127,6 +141,7 @@ export function resolvePlaylistDiscovery({ assignment, registryEntry, discoveryC
     warnings,
     playlistKey: expectedKey,
     youtubePlaylistId: "",
+    playlistPrivacyStatus: "public",
     createAllowed: true,
     matchEvidence: ["complete_channel_inventory_no_identity_match"],
   };
