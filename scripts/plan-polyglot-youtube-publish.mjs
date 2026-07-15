@@ -262,8 +262,14 @@ export function findActivePolyglotCalendarReservation(calendar, candidate) {
     .filter(isActiveCalendarReservation);
   const candidateSlot = polyglotSlotKey(candidate);
   const candidateTargetSet = polyglotTargetSetKey(candidate);
-  return activeRows.find((row) => polyglotSlotKey(row) === candidateSlot)
-    || activeRows.find((row) => polyglotTargetSetKey(row) === candidateTargetSet)
+  let fallbackSlot = null;
+  let fallbackTargetSet = null;
+  if (candidate.contentScope === "short_unverified") {
+    fallbackSlot = polyglotSlotKey({ ...candidate, contentScope: "full" });
+    fallbackTargetSet = polyglotTargetSetKey({ ...candidate, contentScope: "full" });
+  }
+  return activeRows.find((row) => polyglotSlotKey(row) === candidateSlot || (fallbackSlot && polyglotSlotKey(row) === fallbackSlot))
+    || activeRows.find((row) => polyglotTargetSetKey(row) === candidateTargetSet || (fallbackTargetSet && polyglotTargetSetKey(row) === fallbackTargetSet))
     || null;
 }
 
@@ -273,14 +279,18 @@ export function isOwnedPolyglotCampaignClaim({
   campaignId,
   campaignManifestHash,
 }) {
-  return Boolean(
-    campaignId
-    && reservation
-    && reservation.campaignId === campaignId
-    && reservation.campaignManifestHash === campaignManifestHash
-    && polyglotSlotKey(reservation) === polyglotSlotKey(candidate)
-    && polyglotTargetSetKey(reservation) === polyglotTargetSetKey(candidate)
-  );
+  if (!campaignId || !reservation || reservation.campaignId !== campaignId || reservation.campaignManifestHash !== campaignManifestHash) {
+    return false;
+  }
+  const candSlot = polyglotSlotKey(candidate);
+  const resSlot = polyglotSlotKey(reservation);
+  const candTargetSet = polyglotTargetSetKey(candidate);
+  const resTargetSet = polyglotTargetSetKey(reservation);
+
+  const slotMatches = candSlot === resSlot || (candidate.contentScope === "short_unverified" && resSlot === polyglotSlotKey({ ...candidate, contentScope: "full" }));
+  const targetSetMatches = candTargetSet === resTargetSet || (candidate.contentScope === "short_unverified" && resTargetSet === polyglotTargetSetKey({ ...candidate, contentScope: "full" }));
+
+  return slotMatches && targetSetMatches;
 }
 
 function isActiveProgressItem(row) {
