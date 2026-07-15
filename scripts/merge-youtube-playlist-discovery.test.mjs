@@ -37,6 +37,23 @@ assert.equal(merged.summary.supportCount, 51);
 assert.equal(merged.summary.blockerCount, 0);
 assert.equal(merged.summary.youtubeWrites, 0);
 
+const subsetSupports = ["FR", "KO", "ZH", "BN", "IT"];
+const subsetReports = reports.map((report) => ({
+  ...report,
+  channels: report.channels.filter((channel) => subsetSupports.includes(channel.supportLang)),
+}));
+const subset = mergePlaylistDiscoveryReports({
+  reports: subsetReports,
+  routing,
+  expectedRoutes: 4,
+  expectedSupports: subsetSupports,
+  generatedAt: "2026-07-14T00:01:00.000Z",
+});
+assert.equal(subset.complete, true);
+assert.equal(subset.summary.expectedSupportCount, 5);
+assert.equal(subset.summary.supportCount, 5);
+assert.equal(subset.summary.blockerCount, 0);
+
 const incomplete = mergePlaylistDiscoveryReports({ reports: reports.slice(0, 3), routing, expectedRoutes: 4 });
 assert.equal(incomplete.complete, false);
 assert(incomplete.blockers.some((row) => row.includes("route report count")));

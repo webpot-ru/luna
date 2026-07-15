@@ -28,6 +28,10 @@ on:
         description: "Optional no-spend campaign plan: next full Polyglot videos per physical channel; 0 disables campaign planning."
         required: true
         default: "0"
+      campaign_supports:
+        description: "Canonical support subset for the optional campaign plan and its playlist preflight. ALL checks every physical channel."
+        required: true
+        default: "ALL"
       campaign_schedule_start_date:
         description: "Optional YYYY-MM-DD hint; the planner still fills earlier empty policy slots first."
         required: false
@@ -92,15 +96,27 @@ jobs:
           CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORTS" "--live-audit=outputs/youtube-live-publications-$ROUTE.json" "--output=outputs/youtube-publication-control-$ROUTE.json")
           if [ -n "$TARGETS" ]; then CONTROL_ARGS+=("--targets=$TARGETS"); fi
           npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
-      - name: Read every owned playlist and playlist item for stable identity discovery
+      - name: Read selected campaign playlists for stable identity discovery
+        if: ${{ github.event.inputs.campaign_ordinary_per_channel != '0' || github.event.inputs.campaign_polyglot_per_channel != '0' }}
         env:
           SUPPORTS: ${{ matrix.supports }}
+          CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
           ROUTE: ${{ matrix.route }}
         shell: bash
         run: |
           set -euo pipefail
+          if [ "$CAMPAIGN_SUPPORTS" = "ALL" ]; then
+            SELECTED_SUPPORTS="$SUPPORTS"
+          else
+            SELECTED_SUPPORTS="$(node -e '
+              const requested = new Set(process.argv[1].split(",").map((value) => value.trim().toUpperCase()).filter(Boolean));
+              const routeSupports = process.argv[2].split(",").map((value) => value.trim().toUpperCase()).filter(Boolean);
+              process.stdout.write(routeSupports.filter((support) => requested.has(support)).join(","));
+            ' "$CAMPAIGN_SUPPORTS" "$SUPPORTS")"
+          fi
           npm run audit:youtube-playlists -- \
-            --support="$SUPPORTS" \
+            --support="$SELECTED_SUPPORTS" \
+            --allow-empty \
             --route-key="$ROUTE" \
             --max-playlist-pages=20 \
             --max-item-pages=10 \
@@ -135,6 +151,8 @@ jobs:
       - name: Build all-route report
         env:
           SET_ID: ${{ github.event.inputs.set_id }}
+          PLAN_REQUESTED: ${{ github.event.inputs.campaign_ordinary_per_channel != '0' || github.event.inputs.campaign_polyglot_per_channel != '0' }}
+          CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
         run: |
           set -euo pipefail
           npm run merge:youtube-publication-control -- \
@@ -143,10 +161,6 @@ jobs:
             --source-run="$SET_ID:all:${GITHUB_RUN_ID}" \
             --output=outputs/youtube-publication-control-all-routes.json \
             --markdown=outputs/youtube-publication-control-all-routes.md
-          npm run merge:youtube-playlist-discovery -- \
-            --input=.control-artifacts \
-            --expected-routes=4 \
-            --output=outputs/youtube-playlist-discovery-snapshot.json
           if jq -e '.summary.complete == true' outputs/youtube-publication-control-all-routes.json >/dev/null; then
             npm run build:youtube-publication-snapshot -- \
               --report=outputs/youtube-publication-control-all-routes.json \
@@ -155,6 +169,13 @@ jobs:
           else
             echo "::warning::All-route audit is incomplete; refusing to build or persist a durable snapshot."
           fi
+          if [ "$PLAN_REQUESTED" = "true" ]; then
+            npm run merge:youtube-playlist-discovery -- \
+              --input=.control-artifacts \
+              --expected-routes=4 \
+              --supports="$CAMPAIGN_SUPPORTS" \
+              --output=outputs/youtube-playlist-discovery-snapshot.json
+          fi
       - name: Build one no-spend immutable campaign plan from the same live evidence
         if: ${{ github.event.inputs.campaign_ordinary_per_channel != '0' || github.event.inputs.campaign_polyglot_per_channel != '0' }}
         shell: bash
@@ -162,6 +183,7 @@ jobs:
           SET_ID: ${{ github.event.inputs.set_id }}
           ORDINARY_PER_CHANNEL: ${{ github.event.inputs.campaign_ordinary_per_channel }}
           POLYGLOT_PER_CHANNEL: ${{ github.event.inputs.campaign_polyglot_per_channel }}
+          CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
           START_DATE: ${{ github.event.inputs.campaign_schedule_start_date }}
         run: |
           set -euo pipefail
@@ -184,7 +206,7 @@ jobs:
           test -s "$DECK_PATH"
           ARGS=(
             "--set=$SET_ID"
-            "--supports=ALL"
+            "--supports=$CAMPAIGN_SUPPORTS"
             "--ordinary-per-channel=$ORDINARY_PER_CHANNEL"
             "--polyglot-per-channel=$POLYGLOT_PER_CHANNEL"
             "--min-future-minutes=90"
@@ -236,10 +258,15 @@ jobs:
           set -euo pipefail
           cp .snapshot-artifact/youtube-publication-snapshot.json config/youtube-publication-snapshot.json
           cp .snapshot-artifact/youtube-publication-map.md docs/youtube-publication-map.md
-          cp .snapshot-artifact/youtube-playlist-discovery-snapshot.json config/youtube-playlist-discovery-snapshot.json
+          if test -s .snapshot-artifact/youtube-playlist-discovery-snapshot.json; then
+            cp .snapshot-artifact/youtube-playlist-discovery-snapshot.json config/youtube-playlist-discovery-snapshot.json
+          fi
           git status --short --branch --untracked-files=all
           git diff --name-status
-          git add config/youtube-publication-snapshot.json config/youtube-playlist-discovery-snapshot.json docs/youtube-publication-map.md
+          git add config/youtube-publication-snapshot.json docs/youtube-publication-map.md
+          if test -s .snapshot-artifact/youtube-playlist-discovery-snapshot.json; then
+            git add config/youtube-playlist-discovery-snapshot.json
+          fi
           git diff --cached --name-status
           if git diff --cached --quiet; then
             echo "Publication snapshot is unchanged."

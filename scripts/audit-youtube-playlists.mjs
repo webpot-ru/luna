@@ -17,6 +17,7 @@ function parseArgs(argv) {
     output: "outputs/youtube-playlist-discovery.json",
     maxPlaylistPages: 20,
     maxItemPages: 10,
+    allowEmpty: false,
     json: false,
   };
   for (let index = 0; index < argv.length; index += 1) {
@@ -28,6 +29,7 @@ function parseArgs(argv) {
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = value();
     else if (arg === "--max-playlist-pages" || arg.startsWith("--max-playlist-pages=")) options.maxPlaylistPages = Number(value());
     else if (arg === "--max-item-pages" || arg.startsWith("--max-item-pages=")) options.maxItemPages = Number(value());
+    else if (arg === "--allow-empty") options.allowEmpty = true;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else throw new Error(`Unknown argument: ${arg}`);
@@ -184,7 +186,7 @@ async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPlaylistP
 }
 
 export async function auditYoutubePlaylists(options) {
-  if (!options.supports?.length) throw new Error("--support is required");
+  if (!options.supports?.length && !options.allowEmpty) throw new Error("--support is required unless --allow-empty is set");
   if (!options.routeKey) throw new Error("--route-key is required");
   if (!Number.isInteger(options.maxPlaylistPages) || options.maxPlaylistPages < 1) throw new Error("--max-playlist-pages must be a positive integer");
   if (!Number.isInteger(options.maxItemPages) || options.maxItemPages < 1) throw new Error("--max-item-pages must be a positive integer");
