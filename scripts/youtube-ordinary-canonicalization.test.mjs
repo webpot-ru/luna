@@ -50,5 +50,10 @@ assert.equal(dispatcherReport.options.metadataGeminiBackend, "openai,api,vectore
 const ordinaryWorkflow = fs.readFileSync(".github/workflows/youtube-video-publish.yml", "utf8");
 assert.match(ordinaryWorkflow, /confirm_openai_metadata: \{ required: false, type: string, default: "" \}/u);
 assert.match(ordinaryWorkflow, /OPENAI_API_KEY: \$\{\{ secrets\.OPENAI_API_KEY \}\}/u);
+assert.match(
+  ordinaryWorkflow,
+  /GITHUB_EVENT_NAME: \$\{\{ github\.event_name \}\}[\s\S]*?Direct apply is disabled/u,
+  "manual ordinary apply must be blocked so only the campaign workflow can create a bulk wave",
+);
 
 console.log("youtube ordinary canonicalization regression checks passed");
