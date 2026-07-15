@@ -407,15 +407,22 @@ jobs:
             const fs = require("fs");
             const report = JSON.parse(fs.readFileSync("outputs/video-generator/youtube-polyglot-plan-github.json", "utf8"));
             const c = report.candidate || {};
+            const s = report.summary || {};
+            const effectiveScope = s.contentScope || c.contentScope || "";
+            const effectiveMax = String(s.maxDurationSeconds || "");
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `target_langs=${c.targetLangsCsv || ""}\n`);
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `polyglot_key=${c.polyglotKey || ""}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `effective_content_scope=${effectiveScope}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `effective_max_duration=${effectiveMax}\n`);
             if (process.env.GITHUB_STEP_SUMMARY) {
               fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
                 "### Polyglot plan",
                 "",
+                c.autoFallbackContentScope ? `**Auto-fallback**: content_scope=${effectiveScope} max_duration=${effectiveMax}s (channel not phone-verified)` : "",
                 `- Polyglot key: ${c.polyglotKey || ""}`,
                 `- Support: ${c.supportLang || ""}`,
                 `- Bundle: ${c.bundleKey || ""}`,
+                `- Content scope: ${effectiveScope}`,
                 `- Targets: ${c.targetLangsCsv || ""}`,
                 `- Cards: ${c.deck?.cardCount || 0}`,
                 `- Study URL: ${c.studyUrl || ""}`,
@@ -445,8 +452,8 @@ jobs:
           SUPPORT: ${{ inputs.support }}
           BUNDLE: ${{ inputs.bundle }}
           LIMIT: ${{ inputs.limit }}
-          CONTENT_SCOPE: ${{ inputs.content_scope }}
-          MAX_DURATION_SECONDS: ${{ inputs.max_duration_seconds }}
+          CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || inputs.max_duration_seconds }}
           PRIVACY: ${{ inputs.privacy }}
           PUBLISH_MODE: ${{ inputs.publish_mode }}
           PUBLISH_AT: ${{ inputs.publish_at }}
@@ -572,7 +579,7 @@ jobs:
           POLYGLOT_KEY: ${{ steps.polyglot_plan.outputs.polyglot_key }}
           LIMIT: ${{ inputs.limit }}
           MODE: ${{ inputs.mode }}
-          CONTENT_SCOPE: ${{ inputs.content_scope }}
+          CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || inputs.content_scope }}
         run: |
           set -euo pipefail
           BUILD_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--targets" "$TARGET_LANGS" "--content-scope" "$CONTENT_SCOPE")
@@ -588,8 +595,8 @@ jobs:
         if: ${{ inputs.mode != 'plan' }}
         shell: bash
         env:
-          MAX_DURATION_SECONDS: ${{ inputs.max_duration_seconds }}
-          CONTENT_SCOPE: ${{ inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || inputs.max_duration_seconds }}
+          CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || inputs.content_scope }}
         run: |
           set -euo pipefail
           npm run check:polyglot-video-duration -- outputs/video-generator --content-scope "$CONTENT_SCOPE" --max-duration-seconds "$MAX_DURATION_SECONDS" --write-metadata --output=outputs/polyglot-video-duration-check-github.json
@@ -615,8 +622,8 @@ jobs:
           MODE: ${{ inputs.mode }}
           CREATE_PLAYLISTS: ${{ inputs.create_playlists }}
           ALLOW_REPUBLISH: ${{ inputs.allow_republish }}
-          CONTENT_SCOPE: ${{ inputs.content_scope }}
-          MAX_DURATION_SECONDS: ${{ inputs.max_duration_seconds }}
+          CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || inputs.max_duration_seconds }}
         run: |
           set -euo pipefail
           UPLOAD_PLAN_ARGS=("outputs/video-generator" "--write-registry" "--allow-auto-thumbnail-fallback" "--output=outputs/youtube-polyglot-upload-plan-github.json")
