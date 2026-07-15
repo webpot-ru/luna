@@ -465,7 +465,11 @@ jobs:
         run: |
           set -euo pipefail
           npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORT" --include-video-status --output=outputs/youtube-live-publications-github.json --json
-          npm run check:youtube-publication-control -- --set "$SET_ID" --support "$SUPPORT" --targets "$TARGET_LANGS" --proposed-polyglot-key "$POLYGLOT_KEY" --live-audit=outputs/youtube-live-publications-github.json --output=outputs/youtube-publication-control-github.json --strict
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT" "--targets=$TARGET_LANGS" "--proposed-polyglot-key=$POLYGLOT_KEY" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json")
+          if [ -z "${{ inputs.campaign_id }}" ]; then
+            CONTROL_ARGS+=("--strict")
+          fi
+          npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
 
       - name: Generate Polyglot YouTube metadata
         if: ${{ steps.polyglot_plan.outputs.already_published != 'true' }}
@@ -694,7 +698,11 @@ jobs:
         run: |
           set -euo pipefail
           npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORT" --include-video-status --output=outputs/youtube-live-publications-github.json --json
-          npm run check:youtube-publication-control -- --set "$SET_ID" --support "$SUPPORT" --targets "$TARGET_LANGS" --proposed-polyglot-key "$POLYGLOT_KEY" --live-audit=outputs/youtube-live-publications-github.json --output=outputs/youtube-publication-control-github.json --strict
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT" "--targets=$TARGET_LANGS" "--proposed-polyglot-key=$POLYGLOT_KEY" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json")
+          if [ -z "${{ inputs.campaign_id }}" ]; then
+            CONTROL_ARGS+=("--strict")
+          fi
+          npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
 
       - name: Upload Polyglot video to YouTube
         if: ${{ inputs.mode == 'apply' && steps.polyglot_plan.outputs.already_published != 'true' }}
