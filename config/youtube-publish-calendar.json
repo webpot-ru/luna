@@ -240755,6 +240755,62 @@
       "youtubeVideoId": "u7bS4fgm3ek",
       "youtubePlaylistId": "PLXjPeGV4P464",
       "playlistItemId": "UExYalBlR1Y0UDQ2NC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "videoType": "ordinary",
+      "polyglotKey": "",
+      "bundleKey": "",
+      "bundleLabel": "",
+      "contentScope": "",
+      "targetLangs": [],
+      "targetLangsCsv": "",
+      "targetLangsHash": "",
+      "campaignId": "",
+      "campaignManifestHash": "",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "BN",
+      "targetLang": "NO",
+      "channelKey": "bn",
+      "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
+      "publishAt": "2026-07-16T02:30:00.000Z",
+      "timeZone": "Asia/Dhaka",
+      "localDate": "2026-07-16",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_no_bn/youtube_metadata.json",
+      "title": "নরওয়েজীয় প্রাথমিক স্তর: রান্নাঘরের সামগ্রী শব্দভান্ডার | ৫০টি শব্দ",
+      "playlist_key": "BN__NO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T02:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29428597560",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29428597560",
+      "createdAt": "2026-07-15T15:35:21.213Z",
+      "updatedAt": "2026-07-15T15:35:21.213Z",
+      "youtubeVideoId": "7k3fJpaU8kI",
+      "youtubePlaylistId": "PLIfCrVT6jQ3s",
+      "playlistItemId": "UExJZkNyVlQ2alEzcy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
