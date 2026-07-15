@@ -431,7 +431,9 @@ async function main() {
   };
   const existingPublication = findActivePolyglotPublication([publicationRegistry, ordinaryPublicationRegistry], candidateIdentity);
   if (existingPublication && !options.allowRepublish) {
-    blockers.push(`active Polyglot publication already exists for ${polyglotKey}: video=${existingPublication.youtubeVideoId}`);
+    const message = `active Polyglot publication already exists for ${polyglotKey}: video=${existingPublication.youtubeVideoId}`;
+    if (options.campaignId) warnings.push(message);
+    else blockers.push(message);
   }
   const existingCalendarReservation = findActivePolyglotCalendarReservation(calendar, candidateIdentity);
   const ownedCampaignClaim = isOwnedPolyglotCampaignClaim({
@@ -449,7 +451,9 @@ async function main() {
   }
   const existingProgressItem = findActivePolyglotProgressItem(progressRegistry, polyglotKey);
   if (existingProgressItem && !options.allowRepublish) {
-    blockers.push(`active Polyglot progress item already exists for ${polyglotKey}: status=${existingProgressItem.status || "active"}`);
+    const message = `active Polyglot progress item already exists for ${polyglotKey}: status=${existingProgressItem.status || "active"}`;
+    if (options.campaignId) warnings.push(message);
+    else blockers.push(message);
   }
 
   const candidate = {
