@@ -240643,6 +240643,62 @@
       "youtubeVideoId": "sa3DiXHF_AU",
       "youtubePlaylistId": "PLWjz_FF0d4-I",
       "playlistItemId": "UExXanpfRkYwZDQtSS41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "videoType": "ordinary",
+      "polyglotKey": "",
+      "bundleKey": "",
+      "bundleLabel": "",
+      "contentScope": "",
+      "targetLangs": [],
+      "targetLangsCsv": "",
+      "targetLangsHash": "",
+      "campaignId": "",
+      "campaignManifestHash": "",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "CS",
+      "targetLang": "NO",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "publishAt": "2026-07-16T06:30:00.000Z",
+      "timeZone": "Europe/Prague",
+      "localDate": "2026-07-16",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_no_cs/youtube_metadata.json",
+      "title": "Norština A1 pro začátečníky: Kuchyňské potřeby | 50 slov",
+      "playlist_key": "CS__NO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T06:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29428572426",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29428572426",
+      "createdAt": "2026-07-15T15:35:08.446Z",
+      "updatedAt": "2026-07-15T15:35:08.446Z",
+      "youtubeVideoId": "QYucbFV0K9I",
+      "youtubePlaylistId": "PLPmYZ5lNEviM",
+      "playlistItemId": "UExQbVlaNWxORXZpTS41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
