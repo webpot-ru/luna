@@ -56,6 +56,7 @@ export function buildCanonicalSupportRouting({ routing, channelRegistry }) {
 
   return {
     parsed: routing,
+    channelRegistry,
     projects,
     channels,
     channelByKey,

@@ -111,6 +111,9 @@ function main() {
     return {
       support,
       bundle: rows[0]?.bundleKey || "",
+      content_scope: rows[0]?.contentScope || "full",
+      card_limit: String(rows[0]?.cardLimit || 0),
+      max_duration_seconds: String(rows[0]?.maxDurationSeconds || 895),
       route_key: rows[0]?.routeKey || "",
       schedule_start_date: /^\d{4}-\d{2}-\d{2}$/.test(campaign.inputs?.startDate || "") ? campaign.inputs.startDate : "",
     };

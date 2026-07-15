@@ -1,0 +1,94 @@
+name: YouTube Repair Scheduled Publish Times
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "plan is read-only; apply performs only the exact videos.update(status) rows in the committed plan."
+        required: true
+        default: "plan"
+        type: choice
+        options:
+          - plan
+          - apply
+      confirm_youtube_write:
+        description: "For mode=apply type RESCHEDULE_YOUTUBE_VIDEOS."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  repair-scheduled-publish-at:
+    runs-on: ubuntu-latest
+    environment: youtube-api-branding
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate exact repair request
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+        run: |
+          set -euo pipefail
+          test -f config/youtube-schedule-repair-plans/deck1-polyglot-calendar-conflicts-20260715.json
+          if [ "$MODE" != "plan" ] && [ "$MODE" != "apply" ]; then
+            echo "::error::mode must be plan or apply"
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "RESCHEDULE_YOUTUBE_VIDEOS" ]; then
+            echo "::error::mode=apply requires confirm_youtube_write=RESCHEDULE_YOUTUBE_VIDEOS"
+            exit 1
+          fi
+
+      - name: Restore YouTube OAuth bundle from environment secret
+        if: ${{ github.event.inputs.mode == 'apply' }}
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+
+      - name: Plan or repair the two exact schedules
+        shell: bash
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+        run: |
+          set -euo pipefail
+          ARGS=(
+            "--plan=config/youtube-schedule-repair-plans/deck1-polyglot-calendar-conflicts-20260715.json"
+            "--report=outputs/youtube-schedule-repair-report-github.json"
+            "--ledger=outputs/youtube-schedule-repair-ledger.jsonl"
+          )
+          if [ "$MODE" = "apply" ]; then
+            ARGS+=("--apply" "--confirm-youtube-write=RESCHEDULE_YOUTUBE_VIDEOS")
+          fi
+          node scripts/youtube-repair-scheduled-publish-at.mjs "${ARGS[@]}"
+
+      - name: Upload non-secret repair evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-schedule-repair-${{ github.event.inputs.mode }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            outputs/youtube-schedule-repair-report-github.json
+            outputs/youtube-schedule-repair-ledger.jsonl

@@ -66,6 +66,28 @@ function polyglotSlotKey(row = {}) {
   ].join("|");
 }
 
+// A learning product is identified by support channel and bundle. Content
+// scope is deliberately excluded: an unverified short must not coexist with
+// the later full version of the same bundle on one channel.
+function polyglotProductSlotKey(row = {}) {
+  const parts = parsedPolyglotKey(row);
+  const bundleKey = polyglotBundleKey(row);
+  if (!bundleKey) {
+    return [
+      "polyglot-product-target-set",
+      row.setId || parts[1] || "",
+      canonicalSupportCode(row.supportLang || parts[2]),
+      normalizedTargetLangs(row).join(","),
+    ].join("|");
+  }
+  return [
+    "polyglot-product-slot",
+    row.setId || parts[1] || "",
+    canonicalSupportCode(row.supportLang || parts[2]),
+    bundleKey,
+  ].join("|");
+}
+
 function resolvePolyglotBundleTargets(bundle = {}, supportLang) {
   const desiredCount = orderedUniqueCodes(bundle.targetLangs).length;
   const targetLangs = [];
@@ -174,6 +196,26 @@ function duplicateCalendarGroups(rows, keyFor) {
       key,
       count: values.length,
       assignments: [...new Set(values.map(calendarAssignmentKey))].sort(),
+      videoIds: uniqueVideoIds(values),
+    }));
+}
+
+function polyglotCrossScopeGroups(rows) {
+  const groups = new Map();
+  for (const row of rows.filter(isPolyglotRow)) {
+    const key = polyglotProductSlotKey(row);
+    const values = groups.get(key) || [];
+    values.push(row);
+    groups.set(key, values);
+  }
+  return [...groups.entries()]
+    .filter(([, values]) => new Set(values.map(polyglotContentScope)).size > 1)
+    .map(([key, values]) => ({
+      key,
+      setId: values[0]?.setId || "",
+      supportLang: canonicalSupportCode(values[0]?.supportLang),
+      bundleKey: polyglotBundleKey(values[0]),
+      scopes: [...new Set(values.map(polyglotContentScope))].sort(),
       videoIds: uniqueVideoIds(values),
     }));
 }
@@ -370,6 +412,8 @@ export function buildPublicationControlReport({
     ...duplicateVideoGroups(polyglotRows, polyglotSlotKey),
   ];
   const liveDuplicates = duplicateVideoGroups(visibleLiveRows, assignmentKey);
+  const registryPolyglotCrossScopeConflicts = polyglotCrossScopeGroups(polyglotRows);
+  const livePolyglotCrossScopeConflicts = polyglotCrossScopeGroups(visibleLiveRows);
   const calendarAssignmentDuplicates = duplicateCalendarGroups(futureCalendarRows, calendarAssignmentKey);
   const calendarSlotCollisions = duplicateCalendarGroups(
     futureCalendarRows,
@@ -413,15 +457,18 @@ export function buildPublicationControlReport({
 
   const activePolyglotKeys = new Set(polyglotRows.map(polyglotAssignmentKey));
   const activePolyglotSlots = new Set(polyglotRows.map(polyglotSlotKey));
+  const activePolyglotProductSlots = new Set(polyglotRows.map(polyglotProductSlotKey));
   const activePolyglotTargetSets = new Set(polyglotRows.map(polyglotTargetSetKey));
   const polyglotTails = [];
   const polyglotBundleMismatches = [];
+  const polyglotCrossScopeConflicts = [];
   for (const [supportRaw, assignments] of Object.entries(desiredPolyglotAssignmentsBySupport || {})) {
     const supportLang = canonicalSupportCode(supportRaw);
     for (const assignment of assignments || []) {
       const expected = { ...assignment, setId, supportLang };
       const expectedKey = polyglotAssignmentKey(expected);
       const expectedSlot = polyglotSlotKey(expected);
+      const expectedProductSlot = polyglotProductSlotKey(expected);
       const expectedTargetSet = polyglotTargetSetKey(expected);
       const activeSlotRows = polyglotRows.filter((row) => polyglotSlotKey(row) === expectedSlot);
       if (activeSlotRows.length) {
@@ -437,6 +484,20 @@ export function buildPublicationControlReport({
           });
         }
         continue;
+      }
+      const otherScopeRows = polyglotRows.filter((row) => (
+        polyglotProductSlotKey(row) === expectedProductSlot
+        && polyglotContentScope(row) !== polyglotContentScope(expected)
+      ));
+      if (otherScopeRows.length) {
+        polyglotCrossScopeConflicts.push({
+          setId,
+          supportLang,
+          bundleKey: assignment.bundleKey || "",
+          expectedContentScope: polyglotContentScope(expected),
+          activeScopes: [...new Set(otherScopeRows.map(polyglotContentScope))].sort(),
+          activeVideoIds: uniqueVideoIds(otherScopeRows),
+        });
       }
       if (!assignment.polyglotKey || activePolyglotKeys.has(expectedKey) || activePolyglotTargetSets.has(expectedTargetSet)) continue;
       polyglotTails.push({
@@ -462,23 +523,37 @@ export function buildPublicationControlReport({
     targetLang: normalizeCode(assignment.targetLang),
     key: ordinaryAssignmentKey({ setId: assignment.setId || setId, supportLang: assignment.supportLang, targetLang: assignment.targetLang }),
   }));
-  const proposedPolyglotConflicts = (proposedPolyglotAssignments || []).filter((assignment) => {
+  const proposedPolyglotConflicts = (proposedPolyglotAssignments || []).map((assignment) => {
     const candidate = {
       ...assignment,
       setId: assignment.setId || setId,
       supportLang: canonicalSupportCode(assignment.supportLang),
     };
-    return activePolyglotSlots.has(polyglotSlotKey(candidate))
+    return { assignment, candidate };
+  }).filter(({ candidate }) => (
+    activePolyglotSlots.has(polyglotSlotKey(candidate))
       || activePolyglotKeys.has(polyglotAssignmentKey(candidate))
-      || activePolyglotTargetSets.has(polyglotTargetSetKey(candidate));
-  }).map((assignment) => ({
-    setId: assignment.setId || setId,
-    supportLang: canonicalSupportCode(assignment.supportLang),
-    bundleKey: assignment.bundleKey || String(assignment.polyglotKey || "").split(":")[3] || "",
-    targetLangs: (assignment.targetLangs || []).map(normalizeCode).filter(Boolean),
-    polyglotKey: assignment.polyglotKey || "",
-    key: polyglotAssignmentKey({ ...assignment, setId: assignment.setId || setId }),
-  }));
+      || activePolyglotTargetSets.has(polyglotTargetSetKey(candidate))
+      || activePolyglotProductSlots.has(polyglotProductSlotKey(candidate))
+  )).map(({ assignment, candidate }) => {
+    const crossScopeRows = polyglotRows.filter((row) => (
+      polyglotProductSlotKey(row) === polyglotProductSlotKey(candidate)
+      && polyglotContentScope(row) !== polyglotContentScope(candidate)
+    ));
+    return {
+      setId: assignment.setId || setId,
+      supportLang: canonicalSupportCode(assignment.supportLang),
+      bundleKey: assignment.bundleKey || String(assignment.polyglotKey || "").split(":")[3] || "",
+      contentScope: polyglotContentScope(candidate),
+      targetLangs: (assignment.targetLangs || []).map(normalizeCode).filter(Boolean),
+      polyglotKey: assignment.polyglotKey || "",
+      key: polyglotAssignmentKey(candidate),
+      crossScopeConflict: crossScopeRows.length > 0,
+      activeScopes: [...new Set(crossScopeRows.map(polyglotContentScope))].sort(),
+      activeVideoIds: uniqueVideoIds(crossScopeRows),
+    };
+  });
+  const proposedPolyglotCrossScopeConflicts = proposedPolyglotConflicts.filter((item) => item.crossScopeConflict);
   const liveAuditPaginationBlockers = requireCompleteLiveAudit && liveAudit?.paginationComplete !== true
     ? [{
       type: "live_audit_pagination_incomplete",
@@ -526,13 +601,17 @@ export function buildPublicationControlReport({
   const blockers = [
     ...registryDuplicates.map((item) => ({ type: "duplicate_registry_assignment", ...item })),
     ...liveDuplicates.map((item) => ({ type: "duplicate_live_assignment", ...item })),
+    ...registryPolyglotCrossScopeConflicts.map((item) => ({ type: "duplicate_registry_polyglot_cross_scope", ...item })),
+    ...livePolyglotCrossScopeConflicts.map((item) => ({ type: "duplicate_live_polyglot_cross_scope", ...item })),
     ...calendarAssignmentDuplicates.map((item) => ({ type: "duplicate_calendar_assignment", ...item })),
     ...calendarSlotCollisions.map((item) => ({ type: "calendar_slot_collision", ...item })),
     ...liveScheduledMissingCalendar.map((item) => ({ type: "live_schedule_missing_calendar", ...item })),
     ...liveVideosMissingRegistry.map((item) => ({ type: "live_video_missing_durable_registry", ...item })),
     ...proposedOrdinaryConflicts.map((item) => ({ type: "proposed_ordinary_assignment_already_active", ...item })),
     ...proposedPolyglotConflicts.map((item) => ({ type: "proposed_polyglot_assignment_already_active", ...item })),
+    ...proposedPolyglotCrossScopeConflicts.map((item) => ({ type: "proposed_polyglot_cross_scope_conflict", ...item })),
     ...polyglotBundleMismatches.map((item) => ({ type: "polyglot_bundle_target_mismatch", ...item })),
+    ...polyglotCrossScopeConflicts.map((item) => ({ type: "polyglot_required_scope_blocked_by_other_scope", ...item })),
     ...liveStatusBlockers,
     ...unclassifiedUploadBlockers,
     ...liveAuditPaginationBlockers,
@@ -557,12 +636,16 @@ export function buildPublicationControlReport({
       polyglotTailCount: polyglotTails.length,
       registryDuplicateGroupCount: registryDuplicates.length,
       liveDuplicateGroupCount: liveDuplicates.length,
+      registryPolyglotCrossScopeConflictCount: registryPolyglotCrossScopeConflicts.length,
+      livePolyglotCrossScopeConflictCount: livePolyglotCrossScopeConflicts.length,
       calendarAssignmentDuplicateCount: calendarAssignmentDuplicates.length,
       calendarSlotCollisionCount: calendarSlotCollisions.length,
       liveScheduleMissingCalendarCount: liveScheduledMissingCalendar.length,
       liveVideoMissingDurableRegistryCount: liveVideosMissingRegistry.length,
       proposedAssignmentConflictCount: proposedOrdinaryConflicts.length + proposedPolyglotConflicts.length,
+      proposedPolyglotCrossScopeConflictCount: proposedPolyglotCrossScopeConflicts.length,
       polyglotBundleTargetMismatchCount: polyglotBundleMismatches.length,
+      polyglotRequiredScopeBlockedByOtherScopeCount: polyglotCrossScopeConflicts.length,
       liveAuditPaginationComplete: liveAudit?.paginationComplete === true,
       liveStatusNotReturnedCount: statusNotReturnedRows.length,
       youtubeDeletedTombstoneCount: deletedTombstoneRows.length,
@@ -601,6 +684,7 @@ export {
   normalizeCode,
   normalizedTargetLangs,
   polyglotContentScope,
+  polyglotProductSlotKey,
   polyglotSlotKey,
   polyglotTargetSetKey,
   resolvePolyglotBundleTargets,

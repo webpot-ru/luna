@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "planId": "deck1-polyglot-calendar-conflicts-20260715",
+  "setId": "home_kitchen_cookware_pilot_01",
+  "sourceAuditRuns": [29414068886, 29414064783],
+  "purpose": "Resolve two observed cross-deck scheduled-slot collisions without rendering, uploading, deleting, or replacing a video.",
+  "targets": [
+    {
+      "youtubeVideoId": "Rpo-HU3C7gY",
+      "supportLang": "ES-419",
+      "channelKey": "es",
+      "videoType": "polyglot",
+      "contentScope": "full",
+      "expectedPrivacyStatus": "private",
+      "expectedPublishAt": "2026-07-16T21:30:00Z",
+      "publishAt": "2026-07-17T21:30:00Z",
+      "collisionWith": {
+        "youtubeVideoId": "JjMMv5ouVZM",
+        "setId": "home_kitchen_cooking_actions_a1_a2",
+        "supportLang": "ES-419",
+        "targetLang": "HI"
+      }
+    },
+    {
+      "youtubeVideoId": "kd1j2DAi30s",
+      "supportLang": "PT-BR",
+      "channelKey": "pt",
+      "videoType": "polyglot",
+      "contentScope": "full",
+      "expectedPrivacyStatus": "private",
+      "expectedPublishAt": "2026-07-15T19:30:00Z",
+      "publishAt": "2026-07-16T19:30:00Z",
+      "collisionWith": {
+        "youtubeVideoId": "eUQ7VsPNeHI",
+        "setId": "home_kitchen_cooking_actions_a1_a2",
+        "supportLang": "PT-BR",
+        "targetLang": "FI"
+      }
+    }
+  ]
+}

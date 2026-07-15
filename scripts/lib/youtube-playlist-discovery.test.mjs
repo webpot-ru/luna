@@ -30,7 +30,7 @@ const byTitle = resolvePlaylistDiscovery({
   registryEntry: { playlist_key: assignment.key, youtube_playlist_id: "" },
   discoveryChannel: {
     ...channel,
-    playlists: [{ id: "PL-title", title: `  ${assignment.title.toUpperCase()}  `, description: "", youtubeChannelId: "channel-en", videoIds: [] }],
+    playlists: [{ id: "PL-title", title: `  ${assignment.title.toUpperCase()}  `, description: "", youtubeChannelId: "channel-en", privacyStatus: "public", videoIds: [] }],
   },
 });
 assert.equal(byTitle.state, "resolved_existing");
@@ -43,7 +43,7 @@ const byMarker = resolvePlaylistDiscovery({
   registryEntry: null,
   discoveryChannel: {
     ...channel,
-    playlists: [{ id: "PL-marker", title: "Renamed", description: `Public copy\n\n${marker}`, youtubeChannelId: "channel-en", videoIds: [] }],
+    playlists: [{ id: "PL-marker", title: "Renamed", description: `Public copy\n\n${marker}`, youtubeChannelId: "channel-en", privacyStatus: "public", videoIds: [] }],
   },
 });
 assert.equal(byMarker.youtubePlaylistId, "PL-marker");
@@ -54,11 +54,23 @@ const bySourceVideo = resolvePlaylistDiscovery({
   registryEntry: { playlist_key: assignment.key, youtube_playlist_id: "", sourceVideoIds: ["video-1"] },
   discoveryChannel: {
     ...channel,
-    playlists: [{ id: "PL-source", title: "Renamed", description: "", youtubeChannelId: "channel-en", videoIds: ["video-1"] }],
+    playlists: [{ id: "PL-source", title: "Renamed", description: "", youtubeChannelId: "channel-en", privacyStatus: "public", videoIds: ["video-1"] }],
   },
 });
 assert.equal(bySourceVideo.youtubePlaylistId, "PL-source");
 assert(bySourceVideo.matchEvidence.includes("known_source_video_membership"));
+
+const unlistedExisting = resolvePlaylistDiscovery({
+  assignment,
+  registryEntry: { playlist_key: assignment.key, youtube_playlist_id: "PL-unlisted" },
+  discoveryChannel: {
+    ...channel,
+    playlists: [{ id: "PL-unlisted", title: assignment.title, description: "", youtubeChannelId: "channel-en", privacyStatus: "unlisted", videoIds: [] }],
+  },
+  requirePublic: true,
+});
+assert.equal(unlistedExisting.ready, false);
+assert(unlistedExisting.blockers.some((row) => row.includes("requires a public playlist")));
 
 const durableMissing = resolvePlaylistDiscovery({
   assignment,

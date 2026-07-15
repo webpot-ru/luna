@@ -86,7 +86,10 @@ jobs:
         run: |
           set -euo pipefail
           npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORTS" --max-pages "$MAX_PAGES" --include-video-status --output="outputs/youtube-live-publications-$ROUTE.json" --json
-          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORTS" "--live-audit=outputs/youtube-live-publications-$ROUTE.json" "--output=outputs/youtube-publication-control-$ROUTE.json" "--strict")
+          # This is an evidence collection workflow. Drift is recorded in the
+          # control report and blocks campaign planning, but must not discard a
+          # complete API readback or prevent its all-route snapshot from being built.
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORTS" "--live-audit=outputs/youtube-live-publications-$ROUTE.json" "--output=outputs/youtube-publication-control-$ROUTE.json")
           if [ -n "$TARGETS" ]; then CONTROL_ARGS+=("--targets=$TARGETS"); fi
           npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
       - name: Read every owned playlist and playlist item for stable identity discovery

@@ -165,7 +165,9 @@ const shortDoesNotSatisfyFull = buildPublicationControlReport({
   }],
 });
 assert.equal(shortDoesNotSatisfyFull.summary.polyglotTailCount, 1);
-assert.equal(shortDoesNotSatisfyFull.summary.proposedAssignmentConflictCount, 0);
+assert.equal(shortDoesNotSatisfyFull.summary.proposedAssignmentConflictCount, 1);
+assert.equal(shortDoesNotSatisfyFull.summary.proposedPolyglotCrossScopeConflictCount, 1);
+assert.ok(shortDoesNotSatisfyFull.blockers.some((item) => item.type === "proposed_polyglot_cross_scope_conflict"));
 
 const changedBundleContent = buildPublicationControlReport({
   ...base,
@@ -354,5 +356,13 @@ const defaultTargetsReport = JSON.parse(fs.readFileSync(defaultTargetsOutputPath
 assert.equal(defaultTargetsReport.productPolicy.ordinaryTargetSource, "config/language-order.json");
 assert.equal(defaultTargetsReport.summary.ordinaryTailCount, 52);
 assert.ok(!defaultTargetsReport.tails.some((row) => ["EN", "EN-GB"].includes(row.targetLang)));
+
+const auditWorkflow = fs.readFileSync(".github/workflows/youtube-publication-control.yml", "utf8");
+assert.match(auditWorkflow, /Drift is recorded in the/u);
+assert.doesNotMatch(
+  auditWorkflow,
+  /CONTROL_ARGS=.*?"--strict"/u,
+  "the read-only audit must retain complete evidence when it detects state drift",
+);
 
 console.log("youtube publication control tests passed");

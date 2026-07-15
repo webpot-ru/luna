@@ -201,7 +201,7 @@ jobs:
         env:
           MODE: ${{ inputs.mode }}
           SUPPORT: ${{ inputs.support }}
-          LIMIT: ${{ inputs.limit }}
+          LIMIT: ${{ steps.polyglot_plan.outputs.effective_card_limit || inputs.limit }}
           CONTENT_SCOPE: ${{ inputs.content_scope }}
           MAX_DURATION_SECONDS: ${{ inputs.max_duration_seconds }}
           PRIVACY: ${{ inputs.privacy }}
@@ -268,8 +268,8 @@ jobs:
             echo "::error::mode=apply with limit != 0 is only allowed for content_scope=short_unverified."
             exit 1
           fi
-          if [ "$MODE" = "apply" ] && [ "$CONTENT_SCOPE" = "short_unverified" ] && [ "$LIMIT" = "0" ]; then
-            echo "::error::content_scope=short_unverified requires a positive card limit."
+          if [ "$CONTENT_SCOPE" = "short_unverified" ] && ! printf '%s' "$LIMIT" | grep -Eq '^[0-9]+$'; then
+            echo "::error::content_scope=short_unverified requires a non-negative integer card limit; 0 selects the measured full-deck prefix."
             exit 1
           fi
           if [ "$CONTENT_SCOPE" = "short_unverified" ] && [ "$MAX_DURATION_SECONDS" -gt 895 ]; then
@@ -415,7 +415,7 @@ jobs:
           CAMPAIGN_MANIFEST_HASH: ${{ inputs.campaign_manifest_hash }}
         run: |
           set -euo pipefail
-          PLAN_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--bundle" "$BUNDLE" "--content-scope" "$CONTENT_SCOPE" "--max-duration-seconds" "$MAX_DURATION_SECONDS" "--require-offline-deck" "--output=outputs/video-generator/youtube-polyglot-plan-github.json")
+          PLAN_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--bundle" "$BUNDLE" "--content-scope" "$CONTENT_SCOPE" "--max-duration-seconds" "$MAX_DURATION_SECONDS" "--card-limit" "$LIMIT" "--require-offline-deck" "--output=outputs/video-generator/youtube-polyglot-plan-github.json")
           if [ -n "$CAMPAIGN_ID" ]; then
             PLAN_ARGS+=("--campaign-id" "$CAMPAIGN_ID" "--campaign-manifest-hash" "$CAMPAIGN_MANIFEST_HASH")
           fi
@@ -430,17 +430,19 @@ jobs:
             const s = report.summary || {};
             const effectiveScope = s.contentScope || c.contentScope || "";
             const effectiveMax = String(s.maxDurationSeconds || "");
+            const effectiveCardLimit = String(s.cardLimit ?? c.cardLimit ?? "0");
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `target_langs=${c.targetLangsCsv || ""}\n`);
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `polyglot_key=${c.polyglotKey || ""}\n`);
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `effective_content_scope=${effectiveScope}\n`);
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `effective_max_duration=${effectiveMax}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `effective_card_limit=${effectiveCardLimit}\n`);
             const alreadyPublished = (c.existingPublication || (c.existingProgressItem && c.existingProgressItem.youtubeVideoId)) ? "true" : "false";
             fs.appendFileSync(process.env.GITHUB_OUTPUT, `already_published=${alreadyPublished}\n`);
             if (process.env.GITHUB_STEP_SUMMARY) {
               fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
                 "### Polyglot plan",
                 "",
-                c.autoFallbackContentScope ? `**Auto-fallback**: content_scope=${effectiveScope} max_duration=${effectiveMax}s (channel not phone-verified)` : "",
+                c.autoFallbackContentScope ? `**Auto-fallback**: content_scope=${effectiveScope} card_limit=${effectiveCardLimit} max_duration=${effectiveMax}s (long-video upload not confirmed)` : "",
                 `- Polyglot key: ${c.polyglotKey || ""}`,
                 `- Support: ${c.supportLang || ""}`,
                 `- Bundle: ${c.bundleKey || ""}`,
@@ -471,6 +473,29 @@ jobs:
           fi
           npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
 
+      - name: Preflight scheduled public playlist before metadata and render
+        if: ${{ inputs.mode == 'apply' && inputs.publish_mode == 'scheduled' && steps.polyglot_plan.outputs.already_published != 'true' }}
+        shell: bash
+        env:
+          SUPPORT: ${{ inputs.support }}
+        run: |
+          set -euo pipefail
+          ROUTE_KEY="$(node --input-type=module -e '
+            import { canonicalSupportRouteKey, loadCanonicalSupportRouting } from "./scripts/lib/youtube-support-routing.mjs";
+            const route = canonicalSupportRouteKey(loadCanonicalSupportRouting(), process.env.SUPPORT);
+            if (!route) throw new Error(`Missing route for ${process.env.SUPPORT}`);
+            process.stdout.write(route);
+          ')"
+          npm run audit:youtube-playlists -- \
+            --support="$SUPPORT" \
+            --route-key="$ROUTE_KEY" \
+            --output=outputs/youtube-polyglot-playlist-discovery-github.json
+          npm run check:youtube-scheduled-playlist-visibility -- \
+            --plan=outputs/video-generator/youtube-polyglot-plan-github.json \
+            --discovery=outputs/youtube-polyglot-playlist-discovery-github.json \
+            --require-public \
+            --output=outputs/youtube-polyglot-playlist-visibility-github.json
+
       - name: Generate Polyglot YouTube metadata
         if: ${{ steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
@@ -479,7 +504,7 @@ jobs:
           SET_ID: ${{ inputs.set_id }}
           SUPPORT: ${{ inputs.support }}
           BUNDLE: ${{ inputs.bundle }}
-          LIMIT: ${{ inputs.limit }}
+          LIMIT: ${{ steps.polyglot_plan.outputs.effective_card_limit || inputs.limit }}
           CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || inputs.content_scope }}
           MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || inputs.max_duration_seconds }}
           PRIVACY: ${{ inputs.privacy }}
@@ -606,14 +631,18 @@ jobs:
           SUPPORT: ${{ inputs.support }}
           TARGET_LANGS: ${{ steps.polyglot_plan.outputs.target_langs }}
           POLYGLOT_KEY: ${{ steps.polyglot_plan.outputs.polyglot_key }}
-          LIMIT: ${{ inputs.limit }}
+          LIMIT: ${{ steps.polyglot_plan.outputs.effective_card_limit || inputs.limit }}
           MODE: ${{ inputs.mode }}
           CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || inputs.max_duration_seconds }}
         run: |
           set -euo pipefail
           BUILD_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--targets" "$TARGET_LANGS" "--content-scope" "$CONTENT_SCOPE")
           if [ "$LIMIT" != "0" ]; then
             BUILD_ARGS+=("--limit" "$LIMIT")
+          fi
+          if [ "$CONTENT_SCOPE" = "short_unverified" ]; then
+            BUILD_ARGS+=("--max-duration-seconds" "$MAX_DURATION_SECONDS")
           fi
           if [ "$MODE" = "render_no_audio" ]; then
             BUILD_ARGS+=("--no-audio")
@@ -626,9 +655,14 @@ jobs:
         env:
           MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || inputs.max_duration_seconds }}
           CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || inputs.content_scope }}
+          MODE: ${{ inputs.mode }}
         run: |
           set -euo pipefail
-          npm run check:polyglot-video-duration -- outputs/video-generator --content-scope "$CONTENT_SCOPE" --max-duration-seconds "$MAX_DURATION_SECONDS" --write-metadata --output=outputs/polyglot-video-duration-check-github.json
+          CHECK_ARGS=(outputs/video-generator "--content-scope" "$CONTENT_SCOPE" "--max-duration-seconds" "$MAX_DURATION_SECONDS" --write-metadata --output=outputs/polyglot-video-duration-check-github.json)
+          if [ "$CONTENT_SCOPE" = "short_unverified" ] && [ "$MODE" != "render_no_audio" ]; then
+            CHECK_ARGS+=(--require-measured-selection)
+          fi
+          npm run check:polyglot-video-duration -- "${CHECK_ARGS[@]}"
 
       - name: Copy approved pre-rendered Polyglot thumbnails
         if: ${{ inputs.mode == 'apply' && steps.polyglot_plan.outputs.already_published != 'true' }}

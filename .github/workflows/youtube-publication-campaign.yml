@@ -341,9 +341,9 @@ jobs:
       set_id: ${{ needs.preflight.outputs.set_id }}
       support: ${{ matrix.support }}
       bundle: ${{ matrix.bundle }}
-      limit: "0"
-      content_scope: full
-      max_duration_seconds: "895"
+      limit: ${{ matrix.card_limit }}
+      content_scope: ${{ matrix.content_scope }}
+      max_duration_seconds: ${{ matrix.max_duration_seconds }}
       privacy: private
       publish_mode: scheduled
       publish_at: ""

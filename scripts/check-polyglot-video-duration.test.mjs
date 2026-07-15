@@ -15,7 +15,7 @@ fs.writeFileSync(path.join(videoDir, "video.mp4"), "fixture");
 fs.writeFileSync(path.join(videoDir, "youtube_metadata.json"), JSON.stringify({ supportLang: "EN", videoPath: path.join(videoDir, "video.mp4") }));
 const channelConfig = path.join(root, "channels.json");
 
-function run({ allowed, duration, scope = "full" }) {
+function run({ allowed, duration, scope = "full", requireMeasuredSelection = false }) {
   fs.writeFileSync(channelConfig, JSON.stringify({ channels: [{ key: "en", supportLangs: ["EN", "EN-GB"], longVideoUploadAllowed: allowed }] }));
   return spawnSync(process.execPath, [
     "scripts/check-polyglot-video-duration.mjs",
@@ -24,6 +24,7 @@ function run({ allowed, duration, scope = "full" }) {
     `--ffprobe=${ffprobe}`,
     `--content-scope=${scope}`,
     "--max-duration-seconds=895",
+    ...(requireMeasuredSelection ? ["--require-measured-selection"] : []),
   ], { cwd: process.cwd(), encoding: "utf8", env: { ...process.env, FAKE_DURATION: String(duration) } });
 }
 
@@ -31,4 +32,11 @@ assert.equal(run({ allowed: undefined, duration: 800 }).status, 0, "short full v
 assert.equal(run({ allowed: undefined, duration: 900 }).status, 1, "long full video with unknown capability must block");
 assert.equal(run({ allowed: true, duration: 900 }).status, 0, "confirmed long-video channel must pass");
 assert.equal(run({ allowed: true, duration: 900, scope: "short_unverified" }).status, 1, "short scope remains hard-capped");
+assert.equal(run({ allowed: true, duration: 800, scope: "short_unverified", requireMeasuredSelection: true }).status, 1, "new short videos require measured duration selection evidence");
+fs.writeFileSync(path.join(videoDir, "polyglot-duration-selection.json"), JSON.stringify({
+  selectionMethod: "measured_tts_audio_prefix",
+  selectedCardCount: 20,
+  projectedDurationSeconds: 800,
+}));
+assert.equal(run({ allowed: true, duration: 800, scope: "short_unverified", requireMeasuredSelection: true }).status, 0, "measured short selection evidence passes");
 console.log("Polyglot duration/capability tests passed");

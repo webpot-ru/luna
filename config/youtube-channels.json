@@ -18,7 +18,9 @@
       "brandingSettings.channel.description",
       "brandingSettings.image.bannerExternalUrl",
       "watermarks.set"
-    ]
+    ],
+    "longVideoUploadAllowed": false,
+    "shortUnverifiedPolyglotCardLimit": 0
   },
   "channels": [
     {
@@ -41,7 +43,8 @@
       "thumbnailFallbackMode": "custom_when_available",
       "notes": [
         "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
-      ]
+      ],
+      "longVideoUploadAllowed": true
     },
     {
       "key": "ru",
@@ -62,7 +65,8 @@
       "thumbnailFallbackMode": "custom_when_available",
       "notes": [
         "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
-      ]
+      ],
+      "longVideoUploadAllowed": true
     },
     {
       "key": "es",
@@ -84,7 +88,8 @@
       "thumbnailFallbackMode": "custom_when_available",
       "notes": [
         "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
-      ]
+      ],
+      "longVideoUploadAllowed": true
     },
     {
       "key": "pt",
@@ -106,7 +111,8 @@
       "thumbnailFallbackMode": "custom_when_available",
       "notes": [
         "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
-      ]
+      ],
+      "longVideoUploadAllowed": true
     },
     {
       "key": "hi",
@@ -127,7 +133,8 @@
       "thumbnailFallbackMode": "first_frame_auto",
       "notes": [
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
-      ]
+      ],
+      "longVideoUploadAllowed": false
     },
     {
       "key": "id",
@@ -148,7 +155,8 @@
       "thumbnailFallbackMode": "first_frame_auto",
       "notes": [
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
-      ]
+      ],
+      "longVideoUploadAllowed": false
     },
     {
       "key": "fr",
@@ -171,7 +179,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "de",
@@ -192,7 +201,8 @@
       "thumbnailFallbackMode": "first_frame_auto",
       "notes": [
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
-      ]
+      ],
+      "longVideoUploadAllowed": false
     },
     {
       "key": "ja",
@@ -213,7 +223,8 @@
       "thumbnailFallbackMode": "custom_when_available",
       "notes": [
         "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
-      ]
+      ],
+      "longVideoUploadAllowed": true
     },
     {
       "key": "ko",
@@ -234,7 +245,8 @@
       "thumbnailFallbackMode": "first_frame_auto",
       "notes": [
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
-      ]
+      ],
+      "longVideoUploadAllowed": false
     },
     {
       "key": "tr",
@@ -255,7 +267,8 @@
       "thumbnailFallbackMode": "custom_when_available",
       "notes": [
         "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
-      ]
+      ],
+      "longVideoUploadAllowed": true
     },
     {
       "key": "zh",
@@ -276,7 +289,8 @@
       "thumbnailFallbackMode": "first_frame_auto",
       "notes": [
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
-      ]
+      ],
+      "longVideoUploadAllowed": false
     },
     {
       "key": "it",
@@ -304,7 +318,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "vi",
@@ -333,7 +348,8 @@
         "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
       ],
       "customThumbnailUploadAllowed": true,
-      "thumbnailFallbackMode": "custom_when_available"
+      "thumbnailFallbackMode": "custom_when_available",
+      "longVideoUploadAllowed": true
     },
     {
       "key": "th",
@@ -361,7 +377,8 @@
         "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
       ],
       "customThumbnailUploadAllowed": true,
-      "thumbnailFallbackMode": "custom_when_available"
+      "thumbnailFallbackMode": "custom_when_available",
+      "longVideoUploadAllowed": true
     },
     {
       "key": "ms",
@@ -389,7 +406,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "pl",
@@ -416,7 +434,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "nl",
@@ -443,7 +462,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "sv",
@@ -470,7 +490,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "no",
@@ -498,7 +519,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "da",
@@ -526,7 +548,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "fi",
@@ -554,7 +577,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "cs",
@@ -582,7 +606,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "sk",
@@ -610,7 +635,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "hu",
@@ -638,7 +664,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "ro",
@@ -666,7 +693,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "bg",
@@ -694,7 +722,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "hr",
@@ -722,7 +751,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "sr",
@@ -753,7 +783,8 @@
         "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
       ],
       "customThumbnailUploadAllowed": true,
-      "thumbnailFallbackMode": "custom_when_available"
+      "thumbnailFallbackMode": "custom_when_available",
+      "longVideoUploadAllowed": true
     },
     {
       "key": "sl",
@@ -781,7 +812,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "lt",
@@ -809,7 +841,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "lv",
@@ -837,7 +870,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "et",
@@ -865,7 +899,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "is",
@@ -893,7 +928,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "bn",
@@ -921,7 +957,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "tl",
@@ -948,7 +985,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "my",
@@ -978,7 +1016,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation used first-frame auto-thumbnail fallback until advanced features/custom thumbnails were enabled in Studio. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation."
       ],
       "customThumbnailUploadAllowed": true,
-      "thumbnailFallbackMode": "custom_when_available"
+      "thumbnailFallbackMode": "custom_when_available",
+      "longVideoUploadAllowed": true
     },
     {
       "key": "km",
@@ -1018,7 +1057,8 @@
         "errorDomain": "youtube.thumbnail",
         "errorReason": "forbidden",
         "message": "The authenticated user does not have permissions to upload and set custom video thumbnails."
-      }
+      },
+      "longVideoUploadAllowed": false
     },
     {
       "key": "lo",
@@ -1046,7 +1086,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "ne",
@@ -1075,7 +1116,8 @@
         "For browser work, use the Google Sheet Current handle as the navigation/account-switch source. Do not use Channel ID / UC... as the browser URL source.",
         "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
         "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
-      ]
+      ],
+      "longVideoUploadAllowed": true
     },
     {
       "key": "si",
@@ -1104,7 +1146,8 @@
         "2026-07-13: user explicitly confirmed advanced features/custom video and playlist thumbnails are enabled; this supersedes the earlier forbidden fallback note."
       ],
       "customThumbnailUploadAllowed": true,
-      "thumbnailFallbackMode": "custom_when_available"
+      "thumbnailFallbackMode": "custom_when_available",
+      "longVideoUploadAllowed": true
     },
     {
       "key": "ta",
@@ -1132,7 +1175,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "te",
@@ -1160,7 +1204,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "kn",
@@ -1188,7 +1233,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "ml",
@@ -1216,7 +1262,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "uz",
@@ -1245,7 +1292,8 @@
         "2026-07-13: user explicitly confirmed advanced features/custom video and playlist thumbnails are enabled; this supersedes the earlier forbidden fallback note."
       ],
       "customThumbnailUploadAllowed": true,
-      "thumbnailFallbackMode": "custom_when_available"
+      "thumbnailFallbackMode": "custom_when_available",
+      "longVideoUploadAllowed": true
     },
     {
       "key": "kk",
@@ -1274,7 +1322,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "az",
@@ -1304,7 +1353,8 @@
         "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
       ],
       "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto"
+      "thumbnailFallbackMode": "first_frame_auto",
+      "longVideoUploadAllowed": false
     },
     {
       "key": "ka",
@@ -1334,7 +1384,8 @@
         "2026-07-13: user explicitly confirmed advanced features/custom video and playlist thumbnails are now enabled; this supersedes the earlier forbidden/pending notes."
       ],
       "customThumbnailUploadAllowed": true,
-      "thumbnailFallbackMode": "custom_when_available"
+      "thumbnailFallbackMode": "custom_when_available",
+      "longVideoUploadAllowed": true
     },
     {
       "key": "hy",
@@ -1359,7 +1410,8 @@
         "Official API can set banner, description and watermark; channel name, handle, avatar, contact email and profile links remain manual YouTube Studio fields.",
         "Studio public fields and avatar/banner/description/link API readback OK 2026-06-21; contact email intentionally not transmitted.",
         "For browser work, use the Google Sheet Current handle as the navigation/account-switch source. Do not use Channel ID / UC... as the browser URL source."
-      ]
+      ],
+      "longVideoUploadAllowed": false
     },
     {
       "key": "sw",
@@ -1388,7 +1440,8 @@
         "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
       ],
       "customThumbnailUploadAllowed": true,
-      "thumbnailFallbackMode": "custom_when_available"
+      "thumbnailFallbackMode": "custom_when_available",
+      "longVideoUploadAllowed": true
     }
   ]
 }

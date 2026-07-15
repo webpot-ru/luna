@@ -15,6 +15,7 @@ function parseArgs(argv) {
     channelConfig: "config/youtube-channels.json",
     ffprobe: "ffprobe",
     writeMetadata: false,
+    requireMeasuredSelection: false,
     output: "",
     json: false,
   };
@@ -30,6 +31,7 @@ function parseArgs(argv) {
     else if (arg === "--channel-config" || arg.startsWith("--channel-config=")) options.channelConfig = readValue();
     else if (arg === "--ffprobe" || arg.startsWith("--ffprobe=")) options.ffprobe = readValue();
     else if (arg === "--write-metadata") options.writeMetadata = true;
+    else if (arg === "--require-measured-selection") options.requireMeasuredSelection = true;
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = readValue();
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
@@ -75,6 +77,13 @@ function defaultVideoPath(metadataFile, metadata) {
     .sort()[0] || "";
 }
 
+function loadMeasuredSelection(metadataFile) {
+  const selectionPath = path.join(path.dirname(metadataFile), "polyglot-duration-selection.json");
+  if (!fs.existsSync(selectionPath)) return { selectionPath, selection: null };
+  const selection = JSON.parse(fs.readFileSync(selectionPath, "utf8"));
+  return { selectionPath, selection };
+}
+
 function probeDuration(videoPath, ffprobe) {
   const result = spawnSync(ffprobe, ["-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", videoPath], { encoding: "utf8" });
   if (result.status !== 0) throw new Error(`ffprobe failed for ${videoPath}: ${result.stderr || result.stdout}`);
@@ -103,6 +112,7 @@ function main() {
   const results = metadataFiles.map((metadataFile) => {
     const metadata = JSON.parse(fs.readFileSync(metadataFile, "utf8"));
     const videoPath = defaultVideoPath(metadataFile, metadata);
+    const { selectionPath, selection } = loadMeasuredSelection(metadataFile);
     const channel = findChannelForCanonicalSupport(channelRegistry, metadata.supportLang);
     const longVideoCapability = capabilityStatus(channel);
     const blockers = [];
@@ -118,6 +128,16 @@ function main() {
         blockers.push(`duration ${durationSeconds.toFixed(3)}s exceeds ${options.maxDurationSeconds}s and long-video upload capability is ${longVideoCapability}`);
       }
     }
+    if (options.contentScope === "short_unverified" && options.requireMeasuredSelection) {
+      if (!selection) blockers.push("missing measured Polyglot duration selection");
+      else {
+        if (selection.selectionMethod !== "measured_tts_audio_prefix") blockers.push("unsupported measured Polyglot duration selection method");
+        if (Number(selection.selectedCardCount) < 1) blockers.push("measured Polyglot duration selection contains no cards");
+        if (Number(selection.projectedDurationSeconds) > options.maxDurationSeconds) {
+          blockers.push(`measured projected duration ${selection.projectedDurationSeconds}s exceeds short limit ${options.maxDurationSeconds}s`);
+        }
+      }
+    }
     const status = blockers.length ? "blocked" : "ok";
     const gate = {
       status,
@@ -127,12 +147,18 @@ function main() {
       videoDurationSeconds: durationSeconds ? Number(durationSeconds.toFixed(3)) : null,
       longVideoCapability,
       channelKey: channel?.key || "",
+      durationSelectionPath: selection ? selectionPath : "",
+      durationSelection: selection,
       blockers,
     };
     if (options.writeMetadata && videoPath) {
       metadata.videoDurationSeconds = gate.videoDurationSeconds;
       metadata.maxDurationSeconds = options.maxDurationSeconds;
       metadata.durationGate = gate;
+      if (selection?.selectionMethod === "measured_tts_audio_prefix") {
+        metadata.wordCount = Number(selection.selectedCardCount) || metadata.wordCount || 0;
+        metadata.durationSelection = selection;
+      }
       fs.writeFileSync(metadataFile, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");
     }
     return { metadataFile, videoPath, ...gate };
