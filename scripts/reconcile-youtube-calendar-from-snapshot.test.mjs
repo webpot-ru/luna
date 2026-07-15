@@ -32,6 +32,7 @@ const calendar = {
   schemaVersion: 1,
   reservations: [
     { setId: "deck", supportLang: "EN", targetLang: "NB", channelKey: "en", youtubeVideoId: "keep-update", publishAt: "2026-07-14T12:30:00.000Z", status: "reserved" },
+    { setId: "deck", supportLang: "EN", targetLang: "IT", channelKey: "en", youtubeVideoId: "cancelled-old-video", publishAt: "2026-07-14T18:30:00.000Z", status: "reserved", cancelledAt: "2026-07-13T07:00:00.000Z" },
     { setId: "other-deck", supportLang: "EN", targetLang: "ES", channelKey: "en", youtubeVideoId: "other-video", publishAt: "2026-07-15T00:30:00.000Z", status: "reserved" },
   ],
 };
@@ -53,8 +54,9 @@ assert.deepEqual(first.report.skipped.map((row) => row.reason).sort(), [
   "live_duplicate_group",
 ]);
 assert.equal(first.calendar.reservations.find((row) => row.youtubeVideoId === "keep-update").publishAt, "2026-07-14T15:30:00.000Z");
+assert.equal(first.calendar.reservations.find((row) => row.youtubeVideoId === "cancelled-old-video").cancelledAt, "2026-07-13T07:00:00.000Z");
 assert.equal(first.calendar.reservations.find((row) => row.youtubeVideoId === "create-me").localTime, "14:30");
-assert.deepEqual(first.calendar.reservations.slice(0, 2).map((row) => row.youtubeVideoId), ["keep-update", "other-video"]);
+assert.deepEqual(first.calendar.reservations.slice(0, 3).map((row) => row.youtubeVideoId), ["keep-update", "cancelled-old-video", "other-video"]);
 assert.equal(first.calendar.reservations.at(-1).youtubeVideoId, "create-me");
 
 const second = reconcileCalendar({

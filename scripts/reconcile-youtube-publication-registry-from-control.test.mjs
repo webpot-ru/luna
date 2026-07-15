@@ -11,7 +11,6 @@ const polyglotPath = path.join(root, "polyglot.json");
 const channelsPath = path.join(root, "channels.json");
 const progressPath = path.join(root, "progress.json");
 const report1Path = path.join(root, "deck1.json");
-const report2Path = path.join(root, "deck2.json");
 
 const liveOrdinary = {
   videoType: "ordinary",
@@ -60,12 +59,10 @@ fs.writeFileSync(progressPath, `${JSON.stringify({ items: [
   { polyglotKey: "polyglot:deck1:MY:global_europe_core:test", youtubeVideoId: "polyglot-deleted", status: "published_uploaded_thumbnail_auto" },
 ] }, null, 2)}\n`);
 fs.writeFileSync(report1Path, `${JSON.stringify({ summary: completeSummary, publications: [liveOrdinary, livePolyglot], deletedTombstones: [deletedTombstone], blockers: [] }, null, 2)}\n`);
-fs.writeFileSync(report2Path, `${JSON.stringify({ summary: completeSummary, publications: [], blockers: [] }, null, 2)}\n`);
 
 const args = [
   "scripts/reconcile-youtube-publication-registry-from-control.mjs",
   `--report=${report1Path}`,
-  `--report=${report2Path}`,
   `--ordinary-registry=${ordinaryPath}`,
   `--polyglot-registry=${polyglotPath}`,
   `--polyglot-progress=${progressPath}`,
@@ -79,7 +76,7 @@ assert.equal(fs.readFileSync(ordinaryPath, "utf8"), beforeDryRun);
 const incompletePath = path.join(root, "incomplete.json");
 fs.writeFileSync(incompletePath, `${JSON.stringify({ summary: { ...completeSummary, paginationComplete: false }, publications: [], blockers: [] }, null, 2)}\n`);
 const incomplete = spawnSync(process.execPath, [
-  ...args.filter((arg) => !arg.startsWith(`--report=${report2Path}`)),
+  ...args.filter((arg) => !arg.startsWith(`--report=${report1Path}`)),
   `--report=${incompletePath}`,
 ], { cwd: process.cwd(), encoding: "utf8" });
 assert.notEqual(incomplete.status, 0);

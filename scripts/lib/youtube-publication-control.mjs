@@ -120,6 +120,7 @@ function isActive(row = {}) {
 
 function isActiveReservation(row = {}) {
   if (!row.channelKey || !row.publishAt) return false;
+  if (row.cancelledAt || row.deletedAt || row.supersededAt) return false;
   const status = String(row.status || row.publicationStatus || "").toLowerCase();
   return !["failed", "deleted", "superseded", "cancel"].some((token) => status.includes(token));
 }
