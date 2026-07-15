@@ -18578,7 +18578,9 @@
       "previousStatus": "reserved",
       "youtubeVideoId": "qzukw_sfpUQ",
       "youtubePlaylistId": "PLPjZfdTQGWps",
-      "playlistItemId": "UExQalpmZFRRR1dwcy41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExQalpmZFRRR1dwcy41NkI0NEY2RDEwNTU3Q0M2",
+      "videoType": "ordinary",
+      "targetLangs": []
     },
     {
       "schemaVersion": 1,
@@ -18615,7 +18617,9 @@
       "previousStatus": "reserved",
       "youtubeVideoId": "4b65UBRNnAQ",
       "youtubePlaylistId": "PLLfjHH-Tg4us",
-      "playlistItemId": "UExMZmpISC1UZzR1cy41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExMZmpISC1UZzR1cy41NkI0NEY2RDEwNTU3Q0M2",
+      "videoType": "ordinary",
+      "targetLangs": []
     },
     {
       "schemaVersion": 1,
@@ -18652,7 +18656,9 @@
       "previousStatus": "reserved",
       "youtubeVideoId": "LOo85-LKVc4",
       "youtubePlaylistId": "PLPSRbX-Bb-Gg",
-      "playlistItemId": "UExQU1JiWC1CYi1HZy41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExQU1JiWC1CYi1HZy41NkI0NEY2RDEwNTU3Q0M2",
+      "videoType": "ordinary",
+      "targetLangs": []
     },
     {
       "schemaVersion": 1,
@@ -18726,7 +18732,9 @@
       "previousStatus": "reserved",
       "youtubeVideoId": "aUxrajhuCx8",
       "youtubePlaylistId": "PLBJP8efJ2p_w",
-      "playlistItemId": "UExCSlA4ZWZKMnBfdy41NkI0NEY2RDEwNTU3Q0M2"
+      "playlistItemId": "UExCSlA4ZWZKMnBfdy41NkI0NEY2RDEwNTU3Q0M2",
+      "videoType": "ordinary",
+      "targetLangs": []
     },
     {
       "schemaVersion": 1,
@@ -240979,6 +240987,62 @@
       "youtubeVideoId": "ZPBpXkLYHgY",
       "youtubePlaylistId": "PLNli28zr54B0",
       "playlistItemId": "UExObGkyOHpyNTRCMC41NkI0NEY2RDEwNTU3Q0M2"
+    },
+    {
+      "schemaVersion": 1,
+      "videoType": "ordinary",
+      "polyglotKey": "",
+      "bundleKey": "",
+      "bundleLabel": "",
+      "contentScope": "",
+      "targetLangs": [],
+      "targetLangsCsv": "",
+      "targetLangsHash": "",
+      "campaignId": "",
+      "campaignManifestHash": "",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "DA",
+      "targetLang": "NO",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "publishAt": "2026-07-16T18:30:00.000Z",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-07-16",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "localDayOffset": 0,
+      "slotOrdinal": 4,
+      "status": "reserved",
+      "source": "plan-youtube-publish-schedule",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_no_da/youtube_metadata.json",
+      "title": "Norsk A1 ordforråd: Køkkenudstyr for begyndere | 50 ord",
+      "playlist_key": "DA__NO__ordinary-vocabulary__a1-everyday",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T18:30:00.000Z"
+        }
+      ],
+      "githubRunId": "29428606226",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29428606226",
+      "createdAt": "2026-07-15T15:36:09.829Z",
+      "updatedAt": "2026-07-15T15:36:09.829Z",
+      "youtubeVideoId": "hNsWiMCmpZw",
+      "youtubePlaylistId": "PLKiJVolUHpk0",
+      "playlistItemId": "UExLaUpWb2xVSHBrMC41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
