@@ -11,6 +11,14 @@
 - Если файл нужно убрать, не удалять его напрямую. Перемещать только в `Trash/<timestamp>/<original-relative-path>` через `scripts/move-to-trash.sh`.
 - Никогда не очищать `Trash`.
 
+## Неперебиваемое правило Polyglot
+
+- `longVideoUploadAllowed=true` в `config/youtube-channels.json` означает full Polyglot.
+- Для каждого канала с `longVideoUploadAllowed=false` или неизвестным значением обязательно планировать и публиковать один `short_unverified` Polyglot, а не исключать канал и не ждать Advanced features. Лимит — динамически измеренный ролик не длиннее `895` секунд (`14:55`).
+- `customThumbnailUploadAllowed` не влияет на это решение: `false` означает automatic YouTube thumbnail, а не отсутствие видео.
+- Short не закрывает будущий full slot. После подтверждения long-video capability full допускается только через отдельный exact replacement plan; active short/full пара на одном channel + bundle запрещена.
+- Перед любым Polyglot preflight явно сверять это правило с `docs/youtube-publication-campaigns.md` и не утверждать, что unverified каналы «заблокированы» или их нужно пропустить.
+
 ## Обязательный порядок перед работой
 
 Перед любой нетривиальной задачей:
