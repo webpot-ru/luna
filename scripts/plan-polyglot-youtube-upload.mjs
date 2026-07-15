@@ -57,6 +57,8 @@ function parseArgs(argv) {
     else if (arg === "--require-ai-metadata") options.requireAiMetadata = true;
     else if (arg === "--allow-auto-thumbnail-fallback") options.allowAutoThumbnailFallback = true;
     else if (arg === "--allow-missing-video") options.allowMissingVideo = true;
+    else if (arg === "--allow-short-unverified") options.allowShortUnverified = true;
+    else if (arg === "--max-duration-seconds" || arg.startsWith("--max-duration-seconds=")) { readValue(); /* consumed, not used here */ }
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else if (arg === "--metadata" || arg.startsWith("--metadata=")) options.inputs.push(readValue());
