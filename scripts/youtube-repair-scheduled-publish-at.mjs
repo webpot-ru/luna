@@ -10,6 +10,9 @@ import {
 const DEFAULT_PLAN_PATH = "config/youtube-schedule-repair-plans/deck1-polyglot-calendar-conflicts-20260715.json";
 const DEFAULT_REPORT_PATH = "outputs/youtube-schedule-repair-report.json";
 const DEFAULT_LEDGER_PATH = "outputs/youtube-schedule-repair-ledger.jsonl";
+const POST_UPDATE_READBACK_ATTEMPTS = 3;
+const POST_UPDATE_FIRST_DELAY_MS = 15_000;
+const POST_UPDATE_RETRY_DELAY_MS = 10_000;
 
 function fail(message) {
   throw new Error(message);
@@ -74,6 +77,40 @@ function sameTimestamp(left, right) {
   return Number.isFinite(leftMilliseconds)
     && Number.isFinite(rightMilliseconds)
     && Math.abs(leftMilliseconds - rightMilliseconds) <= 1000;
+}
+
+function sleep(milliseconds) {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+export function hasExpectedSchedule(video, publishAt) {
+  return video?.status?.privacyStatus === "private"
+    && sameTimestamp(video.status?.publishAt, publishAt);
+}
+
+export async function readScheduleUntilExpected({
+  read,
+  publishAt,
+  attempts = POST_UPDATE_READBACK_ATTEMPTS,
+  firstDelayMs = POST_UPDATE_FIRST_DELAY_MS,
+  retryDelayMs = POST_UPDATE_RETRY_DELAY_MS,
+  wait = sleep,
+}) {
+  if (!Number.isInteger(attempts) || attempts < 1) fail("Schedule readback attempts must be a positive integer.");
+  let after = null;
+  const delays = [];
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const delayMs = attempt === 1 ? firstDelayMs : retryDelayMs;
+    if (delayMs > 0) {
+      await wait(delayMs);
+      delays.push(delayMs);
+    }
+    after = await read();
+    if (hasExpectedSchedule(after, publishAt)) {
+      return { after, attempts: attempt, matched: true, delays };
+    }
+  }
+  return { after, attempts, matched: false, delays };
 }
 
 function normalizeTarget(target, index) {
@@ -248,6 +285,10 @@ export async function runScheduleRepair({ plan, channelRegistry, clientFile, app
   for (const target of plan.targets) {
     const channel = findChannelForSupport(channelRegistry.channels, target.supportLang);
     const base = planRow({ plan, target, channel, apply });
+    let before = null;
+    let updateResponse = null;
+    let after = null;
+    let postUpdateReadback = null;
     try {
       if (stopped) {
         results.push({ ...base, status: "not_attempted_after_prior_failure" });
@@ -272,28 +313,40 @@ export async function runScheduleRepair({ plan, channelRegistry, clientFile, app
       if (!authorizedChannels.has(channel.key)) {
         authorizedChannels.set(channel.key, await readAuthorizedChannel({ accessToken, expectedChannelId: channel.channelId }));
       }
-      const before = await readVideo({ accessToken, videoId: target.youtubeVideoId });
+      before = await readVideo({ accessToken, videoId: target.youtubeVideoId });
       if (before.snippet?.channelId !== channel.channelId) {
         fail(`Video channel mismatch: expected ${channel.channelId}, got ${before.snippet?.channelId || "(missing)"}.`);
       }
       if (before.status?.privacyStatus !== "private") {
         fail(`Video privacy mismatch: expected private, got ${before.status?.privacyStatus || "(missing)"}.`);
       }
-      if (sameTimestamp(before.status?.publishAt, target.publishAt)) {
+      if (hasExpectedSchedule(before, target.publishAt)) {
         results.push({ ...base, status: "already_moved", authorizedChannel: authorizedChannels.get(channel.key), before, after: before });
         continue;
       }
       if (!sameTimestamp(before.status?.publishAt, target.expectedPublishAt)) {
         fail(`Video publishAt mismatch: expected ${target.expectedPublishAt}, got ${before.status?.publishAt || "(missing)"}.`);
       }
-      const updateResponse = await updateSchedule({ accessToken, video: before, publishAt: target.publishAt });
-      const after = await readVideo({ accessToken, videoId: target.youtubeVideoId });
-      if (after.status?.privacyStatus !== "private" || !sameTimestamp(after.status?.publishAt, target.publishAt)) {
+      updateResponse = await updateSchedule({ accessToken, video: before, publishAt: target.publishAt });
+      postUpdateReadback = await readScheduleUntilExpected({
+        read: () => readVideo({ accessToken, videoId: target.youtubeVideoId }),
+        publishAt: target.publishAt,
+      });
+      after = postUpdateReadback.after;
+      if (!postUpdateReadback.matched) {
         fail(`Schedule readback mismatch: expected private at ${target.publishAt}, got ${after.status?.privacyStatus || "(missing)"} at ${after.status?.publishAt || "(missing)"}.`);
       }
-      results.push({ ...base, status: "schedule_moved", authorizedChannel: authorizedChannels.get(channel.key), before, updateResponse, after });
+      results.push({ ...base, status: "schedule_moved", authorizedChannel: authorizedChannels.get(channel.key), before, updateResponse, postUpdateReadback, after });
     } catch (error) {
-      results.push({ ...base, status: "failed", error: error.message });
+      results.push({
+        ...base,
+        status: "failed",
+        error: error.message,
+        ...(before ? { before } : {}),
+        ...(updateResponse ? { updateResponse } : {}),
+        ...(postUpdateReadback ? { postUpdateReadback } : {}),
+        ...(after ? { after } : {}),
+      });
       stopped = true;
     }
   }
