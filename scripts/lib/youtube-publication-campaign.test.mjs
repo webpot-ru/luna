@@ -102,6 +102,19 @@ assert(first.assignments.filter((row) => row.videoType === "polyglot").every((ro
 )), "unverified channels must claim an explicit <=14:55 short Polyglot product");
 assert(first.assignments.every((row) => row.playlist.state === "verified_absent" && row.playlist.createAllowed));
 
+const subsetSupports = ["EN", "RU"];
+const subsetDiscovery = readJson(paths.playlistDiscoveryPath);
+subsetDiscovery.channels = subsetDiscovery.channels.filter((channel) => subsetSupports.includes(channel.supportLang));
+subsetDiscovery.summary.supportCount = subsetSupports.length;
+const subsetPlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: subsetSupports.join(","),
+  playlistDiscoveryPath: writeJson("playlist-discovery-subset.json", subsetDiscovery),
+});
+assert.equal(subsetPlan.summary.applyReady, true);
+assert.equal(subsetPlan.summary.supportCount, subsetSupports.length);
+assert.equal(subsetPlan.summary.assignmentCount, 12);
+
 const crossScopeSnapshot = readJson(paths.snapshotPath);
 const crossScopeDeck = crossScopeSnapshot.decks.find((deck) => deck.setId === "home_kitchen_cooking_actions_a1_a2");
 crossScopeDeck.publications.push({
