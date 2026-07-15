@@ -241470,6 +241470,53 @@
       ],
       "updatedAt": "2026-07-15T16:20:49.951Z",
       "createdAt": "2026-07-15T16:20:49.951Z"
+    },
+    {
+      "schemaVersion": 1,
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "PT-BR",
+      "targetLang": "ES,FR,IT,EN",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "publishAt": "2026-07-16T19:30:00.000Z",
+      "timeZone": "Europe/Lisbon",
+      "localDate": "2026-07-16",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "youtubeVideoId": "kd1j2DAi30s",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T19:30:00.000Z"
+        }
+      ],
+      "updatedAt": "2026-07-15T16:38:13.000Z",
+      "bundleKey": "",
+      "contentScope": "full",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "EN"
+      ],
+      "targetLangsCsv": "ES,FR,IT,EN",
+      "createdAt": "2026-07-15T16:38:13.000Z"
     }
   ]
 }
