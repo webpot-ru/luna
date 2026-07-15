@@ -113,7 +113,7 @@ function replaceByVideoId(rows, replacement) {
 
 function main() {
   const options = parseArgs(process.argv.slice(2));
-  if (options.reports.length !== 2) throw new Error(`Exactly two all-route deck reports are required; received ${options.reports.length}.`);
+  if (options.reports.length < 1) throw new Error("At least one complete all-route deck report is required.");
   const reports = options.reports.map(readJson);
   for (const report of reports) {
     if (report.summary?.complete !== true || report.summary?.paginationComplete !== true || report.summary?.videoStatusReadbackComplete !== true) {
