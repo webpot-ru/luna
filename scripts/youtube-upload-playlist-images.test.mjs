@@ -68,4 +68,32 @@ assert.throws(() => selectCandidates({
   skipUploaded: false,
 }), /Playlist id mismatch/);
 
+const polyglotRegistryPath = "config/youtube-polyglot-playlists.json";
+const polyglotRegistry = {
+  playlists: [{
+    playlist_key: "POLYGLOT__UZ__global-europe-core__test",
+    youtube_playlist_id: "playlist-polyglot",
+  }],
+};
+const polyglotSelected = selectCandidates({
+  manifest: {
+    records: [{
+      playlistKey: "POLYGLOT__UZ__global-europe-core__test",
+      channelKey: "uz",
+      registryPath: polyglotRegistryPath,
+      playlistId: "playlist-polyglot",
+      coverPath: "data/polyglot.jpg",
+    }],
+  },
+  supports: ["uz"],
+  playlistKeys: [],
+  limitPerChannel: 0,
+  playlistRegistry,
+  playlistRegistries: new Map([[polyglotRegistryPath, polyglotRegistry]]),
+  skipUploaded: false,
+});
+assert.equal(polyglotSelected.length, 1);
+assert.equal(polyglotSelected[0].registryPath, polyglotRegistryPath);
+assert.equal(polyglotSelected[0].playlistIdSource, "durable_registry");
+
 console.log("youtube playlist image selection tests passed");

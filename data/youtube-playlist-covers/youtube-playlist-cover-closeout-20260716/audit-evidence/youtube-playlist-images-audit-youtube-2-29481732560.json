@@ -1,0 +1,3787 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-16T07:58:14.180Z",
+  "completedAt": "2026-07-16T07:58:22.817Z",
+  "mode": "read_only_playlist_images_audit",
+  "filters": {
+    "supports": [
+      "VI",
+      "TH"
+    ]
+  },
+  "policy": {
+    "youtubeWrites": 0,
+    "retries": 0,
+    "endpoint": "playlistImages.list"
+  },
+  "summary": {
+    "physicalPlaylists": 94,
+    "installed": 92,
+    "absent": 2,
+    "unproven": 0,
+    "noPlaylistId": 0,
+    "errors": 0,
+    "playlistImagesListCalls": 94,
+    "channelIdentityCalls": 2,
+    "durableInstalled": 92,
+    "youtubeWrites": 0,
+    "plannedPlaylistImagesListCalls": 94,
+    "plannedChannelIdentityCalls": 2,
+    "plannedQuotaUnits": 96,
+    "byChannel": [
+      {
+        "channelKey": "th",
+        "route": "youtube-2",
+        "total": 47,
+        "installed": 46,
+        "absent": 1,
+        "unproven": 0,
+        "noPlaylistId": 0,
+        "errors": 0,
+        "durableInstalled": 46
+      },
+      {
+        "channelKey": "vi",
+        "route": "youtube-2",
+        "total": 47,
+        "installed": 46,
+        "absent": 1,
+        "unproven": 0,
+        "noPlaylistId": 0,
+        "errors": 0,
+        "durableInstalled": 46
+      }
+    ],
+    "estimatedQuotaUnits": 96
+  },
+  "rows": [
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__BN__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfM1-MSe4SkzEnoyMrI9S0oL",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาเบงกาลีพื้นฐาน | คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T03:23:21.613Z",
+        "imageId": "PL7CNPPbAeUfM1-MSe4SkzEnoyMrI9S0oL.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/by-channel/th/TH_BN_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__BN__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfM1-MSe4SkzEnoyMrI9S0oL.1",
+          "playlistId": "PL7CNPPbAeUfM1-MSe4SkzEnoyMrI9S0oL",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:14.665Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__ES-419__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfM1wWu43_MiBKqrJPmcSSOq",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาสเปน A1: ฝึกคำศัพท์พื้นฐานสำหรับผู้เริ่มต้น | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:08:26.273Z",
+        "imageId": "PL7CNPPbAeUfM1wWu43_MiBKqrJPmcSSOq.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/by-channel/th/TH_ES-419_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__ES-419__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfM1wWu43_MiBKqrJPmcSSOq.1",
+          "playlistId": "PL7CNPPbAeUfM1wWu43_MiBKqrJPmcSSOq",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:14.738Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__DA__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfMhhvOylYkIwgr5euGf8SG4",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาเดนมาร์กพื้นฐาน ระดับ A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T03:23:32.242Z",
+        "imageId": "PL7CNPPbAeUfMhhvOylYkIwgr5euGf8SG4.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/by-channel/th/TH_DA_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__DA__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfMhhvOylYkIwgr5euGf8SG4.1",
+          "playlistId": "PL7CNPPbAeUfMhhvOylYkIwgr5euGf8SG4",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:14.816Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__EN__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfMhP41okDiYL8vbatwT1B0r",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "คำศัพท์ภาษาอังกฤษสำหรับผู้เริ่มต้น | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:08:11.008Z",
+        "imageId": "PL7CNPPbAeUfMhP41okDiYL8vbatwT1B0r.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/by-channel/th/TH_EN_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__EN__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfMhP41okDiYL8vbatwT1B0r.1",
+          "playlistId": "PL7CNPPbAeUfMhP41okDiYL8vbatwT1B0r",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:14.892Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__EN-GB__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfMnskqj1bwEo3q4VwG1CxtP",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "คำศัพท์ภาษาอังกฤษ (UK) สำหรับผู้เริ่มต้น | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:08:15.966Z",
+        "imageId": "PL7CNPPbAeUfMnskqj1bwEo3q4VwG1CxtP.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/by-channel/th/TH_EN-GB_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__EN-GB__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfMnskqj1bwEo3q4VwG1CxtP.1",
+          "playlistId": "PL7CNPPbAeUfMnskqj1bwEo3q4VwG1CxtP",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:14.969Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__AZ__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfMULp7DBYK2HcNvxD3zGKG-",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาอาเซอร์ไบจานระดับเริ่มต้น A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T03:23:11.273Z",
+        "imageId": "PL7CNPPbAeUfMULp7DBYK2HcNvxD3zGKG-.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/by-channel/th/TH_AZ_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__AZ__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfMULp7DBYK2HcNvxD3zGKG-.1",
+          "playlistId": "PL7CNPPbAeUfMULp7DBYK2HcNvxD3zGKG-",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:15.044Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__ET__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfMzcGTgo5_B_nsGE1P3mONc",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาเอสโตเนียพื้นฐาน | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:27.448Z",
+        "imageId": "PL7CNPPbAeUfMzcGTgo5_B_nsGE1P3mONc.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/th/TH_ET_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__ET__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfMzcGTgo5_B_nsGE1P3mONc.1",
+          "playlistId": "PL7CNPPbAeUfMzcGTgo5_B_nsGE1P3mONc",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:15.124Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__RU__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfN0i3km9HKuMCSKHaJZfSL_",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนคำศัพท์ภาษารัสเซียพื้นฐาน A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:19:08.638Z",
+        "imageId": "PL7CNPPbAeUfN0i3km9HKuMCSKHaJZfSL_.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/th/TH_RU_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__RU__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfN0i3km9HKuMCSKHaJZfSL_.1",
+          "playlistId": "PL7CNPPbAeUfN0i3km9HKuMCSKHaJZfSL_",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:15.202Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__FI__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfNjrBsPmmKZ3Qm9glXe4wi8",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาฟินแลนด์พื้นฐาน A1 | คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:31.975Z",
+        "imageId": "PL7CNPPbAeUfNjrBsPmmKZ3Qm9glXe4wi8.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/th/TH_FI_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__FI__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfNjrBsPmmKZ3Qm9glXe4wi8.1",
+          "playlistId": "PL7CNPPbAeUfNjrBsPmmKZ3Qm9glXe4wi8",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:15.282Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__FR__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfO54A_zpZAfD4l00gUewPpP",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนคำศัพท์ภาษาฝรั่งเศสพื้นฐาน A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:36.549Z",
+        "imageId": "PL7CNPPbAeUfO54A_zpZAfD4l00gUewPpP.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/th/TH_FR_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__FR__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfO54A_zpZAfD4l00gUewPpP.1",
+          "playlistId": "PL7CNPPbAeUfO54A_zpZAfD4l00gUewPpP",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:15.359Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__IT__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfOcAlpk4B8h8m8rJBm5a_ju",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาอิตาลีระดับเริ่มต้น A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:12:16.013Z",
+        "imageId": "PL7CNPPbAeUfOcAlpk4B8h8m8rJBm5a_ju.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/by-channel/th/TH_IT_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__IT__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfOcAlpk4B8h8m8rJBm5a_ju.1",
+          "playlistId": "PL7CNPPbAeUfOcAlpk4B8h8m8rJBm5a_ju",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:15.492Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__PT__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfOD7wcA_9M3WEYZXRd_XZUF",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาโปรตุเกสพื้นฐาน A1 | คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:19:03.759Z",
+        "imageId": "PL7CNPPbAeUfOD7wcA_9M3WEYZXRd_XZUF.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/th/TH_PT_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__PT__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfOD7wcA_9M3WEYZXRd_XZUF.1",
+          "playlistId": "PL7CNPPbAeUfOD7wcA_9M3WEYZXRd_XZUF",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:15.608Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__ES__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfOMWIbPENUeCOT35anuAf1M",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาสเปนพื้นฐาน A1 คำศัพท์และการออกเสียง | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:08:21.155Z",
+        "imageId": "PL7CNPPbAeUfOMWIbPENUeCOT35anuAf1M.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/by-channel/th/TH_ES_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__ES__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfOMWIbPENUeCOT35anuAf1M.1",
+          "playlistId": "PL7CNPPbAeUfOMWIbPENUeCOT35anuAf1M",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:15.684Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__DE__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfOsA0wHwnHbeJqHP4zroalP",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนคำศัพท์ภาษาเยอรมัน A1",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:08:04.404Z",
+        "imageId": "PL7CNPPbAeUfOsA0wHwnHbeJqHP4zroalP.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/by-channel/th/TH_DE_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__DE__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfOsA0wHwnHbeJqHP4zroalP.1",
+          "playlistId": "PL7CNPPbAeUfOsA0wHwnHbeJqHP4zroalP",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:15.752Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__BG__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfPG2dXbLVlCZoW066Rq3f3s",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาบัลแกเรียระดับเริ่มต้น A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T03:23:16.514Z",
+        "imageId": "PL7CNPPbAeUfPG2dXbLVlCZoW066Rq3f3s.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/by-channel/th/TH_BG_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__BG__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfPG2dXbLVlCZoW066Rq3f3s.1",
+          "playlistId": "PL7CNPPbAeUfPG2dXbLVlCZoW066Rq3f3s",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:15.828Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__CS__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PL7CNPPbAeUfPxAkWNliNWcuTTLDpxmMsH",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาเช็กระดับเริ่มต้น A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T03:23:26.647Z",
+        "imageId": "PL7CNPPbAeUfPxAkWNliNWcuTTLDpxmMsH.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/by-channel/th/TH_CS_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__CS__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PL7CNPPbAeUfPxAkWNliNWcuTTLDpxmMsH.1",
+          "playlistId": "PL7CNPPbAeUfPxAkWNliNWcuTTLDpxmMsH",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:15.904Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__MS__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLbbHAnwT_xN4",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "Malay A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:32:30.364Z",
+        "imageId": "PLbbHAnwT_xN4.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/th/TH_MS_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__MS__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLbbHAnwT_xN4.1",
+          "playlistId": "PLbbHAnwT_xN4",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:15.967Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__TL__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLBr1EQp6wjKc",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "ฟิลิปปินส์ A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:19:29.621Z",
+        "imageId": "PLBr1EQp6wjKc.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/th/TH_TL_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__TL__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLBr1EQp6wjKc.1",
+          "playlistId": "PLBr1EQp6wjKc",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:16.051Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__ML__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLByNTq63bSiU",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "Malayalam A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:32:25.195Z",
+        "imageId": "PLByNTq63bSiU.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/th/TH_ML_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__ML__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLByNTq63bSiU.1",
+          "playlistId": "PLByNTq63bSiU",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:16.119Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__KO__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLCYwIsUW-kg0",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนคำศัพท์ภาษาเกาหลีพื้นฐาน A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:32:04.562Z",
+        "imageId": "PLCYwIsUW-kg0.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/th/TH_KO_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__KO__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLCYwIsUW-kg0.1",
+          "playlistId": "PLCYwIsUW-kg0",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:16.198Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__MY__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLDiEJ2yVTTAk",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "Burmese A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:32:35.516Z",
+        "imageId": "PLDiEJ2yVTTAk.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/th/TH_MY_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__MY__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLDiEJ2yVTTAk.1",
+          "playlistId": "PLDiEJ2yVTTAk",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:16.265Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__NE__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLDrQuXzXTQzg",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "Nepali A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:32:45.448Z",
+        "imageId": "PLDrQuXzXTQzg.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/th/TH_NE_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__NE__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLDrQuXzXTQzg.1",
+          "playlistId": "PLDrQuXzXTQzg",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:16.386Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__IS__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLeEkwdA99QVw",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาไอซ์แลนด์ระดับเริ่มต้น A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:12:11.216Z",
+        "imageId": "PLeEkwdA99QVw.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/by-channel/th/TH_IS_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__IS__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLeEkwdA99QVw.1",
+          "playlistId": "PLeEkwdA99QVw",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:16.457Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__JA__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLEOe2GSXtxzs",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "คำศัพท์ภาษาญี่ปุ่นพื้นฐาน A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:40:21.127Z",
+        "imageId": "PLEOe2GSXtxzs.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/by-channel/th/TH_JA_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__JA__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLEOe2GSXtxzs.1",
+          "playlistId": "PLEOe2GSXtxzs",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:16.529Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__VI__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLEtAKG81Nq38",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เวียดนาม A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:19:48.141Z",
+        "imageId": "PLEtAKG81Nq38.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/th/TH_VI_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__VI__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLEtAKG81Nq38.1",
+          "playlistId": "PLEtAKG81Nq38",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:16.608Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__TE__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLEwEmR8e6W90",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เตลูกู A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:19:24.741Z",
+        "imageId": "PLEwEmR8e6W90.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/th/TH_TE_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__TE__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLEwEmR8e6W90.1",
+          "playlistId": "PLEwEmR8e6W90",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:16.696Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__KN__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLEyARoeOEW5M",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษากันนาดา: คำศัพท์พื้นฐาน A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:40:41.367Z",
+        "imageId": "PLEyARoeOEW5M.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/by-channel/th/TH_KN_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__KN__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLEyARoeOEW5M.1",
+          "playlistId": "PLEyARoeOEW5M",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:16.778Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__PL__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLfg-X0rwc34E",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "Polish A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:18:57.422Z",
+        "imageId": "PLfg-X0rwc34E.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/th/TH_PL_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__PL__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLfg-X0rwc34E.1",
+          "playlistId": "PLfg-X0rwc34E",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:16.894Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__NL__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLfhRqqG4g2as",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "Dutch A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:32:51.212Z",
+        "imageId": "PLfhRqqG4g2as.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/th/TH_NL_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__NL__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLfhRqqG4g2as.1",
+          "playlistId": "PLfhRqqG4g2as",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:16.970Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__HY__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLGBm7PxVlCe8",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "Armenian A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:12:02.281Z",
+        "imageId": "PLGBm7PxVlCe8.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/by-channel/th/TH_HY_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__HY__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLGBm7PxVlCe8.1",
+          "playlistId": "PLGBm7PxVlCe8",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:17.054Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__KM__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLK-6mmEoEZL0",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาเขมรพื้นฐาน คำศัพท์ภาษาเขมร A1",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:40:37.082Z",
+        "imageId": "PLK-6mmEoEZL0.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/by-channel/th/TH_KM_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__KM__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLK-6mmEoEZL0.1",
+          "playlistId": "PLK-6mmEoEZL0",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:17.125Z"
+    },
+    {
+      "registryPath": "config/youtube-polyglot-playlists.json",
+      "videoType": "polyglot",
+      "playlistKey": "POLYGLOT__TH__global-europe-core__7a4233775927",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLL63dojJHnas",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "โพลีกรอต: อังกฤษ สเปน ฝรั่งเศส เยอรมัน",
+      "durablePlaylistImage": null,
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-polyglot-playlists.json",
+          "playlistKey": "POLYGLOT__TH__global-europe-core__7a4233775927",
+          "videoType": "polyglot"
+        }
+      ],
+      "state": "absent",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [],
+      "readbackAt": "2026-07-16T07:58:17.207Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__ID__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLMa9chvpb_Ss",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "คำศัพท์ภาษาอินโดนีเซียพื้นฐาน A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:12:06.593Z",
+        "imageId": "PLMa9chvpb_Ss.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/by-channel/th/TH_ID_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__ID__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLMa9chvpb_Ss.1",
+          "playlistId": "PLMa9chvpb_Ss",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:17.271Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__HI__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLOwVHulGa1Lo",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาฮินดีพื้นฐาน คำศัพท์ A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:41.342Z",
+        "imageId": "PLOwVHulGa1Lo.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/th/TH_HI_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__HI__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLOwVHulGa1Lo.1",
+          "playlistId": "PLOwVHulGa1Lo",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:17.358Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__NB__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLQzdXawy31q8",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "Norwegian A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:32:40.241Z",
+        "imageId": "PLQzdXawy31q8.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/th/TH_NB_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__NB__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLQzdXawy31q8.1",
+          "playlistId": "PLQzdXawy31q8",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:17.492Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__HU__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLRberj4kgvgQ",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาฮังการี: คำศัพท์พื้นฐาน A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:11:55.068Z",
+        "imageId": "PLRberj4kgvgQ.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/by-channel/th/TH_HU_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__HU__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLRberj4kgvgQ.1",
+          "playlistId": "PLRberj4kgvgQ",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:17.559Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__LV__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLRLLImbnwMMo",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "Latvian A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:32:19.769Z",
+        "imageId": "PLRLLImbnwMMo.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/th/TH_LV_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__LV__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLRLLImbnwMMo.1",
+          "playlistId": "PLRLLImbnwMMo",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:17.621Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__KK__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLS-TqSqoY0Vw",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาคาซัคพื้นฐาน A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:40:32.649Z",
+        "imageId": "PLS-TqSqoY0Vw.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/by-channel/th/TH_KK_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__KK__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLS-TqSqoY0Vw.1",
+          "playlistId": "PLS-TqSqoY0Vw",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:17.712Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__UZ__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLS8xv5PMsqw4",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "อุซเบก A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:19:39.936Z",
+        "imageId": "PLS8xv5PMsqw4.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/th/TH_UZ_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__UZ__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLS8xv5PMsqw4.1",
+          "playlistId": "PLS8xv5PMsqw4",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:17.834Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__ZH__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLSSvG0o64kjA",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "จีน A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T10:08:19.983Z",
+        "imageId": "PLSSvG0o64kjA.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-eighth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-eighth-ten-per-channel/by-channel/th/TH_ZH_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__ZH__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLSSvG0o64kjA.1",
+          "playlistId": "PLSSvG0o64kjA",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:17.908Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__LO__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLSYhjliP-qmE",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาลาวพื้นฐาน A1 | คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:32:09.596Z",
+        "imageId": "PLSYhjliP-qmE.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/th/TH_LO_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__LO__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLSYhjliP-qmE.1",
+          "playlistId": "PLSYhjliP-qmE",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:18.019Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__TR__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLV2i3lQ27ioM",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "ตุรกี A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:19:34.773Z",
+        "imageId": "PLV2i3lQ27ioM.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/th/TH_TR_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__TR__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLV2i3lQ27ioM.1",
+          "playlistId": "PLV2i3lQ27ioM",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:18.091Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__KA__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLWZncmbw_uFs",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "เรียนภาษาจอร์เจีย: คลังคำศัพท์สำหรับผู้เริ่มต้น | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:40:28.076Z",
+        "imageId": "PLWZncmbw_uFs.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/by-channel/th/TH_KA_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__KA__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLWZncmbw_uFs.1",
+          "playlistId": "PLWZncmbw_uFs",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:18.205Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__LT__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLXXaNvHpBpck",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "Lithuanian A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:32:14.510Z",
+        "imageId": "PLXXaNvHpBpck.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/th/TH_LT_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__LT__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLXXaNvHpBpck.1",
+          "playlistId": "PLXXaNvHpBpck",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:18.278Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__SW__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLZ6Cm48vfpjw",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "สวาฮีลี A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:19:14.509Z",
+        "imageId": "PLZ6Cm48vfpjw.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/th/TH_SW_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__SW__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLZ6Cm48vfpjw.1",
+          "playlistId": "PLZ6Cm48vfpjw",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:18.341Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__TA__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLZbIH5O_NXHo",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "ทมิฬ A1: คำศัพท์และการออกเสียง",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:19:19.578Z",
+        "imageId": "PLZbIH5O_NXHo.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/th/TH_TA_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__TA__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLZbIH5O_NXHo.1",
+          "playlistId": "PLZbIH5O_NXHo",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:18.406Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "TH__HR__ordinary-vocabulary__a1-everyday",
+      "channelKey": "th",
+      "supportLang": "TH",
+      "playlistId": "PLZXzcwRa55sU",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "title": "ภาษาโครเอเชีย A1: ฝึกคำศัพท์และการออกเสียง | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:45.928Z",
+        "imageId": "PLZXzcwRa55sU.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/th/TH_HR_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__HR__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLZXzcwRa55sU.1",
+          "playlistId": "PLZXzcwRa55sU",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:18.508Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__KN__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLAASLMlwd5EQ",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học tiếng Kannada cho người mới bắt đầu | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:41:03.894Z",
+        "imageId": "PLAASLMlwd5EQ.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/by-channel/vi/VI_KN_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__KN__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLAASLMlwd5EQ.1",
+          "playlistId": "PLAASLMlwd5EQ",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:18.868Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__JA__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLAgON6OgGPqs",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Từ vựng tiếng Nhật A1 cho người mới bắt đầu",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:40:45.710Z",
+        "imageId": "PLAgON6OgGPqs.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/by-channel/vi/VI_JA_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__JA__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLAgON6OgGPqs.1",
+          "playlistId": "PLAgON6OgGPqs",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:19.002Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__LT__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLAhiEIUxHLss",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Lithuanian A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:33:07.542Z",
+        "imageId": "PLAhiEIUxHLss.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/vi/VI_LT_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__LT__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLAhiEIUxHLss.1",
+          "playlistId": "PLAhiEIUxHLss",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:19.069Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__NE__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLBJwBpqNNRkw",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Nepali A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:33:40.518Z",
+        "imageId": "PLBJwBpqNNRkw.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/vi/VI_NE_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__NE__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLBJwBpqNNRkw.1",
+          "playlistId": "PLBJwBpqNNRkw",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:19.168Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__NL__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLcIVNKK04rec",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Dutch A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:33:45.997Z",
+        "imageId": "PLcIVNKK04rec.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/vi/VI_NL_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__NL__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLcIVNKK04rec.1",
+          "playlistId": "PLcIVNKK04rec",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:19.244Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__PL__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLcL4HHGvKtX0",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Polish A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:19:53.985Z",
+        "imageId": "PLcL4HHGvKtX0.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/vi/VI_PL_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__PL__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLcL4HHGvKtX0.1",
+          "playlistId": "PLcL4HHGvKtX0",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:19.320Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__ML__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLcpiwQOneXsI",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Malayalam A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:33:18.125Z",
+        "imageId": "PLcpiwQOneXsI.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/vi/VI_ML_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__ML__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLcpiwQOneXsI.1",
+          "playlistId": "PLcpiwQOneXsI",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:19.403Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__SW__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLDCGM5whQISE",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tiếng Swahili A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:20:08.870Z",
+        "imageId": "PLDCGM5whQISE.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/vi/VI_SW_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__SW__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLDCGM5whQISE.1",
+          "playlistId": "PLDCGM5whQISE",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:19.525Z"
+    },
+    {
+      "registryPath": "config/youtube-polyglot-playlists.json",
+      "videoType": "polyglot",
+      "playlistKey": "POLYGLOT__VI__global-europe-core__7a4233775927",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLE4eBoGwt9GM",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Polyglot: Tiếng Anh, Tiếng Tây Ban Nha, Tiếng Pháp, Tiếng Đức",
+      "durablePlaylistImage": null,
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-polyglot-playlists.json",
+          "playlistKey": "POLYGLOT__VI__global-europe-core__7a4233775927",
+          "videoType": "polyglot"
+        }
+      ],
+      "state": "absent",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [],
+      "readbackAt": "2026-07-16T07:58:19.632Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__ID__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLe5EOhL8I8Ow",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Từ vựng tiếng Indonesia cơ bản A1",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:12:28.997Z",
+        "imageId": "PLe5EOhL8I8Ow.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/by-channel/vi/VI_ID_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__ID__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLe5EOhL8I8Ow.1",
+          "playlistId": "PLe5EOhL8I8Ow",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:19.715Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__MY__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLEb6VYUx95J0",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Burmese A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:33:28.015Z",
+        "imageId": "PLEb6VYUx95J0.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/vi/VI_MY_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__MY__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLEb6VYUx95J0.1",
+          "playlistId": "PLEb6VYUx95J0",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:19.793Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__LV__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLECJkunKBtRs",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Latvian A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:33:12.724Z",
+        "imageId": "PLECJkunKBtRs.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/vi/VI_LV_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__LV__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLECJkunKBtRs.1",
+          "playlistId": "PLECJkunKBtRs",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:19.871Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__NB__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLEDAlS0TpoQw",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Norwegian A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:33:35.670Z",
+        "imageId": "PLEDAlS0TpoQw.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/vi/VI_NB_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__NB__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLEDAlS0TpoQw.1",
+          "playlistId": "PLEDAlS0TpoQw",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:19.998Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__HU__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLenoXXq9JprM",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học tiếng Hungary A1 - Từ vựng theo chủ đề",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:12:20.064Z",
+        "imageId": "PLenoXXq9JprM.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/by-channel/vi/VI_HU_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__HU__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLenoXXq9JprM.1",
+          "playlistId": "PLenoXXq9JprM",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:20.069Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__TL__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLFcp5iCYjKDE",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tiếng Philippines A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:20:28.864Z",
+        "imageId": "PLFcp5iCYjKDE.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/vi/VI_TL_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__TL__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLFcp5iCYjKDE.1",
+          "playlistId": "PLFcp5iCYjKDE",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:20.147Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__KA__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLfHgbfo9V6MI",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tự học tiếng Gruzia cho người mới bắt đầu | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:40:50.091Z",
+        "imageId": "PLfHgbfo9V6MI.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/by-channel/vi/VI_KA_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__KA__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLfHgbfo9V6MI.1",
+          "playlistId": "PLfHgbfo9V6MI",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:20.234Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__IS__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLFiioJEQwcEQ",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học tiếng Băng Đảo A1 | Từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:12:33.652Z",
+        "imageId": "PLFiioJEQwcEQ.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/by-channel/vi/VI_IS_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__IS__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLFiioJEQwcEQ.1",
+          "playlistId": "PLFiioJEQwcEQ",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:20.305Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__UZ__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLG_g7shLkiIY",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tiếng Uzbek A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:20:39.782Z",
+        "imageId": "PLG_g7shLkiIY.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/vi/VI_UZ_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__UZ__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLG_g7shLkiIY.1",
+          "playlistId": "PLG_g7shLkiIY",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:20.380Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__TE__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLGIohT9XOjhU",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tiếng Telugu A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:20:18.795Z",
+        "imageId": "PLGIohT9XOjhU.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/vi/VI_TE_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__TE__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLGIohT9XOjhU.1",
+          "playlistId": "PLGIohT9XOjhU",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:20.446Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__ZH__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLHbh0oTXPO30",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tiếng Trung A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T10:08:25.271Z",
+        "imageId": "PLHbh0oTXPO30.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-eighth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-eighth-ten-per-channel/by-channel/vi/VI_ZH_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__ZH__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLHbh0oTXPO30.1",
+          "playlistId": "PLHbh0oTXPO30",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:20.578Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__LO__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLLfugxQwmCnw",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học từ vựng tiếng Lào theo chủ đề | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:33:02.708Z",
+        "imageId": "PLLfugxQwmCnw.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/vi/VI_LO_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__LO__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLLfugxQwmCnw.1",
+          "playlistId": "PLLfugxQwmCnw",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:20.650Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__KK__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLLJAmFhsAsfE",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học tiếng Kazakh: Từ vựng A1 - FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:40:54.758Z",
+        "imageId": "PLLJAmFhsAsfE.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/by-channel/vi/VI_KK_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__KK__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLLJAmFhsAsfE.1",
+          "playlistId": "PLLJAmFhsAsfE",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:20.713Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__HI__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLNDjP38EccYk",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Từ vựng tiếng Hindi theo chủ đề | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:33:05.539Z",
+        "imageId": "PLNDjP38EccYk.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/vi/VI_HI_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__HI__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLNDjP38EccYk.1",
+          "playlistId": "PLNDjP38EccYk",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:20.798Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__KO__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLOD_DQwA9rkw",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học từ vựng tiếng Hàn A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:32:56.581Z",
+        "imageId": "PLOD_DQwA9rkw.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/vi/VI_KO_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__KO__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLOD_DQwA9rkw.1",
+          "playlistId": "PLOD_DQwA9rkw",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:20.880Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__EN-GB__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL_3xAEhsNdgJSJY2W-PLMVF",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học tiếng Anh Anh (UK) cơ bản qua thẻ từ vựng | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:08:41.576Z",
+        "imageId": "PLP-RVRjbJRL_3xAEhsNdgJSJY2W-PLMVF.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/by-channel/vi/VI_EN-GB_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__EN-GB__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL_3xAEhsNdgJSJY2W-PLMVF.1",
+          "playlistId": "PLP-RVRjbJRL_3xAEhsNdgJSJY2W-PLMVF",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:20.948Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__IT__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL_r7b1Tp1USci17mPe4iFYH",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Từ vựng tiếng Ý cơ bản A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:12:39.152Z",
+        "imageId": "PLP-RVRjbJRL_r7b1Tp1USci17mPe4iFYH.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/by-channel/vi/VI_IT_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__IT__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL_r7b1Tp1USci17mPe4iFYH.1",
+          "playlistId": "PLP-RVRjbJRL_r7b1Tp1USci17mPe4iFYH",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:21.051Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__EN__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL_Y7uDQR9eYKXCqBBTzI80D",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Từ vựng tiếng Anh cơ bản A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:08:36.187Z",
+        "imageId": "PLP-RVRjbJRL_Y7uDQR9eYKXCqBBTzI80D.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/by-channel/vi/VI_EN_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__EN__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL_Y7uDQR9eYKXCqBBTzI80D.1",
+          "playlistId": "PLP-RVRjbJRL_Y7uDQR9eYKXCqBBTzI80D",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:21.175Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__BN__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL-oQA8Y2tyw5NwiOkf1VLGq",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học tiếng Bengal cho người mới bắt đầu | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T03:23:49.900Z",
+        "imageId": "PLP-RVRjbJRL-oQA8Y2tyw5NwiOkf1VLGq.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/by-channel/vi/VI_BN_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__BN__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL-oQA8Y2tyw5NwiOkf1VLGq.1",
+          "playlistId": "PLP-RVRjbJRL-oQA8Y2tyw5NwiOkf1VLGq",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:21.245Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__BG__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL-zSA87rW3kPGjhXcMd8eKm",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tự học tiếng Bulgaria A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T03:23:45.106Z",
+        "imageId": "PLP-RVRjbJRL-zSA87rW3kPGjhXcMd8eKm.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/by-channel/vi/VI_BG_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__BG__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL-zSA87rW3kPGjhXcMd8eKm.1",
+          "playlistId": "PLP-RVRjbJRL-zSA87rW3kPGjhXcMd8eKm",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:21.313Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__FR__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL8AU7kFPbjkMoYZcXN3wJ-z",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học từ vựng tiếng Pháp A1 theo chủ đề | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:59.835Z",
+        "imageId": "PLP-RVRjbJRL8AU7kFPbjkMoYZcXN3wJ-z.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/vi/VI_FR_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__FR__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL8AU7kFPbjkMoYZcXN3wJ-z.1",
+          "playlistId": "PLP-RVRjbJRL8AU7kFPbjkMoYZcXN3wJ-z",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:21.381Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__AZ__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL8hdvPMPakhxcsLF2hC9_gw",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học tiếng Azerbaijan cơ bản cho người mới bắt đầu",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T03:23:40.053Z",
+        "imageId": "PLP-RVRjbJRL8hdvPMPakhxcsLF2hC9_gw.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/by-channel/vi/VI_AZ_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__AZ__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL8hdvPMPakhxcsLF2hC9_gw.1",
+          "playlistId": "PLP-RVRjbJRL8hdvPMPakhxcsLF2hC9_gw",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:21.491Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__PT__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL8Rad7Lz5HO9jjo2x8_8d0j",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học tiếng Bồ Đào Nha A1 - Từ vựng theo chủ đề",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:19:59.051Z",
+        "imageId": "PLP-RVRjbJRL8Rad7Lz5HO9jjo2x8_8d0j.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/vi/VI_PT_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__PT__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL8Rad7Lz5HO9jjo2x8_8d0j.1",
+          "playlistId": "PLP-RVRjbJRL8Rad7Lz5HO9jjo2x8_8d0j",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:21.567Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__CS__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL8VXbgLVYRZF4FEL_xG6RmM",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Từ vựng tiếng Séc A1 theo chủ đề | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T03:23:55.403Z",
+        "imageId": "PLP-RVRjbJRL8VXbgLVYRZF4FEL_xG6RmM.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/by-channel/vi/VI_CS_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__CS__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL8VXbgLVYRZF4FEL_xG6RmM.1",
+          "playlistId": "PLP-RVRjbJRL8VXbgLVYRZF4FEL_xG6RmM",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:21.621Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__ET__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL92avU5G28Ua6WZvGUBRzWc",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tự học tiếng Estonia A1 cho người mới bắt đầu",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:50.722Z",
+        "imageId": "PLP-RVRjbJRL92avU5G28Ua6WZvGUBRzWc.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/vi/VI_ET_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__ET__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL92avU5G28Ua6WZvGUBRzWc.1",
+          "playlistId": "PLP-RVRjbJRL92avU5G28Ua6WZvGUBRzWc",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:21.765Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__FI__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL98LTv-kW2DD9_kCUI2eEZT",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học tiếng Phần Lan A1 | Từ vựng cơ bản - FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:32:55.304Z",
+        "imageId": "PLP-RVRjbJRL98LTv-kW2DD9_kCUI2eEZT.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/vi/VI_FI_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__FI__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL98LTv-kW2DD9_kCUI2eEZT.1",
+          "playlistId": "PLP-RVRjbJRL98LTv-kW2DD9_kCUI2eEZT",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:21.883Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__ES__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL9Bf2ih7XA-dGHSKVr-62NF",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Từ vựng tiếng Tây Ban Nha A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:08:46.698Z",
+        "imageId": "PLP-RVRjbJRL9Bf2ih7XA-dGHSKVr-62NF.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/by-channel/vi/VI_ES_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__ES__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL9Bf2ih7XA-dGHSKVr-62NF.1",
+          "playlistId": "PLP-RVRjbJRL9Bf2ih7XA-dGHSKVr-62NF",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:21.985Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__ES-419__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL9i5ZXZL2_0Apr54WrbOqQL",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Từ vựng tiếng Tây Ban Nha A1 theo chủ đề",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:08:51.392Z",
+        "imageId": "PLP-RVRjbJRL9i5ZXZL2_0Apr54WrbOqQL.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/by-channel/vi/VI_ES-419_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__ES-419__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL9i5ZXZL2_0Apr54WrbOqQL.1",
+          "playlistId": "PLP-RVRjbJRL9i5ZXZL2_0Apr54WrbOqQL",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:22.047Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__DE__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL9N1-xBLB-YGTGuDLTD4WP0",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Từ vựng tiếng Đức A1 theo chủ đề | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:08:31.724Z",
+        "imageId": "PLP-RVRjbJRL9N1-xBLB-YGTGuDLTD4WP0.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-second-five-per-channel/by-channel/vi/VI_DE_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__DE__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL9N1-xBLB-YGTGuDLTD4WP0.1",
+          "playlistId": "PLP-RVRjbJRL9N1-xBLB-YGTGuDLTD4WP0",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:22.146Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__RU__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL9ONOgm7EImjfYHtjZ9kj4M",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tự học tiếng Nga giao tiếp và từ vựng A1",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:20:04.065Z",
+        "imageId": "PLP-RVRjbJRL9ONOgm7EImjfYHtjZ9kj4M.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/vi/VI_RU_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__RU__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL9ONOgm7EImjfYHtjZ9kj4M.1",
+          "playlistId": "PLP-RVRjbJRL9ONOgm7EImjfYHtjZ9kj4M",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:22.219Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__DA__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLP-RVRjbJRL9yHfDGI7qaFUH12N_s9sqM",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Từ vựng tiếng Đan Mạch cơ bản A1",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T03:24:00.049Z",
+        "imageId": "PLP-RVRjbJRL9yHfDGI7qaFUH12N_s9sqM.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-1-2-3-five-per-channel/by-channel/vi/VI_DA_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__DA__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLP-RVRjbJRL9yHfDGI7qaFUH12N_s9sqM.1",
+          "playlistId": "PLP-RVRjbJRL9yHfDGI7qaFUH12N_s9sqM",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:22.280Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__HY__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLSf6d7Wsxss8",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Armenian A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:12:24.386Z",
+        "imageId": "PLSf6d7Wsxss8.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fourth-five-per-channel/by-channel/vi/VI_HY_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__HY__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLSf6d7Wsxss8.1",
+          "playlistId": "PLSf6d7Wsxss8",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:22.340Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__MS__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLSL2Vvoelmcc",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Malay A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:33:22.965Z",
+        "imageId": "PLSL2Vvoelmcc.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-sixth-ten-per-channel/by-channel/vi/VI_MS_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__MS__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLSL2Vvoelmcc.1",
+          "playlistId": "PLSL2Vvoelmcc",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:22.416Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__KM__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLSzDlQWYxYvE",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tự học tiếng Khmer cơ bản | Từ vựng A1",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T05:40:59.199Z",
+        "imageId": "PLSzDlQWYxYvE.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-fifth-five-per-channel/by-channel/vi/VI_KM_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__KM__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLSzDlQWYxYvE.1",
+          "playlistId": "PLSzDlQWYxYvE",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:22.480Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__TA__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLXR-2BySZbhU",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tiếng Tamil A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:20:13.956Z",
+        "imageId": "PLXR-2BySZbhU.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/vi/VI_TA_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__TA__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLXR-2BySZbhU.1",
+          "playlistId": "PLXR-2BySZbhU",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:22.547Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__TH__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLYHa0OnezG4I",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tiếng Thái A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:20:23.785Z",
+        "imageId": "PLYHa0OnezG4I.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/vi/VI_TH_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__TH__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLYHa0OnezG4I.1",
+          "playlistId": "PLYHa0OnezG4I",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:22.646Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__TR__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLYNbbgyKNSkQ",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Tiếng Thổ Nhĩ Kỳ A1: từ vựng và phát âm",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T09:20:35.552Z",
+        "imageId": "PLYNbbgyKNSkQ.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/vi/VI_TR_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__TR__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLYNbbgyKNSkQ.1",
+          "playlistId": "PLYNbbgyKNSkQ",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:22.729Z"
+    },
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "VI__HR__ordinary-vocabulary__a1-everyday",
+      "channelKey": "vi",
+      "supportLang": "VI",
+      "playlistId": "PLZBOBLz3QRWc",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "title": "Học tiếng Croatia cơ bản A1 | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T04:33:12.672Z",
+        "imageId": "PLZBOBLz3QRWc.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-routes-2-3-third-five-per-channel/by-channel/vi/VI_HR_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-2",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__HR__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLZBOBLz3QRWc.1",
+          "playlistId": "PLZBOBLz3QRWc",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-07-16T07:58:22.816Z"
+    }
+  ]
+}
