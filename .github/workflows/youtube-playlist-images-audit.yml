@@ -1,0 +1,93 @@
+name: YouTube Playlist Images Audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      route:
+        description: "Exact OAuth/quota shard to audit. Read-only; no playlist image writes."
+        required: true
+        type: choice
+        options:
+          - youtube-1
+          - youtube-2
+          - youtube-3
+          - youtube-4
+
+permissions:
+  contents: read
+
+concurrency:
+  group: youtube-playlist-images-audit-${{ github.ref_name }}-${{ inputs.route }}
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: ${{ inputs.route == 'youtube-1' && 'youtube-api-branding' || inputs.route == 'youtube-2' && 'youtube-api-youtube-2' || inputs.route == 'youtube-3' && 'youtube-api-youtube-3' || 'youtube-api-youtube-4' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Resolve exact route supports
+        id: route
+        shell: bash
+        env:
+          ROUTE: ${{ inputs.route }}
+        run: |
+          set -euo pipefail
+          case "$ROUTE" in
+            youtube-1) SUPPORTS="EN,RU,ES-419,PT-BR,JA,TR,ZH" ;;
+            youtube-2) SUPPORTS="VI,TH" ;;
+            youtube-3) SUPPORTS="SR,MY" ;;
+            youtube-4) SUPPORTS="NE,SI,UZ,KA,SW" ;;
+            *) echo "::error::Unknown route: $ROUTE"; exit 1 ;;
+          esac
+          echo "supports=$SUPPORTS" >> "$GITHUB_OUTPUT"
+
+      - name: Validate route environment mapping
+        shell: bash
+        env:
+          SUPPORTS: ${{ steps.route.outputs.supports }}
+          ENVIRONMENT_NAME: ${{ inputs.route == 'youtube-1' && 'youtube-api-branding' || inputs.route == 'youtube-2' && 'youtube-api-youtube-2' || inputs.route == 'youtube-3' && 'youtube-api-youtube-3' || 'youtube-api-youtube-4' }}
+        run: node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORTS" --environment="$ENVIRONMENT_NAME"
+
+      - name: Restore route OAuth bundle
+        shell: bash
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+
+      - name: Audit playlistImages.list without retries or writes
+        shell: bash
+        env:
+          SUPPORTS: ${{ steps.route.outputs.supports }}
+          ROUTE: ${{ inputs.route }}
+        run: |
+          set -euo pipefail
+          mkdir -p outputs/review
+          node scripts/audit-youtube-playlist-images.mjs \
+            --supports="$SUPPORTS" \
+            --output="outputs/review/youtube-playlist-images-audit-${ROUTE}-${GITHUB_RUN_ID}.json"
+
+      - name: Upload non-secret audit report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-playlist-images-audit-${{ inputs.route }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: outputs/review/youtube-playlist-images-audit-${{ inputs.route }}-${{ github.run_id }}.json
