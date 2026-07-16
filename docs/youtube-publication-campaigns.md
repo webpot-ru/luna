@@ -84,7 +84,7 @@ npm run claim:youtube-publication-campaign -- \
 ```
 
 5. Commit/push только exact code/config/manifest/assets по проектным Git-правилам. Apply из незапушенной ветки запрещен.
-6. Один fire-and-forget `.github/workflows/youtube-publication-campaign.yml` в `mode=apply` с exact `campaign_id`, `campaign_manifest_hash` и `confirm_campaign_apply=APPLY_YOUTUBE_PUBLICATION_CAMPAIGN`. Apply preflight строит worker matrix только для video type, который запрошен в claimed campaign: ordinary-only и Polyglot-only recovery campaigns валидны; отсутствующий другой type не является blocker.
+6. Один fire-and-forget `.github/workflows/youtube-publication-campaign.yml` в `mode=apply` с exact `campaign_id`, `campaign_manifest_hash` и `confirm_campaign_apply=APPLY_YOUTUBE_PUBLICATION_CAMPAIGN`. Apply preflight строит worker matrix только для video type, который запрошен в claimed campaign: ordinary-only и Polyglot-only recovery campaigns валидны; отсутствующий другой type не является blocker. Для отсутствующего типа GitHub может вернуть `skipped`; orchestration пропускает его, запускает требуемый worker и finalizer считает такой `skipped` успешным только при нулевом expected count этого типа.
 7. Не смотреть child runs непрерывно. Один bounded readback позже. На failure после metadata/render/TTS/image остановиться и сообщить artifact/stage; не retry и не reupload.
 
 `youtube-video-publish.yml` и `youtube-polyglot-video-publish.yml` являются только внутренними reusable workers: их ручной `workflow_dispatch mode=apply` намеренно запрещён. Это исключает независимые calendar claims, per-child live control и competing state commits; новые волны запускаются только через уже claimed campaign.

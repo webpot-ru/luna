@@ -188,7 +188,13 @@ function main() {
     };
   });
   const expectedCount = campaign.assignments.length;
-  const workerSuccess = options.ordinaryResult === "success" && options.polyglotResult === "success";
+  const ordinaryExpectedCount = campaign.assignments.filter((row) => row.videoType === "ordinary").length;
+  const polyglotExpectedCount = campaign.assignments.filter((row) => row.videoType === "polyglot").length;
+  const workerSucceeded = (expectedCountForType, result) => (
+    expectedCountForType === 0 ? ["success", "skipped"].includes(result) : result === "success"
+  );
+  const workerSuccess = workerSucceeded(ordinaryExpectedCount, options.ordinaryResult)
+    && workerSucceeded(polyglotExpectedCount, options.polyglotResult);
   const complete = workerSuccess
     && observedCount === expectedCount
     && validReceiptCount === expectedCount
