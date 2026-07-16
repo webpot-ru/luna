@@ -12,6 +12,16 @@ on:
           - youtube-2
           - youtube-3
           - youtube-4
+      support:
+        description: "Optional one physical support channel for a bounded playlist canary; must belong to route."
+        required: false
+        type: string
+        default: ""
+      playlist_id:
+        description: "Optional exact playlist ID. With support, audits exactly one playlistImages.list row."
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: read
@@ -48,12 +58,16 @@ jobs:
             youtube-4) SUPPORTS="NE,SI,UZ,KA,SW" ;;
             *) echo "::error::Unknown route: $ROUTE"; exit 1 ;;
           esac
+          if [ -n "${{ inputs.support }}" ]; then
+            SUPPORTS="${{ inputs.support }}"
+          fi
           echo "supports=$SUPPORTS" >> "$GITHUB_OUTPUT"
 
       - name: Validate route environment mapping
         shell: bash
         env:
           SUPPORTS: ${{ steps.route.outputs.supports }}
+          PLAYLIST_ID: ${{ inputs.playlist_id }}
           ENVIRONMENT_NAME: ${{ inputs.route == 'youtube-1' && 'youtube-api-branding' || inputs.route == 'youtube-2' && 'youtube-api-youtube-2' || inputs.route == 'youtube-3' && 'youtube-api-youtube-3' || 'youtube-api-youtube-4' }}
         run: node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORTS" --environment="$ENVIRONMENT_NAME"
 
@@ -76,12 +90,13 @@ jobs:
         env:
           SUPPORTS: ${{ steps.route.outputs.supports }}
           ROUTE: ${{ inputs.route }}
+          PLAYLIST_ID: ${{ inputs.playlist_id }}
         run: |
           set -euo pipefail
           mkdir -p outputs/review
-          node scripts/audit-youtube-playlist-images.mjs \
-            --supports="$SUPPORTS" \
-            --output="outputs/review/youtube-playlist-images-audit-${ROUTE}-${GITHUB_RUN_ID}.json"
+          ARGS=(--supports="$SUPPORTS" --output="outputs/review/youtube-playlist-images-audit-${ROUTE}-${GITHUB_RUN_ID}.json")
+          if [ -n "$PLAYLIST_ID" ]; then ARGS+=(--playlist-ids="$PLAYLIST_ID"); fi
+          node scripts/audit-youtube-playlist-images.mjs "${ARGS[@]}"
 
       - name: Upload non-secret audit report
         if: ${{ always() }}

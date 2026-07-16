@@ -96,11 +96,79 @@ assert(Object.values(first.estimatedUsage.byRoute).every((row) => row.estimatedG
 assert.equal(first.estimatedUsage.directGeminiRequestsCurrentWorkerLayout, 102);
 assert.equal(first.estimatedUsage.directGeminiRequestsCampaignRouteBatchSize5, 63);
 assert.equal(first.estimatedUsage.directGeminiRequestsCampaignWideBatchSize5, 62);
+assert.equal(first.estimatedUsage.metadataMaximumOpenAiAttempts, 63);
+assert.equal(first.estimatedUsage.metadataMaximumDirectGeminiAttempts, 126);
+assert.equal(first.estimatedUsage.metadataMaximumVectorEngineAttempts, 184);
+assert.equal(first.estimatedUsage.metadataMaximumProviderAttempts, 373);
+assert.equal(first.estimatedUsage.renderJobCount, 306);
 assert(first.assignments.every((row) => row.thumbnail.mode === "first_frame_auto" && row.thumbnail.ready));
 assert(first.assignments.filter((row) => row.videoType === "polyglot").every((row) => (
   row.contentScope === "short_unverified" && row.cardLimit === 0 && row.maxDurationSeconds === 895
 )), "unverified channels must claim an explicit <=14:55 short Polyglot product");
 assert(first.assignments.every((row) => row.playlist.state === "verified_absent" && row.playlist.createAllowed));
+
+const customEligibleChannels = readJson(paths.channelsPath);
+customEligibleChannels.channels = customEligibleChannels.channels.map((channel) => (
+  channel.key === "en" ? { ...channel, customThumbnailUploadAllowed: true } : channel
+));
+const missingDeclaredCoverManifestPlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  channelsPath: writeJson("channels-custom-en.json", customEligibleChannels),
+  coverRegistryPath: writeJson("covers-missing-declared-manifest.json", {
+    schemaVersion: 1,
+    policy: { activeStatus: "approved" },
+    manifests: [{
+      id: "missing-deck2-ordinary-manifest",
+      setId: "home_kitchen_cooking_actions_a1_a2",
+      videoType: "ordinary",
+      status: "approved",
+      path: path.join(tempRoot, "missing-approved-manifest.json"),
+    }],
+  }),
+  playlistDiscoveryPath: writeJson("playlist-discovery-en-missing-manifest.json", {
+    ...readJson(paths.playlistDiscoveryPath),
+    summary: { complete: true, blockerCount: 0, supportCount: 1 },
+    channels: readJson(paths.playlistDiscoveryPath).channels.filter((channel) => channel.supportLang === "EN"),
+  }),
+});
+assert(missingDeclaredCoverManifestPlan.blockers.some((row) => row.includes("missing-deck2-ordinary-manifest (missing)")));
+
+const checksumMismatchPlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  ordinaryPerChannel: 1,
+  polyglotPerChannel: 0,
+  channelsPath: writeJson("channels-custom-en-checksum.json", customEligibleChannels),
+  coverRegistryPath: writeJson("covers-checksum-mismatch.json", {
+    schemaVersion: 1,
+    policy: { activeStatus: "approved" },
+    manifests: [{
+      id: "checksum-mismatch",
+      setId: "home_kitchen_cooking_actions_a1_a2",
+      videoType: "ordinary",
+      status: "approved",
+      path: writeJson("checksum-mismatch-manifest.json", {
+        covers: [{
+          status: "approved",
+          setId: "home_kitchen_cooking_actions_a1_a2",
+          videoType: "ordinary",
+          supportLang: "EN",
+          targetLang: "HI",
+          assignmentKey: "ordinary|home_kitchen_cooking_actions_a1_a2|EN|HI",
+          relativePath: "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-30b96a246c69/by-assignment/ordinary-home_kitchen_cooking_actions_a1_a2-EN-HI.jpg",
+          sha256: "not-the-real-checksum",
+        }],
+      }),
+    }],
+  }),
+  playlistDiscoveryPath: writeJson("playlist-discovery-en-checksum.json", {
+    ...readJson(paths.playlistDiscoveryPath),
+    summary: { complete: true, blockerCount: 0, supportCount: 1 },
+    channels: readJson(paths.playlistDiscoveryPath).channels.filter((channel) => channel.supportLang === "EN"),
+  }),
+});
+assert(checksumMismatchPlan.blockers.some((row) => row.includes("approved_cover_checksum_mismatch")));
 
 const subsetSupports = ["EN", "RU"];
 const subsetDiscovery = readJson(paths.playlistDiscoveryPath);
@@ -138,6 +206,37 @@ const crossScopePlan = buildPublicationCampaign({
 });
 assert.equal(crossScopePlan.summary.applyReady, false);
 assert(crossScopePlan.blockers.some((row) => row.includes("EN: global_europe_core full is blocked by active short_unverified Polyglot video active-short-video")));
+
+const activeShortClaim = {
+  schemaVersion: 1,
+  campaigns: [{
+    campaignId: "claimed-short",
+    status: "claimed",
+    assignmentKeys: ["polyglot|home_kitchen_cooking_actions_a1_a2|EN|romance_core|f34a59a474f1|short_unverified"],
+    slotKeys: [],
+    assignments: [{
+      videoType: "polyglot",
+      setId: "home_kitchen_cooking_actions_a1_a2",
+      supportLang: "EN",
+      bundleKey: "romance_core",
+      contentScope: "short_unverified",
+      targetLangs: ["ES", "FR", "IT", "PT"],
+    }],
+  }],
+};
+const planAfterActiveShortClaim = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  channelsPath: writeJson("channels-full-en-claim.json", fullEligibleChannels),
+  campaignRegistryPath: writeJson("campaigns-active-short.json", activeShortClaim),
+  playlistDiscoveryPath: writeJson("playlist-discovery-en-claim.json", {
+    ...readJson(paths.playlistDiscoveryPath),
+    summary: { complete: true, blockerCount: 0, supportCount: 1 },
+    channels: readJson(paths.playlistDiscoveryPath).channels.filter((channel) => channel.supportLang === "EN"),
+  }),
+});
+const enClaimPolyglot = planAfterActiveShortClaim.assignments.find((row) => row.videoType === "polyglot");
+assert.notEqual(enClaimPolyglot.bundleKey, "romance_core", "an active short claim must block a new full claim for the same product slot");
 
 const oneExistingDiscovery = readJson(paths.playlistDiscoveryPath);
 const firstAssignment = first.assignments[0];

@@ -95,7 +95,7 @@ function isGitTracked(filePath) {
 function historicalGitBlobSource(filePath) {
   const absolute = path.resolve(filePath);
   const relative = path.relative(process.cwd(), absolute).split(path.sep).join("/");
-  if (!relative || relative.startsWith("../") || path.isAbsolute(relative) || !fs.existsSync(absolute)) {
+  if (!relative || relative.startsWith("../") || path.isAbsolute(relative)) {
     return { available: false, matchesLocalFile: false, commit: "", blobId: "", localBlobId: "" };
   }
   const history = spawnSync("git", ["log", "--all", "--format=%H", "--", relative], {
@@ -115,7 +115,9 @@ function historicalGitBlobSource(filePath) {
     blobId = resolved.stdout.trim();
     break;
   }
-  const local = spawnSync("git", ["hash-object", "--", relative], { encoding: "utf8" });
+  const local = fs.existsSync(absolute)
+    ? spawnSync("git", ["hash-object", "--", relative], { encoding: "utf8" })
+    : { status: 1, stdout: "" };
   const localBlobId = local.status === 0 ? local.stdout.trim() : "";
   return {
     available: Boolean(commit && blobId),
@@ -125,6 +127,29 @@ function historicalGitBlobSource(filePath) {
     localBlobId,
     path: relative,
   };
+}
+
+function deckCardCount({ offlineDeckPath, historicalDeckSource }) {
+  let source = "";
+  if (fs.existsSync(offlineDeckPath)) source = fs.readFileSync(offlineDeckPath, "utf8");
+  else if (historicalDeckSource?.available && historicalDeckSource?.blobId) {
+    const result = spawnSync("git", ["show", historicalDeckSource.blobId], {
+      encoding: "utf8",
+      maxBuffer: 64 * 1024 * 1024,
+    });
+    if (result.status === 0) source = result.stdout;
+  }
+  if (!source) return null;
+  try {
+    const cards = JSON.parse(source).cards;
+    const counts = new Set(Object.values(cards || {})
+      .flatMap((bySupport) => Object.values(bySupport || {}))
+      .filter(Array.isArray)
+      .map((rows) => rows.length));
+    return counts.size === 1 ? [...counts][0] : null;
+  } catch {
+    return null;
+  }
 }
 
 function targetHash(targetLangs) {
@@ -138,11 +163,21 @@ function activeCampaigns(registry = {}) {
 function campaignClaimSets(registry = {}) {
   const assignments = new Set();
   const slots = new Set();
+  const polyglotProducts = new Set();
   for (const campaign of activeCampaigns(registry)) {
     for (const key of campaign.assignmentKeys || []) assignments.add(key);
     for (const key of campaign.slotKeys || []) slots.add(key);
+    for (const assignment of campaign.assignments || []) {
+      if (isPolyglotRow(assignment)) polyglotProducts.add(polyglotProductSlotKey(assignment));
+    }
+    for (const key of campaign.assignmentKeys || []) {
+      const parts = String(key || "").split("|");
+      if (parts[0] === "polyglot" && parts.length >= 4) {
+        polyglotProducts.add(["polyglot-product-slot", parts[1], canonicalSupportCode(parts[2]), parts[3]].join("|"));
+      }
+    }
   }
-  return { assignments, slots };
+  return { assignments, slots, polyglotProducts };
 }
 
 function loadApprovedCovers(coverRegistryPath) {
@@ -154,12 +189,31 @@ function loadApprovedCovers(coverRegistryPath) {
     if (row.status !== activeStatus || !row.path) continue;
     const exists = fs.existsSync(row.path);
     const tracked = exists && isGitTracked(row.path);
-    manifestReadiness.push({ id: row.id || "", path: row.path, exists, tracked });
+    manifestReadiness.push({
+      id: row.id || "",
+      path: row.path,
+      exists,
+      tracked,
+      setId: row.setId || "",
+      setIds: row.setIds || [],
+      videoType: row.videoType || "",
+      videoTypes: row.videoTypes || [],
+      supports: row.supports || [],
+    });
     if (!exists) continue;
     const manifest = readJson(row.path);
     for (const cover of manifest.covers || []) covers.push({ ...cover, manifestPath: row.path });
   }
   return { registry, covers, manifestReadiness };
+}
+
+function manifestAppliesToCandidate(manifest = {}, candidate = {}) {
+  const setIds = [manifest.setId, ...(manifest.setIds || [])].filter(Boolean);
+  if (setIds.length && !setIds.includes(candidate.setId)) return false;
+  const videoTypes = [manifest.videoType, ...(manifest.videoTypes || [])].filter(Boolean);
+  if (videoTypes.length && !videoTypes.includes(candidate.videoType)) return false;
+  const supports = (manifest.supports || []).map(canonicalSupportCode).filter(Boolean);
+  return !supports.length || supports.includes(candidate.supportLang);
 }
 
 function coverSupportCodes(cover = {}) {
@@ -183,7 +237,9 @@ function coverPath(cover = {}) {
 function findApprovedCover(covers, candidate) {
   return covers.find((cover) => {
     if (cover.uploadEligible === false) return false;
+    if (cover.status && cover.status !== "approved") return false;
     if (cover.setId && cover.setId !== candidate.setId) return false;
+    if (cover.assignmentKey && cover.assignmentKey !== candidate.assignmentKey) return false;
     if (!coverSupportCodes(cover).includes(candidate.supportLang)) return false;
     if (candidate.videoType === "polyglot") {
       if (cover.videoType && cover.videoType !== "polyglot") return false;
@@ -205,13 +261,21 @@ function resolveCoverReadiness({ candidate, channel, covers }) {
   const cover = findApprovedCover(covers, candidate);
   const resolvedPath = cover ? coverPath(cover) : "";
   const tracked = Boolean(resolvedPath && isGitTracked(resolvedPath));
+  const fileBytes = resolvedPath ? fs.readFileSync(resolvedPath) : null;
+  const sha256 = fileBytes ? crypto.createHash("sha256").update(fileBytes).digest("hex") : "";
+  const jpeg = Boolean(fileBytes?.length >= 3 && fileBytes[0] === 0xff && fileBytes[1] === 0xd8 && fileBytes[2] === 0xff);
+  const reason = !cover ? "approved_cover_not_found"
+    : (!resolvedPath ? "approved_cover_file_missing"
+      : (!tracked ? "approved_cover_not_git_tracked"
+        : (!jpeg ? "approved_cover_not_jpeg"
+          : (cover.sha256 && cover.sha256 !== sha256 ? "approved_cover_checksum_mismatch" : ""))));
   return {
     mode: "custom",
-    ready: Boolean(cover && resolvedPath && tracked),
-    reason: !cover ? "approved_cover_not_found" : (!resolvedPath ? "approved_cover_file_missing" : (!tracked ? "approved_cover_not_git_tracked" : "")),
+    ready: !reason,
+    reason,
     path: resolvedPath,
     manifestPath: cover?.manifestPath || "",
-    sha256: resolvedPath ? crypto.createHash("sha256").update(fs.readFileSync(resolvedPath)).digest("hex") : "",
+    sha256,
   };
 }
 
@@ -466,10 +530,11 @@ export function buildPublicationCampaign(options = {}) {
   const offlineDeckExists = fs.existsSync(paths.offlineDeck);
   const offlineDeckTracked = offlineDeckExists && isGitTracked(paths.offlineDeck);
   const driveDeckConfigured = Boolean(driveFileId && driveFileId !== "YOUR_GOOGLE_DRIVE_FILE_ID_HERE");
-  const historicalDeckSource = offlineDeckExists && !offlineDeckTracked
+  const historicalDeckSource = !offlineDeckTracked
     ? historicalGitBlobSource(paths.offlineDeck)
     : { available: false, matchesLocalFile: false, commit: "", blobId: "", localBlobId: "" };
   const claims = campaignClaimSets(planningCampaignRegistry);
+  const cardCount = deckCardCount({ offlineDeckPath: paths.offlineDeck, historicalDeckSource });
   const freshness = snapshotBlockers(deck, snapshot.generatedAt, now, maxSnapshotAgeMinutes);
   const blockers = [...freshness.blockers, ...replacementBlockers];
   const warnings = [];
@@ -479,9 +544,9 @@ export function buildPublicationCampaign(options = {}) {
     : { blockers: [], ageMinutes: Number.POSITIVE_INFINITY };
   blockers.push(...playlistFreshness.blockers);
   const playlistDiscoveryReady = playlistDiscoveryExists && playlistFreshness.blockers.length === 0;
-  if (!offlineDeckExists) {
+  if (!offlineDeckExists && !historicalDeckSource.available) {
     blockers.push(`${setId}: immutable campaign planning requires a local offline deck fingerprint at ${paths.offlineDeck}`);
-  } else if (!offlineDeckTracked && !driveDeckConfigured && !historicalDeckSource.matchesLocalFile) {
+  } else if (!offlineDeckTracked && !driveDeckConfigured && !historicalDeckSource.available) {
     blockers.push(`${setId}: offline deck is not Git-tracked and no verified Drive source is configured`);
   }
 
@@ -512,6 +577,7 @@ export function buildPublicationCampaign(options = {}) {
     }
     const polyglot = polyglotCandidates
       .filter((candidate) => !claims.assignments.has(candidate.assignmentKey))
+      .filter((candidate) => !claims.polyglotProducts.has(polyglotProductSlotKey(candidate)))
       .filter((candidate) => !deck.publications.some((publication) => activePublicationMatchesCandidate(publication, candidate)))
       .slice(0, polyglotPerChannel);
     if (ordinary.length !== ordinaryPerChannel) blockers.push(`${support}: only ${ordinary.length}/${ordinaryPerChannel} unclaimed ordinary tails available`);
@@ -588,7 +654,29 @@ export function buildPublicationCampaign(options = {}) {
   blockers.push(...validateWave(assignments, supports.length, ordinaryPerChannel, polyglotPerChannel));
   blockers.push(...validateResolvedPlaylistIdentities(assignments));
   const routeCounts = Object.fromEntries(routing.projects.map((route) => [route.key, assignments.filter((row) => row.routeKey === route.key).length]));
+  const metadataRouteBatchCount = Object.values(routeCounts)
+    .reduce((total, count) => total + Math.ceil(count / 5), 0);
+  const metadataVectorEngineMaximumAttempts = Object.values(routeCounts)
+    .reduce((total, count) => total + Math.floor(count / 5) * 3 + Math.ceil((count % 5) / 2), 0);
+  const ordinaryTtsRequestsPerSupportMaximum = cardCount === null
+    ? null
+    : cardCount * (ordinaryPerChannel + 1) + ordinaryPerChannel + 1;
+  const ordinaryTtsRequestsMaximum = ordinaryTtsRequestsPerSupportMaximum === null
+    ? null
+    : ordinaryTtsRequestsPerSupportMaximum * supports.length;
+  const polyglotTtsRequestsMaximum = cardCount === null
+    ? null
+    : assignments.filter((row) => row.videoType === "polyglot")
+      .reduce((total, row) => total + 2 + cardCount * (row.targetLangs.length + 1), 0);
   const customThumbnailCount = assignments.filter((row) => row.thumbnail.mode === "custom").length;
+  const unavailableDeclaredCoverManifests = coverInventory.manifestReadiness
+    .filter((manifest) => !manifest.exists || !manifest.tracked)
+    .filter((manifest) => assignments.some((assignment) => (
+      assignment.thumbnail.mode === "custom" && manifestAppliesToCandidate(manifest, assignment)
+    )));
+  for (const manifest of unavailableDeclaredCoverManifests) {
+    blockers.push(`declared approved cover manifest is unavailable for this campaign: ${manifest.id || manifest.path} (${!manifest.exists ? "missing" : "not_git_tracked"})`);
+  }
   const playlistCreateCount = assignments.filter((row) => row.playlist.state === "verified_absent" && row.playlist.createAllowed).length;
   const playlistCreateCountMaximum = playlistDiscoveryReady ? playlistCreateCount : assignments.length;
   const existingPlaylistCount = assignments.filter((row) => row.playlist.state === "resolved_existing" && row.playlist.youtubePlaylistId).length;
@@ -651,7 +739,7 @@ export function buildPublicationCampaign(options = {}) {
           ? "git_offline_json"
           : (driveDeckConfigured
             ? "verified_drive_with_local_fingerprint"
-            : (historicalDeckSource.matchesLocalFile ? "historical_git_blob" : "local_untracked")),
+            : (historicalDeckSource.available ? "historical_git_blob" : "local_untracked")),
         driveFileIdConfigured: driveDeckConfigured,
         offlineDeckExists,
         offlineDeckTracked,
@@ -675,6 +763,8 @@ export function buildPublicationCampaign(options = {}) {
       supportCount: supports.length,
       ordinaryCount: assignments.filter((row) => row.videoType === "ordinary").length,
       polyglotCount: assignments.filter((row) => row.videoType === "polyglot").length,
+      fullPolyglotCount: assignments.filter((row) => row.videoType === "polyglot" && row.contentScope === "full").length,
+      shortUnverifiedPolyglotCount: assignments.filter((row) => row.videoType === "polyglot" && row.contentScope === "short_unverified").length,
       assignmentCount: assignments.length,
       firstPublishAt: assignments.map((row) => row.publishAt).sort()[0] || "",
       lastPublishAt: assignments.map((row) => row.publishAt).sort().at(-1) || "",
@@ -695,9 +785,27 @@ export function buildPublicationCampaign(options = {}) {
       byRoute,
       directGeminiRequestsCurrentWorkerLayout:
         supports.length * (Math.ceil(ordinaryPerChannel / 5) + polyglotPerChannel),
-      directGeminiRequestsCampaignRouteBatchSize5: Object.values(routeCounts)
-        .reduce((total, count) => total + Math.ceil(count / 5), 0),
+      directGeminiRequestsCampaignRouteBatchSize5: metadataRouteBatchCount,
       directGeminiRequestsCampaignWideBatchSize5: Math.ceil(assignments.length / 5),
+      metadataProviderOrder: ["openai_gpt_5_4", "direct_gemini_key_1", "direct_gemini_key_2", "vectorengine_confirmed"],
+      metadataBatchSize: 5,
+      metadataLogicalBatchCount: metadataRouteBatchCount,
+      metadataMaximumOpenAiAttempts: metadataRouteBatchCount,
+      metadataMaximumDirectGeminiAttempts: metadataRouteBatchCount * 2,
+      metadataMaximumVectorEngineAttempts: metadataVectorEngineMaximumAttempts,
+      metadataMaximumProviderAttempts: metadataRouteBatchCount * 3 + metadataVectorEngineMaximumAttempts,
+      renderJobCount: assignments.length,
+      ttsSynthesisRequestEstimate: cardCount === null ? {
+        mode: "unavailable_without_uniform_immutable_deck_card_count",
+      } : {
+        mode: "cache_aware_upper_bound",
+        cardCount,
+        ordinaryRequestsPerSupportMaximum: ordinaryTtsRequestsPerSupportMaximum,
+        ordinaryRequestsMaximum: ordinaryTtsRequestsMaximum,
+        polyglotRequestsMaximum: polyglotTtsRequestsMaximum,
+        totalRequestsMaximum: ordinaryTtsRequestsMaximum + polyglotTtsRequestsMaximum,
+        note: "Short Polyglot card count is duration-measured at render time; this is an upper bound because audio is prepared before final prefix selection.",
+      },
       providerCallsDuringPlan: 0,
       youtubeWritesDuringPlan: 0,
     },
