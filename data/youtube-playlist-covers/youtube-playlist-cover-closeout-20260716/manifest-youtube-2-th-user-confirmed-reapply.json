@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-16T08:38:00.000Z",
+  "mode": "exact_user_confirmed_reapply_playlist_image",
+  "auditComplete": true,
+  "scope": {
+    "route": "youtube-2",
+    "channelKeys": [
+      "th"
+    ],
+    "playlistKeys": [
+      "POLYGLOT__TH__global-europe-core__7a4233775927"
+    ]
+  },
+  "auditReports": [
+    "data/youtube-playlist-covers/youtube-playlist-cover-closeout-20260716/operator-evidence/th-user-confirmed-missing-20260716.json"
+  ],
+  "auditProblems": [],
+  "missingChannels": [],
+  "missingRoutes": [],
+  "blocked": [],
+  "installed": [],
+  "records": [
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "userAuthorizedReapply": true,
+      "reapplyReason": "operator_live_observation_missing",
+      "auditReport": "data/youtube-playlist-covers/youtube-playlist-cover-closeout-20260716/operator-evidence/th-user-confirmed-missing-20260716.json",
+      "auditReportSha256": "b2bd05d6abd95aeabc1b0851f220198f97f8c8ca99cc97ffc6b647176aa70686",
+      "route": "youtube-2",
+      "channelKey": "th",
+      "channelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "supportLang": "TH",
+      "videoType": "polyglot",
+      "playlistKey": "POLYGLOT__TH__global-europe-core__7a4233775927",
+      "playlistId": "PLL63dojJHnas",
+      "registryPath": "config/youtube-polyglot-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-polyglot-playlists.json",
+          "playlistKey": "POLYGLOT__TH__global-europe-core__7a4233775927",
+          "videoType": "polyglot"
+        }
+      ],
+      "title": "โพลีกรอต: อังกฤษ สเปน ฝรั่งเศส เยอรมัน",
+      "coverPath": "data/youtube-playlist-covers/youtube-playlist-cover-closeout-20260716/assets-youtube-2/by-channel/th/POLYGLOT_TH_global-europe-core_7a4233775927/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/youtube-playlist-cover-closeout-20260716/assets-youtube-2/manifest.json",
+      "coverSha256": "4c1958603006450f05ffee0b8d5699351d648b02d84069cc6dbc1fc45a2c25ed",
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    }
+  ],
+  "summary": {
+    "physicalRows": 1,
+    "installed": 0,
+    "ready": 1,
+    "blocked": 0,
+    "estimatedApplyQuotaUnits": 54,
+    "youtubeWritesPlanned": 1,
+    "externalProviderCalls": 0
+  }
+}
