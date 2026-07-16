@@ -136,8 +136,13 @@ function main() {
   if (metadataMatrix.some((row) => !row.route_key || !row.youtube_environment)) blockers.push("metadata route matrix contains an empty route/environment");
   if (ordinaryMatrix.some((row) => !row.route_key)) blockers.push("ordinary worker matrix contains an empty route key");
   if (polyglotMatrix.some((row) => !row.route_key)) blockers.push("Polyglot worker matrix contains an empty route key");
-  if (ordinaryMatrix.length !== Number(campaign.inputs?.supportCount || 0)) blockers.push(`ordinary support matrix count ${ordinaryMatrix.length} does not match campaign`);
-  if (polyglotMatrix.length !== Number(campaign.inputs?.supportCount || 0)) blockers.push(`Polyglot support matrix count ${polyglotMatrix.length} does not match campaign`);
+  const supportCount = Number(campaign.inputs?.supportCount || 0);
+  if (ordinaryExpected > 0 && ordinaryMatrix.length !== supportCount) {
+    blockers.push(`ordinary support matrix count ${ordinaryMatrix.length} does not match campaign`);
+  }
+  if (polyglotExpected > 0 && polyglotMatrix.length !== supportCount) {
+    blockers.push(`Polyglot support matrix count ${polyglotMatrix.length} does not match campaign`);
+  }
   if (blockers.length) throw new Error(`Campaign dispatch preflight blocked:\n${blockers.join("\n")}`);
   const report = {
     schemaVersion: 1,

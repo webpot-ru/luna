@@ -133,6 +133,51 @@ assert.equal(preflight.ordinaryMatrix[0].route_key, "youtube-1");
 assert.equal(preflight.polyglotMatrix[0].bundle, "global_europe_core");
 assert.equal(preflight.polyglotMatrix[0].route_key, "youtube-1");
 
+const polyglotOnlyCampaign = {
+  ...campaign,
+  campaignId: "campaign-polyglot-only",
+  inputs: { ...campaign.inputs, ordinaryPerChannel: 0, polyglotPerChannel: 1 },
+  assignments: [polyglotAssignment],
+  assignmentKeys: [polyglotAssignment.assignmentKey],
+  slotKeys: ["en|2026-07-20T11:30:00.000Z"],
+};
+write(path.join(configDir, "youtube-publication-campaigns.json"), {
+  schemaVersion: 1,
+  campaigns: [campaign, polyglotOnlyCampaign],
+});
+write(path.join(configDir, "youtube-publish-calendar.json"), {
+  schemaVersion: 1,
+  reservations: [{
+    ...polyglotAssignment,
+    campaignId: polyglotOnlyCampaign.campaignId,
+    campaignManifestHash: polyglotOnlyCampaign.manifestHash,
+    status: "campaign_claimed",
+  }],
+});
+const polyglotOnlyPrepare = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/prepare-youtube-publication-campaign-run.mjs"),
+  "--campaign-id=campaign-polyglot-only",
+  "--manifest-hash=manifest-hash",
+  "--registry=config/youtube-publication-campaigns.json",
+  "--calendar=config/youtube-publish-calendar.json",
+  "--output=outputs/preflight-polyglot-only.json",
+], { cwd: root, encoding: "utf8" });
+assert.equal(polyglotOnlyPrepare.status, 0, polyglotOnlyPrepare.stderr || polyglotOnlyPrepare.stdout);
+const polyglotOnlyPreflight = JSON.parse(fs.readFileSync(path.join(root, "outputs/preflight-polyglot-only.json"), "utf8"));
+assert.equal(polyglotOnlyPreflight.ordinaryMatrix.length, 0);
+assert.equal(polyglotOnlyPreflight.polyglotMatrix.length, 1);
+
+write(path.join(configDir, "youtube-publication-campaigns.json"), { schemaVersion: 1, campaigns: [campaign] });
+write(path.join(configDir, "youtube-publish-calendar.json"), {
+  schemaVersion: 1,
+  reservations: [ordinaryAssignment, polyglotAssignment].map((row) => ({
+    ...row,
+    campaignId: campaign.campaignId,
+    campaignManifestHash: campaign.manifestHash,
+    status: "campaign_claimed",
+  })),
+});
+
 const finalize = spawnSync(process.execPath, [
   path.join(repoRoot, "scripts/finalize-youtube-publication-campaign.mjs"),
   "--campaign-id=campaign-test",
