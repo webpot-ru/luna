@@ -109473,7 +109473,7 @@
       "campaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-16-6af2938c3043",
       "manifestHash": "608603a9ecbf9f343e5efed3a25ecc1ea488715ba57ed9f49cfd5286c35ff9da",
       "setId": "home_kitchen_cookware_pilot_01",
-      "status": "reconciliation_required",
+      "status": "superseded_zero_upload_recovery",
       "claimedAt": "2026-07-16T01:30:45.317Z",
       "generatedAt": "2026-07-16T01:30:23.728Z",
       "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_cookware_pilot_01-2026-07-16-6af2938c3043.json",
@@ -109689,7 +109689,7 @@
             "registryEntryPresent": true,
             "discoveryGeneratedAt": "2026-07-15T17:25:53.330Z"
           },
-          "status": "claimed"
+          "status": "superseded_zero_upload_recovery"
         }
       ],
       "finalizedAt": "2026-07-16T01:36:59.741Z",
@@ -109705,7 +109705,234 @@
         "ordinaryResult": "failure",
         "polyglotResult": "skipped",
         "artifactCount": 0
-      }
+      },
+      "supersededAt": "2026-07-16T01:45:29.419Z",
+      "supersededByCampaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-16-fcf8f0d2a565"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-16-fcf8f0d2a565",
+      "manifestHash": "b68198fb3058de7cd8c03727071cb82b8ba9a73e46bd7122090fa18a9b209898",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "status": "claimed",
+      "claimedAt": "2026-07-16T01:45:29.419Z",
+      "generatedAt": "2026-07-16T01:43:45.960Z",
+      "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_cookware_pilot_01-2026-07-16-fcf8f0d2a565.json",
+      "recoveryOfCampaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-16-6af2938c3043",
+      "zeroUploadEvidence": {
+        "beforeSourceRuns": [
+          {
+            "setId": "home_kitchen_cookware_pilot_01",
+            "route": "youtube-3",
+            "githubRunId": "29435878120",
+            "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29435878120"
+          }
+        ],
+        "afterSourceRuns": [
+          {
+            "setId": "home_kitchen_cookware_pilot_01",
+            "route": "youtube-3",
+            "githubRunId": "29435878120",
+            "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29435878120"
+          }
+        ],
+        "beforeVideoCount": 747,
+        "afterVideoCount": 747,
+        "addedVideoIds": [],
+        "removedVideoIds": []
+      },
+      "inputs": {
+        "supports": "BN",
+        "supportCount": 1,
+        "ordinaryPerChannel": 0,
+        "polyglotPerChannel": 1,
+        "startDate": "2026-07-16",
+        "minFutureMinutes": 90,
+        "maxSnapshotAgeMinutes": 720,
+        "replacementCampaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-16-6af2938c3043"
+      },
+      "summary": {
+        "applyReady": true,
+        "blockerCount": 0,
+        "warningCount": 1,
+        "supportCount": 1,
+        "ordinaryCount": 0,
+        "polyglotCount": 1,
+        "assignmentCount": 1,
+        "firstPublishAt": "2026-07-16T05:30:00.000Z",
+        "lastPublishAt": "2026-07-16T05:30:00.000Z",
+        "customThumbnailCount": 0,
+        "automaticThumbnailCount": 1,
+        "existingPlaylistCount": 1,
+        "playlistCreateCount": 0,
+        "playlistCreateCountMaximum": 0,
+        "routeCounts": {
+          "youtube-1": 0,
+          "youtube-2": 0,
+          "youtube-3": 1,
+          "youtube-4": 0
+        }
+      },
+      "evidence": {
+        "snapshotGeneratedAt": "2026-07-15T17:26:03.839Z",
+        "snapshotAgeMinutes": 497.7020166666667,
+        "playlistDiscoveryGeneratedAt": "2026-07-15T17:25:53.330Z",
+        "playlistDiscoveryAgeMinutes": 497.87716666666665,
+        "deckSource": {
+          "mode": "git_offline_json",
+          "driveFileIdConfigured": true,
+          "offlineDeckExists": true,
+          "offlineDeckTracked": true,
+          "historicalGitBlob": {
+            "available": false,
+            "matchesLocalFile": false,
+            "commit": "",
+            "blobId": "",
+            "localBlobId": ""
+          }
+        },
+        "replacementCampaign": {
+          "campaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-16-6af2938c3043",
+          "manifestHash": "608603a9ecbf9f343e5efed3a25ecc1ea488715ba57ed9f49cfd5286c35ff9da",
+          "status": "reconciliation_required",
+          "assignmentCount": 1,
+          "finalizeSummary": {
+            "expectedCount": 1,
+            "completedCount": 0,
+            "observedCount": 0,
+            "missingCount": 1,
+            "duplicateAssignmentCount": 0,
+            "duplicateVideoIdCount": 0,
+            "unexpectedPublicationCount": 0,
+            "receiptErrorCount": 0,
+            "ordinaryResult": "failure",
+            "polyglotResult": "skipped",
+            "artifactCount": 0
+          }
+        },
+        "sourceFingerprints": {
+          "snapshot": {
+            "path": "/private/tmp/deck1-route3-snapshot.json",
+            "exists": true,
+            "sha256": "2eb100fd69a7b0ce15daa6dd3ea5b0ba88e542b094e545877844f2dbaa02d5a1"
+          },
+          "calendar": {
+            "path": "config/youtube-publish-calendar.json",
+            "exists": true,
+            "sha256": "9ca79d218fbb7440a81d4441c4d6040d38131e9c3a22bed516dd624d6b578590"
+          },
+          "campaignRegistry": {
+            "path": "config/youtube-publication-campaigns.json",
+            "exists": true,
+            "sha256": "5a4478c511b0954b7ed57195a85a26c40cb40f4a9b68695ab3b46cde26ff2692"
+          },
+          "policy": {
+            "path": "config/youtube-publish-schedule-policy.json",
+            "exists": true,
+            "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+          },
+          "routing": {
+            "path": "config/youtube-api-project-routing.json",
+            "exists": true,
+            "sha256": "67a62da99274b6f296de982503c00180c3521406e284c545ad173972c26b21fc"
+          },
+          "channels": {
+            "path": "config/youtube-channels.json",
+            "exists": true,
+            "sha256": "1b471dfe3ed56c64f87b4dc36325201b9661ef8458aadab07fb7a73e1e8829ef"
+          },
+          "covers": {
+            "path": "config/youtube-cover-assets.json",
+            "exists": true,
+            "sha256": "9effbd3948c1564a7b8f8b5633250c9466879f65d2a714ffff8021f4b494d2c9"
+          },
+          "deckSources": {
+            "path": "data/deck-sources.json",
+            "exists": true,
+            "sha256": "605eda7deb59067f0809da9d751f443016d4ccd341beac66c45bbdec717d9a45"
+          },
+          "offlineDeck": {
+            "path": "data/decks/home_kitchen_cookware_pilot_01.json",
+            "exists": true,
+            "sha256": "164bd8d1f085b453db6bf3b487da1d4ebb38e7db50fefea1380a6ca34c26b5bc"
+          },
+          "ordinaryPlaylists": {
+            "path": "config/youtube-playlists.json",
+            "exists": true,
+            "sha256": "d898fddc7472963cb57df0beefef837b102e4ccb8af313f2398b8df14a971b9c"
+          },
+          "polyglotPlaylists": {
+            "path": "config/youtube-polyglot-playlists.json",
+            "exists": true,
+            "sha256": "bb375fd30f4e9d3f26fb704101b3de78a47f5403cf66289707ee9ead63165d7d"
+          },
+          "playlistDiscovery": {
+            "path": "/private/tmp/deck1-route3-playlists.json",
+            "exists": true,
+            "sha256": "87f0b762aca7a89353a7ba20fdcb50183e7fd0c51ec2badffa6a2af669ed0532"
+          }
+        }
+      },
+      "assignmentKeys": [
+        "polyglot|home_kitchen_cookware_pilot_01|BN|global_europe_core|7a4233775927|short_unverified"
+      ],
+      "slotKeys": [
+        "bn|2026-07-16T05:30:00.000Z"
+      ],
+      "assignments": [
+        {
+          "assignmentKey": "polyglot|home_kitchen_cookware_pilot_01|BN|global_europe_core|7a4233775927|short_unverified",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_cookware_pilot_01|BN|global_europe_core|short_unverified|bn",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_cookware_pilot_01",
+          "supportLang": "BN",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "short_unverified",
+          "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:BN:global_europe_core:7a4233775927:short_unverified",
+          "channelKey": "bn",
+          "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-16T05:30:00.000Z",
+          "localDate": "2026-07-16",
+          "localTime": "11:30",
+          "timeZone": "Asia/Dhaka",
+          "slotKey": "bn|2026-07-16T05:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__BN__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLJKqVNsz5cgY",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: ইংরেজি, স্প্যানিশ, ফরাসি, জার্মান",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ইংরেজি, স্প্যানিশ, ফরাসি, জার্মান. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-15T17:25:53.330Z"
+          },
+          "status": "claimed"
+        }
+      ]
     }
   ]
 }
