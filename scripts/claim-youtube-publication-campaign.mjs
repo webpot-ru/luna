@@ -7,7 +7,7 @@ import {
   verifyCampaignManifest,
   verifyManifestSourceFingerprints,
 } from "./lib/youtube-publication-campaign.mjs";
-import { calendarAssignmentKey } from "./lib/youtube-publication-control.mjs";
+import { calendarAssignmentKey, canonicalSupportCode, isPolyglotRow, polyglotProductSlotKey } from "./lib/youtube-publication-control.mjs";
 import { isActiveCalendarReservation, slotKey } from "./plan-youtube-publish-schedule.mjs";
 
 const CONFIRM = "CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN";
@@ -105,6 +105,18 @@ function main() {
 
   const activeCampaigns = (registry.campaigns || []).filter((row) => isCampaignStatusActive(row.status));
   const activeAssignmentKeys = new Set(activeCampaigns.flatMap((row) => row.assignmentKeys || []));
+  const activePolyglotProductSlots = new Set();
+  for (const campaign of activeCampaigns) {
+    for (const assignment of campaign.assignments || []) {
+      if (isPolyglotRow(assignment)) activePolyglotProductSlots.add(polyglotProductSlotKey(assignment));
+    }
+    for (const key of campaign.assignmentKeys || []) {
+      const parts = String(key || "").split("|");
+      if (parts[0] === "polyglot" && parts.length >= 4) {
+        activePolyglotProductSlots.add(["polyglot-product-slot", parts[1], canonicalSupportCode(parts[2]), parts[3]].join("|"));
+      }
+    }
+  }
   const activeSlotKeys = new Set([
     ...activeCampaigns.flatMap((row) => row.slotKeys || []),
     ...activeCalendarRows.filter((row) => !isExactOwnedCalendarRow(row)).map(slotKey),
@@ -113,10 +125,13 @@ function main() {
     .filter((row) => !isExactOwnedCalendarRow(row))
     .map(calendarAssignmentKey));
   const assignmentConflicts = (manifest.assignments || []).filter((row) => activeAssignmentKeys.has(row.assignmentKey));
+  const polyglotProductConflicts = (manifest.assignments || []).filter((row) => (
+    isPolyglotRow(row) && activePolyglotProductSlots.has(polyglotProductSlotKey(row))
+  ));
   const slotConflicts = (manifest.assignments || []).filter((row) => activeSlotKeys.has(row.slotKey));
   const calendarAssignmentConflicts = (manifest.assignments || []).filter((row) => existingCalendarAssignmentKeys.has(row.calendarAssignmentKey));
-  if (assignmentConflicts.length || slotConflicts.length || calendarAssignmentConflicts.length) {
-    throw new Error(`Campaign claim conflicts: assignments=${assignmentConflicts.length}, slots=${slotConflicts.length}, calendarAssignments=${calendarAssignmentConflicts.length}`);
+  if (assignmentConflicts.length || polyglotProductConflicts.length || slotConflicts.length || calendarAssignmentConflicts.length) {
+    throw new Error(`Campaign claim conflicts: assignments=${assignmentConflicts.length}, polyglotProducts=${polyglotProductConflicts.length}, slots=${slotConflicts.length}, calendarAssignments=${calendarAssignmentConflicts.length}`);
   }
 
   const claimedAt = new Date().toISOString();

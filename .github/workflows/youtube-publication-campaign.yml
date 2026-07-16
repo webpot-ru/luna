@@ -297,7 +297,9 @@ jobs:
     needs: [preflight, metadata]
     strategy:
       fail-fast: false
-      max-parallel: 20
+      # Campaign-owned apply has four OAuth routes. Keep one top-level worker
+      # per route at most; child per-channel locks still prevent same-channel overlap.
+      max-parallel: 4
       matrix: ${{ fromJSON(needs.preflight.outputs.ordinary_matrix) }}
     uses: ./.github/workflows/youtube-video-publish.yml
     with:
@@ -335,7 +337,8 @@ jobs:
     needs: [preflight, metadata, ordinary]
     strategy:
       fail-fast: false
-      max-parallel: 20
+      # Same route-safe cap as ordinary; metadata is already serialized above.
+      max-parallel: 4
       matrix: ${{ fromJSON(needs.preflight.outputs.polyglot_matrix) }}
     uses: ./.github/workflows/youtube-polyglot-video-publish.yml
     with:

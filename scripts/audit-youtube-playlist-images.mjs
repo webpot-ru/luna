@@ -6,6 +6,7 @@ import path from "node:path";
 const DEFAULT_CHANNELS = "config/youtube-channels.json";
 const DEFAULT_ORDINARY = "config/youtube-playlists.json";
 const DEFAULT_POLYGLOT = "config/youtube-polyglot-playlists.json";
+const DEFAULT_ROUTING = "config/youtube-api-project-routing.json";
 const DEFAULT_OUTPUT = "outputs/review/youtube-playlist-images-audit.json";
 
 function parseArgs(argv) {
@@ -13,8 +14,10 @@ function parseArgs(argv) {
     channels: DEFAULT_CHANNELS,
     ordinaryRegistry: DEFAULT_ORDINARY,
     polyglotRegistry: DEFAULT_POLYGLOT,
+    routing: DEFAULT_ROUTING,
     output: DEFAULT_OUTPUT,
     supports: [],
+    playlistIds: [],
     oauthRoot: "",
     inventoryOnly: false,
   };
@@ -24,8 +27,10 @@ function parseArgs(argv) {
     if (arg === "--channels" || arg.startsWith("--channels=")) options.channels = value();
     else if (arg === "--ordinary-registry" || arg.startsWith("--ordinary-registry=")) options.ordinaryRegistry = value();
     else if (arg === "--polyglot-registry" || arg.startsWith("--polyglot-registry=")) options.polyglotRegistry = value();
+    else if (arg === "--routing" || arg.startsWith("--routing=")) options.routing = value();
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = value();
     else if (arg === "--supports" || arg.startsWith("--supports=")) options.supports = value().split(",").map(normalizeCode).filter(Boolean);
+    else if (arg === "--playlist-ids" || arg.startsWith("--playlist-ids=")) options.playlistIds = value().split(",").map((id) => id.trim()).filter(Boolean);
     else if (arg === "--oauth-root" || arg.startsWith("--oauth-root=")) options.oauthRoot = value();
     else if (arg === "--inventory-only") options.inventoryOnly = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
@@ -102,12 +107,12 @@ async function youtubeJson({ accessToken, pathName, query }) {
   return text ? JSON.parse(text) : {};
 }
 
-function routeForKey(key) {
-  if (["en", "ru", "es", "pt", "ja", "tr", "zh"].includes(key)) return "youtube-1";
-  if (["vi", "th"].includes(key)) return "youtube-2";
-  if (["sr", "my"].includes(key)) return "youtube-3";
-  if (["ne", "si", "uz", "ka", "sw"].includes(key)) return "youtube-4";
-  return "";
+function routesByChannelKey(routing) {
+  const routes = new Map();
+  for (const project of routing.projects || []) {
+    for (const key of project.supportChannelKeys || []) routes.set(String(key).toLowerCase(), project.key || "");
+  }
+  return routes;
 }
 
 function playlistRows(registry, registryPath, videoType) {
@@ -177,7 +182,7 @@ function saveReport(options, rows, startedAt, completedAt = "") {
     generatedAt: startedAt,
     completedAt,
     mode: "read_only_playlist_images_audit",
-    filters: { supports: options.supports },
+    filters: { supports: options.supports, playlistIds: options.playlistIds },
     policy: { youtubeWrites: 0, retries: 0, endpoint: options.inventoryOnly ? "none" : "playlistImages.list" },
     summary: summarize(rows),
     rows,
@@ -190,13 +195,14 @@ function saveReport(options, rows, startedAt, completedAt = "") {
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log("Usage: node scripts/audit-youtube-playlist-images.mjs --supports=EN,RU [--output path]");
+    console.log("Usage: node scripts/audit-youtube-playlist-images.mjs --supports=EN,RU [--playlist-ids=<id,...>] [--output path]");
     return;
   }
   if (!options.supports.length) throw new Error("--supports is required");
 
   const startedAt = new Date().toISOString();
   const channelRegistry = readJson(options.channels, "channel registry");
+  const routes = routesByChannelKey(readJson(options.routing, "YouTube routing registry"));
   const supportSet = new Set(options.supports);
   const channels = (channelRegistry.channels || []).filter((channel) => (
     (channel.supportLangs || []).some((support) => supportSet.has(normalizeCode(support)))
@@ -205,7 +211,9 @@ async function main() {
   const sourceRows = [
     ...playlistRows(readJson(options.ordinaryRegistry, "ordinary playlist registry"), options.ordinaryRegistry, "ordinary"),
     ...playlistRows(readJson(options.polyglotRegistry, "Polyglot playlist registry"), options.polyglotRegistry, "polyglot"),
-  ].filter((row) => selectedKeys.has(row.channelKey));
+  ].filter((row) => selectedKeys.has(row.channelKey))
+    .filter((row) => !options.playlistIds.length || options.playlistIds.includes(row.playlistId));
+  if (options.playlistIds.length && sourceRows.length === 0) throw new Error("--playlist-ids did not resolve to a playlist owned by --supports");
 
   const byPhysicalKey = new Map();
   for (const row of sourceRows) {
@@ -217,7 +225,7 @@ async function main() {
     } else {
       byPhysicalKey.set(key, {
         ...row,
-        route: routeForKey(row.channelKey),
+        route: routes.get(row.channelKey) || "",
         registryRows: [{ registryPath: row.registryPath, playlistKey: row.playlistKey, videoType: row.videoType }],
         state: row.playlistId ? "unproven" : "no_playlist_id",
         playlistImagesListCalled: false,

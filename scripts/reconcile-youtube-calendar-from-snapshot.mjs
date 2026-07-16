@@ -23,6 +23,7 @@ function parseArgs(argv) {
     channels: DEFAULT_CHANNELS_PATH,
     policy: DEFAULT_POLICY_PATH,
     report: "",
+    videoIds: [],
     apply: false,
   };
   for (let index = 0; index < argv.length; index += 1) {
@@ -33,6 +34,7 @@ function parseArgs(argv) {
     else if (arg === "--channels" || arg.startsWith("--channels=")) options.channels = value();
     else if (arg === "--policy" || arg.startsWith("--policy=")) options.policy = value();
     else if (arg === "--report" || arg.startsWith("--report=")) options.report = value();
+    else if (arg === "--video-ids" || arg.startsWith("--video-ids=")) options.videoIds = String(value()).split(",").map((id) => id.trim()).filter(Boolean);
     else if (arg === "--apply") options.apply = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else throw new Error(`Unknown argument: ${arg}`);
@@ -182,12 +184,13 @@ function summarizeSkip(report, reason, publication, details = {}) {
   });
 }
 
-function reconcileCalendar({ snapshot, calendar, channelsConfig, policy, policyPath = DEFAULT_POLICY_PATH, now = new Date().toISOString() }) {
+function reconcileCalendar({ snapshot, calendar, channelsConfig, policy, policyPath = DEFAULT_POLICY_PATH, now = new Date().toISOString(), allowedVideoIds = [] }) {
   const channels = channelIndex(channelsConfig);
   const reservations = calendar.reservations || [];
   const activeRows = reservations.filter(isActiveReservation);
   const duplicateIds = duplicateLiveVideoIds(snapshot);
-  const candidates = scheduledPublications(snapshot);
+  const allowedIds = new Set(allowedVideoIds);
+  const candidates = scheduledPublications(snapshot).filter((row) => !allowedIds.size || allowedIds.has(row.youtubeVideoId));
   const candidateGroups = new Map();
   const prepared = [];
   const report = {
@@ -285,14 +288,21 @@ function reconcileCalendar({ snapshot, calendar, channelsConfig, policy, policyP
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log("Usage: node scripts/reconcile-youtube-calendar-from-snapshot.mjs [--apply] [--snapshot=<json>] [--calendar=<json>] [--report=<json>]");
+    console.log("Usage: node scripts/reconcile-youtube-calendar-from-snapshot.mjs [--apply] [--video-ids=<id,...>] [--snapshot=<json>] [--calendar=<json>] [--report=<json>]");
     return;
   }
   const snapshot = readJson(options.snapshot);
   const calendar = readJson(options.calendar);
   const channelsConfig = readJson(options.channels);
   const policy = readJson(options.policy);
-  const { calendar: reconciled, report } = reconcileCalendar({ snapshot, calendar, channelsConfig, policy, policyPath: options.policy });
+  const { calendar: reconciled, report } = reconcileCalendar({
+    snapshot,
+    calendar,
+    channelsConfig,
+    policy,
+    policyPath: options.policy,
+    allowedVideoIds: options.videoIds,
+  });
   report.mode = options.apply ? "apply_local_calendar_only" : "dry-run";
   if (options.apply) writeJson(options.calendar, reconciled);
   if (options.report) writeJson(options.report, report);

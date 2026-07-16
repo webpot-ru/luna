@@ -17,6 +17,7 @@ import {
   assignmentKey,
   effectiveScheduleStartDate,
   isPolyglotRow,
+  polyglotProductSlotKey,
   polyglotSlotKey,
   polyglotTargetSetKey,
 } from "./lib/youtube-publication-control.mjs";
@@ -261,6 +262,7 @@ function saveCalendar(calendar, filePath = DEFAULT_CALENDAR_PATH) {
 
 function isActiveCalendarReservation(row) {
   if (!row?.publishAt || !row?.channelKey) return false;
+  if (row.cancelledAt || row.deletedAt || row.supersededAt) return false;
   const status = String(row.status || row.publicationStatus || "").toLowerCase();
   if (status.includes("cancel")) return false;
   if (status.includes("delete")) return false;
@@ -280,12 +282,14 @@ function isPolyglotMetadata(metadata = {}) {
 
 function findActivePolyglotPublication(registries, metadata) {
   const candidateKey = assignmentKey(metadata);
+  const candidateProductSlot = polyglotProductSlotKey(metadata);
   const candidateSlot = polyglotSlotKey(metadata);
   const candidateTargetSet = polyglotTargetSetKey(metadata);
   return registries.flatMap((registry) => registry.publications || [])
     .filter(isPolyglotRow)
     .filter(isActivePublication)
     .filter((row) => assignmentKey(row) === candidateKey
+      || polyglotProductSlotKey(row) === candidateProductSlot
       || polyglotSlotKey(row) === candidateSlot
       || polyglotTargetSetKey(row) === candidateTargetSet)
     .sort((a, b) => String(b.lastReadbackAt || b.uploadedAt || "").localeCompare(String(a.lastReadbackAt || a.uploadedAt || "")))[0] || null;

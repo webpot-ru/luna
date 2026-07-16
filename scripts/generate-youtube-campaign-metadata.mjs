@@ -458,8 +458,8 @@ function destinationFor(assignment) {
 
 export async function buildCampaignMetadata(options) {
   const { campaign, assignments } = readClaimedCampaign(options);
-  if (!Number.isInteger(options.batchSize) || options.batchSize < 1 || options.batchSize > 10) {
-    throw new Error("--batch-size must be an integer between 1 and 10");
+  if (!Number.isInteger(options.batchSize) || options.batchSize < 1 || options.batchSize > 5) {
+    throw new Error("--batch-size must be an integer between 1 and 5");
   }
   if (!Number.isInteger(options.vectorengineSubBatchSize)
     || options.vectorengineSubBatchSize < 1

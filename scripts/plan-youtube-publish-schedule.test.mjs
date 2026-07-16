@@ -147,8 +147,10 @@ fs.writeFileSync(polyglotRegistryPath, `${JSON.stringify({
     publicationStatus: "published_uploaded",
   }],
 }, null, 2)}\n`);
-const shortDoesNotBlockFull = runPlanner([polyglotMetadata], path.join(root, "short-does-not-block-full-report.json"));
-assert.equal(shortDoesNotBlockFull.summary.scheduledCount, 1);
+const shortBlocksFull = runPlanner([polyglotMetadata], path.join(root, "short-blocks-full-report.json"));
+assert.equal(shortBlocksFull.summary.scheduledCount, 0);
+assert.equal(shortBlocksFull.rows[0].status, "skipped");
+assert.match(shortBlocksFull.rows[0].blockers.join(" "), /existing active publication/);
 fs.writeFileSync(calendarPath, '{"schemaVersion":1,"reservations":[]}\n');
 
 fs.writeFileSync(polyglotRegistryPath, `${JSON.stringify({
@@ -204,5 +206,25 @@ const ordinalCannotSkipGap = runPlanner(
 );
 assert.equal(ordinalCannotSkipGap.rows[0].targetPlanSlotOrdinal, 1);
 assert.equal(ordinalCannotSkipGap.rows[0].localDate, dayAfterTomorrow);
+
+fs.writeFileSync(ordinaryRegistryPath, '{"schemaVersion":1,"publications":[]}\n');
+fs.writeFileSync(calendarPath, `${JSON.stringify({
+  schemaVersion: 1,
+  reservations: [
+    {
+      setId: "superseded",
+      supportLang: "EN",
+      targetLang: "FR",
+      channelKey: "en",
+      publishAt: `${tomorrow}T08:00:00.000Z`,
+      localDate: tomorrow,
+      status: "reserved",
+      supersededAt: new Date().toISOString(),
+    },
+  ],
+}, null, 2)}\n`);
+const tombstoneDoesNotOccupySlot = runPlanner([ordinaryMetadata], path.join(root, "tombstone-slot-report.json"));
+assert.equal(tombstoneDoesNotOccupySlot.summary.scheduledCount, 1);
+assert.equal(tombstoneDoesNotOccupySlot.rows[0].publishAt, `${tomorrow}T08:00:00.000Z`);
 
 console.log("youtube publish schedule tests passed");

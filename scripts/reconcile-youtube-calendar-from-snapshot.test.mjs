@@ -71,4 +71,18 @@ assert.equal(second.report.summary.updated, 0);
 assert.equal(second.report.summary.unchanged, 2);
 assert.equal(second.report.summary.skipped, 3);
 
+const scoped = reconcileCalendar({
+  snapshot,
+  calendar: structuredClone(calendar),
+  channelsConfig,
+  policy,
+  now: "2026-07-13T08:05:00.000Z",
+  allowedVideoIds: ["create-me"],
+});
+assert.equal(scoped.report.summary.scheduledLiveCandidates, 1);
+assert.equal(scoped.report.summary.created, 1);
+assert.equal(scoped.report.summary.updated, 0);
+assert.equal(scoped.report.summary.skipped, 0);
+assert.equal(scoped.calendar.reservations.at(-1).youtubeVideoId, "create-me");
+
 console.log("youtube calendar snapshot reconciliation tests passed");
