@@ -259,7 +259,7 @@ async function main() {
             pathName: "playlistImages",
             query: {
               part: "snippet",
-              playlistId: row.playlistId,
+              parent: row.playlistId,
               fields: "items(id,snippet(playlistId,type,width,height))",
             },
           });
@@ -270,7 +270,7 @@ async function main() {
           row.state = "error";
           row.error = error.message;
           saveReport(options, rows, startedAt);
-          if (error.status === 403 && /quotaExceeded|quota exceeded/iu.test(error.body || error.message)) throw error;
+          throw error;
         }
         saveReport(options, rows, startedAt);
       }
@@ -285,6 +285,9 @@ async function main() {
   }
 
   const report = saveReport(options, rows, startedAt, new Date().toISOString());
+  if (report.summary.errors > 0) {
+    throw new Error(`Playlist image audit is incomplete: ${report.summary.errors} row(s) failed`);
+  }
   console.log(JSON.stringify({ output: options.output, summary: report.summary }, null, 2));
 }
 
