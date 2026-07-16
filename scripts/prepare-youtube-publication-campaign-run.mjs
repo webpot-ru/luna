@@ -35,6 +35,16 @@ function sha256(filePath) {
   return crypto.createHash("sha256").update(fs.readFileSync(filePath)).digest("hex");
 }
 
+function historicalGitBlobSha256({ commit, path: filePath }) {
+  if (!commit || !filePath) return "";
+  const result = spawnSync("git", ["show", `${commit}:${filePath}`], {
+    encoding: null,
+    maxBuffer: 64 * 1024 * 1024,
+  });
+  if (result.status !== 0 || !result.stdout?.length) return "";
+  return crypto.createHash("sha256").update(result.stdout).digest("hex");
+}
+
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
@@ -51,10 +61,12 @@ function main() {
   const blockers = [];
   const offlineDeckFingerprint = campaign.evidence?.sourceFingerprints?.offlineDeck || {};
   const historicalDeckSource = campaign.evidence?.deckSource?.historicalGitBlob || {};
+  const offlineDeckSha256 = offlineDeckFingerprint.sha256 || historicalGitBlobSha256(historicalDeckSource);
   if (campaign.evidence?.deckSource?.mode === "historical_git_blob") {
     if (!historicalDeckSource.commit || !historicalDeckSource.blobId) {
       blockers.push("campaign historical Git deck source is incomplete");
     }
+    if (!offlineDeckSha256) blockers.push("campaign historical Git deck checksum is unavailable");
   } else if (!offlineDeckFingerprint.exists || !offlineDeckFingerprint.sha256) {
     blockers.push("campaign is missing the immutable offline deck fingerprint");
   }
@@ -166,7 +178,7 @@ function main() {
   fs.writeFileSync(options.output, `${JSON.stringify(report, null, 2)}\n`, "utf8");
   if (options.githubOutput) {
     fs.appendFileSync(options.githubOutput, `set_id=${campaign.setId}\n`);
-    fs.appendFileSync(options.githubOutput, `offline_deck_sha256=${offlineDeckFingerprint.sha256 || ""}\n`);
+    fs.appendFileSync(options.githubOutput, `offline_deck_sha256=${offlineDeckSha256}\n`);
     fs.appendFileSync(options.githubOutput, `offline_deck_git_commit=${historicalDeckSource.commit || ""}\n`);
     fs.appendFileSync(options.githubOutput, `ordinary_matrix=${JSON.stringify({ include: ordinaryMatrix })}\n`);
     fs.appendFileSync(options.githubOutput, `polyglot_matrix=${JSON.stringify({ include: polyglotMatrix })}\n`);
