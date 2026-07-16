@@ -49,6 +49,7 @@ function usage() {
   return [
     "Usage:",
     "  node scripts/youtube-update-visibility.mjs --video-id=<id> --support=<RU> [--playlist-id=<id>] --privacy=public",
+    "  node scripts/youtube-update-visibility.mjs --playlist-id=<id> --support=<RU> --privacy=public",
     "",
     "Dry-run is default. Live write requires:",
     "  --apply --confirm-youtube-write",
@@ -288,7 +289,7 @@ function updatePlaylistRegistry({ filePath, playlistId, privacyStatus }) {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  if (options.help || !options.videoId || !options.supportLang) {
+  if (options.help || (!options.videoId && !options.playlistId) || !options.supportLang) {
     console.log(usage());
     process.exit(options.help ? 0 : 1);
   }
@@ -302,14 +303,14 @@ async function main() {
 
   const plan = {
     action: "youtube_update_visibility",
-    videoId: options.videoId,
+    videoId: options.videoId || "",
     playlistId: options.playlistId,
     supportLang: options.supportLang,
     channelKey: channel.key,
     expectedYoutubeChannelId: channel.channelId,
     privacyStatus: options.privacyStatus,
     apply: options.apply,
-    estimatedQuotaUnits: 50 + (options.playlistId ? 50 : 0),
+    estimatedQuotaUnits: (options.videoId ? 50 : 0) + (options.playlistId ? 50 : 0),
   };
 
   if (!options.apply) {
@@ -334,8 +335,8 @@ async function main() {
       accessToken,
       expectedChannelId: channel.channelId,
     });
-    const beforeVideo = await readVideo({ accessToken, videoId: options.videoId });
-    if (beforeVideo.snippet?.channelId !== channel.channelId) {
+    const beforeVideo = options.videoId ? await readVideo({ accessToken, videoId: options.videoId }) : null;
+    if (beforeVideo && beforeVideo.snippet?.channelId !== channel.channelId) {
       fail(`Video channel mismatch: expected ${channel.channelId}, got ${beforeVideo.snippet?.channelId || "(missing)"}.`);
     }
     const beforePlaylist = await readPlaylist({ accessToken, playlistId: options.playlistId });
@@ -343,19 +344,19 @@ async function main() {
       fail(`Playlist channel mismatch: expected ${channel.channelId}, got ${beforePlaylist.snippet?.channelId || "(missing)"}.`);
     }
 
-    const updatedVideo = await updateVideoPrivacy({
+    const updatedVideo = beforeVideo ? await updateVideoPrivacy({
       accessToken,
       video: beforeVideo,
       privacyStatus: options.privacyStatus,
-    });
+    }) : null;
     const updatedPlaylist = await updatePlaylistPrivacy({
       accessToken,
       playlist: beforePlaylist,
       privacyStatus: options.privacyStatus,
     });
-    const afterVideo = await readVideo({ accessToken, videoId: options.videoId });
+    const afterVideo = options.videoId ? await readVideo({ accessToken, videoId: options.videoId }) : null;
     const afterPlaylist = await readPlaylist({ accessToken, playlistId: options.playlistId });
-    if (afterVideo.status?.privacyStatus !== options.privacyStatus) {
+    if (afterVideo && afterVideo.status?.privacyStatus !== options.privacyStatus) {
       fail(`Video privacy readback mismatch: expected ${options.privacyStatus}, got ${afterVideo.status?.privacyStatus || "(missing)"}.`);
     }
     if (afterPlaylist && afterPlaylist.status?.privacyStatus !== options.privacyStatus) {
@@ -380,13 +381,15 @@ async function main() {
       },
     };
     appendLedger(options.ledger, row);
-    updatePublicationRegistry({
-      filePath: options.publicationRegistry,
-      videoId: options.videoId,
-      privacyStatus: options.privacyStatus,
-      playlistId: options.playlistId,
-      readback: row.readback,
-    });
+    if (options.videoId) {
+      updatePublicationRegistry({
+        filePath: options.publicationRegistry,
+        videoId: options.videoId,
+        privacyStatus: options.privacyStatus,
+        playlistId: options.playlistId,
+        readback: row.readback,
+      });
+    }
     updatePlaylistRegistry({
       filePath: options.playlistRegistry,
       playlistId: options.playlistId,

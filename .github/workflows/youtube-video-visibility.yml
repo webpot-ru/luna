@@ -5,7 +5,8 @@ on:
     inputs:
       video_id:
         description: "Existing YouTube video id to update."
-        required: true
+        required: false
+        default: ""
       support:
         description: "Support language code for channel/token lookup."
         required: true
@@ -14,6 +15,11 @@ on:
         description: "Optional playlist id to update to the same privacy."
         required: false
         default: ""
+      playlist_only:
+        description: "Update only the playlist; never mutate a video."
+        required: true
+        default: false
+        type: boolean
       privacy:
         description: "Target YouTube privacy status."
         required: true
@@ -51,6 +57,9 @@ jobs:
           PRIVACY: ${{ github.event.inputs.privacy }}
           CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
           CONFIRM_PUBLIC: ${{ github.event.inputs.confirm_public }}
+          VIDEO_ID: ${{ github.event.inputs.video_id }}
+          PLAYLIST_ID: ${{ github.event.inputs.playlist_id }}
+          PLAYLIST_ONLY: ${{ github.event.inputs.playlist_only }}
         run: |
           set -euo pipefail
           if [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_YOUTUBE_VISIBILITY" ]; then
@@ -59,6 +68,15 @@ jobs:
           fi
           if [ "$PRIVACY" = "public" ] && [ "$CONFIRM_PUBLIC" != "PUBLISH_PUBLIC" ]; then
             echo "::error::privacy=public requires confirm_public=PUBLISH_PUBLIC"
+            exit 1
+          fi
+          if [ "$PLAYLIST_ONLY" = "true" ]; then
+            if [ -n "$VIDEO_ID" ] || [ -z "$PLAYLIST_ID" ]; then
+              echo "::error::playlist_only requires empty video_id and a non-empty playlist_id"
+              exit 1
+            fi
+          elif [ -z "$VIDEO_ID" ]; then
+            echo "::error::video_id is required unless playlist_only=true"
             exit 1
           fi
 
@@ -89,11 +107,18 @@ jobs:
           SUPPORT: ${{ github.event.inputs.support }}
           PLAYLIST_ID: ${{ github.event.inputs.playlist_id }}
           PRIVACY: ${{ github.event.inputs.privacy }}
+          PLAYLIST_ONLY: ${{ github.event.inputs.playlist_only }}
         run: |
           set -euo pipefail
-          ARGS=("--video-id=$VIDEO_ID" "--support=$SUPPORT" "--privacy=$PRIVACY" "--apply" "--confirm-youtube-write" "--ledger=outputs/youtube-visibility-ledger.jsonl")
+          ARGS=("--support=$SUPPORT" "--privacy=$PRIVACY" "--apply" "--confirm-youtube-write" "--ledger=outputs/youtube-visibility-ledger.jsonl")
+          if [ -n "$VIDEO_ID" ]; then
+            ARGS+=("--video-id=$VIDEO_ID")
+          fi
           if [ -n "$PLAYLIST_ID" ]; then
             ARGS+=("--playlist-id=$PLAYLIST_ID")
+          fi
+          if [ "$PLAYLIST_ONLY" = "true" ]; then
+            ARGS+=("--playlist-registry=config/youtube-polyglot-playlists.json")
           fi
           if [ "$PRIVACY" = "public" ]; then
             ARGS+=("--confirm-public")
@@ -104,9 +129,10 @@ jobs:
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
-          name: youtube-video-visibility-${{ github.event.inputs.video_id }}-${{ github.run_id }}
+          name: youtube-visibility-${{ github.event.inputs.support }}-${{ github.run_id }}
           retention-days: 14
           if-no-files-found: warn
           path: |
             outputs/youtube-visibility-ledger.jsonl
             config/youtube-published-videos.json
+            config/youtube-polyglot-playlists.json
