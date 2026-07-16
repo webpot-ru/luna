@@ -288,9 +288,10 @@
       "customThumbnailUploadAllowed": false,
       "thumbnailFallbackMode": "first_frame_auto",
       "notes": [
-        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio.",
+        "2026-07-16 user explicitly confirmed that the Chinese channel may upload videos longer than 15 minutes; this updates long-video capability only and does not prove thumbnails.set permission."
       ],
-      "longVideoUploadAllowed": false
+      "longVideoUploadAllowed": true
     },
     {
       "key": "it",
