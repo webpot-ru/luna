@@ -109956,7 +109956,7 @@
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-8e9ae3bc05c5",
       "manifestHash": "9e0574510560e6bf283bad2585984e7f62b27288a4de8e923505e99d095756f5",
       "setId": "home_kitchen_cooking_actions_a1_a2",
-      "status": "claimed",
+      "status": "reconciliation_required",
       "claimedAt": "2026-07-16T04:04:27.155Z",
       "generatedAt": "2026-07-16T04:04:27.155Z",
       "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-8e9ae3bc05c5.json",
@@ -110314,7 +110314,17 @@
             "registryEntryPresent": true,
             "discoveryGeneratedAt": "2026-07-14T11:54:35.670Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted",
+          "youtubeVideoId": "odiQ841yJJo",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=odiQ841yJJo",
+          "youtubePlaylistId": "PLdXWzDqR2hbU",
+          "playlistItemId": "UExkWFd6RHFSMmhiVS4yODlGNEE0NkRGMEEzMEQy",
+          "thumbnailSet": true,
+          "publicationStatus": "scheduled_uploaded",
+          "githubRunId": "29470626089",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29470626089",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-16T04:18:00.654Z"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|KO|global_europe_core|7a4233775927|short_unverified",
@@ -110517,7 +110527,21 @@
           },
           "status": "claimed"
         }
-      ]
+      ],
+      "finalizedAt": "2026-07-16T04:18:00.654Z",
+      "finalizeSummary": {
+        "expectedCount": 8,
+        "completedCount": 1,
+        "observedCount": 1,
+        "missingCount": 7,
+        "duplicateAssignmentCount": 0,
+        "duplicateVideoIdCount": 0,
+        "unexpectedPublicationCount": 6,
+        "receiptErrorCount": 0,
+        "ordinaryResult": "failure",
+        "polyglotResult": "failure",
+        "artifactCount": 8
+      }
     }
   ]
 }
