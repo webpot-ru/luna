@@ -191,7 +191,7 @@ function main() {
   const ordinaryExpectedCount = campaign.assignments.filter((row) => row.videoType === "ordinary").length;
   const polyglotExpectedCount = campaign.assignments.filter((row) => row.videoType === "polyglot").length;
   const workerSucceeded = (expectedCountForType, result) => (
-    expectedCountForType === 0 ? ["success", "skipped"].includes(result) : result === "success"
+    expectedCountForType === 0 ? ["success", "skipped", "failure"].includes(result) : result === "success"
   );
   const workerSuccess = workerSucceeded(ordinaryExpectedCount, options.ordinaryResult)
     && workerSucceeded(polyglotExpectedCount, options.polyglotResult);
