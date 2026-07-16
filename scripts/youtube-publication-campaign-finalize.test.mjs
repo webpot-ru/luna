@@ -167,6 +167,39 @@ const polyglotOnlyPreflight = JSON.parse(fs.readFileSync(path.join(root, "output
 assert.equal(polyglotOnlyPreflight.ordinaryMatrix.length, 0);
 assert.equal(polyglotOnlyPreflight.polyglotMatrix.length, 1);
 
+const polyglotOnlyArtifactRoot = path.join(root, "artifacts-polyglot-only");
+const polyglotOnlyArtifact = path.join(polyglotOnlyArtifactRoot, "polyglot", "config");
+write(path.join(polyglotOnlyArtifact, "youtube-polyglot-published-videos.json"), {
+  schemaVersion: 1,
+  publications: [{
+    ...publicationBase,
+    campaignId: polyglotOnlyCampaign.campaignId,
+    videoType: "polyglot",
+    polyglotKey: polyglotAssignment.polyglotKey,
+    targetLang: polyglotAssignment.targetLang,
+    targetLangs: polyglotAssignment.targetLangs,
+    targetLangsHash: "hash",
+    bundleKey: "global_europe_core",
+    contentScope: "full",
+    publishAt: polyglotAssignment.publishAt,
+    youtubeVideoId: "polyglot-only-video",
+    youtubeVideoUrl: "https://youtu.be/polyglot-only-video",
+    youtubePlaylistId: "polyglot-playlist",
+    playlistItemId: "polyglot-only-playlist-item",
+  }],
+});
+const polyglotOnlyFinalize = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/finalize-youtube-publication-campaign.mjs"),
+  "--campaign-id=campaign-polyglot-only",
+  "--artifacts-root=artifacts-polyglot-only",
+  "--ordinary-result=skipped",
+  "--polyglot-result=success",
+  "--output=outputs/final-polyglot-only.json",
+], { cwd: root, encoding: "utf8" });
+assert.equal(polyglotOnlyFinalize.status, 0, polyglotOnlyFinalize.stderr || polyglotOnlyFinalize.stdout);
+const polyglotOnlyFinalReport = JSON.parse(fs.readFileSync(path.join(root, "outputs/final-polyglot-only.json"), "utf8"));
+assert.equal(polyglotOnlyFinalReport.complete, true);
+
 write(path.join(configDir, "youtube-publication-campaigns.json"), { schemaVersion: 1, campaigns: [campaign] });
 write(path.join(configDir, "youtube-publish-calendar.json"), {
   schemaVersion: 1,
@@ -177,6 +210,13 @@ write(path.join(configDir, "youtube-publish-calendar.json"), {
     status: "campaign_claimed",
   })),
 });
+for (const name of ["youtube-published-videos.json", "youtube-polyglot-published-videos.json"]) {
+  write(path.join(configDir, name), { schemaVersion: 1, publications: [] });
+}
+for (const name of ["youtube-playlists.json", "youtube-polyglot-playlists.json"]) {
+  write(path.join(configDir, name), { schemaVersion: 1, playlists: [] });
+}
+write(path.join(configDir, "youtube-polyglot-progress.json"), { schemaVersion: 1, items: [] });
 
 const finalize = spawnSync(process.execPath, [
   path.join(repoRoot, "scripts/finalize-youtube-publication-campaign.mjs"),

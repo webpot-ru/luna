@@ -329,7 +329,7 @@ jobs:
     secrets: inherit
 
   polyglot:
-    if: ${{ always() && inputs.mode == 'apply' && needs.preflight.result == 'success' && needs.metadata.result == 'success' && needs.ordinary.result == 'success' }}
+    if: ${{ always() && inputs.mode == 'apply' && needs.preflight.result == 'success' && needs.metadata.result == 'success' && (needs.ordinary.result == 'success' || needs.ordinary.result == 'skipped') }}
     needs: [preflight, metadata, ordinary]
     strategy:
       fail-fast: false
