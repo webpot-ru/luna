@@ -16,6 +16,7 @@ function parseArgs(argv) {
   const options = {
     setId: "",
     supports: [],
+    videoTypes: [],
     targets: null,
     ordinaryRegistry: "config/youtube-published-videos.json",
     polyglotRegistry: "config/youtube-polyglot-published-videos.json",
@@ -36,6 +37,7 @@ function parseArgs(argv) {
     const value = () => arg.includes("=") ? arg.split("=").slice(1).join("=") : argv[++index];
     if (arg === "--set" || arg.startsWith("--set=")) options.setId = value();
     else if (arg === "--support" || arg.startsWith("--support=")) options.supports = value().split(",").map(normalizeCode).filter(Boolean);
+    else if (arg === "--video-types" || arg.startsWith("--video-types=")) options.videoTypes = value().split(",").map((item) => item.trim().toLowerCase()).filter(Boolean);
     else if (arg === "--targets" || arg.startsWith("--targets=")) options.targets = value().split(",").map(normalizeCode).filter(Boolean);
     else if (arg === "--ordinary-registry" || arg.startsWith("--ordinary-registry=")) options.ordinaryRegistry = value();
     else if (arg === "--polyglot-registry" || arg.startsWith("--polyglot-registry=")) options.polyglotRegistry = value();
@@ -129,11 +131,13 @@ function gapStartDatesForSupports({ supports, channelConfig, schedulePolicy, now
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help || !options.setId || !options.supports.length) {
-    console.log("Usage: node scripts/check-youtube-publication-control.mjs --set <id> --support EN[,RU] [--targets DE,FR] [--polyglot-bundles global_europe_core,...] [--live-audit=<file>] [--strict]");
+    console.log("Usage: node scripts/check-youtube-publication-control.mjs --set <id> --support EN[,RU] [--video-types ordinary,polyglot] [--targets DE,FR] [--polyglot-bundles global_europe_core,...] [--live-audit=<file>] [--strict]");
     process.exit(options.help ? 0 : 1);
   }
   if (options.strict && !options.liveAudit) throw new Error("--strict requires --live-audit from a fresh authenticated readback");
   if (options.blockExistingTargets && !options.targets?.length) throw new Error("--block-existing-targets requires explicit --targets");
+  const unknownVideoTypes = options.videoTypes.filter((value) => !["ordinary", "polyglot"].includes(value));
+  if (unknownVideoTypes.length) throw new Error(`Unknown --video-types values: ${unknownVideoTypes.join(",")}`);
   const liveAudit = readJson(options.liveAudit, null);
   if (options.strict) {
     if (liveAudit?.setId !== options.setId) throw new Error(`Strict live audit set mismatch: expected ${options.setId}, got ${liveAudit?.setId || "missing"}`);
@@ -164,6 +168,7 @@ async function main() {
     liveAudit,
     setId: options.setId,
     supports: options.supports,
+    videoTypes: options.videoTypes,
     desiredTargetsBySupport,
     desiredPolyglotAssignmentsBySupport: polyglotProduct.assignments,
     proposedOrdinaryAssignments: options.blockExistingTargets

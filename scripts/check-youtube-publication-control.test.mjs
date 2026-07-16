@@ -72,6 +72,22 @@ const liveMissingDurableRegistry = buildPublicationControlReport({
 assert.ok(liveMissingDurableRegistry.blockers.some((item) => item.type === "live_video_missing_durable_registry"));
 assert.equal(liveMissingDurableRegistry.publications.find((row) => row.youtubeVideoId === "live-only")?.durableRegistryPresent, false);
 
+const polyglotScopedControl = buildPublicationControlReport({
+  ...base,
+  videoTypes: ["polyglot"],
+  ordinaryRegistry: { publications: [canonical] },
+  calendar: { reservations: [reservation] },
+  liveAudit: { supportReports: [{ supportLang: "EN", channelKey: "en", matchedPublications: [{
+    ...canonical,
+    targetLang: "FR",
+    youtubeVideoId: "same-campaign-ordinary-not-finalized",
+    youtubeStatus: { privacyStatus: "private", publishAt: "2026-07-15T12:00:00Z", uploadStatus: "processed" },
+  }] }] },
+});
+assert.equal(polyglotScopedControl.summary.liveVideoMissingDurableRegistryCount, 0);
+assert.equal(polyglotScopedControl.summary.ordinaryTailCount, 0);
+assert.deepEqual(polyglotScopedControl.videoTypes, ["polyglot"]);
+
 const registryDuplicate = buildPublicationControlReport({
   ...base,
   ordinaryRegistry: { publications: [canonical, { ...canonical, youtubeVideoId: "duplicate" }] },
@@ -325,6 +341,7 @@ const strictCli = spawnSync(process.execPath, [
   "scripts/check-youtube-publication-control.mjs",
   "--set=test-deck",
   "--support=EN",
+  "--video-types=ordinary",
   "--targets=DE",
   `--ordinary-registry=${emptyRegistry}`,
   `--polyglot-registry=${emptyRegistry}`,
@@ -337,6 +354,8 @@ assert.equal(strictCli.status, 0, strictCli.stderr || strictCli.stdout);
 const strictReport = JSON.parse(fs.readFileSync(outputPath, "utf8"));
 assert.equal(strictReport.evidence.strict, true);
 assert.equal(strictReport.evidence.videoStatusReadback, true);
+assert.deepEqual(strictReport.videoTypes, ["ordinary"]);
+assert.equal(strictReport.summary.polyglotTailCount, 0);
 
 const defaultTargetsOutputPath = path.join(root, "control-default-targets.json");
 const defaultTargetsCli = spawnSync(process.execPath, [
@@ -363,6 +382,40 @@ assert.doesNotMatch(
   auditWorkflow,
   /CONTROL_ARGS=.*?"--strict"/u,
   "the read-only audit must retain complete evidence when it detects state drift",
+);
+
+const ordinaryWorkerWorkflow = fs.readFileSync(".github/workflows/youtube-video-publish.yml", "utf8");
+assert.match(
+  ordinaryWorkerWorkflow,
+  /Gate live publications, durable registry and calendar[\s\S]*?CONTROL_ARGS=\([^\n]*?"--video-types=ordinary"[^\n]*?"--strict"\)/u,
+  "ordinary apply must build strict publication-control evidence before render",
+);
+assert.match(
+  ordinaryWorkerWorkflow,
+  /Refresh live publication control immediately before upload[\s\S]*?CONTROL_ARGS=\([^\n]*?"--video-types=ordinary"[^\n]*?"--strict"\)/u,
+  "ordinary apply must refresh strict publication-control evidence immediately before upload",
+);
+assert.equal(
+  (ordinaryWorkerWorkflow.match(/CONTROL_ARGS\+=\("--targets=\$LANGS_INPUT" "--block-existing-targets"\)/gu) || []).length,
+  2,
+  "ordinary apply must bind both strict reports to the exact worker targets, including campaign-owned workers",
+);
+assert.doesNotMatch(
+  ordinaryWorkerWorkflow,
+  /\[ -n "\$LANGS_INPUT" \] && \[ -z "\$\{\{ inputs\.campaign_id \}\}" \]/u,
+  "campaign-owned ordinary workers must not bypass candidate-level duplicate blocking",
+);
+
+const polyglotWorkerWorkflow = fs.readFileSync(".github/workflows/youtube-polyglot-video-publish.yml", "utf8");
+assert.match(
+  polyglotWorkerWorkflow,
+  /Audit and gate live Polyglot publication state[\s\S]*?CONTROL_ARGS=\([^\n]*?"--video-types=polyglot"[^\n]*?"--strict"\)/u,
+  "Polyglot apply must build strict publication-control evidence before render",
+);
+assert.match(
+  polyglotWorkerWorkflow,
+  /Refresh live Polyglot publication control immediately before upload[\s\S]*?CONTROL_ARGS=\([^\n]*?"--video-types=polyglot"[^\n]*?"--strict"\)/u,
+  "Polyglot apply must refresh strict publication-control evidence immediately before upload",
 );
 
 console.log("youtube publication control tests passed");

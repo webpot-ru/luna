@@ -143,6 +143,11 @@ function requireFreshPublicationControl(reportPath, metadata) {
   const support = normalizeLanguageCode(metadata.supportLang);
   const supports = new Set((report.supports || []).map(normalizeLanguageCode));
   if (!supports.has(support)) fail(`Publication control report does not cover support=${support}.`);
+  const candidateVideoType = isPolyglotMetadata(metadata) ? "polyglot" : "ordinary";
+  const reportVideoTypes = new Set((report.videoTypes || []).map((value) => String(value || "").trim().toLowerCase()).filter(Boolean));
+  if (reportVideoTypes.size && !reportVideoTypes.has(candidateVideoType)) {
+    fail(`Publication control report does not cover videoType=${candidateVideoType}.`);
+  }
   const candidateKey = publicationControlAssignmentKey(metadata);
   const candidateTargets = normalizedTargetLangs(metadata).join(",");
   const candidatePolyglotSlot = polyglotSlotKey(metadata);

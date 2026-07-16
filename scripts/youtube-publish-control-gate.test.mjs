@@ -98,4 +98,17 @@ const activePolyglotSlot = run([`--publication-control-report=${activeReportPath
 assert.notEqual(activePolyglotSlot.status, 0);
 assert.match(`${activePolyglotSlot.stdout}\n${activePolyglotSlot.stderr}`, /active assignment for this candidate/);
 
+fs.writeFileSync(activeReportPath, `${JSON.stringify({
+  generatedAt: now,
+  setId: "test-deck",
+  supports: ["EN"],
+  videoTypes: ["ordinary"],
+  summary: { healthy: true },
+  evidence: { strict: true, videoStatusReadback: true, paginationComplete: true, liveAuditGeneratedAt: now },
+  publications: [],
+}, null, 2)}\n`);
+const wrongVideoTypeScope = run([`--publication-control-report=${activeReportPath}`]);
+assert.notEqual(wrongVideoTypeScope.status, 0);
+assert.match(`${wrongVideoTypeScope.stdout}\n${wrongVideoTypeScope.stderr}`, /does not cover videoType=polyglot/);
+
 console.log("youtube publish control gate tests passed");
