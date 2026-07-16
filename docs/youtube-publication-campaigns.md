@@ -125,6 +125,10 @@ Campaign child workflows получают `campaign_id`, поэтому их sta
 
 Standalone ordinary/Polyglot workflows сохраняют собственный persist-job для одиночных legacy-запусков. Они не являются основным путем для смешанной 51-channel campaign.
 
+## Partial recovery after accepted uploads
+
+Если finalizer уже зафиксировал часть YouTube IDs, zero-upload re-arm запрещён. Точный partial recovery использует `npm run recover-partial:youtube-publication-campaign`: только выбранные отсутствующие assignments без YouTube ID получают статус `superseded_partial_recovery`, их старые календарные claims освобождаются, а остальные completed/missing строки исходной campaign не меняются. Новый immutable manifest строится только из свежих здоровых route-control reports, повторно назначает следующие свободные shared-calendar slots и применяет актуальное правило `longVideoUploadAllowed=true -> full`, иначе `short_unverified <= 895s`. После exact commit/merge запускается одна новая campaign; direct child dispatch и полный повтор исходной campaign запрещены.
+
 ## Current implementation state
 
 На 2026-07-14 run `29317134907` финализирован как zero-upload failure из-за малого local output cap. Следующий run `29320229328` использовал исправленный cap, но также завершился zero-upload failure: 4/4 route metadata jobs упали на жестком `120000 ms` provider timeout и последующем VectorEngine timeout/invalid JSON; ordinary/Polyglot были пропущены. Finalizer commit `94cbf801` записал `reconciliation_required`, `0` completed/observed/artifacts/receipt errors и `306` missing. Локальное исправление timeout/key rotation/checkpoint recovery проверено тестами.
