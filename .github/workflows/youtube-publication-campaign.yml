@@ -70,6 +70,7 @@ jobs:
       ordinary_matrix: ${{ steps.apply_preflight.outputs.ordinary_matrix }}
       polyglot_matrix: ${{ steps.apply_preflight.outputs.polyglot_matrix }}
       metadata_matrix: ${{ steps.apply_preflight.outputs.metadata_matrix }}
+      ordinary_worker_count: ${{ steps.apply_preflight.outputs.ordinary_worker_count }}
       offline_deck_sha256: ${{ steps.apply_preflight.outputs.offline_deck_sha256 }}
       offline_deck_git_commit: ${{ steps.apply_preflight.outputs.offline_deck_git_commit }}
     steps:
@@ -329,7 +330,7 @@ jobs:
     secrets: inherit
 
   polyglot:
-    if: ${{ always() && inputs.mode == 'apply' && needs.preflight.result == 'success' && needs.metadata.result == 'success' && (needs.ordinary.result == 'success' || needs.ordinary.result == 'skipped') }}
+    if: ${{ always() && inputs.mode == 'apply' && needs.preflight.result == 'success' && needs.metadata.result == 'success' && (needs.preflight.outputs.ordinary_worker_count == '0' || needs.ordinary.result == 'success') }}
     needs: [preflight, metadata, ordinary]
     strategy:
       fail-fast: false

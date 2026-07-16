@@ -192,7 +192,7 @@ const polyglotOnlyFinalize = spawnSync(process.execPath, [
   path.join(repoRoot, "scripts/finalize-youtube-publication-campaign.mjs"),
   "--campaign-id=campaign-polyglot-only",
   "--artifacts-root=artifacts-polyglot-only",
-  "--ordinary-result=skipped",
+  "--ordinary-result=failure",
   "--polyglot-result=success",
   "--output=outputs/final-polyglot-only.json",
 ], { cwd: root, encoding: "utf8" });
