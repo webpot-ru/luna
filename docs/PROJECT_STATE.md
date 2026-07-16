@@ -1,5 +1,7 @@
 # Project State
 
+- 2026-07-16 route-3 reached YouTube API `quotaExceeded` during read-only playlist discovery, so it is excluded from the current Polyglot recovery. A fresh healthy route-1/2/4 control artifact supports claimed campaign `yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-807bb9dd1825`, manifest `e8bca4ae67547b40c1098ddab1122669ff79f758191dd3fb9133cb7c855c3a84`: exactly `38` missing Polyglot tails (`12/13/13` by routes 1/2/4), no ordinary rows, no route-3 rows, first slot `2026-07-17T11:30:00Z`. It uses `13` reviewed custom covers and `25` automatic thumbnails; local claim made zero provider and YouTube calls.
+
 - 2026-07-16 user confirmed the ZH physical channel for custom-video-thumbnail use. `config/youtube-channels.json` now records `customThumbnailUploadAllowed=true`; this changes no existing YouTube thumbnail and does not prove playlist-image capability, which remains unproven. Any ZH `thumbnails.set` stays an exact missing-only, separately approved write.
 
 - 2026-07-16 `youtube-live-publication-audit` is fail-closed for thumbnail/reconciliation evidence: it now always requests `videos.list(status)` and rejects an artifact unless both uploads pagination and status readback are complete. Earlier route-1 run `29486441180` omitted that status flag (`videoStatusReadback=false`) and therefore cannot prove a missing custom thumbnail or authorize registry reconciliation; its six historical PT rows remain `youtube_existing_unknown`, not thumbnail-upload candidates.
