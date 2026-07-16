@@ -476,13 +476,16 @@ async function main() {
     };
     report.results.push(result);
     try {
+      const userAuthorizedReapply = candidate.userAuthorizedReapply === true
+        && candidate.reapplyReason === "operator_live_observation_missing";
       if (options.apply && (
         candidate.exactMissingOnly !== true
         || candidate.auditState !== "absent"
         || !candidate.auditReport
         || !candidate.auditReportSha256
+        || (!userAuthorizedReapply && candidate.auditEvidenceType !== "youtube_playlist_images_readback")
       )) {
-        fail(`Apply requires exact missing-only audit evidence for ${candidate.playlistKey}`);
+        fail(`Apply requires exact missing-only YouTube readback evidence or an explicit user-authorized reapply for ${candidate.playlistKey}`);
       }
       if (options.apply) {
         const auditPath = path.resolve(candidate.auditReport);
