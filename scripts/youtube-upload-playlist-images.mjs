@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
@@ -14,11 +15,13 @@ import {
 
 const DEFAULT_MANIFEST = "outputs/design-prototypes/youtube-playlist-covers-upload-eligible-20260709-coretext/manifest.json";
 const DEFAULT_OUTPUT_DIR = "outputs/youtube-playlist-image-upload";
+const DEFAULT_POLYGLOT_PLAYLIST_REGISTRY = "config/youtube-polyglot-playlists.json";
 
 function parseArgs(argv) {
   const options = {
     manifest: DEFAULT_MANIFEST,
     playlistRegistry: DEFAULT_PLAYLIST_REGISTRY_PATH,
+    polyglotPlaylistRegistry: DEFAULT_POLYGLOT_PLAYLIST_REGISTRY,
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     supports: [],
     playlistKeys: [],
@@ -28,6 +31,7 @@ function parseArgs(argv) {
     apply: false,
     confirmYoutubeWrite: false,
     skipUploaded: false,
+    readbackAttempts: 8,
   };
   for (const arg of argv) {
     if (arg === "--apply") options.apply = true;
@@ -35,6 +39,7 @@ function parseArgs(argv) {
     else if (arg === "--help" || arg === "-h") options.help = true;
     else if (arg.startsWith("--manifest=")) options.manifest = arg.slice("--manifest=".length);
     else if (arg.startsWith("--playlist-registry=")) options.playlistRegistry = arg.slice("--playlist-registry=".length);
+    else if (arg.startsWith("--polyglot-playlist-registry=")) options.polyglotPlaylistRegistry = arg.slice("--polyglot-playlist-registry=".length);
     else if (arg.startsWith("--channel-config=")) options.channelConfig = arg.slice("--channel-config=".length);
     else if (arg.startsWith("--supports=")) {
       options.supports = arg.slice("--supports=".length).split(",").map((value) => value.trim().toLowerCase()).filter(Boolean);
@@ -42,6 +47,8 @@ function parseArgs(argv) {
       options.playlistKeys = arg.slice("--playlist-keys=".length).split(",").map((value) => value.trim()).filter(Boolean);
     } else if (arg.startsWith("--limit-per-channel=")) {
       options.limitPerChannel = Number(arg.slice("--limit-per-channel=".length));
+    } else if (arg.startsWith("--readback-attempts=")) {
+      options.readbackAttempts = Number(arg.slice("--readback-attempts=".length));
     } else if (arg.startsWith("--output-dir=")) options.outputDir = arg.slice("--output-dir=".length);
     else if (arg.startsWith("--oauth-root=")) options.oauthRoot = arg.slice("--oauth-root=".length);
     else if (arg === "--skip-uploaded") options.skipUploaded = true;
@@ -67,6 +74,10 @@ function fail(message) {
 function readJson(filePath, label) {
   if (!fs.existsSync(filePath)) fail(`Missing ${label}: ${filePath}`);
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+function sha256(filePath) {
+  return crypto.createHash("sha256").update(fs.readFileSync(filePath)).digest("hex");
 }
 
 function resolveExternalPath(filePath, { root = "", label }) {
@@ -274,14 +285,16 @@ function channelByKey(channelRegistry, channelKey) {
   return (channelRegistry.channels || []).find((channel) => channel.key === channelKey);
 }
 
-function selectCandidates({ manifest, supports, playlistKeys, limitPerChannel, playlistRegistry, skipUploaded }) {
+function selectCandidates({ manifest, supports, playlistKeys, limitPerChannel, playlistRegistry, playlistRegistries = new Map(), skipUploaded }) {
   const supportSet = new Set(supports);
   const keySet = new Set(playlistKeys);
   let rows = (manifest.records || [])
     .filter((row) => row.playlistKey && row.coverPath)
     .filter((row) => !row.uploadBlocker || row.uploadBlocker === "missing_youtube_playlist_id")
     .map((row) => {
-      const entry = findRegistryEntry(playlistRegistry, row.playlistKey);
+      const registryPath = row.registryPath || DEFAULT_PLAYLIST_REGISTRY_PATH;
+      const registry = playlistRegistries.get(registryPath) || playlistRegistry;
+      const entry = findRegistryEntry(registry, row.playlistKey);
       const manifestPlaylistId = String(row.playlistId || "");
       const registryPlaylistId = String(entry?.youtube_playlist_id || "");
       if (manifestPlaylistId && registryPlaylistId && manifestPlaylistId !== registryPlaylistId) {
@@ -289,6 +302,7 @@ function selectCandidates({ manifest, supports, playlistKeys, limitPerChannel, p
       }
       return {
         ...row,
+        registryPath,
         manifestPlaylistId,
         playlistId: registryPlaylistId || manifestPlaylistId,
         playlistIdSource: registryPlaylistId ? "durable_registry" : "manifest",
@@ -299,7 +313,8 @@ function selectCandidates({ manifest, supports, playlistKeys, limitPerChannel, p
   if (keySet.size) rows = rows.filter((row) => keySet.has(row.playlistKey));
   if (skipUploaded) {
     rows = rows.filter((row) => {
-      const entry = findRegistryEntry(playlistRegistry, row.playlistKey);
+      const registry = playlistRegistries.get(row.registryPath) || playlistRegistry;
+      const entry = findRegistryEntry(registry, row.playlistKey);
       return entry?.playlistImage?.status !== "uploaded";
     });
   }
@@ -317,6 +332,32 @@ function selectCandidates({ manifest, supports, playlistKeys, limitPerChannel, p
   return limited;
 }
 
+function candidateRegistryRows(candidate, playlistRegistries) {
+  const references = Array.isArray(candidate.registryRows) && candidate.registryRows.length
+    ? candidate.registryRows
+    : [{ registryPath: candidate.registryPath || DEFAULT_PLAYLIST_REGISTRY_PATH, playlistKey: candidate.playlistKey }];
+  return references.map((reference) => {
+    const registryPath = reference.registryPath || candidate.registryPath || DEFAULT_PLAYLIST_REGISTRY_PATH;
+    const registry = playlistRegistries.get(registryPath);
+    if (!registry) fail(`Unsupported playlist registry path: ${registryPath}`);
+    const entry = findRegistryEntry(registry, reference.playlistKey || candidate.playlistKey);
+    if (!entry) fail(`No playlist registry entry for ${reference.playlistKey || candidate.playlistKey} in ${registryPath}`);
+    if (entry.youtube_playlist_id !== candidate.playlistId) {
+      fail(`Playlist id mismatch for ${reference.playlistKey || candidate.playlistKey}: expected ${candidate.playlistId}, got ${entry.youtube_playlist_id || "(missing)"}`);
+    }
+    return { registryPath, registry, entry, playlistKey: reference.playlistKey || candidate.playlistKey };
+  });
+}
+
+function saveCandidateRegistries(registryRows) {
+  const saved = new Set();
+  for (const row of registryRows) {
+    if (saved.has(row.registryPath)) continue;
+    savePlaylistRegistry(row.registry, row.registryPath);
+    saved.add(row.registryPath);
+  }
+}
+
 function isGitTracked(filePath) {
   const absolute = path.resolve(filePath);
   const relative = path.relative(process.cwd(), absolute);
@@ -329,6 +370,7 @@ function isGitTracked(filePath) {
 }
 
 function summarize(results) {
+  const channelIdentityUnits = new Set(results.map((result) => result.channelKey).filter(Boolean)).size;
   const summary = {
     total: results.length,
     planned: 0,
@@ -336,19 +378,20 @@ function summarize(results) {
     inserted: 0,
     updated: 0,
     failed: 0,
-    quotaUnitsEstimated: 0,
+    quotaUnitsEstimated: channelIdentityUnits,
+    channelIdentityUnits,
   };
   for (const result of results) {
     if (result.status === "planned") summary.planned += 1;
     if (result.status === "uploaded") {
       summary.uploaded += 1;
-      summary.quotaUnitsEstimated += 52;
+      summary.quotaUnitsEstimated += result.method === "existing_readback" ? 2 : 53;
       if (result.method === "insert") summary.inserted += 1;
       if (result.method === "update") summary.updated += 1;
     }
     if (result.status === "failed") summary.failed += 1;
   }
-  if (!summary.uploaded) summary.quotaUnitsEstimated = summary.total * 52;
+  if (!summary.uploaded) summary.quotaUnitsEstimated = summary.total * 53 + channelIdentityUnits;
   return summary;
 }
 
@@ -364,16 +407,28 @@ async function main() {
     return;
   }
   if (options.apply && !options.confirmYoutubeWrite) fail("Apply mode requires --confirm-youtube-write.");
+  if (!Number.isInteger(options.readbackAttempts) || options.readbackAttempts < 1 || options.readbackAttempts > 8) {
+    fail("--readback-attempts must be an integer between 1 and 8.");
+  }
 
   const manifest = readJson(options.manifest, "playlist image manifest");
+  if (options.apply && manifest.auditComplete !== true) {
+    fail("Apply requires an auditComplete exact missing-only manifest.");
+  }
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const playlistRegistry = loadPlaylistRegistry(options.playlistRegistry);
+  const polyglotPlaylistRegistry = loadPlaylistRegistry(options.polyglotPlaylistRegistry);
+  const playlistRegistries = new Map([
+    [options.playlistRegistry, playlistRegistry],
+    [options.polyglotPlaylistRegistry, polyglotPlaylistRegistry],
+  ]);
   const candidates = selectCandidates({
     manifest,
     supports: options.supports,
     playlistKeys: options.playlistKeys,
     limitPerChannel: options.limitPerChannel,
     playlistRegistry,
+    playlistRegistries,
     skipUploaded: options.skipUploaded,
   });
   if (!candidates.length) fail("No upload-eligible playlist image candidates matched the filters.");
@@ -390,6 +445,7 @@ async function main() {
       playlistKeys: options.playlistKeys,
       limitPerChannel: options.limitPerChannel,
       skipUploaded: options.skipUploaded,
+      readbackAttempts: options.readbackAttempts,
     },
     results: [],
     summary: {},
@@ -415,14 +471,33 @@ async function main() {
     };
     report.results.push(result);
     try {
+      if (options.apply && (
+        candidate.exactMissingOnly !== true
+        || candidate.auditState !== "absent"
+        || !candidate.auditReport
+        || !candidate.auditReportSha256
+      )) {
+        fail(`Apply requires exact missing-only audit evidence for ${candidate.playlistKey}`);
+      }
+      if (options.apply) {
+        const auditPath = path.resolve(candidate.auditReport);
+        if (!fs.existsSync(auditPath) || sha256(auditPath) !== candidate.auditReportSha256) {
+          fail(`Audit evidence hash mismatch for ${candidate.playlistKey}`);
+        }
+        result.auditReport = candidate.auditReport;
+        result.auditReportSha256 = candidate.auditReportSha256;
+      }
       const channel = channelByKey(channelRegistry, candidate.channelKey);
       if (!channel) fail(`No channel configured for channelKey=${candidate.channelKey}`);
-      if (channel.customThumbnailUploadAllowed !== true) fail(`Channel ${candidate.channelKey} is not marked customThumbnailUploadAllowed=true`);
-      const entry = findRegistryEntry(playlistRegistry, candidate.playlistKey);
-      if (!entry) fail(`No playlist registry entry for ${candidate.playlistKey}`);
-      if (entry.youtube_playlist_id !== candidate.playlistId) fail(`Playlist id mismatch for ${candidate.playlistKey}`);
-      if (entry.youtube_channel_id && entry.youtube_channel_id !== channel.channelId) {
-        fail(`Registry channel mismatch for ${candidate.playlistKey}: expected ${channel.channelId}, got ${entry.youtube_channel_id}`);
+      if (channel.playlistImageUploadAllowed !== true) {
+        fail(`Channel ${candidate.channelKey} is not marked playlistImageUploadAllowed=true`);
+      }
+      const registryRows = candidateRegistryRows(candidate, playlistRegistries);
+      result.registryRows = registryRows.map((row) => ({ registryPath: row.registryPath, playlistKey: row.playlistKey }));
+      for (const registryRow of registryRows) {
+        if (registryRow.entry.youtube_channel_id && registryRow.entry.youtube_channel_id !== channel.channelId) {
+          fail(`Registry channel mismatch for ${registryRow.playlistKey}: expected ${channel.channelId}, got ${registryRow.entry.youtube_channel_id}`);
+        }
       }
       const coverPath = path.resolve(candidate.coverPath);
       if (!fs.existsSync(coverPath)) fail(`Missing cover image: ${candidate.coverPath}`);
@@ -453,20 +528,22 @@ async function main() {
       }
       const existing = await listPlaylistImages({ accessToken, playlistId: candidate.playlistId });
       const currentImage = (existing.items || []).find((item) => samePlaylistImage(item, candidate.playlistId));
-      if (currentImage?.id && entry.playlistImage?.status !== "uploaded") {
+      if (currentImage?.id) {
         const readbackAt = new Date().toISOString();
-        entry.playlistImage = {
-          status: "uploaded",
-          uploadedAt: readbackAt,
-          imageId: currentImage.id,
-          method: "existing_readback",
-          sourceManifest: options.manifest,
-          sourceCoverPath: candidate.coverPath,
-          sourceCoverGitTracked: result.coverGitTracked,
-          playlistImagesEndpoint: "playlistImages",
-        };
-        entry.lastReadbackAt = readbackAt;
-        savePlaylistRegistry(playlistRegistry, options.playlistRegistry);
+        for (const registryRow of registryRows) {
+          registryRow.entry.playlistImage = {
+            status: "uploaded",
+            uploadedAt: readbackAt,
+            imageId: currentImage.id,
+            method: "existing_readback",
+            sourceManifest: options.manifest,
+            sourceCoverPath: candidate.coverPath,
+            sourceCoverGitTracked: result.coverGitTracked,
+            playlistImagesEndpoint: "playlistImages",
+          };
+          registryRow.entry.lastReadbackAt = readbackAt;
+        }
+        saveCandidateRegistries(registryRows);
         result.status = "uploaded";
         result.method = "existing_readback";
         result.playlistImageId = currentImage.id;
@@ -494,27 +571,30 @@ async function main() {
         accessToken,
         playlistId: candidate.playlistId,
         imageId,
+        attempts: options.readbackAttempts,
       });
       const readbackImage = readbackResult.image;
       if (!readbackImage) fail(`Playlist image readback missing after ${method} for ${candidate.playlistId}`);
 
       const uploadedAt = new Date().toISOString();
-      entry.playlistImage = {
-        status: "uploaded",
-        uploadedAt,
-        imageId: readbackImage.id || imageId,
-        method,
-        sourceManifest: options.manifest,
-        sourceCoverPath: candidate.coverPath,
-        sourceCoverGitTracked: result.coverGitTracked,
-        playlistImagesEndpoint: "playlistImages",
-      };
-      entry.lastReadbackAt = uploadedAt;
-      savePlaylistRegistry(playlistRegistry, options.playlistRegistry);
+      for (const registryRow of registryRows) {
+        registryRow.entry.playlistImage = {
+          status: "uploaded",
+          uploadedAt,
+          imageId: readbackImage.id || imageId,
+          method,
+          sourceManifest: options.manifest,
+          sourceCoverPath: candidate.coverPath,
+          sourceCoverGitTracked: result.coverGitTracked,
+          playlistImagesEndpoint: "playlistImages",
+        };
+        registryRow.entry.lastReadbackAt = uploadedAt;
+      }
+      saveCandidateRegistries(registryRows);
 
       result.status = "uploaded";
       result.method = method;
-      result.playlistImageId = entry.playlistImage.imageId;
+      result.playlistImageId = readbackImage.id || imageId;
       result.readback = readbackImage;
       result.readbackAttempts = readbackResult.attemptsUsed;
       result.uploadedAt = uploadedAt;
