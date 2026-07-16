@@ -1,6 +1,6 @@
 # Project State
 
-- 2026-07-16 RU Deck #2 recovery blocker: run `29470626089` остановил только RU до metadata/render/TTS/upload, потому что playlist `PLbhbVjDBYtsQ` имеет `unlisted` visibility. Playlist-only visibility mode теперь не требует и не меняет чужое video ID: он проверяет RU OAuth ownership, обновляет только exact playlist и делает readback `public` перед отдельной one-video recovery campaign.
+- 2026-07-16 RU Deck #2 recovery blocker: run `29470626089` остановил только RU до metadata/render/TTS/upload, потому что playlist `PLbhbVjDBYtsQ` имеет `unlisted` visibility. Playlist-only run `29471668500` выполнил update request, но немедленный YouTube readback ещё вернул старое `unlisted`, поэтому workflow завершился failure и RU recovery не запускался. Локальное исправление делает playlist update идемпотентным и ждёт bounded propagation readback: уже-public playlist не обновляется повторно, а после реального PUT выполняется максимум восемь GET с паузой 2.5 секунды. Новый GitHub dispatch требует отдельного подтверждения по safe publish protocol.
 
 - 2026-07-16 Deck #2 partial-recovery path: после частично успешной campaign нельзя re-arm или повторять все `306`. Новый fail-closed helper освобождает только подтверждённые missing assignments без YouTube ID, сохраняет все принятые uploads, назначает следующие свободные календарные slots и переводит неподтверждённые каналы в `short_unverified <=14:55`. Применение и публикация остаются отдельными подтверждёнными действиями; direct child dispatch запрещён.
 

@@ -186,6 +186,22 @@ async function readPlaylist({ accessToken, playlistId }) {
   return singleYouTubeItem(readback, "playlist");
 }
 
+async function readPlaylistPrivacyWithRetry({
+  accessToken,
+  playlistId,
+  expectedPrivacyStatus,
+  attempts = 8,
+  delayMs = 2500,
+}) {
+  let playlist = null;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    playlist = await readPlaylist({ accessToken, playlistId });
+    if (playlist?.status?.privacyStatus === expectedPrivacyStatus) return playlist;
+    if (attempt < attempts) await new Promise((resolve) => setTimeout(resolve, delayMs));
+  }
+  return playlist;
+}
+
 function mutableVideoStatus(currentStatus, privacyStatus) {
   const next = {
     privacyStatus,
@@ -349,13 +365,18 @@ async function main() {
       video: beforeVideo,
       privacyStatus: options.privacyStatus,
     }) : null;
-    const updatedPlaylist = await updatePlaylistPrivacy({
+    const playlistNeedsUpdate = beforePlaylist?.status?.privacyStatus !== options.privacyStatus;
+    const updatedPlaylist = playlistNeedsUpdate ? await updatePlaylistPrivacy({
       accessToken,
       playlist: beforePlaylist,
       privacyStatus: options.privacyStatus,
-    });
+    }) : null;
     const afterVideo = options.videoId ? await readVideo({ accessToken, videoId: options.videoId }) : null;
-    const afterPlaylist = await readPlaylist({ accessToken, playlistId: options.playlistId });
+    const afterPlaylist = playlistNeedsUpdate ? await readPlaylistPrivacyWithRetry({
+      accessToken,
+      playlistId: options.playlistId,
+      expectedPrivacyStatus: options.privacyStatus,
+    }) : beforePlaylist;
     if (afterVideo && afterVideo.status?.privacyStatus !== options.privacyStatus) {
       fail(`Video privacy readback mismatch: expected ${options.privacyStatus}, got ${afterVideo.status?.privacyStatus || "(missing)"}.`);
     }
