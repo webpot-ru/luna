@@ -46,6 +46,14 @@ on:
         options:
           - "false"
           - "true"
+      exact_missing_only:
+        description: "Require an exact video ID, durable thumbnailSet=false, and a Git-tracked JPG for every apply row."
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
       confirm_youtube_write:
         description: "For mode=apply type APPLY_YOUTUBE_THUMBNAIL_BATCH."
         required: false
@@ -84,6 +92,7 @@ jobs:
           SET_ID: ${{ github.event.inputs.set_id }}
           SUPPORT_INPUT: ${{ github.event.inputs.support }}
           TARGETS_INPUT: ${{ github.event.inputs.targets }}
+          EXACT_MISSING_ONLY: ${{ github.event.inputs.exact_missing_only }}
         run: |
           set -euo pipefail
           mkdir -p outputs/review
@@ -93,6 +102,9 @@ jobs:
           fi
           if [ -n "$(printf '%s' "$TARGETS_INPUT" | xargs)" ]; then
             ARGS+=("--targets=$TARGETS_INPUT")
+          fi
+          if [ "$EXACT_MISSING_ONLY" = "true" ]; then
+            ARGS+=(--require-missing-state --require-exact-video-id --require-git-tracked --fail-on-blockers)
           fi
           node scripts/plan-youtube-thumbnail-batch-from-manifest.mjs "${ARGS[@]}"
 
@@ -127,6 +139,7 @@ jobs:
           SUPPORT_INPUT: ${{ github.event.inputs.support }}
           YOUTUBE_ENVIRONMENT_INPUT: ${{ github.event.inputs.youtube_environment }}
           CONFIRM_YOUTUBE_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
+          EXACT_MISSING_ONLY: ${{ github.event.inputs.exact_missing_only }}
         run: |
           set -euo pipefail
           if [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_YOUTUBE_THUMBNAIL_BATCH" ]; then
@@ -139,6 +152,10 @@ jobs:
           fi
           if [ "$YOUTUBE_ENVIRONMENT_INPUT" = "auto" ]; then
             echo "::error::mode=apply requires an explicit youtube_environment."
+            exit 1
+          fi
+          if [ "$EXACT_MISSING_ONLY" != "true" ]; then
+            echo "::error::This apply path requires exact_missing_only=true."
             exit 1
           fi
 
@@ -187,6 +204,7 @@ jobs:
           if [ -n "$(printf '%s' "$TARGETS_INPUT" | xargs)" ]; then
             ARGS+=("--targets=$TARGETS_INPUT")
           fi
+          ARGS+=(--require-missing-state --require-exact-video-id --require-git-tracked --fail-on-blockers)
           node scripts/plan-youtube-thumbnail-batch-from-manifest.mjs "${ARGS[@]}"
 
       - name: Apply ready thumbnail rows
@@ -251,6 +269,7 @@ jobs:
               `--support=${row.supportLang}`,
               `--target=${row.targetLang}`,
               `--thumbnail=${row.coverRelativePath || row.coverPath}`,
+              `--publication-registry=${row.publicationRegistryPath}`,
               "--ledger=outputs/youtube-thumbnail-ledger.jsonl",
               "--apply",
               "--confirm-youtube-write",
@@ -272,6 +291,7 @@ jobs:
             outputs/review/youtube-thumbnail-batch-skipped-already-set-${{ github.run_id }}.json
             outputs/youtube-thumbnail-ledger.jsonl
             config/youtube-published-videos.json
+            config/youtube-polyglot-published-videos.json
             config/youtube-channels.json
 
   persist-thumbnail-state:
@@ -313,14 +333,15 @@ jobs:
           git fetch origin "$BRANCH_NAME"
           git checkout "$BRANCH_NAME"
           git pull --ff-only origin "$BRANCH_NAME"
-          cp .state-artifact/config/youtube-published-videos.json config/youtube-published-videos.json
-          cp .state-artifact/config/youtube-channels.json config/youtube-channels.json
-          if git diff --quiet -- config/youtube-published-videos.json config/youtube-channels.json; then
+          node scripts/merge-youtube-publish-state.mjs \
+            --artifact-dir=.state-artifact \
+            --summary=outputs/review/youtube-thumbnail-batch-state-merge-${GITHUB_RUN_ID}.json
+          if git diff --quiet -- config/youtube-published-videos.json config/youtube-polyglot-published-videos.json config/youtube-channels.json; then
             echo "No thumbnail state changes to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add config/youtube-published-videos.json config/youtube-channels.json
+          git add config/youtube-published-videos.json config/youtube-polyglot-published-videos.json config/youtube-channels.json
           git commit -m "chore: persist YouTube thumbnail batch state"
           git push origin "$BRANCH_NAME"

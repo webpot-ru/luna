@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-16T08:47:00.000Z",
+  "action": "exact_single_video_thumbnail_set",
+  "status": "ready_for_explicit_apply",
+  "scope": {
+    "setId": "home_kitchen_cooking_actions_a1_a2",
+    "youtubeVideoIds": [
+      "HOSCxDk8V_o"
+    ],
+    "channelKeys": [
+      "th"
+    ],
+    "routes": [
+      "youtube-2"
+    ]
+  },
+  "counts": {
+    "covers": 1,
+    "youtubeThumbnailWritesPlanned": 1,
+    "estimatedYouTubeQuotaUnits": 51,
+    "renderCalls": 0,
+    "ttsCalls": 0,
+    "metadataCalls": 0,
+    "videoUploads": 0
+  },
+  "covers": [
+    {
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TH",
+      "channelKey": "th",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangsHash": "7a4233775927",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:TH:global_europe_core:7a4233775927:full",
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|TH|global_europe_core|7a4233775927|full",
+      "youtubeVideoId": "HOSCxDk8V_o",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=HOSCxDk8V_o",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "route": "youtube-2",
+      "routeEnvironment": "youtube-api-youtube-2",
+      "previousThumbnailSet": false,
+      "previousThumbnailUploadMode": "custom",
+      "coverPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-30b96a246c69/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-TH-global_europe_core-7a4233775927-full.jpg",
+      "relativePath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-30b96a246c69/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-TH-global_europe_core-7a4233775927-full.jpg",
+      "coverSha256": "c8c880b929b9becdaa7f736b28794cb2700f4df15cf1139fa2e494b62c54f0f0",
+      "dimensions": {
+        "width": 1280,
+        "height": 720
+      },
+      "approvedAssetManifest": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-30b96a246c69/manifest.json",
+      "assetStatus": "approved",
+      "customThumbnailUploadAllowed": true
+    }
+  ]
+}
