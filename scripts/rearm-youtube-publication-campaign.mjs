@@ -71,15 +71,28 @@ function equalArrays(left, right) {
   return left.length === right.length && left.every((value, index) => value === right[index]);
 }
 
+function controlReportForSet(report, setId) {
+  if (report.summary) return report;
+  const deck = Object.values(report.decks || {}).find((row) => row?.setId === setId);
+  assert(deck, `control snapshot has no deck report for ${setId}`);
+  return {
+    ...deck,
+    blockers: deck.blockers || [],
+    sourceRuns: deck.evidence?.sourceRuns || report.sourceRuns || [],
+  };
+}
+
 function validateControlReport(report, label, setId) {
-  const summary = report.summary || {};
+  const scoped = controlReportForSet(report, setId);
+  const summary = scoped.summary || {};
   assert(summary.complete === true, `${label} control report is incomplete`);
   assert(summary.healthy === true, `${label} control report is unhealthy`);
   assert(summary.paginationComplete === true, `${label} pagination is incomplete`);
   assert(summary.videoStatusReadbackComplete === true, `${label} video-status readback is incomplete`);
-  assert(Number(summary.blockerCount || 0) === 0 && (report.blockers || []).length === 0, `${label} control report has blockers`);
-  const wrongSet = (report.publications || []).find((row) => row.setId && row.setId !== setId);
+  assert(Number(summary.blockerCount || 0) === 0 && (scoped.blockers || []).length === 0, `${label} control report has blockers`);
+  const wrongSet = (scoped.publications || []).find((row) => row.setId && row.setId !== setId);
   assert(!wrongSet, `${label} control report contains another set: ${wrongSet?.setId}`);
+  return scoped;
 }
 
 function zeroUploadSummaryIsClean(campaign) {
@@ -111,16 +124,16 @@ export function buildZeroUploadRearm({
   assert(manifest.evidence?.replacementCampaign?.campaignId === replacementCampaignId, "recovery manifest does not name the replacement campaign");
   assert(manifest.evidence?.replacementCampaign?.manifestHash === oldCampaign.manifestHash, "recovery manifest replacement hash does not match durable state");
 
-  validateControlReport(beforeReport, "before", oldCampaign.setId);
-  validateControlReport(afterReport, "after", oldCampaign.setId);
-  const beforeVideoIds = sortedUnique((beforeReport.publications || []).map((row) => row.youtubeVideoId));
-  const afterVideoIds = sortedUnique((afterReport.publications || []).map((row) => row.youtubeVideoId));
+  const scopedBeforeReport = validateControlReport(beforeReport, "before", oldCampaign.setId);
+  const scopedAfterReport = validateControlReport(afterReport, "after", oldCampaign.setId);
+  const beforeVideoIds = sortedUnique((scopedBeforeReport.publications || []).map((row) => row.youtubeVideoId));
+  const afterVideoIds = sortedUnique((scopedAfterReport.publications || []).map((row) => row.youtubeVideoId));
   assert(equalArrays(beforeVideoIds, afterVideoIds), "live video ID set changed between before and after control reports");
 
   const oldAssignmentKeys = sortedUnique((oldCampaign.assignments || []).map((row) => row.assignmentKey));
   const newAssignmentKeys = sortedUnique((manifest.assignments || []).map((row) => row.assignmentKey));
   assert(equalArrays(oldAssignmentKeys, newAssignmentKeys), "recovery manifest assignment set differs from the zero-upload campaign");
-  const liveAssignmentKeys = new Set((afterReport.publications || []).map((row) => row.assignmentKey).filter(Boolean));
+  const liveAssignmentKeys = new Set((scopedAfterReport.publications || []).map((row) => row.assignmentKey).filter(Boolean));
   const liveRecoveryKey = newAssignmentKeys.find((key) => liveAssignmentKeys.has(key));
   assert(!liveRecoveryKey, `recovery assignment is already live: ${liveRecoveryKey}`);
 
@@ -157,8 +170,8 @@ export function buildZeroUploadRearm({
   const rearmedAt = now.toISOString();
   const durableManifestPath = path.join("config/youtube-publication-campaign-plans", `${manifest.campaignId}.json`);
   const zeroUploadEvidence = {
-    beforeSourceRuns: beforeReport.sourceRuns || [],
-    afterSourceRuns: afterReport.sourceRuns || [],
+    beforeSourceRuns: scopedBeforeReport.sourceRuns || [],
+    afterSourceRuns: scopedAfterReport.sourceRuns || [],
     beforeVideoCount: beforeVideoIds.length,
     afterVideoCount: afterVideoIds.length,
     addedVideoIds: [],
