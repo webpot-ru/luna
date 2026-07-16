@@ -11,6 +11,7 @@ import {
 } from "./lib/youtube-publication-registry.mjs";
 
 const DEFAULT_CHANNEL_CONFIG_PATH = "config/youtube-channels.json";
+const DEFAULT_POLYGLOT_PUBLICATION_REGISTRY_PATH = "config/youtube-polyglot-published-videos.json";
 const MAX_YOUTUBE_THUMBNAIL_BYTES = 2 * 1024 * 1024;
 const DEFAULT_OUTPUT_DIR = "outputs/review";
 
@@ -23,7 +24,11 @@ function parseArgs(argv) {
     output: "",
     channelConfig: DEFAULT_CHANNEL_CONFIG_PATH,
     publicationRegistry: DEFAULT_PUBLICATION_REGISTRY_PATH,
+    polyglotPublicationRegistry: DEFAULT_POLYGLOT_PUBLICATION_REGISTRY_PATH,
     failOnBlockers: false,
+    requireMissingState: false,
+    requireExactVideoId: false,
+    requireGitTracked: false,
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -41,7 +46,11 @@ function parseArgs(argv) {
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = readValue();
     else if (arg === "--channel-config" || arg.startsWith("--channel-config=")) options.channelConfig = readValue();
     else if (arg === "--publication-registry" || arg.startsWith("--publication-registry=")) options.publicationRegistry = readValue();
+    else if (arg === "--polyglot-publication-registry" || arg.startsWith("--polyglot-publication-registry=")) options.polyglotPublicationRegistry = readValue();
     else if (arg === "--fail-on-blockers") options.failOnBlockers = true;
+    else if (arg === "--require-missing-state") options.requireMissingState = true;
+    else if (arg === "--require-exact-video-id") options.requireExactVideoId = true;
+    else if (arg === "--require-git-tracked") options.requireGitTracked = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -52,7 +61,7 @@ function parseArgs(argv) {
 function usage() {
   return [
     "Usage:",
-    "  node scripts/plan-youtube-thumbnail-batch-from-manifest.mjs --manifest <manifest.json> [--set-id <set>] [--support JA,PT] [--targets HY,KM] [--output <report.json>]",
+    "  node scripts/plan-youtube-thumbnail-batch-from-manifest.mjs --manifest <manifest.json> [--set-id <set>] [--support JA,PT] [--targets HY,KM] [--require-missing-state] [--require-exact-video-id] [--require-git-tracked] [--output <report.json>]",
     "",
     "Plans thumbnail-only updates from a prepared local cover manifest.",
     "Dry-run only: this script never calls YouTube and never modifies config state.",
@@ -158,6 +167,17 @@ function imageInfo(filePath) {
   };
 }
 
+function isGitTracked(filePath) {
+  const relativePath = path.relative(process.cwd(), path.resolve(filePath));
+  if (!relativePath || relativePath.startsWith("..") || path.isAbsolute(relativePath)) return false;
+  try {
+    execFileSync("git", ["ls-files", "--error-unmatch", "--", relativePath], { stdio: "ignore" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function resolveCoverPath(cover, manifestDir) {
   const candidates = [
     cover.relativePath ? path.resolve(cover.relativePath) : "",
@@ -224,6 +244,10 @@ function coverSetId(cover, manifestSetId = "") {
 
 function publicationMatchesCover(publication, { cover, setId, supportLang, targetLang }) {
   const videoType = coverVideoType(cover);
+  if (cover.youtubeVideoId) {
+    return publication.youtubeVideoId === cover.youtubeVideoId
+      && String(publication.setId || "") === String(setId || "");
+  }
   if (videoType === "polyglot") {
     if (publication.videoType !== "polyglot") return false;
     if (String(publication.setId || "") !== String(setId || "")) return false;
@@ -311,6 +335,7 @@ function planCover({ cover, manifestDir, manifestSetId, options, channelRegistry
   if (!setId) blockers.push("missing_set_id");
   if (!supportLang) blockers.push("missing_support_lang");
   if (!targetLang && coverVideoType(cover) !== "polyglot") blockers.push("missing_target_lang");
+  if (options.requireExactVideoId && !cover.youtubeVideoId) blockers.push("missing_manifest_video_id");
 
   const channel = supportLang ? findChannelForSupport(channelRegistry, supportLang) : null;
   if (!channel) blockers.push("no_channel_config");
@@ -338,6 +363,9 @@ function planCover({ cover, manifestDir, manifestSetId, options, channelRegistry
   if (matchingPublications.length > 1) blockers.push("multiple_active_publications");
   const publication = matchingPublications.length === 1 ? matchingPublications[0] : null;
   if (publication && !publication.youtubeVideoId) blockers.push("missing_video_id");
+  if (options.requireMissingState && publication && publication.thumbnailSet !== false) {
+    blockers.push("thumbnail_state_not_proven_missing");
+  }
 
   const coverPath = resolveCoverPath(cover, manifestDir);
   let coverRelativePath = cover.relativePath || (coverPath ? path.relative(process.cwd(), coverPath) : "");
@@ -357,6 +385,7 @@ function planCover({ cover, manifestDir, manifestSetId, options, channelRegistry
       if (sizeBytes > MAX_YOUTUBE_THUMBNAIL_BYTES) blockers.push("over_2mb");
       if (!dimensions) blockers.push("dimensions_unreadable");
       else if (dimensions.width !== 1280 || dimensions.height !== 720) blockers.push("wrong_dimensions");
+      if (options.requireGitTracked && !isGitTracked(coverPath)) blockers.push("cover_not_git_tracked");
     } catch {
       blockers.push("cover_read_failed");
     }
@@ -380,6 +409,7 @@ function planCover({ cover, manifestDir, manifestSetId, options, channelRegistry
     youtubeVideoId: publication?.youtubeVideoId || "",
     youtubeVideoUrl: publication?.youtubeVideoUrl || "",
     publication: compactPublication(publication),
+    publicationRegistryPath: publication?.__registryPath || "",
     matchingActivePublicationCount: matchingPublications.length,
     matchingActivePublicationVideoIds: matchingPublications.map((publication) => publication.youtubeVideoId || "").filter(Boolean),
     coverPath,
@@ -410,7 +440,14 @@ function main() {
   const manifest = readJson(manifestPath, "Thumbnail manifest");
   const manifestDir = path.dirname(manifestPath);
   const channelRegistry = readJson(options.channelConfig, "YouTube channel config");
-  const publicationRegistry = loadPublicationRegistry(options.publicationRegistry);
+  const ordinaryPublicationRegistry = loadPublicationRegistry(options.publicationRegistry);
+  const polyglotPublicationRegistry = loadPublicationRegistry(options.polyglotPublicationRegistry);
+  const publicationRegistry = {
+    publications: [
+      ...ensureArray(ordinaryPublicationRegistry.publications).map((row) => ({ ...row, __registryPath: options.publicationRegistry })),
+      ...ensureArray(polyglotPublicationRegistry.publications).map((row) => ({ ...row, __registryPath: options.polyglotPublicationRegistry })),
+    ],
+  };
   const manifestSetId = manifest.scope?.setId || "";
   const supportFilter = new Set(options.supports);
   const targetFilter = new Set(options.targets);
@@ -444,12 +481,18 @@ function main() {
     mode: "dry-run",
     action: "youtube_thumbnail_batch_set_from_manifest",
     manifestPath,
-    publicationRegistryPath: path.resolve(options.publicationRegistry),
+    publicationRegistryPaths: [
+      path.resolve(options.publicationRegistry),
+      path.resolve(options.polyglotPublicationRegistry),
+    ],
     manifestRunId: manifest.runId || "",
     setId: options.setId || manifestSetId || "",
     filters: {
       supports: options.supports,
       targets: options.targets,
+      requireMissingState: options.requireMissingState,
+      requireExactVideoId: options.requireExactVideoId,
+      requireGitTracked: options.requireGitTracked,
     },
     summary: {
       totalRows: rows.length,
