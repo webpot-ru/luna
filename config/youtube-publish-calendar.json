@@ -241956,7 +241956,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-8e9ae3bc05c5",
       "campaignManifestHash": "9e0574510560e6bf283bad2585984e7f62b27288a4de8e923505e99d095756f5",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -241980,7 +241980,7 @@
       "localTime": "11:30",
       "localSlotIndex": 1,
       "createdAt": "2026-07-16T04:04:27.155Z",
-      "updatedAt": "2026-07-16T04:04:27.155Z",
+      "updatedAt": "2026-07-16T04:45:36.685Z",
       "targetLangsCsv": "EN,ES,FR,DE",
       "analyticsCheckpointsAt": [
         {
@@ -242006,7 +242006,9 @@
       "title": "Полиглот: действия при готовке — английский, испанский, французский, немецкий",
       "playlist_key": "POLYGLOT__RU__global-europe-core__7a4233775927",
       "githubRunId": "29387831377",
-      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29387831377"
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29387831377",
+      "supersededAt": "2026-07-16T04:45:36.685Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-97d2ca1e210d"
     },
     {
       "schemaVersion": 1,
@@ -242037,6 +242039,36 @@
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T04:04:27.155Z",
       "updatedAt": "2026-07-16T04:04:27.155Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-97d2ca1e210d",
+      "campaignManifestHash": "0ece018ee1fec23c9075cd76eeb902b2bd68dc65327ea86c4b48120cec206fc8",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsHash": "7a4233775927",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:RU:global_europe_core:7a4233775927:full",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "publishAt": "2026-07-16T08:30:00.000Z",
+      "timeZone": "Europe/Moscow",
+      "localDate": "2026-07-16",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "createdAt": "2026-07-16T04:45:36.685Z",
+      "updatedAt": "2026-07-16T04:45:36.685Z"
     }
   ]
 }

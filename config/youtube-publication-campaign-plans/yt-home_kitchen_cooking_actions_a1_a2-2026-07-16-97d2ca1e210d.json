@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-16T04:45:36.685Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_kitchen_cooking_actions_a1_a2",
+  "inputs": {
+    "supports": "RU",
+    "supportCount": 1,
+    "ordinaryPerChannel": 0,
+    "polyglotPerChannel": 1,
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 120,
+    "partialRecoveryOfCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-8e9ae3bc05c5"
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-8e9ae3bc05c5",
+      "manifestHash": "9e0574510560e6bf283bad2585984e7f62b27288a4de8e923505e99d095756f5",
+      "status": "reconciliation_required"
+    },
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-1",
+        "generatedAt": "2026-07-16T04:12:16.431Z",
+        "ageMinutes": 33.33756666666667
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/review/youtube-control-29330360665/youtube-publication-control-home_kitchen_cooking_actions_a1_a2-all-routes-29330360665/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "1b63dd5bcedeea96999b3efbf9faa5161a15d82c8100455f0d88d8a328cab445"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "1797c21c29248059ddb14bbaed22c99b2ea52bc16fa9b4c2ea5356b343ea43de"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "eab6959675306f536a0a90106055de4e6c90d9da4a2f0494ce2e1b34aff80c5f"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "67a62da99274b6f296de982503c00180c3521406e284c545ad173972c26b21fc"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "60a0a04cd0c0f5ba29d555c4dca55c5842723e9cd59059c372fd90edcd034210"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "9effbd3948c1564a7b8f8b5633250c9466879f65d2a714ffff8021f4b494d2c9"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "605eda7deb59067f0809da9d751f443016d4ccd341beac66c45bbdec717d9a45"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json",
+        "exists": true,
+        "sha256": "221f3eb523c1b5e5cd9656d9d26fc3fc6e2ca43e2bc8d3c0c5322597cfaf9cd5"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "3990eba43d82401c8bec087177cb5807adab55d49ce7959dc9156a5918cc0ba2"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "02582243b32d04923bdca1f1449933ed2ca810b39a423c5fc97f5ca0c4e2d38a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/review/youtube-control-29330360665/youtube-publication-control-home_kitchen_cooking_actions_a1_a2-all-routes-29330360665/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "540c629e0f476bc41788ade7e16814acfb5a555c3a3f001bbabd1b9fe6a0e13a"
+      }
+    },
+    "deckSource": {
+      "mode": "historical_git_blob",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": false,
+      "historicalGitBlob": {
+        "available": true,
+        "matchesLocalFile": true,
+        "commit": "0a4e6907cdffdb1cafa4b44e723f87650b16a19e",
+        "blobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+        "localBlobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 0,
+    "polyglotCount": 1,
+    "assignmentCount": 1,
+    "firstPublishAt": "2026-07-16T08:30:00.000Z",
+    "lastPublishAt": "2026-07-16T08:30:00.000Z",
+    "customThumbnailCount": 1,
+    "automaticThumbnailCount": 0,
+    "existingPlaylistCount": 1,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 1,
+      "youtube-2": 0,
+      "youtube-3": 0,
+      "youtube-4": 0
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 1,
+    "estimatedPlaylistItemInsertUnits": 50,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 50,
+    "estimatedGeneralQuotaUnitsMaximum": 100,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 100
+      },
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      },
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|RU|global_europe_core|7a4233775927|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|RU|global_europe_core|full|ru",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsHash": "7a4233775927",
+      "bundleKey": "global_europe_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:RU:global_europe_core:7a4233775927:full",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-16T08:30:00.000Z",
+      "localDate": "2026-07-16",
+      "localTime": "11:30",
+      "timeZone": "Europe/Moscow",
+      "slotKey": "ru|2026-07-16T08:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-30b96a246c69/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-RU-global_europe_core-7a4233775927-full.jpg",
+        "manifestPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-30b96a246c69/manifest.json",
+        "sha256": "fa4cff719fa06c4ad685e36feb263b36a3d35d1eebe03095db753819e71c57d5"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__RU__global-europe-core__7a4233775927",
+        "youtubePlaylistId": "PLbhbVjDBYtsQ",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Полиглот: английский, испанский, французский, немецкий",
+        "description": "FlashcardsLuna: плейлист для режима Полиглот. Учите несколько языков одновременно: английский, испанский, французский, немецкий. Тематические колоды, карточки, произношение и повторение. Bundle: global_europe_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-14T11:54:35.670Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 1
+    }
+  ],
+  "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-97d2ca1e210d",
+  "manifestHash": "0ece018ee1fec23c9075cd76eeb902b2bd68dc65327ea86c4b48120cec206fc8"
+}
