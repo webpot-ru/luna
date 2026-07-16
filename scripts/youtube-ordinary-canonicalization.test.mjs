@@ -52,8 +52,20 @@ assert.match(ordinaryWorkflow, /confirm_openai_metadata: \{ required: false, typ
 assert.match(ordinaryWorkflow, /OPENAI_API_KEY: \$\{\{ secrets\.OPENAI_API_KEY \}\}/u);
 assert.match(
   ordinaryWorkflow,
-  /GITHUB_EVENT_NAME: \$\{\{ github\.event_name \}\}[\s\S]*?Direct apply is disabled/u,
-  "manual ordinary apply must be blocked so only the campaign workflow can create a bulk wave",
+  /campaign_owned_apply: \{ required: true, type: boolean \}[\s\S]*?CAMPAIGN_OWNED_APPLY: \$\{\{ inputs\.campaign_owned_apply \}\}[\s\S]*?\[ "\$CAMPAIGN_OWNED_APPLY" != "true" \][\s\S]*?Direct apply is disabled/u,
+  "manual ordinary apply must be blocked unless the reusable worker receives the internal campaign-owned flag",
+);
+assert.doesNotMatch(
+  ordinaryWorkflow.split(/^  workflow_dispatch:/mu)[1],
+  /campaign_owned_apply:/u,
+  "manual ordinary dispatch must not expose the internal campaign-owned flag",
+);
+
+const campaignWorkflow = fs.readFileSync(".github/workflows/youtube-publication-campaign.yml", "utf8");
+assert.match(
+  campaignWorkflow,
+  /uses: \.\/\.github\/workflows\/youtube-video-publish\.yml[\s\S]*?campaign_owned_apply: true/u,
+  "the claimed campaign must explicitly authorize its ordinary reusable worker",
 );
 
 console.log("youtube ordinary canonicalization regression checks passed");

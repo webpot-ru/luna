@@ -90,8 +90,13 @@ assert.match(
 );
 assert.match(
   workerWorkflow,
-  /GITHUB_EVENT_NAME: \$\{\{ github\.event_name \}\}[\s\S]*?Direct apply is disabled/u,
-  "manual Polyglot apply must be blocked so only the campaign workflow can create a bulk wave",
+  /campaign_owned_apply: \{ required: true, type: boolean \}[\s\S]*?CAMPAIGN_OWNED_APPLY: \$\{\{ inputs\.campaign_owned_apply \}\}[\s\S]*?\[ "\$CAMPAIGN_OWNED_APPLY" != "true" \][\s\S]*?Direct apply is disabled/u,
+  "manual Polyglot apply must be blocked unless the reusable worker receives the internal campaign-owned flag",
+);
+assert.doesNotMatch(
+  workerWorkflow.split(/^  workflow_dispatch:/mu)[1],
+  /campaign_owned_apply:/u,
+  "manual Polyglot dispatch must not expose the internal campaign-owned flag",
 );
 assert.match(
   workerWorkflow,
@@ -103,5 +108,10 @@ const campaignWorkflow = fs.readFileSync(".github/workflows/youtube-publication-
 assert.match(campaignWorkflow, /limit: \$\{\{ matrix\.card_limit \}\}/u);
 assert.match(campaignWorkflow, /content_scope: \$\{\{ matrix\.content_scope \}\}/u);
 assert.match(campaignWorkflow, /max_duration_seconds: \$\{\{ matrix\.max_duration_seconds \}\}/u);
+assert.match(
+  campaignWorkflow,
+  /uses: \.\/\.github\/workflows\/youtube-polyglot-video-publish\.yml[\s\S]*?campaign_owned_apply: true/u,
+  "the claimed campaign must explicitly authorize its Polyglot reusable worker",
+);
 
 console.log("youtube Polyglot campaign claim tests passed");

@@ -325,6 +325,7 @@ jobs:
       campaign_id: ${{ inputs.campaign_id }}
       campaign_manifest_hash: ${{ inputs.campaign_manifest_hash }}
       campaign_metadata_route: ${{ matrix.route_key }}
+      campaign_owned_apply: true
       offline_deck_git_commit: ${{ needs.preflight.outputs.offline_deck_git_commit }}
       offline_deck_sha256: ${{ needs.preflight.outputs.offline_deck_sha256 }}
     secrets: inherit
@@ -362,6 +363,7 @@ jobs:
       campaign_id: ${{ inputs.campaign_id }}
       campaign_manifest_hash: ${{ inputs.campaign_manifest_hash }}
       campaign_metadata_route: ${{ matrix.route_key }}
+      campaign_owned_apply: true
       offline_deck_git_commit: ${{ needs.preflight.outputs.offline_deck_git_commit }}
       offline_deck_sha256: ${{ needs.preflight.outputs.offline_deck_sha256 }}
     secrets: inherit
