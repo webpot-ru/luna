@@ -1,0 +1,201 @@
+name: YouTube Playlist Image Batch Set
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "plan is local/read-only; apply inserts exact audit-proven missing playlist images."
+        required: true
+        default: "plan"
+        type: choice
+        options:
+          - plan
+          - apply
+      route:
+        description: "Exact OAuth/quota shard."
+        required: true
+        type: choice
+        options:
+          - youtube-1
+          - youtube-2
+          - youtube-3
+          - youtube-4
+      manifest:
+        description: "Git-tracked exact missing-only playlist image manifest."
+        required: true
+        default: "data/youtube-playlist-covers/youtube-playlist-cover-closeout-20260716/manifest.json"
+      confirm_youtube_write:
+        description: "For apply type APPLY_YOUTUBE_PLAYLIST_IMAGES."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: youtube-playlist-image-batch-${{ github.ref_name }}-${{ inputs.route }}-${{ inputs.mode }}
+  cancel-in-progress: false
+
+jobs:
+  playlist-image-batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    environment: ${{ inputs.route == 'youtube-1' && 'youtube-api-branding' || inputs.route == 'youtube-2' && 'youtube-api-youtube-2' || inputs.route == 'youtube-3' && 'youtube-api-youtube-3' || 'youtube-api-youtube-4' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Resolve and validate exact route
+        id: route
+        shell: bash
+        env:
+          MODE: ${{ inputs.mode }}
+          ROUTE: ${{ inputs.route }}
+          MANIFEST: ${{ inputs.manifest }}
+          CONFIRM_YOUTUBE_WRITE: ${{ inputs.confirm_youtube_write }}
+        run: |
+          set -euo pipefail
+          case "$ROUTE" in
+            youtube-1) SUPPORTS="en,ru,es,pt,ja,tr,zh"; ENVIRONMENT_NAME="youtube-api-branding" ;;
+            youtube-2) SUPPORTS="vi,th"; ENVIRONMENT_NAME="youtube-api-youtube-2" ;;
+            youtube-3) SUPPORTS="sr,my"; ENVIRONMENT_NAME="youtube-api-youtube-3" ;;
+            youtube-4) SUPPORTS="ne,si,uz,ka,sw"; ENVIRONMENT_NAME="youtube-api-youtube-4" ;;
+            *) echo "::error::Unknown route: $ROUTE"; exit 1 ;;
+          esac
+          if [ ! -f "$MANIFEST" ]; then
+            echo "::error::Missing manifest: $MANIFEST"
+            exit 1
+          fi
+          if ! git ls-files --error-unmatch -- "$MANIFEST" >/dev/null 2>&1; then
+            echo "::error::Manifest must be Git-tracked: $MANIFEST"
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_YOUTUBE_PLAYLIST_IMAGES" ]; then
+            echo "::error::apply requires confirm_youtube_write=APPLY_YOUTUBE_PLAYLIST_IMAGES"
+            exit 1
+          fi
+          echo "supports=$SUPPORTS" >> "$GITHUB_OUTPUT"
+          echo "environment_name=$ENVIRONMENT_NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Validate route environment mapping
+        shell: bash
+        env:
+          SUPPORTS: ${{ steps.route.outputs.supports }}
+          ENVIRONMENT_NAME: ${{ steps.route.outputs.environment_name }}
+        run: node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORTS" --environment="$ENVIRONMENT_NAME"
+
+      - name: Restore route OAuth bundle
+        if: ${{ inputs.mode == 'apply' }}
+        shell: bash
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        run: |
+          set -euo pipefail
+          if [ -z "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}" ]; then
+            echo "::error::Missing environment secret YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+            exit 1
+          fi
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+
+      - name: Run exact playlist-image-only batch
+        shell: bash
+        env:
+          MODE: ${{ inputs.mode }}
+          MANIFEST: ${{ inputs.manifest }}
+          SUPPORTS: ${{ steps.route.outputs.supports }}
+          ROUTE: ${{ inputs.route }}
+        run: |
+          set -euo pipefail
+          ARGS=(
+            "--manifest=$MANIFEST"
+            "--supports=$SUPPORTS"
+            "--output-dir=outputs/youtube-playlist-image-closeout/$ROUTE"
+            "--readback-attempts=1"
+          )
+          if [ "$MODE" = "apply" ]; then
+            ARGS+=("--apply" "--confirm-youtube-write")
+          fi
+          node scripts/youtube-upload-playlist-images.mjs "${ARGS[@]}"
+
+      - name: Upload non-secret batch state
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-playlist-image-batch-${{ inputs.route }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-playlist-image-closeout/**
+            config/youtube-playlists.json
+            config/youtube-polyglot-playlists.json
+
+  persist-playlist-image-state:
+    needs: playlist-image-batch
+    if: ${{ always() && inputs.mode == 'apply' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: youtube-playlist-image-state-${{ github.ref_name }}
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Download route state artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: youtube-playlist-image-batch-${{ inputs.route }}-${{ github.run_id }}
+          path: .state-artifact
+
+      - name: Merge confirmed playlist-image state
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          git fetch origin "$BRANCH_NAME"
+          git checkout "$BRANCH_NAME"
+          git pull --ff-only origin "$BRANCH_NAME"
+          node scripts/merge-youtube-playlist-image-state.mjs \
+            --artifact-dir=.state-artifact \
+            --summary=outputs/youtube-playlist-image-state-merge-github.json
+
+      - name: Commit and push confirmed playlist-image state
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          ROUTE: ${{ inputs.route }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- config/youtube-playlists.json config/youtube-polyglot-playlists.json; then
+            echo "No confirmed playlist-image state changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/youtube-playlists.json config/youtube-polyglot-playlists.json
+          git commit -m "Persist YouTube playlist images for ${ROUTE}" \
+            -m "Source workflow run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          git push origin "HEAD:$BRANCH_NAME"
+
+      - name: Upload state merge summary
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-playlist-image-state-merge-${{ inputs.route }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: ignore
+          path: outputs/youtube-playlist-image-state-merge-github.json
