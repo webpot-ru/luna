@@ -303,13 +303,15 @@
       "profileStatus": "configured_readback",
       "shortDescription": "面向中文用户的闪卡视频：50+ 种语言和其他学科。",
       "desiredDescription": "FlashcardsLuna 帮助中文用户通过简短的闪卡视频学习。\n\n我们先从 50+ 种语言开始：听、跟读、查看意思，再用小测验复习。\n\n同样的闪卡形式之后也会扩展到其他学科和主题，让你可以在一个地方持续学习。\n\n也可以在网站练习：\nhttps://flashcardsluna.com/zh/courses",
-      "customThumbnailUploadAllowed": true,
+      "customThumbnailUploadAllowed": false,
       "thumbnailFallbackMode": "first_frame_auto",
       "notes": [
         "Historical YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden before the 2026-07-16 Studio confirmation.",
         "2026-07-16 user explicitly confirmed the Chinese channel for long videos and custom video thumbnails; exact missing-only thumbnails.set remains separately approval-gated. Playlist-image capability remains unproven.",
         "Historical YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden before the 2026-07-16 Studio confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation. Superseded on 2026-06-22: thumbnails.set later succeeded after channel confirmation.",
-        "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs."
+        "2026-06-22 YouTube API thumbnails.set succeeded after channel confirmation; custom thumbnail upload is enabled for future runs.",
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio.",
+        "2026-07-16 user explicitly confirmed that the Chinese channel may upload videos longer than 15 minutes; this updates long-video capability only and does not prove thumbnails.set permission."
       ],
       "longVideoUploadAllowed": true
     },
