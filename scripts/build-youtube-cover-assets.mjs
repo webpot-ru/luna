@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import crypto from "node:crypto";
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -28,6 +29,7 @@ function parseArgs(argv) {
     types: [],
     targets: [],
     bundles: [],
+    deckGitBlob: "",
     outputRoot: "",
     concurrency: 4,
     dryRun: false,
@@ -44,6 +46,7 @@ function parseArgs(argv) {
     else if (arg === "--types" || arg.startsWith("--types=")) options.types.push(...value().split(",").map((item) => item.trim().toLowerCase()).filter(Boolean));
     else if (arg === "--targets" || arg.startsWith("--targets=")) options.targets.push(...value().split(",").map(normalizeCode).filter(Boolean));
     else if (arg === "--bundles" || arg.startsWith("--bundles=")) options.bundles.push(...value().split(",").map((item) => item.trim()).filter(Boolean));
+    else if (arg === "--deck-git-blob" || arg.startsWith("--deck-git-blob=")) options.deckGitBlob = value();
     else if (arg === "--output-root" || arg.startsWith("--output-root=")) options.outputRoot = value();
     else if (arg === "--concurrency" || arg.startsWith("--concurrency=")) options.concurrency = Number(value());
     else if (arg === "--dry-run") options.dryRun = true;
@@ -57,6 +60,15 @@ function parseArgs(argv) {
 function readJson(filePath, label) {
   if (!fs.existsSync(filePath)) throw new Error(`${label} not found: ${filePath}`);
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+function readDeck({ setConfig, setId, deckGitBlob }) {
+  if (fs.existsSync(setConfig.deckDataPath)) return readJson(setConfig.deckDataPath, `Deck data for ${setId}`);
+  if (!deckGitBlob) return readJson(setConfig.deckDataPath, `Deck data for ${setId}`);
+  const raw = execFileSync("git", ["show", deckGitBlob], { encoding: "utf8", maxBuffer: 128 * 1024 * 1024 });
+  const deck = JSON.parse(raw);
+  if (deck.setId !== setId) throw new Error(`Historical deck blob setId mismatch: expected ${setId}, got ${deck.setId || "(missing)"}`);
+  return deck;
 }
 
 function fileSha256(filePath) {
@@ -168,7 +180,7 @@ async function main() {
   for (const setId of options.setIds) {
     const setConfig = templateConfig.sets?.[setId];
     if (!setConfig) throw new Error(`No cover template config for set=${setId}`);
-    const deck = readJson(setConfig.deckDataPath, `Deck data for ${setId}`);
+    const deck = readDeck({ setConfig, setId, deckGitBlob: options.deckGitBlob });
     const setPlan = buildCoverPlan({
       setId,
       setConfig,
