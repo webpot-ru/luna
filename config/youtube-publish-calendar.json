@@ -272797,7 +272797,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T07:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -272827,7 +272846,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -272857,7 +272895,26 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T18:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -272887,13 +272944,32 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-807bb9dd1825",
       "campaignManifestHash": "e8bca4ae67547b40c1098ddab1122669ff79f758191dd3fb9133cb7c855c3a84",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -272917,13 +272993,42 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:57:53.843Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T03:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "Romance Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_en/youtube_metadata.json",
+      "title": "Polyglot Vocabulary: Cooking Actions in Spanish, French, Italian, Portuguese",
+      "playlist_key": "POLYGLOT__EN__romance-core__f34a59a474f1",
+      "githubRunId": "29497304503",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29497304503",
+      "youtubeVideoId": "hpf2zApChsU",
+      "youtubePlaylistId": "PLcvmXhSTl2_s",
+      "playlistItemId": ""
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-807bb9dd1825",
       "campaignManifestHash": "e8bca4ae67547b40c1098ddab1122669ff79f758191dd3fb9133cb7c855c3a84",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -272947,7 +273052,36 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:57:53.843Z",
+      "targetLangsCsv": "FR,IT,PT,EN",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T21:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "Romance Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_es-419/youtube_metadata.json",
+      "title": "Modo políglota: acciones de cocina en francés, italiano, portugués e inglés",
+      "playlist_key": "POLYGLOT__ES-419__romance-core__00dff86eec76",
+      "githubRunId": "29497304503",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29497304503",
+      "youtubeVideoId": "xuFW8U6D4JQ",
+      "youtubePlaylistId": "PLB-NvON6ANMQ",
+      "playlistItemId": ""
     },
     {
       "schemaVersion": 1,
@@ -272977,7 +273111,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273007,7 +273160,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,IT,PT,EN",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273037,7 +273209,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:00:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273067,7 +273258,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273097,7 +273307,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T07:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273127,7 +273356,26 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T07:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273157,13 +273405,32 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,PT,EN",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-807bb9dd1825",
       "campaignManifestHash": "e8bca4ae67547b40c1098ddab1122669ff79f758191dd3fb9133cb7c855c3a84",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -273187,7 +273454,36 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:57:53.843Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "Romance Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_ja/youtube_metadata.json",
+      "title": "ポリグロット語彙：料理の動作 | スペイン語・フランス語・イタリア語・ポルトガル語",
+      "playlist_key": "POLYGLOT__JA__romance-core__f34a59a474f1",
+      "githubRunId": "29497304503",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29497304503",
+      "youtubeVideoId": "KY-kRJ-0ByE",
+      "youtubePlaylistId": "PLE8fqp3ZHbNg",
+      "playlistItemId": "UExFOGZxcDNaSGJOZy41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
@@ -273217,7 +273513,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T07:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273247,7 +273562,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273277,7 +273611,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:00:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273307,7 +273660,26 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273337,7 +273709,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:00:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273367,7 +273758,26 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273397,7 +273807,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:45:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273427,7 +273856,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273457,7 +273905,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273487,7 +273954,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273517,7 +274003,33 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,EN",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T19:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "Romance Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_pt-br/youtube_metadata.json",
+      "title": "Modo poliglota: Ações de cozinhar | espanhol, francês, italiano, inglês",
+      "playlist_key": "POLYGLOT__PT-BR__romance-core__b1acae03ca26",
+      "githubRunId": "29497304503",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29497304503"
     },
     {
       "schemaVersion": 1,
@@ -273547,7 +274059,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273577,7 +274108,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273607,7 +274157,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:00:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273637,7 +274206,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273667,7 +274255,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273697,7 +274304,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273727,7 +274353,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:00:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273757,13 +274402,32 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:00:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-807bb9dd1825",
       "campaignManifestHash": "e8bca4ae67547b40c1098ddab1122669ff79f758191dd3fb9133cb7c855c3a84",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -273787,7 +274451,36 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:57:53.843Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T07:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "Romance Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_th/youtube_metadata.json",
+      "title": "คำศัพท์หลายภาษา: การทำอาหาร สเปน ฝรั่งเศส อิตาลี โปรตุเกส",
+      "playlist_key": "POLYGLOT__TH__romance-core__f34a59a474f1",
+      "githubRunId": "29497304503",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29497304503",
+      "youtubeVideoId": "DJ_XvCA7-I4",
+      "youtubePlaylistId": "PLa1YsVIUypJo",
+      "playlistItemId": "UExhMVlzVklVeXBKby41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
@@ -273817,7 +274510,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -273847,13 +274559,32 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-807bb9dd1825",
       "campaignManifestHash": "e8bca4ae67547b40c1098ddab1122669ff79f758191dd3fb9133cb7c855c3a84",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -273877,7 +274608,36 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:57:53.843Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T07:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "Romance Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_vi/youtube_metadata.json",
+      "title": "Từ vựng Polyglot: động tác nấu ăn bằng tiếng Tây Ban Nha, Pháp, Italy, Bồ Đào Nha",
+      "playlist_key": "POLYGLOT__VI__romance-core__f34a59a474f1",
+      "githubRunId": "29497304503",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29497304503",
+      "youtubeVideoId": "loZ623lV3fk",
+      "youtubePlaylistId": "",
+      "playlistItemId": ""
     },
     {
       "schemaVersion": 1,
@@ -273907,7 +274667,26 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-16T12:11:40.557Z",
-      "updatedAt": "2026-07-16T12:11:40.557Z"
+      "updatedAt": "2026-07-16T12:11:40.557Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     }
   ]
 }

@@ -144001,7 +144001,7 @@
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-807bb9dd1825",
       "manifestHash": "e8bca4ae67547b40c1098ddab1122669ff79f758191dd3fb9133cb7c855c3a84",
       "setId": "home_kitchen_cooking_actions_a1_a2",
-      "status": "claimed",
+      "status": "reconciliation_required",
       "claimedAt": "2026-07-16T12:11:40.557Z",
       "generatedAt": "2026-07-16T12:11:40.557Z",
       "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-807bb9dd1825.json",
@@ -144470,7 +144470,17 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted_reconciliation_required",
+          "youtubeVideoId": "hpf2zApChsU",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=hpf2zApChsU",
+          "youtubePlaylistId": "PLcvmXhSTl2_s",
+          "playlistItemId": "",
+          "thumbnailSet": false,
+          "publicationStatus": "scheduled_uploaded_playlist_insert_pending",
+          "githubRunId": "29497304503",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29497304503",
+          "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n",
+          "finalizedAt": "2026-07-16T12:57:53.843Z"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|ES-419|romance_core|00dff86eec76|full",
@@ -144523,7 +144533,17 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted_reconciliation_required",
+          "youtubeVideoId": "xuFW8U6D4JQ",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=xuFW8U6D4JQ",
+          "youtubePlaylistId": "PLB-NvON6ANMQ",
+          "playlistItemId": "",
+          "thumbnailSet": false,
+          "publicationStatus": "scheduled_uploaded_playlist_insert_pending",
+          "githubRunId": "29497304503",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29497304503",
+          "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n",
+          "finalizedAt": "2026-07-16T12:57:53.843Z"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|FI|romance_core|f34a59a474f1|short_unverified",
@@ -144926,7 +144946,17 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted",
+          "youtubeVideoId": "KY-kRJ-0ByE",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=KY-kRJ-0ByE",
+          "youtubePlaylistId": "PLE8fqp3ZHbNg",
+          "playlistItemId": "UExFOGZxcDNaSGJOZy41NkI0NEY2RDEwNTU3Q0M2",
+          "thumbnailSet": true,
+          "publicationStatus": "scheduled_uploaded",
+          "githubRunId": "29497304503",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29497304503",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-16T12:57:53.843Z"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|KA|romance_core|f34a59a474f1|full",
@@ -145947,7 +145977,17 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted",
+          "youtubeVideoId": "DJ_XvCA7-I4",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=DJ_XvCA7-I4",
+          "youtubePlaylistId": "PLa1YsVIUypJo",
+          "playlistItemId": "UExhMVlzVklVeXBKby41NkI0NEY2RDEwNTU3Q0M2",
+          "thumbnailSet": true,
+          "publicationStatus": "scheduled_uploaded",
+          "githubRunId": "29497304503",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29497304503",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-16T12:57:53.843Z"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|TR|romance_core|f34a59a474f1|full",
@@ -146106,7 +146146,17 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted_reconciliation_required",
+          "youtubeVideoId": "loZ623lV3fk",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=loZ623lV3fk",
+          "youtubePlaylistId": "",
+          "playlistItemId": "",
+          "thumbnailSet": false,
+          "publicationStatus": "scheduled_uploaded_playlist_create_pending",
+          "githubRunId": "29497304503",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29497304503",
+          "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n",
+          "finalizedAt": "2026-07-16T12:57:53.843Z"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|ZH|romance_core|f34a59a474f1|full",
@@ -146158,7 +146208,21 @@
           },
           "status": "claimed"
         }
-      ]
+      ],
+      "finalizedAt": "2026-07-16T12:57:53.843Z",
+      "finalizeSummary": {
+        "expectedCount": 38,
+        "completedCount": 2,
+        "observedCount": 5,
+        "missingCount": 33,
+        "duplicateAssignmentCount": 0,
+        "duplicateVideoIdCount": 0,
+        "unexpectedPublicationCount": 17,
+        "receiptErrorCount": 10,
+        "ordinaryResult": "failure",
+        "polyglotResult": "failure",
+        "artifactCount": 38
+      }
     }
   ]
 }
