@@ -120,12 +120,16 @@ jobs:
           npm run audit:youtube-live-publications -- \
             --set "$SET_ID" \
             --support "$SUPPORTS_CSV" \
+            --include-video-status \
             --max-pages "$MAX_PAGES" \
             --output=outputs/youtube-live-publications-github.json \
             --json
           node -e '
             const fs = require("fs");
             const report = JSON.parse(fs.readFileSync("outputs/youtube-live-publications-github.json", "utf8"));
+            if (report.paginationComplete !== true || report.videoStatusReadback !== true) {
+              throw new Error("Refusing incomplete live-publication audit: uploads pagination and videos.list(status) must both be complete.");
+            }
             if (process.env.GITHUB_STEP_SUMMARY) {
               fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
                 "### YouTube live publication audit",
@@ -135,6 +139,7 @@ jobs:
                 `- Matched current set publications: ${report.matchedPublicationCount || 0}`,
                 `- Missing from local registry: ${report.missingFromLocalRegistryCount || 0}`,
                 `- Duplicate groups detected: ${(report.duplicateGroups || []).length}`,
+                `- videos.list(status) readback: ${report.videoStatusReadback === true ? "complete" : "incomplete"}`,
                 "",
               ].join("\n"));
             }
