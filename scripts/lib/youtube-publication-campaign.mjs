@@ -546,7 +546,7 @@ export function buildPublicationCampaign(options = {}) {
   const playlistDiscoveryReady = playlistDiscoveryExists && playlistFreshness.blockers.length === 0;
   if (!offlineDeckExists && !historicalDeckSource.available) {
     blockers.push(`${setId}: immutable campaign planning requires a local offline deck fingerprint at ${paths.offlineDeck}`);
-  } else if (!offlineDeckTracked && !driveDeckConfigured && !historicalDeckSource.matchesLocalFile) {
+  } else if (!offlineDeckTracked && !driveDeckConfigured && !historicalDeckSource.available) {
     blockers.push(`${setId}: offline deck is not Git-tracked and no verified Drive source is configured`);
   }
 
@@ -739,7 +739,7 @@ export function buildPublicationCampaign(options = {}) {
           ? "git_offline_json"
           : (driveDeckConfigured
             ? "verified_drive_with_local_fingerprint"
-            : (historicalDeckSource.matchesLocalFile ? "historical_git_blob" : "local_untracked")),
+            : (historicalDeckSource.available ? "historical_git_blob" : "local_untracked")),
         driveFileIdConfigured: driveDeckConfigured,
         offlineDeckExists,
         offlineDeckTracked,

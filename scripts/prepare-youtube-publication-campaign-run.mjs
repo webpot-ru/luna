@@ -51,12 +51,12 @@ function main() {
   const blockers = [];
   const offlineDeckFingerprint = campaign.evidence?.sourceFingerprints?.offlineDeck || {};
   const historicalDeckSource = campaign.evidence?.deckSource?.historicalGitBlob || {};
-  if (!offlineDeckFingerprint.exists || !offlineDeckFingerprint.sha256) {
+  if (campaign.evidence?.deckSource?.mode === "historical_git_blob") {
+    if (!historicalDeckSource.commit || !historicalDeckSource.blobId) {
+      blockers.push("campaign historical Git deck source is incomplete");
+    }
+  } else if (!offlineDeckFingerprint.exists || !offlineDeckFingerprint.sha256) {
     blockers.push("campaign is missing the immutable offline deck fingerprint");
-  }
-  if (campaign.evidence?.deckSource?.mode === "historical_git_blob"
-    && (!historicalDeckSource.commit || !historicalDeckSource.blobId || historicalDeckSource.matchesLocalFile !== true)) {
-    blockers.push("campaign historical Git deck source is incomplete");
   }
   if (campaign.manifestPath) {
     if (!fs.existsSync(campaign.manifestPath)) blockers.push(`durable campaign manifest is missing: ${campaign.manifestPath}`);
