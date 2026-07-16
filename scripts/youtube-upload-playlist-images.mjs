@@ -377,6 +377,7 @@ function summarize(results) {
     uploaded: 0,
     inserted: 0,
     updated: 0,
+    acceptedReadbackPending: 0,
     failed: 0,
     quotaUnitsEstimated: channelIdentityUnits,
     channelIdentityUnits,
@@ -388,6 +389,10 @@ function summarize(results) {
       summary.quotaUnitsEstimated += result.method === "existing_readback" ? 2 : 53;
       if (result.method === "insert") summary.inserted += 1;
       if (result.method === "update") summary.updated += 1;
+    }
+    if (result.status === "accepted_readback_pending") {
+      summary.acceptedReadbackPending += 1;
+      summary.quotaUnitsEstimated += 53;
     }
     if (result.status === "failed") summary.failed += 1;
   }
@@ -574,7 +579,15 @@ async function main() {
         attempts: options.readbackAttempts,
       });
       const readbackImage = readbackResult.image;
-      if (!readbackImage) fail(`Playlist image readback missing after ${method} for ${candidate.playlistId}`);
+      if (!readbackImage) {
+        result.status = "accepted_readback_pending";
+        result.method = method;
+        result.playlistImageId = imageId;
+        result.acceptedAt = new Date().toISOString();
+        result.readbackAttempts = readbackResult.attemptsUsed;
+        result.readbackPending = true;
+        continue;
+      }
 
       const uploadedAt = new Date().toISOString();
       for (const registryRow of registryRows) {
