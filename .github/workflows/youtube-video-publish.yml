@@ -373,11 +373,8 @@ jobs:
           LANGS_INPUT: ${{ inputs.langs }}
         run: |
           set -euo pipefail
-          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT_INPUT" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json")
-          if [ -z "${{ inputs.campaign_id }}" ]; then
-            CONTROL_ARGS+=("--strict")
-          fi
-          if [ -n "$LANGS_INPUT" ] && [ -z "${{ inputs.campaign_id }}" ]; then
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT_INPUT" "--video-types=ordinary" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json" "--strict")
+          if [ -n "$LANGS_INPUT" ]; then
             CONTROL_ARGS+=("--targets=$LANGS_INPUT" "--block-existing-targets")
           fi
           npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
@@ -893,11 +890,8 @@ jobs:
         run: |
           set -euo pipefail
           npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORT_INPUT" --include-video-status --output=outputs/youtube-live-publications-github.json --json
-          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT_INPUT" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json")
-          if [ -z "${{ inputs.campaign_id }}" ]; then
-            CONTROL_ARGS+=("--strict")
-          fi
-          if [ -n "$LANGS_INPUT" ] && [ -z "${{ inputs.campaign_id }}" ]; then CONTROL_ARGS+=("--targets=$LANGS_INPUT" "--block-existing-targets"); fi
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT_INPUT" "--video-types=ordinary" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json" "--strict")
+          if [ -n "$LANGS_INPUT" ]; then CONTROL_ARGS+=("--targets=$LANGS_INPUT" "--block-existing-targets"); fi
           npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
 
       - name: Upload videos to YouTube

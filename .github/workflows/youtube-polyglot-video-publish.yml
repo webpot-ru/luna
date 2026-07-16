@@ -474,10 +474,7 @@ jobs:
         run: |
           set -euo pipefail
           npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORT" --include-video-status --output=outputs/youtube-live-publications-github.json --json
-          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT" "--targets=$TARGET_LANGS" "--proposed-polyglot-key=$POLYGLOT_KEY" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json")
-          if [ -z "${{ inputs.campaign_id }}" ]; then
-            CONTROL_ARGS+=("--strict")
-          fi
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT" "--video-types=polyglot" "--targets=$TARGET_LANGS" "--proposed-polyglot-key=$POLYGLOT_KEY" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json" "--strict")
           npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
 
       - name: Preflight scheduled public playlist before metadata and render
@@ -739,10 +736,7 @@ jobs:
         run: |
           set -euo pipefail
           npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORT" --include-video-status --output=outputs/youtube-live-publications-github.json --json
-          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT" "--targets=$TARGET_LANGS" "--proposed-polyglot-key=$POLYGLOT_KEY" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json")
-          if [ -z "${{ inputs.campaign_id }}" ]; then
-            CONTROL_ARGS+=("--strict")
-          fi
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT" "--video-types=polyglot" "--targets=$TARGET_LANGS" "--proposed-polyglot-key=$POLYGLOT_KEY" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json" "--strict")
           npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
 
       - name: Upload Polyglot video to YouTube

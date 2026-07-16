@@ -366,6 +366,7 @@ export function buildPublicationControlReport({
   liveAudit = null,
   setId = "",
   supports = [],
+  videoTypes = [],
   desiredTargetsBySupport = {},
   desiredPolyglotAssignmentsBySupport = {},
   proposedOrdinaryAssignments = [],
@@ -376,11 +377,18 @@ export function buildPublicationControlReport({
 } = {}) {
   const nowMillis = now instanceof Date ? now.getTime() : Date.parse(now);
   const supportSet = new Set((supports || []).map(canonicalSupportCode).filter(Boolean));
-  const liveRows = auditRows(liveAudit || {}).filter((row) => selectedRow(row, { setId, supports: supportSet }));
+  const videoTypeSet = new Set((videoTypes || []).map((value) => String(value || "").trim().toLowerCase()).filter(Boolean));
+  const includesOrdinary = !videoTypeSet.size || videoTypeSet.has("ordinary");
+  const includesPolyglot = !videoTypeSet.size || videoTypeSet.has("polyglot");
+  const selectedVideoType = (row) => !videoTypeSet.size || videoTypeSet.has(isPolyglotRow(row) ? "polyglot" : "ordinary");
+  const liveRows = auditRows(liveAudit || {})
+    .filter((row) => selectedRow(row, { setId, supports: supportSet }))
+    .filter(selectedVideoType);
   const deletedTombstoneRows = liveRows.filter(isYoutubeDeletedTombstone);
   const deletedTombstoneVideoIds = new Set(deletedTombstoneRows.map((row) => row.youtubeVideoId).filter(Boolean));
   const selectedOrdinaryRegistryRows = (ordinaryRegistry.publications || []).filter(isActive)
     .filter((row) => selectedRow(row, { setId, supports: supportSet }))
+    .filter(selectedVideoType)
     .filter((row) => !deletedTombstoneVideoIds.has(row.youtubeVideoId));
   const ordinaryRows = selectedOrdinaryRegistryRows.filter((row) => !isPolyglotRow(row));
   const legacyPolyglotRows = selectedOrdinaryRegistryRows.filter(isPolyglotRow);
@@ -388,6 +396,7 @@ export function buildPublicationControlReport({
     ...legacyPolyglotRows,
     ...(polyglotRegistry.publications || []).filter(isActive)
       .filter((row) => selectedRow(row, { setId, supports: supportSet }))
+      .filter(selectedVideoType)
       .filter((row) => !deletedTombstoneVideoIds.has(row.youtubeVideoId)),
   ];
   const visibleLiveRows = liveRows.filter(isVisibleLiveRow);
@@ -446,7 +455,7 @@ export function buildPublicationControlReport({
     ...visibleLiveRows.filter((row) => !normalizeCode(row.targetLang).includes(",")).map(ordinaryAssignmentKey),
   ]);
   const ordinaryTails = [];
-  for (const [supportRaw, targets] of Object.entries(desiredTargetsBySupport || {})) {
+  for (const [supportRaw, targets] of Object.entries(includesOrdinary ? desiredTargetsBySupport || {} : {})) {
     const supportLang = canonicalSupportCode(supportRaw);
     for (const targetRaw of targets || []) {
       const targetLang = normalizeCode(targetRaw);
@@ -463,7 +472,7 @@ export function buildPublicationControlReport({
   const polyglotTails = [];
   const polyglotBundleMismatches = [];
   const polyglotCrossScopeConflicts = [];
-  for (const [supportRaw, assignments] of Object.entries(desiredPolyglotAssignmentsBySupport || {})) {
+  for (const [supportRaw, assignments] of Object.entries(includesPolyglot ? desiredPolyglotAssignmentsBySupport || {} : {})) {
     const supportLang = canonicalSupportCode(supportRaw);
     for (const assignment of assignments || []) {
       const expected = { ...assignment, setId, supportLang };
@@ -625,6 +634,7 @@ export function buildPublicationControlReport({
     mode: "youtube_publication_control",
     setId,
     supports: [...supportSet].sort(),
+    videoTypes: [...videoTypeSet].sort(),
     summary: {
       healthy: blockers.length === 0,
       blockerCount: blockers.length,
