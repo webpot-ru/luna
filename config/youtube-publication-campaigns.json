@@ -109714,7 +109714,7 @@
       "campaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-16-fcf8f0d2a565",
       "manifestHash": "b68198fb3058de7cd8c03727071cb82b8ba9a73e46bd7122090fa18a9b209898",
       "setId": "home_kitchen_cookware_pilot_01",
-      "status": "claimed",
+      "status": "reconciliation_required",
       "claimedAt": "2026-07-16T01:45:29.419Z",
       "generatedAt": "2026-07-16T01:43:45.960Z",
       "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_cookware_pilot_01-2026-07-16-fcf8f0d2a565.json",
@@ -109932,7 +109932,21 @@
           },
           "status": "claimed"
         }
-      ]
+      ],
+      "finalizedAt": "2026-07-16T01:51:47.092Z",
+      "finalizeSummary": {
+        "expectedCount": 1,
+        "completedCount": 0,
+        "observedCount": 0,
+        "missingCount": 1,
+        "duplicateAssignmentCount": 0,
+        "duplicateVideoIdCount": 0,
+        "unexpectedPublicationCount": 0,
+        "receiptErrorCount": 0,
+        "ordinaryResult": "failure",
+        "polyglotResult": "failure",
+        "artifactCount": 1
+      }
     }
   ]
 }
