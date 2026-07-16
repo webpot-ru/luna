@@ -100,6 +100,7 @@
     "plan:youtube-publication-campaign": "node scripts/plan-youtube-publication-campaign.mjs",
     "claim:youtube-publication-campaign": "node scripts/claim-youtube-publication-campaign.mjs",
     "rearm:youtube-publication-campaign": "node scripts/rearm-youtube-publication-campaign.mjs",
+    "recover-partial:youtube-publication-campaign": "node scripts/create-youtube-partial-recovery-campaign.mjs",
     "finalize:youtube-publication-campaign": "node scripts/finalize-youtube-publication-campaign.mjs",
     "prepare:youtube-publication-campaign-run": "node scripts/prepare-youtube-publication-campaign-run.mjs",
     "generate:youtube-campaign-metadata": "node scripts/generate-youtube-campaign-metadata.mjs",
