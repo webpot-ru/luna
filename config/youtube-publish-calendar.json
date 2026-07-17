@@ -276022,13 +276022,32 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-17T09:51:09.282Z",
-      "updatedAt": "2026-07-17T09:51:09.282Z"
+      "updatedAt": "2026-07-17T09:51:09.282Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T07:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-ecfd614138a2",
       "campaignManifestHash": "968abaa575b65a456929e352739c27b43888d25c48135c42ac2e1bcfad9d53f2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -276052,7 +276071,36 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-17T09:51:09.282Z",
-      "updatedAt": "2026-07-17T09:51:09.282Z"
+      "updatedAt": "2026-07-17T10:06:20.327Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "Romance Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_zh/youtube_metadata.json",
+      "title": "Polyglot 多语词汇：西班牙语、法语、意大利语、葡萄牙语烹饪动作",
+      "playlist_key": "POLYGLOT__ZH__romance-core__f34a59a474f1",
+      "githubRunId": "29568514140",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29568514140",
+      "youtubeVideoId": "RDk3ECs1VE0",
+      "youtubePlaylistId": "PLKVXov1sCsK4",
+      "playlistItemId": ""
     }
   ]
 }
