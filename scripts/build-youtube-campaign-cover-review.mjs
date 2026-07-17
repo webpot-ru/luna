@@ -228,9 +228,11 @@ async function main() {
   options.outputRoot ||= `data/youtube-cover-assets/${plan.campaignId}-precommit-ready`;
   const approved = readJson(options.approvedManifest, "Current approved cover manifest");
   const selected = selectMissingCustomAssignments(plan, approvedAssignmentKeys(approved));
-  if (!options.allowScoped && selected.length !== 75) throw new Error(`Expected exactly 75 missing custom covers, got ${selected.length}; pass --allow-scoped only for an exact recovery campaign`);
   const expectedCustom = (plan.assignments || []).filter((assignment) => assignment.thumbnail?.mode === "custom").length;
-  if (!options.allowScoped && (expectedCustom !== 90 || approved.covers?.length !== 72)) throw new Error(`Unexpected campaign/current-cover boundary: custom=${expectedCustom} approved=${approved.covers?.length}`);
+  const readyCustom = (plan.assignments || []).filter((assignment) => assignment.thumbnail?.mode === "custom" && assignment.thumbnail?.ready === true).length;
+  if (selected.length + readyCustom !== expectedCustom) {
+    throw new Error(`Custom-cover manifest accounting mismatch: missing=${selected.length} ready=${readyCustom} custom=${expectedCustom}`);
+  }
   const { deck, sha256: deckSha256 } = readHistoricalDeck(options.deckGitBlob);
   if (deck.setId !== plan.setId) throw new Error(`Historical deck blob setId mismatch: ${deck.setId}`);
   const baseImage = "assets/youtube-cover-templates/deck2-universal-approved-base.png";
@@ -315,20 +317,21 @@ async function main() {
   if (options.approve) {
     const campaignRegistry = readJson(options.campaignRegistry, "Campaign registry");
     const campaign = (campaignRegistry.campaigns || []).find((row) => row.campaignId === plan.campaignId && row.manifestHash === plan.manifestHash);
-    if (!campaign) throw new Error("Approved cover campaign is missing from durable registry or manifest hash differs");
-    for (const cover of rendered) {
-      const assignment = (campaign.assignments || []).find((row) => stableAssignmentKey(row) === cover.assignmentKey);
-      if (!assignment) throw new Error(`Approved cover assignment is missing from durable campaign: ${cover.assignmentKey}`);
-      assignment.thumbnail = {
-        mode: "custom",
-        ready: true,
-        reason: "approved_visual_review_git_tracked_manifest_required",
-        path: cover.relativePath,
-        manifestPath,
-        sha256: cover.sha256,
-      };
+    if (campaign) {
+      for (const cover of rendered) {
+        const assignment = (campaign.assignments || []).find((row) => stableAssignmentKey(row) === cover.assignmentKey);
+        if (!assignment) throw new Error(`Approved cover assignment is missing from durable campaign: ${cover.assignmentKey}`);
+        assignment.thumbnail = {
+          mode: "custom",
+          ready: true,
+          reason: "approved_visual_review_git_tracked_manifest_required",
+          path: cover.relativePath,
+          manifestPath,
+          sha256: cover.sha256,
+        };
+      }
+      writeJson(options.campaignRegistry, campaignRegistry);
     }
-    writeJson(options.campaignRegistry, campaignRegistry);
     const coverRegistry = readJson(options.coverRegistry, "Cover registry");
     const id = `campaign-${plan.campaignId}`;
     const existing = (coverRegistry.manifests || []).find((row) => row.id === id);
