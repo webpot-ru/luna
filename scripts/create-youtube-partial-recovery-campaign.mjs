@@ -185,14 +185,23 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
     const longAllowed = channel.longVideoUploadAllowed === true;
     const contentScope = longAllowed ? "full" : "short_unverified";
     const customThumbnailAllowed = channel.customThumbnailUploadAllowed === true;
+    const carryForwardCustomThumbnail = customThumbnailAllowed
+      && oldRow.thumbnail?.mode === "custom"
+      && oldRow.thumbnail?.ready === true
+      && oldRow.thumbnail?.path
+      && oldRow.thumbnail?.manifestPath
+      && oldRow.thumbnail?.sha256;
+    if (customThumbnailAllowed) {
+      assert(carryForwardCustomThumbnail, `${oldRow.supportLang}: partial recovery requires the exact approved source-campaign custom cover`);
+    }
     const row = {
       ...oldRow,
       contentScope,
       cardLimit: 0,
       maxDurationSeconds: longAllowed ? 0 : SHORT_MAX_SECONDS,
       longVideoUploadAllowed: longAllowed,
-      thumbnail: customThumbnailAllowed
-        ? { mode: "custom", ready: false, reason: "exact_approved_cover_required" }
+      thumbnail: carryForwardCustomThumbnail
+        ? structuredClone(oldRow.thumbnail)
         : { mode: "first_frame_auto", ready: true, reason: "custom_thumbnail_disabled_for_channel" },
       youtubeVideoId: undefined,
       youtubeVideoUrl: undefined,
