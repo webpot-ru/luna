@@ -11233,16 +11233,15 @@
       "uploadedAt": "2026-07-16T12:26:08.192Z",
       "lastReadbackAt": "2026-07-16T12:26:08.192Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T13:30:00Z",
-        "thumbnailStatus": "auto_first_frame",
-        "playlistItemReadback": "pending"
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -11294,16 +11293,16 @@
       "uploadedAt": "2026-07-16T12:25:51.066Z",
       "lastReadbackAt": "2026-07-16T12:25:51.066Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -11355,16 +11354,16 @@
       "uploadedAt": "2026-07-16T12:26:52.224Z",
       "lastReadbackAt": "2026-07-16T12:26:52.224Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -11418,17 +11417,15 @@
       "uploadedAt": "2026-07-16T12:26:19.532Z",
       "lastReadbackAt": "2026-07-16T12:26:19.532Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame",
-        "playlistItemReadback": "pending",
-        "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n"
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -11481,16 +11478,15 @@
       "uploadedAt": "2026-07-16T12:30:41.649Z",
       "lastReadbackAt": "2026-07-16T12:30:41.649Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T12:30:00Z",
-        "playlistItemReadback": "pending",
-        "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n"
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -11543,16 +11539,15 @@
       "uploadedAt": "2026-07-16T12:32:24.690Z",
       "lastReadbackAt": "2026-07-16T12:32:24.690Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T21:30:00Z",
-        "playlistItemReadback": "pending",
-        "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n"
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -11584,7 +11579,7 @@
       "channelKey": "fi",
       "youtubeChannelId": "UCZkiQ6y2W8aCUuaiP3N665A",
       "channelHandle": "@lunacardssuomi",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T11:30:00Z",
       "scheduledPublishAt": "2026-07-17T11:30:00Z",
@@ -11604,16 +11599,16 @@
       "uploadedAt": "2026-07-16T12:31:26.445Z",
       "lastReadbackAt": "2026-07-16T12:31:26.445Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T11:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -11665,16 +11660,16 @@
       "uploadedAt": "2026-07-16T12:32:47.953Z",
       "lastReadbackAt": "2026-07-16T12:32:47.953Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -11726,16 +11721,16 @@
       "uploadedAt": "2026-07-16T12:35:14.763Z",
       "lastReadbackAt": "2026-07-16T12:35:14.763Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T12:00:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -11787,16 +11782,16 @@
       "uploadedAt": "2026-07-16T12:37:39.335Z",
       "lastReadbackAt": "2026-07-16T12:37:39.335Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -11848,16 +11843,16 @@
       "uploadedAt": "2026-07-16T12:39:05.134Z",
       "lastReadbackAt": "2026-07-16T12:39:05.134Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T13:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -11889,7 +11884,7 @@
       "channelKey": "ja",
       "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
       "channelHandle": "@lunacardsjapan",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-17T11:30:00Z",
       "scheduledPublishAt": "2026-07-17T11:30:00Z",
@@ -11908,16 +11903,16 @@
       "uploadedAt": "2026-07-16T12:39:09.176Z",
       "lastReadbackAt": "2026-07-16T12:39:09.176Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T11:30:00Z",
-        "thumbnailStatus": "custom_set"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -11949,7 +11944,7 @@
       "channelKey": "ko",
       "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
       "channelHandle": "@lunacardskorean",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T11:30:00Z",
       "scheduledPublishAt": "2026-07-17T11:30:00Z",
@@ -11969,16 +11964,16 @@
       "uploadedAt": "2026-07-16T12:42:12.534Z",
       "lastReadbackAt": "2026-07-16T12:42:12.534Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T11:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12010,7 +12005,7 @@
       "channelKey": "ms",
       "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
       "channelHandle": "@lunacardsmalay",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T12:30:00Z",
       "scheduledPublishAt": "2026-07-17T12:30:00Z",
@@ -12030,16 +12025,16 @@
       "uploadedAt": "2026-07-16T12:43:37.873Z",
       "lastReadbackAt": "2026-07-16T12:43:37.873Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12071,7 +12066,7 @@
       "channelKey": "nl",
       "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
       "channelHandle": "@lunacardsnederlands",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T12:30:00Z",
       "scheduledPublishAt": "2026-07-17T12:30:00Z",
@@ -12091,16 +12086,16 @@
       "uploadedAt": "2026-07-16T12:43:32.465Z",
       "lastReadbackAt": "2026-07-16T12:43:32.465Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12132,7 +12127,7 @@
       "channelKey": "no",
       "youtubeChannelId": "UCK2IIhxCoPUW3wI6xBPYkfA",
       "channelHandle": "@lunacardsnorsk",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T12:30:00Z",
       "scheduledPublishAt": "2026-07-17T12:30:00Z",
@@ -12152,16 +12147,16 @@
       "uploadedAt": "2026-07-16T12:45:00.403Z",
       "lastReadbackAt": "2026-07-16T12:45:00.403Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12193,7 +12188,7 @@
       "channelKey": "pl",
       "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
       "channelHandle": "@lunacardspolski",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T12:30:00Z",
       "scheduledPublishAt": "2026-07-17T12:30:00Z",
@@ -12213,16 +12208,16 @@
       "uploadedAt": "2026-07-16T12:46:46.447Z",
       "lastReadbackAt": "2026-07-16T12:46:46.447Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12254,7 +12249,7 @@
       "channelKey": "ro",
       "youtubeChannelId": "UCvc_hya6nn2z8Q2WzHCuBWw",
       "channelHandle": "@lunacardsromana",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T11:30:00Z",
       "scheduledPublishAt": "2026-07-17T11:30:00Z",
@@ -12274,16 +12269,16 @@
       "uploadedAt": "2026-07-16T12:48:43.028Z",
       "lastReadbackAt": "2026-07-16T12:48:43.028Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T11:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12315,7 +12310,7 @@
       "channelKey": "sk",
       "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
       "channelHandle": "@lunacardsslovensky",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T12:30:00Z",
       "scheduledPublishAt": "2026-07-17T12:30:00Z",
@@ -12335,16 +12330,16 @@
       "uploadedAt": "2026-07-16T12:51:45.950Z",
       "lastReadbackAt": "2026-07-16T12:51:45.950Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12376,7 +12371,7 @@
       "channelKey": "sv",
       "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
       "channelHandle": "@lunacardssvenska",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T12:30:00Z",
       "scheduledPublishAt": "2026-07-17T12:30:00Z",
@@ -12396,16 +12391,16 @@
       "uploadedAt": "2026-07-16T12:53:07.733Z",
       "lastReadbackAt": "2026-07-16T12:53:07.733Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12456,16 +12451,16 @@
       "uploadedAt": "2026-07-16T12:54:14.997Z",
       "lastReadbackAt": "2026-07-16T12:54:14.997Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T13:30:00Z",
-        "thumbnailStatus": "custom_set"
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12520,17 +12515,15 @@
       "uploadedAt": "2026-07-16T12:56:47.017Z",
       "lastReadbackAt": "2026-07-16T12:56:47.017Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T13:30:00Z",
-        "playlistReadback": "create_pending",
-        "playlistItemReadback": "pending",
-        "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n    \"errors\": [\n      {\n        \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/v3/getting-started#quota\\\"\\u003equota\\u003c/a\\u003e.\",\n        \"domain\": \"youtube.quota\",\n        \"reason\": \"quotaExceeded\"\n      }\n    ]\n  }\n}\n"
+        "uploadStatus": "processed"
       },
       "schemaVersion": 1,
       "needsThumbnailPermission": false,
       "source": "publication_control_live_registry_reconciliation",
-      "reconciledAt": "2026-07-17T08:40:10.968Z"
+      "reconciledAt": "2026-07-17T08:40:10.968Z",
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12564,8 +12557,8 @@
       "channelHandle": "@lunacardsitaliano",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T12:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T12:30:00.000Z",
+      "publishAt": "2026-07-17T12:30:00Z",
+      "scheduledPublishAt": "2026-07-17T12:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -12582,11 +12575,11 @@
       "uploadedAt": "2026-07-17T09:12:18.415Z",
       "lastReadbackAt": "2026-07-17T09:12:18.415Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12620,8 +12613,8 @@
       "channelHandle": "@lunacardsgeorgian",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-17T13:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T13:30:00.000Z",
+      "publishAt": "2026-07-17T13:30:00Z",
+      "scheduledPublishAt": "2026-07-17T13:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -12637,11 +12630,11 @@
       "uploadedAt": "2026-07-17T09:12:22.627Z",
       "lastReadbackAt": "2026-07-17T09:12:22.627Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T13:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12675,8 +12668,8 @@
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T12:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T12:30:00.000Z",
+      "publishAt": "2026-07-17T12:30:00Z",
+      "scheduledPublishAt": "2026-07-17T12:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -12693,11 +12686,11 @@
       "uploadedAt": "2026-07-17T09:12:26.094Z",
       "lastReadbackAt": "2026-07-17T09:12:26.094Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12729,7 +12722,7 @@
       "channelKey": "kn",
       "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
       "channelHandle": "@lunacardskannada",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T12:00:00.000Z",
       "scheduledPublishAt": "2026-07-17T12:00:00.000Z",
@@ -12749,11 +12742,11 @@
       "uploadedAt": "2026-07-17T09:16:05.018Z",
       "lastReadbackAt": "2026-07-17T09:16:05.018Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:00:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12785,7 +12778,7 @@
       "channelKey": "ml",
       "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
       "channelHandle": "@lunacardsmalayalam",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T12:00:00.000Z",
       "scheduledPublishAt": "2026-07-17T12:00:00.000Z",
@@ -12805,11 +12798,11 @@
       "uploadedAt": "2026-07-17T09:17:10.381Z",
       "lastReadbackAt": "2026-07-17T09:17:10.381Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:00:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12843,8 +12836,8 @@
       "channelHandle": "@lunacardsnepali",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-17T14:45:00.000Z",
-      "scheduledPublishAt": "2026-07-17T14:45:00.000Z",
+      "publishAt": "2026-07-17T14:45:00Z",
+      "scheduledPublishAt": "2026-07-17T14:45:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -12860,11 +12853,11 @@
       "uploadedAt": "2026-07-17T09:18:00.130Z",
       "lastReadbackAt": "2026-07-17T09:18:00.130Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T14:45:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12898,8 +12891,8 @@
       "channelHandle": "@lunacardsportugues",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-17T19:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T19:30:00.000Z",
+      "publishAt": "2026-07-17T19:30:00Z",
+      "scheduledPublishAt": "2026-07-17T19:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -12915,11 +12908,11 @@
       "uploadedAt": "2026-07-17T09:17:12.797Z",
       "lastReadbackAt": "2026-07-17T09:17:12.797Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T19:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -12953,8 +12946,8 @@
       "channelHandle": "@lunacardsru",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-17T14:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T14:30:00.000Z",
+      "publishAt": "2026-07-17T14:30:00Z",
+      "scheduledPublishAt": "2026-07-17T14:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -12970,11 +12963,11 @@
       "uploadedAt": "2026-07-17T09:21:25.118Z",
       "lastReadbackAt": "2026-07-17T09:21:25.118Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T14:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -13006,7 +12999,7 @@
       "channelKey": "si",
       "youtubeChannelId": "UCgGRZU3j02PQ58z5QcnhhMg",
       "channelHandle": "@lunacardssinhala",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-17T12:00:00.000Z",
       "scheduledPublishAt": "2026-07-17T12:00:00.000Z",
@@ -13025,11 +13018,11 @@
       "uploadedAt": "2026-07-17T09:22:04.519Z",
       "lastReadbackAt": "2026-07-17T09:22:04.519Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:00:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -13063,8 +13056,8 @@
       "channelHandle": "@lunacardsswahili",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-17T14:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T14:30:00.000Z",
+      "publishAt": "2026-07-17T14:30:00Z",
+      "scheduledPublishAt": "2026-07-17T14:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -13080,11 +13073,11 @@
       "uploadedAt": "2026-07-17T09:22:27.249Z",
       "lastReadbackAt": "2026-07-17T09:22:27.249Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T14:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -13116,7 +13109,7 @@
       "channelKey": "ta",
       "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
       "channelHandle": "@lunacardstamil",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T12:00:00.000Z",
       "scheduledPublishAt": "2026-07-17T12:00:00.000Z",
@@ -13136,11 +13129,11 @@
       "uploadedAt": "2026-07-17T09:24:46.073Z",
       "lastReadbackAt": "2026-07-17T09:24:46.073Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:00:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -13172,7 +13165,7 @@
       "channelKey": "te",
       "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
       "channelHandle": "@lunacardstelugu",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T12:00:00.000Z",
       "scheduledPublishAt": "2026-07-17T12:00:00.000Z",
@@ -13192,11 +13185,11 @@
       "uploadedAt": "2026-07-17T09:25:53.534Z",
       "lastReadbackAt": "2026-07-17T09:25:53.534Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:00:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -13230,8 +13223,8 @@
       "channelHandle": "@lunacardsturkce",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-17T14:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T14:30:00.000Z",
+      "publishAt": "2026-07-17T14:30:00Z",
+      "scheduledPublishAt": "2026-07-17T14:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -13247,11 +13240,11 @@
       "uploadedAt": "2026-07-17T09:27:32.508Z",
       "lastReadbackAt": "2026-07-17T09:27:32.508Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T14:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -13338,7 +13331,7 @@
       "channelKey": "zh",
       "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
       "channelHandle": "@lunacardschinese",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_playlist_insert_pending",
       "publishAt": "2026-07-17T12:30:00.000Z",
       "scheduledPublishAt": "2026-07-17T12:30:00.000Z",
@@ -13359,12 +13352,11 @@
       "uploadedAt": "2026-07-17T10:05:17.394Z",
       "lastReadbackAt": "2026-07-17T10:05:17.394Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:30:00Z",
-        "playlistItemReadback": "pending",
-        "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     }
   ]
 }
