@@ -145245,7 +145245,7 @@
       "channelKey": "da",
       "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
       "channelHandle": "@lunacardsdansk",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T12:30:00Z",
       "scheduledPublishAt": "2026-07-17T12:30:00Z",
@@ -145265,8 +145265,8 @@
       "uploadedAt": "2026-07-16T10:24:06.548Z",
       "lastReadbackAt": "2026-07-16T10:24:06.548Z",
       "readback": {
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T12:30:00Z",
+        "privacyStatus": "public",
+        "publishAt": "",
         "uploadStatus": "processed"
       },
       "liveReadbackPresent": true
@@ -154134,8 +154134,8 @@
       "channelHandle": "@lunacardsbulgarski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T14:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T14:30:00.000Z",
+      "publishAt": "2026-07-17T14:30:00Z",
+      "scheduledPublishAt": "2026-07-17T14:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154152,11 +154152,11 @@
       "uploadedAt": "2026-07-17T11:40:43.685Z",
       "lastReadbackAt": "2026-07-17T11:40:43.685Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T14:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154174,8 +154174,8 @@
       "channelHandle": "@lunacardsbulgarski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T17:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T17:30:00.000Z",
+      "publishAt": "2026-07-17T17:30:00Z",
+      "scheduledPublishAt": "2026-07-17T17:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154192,11 +154192,11 @@
       "uploadedAt": "2026-07-17T11:40:57.574Z",
       "lastReadbackAt": "2026-07-17T11:40:57.574Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T17:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154214,8 +154214,8 @@
       "channelHandle": "@lunacardsbulgarski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_playlist_insert_pending",
-      "publishAt": "2026-07-17T20:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T20:30:00.000Z",
+      "publishAt": "2026-07-17T20:30:00Z",
+      "scheduledPublishAt": "2026-07-17T20:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154234,13 +154234,11 @@
       "uploadedAt": "2026-07-17T11:41:09.497Z",
       "lastReadbackAt": "2026-07-17T11:41:09.497Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T20:30:00Z",
-        "thumbnailStatus": "auto_first_frame",
-        "playlistItemReadback": "pending",
-        "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154258,8 +154256,8 @@
       "channelHandle": "@lunacardsbangla",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T14:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T14:30:00.000Z",
+      "publishAt": "2026-07-17T14:30:00Z",
+      "scheduledPublishAt": "2026-07-17T14:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154276,11 +154274,11 @@
       "uploadedAt": "2026-07-17T11:41:05.771Z",
       "lastReadbackAt": "2026-07-17T11:41:05.771Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T14:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154298,8 +154296,8 @@
       "channelHandle": "@lunacardsbangla",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T17:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T17:30:00.000Z",
+      "publishAt": "2026-07-17T17:30:00Z",
+      "scheduledPublishAt": "2026-07-17T17:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154316,11 +154314,11 @@
       "uploadedAt": "2026-07-17T11:41:19.825Z",
       "lastReadbackAt": "2026-07-17T11:41:19.825Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T17:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154338,8 +154336,8 @@
       "channelHandle": "@lunacardsbangla",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T02:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T02:30:00.000Z",
+      "publishAt": "2026-07-18T02:30:00Z",
+      "scheduledPublishAt": "2026-07-18T02:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154356,11 +154354,11 @@
       "uploadedAt": "2026-07-17T11:41:36.744Z",
       "lastReadbackAt": "2026-07-17T11:41:36.744Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T02:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154378,8 +154376,8 @@
       "channelHandle": "@lunacardsbangla",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T05:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T05:30:00.000Z",
+      "publishAt": "2026-07-18T05:30:00Z",
+      "scheduledPublishAt": "2026-07-18T05:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154396,11 +154394,11 @@
       "uploadedAt": "2026-07-17T11:41:48.600Z",
       "lastReadbackAt": "2026-07-17T11:41:48.600Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T05:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154418,8 +154416,8 @@
       "channelHandle": "@lunacardsbangla",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T08:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T08:30:00.000Z",
+      "publishAt": "2026-07-18T08:30:00Z",
+      "scheduledPublishAt": "2026-07-18T08:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154436,11 +154434,11 @@
       "uploadedAt": "2026-07-17T11:42:03.253Z",
       "lastReadbackAt": "2026-07-17T11:42:03.253Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T08:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154458,8 +154456,8 @@
       "channelHandle": "@lunacardscesky",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T15:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T15:30:00.000Z",
+      "publishAt": "2026-07-17T15:30:00Z",
+      "scheduledPublishAt": "2026-07-17T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154476,11 +154474,11 @@
       "uploadedAt": "2026-07-17T11:40:39.014Z",
       "lastReadbackAt": "2026-07-17T11:40:39.014Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154498,8 +154496,8 @@
       "channelHandle": "@lunacardscesky",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T18:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T18:30:00.000Z",
+      "publishAt": "2026-07-17T18:30:00Z",
+      "scheduledPublishAt": "2026-07-17T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154516,11 +154514,11 @@
       "uploadedAt": "2026-07-17T11:40:52.003Z",
       "lastReadbackAt": "2026-07-17T11:40:52.003Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154538,8 +154536,8 @@
       "channelHandle": "@lunacardscesky",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T21:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T21:30:00.000Z",
+      "publishAt": "2026-07-17T21:30:00Z",
+      "scheduledPublishAt": "2026-07-17T21:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154556,11 +154554,11 @@
       "uploadedAt": "2026-07-17T11:41:15.336Z",
       "lastReadbackAt": "2026-07-17T11:41:15.336Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154578,8 +154576,8 @@
       "channelHandle": "@lunacardscesky",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T06:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
+      "publishAt": "2026-07-18T06:30:00Z",
+      "scheduledPublishAt": "2026-07-18T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154596,11 +154594,11 @@
       "uploadedAt": "2026-07-17T11:41:33.572Z",
       "lastReadbackAt": "2026-07-17T11:41:33.572Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154618,8 +154616,8 @@
       "channelHandle": "@lunacardscesky",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T09:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
+      "publishAt": "2026-07-18T09:30:00Z",
+      "scheduledPublishAt": "2026-07-18T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154636,11 +154634,11 @@
       "uploadedAt": "2026-07-17T11:41:51.742Z",
       "lastReadbackAt": "2026-07-17T11:41:51.742Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154658,8 +154656,8 @@
       "channelHandle": "@lunacardsdansk",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T21:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T21:30:00.000Z",
+      "publishAt": "2026-07-17T21:30:00Z",
+      "scheduledPublishAt": "2026-07-17T21:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154676,11 +154674,11 @@
       "uploadedAt": "2026-07-17T11:49:39.237Z",
       "lastReadbackAt": "2026-07-17T11:49:39.237Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154698,8 +154696,8 @@
       "channelHandle": "@lunacardsdansk",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T06:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
+      "publishAt": "2026-07-18T06:30:00Z",
+      "scheduledPublishAt": "2026-07-18T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154716,11 +154714,11 @@
       "uploadedAt": "2026-07-17T11:49:50.366Z",
       "lastReadbackAt": "2026-07-17T11:49:50.366Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154738,8 +154736,8 @@
       "channelHandle": "@lunacardsdansk",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T09:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
+      "publishAt": "2026-07-18T09:30:00Z",
+      "scheduledPublishAt": "2026-07-18T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154756,11 +154754,11 @@
       "uploadedAt": "2026-07-17T11:50:06.601Z",
       "lastReadbackAt": "2026-07-17T11:50:06.601Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154778,8 +154776,8 @@
       "channelHandle": "@lunacardsdansk",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T12:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T12:30:00.000Z",
+      "publishAt": "2026-07-18T12:30:00Z",
+      "scheduledPublishAt": "2026-07-18T12:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154796,11 +154794,11 @@
       "uploadedAt": "2026-07-17T11:50:27.339Z",
       "lastReadbackAt": "2026-07-17T11:50:27.339Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T12:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -154818,8 +154816,8 @@
       "channelHandle": "@lunacardsdansk",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T15:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T15:30:00.000Z",
+      "publishAt": "2026-07-18T15:30:00Z",
+      "scheduledPublishAt": "2026-07-18T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -154836,11 +154834,11 @@
       "uploadedAt": "2026-07-17T11:50:42.880Z",
       "lastReadbackAt": "2026-07-17T11:50:42.880Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -155452,8 +155450,8 @@
       "channelHandle": "@lunacardseesti",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T14:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T14:30:00.000Z",
+      "publishAt": "2026-07-17T14:30:00Z",
+      "scheduledPublishAt": "2026-07-17T14:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -155470,11 +155468,11 @@
       "uploadedAt": "2026-07-17T11:57:24.242Z",
       "lastReadbackAt": "2026-07-17T11:57:24.242Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T14:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -155492,8 +155490,8 @@
       "channelHandle": "@lunacardseesti",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T17:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T17:30:00.000Z",
+      "publishAt": "2026-07-17T17:30:00Z",
+      "scheduledPublishAt": "2026-07-17T17:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -155510,11 +155508,11 @@
       "uploadedAt": "2026-07-17T11:57:39.748Z",
       "lastReadbackAt": "2026-07-17T11:57:39.748Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T17:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -155532,8 +155530,8 @@
       "channelHandle": "@lunacardseesti",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T20:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T20:30:00.000Z",
+      "publishAt": "2026-07-17T20:30:00Z",
+      "scheduledPublishAt": "2026-07-17T20:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -155550,11 +155548,11 @@
       "uploadedAt": "2026-07-17T11:57:49.798Z",
       "lastReadbackAt": "2026-07-17T11:57:49.798Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T20:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -155572,8 +155570,8 @@
       "channelHandle": "@lunacardseesti",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T05:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T05:30:00.000Z",
+      "publishAt": "2026-07-18T05:30:00Z",
+      "scheduledPublishAt": "2026-07-18T05:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -155590,11 +155588,11 @@
       "uploadedAt": "2026-07-17T11:58:03.088Z",
       "lastReadbackAt": "2026-07-17T11:58:03.088Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T05:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -155612,8 +155610,8 @@
       "channelHandle": "@lunacardseesti",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T08:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T08:30:00.000Z",
+      "publishAt": "2026-07-18T08:30:00Z",
+      "scheduledPublishAt": "2026-07-18T08:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -155630,11 +155628,11 @@
       "uploadedAt": "2026-07-17T11:58:13.636Z",
       "lastReadbackAt": "2026-07-17T11:58:13.636Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T08:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -155652,8 +155650,8 @@
       "channelHandle": "@lunacardssuomi",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T14:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T14:30:00.000Z",
+      "publishAt": "2026-07-17T14:30:00Z",
+      "scheduledPublishAt": "2026-07-17T14:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -155670,11 +155668,11 @@
       "uploadedAt": "2026-07-17T11:57:42.078Z",
       "lastReadbackAt": "2026-07-17T11:57:42.078Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T14:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -155692,8 +155690,8 @@
       "channelHandle": "@lunacardssuomi",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T17:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T17:30:00.000Z",
+      "publishAt": "2026-07-17T17:30:00Z",
+      "scheduledPublishAt": "2026-07-17T17:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -155710,11 +155708,11 @@
       "uploadedAt": "2026-07-17T11:57:51.869Z",
       "lastReadbackAt": "2026-07-17T11:57:51.869Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T17:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -155732,8 +155730,8 @@
       "channelHandle": "@lunacardssuomi",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T20:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T20:30:00.000Z",
+      "publishAt": "2026-07-17T20:30:00Z",
+      "scheduledPublishAt": "2026-07-17T20:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -155750,11 +155748,11 @@
       "uploadedAt": "2026-07-17T11:58:02.266Z",
       "lastReadbackAt": "2026-07-17T11:58:02.266Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T20:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -155772,8 +155770,8 @@
       "channelHandle": "@lunacardssuomi",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T05:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T05:30:00.000Z",
+      "publishAt": "2026-07-18T05:30:00Z",
+      "scheduledPublishAt": "2026-07-18T05:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -155790,11 +155788,11 @@
       "uploadedAt": "2026-07-17T11:58:17.148Z",
       "lastReadbackAt": "2026-07-17T11:58:17.148Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T05:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -155812,8 +155810,8 @@
       "channelHandle": "@lunacardssuomi",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T08:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T08:30:00.000Z",
+      "publishAt": "2026-07-18T08:30:00Z",
+      "scheduledPublishAt": "2026-07-18T08:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -155830,11 +155828,11 @@
       "uploadedAt": "2026-07-17T11:58:29.505Z",
       "lastReadbackAt": "2026-07-17T11:58:29.505Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T08:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -156252,8 +156250,8 @@
       "channelHandle": "@lunacardshrvatski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T15:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T15:30:00.000Z",
+      "publishAt": "2026-07-17T15:30:00Z",
+      "scheduledPublishAt": "2026-07-17T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -156270,11 +156268,11 @@
       "uploadedAt": "2026-07-17T12:04:50.936Z",
       "lastReadbackAt": "2026-07-17T12:04:50.936Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -156292,8 +156290,8 @@
       "channelHandle": "@lunacardshrvatski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T18:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T18:30:00.000Z",
+      "publishAt": "2026-07-17T18:30:00Z",
+      "scheduledPublishAt": "2026-07-17T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -156310,11 +156308,11 @@
       "uploadedAt": "2026-07-17T12:05:09.487Z",
       "lastReadbackAt": "2026-07-17T12:05:09.487Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -156332,8 +156330,8 @@
       "channelHandle": "@lunacardshrvatski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T21:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T21:30:00.000Z",
+      "publishAt": "2026-07-17T21:30:00Z",
+      "scheduledPublishAt": "2026-07-17T21:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -156350,11 +156348,11 @@
       "uploadedAt": "2026-07-17T12:05:28.084Z",
       "lastReadbackAt": "2026-07-17T12:05:28.084Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -156372,8 +156370,8 @@
       "channelHandle": "@lunacardshrvatski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T06:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
+      "publishAt": "2026-07-18T06:30:00Z",
+      "scheduledPublishAt": "2026-07-18T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -156390,11 +156388,11 @@
       "uploadedAt": "2026-07-17T12:05:46.643Z",
       "lastReadbackAt": "2026-07-17T12:05:46.643Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -156412,8 +156410,8 @@
       "channelHandle": "@lunacardshrvatski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T09:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
+      "publishAt": "2026-07-18T09:30:00Z",
+      "scheduledPublishAt": "2026-07-18T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -156430,11 +156428,11 @@
       "uploadedAt": "2026-07-17T12:06:04.290Z",
       "lastReadbackAt": "2026-07-17T12:06:04.290Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -156452,8 +156450,8 @@
       "channelHandle": "@lunacardsmagyar",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T15:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T15:30:00.000Z",
+      "publishAt": "2026-07-17T15:30:00Z",
+      "scheduledPublishAt": "2026-07-17T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -156470,11 +156468,11 @@
       "uploadedAt": "2026-07-17T12:04:32.075Z",
       "lastReadbackAt": "2026-07-17T12:04:32.075Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -156492,8 +156490,8 @@
       "channelHandle": "@lunacardsmagyar",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T18:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T18:30:00.000Z",
+      "publishAt": "2026-07-17T18:30:00Z",
+      "scheduledPublishAt": "2026-07-17T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -156510,11 +156508,11 @@
       "uploadedAt": "2026-07-17T12:04:40.045Z",
       "lastReadbackAt": "2026-07-17T12:04:40.045Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -156532,8 +156530,8 @@
       "channelHandle": "@lunacardsmagyar",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T21:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T21:30:00.000Z",
+      "publishAt": "2026-07-17T21:30:00Z",
+      "scheduledPublishAt": "2026-07-17T21:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -156550,11 +156548,11 @@
       "uploadedAt": "2026-07-17T12:04:49.431Z",
       "lastReadbackAt": "2026-07-17T12:04:49.431Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -156572,8 +156570,8 @@
       "channelHandle": "@lunacardsmagyar",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T06:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
+      "publishAt": "2026-07-18T06:30:00Z",
+      "scheduledPublishAt": "2026-07-18T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -156590,11 +156588,11 @@
       "uploadedAt": "2026-07-17T12:05:04.465Z",
       "lastReadbackAt": "2026-07-17T12:05:04.465Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -156612,8 +156610,8 @@
       "channelHandle": "@lunacardsmagyar",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T09:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
+      "publishAt": "2026-07-18T09:30:00Z",
+      "scheduledPublishAt": "2026-07-18T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -156630,11 +156628,11 @@
       "uploadedAt": "2026-07-17T12:05:17.082Z",
       "lastReadbackAt": "2026-07-17T12:05:17.082Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -157052,8 +157050,8 @@
       "channelHandle": "@lunacardsislenska",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T14:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T14:30:00.000Z",
+      "publishAt": "2026-07-17T14:30:00Z",
+      "scheduledPublishAt": "2026-07-17T14:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -157070,11 +157068,11 @@
       "uploadedAt": "2026-07-17T12:11:40.867Z",
       "lastReadbackAt": "2026-07-17T12:11:40.867Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T14:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -157092,8 +157090,8 @@
       "channelHandle": "@lunacardsislenska",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T17:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T17:30:00.000Z",
+      "publishAt": "2026-07-17T17:30:00Z",
+      "scheduledPublishAt": "2026-07-17T17:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -157110,11 +157108,11 @@
       "uploadedAt": "2026-07-17T12:11:50.121Z",
       "lastReadbackAt": "2026-07-17T12:11:50.121Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T17:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -157132,8 +157130,8 @@
       "channelHandle": "@lunacardsislenska",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T20:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T20:30:00.000Z",
+      "publishAt": "2026-07-17T20:30:00Z",
+      "scheduledPublishAt": "2026-07-17T20:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -157150,11 +157148,11 @@
       "uploadedAt": "2026-07-17T12:11:57.623Z",
       "lastReadbackAt": "2026-07-17T12:11:57.623Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T20:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -157172,8 +157170,8 @@
       "channelHandle": "@lunacardsislenska",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T23:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T23:30:00.000Z",
+      "publishAt": "2026-07-17T23:30:00Z",
+      "scheduledPublishAt": "2026-07-17T23:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -157190,11 +157188,11 @@
       "uploadedAt": "2026-07-17T12:12:09.621Z",
       "lastReadbackAt": "2026-07-17T12:12:09.621Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T23:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -157212,8 +157210,8 @@
       "channelHandle": "@lunacardsislenska",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T08:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T08:30:00.000Z",
+      "publishAt": "2026-07-18T08:30:00Z",
+      "scheduledPublishAt": "2026-07-18T08:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -157230,11 +157228,11 @@
       "uploadedAt": "2026-07-17T12:12:18.043Z",
       "lastReadbackAt": "2026-07-17T12:12:18.043Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T08:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158042,8 +158040,8 @@
       "channelHandle": "@lunacardskhmer",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T16:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T16:30:00.000Z",
+      "publishAt": "2026-07-17T16:30:00Z",
+      "scheduledPublishAt": "2026-07-17T16:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158060,11 +158058,11 @@
       "uploadedAt": "2026-07-17T12:21:44.128Z",
       "lastReadbackAt": "2026-07-17T12:21:44.128Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T16:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158082,8 +158080,8 @@
       "channelHandle": "@lunacardskhmer",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T01:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T01:30:00.000Z",
+      "publishAt": "2026-07-18T01:30:00Z",
+      "scheduledPublishAt": "2026-07-18T01:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158100,11 +158098,11 @@
       "uploadedAt": "2026-07-17T12:21:53.877Z",
       "lastReadbackAt": "2026-07-17T12:21:53.877Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T01:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158122,8 +158120,8 @@
       "channelHandle": "@lunacardskhmer",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T04:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T04:30:00.000Z",
+      "publishAt": "2026-07-18T04:30:00Z",
+      "scheduledPublishAt": "2026-07-18T04:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158140,11 +158138,11 @@
       "uploadedAt": "2026-07-17T12:22:08.531Z",
       "lastReadbackAt": "2026-07-17T12:22:08.531Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T04:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158162,8 +158160,8 @@
       "channelHandle": "@lunacardskhmer",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T07:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T07:30:00.000Z",
+      "publishAt": "2026-07-18T07:30:00Z",
+      "scheduledPublishAt": "2026-07-18T07:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158180,11 +158178,11 @@
       "uploadedAt": "2026-07-17T12:22:24.517Z",
       "lastReadbackAt": "2026-07-17T12:22:24.517Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T07:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158202,8 +158200,8 @@
       "channelHandle": "@lunacardskhmer",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T10:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T10:30:00.000Z",
+      "publishAt": "2026-07-18T10:30:00Z",
+      "scheduledPublishAt": "2026-07-18T10:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158220,11 +158218,11 @@
       "uploadedAt": "2026-07-17T12:22:36.185Z",
       "lastReadbackAt": "2026-07-17T12:22:36.185Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T10:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158642,8 +158640,8 @@
       "channelHandle": "@lunacardslao",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T16:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T16:30:00.000Z",
+      "publishAt": "2026-07-17T16:30:00Z",
+      "scheduledPublishAt": "2026-07-17T16:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158660,11 +158658,11 @@
       "uploadedAt": "2026-07-17T12:27:57.221Z",
       "lastReadbackAt": "2026-07-17T12:27:57.221Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T16:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158682,8 +158680,8 @@
       "channelHandle": "@lunacardslao",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T01:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T01:30:00.000Z",
+      "publishAt": "2026-07-18T01:30:00Z",
+      "scheduledPublishAt": "2026-07-18T01:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158700,11 +158698,11 @@
       "uploadedAt": "2026-07-17T12:28:11.099Z",
       "lastReadbackAt": "2026-07-17T12:28:11.099Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T01:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158722,8 +158720,8 @@
       "channelHandle": "@lunacardslao",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T04:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T04:30:00.000Z",
+      "publishAt": "2026-07-18T04:30:00Z",
+      "scheduledPublishAt": "2026-07-18T04:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158740,11 +158738,11 @@
       "uploadedAt": "2026-07-17T12:28:22.728Z",
       "lastReadbackAt": "2026-07-17T12:28:22.728Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T04:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158762,8 +158760,8 @@
       "channelHandle": "@lunacardslao",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T07:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T07:30:00.000Z",
+      "publishAt": "2026-07-18T07:30:00Z",
+      "scheduledPublishAt": "2026-07-18T07:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158780,11 +158778,11 @@
       "uploadedAt": "2026-07-17T12:28:33.868Z",
       "lastReadbackAt": "2026-07-17T12:28:33.868Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T07:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158802,8 +158800,8 @@
       "channelHandle": "@lunacardslao",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T10:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T10:30:00.000Z",
+      "publishAt": "2026-07-18T10:30:00Z",
+      "scheduledPublishAt": "2026-07-18T10:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158820,11 +158818,11 @@
       "uploadedAt": "2026-07-17T12:28:43.374Z",
       "lastReadbackAt": "2026-07-17T12:28:43.374Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T10:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158842,8 +158840,8 @@
       "channelHandle": "@lunacardslietuviu",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T14:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T14:30:00.000Z",
+      "publishAt": "2026-07-17T14:30:00Z",
+      "scheduledPublishAt": "2026-07-17T14:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158860,11 +158858,11 @@
       "uploadedAt": "2026-07-17T12:28:59.350Z",
       "lastReadbackAt": "2026-07-17T12:28:59.350Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T14:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158882,8 +158880,8 @@
       "channelHandle": "@lunacardslietuviu",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T17:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T17:30:00.000Z",
+      "publishAt": "2026-07-17T17:30:00Z",
+      "scheduledPublishAt": "2026-07-17T17:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158900,11 +158898,11 @@
       "uploadedAt": "2026-07-17T12:29:09.640Z",
       "lastReadbackAt": "2026-07-17T12:29:09.640Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T17:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158922,8 +158920,8 @@
       "channelHandle": "@lunacardslietuviu",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T20:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T20:30:00.000Z",
+      "publishAt": "2026-07-17T20:30:00Z",
+      "scheduledPublishAt": "2026-07-17T20:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158940,11 +158938,11 @@
       "uploadedAt": "2026-07-17T12:29:25.184Z",
       "lastReadbackAt": "2026-07-17T12:29:25.184Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T20:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158962,8 +158960,8 @@
       "channelHandle": "@lunacardslietuviu",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T05:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T05:30:00.000Z",
+      "publishAt": "2026-07-18T05:30:00Z",
+      "scheduledPublishAt": "2026-07-18T05:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -158980,11 +158978,11 @@
       "uploadedAt": "2026-07-17T12:29:33.870Z",
       "lastReadbackAt": "2026-07-17T12:29:33.870Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T05:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159002,8 +159000,8 @@
       "channelHandle": "@lunacardslietuviu",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T08:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T08:30:00.000Z",
+      "publishAt": "2026-07-18T08:30:00Z",
+      "scheduledPublishAt": "2026-07-18T08:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -159020,11 +159018,11 @@
       "uploadedAt": "2026-07-17T12:29:40.764Z",
       "lastReadbackAt": "2026-07-17T12:29:40.764Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T08:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159042,8 +159040,8 @@
       "channelHandle": "@lunacardslatviesu",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T14:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T14:30:00.000Z",
+      "publishAt": "2026-07-17T14:30:00Z",
+      "scheduledPublishAt": "2026-07-17T14:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -159060,11 +159058,11 @@
       "uploadedAt": "2026-07-17T12:32:54.582Z",
       "lastReadbackAt": "2026-07-17T12:32:54.582Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T14:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159082,8 +159080,8 @@
       "channelHandle": "@lunacardslatviesu",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T17:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T17:30:00.000Z",
+      "publishAt": "2026-07-17T17:30:00Z",
+      "scheduledPublishAt": "2026-07-17T17:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -159100,11 +159098,11 @@
       "uploadedAt": "2026-07-17T12:33:02.505Z",
       "lastReadbackAt": "2026-07-17T12:33:02.505Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T17:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159122,8 +159120,8 @@
       "channelHandle": "@lunacardslatviesu",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T20:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T20:30:00.000Z",
+      "publishAt": "2026-07-17T20:30:00Z",
+      "scheduledPublishAt": "2026-07-17T20:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -159140,11 +159138,11 @@
       "uploadedAt": "2026-07-17T12:33:17.143Z",
       "lastReadbackAt": "2026-07-17T12:33:17.143Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T20:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159162,8 +159160,8 @@
       "channelHandle": "@lunacardslatviesu",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T05:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T05:30:00.000Z",
+      "publishAt": "2026-07-18T05:30:00Z",
+      "scheduledPublishAt": "2026-07-18T05:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -159180,11 +159178,11 @@
       "uploadedAt": "2026-07-17T12:33:26.890Z",
       "lastReadbackAt": "2026-07-17T12:33:26.890Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T05:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159202,8 +159200,8 @@
       "channelHandle": "@lunacardslatviesu",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T08:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T08:30:00.000Z",
+      "publishAt": "2026-07-18T08:30:00Z",
+      "scheduledPublishAt": "2026-07-18T08:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -159220,11 +159218,11 @@
       "uploadedAt": "2026-07-17T12:33:37.968Z",
       "lastReadbackAt": "2026-07-17T12:33:37.968Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T08:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159442,8 +159440,8 @@
       "channelHandle": "@lunacardsmalay",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T15:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T15:30:00.000Z",
+      "publishAt": "2026-07-17T15:30:00Z",
+      "scheduledPublishAt": "2026-07-17T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -159460,11 +159458,11 @@
       "uploadedAt": "2026-07-17T12:35:19.282Z",
       "lastReadbackAt": "2026-07-17T12:35:19.282Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159482,8 +159480,8 @@
       "channelHandle": "@lunacardsmalay",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T00:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T00:30:00.000Z",
+      "publishAt": "2026-07-18T00:30:00Z",
+      "scheduledPublishAt": "2026-07-18T00:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -159500,11 +159498,11 @@
       "uploadedAt": "2026-07-17T12:35:29.754Z",
       "lastReadbackAt": "2026-07-17T12:35:29.754Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T00:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159522,8 +159520,8 @@
       "channelHandle": "@lunacardsmalay",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T03:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T03:30:00.000Z",
+      "publishAt": "2026-07-18T03:30:00Z",
+      "scheduledPublishAt": "2026-07-18T03:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -159540,11 +159538,11 @@
       "uploadedAt": "2026-07-17T12:35:43.076Z",
       "lastReadbackAt": "2026-07-17T12:35:43.076Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T03:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159562,8 +159560,8 @@
       "channelHandle": "@lunacardsmalay",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T06:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
+      "publishAt": "2026-07-18T06:30:00Z",
+      "scheduledPublishAt": "2026-07-18T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -159580,11 +159578,11 @@
       "uploadedAt": "2026-07-17T12:35:58.798Z",
       "lastReadbackAt": "2026-07-17T12:35:58.798Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159602,8 +159600,8 @@
       "channelHandle": "@lunacardsmalay",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T09:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
+      "publishAt": "2026-07-18T09:30:00Z",
+      "scheduledPublishAt": "2026-07-18T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -159620,11 +159618,11 @@
       "uploadedAt": "2026-07-17T12:36:11.062Z",
       "lastReadbackAt": "2026-07-17T12:36:11.062Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159642,8 +159640,8 @@
       "channelHandle": "@lunacardsburmese",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-17T17:00:00.000Z",
-      "scheduledPublishAt": "2026-07-17T17:00:00.000Z",
+      "publishAt": "2026-07-17T17:00:00Z",
+      "scheduledPublishAt": "2026-07-17T17:00:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -159659,11 +159657,11 @@
       "uploadedAt": "2026-07-17T12:36:19.904Z",
       "lastReadbackAt": "2026-07-17T12:36:19.904Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T17:00:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159681,8 +159679,8 @@
       "channelHandle": "@lunacardsburmese",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-18T02:00:00.000Z",
-      "scheduledPublishAt": "2026-07-18T02:00:00.000Z",
+      "publishAt": "2026-07-18T02:00:00Z",
+      "scheduledPublishAt": "2026-07-18T02:00:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -159698,11 +159696,11 @@
       "uploadedAt": "2026-07-17T12:36:31.651Z",
       "lastReadbackAt": "2026-07-17T12:36:31.651Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T02:00:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159720,8 +159718,8 @@
       "channelHandle": "@lunacardsburmese",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-18T05:00:00.000Z",
-      "scheduledPublishAt": "2026-07-18T05:00:00.000Z",
+      "publishAt": "2026-07-18T05:00:00Z",
+      "scheduledPublishAt": "2026-07-18T05:00:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -159737,11 +159735,11 @@
       "uploadedAt": "2026-07-17T12:36:47.268Z",
       "lastReadbackAt": "2026-07-17T12:36:47.268Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T05:00:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159759,8 +159757,8 @@
       "channelHandle": "@lunacardsburmese",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-18T08:00:00.000Z",
-      "scheduledPublishAt": "2026-07-18T08:00:00.000Z",
+      "publishAt": "2026-07-18T08:00:00Z",
+      "scheduledPublishAt": "2026-07-18T08:00:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -159776,11 +159774,11 @@
       "uploadedAt": "2026-07-17T12:37:02.044Z",
       "lastReadbackAt": "2026-07-17T12:37:02.044Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T08:00:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -159798,8 +159796,8 @@
       "channelHandle": "@lunacardsburmese",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-18T11:00:00.000Z",
-      "scheduledPublishAt": "2026-07-18T11:00:00.000Z",
+      "publishAt": "2026-07-18T11:00:00Z",
+      "scheduledPublishAt": "2026-07-18T11:00:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -159815,11 +159813,11 @@
       "uploadedAt": "2026-07-17T12:37:14.199Z",
       "lastReadbackAt": "2026-07-17T12:37:14.199Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T11:00:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160032,8 +160030,8 @@
       "channelHandle": "@lunacardsnederlands",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T15:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T15:30:00.000Z",
+      "publishAt": "2026-07-17T15:30:00Z",
+      "scheduledPublishAt": "2026-07-17T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160050,11 +160048,11 @@
       "uploadedAt": "2026-07-17T12:42:43.675Z",
       "lastReadbackAt": "2026-07-17T12:42:43.675Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160072,8 +160070,8 @@
       "channelHandle": "@lunacardsnederlands",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T18:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T18:30:00.000Z",
+      "publishAt": "2026-07-17T18:30:00Z",
+      "scheduledPublishAt": "2026-07-17T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160090,11 +160088,11 @@
       "uploadedAt": "2026-07-17T12:42:58.786Z",
       "lastReadbackAt": "2026-07-17T12:42:58.786Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160112,8 +160110,8 @@
       "channelHandle": "@lunacardsnederlands",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T21:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T21:30:00.000Z",
+      "publishAt": "2026-07-17T21:30:00Z",
+      "scheduledPublishAt": "2026-07-17T21:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160130,11 +160128,11 @@
       "uploadedAt": "2026-07-17T12:43:06.823Z",
       "lastReadbackAt": "2026-07-17T12:43:06.823Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160152,8 +160150,8 @@
       "channelHandle": "@lunacardsnederlands",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T06:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
+      "publishAt": "2026-07-18T06:30:00Z",
+      "scheduledPublishAt": "2026-07-18T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160170,11 +160168,11 @@
       "uploadedAt": "2026-07-17T12:43:17.192Z",
       "lastReadbackAt": "2026-07-17T12:43:17.192Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160192,8 +160190,8 @@
       "channelHandle": "@lunacardsnederlands",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T09:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
+      "publishAt": "2026-07-18T09:30:00Z",
+      "scheduledPublishAt": "2026-07-18T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160210,11 +160208,11 @@
       "uploadedAt": "2026-07-17T12:43:25.344Z",
       "lastReadbackAt": "2026-07-17T12:43:25.344Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160232,8 +160230,8 @@
       "channelHandle": "@lunacardsnorsk",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T15:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T15:30:00.000Z",
+      "publishAt": "2026-07-17T15:30:00Z",
+      "scheduledPublishAt": "2026-07-17T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160250,11 +160248,11 @@
       "uploadedAt": "2026-07-17T12:43:45.525Z",
       "lastReadbackAt": "2026-07-17T12:43:45.525Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160272,8 +160270,8 @@
       "channelHandle": "@lunacardsnorsk",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T18:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T18:30:00.000Z",
+      "publishAt": "2026-07-17T18:30:00Z",
+      "scheduledPublishAt": "2026-07-17T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160290,11 +160288,11 @@
       "uploadedAt": "2026-07-17T12:43:55.244Z",
       "lastReadbackAt": "2026-07-17T12:43:55.244Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160312,8 +160310,8 @@
       "channelHandle": "@lunacardsnorsk",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T21:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T21:30:00.000Z",
+      "publishAt": "2026-07-17T21:30:00Z",
+      "scheduledPublishAt": "2026-07-17T21:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160330,11 +160328,11 @@
       "uploadedAt": "2026-07-17T12:44:07.057Z",
       "lastReadbackAt": "2026-07-17T12:44:07.057Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160352,8 +160350,8 @@
       "channelHandle": "@lunacardsnorsk",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T06:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
+      "publishAt": "2026-07-18T06:30:00Z",
+      "scheduledPublishAt": "2026-07-18T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160370,11 +160368,11 @@
       "uploadedAt": "2026-07-17T12:44:17.312Z",
       "lastReadbackAt": "2026-07-17T12:44:17.312Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160392,8 +160390,8 @@
       "channelHandle": "@lunacardsnorsk",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T09:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
+      "publishAt": "2026-07-18T09:30:00Z",
+      "scheduledPublishAt": "2026-07-18T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160410,11 +160408,11 @@
       "uploadedAt": "2026-07-17T12:44:27.203Z",
       "lastReadbackAt": "2026-07-17T12:44:27.203Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160432,8 +160430,8 @@
       "channelHandle": "@lunacardspolski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T18:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T18:30:00.000Z",
+      "publishAt": "2026-07-17T18:30:00Z",
+      "scheduledPublishAt": "2026-07-17T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160450,11 +160448,11 @@
       "uploadedAt": "2026-07-17T12:44:29.857Z",
       "lastReadbackAt": "2026-07-17T12:44:29.857Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160472,8 +160470,8 @@
       "channelHandle": "@lunacardspolski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T15:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T15:30:00.000Z",
+      "publishAt": "2026-07-17T15:30:00Z",
+      "scheduledPublishAt": "2026-07-17T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160490,11 +160488,11 @@
       "uploadedAt": "2026-07-17T12:44:38.573Z",
       "lastReadbackAt": "2026-07-17T12:44:38.573Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160512,8 +160510,8 @@
       "channelHandle": "@lunacardspolski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T21:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T21:30:00.000Z",
+      "publishAt": "2026-07-17T21:30:00Z",
+      "scheduledPublishAt": "2026-07-17T21:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160530,11 +160528,11 @@
       "uploadedAt": "2026-07-17T12:44:54.278Z",
       "lastReadbackAt": "2026-07-17T12:44:54.278Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160552,8 +160550,8 @@
       "channelHandle": "@lunacardspolski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T06:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
+      "publishAt": "2026-07-18T06:30:00Z",
+      "scheduledPublishAt": "2026-07-18T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160570,11 +160568,11 @@
       "uploadedAt": "2026-07-17T12:45:07.847Z",
       "lastReadbackAt": "2026-07-17T12:45:07.847Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160592,8 +160590,8 @@
       "channelHandle": "@lunacardspolski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T09:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
+      "publishAt": "2026-07-18T09:30:00Z",
+      "scheduledPublishAt": "2026-07-18T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160610,11 +160608,11 @@
       "uploadedAt": "2026-07-17T12:45:20.328Z",
       "lastReadbackAt": "2026-07-17T12:45:20.328Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160825,7 +160823,7 @@
       "channelKey": "ro",
       "youtubeChannelId": "UCvc_hya6nn2z8Q2WzHCuBWw",
       "channelHandle": "@lunacardsromana",
-      "privacyStatus": "private",
+      "privacyStatus": "public",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "publishAt": "2026-07-17T14:30:00.000Z",
       "scheduledPublishAt": "2026-07-17T14:30:00.000Z",
@@ -160845,11 +160843,11 @@
       "uploadedAt": "2026-07-17T12:49:32.095Z",
       "lastReadbackAt": "2026-07-17T12:49:32.095Z",
       "readback": {
-        "uploadStatus": "uploaded",
-        "privacyStatus": "private",
-        "publishAt": "2026-07-17T14:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160867,8 +160865,8 @@
       "channelHandle": "@lunacardsromana",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T17:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T17:30:00.000Z",
+      "publishAt": "2026-07-17T17:30:00Z",
+      "scheduledPublishAt": "2026-07-17T17:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160885,11 +160883,11 @@
       "uploadedAt": "2026-07-17T12:49:46.982Z",
       "lastReadbackAt": "2026-07-17T12:49:46.982Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T17:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160907,8 +160905,8 @@
       "channelHandle": "@lunacardsromana",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T20:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T20:30:00.000Z",
+      "publishAt": "2026-07-17T20:30:00Z",
+      "scheduledPublishAt": "2026-07-17T20:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160925,11 +160923,11 @@
       "uploadedAt": "2026-07-17T12:50:01.703Z",
       "lastReadbackAt": "2026-07-17T12:50:01.703Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T20:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160947,8 +160945,8 @@
       "channelHandle": "@lunacardsromana",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T05:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T05:30:00.000Z",
+      "publishAt": "2026-07-18T05:30:00Z",
+      "scheduledPublishAt": "2026-07-18T05:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -160965,11 +160963,11 @@
       "uploadedAt": "2026-07-17T12:50:13.549Z",
       "lastReadbackAt": "2026-07-17T12:50:13.549Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T05:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "uploaded"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -160987,8 +160985,8 @@
       "channelHandle": "@lunacardsromana",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T08:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T08:30:00.000Z",
+      "publishAt": "2026-07-18T08:30:00Z",
+      "scheduledPublishAt": "2026-07-18T08:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -161005,11 +161003,11 @@
       "uploadedAt": "2026-07-17T12:50:21.698Z",
       "lastReadbackAt": "2026-07-17T12:50:21.698Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T08:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161417,8 +161415,8 @@
       "channelHandle": "@lunacardsslovensky",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T15:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T15:30:00.000Z",
+      "publishAt": "2026-07-17T15:30:00Z",
+      "scheduledPublishAt": "2026-07-17T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -161435,11 +161433,11 @@
       "uploadedAt": "2026-07-17T12:56:44.597Z",
       "lastReadbackAt": "2026-07-17T12:56:44.597Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161457,8 +161455,8 @@
       "channelHandle": "@lunacardsslovensky",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T18:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T18:30:00.000Z",
+      "publishAt": "2026-07-17T18:30:00Z",
+      "scheduledPublishAt": "2026-07-17T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -161475,11 +161473,11 @@
       "uploadedAt": "2026-07-17T12:56:54.607Z",
       "lastReadbackAt": "2026-07-17T12:56:54.607Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161497,8 +161495,8 @@
       "channelHandle": "@lunacardsslovensky",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T21:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T21:30:00.000Z",
+      "publishAt": "2026-07-17T21:30:00Z",
+      "scheduledPublishAt": "2026-07-17T21:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -161515,11 +161513,11 @@
       "uploadedAt": "2026-07-17T12:57:08.033Z",
       "lastReadbackAt": "2026-07-17T12:57:08.033Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161537,8 +161535,8 @@
       "channelHandle": "@lunacardsslovensky",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T06:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
+      "publishAt": "2026-07-18T06:30:00Z",
+      "scheduledPublishAt": "2026-07-18T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -161555,11 +161553,11 @@
       "uploadedAt": "2026-07-17T12:57:21.035Z",
       "lastReadbackAt": "2026-07-17T12:57:21.035Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161577,8 +161575,8 @@
       "channelHandle": "@lunacardsslovensky",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T09:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
+      "publishAt": "2026-07-18T09:30:00Z",
+      "scheduledPublishAt": "2026-07-18T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -161595,11 +161593,11 @@
       "uploadedAt": "2026-07-17T12:57:31.740Z",
       "lastReadbackAt": "2026-07-17T12:57:31.740Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161617,8 +161615,8 @@
       "channelHandle": "@lunacardssrpski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-17T15:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T15:30:00.000Z",
+      "publishAt": "2026-07-17T15:30:00Z",
+      "scheduledPublishAt": "2026-07-17T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -161634,11 +161632,11 @@
       "uploadedAt": "2026-07-17T12:59:10.420Z",
       "lastReadbackAt": "2026-07-17T12:59:10.420Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T15:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161656,8 +161654,8 @@
       "channelHandle": "@lunacardssrpski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-17T18:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T18:30:00.000Z",
+      "publishAt": "2026-07-17T18:30:00Z",
+      "scheduledPublishAt": "2026-07-17T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -161673,11 +161671,11 @@
       "uploadedAt": "2026-07-17T12:59:24.100Z",
       "lastReadbackAt": "2026-07-17T12:59:24.100Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T18:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161695,8 +161693,8 @@
       "channelHandle": "@lunacardssrpski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-17T21:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T21:30:00.000Z",
+      "publishAt": "2026-07-17T21:30:00Z",
+      "scheduledPublishAt": "2026-07-17T21:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -161712,11 +161710,11 @@
       "uploadedAt": "2026-07-17T12:59:39.423Z",
       "lastReadbackAt": "2026-07-17T12:59:39.423Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T21:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161734,8 +161732,8 @@
       "channelHandle": "@lunacardssrpski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-18T06:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
+      "publishAt": "2026-07-18T06:30:00Z",
+      "scheduledPublishAt": "2026-07-18T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -161751,11 +161749,11 @@
       "uploadedAt": "2026-07-17T12:59:51.835Z",
       "lastReadbackAt": "2026-07-17T12:59:51.835Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T06:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161773,8 +161771,8 @@
       "channelHandle": "@lunacardssrpski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-18T09:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
+      "publishAt": "2026-07-18T09:30:00Z",
+      "scheduledPublishAt": "2026-07-18T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -161790,11 +161788,11 @@
       "uploadedAt": "2026-07-17T13:00:03.123Z",
       "lastReadbackAt": "2026-07-17T13:00:03.123Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T09:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161812,8 +161810,8 @@
       "channelHandle": "@lunacardssvenska",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T15:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T15:30:00.000Z",
+      "publishAt": "2026-07-17T15:30:00Z",
+      "scheduledPublishAt": "2026-07-17T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -161830,11 +161828,11 @@
       "uploadedAt": "2026-07-17T13:01:39.182Z",
       "lastReadbackAt": "2026-07-17T13:01:39.182Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161852,8 +161850,8 @@
       "channelHandle": "@lunacardssvenska",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T21:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T21:30:00.000Z",
+      "publishAt": "2026-07-17T21:30:00Z",
+      "scheduledPublishAt": "2026-07-17T21:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -161870,11 +161868,11 @@
       "uploadedAt": "2026-07-17T13:01:51.385Z",
       "lastReadbackAt": "2026-07-17T13:01:51.385Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T21:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161892,8 +161890,8 @@
       "channelHandle": "@lunacardssvenska",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T18:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T18:30:00.000Z",
+      "publishAt": "2026-07-17T18:30:00Z",
+      "scheduledPublishAt": "2026-07-17T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -161910,11 +161908,11 @@
       "uploadedAt": "2026-07-17T13:02:06.297Z",
       "lastReadbackAt": "2026-07-17T13:02:06.297Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161932,8 +161930,8 @@
       "channelHandle": "@lunacardssvenska",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T06:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
+      "publishAt": "2026-07-18T06:30:00Z",
+      "scheduledPublishAt": "2026-07-18T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -161950,11 +161948,11 @@
       "uploadedAt": "2026-07-17T13:02:16.192Z",
       "lastReadbackAt": "2026-07-17T13:02:16.192Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161972,8 +161970,8 @@
       "channelHandle": "@lunacardssvenska",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T09:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
+      "publishAt": "2026-07-18T09:30:00Z",
+      "scheduledPublishAt": "2026-07-18T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -161990,11 +161988,11 @@
       "uploadedAt": "2026-07-17T13:02:27.326Z",
       "lastReadbackAt": "2026-07-17T13:02:27.326Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -162294,8 +162292,8 @@
       "channelHandle": "@lunacardsthai",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-17T16:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T16:30:00.000Z",
+      "publishAt": "2026-07-17T16:30:00Z",
+      "scheduledPublishAt": "2026-07-17T16:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -162311,11 +162309,11 @@
       "uploadedAt": "2026-07-17T13:11:50.017Z",
       "lastReadbackAt": "2026-07-17T13:11:50.017Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T16:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -162333,8 +162331,8 @@
       "channelHandle": "@lunacardsthai",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-18T01:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T01:30:00.000Z",
+      "publishAt": "2026-07-18T01:30:00Z",
+      "scheduledPublishAt": "2026-07-18T01:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -162350,11 +162348,11 @@
       "uploadedAt": "2026-07-17T13:12:06.172Z",
       "lastReadbackAt": "2026-07-17T13:12:06.172Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T01:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -162372,8 +162370,8 @@
       "channelHandle": "@lunacardsthai",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-18T04:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T04:30:00.000Z",
+      "publishAt": "2026-07-18T04:30:00Z",
+      "scheduledPublishAt": "2026-07-18T04:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -162389,11 +162387,11 @@
       "uploadedAt": "2026-07-17T13:12:19.617Z",
       "lastReadbackAt": "2026-07-17T13:12:19.617Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T04:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -162411,8 +162409,8 @@
       "channelHandle": "@lunacardsthai",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-18T07:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T07:30:00.000Z",
+      "publishAt": "2026-07-18T07:30:00Z",
+      "scheduledPublishAt": "2026-07-18T07:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -162428,11 +162426,11 @@
       "uploadedAt": "2026-07-17T13:12:30.567Z",
       "lastReadbackAt": "2026-07-17T13:12:30.567Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T07:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -162450,8 +162448,8 @@
       "channelHandle": "@lunacardsthai",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-07-18T10:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T10:30:00.000Z",
+      "publishAt": "2026-07-18T10:30:00Z",
+      "scheduledPublishAt": "2026-07-18T10:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -162467,11 +162465,11 @@
       "uploadedAt": "2026-07-17T13:12:46.882Z",
       "lastReadbackAt": "2026-07-17T13:12:46.882Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T10:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -162489,8 +162487,8 @@
       "channelHandle": "@lunacardsfilipino",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T00:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T00:30:00.000Z",
+      "publishAt": "2026-07-18T00:30:00Z",
+      "scheduledPublishAt": "2026-07-18T00:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -162507,11 +162505,11 @@
       "uploadedAt": "2026-07-17T13:11:39.229Z",
       "lastReadbackAt": "2026-07-17T13:11:39.229Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T00:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -162529,8 +162527,8 @@
       "channelHandle": "@lunacardsfilipino",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-17T15:30:00.000Z",
-      "scheduledPublishAt": "2026-07-17T15:30:00.000Z",
+      "publishAt": "2026-07-17T15:30:00Z",
+      "scheduledPublishAt": "2026-07-17T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -162547,11 +162545,11 @@
       "uploadedAt": "2026-07-17T13:11:49.666Z",
       "lastReadbackAt": "2026-07-17T13:11:49.666Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-17T15:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -162569,8 +162567,8 @@
       "channelHandle": "@lunacardsfilipino",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T03:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T03:30:00.000Z",
+      "publishAt": "2026-07-18T03:30:00Z",
+      "scheduledPublishAt": "2026-07-18T03:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -162587,11 +162585,11 @@
       "uploadedAt": "2026-07-17T13:12:04.777Z",
       "lastReadbackAt": "2026-07-17T13:12:04.777Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T03:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -162609,8 +162607,8 @@
       "channelHandle": "@lunacardsfilipino",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T06:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
+      "publishAt": "2026-07-18T06:30:00Z",
+      "scheduledPublishAt": "2026-07-18T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -162627,11 +162625,11 @@
       "uploadedAt": "2026-07-17T13:12:18.279Z",
       "lastReadbackAt": "2026-07-17T13:12:18.279Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T06:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -162649,8 +162647,8 @@
       "channelHandle": "@lunacardsfilipino",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-07-18T09:30:00.000Z",
-      "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
+      "publishAt": "2026-07-18T09:30:00Z",
+      "scheduledPublishAt": "2026-07-18T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -162667,11 +162665,11 @@
       "uploadedAt": "2026-07-17T13:12:31.276Z",
       "lastReadbackAt": "2026-07-17T13:12:31.276Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-18T09:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
