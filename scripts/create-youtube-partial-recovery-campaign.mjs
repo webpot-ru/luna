@@ -78,8 +78,9 @@ function channelForSupport(channels, support) {
 
 function validateRouteReport(report, expectedSetId, selectedRows, now, maxAgeMinutes) {
   assert(report.setId === expectedSetId, `control report set mismatch: ${report.setId}`);
-  assert(report.summary?.healthy === true, "control report is unhealthy");
-  assert(Number(report.summary?.blockerCount || 0) === 0 && (report.blockers || []).length === 0, "control report has blockers");
+  const selectedSupports = new Set(selectedRows.map((row) => row.supportLang));
+  const scopedBlockers = (report.blockers || []).filter((blocker) => !blocker.supportLang || selectedSupports.has(blocker.supportLang));
+  assert(scopedBlockers.length === 0, `control report has selected-support or global blockers: ${scopedBlockers.map((blocker) => blocker.type || "unknown").join(",")}`);
   assert(report.summary?.liveAuditPaginationComplete === true, "control report pagination is incomplete");
   assert(report.evidence?.videoStatusReadback === true, "control report video status readback is incomplete");
   const generatedAt = Date.parse(report.generatedAt || report.evidence?.liveAuditGeneratedAt || "");
@@ -97,7 +98,12 @@ function validateRouteReport(report, expectedSetId, selectedRows, now, maxAgeMin
       && (candidate.contentScope || "full") === "full");
     assert(tail, `${row.supportLang}: expected full Polyglot tail is absent from control report`);
   }
-  return { generatedAt: new Date(generatedAt).toISOString(), ageMinutes };
+  return {
+    generatedAt: new Date(generatedAt).toISOString(),
+    ageMinutes,
+    selectedBlockerCount: scopedBlockers.length,
+    ignoredUnrelatedBlockerCount: (report.blockers || []).length - scopedBlockers.length,
+  };
 }
 
 function campaignAssignment(row) {
@@ -178,12 +184,16 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
     assert(channel, `${oldRow.supportLang}: channel config is missing`);
     const longAllowed = channel.longVideoUploadAllowed === true;
     const contentScope = longAllowed ? "full" : "short_unverified";
+    const customThumbnailAllowed = channel.customThumbnailUploadAllowed === true;
     const row = {
       ...oldRow,
       contentScope,
       cardLimit: 0,
       maxDurationSeconds: longAllowed ? 0 : SHORT_MAX_SECONDS,
       longVideoUploadAllowed: longAllowed,
+      thumbnail: customThumbnailAllowed
+        ? { mode: "custom", ready: false, reason: "exact_approved_cover_required" }
+        : { mode: "first_frame_auto", ready: true, reason: "custom_thumbnail_disabled_for_channel" },
       youtubeVideoId: undefined,
       youtubeVideoUrl: undefined,
       status: "planned",

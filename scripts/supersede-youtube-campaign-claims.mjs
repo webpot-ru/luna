@@ -14,6 +14,7 @@ function parseArgs(argv) {
     polyglotRegistry: "config/youtube-polyglot-published-videos.json",
     progress: "config/youtube-polyglot-progress.json",
     snapshot: "",
+    finalizerArtifact: "",
     output: "outputs/youtube-campaign-claim-supersession.json",
     apply: false,
   };
@@ -28,6 +29,7 @@ function parseArgs(argv) {
     else if (arg === "--polyglot-registry" || arg.startsWith("--polyglot-registry=")) options.polyglotRegistry = value();
     else if (arg === "--progress" || arg.startsWith("--progress=")) options.progress = value();
     else if (arg === "--snapshot" || arg.startsWith("--snapshot=")) options.snapshot = value();
+    else if (arg === "--finalizer-artifact" || arg.startsWith("--finalizer-artifact=")) options.finalizerArtifact = value();
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = value();
     else if (arg === "--apply") options.apply = true;
     else if (arg === "--confirm" || arg.startsWith("--confirm=")) options.confirm = value();
@@ -73,10 +75,39 @@ function liveFullBySupport(snapshot, selected, bundle) {
   return map;
 }
 
-export function buildClaimSupersession({ registry, calendar, polyglotRegistry, progress, snapshot, campaignId, selectedSupports, bundle, now = new Date().toISOString() }) {
+// A finalized parent workflow already contains durable upload receipts.  This
+// mode deliberately does not pretend that those receipts are a new live
+// snapshot; it only reconciles the parent campaign's own unexpected full
+// publications, whose receipt validation was clean.
+function finalizedReceiptFullBySupport(finalizerArtifact, ledgers, campaignId, selected, bundle) {
+  if (finalizerArtifact.campaignId !== campaignId) throw new Error("finalizer artifact campaignId mismatch");
+  if ((finalizerArtifact.receiptErrors || []).length) throw new Error("finalizer artifact contains receipt errors");
+  const unexpected = (finalizerArtifact.unexpectedPublications || []).filter((row) => selected.includes(row.assignmentKey?.split("|")[2]));
+  if (unexpected.length !== selected.length) throw new Error("finalizer artifact does not contain one unexpected full publication per selected support");
+  const bySupport = new Map();
+  for (const item of unexpected) {
+    const ledgerRows = ledgers.filter((row) => row.youtubeVideoId === item.youtubeVideoId);
+    if (!ledgerRows.length) throw new Error(`${item.youtubeVideoId}: durable upload receipt is missing`);
+    if (ledgerRows.some((candidate) => candidate.videoType !== "polyglot" || candidate.contentScope !== "full" || candidate.bundleKey !== bundle
+      || candidate.campaignId !== campaignId || assignmentKey(candidate) !== item.assignmentKey || candidate.postUploadError)) {
+      throw new Error(`${item.youtubeVideoId}: durable receipt is not a clean matching full publication`);
+    }
+    const row = ledgerRows.find((candidate) => candidate.scheduledPublishAt && candidate.youtubePlaylistId && candidate.playlistItemId);
+    if (!row) throw new Error(`${item.youtubeVideoId}: no durable receipt has schedule and playlist proof`);
+    if (bySupport.has(row.supportLang)) throw new Error(`${row.supportLang}: multiple durable full receipts`);
+    bySupport.set(row.supportLang, row);
+  }
+  if (bySupport.size !== selected.length) throw new Error("durable full receipt support coverage is incomplete");
+  return bySupport;
+}
+
+export function buildClaimSupersession({ registry, calendar, polyglotRegistry, progress, snapshot, finalizerArtifact, campaignId, selectedSupports, bundle, now = new Date().toISOString() }) {
   const campaign = (registry.campaigns || []).find((row) => row.campaignId === campaignId);
   if (!campaign || campaign.status !== "reconciliation_required") throw new Error("source campaign must exist and be reconciliation_required");
-  const liveFull = liveFullBySupport(snapshot, selectedSupports, bundle);
+  const ledgers = [polyglotRegistry, progress].flatMap(publications);
+  const fullPublications = finalizerArtifact
+    ? finalizedReceiptFullBySupport(finalizerArtifact, ledgers, campaignId, selectedSupports, bundle)
+    : liveFullBySupport(snapshot, selectedSupports, bundle);
   const selected = selectedSupports.map((support) => {
     const matches = (campaign.assignments || []).filter((row) => row.supportLang === support
       && row.videoType === "polyglot"
@@ -95,7 +126,6 @@ export function buildClaimSupersession({ registry, calendar, polyglotRegistry, p
     const claim = activeCalendarRows.filter((candidate) => calendarAssignmentKey(candidate) === row.calendarAssignmentKey);
     if (claim.length !== 1 || claim[0].youtubeVideoId) throw new Error(`${row.supportLang}: calendar claim is not exactly one zero-upload reservation`);
   }
-  const ledgers = [polyglotRegistry, progress].flatMap(publications);
   const durableAssignmentKey = (row) => row.assignmentKey || assignmentKey(row);
   const receiptRows = ledgers.filter((row) => keys.has(durableAssignmentKey(row)) && row.youtubeVideoId);
   if (receiptRows.length) throw new Error(`selected claims have durable YouTube receipts: ${receiptRows.map((row) => row.youtubeVideoId).join(",")}`);
@@ -107,8 +137,8 @@ export function buildClaimSupersession({ registry, calendar, polyglotRegistry, p
     shortYoutubeVideoId: row.youtubeVideoId || "",
     durableReceiptCount: ledgers.filter((candidate) => durableAssignmentKey(candidate) === row.assignmentKey && candidate.youtubeVideoId).length,
     durableArtifactReferences: [row.artifactPath, row.receiptPath, row.githubRunId].filter(Boolean),
-    liveFullYoutubeVideoId: liveFull.get(row.supportLang).youtubeVideoId,
-    liveFullPublishAt: liveFull.get(row.supportLang).publishAt,
+    fullYoutubeVideoId: fullPublications.get(row.supportLang).youtubeVideoId,
+    fullPublishAt: fullPublications.get(row.supportLang).scheduledPublishAt || fullPublications.get(row.supportLang).publishAt,
   }));
   if (reportRows.some((row) => row.shortYoutubeVideoId || row.durableReceiptCount || row.durableArtifactReferences.length)) {
     throw new Error("selected claims are not proven zero-upload");
@@ -119,15 +149,46 @@ export function buildClaimSupersession({ registry, calendar, polyglotRegistry, p
   nextCampaign.slotKeys = (nextCampaign.slotKeys || []).filter((key) => !slots.has(key));
   for (const row of nextCampaign.assignments || []) {
     if (!keys.has(row.assignmentKey)) continue;
-    const live = liveFull.get(row.supportLang);
-    Object.assign(row, { status: "superseded_live_full_product_conflict", supersededAt: now, supersededByYoutubeVideoId: live.youtubeVideoId, supersededReason: "confirmed_live_full_product_has_priority" });
+    const full = fullPublications.get(row.supportLang);
+    Object.assign(row, { status: "superseded_live_full_product_conflict", supersededAt: now, supersededByYoutubeVideoId: full.youtubeVideoId, supersededReason: "confirmed_full_product_has_priority" });
   }
   const nextCalendar = structuredClone(calendar);
+  const fullCalendarReservations = [];
   for (const row of nextCalendar.reservations || []) {
     if (row.campaignId !== campaignId || !calendarKeys.has(calendarAssignmentKey(row)) || !isActiveReservation(row)) continue;
-    const live = liveFull.get(row.supportLang);
-    Object.assign(row, { status: "superseded_live_full_product_conflict", supersededAt: now, supersededByYoutubeVideoId: live.youtubeVideoId, supersededReason: "confirmed_live_full_product_has_priority", updatedAt: now });
+    const full = fullPublications.get(row.supportLang);
+    Object.assign(row, { status: "superseded_live_full_product_conflict", supersededAt: now, supersededByYoutubeVideoId: full.youtubeVideoId, supersededReason: "confirmed_full_product_has_priority", updatedAt: now });
+    fullCalendarReservations.push({
+      ...row,
+      status: "reserved_durable_upload_receipt_reconciled",
+      source: "youtube-campaign-finalizer-reconciliation",
+      contentScope: "full",
+      polyglotKey: full.polyglotKey,
+      targetLang: full.targetLang,
+      targetLangs: full.targetLangs,
+      targetLangsCsv: full.targetLangsCsv,
+      targetLangsHash: full.targetLangsHash,
+      youtubeVideoId: full.youtubeVideoId,
+      youtubePlaylistId: full.youtubePlaylistId,
+      playlistItemId: full.playlistItemId,
+      publicationStatus: full.publicationStatus,
+      scheduledPublishAt: full.scheduledPublishAt,
+      reconciledAt: now,
+      supersededAt: undefined,
+      supersededByYoutubeVideoId: undefined,
+      supersededReason: undefined,
+      updatedAt: now,
+    });
   }
+  for (const row of fullCalendarReservations) {
+    const duplicate = (nextCalendar.reservations || []).find((candidate) => isActiveReservation(candidate) && calendarAssignmentKey(candidate) === calendarAssignmentKey(row));
+    if (duplicate) throw new Error(`${row.supportLang}: full calendar reservation already active`);
+    nextCalendar.reservations.push(row);
+  }
+  nextCampaign.reconciledFullPublications = [
+    ...(nextCampaign.reconciledFullPublications || []),
+    ...[...fullPublications.values()].map((row) => ({ supportLang: row.supportLang, bundleKey: row.bundleKey, contentScope: "full", youtubeVideoId: row.youtubeVideoId, scheduledPublishAt: row.scheduledPublishAt, reconciledAt: now, source: finalizerArtifact ? "finalizer_durable_upload_receipt" : "live_snapshot" })),
+  ];
   return {
     report: {
       schemaVersion: 1,
@@ -136,9 +197,10 @@ export function buildClaimSupersession({ registry, calendar, polyglotRegistry, p
       campaignId,
       bundleKey: bundle,
       selectedCount: reportRows.length,
-      proof: { zeroYoutubeIds: true, zeroDurableReceipts: true, zeroDurableArtifactReferences: true, liveFullPriority: true },
+      proof: { zeroYoutubeIds: true, zeroDurableReceipts: true, zeroDurableArtifactReferences: true, fullProductPriority: true },
+      fullEvidenceSource: finalizerArtifact ? "parent_finalizer_durable_upload_receipt" : "live_snapshot",
       rows: reportRows,
-      sourceFingerprints: { registry: sha256(registry), calendar: sha256(calendar), polyglotRegistry: sha256(polyglotRegistry), progress: sha256(progress), snapshot: sha256(snapshot) },
+      sourceFingerprints: { registry: sha256(registry), calendar: sha256(calendar), polyglotRegistry: sha256(polyglotRegistry), progress: sha256(progress), ...(finalizerArtifact ? { finalizerArtifact: sha256(finalizerArtifact) } : { snapshot: sha256(snapshot) }) },
     },
     nextRegistry,
     nextCalendar,
@@ -151,14 +213,15 @@ function main() {
     console.log(`node scripts/supersede-youtube-campaign-claims.mjs --campaign-id=<id> --supports=BG,HR --bundle=global_europe_core --snapshot=<snapshot.json> [--apply --confirm=${CONFIRM}]`);
     return;
   }
-  if (!options.campaignId || !options.supports || !options.bundle || !options.snapshot) throw new Error("--campaign-id, --supports, --bundle and --snapshot are required");
+  if (!options.campaignId || !options.supports || !options.bundle || (!options.snapshot && !options.finalizerArtifact)) throw new Error("--campaign-id, --supports, --bundle and either --snapshot or --finalizer-artifact are required");
   if (options.apply && options.confirm !== CONFIRM) throw new Error(`--apply requires --confirm=${CONFIRM}`);
   const result = buildClaimSupersession({
     registry: readJson(options.registry),
     calendar: readJson(options.calendar),
     polyglotRegistry: readJson(options.polyglotRegistry),
     progress: readJson(options.progress),
-    snapshot: readJson(options.snapshot),
+    snapshot: options.snapshot ? readJson(options.snapshot) : null,
+    finalizerArtifact: options.finalizerArtifact ? readJson(options.finalizerArtifact) : null,
     campaignId: options.campaignId,
     selectedSupports: supports(options.supports),
     bundle: options.bundle,

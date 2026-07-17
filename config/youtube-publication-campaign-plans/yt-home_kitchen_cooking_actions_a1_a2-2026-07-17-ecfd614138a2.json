@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-17T09:51:09.282Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_kitchen_cooking_actions_a1_a2",
+  "inputs": {
+    "supports": "HY,ZH",
+    "supportCount": 2,
+    "ordinaryPerChannel": 0,
+    "polyglotPerChannel": 1,
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 30,
+    "partialRecoveryOfCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-080c2f49ed8e"
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-080c2f49ed8e",
+      "manifestHash": "685975d8fe91bfff2dd82170d8b2f89c27e260307e4342b50194bc6386b3cdb9",
+      "status": "reconciliation_required"
+    },
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-4",
+        "generatedAt": "2026-07-17T09:48:32.289Z",
+        "ageMinutes": 2.61655,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 7
+      },
+      {
+        "routeKey": "youtube-1",
+        "generatedAt": "2026-07-17T09:48:31.190Z",
+        "ageMinutes": 2.6348666666666665,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 5
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/review/youtube-publication-snapshot-reconciled-five-full-20260716.json",
+        "exists": true,
+        "sha256": "c682df7f46f7ad7052f320dcb2237d43559733115f72133dfb21b12dd2f64dd6"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "1ae211733492c8845db9babe274932bce00b2b05c771468b23fcf6a8b440ce6a"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "09b0a90729389d5f2a146e5ace3729fd201cc7759af4b9553b4295fe249619f5"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "e195a73d31716e2248f4031edfe6346331b670f8d4afab90abf346d70cb18c82"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "8c05e324676cc0b4a6e3e376040c7649bdeef671b688e47aace1f40f5c4582c2"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "090be7dd53210314fc0aca1026de6489250564f01092e6004cedbab13975741f"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "605eda7deb59067f0809da9d751f443016d4ccd341beac66c45bbdec717d9a45"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json",
+        "exists": false,
+        "sha256": ""
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "d898fddc7472963cb57df0beefef837b102e4ccb8af313f2398b8df14a971b9c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "df6465006e476fb3ed14a60eaa724ec86c1a271b9c5b60b8218148071a2195d5"
+      },
+      "playlistDiscovery": {
+        "path": "/private/tmp/youtube-preflight-29478908334/youtube-publication-control-home_kitchen_cooking_actions_a1_a2-all-routes-29478908334/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "bcdf3024b5371a667dd91f7794163b1dcf49331a49f6d0441711a0eae0217b19"
+      }
+    },
+    "deckSource": {
+      "mode": "historical_git_blob",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": false,
+      "offlineDeckTracked": false,
+      "historicalGitBlob": {
+        "available": true,
+        "matchesLocalFile": false,
+        "commit": "0a4e6907cdffdb1cafa4b44e723f87650b16a19e",
+        "blobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+        "localBlobId": "",
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 1,
+    "supportCount": 2,
+    "ordinaryCount": 0,
+    "polyglotCount": 2,
+    "assignmentCount": 2,
+    "firstPublishAt": "2026-07-17T12:30:00.000Z",
+    "lastPublishAt": "2026-07-17T13:30:00.000Z",
+    "customThumbnailCount": 1,
+    "automaticThumbnailCount": 1,
+    "existingPlaylistCount": 0,
+    "playlistCreateCount": 2,
+    "playlistCreateCountMaximum": 2,
+    "routeCounts": {
+      "youtube-1": 1,
+      "youtube-2": 0,
+      "youtube-3": 0,
+      "youtube-4": 1
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 2,
+    "estimatedPlaylistItemInsertUnits": 100,
+    "estimatedPlaylistCreateUnitsMaximum": 100,
+    "estimatedThumbnailSetUnits": 50,
+    "estimatedGeneralQuotaUnitsMaximum": 250,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 150
+      },
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      },
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 100
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "HY: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|HY|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|HY|romance_core|short_unverified|hy",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HY",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:HY:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-07-17T13:30:00.000Z",
+      "localDate": "2026-07-17",
+      "localTime": "17:30",
+      "timeZone": "Asia/Yerevan",
+      "slotKey": "hy|2026-07-17T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__HY__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: իսպաներեն, ֆրանսերեն, իտալերեն, պորտուգալերեն",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: իսպաներեն, ֆրանսերեն, իտալերեն, պորտուգալերեն. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|ZH|romance_core|f34a59a474f1|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|ZH|romance_core|full|zh",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ZH",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:ZH:romance_core:f34a59a474f1:full",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-17T12:30:00.000Z",
+      "localDate": "2026-07-17",
+      "localTime": "20:30",
+      "timeZone": "Asia/Shanghai",
+      "slotKey": "zh|2026-07-17T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": false,
+        "reason": "exact_approved_cover_required"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__ZH__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: 西班牙语, 法语, 意大利语, 葡萄牙语",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: 西班牙语, 法语, 意大利语, 葡萄牙语. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 4
+    }
+  ],
+  "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-ecfd614138a2",
+  "manifestHash": "968abaa575b65a456929e352739c27b43888d25c48135c42ac2e1bcfad9d53f2"
+}

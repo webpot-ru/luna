@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-17T09:53:21.070Z",
+  "status": "approved",
+  "sourceOfTruth": "Immutable campaign manifest; exact missing custom-thumbnail assignments only.",
+  "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-ecfd614138a2",
+  "campaignManifestHash": "968abaa575b65a456929e352739c27b43888d25c48135c42ac2e1bcfad9d53f2",
+  "source": {
+    "campaignManifest": "config/youtube-publication-campaign-plans/yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-ecfd614138a2.json",
+    "approvedCoverManifest": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-30b96a246c69/manifest.json",
+    "historicalDeckGitBlob": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+    "historicalDeckSha256": "221f3eb523c1b5e5cd9656d9d26fc3fc6e2ca43e2bc8d3c0c5322597cfaf9cd5",
+    "approvedBaseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+    "approvedBaseImageSha256": "33082f1c7c4d48ef1670777a5558cfe5b995de80ed9608d1aec822107a62be31"
+  },
+  "policy": {
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0,
+    "uploadEligible": true,
+    "visualReviewRequired": false,
+    "gitTrackedApprovalManifestRequired": false
+  },
+  "counts": {
+    "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-ecfd614138a2",
+    "campaignManifestHash": "968abaa575b65a456929e352739c27b43888d25c48135c42ac2e1bcfad9d53f2",
+    "coverCount": 1,
+    "ordinaryCount": 0,
+    "polyglotCount": 1,
+    "status": "approved",
+    "approved": true,
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0
+  },
+  "review": {
+    "sheetCsv": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-ecfd614138a2-precommit-ready/review-sheet.csv",
+    "contactSheets": [
+      {
+        "groupKey": "ZH__polyglot",
+        "coverCount": 1,
+        "relativePath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-ecfd614138a2-precommit-ready/contact-sheets/ZH__polyglot.jpg"
+      }
+    ],
+    "pendingVisualReviewCount": 0,
+    "approvedCount": 1,
+    "cjkTextCoverCount": 1
+  },
+  "covers": [
+    {
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ZH",
+      "viewerSupportLang": "ZH",
+      "channelKey": "zh",
+      "channelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "channelHandle": "LunaCardsChinese",
+      "channelSupportLangs": [
+        "ZH"
+      ],
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|ZH|romance_core|f34a59a474f1|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|ZH|romance_core|full|zh",
+      "title": "烹饪动作",
+      "description": "厨房动作词。初级。",
+      "module": "家",
+      "category": "厨房",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "sourceAssetApproval": "git-tracked-approved-base",
+      "uploadEligible": true,
+      "status": "approved",
+      "reviewStatus": "approved_visual_review",
+      "gitTrackedApprovalRequired": false,
+      "videoType": "polyglot",
+      "bundleKey": "romance_core",
+      "bundleLabel": "romance_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "targetLangsHash": "f34a59a474f1",
+      "targetLanguageLines": [
+        "西班牙语 · 法语",
+        "意大利语 · 葡萄牙语"
+      ],
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:ZH:romance_core:f34a59a474f1:full",
+      "visualTemplate": "polyglot-target-languages-large-lines-v1-deck2-action-base",
+      "relativePath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-ecfd614138a2-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-ZH-romance_core-f34a59a474f1-full.jpg",
+      "sidecarPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-ecfd614138a2-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-ZH-romance_core-f34a59a474f1-full.json",
+      "cjkTextPresent": true,
+      "path": "/Users/lali/Documents/LUNA2/.codex-worktrees/youtube-campaign-clean-preflight-20260716/data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-ecfd614138a2-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-ZH-romance_core-f34a59a474f1-full.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 287338,
+      "sha256": "72977919ccd53003b7d8b68a9e452b792547397f87350b932985675ff92ad0b8"
+    }
+  ]
+}

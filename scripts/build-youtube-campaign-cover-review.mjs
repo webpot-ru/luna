@@ -17,10 +17,13 @@ function parseArgs(argv) {
   const options = {
     campaignManifest: DEFAULT_PLAN,
     approvedManifest: DEFAULT_APPROVED_MANIFEST,
+    campaignRegistry: "config/youtube-publication-campaigns.json",
+    coverRegistry: "config/youtube-cover-assets.json",
     deckGitBlob: DEFAULT_DECK_BLOB,
     outputRoot: "",
     concurrency: 4,
     dryRun: false,
+    allowScoped: false,
     approve: false,
     confirm: "",
   };
@@ -29,10 +32,13 @@ function parseArgs(argv) {
     const value = () => arg.includes("=") ? arg.split("=").slice(1).join("=") : argv[++index];
     if (arg === "--campaign-manifest" || arg.startsWith("--campaign-manifest=")) options.campaignManifest = value();
     else if (arg === "--approved-manifest" || arg.startsWith("--approved-manifest=")) options.approvedManifest = value();
+    else if (arg === "--campaign-registry" || arg.startsWith("--campaign-registry=")) options.campaignRegistry = value();
+    else if (arg === "--cover-registry" || arg.startsWith("--cover-registry=")) options.coverRegistry = value();
     else if (arg === "--deck-git-blob" || arg.startsWith("--deck-git-blob=")) options.deckGitBlob = value();
     else if (arg === "--output-root" || arg.startsWith("--output-root=")) options.outputRoot = value();
     else if (arg === "--concurrency" || arg.startsWith("--concurrency=")) options.concurrency = Number(value());
     else if (arg === "--dry-run") options.dryRun = true;
+    else if (arg === "--allow-scoped") options.allowScoped = true;
     else if (arg === "--approve") options.approve = true;
     else if (arg === "--confirm" || arg.startsWith("--confirm=")) options.confirm = value();
     else if (arg === "--help" || arg === "-h") options.help = true;
@@ -44,6 +50,10 @@ function parseArgs(argv) {
 function readJson(filePath, label) {
   if (!fs.existsSync(filePath)) throw new Error(`${label} not found: ${filePath}`);
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+function writeJson(filePath, value) {
+  fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
 
 function sha256(value) {
@@ -218,9 +228,9 @@ async function main() {
   options.outputRoot ||= `data/youtube-cover-assets/${plan.campaignId}-precommit-ready`;
   const approved = readJson(options.approvedManifest, "Current approved cover manifest");
   const selected = selectMissingCustomAssignments(plan, approvedAssignmentKeys(approved));
-  if (selected.length !== 75) throw new Error(`Expected exactly 75 missing custom covers, got ${selected.length}`);
+  if (!options.allowScoped && selected.length !== 75) throw new Error(`Expected exactly 75 missing custom covers, got ${selected.length}; pass --allow-scoped only for an exact recovery campaign`);
   const expectedCustom = (plan.assignments || []).filter((assignment) => assignment.thumbnail?.mode === "custom").length;
-  if (expectedCustom !== 90 || approved.covers?.length !== 72) throw new Error(`Unexpected campaign/current-cover boundary: custom=${expectedCustom} approved=${approved.covers?.length}`);
+  if (!options.allowScoped && (expectedCustom !== 90 || approved.covers?.length !== 72)) throw new Error(`Unexpected campaign/current-cover boundary: custom=${expectedCustom} approved=${approved.covers?.length}`);
   const { deck, sha256: deckSha256 } = readHistoricalDeck(options.deckGitBlob);
   if (deck.setId !== plan.setId) throw new Error(`Historical deck blob setId mismatch: ${deck.setId}`);
   const baseImage = "assets/youtube-cover-templates/deck2-universal-approved-base.png";
@@ -299,8 +309,38 @@ async function main() {
     covers: rendered,
   };
   fs.writeFileSync(path.join(options.outputRoot, "review-sheet.csv"), reviewSheet(rendered, options.approve), "utf8");
-  fs.writeFileSync(path.join(options.outputRoot, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
-  console.log(JSON.stringify({ ...summary, outputRoot: options.outputRoot, contactSheetCount: contactSheets.length }, null, 2));
+  const manifestPath = path.join(options.outputRoot, "manifest.json");
+  writeJson(manifestPath, manifest);
+  let approvalRegistryUpdated = false;
+  if (options.approve) {
+    const campaignRegistry = readJson(options.campaignRegistry, "Campaign registry");
+    const campaign = (campaignRegistry.campaigns || []).find((row) => row.campaignId === plan.campaignId && row.manifestHash === plan.manifestHash);
+    if (!campaign) throw new Error("Approved cover campaign is missing from durable registry or manifest hash differs");
+    for (const cover of rendered) {
+      const assignment = (campaign.assignments || []).find((row) => stableAssignmentKey(row) === cover.assignmentKey);
+      if (!assignment) throw new Error(`Approved cover assignment is missing from durable campaign: ${cover.assignmentKey}`);
+      assignment.thumbnail = {
+        mode: "custom",
+        ready: true,
+        reason: "approved_visual_review_git_tracked_manifest_required",
+        path: cover.relativePath,
+        manifestPath,
+        sha256: cover.sha256,
+      };
+    }
+    writeJson(options.campaignRegistry, campaignRegistry);
+    const coverRegistry = readJson(options.coverRegistry, "Cover registry");
+    const id = `campaign-${plan.campaignId}`;
+    const existing = (coverRegistry.manifests || []).find((row) => row.id === id);
+    if (existing && existing.path !== manifestPath) throw new Error(`Cover registry id collision: ${id}`);
+    if (!existing) {
+      coverRegistry.manifests ||= [];
+      coverRegistry.manifests.push({ id, setId: plan.setId, videoTypes: ["ordinary", "polyglot"], campaignId: plan.campaignId, status: "approved", path: manifestPath });
+      writeJson(options.coverRegistry, coverRegistry);
+      approvalRegistryUpdated = true;
+    }
+  }
+  console.log(JSON.stringify({ ...summary, outputRoot: options.outputRoot, contactSheetCount: contactSheets.length, approvalRegistryUpdated }, null, 2));
 }
 
 const invokedPath = process.argv[1] ? pathToFileURL(path.resolve(process.argv[1])).href : "";
