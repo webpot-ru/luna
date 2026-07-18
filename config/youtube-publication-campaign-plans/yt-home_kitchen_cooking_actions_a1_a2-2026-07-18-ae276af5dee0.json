@@ -1,0 +1,328 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-18T10:24:35.793Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_kitchen_cooking_actions_a1_a2",
+  "inputs": {
+    "supports": "SV,TH,VI",
+    "supportCount": 3,
+    "ordinaryPerChannel": 0,
+    "polyglotPerChannel": 1,
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 30,
+    "partialRecoveryOfCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-7ac5277cb2b8"
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-7ac5277cb2b8",
+      "manifestHash": "2a78472a4c2536217beff857ddb5b2aef54fd3eb4687552be7547f229b2ed86e",
+      "status": "reconciliation_required"
+    },
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-07-18T10:24:17.231Z",
+        "ageMinutes": 0.3093666666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot-29573272283-reconciled.json",
+        "exists": true,
+        "sha256": "3a17e733b1268673ee7f47aed95d249be45ec06fe1e50a824c5e269381c24ff8"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "ca2852986de698240474f3726dfd93ac4f5ed217f45c460d1ee4a5ef35059874"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "3b0f066258e5f08273d0c7dd07575c61b7171ca19465225cace31ce011ebeb5e"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "e195a73d31716e2248f4031edfe6346331b670f8d4afab90abf346d70cb18c82"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "bc5d4a0ac8b594ca980d112129bf2f1ebd73b2b38af21406920580eb5ea1f976"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "a10096ba3a5cbefef9991f0ff24a41a2904d619d654a1e71eb5a32212f65635c"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "605eda7deb59067f0809da9d751f443016d4ccd341beac66c45bbdec717d9a45"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json",
+        "exists": false,
+        "sha256": ""
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "bb7f7197d372e5535ca3aee29873693c751b8fda38d14b40d7aa8ee1cb6fd0b1"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "1d8cec31f8731a229f0f51a550146ee954aab15bb71574776ee462ff470eccb5"
+      },
+      "playlistDiscovery": {
+        "path": "/private/tmp/youtube-control-29573272283/youtube-publication-control-home_kitchen_cooking_actions_a1_a2-all-routes-29573272283/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "54f34b2dc94836fe87e493a37619fc86ee06621b172f3f5383036e916d24afc3"
+      }
+    },
+    "deckSource": {
+      "mode": "historical_git_blob",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": false,
+      "offlineDeckTracked": false,
+      "historicalGitBlob": {
+        "available": true,
+        "matchesLocalFile": false,
+        "commit": "0a4e6907cdffdb1cafa4b44e723f87650b16a19e",
+        "blobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+        "localBlobId": "",
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 1,
+    "supportCount": 3,
+    "ordinaryCount": 0,
+    "polyglotCount": 3,
+    "assignmentCount": 3,
+    "firstPublishAt": "2026-07-18T12:30:00.000Z",
+    "lastPublishAt": "2026-07-18T13:30:00.000Z",
+    "customThumbnailCount": 2,
+    "automaticThumbnailCount": 1,
+    "existingPlaylistCount": 0,
+    "playlistCreateCount": 3,
+    "playlistCreateCountMaximum": 3,
+    "routeCounts": {
+      "youtube-1": 0,
+      "youtube-2": 3,
+      "youtube-3": 0,
+      "youtube-4": 0
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 3,
+    "estimatedPlaylistItemInsertUnits": 150,
+    "estimatedPlaylistCreateUnitsMaximum": 150,
+    "estimatedThumbnailSetUnits": 100,
+    "estimatedGeneralQuotaUnitsMaximum": 400,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      },
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 3,
+        "estimatedGeneralQuotaUnitsMaximum": 400
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      },
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "SV: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|SV|east_asia_core|69af08ca98ea|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|SV|east_asia_core|short_unverified|sv",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SV",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:SV:east_asia_core:69af08ca98ea:short_unverified",
+      "channelKey": "sv",
+      "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-07-18T12:30:00.000Z",
+      "localDate": "2026-07-18",
+      "localTime": "14:30",
+      "timeZone": "Europe/Stockholm",
+      "slotKey": "sv|2026-07-18T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__SV__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: kinesiska, japanska, koreanska",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: kinesiska, japanska, koreanska. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-17T10:26:15.828Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|TH|east_asia_core|69af08ca98ea|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|TH|east_asia_core|full|th",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TH",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:TH:east_asia_core:69af08ca98ea:full",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-07-18T13:30:00.000Z",
+      "localDate": "2026-07-18",
+      "localTime": "20:30",
+      "timeZone": "Asia/Bangkok",
+      "slotKey": "th|2026-07-18T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-1f69de69c851-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-TH-east_asia_core-69af08ca98ea-full.jpg",
+        "manifestPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-1f69de69c851-precommit-ready/manifest.json",
+        "sha256": "a94e68a3fb28c661e2bb9224691061282d8762584c68c6a0d2e660539ef82925"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__TH__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: จีน, ญี่ปุ่น, เกาหลี",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: จีน, ญี่ปุ่น, เกาหลี. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-17T10:26:15.828Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|VI|east_asia_core|69af08ca98ea|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|VI|east_asia_core|full|vi",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "VI",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:VI:east_asia_core:69af08ca98ea:full",
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-07-18T13:30:00.000Z",
+      "localDate": "2026-07-18",
+      "localTime": "20:30",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "slotKey": "vi|2026-07-18T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-1f69de69c851-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-VI-east_asia_core-69af08ca98ea-full.jpg",
+        "manifestPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-1f69de69c851-precommit-ready/manifest.json",
+        "sha256": "943e16e6c7354f6d7cf836e715462f4e5b79ae61a5f12439ac5e32c3185c8e37"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__VI__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: Tiếng Trung, Tiếng Nhật, Tiếng Hàn",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Tiếng Trung, Tiếng Nhật, Tiếng Hàn. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-17T10:26:15.828Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 4
+    }
+  ],
+  "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-ae276af5dee0",
+  "manifestHash": "d2bc10c04e5fad4bd2690b6b2c1d6ce5f1f887a17539a0c0f2b9224fbe97f8fb"
+}

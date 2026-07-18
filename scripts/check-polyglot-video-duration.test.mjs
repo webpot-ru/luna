@@ -15,7 +15,7 @@ fs.writeFileSync(path.join(videoDir, "video.mp4"), "fixture");
 fs.writeFileSync(path.join(videoDir, "youtube_metadata.json"), JSON.stringify({ supportLang: "EN", videoPath: path.join(videoDir, "video.mp4") }));
 const channelConfig = path.join(root, "channels.json");
 
-function run({ allowed, duration, scope = "full", requireMeasuredSelection = false }) {
+function run({ allowed, duration, scope = "full", requireMeasuredSelection = false, writeMetadata = false }) {
   fs.writeFileSync(channelConfig, JSON.stringify({ channels: [{ key: "en", supportLangs: ["EN", "EN-GB"], longVideoUploadAllowed: allowed }] }));
   return spawnSync(process.execPath, [
     "scripts/check-polyglot-video-duration.mjs",
@@ -24,6 +24,7 @@ function run({ allowed, duration, scope = "full", requireMeasuredSelection = fal
     `--ffprobe=${ffprobe}`,
     `--content-scope=${scope}`,
     "--max-duration-seconds=895",
+    ...(writeMetadata ? ["--write-metadata"] : []),
     ...(requireMeasuredSelection ? ["--require-measured-selection"] : []),
   ], { cwd: process.cwd(), encoding: "utf8", env: { ...process.env, FAKE_DURATION: String(duration) } });
 }
@@ -38,5 +39,8 @@ fs.writeFileSync(path.join(videoDir, "polyglot-duration-selection.json"), JSON.s
   selectedCardCount: 20,
   projectedDurationSeconds: 800,
 }));
-assert.equal(run({ allowed: true, duration: 800, scope: "short_unverified", requireMeasuredSelection: true }).status, 0, "measured short selection evidence passes");
+assert.equal(run({ allowed: true, duration: 800, scope: "short_unverified", requireMeasuredSelection: true, writeMetadata: true }).status, 0, "measured short selection evidence passes");
+const written = JSON.parse(fs.readFileSync(path.join(videoDir, "youtube_metadata.json"), "utf8"));
+assert.equal(written.contentScope, "short_unverified", "duration gate persists short content scope");
+assert.equal(written.wordLimit, 20, "duration gate persists measured selected-card count");
 console.log("Polyglot duration/capability tests passed");
