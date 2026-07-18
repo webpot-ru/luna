@@ -28,9 +28,9 @@ jobs:
           - route: youtube-api-branding
             supports: DE,EN,ES-419,ZH
           - route: youtube-api-youtube-2
-            supports: PL,RO,TH,VI
+            supports: NL,PL,RO,TH,VI
           - route: youtube-api-youtube-3
-            supports: BG,NL,TL
+            supports: BG,TL
           - route: youtube-api-youtube-4
             supports: AZ,SW
     runs-on: ubuntu-latest
