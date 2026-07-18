@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "plan is registry preflight; apply calls playlistItems.insert only."
+        description: "plan is registry preflight; apply repairs the existing video's playlist membership and creates only a verified-missing playlist when required."
         required: true
         default: "plan"
         type: choice
@@ -174,7 +174,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     concurrency:
-      group: youtube-polyglot-playlist-insert-state-${{ github.ref_name }}-${{ github.run_id }}
+      group: youtube-polyglot-playlist-insert-state-${{ github.ref_name }}
       cancel-in-progress: false
     permissions:
       contents: write
