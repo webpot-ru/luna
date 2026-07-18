@@ -92,11 +92,28 @@ function isGitTracked(filePath) {
   }).status === 0;
 }
 
-function historicalGitBlobSource(filePath) {
+function historicalGitBlobSource(filePath, explicitBlobId = "") {
   const absolute = path.resolve(filePath);
   const relative = path.relative(process.cwd(), absolute).split(path.sep).join("/");
   if (!relative || relative.startsWith("../") || path.isAbsolute(relative)) {
     return { available: false, matchesLocalFile: false, commit: "", blobId: "", localBlobId: "" };
+  }
+  if (explicitBlobId) {
+    const probe = spawnSync("git", ["cat-file", "-e", `${explicitBlobId}^{blob}`], { stdio: "ignore" });
+    if (probe.status !== 0) throw new Error(`Explicit historical deck blob is unavailable: ${explicitBlobId}`);
+    const local = fs.existsSync(absolute)
+      ? spawnSync("git", ["hash-object", "--", relative], { encoding: "utf8" })
+      : { status: 1, stdout: "" };
+    const localBlobId = local.status === 0 ? local.stdout.trim() : "";
+    return {
+      available: true,
+      matchesLocalFile: Boolean(localBlobId && explicitBlobId === localBlobId),
+      commit: "",
+      blobId: explicitBlobId,
+      localBlobId,
+      path: relative,
+      source: "explicit_verified_blob",
+    };
   }
   const history = spawnSync("git", ["log", "--all", "--format=%H", "--", relative], {
     encoding: "utf8",
@@ -531,7 +548,7 @@ export function buildPublicationCampaign(options = {}) {
   const offlineDeckTracked = offlineDeckExists && isGitTracked(paths.offlineDeck);
   const driveDeckConfigured = Boolean(driveFileId && driveFileId !== "YOUR_GOOGLE_DRIVE_FILE_ID_HERE");
   const historicalDeckSource = !offlineDeckTracked
-    ? historicalGitBlobSource(paths.offlineDeck)
+    ? historicalGitBlobSource(paths.offlineDeck, options.historicalDeckBlob)
     : { available: false, matchesLocalFile: false, commit: "", blobId: "", localBlobId: "" };
   const claims = campaignClaimSets(planningCampaignRegistry);
   const cardCount = deckCardCount({ offlineDeckPath: paths.offlineDeck, historicalDeckSource });
@@ -569,17 +586,17 @@ export function buildPublicationCampaign(options = {}) {
       .slice(0, ordinaryPerChannel);
     const polyglotCandidates = tails.polyglot
       .map((tail) => buildCandidate({ tail, channel, route, channelRegistry: routing.channelRegistry }));
-    for (const candidate of polyglotCandidates) {
-      const conflicting = deck.publications.find((publication) => crossScopePublicationMatchesCandidate(publication, candidate));
-      if (conflicting) {
-        blockers.push(`${support}: ${candidate.bundleKey} ${candidate.contentScope} is blocked by active ${polyglotContentScope(conflicting)} Polyglot video ${conflicting.youtubeVideoId || "without durable ID"}`);
-      }
-    }
     const polyglot = polyglotCandidates
       .filter((candidate) => !claims.assignments.has(candidate.assignmentKey))
       .filter((candidate) => !claims.polyglotProducts.has(polyglotProductSlotKey(candidate)))
       .filter((candidate) => !deck.publications.some((publication) => activePublicationMatchesCandidate(publication, candidate)))
       .slice(0, polyglotPerChannel);
+    for (const candidate of polyglot) {
+      const conflicting = deck.publications.find((publication) => crossScopePublicationMatchesCandidate(publication, candidate));
+      if (conflicting) {
+        blockers.push(`${support}: ${candidate.bundleKey} ${candidate.contentScope} is blocked by active ${polyglotContentScope(conflicting)} Polyglot video ${conflicting.youtubeVideoId || "without durable ID"}`);
+      }
+    }
     if (ordinary.length !== ordinaryPerChannel) blockers.push(`${support}: only ${ordinary.length}/${ordinaryPerChannel} unclaimed ordinary tails available`);
     if (polyglot.length !== polyglotPerChannel) blockers.push(`${support}: only ${polyglot.length}/${polyglotPerChannel} unclaimed full Polyglot tails available`);
     selected.push(...ordinary, ...polyglot);
