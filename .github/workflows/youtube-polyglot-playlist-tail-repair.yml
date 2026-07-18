@@ -1,0 +1,113 @@
+name: YouTube Polyglot Playlist Tail Repair
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        required: true
+        default: plan
+        type: choice
+        options: [plan, apply]
+      set_id:
+        required: true
+        default: home_kitchen_cooking_actions_a1_a2
+      confirm_youtube_write:
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include:
+          - route: youtube-api-branding
+            supports: DE,EN,ES-419,ZH
+          - route: youtube-api-youtube-2
+            supports: PL,RO,TH,VI
+          - route: youtube-api-youtube-3
+            supports: BG,NL,TL
+          - route: youtube-api-youtube-4
+            supports: AZ,SW
+    runs-on: ubuntu-latest
+    environment: ${{ matrix.route }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci || npm install
+      - name: Refuse unsafe repair input
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.mode }}" = "apply" ] && [ "${{ inputs.confirm_youtube_write }}" != "APPLY_YOUTUBE_PLAYLIST_INSERT" ]; then
+            echo "::error::apply requires confirm_youtube_write=APPLY_YOUTUBE_PLAYLIST_INSERT"
+            exit 1
+          fi
+      - name: Restore route OAuth bundle
+        if: ${{ inputs.mode == 'apply' }}
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        run: |
+          set -euo pipefail
+          test -n "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}"
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+      - name: Repair exact uploaded-video playlist tails sequentially
+        shell: bash
+        run: |
+          set -euo pipefail
+          ARGS=("--set-id=${{ inputs.set_id }}" "--supports=${{ matrix.supports }}")
+          if [ "${{ inputs.mode }}" = "apply" ]; then ARGS+=(--apply --confirm-youtube-write); fi
+          node scripts/run-youtube-polyglot-playlist-repairs.mjs "${ARGS[@]}"
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: youtube-polyglot-playlist-tail-repair-${{ matrix.route }}-${{ github.run_id }}
+          retention-days: 14
+          path: |
+            outputs/youtube-polyglot-playlist-tail-repair-ledger.jsonl
+            config/youtube-polyglot-published-videos.json
+            config/youtube-polyglot-playlists.json
+
+  persist:
+    needs: repair
+    if: ${{ always() && inputs.mode == 'apply' && needs.repair.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: youtube-polyglot-playlist-tail-repair-*
+          path: .state-artifact
+          merge-multiple: false
+      - name: Merge all exact route repair receipts once
+        shell: bash
+        run: |
+          set -euo pipefail
+          found=0
+          for artifact in .state-artifact/*; do
+            test -d "$artifact"
+            npm run merge:youtube-publish-state -- --artifact-dir="$artifact" --summary=outputs/youtube-polyglot-playlist-tail-repair-merge.json
+            found=1
+          done
+          test "$found" = 1
+      - name: Commit durable playlist repair state
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- config/youtube-polyglot-published-videos.json config/youtube-polyglot-playlists.json; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config/youtube-polyglot-published-videos.json config/youtube-polyglot-playlists.json
+          git commit -m "Persist Polyglot playlist tail repairs"
+          git push origin "HEAD:${{ github.ref_name }}"

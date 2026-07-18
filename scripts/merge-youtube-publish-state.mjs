@@ -154,6 +154,41 @@ function mergeAuthoritativeReadback(existing, incoming) {
   return changed;
 }
 
+function mergePlaylistRepairReceipt(existing, incoming) {
+  if (!incoming.playlistInsertRepairedAt || !incoming.playlistItemId) return false;
+  let changed = false;
+  for (const field of [
+    "youtubePlaylistId",
+    "youtubePlaylistUrl",
+    "playlistItemId",
+    "publicationStatus",
+    "lastReadbackAt",
+    "playlistCreateRepairedAt",
+    "playlistCreateRepairStatus",
+    "playlistInsertRepairedAt",
+    "playlistInsertRepairStatus",
+    "playlistInsertRepairGithubRunId",
+    "playlistInsertRepairGithubRunUrl",
+    "playlistInsertRepairNote",
+    "readback",
+  ]) {
+    changed = assignIfChanged(existing, incoming, field) || changed;
+  }
+  for (const field of [
+    "needsPlaylistCreate",
+    "needsPlaylistInsert",
+    "playlistCreateDeferredError",
+    "playlistInsertDeferredError",
+    "postUploadError",
+  ]) {
+    if (Object.hasOwn(existing, field)) {
+      delete existing[field];
+      changed = true;
+    }
+  }
+  return changed;
+}
+
 function mergePublications(currentRegistry, incomingRegistry, { authoritativeReadback = false } = {}) {
   const currentRows = currentRegistry.publications || [];
   const incomingRows = (incomingRegistry.publications || []).filter((row) => row?.youtubeVideoId);
@@ -220,6 +255,7 @@ function mergePublications(currentRegistry, incomingRegistry, { authoritativeRea
       "lastReadbackAt",
     ]);
     changed = repairPolyglotPublicationIdentity(existing, incoming) || changed;
+    changed = mergePlaylistRepairReceipt(existing, incoming) || changed;
     if (authoritativeReadback) changed = mergeAuthoritativeReadback(existing, incoming) || changed;
     if (existing.thumbnailSet !== true && incoming.thumbnailSet === true) {
       existing.thumbnailSet = true;

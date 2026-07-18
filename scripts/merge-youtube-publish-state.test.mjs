@@ -56,7 +56,22 @@ const incomingPublication = {
   publicationStatus: "scheduled_uploaded",
   privacyStatus: "private",
   publishAt: "2026-07-21T08:00:00.000Z",
+  youtubePlaylistId: "playlist-incoming",
+  playlistItemId: "playlist-item-incoming",
+  playlistInsertRepairedAt: "2026-07-18T12:00:00.000Z",
+  playlistInsertRepairStatus: "inserted",
 };
+fs.writeFileSync(path.join(config, "youtube-polyglot-published-videos.json"), `${JSON.stringify({
+  schemaVersion: 1,
+  publications: [{
+    ...incomingPublication,
+    playlistItemId: "",
+    needsPlaylistCreate: true,
+    needsPlaylistInsert: true,
+    playlistCreateDeferredError: "old quota error",
+    postUploadError: "old insert error",
+  }],
+}, null, 2)}\n`);
 fs.writeFileSync(path.join(artifactConfig, "youtube-polyglot-published-videos.json"), `${JSON.stringify({
   schemaVersion: 1,
   publications: [incomingPublication],
@@ -106,6 +121,10 @@ assert.equal(calendar.reservations.find((row) => row.polyglotKey === incomingKey
 const registry = JSON.parse(fs.readFileSync(path.join(config, "youtube-polyglot-published-videos.json"), "utf8"));
 assert.equal(registry.publications.length, 2);
 assert.equal(registry.publications.find((row) => row.youtubeVideoId === "incoming-video")?.polyglotKey, incomingKey);
+const repaired = registry.publications.find((row) => row.youtubeVideoId === "incoming-video");
+assert.equal(repaired?.playlistItemId, "playlist-item-incoming");
+assert.ok(!Object.hasOwn(repaired, "needsPlaylistCreate"));
+assert.ok(!Object.hasOwn(repaired, "needsPlaylistInsert"));
 assert.equal(registry.publications.find((row) => row.youtubeVideoId === "live-polyglot")?.readback?.privacyStatus, "public");
 
 const ordinaryRegistry = JSON.parse(fs.readFileSync(path.join(config, "youtube-published-videos.json"), "utf8"));
