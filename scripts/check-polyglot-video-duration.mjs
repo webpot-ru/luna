@@ -152,11 +152,13 @@ function main() {
       blockers,
     };
     if (options.writeMetadata && videoPath) {
+      metadata.contentScope = options.contentScope;
       metadata.videoDurationSeconds = gate.videoDurationSeconds;
       metadata.maxDurationSeconds = options.maxDurationSeconds;
       metadata.durationGate = gate;
       if (selection?.selectionMethod === "measured_tts_audio_prefix") {
         metadata.wordCount = Number(selection.selectedCardCount) || metadata.wordCount || 0;
+        metadata.wordLimit = Number(selection.selectedCardCount) || metadata.wordLimit || 0;
         metadata.durationSelection = selection;
       }
       fs.writeFileSync(metadataFile, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");

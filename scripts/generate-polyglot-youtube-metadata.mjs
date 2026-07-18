@@ -64,6 +64,9 @@ function parseArgs(argv) {
     allowRepublish: false,
     campaignId: "",
     campaignManifestHash: "",
+    contentScope: "full",
+    maxDurationSeconds: 895,
+    cardLimit: 0,
     requireOfflineDeck: true,
     json: false,
     help: false,
@@ -98,6 +101,9 @@ function parseArgs(argv) {
     else if (arg === "--allow-republish") options.allowRepublish = true;
     else if (arg === "--campaign-id" || arg.startsWith("--campaign-id=")) options.campaignId = readValue();
     else if (arg === "--campaign-manifest-hash" || arg.startsWith("--campaign-manifest-hash=")) options.campaignManifestHash = readValue();
+    else if (arg === "--content-scope" || arg.startsWith("--content-scope=")) options.contentScope = readValue();
+    else if (arg === "--max-duration-seconds" || arg.startsWith("--max-duration-seconds=")) options.maxDurationSeconds = Number(readValue());
+    else if (arg === "--card-limit" || arg.startsWith("--card-limit=")) options.cardLimit = Number(readValue());
     else if (arg === "--no-require-offline-deck") options.requireOfflineDeck = false;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
@@ -160,6 +166,15 @@ function assertArgs(options) {
   if (Boolean(options.campaignId) !== Boolean(options.campaignManifestHash)) {
     throw new Error("--campaign-id and --campaign-manifest-hash must be supplied together.");
   }
+  if (!['full', 'short_unverified'].includes(options.contentScope)) {
+    throw new Error(`Invalid --content-scope=${options.contentScope}`);
+  }
+  if (!Number.isFinite(options.maxDurationSeconds) || options.maxDurationSeconds < 0) {
+    throw new Error("--max-duration-seconds must be a non-negative number.");
+  }
+  if (!Number.isInteger(options.cardLimit) || options.cardLimit < 0) {
+    throw new Error("--card-limit must be a non-negative integer.");
+  }
 }
 
 function runPlanner(options) {
@@ -184,6 +199,12 @@ function runPlanner(options) {
     options.publicationRegistry,
     "--progress-registry",
     options.progressRegistry,
+    "--content-scope",
+    options.contentScope,
+    "--max-duration-seconds",
+    String(options.maxDurationSeconds),
+    "--card-limit",
+    String(options.cardLimit),
     "--output",
     output,
   ];
@@ -453,6 +474,9 @@ async function main() {
     targetLangs: candidate.targetLangs,
     targetLangsCsv: candidate.targetLangsCsv,
     targetLangsHash: candidate.targetLangsHash,
+    contentScope: candidate.contentScope,
+    wordLimit: candidate.cardLimit,
+    maxDurationSeconds: candidate.maxDurationSeconds,
     title: copy.title,
     description: copy.description,
     tags: copy.tags,
