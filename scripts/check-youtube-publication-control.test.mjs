@@ -184,6 +184,32 @@ assert.equal(shortDoesNotSatisfyFull.summary.polyglotTailCount, 1);
 assert.equal(shortDoesNotSatisfyFull.summary.proposedAssignmentConflictCount, 1);
 assert.equal(shortDoesNotSatisfyFull.summary.proposedPolyglotCrossScopeConflictCount, 1);
 assert.ok(shortDoesNotSatisfyFull.blockers.some((item) => item.type === "proposed_polyglot_cross_scope_conflict"));
+assert.equal(shortDoesNotSatisfyFull.summary.advisoryCount, 1);
+assert.ok(shortDoesNotSatisfyFull.advisories.some((item) => item.type === "polyglot_full_tail_deferred_by_active_short_unverified"));
+
+const shortKeepsFutureFullTailWithoutBlockingUnrelatedControl = buildPublicationControlReport({
+  ...base,
+  polyglotRegistry: shortDoesNotSatisfyFull.publications.length ? { publications: [{
+    setId: "deck-2",
+    supportLang: "EN",
+    videoType: "polyglot",
+    bundleKey: "global_europe_core",
+    contentScope: "short_unverified",
+    polyglotKey: "polyglot:deck-2:EN:global_europe_core:abc123:short_unverified",
+    targetLangs: ["ES", "FR", "DE", "IT"],
+    youtubeVideoId: "short-poly-video",
+    publicationStatus: "published_uploaded",
+  }] } : { publications: [] },
+  desiredPolyglotAssignmentsBySupport: { EN: [{
+    bundleKey: "global_europe_core",
+    targetLangs: ["ES", "FR", "DE", "IT"],
+    polyglotKey,
+  }] },
+  proposedPolyglotAssignments: [],
+});
+assert.equal(shortKeepsFutureFullTailWithoutBlockingUnrelatedControl.summary.polyglotTailCount, 1);
+assert.equal(shortKeepsFutureFullTailWithoutBlockingUnrelatedControl.summary.blockerCount, 0);
+assert.equal(shortKeepsFutureFullTailWithoutBlockingUnrelatedControl.summary.advisoryCount, 1);
 
 const changedBundleContent = buildPublicationControlReport({
   ...base,

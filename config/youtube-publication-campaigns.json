@@ -165482,14 +165482,11 @@
         "polyglot|home_kitchen_cooking_actions_a1_a2|BG|east_asia_core|69af08ca98ea|short_unverified",
         "polyglot|home_kitchen_cooking_actions_a1_a2|BN|east_asia_core|69af08ca98ea|short_unverified",
         "polyglot|home_kitchen_cooking_actions_a1_a2|CS|east_asia_core|69af08ca98ea|short_unverified",
-        "polyglot|home_kitchen_cooking_actions_a1_a2|DA|east_asia_core|69af08ca98ea|short_unverified",
         "polyglot|home_kitchen_cooking_actions_a1_a2|ET|east_asia_core|69af08ca98ea|short_unverified",
         "polyglot|home_kitchen_cooking_actions_a1_a2|FI|east_asia_core|69af08ca98ea|short_unverified",
         "polyglot|home_kitchen_cooking_actions_a1_a2|HR|east_asia_core|69af08ca98ea|short_unverified",
         "polyglot|home_kitchen_cooking_actions_a1_a2|HU|east_asia_core|69af08ca98ea|short_unverified",
         "polyglot|home_kitchen_cooking_actions_a1_a2|IS|east_asia_core|69af08ca98ea|short_unverified",
-        "polyglot|home_kitchen_cooking_actions_a1_a2|KM|east_asia_core|69af08ca98ea|short_unverified",
-        "polyglot|home_kitchen_cooking_actions_a1_a2|LO|east_asia_core|69af08ca98ea|short_unverified",
         "polyglot|home_kitchen_cooking_actions_a1_a2|LT|east_asia_core|69af08ca98ea|short_unverified",
         "polyglot|home_kitchen_cooking_actions_a1_a2|LV|east_asia_core|69af08ca98ea|short_unverified",
         "polyglot|home_kitchen_cooking_actions_a1_a2|MS|east_asia_core|69af08ca98ea|short_unverified",
@@ -165507,14 +165504,11 @@
         "bg|2026-07-18T11:30:00.000Z",
         "bn|2026-07-18T11:30:00.000Z",
         "cs|2026-07-18T12:30:00.000Z",
-        "da|2026-07-18T18:30:00.000Z",
         "et|2026-07-18T11:30:00.000Z",
         "fi|2026-07-18T11:30:00.000Z",
         "hr|2026-07-18T12:30:00.000Z",
         "hu|2026-07-18T12:30:00.000Z",
         "is|2026-07-18T11:30:00.000Z",
-        "km|2026-07-18T13:30:00.000Z",
-        "lo|2026-07-18T13:30:00.000Z",
         "lt|2026-07-18T11:30:00.000Z",
         "lv|2026-07-18T11:30:00.000Z",
         "ms|2026-07-18T12:30:00.000Z",
@@ -165723,7 +165717,10 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-17T10:26:15.828Z"
           },
-          "status": "claimed"
+          "status": "superseded_live_full_product_conflict",
+          "supersededAt": "2026-07-18T13:19:07.972Z",
+          "supersededByYoutubeVideoId": "DSDTA6s_jHw",
+          "supersededReason": "confirmed_full_product_has_priority"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|ET|east_asia_core|69af08ca98ea|short_unverified",
@@ -166017,7 +166014,10 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-17T10:26:15.828Z"
           },
-          "status": "claimed"
+          "status": "superseded_live_full_product_conflict",
+          "supersededAt": "2026-07-18T13:19:07.972Z",
+          "supersededByYoutubeVideoId": "cYhzEyJKALg",
+          "supersededReason": "confirmed_full_product_has_priority"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|LO|east_asia_core|69af08ca98ea|short_unverified",
@@ -166066,7 +166066,10 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-17T10:26:15.828Z"
           },
-          "status": "claimed"
+          "status": "superseded_live_full_product_conflict",
+          "supersededAt": "2026-07-18T13:19:07.972Z",
+          "supersededByYoutubeVideoId": "_87t3ETm12Y",
+          "supersededReason": "confirmed_full_product_has_priority"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|LT|east_asia_core|69af08ca98ea|short_unverified",
@@ -166858,6 +166861,32 @@
       },
       "partialRecoveryCampaignIds": [
         "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-ae276af5dee0"
+      ],
+      "reconciledFullPublications": [
+        {
+          "supportLang": "DA",
+          "bundleKey": "east_asia_core",
+          "contentScope": "full",
+          "youtubeVideoId": "DSDTA6s_jHw",
+          "reconciledAt": "2026-07-18T13:19:07.972Z",
+          "source": "live_snapshot"
+        },
+        {
+          "supportLang": "KM",
+          "bundleKey": "east_asia_core",
+          "contentScope": "full",
+          "youtubeVideoId": "cYhzEyJKALg",
+          "reconciledAt": "2026-07-18T13:19:07.972Z",
+          "source": "live_snapshot"
+        },
+        {
+          "supportLang": "LO",
+          "bundleKey": "east_asia_core",
+          "contentScope": "full",
+          "youtubeVideoId": "_87t3ETm12Y",
+          "reconciledAt": "2026-07-18T13:19:07.972Z",
+          "source": "live_snapshot"
+        }
       ]
     },
     {

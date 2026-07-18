@@ -608,6 +608,13 @@ export function buildPublicationControlReport({
     else privateUnscheduledCount += 1;
   }
 
+  // A short_unverified publication intentionally leaves the future full product
+  // tail open.  It must block an actual proposed full assignment, but it must
+  // not make every unrelated publication-control run unhealthy forever.
+  const advisories = polyglotCrossScopeConflicts.map((item) => ({
+    type: "polyglot_full_tail_deferred_by_active_short_unverified",
+    ...item,
+  }));
   const blockers = [
     ...registryDuplicates.map((item) => ({ type: "duplicate_registry_assignment", ...item })),
     ...liveDuplicates.map((item) => ({ type: "duplicate_live_assignment", ...item })),
@@ -621,7 +628,6 @@ export function buildPublicationControlReport({
     ...proposedPolyglotConflicts.map((item) => ({ type: "proposed_polyglot_assignment_already_active", ...item })),
     ...proposedPolyglotCrossScopeConflicts.map((item) => ({ type: "proposed_polyglot_cross_scope_conflict", ...item })),
     ...polyglotBundleMismatches.map((item) => ({ type: "polyglot_bundle_target_mismatch", ...item })),
-    ...polyglotCrossScopeConflicts.map((item) => ({ type: "polyglot_required_scope_blocked_by_other_scope", ...item })),
     ...liveStatusBlockers,
     ...unclassifiedUploadBlockers,
     ...liveAuditPaginationBlockers,
@@ -657,6 +663,7 @@ export function buildPublicationControlReport({
       proposedPolyglotCrossScopeConflictCount: proposedPolyglotCrossScopeConflicts.length,
       polyglotBundleTargetMismatchCount: polyglotBundleMismatches.length,
       polyglotRequiredScopeBlockedByOtherScopeCount: polyglotCrossScopeConflicts.length,
+      advisoryCount: advisories.length,
       liveAuditPaginationComplete: liveAudit?.paginationComplete === true,
       liveStatusNotReturnedCount: statusNotReturnedRows.length,
       youtubeDeletedTombstoneCount: deletedTombstoneRows.length,
@@ -665,6 +672,7 @@ export function buildPublicationControlReport({
       calendarDayGapCount: dayGaps.reduce((sum, item) => sum + item.missingDates.length, 0),
     },
     blockers,
+    advisories,
     publications,
     deletedTombstones: deletedTombstoneRows.map((row) => ({
       youtubeVideoId: row.youtubeVideoId || "",
