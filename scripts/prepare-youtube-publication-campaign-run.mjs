@@ -35,14 +35,24 @@ function sha256(filePath) {
   return crypto.createHash("sha256").update(fs.readFileSync(filePath)).digest("hex");
 }
 
-function historicalGitBlobSha256({ commit, path: filePath }) {
-  if (!commit || !filePath) return "";
-  const result = spawnSync("git", ["show", `${commit}:${filePath}`], {
+function historicalGitBlobSha256({ blobId }) {
+  if (!blobId) return "";
+  const result = spawnSync("git", ["cat-file", "blob", blobId], {
     encoding: null,
     maxBuffer: 64 * 1024 * 1024,
   });
   if (result.status !== 0 || !result.stdout?.length) return "";
   return crypto.createHash("sha256").update(result.stdout).digest("hex");
+}
+
+function historicalGitBlobIsValid({ commit, blobId, path: filePath }) {
+  if (!blobId) return false;
+  const probe = spawnSync("git", ["cat-file", "-e", `${blobId}^{blob}`], { stdio: "ignore" });
+  if (probe.status !== 0) return false;
+  if (!commit) return true;
+  if (!filePath) return false;
+  const resolved = spawnSync("git", ["rev-parse", `${commit}:${filePath}`], { encoding: "utf8" });
+  return resolved.status === 0 && resolved.stdout.trim() === blobId;
 }
 
 function main() {
@@ -61,12 +71,17 @@ function main() {
   const blockers = [];
   const offlineDeckFingerprint = campaign.evidence?.sourceFingerprints?.offlineDeck || {};
   const historicalDeckSource = campaign.evidence?.deckSource?.historicalGitBlob || {};
-  const offlineDeckSha256 = offlineDeckFingerprint.sha256 || historicalGitBlobSha256(historicalDeckSource);
+  const historicalDeckSourceValid = historicalGitBlobIsValid(historicalDeckSource);
+  const historicalDeckBlobSha256 = historicalDeckSourceValid ? historicalGitBlobSha256(historicalDeckSource) : "";
+  const offlineDeckSha256 = offlineDeckFingerprint.sha256 || historicalDeckBlobSha256;
   if (campaign.evidence?.deckSource?.mode === "historical_git_blob") {
-    if (!historicalDeckSource.commit || !historicalDeckSource.blobId) {
+    if (!historicalDeckSourceValid) {
       blockers.push("campaign historical Git deck source is incomplete");
     }
     if (!offlineDeckSha256) blockers.push("campaign historical Git deck checksum is unavailable");
+    if (offlineDeckFingerprint.sha256 && historicalDeckBlobSha256 && offlineDeckFingerprint.sha256 !== historicalDeckBlobSha256) {
+      blockers.push("campaign historical Git deck checksum does not match the exact blob");
+    }
   } else if (!offlineDeckFingerprint.exists || !offlineDeckFingerprint.sha256) {
     blockers.push("campaign is missing the immutable offline deck fingerprint");
   }
@@ -180,6 +195,7 @@ function main() {
     fs.appendFileSync(options.githubOutput, `set_id=${campaign.setId}\n`);
     fs.appendFileSync(options.githubOutput, `offline_deck_sha256=${offlineDeckSha256}\n`);
     fs.appendFileSync(options.githubOutput, `offline_deck_git_commit=${historicalDeckSource.commit || ""}\n`);
+    fs.appendFileSync(options.githubOutput, `offline_deck_git_blob=${historicalDeckSource.blobId || ""}\n`);
     fs.appendFileSync(options.githubOutput, `ordinary_matrix=${JSON.stringify({ include: ordinaryMatrix })}\n`);
     fs.appendFileSync(options.githubOutput, `polyglot_matrix=${JSON.stringify({ include: polyglotMatrix })}\n`);
     fs.appendFileSync(options.githubOutput, `metadata_matrix=${JSON.stringify({ include: metadataMatrix })}\n`);
