@@ -38,6 +38,11 @@ for (let route = 1; route <= 4; route += 1) {
       paginationComplete: true,
     },
     blockers: [],
+    advisories: route === 1 ? [{
+      type: "polyglot_full_tail_deferred_by_active_short_unverified",
+      supportLang: "SV",
+      bundleKey: "east_asia_core",
+    }] : [],
     tails: route === 1 ? [ordinaryTail] : (route <= 3 ? [polyglotTail] : []),
     publications: [{
       videoType: "ordinary",
@@ -74,6 +79,8 @@ assert.equal(merged.status, 0, merged.stderr || merged.stdout);
 const aggregate = JSON.parse(fs.readFileSync(output, "utf8"));
 assert.equal(aggregate.summary.complete, true);
 assert.equal(aggregate.summary.healthy, true);
+assert.equal(aggregate.summary.advisoryCount, 1);
+assert.equal(aggregate.advisories.length, 1);
 assert.equal(aggregate.summary.tailCount, 2);
 assert.equal(aggregate.summary.ordinaryTailCount, 1);
 assert.equal(aggregate.summary.polyglotTailCount, 1);
@@ -89,5 +96,6 @@ const markdownText = fs.readFileSync(markdown, "utf8");
 assert.match(markdownText, /Polyglot slavic_core/);
 assert.match(markdownText, /https:\/\/www\.youtube\.com\/watch\?v=video-4/);
 assert.match(markdownText, /Unclassified uploads: 1/);
+assert.match(markdownText, /polyglot_full_tail_deferred_by_active_short_unverified/);
 
 console.log("youtube publication control merge tests passed");

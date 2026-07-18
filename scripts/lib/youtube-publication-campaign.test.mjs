@@ -204,8 +204,24 @@ const crossScopePlan = buildPublicationCampaign({
   snapshotPath: writeJson("snapshot-cross-scope.json", crossScopeSnapshot),
   channelsPath: writeJson("channels-full-en.json", fullEligibleChannels),
 });
-assert.equal(crossScopePlan.summary.applyReady, false);
-assert(crossScopePlan.blockers.some((row) => row.includes("EN: global_europe_core full is blocked by active short_unverified Polyglot video active-short-video")));
+assert.equal(crossScopePlan.summary.applyReady, true);
+const nextFullAfterShort = crossScopePlan.assignments.find((row) => row.videoType === "polyglot" && row.supportLang === "EN");
+assert.notEqual(nextFullAfterShort.bundleKey, "global_europe_core", "active short must defer its full replacement and select the next missing bundle");
+assert.equal(nextFullAfterShort.contentScope, "full");
+
+const deferredShortDiscovery = readJson(paths.playlistDiscoveryPath);
+deferredShortDiscovery.channels = deferredShortDiscovery.channels.filter((channel) => channel.supportLang === "EN");
+deferredShortDiscovery.summary.supportCount = 1;
+const planAfterPublishedShort = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  snapshotPath: writeJson("snapshot-published-short.json", crossScopeSnapshot),
+  playlistDiscoveryPath: writeJson("playlist-discovery-published-short.json", deferredShortDiscovery),
+});
+assert.equal(planAfterPublishedShort.summary.applyReady, true);
+const nextPolyglotAfterShort = planAfterPublishedShort.assignments.find((row) => row.videoType === "polyglot");
+assert.notEqual(nextPolyglotAfterShort.bundleKey, "global_europe_core", "published short must keep its full tail deferred and select the next missing bundle");
+assert.equal(nextPolyglotAfterShort.contentScope, "short_unverified");
 
 const activeShortClaim = {
   schemaVersion: 1,

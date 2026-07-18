@@ -34,6 +34,7 @@ function parseArgs(argv) {
     else if (arg === "--ordinary-playlist-registry" || arg.startsWith("--ordinary-playlist-registry=")) options.ordinaryPlaylistRegistryPath = value();
     else if (arg === "--polyglot-playlist-registry" || arg.startsWith("--polyglot-playlist-registry=")) options.polyglotPlaylistRegistryPath = value();
     else if (arg === "--playlist-discovery" || arg.startsWith("--playlist-discovery=")) options.playlistDiscoveryPath = value();
+    else if (arg === "--historical-deck-blob" || arg.startsWith("--historical-deck-blob=")) options.historicalDeckBlob = value();
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = value();
     else if (arg === "--require-apply-ready") options.requireApplyReady = true;
     else if (arg === "--json") options.json = true;

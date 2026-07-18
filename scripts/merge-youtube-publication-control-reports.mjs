@@ -63,6 +63,7 @@ function main() {
   const unclassifiedUploads = uniqueRows(routes.flatMap(({ report }) => report.unclassifiedUploads || []), (row) => row.youtubeVideoId);
   const deletedTombstones = uniqueRows(routes.flatMap(({ report }) => report.deletedTombstones || []), (row) => row.youtubeVideoId);
   const blockers = routes.flatMap(({ file, report }) => (report.blockers || []).map((row) => ({ routeArtifact: file, ...row })));
+  const advisories = routes.flatMap(({ file, report }) => (report.advisories || []).map((row) => ({ routeArtifact: file, ...row })));
   const calendarDayGaps = routes.flatMap(({ file, report }) => (report.calendarDayGaps || []).map((row) => ({ routeArtifact: file, ...row })));
   const sourceRuns = options.sourceRuns.map(parseSourceRun);
   const summary = {
@@ -71,6 +72,7 @@ function main() {
     receivedRouteCount: routes.length,
     healthy: routes.length === options.expectedRoutes && blockers.length === 0,
     blockerCount: blockers.length,
+    advisoryCount: advisories.length,
     tailCount: tails.length,
     ordinaryTailCount: tails.filter((row) => row.videoType !== "polyglot").length,
     polyglotTailCount: tails.filter((row) => row.videoType === "polyglot").length,
@@ -105,6 +107,7 @@ function main() {
     })),
     sourceRuns,
     blockers,
+    advisories,
     publications,
     unclassifiedUploads,
     deletedTombstones,
@@ -128,6 +131,7 @@ function main() {
     `- Explicit pagination complete: ${summary.paginationComplete}`,
     `- Tails: ${summary.tailCount} (ordinary ${summary.ordinaryTailCount}, Polyglot ${summary.polyglotTailCount})`,
     `- Blockers: ${summary.blockerCount}`,
+    `- Advisories: ${summary.advisoryCount}`,
     `- Scheduled live videos missing calendar: ${summary.liveScheduleMissingCalendarCount}`,
     `- Calendar assignment duplicates: ${summary.calendarAssignmentDuplicateCount}`,
     `- Calendar slot collisions: ${summary.calendarSlotCollisionCount}`,
@@ -157,6 +161,10 @@ function main() {
     "## Blockers",
     "",
     ...(blockers.length ? blockers.map((row) => `- ${row.type}: ${row.key || row.youtubeVideoId || "see JSON"}`) : ["- none"]),
+    "",
+    "## Advisories",
+    "",
+    ...(advisories.length ? advisories.map((row) => `- ${row.type}: ${row.supportLang || ""} ${row.bundleKey || ""}`.trim()) : ["- none"]),
     "",
   ];
   fs.writeFileSync(options.markdown, `${lines.join("\n")}\n`, "utf8");
