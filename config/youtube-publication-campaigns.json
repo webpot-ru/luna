@@ -166865,7 +166865,7 @@
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-ae276af5dee0",
       "manifestHash": "d2bc10c04e5fad4bd2690b6b2c1d6ce5f1f887a17539a0c0f2b9224fbe97f8fb",
       "setId": "home_kitchen_cooking_actions_a1_a2",
-      "status": "claimed",
+      "status": "finalized",
       "claimedAt": "2026-07-18T10:24:35.793Z",
       "generatedAt": "2026-07-18T10:24:35.793Z",
       "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-ae276af5dee0.json",
@@ -167052,7 +167052,17 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-17T10:26:15.828Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted",
+          "youtubeVideoId": "riYHyXkbvtI",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=riYHyXkbvtI",
+          "youtubePlaylistId": "PLB5hMOfhdVK8",
+          "playlistItemId": "UExCNWhNT2ZoZFZLOC41NkI0NEY2RDEwNTU3Q0M2",
+          "thumbnailSet": false,
+          "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+          "githubRunId": "29640865043",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29640865043",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-18T10:35:36.645Z"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|TH|east_asia_core|69af08ca98ea|full",
@@ -167104,7 +167114,17 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-17T10:26:15.828Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted",
+          "youtubeVideoId": "8EpY6rNvZLE",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=8EpY6rNvZLE",
+          "youtubePlaylistId": "PLMBh7LLY-6p0",
+          "playlistItemId": "UExNQmg3TExZLTZwMC41NkI0NEY2RDEwNTU3Q0M2",
+          "thumbnailSet": true,
+          "publicationStatus": "scheduled_uploaded",
+          "githubRunId": "29640865043",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29640865043",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-18T10:35:36.645Z"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|VI|east_asia_core|69af08ca98ea|full",
@@ -167156,9 +167176,33 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-17T10:26:15.828Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted",
+          "youtubeVideoId": "O_Zl02BKhxU",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=O_Zl02BKhxU",
+          "youtubePlaylistId": "PLcVPsL_dngUs",
+          "playlistItemId": "UExjVlBzTF9kbmdVcy41NkI0NEY2RDEwNTU3Q0M2",
+          "thumbnailSet": true,
+          "publicationStatus": "scheduled_uploaded",
+          "githubRunId": "29640865043",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29640865043",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-18T10:35:36.645Z"
         }
-      ]
+      ],
+      "finalizedAt": "2026-07-18T10:35:36.645Z",
+      "finalizeSummary": {
+        "expectedCount": 3,
+        "completedCount": 3,
+        "observedCount": 3,
+        "missingCount": 0,
+        "duplicateAssignmentCount": 0,
+        "duplicateVideoIdCount": 0,
+        "unexpectedPublicationCount": 0,
+        "receiptErrorCount": 0,
+        "ordinaryResult": "failure",
+        "polyglotResult": "success",
+        "artifactCount": 3
+      }
     }
   ]
 }
