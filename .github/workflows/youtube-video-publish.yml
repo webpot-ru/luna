@@ -34,6 +34,7 @@ on:
       campaign_metadata_route: { required: false, type: string, default: "" }
       campaign_owned_apply: { required: true, type: boolean }
       offline_deck_git_commit: { required: false, type: string, default: "" }
+      offline_deck_git_blob: { required: false, type: string, default: "" }
       offline_deck_sha256: { required: false, type: string, default: "" }
   workflow_dispatch:
     inputs:
@@ -467,6 +468,7 @@ jobs:
         shell: bash
         env:
           HISTORICAL_DECK_COMMIT: ${{ inputs.offline_deck_git_commit }}
+          HISTORICAL_DECK_BLOB: ${{ inputs.offline_deck_git_blob }}
           EXPECTED_DECK_SHA256: ${{ inputs.offline_deck_sha256 }}
         run: |
           set -euo pipefail
@@ -496,16 +498,22 @@ jobs:
           fi
 
           if [ ! -s "data/decks/${SET_ID}.json" ]; then
-            COMMIT_TO_USE="$HISTORICAL_DECK_COMMIT"
-            if [ -z "$COMMIT_TO_USE" ]; then
+            if [ -n "$HISTORICAL_DECK_BLOB" ]; then
+              echo "Restoring offline deck from exact Git blob $HISTORICAL_DECK_BLOB..."
+              mkdir -p data/decks
+              git cat-file blob "$HISTORICAL_DECK_BLOB" > "data/decks/${SET_ID}.json"
+            else
+              COMMIT_TO_USE="$HISTORICAL_DECK_COMMIT"
+            fi
+            if [ ! -s "data/decks/${SET_ID}.json" ] && [ -z "$COMMIT_TO_USE" ]; then
               echo "Checking Git history for data/decks/${SET_ID}.json..."
               COMMIT_TO_USE=$(git log --all --format=%H -- "data/decks/${SET_ID}.json" | head -n1 || true)
             fi
-            if [ -n "$COMMIT_TO_USE" ]; then
+            if [ ! -s "data/decks/${SET_ID}.json" ] && [ -n "$COMMIT_TO_USE" ]; then
               echo "Restoring offline deck from commit $COMMIT_TO_USE..."
               mkdir -p data/decks
               git show "${COMMIT_TO_USE}:data/decks/${SET_ID}.json" > "data/decks/${SET_ID}.json"
-            else
+            elif [ ! -s "data/decks/${SET_ID}.json" ]; then
               echo "No commit found containing data/decks/${SET_ID}.json."
             fi
           fi

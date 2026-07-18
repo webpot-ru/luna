@@ -73,6 +73,7 @@ jobs:
       ordinary_worker_count: ${{ steps.apply_preflight.outputs.ordinary_worker_count }}
       offline_deck_sha256: ${{ steps.apply_preflight.outputs.offline_deck_sha256 }}
       offline_deck_git_commit: ${{ steps.apply_preflight.outputs.offline_deck_git_commit }}
+      offline_deck_git_blob: ${{ steps.apply_preflight.outputs.offline_deck_git_blob }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -182,6 +183,7 @@ jobs:
           SET_ID: ${{ needs.preflight.outputs.set_id }}
           EXPECTED_DECK_SHA256: ${{ needs.preflight.outputs.offline_deck_sha256 }}
           HISTORICAL_DECK_COMMIT: ${{ needs.preflight.outputs.offline_deck_git_commit }}
+          HISTORICAL_DECK_BLOB: ${{ needs.preflight.outputs.offline_deck_git_blob }}
         run: |
           set -euo pipefail
           FILE_ID=$(node -e '
@@ -201,7 +203,10 @@ jobs:
               curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
             fi
           fi
-          if [ ! -s "data/decks/${SET_ID}.json" ] && [ -n "$HISTORICAL_DECK_COMMIT" ]; then
+          if [ ! -s "data/decks/${SET_ID}.json" ] && [ -n "$HISTORICAL_DECK_BLOB" ]; then
+            mkdir -p data/decks
+            git cat-file blob "$HISTORICAL_DECK_BLOB" > "data/decks/${SET_ID}.json"
+          elif [ ! -s "data/decks/${SET_ID}.json" ] && [ -n "$HISTORICAL_DECK_COMMIT" ]; then
             mkdir -p data/decks
             git show "${HISTORICAL_DECK_COMMIT}:data/decks/${SET_ID}.json" > "data/decks/${SET_ID}.json"
           fi
@@ -329,6 +334,7 @@ jobs:
       campaign_metadata_route: ${{ matrix.route_key }}
       campaign_owned_apply: true
       offline_deck_git_commit: ${{ needs.preflight.outputs.offline_deck_git_commit }}
+      offline_deck_git_blob: ${{ needs.preflight.outputs.offline_deck_git_blob }}
       offline_deck_sha256: ${{ needs.preflight.outputs.offline_deck_sha256 }}
     secrets: inherit
 
@@ -368,6 +374,7 @@ jobs:
       campaign_metadata_route: ${{ matrix.route_key }}
       campaign_owned_apply: true
       offline_deck_git_commit: ${{ needs.preflight.outputs.offline_deck_git_commit }}
+      offline_deck_git_blob: ${{ needs.preflight.outputs.offline_deck_git_blob }}
       offline_deck_sha256: ${{ needs.preflight.outputs.offline_deck_sha256 }}
     secrets: inherit
 

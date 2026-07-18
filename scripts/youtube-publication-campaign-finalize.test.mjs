@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -14,6 +15,21 @@ const write = (filePath, value) => {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 };
+const git = (...args) => {
+  const result = spawnSync("git", args, { cwd: root, encoding: "utf8" });
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  return result.stdout.trim();
+};
+git("init", "-q");
+git("config", "user.name", "YouTube Campaign Test");
+git("config", "user.email", "youtube-campaign-test@example.invalid");
+write(path.join(root, "data/decks/deck.json"), { cards: [{ id: "card-1" }] });
+git("add", "data/decks/deck.json");
+git("commit", "-q", "-m", "Add immutable deck fixture");
+const historicalDeckBlob = git("rev-parse", "HEAD:data/decks/deck.json");
+const historicalDeckSha256 = crypto.createHash("sha256")
+  .update(fs.readFileSync(path.join(root, "data/decks/deck.json")))
+  .digest("hex");
 const ordinaryAssignment = {
   assignmentKey: "ordinary|deck|EN|DE",
   calendarAssignmentKey: "ordinary|deck|EN|DE|en",
@@ -132,6 +148,89 @@ assert.equal(preflight.ordinaryMatrix[0].langs, "DE");
 assert.equal(preflight.ordinaryMatrix[0].route_key, "youtube-1");
 assert.equal(preflight.polyglotMatrix[0].bundle, "global_europe_core");
 assert.equal(preflight.polyglotMatrix[0].route_key, "youtube-1");
+
+const blobOnlyCampaign = {
+  ...campaign,
+  campaignId: "campaign-blob-only",
+  evidence: {
+    sourceFingerprints: { offlineDeck: { exists: true, sha256: historicalDeckSha256 } },
+    deckSource: {
+      mode: "historical_git_blob",
+      historicalGitBlob: {
+        available: true,
+        matchesLocalFile: true,
+        commit: "",
+        blobId: historicalDeckBlob,
+        localBlobId: historicalDeckBlob,
+        path: "data/decks/deck.json",
+        source: "explicit_verified_blob",
+      },
+    },
+  },
+};
+write(path.join(configDir, "youtube-publication-campaigns.json"), { schemaVersion: 1, campaigns: [blobOnlyCampaign] });
+write(path.join(configDir, "youtube-publish-calendar.json"), {
+  schemaVersion: 1,
+  reservations: [ordinaryAssignment, polyglotAssignment].map((row) => ({
+    ...row,
+    campaignId: blobOnlyCampaign.campaignId,
+    campaignManifestHash: blobOnlyCampaign.manifestHash,
+    status: "campaign_claimed",
+  })),
+});
+const blobOnlyGithubOutput = path.join(root, "outputs/github-output.txt");
+const blobOnlyPrepare = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/prepare-youtube-publication-campaign-run.mjs"),
+  "--campaign-id=campaign-blob-only",
+  "--manifest-hash=manifest-hash",
+  "--registry=config/youtube-publication-campaigns.json",
+  "--calendar=config/youtube-publish-calendar.json",
+  "--output=outputs/preflight-blob-only.json",
+  `--github-output=${blobOnlyGithubOutput}`,
+], { cwd: root, encoding: "utf8" });
+assert.equal(blobOnlyPrepare.status, 0, blobOnlyPrepare.stderr || blobOnlyPrepare.stdout);
+const blobOnlyOutputs = fs.readFileSync(blobOnlyGithubOutput, "utf8");
+assert.match(blobOnlyOutputs, /^offline_deck_git_commit=$/m);
+assert.match(blobOnlyOutputs, new RegExp(`^offline_deck_git_blob=${historicalDeckBlob}$`, "m"));
+
+write(path.join(root, "data/decks/deck.json"), { cards: [{ id: "card-2" }] });
+git("add", "data/decks/deck.json");
+git("commit", "-q", "-m", "Change immutable deck fixture");
+const mismatchedDeckCommit = git("rev-parse", "HEAD");
+const mismatchedCampaign = {
+  ...blobOnlyCampaign,
+  campaignId: "campaign-blob-mismatch",
+  evidence: {
+    ...blobOnlyCampaign.evidence,
+    deckSource: {
+      ...blobOnlyCampaign.evidence.deckSource,
+      historicalGitBlob: {
+        ...blobOnlyCampaign.evidence.deckSource.historicalGitBlob,
+        commit: mismatchedDeckCommit,
+      },
+    },
+  },
+};
+write(path.join(configDir, "youtube-publication-campaigns.json"), { schemaVersion: 1, campaigns: [mismatchedCampaign] });
+write(path.join(configDir, "youtube-publish-calendar.json"), {
+  schemaVersion: 1,
+  reservations: [ordinaryAssignment, polyglotAssignment].map((row) => ({
+    ...row,
+    campaignId: mismatchedCampaign.campaignId,
+    campaignManifestHash: mismatchedCampaign.manifestHash,
+    status: "campaign_claimed",
+  })),
+});
+const mismatchedPrepare = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/prepare-youtube-publication-campaign-run.mjs"),
+  "--campaign-id=campaign-blob-mismatch",
+  "--manifest-hash=manifest-hash",
+  "--registry=config/youtube-publication-campaigns.json",
+  "--calendar=config/youtube-publish-calendar.json",
+  "--output=outputs/preflight-blob-mismatch.json",
+], { cwd: root, encoding: "utf8" });
+assert.notEqual(mismatchedPrepare.status, 0);
+assert.match(mismatchedPrepare.stderr, /campaign historical Git deck source is incomplete/u);
 
 const polyglotOnlyCampaign = {
   ...campaign,
