@@ -5719,7 +5719,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -5762,7 +5762,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -11288,8 +11290,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "BG",
@@ -11302,31 +11304,31 @@
       "polyglotKey": "",
       "channelKey": "bg",
       "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
-      "publishAt": "2026-07-18T17:30:00.000Z",
+      "publishAt": "2026-07-19T17:30:00.000Z",
       "timeZone": "Europe/Sofia",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T17:30:00.000Z"
+          "dueAt": "2026-07-20T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T17:30:00.000Z"
+          "dueAt": "2026-07-22T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T17:30:00.000Z"
+          "dueAt": "2026-07-26T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T17:30:00.000Z"
+          "dueAt": "2026-08-18T17:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -11555,7 +11557,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -11598,7 +11600,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -17330,8 +17334,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "BN",
@@ -17344,31 +17348,31 @@
       "polyglotKey": "",
       "channelKey": "bn",
       "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
-      "publishAt": "2026-07-18T17:30:00.000Z",
+      "publishAt": "2026-07-19T17:30:00.000Z",
       "timeZone": "Asia/Dhaka",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "23:30",
       "localSlotIndex": 5,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T17:30:00.000Z"
+          "dueAt": "2026-07-20T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T17:30:00.000Z"
+          "dueAt": "2026-07-22T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T17:30:00.000Z"
+          "dueAt": "2026-07-26T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T17:30:00.000Z"
+          "dueAt": "2026-08-18T17:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 5,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -17597,7 +17601,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -17640,7 +17644,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -23131,8 +23137,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "CS",
@@ -23145,31 +23151,31 @@
       "polyglotKey": "",
       "channelKey": "cs",
       "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Prague",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -23398,7 +23404,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -23441,7 +23447,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -29594,7 +29602,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -29637,7 +29645,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -34996,8 +35006,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "DE",
@@ -35010,31 +35020,31 @@
       "polyglotKey": "",
       "channelKey": "de",
       "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Berlin",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -35104,7 +35114,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -35142,19 +35152,21 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_my_de/youtube_metadata.json",
       "title": "Birmanisch A1 Wortschatz: Kochaktionen lernen | 25 Wörter",
       "playlist_key": "DE__MY__ordinary-vocabulary__a1-everyday",
       "githubRunId": "29652924763",
-      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763"
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -35192,19 +35204,21 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ne_de/youtube_metadata.json",
       "title": "Nepalesisch A1 Wortschatz: Kochaktionen lernen | 25 Wörter",
       "playlist_key": "DE__NE__ordinary-vocabulary__a1-everyday",
       "githubRunId": "29652924763",
-      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763"
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -35242,19 +35256,21 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_nl_de/youtube_metadata.json",
       "title": "Niederländisch A1 Wortschatz: Kochaktionen lernen | 25 Wörter",
       "playlist_key": "DE__NL__ordinary-vocabulary__a1-everyday",
       "githubRunId": "29652924763",
-      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763"
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -35297,7 +35313,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -41742,8 +41760,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "EN",
@@ -41756,31 +41774,31 @@
       "polyglotKey": "",
       "channelKey": "en",
       "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "America/New_York",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "14:30",
       "localSlotIndex": 2,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 2,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -42009,7 +42027,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -42052,7 +42070,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -49073,7 +49093,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -49116,7 +49136,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -54713,8 +54735,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "ET",
@@ -54727,31 +54749,31 @@
       "polyglotKey": "",
       "channelKey": "et",
       "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
-      "publishAt": "2026-07-18T17:30:00.000Z",
+      "publishAt": "2026-07-19T17:30:00.000Z",
       "timeZone": "Europe/Tallinn",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T17:30:00.000Z"
+          "dueAt": "2026-07-20T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T17:30:00.000Z"
+          "dueAt": "2026-07-22T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T17:30:00.000Z"
+          "dueAt": "2026-07-26T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T17:30:00.000Z"
+          "dueAt": "2026-08-18T17:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -54980,7 +55002,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -55023,7 +55045,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -60642,8 +60666,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "FI",
@@ -60656,31 +60680,31 @@
       "polyglotKey": "",
       "channelKey": "fi",
       "youtubeChannelId": "UCZkiQ6y2W8aCUuaiP3N665A",
-      "publishAt": "2026-07-18T17:30:00.000Z",
+      "publishAt": "2026-07-19T17:30:00.000Z",
       "timeZone": "Europe/Helsinki",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T17:30:00.000Z"
+          "dueAt": "2026-07-20T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T17:30:00.000Z"
+          "dueAt": "2026-07-22T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T17:30:00.000Z"
+          "dueAt": "2026-07-26T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T17:30:00.000Z"
+          "dueAt": "2026-08-18T17:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -60909,7 +60933,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -60952,7 +60976,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -66311,8 +66337,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "FR",
@@ -66325,31 +66351,31 @@
       "polyglotKey": "",
       "channelKey": "fr",
       "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Paris",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -66419,7 +66445,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -66457,19 +66483,21 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_my_fr/youtube_metadata.json",
       "title": "Birman A1-A2 : actions de cuisine | 25 mots",
       "playlist_key": "FR__MY__ordinary-vocabulary__a1-everyday",
       "githubRunId": "29652924763",
-      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763"
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -66507,19 +66535,21 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ne_fr/youtube_metadata.json",
       "title": "Népalais A1-A2 : actions de cuisine | 25 mots",
       "playlist_key": "FR__NE__ordinary-vocabulary__a1-everyday",
       "githubRunId": "29652924763",
-      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763"
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -66557,19 +66587,21 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_nl_fr/youtube_metadata.json",
       "title": "Néerlandais A1-A2 : actions de cuisine | 25 mots",
       "playlist_key": "FR__NL__ordinary-vocabulary__a1-everyday",
       "githubRunId": "29652924763",
-      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763"
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -66612,7 +66644,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -71954,8 +71988,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "HI",
@@ -71968,31 +72002,31 @@
       "polyglotKey": "",
       "channelKey": "hi",
       "youtubeChannelId": "UCRWc-CxGQSN_pbC42scuQHA",
-      "publishAt": "2026-07-18T18:00:00.000Z",
+      "publishAt": "2026-07-19T18:00:00.000Z",
       "timeZone": "Asia/Kolkata",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "23:30",
       "localSlotIndex": 5,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:00:00.000Z"
+          "dueAt": "2026-07-20T18:00:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:00:00.000Z"
+          "dueAt": "2026-07-22T18:00:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:00:00.000Z"
+          "dueAt": "2026-07-26T18:00:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:00:00.000Z"
+          "dueAt": "2026-08-18T18:00:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 5,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -72221,7 +72255,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -72264,7 +72298,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -78330,8 +78366,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "HR",
@@ -78344,31 +78380,31 @@
       "polyglotKey": "",
       "channelKey": "hr",
       "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Zagreb",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -78597,7 +78633,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -78640,7 +78676,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -84361,8 +84399,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "HU",
@@ -84375,31 +84413,31 @@
       "polyglotKey": "",
       "channelKey": "hu",
       "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Budapest",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -84628,7 +84666,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -84671,7 +84709,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -89724,8 +89764,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "HY",
@@ -89738,31 +89778,31 @@
       "polyglotKey": "",
       "channelKey": "hy",
       "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
-      "publishAt": "2026-07-18T19:30:00.000Z",
+      "publishAt": "2026-07-19T19:30:00.000Z",
       "timeZone": "Asia/Yerevan",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "23:30",
       "localSlotIndex": 5,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T19:30:00.000Z"
+          "dueAt": "2026-07-20T19:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T19:30:00.000Z"
+          "dueAt": "2026-07-22T19:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T19:30:00.000Z"
+          "dueAt": "2026-07-26T19:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T19:30:00.000Z"
+          "dueAt": "2026-08-18T19:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 5,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -89991,7 +90031,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -90034,7 +90074,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -95551,7 +95593,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -95594,7 +95636,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -101399,8 +101443,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "IS",
@@ -101413,31 +101457,31 @@
       "polyglotKey": "",
       "channelKey": "is",
       "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
-      "publishAt": "2026-07-18T17:30:00.000Z",
+      "publishAt": "2026-07-19T17:30:00.000Z",
       "timeZone": "Atlantic/Reykjavik",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "17:30",
       "localSlotIndex": 3,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T17:30:00.000Z"
+          "dueAt": "2026-07-20T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T17:30:00.000Z"
+          "dueAt": "2026-07-22T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T17:30:00.000Z"
+          "dueAt": "2026-07-26T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T17:30:00.000Z"
+          "dueAt": "2026-08-18T17:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 3,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -101666,7 +101710,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -101709,7 +101753,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -107584,8 +107630,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "IT",
@@ -107598,31 +107644,31 @@
       "polyglotKey": "",
       "channelKey": "it",
       "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Rome",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -107851,7 +107897,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -107894,7 +107940,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -113433,7 +113481,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -113476,7 +113524,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -119221,8 +119271,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "KA",
@@ -119235,31 +119285,31 @@
       "polyglotKey": "",
       "channelKey": "ka",
       "youtubeChannelId": "UCpZM_1u-nTHydEJz7cnjf7w",
-      "publishAt": "2026-07-18T19:30:00.000Z",
+      "publishAt": "2026-07-19T19:30:00.000Z",
       "timeZone": "Asia/Tbilisi",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "23:30",
       "localSlotIndex": 5,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T19:30:00.000Z"
+          "dueAt": "2026-07-20T19:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T19:30:00.000Z"
+          "dueAt": "2026-07-22T19:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T19:30:00.000Z"
+          "dueAt": "2026-07-26T19:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T19:30:00.000Z"
+          "dueAt": "2026-08-18T19:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 5,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -119488,7 +119538,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -119531,7 +119581,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -125353,8 +125405,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "KK",
@@ -125367,31 +125419,31 @@
       "polyglotKey": "",
       "channelKey": "kk",
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Asia/Almaty",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "23:30",
       "localSlotIndex": 5,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 5,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -125620,7 +125672,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -125663,7 +125715,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -131690,7 +131744,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -131733,7 +131787,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -137669,8 +137725,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "KN",
@@ -137683,31 +137739,31 @@
       "polyglotKey": "",
       "channelKey": "kn",
       "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
-      "publishAt": "2026-07-18T18:00:00.000Z",
+      "publishAt": "2026-07-19T18:00:00.000Z",
       "timeZone": "Asia/Kolkata",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "23:30",
       "localSlotIndex": 5,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:00:00.000Z"
+          "dueAt": "2026-07-20T18:00:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:00:00.000Z"
+          "dueAt": "2026-07-22T18:00:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:00:00.000Z"
+          "dueAt": "2026-07-26T18:00:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:00:00.000Z"
+          "dueAt": "2026-08-18T18:00:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 5,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -137936,7 +137992,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -137979,7 +138035,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -143596,7 +143654,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -143639,7 +143697,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -149698,7 +149758,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -149741,7 +149801,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -155314,8 +155376,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "LT",
@@ -155328,31 +155390,31 @@
       "polyglotKey": "",
       "channelKey": "lt",
       "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
-      "publishAt": "2026-07-18T17:30:00.000Z",
+      "publishAt": "2026-07-19T17:30:00.000Z",
       "timeZone": "Europe/Vilnius",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T17:30:00.000Z"
+          "dueAt": "2026-07-20T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T17:30:00.000Z"
+          "dueAt": "2026-07-22T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T17:30:00.000Z"
+          "dueAt": "2026-07-26T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T17:30:00.000Z"
+          "dueAt": "2026-08-18T17:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -155581,7 +155643,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -155624,7 +155686,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -161322,8 +161386,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "LV",
@@ -161336,31 +161400,31 @@
       "polyglotKey": "",
       "channelKey": "lv",
       "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
-      "publishAt": "2026-07-18T17:30:00.000Z",
+      "publishAt": "2026-07-19T17:30:00.000Z",
       "timeZone": "Europe/Riga",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T17:30:00.000Z"
+          "dueAt": "2026-07-20T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T17:30:00.000Z"
+          "dueAt": "2026-07-22T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T17:30:00.000Z"
+          "dueAt": "2026-07-26T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T17:30:00.000Z"
+          "dueAt": "2026-08-18T17:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -161589,7 +161653,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -161632,7 +161696,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -167761,8 +167827,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "ML",
@@ -167775,31 +167841,31 @@
       "polyglotKey": "",
       "channelKey": "ml",
       "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
-      "publishAt": "2026-07-18T18:00:00.000Z",
+      "publishAt": "2026-07-20T03:00:00.000Z",
       "timeZone": "Asia/Kolkata",
-      "localDate": "2026-07-18",
-      "localTime": "23:30",
-      "localSlotIndex": 5,
+      "localDate": "2026-07-20",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:00:00.000Z"
+          "dueAt": "2026-07-21T03:00:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:00:00.000Z"
+          "dueAt": "2026-07-23T03:00:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:00:00.000Z"
+          "dueAt": "2026-07-27T03:00:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:00:00.000Z"
+          "dueAt": "2026-08-19T03:00:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 0,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -168028,7 +168094,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -168071,7 +168137,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -174241,7 +174309,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -174284,7 +174352,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -180271,7 +180341,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -180314,7 +180384,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -186222,8 +186294,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "NE",
@@ -186236,31 +186308,31 @@
       "polyglotKey": "",
       "channelKey": "ne",
       "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
-      "publishAt": "2026-07-18T17:45:00.000Z",
+      "publishAt": "2026-07-20T02:45:00.000Z",
       "timeZone": "Asia/Kathmandu",
-      "localDate": "2026-07-18",
-      "localTime": "23:30",
-      "localSlotIndex": 5,
+      "localDate": "2026-07-20",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T17:45:00.000Z"
+          "dueAt": "2026-07-21T02:45:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T17:45:00.000Z"
+          "dueAt": "2026-07-23T02:45:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T17:45:00.000Z"
+          "dueAt": "2026-07-27T02:45:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T17:45:00.000Z"
+          "dueAt": "2026-08-19T02:45:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 0,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -186489,7 +186561,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -186532,7 +186604,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -192489,8 +192563,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "NL",
@@ -192503,31 +192577,31 @@
       "polyglotKey": "",
       "channelKey": "nl",
       "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Amsterdam",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -192756,7 +192830,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -192799,7 +192873,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -198755,8 +198831,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "NO",
@@ -198769,31 +198845,31 @@
       "polyglotKey": "",
       "channelKey": "no",
       "youtubeChannelId": "UCK2IIhxCoPUW3wI6xBPYkfA",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Oslo",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -199022,7 +199098,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -199065,7 +199141,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -205000,8 +205078,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "PL",
@@ -205014,31 +205092,31 @@
       "polyglotKey": "",
       "channelKey": "pl",
       "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Warsaw",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -205267,7 +205345,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -205310,7 +205388,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -212233,7 +212313,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -212276,7 +212356,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -218465,8 +218547,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "RO",
@@ -218479,31 +218561,31 @@
       "polyglotKey": "",
       "channelKey": "ro",
       "youtubeChannelId": "UCvc_hya6nn2z8Q2WzHCuBWw",
-      "publishAt": "2026-07-18T17:30:00.000Z",
+      "publishAt": "2026-07-19T17:30:00.000Z",
       "timeZone": "Europe/Bucharest",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T17:30:00.000Z"
+          "dueAt": "2026-07-20T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T17:30:00.000Z"
+          "dueAt": "2026-07-22T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T17:30:00.000Z"
+          "dueAt": "2026-07-26T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T17:30:00.000Z"
+          "dueAt": "2026-08-18T17:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -218732,7 +218814,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -218775,7 +218857,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -223737,8 +223821,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "RU",
@@ -223751,31 +223835,31 @@
       "polyglotKey": "",
       "channelKey": "ru",
       "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
-      "publishAt": "2026-07-18T17:30:00.000Z",
+      "publishAt": "2026-07-19T17:30:00.000Z",
       "timeZone": "Europe/Moscow",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T17:30:00.000Z"
+          "dueAt": "2026-07-20T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T17:30:00.000Z"
+          "dueAt": "2026-07-22T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T17:30:00.000Z"
+          "dueAt": "2026-07-26T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T17:30:00.000Z"
+          "dueAt": "2026-08-18T17:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -224004,7 +224088,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -224047,7 +224131,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -229885,8 +229971,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "SI",
@@ -229899,31 +229985,31 @@
       "polyglotKey": "",
       "channelKey": "si",
       "youtubeChannelId": "UCgGRZU3j02PQ58z5QcnhhMg",
-      "publishAt": "2026-07-18T18:00:00.000Z",
+      "publishAt": "2026-07-20T03:00:00.000Z",
       "timeZone": "Asia/Colombo",
-      "localDate": "2026-07-18",
-      "localTime": "23:30",
-      "localSlotIndex": 5,
+      "localDate": "2026-07-20",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:00:00.000Z"
+          "dueAt": "2026-07-21T03:00:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:00:00.000Z"
+          "dueAt": "2026-07-23T03:00:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:00:00.000Z"
+          "dueAt": "2026-07-27T03:00:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:00:00.000Z"
+          "dueAt": "2026-08-19T03:00:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 0,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -230152,7 +230238,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -230195,7 +230281,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -236558,8 +236646,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "SK",
@@ -236572,31 +236660,31 @@
       "polyglotKey": "",
       "channelKey": "sk",
       "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Bratislava",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -236825,7 +236913,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -236868,7 +236956,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -242676,8 +242766,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "SL",
@@ -242690,31 +242780,31 @@
       "polyglotKey": "",
       "channelKey": "sl",
       "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Ljubljana",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -242943,7 +243033,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -242986,7 +243076,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -248789,8 +248881,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "SR",
@@ -248803,31 +248895,31 @@
       "polyglotKey": "",
       "channelKey": "sr",
       "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Belgrade",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -249056,7 +249148,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -249099,7 +249191,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -255270,8 +255364,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "SV",
@@ -255284,31 +255378,31 @@
       "polyglotKey": "",
       "channelKey": "sv",
       "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-19T18:30:00.000Z",
       "timeZone": "Europe/Stockholm",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-20T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-22T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-26T18:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-18T18:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -255537,7 +255631,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -255580,7 +255674,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -261470,8 +261566,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "SW",
@@ -261484,31 +261580,31 @@
       "polyglotKey": "",
       "channelKey": "sw",
       "youtubeChannelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
-      "publishAt": "2026-07-18T17:30:00.000Z",
+      "publishAt": "2026-07-19T17:30:00.000Z",
       "timeZone": "Africa/Nairobi",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T17:30:00.000Z"
+          "dueAt": "2026-07-20T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T17:30:00.000Z"
+          "dueAt": "2026-07-22T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T17:30:00.000Z"
+          "dueAt": "2026-07-26T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T17:30:00.000Z"
+          "dueAt": "2026-08-18T17:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -261525,8 +261621,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "SW",
@@ -261539,31 +261635,31 @@
       "polyglotKey": "",
       "channelKey": "sw",
       "youtubeChannelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
-      "publishAt": "2026-07-18T20:30:00.000Z",
+      "publishAt": "2026-07-19T20:30:00.000Z",
       "timeZone": "Africa/Nairobi",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "23:30",
       "localSlotIndex": 5,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T20:30:00.000Z"
+          "dueAt": "2026-07-20T20:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T20:30:00.000Z"
+          "dueAt": "2026-07-22T20:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T20:30:00.000Z"
+          "dueAt": "2026-07-26T20:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T20:30:00.000Z"
+          "dueAt": "2026-08-18T20:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 5,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -261739,7 +261835,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -261782,7 +261878,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -267690,8 +267788,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "TA",
@@ -267704,31 +267802,31 @@
       "polyglotKey": "",
       "channelKey": "ta",
       "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
-      "publishAt": "2026-07-18T18:00:00.000Z",
+      "publishAt": "2026-07-20T03:00:00.000Z",
       "timeZone": "Asia/Kolkata",
-      "localDate": "2026-07-18",
-      "localTime": "23:30",
-      "localSlotIndex": 5,
+      "localDate": "2026-07-20",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:00:00.000Z"
+          "dueAt": "2026-07-21T03:00:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:00:00.000Z"
+          "dueAt": "2026-07-23T03:00:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:00:00.000Z"
+          "dueAt": "2026-07-27T03:00:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:00:00.000Z"
+          "dueAt": "2026-08-19T03:00:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 0,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -267957,7 +268055,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -268000,7 +268098,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -274116,8 +274216,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "TE",
@@ -274130,31 +274230,31 @@
       "polyglotKey": "",
       "channelKey": "te",
       "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
-      "publishAt": "2026-07-18T18:00:00.000Z",
+      "publishAt": "2026-07-20T03:00:00.000Z",
       "timeZone": "Asia/Kolkata",
-      "localDate": "2026-07-18",
-      "localTime": "23:30",
-      "localSlotIndex": 5,
+      "localDate": "2026-07-20",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:00:00.000Z"
+          "dueAt": "2026-07-21T03:00:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:00:00.000Z"
+          "dueAt": "2026-07-23T03:00:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:00:00.000Z"
+          "dueAt": "2026-07-27T03:00:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:00:00.000Z"
+          "dueAt": "2026-08-19T03:00:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 0,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -274383,7 +274483,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -274426,7 +274526,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -280851,7 +280953,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -280894,7 +280996,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -286782,7 +286886,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -286825,7 +286929,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -291987,8 +292093,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "TR",
@@ -292001,31 +292107,31 @@
       "polyglotKey": "",
       "channelKey": "tr",
       "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
-      "publishAt": "2026-07-18T17:30:00.000Z",
+      "publishAt": "2026-07-19T17:30:00.000Z",
       "timeZone": "Europe/Istanbul",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "20:30",
       "localSlotIndex": 4,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T17:30:00.000Z"
+          "dueAt": "2026-07-20T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T17:30:00.000Z"
+          "dueAt": "2026-07-22T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T17:30:00.000Z"
+          "dueAt": "2026-07-26T17:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T17:30:00.000Z"
+          "dueAt": "2026-08-18T17:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 4,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -292042,8 +292148,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "TR",
@@ -292056,31 +292162,31 @@
       "polyglotKey": "",
       "channelKey": "tr",
       "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
-      "publishAt": "2026-07-18T20:30:00.000Z",
+      "publishAt": "2026-07-19T20:30:00.000Z",
       "timeZone": "Europe/Istanbul",
-      "localDate": "2026-07-18",
+      "localDate": "2026-07-19",
       "localTime": "23:30",
       "localSlotIndex": 5,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T20:30:00.000Z"
+          "dueAt": "2026-07-20T20:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T20:30:00.000Z"
+          "dueAt": "2026-07-22T20:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T20:30:00.000Z"
+          "dueAt": "2026-07-26T20:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T20:30:00.000Z"
+          "dueAt": "2026-08-18T20:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 5,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -292256,7 +292362,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -292299,7 +292405,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -298164,8 +298272,8 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_upload_accepted",
-      "source": "youtube-publication-campaign",
+      "status": "reserved_live_readback_reconciled",
+      "source": "youtube-publication-snapshot-reconciliation",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
       "supportLang": "UZ",
@@ -298178,31 +298286,31 @@
       "polyglotKey": "",
       "channelKey": "uz",
       "youtubeChannelId": "UClFSxvtwOnc_pPv2rCnT-bg",
-      "publishAt": "2026-07-18T18:30:00.000Z",
+      "publishAt": "2026-07-20T03:30:00.000Z",
       "timeZone": "Asia/Tashkent",
-      "localDate": "2026-07-18",
-      "localTime": "23:30",
-      "localSlotIndex": 5,
+      "localDate": "2026-07-20",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
       "analyticsCheckpointsAt": [
         {
           "hoursAfterPublish": 24,
-          "dueAt": "2026-07-19T18:30:00.000Z"
+          "dueAt": "2026-07-21T03:30:00.000Z"
         },
         {
           "hoursAfterPublish": 72,
-          "dueAt": "2026-07-21T18:30:00.000Z"
+          "dueAt": "2026-07-23T03:30:00.000Z"
         },
         {
           "hoursAfterPublish": 168,
-          "dueAt": "2026-07-25T18:30:00.000Z"
+          "dueAt": "2026-07-27T03:30:00.000Z"
         },
         {
           "hoursAfterPublish": 720,
-          "dueAt": "2026-08-17T18:30:00.000Z"
+          "dueAt": "2026-08-19T03:30:00.000Z"
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T19:24:22.107Z",
+      "updatedAt": "2026-07-19T03:02:30.358Z",
       "localDayOffset": 0,
       "slotOrdinal": 0,
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -298431,7 +298539,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -298474,7 +298582,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -304912,7 +305022,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -304955,7 +305065,9 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
     },
     {
       "schemaVersion": 1,
@@ -310493,7 +310605,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4",
       "campaignManifestHash": "de6bbb59d41bc83103594a6d2aa3a639c86f8760b162403ca8f37a1eaeec2e00",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -310536,7 +310648,1689 @@
         }
       ],
       "createdAt": "2026-07-18T15:55:02.439Z",
-      "updatedAt": "2026-07-18T15:55:02.439Z"
+      "updatedAt": "2026-07-19T03:05:00.000Z",
+      "supersededAt": "2026-07-19T03:05:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "AZ",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:AZ:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "publishAt": "2026-07-19T16:30:00.000Z",
+      "timeZone": "Asia/Baku",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "BG",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:BG:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Europe/Sofia",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "BN",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:BN:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "bn",
+      "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Asia/Dhaka",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "CS",
+      "targetLang": "RU,PL,SK,BG",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "SK",
+        "BG"
+      ],
+      "targetLangsHash": "68ca88a08548",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:CS:slavic_core:68ca88a08548:short_unverified",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Prague",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:DA:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "publishAt": "2026-07-19T18:30:00.000Z",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DE",
+      "targetLang": "MY",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "publishAt": "2026-07-19T06:30:00.000Z",
+      "timeZone": "Europe/Berlin",
+      "localDate": "2026-07-19",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DE",
+      "targetLang": "NE",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "publishAt": "2026-07-19T09:30:00.000Z",
+      "timeZone": "Europe/Berlin",
+      "localDate": "2026-07-19",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DE",
+      "targetLang": "NL",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "publishAt": "2026-07-19T12:30:00.000Z",
+      "timeZone": "Europe/Berlin",
+      "localDate": "2026-07-19",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DE",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:DE:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Berlin",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "EN",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:EN:slavic_core:93d499d62441:full",
+      "channelKey": "en",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "America/New_York",
+      "localDate": "2026-07-19",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ES-419",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:ES-419:slavic_core:93d499d62441:full",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "publishAt": "2026-07-20T21:30:00.000Z",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-07-20",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ET",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:ET:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Europe/Tallinn",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "FI",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:FI:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "fi",
+      "youtubeChannelId": "UCZkiQ6y2W8aCUuaiP3N665A",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Europe/Helsinki",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "FR",
+      "targetLang": "MY",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-07-19T06:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-19",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "FR",
+      "targetLang": "NE",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-07-19T09:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-19",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "FR",
+      "targetLang": "NL",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-07-19T12:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-19",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "FR",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:FR:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HI",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:HI:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "hi",
+      "youtubeChannelId": "UCRWc-CxGQSN_pbC42scuQHA",
+      "publishAt": "2026-07-19T15:00:00.000Z",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HR",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:HR:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Zagreb",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HU",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:HU:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Budapest",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HY",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:HY:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "publishAt": "2026-07-19T16:30:00.000Z",
+      "timeZone": "Asia/Yerevan",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ID",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:ID:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "publishAt": "2026-07-19T16:30:00.000Z",
+      "timeZone": "Asia/Jakarta",
+      "localDate": "2026-07-19",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "IS",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:IS:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Atlantic/Reykjavik",
+      "localDate": "2026-07-19",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "IT",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:IT:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "JA",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:JA:slavic_core:93d499d62441:full",
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Asia/Tokyo",
+      "localDate": "2026-07-19",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KA",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:KA:slavic_core:93d499d62441:full",
+      "channelKey": "ka",
+      "youtubeChannelId": "UCpZM_1u-nTHydEJz7cnjf7w",
+      "publishAt": "2026-07-19T16:30:00.000Z",
+      "timeZone": "Asia/Tbilisi",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KK",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:KK:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Asia/Almaty",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KM",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:KM:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "publishAt": "2026-07-19T16:30:00.000Z",
+      "timeZone": "Asia/Phnom_Penh",
+      "localDate": "2026-07-19",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KN",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:KN:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "kn",
+      "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+      "publishAt": "2026-07-19T15:00:00.000Z",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KO",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:KO:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-07-19",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "LO",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:LO:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "publishAt": "2026-07-19T16:30:00.000Z",
+      "timeZone": "Asia/Vientiane",
+      "localDate": "2026-07-19",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "LT",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:LT:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Europe/Vilnius",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "LV",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:LV:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Europe/Riga",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ML",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:ML:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "publishAt": "2026-07-19T15:00:00.000Z",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "MS",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:MS:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "localDate": "2026-07-19",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "MY",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:MY:slavic_core:93d499d62441:full",
+      "channelKey": "my",
+      "youtubeChannelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "publishAt": "2026-07-19T17:00:00.000Z",
+      "timeZone": "Asia/Yangon",
+      "localDate": "2026-07-19",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "NE",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:NE:slavic_core:93d499d62441:full",
+      "channelKey": "ne",
+      "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+      "publishAt": "2026-07-19T14:45:00.000Z",
+      "timeZone": "Asia/Kathmandu",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "NL",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:NL:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "nl",
+      "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Amsterdam",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "NO",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:NO:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "no",
+      "youtubeChannelId": "UCK2IIhxCoPUW3wI6xBPYkfA",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Oslo",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PL",
+      "targetLang": "RU,CS,SK,BG",
+      "targetLangs": [
+        "RU",
+        "CS",
+        "SK",
+        "BG"
+      ],
+      "targetLangsHash": "46049b3b3e49",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:PL:slavic_core:46049b3b3e49:short_unverified",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Warsaw",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:PT-BR:slavic_core:93d499d62441:full",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "publishAt": "2026-07-19T19:30:00.000Z",
+      "timeZone": "Europe/Lisbon",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RO",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:RO:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "ro",
+      "youtubeChannelId": "UCvc_hya6nn2z8Q2WzHCuBWw",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Europe/Bucharest",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "targetLang": "PL,CS,SK,BG",
+      "targetLangs": [
+        "PL",
+        "CS",
+        "SK",
+        "BG"
+      ],
+      "targetLangsHash": "31c833f1eaec",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:RU:slavic_core:31c833f1eaec:full",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Europe/Moscow",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SI",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:SI:slavic_core:93d499d62441:full",
+      "channelKey": "si",
+      "youtubeChannelId": "UCgGRZU3j02PQ58z5QcnhhMg",
+      "publishAt": "2026-07-19T15:00:00.000Z",
+      "timeZone": "Asia/Colombo",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SK",
+      "targetLang": "RU,PL,CS,BG",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "BG"
+      ],
+      "targetLangsHash": "849600d8d591",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:SK:slavic_core:849600d8d591:short_unverified",
+      "channelKey": "sk",
+      "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Bratislava",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SL",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:SL:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Ljubljana",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SR",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:SR:slavic_core:93d499d62441:full",
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Belgrade",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SV",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:SV:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "sv",
+      "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Europe/Stockholm",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SW",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:SW:slavic_core:93d499d62441:full",
+      "channelKey": "sw",
+      "youtubeChannelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Africa/Nairobi",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TA",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:TA:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "ta",
+      "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+      "publishAt": "2026-07-19T15:00:00.000Z",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TE",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:TE:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "te",
+      "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+      "publishAt": "2026-07-19T15:00:00.000Z",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TH",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:TH:slavic_core:93d499d62441:full",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "publishAt": "2026-07-19T16:30:00.000Z",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-07-19",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TL",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:TL:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Asia/Manila",
+      "localDate": "2026-07-19",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TR",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:TR:slavic_core:93d499d62441:full",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "publishAt": "2026-07-19T14:30:00.000Z",
+      "timeZone": "Europe/Istanbul",
+      "localDate": "2026-07-19",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "UZ",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:UZ:slavic_core:93d499d62441:full",
+      "channelKey": "uz",
+      "youtubeChannelId": "UClFSxvtwOnc_pPv2rCnT-bg",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Asia/Tashkent",
+      "localDate": "2026-07-19",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "VI",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:VI:slavic_core:93d499d62441:full",
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "publishAt": "2026-07-19T16:30:00.000Z",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "localDate": "2026-07-19",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "campaignManifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ZH",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:ZH:slavic_core:93d499d62441:full",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "publishAt": "2026-07-19T15:30:00.000Z",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-19",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-07-19T03:05:00.000Z",
+      "updatedAt": "2026-07-19T03:05:00.000Z"
     }
   ]
 }
