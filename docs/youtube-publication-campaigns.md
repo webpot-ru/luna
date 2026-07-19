@@ -56,6 +56,8 @@ Legacy per-video planners may still emit a compatibility `polyglotKey` without t
 ## Safe publish sequence
 
 1. Один read-only `.github/workflows/youtube-publication-control.yml` по всем четырем routes, без watch и без публикации. Без campaign-плана он читает uploads pagination и `videos.list(status)` для всех IDs, строит свежий live snapshot и не обходит плейлисты. Для no-spend campaign-плана передать точные `campaign_supports`, `campaign_ordinary_per_channel` и `campaign_polyglot_per_channel`: workflow дополнительно читает только owned playlists этих support-каналов, а не все 51 канала. State drift сохраняется как evidence/snapshot with blockers instead of aborting the audit job; campaign planning/apply remains blocked until duplicates, registry and calendar blockers are zero. Live snapshot и выбранный playlist-discovery snapshot должны быть не старше 30 минут.
+
+Финальная ordinary-волна исчерпываемой колоды может явно передать `campaign_allow_partial_ordinary_tail=true`. Этот режим сохраняет `campaign_ordinary_per_channel` как верхнюю границу, но допускает меньше назначений только там, где после исключения live publications и active claims больше нет unclaimed ordinary tails. Без явного флага exact-count gate остаётся строгим. Режим не разрешает дубли, замену set ID или автоматическое дополнение из следующей колоды.
 2. Локальный planner ниже остается эквивалентным fallback для уже скачанных exact snapshots; не запускать второй независимый selector поверх GitHub plan:
 
 ```bash

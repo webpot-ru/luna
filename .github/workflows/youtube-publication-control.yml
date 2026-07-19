@@ -24,6 +24,11 @@ on:
         description: "Optional no-spend campaign plan: next ordinary videos per physical channel; 0 disables campaign planning."
         required: true
         default: "0"
+      campaign_allow_partial_ordinary_tail:
+        description: "Allow a final ordinary tail campaign to take fewer than the requested count only where the deck has no more unclaimed assignments."
+        required: true
+        default: false
+        type: boolean
       campaign_polyglot_per_channel:
         description: "Optional no-spend campaign plan: next full Polyglot videos per physical channel; 0 disables campaign planning."
         required: true
@@ -182,6 +187,7 @@ jobs:
         env:
           SET_ID: ${{ github.event.inputs.set_id }}
           ORDINARY_PER_CHANNEL: ${{ github.event.inputs.campaign_ordinary_per_channel }}
+          ALLOW_PARTIAL_ORDINARY_TAIL: ${{ github.event.inputs.campaign_allow_partial_ordinary_tail }}
           POLYGLOT_PER_CHANNEL: ${{ github.event.inputs.campaign_polyglot_per_channel }}
           CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
           START_DATE: ${{ github.event.inputs.campaign_schedule_start_date }}
@@ -217,6 +223,7 @@ jobs:
             --json
           )
           if [ -n "$START_DATE" ]; then ARGS+=("--start-date=$START_DATE"); fi
+          if [ "$ALLOW_PARTIAL_ORDINARY_TAIL" = "true" ]; then ARGS+=("--allow-partial-ordinary-tail"); fi
           npm run plan:youtube-publication-campaign -- "${ARGS[@]}"
       - uses: actions/upload-artifact@v4
         if: always()
