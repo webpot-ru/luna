@@ -121,7 +121,11 @@ function main() {
     target.set(row.supportLang, values);
   }
   const ordinaryExpected = Number(campaign.inputs?.ordinaryPerChannel || 0);
-  const allowPartialOrdinaryTail = campaign.inputs?.allowPartialOrdinaryTail === true;
+  // `partialRecoveryOfCampaignId` is the durable identity of pre-flag partial
+  // recovery manifests. Keep those immutable manifests dispatchable while new
+  // manifests additionally record the explicit partial-tail flag.
+  const allowPartialOrdinaryTail = campaign.inputs?.allowPartialOrdinaryTail === true
+    || typeof campaign.inputs?.partialRecoveryOfCampaignId === "string";
   const polyglotExpected = Number(campaign.inputs?.polyglotPerChannel || 0);
   const ordinaryMatrix = [...ordinaryBySupport.entries()].map(([support, rows]) => {
     if (allowPartialOrdinaryTail) {

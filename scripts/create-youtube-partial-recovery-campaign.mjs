@@ -303,6 +303,10 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
       ordinarySupportCount: new Set(assignments.filter((row) => row.videoType === "ordinary").map((row) => row.supportLang)).size,
       polyglotSupportCount: new Set(assignments.filter((row) => row.videoType === "polyglot").map((row) => row.supportLang)).size,
       ordinaryPerChannel: Math.max(0, ...ordinaryCountsBySupport),
+      // A partial recovery may contain different numbers of ordinary rows per
+      // support language. The dispatch preflight must preserve that exact tail
+      // instead of treating the largest per-support count as a full-wave rule.
+      allowPartialOrdinaryTail: true,
       polyglotPerChannel: polyglotCount > 0 ? 1 : 0,
       assignmentKeys: assignments.map((row) => row.assignmentKey),
       startDate: "auto",

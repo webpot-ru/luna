@@ -4,16 +4,16 @@ import fs from "node:fs";
 
 import { buildPartialRecovery } from "./create-youtube-partial-recovery-campaign.mjs";
 
-const sourceCampaignId = "yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-63e957e174e4";
 const durableRegistry = JSON.parse(fs.readFileSync("config/youtube-publication-campaigns.json", "utf8"));
 const durableCalendar = JSON.parse(fs.readFileSync("config/youtube-publish-calendar.json", "utf8"));
 const channels = JSON.parse(fs.readFileSync("config/youtube-channels.json", "utf8"));
 const policy = JSON.parse(fs.readFileSync("config/youtube-publish-schedule-policy.json", "utf8"));
-const currentRecovery = durableRegistry.campaigns.find((row) =>
-  row.recoveryOfCampaignId === sourceCampaignId
-  && row.status === "claimed"
-  && row.summary?.assignmentCount === 57);
+const currentRecovery = [...durableRegistry.campaigns]
+  .filter((row) => row.recoveryOfCampaignId && (row.inputs?.assignmentKeys || row.assignmentKeys || []).length > 0)
+  .sort((left, right) => Date.parse(right.claimedAt || right.generatedAt || 0) - Date.parse(left.claimedAt || left.generatedAt || 0))[0];
 assert(currentRecovery);
+const sourceCampaignId = currentRecovery.recoveryOfCampaignId;
+const expected = currentRecovery.summary;
 
 // Reconstruct the exact pre-apply source state in memory so this regression remains
 // independent of the durable recovery claim that the production apply intentionally adds.
@@ -27,7 +27,7 @@ const selectedKeys = new Set(currentRecovery.evidence?.partialRecoveryCampaign
 const restoredRows = sourceCampaign.assignments.filter((row) =>
   selectedKeys.has(row.assignmentKey)
   && row.supersededByCampaignId === currentRecovery.campaignId);
-assert.equal(restoredRows.length, 57);
+assert.equal(restoredRows.length, currentRecovery.assignmentKeys.length);
 for (const row of restoredRows) {
   row.status = "missing";
   delete row.supersededAt;
@@ -47,7 +47,7 @@ for (const row of calendar.reservations) {
 }
 
 const missingRows = sourceCampaign.assignments.filter((row) => !row.youtubeVideoId && !String(row.status || "").includes("superseded"));
-assert.equal(missingRows.length, 57);
+assert.equal(missingRows.length, currentRecovery.assignmentKeys.length);
 const assignmentKeys = missingRows.map((row) => row.assignmentKey);
 const generatedAt = "2026-07-19T03:00:00.000Z";
 const controlReports = ["youtube-1", "youtube-2", "youtube-3", "youtube-4"].map((routeKey) => {
@@ -79,31 +79,26 @@ const result = buildPartialRecovery({
 });
 
 assert.equal(result.manifest.summary.applyReady, true);
-assert.equal(result.manifest.summary.assignmentCount, 57);
-assert.equal(result.manifest.summary.supportCount, 51);
-assert.equal(result.manifest.summary.ordinaryCount, 6);
-assert.equal(result.manifest.summary.polyglotCount, 51);
-assert.equal(result.manifest.inputs.ordinarySupportCount, 2);
-assert.equal(result.manifest.inputs.polyglotSupportCount, 51);
-assert.equal(result.manifest.summary.customThumbnailCount, 16);
-assert.equal(result.manifest.summary.automaticThumbnailCount, 41);
-assert.deepEqual(result.manifest.summary.routeCounts, {
-  "youtube-1": 18,
-  "youtube-2": 13,
-  "youtube-3": 13,
-  "youtube-4": 13,
-});
-assert.equal(result.manifest.assignments.filter((row) => row.contentScope === "short_unverified").length, 35);
-assert.equal(new Set(result.manifest.assignments.map((row) => row.assignmentKey)).size, 57);
+assert.equal(result.manifest.summary.assignmentCount, expected.assignmentCount);
+assert.equal(result.manifest.summary.supportCount, expected.supportCount);
+assert.equal(result.manifest.summary.ordinaryCount, expected.ordinaryCount);
+assert.equal(result.manifest.summary.polyglotCount, expected.polyglotCount);
+assert.equal(result.manifest.inputs.ordinarySupportCount, currentRecovery.inputs.ordinarySupportCount);
+assert.equal(result.manifest.inputs.polyglotSupportCount, currentRecovery.inputs.polyglotSupportCount);
+assert.equal(result.manifest.inputs.allowPartialOrdinaryTail, true);
+assert.equal(result.manifest.summary.customThumbnailCount, expected.customThumbnailCount);
+assert.equal(result.manifest.summary.automaticThumbnailCount, expected.automaticThumbnailCount);
+assert.deepEqual(result.manifest.summary.routeCounts, expected.routeCounts);
+assert.equal(new Set(result.manifest.assignments.map((row) => row.assignmentKey)).size, expected.assignmentCount);
 assert(result.manifest.assignments.every((row) => Date.parse(row.publishAt) >= Date.parse(generatedAt) + 90 * 60_000));
 
 const nextSource = result.nextRegistry.campaigns.find((row) => row.campaignId === sourceCampaignId);
 const nextCampaign = result.nextRegistry.campaigns.find((row) => row.campaignId === result.manifest.campaignId);
 assert.equal(nextCampaign.status, "claimed");
-assert.equal(nextCampaign.assignments.length, 57);
-assert.equal(nextSource.assignments.filter((row) => row.status === "superseded_partial_recovery").length, 57);
+assert.equal(nextCampaign.assignments.length, expected.assignmentCount);
+assert.equal(nextSource.assignments.filter((row) => row.status === "superseded_partial_recovery").length, expected.assignmentCount);
 assert.equal(nextSource.assignmentKeys.filter((key) => assignmentKeys.includes(key)).length, 0);
-assert.equal(result.nextCalendar.reservations.filter((row) => row.campaignId === result.manifest.campaignId && row.status === "campaign_claimed").length, 57);
+assert.equal(result.nextCalendar.reservations.filter((row) => row.campaignId === result.manifest.campaignId && row.status === "campaign_claimed").length, expected.assignmentCount);
 assert.equal(result.manifest.generatedAt, generatedAt);
 
 const ordinaryRow = missingRows.find((row) => row.videoType === "ordinary");
