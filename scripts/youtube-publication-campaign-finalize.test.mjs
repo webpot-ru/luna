@@ -184,6 +184,35 @@ assert.equal(partialTailPrepare.status, 0, partialTailPrepare.stderr || partialT
 const partialTailPreflight = JSON.parse(fs.readFileSync(path.join(root, "outputs/preflight-partial-tail.json"), "utf8"));
 assert.equal(partialTailPreflight.ordinaryMatrix[0].langs, "DE");
 
+const legacyPartialRecoveryCampaign = {
+  ...partialTailCampaign,
+  campaignId: "campaign-legacy-partial-recovery",
+  inputs: {
+    ...partialTailCampaign.inputs,
+    allowPartialOrdinaryTail: false,
+    partialRecoveryOfCampaignId: "campaign-source",
+  },
+};
+write(path.join(configDir, "youtube-publication-campaigns.json"), { schemaVersion: 1, campaigns: [legacyPartialRecoveryCampaign] });
+write(path.join(configDir, "youtube-publish-calendar.json"), {
+  schemaVersion: 1,
+  reservations: [{
+    ...ordinaryAssignment,
+    campaignId: legacyPartialRecoveryCampaign.campaignId,
+    campaignManifestHash: legacyPartialRecoveryCampaign.manifestHash,
+    status: "campaign_claimed",
+  }],
+});
+const legacyPartialRecoveryPrepare = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/prepare-youtube-publication-campaign-run.mjs"),
+  "--campaign-id=campaign-legacy-partial-recovery",
+  "--manifest-hash=manifest-hash",
+  "--registry=config/youtube-publication-campaigns.json",
+  "--calendar=config/youtube-publish-calendar.json",
+  "--output=outputs/preflight-legacy-partial-recovery.json",
+], { cwd: root, encoding: "utf8" });
+assert.equal(legacyPartialRecoveryPrepare.status, 0, legacyPartialRecoveryPrepare.stderr || legacyPartialRecoveryPrepare.stdout);
+
 const strictShortCampaign = {
   ...partialTailCampaign,
   campaignId: "campaign-strict-short",
