@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-19T23:15:30.170Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_kitchen_cooking_actions_a1_a2",
+  "inputs": {
+    "supports": "ID,NL",
+    "supportCount": 2,
+    "ordinarySupportCount": 2,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 4,
+    "polyglotPerChannel": 0,
+    "assignmentKeys": [
+      "ordinary|home_kitchen_cooking_actions_a1_a2|ID|PL",
+      "ordinary|home_kitchen_cooking_actions_a1_a2|ID|PT",
+      "ordinary|home_kitchen_cooking_actions_a1_a2|ID|PT-BR",
+      "ordinary|home_kitchen_cooking_actions_a1_a2|ID|RO",
+      "ordinary|home_kitchen_cooking_actions_a1_a2|NL|ZH"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 30,
+    "partialRecoveryOfCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-6424a3302614"
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-6424a3302614",
+      "manifestHash": "099dd4e8ab0a10897cc0ce658cbd94225000b38511f3974d90d1229ea7fbf617",
+      "status": "reconciliation_required"
+    },
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-1",
+        "generatedAt": "2026-07-19T23:09:01.060Z",
+        "ageMinutes": 6.485166666666666,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-07-19T23:09:00.688Z",
+        "ageMinutes": 6.491366666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "447bf9dcecd5c9144a7eb184b775dc8dac25d1943ec3fb636cc5aa7628733d82"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "af4b66628872db654990807a2efcdb8d0ff75353c1a0220d95470d4ef37db9d3"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "949e97945df6919f9453e56968ed406f7d2338b3705adb56e36d323a510f49e9"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "e195a73d31716e2248f4031edfe6346331b670f8d4afab90abf346d70cb18c82"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "bc5d4a0ac8b594ca980d112129bf2f1ebd73b2b38af21406920580eb5ea1f976"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "4e01176c3e87f3ab7ebd0fcc9a46e21624df2af0f76750a9ded72a537d550a9c"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "605eda7deb59067f0809da9d751f443016d4ccd341beac66c45bbdec717d9a45"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json",
+        "exists": true,
+        "sha256": "221f3eb523c1b5e5cd9656d9d26fc3fc6e2ca43e2bc8d3c0c5322597cfaf9cd5"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "15b935b807d09a7b3c0e0a56b1e067ca677553877ed3792c4483398de4b04f54"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "d9e47800e130ce40020331751d83f88710e88bb46502f35370180478a96cf684"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "1ae8230d1478c51fddd5f4265615434ff37320b073e9fb8e5e69f7fa7e9ecb03"
+      }
+    },
+    "deckSource": {
+      "mode": "historical_git_blob",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": false,
+      "historicalGitBlob": {
+        "available": true,
+        "matchesLocalFile": true,
+        "commit": "0a4e6907cdffdb1cafa4b44e723f87650b16a19e",
+        "blobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+        "localBlobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 2,
+    "ordinaryCount": 5,
+    "polyglotCount": 0,
+    "assignmentCount": 5,
+    "firstPublishAt": "2026-07-20T04:30:00.000Z",
+    "lastPublishAt": "2026-07-20T15:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 5,
+    "existingPlaylistCount": 5,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 4,
+      "youtube-2": 1,
+      "youtube-3": 0,
+      "youtube-4": 0
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 5,
+    "estimatedPlaylistItemInsertUnits": 250,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 250,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 4,
+        "estimatedGeneralQuotaUnitsMaximum": 200
+      },
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      },
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|PL",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|PL|id",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ID",
+      "targetLang": "PL",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-20T04:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "11:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-07-20T04:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__PL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLEPc0IOXSRIg",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polski A1: Everyday: kata",
+        "description": "Belajar Polski. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-19T12:52:46.022Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|PT",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|PT|id",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ID",
+      "targetLang": "PT",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-20T07:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "14:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-07-20T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__PT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf6QJ7eQtIOsfesfCFU0E2gcr818Q3rF_",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Portugis A1: Everyday: kata",
+        "description": "Belajar Portugis. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-19T12:52:46.022Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|PT-BR",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|PT-BR|id",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ID",
+      "targetLang": "PT-BR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-20T10:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "17:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-07-20T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__PT-BR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLP3IaimlUnVI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Portugis (Brasil) A1: Everyday: kata",
+        "description": "Belajar Portugis (Brasil). Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-19T12:52:46.022Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|RO",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|RO|id",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ID",
+      "targetLang": "RO",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-20T13:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "20:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-07-20T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__RO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLFxSokE2sg-s",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Rumania A1: Everyday: kata",
+        "description": "Belajar Rumania. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-19T12:52:46.022Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|NL|ZH",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|NL|ZH|nl",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "NL",
+      "targetLang": "ZH",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "nl",
+      "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-07-20T15:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "17:30",
+      "timeZone": "Europe/Amsterdam",
+      "slotKey": "nl|2026-07-20T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "NL__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLZlyEwvqsQ-8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Chinees A1: woordenschat en uitspraak",
+        "description": "FlashcardsLuna-video's voor Nederlandstaligen die Chinees leren: flashcards, uitspraak, pauzes om te herhalen en korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-19T12:52:46.022Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 3
+    }
+  ],
+  "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-facd365dbca9",
+  "manifestHash": "a8aa27d29477d41e13bf91ce1083ee86396b1107733ad579aa30b1d94e1d0e6d"
+}
