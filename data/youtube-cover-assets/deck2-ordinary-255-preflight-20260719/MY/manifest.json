@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-19T11:51:39.747Z",
+  "status": "approved",
+  "sourceOfTruth": "Approved local base artwork plus deterministic no-provider text overlays.",
+  "configPath": "config/youtube-cover-templates.json",
+  "policy": {
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0,
+    "applyRequiresGitTrackedAssets": true
+  },
+  "counts": {
+    "setIds": [
+      "home_kitchen_cooking_actions_a1_a2"
+    ],
+    "supports": [
+      "MY"
+    ],
+    "types": [
+      "ordinary"
+    ],
+    "coverCount": 5,
+    "ordinaryCount": 5,
+    "polyglotCount": 0,
+    "skippedCount": 0,
+    "outputRoot": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY",
+    "dryRun": false,
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0
+  },
+  "outputs": {
+    "root": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY",
+    "manifest": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/manifest.json",
+    "contactSheets": [
+      {
+        "setId": "home_kitchen_cooking_actions_a1_a2",
+        "supportLang": "MY",
+        "videoType": "ordinary",
+        "coverCount": 5,
+        "relativePath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/contact-sheets/home_kitchen_cooking_actions_a1_a2__MY__ordinary.jpg"
+      }
+    ]
+  },
+  "skipped": [],
+  "covers": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "MY",
+      "viewerSupportLang": "MY",
+      "channelKey": "my",
+      "channelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "channelHandle": "LunaCardsBurmese",
+      "channelSupportLangs": [
+        "MY"
+      ],
+      "targetLang": "VI",
+      "targetName": "ဗီယက်နမ်",
+      "targetLabel": "ဗီယက်နမ် A1",
+      "title": "ချက်ပြုတ် လုပ်ဆောင်ချက်။",
+      "description": "မီးဖိုချောင်ကြိယာ။ အခြေခံအဆင့်။",
+      "module": "အိမ်",
+      "category": "မီးဖိုချောင်",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/VI__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/VI__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/.codex-worktrees/deck2-ordinary-65-covers-20260719/data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/VI__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 297748,
+      "sha256": "1e59d1f9ac59afd8d0192ca5a37301028fcdaa0b507b37573a35f2c729ddd3df"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "MY",
+      "viewerSupportLang": "MY",
+      "channelKey": "my",
+      "channelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "channelHandle": "LunaCardsBurmese",
+      "channelSupportLangs": [
+        "MY"
+      ],
+      "targetLang": "TH",
+      "targetName": "ထိုင်း",
+      "targetLabel": "ထိုင်း A1",
+      "title": "ချက်ပြုတ် လုပ်ဆောင်ချက်။",
+      "description": "မီးဖိုချောင်ကြိယာ။ အခြေခံအဆင့်။",
+      "module": "အိမ်",
+      "category": "မီးဖိုချောင်",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/TH__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/TH__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/.codex-worktrees/deck2-ordinary-65-covers-20260719/data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/TH__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 292884,
+      "sha256": "26264e1c22f47dfdf66b0972a9b67019029fd6c6fc42def00bd1a904b46d6c6b"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "MY",
+      "viewerSupportLang": "MY",
+      "channelKey": "my",
+      "channelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "channelHandle": "LunaCardsBurmese",
+      "channelSupportLangs": [
+        "MY"
+      ],
+      "targetLang": "TL",
+      "targetName": "ဖိလစ်ပိုင်",
+      "targetLabel": "ဖိလစ်ပိုင် A1",
+      "title": "ချက်ပြုတ် လုပ်ဆောင်ချက်။",
+      "description": "မီးဖိုချောင်ကြိယာ။ အခြေခံအဆင့်။",
+      "module": "အိမ်",
+      "category": "မီးဖိုချောင်",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/TL__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/TL__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/.codex-worktrees/deck2-ordinary-65-covers-20260719/data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/TL__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 297764,
+      "sha256": "31cbd865fb1ad25980b3968533b0625f58a8406586f7f62efa470fdf060e7b53"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "MY",
+      "viewerSupportLang": "MY",
+      "channelKey": "my",
+      "channelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "channelHandle": "LunaCardsBurmese",
+      "channelSupportLangs": [
+        "MY"
+      ],
+      "targetLang": "TR",
+      "targetName": "တူရကီ",
+      "targetLabel": "တူရကီ A1",
+      "title": "ချက်ပြုတ် လုပ်ဆောင်ချက်။",
+      "description": "မီးဖိုချောင်ကြိယာ။ အခြေခံအဆင့်။",
+      "module": "အိမ်",
+      "category": "မီးဖိုချောင်",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/TR__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/TR__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/.codex-worktrees/deck2-ordinary-65-covers-20260719/data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/TR__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 294697,
+      "sha256": "81584ec21f9e9fc83368bcdfa1b4f2ad33fd7a5a569e5ada0537e5fbd986bb17"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "MY",
+      "viewerSupportLang": "MY",
+      "channelKey": "my",
+      "channelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "channelHandle": "LunaCardsBurmese",
+      "channelSupportLangs": [
+        "MY"
+      ],
+      "targetLang": "UZ",
+      "targetName": "ဥဇဘတ်",
+      "targetLabel": "ဥဇဘတ် A1",
+      "title": "ချက်ပြုတ် လုပ်ဆောင်ချက်။",
+      "description": "မီးဖိုချောင်ကြိယာ။ အခြေခံအဆင့်။",
+      "module": "အိမ်",
+      "category": "မီးဖိုချောင်",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/UZ__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/UZ__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/.codex-worktrees/deck2-ordinary-65-covers-20260719/data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/MY/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/my__MY__LunaCardsBurmese/UZ__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 295795,
+      "sha256": "90bd7c80c4002bd5098d4b2d17d67b9a0d91aa579cf4f66262ffd29c596e4225"
+    }
+  ]
+}
