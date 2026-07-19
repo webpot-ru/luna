@@ -183,6 +183,46 @@ assert.equal(subsetPlan.summary.applyReady, true);
 assert.equal(subsetPlan.summary.supportCount, subsetSupports.length);
 assert.equal(subsetPlan.summary.assignmentCount, 12);
 
+const enTails = snapshot.decks
+  .find((deck) => deck.setId === "home_kitchen_cooking_actions_a1_a2")
+  .tails.filter((tail) => tail.videoType === "ordinary" && tail.supportLang === "EN");
+const claimedEnTailKeys = enTails.slice(0, -3).map((tail) => (
+  `ordinary|home_kitchen_cooking_actions_a1_a2|EN|${tail.targetLang}`
+));
+const partialTailRegistryPath = writeJson("campaigns-partial-tail.json", {
+  schemaVersion: 1,
+  campaigns: [{
+    campaignId: "claimed-en-tail-fixture",
+    status: "claimed",
+    assignmentKeys: claimedEnTailKeys,
+    slotKeys: [],
+    assignments: [],
+  }],
+});
+const enDiscovery = readJson(paths.playlistDiscoveryPath);
+enDiscovery.channels = enDiscovery.channels.filter((channel) => channel.supportLang === "EN");
+enDiscovery.summary.supportCount = 1;
+const strictExhaustedTailPlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  polyglotPerChannel: 0,
+  campaignRegistryPath: partialTailRegistryPath,
+  playlistDiscoveryPath: writeJson("playlist-discovery-en-partial-strict.json", enDiscovery),
+});
+assert(strictExhaustedTailPlan.blockers.some((row) => row.includes("only 3/5 unclaimed ordinary tails available")));
+assert(strictExhaustedTailPlan.blockers.some((row) => row.includes("ordinary assignment count 3 != 5")));
+const allowedExhaustedTailPlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  polyglotPerChannel: 0,
+  allowPartialOrdinaryTail: true,
+  campaignRegistryPath: partialTailRegistryPath,
+  playlistDiscoveryPath: writeJson("playlist-discovery-en-partial-allowed.json", enDiscovery),
+});
+assert.equal(allowedExhaustedTailPlan.summary.applyReady, true);
+assert.equal(allowedExhaustedTailPlan.summary.ordinaryCount, 3);
+assert.equal(allowedExhaustedTailPlan.inputs.allowPartialOrdinaryTail, true);
+
 const crossScopeSnapshot = readJson(paths.snapshotPath);
 const crossScopeDeck = crossScopeSnapshot.decks.find((deck) => deck.setId === "home_kitchen_cooking_actions_a1_a2");
 crossScopeDeck.publications.push({

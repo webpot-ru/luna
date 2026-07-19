@@ -439,13 +439,15 @@ function crossScopePublicationMatchesCandidate(publication, candidate) {
     && polyglotContentScope(publication) !== candidate.contentScope;
 }
 
-function validateWave(assignments, expectedSupportCount, ordinaryPerChannel, polyglotPerChannel) {
+function validateWave(assignments, expectedSupportCount, ordinaryPerChannel, polyglotPerChannel, allowPartialOrdinaryTail = false) {
   const blockers = [];
   const expectedOrdinary = expectedSupportCount * ordinaryPerChannel;
   const expectedPolyglot = expectedSupportCount * polyglotPerChannel;
   const ordinaryCount = assignments.filter((row) => row.videoType === "ordinary").length;
   const polyglotCount = assignments.filter((row) => row.videoType === "polyglot").length;
-  if (ordinaryCount !== expectedOrdinary) blockers.push(`ordinary assignment count ${ordinaryCount} != ${expectedOrdinary}`);
+  if (allowPartialOrdinaryTail) {
+    if (ordinaryCount > expectedOrdinary) blockers.push(`ordinary assignment count ${ordinaryCount} exceeds maximum ${expectedOrdinary}`);
+  } else if (ordinaryCount !== expectedOrdinary) blockers.push(`ordinary assignment count ${ordinaryCount} != ${expectedOrdinary}`);
   if (polyglotCount !== expectedPolyglot) blockers.push(`Polyglot assignment count ${polyglotCount} != ${expectedPolyglot}`);
   const assignmentKeys = assignments.map((row) => row.assignmentKey);
   const slotKeys = assignments.map((row) => row.slotKey);
@@ -480,6 +482,7 @@ export function buildPublicationCampaign(options = {}) {
   const setId = options.setId;
   if (!setId) throw new Error("setId is required");
   const ordinaryPerChannel = Number(options.ordinaryPerChannel ?? 5);
+  const allowPartialOrdinaryTail = options.allowPartialOrdinaryTail === true;
   const polyglotPerChannel = Number(options.polyglotPerChannel ?? 1);
   const maxSnapshotAgeMinutes = Number(options.maxSnapshotAgeMinutes ?? 30);
   const minFutureMinutes = Number(options.minFutureMinutes ?? 90);
@@ -597,7 +600,7 @@ export function buildPublicationCampaign(options = {}) {
         blockers.push(`${support}: ${candidate.bundleKey} ${candidate.contentScope} is blocked by active ${polyglotContentScope(conflicting)} Polyglot video ${conflicting.youtubeVideoId || "without durable ID"}`);
       }
     }
-    if (ordinary.length !== ordinaryPerChannel) blockers.push(`${support}: only ${ordinary.length}/${ordinaryPerChannel} unclaimed ordinary tails available`);
+    if (!allowPartialOrdinaryTail && ordinary.length !== ordinaryPerChannel) blockers.push(`${support}: only ${ordinary.length}/${ordinaryPerChannel} unclaimed ordinary tails available`);
     if (polyglot.length !== polyglotPerChannel) blockers.push(`${support}: only ${polyglot.length}/${polyglotPerChannel} unclaimed full Polyglot tails available`);
     selected.push(...ordinary, ...polyglot);
   }
@@ -668,7 +671,7 @@ export function buildPublicationCampaign(options = {}) {
     });
   }
 
-  blockers.push(...validateWave(assignments, supports.length, ordinaryPerChannel, polyglotPerChannel));
+  blockers.push(...validateWave(assignments, supports.length, ordinaryPerChannel, polyglotPerChannel, allowPartialOrdinaryTail));
   blockers.push(...validateResolvedPlaylistIdentities(assignments));
   const routeCounts = Object.fromEntries(routing.projects.map((route) => [route.key, assignments.filter((row) => row.routeKey === route.key).length]));
   const metadataRouteBatchCount = Object.values(routeCounts)
@@ -740,6 +743,7 @@ export function buildPublicationCampaign(options = {}) {
       supports: supports.join(","),
       supportCount: supports.length,
       ordinaryPerChannel,
+      allowPartialOrdinaryTail,
       polyglotPerChannel,
       startDate: requestedStartDate || "auto",
       minFutureMinutes,
