@@ -36,6 +36,7 @@ function parseArgs(argv) {
     const value = () => arg.includes("=") ? arg.split("=").slice(1).join("=") : argv[++index];
     if (arg === "--campaign-id" || arg.startsWith("--campaign-id=")) options.campaignId = value();
     else if (arg === "--supports" || arg.startsWith("--supports=")) options.supports = value();
+    else if (arg === "--assignment-keys-file" || arg.startsWith("--assignment-keys-file=")) options.assignmentKeysFile = value();
     else if (arg === "--control-reports" || arg.startsWith("--control-reports=")) options.controlReports = value();
     else if (arg === "--registry" || arg.startsWith("--registry=")) options.registry = value();
     else if (arg === "--calendar" || arg.startsWith("--calendar=")) options.calendar = value();
@@ -43,6 +44,7 @@ function parseArgs(argv) {
     else if (arg === "--policy" || arg.startsWith("--policy=")) options.policy = value();
     else if (arg === "--plans-dir" || arg.startsWith("--plans-dir=")) options.plansDir = value();
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = value();
+    else if (arg === "--generated-at" || arg.startsWith("--generated-at=")) options.generatedAt = value();
     else if (arg === "--min-future-minutes" || arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(value());
     else if (arg === "--max-evidence-age-minutes" || arg.startsWith("--max-evidence-age-minutes=")) options.maxEvidenceAgeMinutes = Number(value());
     else if (arg === "--apply") options.apply = true;
@@ -87,6 +89,18 @@ function validateRouteReport(report, expectedSetId, selectedRows, now, maxAgeMin
   const ageMinutes = Number.isFinite(generatedAt) ? (now.getTime() - generatedAt) / 60_000 : Number.POSITIVE_INFINITY;
   assert(ageMinutes >= -5 && ageMinutes <= maxAgeMinutes, `control report is stale: ${ageMinutes.toFixed(1)}m`);
   for (const row of selectedRows) {
+    if (row.videoType === "ordinary") {
+      const collision = (report.publications || []).find((publication) =>
+        publication.youtubeVideoId
+        && assignmentKey(publication) === row.assignmentKey);
+      assert(!collision, `${row.supportLang} -> ${row.targetLang}: ordinary assignment already exists live as ${collision?.youtubeVideoId}`);
+      const tail = (report.tails || []).find((candidate) =>
+        candidate.videoType === "ordinary"
+        && candidate.supportLang === row.supportLang
+        && candidate.targetLang === row.targetLang);
+      assert(tail, `${row.supportLang} -> ${row.targetLang}: expected ordinary tail is absent from control report`);
+      continue;
+    }
     const collision = (report.publications || []).find((publication) =>
       publication.youtubeVideoId
       && polyglotProductSlotKey(publication) === polyglotProductSlotKey(row));
@@ -134,22 +148,37 @@ function campaignAssignment(row) {
   };
 }
 
-export function buildPartialRecovery({ registry, calendar, channels, policy, controlReports, campaignId, supports, now = new Date(), minFutureMinutes = 90, maxEvidenceAgeMinutes = 30 }) {
+export function buildPartialRecovery({ registry, calendar, channels, policy, controlReports, campaignId, supports, assignmentKeys = [], now = new Date(), minFutureMinutes = 90, maxEvidenceAgeMinutes = 30 }) {
   const oldCampaign = (registry.campaigns || []).find((row) => row.campaignId === campaignId);
   assert(oldCampaign, `campaign not found: ${campaignId}`);
   assert(oldCampaign.status === "reconciliation_required", `campaign must be reconciliation_required, got ${oldCampaign.status}`);
-  const selectedSupports = canonicalSupports(supports);
-  assert(selectedSupports.length > 0, "--supports is empty");
-  const selectedOldRows = selectedSupports.map((support) => {
-    const matches = (oldCampaign.assignments || []).filter((row) =>
-      row.supportLang === support
-      && row.videoType === "polyglot"
-      && !row.youtubeVideoId
-      && !String(row.status || "").includes("superseded"));
-    assert(matches.length === 1, `${support}: expected exactly one missing Polyglot assignment, got ${matches.length}`);
-    assert((oldCampaign.assignmentKeys || []).includes(matches[0].assignmentKey), `${support}: original assignment is no longer actively claimed by the source campaign`);
-    return matches[0];
-  });
+  const requestedKeys = [...new Set(assignmentKeys.map(String).map((value) => value.trim()).filter(Boolean))].sort();
+  let selectedOldRows;
+  if (requestedKeys.length > 0) {
+    selectedOldRows = requestedKeys.map((key) => {
+      const matches = (oldCampaign.assignments || []).filter((row) => row.assignmentKey === key);
+      assert(matches.length === 1, `${key}: expected exactly one source assignment, got ${matches.length}`);
+      const row = matches[0];
+      assert(!row.youtubeVideoId, `${key}: source assignment already has YouTube video ${row.youtubeVideoId}`);
+      assert(!String(row.status || "").includes("superseded"), `${key}: source assignment is already superseded`);
+      assert((oldCampaign.assignmentKeys || []).includes(key), `${key}: source assignment is no longer actively claimed`);
+      return row;
+    });
+  } else {
+    const legacySupports = canonicalSupports(supports);
+    assert(legacySupports.length > 0, "--supports is empty and no assignment keys were provided");
+    selectedOldRows = legacySupports.map((support) => {
+      const matches = (oldCampaign.assignments || []).filter((row) =>
+        row.supportLang === support
+        && row.videoType === "polyglot"
+        && !row.youtubeVideoId
+        && !String(row.status || "").includes("superseded"));
+      assert(matches.length === 1, `${support}: expected exactly one missing Polyglot assignment, got ${matches.length}`);
+      assert((oldCampaign.assignmentKeys || []).includes(matches[0].assignmentKey), `${support}: original assignment is no longer actively claimed by the source campaign`);
+      return matches[0];
+    });
+  }
+  const selectedSupports = [...new Set(selectedOldRows.map((row) => row.supportLang))].sort();
   const routeReports = new Map();
   for (const report of controlReports) {
     const routes = [...new Set(selectedOldRows.filter((row) => (report.supports || []).includes(row.supportLang)).map((row) => row.routeKey))];
@@ -179,11 +208,17 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
   const plannedSlots = new Set();
   const minPublishMillis = now.getTime() + minFutureMinutes * 60_000;
   const assignments = [];
-  for (const oldRow of selectedOldRows.sort((a, b) => a.supportLang.localeCompare(b.supportLang))) {
+  for (const oldRow of selectedOldRows.sort((a, b) =>
+    a.supportLang.localeCompare(b.supportLang)
+    || a.videoType.localeCompare(b.videoType)
+    || String(a.targetLang || a.bundleKey).localeCompare(String(b.targetLang || b.bundleKey)))) {
     const channel = channelForSupport(channels, oldRow.supportLang);
     assert(channel, `${oldRow.supportLang}: channel config is missing`);
     const longAllowed = channel.longVideoUploadAllowed === true;
-    const contentScope = longAllowed ? "full" : "short_unverified";
+    const contentScope = oldRow.videoType === "polyglot" ? (longAllowed ? "full" : "short_unverified") : "";
+    if (oldRow.videoType === "polyglot") {
+      assert((oldRow.contentScope || "full") === contentScope, `${oldRow.supportLang}: Polyglot content scope changed from ${oldRow.contentScope || "full"} to ${contentScope}`);
+    }
     const customThumbnailAllowed = channel.customThumbnailUploadAllowed === true;
     const carryForwardCustomThumbnail = customThumbnailAllowed
       && oldRow.thumbnail?.mode === "custom"
@@ -197,9 +232,9 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
     const row = {
       ...oldRow,
       contentScope,
-      cardLimit: 0,
-      maxDurationSeconds: longAllowed ? 0 : SHORT_MAX_SECONDS,
-      longVideoUploadAllowed: longAllowed,
+      cardLimit: oldRow.videoType === "polyglot" ? 0 : oldRow.cardLimit,
+      maxDurationSeconds: oldRow.videoType === "polyglot" ? (longAllowed ? 0 : SHORT_MAX_SECONDS) : oldRow.maxDurationSeconds,
+      longVideoUploadAllowed: oldRow.videoType === "polyglot" ? longAllowed : oldRow.longVideoUploadAllowed,
       thumbnail: carryForwardCustomThumbnail
         ? structuredClone(oldRow.thumbnail)
         : { mode: "first_frame_auto", ready: true, reason: "custom_thumbnail_disabled_for_channel" },
@@ -207,7 +242,9 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
       youtubeVideoUrl: undefined,
       status: "planned",
     };
-    row.polyglotKey = ["polyglot", row.setId, row.supportLang, row.bundleKey, row.targetLangsHash, contentScope].join(":");
+    row.polyglotKey = row.videoType === "polyglot"
+      ? ["polyglot", row.setId, row.supportLang, row.bundleKey, row.targetLangsHash, contentScope].join(":")
+      : "";
     row.assignmentKey = assignmentKey(row);
     row.calendarAssignmentKey = calendarAssignmentKey(row);
     const perChannelPolicy = channelPolicy(policy, channel.key);
@@ -236,6 +273,9 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
   const routeCounts = Object.fromEntries(["youtube-1", "youtube-2", "youtube-3", "youtube-4"].map((route) => [route, assignments.filter((row) => row.routeKey === route).length]));
   const customThumbnailCount = assignments.filter((row) => row.thumbnail?.mode === "custom").length;
   const playlistCreateCount = assignments.filter((row) => row.playlist?.state === "verified_absent").length;
+  const ordinaryCount = assignments.filter((row) => row.videoType === "ordinary").length;
+  const polyglotCount = assignments.filter((row) => row.videoType === "polyglot").length;
+  const ordinaryCountsBySupport = selectedSupports.map((support) => assignments.filter((row) => row.supportLang === support && row.videoType === "ordinary").length);
   const estimatedUsage = {
     estimatedVideoUploadCalls: assignments.length,
     estimatedPlaylistItemInsertUnits: assignments.length * 50,
@@ -260,8 +300,11 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
     inputs: {
       supports: selectedSupports.join(","),
       supportCount: selectedSupports.length,
-      ordinaryPerChannel: 0,
-      polyglotPerChannel: 1,
+      ordinarySupportCount: new Set(assignments.filter((row) => row.videoType === "ordinary").map((row) => row.supportLang)).size,
+      polyglotSupportCount: new Set(assignments.filter((row) => row.videoType === "polyglot").map((row) => row.supportLang)).size,
+      ordinaryPerChannel: Math.max(0, ...ordinaryCountsBySupport),
+      polyglotPerChannel: polyglotCount > 0 ? 1 : 0,
+      assignmentKeys: assignments.map((row) => row.assignmentKey),
       startDate: "auto",
       minFutureMinutes,
       maxSnapshotAgeMinutes: maxEvidenceAgeMinutes,
@@ -277,9 +320,9 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
       applyReady: true,
       blockerCount: 0,
       warningCount: assignments.filter((row) => row.contentScope === "short_unverified").length,
-      supportCount: assignments.length,
-      ordinaryCount: 0,
-      polyglotCount: assignments.length,
+      supportCount: selectedSupports.length,
+      ordinaryCount,
+      polyglotCount,
       assignmentCount: assignments.length,
       firstPublishAt: assignments.map((row) => row.publishAt).sort()[0],
       lastPublishAt: assignments.map((row) => row.publishAt).sort().at(-1),
@@ -351,9 +394,9 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
       targetLang: row.targetLang || "",
       targetLangs: row.targetLangs || [],
       targetLangsHash: row.targetLangsHash || "",
-      bundleKey: row.bundleKey,
-      contentScope: row.contentScope,
-      polyglotKey: row.polyglotKey,
+      bundleKey: row.bundleKey || "",
+      contentScope: row.contentScope || "",
+      polyglotKey: row.polyglotKey || "",
       channelKey: row.channelKey,
       youtubeChannelId: row.youtubeChannelId,
       publishAt: row.publishAt,
@@ -371,12 +414,13 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log(`node scripts/create-youtube-partial-recovery-campaign.mjs --campaign-id=<id> --supports=JA,RU --control-reports=<a.json,b.json> [--apply --confirm=${CONFIRM}]`);
+    console.log(`node scripts/create-youtube-partial-recovery-campaign.mjs --campaign-id=<id> (--supports=JA,RU | --assignment-keys-file=<keys.json>) --control-reports=<a.json,b.json> [--generated-at=<ISO>] [--apply --confirm=${CONFIRM}]`);
     return;
   }
-  assert(options.campaignId && options.supports && options.controlReports, "--campaign-id, --supports and --control-reports are required");
+  assert(options.campaignId && (options.supports || options.assignmentKeysFile) && options.controlReports, "--campaign-id, --control-reports and either --supports or --assignment-keys-file are required");
   if (options.apply) assert(options.confirm === CONFIRM, `--apply requires --confirm=${CONFIRM}`);
-  const now = new Date();
+  const now = options.generatedAt ? new Date(options.generatedAt) : new Date();
+  assert(Number.isFinite(now.getTime()), `invalid --generated-at: ${options.generatedAt}`);
   const result = buildPartialRecovery({
     registry: readJson(options.registry),
     calendar: readJson(options.calendar),
@@ -385,6 +429,9 @@ function main() {
     controlReports: String(options.controlReports).split(",").map(readJson),
     campaignId: options.campaignId,
     supports: options.supports,
+    assignmentKeys: options.assignmentKeysFile
+      ? (Array.isArray(readJson(options.assignmentKeysFile)) ? readJson(options.assignmentKeysFile) : readJson(options.assignmentKeysFile).assignmentKeys)
+      : [],
     now,
     minFutureMinutes: options.minFutureMinutes,
     maxEvidenceAgeMinutes: options.maxEvidenceAgeMinutes,
