@@ -121,9 +121,14 @@ function main() {
     target.set(row.supportLang, values);
   }
   const ordinaryExpected = Number(campaign.inputs?.ordinaryPerChannel || 0);
+  const allowPartialOrdinaryTail = campaign.inputs?.allowPartialOrdinaryTail === true;
   const polyglotExpected = Number(campaign.inputs?.polyglotPerChannel || 0);
   const ordinaryMatrix = [...ordinaryBySupport.entries()].map(([support, rows]) => {
-    if (rows.length !== ordinaryExpected) blockers.push(`${support}: ordinary rows ${rows.length} != ${ordinaryExpected}`);
+    if (allowPartialOrdinaryTail) {
+      if (rows.length < 1 || rows.length > ordinaryExpected) {
+        blockers.push(`${support}: ordinary rows ${rows.length} must be within 1..${ordinaryExpected} for a partial tail campaign`);
+      }
+    } else if (rows.length !== ordinaryExpected) blockers.push(`${support}: ordinary rows ${rows.length} != ${ordinaryExpected}`);
     return {
       support,
       langs: rows.map((row) => row.targetLang).join(","),
