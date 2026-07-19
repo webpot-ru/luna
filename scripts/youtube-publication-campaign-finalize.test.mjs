@@ -149,6 +149,67 @@ assert.equal(preflight.ordinaryMatrix[0].route_key, "youtube-1");
 assert.equal(preflight.polyglotMatrix[0].bundle, "global_europe_core");
 assert.equal(preflight.polyglotMatrix[0].route_key, "youtube-1");
 
+const partialTailCampaign = {
+  ...campaign,
+  campaignId: "campaign-partial-ordinary-tail",
+  inputs: {
+    ...campaign.inputs,
+    ordinaryPerChannel: 2,
+    allowPartialOrdinaryTail: true,
+    polyglotPerChannel: 0,
+  },
+  assignments: [ordinaryAssignment],
+  assignmentKeys: [ordinaryAssignment.assignmentKey],
+  slotKeys: ["en|2026-07-20T08:30:00.000Z"],
+};
+write(path.join(configDir, "youtube-publication-campaigns.json"), { schemaVersion: 1, campaigns: [partialTailCampaign] });
+write(path.join(configDir, "youtube-publish-calendar.json"), {
+  schemaVersion: 1,
+  reservations: [{
+    ...ordinaryAssignment,
+    campaignId: partialTailCampaign.campaignId,
+    campaignManifestHash: partialTailCampaign.manifestHash,
+    status: "campaign_claimed",
+  }],
+});
+const partialTailPrepare = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/prepare-youtube-publication-campaign-run.mjs"),
+  "--campaign-id=campaign-partial-ordinary-tail",
+  "--manifest-hash=manifest-hash",
+  "--registry=config/youtube-publication-campaigns.json",
+  "--calendar=config/youtube-publish-calendar.json",
+  "--output=outputs/preflight-partial-tail.json",
+], { cwd: root, encoding: "utf8" });
+assert.equal(partialTailPrepare.status, 0, partialTailPrepare.stderr || partialTailPrepare.stdout);
+const partialTailPreflight = JSON.parse(fs.readFileSync(path.join(root, "outputs/preflight-partial-tail.json"), "utf8"));
+assert.equal(partialTailPreflight.ordinaryMatrix[0].langs, "DE");
+
+const strictShortCampaign = {
+  ...partialTailCampaign,
+  campaignId: "campaign-strict-short",
+  inputs: { ...partialTailCampaign.inputs, allowPartialOrdinaryTail: false },
+};
+write(path.join(configDir, "youtube-publication-campaigns.json"), { schemaVersion: 1, campaigns: [strictShortCampaign] });
+write(path.join(configDir, "youtube-publish-calendar.json"), {
+  schemaVersion: 1,
+  reservations: [{
+    ...ordinaryAssignment,
+    campaignId: strictShortCampaign.campaignId,
+    campaignManifestHash: strictShortCampaign.manifestHash,
+    status: "campaign_claimed",
+  }],
+});
+const strictShortPrepare = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/prepare-youtube-publication-campaign-run.mjs"),
+  "--campaign-id=campaign-strict-short",
+  "--manifest-hash=manifest-hash",
+  "--registry=config/youtube-publication-campaigns.json",
+  "--calendar=config/youtube-publish-calendar.json",
+  "--output=outputs/preflight-strict-short.json",
+], { cwd: root, encoding: "utf8" });
+assert.notEqual(strictShortPrepare.status, 0);
+assert.match(strictShortPrepare.stderr, /EN: ordinary rows 1 != 2/u);
+
 const blobOnlyCampaign = {
   ...campaign,
   campaignId: "campaign-blob-only",
