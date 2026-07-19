@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-19T11:51:41.077Z",
+  "status": "approved",
+  "sourceOfTruth": "Approved local base artwork plus deterministic no-provider text overlays.",
+  "configPath": "config/youtube-cover-templates.json",
+  "policy": {
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0,
+    "applyRequiresGitTrackedAssets": true
+  },
+  "counts": {
+    "setIds": [
+      "home_kitchen_cooking_actions_a1_a2"
+    ],
+    "supports": [
+      "RU"
+    ],
+    "types": [
+      "ordinary"
+    ],
+    "coverCount": 5,
+    "ordinaryCount": 5,
+    "polyglotCount": 0,
+    "skippedCount": 0,
+    "outputRoot": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU",
+    "dryRun": false,
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0
+  },
+  "outputs": {
+    "root": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU",
+    "manifest": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/manifest.json",
+    "contactSheets": [
+      {
+        "setId": "home_kitchen_cooking_actions_a1_a2",
+        "supportLang": "RU",
+        "videoType": "ordinary",
+        "coverCount": 5,
+        "relativePath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/contact-sheets/home_kitchen_cooking_actions_a1_a2__RU__ordinary.jpg"
+      }
+    ]
+  },
+  "skipped": [],
+  "covers": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "viewerSupportLang": "RU",
+      "channelKey": "ru",
+      "channelId": "UC1f5EyXEMejXIumH9104GMA",
+      "channelHandle": "LunaCardsRU",
+      "channelSupportLangs": [
+        "RU"
+      ],
+      "targetLang": "PT",
+      "targetName": "Португальский",
+      "targetLabel": "Португальский A1",
+      "title": "Действия при готовке",
+      "description": "Глаголы для готовки. Начальный уровень.",
+      "module": "Дом",
+      "category": "Кухня",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/PT__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/PT__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/.codex-worktrees/deck2-ordinary-65-covers-20260719/data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/PT__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 278077,
+      "sha256": "e3cd91c619b29ef2e698bec3050a4a7a0589eecd563a2a62e3064998070d30f8"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "viewerSupportLang": "RU",
+      "channelKey": "ru",
+      "channelId": "UC1f5EyXEMejXIumH9104GMA",
+      "channelHandle": "LunaCardsRU",
+      "channelSupportLangs": [
+        "RU"
+      ],
+      "targetLang": "PL",
+      "targetName": "Польский",
+      "targetLabel": "Польский A1",
+      "title": "Действия при готовке",
+      "description": "Глаголы для готовки. Начальный уровень.",
+      "module": "Дом",
+      "category": "Кухня",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/PL__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/PL__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/.codex-worktrees/deck2-ordinary-65-covers-20260719/data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/PL__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 278999,
+      "sha256": "5b9347255b1a64fc0a656b248ec261ca70c135fa50c3d752bea0c4e9be70d0e8"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "viewerSupportLang": "RU",
+      "channelKey": "ru",
+      "channelId": "UC1f5EyXEMejXIumH9104GMA",
+      "channelHandle": "LunaCardsRU",
+      "channelSupportLangs": [
+        "RU"
+      ],
+      "targetLang": "NL",
+      "targetName": "Нидерландский",
+      "targetLabel": "Нидерландский A1",
+      "title": "Действия при готовке",
+      "description": "Глаголы для готовки. Начальный уровень.",
+      "module": "Дом",
+      "category": "Кухня",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/NL__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/NL__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/.codex-worktrees/deck2-ordinary-65-covers-20260719/data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/NL__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 278982,
+      "sha256": "ff3d1549c3176ca3f9b7d30822b2e77b73971e68a18e34fc4ba18ac83464dbe5"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "viewerSupportLang": "RU",
+      "channelKey": "ru",
+      "channelId": "UC1f5EyXEMejXIumH9104GMA",
+      "channelHandle": "LunaCardsRU",
+      "channelSupportLangs": [
+        "RU"
+      ],
+      "targetLang": "NE",
+      "targetName": "Непальский",
+      "targetLabel": "Непальский A1",
+      "title": "Действия при готовке",
+      "description": "Глаголы для готовки. Начальный уровень.",
+      "module": "Дом",
+      "category": "Кухня",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/NE__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/NE__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/.codex-worktrees/deck2-ordinary-65-covers-20260719/data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/NE__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 279142,
+      "sha256": "90efc69d6af7ca8d58c6cc029e36563f413bbaa6af80af2042ea6d0b7fd2d675"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "viewerSupportLang": "RU",
+      "channelKey": "ru",
+      "channelId": "UC1f5EyXEMejXIumH9104GMA",
+      "channelHandle": "LunaCardsRU",
+      "channelSupportLangs": [
+        "RU"
+      ],
+      "targetLang": "NO",
+      "targetName": "Норвежский",
+      "targetLabel": "Норвежский A1",
+      "title": "Действия при готовке",
+      "description": "Глаголы для готовки. Начальный уровень.",
+      "module": "Дом",
+      "category": "Кухня",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/NO__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/NO__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/.codex-worktrees/deck2-ordinary-65-covers-20260719/data/youtube-cover-assets/deck2-ordinary-255-preflight-20260719/RU/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/NO__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 279553,
+      "sha256": "037c4c4089e713e653c640bcd12ba45e64a085f10d326538679d5f6047f00fb1"
+    }
+  ]
+}
