@@ -211,6 +211,7 @@ function main() {
     fs.appendFileSync(options.githubOutput, `polyglot_matrix=${JSON.stringify({ include: polyglotMatrix })}\n`);
     fs.appendFileSync(options.githubOutput, `metadata_matrix=${JSON.stringify({ include: metadataMatrix })}\n`);
     fs.appendFileSync(options.githubOutput, `ordinary_worker_count=${ordinaryMatrix.length}\n`);
+    fs.appendFileSync(options.githubOutput, `polyglot_worker_count=${polyglotMatrix.length}\n`);
   }
   console.log(JSON.stringify(report.summary, null, 2));
 }

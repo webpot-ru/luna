@@ -129,7 +129,7 @@ Campaign child workflows получают `campaign_id`, поэтому их sta
 
 Если exact before/after control reports уже доказывают zero-upload и равенство live-ID set, replacement planner может читать только snapshot и playlist-discovery artifact из этого after report с ограниченным evidence window. Это разрешено исключительно при `--replacement-campaign-id` перед немедленным `rearm`; manifest обязан сохранить exact assignment set, а `rearm` повторно валидирует оба reports. Такой artifact не является свежим общим разрешением на обычный publish plan и не отменяет строгий pre-upload readback.
 
-Standalone ordinary/Polyglot workflows сохраняют собственный persist-job для одиночных legacy-запусков. Они не являются основным путем для смешанной 51-channel campaign.
+Standalone ordinary/Polyglot workflows сохраняют собственный persist-job для одиночных legacy-запусков. Они не являются основным путем для смешанной 51-channel campaign. Parent campaign preflight выводит отдельные worker counts; если ordinary или Polyglot matrix пуста, соответствующий job пропускается до GitHub matrix evaluation. Это сохраняет valid ordinary-only и Polyglot-only campaigns без ложного workflow failure.
 
 ## Partial recovery after accepted uploads
 
