@@ -18497,12 +18497,12 @@
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=wce_3P8nH2M",
       "youtubePlaylistId": "PLbSj7thI5yYw",
       "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLbSj7thI5yYw",
-      "playlistItemId": "",
+      "playlistItemId": "UExiU2o3dGhJNXlZdy41NkI0NEY2RDEwNTU3Q0M2",
       "channelKey": "ne",
       "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
       "channelHandle": "@lunacardsnepali",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_playlist_insert_pending",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-20T17:45:00.000Z",
       "scheduledPublishAt": "2026-07-20T17:45:00.000Z",
       "desiredPrivacyStatus": "public",
@@ -18511,8 +18511,6 @@
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "custom",
       "thumbnailSource": "pre-rendered-design-prototype",
-      "needsPlaylistInsert": true,
-      "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.4-2026-03-05",
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
@@ -18520,14 +18518,22 @@
       "githubRunId": "29743384974",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
       "uploadedAt": "2026-07-20T13:19:43.213Z",
-      "lastReadbackAt": "2026-07-20T13:19:43.213Z",
+      "lastReadbackAt": "2026-07-20T15:06:50.050Z",
       "readback": {
-        "uploadStatus": "uploaded",
+        "uploadStatus": "processed",
         "privacyStatus": "private",
         "publishAt": "2026-07-20T17:45:00Z",
-        "playlistItemReadback": "pending",
-        "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n"
-      }
+        "playlistItemReadback": "inserted",
+        "playlistId": "PLbSj7thI5yYw",
+        "playlistPrivacyStatus": "public",
+        "playlistItemId": "UExiU2o3dGhJNXlZdy41NkI0NEY2RDEwNTU3Q0M2",
+        "playlistInsertRepairedAt": "2026-07-20T15:06:50.050Z"
+      },
+      "playlistInsertRepairedAt": "2026-07-20T15:06:50.050Z",
+      "playlistInsertRepairStatus": "inserted",
+      "playlistInsertRepairGithubRunId": "29753643112",
+      "playlistInsertRepairGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29753643112",
+      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video."
     },
     {
       "videoType": "polyglot",
@@ -18644,7 +18650,8 @@
       "playlistInsertRepairStatus": "inserted",
       "playlistInsertRepairGithubRunId": "29753642449",
       "playlistInsertRepairGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29753642449",
-      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video."
+      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video.",
+      "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n"
     },
     {
       "videoType": "polyglot",
