@@ -149,6 +149,21 @@ assert.equal(preflight.ordinaryMatrix[0].route_key, "youtube-1");
 assert.equal(preflight.polyglotMatrix[0].bundle, "global_europe_core");
 assert.equal(preflight.polyglotMatrix[0].route_key, "youtube-1");
 
+const preflightGithubOutput = path.join(root, "outputs/preflight-github-output.txt");
+const preflightWithGithubOutput = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/prepare-youtube-publication-campaign-run.mjs"),
+  "--campaign-id=campaign-test",
+  "--manifest-hash=manifest-hash",
+  "--registry=config/youtube-publication-campaigns.json",
+  "--calendar=config/youtube-publish-calendar.json",
+  "--output=outputs/preflight-github-output.json",
+  `--github-output=${preflightGithubOutput}`,
+], { cwd: root, encoding: "utf8" });
+assert.equal(preflightWithGithubOutput.status, 0, preflightWithGithubOutput.stderr || preflightWithGithubOutput.stdout);
+const preflightOutputs = fs.readFileSync(preflightGithubOutput, "utf8");
+assert.match(preflightOutputs, /^ordinary_worker_count=1$/m);
+assert.match(preflightOutputs, /^polyglot_worker_count=1$/m);
+
 const partialTailCampaign = {
   ...campaign,
   campaignId: "campaign-partial-ordinary-tail",
