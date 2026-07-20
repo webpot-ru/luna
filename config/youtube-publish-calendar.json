@@ -328668,7 +328668,7 @@
       ],
       "youtubeVideoId": "E45TDIzfspI",
       "youtubePlaylistId": "PLfJ93I_zR3io",
-      "playlistItemId": ""
+      "playlistItemId": "UExmSjkzSV96UjNpby41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
@@ -331285,7 +331285,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -331315,7 +331334,26 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -331340,7 +331378,31 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T18:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_pt_cs/youtube_metadata.json",
+      "title": "Portugalština A1–A2: Kuchyňské úkony | 25 slovíček",
+      "playlist_key": "CS__PT__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331365,7 +331427,31 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T21:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_pt-br_cs/youtube_metadata.json",
+      "title": "Portugalština (Brazílie) A1–A2: Kuchyňské úkony | 25 slovíček",
+      "playlist_key": "CS__PT-BR__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331390,7 +331476,31 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T06:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ro_cs/youtube_metadata.json",
+      "title": "Rumunština A1–A2: Kuchyňské úkony | 25 slovíček",
+      "playlist_key": "CS__RO__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331420,7 +331530,26 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -331450,7 +331579,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -331475,7 +331623,31 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T10:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_pl_hy/youtube_metadata.json",
+      "title": "Լեհերեն A1 բառապաշար․ Խոհարարական գործ",
+      "playlist_key": "HY__PL__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331500,7 +331672,31 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T13:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_pt_hy/youtube_metadata.json",
+      "title": "Պորտուգալերեն A1 բառապաշար․ Խոհարարական գործ",
+      "playlist_key": "HY__PT__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331525,7 +331721,31 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T16:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_pt-br_hy/youtube_metadata.json",
+      "title": "Պորտուգալերեն (Բրազիլիա) A1 բառապաշար․ Խոհարարական գործ",
+      "playlist_key": "HY__PT-BR__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331550,7 +331770,31 @@
       "localTime": "11:30",
       "localSlotIndex": 1,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T19:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ro_hy/youtube_metadata.json",
+      "title": "Ռումիներեն A1 բառապաշար․ Խոհարարական գործ",
+      "playlist_key": "HY__RO__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331575,7 +331819,31 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T04:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ru_hy/youtube_metadata.json",
+      "title": "Ռուսերեն A1 բառապաշար․ Խոհարարական գործ | 25 բառ",
+      "playlist_key": "HY__RU__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331605,7 +331873,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -331635,7 +331922,26 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T07:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -331665,7 +331971,26 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T07:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -331695,7 +332020,26 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -331725,7 +332069,26 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -331755,7 +332118,26 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T08:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T08:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T08:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T08:00:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -331780,7 +332162,31 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T12:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_ne_no/youtube_metadata.json",
+      "title": "Nepali A1: Matlagingsverb",
+      "playlist_key": "NO__NE__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331805,7 +332211,31 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T15:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_nl_no/youtube_metadata.json",
+      "title": "Nederlandsk A1: Matlagingsverb",
+      "playlist_key": "NO__NL__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331830,7 +332260,31 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T18:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_pl_no/youtube_metadata.json",
+      "title": "Polsk A1: Matlagingsverb",
+      "playlist_key": "NO__PL__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331855,7 +332309,31 @@
       "localTime": "11:30",
       "localSlotIndex": 1,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T21:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_pt_no/youtube_metadata.json",
+      "title": "Portugisisk A1: Matlagingsverb",
+      "playlist_key": "NO__PT__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331880,7 +332358,31 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T06:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_pt-br_no/youtube_metadata.json",
+      "title": "Portugisisk (Brasil) A1 – matlagingsverb | 25 ord",
+      "playlist_key": "NO__PT-BR__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331905,7 +332407,31 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T15:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_nl_sl/youtube_metadata.json",
+      "title": "Nizozemščina A1–A2: Kuhinjska opravila | 25 besed",
+      "playlist_key": "SL__NL__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331930,7 +332456,31 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T18:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_no_sl/youtube_metadata.json",
+      "title": "Norveščina A1–A2: Kuhinjska opravila | 25 besed",
+      "playlist_key": "SL__NO__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331955,7 +332505,31 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-17T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-19T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-23T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-15T21:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_pl_sl/youtube_metadata.json",
+      "title": "Poljščina A1–A2: Kuhinjska opravila | 25 besed",
+      "playlist_key": "SL__PL__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -331980,7 +332554,31 @@
       "localTime": "11:30",
       "localSlotIndex": 1,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T06:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_pt_sl/youtube_metadata.json",
+      "title": "Portugalščina A1–A2: Kuhinjska opravila | 25 besed",
+      "playlist_key": "SL__PT__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29487310636",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636"
     },
     {
       "schemaVersion": 1,
@@ -332010,7 +332608,26 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -332040,7 +332657,26 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -332070,13 +332706,32 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-18T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-20T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-16T09:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332099,13 +332754,42 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "bundleLabel": "East Asia Core",
+      "targetLangsCsv": "ZH,JA,KO",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_az/youtube_metadata.json",
+      "title": "Poliqlot lüğət: Bişirmə hərəkətləri | çin, yapon, koreya",
+      "playlist_key": "POLYGLOT__AZ__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "FNvGDB5m17A",
+      "youtubePlaylistId": "PLWYFdf3l1_Io",
+      "playlistItemId": "UExXWUZkZjNsMV9Jby41NkI0NEY2RDEwNTU3Q0M2",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T13:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332124,13 +332808,40 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_sv_bg/youtube_metadata.json",
+      "title": "Шведски A1–A2: Действия при готвене | 25 думи",
+      "playlist_key": "BG__SV__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "29574928824",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29574928824",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T08:30:00.000Z"
+        }
+      ],
+      "youtubeVideoId": "4tcwrnlCQaQ",
+      "youtubePlaylistId": "PLdTwf7ythpKY",
+      "playlistItemId": "UExkVHdmN3l0aHBLWS41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332153,13 +332864,42 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_de/youtube_metadata.json",
+      "title": "Polyglott: Kochaktionen auf Chinesisch, Japanisch und Koreanisch",
+      "playlist_key": "POLYGLOT__DE__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "99asna6sjFI",
+      "youtubePlaylistId": "PLDF_BBUp4ZPw",
+      "playlistItemId": "UExERl9CQlVwNFpQdy41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332182,13 +332922,42 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_en/youtube_metadata.json",
+      "title": "Polyglot Cooking Actions: Chinese, Japanese and Korean Vocabulary",
+      "playlist_key": "POLYGLOT__EN__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "b38gQb7dwIU",
+      "youtubePlaylistId": "PLM3hzWEUA26A",
+      "playlistItemId": "UExNM2h6V0VVQTI2QS41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332211,13 +332980,42 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-20T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-22T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-26T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-18T21:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_es-419/youtube_metadata.json",
+      "title": "Modo políglota: acciones de cocina en chino, japonés y coreano",
+      "playlist_key": "POLYGLOT__ES-419__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "wcIwTZEqVqA",
+      "youtubePlaylistId": "PLahj9isJbGp4",
+      "playlistItemId": "UExhaGo5aXNKYkdwNC41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332240,13 +333038,42 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_fr/youtube_metadata.json",
+      "title": "Mode polyglotte : actions de cuisine en chinois, japonais et coréen",
+      "playlist_key": "POLYGLOT__FR__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "q0w09nElPfE",
+      "youtubePlaylistId": "PLbWWklDRc6uM",
+      "playlistItemId": "UExiV1drbERSYzZ1TS41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332269,13 +333096,42 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:00:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_hi/youtube_metadata.json",
+      "title": "पॉलीग्लॉट शब्दावली: चीनी, जापानी और कोरियाई में पकाने की क्रियाएँ",
+      "playlist_key": "POLYGLOT__HI__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "X9SGufIWiDY",
+      "youtubePlaylistId": "PLOtF3AR4aPl8",
+      "playlistItemId": "UExPdEYzQVI0YVBsOC41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332298,13 +333154,42 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T13:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_hy/youtube_metadata.json",
+      "title": "Պոլիգլոտ բառապաշար․ Խոհարարական գործ | չինարեն, ճապոներեն, կորեերեն",
+      "playlist_key": "POLYGLOT__HY__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "Blt3fNLIU-s",
+      "youtubePlaylistId": "PLSVAd7Udis6I",
+      "playlistItemId": "UExTVkFkN1VkaXM2SS41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332327,13 +333212,42 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T13:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_id/youtube_metadata.json",
+      "title": "Kosakata Polyglot: Aksi memasak dalam Tionghoa, Jepang, Korea",
+      "playlist_key": "POLYGLOT__ID__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "HaqvXrywtiQ",
+      "youtubePlaylistId": "PLV-MEGbPZpdI",
+      "playlistItemId": "UExWLU1FR2JQWnBkSS41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332356,13 +333270,42 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:30:00.000Z"
+        }
+      ],
+      "youtubeVideoId": "pZe2sCy0hm8",
+      "youtubePlaylistId": "PLdhiYbZqOB3M",
+      "playlistItemId": "UExkaGlZYlpxT0IzTS41NkI0NEY2RDEwNTU3Q0M2",
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_it/youtube_metadata.json",
+      "title": "Vocabolario poliglotta: Azioni in cucina | cinese, giapponese, coreano",
+      "playlist_key": "POLYGLOT__IT__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332385,13 +333328,44 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,KO,EN",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T11:30:00.000Z"
+        }
+      ],
+      "youtubeVideoId": "nJP_eXsxUFs",
+      "youtubePlaylistId": "PLE5WOq12FowA",
+      "playlistItemId": "UExFNVdPcTEyRm93QS41NkI0NEY2RDEwNTU3Q0M2",
+      "bundleLabel": "East Asia Core",
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_ja/youtube_metadata.json",
+      "title": "ポリグロット語彙：料理の動作を中国語・韓国語・英語で学ぶ",
+      "playlist_key": "POLYGLOT__JA__east-asia-core__fa91433fb684",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332414,13 +333388,42 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T13:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_ka/youtube_metadata.json",
+      "title": "პოლიგლოტური ლექსიკა: მომზადების მოქმედებები | ჩინური, იაპონური, კორეული",
+      "playlist_key": "POLYGLOT__KA__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "o9Ag2PYXt0M",
+      "youtubePlaylistId": "PLJ_9gBlaX8js",
+      "playlistItemId": "UExKXzlnQmxhWDhqcy41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332443,13 +333446,42 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_kk/youtube_metadata.json",
+      "title": "Полиглот сөздік: Пісіру әрекеттері | қытай тілі, жапон тілі, корей тілі",
+      "playlist_key": "POLYGLOT__KK__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "JTMV8pLBwdc",
+      "youtubePlaylistId": "PLDaBGm3dR7oc",
+      "playlistItemId": "UExEYUJHbTNkUjdvYy41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332472,13 +333504,42 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:00:00.000Z"
+        }
+      ],
+      "youtubeVideoId": "h0YFzLwBcYY",
+      "youtubePlaylistId": "PLFojJ5mD0hYU",
+      "playlistItemId": "UExGb2pKNW1EMGhZVS41NkI0NEY2RDEwNTU3Q0M2",
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_kn/youtube_metadata.json",
+      "title": "ಬಹುಭಾಷಾ ಪದಸಂಪತ್ತು: ಅಡುಗೆ ಕ್ರಿಯೆಗಳು | ಚೈನೀಸ್, ಜಾಪನೀಸ್, ಕೊರಿಯನ್",
+      "playlist_key": "POLYGLOT__KN__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332501,7 +333562,38 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,EN",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T11:30:00.000Z"
+        }
+      ],
+      "youtubeVideoId": "fFYVZ8_TsCY",
+      "youtubePlaylistId": "PLbLK0i0Wyv4c",
+      "playlistItemId": "UExiTEswaTBXeXY0Yy41NkI0NEY2RDEwNTU3Q0M2",
+      "bundleLabel": "East Asia Core",
+      "localDayOffset": 0,
+      "slotOrdinal": 0,
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_ko/youtube_metadata.json",
+      "title": "폴리글롯 어휘: 요리 동작 중국어·일본어·영어",
+      "playlist_key": "POLYGLOT__KO__east-asia-core__62f96bfdd5ad",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974"
     },
     {
       "schemaVersion": 1,
@@ -332530,13 +333622,39 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T11:15:00.000Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:00:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_ml/youtube_metadata.json",
+      "title": "പോളിഗ്ലോട്ട് പദസമ്പത്ത്: പാചക പ്രവർത്തികൾ | ചൈനീസ്, ജാപ്പനീസ്, കൊറിയൻ",
+      "playlist_key": "POLYGLOT__ML__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332559,13 +333677,42 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T14:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T14:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T14:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T14:45:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_ne/youtube_metadata.json",
+      "title": "बहुभाषिक शब्दावली: पकाउने क्रिया | चिनियाँ, जापानी, कोरियाली",
+      "playlist_key": "POLYGLOT__NE__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "wce_3P8nH2M",
+      "youtubePlaylistId": "PLbSj7thI5yYw",
+      "playlistItemId": ""
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332588,13 +333735,42 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T19:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_pt-br/youtube_metadata.json",
+      "title": "Vocabulário poliglota: ações de cozinhar em chinês, japonês e coreano",
+      "playlist_key": "POLYGLOT__PT-BR__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "qESO4LLb1tk",
+      "youtubePlaylistId": "PLE3wZ_Z2b3Iw",
+      "playlistItemId": "UExFM3daX1oyYjNJdy41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332617,13 +333793,42 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T14:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_ru/youtube_metadata.json",
+      "title": "Полиглот: лексика по теме готовки на китайском, японском и корейском",
+      "playlist_key": "POLYGLOT__RU__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "q2BTfD_PTQE",
+      "youtubePlaylistId": "PLeMciahoEI_c",
+      "playlistItemId": ""
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332646,13 +333851,42 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:00:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_si/youtube_metadata.json",
+      "title": "බහුභාෂා ශබ්දමාලාව: පිසීමේ ක්‍රියා | චීන, ජපන්, කොරියානු",
+      "playlist_key": "POLYGLOT__SI__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "4yu_fXnwtgQ",
+      "youtubePlaylistId": "PLBhWzinxjQp8",
+      "playlistItemId": "UExCaFd6aW54alFwOC41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332675,13 +333909,42 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T14:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_sw/youtube_metadata.json",
+      "title": "Msamiati wa Polyglot: Vitendo vya kupika | Kichina, Kijapani, Kikorea",
+      "playlist_key": "POLYGLOT__SW__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "TKRp7R25zbQ",
+      "youtubePlaylistId": "PLKFCLOYorSvo",
+      "playlistItemId": "UExLRkNMT1lvclN2by41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332704,13 +333967,42 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:00:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_ta/youtube_metadata.json",
+      "title": "சமையல் செயல்கள் சொற்கள் | சீனம், ஜாப்பனீஸ், கொரியன்",
+      "playlist_key": "POLYGLOT__TA__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "0nwcggGeTjc",
+      "youtubePlaylistId": "PLAqv3CUQy6NI",
+      "playlistItemId": "UExBcXYzQ1VReTZOSS41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332733,13 +334025,42 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:00:00.000Z"
+        }
+      ],
+      "youtubeVideoId": "dipHJ78q72g",
+      "youtubePlaylistId": "PLTLbMG68YxN4",
+      "playlistItemId": "UExUTGJNRzY4WXhONC41NkI0NEY2RDEwNTU3Q0M2",
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_te/youtube_metadata.json",
+      "title": "వంట చర్యల పదాలు | చైనీస్, జపనీస్, కొరియన్",
+      "playlist_key": "POLYGLOT__TE__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332762,13 +334083,42 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T14:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_tr/youtube_metadata.json",
+      "title": "Pişirme eylemleri | Çince, Japonca, Korece Polyglot kelime dersi",
+      "playlist_key": "POLYGLOT__TR__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "57NO8foQAFo",
+      "youtubePlaylistId": "PLd6KAVooQ5dI",
+      "playlistItemId": "UExkNktBVm9vUTVkSS41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332791,13 +334141,42 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "ZH,JA,KO",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_uz/youtube_metadata.json",
+      "title": "Taom tayyorlash so'zlari | xitoy, yapon, koreyscha",
+      "playlist_key": "POLYGLOT__UZ__east-asia-core__69af08ca98ea",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "2nMmcNDnTVI",
+      "youtubePlaylistId": "PLBaSgX8bhi1c",
+      "playlistItemId": "UExCYVNnWDhiaGkxYy41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
       "campaignManifestHash": "4e3985787ab8e0e58c3c04d3d060ebe45566629d9725e1fb3430e277cbaddce2",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -332820,7 +334199,36 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-07-20T11:15:00.000Z",
-      "updatedAt": "2026-07-20T11:15:00.000Z"
+      "updatedAt": "2026-07-20T13:29:56.150Z",
+      "targetLangsCsv": "JA,KO,EN",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-19T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-21T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-25T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-17T12:30:00.000Z"
+        }
+      ],
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_zh/youtube_metadata.json",
+      "title": "烹饪动作 | 日语、韩语、英语 Polyglot 词汇课",
+      "playlist_key": "POLYGLOT__ZH__east-asia-core__e3f7fbb970b2",
+      "githubRunId": "29743384974",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29743384974",
+      "youtubeVideoId": "drJstnQkaXY",
+      "youtubePlaylistId": "PLamvl4idV2bw",
+      "playlistItemId": "UExhbXZsNGlkVjJidy41NkI0NEY2RDEwNTU3Q0M2"
     }
   ]
 }
