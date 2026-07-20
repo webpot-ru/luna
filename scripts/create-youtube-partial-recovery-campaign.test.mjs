@@ -9,7 +9,10 @@ const durableCalendar = JSON.parse(fs.readFileSync("config/youtube-publish-calen
 const channels = JSON.parse(fs.readFileSync("config/youtube-channels.json", "utf8"));
 const policy = JSON.parse(fs.readFileSync("config/youtube-publish-schedule-policy.json", "utf8"));
 const currentRecovery = [...durableRegistry.campaigns]
-  .filter((row) => row.recoveryOfCampaignId && (row.inputs?.assignmentKeys || row.assignmentKeys || []).length > 0)
+  .filter((row) => row.recoveryOfCampaignId
+    && (row.inputs?.assignmentKeys || row.assignmentKeys || []).length > 0
+    && row.summary?.ordinaryCount > 0
+    && row.summary?.polyglotCount > 0)
   .sort((left, right) => Date.parse(right.claimedAt || right.generatedAt || 0) - Date.parse(left.claimedAt || left.generatedAt || 0))[0];
 assert(currentRecovery);
 const sourceCampaignId = currentRecovery.recoveryOfCampaignId;
@@ -46,7 +49,10 @@ for (const row of calendar.reservations) {
   delete row.supersededByCampaignId;
 }
 
-const missingRows = sourceCampaign.assignments.filter((row) => !row.youtubeVideoId && !String(row.status || "").includes("superseded"));
+// Exact-key partial recovery may intentionally select only the subset that is
+// still proven missing by the fresh live audit. Other historical missing rows
+// in the source campaign must remain untouched.
+const missingRows = restoredRows;
 assert.equal(missingRows.length, currentRecovery.assignmentKeys.length);
 const assignmentKeys = missingRows.map((row) => row.assignmentKey);
 const generatedAt = "2026-07-19T03:00:00.000Z";
@@ -96,7 +102,9 @@ const nextSource = result.nextRegistry.campaigns.find((row) => row.campaignId ==
 const nextCampaign = result.nextRegistry.campaigns.find((row) => row.campaignId === result.manifest.campaignId);
 assert.equal(nextCampaign.status, "claimed");
 assert.equal(nextCampaign.assignments.length, expected.assignmentCount);
-assert.equal(nextSource.assignments.filter((row) => row.status === "superseded_partial_recovery").length, expected.assignmentCount);
+assert.equal(nextSource.assignments.filter((row) =>
+  assignmentKeys.includes(row.assignmentKey)
+  && row.status === "superseded_partial_recovery").length, expected.assignmentCount);
 assert.equal(nextSource.assignmentKeys.filter((key) => assignmentKeys.includes(key)).length, 0);
 assert.equal(result.nextCalendar.reservations.filter((row) => row.campaignId === result.manifest.campaignId && row.status === "campaign_claimed").length, expected.assignmentCount);
 assert.equal(result.manifest.generatedAt, generatedAt);
