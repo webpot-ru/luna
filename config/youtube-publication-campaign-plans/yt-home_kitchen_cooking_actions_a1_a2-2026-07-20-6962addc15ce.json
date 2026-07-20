@@ -1,0 +1,1339 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-20T16:36:28.490Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_kitchen_cooking_actions_a1_a2",
+  "inputs": {
+    "supports": "BG,BN,CS,ET,HR,IS,KM,LO,LT,LV,MY,SL,SR,TL",
+    "supportCount": 14,
+    "ordinarySupportCount": 2,
+    "polyglotSupportCount": 13,
+    "ordinaryPerChannel": 2,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "assignmentKeys": [
+      "polyglot|home_kitchen_cooking_actions_a1_a2|BG|romance_core|f34a59a474f1|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|BN|romance_core|f34a59a474f1|short_unverified",
+      "ordinary|home_kitchen_cooking_actions_a1_a2|CS|PT",
+      "ordinary|home_kitchen_cooking_actions_a1_a2|CS|RO",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|ET|romance_core|f34a59a474f1|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|HR|romance_core|f34a59a474f1|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|IS|romance_core|f34a59a474f1|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|KM|romance_core|f34a59a474f1|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|LO|romance_core|f34a59a474f1|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|LT|romance_core|f34a59a474f1|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|LV|romance_core|f34a59a474f1|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|MY|romance_core|f34a59a474f1|full",
+      "ordinary|home_kitchen_cooking_actions_a1_a2|SL|PT",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|SL|romance_core|f34a59a474f1|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|SR|romance_core|f34a59a474f1|full",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|TL|romance_core|f34a59a474f1|short_unverified"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 240,
+    "maxSnapshotAgeMinutes": 30,
+    "partialRecoveryOfCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-aa550a552241"
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-aa550a552241",
+      "manifestHash": "6c40cc3bb9df1997dad20bd662133ded569ff6b14fb1f7c4baf41afafb30d911",
+      "status": "reconciliation_required"
+    },
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-07-20T16:24:48.937Z",
+        "ageMinutes": 11.659216666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-3",
+        "generatedAt": "2026-07-20T16:24:49.232Z",
+        "ageMinutes": 11.6543,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/review/youtube-publication-snapshot-reconciled-five-full-20260716.json",
+        "exists": true,
+        "sha256": "c682df7f46f7ad7052f320dcb2237d43559733115f72133dfb21b12dd2f64dd6"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "1ae211733492c8845db9babe274932bce00b2b05c771468b23fcf6a8b440ce6a"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "09b0a90729389d5f2a146e5ace3729fd201cc7759af4b9553b4295fe249619f5"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "e195a73d31716e2248f4031edfe6346331b670f8d4afab90abf346d70cb18c82"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "8c05e324676cc0b4a6e3e376040c7649bdeef671b688e47aace1f40f5c4582c2"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "090be7dd53210314fc0aca1026de6489250564f01092e6004cedbab13975741f"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "605eda7deb59067f0809da9d751f443016d4ccd341beac66c45bbdec717d9a45"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json",
+        "exists": false,
+        "sha256": ""
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "d898fddc7472963cb57df0beefef837b102e4ccb8af313f2398b8df14a971b9c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "df6465006e476fb3ed14a60eaa724ec86c1a271b9c5b60b8218148071a2195d5"
+      },
+      "playlistDiscovery": {
+        "path": "/private/tmp/youtube-preflight-29478908334/youtube-publication-control-home_kitchen_cooking_actions_a1_a2-all-routes-29478908334/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "bcdf3024b5371a667dd91f7794163b1dcf49331a49f6d0441711a0eae0217b19"
+      }
+    },
+    "deckSource": {
+      "mode": "historical_git_blob",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": false,
+      "offlineDeckTracked": false,
+      "historicalGitBlob": {
+        "available": true,
+        "matchesLocalFile": false,
+        "commit": "0a4e6907cdffdb1cafa4b44e723f87650b16a19e",
+        "blobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+        "localBlobId": "",
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 11,
+    "supportCount": 14,
+    "ordinaryCount": 3,
+    "polyglotCount": 13,
+    "assignmentCount": 16,
+    "firstPublishAt": "2026-07-20T21:30:00.000Z",
+    "lastPublishAt": "2026-07-22T12:30:00.000Z",
+    "customThumbnailCount": 2,
+    "automaticThumbnailCount": 14,
+    "existingPlaylistCount": 2,
+    "playlistCreateCount": 14,
+    "playlistCreateCountMaximum": 14,
+    "routeCounts": {
+      "youtube-1": 0,
+      "youtube-2": 2,
+      "youtube-3": 14,
+      "youtube-4": 0
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 16,
+    "estimatedPlaylistItemInsertUnits": 800,
+    "estimatedPlaylistCreateUnitsMaximum": 700,
+    "estimatedThumbnailSetUnits": 100,
+    "estimatedGeneralQuotaUnitsMaximum": 1600,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      },
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 2,
+        "estimatedGeneralQuotaUnitsMaximum": 150
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 14,
+        "estimatedGeneralQuotaUnitsMaximum": 1450
+      },
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "BG: short_unverified <=895s",
+    "BN: short_unverified <=895s",
+    "ET: short_unverified <=895s",
+    "HR: short_unverified <=895s",
+    "IS: short_unverified <=895s",
+    "KM: short_unverified <=895s",
+    "LO: short_unverified <=895s",
+    "LT: short_unverified <=895s",
+    "LV: short_unverified <=895s",
+    "SL: short_unverified <=895s",
+    "TL: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|BG|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|BG|romance_core|short_unverified|bg",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "BG",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:BG:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-21T05:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "08:30",
+      "timeZone": "Europe/Sofia",
+      "slotKey": "bg|2026-07-21T05:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__BG__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: испански, френски, италиански, португалски",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: испански, френски, италиански, португалски. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 0,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-22T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-24T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-28T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-20T05:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|BN|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|BN|romance_core|short_unverified|bn",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "BN",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:BN:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "bn",
+      "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-21T02:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "08:30",
+      "timeZone": "Asia/Dhaka",
+      "slotKey": "bn|2026-07-21T02:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__BN__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: স্প্যানিশ, ফরাসি, ইতালীয়, পর্তুগিজ",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: স্প্যানিশ, ফরাসি, ইতালীয়, পর্তুগিজ. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 0,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-22T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-24T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-28T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-20T02:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|CS|PT",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|CS|PT|cs",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "CS",
+      "targetLang": "PT",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-07-20T21:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "23:30",
+      "timeZone": "Europe/Prague",
+      "slotKey": "cs|2026-07-20T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "CS__PT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBqL9gOb0y_AQ4GZDAE4OUmmwcdg-1WYk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Portugalština A1: slovíčka a výslovnost",
+        "description": "Videa FlashcardsLuna pro česky mluvící studenty, kteří se učí Portugalština: kartičky, výslovnost, pauzy na opakování a krátké mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 5,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-21T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-23T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-27T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-19T21:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|CS|RO",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|CS|RO|cs",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "CS",
+      "targetLang": "RO",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-07-21T09:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "11:30",
+      "timeZone": "Europe/Prague",
+      "slotKey": "cs|2026-07-21T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "CS__RO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Rumunština A1: slovíčka a výslovnost",
+        "description": "Videa FlashcardsLuna pro česky mluvící studenty, kteří se učí Rumunština: kartičky, výslovnost, pauzy na opakování a krátké mini testy.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 1,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-22T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-28T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-20T09:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|ET|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|ET|romance_core|short_unverified|et",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ET",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:ET:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-21T05:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "08:30",
+      "timeZone": "Europe/Tallinn",
+      "slotKey": "et|2026-07-21T05:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__ET__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: hispaania, prantsuse, itaalia, portugali",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: hispaania, prantsuse, itaalia, portugali. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 0,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-22T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-24T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-28T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-20T05:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|HR|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|HR|romance_core|short_unverified|hr",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HR",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:HR:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-20T21:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "23:30",
+      "timeZone": "Europe/Zagreb",
+      "slotKey": "hr|2026-07-20T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__HR__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: španjolski, francuski, talijanski, portugalski",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: španjolski, francuski, talijanski, portugalski. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 5,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-21T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-23T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-27T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-19T21:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|IS|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|IS|romance_core|short_unverified|is",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "IS",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:IS:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-20T23:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "23:30",
+      "timeZone": "Atlantic/Reykjavik",
+      "slotKey": "is|2026-07-20T23:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__IS__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: spænska, franska, ítalska, portúgalska",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: spænska, franska, ítalska, portúgalska. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 5,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-21T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-23T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-27T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-19T23:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|KM|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|KM|romance_core|short_unverified|km",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KM",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:KM:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-21T01:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "08:30",
+      "timeZone": "Asia/Phnom_Penh",
+      "slotKey": "km|2026-07-21T01:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__KM__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: អេស្ប៉ាញ, បារាំង, អ៊ីតាលី, ព័រទុយហ្គាល់",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: អេស្ប៉ាញ, បារាំង, អ៊ីតាលី, ព័រទុយហ្គាល់. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 0,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-22T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-24T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-28T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-20T01:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|LO|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|LO|romance_core|short_unverified|lo",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "LO",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:LO:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-21T01:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "08:30",
+      "timeZone": "Asia/Vientiane",
+      "slotKey": "lo|2026-07-21T01:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__LO__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: ສະແປນນິຊ, ຝຣັ່ງ, ອິຕາລຽນ, ປອກຕຸຍກິສ",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ສະແປນນິຊ, ຝຣັ່ງ, ອິຕາລຽນ, ປອກຕຸຍກິສ. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 0,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-22T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-24T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-28T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-20T01:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|LT|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|LT|romance_core|short_unverified|lt",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "LT",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:LT:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-21T05:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "08:30",
+      "timeZone": "Europe/Vilnius",
+      "slotKey": "lt|2026-07-21T05:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__LT__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: ispanų, prancūzų, italų, portugalų",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ispanų, prancūzų, italų, portugalų. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 0,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-22T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-24T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-28T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-20T05:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|LV|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|LV|romance_core|short_unverified|lv",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "LV",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:LV:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-21T05:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "08:30",
+      "timeZone": "Europe/Riga",
+      "slotKey": "lv|2026-07-21T05:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__LV__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: spāņu, franču, itāļu, portugāļu",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: spāņu, franču, itāļu, portugāļu. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 0,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-22T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-24T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-28T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-20T05:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|MY|romance_core|f34a59a474f1|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|MY|romance_core|full|my",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "MY",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:MY:romance_core:f34a59a474f1:full",
+      "channelKey": "my",
+      "youtubeChannelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-21T02:00:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "08:30",
+      "timeZone": "Asia/Yangon",
+      "slotKey": "my|2026-07-21T02:00:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-aee0c1b1c1d5-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-MY-romance_core-f34a59a474f1-full.jpg",
+        "manifestPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-aee0c1b1c1d5-precommit-ready/manifest.json",
+        "sha256": "dc7f1b907003aa000406b7e8a08a107add4a88c1db0eea253adeb917d0d87273"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__MY__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: စပိန်, ပြင်သစ်, အီတလီ, ပေါ်တူဂီ",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: စပိန်, ပြင်သစ်, အီတလီ, ပေါ်တူဂီ. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 0,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-22T02:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-24T02:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-28T02:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-20T02:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|SL|PT",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|SL|PT|sl",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SL",
+      "targetLang": "PT",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-21T12:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "14:30",
+      "timeZone": "Europe/Ljubljana",
+      "slotKey": "sl|2026-07-21T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SL__PT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLrRO7cv1Ua_SyuVlsFCUK1Tj100b65agC",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Portugalščina A1: besedišče in izgovorjava",
+        "description": "Videi FlashcardsLuna za slovensko govoreče, ki se učijo Portugalščina: kartice, izgovorjava, premori za ponavljanje in kratki mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 2,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-22T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-24T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-28T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-20T12:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|SL|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|SL|romance_core|short_unverified|sl",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SL",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:SL:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-22T12:30:00.000Z",
+      "localDate": "2026-07-22",
+      "localTime": "14:30",
+      "timeZone": "Europe/Ljubljana",
+      "slotKey": "sl|2026-07-22T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__SL__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: španščina, francoščina, italijanščina, portugalščina",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: španščina, francoščina, italijanščina, portugalščina. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 2,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T12:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|SR|romance_core|f34a59a474f1|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|SR|romance_core|full|sr",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SR",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:SR:romance_core:f34a59a474f1:full",
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-20T21:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "23:30",
+      "timeZone": "Europe/Belgrade",
+      "slotKey": "sr|2026-07-20T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-aee0c1b1c1d5-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-SR-romance_core-f34a59a474f1-full.jpg",
+        "manifestPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-aee0c1b1c1d5-precommit-ready/manifest.json",
+        "sha256": "2d9a36bce26b2a409d5f1266d2dec5a4d2eda6f4c0956e8f82ef46e24141075c"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__SR__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: шпански, француски, италијански, португалски",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: шпански, француски, италијански, португалски. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 5,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-21T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-23T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-27T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-19T21:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|TL|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|TL|romance_core|short_unverified|tl",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TL",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:TL:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-07-21T00:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "08:30",
+      "timeZone": "Asia/Manila",
+      "slotKey": "tl|2026-07-21T00:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__TL__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: Spanish, French, Italian, Portuguese",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Spanish, French, Italian, Portuguese. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-16T07:11:27.371Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 0,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-22T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-24T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-28T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-20T00:30:00.000Z"
+        }
+      ]
+    }
+  ],
+  "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-6962addc15ce",
+  "manifestHash": "ead19da1f362cd0b8c23516ca031cdecab61247882f0b739fdb5a0e78ad1725d"
+}
