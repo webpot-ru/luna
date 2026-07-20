@@ -129,6 +129,12 @@ Campaign child workflows получают `campaign_id`, поэтому их sta
 
 Если exact before/after control reports уже доказывают zero-upload и равенство live-ID set, replacement planner может читать только snapshot и playlist-discovery artifact из этого after report с ограниченным evidence window. Это разрешено исключительно при `--replacement-campaign-id` перед немедленным `rearm`; manifest обязан сохранить exact assignment set, а `rearm` повторно валидирует оба reports. Такой artifact не является свежим общим разрешением на обычный publish plan и не отменяет строгий pre-upload readback.
 
+## Unlaunched claimed-campaign rollover
+
+Если immutable campaign была `claimed`, но parent workflow ни разу не dispatch-ился и её слоты успели устареть, запрещено запускать её с прошедшими датами или вручную менять статус/календарь. `npm run rollover:youtube-claimed-campaign` создаёт новый immutable manifest с тем же exact assignment-key set и безопасными будущими слотами. Старые campaign/calendar claims становятся `superseded_unlaunched_claim_rollover`; новая campaign получает собственные ID/hash и `rolloverOfCampaignId`.
+
+Rollover является fail-closed локальной durable-state операцией. Он требует source status `claimed`, отсутствие campaign/assignment/calendar dispatch, finalizer, artifact и YouTube receipt evidence, exact integrity старого manifest и claims, отсутствие конфликтов с другими active campaigns, а также свежий complete control report с полной pagination/status readback, без recent unclassified uploads, selected blockers и live video IDs для переносимых assignments. Dry-run является default; apply требует `--confirm=ROLLOVER_UNLAUNCHED_CLAIMED_YOUTUBE_CAMPAIGN`. Provider calls и YouTube writes равны нулю. Commit/push нового manifest/registry/calendar и последующий publication dispatch остаются отдельными действиями.
+
 Standalone ordinary/Polyglot workflows сохраняют собственный persist-job для одиночных legacy-запусков. Они не являются основным путем для смешанной 51-channel campaign. Parent campaign preflight выводит отдельные worker counts; если ordinary или Polyglot matrix пуста, соответствующий job пропускается до GitHub matrix evaluation. Это сохраняет valid ordinary-only и Polyglot-only campaigns без ложного workflow failure.
 
 ## Partial recovery after accepted uploads
