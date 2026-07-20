@@ -1,0 +1,924 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-20T09:10:19.000Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_kitchen_cooking_actions_a1_a2",
+  "inputs": {
+    "supports": "PL,PT-BR,RO,RU,SK,SV,TA,TE,TH,TR,UZ,VI,ZH",
+    "supportCount": 13,
+    "ordinarySupportCount": 0,
+    "polyglotSupportCount": 13,
+    "ordinaryPerChannel": 0,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "assignmentKeys": [
+      "polyglot|home_kitchen_cooking_actions_a1_a2|PL|slavic_core|46049b3b3e49|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|PT-BR|slavic_core|93d499d62441|full",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|RO|slavic_core|93d499d62441|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|RU|slavic_core|31c833f1eaec|full",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|SK|slavic_core|849600d8d591|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|SV|slavic_core|93d499d62441|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|TA|slavic_core|93d499d62441|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|TE|slavic_core|93d499d62441|short_unverified",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|TH|slavic_core|93d499d62441|full",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|TR|slavic_core|93d499d62441|full",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|UZ|slavic_core|93d499d62441|full",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|VI|slavic_core|93d499d62441|full",
+      "polyglot|home_kitchen_cooking_actions_a1_a2|ZH|slavic_core|93d499d62441|full"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 30,
+    "partialRecoveryOfCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad"
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
+      "manifestHash": "060d7a54aa6292352c1aafa6e6d8676bab65afeb7416dc31413f10839a817e25",
+      "status": "reconciliation_required"
+    },
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-07-20T08:45:41.029Z",
+        "ageMinutes": 24.63285,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-1",
+        "generatedAt": "2026-07-20T08:45:43.747Z",
+        "ageMinutes": 24.58755,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-4",
+        "generatedAt": "2026-07-20T08:45:34.277Z",
+        "ageMinutes": 24.745383333333333,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/review/youtube-publication-snapshot-29645382620-local-reconciled-approved.json",
+        "exists": true,
+        "sha256": "1406f9fcf98504962852b6d8bcc799c7f7823310e2a62f97a3e067b067fb63e9"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "4ed82d123c13f77d71879e6e41e423b4f360edd1954eebaafd8d1709f23f29c9"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "354162fc0f286fc29c1879455c7bdc465c14feff231876d6a761442f1505e504"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "e195a73d31716e2248f4031edfe6346331b670f8d4afab90abf346d70cb18c82"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "bc5d4a0ac8b594ca980d112129bf2f1ebd73b2b38af21406920580eb5ea1f976"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "c4451921fc51d9c983bbd40cd26d4f89e3e39c03d682103872ccfcc1595cd8f0"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "605eda7deb59067f0809da9d751f443016d4ccd341beac66c45bbdec717d9a45"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json",
+        "exists": true,
+        "sha256": "221f3eb523c1b5e5cd9656d9d26fc3fc6e2ca43e2bc8d3c0c5322597cfaf9cd5"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "bb5e3a5545e38d2ecde8ecc380c8370d713fc1c7fd639ddbad3d13bff1052a8a"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "e38b4bb36069776d1a951fee867350d62f756c80ca88093be38a8482efb4014c"
+      },
+      "playlistDiscovery": {
+        "path": "/private/tmp/luna-control-29645382620/youtube-publication-control-home_kitchen_cooking_actions_a1_a2-all-routes-29645382620/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "5f4973f8b2b85ac2b2271a32604dd3ae1a18184493f648cb784a0071c28d14bd"
+      }
+    },
+    "deckSource": {
+      "mode": "historical_git_blob",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": false,
+      "historicalGitBlob": {
+        "available": true,
+        "matchesLocalFile": true,
+        "commit": "",
+        "blobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+        "localBlobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json",
+        "source": "explicit_verified_blob"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 6,
+    "supportCount": 13,
+    "ordinaryCount": 0,
+    "polyglotCount": 13,
+    "assignmentCount": 13,
+    "firstPublishAt": "2026-07-20T15:00:00.000Z",
+    "lastPublishAt": "2026-07-21T18:30:00.000Z",
+    "customThumbnailCount": 7,
+    "automaticThumbnailCount": 6,
+    "existingPlaylistCount": 0,
+    "playlistCreateCount": 13,
+    "playlistCreateCountMaximum": 13,
+    "routeCounts": {
+      "youtube-1": 4,
+      "youtube-2": 6,
+      "youtube-3": 0,
+      "youtube-4": 3
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 13,
+    "estimatedPlaylistItemInsertUnits": 650,
+    "estimatedPlaylistCreateUnitsMaximum": 650,
+    "estimatedThumbnailSetUnits": 350,
+    "estimatedGeneralQuotaUnitsMaximum": 1650,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 4,
+        "estimatedGeneralQuotaUnitsMaximum": 600
+      },
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 6,
+        "estimatedGeneralQuotaUnitsMaximum": 700
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0
+      },
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 3,
+        "estimatedGeneralQuotaUnitsMaximum": 350
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "PL: short_unverified <=895s",
+    "RO: short_unverified <=895s",
+    "SK: short_unverified <=895s",
+    "SV: short_unverified <=895s",
+    "TA: short_unverified <=895s",
+    "TE: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|PL|slavic_core|46049b3b3e49|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|PL|slavic_core|short_unverified|pl",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PL",
+      "targetLang": "RU,CS,SK,BG",
+      "targetLangs": [
+        "RU",
+        "CS",
+        "SK",
+        "BG"
+      ],
+      "targetLangsHash": "46049b3b3e49",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:PL:slavic_core:46049b3b3e49:short_unverified",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-07-20T18:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "20:30",
+      "timeZone": "Europe/Warsaw",
+      "slotKey": "pl|2026-07-20T18:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__PL__slavic-core__46049b3b3e49",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: rosyjski, czeski, słowacki, bułgarski",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: rosyjski, czeski, słowacki, bułgarski. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|PT-BR|slavic_core|93d499d62441|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|PT-BR|slavic_core|full|pt",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:PT-BR:slavic_core:93d499d62441:full",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-20T22:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "23:30",
+      "timeZone": "Europe/Lisbon",
+      "slotKey": "pt|2026-07-20T22:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-4a95b4a6c5c0-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-PT-BR-slavic_core-93d499d62441-full.jpg",
+        "manifestPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-4a95b4a6c5c0-precommit-ready/manifest.json",
+        "sha256": "81407a5fd84b813cf7693d5dd0fa277510468aeb2bdd369f9121b473083ea43c"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__PT-BR__slavic-core__93d499d62441",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Modo poliglota: russo, polonês, tcheco, eslovaco",
+        "description": "FlashcardsLuna: playlist para o modo poliglota. Aprenda vários idiomas ao mesmo tempo: russo, polonês, tcheco, eslovaco. Decks temáticos, flashcards, pronúncia e revisão. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|RO|slavic_core|93d499d62441|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|RO|slavic_core|short_unverified|ro",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RO",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:RO:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "ro",
+      "youtubeChannelId": "UCvc_hya6nn2z8Q2WzHCuBWw",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-07-20T17:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "20:30",
+      "timeZone": "Europe/Bucharest",
+      "slotKey": "ro|2026-07-20T17:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__RO__slavic-core__93d499d62441",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: rusă, poloneză, cehă, slovacă",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: rusă, poloneză, cehă, slovacă. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|RU|slavic_core|31c833f1eaec|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|RU|slavic_core|full|ru",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "targetLang": "PL,CS,SK,BG",
+      "targetLangs": [
+        "PL",
+        "CS",
+        "SK",
+        "BG"
+      ],
+      "targetLangsHash": "31c833f1eaec",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:RU:slavic_core:31c833f1eaec:full",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-20T20:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "23:30",
+      "timeZone": "Europe/Moscow",
+      "slotKey": "ru|2026-07-20T20:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-4a95b4a6c5c0-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-RU-slavic_core-31c833f1eaec-full.jpg",
+        "manifestPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-4a95b4a6c5c0-precommit-ready/manifest.json",
+        "sha256": "f83d5fdea9f2c7011b87ce3a9b61edf792d7929fa134cbcb7a35907cde8a1c75"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__RU__slavic-core__31c833f1eaec",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Полиглот: польский, чешский, словацкий, болгарский",
+        "description": "FlashcardsLuna: плейлист для режима Полиглот. Учите несколько языков одновременно: польский, чешский, словацкий, болгарский. Тематические колоды, карточки, произношение и повторение. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|SK|slavic_core|849600d8d591|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|SK|slavic_core|short_unverified|sk",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SK",
+      "targetLang": "RU,PL,CS,BG",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "BG"
+      ],
+      "targetLangsHash": "849600d8d591",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:SK:slavic_core:849600d8d591:short_unverified",
+      "channelKey": "sk",
+      "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-07-20T18:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "20:30",
+      "timeZone": "Europe/Bratislava",
+      "slotKey": "sk|2026-07-20T18:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__SK__slavic-core__849600d8d591",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: ruština, poľština, čeština, bulharčina",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ruština, poľština, čeština, bulharčina. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|SV|slavic_core|93d499d62441|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|SV|slavic_core|short_unverified|sv",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "SV",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:SV:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "sv",
+      "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-07-20T18:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "20:30",
+      "timeZone": "Europe/Stockholm",
+      "slotKey": "sv|2026-07-20T18:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__SV__slavic-core__93d499d62441",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: ryska, polska, tjeckiska, slovakiska",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ryska, polska, tjeckiska, slovakiska. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|TA|slavic_core|93d499d62441|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|TA|slavic_core|short_unverified|ta",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TA",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:TA:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "ta",
+      "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-07-21T03:00:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "08:30",
+      "timeZone": "Asia/Kolkata",
+      "slotKey": "ta|2026-07-21T03:00:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__TA__slavic-core__93d499d62441",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: ரஷியன், போலிஷ், செக், ஸ்லோவாக்",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ரஷியன், போலிஷ், செக், ஸ்லோவாக். Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|TE|slavic_core|93d499d62441|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|TE|slavic_core|short_unverified|te",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TE",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:TE:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "te",
+      "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-07-20T15:00:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "20:30",
+      "timeZone": "Asia/Kolkata",
+      "slotKey": "te|2026-07-20T15:00:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__TE__slavic-core__93d499d62441",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: రష్యన్, పోలిష్, చెక్, స్లోవక్",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: రష్యన్, పోలిష్, చెక్, స్లోవక్. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|TH|slavic_core|93d499d62441|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|TH|slavic_core|full|th",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TH",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:TH:slavic_core:93d499d62441:full",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-07-20T16:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "23:30",
+      "timeZone": "Asia/Bangkok",
+      "slotKey": "th|2026-07-20T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-4a95b4a6c5c0-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-TH-slavic_core-93d499d62441-full.jpg",
+        "manifestPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-4a95b4a6c5c0-precommit-ready/manifest.json",
+        "sha256": "15ff33b90bbe11ba3b1e58b92718c70e72e5e464f3576dfdf14b55b243089676"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__TH__slavic-core__93d499d62441",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: รัสเซีย, โปแลนด์, เช็ก, สโลวัก",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: รัสเซีย, โปแลนด์, เช็ก, สโลวัก. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|TR|slavic_core|93d499d62441|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|TR|slavic_core|full|tr",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TR",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:TR:slavic_core:93d499d62441:full",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-21T05:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "08:30",
+      "timeZone": "Europe/Istanbul",
+      "slotKey": "tr|2026-07-21T05:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-4a95b4a6c5c0-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-TR-slavic_core-93d499d62441-full.jpg",
+        "manifestPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-4a95b4a6c5c0-precommit-ready/manifest.json",
+        "sha256": "d2f709691072a6fbd3ab88c687b0d1aced5f391f8418986dab3e3d562c170c18"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__TR__slavic-core__93d499d62441",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: Rusça, Lehçe, Çekçe, Slovakça",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Rusça, Lehçe, Çekçe, Slovakça. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|UZ|slavic_core|93d499d62441|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|UZ|slavic_core|full|uz",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "UZ",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:UZ:slavic_core:93d499d62441:full",
+      "channelKey": "uz",
+      "youtubeChannelId": "UClFSxvtwOnc_pPv2rCnT-bg",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-07-21T18:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "23:30",
+      "timeZone": "Asia/Tashkent",
+      "slotKey": "uz|2026-07-21T18:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/approved-template-overlay-uz-si-ka-20260713/video/by-set/home_kitchen_cooking_actions_a1_a2/polyglot/by-channel/uz__UZ__LunaCardsUzbek/UZ__slavic_core__93d499d62441__full.jpg",
+        "manifestPath": "data/youtube-cover-assets/approved-template-overlay-uz-si-ka-20260713/manifest.json",
+        "sha256": "5d803791dc62052b631f8306994d2d9a0a364c756367591b5b6a96be23729b79"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__UZ__slavic-core__93d499d62441",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: ruscha, polyakcha, chex, slovakcha",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ruscha, polyakcha, chex, slovakcha. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|VI|slavic_core|93d499d62441|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|VI|slavic_core|full|vi",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "VI",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:VI:slavic_core:93d499d62441:full",
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-07-20T16:30:00.000Z",
+      "localDate": "2026-07-20",
+      "localTime": "23:30",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "slotKey": "vi|2026-07-20T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-4a95b4a6c5c0-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-VI-slavic_core-93d499d62441-full.jpg",
+        "manifestPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-4a95b4a6c5c0-precommit-ready/manifest.json",
+        "sha256": "8056a61801c5abc8ac780cc6ef7c68a5d334258225e112c6833e2387b3926e3a"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__VI__slavic-core__93d499d62441",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: Tiếng Nga, Tiếng Ba Lan, Tiếng Séc, Tiếng Slovak",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Tiếng Nga, Tiếng Ba Lan, Tiếng Séc, Tiếng Slovak. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|ZH|slavic_core|93d499d62441|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cooking_actions_a1_a2|ZH|slavic_core|full|zh",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ZH",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:ZH:slavic_core:93d499d62441:full",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-21T00:30:00.000Z",
+      "localDate": "2026-07-21",
+      "localTime": "08:30",
+      "timeZone": "Asia/Shanghai",
+      "slotKey": "zh|2026-07-21T00:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-4a95b4a6c5c0-precommit-ready/by-assignment/polyglot-home_kitchen_cooking_actions_a1_a2-ZH-slavic_core-93d499d62441-full.jpg",
+        "manifestPath": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-18-4a95b4a6c5c0-precommit-ready/manifest.json",
+        "sha256": "923ff0c5127866117dea8c9c3b9dd54bfa745d5ce6cb7042c4460bb233c7b9d2"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__ZH__slavic-core__93d499d62441",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Polyglot: 俄语, 波兰语, 捷克语, 斯洛伐克语",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: 俄语, 波兰语, 捷克语, 斯洛伐克语. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-18T13:04:46.236Z"
+      },
+      "status": "planned",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "localSlotIndex": 0
+    }
+  ],
+  "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-0af4c75e2c78",
+  "manifestHash": "54e42ac3cd033d7e0cf3ac3a8d803f11e5406f24f5c495bf896a90f9f9cf0549"
+}
