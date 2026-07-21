@@ -9,13 +9,17 @@ import { spawnSync } from "node:child_process";
 import {
   CAMPAIGN_MAX_OUTPUT_TOKENS,
   OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS,
+  DEFAULT_OPENAI_DAILY_TOKEN_LIMIT,
+  DEFAULT_OPENAI_LARGE_CAMPAIGN_ASSIGNMENTS,
+  assertOpenAiDailyTokenBudget,
+  selectOpenAiMetadataModel,
   DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE,
   buildCampaignMetadataPrompt,
   generateVectorEngineCampaignMetadataSubBatches,
   loadReusableMetadataCheckpoint,
   validateCampaignMetadataResponse,
 } from "./generate-youtube-campaign-metadata.mjs";
-import { callOpenAiStructuredJson, resolveOpenAiServiceTier } from "./lib/openai-structured-json.mjs";
+import { callOpenAiStructuredJson, estimateOpenAiRequestTokenUpperBound, resolveOpenAiServiceTier } from "./lib/openai-structured-json.mjs";
 
 const tasks = [
   { requestId: "ordinary|deck|EN|DE", videoType: "ordinary", supportLang: "EN", targetLang: "DE" },
@@ -28,6 +32,13 @@ assert.match(prompt, /250-900 Unicode characters/);
 assert.match(prompt, /ZH, JA and KO descriptions may be 150-900 Unicode characters/);
 assert.equal(CAMPAIGN_MAX_OUTPUT_TOKENS, 60000);
 assert.equal(OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS, 12000);
+assert.equal(DEFAULT_OPENAI_DAILY_TOKEN_LIMIT, 2_000_000);
+assert.equal(DEFAULT_OPENAI_LARGE_CAMPAIGN_ASSIGNMENTS, 100);
+assert.equal(selectOpenAiMetadataModel({ assignmentCount: 99, useLuna: false }), "gpt-5.6-terra");
+assert.equal(selectOpenAiMetadataModel({ assignmentCount: 100, useLuna: false }), "gpt-5.6-luna");
+assert.equal(selectOpenAiMetadataModel({ assignmentCount: 1, useLuna: true }), "gpt-5.6-luna");
+assert.doesNotThrow(() => assertOpenAiDailyTokenBudget({ usedTokens: 1_900_000, reservationTokens: 100_000, limitTokens: 2_000_000 }));
+assert.throws(() => assertOpenAiDailyTokenBudget({ usedTokens: 1_900_001, reservationTokens: 100_000, limitTokens: 2_000_000 }), /daily token budget would be exceeded/);
 const response = {
   items: tasks.map((task) => ({
     requestId: task.requestId,
@@ -49,6 +60,11 @@ assert.match(
 assert.match(campaignWorkflow, /OPENAI_API_KEY: \$\{\{ secrets\.OPENAI_API_KEY \}\}/u);
 assert.match(campaignWorkflow, /BACKEND="openai,api"/u);
 assert.match(campaignWorkflow, /--confirm-openai=USE_OPENAI_METADATA/u);
+assert.match(campaignWorkflow, /--openai-model="gpt-5\.6-terra"/u);
+assert.match(campaignWorkflow, /--openai-fallback-model="gpt-5\.6-luna"/u);
+assert.match(campaignWorkflow, /OPENAI_ROUTE_TOKEN_BUDGET: "500000"/u);
+assert.doesNotMatch(campaignWorkflow, /OPENAI_METADATA_MODEL: \$\{\{ vars\.OPENAI_METADATA_MODEL \}\}/u);
+assert.ok(estimateOpenAiRequestTokenUpperBound({ prompt, schema: { type: "object", properties: {} } }) > Buffer.byteLength(prompt));
 
 const openAiBodies = [];
 const openAiResult = await callOpenAiStructuredJson({
