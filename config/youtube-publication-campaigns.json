@@ -220613,7 +220613,7 @@
       "campaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-21-36d1fec8271a",
       "manifestHash": "b1c90df9837ec4b0fb0689a08d3f3d3c5e3abaa00cb191da4722a9fd689c062b",
       "setId": "home_kitchen_cookware_pilot_01",
-      "status": "claimed",
+      "status": "finalized",
       "claimedAt": "2026-07-21T08:20:21.367Z",
       "generatedAt": "2026-07-21T08:20:10.637Z",
       "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_cookware_pilot_01-2026-07-21-36d1fec8271a.json",
@@ -220791,9 +220791,33 @@
             "registryEntryPresent": true,
             "discoveryGeneratedAt": "2026-07-21T08:03:09.720Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted",
+          "youtubeVideoId": "o91lBJS7IVI",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=o91lBJS7IVI",
+          "youtubePlaylistId": "PLamvl4idV2bw",
+          "playlistItemId": "UExhbXZsNGlkVjJidy4yODlGNEE0NkRGMEEzMEQy",
+          "thumbnailSet": true,
+          "publicationStatus": "scheduled_uploaded",
+          "githubRunId": "29814055722",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29814055722",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-21T08:33:40.425Z"
         }
-      ]
+      ],
+      "finalizedAt": "2026-07-21T08:33:40.425Z",
+      "finalizeSummary": {
+        "expectedCount": 1,
+        "completedCount": 1,
+        "observedCount": 1,
+        "missingCount": 0,
+        "duplicateAssignmentCount": 0,
+        "duplicateVideoIdCount": 0,
+        "unexpectedPublicationCount": 0,
+        "receiptErrorCount": 0,
+        "ordinaryResult": "skipped",
+        "polyglotResult": "success",
+        "artifactCount": 1
+      }
     }
   ]
 }

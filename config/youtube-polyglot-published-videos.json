@@ -2394,7 +2394,14 @@
       "publishAt": "",
       "publicationStatus": "live_youtube_upload_detected",
       "source": "exact_duplicate_delete_reconciliation",
-      "reconciledAt": "2026-07-13T13:41:36.904Z"
+      "reconciledAt": "2026-07-13T13:41:36.904Z",
+      "uploadedAt": "2026-07-04T15:30:09Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
@@ -3937,7 +3944,15 @@
       "targetLangsHash": "7a4233775927",
       "bundleKey": "",
       "contentScope": "full",
-      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:ZH::7a4233775927"
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:ZH::7a4233775927",
+      "title": "多语种词汇学习：厨房用品基础（英语、西班牙语、法语、德语）| FlashcardsLuna Polyglot",
+      "uploadedAt": "2026-06-30T14:26:06Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
@@ -3969,7 +3984,15 @@
       "targetLangsHash": "f34a59a474f1",
       "bundleKey": "",
       "contentScope": "full",
-      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:ZH::f34a59a474f1"
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:ZH::f34a59a474f1",
+      "title": "厨房用品基础：一次学四国语言（西班牙语、法语、意大利语、葡萄牙语）| 多语种词汇记忆 | FlashcardsLuna Polyglot",
+      "uploadedAt": "2026-07-03T00:30:15Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
@@ -4000,7 +4023,15 @@
       "targetLangsHash": "b45533ac9265",
       "bundleKey": "",
       "contentScope": "full",
-      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:ZH::b45533ac9265"
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:ZH::b45533ac9265",
+      "title": "多语种词汇学习：厨房用品基础（日语、韩语、越南语）| FlashcardsLuna Polyglot",
+      "uploadedAt": "2026-07-02T12:30:28Z",
+      "readback": {
+        "privacyStatus": "public",
+        "publishAt": "",
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "schemaVersion": 1,
@@ -19732,6 +19763,60 @@
       "bundleKey": "",
       "contentScope": "full",
       "polyglotKey": "polyglot:home_kitchen_cooking_actions_a1_a2:ML::69af08ca98ea"
+    },
+    {
+      "videoType": "polyglot",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:ZH:east_asia_core:e3f7fbb970b2",
+      "bundleKey": "east_asia_core",
+      "bundleLabel": "East Asia Core",
+      "contentScope": "full",
+      "wordLimit": 0,
+      "videoDurationSeconds": 1076.08,
+      "maxDurationSeconds": 895,
+      "targetLangs": [
+        "JA",
+        "KO",
+        "EN"
+      ],
+      "targetLangsCsv": "JA,KO,EN",
+      "targetLangsHash": "e3f7fbb970b2",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ZH",
+      "targetLang": "JA,KO,EN",
+      "playlist_key": "POLYGLOT__ZH__east-asia-core__e3f7fbb970b2",
+      "title": "厨房用品基础多语词汇练习｜日语、韩语、英语",
+      "youtubeVideoId": "o91lBJS7IVI",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=o91lBJS7IVI",
+      "youtubePlaylistId": "PLamvl4idV2bw",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLamvl4idV2bw",
+      "playlistItemId": "UExhbXZsNGlkVjJidy4yODlGNEE0NkRGMEEzMEQy",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "channelHandle": "@lunacardschinese",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded",
+      "publishAt": "2026-07-22T03:30:00.000Z",
+      "scheduledPublishAt": "2026-07-22T03:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": true,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "pre-rendered-design-prototype",
+      "metadataSource": "openai-responses-campaign-batch",
+      "metadataModel": "gpt-5.4-2026-03-05",
+      "campaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-21-36d1fec8271a",
+      "campaignManifestHash": "b1c90df9837ec4b0fb0689a08d3f3d3c5e3abaa00cb191da4722a9fd689c062b",
+      "githubRunId": "29814055722",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29814055722",
+      "uploadedAt": "2026-07-21T08:32:35.957Z",
+      "lastReadbackAt": "2026-07-21T08:32:35.957Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "private",
+        "publishAt": "2026-07-22T03:30:00Z",
+        "thumbnailStatus": "custom_set"
+      }
     }
   ]
 }

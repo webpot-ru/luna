@@ -340988,7 +340988,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-21-36d1fec8271a",
       "campaignManifestHash": "b1c90df9837ec4b0fb0689a08d3f3d3c5e3abaa00cb191da4722a9fd689c062b",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign",
       "videoType": "polyglot",
       "setId": "home_kitchen_cookware_pilot_01",
@@ -341030,7 +341030,17 @@
         }
       ],
       "createdAt": "2026-07-21T08:20:21.367Z",
-      "updatedAt": "2026-07-21T08:20:21.367Z"
+      "updatedAt": "2026-07-21T08:33:40.425Z",
+      "bundleLabel": "East Asia Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cookware_pilot_01_polyglot_zh/youtube_metadata.json",
+      "title": "厨房用品基础多语词汇练习｜日语、韩语、英语",
+      "playlist_key": "POLYGLOT__ZH__east-asia-core__e3f7fbb970b2",
+      "githubRunId": "29814055722",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29814055722",
+      "youtubeVideoId": "o91lBJS7IVI",
+      "youtubePlaylistId": "PLamvl4idV2bw",
+      "playlistItemId": "UExhbXZsNGlkVjJidy4yODlGNEE0NkRGMEEzMEQy"
     }
   ]
 }
