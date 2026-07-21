@@ -224,7 +224,8 @@ async function main() {
   }
   const plan = readJson(options.campaignManifest, "Campaign manifest");
   if (!plan.campaignId || !plan.manifestHash) throw new Error("Campaign manifest must be immutable and include campaignId + manifestHash");
-  if (plan.setId !== "home_kitchen_cooking_actions_a1_a2") throw new Error(`This scoped generator only supports deck #2, got ${plan.setId}`);
+  const supportedSets = new Set(["home_kitchen_cookware_pilot_01", "home_kitchen_cooking_actions_a1_a2"]);
+  if (!supportedSets.has(plan.setId)) throw new Error(`Campaign cover generator does not support set ${plan.setId}`);
   options.outputRoot ||= `data/youtube-cover-assets/${plan.campaignId}-precommit-ready`;
   const approved = readJson(options.approvedManifest, "Current approved cover manifest");
   const selected = selectMissingCustomAssignments(plan, approvedAssignmentKeys(approved));
@@ -235,8 +236,10 @@ async function main() {
   }
   const { deck, sha256: deckSha256 } = readHistoricalDeck(options.deckGitBlob);
   if (deck.setId !== plan.setId) throw new Error(`Historical deck blob setId mismatch: ${deck.setId}`);
-  const baseImage = "assets/youtube-cover-templates/deck2-universal-approved-base.png";
-  const baseSha256 = assertTrackedFile(baseImage, "Approved deck #2 cover base");
+  const baseImage = plan.setId === "home_kitchen_cookware_pilot_01"
+    ? "assets/youtube-cover-templates/deck1-polyglot-approved-base.png"
+    : "assets/youtube-cover-templates/deck2-universal-approved-base.png";
+  const baseSha256 = assertTrackedFile(baseImage, `Approved cover base for ${plan.setId}`);
   const channels = readJson("config/youtube-channels.json", "YouTube channels").channels || [];
   const covers = selected.map((assignment) => coverForAssignment({ assignment, channels, deck, baseImage, outputRoot: options.outputRoot }));
   if (new Set(covers.map((cover) => cover.relativePath)).size !== covers.length) throw new Error("Duplicate deterministic cover paths");

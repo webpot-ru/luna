@@ -340983,6 +340983,54 @@
       ],
       "createdAt": "2026-07-21T01:00:22.353Z",
       "updatedAt": "2026-07-21T01:00:22.353Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-21-36d1fec8271a",
+      "campaignManifestHash": "b1c90df9837ec4b0fb0689a08d3f3d3c5e3abaa00cb191da4722a9fd689c062b",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ZH",
+      "targetLang": "JA,KO,EN",
+      "targetLangs": [
+        "JA",
+        "KO",
+        "EN"
+      ],
+      "targetLangsCsv": "JA,KO,EN",
+      "targetLangsHash": "e3f7fbb970b2",
+      "bundleKey": "east_asia_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:ZH:east_asia_core:e3f7fbb970b2:full",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "publishAt": "2026-07-22T03:30:00.000Z",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-22",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T03:30:00.000Z"
+        }
+      ],
+      "createdAt": "2026-07-21T08:20:21.367Z",
+      "updatedAt": "2026-07-21T08:20:21.367Z"
     }
   ]
 }
