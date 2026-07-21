@@ -223,6 +223,36 @@ assert.equal(allowedExhaustedTailPlan.summary.applyReady, true);
 assert.equal(allowedExhaustedTailPlan.summary.ordinaryCount, 3);
 assert.equal(allowedExhaustedTailPlan.inputs.allowPartialOrdinaryTail, true);
 
+const releasedPartialRecoveryKey = claimedEnTailKeys[0];
+const releasedPartialRecoveryRegistryPath = writeJson("campaigns-released-partial-recovery.json", {
+  schemaVersion: 1,
+  campaigns: [{
+    campaignId: "released-en-tail-fixture",
+    status: "reconciliation_required",
+    assignmentKeys: claimedEnTailKeys,
+    slotKeys: [],
+    assignments: claimedEnTailKeys.map((assignmentKey, index) => ({
+      assignmentKey,
+      videoType: "ordinary",
+      setId: "home_kitchen_cooking_actions_a1_a2",
+      supportLang: "EN",
+      targetLang: assignmentKey.split("|").at(-1),
+      status: index === 0 ? "superseded_partial_recovery" : "claimed",
+    })),
+  }],
+});
+const releasedPartialRecoveryPlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  polyglotPerChannel: 0,
+  allowPartialOrdinaryTail: true,
+  campaignRegistryPath: releasedPartialRecoveryRegistryPath,
+  playlistDiscoveryPath: writeJson("playlist-discovery-en-released-partial-recovery.json", enDiscovery),
+});
+assert.equal(releasedPartialRecoveryPlan.summary.ordinaryCount, 4);
+assert(releasedPartialRecoveryPlan.assignments.some((row) => row.assignmentKey === releasedPartialRecoveryKey),
+  "a superseded partial-recovery assignment must not be re-claimed through the campaign top-level assignmentKeys fallback");
+
 const crossScopeSnapshot = readJson(paths.snapshotPath);
 const crossScopeDeck = crossScopeSnapshot.decks.find((deck) => deck.setId === "home_kitchen_cooking_actions_a1_a2");
 crossScopeDeck.publications.push({
@@ -355,7 +385,7 @@ const claimArgs = [
   `--campaign-registry=${paths.campaignRegistryPath}`,
   `--calendar=${paths.calendarPath}`,
   `--plans-dir=${path.join(tempRoot, "plans")}`,
-  "--max-plan-age-minutes=10000",
+  "--max-plan-age-minutes=20000",
   "--apply",
   "--confirm=CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN",
   "--json",
