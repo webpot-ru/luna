@@ -1,4 +1,4 @@
-const DEFAULT_MODEL = "gpt-5.4-mini-2026-03-17";
+const DEFAULT_MODEL = "gpt-5.6-terra";
 const DEFAULT_TIMEOUT_MS = 600000;
 const ALLOWED_SERVICE_TIERS = new Set(["auto", "default", "flex"]);
 
@@ -37,6 +37,11 @@ export function resolveOpenAiServiceTier(value = process.env.OPENAI_SERVICE_TIER
     throw new Error(`Unsupported OpenAI service tier: ${tier}. Expected auto, default or flex.`);
   }
   return tier;
+}
+
+export function estimateOpenAiRequestTokenUpperBound({ prompt, schema, systemInstruction = "Return strict JSON only. Do not use Markdown." } = {}) {
+  const requestText = JSON.stringify({ instructions: systemInstruction, input: prompt, schema: normalizeStrictSchema(schema) });
+  return Buffer.byteLength(requestText, "utf8");
 }
 
 export async function callOpenAiStructuredJson({

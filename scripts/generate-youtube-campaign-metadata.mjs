@@ -13,7 +13,11 @@ import {
   runGeminiBackendChain,
 } from "./lib/gemini-structured-json.mjs";
 import { callVectorEngineGeminiJson } from "./lib/vectorengine-gemini.mjs";
-import { callOpenAiStructuredJson, resolveOpenAiServiceTier } from "./lib/openai-structured-json.mjs";
+import {
+  callOpenAiStructuredJson,
+  estimateOpenAiRequestTokenUpperBound,
+  resolveOpenAiServiceTier,
+} from "./lib/openai-structured-json.mjs";
 import {
   generateYouTubeMetadataBatch,
   normalizeYouTubeMetadata,
@@ -25,6 +29,9 @@ const VECTOR_CONFIRM = "USE_VECTORENGINE_METADATA";
 const OPENAI_CONFIRM = "USE_OPENAI_METADATA";
 export const CAMPAIGN_MAX_OUTPUT_TOKENS = GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS;
 export const OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS = 12000;
+export const DEFAULT_OPENAI_DAILY_TOKEN_LIMIT = 2_000_000;
+export const DEFAULT_OPENAI_LARGE_CAMPAIGN_ASSIGNMENTS = 100;
+export const DEFAULT_OPENAI_TERRA_TOKENS_PER_ASSIGNMENT_LIMIT = 6_000;
 export const MAX_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE = 2;
 export const DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE = 2;
 const ITEM_SCHEMA = {
@@ -41,6 +48,16 @@ const ITEM_SCHEMA = {
   required: ["requestId", "title", "description", "tags", "hashtags"],
 };
 
+export function assertOpenAiDailyTokenBudget({ usedTokens, reservationTokens, limitTokens }) {
+  if (usedTokens + reservationTokens > limitTokens) {
+    throw new Error(`OpenAI daily token budget would be exceeded: used=${usedTokens}, reservation=${reservationTokens}, limit=${limitTokens}`);
+  }
+}
+
+export function selectOpenAiMetadataModel({ assignmentCount, useLuna, primaryModel = "gpt-5.6-terra", fallbackModel = "gpt-5.6-luna", largeCampaignAssignments = DEFAULT_OPENAI_LARGE_CAMPAIGN_ASSIGNMENTS }) {
+  return useLuna || assignmentCount >= largeCampaignAssignments ? fallbackModel : primaryModel;
+}
+
 function parseArgs(argv) {
   const options = {
     registry: "config/youtube-publication-campaigns.json",
@@ -52,7 +69,12 @@ function parseArgs(argv) {
     rateLimitMs: 15000,
     geminiBackend: "api",
     model: process.env.GEMINI_MODEL || process.env.VECTORENGINE_GEMINI_MODEL || "gemini-3.5-flash",
-    openaiModel: process.env.OPENAI_METADATA_MODEL || "gpt-5.4-mini-2026-03-17",
+    openaiModel: "gpt-5.6-terra",
+    openaiFallbackModel: "gpt-5.6-luna",
+    openaiDailyTokenLimit: Number(process.env.OPENAI_DAILY_TOKEN_LIMIT || DEFAULT_OPENAI_DAILY_TOKEN_LIMIT),
+    openaiTokensUsedToday: Number(process.env.OPENAI_TOKENS_USED_TODAY || 0),
+    openaiLargeCampaignAssignments: Number(process.env.OPENAI_LARGE_CAMPAIGN_ASSIGNMENTS || DEFAULT_OPENAI_LARGE_CAMPAIGN_ASSIGNMENTS),
+    openaiTerraTokensPerAssignmentLimit: Number(process.env.OPENAI_TERRA_TOKENS_PER_ASSIGNMENT_LIMIT || DEFAULT_OPENAI_TERRA_TOKENS_PER_ASSIGNMENT_LIMIT),
     openaiServiceTier: resolveOpenAiServiceTier(),
     apply: false,
     resumeExisting: false,
@@ -76,6 +98,9 @@ function parseArgs(argv) {
     else if (arg === "--gemini-backend" || arg.startsWith("--gemini-backend=")) options.geminiBackend = value();
     else if (arg === "--model" || arg.startsWith("--model=")) options.model = value();
     else if (arg === "--openai-model" || arg.startsWith("--openai-model=")) options.openaiModel = value();
+    else if (arg === "--openai-fallback-model" || arg.startsWith("--openai-fallback-model=")) options.openaiFallbackModel = value();
+    else if (arg === "--openai-daily-token-limit" || arg.startsWith("--openai-daily-token-limit=")) options.openaiDailyTokenLimit = Number(value());
+    else if (arg === "--openai-tokens-used-today" || arg.startsWith("--openai-tokens-used-today=")) options.openaiTokensUsedToday = Number(value());
     else if (arg === "--openai-service-tier" || arg.startsWith("--openai-service-tier=")) options.openaiServiceTier = resolveOpenAiServiceTier(value());
     else if (arg === "--confirm" || arg.startsWith("--confirm=")) options.confirm = value();
     else if (arg === "--confirm-vectorengine" || arg.startsWith("--confirm-vectorengine=")) options.confirmVectorengine = value();
@@ -374,14 +399,26 @@ async function generateBatch(tasks, options) {
   const taskRequests = tasks.map((task) => task.request);
   const validateValue = (value) => validateCampaignMetadataResponse(value, taskRequests);
   const request = buildCampaignMetadataRequest(taskRequests, options);
+  const selectedOpenAiModel = selectOpenAiMetadataModel({
+    assignmentCount: options.campaignAssignmentCount,
+    useLuna: options.useOpenAiLuna,
+    primaryModel: options.openaiModel,
+    fallbackModel: options.openaiFallbackModel,
+    largeCampaignAssignments: options.openaiLargeCampaignAssignments,
+  });
+  const openAiReservation = estimateOpenAiRequestTokenUpperBound(request) + OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS;
   const result = await runGeminiBackendChain({
     backends,
     providers: {
       openai: async () => callOpenAiStructuredJson({
         ...request,
-        model: options.openaiModel,
+        model: selectedOpenAiModel,
         maxOutputTokens: OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS,
         serviceTier: options.openaiServiceTier,
+        ...(Number.isFinite(options.openaiDailyTokenLimit) ? (() => {
+          assertOpenAiDailyTokenBudget({ usedTokens: options.openaiTokensUsedToday, reservationTokens: openAiReservation, limitTokens: options.openaiDailyTokenLimit });
+          return {};
+        })() : {}),
       }),
       api: async () => callGeminiApiJsonWithKeys(request),
       vectorengine: async () => generateVectorEngineCampaignMetadataSubBatches(taskRequests, {
@@ -390,6 +427,13 @@ async function generateBatch(tasks, options) {
       }),
     },
   });
+  if (result.backend === "openai") {
+    const actualTokens = Number(result.usage?.inputTokens || 0) + Number(result.usage?.outputTokens || 0);
+    options.openaiTokensUsedToday += actualTokens;
+    if (selectedOpenAiModel === options.openaiModel && actualTokens / Math.max(1, tasks.length) > options.openaiTerraTokensPerAssignmentLimit) {
+      options.useOpenAiLuna = true;
+    }
+  }
   return { ...result, byId: validateValue(result.value) };
 }
 
@@ -490,6 +534,10 @@ export async function buildCampaignMetadata(options) {
       ? await prepareOrdinaryTask(assignment)
       : preparePolyglotTask(assignment, options.outputRoot));
   }
+  options.campaignAssignmentCount = (campaign.assignments || []).length;
+  options.useOpenAiLuna = options.campaignAssignmentCount >= options.openaiLargeCampaignAssignments;
+  if (!Number.isInteger(options.openaiDailyTokenLimit) || options.openaiDailyTokenLimit < 1) throw new Error("--openai-daily-token-limit must be a positive integer");
+  if (!Number.isInteger(options.openaiTokensUsedToday) || options.openaiTokensUsedToday < 0) throw new Error("--openai-tokens-used-today must be a non-negative integer");
   const report = {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
@@ -515,6 +563,9 @@ export async function buildCampaignMetadata(options) {
       totalTokens: 0,
       reasoningTokens: 0,
       serviceTiers: {},
+      models: {},
+      dailyLimit: options.openaiDailyTokenLimit,
+      usedBeforeRun: options.openaiTokensUsedToday,
     },
     attemptedBatchCount: 0,
     reusedBatchCount: 0,
@@ -564,6 +615,9 @@ export async function buildCampaignMetadata(options) {
         report.openaiUsage.reasoningTokens += Number(provider.usage?.reasoningTokens || 0);
         const serviceTier = String(provider.serviceTier || options.openaiServiceTier || "unknown");
         report.openaiUsage.serviceTiers[serviceTier] = (report.openaiUsage.serviceTiers[serviceTier] || 0) + 1;
+        const usedModel = String(provider.model || (options.useOpenAiLuna ? options.openaiFallbackModel : options.openaiModel));
+        report.openaiUsage.models[usedModel] = (report.openaiUsage.models[usedModel] || 0) + 1;
+        report.openaiUsage.usedAfterRun = options.openaiTokensUsedToday;
       }
       for (const task of tasks) {
         const metadata = finalizeMetadata(task, provider.byId.get(task.assignment.assignmentKey), {
