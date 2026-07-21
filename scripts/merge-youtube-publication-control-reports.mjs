@@ -8,6 +8,7 @@ function parseArgs(argv) {
     output: "outputs/youtube-publication-control-all-routes.json",
     markdown: "outputs/youtube-publication-control-all-routes.md",
     expectedRoutes: 4,
+    expectedRouteKeys: [],
     sourceRuns: [],
   };
   for (const arg of argv) {
@@ -15,6 +16,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--output=")) options.output = arg.slice("--output=".length);
     else if (arg.startsWith("--markdown=")) options.markdown = arg.slice("--markdown=".length);
     else if (arg.startsWith("--expected-routes=")) options.expectedRoutes = Number(arg.slice("--expected-routes=".length));
+    else if (arg.startsWith("--expected-route-keys=")) options.expectedRouteKeys = arg.slice("--expected-route-keys=".length).split(",").map((value) => value.trim()).filter(Boolean);
     else if (arg.startsWith("--source-run=")) options.sourceRuns.push(arg.slice("--source-run=".length));
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -56,6 +58,11 @@ function main() {
   const options = parseArgs(process.argv.slice(2));
   const files = findReports(options.input);
   const routes = files.map((file) => ({ file, report: JSON.parse(fs.readFileSync(file, "utf8")) }));
+  const receivedRouteKeys = files.map((file) => path.basename(file).match(/youtube-publication-control-(youtube-[1-4])\.json$/u)?.[1] || "").filter(Boolean).sort();
+  const expectedRouteKeys = [...new Set(options.expectedRouteKeys)].sort();
+  const missingRouteKeys = expectedRouteKeys.filter((route) => !receivedRouteKeys.includes(route));
+  const unexpectedRouteKeys = expectedRouteKeys.length ? receivedRouteKeys.filter((route) => !expectedRouteKeys.includes(route)) : [];
+  const exactRouteScope = expectedRouteKeys.length === 0 || (missingRouteKeys.length === 0 && unexpectedRouteKeys.length === 0);
   const tails = uniqueRows(routes.flatMap(({ report }) => report.tails || []), (row) => row.videoType === "polyglot"
     ? `polyglot|${row.polyglotKey}`
     : `ordinary|${row.setId}|${row.supportLang}|${row.targetLang}`);
@@ -67,10 +74,14 @@ function main() {
   const calendarDayGaps = routes.flatMap(({ file, report }) => (report.calendarDayGaps || []).map((row) => ({ routeArtifact: file, ...row })));
   const sourceRuns = options.sourceRuns.map(parseSourceRun);
   const summary = {
-    complete: routes.length === options.expectedRoutes,
+    complete: routes.length === options.expectedRoutes && exactRouteScope,
     expectedRouteCount: options.expectedRoutes,
     receivedRouteCount: routes.length,
-    healthy: routes.length === options.expectedRoutes && blockers.length === 0,
+    healthy: routes.length === options.expectedRoutes && exactRouteScope && blockers.length === 0,
+    expectedRouteKeys,
+    receivedRouteKeys,
+    missingRouteKeys,
+    unexpectedRouteKeys,
     blockerCount: blockers.length,
     advisoryCount: advisories.length,
     tailCount: tails.length,
@@ -96,6 +107,11 @@ function main() {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
     mode: "youtube_publication_control_all_routes",
+    routeScope: {
+      mode: expectedRouteKeys.length === 4 ? "all_routes" : "selected_routes",
+      expectedRouteKeys,
+      receivedRouteKeys,
+    },
     summary,
     routes: routes.map(({ file, report }) => ({
       file,

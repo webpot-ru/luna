@@ -20,6 +20,10 @@ on:
         required: true
         default: false
         type: boolean
+      audit_routes:
+        description: "Routes to audit: ALL (default) or an explicit comma-separated subset such as youtube-2,youtube-3,youtube-4."
+        required: true
+        default: "ALL"
       campaign_ordinary_per_channel:
         description: "Optional no-spend campaign plan: next ordinary videos per physical channel; 0 disables campaign planning."
         required: true
@@ -46,23 +50,56 @@ permissions:
   contents: read
 
 jobs:
+  select-routes:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.select.outputs.matrix }}
+      route_count: ${{ steps.select.outputs.route_count }}
+      route_keys: ${{ steps.select.outputs.route_keys }}
+    steps:
+      - id: select
+        name: Validate and select audit routes
+        shell: bash
+        env:
+          AUDIT_ROUTES: ${{ github.event.inputs.audit_routes }}
+          CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
+          PLAN_REQUESTED: ${{ github.event.inputs.campaign_ordinary_per_channel != '0' || github.event.inputs.campaign_polyglot_per_channel != '0' }}
+        run: |
+          node <<'NODE'
+          const fs = require("node:fs");
+          const routes = [
+            { route: "youtube-1", environment: "youtube-api-branding", supports: "EN,ES-419,PT-BR,RU,HI,ID,FR,DE,JA,KO,TR,ZH" },
+            { route: "youtube-2", environment: "youtube-api-youtube-2", supports: "VI,TH,MS,PL,NL,SV,NO,DA,FI,CS,SK,HU,RO" },
+            { route: "youtube-3", environment: "youtube-api-youtube-3", supports: "BG,HR,SR,SL,LT,LV,ET,IS,BN,TL,MY,KM,LO" },
+            { route: "youtube-4", environment: "youtube-api-youtube-4", supports: "NE,SI,TA,TE,KN,ML,UZ,KK,AZ,KA,HY,SW,IT" },
+          ];
+          const requested = String(process.env.AUDIT_ROUTES || "ALL").trim();
+          const keys = requested.toUpperCase() === "ALL"
+            ? routes.map((row) => row.route)
+            : [...new Set(requested.split(",").map((value) => value.trim()).filter(Boolean))];
+          const invalid = keys.filter((key) => !routes.some((row) => row.route === key));
+          if (!keys.length || invalid.length) throw new Error(`invalid audit_routes: ${invalid.join(",") || requested}`);
+          const selected = routes.filter((row) => keys.includes(row.route));
+          if (process.env.PLAN_REQUESTED === "true" && selected.length < routes.length) {
+            if (String(process.env.CAMPAIGN_SUPPORTS || "").toUpperCase() === "ALL") {
+              throw new Error("route-scoped campaign planning requires an explicit campaign_supports list");
+            }
+            const allowed = new Set(selected.flatMap((row) => row.supports.split(",")));
+            const supports = String(process.env.CAMPAIGN_SUPPORTS || "").split(",").map((value) => value.trim().toUpperCase()).filter(Boolean);
+            const outside = supports.filter((support) => !allowed.has(support));
+            if (outside.length) throw new Error(`campaign_supports outside selected audit_routes: ${outside.join(",")}`);
+          }
+          const output = process.env.GITHUB_OUTPUT;
+          fs.appendFileSync(output, `matrix=${JSON.stringify({ include: selected })}\n`);
+          fs.appendFileSync(output, `route_count=${selected.length}\n`);
+          fs.appendFileSync(output, `route_keys=${selected.map((row) => row.route).join(",")}\n`);
+          NODE
+
   audit-route:
+    needs: select-routes
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - route: youtube-1
-            environment: youtube-api-branding
-            supports: EN,ES-419,PT-BR,RU,HI,ID,FR,DE,JA,KO,TR,ZH
-          - route: youtube-2
-            environment: youtube-api-youtube-2
-            supports: VI,TH,MS,PL,NL,SV,NO,DA,FI,CS,SK,HU,RO
-          - route: youtube-3
-            environment: youtube-api-youtube-3
-            supports: BG,HR,SR,SL,LT,LV,ET,IS,BN,TL,MY,KM,LO
-          - route: youtube-4
-            environment: youtube-api-youtube-4
-            supports: NE,SI,TA,TE,KN,ML,UZ,KK,AZ,KA,HY,SW,IT
+      matrix: ${{ fromJSON(needs.select-routes.outputs.matrix) }}
     runs-on: ubuntu-latest
     environment: ${{ matrix.environment }}
     timeout-minutes: 45
@@ -138,7 +175,7 @@ jobs:
             outputs/youtube-playlist-discovery-${{ matrix.route }}.json
 
   aggregate:
-    needs: audit-route
+    needs: [select-routes, audit-route]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -158,12 +195,15 @@ jobs:
           SET_ID: ${{ github.event.inputs.set_id }}
           PLAN_REQUESTED: ${{ github.event.inputs.campaign_ordinary_per_channel != '0' || github.event.inputs.campaign_polyglot_per_channel != '0' }}
           CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
+          EXPECTED_ROUTE_COUNT: ${{ needs.select-routes.outputs.route_count }}
+          EXPECTED_ROUTE_KEYS: ${{ needs.select-routes.outputs.route_keys }}
         run: |
           set -euo pipefail
           npm run merge:youtube-publication-control -- \
             --input=.control-artifacts \
-            --expected-routes=4 \
-            --source-run="$SET_ID:all:${GITHUB_RUN_ID}" \
+            --expected-routes="$EXPECTED_ROUTE_COUNT" \
+            --expected-route-keys="$EXPECTED_ROUTE_KEYS" \
+            --source-run="$SET_ID:$EXPECTED_ROUTE_KEYS:${GITHUB_RUN_ID}" \
             --output=outputs/youtube-publication-control-all-routes.json \
             --markdown=outputs/youtube-publication-control-all-routes.md
           if jq -e '.summary.complete == true' outputs/youtube-publication-control-all-routes.json >/dev/null; then
@@ -177,7 +217,7 @@ jobs:
           if [ "$PLAN_REQUESTED" = "true" ]; then
             npm run merge:youtube-playlist-discovery -- \
               --input=.control-artifacts \
-              --expected-routes=4 \
+              --expected-routes="$EXPECTED_ROUTE_COUNT" \
               --supports="$CAMPAIGN_SUPPORTS" \
               --output=outputs/youtube-playlist-discovery-snapshot.json
           fi

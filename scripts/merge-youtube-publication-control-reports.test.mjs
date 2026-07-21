@@ -72,12 +72,15 @@ const merged = spawnSync(process.execPath, [
   `--output=${output}`,
   `--markdown=${markdown}`,
   "--expected-routes=4",
+  "--expected-route-keys=youtube-1,youtube-2,youtube-3,youtube-4",
   "--source-run=deck:all:123456789",
 ], { cwd: process.cwd(), encoding: "utf8" });
 assert.equal(merged.status, 0, merged.stderr || merged.stdout);
 
 const aggregate = JSON.parse(fs.readFileSync(output, "utf8"));
 assert.equal(aggregate.summary.complete, true);
+assert.deepEqual(aggregate.summary.receivedRouteKeys, ["youtube-1", "youtube-2", "youtube-3", "youtube-4"]);
+assert.equal(aggregate.routeScope.mode, "all_routes");
 assert.equal(aggregate.summary.healthy, true);
 assert.equal(aggregate.summary.advisoryCount, 1);
 assert.equal(aggregate.advisories.length, 1);
@@ -97,5 +100,26 @@ assert.match(markdownText, /Polyglot slavic_core/);
 assert.match(markdownText, /https:\/\/www\.youtube\.com\/watch\?v=video-4/);
 assert.match(markdownText, /Unclassified uploads: 1/);
 assert.match(markdownText, /polyglot_full_tail_deferred_by_active_short_unverified/);
+
+const scopedOutput = path.join(root, "scoped.json");
+const scopedInput = path.join(root, "scoped-input");
+fs.mkdirSync(scopedInput, { recursive: true });
+for (const route of [2, 3, 4]) fs.copyFileSync(
+  path.join(input, `youtube-publication-control-youtube-${route}.json`),
+  path.join(scopedInput, `youtube-publication-control-youtube-${route}.json`),
+);
+const scoped = spawnSync(process.execPath, [
+  "scripts/merge-youtube-publication-control-reports.mjs",
+  `--input=${scopedInput}`,
+  `--output=${scopedOutput}`,
+  `--markdown=${path.join(root, "scoped.md")}`,
+  "--expected-routes=3",
+  "--expected-route-keys=youtube-2,youtube-3,youtube-4",
+], { cwd: process.cwd(), encoding: "utf8" });
+assert.equal(scoped.status, 0, scoped.stderr || scoped.stdout);
+const scopedAggregate = JSON.parse(fs.readFileSync(scopedOutput, "utf8"));
+assert.equal(scopedAggregate.summary.complete, true);
+assert.equal(scopedAggregate.routeScope.mode, "selected_routes");
+assert.deepEqual(scopedAggregate.summary.receivedRouteKeys, ["youtube-2", "youtube-3", "youtube-4"]);
 
 console.log("youtube publication control merge tests passed");

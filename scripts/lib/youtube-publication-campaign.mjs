@@ -317,7 +317,7 @@ function exactDeck(snapshot, setId) {
   return deck;
 }
 
-function snapshotBlockers(deck, snapshotGeneratedAt, now, maxAgeMinutes) {
+function snapshotBlockers(deck, snapshotGeneratedAt, now, maxAgeMinutes, requiredSupports = []) {
   const blockers = [];
   const summary = deck.summary || {};
   const requiredTrue = ["complete", "paginationComplete", "videoStatusReadbackComplete"];
@@ -332,6 +332,9 @@ function snapshotBlockers(deck, snapshotGeneratedAt, now, maxAgeMinutes) {
     "liveScheduleMissingCalendarCount",
   ];
   for (const key of zeroFields) if (Number(summary[key] || 0) !== 0) blockers.push(`snapshot.${key} must be 0, got ${summary[key]}`);
+  const auditedSupports = new Set((deck.evidence?.routes || []).flatMap((route) => route.supports || []).map(canonicalSupportCode));
+  const missingSupports = requiredSupports.map(canonicalSupportCode).filter((support) => support && !auditedSupports.has(support));
+  if (missingSupports.length) blockers.push(`snapshot is missing selected supports: ${[...new Set(missingSupports)].sort().join(",")}`);
   const generatedMillis = Date.parse(snapshotGeneratedAt || "");
   const ageMinutes = Number.isFinite(generatedMillis) ? (now.getTime() - generatedMillis) / 60_000 : Number.POSITIVE_INFINITY;
   if (!Number.isFinite(ageMinutes) || ageMinutes < -5 || ageMinutes > maxAgeMinutes) {
@@ -570,7 +573,7 @@ export function buildPublicationCampaign(options = {}) {
     : { available: false, matchesLocalFile: false, commit: "", blobId: "", localBlobId: "" };
   const claims = campaignClaimSets(planningCampaignRegistry);
   const cardCount = deckCardCount({ offlineDeckPath: paths.offlineDeck, historicalDeckSource });
-  const freshness = snapshotBlockers(deck, snapshot.generatedAt, now, maxSnapshotAgeMinutes);
+  const freshness = snapshotBlockers(deck, snapshot.generatedAt, now, maxSnapshotAgeMinutes, supports);
   const blockers = [...freshness.blockers, ...replacementBlockers];
   const warnings = [];
   if (!playlistDiscoveryExists) blockers.push(`route-authenticated playlist discovery snapshot is missing: ${paths.playlistDiscovery}`);
