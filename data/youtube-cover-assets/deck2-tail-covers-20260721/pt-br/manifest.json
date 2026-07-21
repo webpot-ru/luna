@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-21T00:34:44.620Z",
+  "status": "approved",
+  "sourceOfTruth": "Approved local base artwork plus deterministic no-provider text overlays.",
+  "configPath": "config/youtube-cover-templates.json",
+  "policy": {
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0,
+    "applyRequiresGitTrackedAssets": true
+  },
+  "counts": {
+    "setIds": [
+      "home_kitchen_cooking_actions_a1_a2"
+    ],
+    "supports": [
+      "PT-BR"
+    ],
+    "types": [
+      "ordinary"
+    ],
+    "coverCount": 6,
+    "ordinaryCount": 6,
+    "polyglotCount": 0,
+    "skippedCount": 0,
+    "outputRoot": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br",
+    "dryRun": false,
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0
+  },
+  "outputs": {
+    "root": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br",
+    "manifest": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/manifest.json",
+    "contactSheets": [
+      {
+        "setId": "home_kitchen_cooking_actions_a1_a2",
+        "supportLang": "PT-BR",
+        "videoType": "ordinary",
+        "coverCount": 6,
+        "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/contact-sheets/home_kitchen_cooking_actions_a1_a2__PT-BR__ordinary.jpg"
+      }
+    ]
+  },
+  "skipped": [],
+  "covers": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "viewerSupportLang": "PT-BR",
+      "channelKey": "pt",
+      "channelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "channelHandle": "LunaCardsPortugues",
+      "channelSupportLangs": [
+        "PT",
+        "PT-BR"
+      ],
+      "targetLang": "SK",
+      "targetName": "Eslovaco",
+      "targetLabel": "Eslovaco A1",
+      "title": "Ações de cozinhar",
+      "description": "Verbos de cozinha. Nível básico.",
+      "module": "Casa",
+      "category": "Cozinha",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/SK__Eslovaco/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/SK__Eslovaco/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/youtube-next-batch-153/data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/SK__Eslovaco/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 285327,
+      "sha256": "8bcc733abb56fc1c0579bae12bb5578382397e5dddef0d6d683aa0837a94e8d5"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "viewerSupportLang": "PT-BR",
+      "channelKey": "pt",
+      "channelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "channelHandle": "LunaCardsPortugues",
+      "channelSupportLangs": [
+        "PT",
+        "PT-BR"
+      ],
+      "targetLang": "RU",
+      "targetName": "Russo",
+      "targetLabel": "Russo A1",
+      "title": "Ações de cozinhar",
+      "description": "Verbos de cozinha. Nível básico.",
+      "module": "Casa",
+      "category": "Cozinha",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/RU__Russo/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/RU__Russo/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/youtube-next-batch-153/data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/RU__Russo/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 283150,
+      "sha256": "a37410384e7006cbc1c61362f10957a116c37d0255c609de0415ca65ecdbd370"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "viewerSupportLang": "PT-BR",
+      "channelKey": "pt",
+      "channelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "channelHandle": "LunaCardsPortugues",
+      "channelSupportLangs": [
+        "PT",
+        "PT-BR"
+      ],
+      "targetLang": "RO",
+      "targetName": "Romeno",
+      "targetLabel": "Romeno A1",
+      "title": "Ações de cozinhar",
+      "description": "Verbos de cozinha. Nível básico.",
+      "module": "Casa",
+      "category": "Cozinha",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/RO__Romeno/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/RO__Romeno/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/youtube-next-batch-153/data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/RO__Romeno/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 284460,
+      "sha256": "d6f7efcd50c5c697f166fdac7b440169fa857bbf92b309dd991bff50ad084b0d"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "viewerSupportLang": "PT-BR",
+      "channelKey": "pt",
+      "channelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "channelHandle": "LunaCardsPortugues",
+      "channelSupportLangs": [
+        "PT",
+        "PT-BR"
+      ],
+      "targetLang": "SI",
+      "targetName": "Cingalês",
+      "targetLabel": "Cingalês A1",
+      "title": "Ações de cozinhar",
+      "description": "Verbos de cozinha. Nível básico.",
+      "module": "Casa",
+      "category": "Cozinha",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/SI__Cingal_s/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/SI__Cingal_s/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/youtube-next-batch-153/data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/SI__Cingal_s/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 286015,
+      "sha256": "c62e42431f9d71f65957d7abb42c1e404096b8aaa9be1d7027291f515002e7bd"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "viewerSupportLang": "PT-BR",
+      "channelKey": "pt",
+      "channelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "channelHandle": "LunaCardsPortugues",
+      "channelSupportLangs": [
+        "PT",
+        "PT-BR"
+      ],
+      "targetLang": "SR",
+      "targetName": "Sérvio",
+      "targetLabel": "Sérvio A1",
+      "title": "Ações de cozinhar",
+      "description": "Verbos de cozinha. Nível básico.",
+      "module": "Casa",
+      "category": "Cozinha",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/SR__S_rvio/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/SR__S_rvio/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/youtube-next-batch-153/data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/SR__S_rvio/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 283256,
+      "sha256": "053f3b8ab1e43661c04d7987ed9961eb4ae886d333ba777dd6fd0d8803c48aa6"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "viewerSupportLang": "PT-BR",
+      "channelKey": "pt",
+      "channelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "channelHandle": "LunaCardsPortugues",
+      "channelSupportLangs": [
+        "PT",
+        "PT-BR"
+      ],
+      "targetLang": "SL",
+      "targetName": "Esloveno",
+      "targetLabel": "Esloveno A1",
+      "title": "Ações de cozinhar",
+      "description": "Verbos de cozinha. Nível básico.",
+      "module": "Casa",
+      "category": "Cozinha",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/SL__Esloveno/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/SL__Esloveno/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/youtube-next-batch-153/data/youtube-cover-assets/deck2-tail-covers-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/SL__Esloveno/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 285065,
+      "sha256": "f61c8b9a80e3a4332a5fdfe6d357bf74ebe955335a12e5ab83e475ce32671c8c"
+    }
+  ]
+}

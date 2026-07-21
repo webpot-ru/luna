@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-21T00:34:43.238Z",
+  "status": "approved",
+  "sourceOfTruth": "Approved local base artwork plus deterministic no-provider text overlays.",
+  "configPath": "config/youtube-cover-templates.json",
+  "policy": {
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0,
+    "applyRequiresGitTrackedAssets": true
+  },
+  "counts": {
+    "setIds": [
+      "home_kitchen_cooking_actions_a1_a2"
+    ],
+    "supports": [
+      "JA"
+    ],
+    "types": [
+      "ordinary"
+    ],
+    "coverCount": 6,
+    "ordinaryCount": 6,
+    "polyglotCount": 0,
+    "skippedCount": 0,
+    "outputRoot": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja",
+    "dryRun": false,
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0
+  },
+  "outputs": {
+    "root": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja",
+    "manifest": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/manifest.json",
+    "contactSheets": [
+      {
+        "setId": "home_kitchen_cooking_actions_a1_a2",
+        "supportLang": "JA",
+        "videoType": "ordinary",
+        "coverCount": 6,
+        "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/contact-sheets/home_kitchen_cooking_actions_a1_a2__JA__ordinary.jpg"
+      }
+    ]
+  },
+  "skipped": [],
+  "covers": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "JA",
+      "viewerSupportLang": "JA",
+      "channelKey": "ja",
+      "channelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "channelHandle": "LunaCardsJapan",
+      "channelSupportLangs": [
+        "JA"
+      ],
+      "targetLang": "SK",
+      "targetName": "スロバキア語",
+      "targetLabel": "スロバキア語 A1",
+      "title": "料理の動作",
+      "description": "料理の動詞。初級レベル。",
+      "module": "家",
+      "category": "キッチン",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SK__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SK__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/youtube-next-batch-153/data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SK__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 284723,
+      "sha256": "2b04e951dd998330e0c7e6b2b396d6ba88f70174eabc423f8c6743ef1786bbdf"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "JA",
+      "viewerSupportLang": "JA",
+      "channelKey": "ja",
+      "channelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "channelHandle": "LunaCardsJapan",
+      "channelSupportLangs": [
+        "JA"
+      ],
+      "targetLang": "RU",
+      "targetName": "ロシア語",
+      "targetLabel": "ロシア語 A1",
+      "title": "料理の動作",
+      "description": "料理の動詞。初級レベル。",
+      "module": "家",
+      "category": "キッチン",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/RU__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/RU__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/youtube-next-batch-153/data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/RU__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 281128,
+      "sha256": "786c4f073169b04fd58a38c971509024881bd9d2e5c25547a46d44bd2ae5d85c"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "JA",
+      "viewerSupportLang": "JA",
+      "channelKey": "ja",
+      "channelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "channelHandle": "LunaCardsJapan",
+      "channelSupportLangs": [
+        "JA"
+      ],
+      "targetLang": "SV",
+      "targetName": "スウェーデン語",
+      "targetLabel": "スウェーデン語 A1",
+      "title": "料理の動作",
+      "description": "料理の動詞。初級レベル。",
+      "module": "家",
+      "category": "キッチン",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SV__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SV__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/youtube-next-batch-153/data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SV__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 284023,
+      "sha256": "b24bb43c70144182c50d0677d4defd4cb2bbcc25d165d420179d04c2526e6e5a"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "JA",
+      "viewerSupportLang": "JA",
+      "channelKey": "ja",
+      "channelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "channelHandle": "LunaCardsJapan",
+      "channelSupportLangs": [
+        "JA"
+      ],
+      "targetLang": "SI",
+      "targetName": "シンハラ語",
+      "targetLabel": "シンハラ語 A1",
+      "title": "料理の動作",
+      "description": "料理の動詞。初級レベル。",
+      "module": "家",
+      "category": "キッチン",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SI__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SI__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/youtube-next-batch-153/data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SI__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 282938,
+      "sha256": "fc44ed54bb958961dc101fb831401352898aa1194851a144efe714d53a1a16df"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "JA",
+      "viewerSupportLang": "JA",
+      "channelKey": "ja",
+      "channelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "channelHandle": "LunaCardsJapan",
+      "channelSupportLangs": [
+        "JA"
+      ],
+      "targetLang": "SR",
+      "targetName": "セルビア語",
+      "targetLabel": "セルビア語 A1",
+      "title": "料理の動作",
+      "description": "料理の動詞。初級レベル。",
+      "module": "家",
+      "category": "キッチン",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SR__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SR__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/youtube-next-batch-153/data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SR__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 283676,
+      "sha256": "0961441f641dc387ff9e9e163a8b3efee8c57a431aa1b71ade6182041fe3fc6c"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "JA",
+      "viewerSupportLang": "JA",
+      "channelKey": "ja",
+      "channelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "channelHandle": "LunaCardsJapan",
+      "channelSupportLangs": [
+        "JA"
+      ],
+      "targetLang": "SL",
+      "targetName": "スロベニア語",
+      "targetLabel": "スロベニア語 A1",
+      "title": "料理の動作",
+      "description": "料理の動詞。初級レベル。",
+      "module": "家",
+      "category": "キッチン",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SL__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SL__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/youtube-next-batch-153/data/youtube-cover-assets/deck2-tail-covers-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/SL__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 283743,
+      "sha256": "e5a07179a2373eb0ac78841b4b241a3954c48902964309f2878642347d3cdcfb"
+    }
+  ]
+}

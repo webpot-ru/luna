@@ -48,6 +48,9 @@ const ACTIVE_CAMPAIGN_STATUSES = new Set([
   "upload_accepted",
   "reconciliation_required",
 ]);
+const RELEASED_ASSIGNMENT_STATUSES = new Set([
+  "superseded_partial_recovery",
+]);
 const SHORT_UNVERIFIED_MAX_DURATION_SECONDS = 895;
 const DEFAULT_SHORT_UNVERIFIED_CARD_LIMIT = 0;
 
@@ -182,16 +185,28 @@ function campaignClaimSets(registry = {}) {
   const slots = new Set();
   const polyglotProducts = new Set();
   for (const campaign of activeCampaigns(registry)) {
-    for (const key of campaign.assignmentKeys || []) assignments.add(key);
-    for (const key of campaign.slotKeys || []) slots.add(key);
-    for (const assignment of campaign.assignments || []) {
+    const campaignAssignments = campaign.assignments || [];
+    const representedAssignmentKeys = new Set(campaignAssignments.map((row) => row.assignmentKey).filter(Boolean));
+    const representedSlotKeys = new Set(campaignAssignments.map((row) => row.slotKey).filter(Boolean));
+    for (const assignment of campaignAssignments) {
+      if (RELEASED_ASSIGNMENT_STATUSES.has(String(assignment.status || "").toLowerCase())) continue;
+      if (assignment.assignmentKey) assignments.add(assignment.assignmentKey);
+      if (assignment.slotKey) slots.add(assignment.slotKey);
       if (isPolyglotRow(assignment)) polyglotProducts.add(polyglotProductSlotKey(assignment));
     }
+    // Legacy campaigns may have only the compact top-level key arrays. Keep
+    // those as a fail-closed fallback, but do not let them re-claim an exact
+    // assignment that partial recovery already released in the detailed rows.
     for (const key of campaign.assignmentKeys || []) {
+      if (representedAssignmentKeys.has(key)) continue;
+      assignments.add(key);
       const parts = String(key || "").split("|");
       if (parts[0] === "polyglot" && parts.length >= 4) {
         polyglotProducts.add(["polyglot-product-slot", parts[1], canonicalSupportCode(parts[2]), parts[3]].join("|"));
       }
+    }
+    for (const key of campaign.slotKeys || []) {
+      if (!representedSlotKeys.has(key)) slots.add(key);
     }
   }
   return { assignments, slots, polyglotProducts };
