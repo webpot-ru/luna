@@ -323,6 +323,7 @@ function channelSummaries(publications, tails, duplicates) {
 function routeEvidence(report) {
   return (report.routes || []).map((route) => ({
     artifact: path.basename(route.file || ""),
+    routeKey: path.basename(route.file || "").match(/youtube-publication-control-(youtube-[1-4])\.json$/u)?.[1] || "",
     supports: (route.supports || []).map(canonicalSupportCode).filter(Boolean),
     supportCount: (route.supports || []).length,
     generatedAt: route.generatedAt || "",
@@ -381,6 +382,11 @@ function buildDeck(report, sourceRuns, nowMillis) {
     evidence: {
       routeCount: report.summary?.receivedRouteCount || routes.length,
       expectedRouteCount: report.summary?.expectedRouteCount || 4,
+      routeScope: report.routeScope || {
+        mode: "all_routes",
+        expectedRouteKeys: routes.map((route) => route.routeKey).filter(Boolean).sort(),
+        receivedRouteKeys: routes.map((route) => route.routeKey).filter(Boolean).sort(),
+      },
       videoStatusReadbackComplete: report.summary?.videoStatusReadbackComplete === true || routes.every((route) => route.videoStatusReadback),
       paginationComplete: report.summary?.paginationComplete === true || routes.every((route) => route.paginationComplete),
       strictApplyEvidence: (report.summary?.videoStatusReadbackComplete === true || routes.every((route) => route.videoStatusReadback))
