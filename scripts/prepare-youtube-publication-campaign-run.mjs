@@ -173,7 +173,8 @@ function main() {
   if (ordinaryMatrix.some((row) => !row.route_key)) blockers.push("ordinary worker matrix contains an empty route key");
   if (polyglotMatrix.some((row) => !row.route_key)) blockers.push("Polyglot worker matrix contains an empty route key");
   const supportCount = Number(campaign.inputs?.supportCount || 0);
-  const ordinarySupportCount = Number(campaign.inputs?.ordinarySupportCount ?? supportCount);
+  const ordinarySupportCount = Number(campaign.inputs?.ordinarySupportCount
+    ?? (allowPartialOrdinaryTail ? ordinaryBySupport.size : supportCount));
   const polyglotSupportCount = Number(campaign.inputs?.polyglotSupportCount ?? supportCount);
   if (ordinaryExpected > 0 && ordinaryMatrix.length !== ordinarySupportCount) {
     blockers.push(`ordinary support matrix count ${ordinaryMatrix.length} does not match campaign`);

@@ -169,6 +169,7 @@ const partialTailCampaign = {
   campaignId: "campaign-partial-ordinary-tail",
   inputs: {
     ...campaign.inputs,
+    supportCount: 2,
     ordinaryPerChannel: 2,
     allowPartialOrdinaryTail: true,
     polyglotPerChannel: 0,
