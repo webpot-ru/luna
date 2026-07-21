@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-21T12:09:51.074Z",
+  "status": "approved",
+  "sourceOfTruth": "Approved local base artwork plus deterministic no-provider text overlays.",
+  "configPath": "config/youtube-cover-templates.json",
+  "policy": {
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0,
+    "applyRequiresGitTrackedAssets": true
+  },
+  "counts": {
+    "setIds": [
+      "home_kitchen_cooking_actions_a1_a2"
+    ],
+    "supports": [
+      "ZH"
+    ],
+    "types": [
+      "ordinary"
+    ],
+    "coverCount": 4,
+    "ordinaryCount": 4,
+    "polyglotCount": 0,
+    "skippedCount": 0,
+    "outputRoot": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh",
+    "dryRun": false,
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0
+  },
+  "outputs": {
+    "root": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh",
+    "manifest": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/manifest.json",
+    "contactSheets": [
+      {
+        "setId": "home_kitchen_cooking_actions_a1_a2",
+        "supportLang": "ZH",
+        "videoType": "ordinary",
+        "coverCount": 4,
+        "relativePath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/contact-sheets/home_kitchen_cooking_actions_a1_a2__ZH__ordinary.jpg"
+      }
+    ]
+  },
+  "skipped": [],
+  "covers": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ZH",
+      "viewerSupportLang": "ZH",
+      "channelKey": "zh",
+      "channelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "channelHandle": "LunaCardsChinese",
+      "channelSupportLangs": [
+        "ZH"
+      ],
+      "targetLang": "SV",
+      "targetName": "瑞典语",
+      "targetLabel": "瑞典语 A1",
+      "title": "烹饪动作",
+      "description": "厨房动作词。初级。",
+      "module": "家",
+      "category": "厨房",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/SV__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/SV__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/deck2-cover-tail-20260721/data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/SV__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 279042,
+      "sha256": "65b67e398d990096bf21a8ed1cfc0fe02b35271148018b2b7dd1fe882921a83a"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ZH",
+      "viewerSupportLang": "ZH",
+      "channelKey": "zh",
+      "channelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "channelHandle": "LunaCardsChinese",
+      "channelSupportLangs": [
+        "ZH"
+      ],
+      "targetLang": "TA",
+      "targetName": "泰米尔语",
+      "targetLabel": "泰米尔语 A1",
+      "title": "烹饪动作",
+      "description": "厨房动作词。初级。",
+      "module": "家",
+      "category": "厨房",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/TA__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/TA__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/deck2-cover-tail-20260721/data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/TA__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 280684,
+      "sha256": "3d7a1936843a4f3bdba96bb8634147e10d2c577cba627a994979e141d2705c85"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ZH",
+      "viewerSupportLang": "ZH",
+      "channelKey": "zh",
+      "channelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "channelHandle": "LunaCardsChinese",
+      "channelSupportLangs": [
+        "ZH"
+      ],
+      "targetLang": "SW",
+      "targetName": "斯瓦希里语",
+      "targetLabel": "斯瓦希里语 A1",
+      "title": "烹饪动作",
+      "description": "厨房动作词。初级。",
+      "module": "家",
+      "category": "厨房",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/SW__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/SW__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/deck2-cover-tail-20260721/data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/SW__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 283309,
+      "sha256": "d078b5e5af5be81ab802e62b4d7fde7701b5c6abde02f79644a3364ae5cfd458"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ZH",
+      "viewerSupportLang": "ZH",
+      "channelKey": "zh",
+      "channelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "channelHandle": "LunaCardsChinese",
+      "channelSupportLangs": [
+        "ZH"
+      ],
+      "targetLang": "SR",
+      "targetName": "塞尔维亚语",
+      "targetLabel": "塞尔维亚语 A1",
+      "title": "烹饪动作",
+      "description": "厨房动作词。初级。",
+      "module": "家",
+      "category": "厨房",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/SR__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/SR__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/deck2-cover-tail-20260721/data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/SR__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 284005,
+      "sha256": "292f8039a484db1343d415d04d61029ff55cb5e9554e896c4a324441e8381e47"
+    }
+  ]
+}
