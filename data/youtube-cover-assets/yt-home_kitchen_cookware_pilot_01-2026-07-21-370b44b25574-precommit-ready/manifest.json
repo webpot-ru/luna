@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-21T08:17:21.904Z",
+  "status": "approved",
+  "sourceOfTruth": "Immutable campaign manifest; exact missing custom-thumbnail assignments only.",
+  "campaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-21-370b44b25574",
+  "campaignManifestHash": "dc63d709004a9076e8b5ee7aedb03d5ba103330038d69fdd733475dedf0a641a",
+  "source": {
+    "campaignManifest": "outputs/review/zh-polyglot-preflight-29812623867/youtube-publication-campaign-plan.json",
+    "approvedCoverManifest": "data/youtube-cover-assets/yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-30b96a246c69/manifest.json",
+    "historicalDeckGitBlob": "372c326eb5a973d0c0aba0bd13fe123bd23e612c",
+    "historicalDeckSha256": "164bd8d1f085b453db6bf3b487da1d4ebb38e7db50fefea1380a6ca34c26b5bc",
+    "approvedBaseImage": "assets/youtube-cover-templates/deck1-polyglot-approved-base.png",
+    "approvedBaseImageSha256": "27857442f4c09b75e4e2297cad01f86f40d93b2c3a2c5af7e446a3e00be2240e"
+  },
+  "policy": {
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0,
+    "uploadEligible": true,
+    "visualReviewRequired": false,
+    "gitTrackedApprovalManifestRequired": false
+  },
+  "counts": {
+    "campaignId": "yt-home_kitchen_cookware_pilot_01-2026-07-21-370b44b25574",
+    "campaignManifestHash": "dc63d709004a9076e8b5ee7aedb03d5ba103330038d69fdd733475dedf0a641a",
+    "coverCount": 1,
+    "ordinaryCount": 0,
+    "polyglotCount": 1,
+    "status": "approved",
+    "approved": true,
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0
+  },
+  "review": {
+    "sheetCsv": "data/youtube-cover-assets/yt-home_kitchen_cookware_pilot_01-2026-07-21-370b44b25574-precommit-ready/review-sheet.csv",
+    "contactSheets": [
+      {
+        "groupKey": "ZH__polyglot",
+        "coverCount": 1,
+        "relativePath": "data/youtube-cover-assets/yt-home_kitchen_cookware_pilot_01-2026-07-21-370b44b25574-precommit-ready/contact-sheets/ZH__polyglot.jpg"
+      }
+    ],
+    "pendingVisualReviewCount": 0,
+    "approvedCount": 1,
+    "cjkTextCoverCount": 1
+  },
+  "covers": [
+    {
+      "setId": "home_kitchen_cookware_pilot_01",
+      "supportLang": "ZH",
+      "viewerSupportLang": "ZH",
+      "channelKey": "zh",
+      "channelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "channelHandle": "LunaCardsChinese",
+      "channelSupportLangs": [
+        "ZH"
+      ],
+      "assignmentKey": "polyglot|home_kitchen_cookware_pilot_01|ZH|east_asia_core|e3f7fbb970b2|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_cookware_pilot_01|ZH|east_asia_core|full|zh",
+      "title": "厨房用品基础",
+      "description": "餐具和厨具。基础级别。",
+      "module": "家",
+      "category": "厨房",
+      "baseImage": "assets/youtube-cover-templates/deck1-polyglot-approved-base.png",
+      "sourceAssetApproval": "git-tracked-approved-base",
+      "uploadEligible": true,
+      "status": "approved",
+      "reviewStatus": "approved_visual_review",
+      "gitTrackedApprovalRequired": false,
+      "videoType": "polyglot",
+      "bundleKey": "east_asia_core",
+      "bundleLabel": "east_asia_core",
+      "contentScope": "full",
+      "targetLangs": [
+        "JA",
+        "KO",
+        "EN"
+      ],
+      "targetLangsCsv": "JA,KO,EN",
+      "targetLangsHash": "e3f7fbb970b2",
+      "targetLanguageLines": [
+        "日语 · 韩语",
+        "英语"
+      ],
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:ZH:east_asia_core:e3f7fbb970b2:full",
+      "visualTemplate": "polyglot-target-languages-large-lines-v1-deck2-action-base",
+      "relativePath": "data/youtube-cover-assets/yt-home_kitchen_cookware_pilot_01-2026-07-21-370b44b25574-precommit-ready/by-assignment/polyglot-home_kitchen_cookware_pilot_01-ZH-east_asia_core-e3f7fbb970b2-full.jpg",
+      "sidecarPath": "data/youtube-cover-assets/yt-home_kitchen_cookware_pilot_01-2026-07-21-370b44b25574-precommit-ready/by-assignment/polyglot-home_kitchen_cookware_pilot_01-ZH-east_asia_core-e3f7fbb970b2-full.json",
+      "cjkTextPresent": true,
+      "path": "/Users/lali/Documents/LUNA2/worktrees/deck1-zh-polyglot-tail/data/youtube-cover-assets/yt-home_kitchen_cookware_pilot_01-2026-07-21-370b44b25574-precommit-ready/by-assignment/polyglot-home_kitchen_cookware_pilot_01-ZH-east_asia_core-e3f7fbb970b2-full.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 270105,
+      "sha256": "f8ee71e912e4e2a9396268db942500277ab91c88ceea62903cfc25b167f0db33"
+    }
+  ]
+}
