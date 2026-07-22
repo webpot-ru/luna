@@ -223969,10 +223969,6 @@
         "ordinary|home_kitchen_cooking_actions_a1_a2|JA|TR",
         "ordinary|home_kitchen_cooking_actions_a1_a2|JA|UZ",
         "ordinary|home_kitchen_cooking_actions_a1_a2|JA|VI",
-        "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TL",
-        "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TR",
-        "ordinary|home_kitchen_cooking_actions_a1_a2|KO|UZ",
-        "ordinary|home_kitchen_cooking_actions_a1_a2|KO|VI",
         "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TH",
         "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TL",
         "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TR",
@@ -224019,10 +224015,6 @@
         "ja|2026-07-22T23:30:00.000Z",
         "ja|2026-07-23T02:30:00.000Z",
         "ja|2026-07-23T05:30:00.000Z",
-        "ko|2026-07-22T14:30:00.000Z",
-        "ko|2026-07-22T23:30:00.000Z",
-        "ko|2026-07-23T02:30:00.000Z",
-        "ko|2026-07-23T05:30:00.000Z",
         "pt|2026-07-22T19:30:00.000Z",
         "pt|2026-07-22T22:30:00.000Z",
         "pt|2026-07-23T07:30:00.000Z",
@@ -225704,7 +225696,9 @@
             "registryEntryPresent": true,
             "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
           },
-          "status": "claimed"
+          "status": "superseded_partial_recovery",
+          "supersededAt": "2026-07-22T08:56:40.618Z",
+          "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-22-f426219ea591"
         },
         {
           "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TR",
@@ -225751,7 +225745,9 @@
             "registryEntryPresent": true,
             "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
           },
-          "status": "claimed"
+          "status": "superseded_partial_recovery",
+          "supersededAt": "2026-07-22T08:56:40.618Z",
+          "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-22-f426219ea591"
         },
         {
           "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|UZ",
@@ -225798,7 +225794,9 @@
             "registryEntryPresent": true,
             "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
           },
-          "status": "claimed"
+          "status": "superseded_partial_recovery",
+          "supersededAt": "2026-07-22T08:56:40.618Z",
+          "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-22-f426219ea591"
         },
         {
           "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|VI",
@@ -225845,7 +225843,9 @@
             "registryEntryPresent": true,
             "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
           },
-          "status": "claimed"
+          "status": "superseded_partial_recovery",
+          "supersededAt": "2026-07-22T08:56:40.618Z",
+          "supersededByCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-22-f426219ea591"
         },
         {
           "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TH",
@@ -226807,7 +226807,356 @@
         "ordinaryResult": "failure",
         "polyglotResult": "skipped",
         "artifactCount": 12
-      }
+      },
+      "partialRecoveryCampaignIds": [
+        "yt-home_kitchen_cooking_actions_a1_a2-2026-07-22-f426219ea591"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-22-f426219ea591",
+      "manifestHash": "b66534de1d2da9472e77970a8094268676b5d2ce07fb7a3af39f427b990e960f",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "status": "claimed",
+      "claimedAt": "2026-07-22T08:56:40.618Z",
+      "generatedAt": "2026-07-22T08:56:40.618Z",
+      "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_cooking_actions_a1_a2-2026-07-22-f426219ea591.json",
+      "recoveryOfCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-22-c4afe6727e48",
+      "inputs": {
+        "supports": "KO",
+        "supportCount": 1,
+        "ordinarySupportCount": 1,
+        "polyglotSupportCount": 0,
+        "ordinaryPerChannel": 4,
+        "allowPartialOrdinaryTail": true,
+        "polyglotPerChannel": 0,
+        "assignmentKeys": [
+          "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TL",
+          "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TR",
+          "ordinary|home_kitchen_cooking_actions_a1_a2|KO|UZ",
+          "ordinary|home_kitchen_cooking_actions_a1_a2|KO|VI"
+        ],
+        "startDate": "auto",
+        "minFutureMinutes": 90,
+        "maxSnapshotAgeMinutes": 30,
+        "partialRecoveryOfCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-22-c4afe6727e48"
+      },
+      "summary": {
+        "applyReady": true,
+        "blockerCount": 0,
+        "warningCount": 0,
+        "supportCount": 1,
+        "ordinaryCount": 4,
+        "polyglotCount": 0,
+        "assignmentCount": 4,
+        "firstPublishAt": "2026-07-22T14:30:00.000Z",
+        "lastPublishAt": "2026-07-23T05:30:00.000Z",
+        "customThumbnailCount": 0,
+        "automaticThumbnailCount": 4,
+        "existingPlaylistCount": 4,
+        "playlistCreateCount": 0,
+        "playlistCreateCountMaximum": 0,
+        "routeCounts": {
+          "youtube-1": 4,
+          "youtube-2": 0,
+          "youtube-3": 0,
+          "youtube-4": 0
+        }
+      },
+      "evidence": {
+        "partialRecoveryCampaign": {
+          "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-22-c4afe6727e48",
+          "manifestHash": "9ffa981f81c1d1a508b1c603f7a5c0d1cfa55d3cf4bffa7583f385324b239d26",
+          "status": "reconciliation_required"
+        },
+        "routeControlReports": [
+          {
+            "routeKey": "youtube-1",
+            "generatedAt": "2026-07-22T08:52:33.100Z",
+            "ageMinutes": 4.1253,
+            "selectedBlockerCount": 0,
+            "ignoredUnrelatedBlockerCount": 0
+          }
+        ],
+        "sourceFingerprints": {
+          "snapshot": {
+            "path": "outputs/youtube-publication-snapshot.json",
+            "exists": true,
+            "sha256": "6d65558228e1a12bdcd17572a53cce2c20e18a3bd7dd9b9843b7710fbfc7577d"
+          },
+          "calendar": {
+            "path": "config/youtube-publish-calendar.json",
+            "exists": true,
+            "sha256": "7bd7b0ef3ded14ba166267f7a08cf23141e7de6ee5e115197fb36467fd44ba1d"
+          },
+          "campaignRegistry": {
+            "path": "config/youtube-publication-campaigns.json",
+            "exists": true,
+            "sha256": "a1215e938b90c4a382c6725e033f95f244a1437d448d3c52c4769da7f81e316c"
+          },
+          "policy": {
+            "path": "config/youtube-publish-schedule-policy.json",
+            "exists": true,
+            "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+          },
+          "routing": {
+            "path": "config/youtube-api-project-routing.json",
+            "exists": true,
+            "sha256": "e195a73d31716e2248f4031edfe6346331b670f8d4afab90abf346d70cb18c82"
+          },
+          "channels": {
+            "path": "config/youtube-channels.json",
+            "exists": true,
+            "sha256": "bc5d4a0ac8b594ca980d112129bf2f1ebd73b2b38af21406920580eb5ea1f976"
+          },
+          "covers": {
+            "path": "config/youtube-cover-assets.json",
+            "exists": true,
+            "sha256": "a181440d2645d4ab23962c1e2b31a6592c5e43736f9ca65e6df52bcc0f5a2451"
+          },
+          "deckSources": {
+            "path": "data/deck-sources.json",
+            "exists": true,
+            "sha256": "605eda7deb59067f0809da9d751f443016d4ccd341beac66c45bbdec717d9a45"
+          },
+          "offlineDeck": {
+            "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json",
+            "exists": true,
+            "sha256": "221f3eb523c1b5e5cd9656d9d26fc3fc6e2ca43e2bc8d3c0c5322597cfaf9cd5"
+          },
+          "ordinaryPlaylists": {
+            "path": "config/youtube-playlists.json",
+            "exists": true,
+            "sha256": "90a808dfb49161d94ccbcaa9f461784fb971e43dfe49bff29daea9aa643558cf"
+          },
+          "polyglotPlaylists": {
+            "path": "config/youtube-polyglot-playlists.json",
+            "exists": true,
+            "sha256": "1e1ab1ab7067b951e60ac73215f6433e4e3958bdfd1ecd2f59f14a4d414edf52"
+          },
+          "playlistDiscovery": {
+            "path": "outputs/youtube-playlist-discovery-snapshot.json",
+            "exists": true,
+            "sha256": "0abcc3e27480a39c2d6448faa1f91b9dcca387872ea4b04a034398f9ae5d2455"
+          }
+        },
+        "deckSource": {
+          "mode": "historical_git_blob",
+          "driveFileIdConfigured": false,
+          "offlineDeckExists": true,
+          "offlineDeckTracked": false,
+          "historicalGitBlob": {
+            "available": true,
+            "matchesLocalFile": true,
+            "commit": "0a4e6907cdffdb1cafa4b44e723f87650b16a19e",
+            "blobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+            "localBlobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+            "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json"
+          }
+        }
+      },
+      "assignmentKeys": [
+        "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TL",
+        "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TR",
+        "ordinary|home_kitchen_cooking_actions_a1_a2|KO|UZ",
+        "ordinary|home_kitchen_cooking_actions_a1_a2|KO|VI"
+      ],
+      "slotKeys": [
+        "ko|2026-07-22T14:30:00.000Z",
+        "ko|2026-07-22T23:30:00.000Z",
+        "ko|2026-07-23T02:30:00.000Z",
+        "ko|2026-07-23T05:30:00.000Z"
+      ],
+      "assignments": [
+        {
+          "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TL",
+          "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TL|ko",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_cooking_actions_a1_a2",
+          "supportLang": "KO",
+          "targetLang": "TL",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "ko",
+          "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+          "routeKey": "youtube-1",
+          "youtubeEnvironment": "youtube-api-branding",
+          "publishAt": "2026-07-22T14:30:00.000Z",
+          "localDate": "2026-07-22",
+          "localTime": "23:30",
+          "timeZone": "Asia/Seoul",
+          "slotKey": "ko|2026-07-22T14:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "KO__TL__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLGfPcWlzsR_U",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "필리핀어 A1: Everyday: 단어",
+            "description": "필리핀어 공부하기. 오늘의 주제는 FlashcardsLuna입니다. 원어민의 발음을 잘 듣고 따라 해보세요. 마지막에는 퀴즈가 준비되어 있습니다! 웹사이트에서 무료로 카드 세트를 연습하세요",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TR",
+          "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TR|ko",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_cooking_actions_a1_a2",
+          "supportLang": "KO",
+          "targetLang": "TR",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "ko",
+          "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+          "routeKey": "youtube-1",
+          "youtubeEnvironment": "youtube-api-branding",
+          "publishAt": "2026-07-22T23:30:00.000Z",
+          "localDate": "2026-07-23",
+          "localTime": "08:30",
+          "timeZone": "Asia/Seoul",
+          "slotKey": "ko|2026-07-22T23:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "KO__TR__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLRilKNSFTAQU",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "튀르키예어 A1: Everyday: 단어",
+            "description": "튀르키예어 공부하기. 오늘의 주제는 FlashcardsLuna입니다. 원어민의 발음을 잘 듣고 따라 해보세요. 마지막에는 퀴즈가 준비되어 있습니다! 웹사이트에서 무료로 카드 세트를 연습하세요",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|UZ",
+          "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|UZ|ko",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_cooking_actions_a1_a2",
+          "supportLang": "KO",
+          "targetLang": "UZ",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "ko",
+          "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+          "routeKey": "youtube-1",
+          "youtubeEnvironment": "youtube-api-branding",
+          "publishAt": "2026-07-23T02:30:00.000Z",
+          "localDate": "2026-07-23",
+          "localTime": "11:30",
+          "timeZone": "Asia/Seoul",
+          "slotKey": "ko|2026-07-23T02:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "KO__UZ__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLfdgyt3_JteY",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "우즈베크어 A1: Everyday: 단어",
+            "description": "우즈베크어 공부하기. 오늘의 주제는 FlashcardsLuna입니다. 원어민의 발음을 잘 듣고 따라 해보세요. 마지막에는 퀴즈가 준비되어 있습니다! 웹사이트에서 무료로 카드 세트를 연습하세요",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|VI",
+          "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|VI|ko",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_cooking_actions_a1_a2",
+          "supportLang": "KO",
+          "targetLang": "VI",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "ko",
+          "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+          "routeKey": "youtube-1",
+          "youtubeEnvironment": "youtube-api-branding",
+          "publishAt": "2026-07-23T05:30:00.000Z",
+          "localDate": "2026-07-23",
+          "localTime": "14:30",
+          "timeZone": "Asia/Seoul",
+          "slotKey": "ko|2026-07-23T05:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "KO__VI__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLG6cEidlT-5c",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "베트남어 A1: Everyday: 단어",
+            "description": "베트남어 공부하기. 오늘의 주제는 FlashcardsLuna입니다. 원어민의 발음을 잘 듣고 따라 해보세요. 마지막에는 퀴즈가 준비되어 있습니다! 웹사이트에서 무료로 카드 세트를 연습하세요",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+          },
+          "status": "claimed"
+        }
+      ]
     }
   ]
 }
