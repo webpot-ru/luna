@@ -238,6 +238,25 @@ jobs:
           DECK_PATH="data/decks/${SET_ID}.json"
           if [ ! -s "$DECK_PATH" ]; then
             mkdir -p data/decks
+            FILE_ID="$(node -e '
+              const fs = require("fs");
+              const mapping = fs.existsSync("data/deck-sources.json")
+                ? JSON.parse(fs.readFileSync("data/deck-sources.json", "utf8"))
+                : {};
+              process.stdout.write(String(mapping[process.env.SET_ID] || ""));
+            ')"
+            if [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
+              curl -c /tmp/cookies -sL "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o /tmp/confirm.html
+              CONFIRM=$(grep -o 'confirm=[^&" ]*' /tmp/confirm.html | head -n1 | cut -d= -f2 || true)
+              if [ -n "$CONFIRM" ]; then
+                curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&confirm=${CONFIRM}&id=${FILE_ID}" -o "$DECK_PATH"
+              else
+                curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "$DECK_PATH"
+              fi
+            fi
+          fi
+          if [ ! -s "$DECK_PATH" ]; then
+            mkdir -p data/decks
             HISTORICAL_COMMIT=""
             while IFS= read -r CANDIDATE; do
               if git cat-file -e "${CANDIDATE}:${DECK_PATH}" 2>/dev/null; then
