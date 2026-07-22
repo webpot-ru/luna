@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-22T10:53:18.454Z",
+  "status": "approved",
+  "sourceOfTruth": "Approved local base artwork plus deterministic no-provider text overlays.",
+  "configPath": "config/youtube-cover-templates.json",
+  "policy": {
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0,
+    "applyRequiresGitTrackedAssets": true
+  },
+  "counts": {
+    "setIds": [
+      "home_kitchen_cooking_actions_a1_a2"
+    ],
+    "supports": [
+      "EN"
+    ],
+    "types": [
+      "ordinary"
+    ],
+    "coverCount": 2,
+    "ordinaryCount": 2,
+    "polyglotCount": 0,
+    "skippedCount": 0,
+    "outputRoot": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/en",
+    "dryRun": false,
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0
+  },
+  "outputs": {
+    "root": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/en",
+    "manifest": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/en/manifest.json",
+    "contactSheets": [
+      {
+        "setId": "home_kitchen_cooking_actions_a1_a2",
+        "supportLang": "EN",
+        "videoType": "ordinary",
+        "coverCount": 2,
+        "relativePath": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/en/video/contact-sheets/home_kitchen_cooking_actions_a1_a2__EN__ordinary.jpg"
+      }
+    ]
+  },
+  "skipped": [],
+  "covers": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "EN",
+      "viewerSupportLang": "EN",
+      "channelKey": "en",
+      "channelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "channelHandle": "flashcardsluna",
+      "channelSupportLangs": [
+        "EN",
+        "EN-GB"
+      ],
+      "targetLang": "ZH",
+      "targetName": "Chinese",
+      "targetLabel": "Chinese A1",
+      "title": "Cooking Actions",
+      "description": "Cooking verbs. Elementary level.",
+      "module": "Home",
+      "category": "Kitchen",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/en/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/en__EN__flashcardsluna/ZH__Chinese/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/en/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/en__EN__flashcardsluna/ZH__Chinese/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/deck2-cover-tail-20260721/data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/en/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/en__EN__flashcardsluna/ZH__Chinese/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 283207,
+      "sha256": "2b53954654b31818e0dcf0e9fd2260bbba5cabba3b6c0025e9fe8bcc491d9c08"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "EN",
+      "viewerSupportLang": "EN",
+      "channelKey": "en",
+      "channelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "channelHandle": "flashcardsluna",
+      "channelSupportLangs": [
+        "EN",
+        "EN-GB"
+      ],
+      "targetLang": "VI",
+      "targetName": "Vietnamese",
+      "targetLabel": "Vietnamese A1",
+      "title": "Cooking Actions",
+      "description": "Cooking verbs. Elementary level.",
+      "module": "Home",
+      "category": "Kitchen",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/en/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/en__EN__flashcardsluna/VI__Vietnamese/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/en/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/en__EN__flashcardsluna/VI__Vietnamese/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/deck2-cover-tail-20260721/data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/en/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/en__EN__flashcardsluna/VI__Vietnamese/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 286954,
+      "sha256": "5de063edeca2b1c1bc4b80226d16db3fbdc6549dff672329a7d6cc31b58a19c5"
+    }
+  ]
+}

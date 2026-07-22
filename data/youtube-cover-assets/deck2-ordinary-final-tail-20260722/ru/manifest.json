@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-22T10:53:39.895Z",
+  "status": "approved",
+  "sourceOfTruth": "Approved local base artwork plus deterministic no-provider text overlays.",
+  "configPath": "config/youtube-cover-templates.json",
+  "policy": {
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0,
+    "applyRequiresGitTrackedAssets": true
+  },
+  "counts": {
+    "setIds": [
+      "home_kitchen_cooking_actions_a1_a2"
+    ],
+    "supports": [
+      "RU"
+    ],
+    "types": [
+      "ordinary"
+    ],
+    "coverCount": 2,
+    "ordinaryCount": 2,
+    "polyglotCount": 0,
+    "skippedCount": 0,
+    "outputRoot": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/ru",
+    "dryRun": false,
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0
+  },
+  "outputs": {
+    "root": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/ru",
+    "manifest": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/ru/manifest.json",
+    "contactSheets": [
+      {
+        "setId": "home_kitchen_cooking_actions_a1_a2",
+        "supportLang": "RU",
+        "videoType": "ordinary",
+        "coverCount": 2,
+        "relativePath": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/ru/video/contact-sheets/home_kitchen_cooking_actions_a1_a2__RU__ordinary.jpg"
+      }
+    ]
+  },
+  "skipped": [],
+  "covers": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "viewerSupportLang": "RU",
+      "channelKey": "ru",
+      "channelId": "UC1f5EyXEMejXIumH9104GMA",
+      "channelHandle": "LunaCardsRU",
+      "channelSupportLangs": [
+        "RU"
+      ],
+      "targetLang": "ZH",
+      "targetName": "Китайский",
+      "targetLabel": "Китайский A1",
+      "title": "Действия при готовке",
+      "description": "Глаголы для готовки. Начальный уровень.",
+      "module": "Дом",
+      "category": "Кухня",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/ru/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/ZH__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/ru/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/ZH__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/deck2-cover-tail-20260721/data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/ru/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/ZH__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 279463,
+      "sha256": "dbafbc655bb87b299cfc072305df243adec172c6dba3bcffa3b88a5800341068"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "viewerSupportLang": "RU",
+      "channelKey": "ru",
+      "channelId": "UC1f5EyXEMejXIumH9104GMA",
+      "channelHandle": "LunaCardsRU",
+      "channelSupportLangs": [
+        "RU"
+      ],
+      "targetLang": "VI",
+      "targetName": "Вьетнамский",
+      "targetLabel": "Вьетнамский A1",
+      "title": "Действия при готовке",
+      "description": "Глаголы для готовки. Начальный уровень.",
+      "module": "Дом",
+      "category": "Кухня",
+      "baseImage": "assets/youtube-cover-templates/deck2-universal-approved-base.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v3-deck2-action-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/ru/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/VI__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/ru/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/VI__item/video.json",
+      "path": "/Users/lali/Documents/LUNA2/worktrees/deck2-cover-tail-20260721/data/youtube-cover-assets/deck2-ordinary-final-tail-20260722/ru/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/VI__item/youtube_thumbnail.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 278692,
+      "sha256": "8957f71653a1a8fca721d91710fbf56ab4b9aec937a68ebc82aa35065a7818cc"
+    }
+  ]
+}
