@@ -1,0 +1,3264 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-22T07:43:10.158Z",
+  "mode": "read_only_no_spend_plan",
+  "setId": "home_kitchen_cooking_actions_a1_a2",
+  "inputs": {
+    "supports": "DE,EN,ES-419,FR,HI,ID,JA,KO,PT-BR,RU,TR,ZH",
+    "supportCount": 12,
+    "ordinaryPerChannel": 4,
+    "allowPartialOrdinaryTail": false,
+    "polyglotPerChannel": 0,
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 30
+  },
+  "evidence": {
+    "snapshotGeneratedAt": "2026-07-22T07:43:09.649Z",
+    "snapshotAgeMinutes": 0.008483333333333334,
+    "playlistDiscoveryGeneratedAt": "2026-07-22T07:43:09.879Z",
+    "playlistDiscoveryAgeMinutes": 0.00465,
+    "deckSource": {
+      "mode": "historical_git_blob",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": false,
+      "historicalGitBlob": {
+        "available": true,
+        "matchesLocalFile": true,
+        "commit": "0a4e6907cdffdb1cafa4b44e723f87650b16a19e",
+        "blobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+        "localBlobId": "144f997ab79e4e99efaf18c0d7592fb904609dd1",
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json"
+      }
+    },
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "6d65558228e1a12bdcd17572a53cce2c20e18a3bd7dd9b9843b7710fbfc7577d"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "7bd7b0ef3ded14ba166267f7a08cf23141e7de6ee5e115197fb36467fd44ba1d"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "a1215e938b90c4a382c6725e033f95f244a1437d448d3c52c4769da7f81e316c"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "e195a73d31716e2248f4031edfe6346331b670f8d4afab90abf346d70cb18c82"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "bc5d4a0ac8b594ca980d112129bf2f1ebd73b2b38af21406920580eb5ea1f976"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "a181440d2645d4ab23962c1e2b31a6592c5e43736f9ca65e6df52bcc0f5a2451"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "605eda7deb59067f0809da9d751f443016d4ccd341beac66c45bbdec717d9a45"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_kitchen_cooking_actions_a1_a2.json",
+        "exists": true,
+        "sha256": "221f3eb523c1b5e5cd9656d9d26fc3fc6e2ca43e2bc8d3c0c5322597cfaf9cd5"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "90a808dfb49161d94ccbcaa9f461784fb971e43dfe49bff29daea9aa643558cf"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "1e1ab1ab7067b951e60ac73215f6433e4e3958bdfd1ecd2f59f14a4d414edf52"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "0abcc3e27480a39c2d6448faa1f91b9dcca387872ea4b04a034398f9ae5d2455"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 34,
+    "supportCount": 12,
+    "ordinaryCount": 48,
+    "polyglotCount": 0,
+    "fullPolyglotCount": 0,
+    "shortUnverifiedPolyglotCount": 0,
+    "assignmentCount": 48,
+    "firstPublishAt": "2026-07-22T14:30:00.000Z",
+    "lastPublishAt": "2026-07-24T09:30:00.000Z",
+    "customThumbnailCount": 28,
+    "automaticThumbnailCount": 20,
+    "existingPlaylistCount": 45,
+    "playlistCreateCount": 3,
+    "playlistCreateCountMaximum": 3,
+    "routeCounts": {
+      "youtube-1": 48,
+      "youtube-2": 0,
+      "youtube-3": 0,
+      "youtube-4": 0
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 48,
+    "estimatedPlaylistItemInsertUnits": 2400,
+    "estimatedPlaylistCreateUnitsMaximum": 150,
+    "estimatedThumbnailSetUnits": 1400,
+    "estimatedGeneralQuotaUnitsMaximum": 3950,
+    "estimatedQuotaUnitsMaximum": 3998,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 48,
+        "estimatedPlaylistItemInsertUnits": 2400,
+        "estimatedPlaylistCreateUnitsMaximum": 150,
+        "estimatedThumbnailSetUnits": 1400,
+        "estimatedGeneralQuotaUnitsMaximum": 3950,
+        "estimatedQuotaUnitsMaximum": 3998
+      },
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      },
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      }
+    },
+    "directGeminiRequestsCurrentWorkerLayout": 12,
+    "directGeminiRequestsCampaignRouteBatchSize5": 10,
+    "directGeminiRequestsCampaignWideBatchSize5": 10,
+    "metadataProviderOrder": [
+      "openai_gpt_5_4",
+      "direct_gemini_key_1",
+      "direct_gemini_key_2",
+      "vectorengine_confirmed"
+    ],
+    "metadataBatchSize": 5,
+    "metadataLogicalBatchCount": 10,
+    "metadataMaximumOpenAiAttempts": 10,
+    "metadataMaximumDirectGeminiAttempts": 20,
+    "metadataMaximumVectorEngineAttempts": 29,
+    "metadataMaximumProviderAttempts": 59,
+    "renderJobCount": 48,
+    "ttsSynthesisRequestEstimate": {
+      "mode": "cache_aware_upper_bound",
+      "cardCount": 25,
+      "ordinaryRequestsPerSupportMaximum": 130,
+      "ordinaryRequestsMaximum": 1560,
+      "polyglotRequestsMaximum": 0,
+      "totalRequestsMaximum": 1560,
+      "note": "Short Polyglot card count is duration-measured at render time; this is an upper bound because audio is prepared before final prefix selection."
+    },
+    "providerCallsDuringPlan": 0,
+    "youtubeWritesDuringPlan": 0
+  },
+  "blockers": [],
+  "warnings": [
+    "ordinary|home_kitchen_cooking_actions_a1_a2|DE|TR: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|DE|UZ: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|DE|VI: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|ES-419|TH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|ES-419|TL: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|ES-419|TR: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|ES-419|UZ: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|FR|TR: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|FR|UZ: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|FR|VI: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|HI|TR: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|HI|UZ: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|HI|VI: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|ID|TL: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|ID|TR: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|ID|UZ: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|ID|VI: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|JA|TL: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|JA|TR: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|JA|UZ: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|JA|VI: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TL: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TR: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|KO|UZ: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|KO|VI: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TL: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TR: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|UZ: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|RU|TH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|TR|SV: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|TR|SW: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|TR|TA: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_cooking_actions_a1_a2|TR|TE: durable playlist title differs from the current deterministic title; ID remains authoritative"
+  ],
+  "assignments": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DE",
+      "targetLang": "TL",
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|DE|TL",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|DE|TL|de",
+      "publishAt": "2026-07-22T18:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Berlin",
+      "localDate": "2026-07-22",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "de|2026-07-22T18:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T18:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "DE__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Filipino A1: Everyday: Wörter",
+        "description": "Wir lernen Filipino. Lektionsthema: FlashcardsLuna. Hören Sie aufmerksam auf die muttersprachliche Aussprache und wiederholen Sie die Wörter in den Pausen. Am Ende erwartet Sie ein interaktiver Mini-Test! Übe Kartensätze kostenlos auf unserer Website",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DE",
+      "targetLang": "TR",
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|DE|TR",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|DE|TR|de",
+      "publishAt": "2026-07-22T21:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Berlin",
+      "localDate": "2026-07-22",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "de|2026-07-22T21:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T21:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DE__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLPsfT_jxz6Kw",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Türkisch A1: Everyday: Wörter",
+        "description": "Wir lernen Türkisch. Lektionsthema: FlashcardsLuna. Hören Sie aufmerksam auf die muttersprachliche Aussprache und wiederholen Sie die Wörter in den Pausen. Am Ende erwartet Sie ein interaktiver Mini-Test! Übe Kartensätze kostenlos auf unserer Website",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DE",
+      "targetLang": "UZ",
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|DE|UZ",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|DE|UZ|de",
+      "publishAt": "2026-07-23T06:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Berlin",
+      "localDate": "2026-07-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "de|2026-07-23T06:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T06:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DE__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLQAnY6HGiuK8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Usbekisch A1: Everyday: Wörter",
+        "description": "Wir lernen Usbekisch. Lektionsthema: FlashcardsLuna. Hören Sie aufmerksam auf die muttersprachliche Aussprache und wiederholen Sie die Wörter in den Pausen. Am Ende erwartet Sie ein interaktiver Mini-Test! Übe Kartensätze kostenlos auf unserer Website",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "DE",
+      "targetLang": "VI",
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|DE|VI",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|DE|VI|de",
+      "publishAt": "2026-07-23T09:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Berlin",
+      "localDate": "2026-07-23",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "de|2026-07-23T09:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T09:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DE__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLJz-kTrotB3Y",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Vietnamesisch A1: Everyday: Wörter",
+        "description": "Wir lernen Vietnamesisch. Lektionsthema: FlashcardsLuna. Hören Sie aufmerksam auf die muttersprachliche Aussprache und wiederholen Sie die Wörter in den Pausen. Am Ende erwartet Sie ein interaktiver Mini-Test! Übe Kartensätze kostenlos auf unserer Website",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "EN",
+      "targetLang": "TH",
+      "channelKey": "en",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|EN|TH",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|EN|TH|en",
+      "publishAt": "2026-07-22T21:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "America/New_York",
+      "localDate": "2026-07-22",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "en|2026-07-22T21:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T21:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/en/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/en__EN__flashcardsluna/TH__Thai/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/en/manifest.json",
+        "sha256": "578ddfdb9565b4fadd884cff8425c7d878f00c9be7216c2929a9fe6208511ccd"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "EN__TH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLN-4UyUZv-Wg",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Thai A1: Everyday Flashcards",
+        "description": "FlashcardsLuna videos for native EN speakers learning Thai: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "EN",
+      "targetLang": "TL",
+      "channelKey": "en",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|EN|TL",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|EN|TL|en",
+      "publishAt": "2026-07-23T00:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "America/New_York",
+      "localDate": "2026-07-22",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "en|2026-07-23T00:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T00:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/en/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/en__EN__flashcardsluna/TL__Filipino/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/en/manifest.json",
+        "sha256": "c1b16f49ee9364490027a20c9e0f8a41aaf17e443edb97a45aca3a6e4cc224f0"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "EN__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLTNj_WuNtLok",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Filipino A1: Everyday Flashcards",
+        "description": "FlashcardsLuna videos for native EN speakers learning Filipino: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "EN",
+      "targetLang": "TR",
+      "channelKey": "en",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|EN|TR",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|EN|TR|en",
+      "publishAt": "2026-07-23T03:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "America/New_York",
+      "localDate": "2026-07-22",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "en|2026-07-23T03:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T03:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/en/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/en__EN__flashcardsluna/TR__Turkish/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/en/manifest.json",
+        "sha256": "efaacb56e7c33c168a5767758b2b62ea1391aa1c47439b4400f1c21c9b4bc6dd"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "EN__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLHG0-QPCX-uA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Turkish A1: Everyday Flashcards",
+        "description": "FlashcardsLuna videos for native EN speakers learning Turkish: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "EN",
+      "targetLang": "UZ",
+      "channelKey": "en",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|EN|UZ",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|EN|UZ|en",
+      "publishAt": "2026-07-23T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "America/New_York",
+      "localDate": "2026-07-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "en|2026-07-23T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/en/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/en__EN__flashcardsluna/UZ__Uzbek/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/en/manifest.json",
+        "sha256": "0f8603c3b31eac2276dd59fd9876842ac69de0bdf9a99f0c70fc4b4bf62bc079"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "EN__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAvgXDVfHq3k",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Uzbek A1: Everyday Flashcards",
+        "description": "FlashcardsLuna videos for native EN speakers learning Uzbek: flashcards, pronunciation, repeat pauses and quick mini-tests. Playlist key: ordinary-vocabulary/a1-everyday.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ES-419",
+      "targetLang": "TH",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ES-419|TH",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ES-419|TH|es",
+      "publishAt": "2026-07-23T18:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-07-23",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "es|2026-07-23T18:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T18:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/es-419/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/es__ES-419__LunaCardsEspanol/TH__Tailand_s/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/es-419/manifest.json",
+        "sha256": "a939fc87e2b5c538759c750de26eb2d30d93e87a015f9cc177cea9c15366c0b3"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ES-419__TH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLYiJwnjAH0eQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tailandés A1: Everyday: tarjetas FlashcardsLuna",
+        "description": "Aprendiendo Tailandés. Tema de la lección: FlashcardsLuna. Escuche atentamente la pronunciación de los hablantes nativos y repita las palabras en las pausas. ¡Un mini-test interactivo le espera al final! Practica mazos gratis en nuestro sitio web",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ES-419",
+      "targetLang": "TL",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ES-419|TL",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ES-419|TL|es",
+      "publishAt": "2026-07-23T21:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-07-23",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "es|2026-07-23T21:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T21:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/es-419/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/es__ES-419__LunaCardsEspanol/TL__Filipino/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/es-419/manifest.json",
+        "sha256": "76c8f45ebe938aec02eeafd62ab47bac701e7bdaa0dd8c3792b599ca106198b4"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ES-419__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLWXePEXojYiM",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Filipino A1: Everyday: tarjetas FlashcardsLuna",
+        "description": "Aprendiendo Filipino. Tema de la lección: FlashcardsLuna. Escuche atentamente la pronunciación de los hablantes nativos y repita las palabras en las pausas. ¡Un mini-test interactivo le espera al final! Practica mazos gratis en nuestro sitio web",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ES-419",
+      "targetLang": "TR",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ES-419|TR",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ES-419|TR|es",
+      "publishAt": "2026-07-24T06:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-07-24",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "es|2026-07-24T06:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-25T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-27T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-31T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-23T06:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/es-419/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/es__ES-419__LunaCardsEspanol/TR__Turco/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/es-419/manifest.json",
+        "sha256": "0e3040e35a43a839e705ad81d55968b749e65188a425246c75fdba762a3378ec"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ES-419__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLJyyBz8AzBKc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Turco A1: Everyday: tarjetas FlashcardsLuna",
+        "description": "Aprendiendo Turco. Tema de la lección: FlashcardsLuna. Escuche atentamente la pronunciación de los hablantes nativos y repita las palabras en las pausas. ¡Un mini-test interactivo le espera al final! Practica mazos gratis en nuestro sitio web",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ES-419",
+      "targetLang": "UZ",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ES-419|UZ",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ES-419|UZ|es",
+      "publishAt": "2026-07-24T09:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-07-24",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "es|2026-07-24T09:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-25T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-27T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-31T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-23T09:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/es-419/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/es__ES-419__LunaCardsEspanol/UZ__Uzbeko/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/es-419/manifest.json",
+        "sha256": "5e5537dd8d898c1ef1401f40b73412bd5fa947f4fce9bdb4fc7722b91003712b"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ES-419__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLJE-Cj7Hsbpg",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Uzbeko A1: Everyday: tarjetas FlashcardsLuna",
+        "description": "Aprendiendo Uzbeko. Tema de la lección: FlashcardsLuna. Escuche atentamente la pronunciación de los hablantes nativos y repita las palabras en las pausas. ¡Un mini-test interactivo le espera al final! Practica mazos gratis en nuestro sitio web",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "FR",
+      "targetLang": "TL",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|FR|TL",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|FR|TL|fr",
+      "publishAt": "2026-07-22T18:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-22",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "fr|2026-07-22T18:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T18:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "FR__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "Filipino A1: Everyday: mots",
+        "description": "Apprentissage de Filipino. Sujet de la leçon : FlashcardsLuna. Écoutez attentivement la prononciation des locuteurs natifs et répétez les mots pendant les pauses. Un mini-test interactif vous attend à la fin ! Entraînez-vous gratuitement sur notre site web",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "FR",
+      "targetLang": "TR",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|FR|TR",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|FR|TR|fr",
+      "publishAt": "2026-07-22T21:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-22",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "fr|2026-07-22T21:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T21:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "FR__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLSlN-lto34tQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Turc A1: Everyday: mots",
+        "description": "Apprentissage de Turc. Sujet de la leçon : FlashcardsLuna. Écoutez attentivement la prononciation des locuteurs natifs et répétez les mots pendant les pauses. Un mini-test interactif vous attend à la fin ! Entraînez-vous gratuitement sur notre site web",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "FR",
+      "targetLang": "UZ",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|FR|UZ",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|FR|UZ|fr",
+      "publishAt": "2026-07-23T06:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "fr|2026-07-23T06:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T06:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "FR__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLLRY18DlXZ60",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Ouzbek A1: Everyday: mots",
+        "description": "Apprentissage de Ouzbek. Sujet de la leçon : FlashcardsLuna. Écoutez attentivement la prononciation des locuteurs natifs et répétez les mots pendant les pauses. Un mini-test interactif vous attend à la fin ! Entraînez-vous gratuitement sur notre site web",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "FR",
+      "targetLang": "VI",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|FR|VI",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|FR|VI|fr",
+      "publishAt": "2026-07-23T09:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-07-23",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "fr|2026-07-23T09:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T09:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "FR__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLUpOtmkdGU5U",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Vietnamien A1: Everyday: mots",
+        "description": "Apprentissage de Vietnamien. Sujet de la leçon : FlashcardsLuna. Écoutez attentivement la prononciation des locuteurs natifs et répétez les mots pendant les pauses. Un mini-test interactif vous attend à la fin ! Entraînez-vous gratuitement sur notre site web",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HI",
+      "targetLang": "TL",
+      "channelKey": "hi",
+      "youtubeChannelId": "UCRWc-CxGQSN_pbC42scuQHA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|HI|TL",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|HI|TL|hi",
+      "publishAt": "2026-07-22T15:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-07-22",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "hi|2026-07-22T15:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T15:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "verified_absent",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HI__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": true,
+        "matchEvidence": [
+          "complete_channel_inventory_no_identity_match"
+        ],
+        "title": "फ़िलिपीनो A1: Everyday: शब्द",
+        "description": "हम फ़िलिपीनो सीख रहे हैं। पाठ का विषय है: FlashcardsLuna। मूल उच्चारण को ध्यान से सुनें और ठहराव में शब्दों को दोहराएं। अंत में एक इंटरैक्टिव मिनी-टेस्ट आपका इंतजार कर रहा है! हमारी वेबसाइट पर मुफ़्त में अभ्यास करें",
+        "registryEntryPresent": false,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HI",
+      "targetLang": "TR",
+      "channelKey": "hi",
+      "youtubeChannelId": "UCRWc-CxGQSN_pbC42scuQHA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|HI|TR",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|HI|TR|hi",
+      "publishAt": "2026-07-22T18:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-07-22",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "hi|2026-07-22T18:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T18:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HI__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLcLfVhSJKMTU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "तुर्की A1: Everyday: शब्द",
+        "description": "हम तुर्की सीख रहे हैं। पाठ का विषय है: FlashcardsLuna। मूल उच्चारण को ध्यान से सुनें और ठहराव में शब्दों को दोहराएं। अंत में एक इंटरैक्टिव मिनी-टेस्ट आपका इंतजार कर रहा है! हमारी वेबसाइट पर मुफ़्त में अभ्यास करें",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HI",
+      "targetLang": "UZ",
+      "channelKey": "hi",
+      "youtubeChannelId": "UCRWc-CxGQSN_pbC42scuQHA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|HI|UZ",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|HI|UZ|hi",
+      "publishAt": "2026-07-23T03:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-07-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "hi|2026-07-23T03:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T03:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HI__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLJ-hqRmNF7Ao",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "उज़्बेक A1: Everyday: शब्द",
+        "description": "हम उज़्बेक सीख रहे हैं। पाठ का विषय है: FlashcardsLuna। मूल उच्चारण को ध्यान से सुनें और ठहराव में शब्दों को दोहराएं। अंत में एक इंटरैक्टिव मिनी-टेस्ट आपका इंतजार कर रहा है! हमारी वेबसाइट पर मुफ़्त में अभ्यास करें",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "HI",
+      "targetLang": "VI",
+      "channelKey": "hi",
+      "youtubeChannelId": "UCRWc-CxGQSN_pbC42scuQHA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|HI|VI",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|HI|VI|hi",
+      "publishAt": "2026-07-23T06:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-07-23",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "hi|2026-07-23T06:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T06:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HI__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLTbnMRK-El7I",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "वियतनामी A1: Everyday: शब्द",
+        "description": "हम वियतनामी सीख रहे हैं। पाठ का विषय है: FlashcardsLuna। मूल उच्चारण को ध्यान से सुनें और ठहराव में शब्दों को दोहराएं। अंत में एक इंटरैक्टिव मिनी-टेस्ट आपका इंतजार कर रहा है! हमारी वेबसाइट पर मुफ़्त में अभ्यास करें",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ID",
+      "targetLang": "TL",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|TL",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|TL|id",
+      "publishAt": "2026-07-22T16:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Jakarta",
+      "localDate": "2026-07-22",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "id|2026-07-22T16:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T16:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLdu5-e3Kibdc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Filipino A1: Everyday: kata",
+        "description": "Belajar Filipino. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ID",
+      "targetLang": "TR",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|TR",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|TR|id",
+      "publishAt": "2026-07-23T01:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Jakarta",
+      "localDate": "2026-07-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "id|2026-07-23T01:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T01:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLJ8bNMcClD-0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Turki A1: Everyday: kata",
+        "description": "Belajar Turki. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ID",
+      "targetLang": "UZ",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|UZ",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|UZ|id",
+      "publishAt": "2026-07-23T04:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Jakarta",
+      "localDate": "2026-07-23",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "id|2026-07-23T04:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T04:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLRo2C1QC9naU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Uzbek A1: Everyday: kata",
+        "description": "Belajar Uzbek. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ID",
+      "targetLang": "VI",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|VI",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ID|VI|id",
+      "publishAt": "2026-07-23T07:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Jakarta",
+      "localDate": "2026-07-23",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "id|2026-07-23T07:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T07:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLeWEi2pOFAjc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Vietnam A1: Everyday: kata",
+        "description": "Belajar Vietnam. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "JA",
+      "targetLang": "TL",
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|JA|TL",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|JA|TL|ja",
+      "publishAt": "2026-07-22T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Tokyo",
+      "localDate": "2026-07-22",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "ja|2026-07-22T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/TL__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ja/manifest.json",
+        "sha256": "e1eef527b89a0498acee8f8d8df8b1d9a393335511fb5cd318b837ac700d708f"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "JA__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLFNR45OlVk8g",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "フィリピノ語 A1: Everyday: 単語",
+        "description": "フィリピノ語の学習。レッスンのテーマは、FlashcardsLunaです。 ネイティブの発音を聞いて、ポーズの間に繰り返してください。 最後にミニテストがあります！ ウェブサイトで無料デッキを練習する",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "JA",
+      "targetLang": "TR",
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|JA|TR",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|JA|TR|ja",
+      "publishAt": "2026-07-22T23:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Tokyo",
+      "localDate": "2026-07-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "ja|2026-07-22T23:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T23:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/TR__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ja/manifest.json",
+        "sha256": "5c10a0539ad4f610255bfe8dac33fec1098ad8414d9ec8718b9f0c6db03f1a3a"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "JA__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLd__6yfMKKAE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "トルコ語 A1: Everyday: 単語",
+        "description": "トルコ語の学習。レッスンのテーマは、FlashcardsLunaです。 ネイティブの発音を聞いて、ポーズの間に繰り返してください。 最後にミニテストがあります！ ウェブサイトで無料デッキを練習する",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "JA",
+      "targetLang": "UZ",
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|JA|UZ",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|JA|UZ|ja",
+      "publishAt": "2026-07-23T02:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Tokyo",
+      "localDate": "2026-07-23",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "ja|2026-07-23T02:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T02:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/UZ__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ja/manifest.json",
+        "sha256": "a7b2cbff3e96f66d4d48144b03ebae38e71e839051d0197db72755dc5f3dbbe2"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "JA__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLSa3PxNYr1oY",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ウズベク語 A1: Everyday: 単語",
+        "description": "ウズベク語の学習。レッスンのテーマは、FlashcardsLunaです。 ネイティブの発音を聞いて、ポーズの間に繰り返してください。 最後にミニテストがあります！ ウェブサイトで無料デッキを練習する",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "JA",
+      "targetLang": "VI",
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|JA|VI",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|JA|VI|ja",
+      "publishAt": "2026-07-23T05:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Tokyo",
+      "localDate": "2026-07-23",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "ja|2026-07-23T05:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T05:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ja/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/VI__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ja/manifest.json",
+        "sha256": "c9e8b706ad49f5a0edbc66c5423c13ca83fcfa0b4c04e685a2cf63b264087644"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "JA__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLWeanQDtblYs",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ベトナム語 A1: Everyday: 単語",
+        "description": "ベトナム語の学習。レッスンのテーマは、FlashcardsLunaです。 ネイティブの発音を聞いて、ポーズの間に繰り返してください。 最後にミニテストがあります！ ウェブサイトで無料デッキを練習する",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KO",
+      "targetLang": "TL",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TL",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TL|ko",
+      "publishAt": "2026-07-22T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-07-22",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "ko|2026-07-22T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KO__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLGfPcWlzsR_U",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "필리핀어 A1: Everyday: 단어",
+        "description": "필리핀어 공부하기. 오늘의 주제는 FlashcardsLuna입니다. 원어민의 발음을 잘 듣고 따라 해보세요. 마지막에는 퀴즈가 준비되어 있습니다! 웹사이트에서 무료로 카드 세트를 연습하세요",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KO",
+      "targetLang": "TR",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TR",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|TR|ko",
+      "publishAt": "2026-07-22T23:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-07-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "ko|2026-07-22T23:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T23:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KO__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLRilKNSFTAQU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "튀르키예어 A1: Everyday: 단어",
+        "description": "튀르키예어 공부하기. 오늘의 주제는 FlashcardsLuna입니다. 원어민의 발음을 잘 듣고 따라 해보세요. 마지막에는 퀴즈가 준비되어 있습니다! 웹사이트에서 무료로 카드 세트를 연습하세요",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KO",
+      "targetLang": "UZ",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|UZ",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|UZ|ko",
+      "publishAt": "2026-07-23T02:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-07-23",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "ko|2026-07-23T02:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T02:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T02:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KO__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLfdgyt3_JteY",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "우즈베크어 A1: Everyday: 단어",
+        "description": "우즈베크어 공부하기. 오늘의 주제는 FlashcardsLuna입니다. 원어민의 발음을 잘 듣고 따라 해보세요. 마지막에는 퀴즈가 준비되어 있습니다! 웹사이트에서 무료로 카드 세트를 연습하세요",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "KO",
+      "targetLang": "VI",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|VI",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|KO|VI|ko",
+      "publishAt": "2026-07-23T05:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-07-23",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "ko|2026-07-23T05:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T05:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KO__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLG6cEidlT-5c",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "베트남어 A1: Everyday: 단어",
+        "description": "베트남어 공부하기. 오늘의 주제는 FlashcardsLuna입니다. 원어민의 발음을 잘 듣고 따라 해보세요. 마지막에는 퀴즈가 준비되어 있습니다! 웹사이트에서 무료로 카드 세트를 연습하세요",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "targetLang": "TH",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TH",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TH|pt",
+      "publishAt": "2026-07-22T19:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Lisbon",
+      "localDate": "2026-07-22",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "pt|2026-07-22T19:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T19:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/TH__Tailand_s/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/pt-br/manifest.json",
+        "sha256": "c4404396b5a8741fd00e91ce1d42bb11cfabbba75b055e1638abd040ea84a1b2"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PT-BR__TH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLHLs7uN8QjTE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tailandês A1: Everyday: flashcards FlashcardsLuna",
+        "description": "Estudando Tailandês. Tema da lição: FlashcardsLuna. Ouça atentamente a pronúncia dos falantes nativos e repita as palavras nas pausas. Um mini-teste interativo espera por você no final! Pratique baralhos grátis em nosso site",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "targetLang": "TL",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TL",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TL|pt",
+      "publishAt": "2026-07-22T22:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Lisbon",
+      "localDate": "2026-07-22",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "pt|2026-07-22T22:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T22:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/TL__Filipino/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/pt-br/manifest.json",
+        "sha256": "466cd7ffc004b253ee37c75c07b0be0a70305794c1ac5d43cf0055aa8c0908bb"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PT-BR__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLEjs1n7fmo1A",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Filipino A1: Everyday: flashcards FlashcardsLuna",
+        "description": "Estudando Filipino. Tema da lição: FlashcardsLuna. Ouça atentamente a pronúncia dos falantes nativos e repita as palavras nas pausas. Um mini-teste interativo espera por você no final! Pratique baralhos grátis em nosso site",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "targetLang": "TR",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TR",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|TR|pt",
+      "publishAt": "2026-07-23T07:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Lisbon",
+      "localDate": "2026-07-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "pt|2026-07-23T07:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T07:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/TR__Turco/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/pt-br/manifest.json",
+        "sha256": "0cac49ae15e69bd518299761ce61fb3925900f8a8a8bdd22e75fff84108fb821"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PT-BR__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLbwWmAIgYLsU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Turco A1: Everyday: flashcards FlashcardsLuna",
+        "description": "Estudando Turco. Tema da lição: FlashcardsLuna. Ouça atentamente a pronúncia dos falantes nativos e repita as palavras nas pausas. Um mini-teste interativo espera por você no final! Pratique baralhos grátis em nosso site",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "PT-BR",
+      "targetLang": "UZ",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|UZ",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|PT-BR|UZ|pt",
+      "publishAt": "2026-07-23T10:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Lisbon",
+      "localDate": "2026-07-23",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "pt|2026-07-23T10:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T10:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/pt-br/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/UZ__Uzbeque/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/pt-br/manifest.json",
+        "sha256": "51f69c261f92515de7fb0b550f72a590fcaf147a19238cab075753242e76c198"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PT-BR__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLXCDbTie5JU8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Uzbeque A1: Everyday: flashcards FlashcardsLuna",
+        "description": "Estudando Uzbeque. Tema da lição: FlashcardsLuna. Ouça atentamente a pronúncia dos falantes nativos e repita as palavras nas pausas. Um mini-teste interativo espera por você no final! Pratique baralhos grátis em nosso site",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "targetLang": "TH",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|RU|TH",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|RU|TH|ru",
+      "publishAt": "2026-07-22T17:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Moscow",
+      "localDate": "2026-07-22",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "ru|2026-07-22T17:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T17:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T17:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T17:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T17:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ru/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/TH__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ru/manifest.json",
+        "sha256": "ae21d11040b030b2eabc2c6bab90fdaf76f6dff2f07c1a352cf1e18c8a8c0d09"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "RU__TH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLx5nIeqMBQ7lZA5K0xx7-7iKqZK_DX6w4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Тайский A1: бытовой словарь",
+        "description": "Видео FlashcardsLuna для русскоязычных, которые изучают Тайский: карточки, произношение, паузы для повторения и короткие мини-тесты.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "targetLang": "TL",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|RU|TL",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|RU|TL|ru",
+      "publishAt": "2026-07-22T20:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Moscow",
+      "localDate": "2026-07-22",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "ru|2026-07-22T20:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T20:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ru/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/TL__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ru/manifest.json",
+        "sha256": "85540e356be3acd504c31f63be73dc2f7a92bcaf8164c6048500602cd3e6ddc2"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "RU__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLTmFLVjDp-1o",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Филиппинский A1: бытовой словарь",
+        "description": "Видео FlashcardsLuna для русскоязычных, которые изучают Филиппинский: карточки, произношение, паузы для повторения и короткие мини-тесты.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "targetLang": "TR",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|RU|TR",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|RU|TR|ru",
+      "publishAt": "2026-07-23T05:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Moscow",
+      "localDate": "2026-07-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "ru|2026-07-23T05:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T05:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ru/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/TR__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ru/manifest.json",
+        "sha256": "5ec94adc7ea55b37ae7230a52b13550d0076843e68319ef602e19728cee23a22"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "RU__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLEJI67kBjkyk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Турецкий A1: бытовой словарь",
+        "description": "Видео FlashcardsLuna для русскоязычных, которые изучают Турецкий: карточки, произношение, паузы для повторения и короткие мини-тесты.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "RU",
+      "targetLang": "UZ",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|RU|UZ",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|RU|UZ|ru",
+      "publishAt": "2026-07-23T08:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Moscow",
+      "localDate": "2026-07-23",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "ru|2026-07-23T08:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T08:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ru/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/ru__RU__LunaCardsRU/UZ__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/ru/manifest.json",
+        "sha256": "81b5503ceb42c96c71b56fd1ec33f9bc8647fb043cfce615008bd127225161b0"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "RU__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBTU0btSeeOE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Узбекский A1: бытовой словарь",
+        "description": "Видео FlashcardsLuna для русскоязычных, которые изучают Узбекский: карточки, произношение, паузы для повторения и короткие мини-тесты.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TR",
+      "targetLang": "SV",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|TR|SV",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|TR|SV|tr",
+      "publishAt": "2026-07-22T20:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Istanbul",
+      "localDate": "2026-07-22",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "tr|2026-07-22T20:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-23T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-25T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-29T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-21T20:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/tr/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/tr__TR__LunaCardsTurkce/SV__sve_e/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/tr/manifest.json",
+        "sha256": "494be6b44a04705c827771ec00b252936943729a8f03556947e6da8d433885c4"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__SV__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLY27ciPrB95U",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "İsveççe A1: Everyday: kelime",
+        "description": "İsveççe öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TR",
+      "targetLang": "SW",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|TR|SW",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|TR|SW|tr",
+      "publishAt": "2026-07-23T05:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Istanbul",
+      "localDate": "2026-07-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "tr|2026-07-23T05:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T05:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T05:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/tr/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/tr__TR__LunaCardsTurkce/SW__Svahili_dili/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/tr/manifest.json",
+        "sha256": "29520af6093279d30071812b58394e77851fa798bd96fb3ea0c9604672b87480"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__SW__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLC1L6_5tJa8M",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Svahili dili A1: Everyday: kelime",
+        "description": "Svahili dili öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TR",
+      "targetLang": "TA",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|TR|TA",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|TR|TA|tr",
+      "publishAt": "2026-07-23T08:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Istanbul",
+      "localDate": "2026-07-23",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "tr|2026-07-23T08:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T08:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/tr/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/tr__TR__LunaCardsTurkce/TA__Tamilce/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/tr/manifest.json",
+        "sha256": "6e513bd698080bbff0b47bbfa2ee7abbd24ce428b10f476d1d6610319fabdfe2"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__TA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLUvHmOzz2a9k",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tamilce A1: Everyday: kelime",
+        "description": "Tamilce öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "TR",
+      "targetLang": "TE",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|TR|TE",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|TR|TE|tr",
+      "publishAt": "2026-07-23T11:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Europe/Istanbul",
+      "localDate": "2026-07-23",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "tr|2026-07-23T11:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T11:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/tr/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/tr__TR__LunaCardsTurkce/TE__Telugu_dili/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/tr/manifest.json",
+        "sha256": "6c477c8553af591722c3d69e75dd615d9796a97dbcba27e18f0bc1da1ba539db"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__TE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLWWenPfpVT0I",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Telugu dili A1: Everyday: kelime",
+        "description": "Telugu dili öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ZH",
+      "targetLang": "SR",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ZH|SR",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ZH|SR|zh",
+      "publishAt": "2026-07-23T00:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-23",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "zh|2026-07-23T00:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T00:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/SR__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/manifest.json",
+        "sha256": "292f8039a484db1343d415d04d61029ff55cb5e9554e896c4a324441e8381e47"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "ZH__SR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLehVWRMnKlYQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "塞尔维亚语 A1：词汇和发音",
+        "description": "FlashcardsLuna 视频帮助中文母语者学习 塞尔维亚语：单词卡、发音、跟读停顿和简短小测。",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ZH",
+      "targetLang": "SV",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ZH|SV",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ZH|SV|zh",
+      "publishAt": "2026-07-23T03:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-23",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "zh|2026-07-23T03:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T03:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/SV__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/manifest.json",
+        "sha256": "65b67e398d990096bf21a8ed1cfc0fe02b35271148018b2b7dd1fe882921a83a"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "ZH__SV__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLDMSmCS1Cp4I",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "瑞典语 A1：词汇和发音",
+        "description": "FlashcardsLuna 视频帮助中文母语者学习 瑞典语：单词卡、发音、跟读停顿和简短小测。",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ZH",
+      "targetLang": "SW",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ZH|SW",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ZH|SW|zh",
+      "publishAt": "2026-07-23T06:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-23",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "zh|2026-07-23T06:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T06:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/SW__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/manifest.json",
+        "sha256": "d078b5e5af5be81ab802e62b4d7fde7701b5c6abde02f79644a3364ae5cfd458"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "ZH__SW__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLFGhc7I5ijaA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "斯瓦希里语 A1：词汇和发音",
+        "description": "FlashcardsLuna 视频帮助中文母语者学习 斯瓦希里语：单词卡、发音、跟读停顿和简短小测。",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_cooking_actions_a1_a2",
+      "supportLang": "ZH",
+      "targetLang": "TA",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ZH|TA",
+      "calendarAssignmentKey": "ordinary|home_kitchen_cooking_actions_a1_a2|ZH|TA|zh",
+      "publishAt": "2026-07-23T09:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-22",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-23",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "zh|2026-07-23T09:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-24T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-26T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-07-30T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-22T09:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/video/by-set/home_kitchen_cooking_actions_a1_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/TA__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck2-ordinary-next-tail-20260721/zh/manifest.json",
+        "sha256": "3d7a1936843a4f3bdba96bb8634147e10d2c577cba627a994979e141d2705c85"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "ZH__TA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLXxjcFgy9lWI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "泰米尔语 A1：词汇和发音",
+        "description": "FlashcardsLuna 视频帮助中文母语者学习 泰米尔语：单词卡、发音、跟读停顿和简短小测。",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-22T07:43:09.879Z"
+      }
+    }
+  ],
+  "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-22-c4afe6727e48",
+  "manifestHash": "9ffa981f81c1d1a508b1c603f7a5c0d1cfa55d3cf4bffa7583f385324b239d26"
+}
