@@ -419,23 +419,13 @@ async function main() {
     blockers.push(`maxDurationSeconds must be between 1 and ${SHORT_UNVERIFIED_MAX_DURATION_SECONDS}`);
   }
   if (!Number.isInteger(options.cardLimit) || options.cardLimit < 0) blockers.push("cardLimit must be a non-negative integer");
-  let effectiveContentScope = contentScope;
-  let effectiveMaxDuration = maxDurationSeconds;
+  const effectiveContentScope = contentScope;
+  const effectiveMaxDuration = maxDurationSeconds;
   let effectiveCardLimit = options.cardLimit;
   const longVideoAllowed = channel ? longVideoUploadAllowed(channelRegistry, channel) : false;
   const configuredShortCardLimit = Number(channelRegistry?.defaults?.shortUnverifiedPolyglotCardLimit ?? DEFAULT_SHORT_UNVERIFIED_CARD_LIMIT);
   if (!Number.isInteger(configuredShortCardLimit) || configuredShortCardLimit < 0) {
     blockers.push("channel defaults.shortUnverifiedPolyglotCardLimit must be a non-negative integer");
-  }
-  if (channel && contentScope === "full" && !longVideoAllowed) {
-    if (options.campaignId) {
-      effectiveContentScope = "short_unverified";
-      effectiveMaxDuration = SHORT_UNVERIFIED_MAX_DURATION_SECONDS;
-      effectiveCardLimit = configuredShortCardLimit;
-      warnings.push(`Channel ${channel.key} is not confirmed for long uploads; campaign uses content_scope=short_unverified, card_limit=${configuredShortCardLimit || "dynamic"}, max_duration_seconds=${SHORT_UNVERIFIED_MAX_DURATION_SECONDS}`);
-    } else {
-      blockers.push(`Channel ${channel.key} is not confirmed for uploads longer than 15 minutes; replan as short_unverified with a non-negative card limit (0 means measured full-deck prefix)`);
-    }
   }
   if (effectiveContentScope === "short_unverified") {
     if (effectiveCardLimit === 0) effectiveCardLimit = configuredShortCardLimit;
@@ -500,10 +490,10 @@ async function main() {
     youtubeChannelId: channel?.channelId || "",
     customThumbnailUploadAllowed: channel ? customThumbnailUploadAllowed(channelRegistry, channel) : false,
     longVideoUploadAllowed: longVideoAllowed,
-    polyglotLongVideoEligibility: longVideoAllowed ? "confirmed_allowed" : "short_unverified_only",
-    autoFallbackContentScope: effectiveContentScope !== contentScope ? effectiveContentScope : null,
-    autoFallbackMaxDurationSeconds: effectiveContentScope !== contentScope ? effectiveMaxDuration : null,
-    autoFallbackCardLimit: effectiveContentScope !== contentScope ? effectiveCardLimit : null,
+    polyglotLongVideoEligibility: longVideoAllowed ? "confirmed_allowed" : "allowed_at_or_below_duration_cap",
+    autoFallbackContentScope: null,
+    autoFallbackMaxDurationSeconds: null,
+    autoFallbackCardLimit: null,
     campaignId: options.campaignId,
     campaignManifestHash: options.campaignManifestHash,
     deck: deckPlan,

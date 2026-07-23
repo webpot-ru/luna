@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { spawnSync } from "node:child_process";
 
 import {
   findActivePolyglotCalendarReservation,
@@ -113,5 +116,21 @@ assert.match(
   /uses: \.\/\.github\/workflows\/youtube-polyglot-video-publish\.yml[\s\S]*?campaign_owned_apply: true/u,
   "the claimed campaign must explicitly authorize its Polyglot reusable worker",
 );
+
+const directPlanOutput = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "youtube-polyglot-plan-")), "plan.json");
+spawnSync(process.execPath, [
+  "scripts/plan-polyglot-youtube-publish.mjs",
+  "--set=home_kitchen_cooking_actions_a1_a2",
+  "--support=LO",
+  "--bundle=romance_core",
+  "--content-scope=full",
+  "--max-duration-seconds=895",
+  `--output=${directPlanOutput}`,
+], { cwd: process.cwd(), encoding: "utf8" });
+const directPlan = JSON.parse(fs.readFileSync(directPlanOutput, "utf8"));
+assert.equal(directPlan.candidate.contentScope, "full", "a channel without confirmed long-video capability must retain the requested full product");
+assert.equal(directPlan.candidate.maxDurationSeconds, 895, "unconfirmed full product must retain the <=14:55 duration gate");
+assert.equal(directPlan.candidate.cardLimit, 0, "full product must not inherit the deliberately-truncated short card limit");
+assert.equal(directPlan.candidate.autoFallbackContentScope, null, "planner must never auto-convert full Polyglot to short_unverified");
 
 console.log("youtube Polyglot campaign claim tests passed");
