@@ -125,6 +125,12 @@ Campaign child workflows получают `campaign_id`, поэтому их sta
 
 `finalized` допустим только когда присутствуют все expected receipts, один YouTube ID не назначен двум assignments, `publishAt` совпадает с claimed slot, обязательная custom cover реально установлена, есть `youtubePlaylistId` и `playlistItemId`, resolved playlist ID совпадает с manifest и нет `postUploadError`. Любая неполнота или mismatch дает `reconciliation_required`; claims сохраняются, а автоматический повтор запрещен. Сначала нужен новый read-only live audit и exact reconciliation plan.
 
+### Post-upload schedule reconciliation
+
+Если все expected upload receipts уже существуют, а единственной причиной `reconciliation_required` являются сдвинутые фактические `publishAt`, допустима отдельная локальная финализация через `npm run reconcile:youtube-campaign-schedule`. Она всегда начинается с dry-run и требует complete all-route control report с полной pagination/status readback вместе с publication snapshot из того же audit artifact. Допускаются только точные blockers `live_schedule_missing_calendar` для тех же campaign video IDs; каждый такой ID обязан быть private scheduled в snapshot, совпадать по полной assignment identity с durable receipt и не иметь конфликта в фактическом `channelKey + publishAt` slot. Missing receipts, duplicate/unexpected publications, другие blockers, playlist/thumbnail/post-upload errors или public/unknown live state блокируют операцию.
+
+`--apply --confirm=RECONCILE_YOUTUBE_CAMPAIGN_SCHEDULE` меняет только local durable state: calendar получает фактический live `publishAt` и `campaign_finalized`, campaign receipt получает `actualPublishAt` и evidence path, top-level campaign становится `finalized`. Immutable manifest, его SHA и исходные claimed slots не переписываются. Команда не вызывает provider, render, TTS, GitHub workflow или YouTube API и не переносит публикацию на YouTube.
+
 ## Zero-upload re-arm
 
 Если finalizer доказал `completedCount=0`, `observedCount=0`, `artifactCount=0`, а два complete all-route control reports до и после failure имеют идентичный YouTube video-ID set, допускается отдельный zero-upload re-arm. Planner получает `--replacement-campaign-id=<old-id>` и виртуально исключает только эту `reconciliation_required` campaign из assignment/slot claims; исходные registry/calendar остаются неизменными до apply. Новый manifest обязан содержать ровно тот же assignment-key set, новый campaign ID/hash и безопасные будущие слоты.

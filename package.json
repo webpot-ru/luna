@@ -81,6 +81,8 @@
     "build:youtube-publication-snapshot": "node scripts/build-youtube-publication-snapshot.mjs",
     "reconcile:youtube-calendar-snapshot": "node scripts/reconcile-youtube-calendar-from-snapshot.mjs",
     "test:youtube-calendar-snapshot-reconcile": "node scripts/reconcile-youtube-calendar-from-snapshot.test.mjs",
+    "reconcile:youtube-campaign-schedule": "node scripts/reconcile-youtube-campaign-schedule.mjs",
+    "test:youtube-campaign-schedule-reconcile": "node scripts/reconcile-youtube-campaign-schedule.test.mjs",
     "test:youtube-publish-state-merge": "node scripts/merge-youtube-publish-state.test.mjs",
     "test:youtube-publish-control-gate": "node scripts/youtube-publish-control-gate.test.mjs",
     "test:youtube-support-routing": "node scripts/lib/youtube-support-routing.test.mjs",
