@@ -398,7 +398,7 @@ function buildCandidate({ tail, channel, route, channelRegistry }) {
     const targetLangsHash = targetHash(targetLangs);
     const requestedContentScope = tail.contentScope || "full";
     const longVideoAllowed = longVideoUploadAllowed(channelRegistry, channel);
-    const useShortUnverified = requestedContentScope === "full" && !longVideoAllowed;
+    const requiresDurationCap = requestedContentScope === "full" && !longVideoAllowed;
     const shortCardLimit = Number(channelRegistry?.defaults?.shortUnverifiedPolyglotCardLimit ?? DEFAULT_SHORT_UNVERIFIED_CARD_LIMIT);
     const candidate = {
       videoType: "polyglot",
@@ -410,11 +410,13 @@ function buildCandidate({ tail, channel, route, channelRegistry }) {
       targetLangsHash,
       bundleKey: tail.bundleKey,
       requestedContentScope,
-      contentScope: useShortUnverified ? "short_unverified" : requestedContentScope,
-      cardLimit: useShortUnverified ? shortCardLimit : 0,
-      maxDurationSeconds: useShortUnverified ? SHORT_UNVERIFIED_MAX_DURATION_SECONDS : 0,
+      contentScope: requestedContentScope,
+      cardLimit: requestedContentScope === "short_unverified" ? shortCardLimit : 0,
+      maxDurationSeconds: requestedContentScope === "short_unverified" || requiresDurationCap
+        ? SHORT_UNVERIFIED_MAX_DURATION_SECONDS
+        : 0,
       longVideoUploadAllowed: longVideoAllowed,
-      autoFallbackReason: useShortUnverified ? "long_video_upload_not_confirmed" : "",
+      autoFallbackReason: "",
       channelKey: channel.key,
       youtubeChannelId: channel.channelId,
       youtubeEnvironment: route.githubEnvironment || route.environment || "",

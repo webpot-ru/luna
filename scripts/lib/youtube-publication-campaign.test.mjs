@@ -103,8 +103,8 @@ assert.equal(first.estimatedUsage.metadataMaximumProviderAttempts, 373);
 assert.equal(first.estimatedUsage.renderJobCount, 306);
 assert(first.assignments.every((row) => row.thumbnail.mode === "first_frame_auto" && row.thumbnail.ready));
 assert(first.assignments.filter((row) => row.videoType === "polyglot").every((row) => (
-  row.contentScope === "short_unverified" && row.cardLimit === 0 && row.maxDurationSeconds === 895
-)), "unverified channels must claim an explicit <=14:55 short Polyglot product");
+  row.contentScope === "full" && row.cardLimit === 0 && row.maxDurationSeconds === 895
+)), "unconfirmed long-video channels must retain the full Polyglot product with a <=14:55 duration gate");
 assert(first.assignments.every((row) => row.playlist.state === "verified_absent" && row.playlist.createAllowed));
 
 const customEligibleChannels = readJson(paths.channelsPath);
@@ -291,7 +291,7 @@ const planAfterPublishedShort = buildPublicationCampaign({
 assert.equal(planAfterPublishedShort.summary.applyReady, true);
 const nextPolyglotAfterShort = planAfterPublishedShort.assignments.find((row) => row.videoType === "polyglot");
 assert.notEqual(nextPolyglotAfterShort.bundleKey, "global_europe_core", "published short must keep its full tail deferred and select the next missing bundle");
-assert.equal(nextPolyglotAfterShort.contentScope, "short_unverified");
+assert.equal(nextPolyglotAfterShort.contentScope, "full");
 
 const activeShortClaim = {
   schemaVersion: 1,

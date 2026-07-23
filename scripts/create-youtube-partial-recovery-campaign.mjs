@@ -215,10 +215,7 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
     const channel = channelForSupport(channels, oldRow.supportLang);
     assert(channel, `${oldRow.supportLang}: channel config is missing`);
     const longAllowed = channel.longVideoUploadAllowed === true;
-    const contentScope = oldRow.videoType === "polyglot" ? (longAllowed ? "full" : "short_unverified") : "";
-    if (oldRow.videoType === "polyglot") {
-      assert((oldRow.contentScope || "full") === contentScope, `${oldRow.supportLang}: Polyglot content scope changed from ${oldRow.contentScope || "full"} to ${contentScope}`);
-    }
+    const contentScope = oldRow.videoType === "polyglot" ? (oldRow.contentScope || "full") : "";
     const customThumbnailAllowed = channel.customThumbnailUploadAllowed === true;
     const carryForwardCustomThumbnail = customThumbnailAllowed
       && oldRow.thumbnail?.mode === "custom"
@@ -233,7 +230,9 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
       ...oldRow,
       contentScope,
       cardLimit: oldRow.videoType === "polyglot" ? 0 : oldRow.cardLimit,
-      maxDurationSeconds: oldRow.videoType === "polyglot" ? (longAllowed ? 0 : SHORT_MAX_SECONDS) : oldRow.maxDurationSeconds,
+      maxDurationSeconds: oldRow.videoType === "polyglot"
+        ? (contentScope === "short_unverified" || !longAllowed ? SHORT_MAX_SECONDS : 0)
+        : oldRow.maxDurationSeconds,
       longVideoUploadAllowed: oldRow.videoType === "polyglot" ? longAllowed : oldRow.longVideoUploadAllowed,
       thumbnail: carryForwardCustomThumbnail
         ? structuredClone(oldRow.thumbnail)
