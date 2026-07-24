@@ -1,0 +1,610 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-24T09:42:20.208Z",
+  "mode": "read_only_no_spend_plan",
+  "setId": "home_kitchen_storage_cleaning_a2",
+  "inputs": {
+    "supports": "ZH",
+    "supportCount": 1,
+    "ordinaryPerChannel": 5,
+    "allowPartialOrdinaryTail": false,
+    "polyglotPerChannel": 1,
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 30
+  },
+  "evidence": {
+    "snapshotGeneratedAt": "2026-07-24T09:42:15.359Z",
+    "snapshotAgeMinutes": 0.08081666666666666,
+    "playlistDiscoveryGeneratedAt": "2026-07-24T09:42:15.577Z",
+    "playlistDiscoveryAgeMinutes": 0.07718333333333334,
+    "deckSource": {
+      "mode": "verified_drive_with_local_fingerprint",
+      "driveFileIdConfigured": true,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": false,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": "29aa5eec15c8e55207fc73d281323302df05cd8d",
+        "path": "data/decks/home_kitchen_storage_cleaning_a2.json"
+      }
+    },
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "e6c2d1d42a3998e79a4a1f5bfcb331544198818ff6423bf19c716ecaa35500e2"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "d3b0c8d26437849403b618e117f0946b1f809102598d23a77878cf970b1fec80"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "e2d1f69625436cea7110b93c2b0750a148b67a9e1146c3be9390182094c7c2da"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "e195a73d31716e2248f4031edfe6346331b670f8d4afab90abf346d70cb18c82"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "bc5d4a0ac8b594ca980d112129bf2f1ebd73b2b38af21406920580eb5ea1f976"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "a196218a381d84acd54c954b24785eb060d944ef11668fa768275955585b2d21"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "f6addacada00ae9a8e9d54d6e3adac2deba6ea41f382416f8b845d32dad695c2"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_kitchen_storage_cleaning_a2.json",
+        "exists": true,
+        "sha256": "1b32d508834b8f200eb4a056d9d9547e14f255f119b518747c6b15f1cc3c0021"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "5da71d42bfea97fc763dd0ea421b343d17f0b6b8a35ebc8c44ad05eb3d5bf597"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "fc879d020fd9e8017fa1cc5539ee4a7c786453fa0b32e0971c930981f1a5072a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "28176523773a3d2bbdd904014ca627fdac59134706ff7d5ba58b632bde073325"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 6,
+    "supportCount": 1,
+    "ordinaryCount": 5,
+    "polyglotCount": 1,
+    "fullPolyglotCount": 1,
+    "shortUnverifiedPolyglotCount": 0,
+    "assignmentCount": 6,
+    "firstPublishAt": "2026-07-25T12:30:00.000Z",
+    "lastPublishAt": "2026-07-26T09:30:00.000Z",
+    "customThumbnailCount": 6,
+    "automaticThumbnailCount": 0,
+    "existingPlaylistCount": 6,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 6,
+      "youtube-2": 0,
+      "youtube-3": 0,
+      "youtube-4": 0
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 6,
+    "estimatedPlaylistItemInsertUnits": 300,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 300,
+    "estimatedGeneralQuotaUnitsMaximum": 600,
+    "estimatedQuotaUnitsMaximum": 606,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 6,
+        "estimatedPlaylistItemInsertUnits": 300,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 300,
+        "estimatedGeneralQuotaUnitsMaximum": 600,
+        "estimatedQuotaUnitsMaximum": 606
+      },
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      },
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      }
+    },
+    "directGeminiRequestsCurrentWorkerLayout": 2,
+    "directGeminiRequestsCampaignRouteBatchSize5": 2,
+    "directGeminiRequestsCampaignWideBatchSize5": 2,
+    "metadataProviderOrder": [
+      "openai_gpt_5_4",
+      "direct_gemini_key_1",
+      "direct_gemini_key_2",
+      "vectorengine_confirmed"
+    ],
+    "metadataBatchSize": 5,
+    "metadataLogicalBatchCount": 2,
+    "metadataMaximumOpenAiAttempts": 2,
+    "metadataMaximumDirectGeminiAttempts": 4,
+    "metadataMaximumVectorEngineAttempts": 4,
+    "metadataMaximumProviderAttempts": 10,
+    "renderJobCount": 6,
+    "ttsSynthesisRequestEstimate": {
+      "mode": "cache_aware_upper_bound",
+      "cardCount": 35,
+      "ordinaryRequestsPerSupportMaximum": 216,
+      "ordinaryRequestsMaximum": 216,
+      "polyglotRequestsMaximum": 177,
+      "totalRequestsMaximum": 393,
+      "note": "Short Polyglot card count is duration-measured at render time; this is an upper bound because audio is prepared before final prefix selection."
+    },
+    "providerCallsDuringPlan": 0,
+    "youtubeWritesDuringPlan": 0
+  },
+  "blockers": [],
+  "warnings": [
+    "ordinary|home_kitchen_storage_cleaning_a2|ZH|AZ: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_storage_cleaning_a2|ZH|BG: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_storage_cleaning_a2|ZH|BN: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_storage_cleaning_a2|ZH|CS: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_kitchen_storage_cleaning_a2|ZH|DA: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "polyglot|home_kitchen_storage_cleaning_a2|ZH|global_europe_core|7a4233775927|full: durable playlist title differs from the current deterministic title; ID remains authoritative"
+  ],
+  "assignments": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "ZH",
+      "targetLang": "AZ",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|AZ",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|AZ|zh",
+      "publishAt": "2026-07-25T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-24",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-25",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "zh|2026-07-25T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-26T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-28T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-08-01T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-24T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck3-zh-complete-20260724/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/AZ__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck3-zh-complete-20260724/manifest.json",
+        "sha256": "8a68337c09af5207a3a0b99603518c9d06583c52f902c50e891e46d3875372bf"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ZH__AZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLigXQEekIboaKKToDqDGsvMB08iD4vwrj",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "阿塞拜疆语 A1：词汇和发音",
+        "description": "FlashcardsLuna 视频帮助中文母语者学习 阿塞拜疆语：单词卡、发音、跟读停顿和简短小测。",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-24T09:42:15.577Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "ZH",
+      "targetLang": "BG",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|BG",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|BG|zh",
+      "publishAt": "2026-07-25T15:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-24",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-25",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "zh|2026-07-25T15:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-26T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-28T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-08-01T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-24T15:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck3-zh-complete-20260724/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/BG__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck3-zh-complete-20260724/manifest.json",
+        "sha256": "65375fc5dea835d214850515fcaf7fac6256906f9f733ec6e25f566fe343b1a5"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ZH__BG__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLigXQEekIboazAspOto_rpW6QY0HgDjZe",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "保加利亚语 A1：词汇和发音",
+        "description": "FlashcardsLuna 视频帮助中文母语者学习 保加利亚语：单词卡、发音、跟读停顿和简短小测。",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-24T09:42:15.577Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "ZH",
+      "targetLang": "BN",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|BN",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|BN|zh",
+      "publishAt": "2026-07-26T00:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-24",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-26",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "zh|2026-07-26T00:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-27T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-29T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-08-02T00:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-25T00:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck3-zh-complete-20260724/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/BN__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck3-zh-complete-20260724/manifest.json",
+        "sha256": "6c6a8717f172b6d6b6ac7d0bc418ac41ede106f2ea06bc46e93a465dfd2e465c"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ZH__BN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLigXQEekIboaQtDdTE5ss3m9YWnV3HLAA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "孟加拉语 A1：词汇和发音",
+        "description": "FlashcardsLuna 视频帮助中文母语者学习 孟加拉语：单词卡、发音、跟读停顿和简短小测。",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-24T09:42:15.577Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "ZH",
+      "targetLang": "CS",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|CS",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|CS|zh",
+      "publishAt": "2026-07-26T03:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-24",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-26",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "zh|2026-07-26T03:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-27T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-29T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-08-02T03:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-25T03:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck3-zh-complete-20260724/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/CS__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck3-zh-complete-20260724/manifest.json",
+        "sha256": "49b42e091855de75a92d5c08c5068990014abb9615ff66b7f5fac0564f4dc647"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ZH__CS__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLigXQEekIboYSJzdJz-YE2yh64wfe8e4c",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "捷克语 A1：词汇和发音",
+        "description": "FlashcardsLuna 视频帮助中文母语者学习 捷克语：单词卡、发音、跟读停顿和简短小测。",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-24T09:42:15.577Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "ZH",
+      "targetLang": "DA",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|DA",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|DA|zh",
+      "publishAt": "2026-07-26T06:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-24",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-26",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "zh|2026-07-26T06:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-27T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-29T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-08-02T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-25T06:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck3-zh-complete-20260724/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/DA__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck3-zh-complete-20260724/manifest.json",
+        "sha256": "3c92e64ae49c9e0f6f5d4fd53baaf74aca38c7c11875c28c1093673f5c6281c7"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ZH__DA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLigXQEekIboYawW6-VB33Ng1hayvtJAOp",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "丹麦语 A1：词汇和发音",
+        "description": "FlashcardsLuna 视频帮助中文母语者学习 丹麦语：单词卡、发音、跟读停顿和简短小测。",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-24T09:42:15.577Z"
+      }
+    },
+    {
+      "videoType": "polyglot",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "ZH",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "targetLangsHash": "7a4233775927",
+      "bundleKey": "global_europe_core",
+      "requestedContentScope": "full",
+      "contentScope": "full",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "autoFallbackReason": "",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:ZH:global_europe_core:7a4233775927:full",
+      "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|ZH|global_europe_core|7a4233775927|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|ZH|global_europe_core|full|zh",
+      "publishAt": "2026-07-26T09:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-07-24",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-07-26",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "zh|2026-07-26T09:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-27T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-29T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-08-02T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-25T09:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck3-zh-complete-20260724/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/zh__ZH__LunaCardsChinese/ZH__global_europe_core__7a4233775927__full.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck3-zh-complete-20260724/manifest.json",
+        "sha256": "5ef39247230cccb96b836dae28c3e9b02c63da81e2232e5a8ce3f482623b33fc"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__ZH__global-europe-core__7a4233775927",
+        "youtubePlaylistId": "PLJ7gVC3QnK7g",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: 英语, 西班牙语, 法语, 德语",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: 英语, 西班牙语, 法语, 德语. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-24T09:42:15.577Z"
+      }
+    }
+  ],
+  "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-24-ec8d612f50e3",
+  "manifestHash": "93ad8ee478c2332b368869052e45da088ae0b423b51d7a5ebd709c029f9bd29f"
+}
