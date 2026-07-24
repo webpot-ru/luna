@@ -234,4 +234,89 @@ assert.throws(() => buildPartialRecovery({
   now: new Date(generatedAt),
 }), /supported Polyglot scope upgrade/);
 
+const downgradeKey = "polyglot|deck|KN|global_europe_core|targets|full";
+const downgradeRegistry = {
+  campaigns: [{
+    campaignId: "full-source",
+    manifestHash: "source-hash",
+    setId: "deck",
+    status: "reconciliation_required",
+    assignmentKeys: [downgradeKey],
+    slotKeys: ["kn|2026-07-19T01:30:00.000Z"],
+    assignments: [{
+      assignmentKey: downgradeKey,
+      calendarAssignmentKey: downgradeKey,
+      videoType: "polyglot",
+      setId: "deck",
+      supportLang: "KN",
+      bundleKey: "global_europe_core",
+      contentScope: "full",
+      targetLangs: ["EN", "ES", "FR", "DE"],
+      targetLangsHash: "targets",
+      polyglotKey: "polyglot:deck:KN:global_europe_core:targets:full",
+      channelKey: "kn",
+      youtubeChannelId: "channel-kn",
+      routeKey: "youtube-4",
+      youtubeEnvironment: "youtube-api-youtube-4",
+      publishAt: "2026-07-19T01:30:00.000Z",
+      localDate: "2026-07-19",
+      localTime: "08:30",
+      timeZone: "Asia/Kolkata",
+      slotKey: "kn|2026-07-19T01:30:00.000Z",
+      thumbnail: { mode: "first_frame_auto", ready: true },
+      playlist: { state: "verified_absent", createAllowed: true },
+      status: "claimed",
+    }],
+  }],
+};
+const downgradeCalendar = {
+  reservations: [{
+    ...downgradeRegistry.campaigns[0].assignments[0],
+    campaignId: "full-source",
+    campaignManifestHash: "source-hash",
+    status: "campaign_claimed",
+  }],
+};
+const downgradeCalendarKey = calendarAssignmentKey(downgradeRegistry.campaigns[0].assignments[0]);
+downgradeRegistry.campaigns[0].assignments[0].calendarAssignmentKey = downgradeCalendarKey;
+downgradeCalendar.reservations[0].calendarAssignmentKey = downgradeCalendarKey;
+const downgradeChannels = { channels: [{ key: "kn", supportLangs: ["KN"], longVideoUploadAllowed: false, customThumbnailUploadAllowed: false }] };
+const downgradeControl = [{
+  setId: "deck",
+  generatedAt,
+  supports: ["KN"],
+  blockers: [],
+  summary: { liveAuditPaginationComplete: true },
+  evidence: { videoStatusReadback: true },
+  publications: [],
+  tails: [{ videoType: "polyglot", supportLang: "KN", bundleKey: "global_europe_core", contentScope: "full" }],
+}];
+const downgradeResult = buildPartialRecovery({
+  registry: downgradeRegistry,
+  calendar: downgradeCalendar,
+  channels: downgradeChannels,
+  policy,
+  controlReports: downgradeControl,
+  campaignId: "full-source",
+  assignmentKeys: [downgradeKey],
+  polyglotScopeDowngrades: { [downgradeKey]: "short_unverified" },
+  now: new Date(generatedAt),
+  minFutureMinutes: 90,
+});
+assert.equal(downgradeResult.manifest.assignments[0].contentScope, "short_unverified");
+assert.equal(downgradeResult.manifest.assignments[0].maxDurationSeconds, 895);
+assert.match(downgradeResult.manifest.assignments[0].assignmentKey, /\|short_unverified$/u);
+assert.equal(downgradeResult.nextRegistry.campaigns[0].assignments[0].status, "superseded_partial_recovery");
+assert.throws(() => buildPartialRecovery({
+  registry: downgradeRegistry,
+  calendar: downgradeCalendar,
+  channels: downgradeChannels,
+  policy,
+  controlReports: downgradeControl,
+  campaignId: "full-source",
+  assignmentKeys: [downgradeKey],
+  polyglotScopeDowngrades: { [downgradeKey]: "full" },
+  now: new Date(generatedAt),
+}), /supported Polyglot scope downgrade/);
+
 console.log("mixed YouTube partial recovery tests passed");
