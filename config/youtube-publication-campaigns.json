@@ -248795,7 +248795,7 @@
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-24-8563ef8d8174",
       "manifestHash": "560192b1cf57bcac55265c6c72581dcbdfa2f8ce65833676fd232ea158a48917",
       "setId": "home_kitchen_cooking_actions_a1_a2",
-      "status": "claimed",
+      "status": "finalized",
       "claimedAt": "2026-07-24T03:14:43.358Z",
       "generatedAt": "2026-07-24T03:14:43.358Z",
       "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_cooking_actions_a1_a2-2026-07-24-8563ef8d8174.json",
@@ -249003,7 +249003,7 @@
             "registryEntryPresent": true,
             "discoveryGeneratedAt": "2026-07-14T11:54:35.670Z"
           },
-          "status": "claimed",
+          "status": "upload_accepted",
           "cardLimit": 0,
           "maxDurationSeconds": 895,
           "longVideoUploadAllowed": false,
@@ -249025,7 +249025,17 @@
               "hoursAfterPublish": 720,
               "dueAt": "2026-08-23T13:30:00.000Z"
             }
-          ]
+          ],
+          "youtubeVideoId": "hu1BdAaxGI0",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=hu1BdAaxGI0",
+          "youtubePlaylistId": "PLcqkiUCaHD84",
+          "playlistItemId": "UExjcWtpVUNhSEQ4NC4yODlGNEE0NkRGMEEzMEQy",
+          "thumbnailSet": false,
+          "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+          "githubRunId": "30063916990",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/30063916990",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-24T03:39:32.864Z"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_cooking_actions_a1_a2|IT|global_europe_core|7a4233775927|full",
@@ -249076,7 +249086,7 @@
             "registryEntryPresent": true,
             "discoveryGeneratedAt": "2026-07-14T11:54:35.670Z"
           },
-          "status": "claimed",
+          "status": "upload_accepted",
           "cardLimit": 0,
           "maxDurationSeconds": 895,
           "longVideoUploadAllowed": false,
@@ -249098,9 +249108,33 @@
               "hoursAfterPublish": 720,
               "dueAt": "2026-08-23T09:30:00.000Z"
             }
-          ]
+          ],
+          "youtubeVideoId": "JCx0SfH-WF4",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=JCx0SfH-WF4",
+          "youtubePlaylistId": "PLYiSJomNc8QM",
+          "playlistItemId": "UExZaVNKb21OYzhRTS4wMTcyMDhGQUE4NTIzM0Y5",
+          "thumbnailSet": false,
+          "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+          "githubRunId": "30063916990",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/30063916990",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-24T03:39:32.864Z"
         }
-      ]
+      ],
+      "finalizedAt": "2026-07-24T03:39:32.864Z",
+      "finalizeSummary": {
+        "expectedCount": 2,
+        "completedCount": 2,
+        "observedCount": 2,
+        "missingCount": 0,
+        "duplicateAssignmentCount": 0,
+        "duplicateVideoIdCount": 0,
+        "unexpectedPublicationCount": 0,
+        "receiptErrorCount": 0,
+        "ordinaryResult": "skipped",
+        "polyglotResult": "success",
+        "artifactCount": 2
+      }
     }
   ]
 }
