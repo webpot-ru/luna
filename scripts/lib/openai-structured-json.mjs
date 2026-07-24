@@ -5,6 +5,13 @@ const ALLOWED_SERVICE_TIERS = new Set(["auto", "default", "flex"]);
 function cleanText(value) {
   return String(value || "").replace(/\s+/gu, " ").trim();
 }
+
+function responseIntegrityError(code, message, cause) {
+  const error = new Error(message, cause ? { cause } : undefined);
+  error.code = code;
+  return error;
+}
+
 function normalizeStrictSchema(value) {
   if (Array.isArray(value)) return value.map(normalizeStrictSchema);
   if (!value || typeof value !== "object") return value;
@@ -108,17 +115,41 @@ export async function callOpenAiStructuredJson({
     throw new Error(`OpenAI API HTTP ${response.status}: ${cleanText(data?.error?.message || JSON.stringify(data)).slice(0, 800)}`);
   }
   if (data.status !== "completed") {
-    throw new Error(`OpenAI API returned incomplete response: status=${data.status || "missing"}; ${cleanText(JSON.stringify(data.incomplete_details || data.error || {})).slice(0, 500)}`);
+    throw responseIntegrityError(
+      "OPENAI_INCOMPLETE_RESPONSE",
+      `OpenAI API returned incomplete response: status=${data.status || "missing"}; ${cleanText(JSON.stringify(data.incomplete_details || data.error || {})).slice(0, 500)}`,
+    );
   }
-  const outputText = extractOutputText(data);
-  if (!outputText) throw new Error("OpenAI API returned no structured output text.");
+  let outputText;
+  try {
+    outputText = extractOutputText(data);
+  } catch (error) {
+    throw responseIntegrityError("OPENAI_REFUSAL", cleanText(error?.message), error);
+  }
+  if (!outputText) {
+    throw responseIntegrityError("OPENAI_INCOMPLETE_RESPONSE", "OpenAI API returned no structured output text.");
+  }
   let value;
   try {
     value = JSON.parse(outputText);
   } catch (error) {
-    throw new Error(`OpenAI API returned invalid JSON: ${cleanText(error?.message).slice(0, 300)}`);
+    throw responseIntegrityError(
+      "OPENAI_INVALID_JSON",
+      `OpenAI API returned invalid JSON: ${cleanText(error?.message).slice(0, 300)}`,
+      error,
+    );
   }
-  if (typeof validateValue === "function") await validateValue(value);
+  if (typeof validateValue === "function") {
+    try {
+      await validateValue(value);
+    } catch (error) {
+      throw responseIntegrityError(
+        "OPENAI_INVALID_RESPONSE",
+        `OpenAI structured response validation failed: ${cleanText(error?.message).slice(0, 800)}`,
+        error,
+      );
+    }
+  }
   const usage = {
     inputTokens: Number(data.usage?.input_tokens || 0),
     outputTokens: Number(data.usage?.output_tokens || 0),

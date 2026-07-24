@@ -21,6 +21,7 @@ import {
   validateCampaignMetadataResponse,
 } from "./generate-youtube-campaign-metadata.mjs";
 import { callOpenAiStructuredJson, estimateOpenAiRequestTokenUpperBound, resolveOpenAiServiceTier } from "./lib/openai-structured-json.mjs";
+import { runGeminiBackendChain } from "./lib/gemini-structured-json.mjs";
 
 const tasks = [
   { requestId: "ordinary|deck|EN|DE", videoType: "ordinary", supportLang: "EN", targetLang: "DE" },
@@ -157,6 +158,62 @@ assert.equal(openAiBodies[0].text.format.schema.additionalProperties, false);
 assert.deepEqual(openAiBodies[0].text.format.schema.required, ["items"]);
 assert.equal(openAiBodies[0].text.format.schema.properties.items.items.additionalProperties, false);
 assert.throws(() => resolveOpenAiServiceTier("batch"), /Expected auto, default or flex/);
+
+const foreignRequestIdBackendCalls = [];
+const foreignRequestIdRecovery = await runGeminiBackendChain({
+  backends: ["openai", "api"],
+  providers: {
+    openai: async () => {
+      foreignRequestIdBackendCalls.push("openai");
+      return callOpenAiStructuredJson({
+        apiKey: "test-key",
+        model: "gpt-test",
+        prompt,
+        schema: {
+          type: "object",
+          properties: {
+            items: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  requestId: { type: "string" },
+                },
+              },
+            },
+          },
+        },
+        validateValue: (value) => validateCampaignMetadataResponse(value, tasks),
+        fetchImpl: async () => ({
+          ok: true,
+          status: 200,
+          json: async () => ({
+            id: "resp-foreign-request-id",
+            status: "completed",
+            model: "gpt-test",
+            service_tier: "default",
+            output: [{
+              type: "message",
+              content: [{
+                type: "output_text",
+                text: JSON.stringify({
+                  items: [{ requestId: "polyglot|another_deck|NO|east_asia_core|hash|full" }],
+                }),
+              }],
+            }],
+          }),
+        }),
+      });
+    },
+    api: async () => {
+      foreignRequestIdBackendCalls.push("api");
+      return { value: { recovered: true } };
+    },
+  },
+});
+assert.deepEqual(foreignRequestIdBackendCalls, ["openai", "api"]);
+assert.equal(foreignRequestIdRecovery.backend, "api");
+assert.deepEqual(foreignRequestIdRecovery.value, { recovered: true });
 
 const vectorTasks = Array.from({ length: 5 }, (_, index) => ({
   requestId: `ordinary|deck|EN|T${index + 1}`,
