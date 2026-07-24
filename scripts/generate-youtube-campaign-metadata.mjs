@@ -238,6 +238,7 @@ async function prepareOrdinaryTask(assignment) {
       courseUrl: template.courseUrl,
       baseTitle: template.title,
       baseDescription: template.description,
+      fallbackTags: template.tags,
       sampleWords: (template.tags || []).slice(-8),
     },
   };
@@ -280,6 +281,7 @@ function preparePolyglotTask(assignment, outputRoot) {
       bundleKey: assignment.bundleKey,
       baseTitle: template.title,
       baseDescription: template.description,
+      fallbackTags: template.tags,
       basePlaylistTitle: template.playlistTitle,
       basePlaylistDescription: template.playlistDescription,
     },
@@ -291,6 +293,7 @@ export function buildCampaignMetadataPrompt(tasks) {
     `Create YouTube SEO metadata for ${tasks.length} independent FlashcardsLuna vocabulary videos in one response.`,
     "Return one items[] entry for every task and preserve each requestId exactly.",
     "Write every title, description, tag set and playlist copy in that task's supportLang.",
+    "For a non-English support language, never return English template tags. If a tag cannot be localized confidently, use that task's fallbackTags instead of inventing English tags.",
     "Do not merge, omit or duplicate tasks.",
     "For Polyglot tasks, playlistTitle and playlistDescription are required; ordinary tasks may leave them empty.",
     "Titles must be natural, <=100 characters and not clickbait.",
@@ -437,7 +440,12 @@ async function generateBatch(tasks, options) {
   return { ...result, byId: validateValue(result.value) };
 }
 
-function finalizeMetadata(task, generated, provider) {
+function hasOnlyEnglishTagBlockers(languageGate) {
+  return languageGate.blockers.length > 0
+    && languageGate.blockers.every((blocker) => /English-template tags$/u.test(blocker));
+}
+
+export function finalizeCampaignMetadata(task, generated, provider) {
   const source = provider.backend === "openai"
     ? "openai-responses-campaign-batch"
     : `gemini-${provider.backend}-campaign-batch`;
@@ -488,7 +496,13 @@ function finalizeMetadata(task, generated, provider) {
       description: playlistDescription,
     };
   }
-  const languageGate = validateAiMetadataLanguage(merged);
+  let languageGate = validateAiMetadataLanguage(merged);
+  if (hasOnlyEnglishTagBlockers(languageGate) && Array.isArray(task.template.tags) && task.template.tags.length) {
+    merged.tags = normalizeYouTubeMetadata({ ...merged, tags: task.template.tags }).tags;
+    merged.aiMetadata.tagsFallbackToTemplate = true;
+    merged.aiMetadata.tagsFallbackReason = "english_template_tags";
+    languageGate = validateAiMetadataLanguage(merged);
+  }
   if (languageGate.blockers.length) {
     throw new Error(`${task.assignment.assignmentKey}: metadata language gate failed: ${languageGate.blockers.join("; ")}`);
   }
@@ -620,7 +634,7 @@ export async function buildCampaignMetadata(options) {
         report.openaiUsage.usedAfterRun = options.openaiTokensUsedToday;
       }
       for (const task of tasks) {
-        const metadata = finalizeMetadata(task, provider.byId.get(task.assignment.assignmentKey), {
+        const metadata = finalizeCampaignMetadata(task, provider.byId.get(task.assignment.assignmentKey), {
           backend: provider.backend,
           backendChain: backendNames,
           model: provider.model || options.model,

@@ -15,6 +15,7 @@ import {
   selectOpenAiMetadataModel,
   DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE,
   buildCampaignMetadataPrompt,
+  finalizeCampaignMetadata,
   generateVectorEngineCampaignMetadataSubBatches,
   loadReusableMetadataCheckpoint,
   validateCampaignMetadataResponse,
@@ -30,6 +31,7 @@ assert.match(prompt, /2 independent FlashcardsLuna/);
 assert.match(prompt, /ordinary\|deck\|EN\|DE/);
 assert.match(prompt, /250-900 Unicode characters/);
 assert.match(prompt, /ZH, JA and KO descriptions may be 150-900 Unicode characters/);
+assert.match(prompt, /fallbackTags/u);
 assert.equal(CAMPAIGN_MAX_OUTPUT_TOKENS, 60000);
 assert.equal(OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS, 12000);
 assert.equal(DEFAULT_OPENAI_DAILY_TOKEN_LIMIT, 2_000_000);
@@ -50,6 +52,39 @@ const response = {
 };
 assert.equal(validateCampaignMetadataResponse(response, tasks).size, 2);
 assert.throws(() => validateCampaignMetadataResponse({ items: [response.items[0]] }, tasks), /response mismatch/);
+
+const czechPolyglotTask = {
+  assignment: {
+    assignmentKey: "polyglot|deck|CS|romance_core|hash|full",
+    supportLang: "CS",
+    videoType: "polyglot",
+    campaignId: "campaign",
+    campaignManifestHash: "hash",
+    publishAt: "2026-07-25T10:30:00.000Z",
+    playlist: { playlistKey: "CS__romance_core", youtubePlaylistId: "PL-test" },
+  },
+  template: {
+    setId: "deck",
+    supportLang: "CS",
+    title: "Polyglot: kuchyňská slovíčka",
+    description: "Procvičujte kuchyňská slovíčka, výslovnost a opakování s kartičkami FlashcardsLuna. Více jazyků v jednom videu pomáhá pravidelnému učení a opakování slovní zásoby. Poslouchejte slovo, opakujte je během pauzy a na konci si ověřte paměť krátkým opakováním.",
+    tags: ["FlashcardsLuna", "polyglot", "kuchyňská slovíčka", "jazykové kartičky", "francouzština"],
+    hashtags: ["#FlashcardsLuna", "#Polyglot"],
+    playlistTitle: "Polyglot: románské jazyky",
+    playlistDescription: "Procvičujte románské jazyky v režimu Polyglot.",
+  },
+};
+const czechMetadata = finalizeCampaignMetadata(czechPolyglotTask, {
+  title: "Polyglot: kuchyňská slovíčka",
+  description: czechPolyglotTask.template.description,
+  tags: ["learn French", "French vocabulary", "French pronunciation", "French for beginners", "kitchen words", "basic French words", "word list"],
+  hashtags: ["#FlashcardsLuna", "#Polyglot"],
+  playlistTitle: "Polyglot: románské jazyky",
+  playlistDescription: "Procvičujte románské jazyky v režimu Polyglot.",
+}, { backend: "openai", backendChain: ["openai"], model: "gpt-test", batchSize: 5 });
+assert.deepEqual(czechMetadata.tags, czechPolyglotTask.template.tags);
+assert.equal(czechMetadata.aiMetadata.tagsFallbackToTemplate, true);
+assert.equal(czechMetadata.aiMetadata.languageGate.status, "pass");
 assert.equal(DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE, 2);
 const campaignWorkflow = fs.readFileSync(".github/workflows/youtube-publication-campaign.yml", "utf8");
 assert.match(
