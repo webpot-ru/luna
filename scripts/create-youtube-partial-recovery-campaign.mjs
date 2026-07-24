@@ -38,6 +38,7 @@ function parseArgs(argv) {
     else if (arg === "--supports" || arg.startsWith("--supports=")) options.supports = value();
     else if (arg === "--assignment-keys-file" || arg.startsWith("--assignment-keys-file=")) options.assignmentKeysFile = value();
     else if (arg === "--polyglot-scope-upgrades-file" || arg.startsWith("--polyglot-scope-upgrades-file=")) options.polyglotScopeUpgradesFile = value();
+    else if (arg === "--polyglot-scope-downgrades-file" || arg.startsWith("--polyglot-scope-downgrades-file=")) options.polyglotScopeDowngradesFile = value();
     else if (arg === "--control-reports" || arg.startsWith("--control-reports=")) options.controlReports = value();
     else if (arg === "--registry" || arg.startsWith("--registry=")) options.registry = value();
     else if (arg === "--calendar" || arg.startsWith("--calendar=")) options.calendar = value();
@@ -149,15 +150,15 @@ function campaignAssignment(row) {
   };
 }
 
-export function buildPartialRecovery({ registry, calendar, channels, policy, controlReports, campaignId, supports, assignmentKeys = [], polyglotScopeUpgrades = {}, now = new Date(), minFutureMinutes = 90, maxEvidenceAgeMinutes = 30 }) {
+export function buildPartialRecovery({ registry, calendar, channels, policy, controlReports, campaignId, supports, assignmentKeys = [], polyglotScopeUpgrades = {}, polyglotScopeDowngrades = {}, now = new Date(), minFutureMinutes = 90, maxEvidenceAgeMinutes = 30 }) {
   const oldCampaign = (registry.campaigns || []).find((row) => row.campaignId === campaignId);
   assert(oldCampaign, `campaign not found: ${campaignId}`);
-  const scopeUpgradeRequested = Object.keys(polyglotScopeUpgrades || {}).length > 0;
-  const unlaunchedClaimedUpgrade = oldCampaign.status === "claimed" && scopeUpgradeRequested;
-  assert(oldCampaign.status === "reconciliation_required" || unlaunchedClaimedUpgrade, `campaign must be reconciliation_required, or an unlaunched claimed campaign with an explicit scope upgrade, got ${oldCampaign.status}`);
-  if (unlaunchedClaimedUpgrade) {
-    assert(!oldCampaign.finalizedAt && !oldCampaign.finalizeSummary && !oldCampaign.githubRunId && !oldCampaign.dispatchRunId, `${campaignId}: claimed scope upgrade requires no campaign dispatch/finalizer evidence`);
-    assert((oldCampaign.assignments || []).every((row) => row.status === "claimed" && !row.youtubeVideoId && !row.youtubeVideoUrl), `${campaignId}: claimed scope upgrade requires every source assignment to remain unaccepted`);
+  const scopeChangeRequested = Object.keys(polyglotScopeUpgrades || {}).length > 0 || Object.keys(polyglotScopeDowngrades || {}).length > 0;
+  const unlaunchedClaimedScopeChange = oldCampaign.status === "claimed" && scopeChangeRequested;
+  assert(oldCampaign.status === "reconciliation_required" || unlaunchedClaimedScopeChange, `campaign must be reconciliation_required, or an unlaunched claimed campaign with an explicit scope change, got ${oldCampaign.status}`);
+  if (unlaunchedClaimedScopeChange) {
+    assert(!oldCampaign.finalizedAt && !oldCampaign.finalizeSummary && !oldCampaign.githubRunId && !oldCampaign.dispatchRunId, `${campaignId}: claimed scope change requires no campaign dispatch/finalizer evidence`);
+    assert((oldCampaign.assignments || []).every((row) => row.status === "claimed" && !row.youtubeVideoId && !row.youtubeVideoUrl), `${campaignId}: claimed scope change requires every source assignment to remain unaccepted`);
   }
   const requestedKeys = [...new Set(assignmentKeys.map(String).map((value) => value.trim()).filter(Boolean))].sort();
   let selectedOldRows;
@@ -187,6 +188,7 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
   }
   const selectedSupports = [...new Set(selectedOldRows.map((row) => row.supportLang))].sort();
   const scopeUpgrades = Object.fromEntries(Object.entries(polyglotScopeUpgrades || {}).map(([key, value]) => [String(key).trim(), String(value).trim()]));
+  const scopeDowngrades = Object.fromEntries(Object.entries(polyglotScopeDowngrades || {}).map(([key, value]) => [String(key).trim(), String(value).trim()]));
   const selectedOldKeySet = new Set(selectedOldRows.map((row) => row.assignmentKey));
   for (const [key, scope] of Object.entries(scopeUpgrades)) {
     assert(selectedOldKeySet.has(key), `${key}: scope upgrade is not an explicitly selected source assignment`);
@@ -194,6 +196,15 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
     assert(row.videoType === "polyglot", `${key}: only Polyglot assignments can receive a scope upgrade`);
     assert((row.contentScope || "full") === "short_unverified", `${key}: only short_unverified assignments can upgrade to full`);
     assert(scope === "full", `${key}: supported Polyglot scope upgrade is short_unverified -> full`);
+  }
+  for (const [key, scope] of Object.entries(scopeDowngrades)) {
+    assert(selectedOldKeySet.has(key), `${key}: scope downgrade is not an explicitly selected source assignment`);
+    const row = selectedOldRows.find((candidate) => candidate.assignmentKey === key);
+    assert(row.videoType === "polyglot", `${key}: only Polyglot assignments can receive a scope downgrade`);
+    assert((row.contentScope || "full") === "full", `${key}: only full assignments can downgrade to short_unverified`);
+    assert(row.status === "claimed", `${key}: full -> short_unverified requires an unaccepted claimed source assignment`);
+    assert(!row.youtubeVideoId && !row.youtubeVideoUrl, `${key}: full -> short_unverified requires no accepted YouTube video`);
+    assert(scope === "short_unverified", `${key}: supported Polyglot scope downgrade is full -> short_unverified`);
   }
   const routeReports = new Map();
   for (const report of controlReports) {
@@ -232,7 +243,7 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
     assert(channel, `${oldRow.supportLang}: channel config is missing`);
     const longAllowed = channel.longVideoUploadAllowed === true;
     const contentScope = oldRow.videoType === "polyglot"
-      ? (scopeUpgrades[oldRow.assignmentKey] || oldRow.contentScope || "full")
+      ? (scopeUpgrades[oldRow.assignmentKey] || scopeDowngrades[oldRow.assignmentKey] || oldRow.contentScope || "full")
       : "";
     const customThumbnailAllowed = channel.customThumbnailUploadAllowed === true;
     const carryForwardCustomThumbnail = customThumbnailAllowed
@@ -331,9 +342,10 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
       maxSnapshotAgeMinutes: maxEvidenceAgeMinutes,
       partialRecoveryOfCampaignId: campaignId,
       polyglotScopeUpgrades: Object.entries(scopeUpgrades).map(([sourceAssignmentKey, contentScope]) => ({ sourceAssignmentKey, contentScope })),
+      polyglotScopeDowngrades: Object.entries(scopeDowngrades).map(([sourceAssignmentKey, contentScope]) => ({ sourceAssignmentKey, contentScope })),
     },
     evidence: {
-      partialRecoveryCampaign: { campaignId, manifestHash: oldCampaign.manifestHash, status: oldCampaign.status, scopeUpgrades },
+      partialRecoveryCampaign: { campaignId, manifestHash: oldCampaign.manifestHash, status: oldCampaign.status, scopeUpgrades, scopeDowngrades },
       routeControlReports: evidence,
       sourceFingerprints: oldCampaign.evidence?.sourceFingerprints || {},
       deckSource: oldCampaign.evidence?.deckSource || {},
@@ -436,7 +448,7 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log(`node scripts/create-youtube-partial-recovery-campaign.mjs --campaign-id=<id> (--supports=JA,RU | --assignment-keys-file=<keys.json>) --control-reports=<a.json,b.json> [--polyglot-scope-upgrades-file=<json>] [--generated-at=<ISO>] [--apply --confirm=${CONFIRM}]`);
+    console.log(`node scripts/create-youtube-partial-recovery-campaign.mjs --campaign-id=<id> (--supports=JA,RU | --assignment-keys-file=<keys.json>) --control-reports=<a.json,b.json> [--polyglot-scope-upgrades-file=<json>] [--polyglot-scope-downgrades-file=<json>] [--generated-at=<ISO>] [--apply --confirm=${CONFIRM}]`);
     return;
   }
   assert(options.campaignId && (options.supports || options.assignmentKeysFile) && options.controlReports, "--campaign-id, --control-reports and either --supports or --assignment-keys-file are required");
@@ -445,6 +457,8 @@ function main() {
   assert(Number.isFinite(now.getTime()), `invalid --generated-at: ${options.generatedAt}`);
   const polyglotScopeUpgrades = options.polyglotScopeUpgradesFile ? readJson(options.polyglotScopeUpgradesFile) : {};
   assert(polyglotScopeUpgrades && typeof polyglotScopeUpgrades === "object" && !Array.isArray(polyglotScopeUpgrades), "--polyglot-scope-upgrades-file must contain an object keyed by source assignmentKey");
+  const polyglotScopeDowngrades = options.polyglotScopeDowngradesFile ? readJson(options.polyglotScopeDowngradesFile) : {};
+  assert(polyglotScopeDowngrades && typeof polyglotScopeDowngrades === "object" && !Array.isArray(polyglotScopeDowngrades), "--polyglot-scope-downgrades-file must contain an object keyed by source assignmentKey");
   const result = buildPartialRecovery({
     registry: readJson(options.registry),
     calendar: readJson(options.calendar),
@@ -457,6 +471,7 @@ function main() {
       ? (Array.isArray(readJson(options.assignmentKeysFile)) ? readJson(options.assignmentKeysFile) : readJson(options.assignmentKeysFile).assignmentKeys)
       : [],
     polyglotScopeUpgrades,
+    polyglotScopeDowngrades,
     now,
     minFutureMinutes: options.minFutureMinutes,
     maxEvidenceAgeMinutes: options.maxEvidenceAgeMinutes,
