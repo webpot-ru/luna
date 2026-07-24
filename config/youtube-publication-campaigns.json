@@ -249159,6 +249159,3211 @@
         "polyglotResult": "success",
         "artifactCount": 2
       }
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-24-bad172552fa6",
+      "manifestHash": "6fcf4a1b74c0b469dd0ce1de468bcf4ab06cfb776206e7fa3ecdae1126e9c1f1",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "status": "claimed",
+      "claimedAt": "2026-07-24T05:13:23.857Z",
+      "generatedAt": "2026-07-24T05:09:09.678Z",
+      "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_storage_cleaning_a2-2026-07-24-bad172552fa6.json",
+      "inputs": {
+        "supports": "BG,ET,HR,KN,LT,LV,ML,MS,NE,NL,NO,PL,SI,SL,SR,SV,TA,TE,TH,VI",
+        "supportCount": 20,
+        "ordinaryPerChannel": 2,
+        "allowPartialOrdinaryTail": false,
+        "polyglotPerChannel": 1,
+        "startDate": "auto",
+        "minFutureMinutes": 90,
+        "maxSnapshotAgeMinutes": 30
+      },
+      "summary": {
+        "applyReady": true,
+        "blockerCount": 0,
+        "warningCount": 54,
+        "supportCount": 20,
+        "ordinaryCount": 40,
+        "polyglotCount": 20,
+        "fullPolyglotCount": 20,
+        "shortUnverifiedPolyglotCount": 0,
+        "assignmentCount": 60,
+        "firstPublishAt": "2026-07-24T07:30:00.000Z",
+        "lastPublishAt": "2026-07-24T15:30:00.000Z",
+        "customThumbnailCount": 15,
+        "automaticThumbnailCount": 45,
+        "existingPlaylistCount": 60,
+        "playlistCreateCount": 0,
+        "playlistCreateCountMaximum": 0,
+        "routeCounts": {
+          "youtube-1": 0,
+          "youtube-2": 21,
+          "youtube-3": 21,
+          "youtube-4": 18
+        }
+      },
+      "evidence": {
+        "snapshotGeneratedAt": "2026-07-24T05:09:02.231Z",
+        "snapshotAgeMinutes": 0.12411666666666667,
+        "playlistDiscoveryGeneratedAt": "2026-07-24T05:09:02.483Z",
+        "playlistDiscoveryAgeMinutes": 0.11991666666666667,
+        "deckSource": {
+          "mode": "verified_drive_with_local_fingerprint",
+          "driveFileIdConfigured": true,
+          "offlineDeckExists": true,
+          "offlineDeckTracked": false,
+          "historicalGitBlob": {
+            "available": false,
+            "matchesLocalFile": false,
+            "commit": "",
+            "blobId": "",
+            "localBlobId": "29aa5eec15c8e55207fc73d281323302df05cd8d",
+            "path": "data/decks/home_kitchen_storage_cleaning_a2.json"
+          }
+        },
+        "sourceFingerprints": {
+          "snapshot": {
+            "path": "outputs/youtube-publication-snapshot.json",
+            "exists": true,
+            "sha256": "55e2531b26e61ce2c2d69926a919b5edcc194124468500fc07f9f63fbc53b1d1"
+          },
+          "calendar": {
+            "path": "config/youtube-publish-calendar.json",
+            "exists": true,
+            "sha256": "f48aab9c23f758bbcfc0f36c5fa1fba68c7356bb7d70ace73949426775aaaaf3"
+          },
+          "campaignRegistry": {
+            "path": "config/youtube-publication-campaigns.json",
+            "exists": true,
+            "sha256": "0513747522958ebcac9ec1e9c776c40ff781e02b94f6773a24fba9c0c625d005"
+          },
+          "policy": {
+            "path": "config/youtube-publish-schedule-policy.json",
+            "exists": true,
+            "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+          },
+          "routing": {
+            "path": "config/youtube-api-project-routing.json",
+            "exists": true,
+            "sha256": "e195a73d31716e2248f4031edfe6346331b670f8d4afab90abf346d70cb18c82"
+          },
+          "channels": {
+            "path": "config/youtube-channels.json",
+            "exists": true,
+            "sha256": "bc5d4a0ac8b594ca980d112129bf2f1ebd73b2b38af21406920580eb5ea1f976"
+          },
+          "covers": {
+            "path": "config/youtube-cover-assets.json",
+            "exists": true,
+            "sha256": "96c008fdd983299f2fdb78d843d8c35baf6aa2914bbf03eb077361a575af32b4"
+          },
+          "deckSources": {
+            "path": "data/deck-sources.json",
+            "exists": true,
+            "sha256": "f6addacada00ae9a8e9d54d6e3adac2deba6ea41f382416f8b845d32dad695c2"
+          },
+          "offlineDeck": {
+            "path": "data/decks/home_kitchen_storage_cleaning_a2.json",
+            "exists": true,
+            "sha256": "1b32d508834b8f200eb4a056d9d9547e14f255f119b518747c6b15f1cc3c0021"
+          },
+          "ordinaryPlaylists": {
+            "path": "config/youtube-playlists.json",
+            "exists": true,
+            "sha256": "5da71d42bfea97fc763dd0ea421b343d17f0b6b8a35ebc8c44ad05eb3d5bf597"
+          },
+          "polyglotPlaylists": {
+            "path": "config/youtube-polyglot-playlists.json",
+            "exists": true,
+            "sha256": "fc879d020fd9e8017fa1cc5539ee4a7c786453fa0b32e0971c930981f1a5072a"
+          },
+          "playlistDiscovery": {
+            "path": "outputs/youtube-playlist-discovery-snapshot.json",
+            "exists": true,
+            "sha256": "a5a64f9412afb56e9988eb9eb6936fac3a6b405c4bc5c1c84be83bd2ccf79a9c"
+          }
+        }
+      },
+      "assignmentKeys": [
+        "ordinary|home_kitchen_storage_cleaning_a2|BG|EN-GB",
+        "ordinary|home_kitchen_storage_cleaning_a2|BG|ES",
+        "polyglot|home_kitchen_storage_cleaning_a2|BG|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|ET|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|ET|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|ET|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|HR|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|HR|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|HR|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|KN|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|KN|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|KN|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|LT|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|LT|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|LT|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|LV|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|LV|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|LV|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|ML|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|ML|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|ML|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|MS|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|MS|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|MS|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|NE|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|NE|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|NE|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|NL|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|NL|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|NL|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|NO|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|NO|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|NO|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|PL|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|PL|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|PL|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|SI|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|SI|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|SI|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|SL|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|SL|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|SL|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|SR|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|SR|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|SR|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|SV|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|SV|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|SV|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|TA|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|TA|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|TA|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|TE|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|TE|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|TE|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|TH|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|TH|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|TH|global_europe_core|7a4233775927|full",
+        "ordinary|home_kitchen_storage_cleaning_a2|VI|EN",
+        "ordinary|home_kitchen_storage_cleaning_a2|VI|EN-GB",
+        "polyglot|home_kitchen_storage_cleaning_a2|VI|global_europe_core|7a4233775927|full"
+      ],
+      "slotKeys": [
+        "bg|2026-07-24T08:30:00.000Z",
+        "bg|2026-07-24T11:30:00.000Z",
+        "bg|2026-07-24T14:30:00.000Z",
+        "et|2026-07-24T08:30:00.000Z",
+        "et|2026-07-24T11:30:00.000Z",
+        "et|2026-07-24T14:30:00.000Z",
+        "hr|2026-07-24T09:30:00.000Z",
+        "hr|2026-07-24T12:30:00.000Z",
+        "hr|2026-07-24T15:30:00.000Z",
+        "kn|2026-07-24T09:00:00.000Z",
+        "kn|2026-07-24T12:00:00.000Z",
+        "kn|2026-07-24T15:00:00.000Z",
+        "lt|2026-07-24T08:30:00.000Z",
+        "lt|2026-07-24T11:30:00.000Z",
+        "lt|2026-07-24T14:30:00.000Z",
+        "lv|2026-07-24T08:30:00.000Z",
+        "lv|2026-07-24T11:30:00.000Z",
+        "lv|2026-07-24T14:30:00.000Z",
+        "ml|2026-07-24T09:00:00.000Z",
+        "ml|2026-07-24T12:00:00.000Z",
+        "ml|2026-07-24T15:00:00.000Z",
+        "ms|2026-07-24T09:30:00.000Z",
+        "ms|2026-07-24T12:30:00.000Z",
+        "ms|2026-07-24T15:30:00.000Z",
+        "ne|2026-07-24T08:45:00.000Z",
+        "ne|2026-07-24T11:45:00.000Z",
+        "ne|2026-07-24T14:45:00.000Z",
+        "nl|2026-07-24T09:30:00.000Z",
+        "nl|2026-07-24T12:30:00.000Z",
+        "nl|2026-07-24T15:30:00.000Z",
+        "no|2026-07-24T09:30:00.000Z",
+        "no|2026-07-24T12:30:00.000Z",
+        "no|2026-07-24T15:30:00.000Z",
+        "pl|2026-07-24T09:30:00.000Z",
+        "pl|2026-07-24T12:30:00.000Z",
+        "pl|2026-07-24T15:30:00.000Z",
+        "si|2026-07-24T09:00:00.000Z",
+        "si|2026-07-24T12:00:00.000Z",
+        "si|2026-07-24T15:00:00.000Z",
+        "sl|2026-07-24T09:30:00.000Z",
+        "sl|2026-07-24T12:30:00.000Z",
+        "sl|2026-07-24T15:30:00.000Z",
+        "sr|2026-07-24T09:30:00.000Z",
+        "sr|2026-07-24T12:30:00.000Z",
+        "sr|2026-07-24T15:30:00.000Z",
+        "sv|2026-07-24T09:30:00.000Z",
+        "sv|2026-07-24T12:30:00.000Z",
+        "sv|2026-07-24T15:30:00.000Z",
+        "ta|2026-07-24T09:00:00.000Z",
+        "ta|2026-07-24T12:00:00.000Z",
+        "ta|2026-07-24T15:00:00.000Z",
+        "te|2026-07-24T09:00:00.000Z",
+        "te|2026-07-24T12:00:00.000Z",
+        "te|2026-07-24T15:00:00.000Z",
+        "th|2026-07-24T07:30:00.000Z",
+        "th|2026-07-24T10:30:00.000Z",
+        "th|2026-07-24T13:30:00.000Z",
+        "vi|2026-07-24T07:30:00.000Z",
+        "vi|2026-07-24T10:30:00.000Z",
+        "vi|2026-07-24T13:30:00.000Z"
+      ],
+      "assignments": [
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|BG|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|BG|EN-GB|bg",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "BG",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "bg",
+          "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T08:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "11:30",
+          "timeZone": "Europe/Sofia",
+          "slotKey": "bg|2026-07-24T08:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "BG__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLbx8Ii8MSQqrF0ChgqjhJPUDiMkKWdE3-",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Английски (Великобритания) A1: думи и произношение",
+            "description": "FlashcardsLuna видеа за българскоговорящи, които учат Английски (Великобритания): карти с думи, произношение, паузи за повторение и кратки мини тестове.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|BG|ES",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|BG|ES|bg",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "BG",
+          "targetLang": "ES",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "bg",
+          "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T11:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Europe/Sofia",
+          "slotKey": "bg|2026-07-24T11:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "BG__ES__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLbx8Ii8MSQqr0r82l5VllQ2x78V9_HYd4",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Испански A1: думи и произношение",
+            "description": "FlashcardsLuna видеа за българскоговорящи, които учат Испански: карти с думи, произношение, паузи за повторение и кратки мини тестове.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|BG|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|BG|global_europe_core|full|bg",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "BG",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:BG:global_europe_core:7a4233775927:full",
+          "channelKey": "bg",
+          "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T14:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Europe/Sofia",
+          "slotKey": "bg|2026-07-24T14:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__BG__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLXt5jtkYnqOw",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: английски, испански, френски, немски",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: английски, испански, френски, немски. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ET|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ET|EN|et",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "ET",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "et",
+          "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T08:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "11:30",
+          "timeZone": "Europe/Tallinn",
+          "slotKey": "et|2026-07-24T08:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "ET__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLSzlbZS0FhfbGK9YX8Z1yRzbuBASxXMvo",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Inglise A1: sõnavara ja hääldus",
+            "description": "FlashcardsLuna videod eesti keelt kõnelevatele õppijatele, kes õpivad Inglise: sõnakaardid, hääldus, kordamispausid ja lühikesed minitestid.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ET|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ET|EN-GB|et",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "ET",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "et",
+          "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T11:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Europe/Tallinn",
+          "slotKey": "et|2026-07-24T11:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "ET__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLSzlbZS0FhfYlARUhk4JoXqnlOyVlNmax",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Inglise (Ühendkuningriik) A1: sõnavara ja hääldus",
+            "description": "FlashcardsLuna videod eesti keelt kõnelevatele õppijatele, kes õpivad Inglise (Ühendkuningriik): sõnakaardid, hääldus, kordamispausid ja lühikesed minitestid.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|ET|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|ET|global_europe_core|full|et",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "ET",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:ET:global_europe_core:7a4233775927:full",
+          "channelKey": "et",
+          "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T14:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Europe/Tallinn",
+          "slotKey": "et|2026-07-24T14:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__ET__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLPSEgS77Q5sg",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: inglise, hispaania, prantsuse, saksa",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: inglise, hispaania, prantsuse, saksa. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|HR|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|HR|EN|hr",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "HR",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "hr",
+          "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T09:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "11:30",
+          "timeZone": "Europe/Zagreb",
+          "slotKey": "hr|2026-07-24T09:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "HR__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PL3_zOFdP7_lKvFuHWjyTWZmIer5jnQq4M",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Engleski A1: rječnik i izgovor",
+            "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Engleski: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|HR|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|HR|EN-GB|hr",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "HR",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "hr",
+          "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T12:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Europe/Zagreb",
+          "slotKey": "hr|2026-07-24T12:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "HR__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PL3_zOFdP7_lK2W6TM5hGB-owvsp55T3ZR",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Engleski (Ujedinjeno Kraljevstvo) A1: rječnik i izgovor",
+            "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Engleski (Ujedinjeno Kraljevstvo): kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|HR|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|HR|global_europe_core|full|hr",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "HR",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:HR:global_europe_core:7a4233775927:full",
+          "channelKey": "hr",
+          "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T15:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Europe/Zagreb",
+          "slotKey": "hr|2026-07-24T15:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__HR__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLAs4kJYhYJXk",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: engleski, španjolski, francuski, njemački",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: engleski, španjolski, francuski, njemački. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|KN|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|KN|EN|kn",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "KN",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "kn",
+          "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T09:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Asia/Kolkata",
+          "slotKey": "kn|2026-07-24T09:00:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "KN__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLqJ6N6HR1RRYqw2AbqQfjId567Tf859RO",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "ಇಂಗ್ಲಿಷ್ A1: Everyday: ಪದಗಳು",
+            "description": "ನಾವು ಇಂಗ್ಲಿಷ್ ಕಲಿಯುತ್ತಿದ್ದೇವೆ. ಪಾಠದ ವಿಷಯ: FlashcardsLuna. ಸ್ಥಳೀಯ ಉಚ್ಚಾರಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಕೇಳಿ ಮತ್ತು ವಿರಾಮಗಳಲ್ಲಿ ಪದಗಳನ್ನು ಪುನರಾವರ್ತಿಸಿ. ಕೊನೆಯಲ್ಲಿ ಸಂವಾದಾತ್ಮಕ ಮಿನಿ-ಟೆಸ್ಟ್ ನಿಮಗಾಗಿ ಕಾಯುತ್ತಿದೆ! ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|KN|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|KN|EN-GB|kn",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "KN",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "kn",
+          "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T12:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Asia/Kolkata",
+          "slotKey": "kn|2026-07-24T12:00:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "KN__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLqJ6N6HR1RRZ0DxkdKY4pBLmEKtwQosoD",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "ಇಂಗ್ಲಿಷ್ (ಯುನೈಟೆಡ್ ಕಿಂಗ್‌ಡಮ್) A1: Everyday: ಪದಗಳು",
+            "description": "ನಾವು ಇಂಗ್ಲಿಷ್ (ಯುನೈಟೆಡ್ ಕಿಂಗ್‌ಡಮ್) ಕಲಿಯುತ್ತಿದ್ದೇವೆ. ಪಾಠದ ವಿಷಯ: FlashcardsLuna. ಸ್ಥಳೀಯ ಉಚ್ಚಾರಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಕೇಳಿ ಮತ್ತು ವಿರಾಮಗಳಲ್ಲಿ ಪದಗಳನ್ನು ಪುನರಾವರ್ತಿಸಿ. ಕೊನೆಯಲ್ಲಿ ಸಂವಾದಾತ್ಮಕ ಮಿನಿ-ಟೆಸ್ಟ್ ನಿಮಗಾಗಿ ಕಾಯುತ್ತಿದೆ! ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|KN|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|KN|global_europe_core|full|kn",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "KN",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:KN:global_europe_core:7a4233775927:full",
+          "channelKey": "kn",
+          "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T15:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "20:30",
+          "timeZone": "Asia/Kolkata",
+          "slotKey": "kn|2026-07-24T15:00:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__KN__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLQR536UO7Zpw",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: ಇಂಗ್ಲಿಷ್, ಸ್ಪ್ಯಾನಿಷ್, ಫ್ರೆಂಚ್, ಜರ್ಮನ್",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ಇಂಗ್ಲಿಷ್, ಸ್ಪ್ಯಾನಿಷ್, ಫ್ರೆಂಚ್, ಜರ್ಮನ್. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|LT|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|LT|EN|lt",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "LT",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "lt",
+          "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T08:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "11:30",
+          "timeZone": "Europe/Vilnius",
+          "slotKey": "lt|2026-07-24T08:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "LT__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLAy7CrRODEjmePVIsA0ZTLr-9xubHl9tO",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Anglų A1: žodynas ir tarimas",
+            "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Anglų: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|LT|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|LT|EN-GB|lt",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "LT",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "lt",
+          "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T11:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Europe/Vilnius",
+          "slotKey": "lt|2026-07-24T11:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "LT__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLAy7CrRODEjmek6synjaqc4iSv8iVOdkb",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Anglų (Jungtinė Karalystė) A1: žodynas ir tarimas",
+            "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Anglų (Jungtinė Karalystė): kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|LT|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|LT|global_europe_core|full|lt",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "LT",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:LT:global_europe_core:7a4233775927:full",
+          "channelKey": "lt",
+          "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T14:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Europe/Vilnius",
+          "slotKey": "lt|2026-07-24T14:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__LT__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLaaMXcB9uGFM",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: anglų, ispanų, prancūzų, vokiečių",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: anglų, ispanų, prancūzų, vokiečių. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|LV|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|LV|EN|lv",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "LV",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "lv",
+          "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T08:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "11:30",
+          "timeZone": "Europe/Riga",
+          "slotKey": "lv|2026-07-24T08:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "LV__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PL8Cf5ER310bJ0cAQFFrtb1R6cZ8oYyoPp",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Angļu A1: vārdu krājums un izruna",
+            "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Angļu: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|LV|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|LV|EN-GB|lv",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "LV",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "lv",
+          "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T11:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Europe/Riga",
+          "slotKey": "lv|2026-07-24T11:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "LV__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PL8Cf5ER310bJj4K0NG0ycKyePo3CZF-VV",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Angļu (Apvienotā Karaliste) A1: vārdu krājums un izruna",
+            "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Angļu (Apvienotā Karaliste): kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|LV|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|LV|global_europe_core|full|lv",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "LV",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:LV:global_europe_core:7a4233775927:full",
+          "channelKey": "lv",
+          "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T14:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Europe/Riga",
+          "slotKey": "lv|2026-07-24T14:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__LV__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLKnG6f0Xf_qc",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: angļu, spāņu, franču, vācu",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: angļu, spāņu, franču, vācu. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ML|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ML|EN|ml",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "ML",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "ml",
+          "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T09:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Asia/Kolkata",
+          "slotKey": "ml|2026-07-24T09:00:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "ML__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLgZZTTzYOUoWBNetNIyK9eDD09UUNSOIw",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "ഇംഗ്ലീഷ് A1: Everyday: വാക്കുകൾ",
+            "description": "നാം ഇംഗ്ലീഷ് പഠിക്കുന്നു. പാഠഭാഗം: FlashcardsLuna. ഉച്ചാരണം ശ്രദ്ധാപൂർവ്വം കേൾക്കുക, ഇടവേളകളിൽ വാക്കുകൾ ആവർത്തിക്കുക. അവസാനം ഒരു ഇന്ററാക്ടീവ് മിനി-ടെസ്റ്റ് നിങ്ങൾക്കായി കാത്തിരിക്കുന്നു! ഞങ്ങളുടെ വെബ്‌സൈറ്റിൽ സൗജന്യമായി പരിശീലിക്കുക",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ML|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ML|EN-GB|ml",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "ML",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "ml",
+          "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T12:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Asia/Kolkata",
+          "slotKey": "ml|2026-07-24T12:00:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "ML__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLgZZTTzYOUoUZKConRccJpHV1H56l0nJY",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "ഇംഗ്ലീഷ് (യുണൈറ്റഡ് കിംഗ്ഡം) A1: Everyday: വാക്കുകൾ",
+            "description": "നാം ഇംഗ്ലീഷ് (യുണൈറ്റഡ് കിംഗ്ഡം) പഠിക്കുന്നു. പാഠഭാഗം: FlashcardsLuna. ഉച്ചാരണം ശ്രദ്ധാപൂർവ്വം കേൾക്കുക, ഇടവേളകളിൽ വാക്കുകൾ ആവർത്തിക്കുക. അവസാനം ഒരു ഇന്ററാക്ടീവ് മിനി-ടെസ്റ്റ് നിങ്ങൾക്കായി കാത്തിരിക്കുന്നു! ഞങ്ങളുടെ വെബ്‌സൈറ്റിൽ സൗജന്യമായി പരിശീലിക്കുക",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|ML|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|ML|global_europe_core|full|ml",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "ML",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:ML:global_europe_core:7a4233775927:full",
+          "channelKey": "ml",
+          "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T15:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "20:30",
+          "timeZone": "Asia/Kolkata",
+          "slotKey": "ml|2026-07-24T15:00:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__ML__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLGouiavsr9ks",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: ഇംഗ്ലീഷ്, സ്‌പാനിഷ്, ഫ്രഞ്ച്, ജർമ്മൻ",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ഇംഗ്ലീഷ്, സ്‌പാനിഷ്, ഫ്രഞ്ച്, ജർമ്മൻ. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|MS|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|MS|EN|ms",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "MS",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "ms",
+          "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T09:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Asia/Kuala_Lumpur",
+          "slotKey": "ms|2026-07-24T09:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "MS__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PL8q4vfdwFMErMUL1GEHtW-2kxJk5b_Trb",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Inggeris A1: kosa kata dan sebutan",
+            "description": "Video FlashcardsLuna untuk penutur bahasa Melayu yang belajar Inggeris: kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|MS|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|MS|EN-GB|ms",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "MS",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "ms",
+          "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T12:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "20:30",
+          "timeZone": "Asia/Kuala_Lumpur",
+          "slotKey": "ms|2026-07-24T12:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "MS__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PL8q4vfdwFMErB5jUw_EFLhoMbuMjfkEuf",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Inggeris (United Kingdom) A1: kosa kata dan sebutan",
+            "description": "Video FlashcardsLuna untuk penutur bahasa Melayu yang belajar Inggeris (United Kingdom): kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|MS|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|MS|global_europe_core|full|ms",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "MS",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:MS:global_europe_core:7a4233775927:full",
+          "channelKey": "ms",
+          "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T15:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "23:30",
+          "timeZone": "Asia/Kuala_Lumpur",
+          "slotKey": "ms|2026-07-24T15:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__MS__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLE4GE7Ad3XOY",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: Inggeris, Sepanyol, Perancis, Jerman",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Inggeris, Sepanyol, Perancis, Jerman. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|NE|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|NE|EN|ne",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "NE",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "ne",
+          "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T08:45:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Asia/Kathmandu",
+          "slotKey": "ne|2026-07-24T08:45:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/ne__NE__LunaCardsNepali/EN__item/youtube_thumbnail.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "fc4e8a544f10e0058a4bc1d832cc14c8be4f8150ae7ecc71030e7eb679b0ef44"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "NE__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLzHdIxZgrAa2VJIRCuUol-PsOL_NpoLzP",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "अङ्ग्रेजी A1: Everyday: शब्दहरू",
+            "description": "हामी अङ्ग्रेजी सिक्दैछौं। पाठको विषय: FlashcardsLuna। स्थानीय वक्ताको उच्चारण ध्यान दिएर सुन्नुहोस् र पजहरूमा शब्दहरू दोहोर्याउनुहोस्। अन्त्यमा एक अन्तरक्रियात्मक मिनी-टेस्ट तपाईंको पर्खाइमा छ! हाम्रो वेबसाइटमा निःशुल्क फ्ल्यासकार्डहरू अभ्यास गर्नुहोस्",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|NE|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|NE|EN-GB|ne",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "NE",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "ne",
+          "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T11:45:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Asia/Kathmandu",
+          "slotKey": "ne|2026-07-24T11:45:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/ne__NE__LunaCardsNepali/EN-GB__item/youtube_thumbnail.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "5d8e85b476d39c1c1b58a862e3c9b76947618716900d0646decb6437c041eb49"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "NE__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLzHdIxZgrAa2Gbr9mAL8hzepprb_54w0U",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "अङ्ग्रेजी (संयुक्त अधिराज्य) A1: Everyday: शब्दहरू",
+            "description": "हामी अङ्ग्रेजी (संयुक्त अधिराज्य) सिक्दैछौं। पाठको विषय: FlashcardsLuna। स्थानीय वक्ताको उच्चारण ध्यान दिएर सुन्नुहोस् र पजहरूमा शब्दहरू दोहोर्याउनुहोस्। अन्त्यमा एक अन्तरक्रियात्मक मिनी-टेस्ट तपाईंको पर्खाइमा छ! हाम्रो वेबसाइटमा निःशुल्क फ्ल्यासकार्डहरू अभ्यास गर्नुहोस्",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|NE|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|NE|global_europe_core|full|ne",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "NE",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:NE:global_europe_core:7a4233775927:full",
+          "channelKey": "ne",
+          "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T14:45:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "20:30",
+          "timeZone": "Asia/Kathmandu",
+          "slotKey": "ne|2026-07-24T14:45:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/ne__NE__LunaCardsNepali/NE__global_europe_core__7a4233775927__full.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "cc1fe8c1f24665654224b5481d443e9e08b716a22a214183959da821e9a4112a"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__NE__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLf95Xqig6hqg",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: अङ्ग्रेजी, स्पेनी, फ्रान्सेली, जर्मन",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: अङ्ग्रेजी, स्पेनी, फ्रान्सेली, जर्मन. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|NL|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|NL|EN|nl",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "NL",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "nl",
+          "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T09:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "11:30",
+          "timeZone": "Europe/Amsterdam",
+          "slotKey": "nl|2026-07-24T09:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "NL__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLNHC00kNVG0ba-iFnuc8TbmwuQjGMZ125",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Engels A1: woordenschat en uitspraak",
+            "description": "FlashcardsLuna-video's voor Nederlandstaligen die Engels leren: flashcards, uitspraak, pauzes om te herhalen en korte mini-tests.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|NL|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|NL|EN-GB|nl",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "NL",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "nl",
+          "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T12:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Europe/Amsterdam",
+          "slotKey": "nl|2026-07-24T12:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "NL__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLNHC00kNVG0ZZRedFtzedhOP2z9oMVAY4",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Engels (Verenigd Koninkrijk) A1: woordenschat en uitspraak",
+            "description": "FlashcardsLuna-video's voor Nederlandstaligen die Engels (Verenigd Koninkrijk) leren: flashcards, uitspraak, pauzes om te herhalen en korte mini-tests.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|NL|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|NL|global_europe_core|full|nl",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "NL",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:NL:global_europe_core:7a4233775927:full",
+          "channelKey": "nl",
+          "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T15:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Europe/Amsterdam",
+          "slotKey": "nl|2026-07-24T15:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__NL__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLWD66ALyk9Ek",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: Engels, Spaans, Frans, Duits",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Engels, Spaans, Frans, Duits. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|NO|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|NO|EN|no",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "NO",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "no",
+          "youtubeChannelId": "UCK2IIhxCoPUW3wI6xBPYkfA",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T09:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "11:30",
+          "timeZone": "Europe/Oslo",
+          "slotKey": "no|2026-07-24T09:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "NO__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLqIsPmxIZy9TQeabvQ7FOVFkWAgUf-w2W",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Engelsk A1: ordforråd og uttale",
+            "description": "FlashcardsLuna-videoer for norsktalende som lærer Engelsk: flashcards, uttale, pauser for repetisjon og korte minitester.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|NO|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|NO|EN-GB|no",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "NO",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "no",
+          "youtubeChannelId": "UCK2IIhxCoPUW3wI6xBPYkfA",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T12:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Europe/Oslo",
+          "slotKey": "no|2026-07-24T12:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "NO__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLqIsPmxIZy9TmN8Us0m3TD-0eIpgUWDA5",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Engelsk (Storbritannia) A1: ordforråd og uttale",
+            "description": "FlashcardsLuna-videoer for norsktalende som lærer Engelsk (Storbritannia): flashcards, uttale, pauser for repetisjon og korte minitester.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|NO|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|NO|global_europe_core|full|no",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "NO",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:NO:global_europe_core:7a4233775927:full",
+          "channelKey": "no",
+          "youtubeChannelId": "UCK2IIhxCoPUW3wI6xBPYkfA",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T15:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Europe/Oslo",
+          "slotKey": "no|2026-07-24T15:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__NO__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLEUqIxiJyC1A",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: engelsk, spansk, fransk, tysk",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: engelsk, spansk, fransk, tysk. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|PL|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|PL|EN|pl",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "PL",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "pl",
+          "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T09:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "11:30",
+          "timeZone": "Europe/Warsaw",
+          "slotKey": "pl|2026-07-24T09:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "PL__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLBKaXeretxlwmYYTgEFHS0Iwm9HkCUMpE",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Angielski A1: słownictwo i wymowa",
+            "description": "Filmy FlashcardsLuna dla polskojęzycznych osób uczących się Angielski: fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|PL|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|PL|EN-GB|pl",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "PL",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "pl",
+          "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T12:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Europe/Warsaw",
+          "slotKey": "pl|2026-07-24T12:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "PL__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLBKaXeretxlzQQIr5irQDB18HFPADebLp",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Angielski (Wielka Brytania) A1: słownictwo i wymowa",
+            "description": "Filmy FlashcardsLuna dla polskojęzycznych osób uczących się Angielski (Wielka Brytania): fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|PL|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|PL|global_europe_core|full|pl",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "PL",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:PL:global_europe_core:7a4233775927:full",
+          "channelKey": "pl",
+          "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T15:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Europe/Warsaw",
+          "slotKey": "pl|2026-07-24T15:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [],
+            "playlistKey": "POLYGLOT__PL__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLAQM4m55__mc",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: angielski, hiszpański, francuski, niemiecki",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: angielski, hiszpański, francuski, niemiecki. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SI|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SI|EN|si",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "SI",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "si",
+          "youtubeChannelId": "UCgGRZU3j02PQ58z5QcnhhMg",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T09:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Asia/Colombo",
+          "slotKey": "si|2026-07-24T09:00:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/si__SI__LunaCardsSinhala/EN__item/youtube_thumbnail.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "229c28dda7087e12567dd6b4c31b30cda1945867fbe4ef556507d82455457322"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "SI__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLEVUaRDdRI36UVUYzyg6dU4yldFeP-EeJ",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "ඉංග්‍රීසි A1: Everyday: වචන",
+            "description": "අපි ඉංග්‍රීසි ඉගෙන ගනිමු. පාඩමේ මාතෘකාව: FlashcardsLuna. දේශීය උච්චාරණයට හොඳින් සවන් දී විරාමයන් අතරතුර වචන නැවත කියන්න. අවසානයේදී ඔබට කුඩා පරීක්ෂණයක් ඇත! අපගේ වෙබ් අඩවියෙන් නොමිලේ වචන පුහුණු වන්න",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SI|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SI|EN-GB|si",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "SI",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "si",
+          "youtubeChannelId": "UCgGRZU3j02PQ58z5QcnhhMg",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T12:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Asia/Colombo",
+          "slotKey": "si|2026-07-24T12:00:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/si__SI__LunaCardsSinhala/EN-GB__item/youtube_thumbnail.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "0532efc5ebfd8ba567354c6a7d39080da70fe1dd489adc67dbe306db0d8295f3"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "SI__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLEVUaRDdRI37aj1bnxWzAOdyjtegzDKqu",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "ඉංග්‍රීසි (එක්සත් රාජධානිය) A1: Everyday: වචන",
+            "description": "අපි ඉංග්‍රීසි (එක්සත් රාජධානිය) ඉගෙන ගනිමු. පාඩමේ මාතෘකාව: FlashcardsLuna. දේශීය උච්චාරණයට හොඳින් සවන් දී විරාමයන් අතරතුර වචන නැවත කියන්න. අවසානයේදී ඔබට කුඩා පරීක්ෂණයක් ඇත! අපගේ වෙබ් අඩවියෙන් නොමිලේ වචන පුහුණු වන්න",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|SI|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|SI|global_europe_core|full|si",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "SI",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:SI:global_europe_core:7a4233775927:full",
+          "channelKey": "si",
+          "youtubeChannelId": "UCgGRZU3j02PQ58z5QcnhhMg",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T15:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "20:30",
+          "timeZone": "Asia/Colombo",
+          "slotKey": "si|2026-07-24T15:00:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/si__SI__LunaCardsSinhala/SI__global_europe_core__7a4233775927__full.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "b597367c57b46fae688a962695a3a2a9234cc491806a60f6cba981cff651b509"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [],
+            "playlistKey": "POLYGLOT__SI__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLKTy7wUyDC4w",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: ඉංග්‍රීසි, ස්පාඤ්ඤ, ප්‍රංශ, ජර්මන්",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ඉංග්‍රීසි, ස්පාඤ්ඤ, ප්‍රංශ, ජර්මන්. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SL|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SL|EN|sl",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "SL",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "sl",
+          "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T09:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "11:30",
+          "timeZone": "Europe/Ljubljana",
+          "slotKey": "sl|2026-07-24T09:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "SL__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLrRO7cv1Ua_TPq387DCcO4dDYZqEpS88t",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Angleščina A1: besedišče in izgovorjava",
+            "description": "Videi FlashcardsLuna za slovensko govoreče, ki se učijo Angleščina: kartice, izgovorjava, premori za ponavljanje in kratki mini testi.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SL|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SL|EN-GB|sl",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "SL",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "sl",
+          "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T12:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Europe/Ljubljana",
+          "slotKey": "sl|2026-07-24T12:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "SL__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLrRO7cv1Ua_QCEgoC69vPhu_HOhjTc7bI",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Angleščina (Združeno kraljestvo) A1: besedišče in izgovorjava",
+            "description": "Videi FlashcardsLuna za slovensko govoreče, ki se učijo Angleščina (Združeno kraljestvo): kartice, izgovorjava, premori za ponavljanje in kratki mini testi.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|SL|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|SL|global_europe_core|full|sl",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "SL",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:SL:global_europe_core:7a4233775927:full",
+          "channelKey": "sl",
+          "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T15:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Europe/Ljubljana",
+          "slotKey": "sl|2026-07-24T15:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [],
+            "playlistKey": "POLYGLOT__SL__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLXFD64K5g6Uk",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: angleščina, španščina, francoščina, nemščina",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: angleščina, španščina, francoščina, nemščina. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SR|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SR|EN|sr",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "SR",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "sr",
+          "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T09:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "11:30",
+          "timeZone": "Europe/Belgrade",
+          "slotKey": "sr|2026-07-24T09:30:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/sr__SR__LunaCardsSrpski/EN__item/youtube_thumbnail.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "fcf3ea1fad2005dee6f23f3b9d5112235cfd5c738516b42e3bf1591256f316e9"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "SR__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLsLGddwB2Eii-X0Ko6MAZ0WTSMw77h8Gp",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Енглески A1: vokabular i izgovor",
+            "description": "FlashcardsLuna video snimci za govornike srpskog koji uče Енглески: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SR|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SR|EN-GB|sr",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "SR",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "sr",
+          "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T12:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Europe/Belgrade",
+          "slotKey": "sr|2026-07-24T12:30:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/sr__SR__LunaCardsSrpski/EN-GB__item/youtube_thumbnail.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "95a3c572ec6684739f181f79eed22c2a508bb6903c8e99c8145fe814b4729ea9"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "SR__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLsLGddwB2EigznD7EKTT0GTXQyWxMKCC4",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Енглески (Уједињено Краљевство) A1: vokabular i izgovor",
+            "description": "FlashcardsLuna video snimci za govornike srpskog koji uče Енглески (Уједињено Краљевство): kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|SR|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|SR|global_europe_core|full|sr",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "SR",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:SR:global_europe_core:7a4233775927:full",
+          "channelKey": "sr",
+          "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+          "routeKey": "youtube-3",
+          "youtubeEnvironment": "youtube-api-youtube-3",
+          "publishAt": "2026-07-24T15:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Europe/Belgrade",
+          "slotKey": "sr|2026-07-24T15:30:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/sr__SR__LunaCardsSrpski/SR__global_europe_core__7a4233775927__full.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "ab49454cb9f1bc5cbbfbcd8fd9c3b95d6baecca5d2e2c0bfb12c4de09765b38f"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [],
+            "playlistKey": "POLYGLOT__SR__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLXRXOxnX3lIo",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: енглески, шпански, француски, немачки",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: енглески, шпански, француски, немачки. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SV|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SV|EN|sv",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "SV",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "sv",
+          "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T09:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "11:30",
+          "timeZone": "Europe/Stockholm",
+          "slotKey": "sv|2026-07-24T09:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "SV__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLw7wGOQyFMKBVMdo04j6PjL7SIAp3WeOA",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Engelska A1: ordförråd och uttal",
+            "description": "FlashcardsLuna-videor för svensktalande som lär sig Engelska: flashcards, uttal, pauser för upprepning och korta minitest.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SV|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|SV|EN-GB|sv",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "SV",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "sv",
+          "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T12:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Europe/Stockholm",
+          "slotKey": "sv|2026-07-24T12:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "SV__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLw7wGOQyFMKAGdGVk0tRozauot5n2J-fY",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Engelska (Storbritannien) A1: ordförråd och uttal",
+            "description": "FlashcardsLuna-videor för svensktalande som lär sig Engelska (Storbritannien): flashcards, uttal, pauser för upprepning och korta minitest.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|SV|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|SV|global_europe_core|full|sv",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "SV",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:SV:global_europe_core:7a4233775927:full",
+          "channelKey": "sv",
+          "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T15:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Europe/Stockholm",
+          "slotKey": "sv|2026-07-24T15:30:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [],
+            "playlistKey": "POLYGLOT__SV__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLIa6Xdy9CxUs",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: engelska, spanska, franska, tyska",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: engelska, spanska, franska, tyska. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TA|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TA|EN|ta",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "TA",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "ta",
+          "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T09:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Asia/Kolkata",
+          "slotKey": "ta|2026-07-24T09:00:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "TA__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLK5uVsB7cKAI9CvSntcd7XvNfrHhxZX5y",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "ஆங்கிலம் A1: Everyday: சொற்கள்",
+            "description": "நாம் ஆங்கிலம் கற்கிறோம். பாடத் தலைப்பு: FlashcardsLuna. உள்ளூர் உச்சரிப்பைக் கவனமாகக் கேட்டு, இடைவெளிகளின் போது சொற்களைத் திரும்பக் கூறவும். இறுதியில் ஒரு ஊடாடும் மினி-தேர்வு உங்களுக்காகக் காத்திருக்கிறது! எங்கள் இணையதளத்தில் இலவசமாகப் பயிற்சி செய்யுங்கள்",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TA|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TA|EN-GB|ta",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "TA",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "ta",
+          "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T12:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Asia/Kolkata",
+          "slotKey": "ta|2026-07-24T12:00:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "TA__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLK5uVsB7cKALyJ-w-upjga4t6xNYjaIkF",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "ஆங்கிலம் (யுனைடெட் கிங்டம்) A1: Everyday: சொற்கள்",
+            "description": "நாம் ஆங்கிலம் (யுனைடெட் கிங்டம்) கற்கிறோம். பாடத் தலைப்பு: FlashcardsLuna. உள்ளூர் உச்சரிப்பைக் கவனமாகக் கேட்டு, இடைவெளிகளின் போது சொற்களைத் திரும்பக் கூறவும். இறுதியில் ஒரு ஊடாடும் மினி-தேர்வு உங்களுக்காகக் காத்திருக்கிறது! எங்கள் இணையதளத்தில் இலவசமாகப் பயிற்சி செய்யுங்கள்",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|TA|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|TA|global_europe_core|full|ta",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "TA",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:TA:global_europe_core:7a4233775927:full",
+          "channelKey": "ta",
+          "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T15:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "20:30",
+          "timeZone": "Asia/Kolkata",
+          "slotKey": "ta|2026-07-24T15:00:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__TA__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLVpRbPlns3HU",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: ஆங்கிலம், ஸ்பானிஷ், பிரெஞ்சு, ஜெர்மன்",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ஆங்கிலம், ஸ்பானிஷ், பிரெஞ்சு, ஜெர்மன். Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TE|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TE|EN|te",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "TE",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "te",
+          "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T09:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Asia/Kolkata",
+          "slotKey": "te|2026-07-24T09:00:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "TE__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLvHaZVfMVmm6Ywyeu9iRuJhD00bgbyTqZ",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "ఇంగ్లీష్ A1: Everyday: పదాలు",
+            "description": "మనం ఇంగ్లీష్ నేర్చుకుంటున్నాము. పాఠం అంశం: FlashcardsLuna. స్థానిక ఉచ్చారణను జాగ్రత్తగా వినండి మరియు విరామాలలో పదాలను పునరావృతం చేయండి. చివరలో ఒక ఇంటరాక్టివ్ మినీ-టెస్ట్ మీ కోసం వేచి ఉంది! మా వెబ్‌సైట్‌లో ఉచితంగా ప్రాక్టీస్ చేయండి",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TE|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TE|EN-GB|te",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "TE",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "te",
+          "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T12:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Asia/Kolkata",
+          "slotKey": "te|2026-07-24T12:00:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "TE__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLvHaZVfMVmm6ogNkxHCtq_Y4Rl6Ir5Y10",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "ఇంగ్లీష్ (యునైటెడ్ కింగ్‌డమ్) A1: Everyday: పదాలు",
+            "description": "మనం ఇంగ్లీష్ (యునైటెడ్ కింగ్‌డమ్) నేర్చుకుంటున్నాము. పాఠం అంశం: FlashcardsLuna. స్థానిక ఉచ్చారణను జాగ్రత్తగా వినండి మరియు విరామాలలో పదాలను పునరావృతం చేయండి. చివరలో ఒక ఇంటరాక్టివ్ మినీ-టెస్ట్ మీ కోసం వేచి ఉంది! మా వెబ్‌సైట్‌లో ఉచితంగా ప్రాక్టీస్ చేయండి",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|TE|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|TE|global_europe_core|full|te",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "TE",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:TE:global_europe_core:7a4233775927:full",
+          "channelKey": "te",
+          "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+          "routeKey": "youtube-4",
+          "youtubeEnvironment": "youtube-api-youtube-4",
+          "publishAt": "2026-07-24T15:00:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "20:30",
+          "timeZone": "Asia/Kolkata",
+          "slotKey": "te|2026-07-24T15:00:00.000Z",
+          "thumbnail": {
+            "mode": "first_frame_auto",
+            "ready": true,
+            "reason": "custom_thumbnail_disabled_for_channel"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__TE__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLHxVejF8Jzq8",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: ఇంగ్లీష్, స్పానిష్, ఫ్రెంచ్, జర్మన్",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ఇంగ్లీష్, స్పానిష్, ఫ్రెంచ్, జర్మన్. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TH|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TH|EN|th",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "TH",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "th",
+          "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T07:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Asia/Bangkok",
+          "slotKey": "th|2026-07-24T07:30:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/th__TH__LunaCardsThai/EN__item/youtube_thumbnail.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "4679d0d4ce89386192d718da2de4f315ea7cbc4bc1b13db12fe88aaf52d349fd"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "TH__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PL7CNPPbAeUfMhP41okDiYL8vbatwT1B0r",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "อังกฤษ A1: คำศัพท์และการออกเสียง",
+            "description": "วิดีโอ FlashcardsLuna สำหรับผู้พูดภาษาไทยที่กำลังเรียน อังกฤษ: แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TH|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TH|EN-GB|th",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "TH",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "th",
+          "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T10:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Asia/Bangkok",
+          "slotKey": "th|2026-07-24T10:30:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/th__TH__LunaCardsThai/EN-GB__item/youtube_thumbnail.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "279a077c4ff0a8ec4b36daf17902465ba1deee58f35282b80b3fd395cc2945a9"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "TH__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PL7CNPPbAeUfMnskqj1bwEo3q4VwG1CxtP",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "อังกฤษ (สหราชอาณาจักร) A1: คำศัพท์และการออกเสียง",
+            "description": "วิดีโอ FlashcardsLuna สำหรับผู้พูดภาษาไทยที่กำลังเรียน อังกฤษ (สหราชอาณาจักร): แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|TH|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|TH|global_europe_core|full|th",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "TH",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:TH:global_europe_core:7a4233775927:full",
+          "channelKey": "th",
+          "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T13:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "20:30",
+          "timeZone": "Asia/Bangkok",
+          "slotKey": "th|2026-07-24T13:30:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/th__TH__LunaCardsThai/TH__global_europe_core__7a4233775927__full.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "965e5eb4368df2aab9329d9a9aae1cf946ab538bd107752edd1d8589aa0e1608"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "POLYGLOT__TH__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLL63dojJHnas",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: อังกฤษ, สเปน, ฝรั่งเศส, เยอรมัน",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: อังกฤษ, สเปน, ฝรั่งเศส, เยอรมัน. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|VI|EN",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|VI|EN|vi",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "VI",
+          "targetLang": "EN",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "vi",
+          "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T07:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "14:30",
+          "timeZone": "Asia/Ho_Chi_Minh",
+          "slotKey": "vi|2026-07-24T07:30:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/vi__VI__LunaCardsTiengViet/EN__Ti_ng_Anh/youtube_thumbnail.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "04a27b7afcf5c92d7d4f68b2478599c40f181358282b2f500810e620667bbeef"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "VI__EN__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLP-RVRjbJRL_Y7uDQR9eYKXCqBBTzI80D",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Tiếng Anh A1: từ vựng và phát âm",
+            "description": "Video FlashcardsLuna dành cho người nói tiếng Việt học Tiếng Anh: thẻ ghi nhớ, phát âm, khoảng dừng để lặp lại và bài kiểm tra ngắn.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|VI|EN-GB",
+          "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|VI|EN-GB|vi",
+          "videoType": "ordinary",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "VI",
+          "targetLang": "EN-GB",
+          "targetLangs": [],
+          "targetLangsHash": "",
+          "bundleKey": "",
+          "contentScope": "",
+          "polyglotKey": "",
+          "channelKey": "vi",
+          "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T10:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "17:30",
+          "timeZone": "Asia/Ho_Chi_Minh",
+          "slotKey": "vi|2026-07-24T10:30:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/vi__VI__LunaCardsTiengViet/EN-GB__Ti_ng_Anh_V_ng_qu_c_Anh/youtube_thumbnail.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "7df9b82cabcbdd2e986ad2638988cb629ba57fbb7e0b5b7db18302a4da1f1b95"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [
+              "durable playlist title differs from the current deterministic title; ID remains authoritative"
+            ],
+            "playlistKey": "VI__EN-GB__ordinary-vocabulary__a1-everyday",
+            "youtubePlaylistId": "PLP-RVRjbJRL_3xAEhsNdgJSJY2W-PLMVF",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Tiếng Anh (Vương quốc Anh) A1: từ vựng và phát âm",
+            "description": "Video FlashcardsLuna dành cho người nói tiếng Việt học Tiếng Anh (Vương quốc Anh): thẻ ghi nhớ, phát âm, khoảng dừng để lặp lại và bài kiểm tra ngắn.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        },
+        {
+          "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|VI|global_europe_core|7a4233775927|full",
+          "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|VI|global_europe_core|full|vi",
+          "videoType": "polyglot",
+          "setId": "home_kitchen_storage_cleaning_a2",
+          "supportLang": "VI",
+          "targetLang": "EN,ES,FR,DE",
+          "targetLangs": [
+            "EN",
+            "ES",
+            "FR",
+            "DE"
+          ],
+          "targetLangsHash": "7a4233775927",
+          "bundleKey": "global_europe_core",
+          "contentScope": "full",
+          "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:VI:global_europe_core:7a4233775927:full",
+          "channelKey": "vi",
+          "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+          "routeKey": "youtube-2",
+          "youtubeEnvironment": "youtube-api-youtube-2",
+          "publishAt": "2026-07-24T13:30:00.000Z",
+          "localDate": "2026-07-24",
+          "localTime": "20:30",
+          "timeZone": "Asia/Ho_Chi_Minh",
+          "slotKey": "vi|2026-07-24T13:30:00.000Z",
+          "thumbnail": {
+            "mode": "custom",
+            "ready": true,
+            "reason": "",
+            "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/vi__VI__LunaCardsTiengViet/VI__global_europe_core__7a4233775927__full.jpg",
+            "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+            "sha256": "7c045e4c93cde87f640933a3fcc8c216504fb929ec96fba7c376befbfe2f839c"
+          },
+          "playlist": {
+            "ready": true,
+            "state": "resolved_existing",
+            "blockers": [],
+            "warnings": [],
+            "playlistKey": "POLYGLOT__VI__global-europe-core__7a4233775927",
+            "youtubePlaylistId": "PLE4eBoGwt9GM",
+            "playlistPrivacyStatus": "public",
+            "createAllowed": false,
+            "matchEvidence": [
+              "durable_registry_id"
+            ],
+            "title": "Polyglot: Tiếng Anh, Tiếng Tây Ban Nha, Tiếng Pháp, Tiếng Đức",
+            "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Tiếng Anh, Tiếng Tây Ban Nha, Tiếng Pháp, Tiếng Đức. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+            "registryEntryPresent": true,
+            "discoveryGeneratedAt": "2026-07-24T05:09:02.483Z"
+          },
+          "status": "claimed"
+        }
+      ]
     }
   ]
 }
