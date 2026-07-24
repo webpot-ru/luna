@@ -104,6 +104,8 @@ Campaign child workflows получают `campaign_id`, поэтому их sta
 
 Перед `playlists.insert` campaign uploader повторно перечисляет все owned playlists и ищет stable key marker или exact deterministic title. Найденный один playlist используется без создания; несколько совпадений блокируют write; только complete no-match разрешает один create. Новый playlist получает marker `LunaCards playlist key: <stable-key>` в description.
 
+Если historical playlist duplicates уже существуют, их не удаляют и не меняют в ходе publication recovery. Сначала фиксируют один durable `youtube_playlist_id` только при доказуемом live readback: тот же channel, complete playlist-items pagination и membership актуального published video для данной stable identity. В registry сохраняют ID, timestamp и evidence; после этого fresh control может использовать ID как authoritative. Совпадение только по title/description или наличие старого Deck #1 video недостаточно.
+
 `finalized` допустим только когда присутствуют все expected receipts, один YouTube ID не назначен двум assignments, `publishAt` совпадает с claimed slot, обязательная custom cover реально установлена, есть `youtubePlaylistId` и `playlistItemId`, resolved playlist ID совпадает с manifest и нет `postUploadError`. Любая неполнота или mismatch дает `reconciliation_required`; claims сохраняются, а автоматический повтор запрещен. Сначала нужен новый read-only live audit и exact reconciliation plan.
 
 ## Zero-upload re-arm
