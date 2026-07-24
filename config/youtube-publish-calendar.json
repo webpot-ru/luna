@@ -364104,7 +364104,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-24-ec777b9f3320",
       "campaignManifestHash": "53664b0ce0dc962c6ab9c8d931aa98ff4a26cc640f62ee4036230e27a6c5c462",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-claimed-rollover",
       "rolloverOfCampaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-23-275152b31866",
       "videoType": "polyglot",
@@ -364117,7 +364117,7 @@
         "IT",
         "PT"
       ],
-      "targetLangsCsv": "",
+      "targetLangsCsv": "ES,FR,IT,PT",
       "targetLangsHash": "f34a59a474f1",
       "bundleKey": "romance_core",
       "contentScope": "full",
@@ -364148,7 +364148,17 @@
         }
       ],
       "createdAt": "2026-07-24T03:14:42.651Z",
-      "updatedAt": "2026-07-24T03:14:42.651Z"
+      "updatedAt": "2026-07-24T03:27:23.611Z",
+      "bundleLabel": "Romance Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_lo/youtube_metadata.json",
+      "title": "ຄຳສັບການເຮັດອາຫານ: ສະແປນນິຊ ຝຣັ່ງ ອິຕາລຽນ ປອກຕຸຍກິສ",
+      "playlist_key": "POLYGLOT__LO__romance-core__f34a59a474f1",
+      "githubRunId": "30063914269",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/30063914269",
+      "youtubeVideoId": "5fEyvkMi2n0",
+      "youtubePlaylistId": "PLbNsWjGyKfiU",
+      "playlistItemId": "UExiTnNXakd5S2ZpVS41NkI0NEY2RDEwNTU3Q0M2"
     },
     {
       "schemaVersion": 1,
@@ -364217,7 +364227,7 @@
         "FR",
         "DE"
       ],
-      "targetLangsCsv": "",
+      "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
       "bundleKey": "global_europe_core",
       "contentScope": "full",
@@ -364248,7 +364258,14 @@
         }
       ],
       "createdAt": "2026-07-24T03:14:43.358Z",
-      "updatedAt": "2026-07-24T03:14:43.358Z"
+      "updatedAt": "2026-07-24T03:14:43.358Z",
+      "bundleLabel": "Global Europe Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_hy/youtube_metadata.json",
+      "title": "Polyglot բառապաշար․ Խոհարարական գործ | անգլերեն, իսպաներեն, ֆրանսերեն, գերմաներեն",
+      "playlist_key": "POLYGLOT__HY__global-europe-core__7a4233775927",
+      "githubRunId": "29409722334",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29409722334"
     },
     {
       "schemaVersion": 1,
@@ -364267,7 +364284,7 @@
         "FR",
         "DE"
       ],
-      "targetLangsCsv": "",
+      "targetLangsCsv": "EN,ES,FR,DE",
       "targetLangsHash": "7a4233775927",
       "bundleKey": "global_europe_core",
       "contentScope": "full",
@@ -364298,7 +364315,14 @@
         }
       ],
       "createdAt": "2026-07-24T03:14:43.358Z",
-      "updatedAt": "2026-07-24T03:14:43.358Z"
+      "updatedAt": "2026-07-24T03:14:43.358Z",
+      "bundleLabel": "Global Europe Core",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_cooking_actions_a1_a2_polyglot_it/youtube_metadata.json",
+      "title": "Polyglot: azioni in cucina | inglese, spagnolo, francese, tedesco",
+      "playlist_key": "POLYGLOT__IT__global-europe-core__7a4233775927",
+      "githubRunId": "29409722334",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29409722334"
     }
   ]
 }
