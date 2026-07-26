@@ -228545,6 +228545,50 @@
         "publishAt": "2026-07-27T13:30:00Z",
         "thumbnailStatus": "custom_set"
       }
+    },
+    {
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "HY",
+      "targetLang": "ID",
+      "playlist_key": "HY__ID__ordinary-vocabulary__a1-everyday",
+      "title": "Ինդոնեզերեն A1․ Խոհանոցում պահպանում — 35 բառ",
+      "youtubeVideoId": "m3kJn3rjubk",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=m3kJn3rjubk",
+      "youtubePlaylistId": "PLVGEIO6mZiqQ",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLVGEIO6mZiqQ",
+      "playlistItemId": "",
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "channelHandle": "@lunacardsarmenian",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded_playlist_insert_pending",
+      "publishAt": "2026-07-26T19:30:00.000Z",
+      "scheduledPublishAt": "2026-07-26T19:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "needsPlaylistInsert": true,
+      "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n",
+      "metadataSource": "openai-responses-campaign-batch",
+      "metadataModel": "gpt-5.6-terra",
+      "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-1061e510e41d",
+      "campaignManifestHash": "57108452f44f1df32752a344de7dae8c4e692f4f45584c160cba14003a55bfc3",
+      "githubRunId": "30202808476",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/30202808476",
+      "uploadedAt": "2026-07-26T13:00:40.299Z",
+      "lastReadbackAt": "2026-07-26T13:00:40.299Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "private",
+        "publishAt": "2026-07-26T19:30:00Z",
+        "thumbnailStatus": "auto_first_frame",
+        "playlistItemReadback": "pending",
+        "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n"
+      }
     }
   ]
 }

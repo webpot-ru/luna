@@ -349095,7 +349095,7 @@
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-1061e510e41d",
       "manifestHash": "57108452f44f1df32752a344de7dae8c4e692f4f45584c160cba14003a55bfc3",
       "setId": "home_kitchen_storage_cleaning_a2",
-      "status": "claimed",
+      "status": "reconciliation_required",
       "claimedAt": "2026-07-26T12:47:48.770Z",
       "generatedAt": "2026-07-26T12:47:48.770Z",
       "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_storage_cleaning_a2-2026-07-26-1061e510e41d.json",
@@ -349315,7 +349315,17 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-26T11:43:54.232Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted_reconciliation_required",
+          "youtubeVideoId": "m3kJn3rjubk",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=m3kJn3rjubk",
+          "youtubePlaylistId": "PLVGEIO6mZiqQ",
+          "playlistItemId": "",
+          "thumbnailSet": false,
+          "publicationStatus": "scheduled_uploaded_playlist_insert_pending",
+          "githubRunId": "30202808476",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/30202808476",
+          "postUploadError": "YouTube API POST /youtube/v3/playlistItems failed (409): {\n  \"error\": {\n    \"code\": 409,\n    \"message\": \"The operation was aborted.\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.CoreErrorDomain\",\n        \"reason\": \"SERVICE_UNAVAILABLE\"\n      }\n    ],\n    \"status\": \"ABORTED\"\n  }\n}\n",
+          "finalizedAt": "2026-07-26T13:02:08.423Z"
         },
         {
           "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|HY|IS",
@@ -349625,7 +349635,21 @@
           },
           "status": "claimed"
         }
-      ]
+      ],
+      "finalizedAt": "2026-07-26T13:02:08.423Z",
+      "finalizeSummary": {
+        "expectedCount": 6,
+        "completedCount": 0,
+        "observedCount": 1,
+        "missingCount": 5,
+        "duplicateAssignmentCount": 0,
+        "duplicateVideoIdCount": 0,
+        "unexpectedPublicationCount": 0,
+        "receiptErrorCount": 2,
+        "ordinaryResult": "failure",
+        "polyglotResult": "skipped",
+        "artifactCount": 1
+      }
     }
   ]
 }
