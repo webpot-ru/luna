@@ -49,6 +49,7 @@ const args = [
   path.join(repoRoot, "scripts/reconcile-youtube-campaign-schedule.mjs"),
   `--campaign-id=${campaignId}`,
   "--report=report.json",
+  "--report-evidence=https://example.test/actions/runs/123",
   "--snapshot=snapshot.json",
   "--campaign-registry=campaigns.json",
   "--calendar=calendar.json",
@@ -59,7 +60,10 @@ const args = [
 const before = fs.readFileSync(path.join(root, "campaigns.json"), "utf8");
 const dryRun = spawnSync(process.execPath, args, { cwd: root, encoding: "utf8" });
 assert.equal(dryRun.status, 0, dryRun.stderr || dryRun.stdout);
-assert.equal(JSON.parse(fs.readFileSync(path.join(root, "output.json"), "utf8")).summary.resolvedPublishAtMismatchCount, 1);
+const dryRunOutput = JSON.parse(fs.readFileSync(path.join(root, "output.json"), "utf8"));
+assert.equal(dryRunOutput.summary.resolvedPublishAtMismatchCount, 1);
+assert.equal(dryRunOutput.sourceReport, "https://example.test/actions/runs/123");
+assert.equal(dryRunOutput.sourceReportReadPath, "report.json");
 assert.equal(fs.readFileSync(path.join(root, "campaigns.json"), "utf8"), before);
 
 const apply = spawnSync(process.execPath, [...args, "--apply", "--confirm=RECONCILE_YOUTUBE_CAMPAIGN_SCHEDULE"], { cwd: root, encoding: "utf8" });
@@ -71,6 +75,7 @@ assert.equal(campaign.finalizeSummary.receiptErrorCount, 0);
 assert.equal(campaign.assignments[0].actualPublishAt, "2026-07-23T08:30:00.000Z");
 assert.equal(calendar.publishAt, "2026-07-23T08:30:00.000Z");
 assert.equal(calendar.status, "campaign_finalized");
+assert.equal(campaign.scheduleReconciliation.reportPath, "https://example.test/actions/runs/123");
 
 const idempotent = spawnSync(process.execPath, [...args, "--apply", "--confirm=RECONCILE_YOUTUBE_CAMPAIGN_SCHEDULE"], { cwd: root, encoding: "utf8" });
 assert.equal(idempotent.status, 0, idempotent.stderr || idempotent.stdout);

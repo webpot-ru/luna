@@ -324143,7 +324143,7 @@
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-13f9042f5330",
       "manifestHash": "5a71afa5881cc8a1c29e0f13858a6545f8c44064d1348d17acec04182a94ca60",
       "setId": "home_kitchen_storage_cleaning_a2",
-      "status": "reconciliation_required",
+      "status": "finalized",
       "claimedAt": "2026-07-26T05:32:58.014Z",
       "generatedAt": "2026-07-26T05:32:58.014Z",
       "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_storage_cleaning_a2-2026-07-26-13f9042f5330.json",
@@ -325488,7 +325488,7 @@
             "registryEntryPresent": true,
             "discoveryGeneratedAt": "2026-07-24T12:04:13.837Z"
           },
-          "status": "upload_accepted_reconciliation_required",
+          "status": "upload_accepted_schedule_reconciled",
           "youtubeVideoId": "LWbuPehVq-A",
           "youtubeVideoUrl": "https://www.youtube.com/watch?v=LWbuPehVq-A",
           "youtubePlaylistId": "PLIqtoO7uslVc",
@@ -325498,7 +325498,10 @@
           "githubRunId": "30189791790",
           "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/30189791790",
           "postUploadError": "",
-          "finalizedAt": "2026-07-26T06:21:07.961Z"
+          "finalizedAt": "2026-07-26T06:21:07.961Z",
+          "actualPublishAt": "2026-07-27T01:30:00.000Z",
+          "scheduleReconciledAt": "2026-07-26T06:53:52.056Z",
+          "scheduleReconciliationSource": "https://github.com/webpot-ru/luna/actions/runs/30191143440"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|KO|romance_core|f34a59a474f1|short_unverified",
@@ -325878,19 +325881,34 @@
           "finalizedAt": "2026-07-26T06:21:07.961Z"
         }
       ],
-      "finalizedAt": "2026-07-26T06:21:07.961Z",
+      "finalizedAt": "2026-07-26T06:53:52.056Z",
       "finalizeSummary": {
         "expectedCount": 19,
-        "completedCount": 18,
+        "completedCount": 19,
         "observedCount": 19,
         "missingCount": 0,
         "duplicateAssignmentCount": 0,
         "duplicateVideoIdCount": 0,
         "unexpectedPublicationCount": 0,
-        "receiptErrorCount": 1,
+        "receiptErrorCount": 0,
         "ordinaryResult": "skipped",
         "polyglotResult": "success",
         "artifactCount": 19
+      },
+      "scheduleReconciliation": {
+        "reconciledAt": "2026-07-26T06:53:52.056Z",
+        "reportPath": "https://github.com/webpot-ru/luna/actions/runs/30191143440",
+        "resolvedPublishAtMismatchCount": 1,
+        "changes": [
+          {
+            "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|KM|romance_core|f34a59a474f1|short_unverified",
+            "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|KM|romance_core|short_unverified|km",
+            "youtubeVideoId": "LWbuPehVq-A",
+            "claimedPublishAt": "2026-07-26T07:30:00.000Z",
+            "actualPublishAt": "2026-07-27T01:30:00.000Z"
+          }
+        ],
+        "note": "Immutable manifest retains claimed slots; calendar and campaign receipts record authenticated live schedule readback."
       }
     }
   ]
