@@ -118,9 +118,11 @@ async function runBuild({ setId, targetLang, supportLang, transition, quizLimit 
     const duration = ((Date.now() - start) / 1000).toFixed(1);
     console.log(`[SUCCESS] Compiled ${targetLang} in ${duration}s.`);
     await appendToRegistry(setId, targetLang, supportLang, transition, quizLimit);
+    return { ok: true, targetLang };
   } catch (err) {
     const duration = ((Date.now() - start) / 1000).toFixed(1);
     console.error(`[ERROR] Failed ${targetLang} after ${duration}s: ${err.message}`);
+    return { ok: false, targetLang, error: err.message };
   }
 }
 
@@ -261,6 +263,7 @@ async function main() {
   const globalStart = Date.now();
   const queue = [...languages];
   const workers = [];
+  const failures = [];
 
   async function worker() {
     while (queue.length > 0) {
@@ -282,7 +285,8 @@ async function main() {
         continue;
       }
       
-      await runBuild({ setId, targetLang, supportLang, transition, quizLimit });
+      const result = await runBuild({ setId, targetLang, supportLang, transition, quizLimit });
+      if (!result.ok) failures.push(result);
     }
   }
 
@@ -291,9 +295,17 @@ async function main() {
   }
 
   await Promise.all(workers);
+  if (failures.length > 0) {
+    const failurePath = path.resolve(`outputs/video-generator/${setId}_${supportLang.toLowerCase()}_video_build_failures.json`);
+    fs.writeFileSync(failurePath, `${JSON.stringify({ generatedAt: new Date().toISOString(), setId, supportLang, failures }, null, 2)}\n`, "utf8");
+    throw new Error(`Video build failed for ${failures.map((item) => item.targetLang).join(", ")}. Details: ${failurePath}`);
+  }
   
   const totalDuration = ((Date.now() - globalStart) / 1000 / 60).toFixed(1);
   console.log(`\n🎉 Bulk generation complete! Total time: ${totalDuration} minutes.`);
 }
 
-main().catch(console.error);
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});

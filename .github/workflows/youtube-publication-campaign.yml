@@ -41,6 +41,14 @@ on:
         description: "Apply recovery only: prior campaign run whose validated completed metadata batches may be reused."
         required: false
         default: ""
+      video_cache_resume_run_id:
+        description: "Apply recovery only: failed child run whose exact ordinary audio cache may be reused after target-contract validation."
+        required: false
+        default: ""
+      video_cache_resume_support:
+        description: "Apply recovery only: one canonical support matching video_cache_resume_run_id."
+        required: false
+        default: ""
       confirm_campaign_apply:
         description: "Apply only: type APPLY_YOUTUBE_PUBLICATION_CAMPAIGN."
         required: false
@@ -137,6 +145,14 @@ jobs:
           fi
           if [ -n "${{ inputs.metadata_resume_run_id }}" ] && ! [[ "${{ inputs.metadata_resume_run_id }}" =~ ^[0-9]+$ ]]; then
             echo "::error::metadata_resume_run_id must be an exact numeric GitHub run id"
+            exit 1
+          fi
+          if [ -n "${{ inputs.video_cache_resume_run_id }}" ] && ! [[ "${{ inputs.video_cache_resume_run_id }}" =~ ^[0-9]+$ ]]; then
+            echo "::error::video_cache_resume_run_id must be an exact numeric GitHub run id"
+            exit 1
+          fi
+          if { [ -n "${{ inputs.video_cache_resume_run_id }}" ] && [ -z "${{ inputs.video_cache_resume_support }}" ]; } || { [ -z "${{ inputs.video_cache_resume_run_id }}" ] && [ -n "${{ inputs.video_cache_resume_support }}" ]; }; then
+            echo "::error::video cache recovery requires both video_cache_resume_run_id and video_cache_resume_support"
             exit 1
           fi
           npm run prepare:youtube-publication-campaign-run -- \
@@ -329,6 +345,7 @@ jobs:
       create_playlists: true
       allow_republish: false
       generate_thumbnails: false
+      source_cache_run_id: ${{ matrix.support == inputs.video_cache_resume_support && inputs.video_cache_resume_run_id || '' }}
       confirm_vectorengine_metadata: ${{ inputs.confirm_vectorengine_metadata }}
       confirm_youtube_write: APPLY_YOUTUBE_UPLOAD
       confirm_public: PUBLISH_PUBLIC

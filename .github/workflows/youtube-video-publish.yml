@@ -24,6 +24,7 @@ on:
       allow_republish: { required: false, type: boolean, default: false }
       generate_thumbnails: { required: false, type: boolean, default: false }
       source_run_id: { required: false, type: string, default: "" }
+      source_cache_run_id: { required: false, type: string, default: "" }
       confirm_thumbnail_spend: { required: false, type: string, default: "" }
       confirm_openai_metadata: { required: false, type: string, default: "" }
       confirm_vectorengine_metadata: { required: false, type: string, default: "" }
@@ -605,11 +606,48 @@ jobs:
             --require-public \
             --output=outputs/youtube-ordinary-playlist-visibility-github.json
 
+      - name: Restore verified audio cache from an interrupted build
+        if: ${{ inputs.source_run_id == '' && inputs.source_cache_run_id != '' && steps.generation_targets.outputs.has_targets == 'true' }}
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ inputs.source_cache_run_id }}
+          github-token: ${{ github.token }}
+          name: youtube-video-publish-apply-${{ inputs.set_id }}-${{ inputs.support }}-${{ inputs.source_cache_run_id }}
+          path: .source-cache-artifact
+
+      - name: Validate and restore interrupted audio cache
+        if: ${{ inputs.source_run_id == '' && inputs.source_cache_run_id != '' && steps.generation_targets.outputs.has_targets == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          SOURCE_ROOT="$(find .source-cache-artifact -type f -name youtube-generation-targets-github.json -print -quit | xargs -r dirname)"
+          test -n "$SOURCE_ROOT"
+          test -d "$SOURCE_ROOT/cache"
+          node -e '
+            const fs = require("fs");
+            const current = JSON.parse(fs.readFileSync("outputs/video-generator/youtube-generation-targets-github.json", "utf8"));
+            const source = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+            const compact = (report) => (report.supports || []).map((row) => ({
+              setId: row.setId, supportLang: row.supportLang,
+              targets: row.shardSelectedTargets || [],
+            }));
+            if (JSON.stringify(compact(current)) !== JSON.stringify(compact(source))) {
+              throw new Error("Source cache target contract differs from this immutable worker assignment.");
+            }
+          ' "$SOURCE_ROOT/youtube-generation-targets-github.json"
+          mkdir -p outputs/video-generator/cache
+          cp -R "$SOURCE_ROOT/cache/." outputs/video-generator/cache/
+          echo "Restored only hash-addressed audio cache after exact set/support/target contract match."
+
       - name: Build videos, metadata, schedule and thumbnails
         if: ${{ inputs.source_run_id == '' && steps.generation_targets.outputs.has_targets == 'true' }}
         shell: bash
         env:
           AI33_API_KEY: ${{ secrets.AI33_API_KEY }}
+          AI33_TASK_STATUS_RETRIES: "6"
+          AI33_TASK_STATUS_RETRY_BASE_MS: "2000"
+          AI33_TASK_POLL_ATTEMPTS: "30"
+          AI33_TASK_POLL_INTERVAL_MS: "2000"
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
