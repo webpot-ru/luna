@@ -806,6 +806,10 @@ jobs:
             outputs/youtube-live-publications-github.json
             outputs/youtube-publication-control-github.json
             outputs/youtube-polyglot-publish-schedule-github.json
+            # A ledger has task ids and cache filenames only: no text, audio
+            # URLs or credentials. Preserve it for evidence and exact future
+            # recovery of an already-created AI33 task.
+            outputs/video-generator/cache/**/ai33-task-ledger.jsonl
             outputs/video-generator/*_polyglot_*
             config/youtube-channels.json
             config/youtube-polyglot-playlists.json

@@ -308,13 +308,33 @@ async function downloadFile(url, outputPath) {
 async function waitForAi33TaskAudio(taskId) {
   const pollAttempts = positiveIntegerEnv("AI33_TASK_POLL_ATTEMPTS", 30);
   const pollIntervalMs = positiveIntegerEnv("AI33_TASK_POLL_INTERVAL_MS", 2000);
+  let lastTransientStatusError = null;
   for (let i = 0; i < pollAttempts; i++) {
     await delay(pollIntervalMs);
-    const taskInfo = await checkTaskStatus(taskId);
+    let taskInfo;
+    try {
+      taskInfo = await checkTaskStatus(taskId);
+    } catch (error) {
+      // AI33 can temporarily return server_busy while the already-created task
+      // continues processing. Keep polling that immutable task instead of
+      // treating one exhausted HTTP retry window as a failed synthesis.
+      lastTransientStatusError = error;
+      console.warn(
+        `[AI33 TTS] Task ${taskId} status is temporarily unavailable ` +
+        `(${i + 1}/${pollAttempts}); continuing the same task: ${error.message}`,
+      );
+      continue;
+    }
     if (taskInfo.status === "done" && taskInfo.metadata?.audio_url) return taskInfo.metadata.audio_url;
     if (["failed", "error", "cancelled"].includes(String(taskInfo.status || "").toLowerCase())) {
       throw new Error(`AI33 task ${taskId} failed on server side with status=${taskInfo.status}.`);
     }
+  }
+  if (lastTransientStatusError) {
+    throw new Error(
+      `AI33 task ${taskId} remained unavailable after ${pollAttempts} polling attempts: ` +
+      lastTransientStatusError.message,
+    );
   }
   throw new Error(`AI33 task ${taskId} timed out.`);
 }
