@@ -5,8 +5,12 @@ import path from "node:path";
 import {
   assignmentKey,
   calendarAssignmentKey,
+  canonicalSupportCode,
   isActive,
   isActiveReservation,
+  isPolyglotRow,
+  normalizedTargetLangs,
+  polyglotSlotKey,
 } from "./lib/youtube-publication-control.mjs";
 
 function parseArgs(argv) {
@@ -81,6 +85,24 @@ function slotKey(row) {
   return `${row.channelKey || ""}|${new Date(row.publishAt).toISOString()}`;
 }
 
+function isPolyglotIdentityRow(row) {
+  return isPolyglotRow(row) || (Boolean(row.bundleKey) && Array.isArray(row.targetLangs));
+}
+
+function sameAssignmentIdentity(left, right) {
+  if (assignmentKey(left) === assignmentKey(right)) return true;
+  if (!isPolyglotIdentityRow(left) || !isPolyglotIdentityRow(right)) return false;
+
+  const leftTargets = normalizedTargetLangs(left);
+  const rightTargets = normalizedTargetLangs(right);
+  return leftTargets.length > 0
+    && leftTargets.length === rightTargets.length
+    && leftTargets.every((target, index) => target === rightTargets[index])
+    && String(left.setId || "") === String(right.setId || "")
+    && canonicalSupportCode(left.supportLang) === canonicalSupportCode(right.supportLang)
+    && polyglotSlotKey(left) === polyglotSlotKey(right);
+}
+
 function planReconciliation({ campaign, report, snapshot, calendar, ordinary, polyglot, now }) {
   assert(completeReport(report), "Refusing campaign schedule reconciliation from incomplete all-route live evidence.");
   assert(
@@ -126,12 +148,12 @@ function planReconciliation({ campaign, report, snapshot, calendar, ordinary, po
     const live = liveByVideoId.get(publication.youtubeVideoId);
     assert(live, `Live evidence is missing campaign video ${publication.youtubeVideoId}.`);
     assert(sameInstant(live.publishAt, actualPublishAt), `Live schedule disagrees with durable receipt for ${assignment.assignmentKey}.`);
-    assert(assignmentKey(live) === assignment.assignmentKey, `Live assignment identity differs for ${assignment.assignmentKey}.`);
+    assert(sameAssignmentIdentity(live, assignment), `Live assignment identity differs for ${assignment.assignmentKey}.`);
     const snapshotLive = snapshotByVideoId.get(publication.youtubeVideoId);
     assert(snapshotLive, `Snapshot evidence is missing campaign video ${publication.youtubeVideoId}.`);
     assert(snapshotLive.state === "scheduled" && snapshotLive.privacyStatus === "private", `Schedule mismatch is not a future private scheduled video: ${assignment.assignmentKey}.`);
     assert(sameInstant(snapshotLive.publishAt, actualPublishAt), `Snapshot schedule disagrees with durable receipt for ${assignment.assignmentKey}.`);
-    assert(assignmentKey(snapshotLive) === assignment.assignmentKey, `Snapshot assignment identity differs for ${assignment.assignmentKey}.`);
+    assert(sameAssignmentIdentity(snapshotLive, assignment), `Snapshot assignment identity differs for ${assignment.assignmentKey}.`);
 
     const reservationKey = assignment.calendarAssignmentKey || calendarAssignmentKey(assignment);
     const reservations = activeReservations.filter((row) => calendarAssignmentKey(row) === reservationKey);
