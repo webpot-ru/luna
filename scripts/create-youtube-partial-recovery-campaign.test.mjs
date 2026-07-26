@@ -8,6 +8,13 @@ import { calendarAssignmentKey } from "./lib/youtube-publication-control.mjs";
 const durableRegistry = JSON.parse(fs.readFileSync("config/youtube-publication-campaigns.json", "utf8"));
 const durableCalendar = JSON.parse(fs.readFileSync("config/youtube-publish-calendar.json", "utf8"));
 const channels = JSON.parse(fs.readFileSync("config/youtube-channels.json", "utf8"));
+const historicalRecoveryChannels = structuredClone(channels);
+historicalRecoveryChannels.channels = historicalRecoveryChannels.channels.map((channel) => (
+  channel.key === "hy" ? {
+    ...channel,
+    videoProductionReadiness: { status: "ready", reason: "historical_fixture_ready", checkedAt: "2026-07-26" },
+  } : channel
+));
 const policy = JSON.parse(fs.readFileSync("config/youtube-publish-schedule-policy.json", "utf8"));
 const currentRecovery = [...durableRegistry.campaigns]
   .filter((row) => row.recoveryOfCampaignId
@@ -83,7 +90,7 @@ const controlReports = ["youtube-1", "youtube-2", "youtube-3", "youtube-4"].map(
 const result = buildPartialRecovery({
   registry,
   calendar,
-  channels,
+  channels: historicalRecoveryChannels,
   policy,
   controlReports,
   campaignId: sourceCampaignId,
@@ -126,7 +133,7 @@ collisionReports.find((report) => report.supports.includes(ordinaryRow.supportLa
 assert.throws(() => buildPartialRecovery({
   registry,
   calendar,
-  channels,
+  channels: historicalRecoveryChannels,
   policy,
   controlReports: collisionReports,
   campaignId: sourceCampaignId,
@@ -141,7 +148,7 @@ registryWithAcceptedUpload.campaigns
 assert.throws(() => buildPartialRecovery({
   registry: registryWithAcceptedUpload,
   calendar,
-  channels,
+  channels: historicalRecoveryChannels,
   policy,
   controlReports,
   campaignId: sourceCampaignId,
@@ -195,7 +202,7 @@ const upgradeCalendar = {
 const upgradeCalendarKey = calendarAssignmentKey(upgradeRegistry.campaigns[0].assignments[0]);
 upgradeRegistry.campaigns[0].assignments[0].calendarAssignmentKey = upgradeCalendarKey;
 upgradeCalendar.reservations[0].calendarAssignmentKey = upgradeCalendarKey;
-const upgradeChannels = { channels: [{ key: "lo", supportLangs: ["LO"], longVideoUploadAllowed: false, customThumbnailUploadAllowed: false }] };
+const upgradeChannels = { channels: [{ key: "lo", supportLangs: ["LO"], longVideoUploadAllowed: true, customThumbnailUploadAllowed: false }] };
 const upgradeControl = [{
   setId: "deck",
   generatedAt,
@@ -219,7 +226,7 @@ const upgradeResult = buildPartialRecovery({
   minFutureMinutes: 90,
 });
 assert.equal(upgradeResult.manifest.assignments[0].contentScope, "full");
-assert.equal(upgradeResult.manifest.assignments[0].maxDurationSeconds, 895);
+assert.equal(upgradeResult.manifest.assignments[0].maxDurationSeconds, 0);
 assert.match(upgradeResult.manifest.assignments[0].assignmentKey, /\|full$/u);
 assert.equal(upgradeResult.nextRegistry.campaigns[0].assignments[0].status, "superseded_partial_recovery");
 assert.throws(() => buildPartialRecovery({
@@ -299,13 +306,14 @@ const downgradeResult = buildPartialRecovery({
   controlReports: downgradeControl,
   campaignId: "full-source",
   assignmentKeys: [downgradeKey],
-  polyglotScopeDowngrades: { [downgradeKey]: "short_unverified" },
   now: new Date(generatedAt),
   minFutureMinutes: 90,
 });
 assert.equal(downgradeResult.manifest.assignments[0].contentScope, "short_unverified");
 assert.equal(downgradeResult.manifest.assignments[0].maxDurationSeconds, 895);
 assert.match(downgradeResult.manifest.assignments[0].assignmentKey, /\|short_unverified$/u);
+assert.equal(downgradeResult.manifest.assignments[0].autoFallbackReason, "long_video_upload_not_confirmed");
+assert.deepEqual(downgradeResult.manifest.inputs.automaticPolyglotScopeDowngrades, [{ sourceAssignmentKey: downgradeKey, contentScope: "short_unverified" }]);
 assert.equal(downgradeResult.nextRegistry.campaigns[0].assignments[0].status, "superseded_partial_recovery");
 assert.throws(() => buildPartialRecovery({
   registry: downgradeRegistry,

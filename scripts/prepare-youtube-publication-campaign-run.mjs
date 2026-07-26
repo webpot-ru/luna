@@ -5,11 +5,13 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 
 import { assignmentKey, calendarAssignmentKey } from "./lib/youtube-publication-control.mjs";
+import { longVideoUploadAllowed, resolveYoutubeVideoProductionReadiness } from "./lib/youtube-video-production-readiness.mjs";
 
 function parseArgs(argv) {
   const options = {
     registry: "config/youtube-publication-campaigns.json",
     calendar: "config/youtube-publish-calendar.json",
+    channels: "config/youtube-channels.json",
     output: "outputs/youtube-publication-campaign-run-preflight.json",
   };
   for (let index = 0; index < argv.length; index += 1) {
@@ -19,6 +21,7 @@ function parseArgs(argv) {
     else if (arg === "--manifest-hash" || arg.startsWith("--manifest-hash=")) options.manifestHash = value();
     else if (arg === "--registry" || arg.startsWith("--registry=")) options.registry = value();
     else if (arg === "--calendar" || arg.startsWith("--calendar=")) options.calendar = value();
+    else if (arg === "--channels" || arg.startsWith("--channels=")) options.channels = value();
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = value();
     else if (arg === "--github-output" || arg.startsWith("--github-output=")) options.githubOutput = value();
     else if (arg === "--help" || arg === "-h") options.help = true;
@@ -58,12 +61,13 @@ function historicalGitBlobIsValid({ commit, blobId, path: filePath }) {
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log("node scripts/prepare-youtube-publication-campaign-run.mjs --campaign-id=<id> --manifest-hash=<sha256>");
+    console.log("node scripts/prepare-youtube-publication-campaign-run.mjs --campaign-id=<id> --manifest-hash=<sha256> [--channels=config/youtube-channels.json]");
     return;
   }
   if (!options.campaignId || !options.manifestHash) throw new Error("--campaign-id and --manifest-hash are required");
   const registry = JSON.parse(fs.readFileSync(options.registry, "utf8"));
   const calendar = JSON.parse(fs.readFileSync(options.calendar, "utf8"));
+  const channelRegistry = JSON.parse(fs.readFileSync(options.channels, "utf8"));
   const campaign = (registry.campaigns || []).find((row) => row.campaignId === options.campaignId);
   if (!campaign) throw new Error(`Claimed campaign not found: ${options.campaignId}`);
   if (campaign.manifestHash !== options.manifestHash) throw new Error("Campaign manifest hash does not match durable registry");
@@ -93,6 +97,24 @@ function main() {
     .filter((row) => row.campaignId === campaign.campaignId)
     .map((row) => [calendarAssignmentKey(row), row]));
   for (const row of campaign.assignments || []) {
+    const channel = (channelRegistry.channels || []).find((candidate) => (candidate.supportLangs || []).includes(row.supportLang));
+    if (!channel) {
+      blockers.push(`${row.assignmentKey}: channel production configuration is missing for ${row.supportLang}`);
+    } else {
+      const productionReadiness = resolveYoutubeVideoProductionReadiness(channelRegistry, channel, row.supportLang);
+      if (!productionReadiness.ready) {
+        blockers.push(`${row.assignmentKey}: video production readiness is blocked (${productionReadiness.reason})`);
+      }
+      if (row.videoType === "polyglot" && (row.contentScope || "full") === "full" && !longVideoUploadAllowed(channelRegistry, channel)) {
+        blockers.push(`${row.assignmentKey}: full Polyglot requires longVideoUploadAllowed=true; plan short_unverified before claim`);
+      }
+      if (row.videoType === "polyglot" && row.contentScope === "short_unverified") {
+        const maxDurationSeconds = Number(row.maxDurationSeconds || 895);
+        if (!Number.isFinite(maxDurationSeconds) || maxDurationSeconds <= 0 || maxDurationSeconds > 895) {
+          blockers.push(`${row.assignmentKey}: short_unverified requires maxDurationSeconds within 1..895`);
+        }
+      }
+    }
     const claim = claimsByAssignment.get(row.calendarAssignmentKey);
     if (!claim) blockers.push(`${row.assignmentKey}: durable calendar claim missing`);
     else if (claim.campaignManifestHash !== campaign.manifestHash || claim.publishAt !== row.publishAt) blockers.push(`${row.assignmentKey}: calendar claim identity/time mismatch`);

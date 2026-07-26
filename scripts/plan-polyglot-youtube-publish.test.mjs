@@ -128,9 +128,24 @@ spawnSync(process.execPath, [
   `--output=${directPlanOutput}`,
 ], { cwd: process.cwd(), encoding: "utf8" });
 const directPlan = JSON.parse(fs.readFileSync(directPlanOutput, "utf8"));
-assert.equal(directPlan.candidate.contentScope, "full", "a channel without confirmed long-video capability must retain the requested full product");
-assert.equal(directPlan.candidate.maxDurationSeconds, 895, "unconfirmed full product must retain the <=14:55 duration gate");
-assert.equal(directPlan.candidate.cardLimit, 0, "full product must not inherit the deliberately-truncated short card limit");
-assert.equal(directPlan.candidate.autoFallbackContentScope, null, "planner must never auto-convert full Polyglot to short_unverified");
+assert.equal(directPlan.candidate.contentScope, "short_unverified", "a channel without confirmed long-video capability must be planned as a short product before render");
+assert.equal(directPlan.candidate.maxDurationSeconds, 895, "automatic short product must retain the <=14:55 duration gate");
+assert.equal(directPlan.candidate.cardLimit, 0, "automatic short product uses dynamic measured card selection");
+assert.equal(directPlan.candidate.autoFallbackContentScope, "short_unverified", "planner must record the pre-render full-to-short conversion");
+assert.equal(directPlan.candidate.autoFallbackReason, "long_video_upload_not_confirmed");
+
+const hyPlanOutput = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "youtube-polyglot-plan-hy-")), "plan.json");
+const hyPlanRun = spawnSync(process.execPath, [
+  "scripts/plan-polyglot-youtube-publish.mjs",
+  "--set=home_kitchen_cooking_actions_a1_a2",
+  "--support=HY",
+  "--bundle=romance_core",
+  "--content-scope=full",
+  `--output=${hyPlanOutput}`,
+], { cwd: process.cwd(), encoding: "utf8" });
+assert.notEqual(hyPlanRun.status, 0, "HY must be blocked by the no-spend production readiness gate");
+const hyPlan = JSON.parse(fs.readFileSync(hyPlanOutput, "utf8"));
+assert.equal(hyPlan.candidate.productionReadiness.ready, false);
+assert.match(hyPlan.blockers.join("\n"), /ai33_tts_endpoint_not_verified_for_github/u);
 
 console.log("youtube Polyglot campaign claim tests passed");

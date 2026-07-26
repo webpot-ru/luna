@@ -30,6 +30,7 @@ import {
   longVideoUploadAllowed,
   findPlaylistEntry,
 } from "./youtube-playlists.mjs";
+import { resolveYoutubeVideoProductionReadiness } from "./youtube-video-production-readiness.mjs";
 import {
   buildPolyglotPlaylistAssignment,
   findPolyglotPlaylistEntry,
@@ -398,7 +399,8 @@ function buildCandidate({ tail, channel, route, channelRegistry }) {
     const targetLangsHash = targetHash(targetLangs);
     const requestedContentScope = tail.contentScope || "full";
     const longVideoAllowed = longVideoUploadAllowed(channelRegistry, channel);
-    const requiresDurationCap = requestedContentScope === "full" && !longVideoAllowed;
+    const autoFallbackToShort = requestedContentScope === "full" && !longVideoAllowed;
+    const contentScope = autoFallbackToShort ? "short_unverified" : requestedContentScope;
     const shortCardLimit = Number(channelRegistry?.defaults?.shortUnverifiedPolyglotCardLimit ?? DEFAULT_SHORT_UNVERIFIED_CARD_LIMIT);
     const candidate = {
       videoType: "polyglot",
@@ -410,13 +412,14 @@ function buildCandidate({ tail, channel, route, channelRegistry }) {
       targetLangsHash,
       bundleKey: tail.bundleKey,
       requestedContentScope,
-      contentScope: requestedContentScope,
-      cardLimit: requestedContentScope === "short_unverified" ? shortCardLimit : 0,
-      maxDurationSeconds: requestedContentScope === "short_unverified" || requiresDurationCap
+      contentScope,
+      cardLimit: contentScope === "short_unverified" ? shortCardLimit : 0,
+      maxDurationSeconds: contentScope === "short_unverified"
         ? SHORT_UNVERIFIED_MAX_DURATION_SECONDS
         : 0,
       longVideoUploadAllowed: longVideoAllowed,
-      autoFallbackReason: "",
+      autoFallbackReason: autoFallbackToShort ? "long_video_upload_not_confirmed" : "",
+      productionReadiness: resolveYoutubeVideoProductionReadiness(channelRegistry, channel, tail.supportLang),
       channelKey: channel.key,
       youtubeChannelId: channel.channelId,
       youtubeEnvironment: route.githubEnvironment || route.environment || "",
@@ -436,6 +439,7 @@ function buildCandidate({ tail, channel, route, channelRegistry }) {
     youtubeChannelId: channel.channelId,
     youtubeEnvironment: route.githubEnvironment || route.environment || "",
     routeKey: route.key,
+    productionReadiness: resolveYoutubeVideoProductionReadiness(channelRegistry, channel, tail.supportLang),
   };
   candidate.assignmentKey = assignmentKey(candidate);
   candidate.calendarAssignmentKey = calendarAssignmentKey(candidate);
@@ -459,10 +463,15 @@ function crossScopePublicationMatchesCandidate(publication, candidate) {
     && polyglotContentScope(publication) !== candidate.contentScope;
 }
 
-function validateWave(assignments, expectedSupportCount, ordinaryPerChannel, polyglotPerChannel, allowPartialOrdinaryTail = false) {
+function validateWave(assignments, expectedSupportCount, ordinaryPerChannel, polyglotPerChannel, {
+  allowPartialOrdinaryTail = false,
+  deferredProductionAssignments = [],
+} = {}) {
   const blockers = [];
-  const expectedOrdinary = expectedSupportCount * ordinaryPerChannel;
-  const expectedPolyglot = expectedSupportCount * polyglotPerChannel;
+  const deferredOrdinary = deferredProductionAssignments.filter((row) => row.videoType === "ordinary").length;
+  const deferredPolyglot = deferredProductionAssignments.filter((row) => row.videoType === "polyglot").length;
+  const expectedOrdinary = expectedSupportCount * ordinaryPerChannel - deferredOrdinary;
+  const expectedPolyglot = expectedSupportCount * polyglotPerChannel - deferredPolyglot;
   const ordinaryCount = assignments.filter((row) => row.videoType === "ordinary").length;
   const polyglotCount = assignments.filter((row) => row.videoType === "polyglot").length;
   if (allowPartialOrdinaryTail) {
@@ -599,6 +608,7 @@ export function buildPublicationCampaign(options = {}) {
   }
 
   const selected = [];
+  const deferredProductionAssignments = [];
   for (const support of supports) {
     const channel = routing.supportToChannel.get(support);
     const route = routing.supportToRoute.get(support);
@@ -614,6 +624,23 @@ export function buildPublicationCampaign(options = {}) {
       .filter((candidate) => !claims.polyglotProducts.has(polyglotProductSlotKey(candidate)))
       .filter((candidate) => !deck.publications.some((publication) => activePublicationMatchesCandidate(publication, candidate)))
       .slice(0, polyglotPerChannel);
+    const productionReadiness = ordinary[0]?.productionReadiness
+      || polyglot[0]?.productionReadiness
+      || resolveYoutubeVideoProductionReadiness(routing.channelRegistry, channel, support);
+    if (!productionReadiness.ready) {
+      const deferred = [...ordinary, ...polyglot].map((candidate) => ({
+        ...candidate,
+        deferredReason: productionReadiness.reason,
+        deferredAtStage: "campaign_no_spend_plan",
+      }));
+      deferredProductionAssignments.push(...deferred);
+      if (deferred.length) {
+        warnings.push(`${support}: ${deferred.length} assignment(s) deferred before metadata/TTS/render because production readiness is blocked (${productionReadiness.reason})`);
+      } else {
+        warnings.push(`${support}: no unclaimed assignment is scheduled because production readiness is blocked (${productionReadiness.reason})`);
+      }
+      continue;
+    }
     for (const candidate of polyglot) {
       const conflicting = deck.publications.find((publication) => crossScopePublicationMatchesCandidate(publication, candidate));
       if (conflicting) {
@@ -691,7 +718,10 @@ export function buildPublicationCampaign(options = {}) {
     });
   }
 
-  blockers.push(...validateWave(assignments, supports.length, ordinaryPerChannel, polyglotPerChannel, allowPartialOrdinaryTail));
+  blockers.push(...validateWave(assignments, supports.length, ordinaryPerChannel, polyglotPerChannel, {
+    allowPartialOrdinaryTail,
+    deferredProductionAssignments,
+  }));
   blockers.push(...validateResolvedPlaylistIdentities(assignments));
   const routeCounts = Object.fromEntries(routing.projects.map((route) => [route.key, assignments.filter((row) => row.routeKey === route.key).length]));
   const metadataRouteBatchCount = Object.values(routeCounts)
@@ -701,9 +731,17 @@ export function buildPublicationCampaign(options = {}) {
   const ordinaryTtsRequestsPerSupportMaximum = cardCount === null
     ? null
     : cardCount * (ordinaryPerChannel + 1) + ordinaryPerChannel + 1;
+  const scheduledOrdinarySupportCount = new Set(assignments
+    .filter((row) => row.videoType === "ordinary")
+    .map((row) => row.supportLang)).size;
+  const scheduledPolyglotSupportCount = new Set(assignments
+    .filter((row) => row.videoType === "polyglot")
+    .map((row) => row.supportLang)).size;
+  const scheduledSupportCount = new Set(assignments.map((row) => row.supportLang)).size;
+  const deferredProductionSupportCount = new Set(deferredProductionAssignments.map((row) => row.supportLang)).size;
   const ordinaryTtsRequestsMaximum = ordinaryTtsRequestsPerSupportMaximum === null
     ? null
-    : ordinaryTtsRequestsPerSupportMaximum * supports.length;
+    : ordinaryTtsRequestsPerSupportMaximum * scheduledOrdinarySupportCount;
   const polyglotTtsRequestsMaximum = cardCount === null
     ? null
     : assignments.filter((row) => row.videoType === "polyglot")
@@ -762,6 +800,9 @@ export function buildPublicationCampaign(options = {}) {
     inputs: {
       supports: supports.join(","),
       supportCount: supports.length,
+      ordinarySupportCount: scheduledOrdinarySupportCount,
+      polyglotSupportCount: scheduledPolyglotSupportCount,
+      productionDeferredSupportCount: deferredProductionSupportCount,
       ordinaryPerChannel,
       allowPartialOrdinaryTail,
       polyglotPerChannel,
@@ -795,6 +836,7 @@ export function buildPublicationCampaign(options = {}) {
           finalizeSummary: replacementCampaign?.finalizeSummary || null,
         },
       } : {}),
+      productionDeferredAssignments: deferredProductionAssignments,
       sourceFingerprints,
     },
     summary: {
@@ -802,6 +844,9 @@ export function buildPublicationCampaign(options = {}) {
       blockerCount: blockers.length,
       warningCount: warnings.length,
       supportCount: supports.length,
+      scheduledSupportCount,
+      productionDeferredSupportCount: deferredProductionSupportCount,
+      productionDeferredAssignmentCount: deferredProductionAssignments.length,
       ordinaryCount: assignments.filter((row) => row.videoType === "ordinary").length,
       polyglotCount: assignments.filter((row) => row.videoType === "polyglot").length,
       fullPolyglotCount: assignments.filter((row) => row.videoType === "polyglot" && row.contentScope === "full").length,
@@ -825,7 +870,8 @@ export function buildPublicationCampaign(options = {}) {
       estimatedQuotaUnitsMaximum: estimatedVideoUploadCalls + estimatedGeneralQuotaUnitsMaximum,
       byRoute,
       directGeminiRequestsCurrentWorkerLayout:
-        supports.length * (Math.ceil(ordinaryPerChannel / 5) + polyglotPerChannel),
+        scheduledOrdinarySupportCount * Math.ceil(ordinaryPerChannel / 5)
+        + scheduledPolyglotSupportCount * polyglotPerChannel,
       directGeminiRequestsCampaignRouteBatchSize5: metadataRouteBatchCount,
       directGeminiRequestsCampaignWideBatchSize5: Math.ceil(assignments.length / 5),
       metadataProviderOrder: ["openai_gpt_5_4", "direct_gemini_key_1", "direct_gemini_key_2", "vectorengine_confirmed"],

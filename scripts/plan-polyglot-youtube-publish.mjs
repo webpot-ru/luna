@@ -14,6 +14,7 @@ import {
   loadYoutubeChannels,
   normalizeLanguageCode,
 } from "./lib/youtube-playlists.mjs";
+import { resolveYoutubeVideoProductionReadiness } from "./lib/youtube-video-production-readiness.mjs";
 import {
   isActivePublication,
   loadPublicationRegistry,
@@ -419,10 +420,17 @@ async function main() {
     blockers.push(`maxDurationSeconds must be between 1 and ${SHORT_UNVERIFIED_MAX_DURATION_SECONDS}`);
   }
   if (!Number.isInteger(options.cardLimit) || options.cardLimit < 0) blockers.push("cardLimit must be a non-negative integer");
-  const effectiveContentScope = contentScope;
-  const effectiveMaxDuration = maxDurationSeconds;
-  let effectiveCardLimit = options.cardLimit;
   const longVideoAllowed = channel ? longVideoUploadAllowed(channelRegistry, channel) : false;
+  const productionReadiness = channel
+    ? resolveYoutubeVideoProductionReadiness(channelRegistry, channel, supportLang)
+    : { ready: false, reason: "channel_production_configuration_missing" };
+  if (!productionReadiness.ready) blockers.push(`video production readiness is blocked (${productionReadiness.reason})`);
+  const autoFallbackToShort = contentScope === "full" && !longVideoAllowed;
+  const effectiveContentScope = autoFallbackToShort ? "short_unverified" : contentScope;
+  const effectiveMaxDuration = effectiveContentScope === "short_unverified"
+    ? Math.min(maxDurationSeconds, SHORT_UNVERIFIED_MAX_DURATION_SECONDS)
+    : maxDurationSeconds;
+  let effectiveCardLimit = options.cardLimit;
   const configuredShortCardLimit = Number(channelRegistry?.defaults?.shortUnverifiedPolyglotCardLimit ?? DEFAULT_SHORT_UNVERIFIED_CARD_LIMIT);
   if (!Number.isInteger(configuredShortCardLimit) || configuredShortCardLimit < 0) {
     blockers.push("channel defaults.shortUnverifiedPolyglotCardLimit must be a non-negative integer");
@@ -490,10 +498,13 @@ async function main() {
     youtubeChannelId: channel?.channelId || "",
     customThumbnailUploadAllowed: channel ? customThumbnailUploadAllowed(channelRegistry, channel) : false,
     longVideoUploadAllowed: longVideoAllowed,
-    polyglotLongVideoEligibility: longVideoAllowed ? "confirmed_allowed" : "allowed_at_or_below_duration_cap",
-    autoFallbackContentScope: null,
-    autoFallbackMaxDurationSeconds: null,
-    autoFallbackCardLimit: null,
+    polyglotLongVideoEligibility: longVideoAllowed ? "confirmed_allowed" : "short_unverified_required",
+    requestedContentScope: contentScope,
+    autoFallbackContentScope: autoFallbackToShort ? "short_unverified" : null,
+    autoFallbackMaxDurationSeconds: autoFallbackToShort ? SHORT_UNVERIFIED_MAX_DURATION_SECONDS : null,
+    autoFallbackCardLimit: autoFallbackToShort ? effectiveCardLimit : null,
+    autoFallbackReason: autoFallbackToShort ? "long_video_upload_not_confirmed" : "",
+    productionReadiness,
     campaignId: options.campaignId,
     campaignManifestHash: options.campaignManifestHash,
     deck: deckPlan,
