@@ -13,6 +13,7 @@ import {
   savePlaylistRegistry,
   upsertPlannedPlaylist,
 } from "./lib/youtube-playlists.mjs";
+import { resolveYoutubeVideoProductionReadiness } from "./lib/youtube-video-production-readiness.mjs";
 import {
   DEFAULT_PUBLICATION_REGISTRY_PATH,
   activePublicationBlocker,
@@ -153,6 +154,9 @@ function buildCandidate({
 }) {
   const assignment = buildPlaylistAssignment(metadata);
   const channel = findChannelForSupport(channelRegistry.channels, metadata.supportLang);
+  const productionReadiness = channel
+    ? resolveYoutubeVideoProductionReadiness(channelRegistry, channel, metadata.supportLang)
+    : { ready: false, reason: "channel_production_configuration_missing" };
   const playlistEntry = findPlaylistEntry(playlistRegistry, assignment.key);
   const existingPublication = findActivePublication(publicationRegistry, metadata);
   const videoPath = findVideoFile(metadataFile, metadata);
@@ -175,6 +179,7 @@ function buildCandidate({
 
   if (!channel) blockers.push(`no channel configured for supportLang=${metadata.supportLang}`);
   else if (!channel.channelId) blockers.push(`channel ${channel.key} has no channelId`);
+  if (!productionReadiness.ready) blockers.push(`video production readiness is blocked (${productionReadiness.reason})`);
   if (!videoPath) blockers.push("missing video file next to metadata");
   if (!metadata.title || String(metadata.title).length > 100) blockers.push("missing or too-long title");
   if (!metadata.description || !String(metadata.description).includes("flashcardsluna.com")) blockers.push("description missing flashcardsluna.com link");
@@ -219,6 +224,7 @@ function buildCandidate({
     publishAt,
     channelKey: channel?.key || "",
     youtube_channel_id: channel?.channelId || "",
+    productionReadiness,
     customThumbnailUploadAllowed: canUploadCustomThumbnail,
     thumbnailUploadMode,
     thumbnailFallbackReason,

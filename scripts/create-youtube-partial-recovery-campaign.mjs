@@ -16,6 +16,7 @@ import {
   slotKey,
   ymdInZone,
 } from "./plan-youtube-publish-schedule.mjs";
+import { longVideoUploadAllowed, resolveYoutubeVideoProductionReadiness } from "./lib/youtube-video-production-readiness.mjs";
 
 const CONFIRM = "CREATE_PARTIAL_YOUTUBE_RECOVERY_CAMPAIGN";
 const SHORT_MAX_SECONDS = 895;
@@ -133,8 +134,15 @@ function campaignAssignment(row) {
     targetLangs: row.targetLangs || [],
     targetLangsHash: row.targetLangsHash || "",
     bundleKey: row.bundleKey || "",
+    sourceAssignmentKey: row.sourceAssignmentKey || "",
+    requestedContentScope: row.requestedContentScope || "",
     contentScope: row.contentScope || "",
+    cardLimit: Number(row.cardLimit || 0),
+    maxDurationSeconds: Number(row.maxDurationSeconds || 0),
+    longVideoUploadAllowed: row.longVideoUploadAllowed === true,
     polyglotKey: row.polyglotKey || "",
+    autoFallbackReason: row.autoFallbackReason || "",
+    productionReadiness: row.productionReadiness || null,
     channelKey: row.channelKey,
     youtubeChannelId: row.youtubeChannelId,
     routeKey: row.routeKey,
@@ -241,10 +249,19 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
     || String(a.targetLang || a.bundleKey).localeCompare(String(b.targetLang || b.bundleKey)))) {
     const channel = channelForSupport(channels, oldRow.supportLang);
     assert(channel, `${oldRow.supportLang}: channel config is missing`);
-    const longAllowed = channel.longVideoUploadAllowed === true;
-    const contentScope = oldRow.videoType === "polyglot"
+    const longAllowed = longVideoUploadAllowed(channels, channel);
+    const requestedContentScope = oldRow.videoType === "polyglot"
       ? (scopeUpgrades[oldRow.assignmentKey] || scopeDowngrades[oldRow.assignmentKey] || oldRow.contentScope || "full")
       : "";
+    if (oldRow.videoType === "polyglot" && scopeUpgrades[oldRow.assignmentKey] === "full" && !longAllowed) {
+      assert(false, `${oldRow.supportLang}: full Polyglot upgrade requires longVideoUploadAllowed=true`);
+    }
+    const autoFallbackToShort = oldRow.videoType === "polyglot"
+      && requestedContentScope === "full"
+      && !longAllowed;
+    const contentScope = autoFallbackToShort ? "short_unverified" : requestedContentScope;
+    const productionReadiness = resolveYoutubeVideoProductionReadiness(channels, channel, oldRow.supportLang);
+    assert(productionReadiness.ready, `${oldRow.supportLang}: video production preflight blocked (${productionReadiness.reason}); keep this support as a separate tail until readiness is restored`);
     const customThumbnailAllowed = channel.customThumbnailUploadAllowed === true;
     const carryForwardCustomThumbnail = customThumbnailAllowed
       && oldRow.thumbnail?.mode === "custom"
@@ -257,12 +274,16 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
     }
     const row = {
       ...oldRow,
+      sourceAssignmentKey: oldRow.assignmentKey,
+      requestedContentScope,
       contentScope,
       cardLimit: oldRow.videoType === "polyglot" ? 0 : oldRow.cardLimit,
       maxDurationSeconds: oldRow.videoType === "polyglot"
         ? (contentScope === "short_unverified" || !longAllowed ? SHORT_MAX_SECONDS : 0)
         : oldRow.maxDurationSeconds,
       longVideoUploadAllowed: oldRow.videoType === "polyglot" ? longAllowed : oldRow.longVideoUploadAllowed,
+      autoFallbackReason: autoFallbackToShort ? "long_video_upload_not_confirmed" : "",
+      productionReadiness,
       thumbnail: carryForwardCustomThumbnail
         ? structuredClone(oldRow.thumbnail)
         : { mode: "first_frame_auto", ready: true, reason: "custom_thumbnail_disabled_for_channel" },
@@ -343,6 +364,9 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
       partialRecoveryOfCampaignId: campaignId,
       polyglotScopeUpgrades: Object.entries(scopeUpgrades).map(([sourceAssignmentKey, contentScope]) => ({ sourceAssignmentKey, contentScope })),
       polyglotScopeDowngrades: Object.entries(scopeDowngrades).map(([sourceAssignmentKey, contentScope]) => ({ sourceAssignmentKey, contentScope })),
+      automaticPolyglotScopeDowngrades: assignments
+        .filter((row) => row.videoType === "polyglot" && row.autoFallbackReason === "long_video_upload_not_confirmed")
+        .map((row) => ({ sourceAssignmentKey: row.sourceAssignmentKey, contentScope: row.contentScope })),
     },
     evidence: {
       partialRecoveryCampaign: { campaignId, manifestHash: oldCampaign.manifestHash, status: oldCampaign.status, scopeUpgrades, scopeDowngrades },

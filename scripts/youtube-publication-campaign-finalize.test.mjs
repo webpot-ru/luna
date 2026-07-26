@@ -91,7 +91,16 @@ write(path.join(configDir, "youtube-publish-calendar.json"), {
 for (const name of ["youtube-published-videos.json", "youtube-polyglot-published-videos.json"]) write(path.join(configDir, name), { schemaVersion: 1, publications: [] });
 for (const name of ["youtube-playlists.json", "youtube-polyglot-playlists.json"]) write(path.join(configDir, name), { schemaVersion: 1, playlists: [] });
 write(path.join(configDir, "youtube-polyglot-progress.json"), { schemaVersion: 1, items: [] });
-write(path.join(configDir, "youtube-channels.json"), { schemaVersion: 1, channels: [] });
+const readyChannelConfig = {
+  schemaVersion: 1,
+  channels: [{
+    key: "en",
+    supportLangs: ["EN"],
+    longVideoUploadAllowed: true,
+    videoProductionReadiness: { status: "ready", reason: "fixture_ready" },
+  }],
+};
+write(path.join(configDir, "youtube-channels.json"), readyChannelConfig);
 
 const ordinaryArtifact = path.join(artifactRoot, "ordinary", "config");
 const polyglotArtifact = path.join(artifactRoot, "polyglot", "config");
@@ -148,6 +157,40 @@ assert.equal(preflight.ordinaryMatrix[0].langs, "DE");
 assert.equal(preflight.ordinaryMatrix[0].route_key, "youtube-1");
 assert.equal(preflight.polyglotMatrix[0].bundle, "global_europe_core");
 assert.equal(preflight.polyglotMatrix[0].route_key, "youtube-1");
+
+write(path.join(configDir, "youtube-channels.json"), {
+  ...readyChannelConfig,
+  channels: [{
+    ...readyChannelConfig.channels[0],
+    videoProductionReadiness: { status: "blocked", reason: "fixture_tts_unavailable" },
+  }],
+});
+const blockedProductionPrepare = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/prepare-youtube-publication-campaign-run.mjs"),
+  "--campaign-id=campaign-test",
+  "--manifest-hash=manifest-hash",
+  "--registry=config/youtube-publication-campaigns.json",
+  "--calendar=config/youtube-publish-calendar.json",
+  "--output=outputs/preflight-production-blocked.json",
+], { cwd: root, encoding: "utf8" });
+assert.notEqual(blockedProductionPrepare.status, 0);
+assert.match(blockedProductionPrepare.stderr, /video production readiness is blocked \(fixture_tts_unavailable\)/u);
+
+write(path.join(configDir, "youtube-channels.json"), {
+  ...readyChannelConfig,
+  channels: [{ ...readyChannelConfig.channels[0], longVideoUploadAllowed: false }],
+});
+const legacyFullPrepare = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/prepare-youtube-publication-campaign-run.mjs"),
+  "--campaign-id=campaign-test",
+  "--manifest-hash=manifest-hash",
+  "--registry=config/youtube-publication-campaigns.json",
+  "--calendar=config/youtube-publish-calendar.json",
+  "--output=outputs/preflight-legacy-full.json",
+], { cwd: root, encoding: "utf8" });
+assert.notEqual(legacyFullPrepare.status, 0);
+assert.match(legacyFullPrepare.stderr, /full Polyglot requires longVideoUploadAllowed=true/u);
+write(path.join(configDir, "youtube-channels.json"), readyChannelConfig);
 
 const preflightGithubOutput = path.join(root, "outputs/preflight-github-output.txt");
 const preflightWithGithubOutput = spawnSync(process.execPath, [

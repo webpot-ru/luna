@@ -24,6 +24,7 @@ channels.channels = channels.channels.map((channel) => ({
   customThumbnailUploadAllowed: false,
   thumbnailFallbackMode: "first_frame_auto",
   longVideoUploadAllowed: false,
+  videoProductionReadiness: { status: "ready", reason: "fixture_ready", checkedAt: "2026-07-26" },
 }));
 const routingFixture = readJson("config/youtube-api-project-routing.json");
 const canonicalRouting = loadCanonicalSupportRouting();
@@ -103,9 +104,36 @@ assert.equal(first.estimatedUsage.metadataMaximumProviderAttempts, 373);
 assert.equal(first.estimatedUsage.renderJobCount, 306);
 assert(first.assignments.every((row) => row.thumbnail.mode === "first_frame_auto" && row.thumbnail.ready));
 assert(first.assignments.filter((row) => row.videoType === "polyglot").every((row) => (
-  row.contentScope === "full" && row.cardLimit === 0 && row.maxDurationSeconds === 895
-)), "unconfirmed long-video channels must retain the full Polyglot product with a <=14:55 duration gate");
+  row.contentScope === "short_unverified"
+  && row.cardLimit === 0
+  && row.maxDurationSeconds === 895
+  && row.autoFallbackReason === "long_video_upload_not_confirmed"
+)), "channels without confirmed long-video capability must be planned as measured short Polyglots before claim");
+assert.equal(first.summary.fullPolyglotCount, 0);
+assert.equal(first.summary.shortUnverifiedPolyglotCount, 51);
 assert(first.assignments.every((row) => row.playlist.state === "verified_absent" && row.playlist.createAllowed));
+
+const productionBlockedChannels = readJson(paths.channelsPath);
+productionBlockedChannels.channels = productionBlockedChannels.channels.map((channel) => (
+  channel.key === "hy" ? {
+    ...channel,
+    videoProductionReadiness: {
+      status: "blocked",
+      reason: "fixture_ai33_unavailable",
+      checkedAt: "2026-07-26",
+    },
+  } : channel
+));
+const productionDeferredPlan = buildPublicationCampaign({
+  ...baseOptions,
+  channelsPath: writeJson("channels-production-blocked-hy.json", productionBlockedChannels),
+});
+assert.equal(productionDeferredPlan.summary.applyReady, true);
+assert.equal(productionDeferredPlan.summary.assignmentCount, 300);
+assert.equal(productionDeferredPlan.summary.productionDeferredSupportCount, 1);
+assert.equal(productionDeferredPlan.summary.productionDeferredAssignmentCount, 6);
+assert.equal(productionDeferredPlan.assignments.filter((row) => row.supportLang === "HY").length, 0);
+assert.equal(productionDeferredPlan.evidence.productionDeferredAssignments.filter((row) => row.supportLang === "HY").length, 6);
 
 const customEligibleChannels = readJson(paths.channelsPath);
 customEligibleChannels.channels = customEligibleChannels.channels.map((channel) => (
@@ -291,7 +319,7 @@ const planAfterPublishedShort = buildPublicationCampaign({
 assert.equal(planAfterPublishedShort.summary.applyReady, true);
 const nextPolyglotAfterShort = planAfterPublishedShort.assignments.find((row) => row.videoType === "polyglot");
 assert.notEqual(nextPolyglotAfterShort.bundleKey, "global_europe_core", "published short must keep its full tail deferred and select the next missing bundle");
-assert.equal(nextPolyglotAfterShort.contentScope, "full");
+assert.equal(nextPolyglotAfterShort.contentScope, "short_unverified");
 
 const activeShortClaim = {
   schemaVersion: 1,
@@ -395,6 +423,10 @@ assert.equal(firstClaim.status, 0, firstClaim.stderr || firstClaim.stdout);
 assert.match(firstClaim.stdout, /"status": "claimed"/);
 assert.equal(readJson(paths.calendarPath).reservations.length, 306);
 assert.equal(readJson(paths.campaignRegistryPath).campaigns.length, 1);
+assert(readJson(paths.campaignRegistryPath).campaigns[0].assignments
+  .filter((row) => row.videoType === "polyglot")
+  .every((row) => row.contentScope === "short_unverified" && row.maxDurationSeconds === 895),
+"claim must retain the short duration contract for the dispatch preflight");
 assert(fs.existsSync(path.join(tempRoot, "plans", `${first.campaignId}.json`)));
 
 const secondClaim = spawnSync(process.execPath, claimArgs, { cwd: process.cwd(), encoding: "utf8" });

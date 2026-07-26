@@ -97,6 +97,7 @@
     "test:polyglot-youtube-metadata-unicode": "node scripts/check-polyglot-youtube-metadata.test.mjs",
     "test:youtube-openai-metadata-canary": "node scripts/check-openai-youtube-metadata.test.mjs",
     "test:youtube-polyglot-campaign-claim": "node scripts/plan-polyglot-youtube-publish.test.mjs",
+    "test:youtube-ordinary-production-readiness": "node scripts/plan-youtube-publish.test.mjs",
     "test:youtube-polyglot-state": "node scripts/check-youtube-polyglot-state.test.mjs",
     "test:polyglot-video-duration": "node scripts/check-polyglot-video-duration.test.mjs",
     "test:polyglot-duration-selection": "node scripts/lib/polyglot-duration-selection.test.mjs",
