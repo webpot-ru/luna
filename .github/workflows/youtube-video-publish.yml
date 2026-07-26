@@ -631,13 +631,19 @@ jobs:
               setId: row.setId, supportLang: row.supportLang,
               targets: row.shardSelectedTargets || [],
             }));
-            if (JSON.stringify(compact(current)) !== JSON.stringify(compact(source))) {
-              throw new Error("Source cache target contract differs from this immutable worker assignment.");
+            const currentRows = compact(current);
+            const sourceRows = compact(source);
+            const compatible = currentRows.length === 1 && sourceRows.length === 1
+              && currentRows[0].setId === sourceRows[0].setId
+              && currentRows[0].supportLang === sourceRows[0].supportLang
+              && currentRows[0].targets.every((target) => sourceRows[0].targets.includes(target));
+            if (!compatible) {
+              throw new Error("Source cache set/support contract differs, or does not cover every current worker target.");
             }
           ' "$SOURCE_ROOT/youtube-generation-targets-github.json"
           mkdir -p outputs/video-generator/cache
           cp -R "$SOURCE_ROOT/cache/." outputs/video-generator/cache/
-          echo "Restored only hash-addressed audio cache after exact set/support/target contract match."
+          echo "Restored only hash-addressed audio cache after exact set/support and target-subset contract match."
 
       - name: Build videos, metadata, schedule and thumbnails
         if: ${{ inputs.source_run_id == '' && steps.generation_targets.outputs.has_targets == 'true' }}
