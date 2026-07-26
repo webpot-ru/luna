@@ -24,6 +24,10 @@ on:
         description: "Routes to audit: ALL (default) or an explicit comma-separated subset such as youtube-2,youtube-3,youtube-4."
         required: true
         default: "ALL"
+      audit_supports:
+        description: "Read-only only: optional exact support subset within explicit audit_routes, for example HY. Empty keeps every support on each selected route."
+        required: false
+        default: ""
       campaign_ordinary_per_channel:
         description: "Optional no-spend campaign plan: next ordinary videos per physical channel; 0 disables campaign planning."
         required: true
@@ -62,8 +66,10 @@ jobs:
         shell: bash
         env:
           AUDIT_ROUTES: ${{ github.event.inputs.audit_routes }}
+          AUDIT_SUPPORTS: ${{ github.event.inputs.audit_supports }}
           CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
           PLAN_REQUESTED: ${{ github.event.inputs.campaign_ordinary_per_channel != '0' || github.event.inputs.campaign_polyglot_per_channel != '0' }}
+          PERSIST_SNAPSHOT: ${{ github.event.inputs.persist_snapshot }}
         run: |
           node <<'NODE'
           const fs = require("node:fs");
@@ -79,7 +85,18 @@ jobs:
             : [...new Set(requested.split(",").map((value) => value.trim()).filter(Boolean))];
           const invalid = keys.filter((key) => !routes.some((row) => row.route === key));
           if (!keys.length || invalid.length) throw new Error(`invalid audit_routes: ${invalid.join(",") || requested}`);
-          const selected = routes.filter((row) => keys.includes(row.route));
+          let selected = routes.filter((row) => keys.includes(row.route));
+          const auditSupports = [...new Set(String(process.env.AUDIT_SUPPORTS || "").split(",").map((value) => value.trim().toUpperCase()).filter(Boolean))];
+          if (auditSupports.length) {
+            if (requested.toUpperCase() === "ALL") throw new Error("audit_supports requires explicit audit_routes; ALL would hide route coverage.");
+            if (process.env.PLAN_REQUESTED === "true" || process.env.PERSIST_SNAPSHOT === "true") throw new Error("audit_supports is evidence-only and cannot plan or persist a snapshot.");
+            const allowed = new Set(selected.flatMap((row) => row.supports.split(",")));
+            const outside = auditSupports.filter((support) => !allowed.has(support));
+            if (outside.length) throw new Error(`audit_supports outside selected audit_routes: ${outside.join(",")}`);
+            selected = selected.map((row) => ({ ...row, supports: row.supports.split(",").filter((support) => auditSupports.includes(support)).join(",") }))
+              .filter((row) => row.supports);
+            if (!selected.length) throw new Error("audit_supports selected no route supports");
+          }
           if (process.env.PLAN_REQUESTED === "true" && selected.length < routes.length) {
             if (String(process.env.CAMPAIGN_SUPPORTS || "").toUpperCase() === "ALL") {
               throw new Error("route-scoped campaign planning requires an explicit campaign_supports list");
