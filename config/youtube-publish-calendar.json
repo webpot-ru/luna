@@ -448995,7 +448995,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-b406a098da34",
       "campaignManifestHash": "3a3bb37af5e720d0a2209f9fa3905de471fdaaad549d553ddf15c2c620139101",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_kitchen_storage_cleaning_a2",
@@ -449018,7 +449018,7 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-26T14:13:02.970Z",
-      "updatedAt": "2026-07-26T14:13:02.970Z",
+      "updatedAt": "2026-07-26T14:46:00.000Z",
       "bundleLabel": "East Asia Core",
       "targetLangsCsv": "ZH,JA,KO",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -449044,7 +449044,38 @@
           "hoursAfterPublish": 720,
           "dueAt": "2026-08-26T13:30:00.000Z"
         }
-      ]
+      ],
+      "supersededAt": "2026-07-26T14:46:00.000Z",
+      "supersededByCampaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-fc20d9ecc4dd"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-fc20d9ecc4dd",
+      "campaignManifestHash": "b9477d622653a8182b4d57216cf3df2f8f966f862f3971b92ffa7511447927b8",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "HY",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:HY:east_asia_core:69af08ca98ea:short_unverified",
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "publishAt": "2026-07-26T16:30:00.000Z",
+      "timeZone": "Asia/Yerevan",
+      "localDate": "2026-07-26",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "createdAt": "2026-07-26T14:46:00.000Z",
+      "updatedAt": "2026-07-26T14:46:00.000Z"
     }
   ]
 }
