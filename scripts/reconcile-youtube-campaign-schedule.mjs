@@ -20,6 +20,7 @@ function parseArgs(argv) {
     ordinaryRegistry: "config/youtube-published-videos.json",
     polyglotRegistry: "config/youtube-polyglot-published-videos.json",
     snapshot: "",
+    reportEvidence: "",
     output: "outputs/youtube-campaign-schedule-reconciliation.json",
     apply: false,
     confirm: "",
@@ -29,6 +30,7 @@ function parseArgs(argv) {
     const value = () => arg.includes("=") ? arg.split("=").slice(1).join("=") : argv[++index];
     if (arg === "--campaign-id" || arg.startsWith("--campaign-id=")) options.campaignId = value();
     else if (arg === "--report" || arg.startsWith("--report=")) options.report = value();
+    else if (arg === "--report-evidence" || arg.startsWith("--report-evidence=")) options.reportEvidence = value();
     else if (arg === "--snapshot" || arg.startsWith("--snapshot=")) options.snapshot = value();
     else if (arg === "--campaign-registry" || arg.startsWith("--campaign-registry=")) options.campaignRegistry = value();
     else if (arg === "--calendar" || arg.startsWith("--calendar=")) options.calendar = value();
@@ -107,7 +109,10 @@ function planReconciliation({ campaign, report, snapshot, calendar, ordinary, po
   assert(completeReport(report), "Refusing campaign schedule reconciliation from incomplete all-route live evidence.");
   assert(
     campaign.status === "reconciliation_required"
-      || (campaign.status === "finalized" && campaign.scheduleReconciliation?.reportPath === report.__sourcePath),
+      || (campaign.status === "finalized" && (
+        campaign.scheduleReconciliation?.reportPath === report.__evidencePath
+        || campaign.scheduleReconciliation?.reportPath === report.__sourcePath
+      )),
     "Campaign must be reconciliation_required, or a prior reconciliation from this exact report.",
   );
   assert(campaign.finalizeSummary?.expectedCount === campaign.assignments.length, "Campaign finalizer evidence is incomplete.");
@@ -231,7 +236,7 @@ function applyReconciliation({ campaign, calendar, changes, reportPath, reconcil
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log("Usage: node scripts/reconcile-youtube-campaign-schedule.mjs --campaign-id=<id> --report=<complete-all-route-control.json> --snapshot=<same-run-publication-snapshot.json> [--apply --confirm=RECONCILE_YOUTUBE_CAMPAIGN_SCHEDULE]");
+    console.log("Usage: node scripts/reconcile-youtube-campaign-schedule.mjs --campaign-id=<id> --report=<complete-all-route-control.json> [--report-evidence=<durable-url-or-tracked-path>] --snapshot=<same-run-publication-snapshot.json> [--apply --confirm=RECONCILE_YOUTUBE_CAMPAIGN_SCHEDULE]");
     return;
   }
   assert(options.campaignId && options.report && options.snapshot, "--campaign-id, --report and --snapshot are required.");
@@ -242,6 +247,7 @@ function main() {
   const calendar = readJson(options.calendar);
   const report = readJson(options.report);
   report.__sourcePath = options.report;
+  report.__evidencePath = options.reportEvidence || options.report;
   const snapshot = readJson(options.snapshot);
   const ordinary = readJson(options.ordinaryRegistry);
   const polyglot = readJson(options.polyglotRegistry);
@@ -251,7 +257,8 @@ function main() {
     mode: options.apply ? "apply_local_durable_state_only" : "dry-run",
     campaignId: campaign.campaignId,
     manifestHash: campaign.manifestHash,
-    sourceReport: options.report,
+    sourceReport: report.__evidencePath,
+    sourceReportReadPath: options.report,
     sourceReportGeneratedAt: report.generatedAt || "",
     sourceSnapshot: options.snapshot,
     sourceSnapshotGeneratedAt: snapshot.generatedAt || "",
@@ -260,7 +267,13 @@ function main() {
     changes,
   };
   if (options.apply) {
-    applyReconciliation({ campaign, calendar, changes, reportPath: options.report, reconciledAt });
+    applyReconciliation({
+      campaign,
+      calendar,
+      changes,
+      reportPath: report.__evidencePath,
+      reconciledAt,
+    });
     writeJson(options.calendar, calendar);
     writeJson(options.campaignRegistry, registry);
   }
