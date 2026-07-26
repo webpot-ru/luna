@@ -143,9 +143,11 @@ const hyPlanRun = spawnSync(process.execPath, [
   "--content-scope=full",
   `--output=${hyPlanOutput}`,
 ], { cwd: process.cwd(), encoding: "utf8" });
-assert.notEqual(hyPlanRun.status, 0, "HY must be blocked by the no-spend production readiness gate");
+assert.notEqual(hyPlanRun.status, 0, "the historical HY romance product stays blocked because it already has a scheduled video");
 const hyPlan = JSON.parse(fs.readFileSync(hyPlanOutput, "utf8"));
-assert.equal(hyPlan.candidate.productionReadiness.ready, false);
-assert.match(hyPlan.blockers.join("\n"), /ai33_tts_endpoint_not_verified_for_github/u);
+assert.equal(hyPlan.candidate.productionReadiness.ready, true);
+assert.equal(hyPlan.candidate.contentScope, "short_unverified", "HY keeps the measured short fallback until long-video capability is confirmed");
+assert.doesNotMatch(hyPlan.blockers.join("\n"), /video production readiness/u);
+assert.match(hyPlan.blockers.join("\n"), /active Polyglot publication/u);
 
 console.log("youtube Polyglot campaign claim tests passed");
