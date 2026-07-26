@@ -350190,7 +350190,7 @@
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-fc20d9ecc4dd",
       "manifestHash": "b9477d622653a8182b4d57216cf3df2f8f966f862f3971b92ffa7511447927b8",
       "setId": "home_kitchen_storage_cleaning_a2",
-      "status": "claimed",
+      "status": "reconciliation_required",
       "claimedAt": "2026-07-26T14:46:00.000Z",
       "generatedAt": "2026-07-26T14:46:00.000Z",
       "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_storage_cleaning_a2-2026-07-26-fc20d9ecc4dd.json",
@@ -350403,7 +350403,21 @@
           },
           "status": "claimed"
         }
-      ]
+      ],
+      "finalizedAt": "2026-07-26T15:04:53.872Z",
+      "finalizeSummary": {
+        "expectedCount": 1,
+        "completedCount": 0,
+        "observedCount": 0,
+        "missingCount": 1,
+        "duplicateAssignmentCount": 0,
+        "duplicateVideoIdCount": 0,
+        "unexpectedPublicationCount": 0,
+        "receiptErrorCount": 0,
+        "ordinaryResult": "skipped",
+        "polyglotResult": "failure",
+        "artifactCount": 1
+      }
     }
   ]
 }

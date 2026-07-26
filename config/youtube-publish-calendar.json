@@ -449075,7 +449075,33 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-07-26T14:46:00.000Z",
-      "updatedAt": "2026-07-26T14:46:00.000Z"
+      "updatedAt": "2026-07-26T14:46:00.000Z",
+      "bundleLabel": "East Asia Core",
+      "targetLangsCsv": "ZH,JA,KO",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_kitchen_storage_cleaning_a2_polyglot_hy/youtube_metadata.json",
+      "title": "Խոհանոցում պահպանում՝ չինարեն, ճապոներեն, կորեերեն | Բառապաշար",
+      "playlist_key": "POLYGLOT__HY__east-asia-core__69af08ca98ea",
+      "githubRunId": "30206874433",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/30206874433",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-07-28T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-07-30T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-08-03T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-08-26T13:30:00.000Z"
+        }
+      ]
     }
   ]
 }
