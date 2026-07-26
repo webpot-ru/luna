@@ -948,7 +948,8 @@ jobs:
           ALLOW_REPUBLISH: ${{ inputs.allow_republish }}
           PRIVACY: ${{ inputs.privacy }}
           PUBLISH_MODE: ${{ inputs.publish_mode }}
-          YOUTUBE_API_RETRY_ATTEMPTS: ${{ inputs.campaign_id != '' && '1' || '7' }}
+          YOUTUBE_API_RETRY_ATTEMPTS: "7"
+          YOUTUBE_PLAYLIST_INSERT_RETRY_ATTEMPTS: "4"
           YOUTUBE_API_RETRY_BASE_MS: "4000"
           YOUTUBE_API_RETRY_JITTER_MS: "4000"
           YOUTUBE_API_RETRY_MAX_MS: "90000"
@@ -987,7 +988,8 @@ jobs:
         shell: bash
         env:
           SUPPORT_INPUT: ${{ inputs.support }}
-          YOUTUBE_API_RETRY_ATTEMPTS: ${{ inputs.campaign_id != '' && '1' || '7' }}
+          YOUTUBE_API_RETRY_ATTEMPTS: "7"
+          YOUTUBE_PLAYLIST_INSERT_RETRY_ATTEMPTS: "4"
           YOUTUBE_API_RETRY_BASE_MS: "4000"
           YOUTUBE_API_RETRY_JITTER_MS: "4000"
           YOUTUBE_API_RETRY_MAX_MS: "90000"

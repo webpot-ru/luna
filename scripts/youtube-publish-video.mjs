@@ -243,6 +243,8 @@ function isRecoverablePlaylistWriteError(error) {
       || message.includes("userratelimitexceeded")
       || message.includes("rate limit")
       || message.includes("resource_exhausted")
+      || message.includes("service_unavailable")
+      || message.includes("operation was aborted")
       || message.includes("videonotfound")
       || message.includes("video not found")
     )
@@ -487,12 +489,12 @@ async function getAccessToken({ clientFile, tokenFile }) {
   return nextToken.access_token;
 }
 
-async function youtubeJson({ accessToken, method, pathName, query = {}, body }) {
+async function youtubeJson({ accessToken, method, pathName, query = {}, body, retryAttempts }) {
   const url = new URL(pathName, "https://www.googleapis.com/youtube/v3/");
   for (const [key, value] of Object.entries(query)) {
     if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, String(value));
   }
-  const attempts = envInteger("YOUTUBE_API_RETRY_ATTEMPTS", 6, { min: 1, max: 12 });
+  const attempts = retryAttempts ?? envInteger("YOUTUBE_API_RETRY_ATTEMPTS", 6, { min: 1, max: 12 });
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     await delayBeforePlaylistWrite({ method, pathName });
     const response = await fetch(url, {
@@ -514,6 +516,61 @@ async function youtubeJson({ accessToken, method, pathName, query = {}, body }) 
     fail(`YouTube API ${method} ${url.pathname} failed (${response.status}): ${text}`);
   }
   fail(`YouTube API ${method} ${url.pathname} failed after ${attempts} attempts.`);
+}
+
+async function findPlaylistItemForVideo({ accessToken, playlistId, videoId }) {
+  let pageToken = "";
+  for (let page = 0; page < 1000; page += 1) {
+    const response = await youtubeJson({
+      accessToken,
+      method: "GET",
+      pathName: "playlistItems",
+      query: {
+        part: "snippet,contentDetails",
+        playlistId,
+        maxResults: 50,
+        pageToken,
+        fields: "nextPageToken,items(id,snippet(playlistId,resourceId),contentDetails(videoId))",
+      },
+    });
+    const existing = (response?.items || []).find((item) =>
+      item?.contentDetails?.videoId === videoId || item?.snippet?.resourceId?.videoId === videoId,
+    );
+    if (existing) return existing;
+    pageToken = response?.nextPageToken || "";
+    if (!pageToken) return null;
+  }
+  fail(`Playlist item lookup exceeded page limit for playlist ${playlistId}.`);
+}
+
+async function insertPlaylistItemIdempotently({ accessToken, playlistId, videoId }) {
+  const attempts = envInteger("YOUTUBE_PLAYLIST_INSERT_RETRY_ATTEMPTS", 4, { min: 1, max: 8 });
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await youtubeJson({
+        accessToken,
+        method: "POST",
+        pathName: "playlistItems",
+        retryAttempts: 1,
+        query: { part: "snippet,contentDetails", fields: "id,snippet(playlistId,resourceId),contentDetails(videoId)" },
+        body: { snippet: { playlistId, resourceId: { kind: "youtube#video", videoId } } },
+      });
+    } catch (error) {
+      const existing = await findPlaylistItemForVideo({ accessToken, playlistId, videoId });
+      if (existing) {
+        console.warn(`Playlist item already exists after failed insert for video ${videoId}; reusing ${existing.id}.`);
+        return existing;
+      }
+      if (attempt >= attempts || !isRecoverablePlaylistWriteError(error)) throw error;
+      const delayMs = Math.min(
+        envInteger("YOUTUBE_API_RETRY_MAX_MS", 90000, { min: 1000 }),
+        envInteger("YOUTUBE_API_RETRY_BASE_MS", 3000, { min: 100, max: 120000 }) * (2 ** (attempt - 1)),
+      );
+      console.warn(`Playlist insert retryable failure on attempt ${attempt}/${attempts}; verified absent and retrying in ${delayMs}ms.`);
+      await sleep(delayMs);
+    }
+  }
+  fail(`Playlist item insert failed after ${attempts} attempts.`);
 }
 
 async function discoverPlaylistImmediatelyBeforeCreate({ accessToken, assignment, campaignPlaylist }) {
@@ -1139,21 +1196,7 @@ async function main() {
 
     if (youtubePlaylistId) {
       try {
-        const playlistItem = await youtubeJson({
-          accessToken,
-          method: "POST",
-          pathName: "playlistItems",
-          query: { part: "snippet,contentDetails", fields: "id,snippet(playlistId,resourceId),contentDetails(videoId)" },
-          body: {
-            snippet: {
-              playlistId: youtubePlaylistId,
-              resourceId: {
-                kind: "youtube#video",
-                videoId,
-              },
-            },
-          },
-        });
+        const playlistItem = await insertPlaylistItemIdempotently({ accessToken, playlistId: youtubePlaylistId, videoId });
         playlistItemId = playlistItem.id;
       } catch (error) {
         if (!publishAt || !isRecoverablePlaylistWriteError(error)) throw error;
