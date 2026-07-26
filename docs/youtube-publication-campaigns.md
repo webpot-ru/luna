@@ -127,6 +127,8 @@ Campaign child workflows получают `campaign_id`, поэтому их sta
 
 Если historical playlist duplicates уже существуют, их не удаляют и не меняют в ходе publication recovery. Сначала фиксируют один durable `youtube_playlist_id` только при доказуемом live readback: тот же channel, complete playlist-items pagination и membership актуального published video для данной stable identity. В registry сохраняют ID, timestamp и evidence; после этого fresh control может использовать ID как authoritative. Совпадение только по title/description или наличие старого Deck #1 video недостаточно.
 
+Если duplicate playlist блокирует только выбранный ordinary target, planner может явно передать `--exclude-ordinary-targets=<codes>` и выбрать следующий unclaimed ordinary tail. Исключение записывается в immutable manifest, действует для всех support channels этой волны и не удаляет, не объединяет и не переиспользует ambiguous playlist. Оно не ослабляет strict `ordinaryPerChannel` и не разрешает обходить blocker для уже выбранной пары.
+
 `finalized` допустим только когда присутствуют все expected receipts, один YouTube ID не назначен двум assignments, `publishAt` совпадает с claimed slot, обязательная custom cover реально установлена, есть `youtubePlaylistId` и `playlistItemId`, resolved playlist ID совпадает с manifest и нет `postUploadError`. Любая неполнота или mismatch дает `reconciliation_required`; claims сохраняются, а автоматический повтор запрещен. Сначала нужен новый read-only live audit и exact reconciliation plan.
 
 ### Post-upload schedule reconciliation
