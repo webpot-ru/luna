@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { appendAi33TaskLedger, readAi33TaskForCache } from "./ai33-task-ledger.mjs";
 import { execSync, execFileSync } from "node:child_process";
 import { psqlJson } from "./qa-utils.mjs";
 import { getDbLanguageCode, normalizeLanguageCode } from "./video-language-codes.mjs";
@@ -80,15 +81,18 @@ async function fetchWithRetry(url, options = {}, retries = 3, backoff = 2000) {
 
       if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(`HTTP ${response.status}: ${errorText || response.statusText}`);
+        const error = new Error(`HTTP ${response.status}: ${errorText || response.statusText}`);
+        error.status = response.status;
+        throw error;
       }
 
       const data = await response.json();
       return data;
     } catch (err) {
       const isLastAttempt = attempt === retries - 1;
+      const retryable = !err.status || err.status === 408 || err.status === 409 || err.status === 425 || err.status === 429 || err.status >= 500;
       console.warn(`Request failed (attempt ${attempt + 1}/${retries}): ${err.message}`);
-      if (isLastAttempt) throw err;
+      if (isLastAttempt || !retryable) throw err;
       await delay(backoff * Math.pow(2, attempt));
     } finally {
       clearTimeout(timeoutId);
@@ -128,7 +132,7 @@ function normalizeAi33TaskResponse(data, taskId) {
 async function readAi33TaskStatusFrom(endpoint, taskId, headers) {
   const data = await fetchWithRetry(new URL(endpoint.replace("{taskId}", encodeURIComponent(taskId)), baseUrl), {
     headers,
-  }, 1);
+  }, positiveIntegerEnv("AI33_TASK_STATUS_RETRIES", 6), positiveIntegerEnv("AI33_TASK_STATUS_RETRY_BASE_MS", 2000));
   return normalizeAi33TaskResponse(data, taskId);
 }
 
@@ -301,6 +305,20 @@ async function downloadFile(url, outputPath) {
   fs.writeFileSync(outputPath, Buffer.from(arrayBuffer));
 }
 
+async function waitForAi33TaskAudio(taskId) {
+  const pollAttempts = positiveIntegerEnv("AI33_TASK_POLL_ATTEMPTS", 30);
+  const pollIntervalMs = positiveIntegerEnv("AI33_TASK_POLL_INTERVAL_MS", 2000);
+  for (let i = 0; i < pollAttempts; i++) {
+    await delay(pollIntervalMs);
+    const taskInfo = await checkTaskStatus(taskId);
+    if (taskInfo.status === "done" && taskInfo.metadata?.audio_url) return taskInfo.metadata.audio_url;
+    if (["failed", "error", "cancelled"].includes(String(taskInfo.status || "").toLowerCase())) {
+      throw new Error(`AI33 task ${taskId} failed on server side with status=${taskInfo.status}.`);
+    }
+  }
+  throw new Error(`AI33 task ${taskId} timed out.`);
+}
+
 // Generate TTS Audio (Local Free Edge-TTS version!)
 export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
   if (!text || !text.trim()) return null;
@@ -334,30 +352,31 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
     try {
       const mappedVoiceId = String(voiceId || "").replace(/^ai33_/, "");
       const activeVoiceId = process.env.AI33_VOICE_ID || mappedVoiceId || "elevenlabs_qJBO8ZmKp4te7NTtYgzz";
-      const speech = await createAi33Speech(cleanedText, activeVoiceId, langCode);
-
-      if (speech.audioBuffer) {
-        fs.writeFileSync(cachedPath, speech.audioBuffer);
-        return cachedPath;
-      }
-
-      let audioUrl = null;
-      for (let i = 0; i < 30; i++) {
-        await delay(2000);
-        const taskInfo = await checkTaskStatus(speech.taskId);
-        if (taskInfo.status === "done" && taskInfo.metadata?.audio_url) {
-          audioUrl = taskInfo.metadata.audio_url;
-          break;
-        } else if (taskInfo.status === "failed") {
-          throw new Error("AI33 task failed on server side.");
+      const cacheFile = path.basename(cachedPath);
+      const resumedTask = readAi33TaskForCache(cacheDir, cacheFile);
+      let taskId = resumedTask?.taskId || "";
+      if (taskId) console.log(`[AI33 TTS] Resuming persisted task ${taskId} for ${cacheFile}.`);
+      if (!taskId) {
+        const speech = await createAi33Speech(cleanedText, activeVoiceId, langCode);
+        if (speech.audioBuffer) {
+          fs.writeFileSync(cachedPath, speech.audioBuffer);
+          return cachedPath;
         }
+        taskId = speech.taskId;
+        appendAi33TaskLedger(cacheDir, {
+          provider: "ai33",
+          event: "created",
+          taskId,
+          cacheFile,
+          voiceId: activeVoiceId,
+          langCode: "HY",
+          textSha256: crypto.createHash("sha256").update(cleanedText).digest("hex"),
+        });
       }
-
-      if (!audioUrl) {
-        throw new Error("AI33 task timed out.");
-      }
+      const audioUrl = await waitForAi33TaskAudio(taskId);
 
       await downloadFile(audioUrl, cachedPath);
+      appendAi33TaskLedger(cacheDir, { provider: "ai33", event: "downloaded", taskId, cacheFile, voiceId: activeVoiceId, langCode: "HY" });
       return cachedPath;
     } catch (err) {
       try {
