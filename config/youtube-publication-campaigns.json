@@ -349659,7 +349659,7 @@
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-b406a098da34",
       "manifestHash": "3a3bb37af5e720d0a2209f9fa3905de471fdaaad549d553ddf15c2c620139101",
       "setId": "home_kitchen_storage_cleaning_a2",
-      "status": "claimed",
+      "status": "reconciliation_required",
       "claimedAt": "2026-07-26T14:13:02.970Z",
       "generatedAt": "2026-07-26T14:13:02.970Z",
       "manifestPath": "config/youtube-publication-campaign-plans/yt-home_kitchen_storage_cleaning_a2-2026-07-26-b406a098da34.json",
@@ -349876,7 +349876,17 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-26T11:43:54.232Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted",
+          "youtubeVideoId": "9ZiRB9P199s",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=9ZiRB9P199s",
+          "youtubePlaylistId": "PLatX_gWVASIQ",
+          "playlistItemId": "UExhdFhfZ1dWQVNJUS41NkI0NEY2RDEwNTU3Q0M2",
+          "thumbnailSet": false,
+          "publicationStatus": "live_youtube_upload_detected",
+          "githubRunId": "30205696028",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/30205696028",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-26T14:35:54.171Z"
         },
         {
           "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|HY|IT",
@@ -349938,7 +349948,17 @@
             "registryEntryPresent": true,
             "discoveryGeneratedAt": "2026-07-26T11:43:54.232Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted",
+          "youtubeVideoId": "DwcTsOtmAdk",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=DwcTsOtmAdk",
+          "youtubePlaylistId": "PLYTpH0KeZCn0",
+          "playlistItemId": "UExZVHBIMEtlWkNuMC4wMTcyMDhGQUE4NTIzM0Y5",
+          "thumbnailSet": false,
+          "publicationStatus": "live_youtube_upload_detected",
+          "githubRunId": "30205696028",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/30205696028",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-26T14:35:54.171Z"
         },
         {
           "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|HY|JA",
@@ -349998,7 +350018,17 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-26T11:43:54.232Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted",
+          "youtubeVideoId": "Wb3wRkpF1JQ",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=Wb3wRkpF1JQ",
+          "youtubePlaylistId": "PLTo-oAjv8wj8",
+          "playlistItemId": "UExUby1vQWp2OHdqOC4yODlGNEE0NkRGMEEzMEQy",
+          "thumbnailSet": false,
+          "publicationStatus": "live_youtube_upload_detected",
+          "githubRunId": "30205696028",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/30205696028",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-26T14:35:54.171Z"
         },
         {
           "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|HY|KA",
@@ -350058,7 +350088,17 @@
             "registryEntryPresent": false,
             "discoveryGeneratedAt": "2026-07-26T11:43:54.232Z"
           },
-          "status": "claimed"
+          "status": "upload_accepted",
+          "youtubeVideoId": "TkwXxU_s7hM",
+          "youtubeVideoUrl": "https://www.youtube.com/watch?v=TkwXxU_s7hM",
+          "youtubePlaylistId": "PLJfWjhcpgyQA",
+          "playlistItemId": "UExKZldqaGNwZ3lRQS41NkI0NEY2RDEwNTU3Q0M2",
+          "thumbnailSet": false,
+          "publicationStatus": "live_youtube_upload_detected",
+          "githubRunId": "30205696028",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/30205696028",
+          "postUploadError": "",
+          "finalizedAt": "2026-07-26T14:35:54.171Z"
         },
         {
           "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|HY|east_asia_core|69af08ca98ea|short_unverified",
@@ -350126,7 +350166,21 @@
           },
           "status": "claimed"
         }
-      ]
+      ],
+      "finalizedAt": "2026-07-26T14:35:54.171Z",
+      "finalizeSummary": {
+        "expectedCount": 5,
+        "completedCount": 4,
+        "observedCount": 4,
+        "missingCount": 1,
+        "duplicateAssignmentCount": 0,
+        "duplicateVideoIdCount": 0,
+        "unexpectedPublicationCount": 0,
+        "receiptErrorCount": 0,
+        "ordinaryResult": "success",
+        "polyglotResult": "failure",
+        "artifactCount": 2
+      }
     }
   ]
 }
