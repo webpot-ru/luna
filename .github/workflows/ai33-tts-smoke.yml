@@ -1,0 +1,57 @@
+name: AI33 Armenian TTS Smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_ai33_tts:
+        description: "Type CHECK_AI33_TTS to synthesize one fixed Armenian smoke phrase. No video, metadata, playlist, or YouTube action is performed."
+        required: true
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Refuse an unconfirmed TTS request
+        shell: bash
+        env:
+          CONFIRM_AI33_TTS: ${{ inputs.confirm_ai33_tts }}
+        run: |
+          set -euo pipefail
+          test "$CONFIRM_AI33_TTS" = "CHECK_AI33_TTS"
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Synthesize one Armenian AI33 smoke phrase
+        shell: bash
+        env:
+          AI33_API_KEY: ${{ secrets.AI33_API_KEY }}
+        run: |
+          set -euo pipefail
+          node scripts/check-ai33-tts.mjs \
+            --confirm=CHECK_AI33_TTS \
+            --output=outputs/ai33-tts-smoke.json
+
+      - name: Upload non-secret smoke evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai33-tts-smoke
+          path: outputs/ai33-tts-smoke.json
+          if-no-files-found: warn
+          retention-days: 14
