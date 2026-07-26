@@ -753,7 +753,8 @@ jobs:
           ALLOW_REPUBLISH: ${{ inputs.allow_republish }}
           INPUT_PRIVACY: ${{ inputs.privacy }}
           PUBLISH_MODE: ${{ inputs.publish_mode }}
-          YOUTUBE_API_RETRY_ATTEMPTS: ${{ inputs.campaign_id != '' && '1' || '6' }}
+          YOUTUBE_API_RETRY_ATTEMPTS: "6"
+          YOUTUBE_PLAYLIST_INSERT_RETRY_ATTEMPTS: "4"
         run: |
           set -euo pipefail
           mapfile -d '' METADATA_FILES < <(find outputs/video-generator -name youtube_metadata.json -print0 | sort -z)
