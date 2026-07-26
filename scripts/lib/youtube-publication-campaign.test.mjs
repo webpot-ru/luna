@@ -211,6 +211,31 @@ assert.equal(subsetPlan.summary.applyReady, true);
 assert.equal(subsetPlan.summary.supportCount, subsetSupports.length);
 assert.equal(subsetPlan.summary.assignmentCount, 12);
 
+const exclusionSnapshot = structuredClone(snapshot);
+const exclusionDeck = exclusionSnapshot.decks.find((deck) => deck.setId === "home_kitchen_cooking_actions_a1_a2");
+const hyTailIndex = exclusionDeck.tails.findIndex((tail) => (
+  tail.videoType === "ordinary" && tail.supportLang === "EN" && tail.targetLang === "HY"
+));
+assert.notEqual(hyTailIndex, -1, "fixture requires an EN -> HY ordinary tail");
+const [hyTail] = exclusionDeck.tails.splice(hyTailIndex, 1);
+exclusionDeck.tails.unshift(hyTail);
+const excludedOrdinaryTargetPlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  ordinaryPerChannel: 1,
+  polyglotPerChannel: 0,
+  snapshotPath: writeJson("snapshot-excluded-ordinary-target.json", exclusionSnapshot),
+  playlistDiscoveryPath: writeJson("playlist-discovery-en-excluded-ordinary-target.json", {
+    ...readJson(paths.playlistDiscoveryPath),
+    summary: { complete: true, blockerCount: 0, supportCount: 1 },
+    channels: readJson(paths.playlistDiscoveryPath).channels.filter((channel) => channel.supportLang === "EN"),
+  }),
+  excludeOrdinaryTargets: "HY",
+});
+assert.equal(excludedOrdinaryTargetPlan.summary.applyReady, true);
+assert.equal(excludedOrdinaryTargetPlan.inputs.excludeOrdinaryTargets, "HY");
+assert.notEqual(excludedOrdinaryTargetPlan.assignments[0].targetLang, "HY");
+
 const enTails = snapshot.decks
   .find((deck) => deck.setId === "home_kitchen_cooking_actions_a1_a2")
   .tails.filter((tail) => tail.videoType === "ordinary" && tail.supportLang === "EN");

@@ -513,6 +513,11 @@ export function buildPublicationCampaign(options = {}) {
   const ordinaryPerChannel = Number(options.ordinaryPerChannel ?? 5);
   const allowPartialOrdinaryTail = options.allowPartialOrdinaryTail === true;
   const polyglotPerChannel = Number(options.polyglotPerChannel ?? 1);
+  const excludedOrdinaryTargets = new Set((Array.isArray(options.excludeOrdinaryTargets)
+    ? options.excludeOrdinaryTargets
+    : String(options.excludeOrdinaryTargets || "").split(","))
+    .map(normalizeCode)
+    .filter(Boolean));
   const maxSnapshotAgeMinutes = Number(options.maxSnapshotAgeMinutes ?? 30);
   const minFutureMinutes = Number(options.minFutureMinutes ?? 90);
   if (!Number.isInteger(ordinaryPerChannel) || ordinaryPerChannel < 0) throw new Error("ordinaryPerChannel must be a non-negative integer");
@@ -602,7 +607,11 @@ export function buildPublicationCampaign(options = {}) {
   const tailsBySupport = new Map();
   for (const support of supports) {
     tailsBySupport.set(support, {
-      ordinary: (deck.tails || []).filter((row) => row.videoType === "ordinary" && canonicalSupportCode(row.supportLang) === support),
+      ordinary: (deck.tails || []).filter((row) => (
+        row.videoType === "ordinary"
+        && canonicalSupportCode(row.supportLang) === support
+        && !excludedOrdinaryTargets.has(normalizeCode(row.targetLang))
+      )),
       polyglot: (deck.tails || []).filter((row) => row.videoType === "polyglot" && canonicalSupportCode(row.supportLang) === support && (row.contentScope || "full") === "full"),
     });
   }
@@ -806,6 +815,7 @@ export function buildPublicationCampaign(options = {}) {
       ordinaryPerChannel,
       allowPartialOrdinaryTail,
       polyglotPerChannel,
+      excludeOrdinaryTargets: [...excludedOrdinaryTargets].sort().join(","),
       startDate: requestedStartDate || "auto",
       minFutureMinutes,
       maxSnapshotAgeMinutes,

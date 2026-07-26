@@ -10,6 +10,7 @@ function parseArgs(argv) {
     ordinaryPerChannel: 5,
     allowPartialOrdinaryTail: false,
     polyglotPerChannel: 1,
+    excludeOrdinaryTargets: "",
     minFutureMinutes: 90,
     maxSnapshotAgeMinutes: 30,
     output: "outputs/youtube-publication-campaign-plan.json",
@@ -22,6 +23,7 @@ function parseArgs(argv) {
     else if (arg === "--ordinary-per-channel" || arg.startsWith("--ordinary-per-channel=")) options.ordinaryPerChannel = Number(value());
     else if (arg === "--allow-partial-ordinary-tail") options.allowPartialOrdinaryTail = true;
     else if (arg === "--polyglot-per-channel" || arg.startsWith("--polyglot-per-channel=")) options.polyglotPerChannel = Number(value());
+    else if (arg === "--exclude-ordinary-targets" || arg.startsWith("--exclude-ordinary-targets=")) options.excludeOrdinaryTargets = value();
     else if (arg === "--start-date" || arg.startsWith("--start-date=")) options.startDate = value();
     else if (arg === "--min-future-minutes" || arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(value());
     else if (arg === "--max-snapshot-age-minutes" || arg.startsWith("--max-snapshot-age-minutes=")) options.maxSnapshotAgeMinutes = Number(value());
@@ -47,7 +49,7 @@ function parseArgs(argv) {
 }
 
 function usage() {
-  return "node scripts/plan-youtube-publication-campaign.mjs --set=<set_id> [--supports=ALL] [--ordinary-per-channel=5] [--allow-partial-ordinary-tail] [--polyglot-per-channel=1] [--start-date=YYYY-MM-DD] [--replacement-campaign-id=<id>]";
+  return "node scripts/plan-youtube-publication-campaign.mjs --set=<set_id> [--supports=ALL] [--ordinary-per-channel=5] [--allow-partial-ordinary-tail] [--polyglot-per-channel=1] [--exclude-ordinary-targets=HY] [--start-date=YYYY-MM-DD] [--replacement-campaign-id=<id>]";
 }
 
 function main() {
