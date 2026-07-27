@@ -19,6 +19,21 @@ assert.doesNotThrow(() =>
   }),
 );
 
+for (const [supportCode, environment] of [
+  ["FR", "youtube-api-youtube-5"],
+  ["DA", "youtube-api-youtube-6"],
+  ["IS", "youtube-api-youtube-7"],
+  ["KK", "youtube-api-youtube-8"],
+]) {
+  assert.doesNotThrow(() =>
+    resolveYouTubeApiEnvironment({
+      routing,
+      supportCodes: [supportCode],
+      requestedEnvironment: environment,
+    }),
+  );
+}
+
 const cliResult = spawnSync(
   process.execPath,
   [

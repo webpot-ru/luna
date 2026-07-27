@@ -60,7 +60,7 @@ for (const [routeKey, expected] of Object.entries(expectedRoutes)) {
   assert(project, `missing ${routeKey}`);
   assert.equal(project.githubEnvironment, expected.environment);
   assert.equal(project.pairedRouteKey, expected.pairedRouteKey);
-  assert.equal(project.publicationReady, Number(routeKey.slice(-1)) <= 4);
+  assert.equal(project.publicationReady, true);
   assert.deepEqual([...project.canonicalSupports].sort(), expected.supports);
 
   const pair = routing.projects.find((row) => row.key === expected.pairedRouteKey);
@@ -89,10 +89,6 @@ for (const [routeKey, expected] of Object.entries(expectedRoutes)) {
 }
 assert.deepEqual(resolveCanonicalSupports({ requested: "EN-GB,ES,PT", routing }), ["EN", "ES-419", "PT-BR"]);
 assert.deepEqual(resolveCanonicalSupports({ requested: "ALL", excludeSupports: ["ES"], routing }).includes("ES-419"), false);
-assert.doesNotThrow(() => assertPublicationReadyForSupports(routing, ["EN", "VI", "BG", "NE"]));
-assert.throws(
-  () => assertPublicationReadyForSupports(routing, ["FR"]),
-  /youtube-5 is publication-blocked/,
-);
+assert.doesNotThrow(() => assertPublicationReadyForSupports(routing, ["EN", "VI", "BG", "NE", "FR", "DA", "IS", "KK"]));
 
 console.log("youtube canonical support routing tests passed");

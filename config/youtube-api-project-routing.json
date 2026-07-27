@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "status": "eight_route_contract_github_activation_pending",
+  "status": "eight_route_contract_publication_ready",
   "sourceOfTruth": "docs/youtube-api-project-routing.md",
   "generatedFor": "51 public YouTube support channels / 54 support-language variants",
   "projectLabels": [
@@ -234,11 +234,10 @@
     {
       "key": "youtube-5",
       "label": "youtube 5",
-      "status": "active_tokens_verified_github_bundle_pending",
+      "status": "github_actions_identity_readback_verified",
       "cloudProjectId": "flashcardsluna-5",
       "githubEnvironment": "youtube-api-youtube-5",
-      "publicationReady": false,
-      "publicationBlockedReason": "GitHub Environment youtube-api-youtube-5 and its YOUTUBE_OAUTH_BUNDLE_TGZ_B64 secret are not yet configured; the current GitHub credential lacks repository-admin permission to create the environment.",
+      "publicationReady": true,
       "pairedRouteKey": "youtube-1",
       "plannedAuthorizationChannelKeys": [
         "en",
@@ -256,7 +255,7 @@
       ],
       "notes": [
         "Google Cloud project exists; YouTube Data API v3 is enabled; Google Auth Platform is External/In production; desktop OAuth client LunaCards YouTube Route 5 Desktop was created on 2026-07-27.",
-        "The six active channel tokens FR, DE, JA, KO, TR and ZH were verified with channel-by-channel channels.list(mine=true) on 2026-07-27. GitHub Environment/secret upload remains pending.",
+        "The six active channel tokens FR, DE, JA, KO, TR and ZH were verified locally with channel-by-channel channels.list(mine=true) on 2026-07-27, then verified after GitHub bundle restore by Actions run 30238235816.",
         "Full-pair standby token collection remains a future resilience task and is not needed for the active youtube-5 assignment.",
         "The full youtube-1/youtube-5 pair is planned for standby authorization, but only these active supportChannelKeys may publish through youtube-5."
       ],
@@ -281,11 +280,10 @@
     {
       "key": "youtube-6",
       "label": "youtube 6",
-      "status": "active_tokens_verified_github_bundle_pending",
+      "status": "github_actions_identity_readback_verified",
       "cloudProjectId": "flashcardsluna-6",
       "githubEnvironment": "youtube-api-youtube-6",
-      "publicationReady": false,
-      "publicationBlockedReason": "GitHub Environment youtube-api-youtube-6 and its YOUTUBE_OAUTH_BUNDLE_TGZ_B64 secret are not yet configured; the current GitHub credential lacks repository-admin permission to create the environment.",
+      "publicationReady": true,
       "pairedRouteKey": "youtube-2",
       "plannedAuthorizationChannelKeys": [
         "vi",
@@ -304,7 +302,7 @@
       ],
       "notes": [
         "Google Cloud project exists; YouTube Data API v3 is enabled; Google Auth Platform is External/In production; desktop OAuth client LunaCards YouTube Route 6 Desktop was created on 2026-07-27.",
-        "The six active channel tokens DA, FI, CS, SK, HU and RO were verified with channel-by-channel channels.list(mine=true) on 2026-07-27. GitHub Environment/secret upload remains pending.",
+        "The six active channel tokens DA, FI, CS, SK, HU and RO were verified locally with channel-by-channel channels.list(mine=true) on 2026-07-27, then verified after GitHub bundle restore by Actions run 30238591503. The bundle retains compatibility aliases for the historical configured token-file paths; future secret rebuilds must preserve that mapping.",
         "Full-pair standby token collection remains a future resilience task and is not needed for the active youtube-6 assignment.",
         "The full youtube-2/youtube-6 pair is planned for standby authorization, but only these active supportChannelKeys may publish through youtube-6."
       ],
@@ -329,11 +327,10 @@
     {
       "key": "youtube-7",
       "label": "youtube 7",
-      "status": "active_tokens_verified_github_bundle_pending",
+      "status": "github_actions_identity_readback_verified",
       "cloudProjectId": "flashcardsluna-7",
       "githubEnvironment": "youtube-api-youtube-7",
-      "publicationReady": false,
-      "publicationBlockedReason": "GitHub Environment youtube-api-youtube-7 and its YOUTUBE_OAUTH_BUNDLE_TGZ_B64 secret are not yet configured; the current GitHub credential lacks repository-admin permission to create the environment.",
+      "publicationReady": true,
       "pairedRouteKey": "youtube-3",
       "plannedAuthorizationChannelKeys": [
         "bg",
@@ -352,7 +349,7 @@
       ],
       "notes": [
         "Google Cloud project exists; YouTube Data API v3 is enabled; Google Auth Platform is External/In production; desktop OAuth client LunaCards YouTube Route 7 Desktop was created on 2026-07-27.",
-        "The six active channel tokens IS, BN, TL, MY, KM and LO were verified with channel-by-channel channels.list(mine=true) on 2026-07-27. GitHub Environment/secret upload remains pending.",
+        "The six active channel tokens IS, BN, TL, MY, KM and LO were verified locally with channel-by-channel channels.list(mine=true) on 2026-07-27, then verified after GitHub bundle restore by Actions run 30238592565. The bundle retains compatibility aliases for the historical configured token-file paths; future secret rebuilds must preserve that mapping.",
         "Full-pair standby token collection remains a future resilience task and is not needed for the active youtube-7 assignment.",
         "The full youtube-3/youtube-7 pair is planned for standby authorization, but only these active supportChannelKeys may publish through youtube-7."
       ],
@@ -377,11 +374,10 @@
     {
       "key": "youtube-8",
       "label": "youtube 8",
-      "status": "active_tokens_verified_github_bundle_pending",
+      "status": "github_actions_identity_readback_verified",
       "cloudProjectId": "flashcardsluna-8",
       "githubEnvironment": "youtube-api-youtube-8",
-      "publicationReady": false,
-      "publicationBlockedReason": "GitHub Environment youtube-api-youtube-8 and its YOUTUBE_OAUTH_BUNDLE_TGZ_B64 secret are not yet configured; the current GitHub credential lacks repository-admin permission to create the environment.",
+      "publicationReady": true,
       "pairedRouteKey": "youtube-4",
       "plannedAuthorizationChannelKeys": [
         "ne",
@@ -400,7 +396,7 @@
       ],
       "notes": [
         "Google Cloud project exists; YouTube Data API v3 is enabled; Google Auth Platform is External/In production; desktop OAuth client LunaCards YouTube Route 8 Desktop was created on 2026-07-27.",
-        "The six active channel tokens KK, AZ, KA, HY, SW and IT were verified with channel-by-channel channels.list(mine=true) on 2026-07-27. GitHub Environment/secret upload remains pending.",
+        "The six active channel tokens KK, AZ, KA, HY, SW and IT were verified locally with channel-by-channel channels.list(mine=true) on 2026-07-27, then verified after GitHub bundle restore by Actions run 30238593545. The bundle retains compatibility aliases for the historical configured token-file paths; future secret rebuilds must preserve that mapping.",
         "Full-pair standby token collection remains a future resilience task and is not needed for the active youtube-8 assignment.",
         "The full youtube-4/youtube-8 pair is planned for standby authorization, but only these active supportChannelKeys may publish through youtube-8."
       ],
