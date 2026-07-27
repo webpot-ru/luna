@@ -1,6 +1,6 @@
 # YouTube API Project Routing
 
-Status: **source of truth for the eight-route active/standby contract. Routes `youtube-1`–`youtube-4` are publication-ready. Routes `youtube-5`–`youtube-8` have production OAuth clients, verified active channel tokens, separate GitHub Environments and OAuth bundle secrets, but remain fail-closed until a GitHub Actions readback restores each secret and matches all active channels**.
+Status: **source of truth for the eight-route active/standby contract. All routes `youtube-1`–`youtube-8` are publication-ready. Routes `youtube-5`–`youtube-8` have production OAuth clients, verified active channel tokens, separate GitHub Environments and OAuth bundle secrets, and completed full GitHub Actions identity readback for every active channel**.
 
 This document records how the 51 public YouTube support-language channels are assigned to eight Google Cloud / YouTube API routes named `youtube-1` through `youtube-8`. The eight routes exist for operational convenience and future reviewed rearrangement. They do **not** double the accepted aggregate publication allowance.
 
@@ -36,10 +36,10 @@ Terminology rule: call routes `youtube-1` through `youtube-8` in plans and repor
 | `youtube-2` | Existing OAuth bundle; active split ready after code deployment | `youtube-api-youtube-2` | 7 | 7 | 42 |
 | `youtube-3` | Existing OAuth bundle; active split ready after code deployment | `youtube-api-youtube-3` | 7 | 7 | 42 |
 | `youtube-4` | Existing OAuth bundle; active split ready after code deployment | `youtube-api-youtube-4` | 7 | 7 | 42 |
-| `youtube-5` | Active six tokens identity-verified; GitHub Environment/secret name verified; full GitHub readback pending; publication blocked | `youtube-api-youtube-5` | 6 | 6 | 36 |
-| `youtube-6` | Active six tokens identity-verified; GitHub Environment/secret name verified; full GitHub readback pending; publication blocked | `youtube-api-youtube-6` | 6 | 6 | 36 |
-| `youtube-7` | Active six tokens identity-verified; GitHub Environment/secret name verified; full GitHub readback pending; publication blocked | `youtube-api-youtube-7` | 6 | 6 | 36 |
-| `youtube-8` | Active six tokens identity-verified; GitHub Environment/secret name verified; full GitHub readback pending; publication blocked | `youtube-api-youtube-8` | 6 | 6 | 36 |
+| `youtube-5` | Six-channel GitHub Actions identity readback passed; publication-ready | `youtube-api-youtube-5` | 6 | 6 | 36 |
+| `youtube-6` | Six-channel GitHub Actions identity readback passed; publication-ready | `youtube-api-youtube-6` | 6 | 6 | 36 |
+| `youtube-7` | Six-channel GitHub Actions identity readback passed; publication-ready | `youtube-api-youtube-7` | 6 | 6 | 36 |
+| `youtube-8` | Six-channel GitHub Actions identity readback passed; publication-ready | `youtube-api-youtube-8` | 6 | 6 | 36 |
 | **Total** |  |  | **51** | **54** | **324** |
 
 The standard 306-video campaign split is `36/42/42/42/36/36/36/36`. Per-route planned daily release counts are below 100, while the eight-route aggregate remains `324 <= 400`.
@@ -61,13 +61,13 @@ The standard 306-video campaign split is `36/42/42/42/36/36/36/36`. Per-route pl
 
 ## Existing OAuth evidence
 
-Historical 2026-06-22 evidence: `IT` moved from `youtube-1` to `youtube-4` after a route-1 quota failure. It was reauthorized through the route-4 OAuth client and `channels.list(mine=true)` matched the configured Italian channel. Under the new active split, `IT` is assigned to `youtube-8`; it must not publish there until route 8 setup and exact channel readback are complete.
+Historical 2026-06-22 evidence: `IT` moved from `youtube-1` to `youtube-4` after a route-1 quota failure. It was reauthorized through the route-4 OAuth client and `channels.list(mine=true)` matched the configured Italian channel. Under the new active split, `IT` is assigned to `youtube-8`; its route-8 bundle and exact active-channel identity were verified by the completed route-8 readback.
 
 On 2026-06-22, route `youtube-1` was reauthorized after its Google Auth app moved to Production. Its local and GitHub bundle contains the 12-channel route-1/5 pair, and every token was checked against the configured channel ID.
 
 On 2026-06-22, routes `youtube-2`, `youtube-3` and `youtube-4` were each authorized for their complete 13-channel future pair. Every token was checked against the configured channel ID before the corresponding GitHub environment bundle was uploaded. Token contents remain local-only.
 
-Projects `flashcardsluna-5`, `flashcardsluna-6`, `flashcardsluna-7` and `flashcardsluna-8` were created on 2026-07-27. YouTube Data API v3 is enabled in all four. Each Google Auth Platform app is External and In production, and each has one desktop client named `LunaCards YouTube Route N Desktop`. Each route's six active tokens were read back through `channels.list(mine=true)` on 2026-07-27 and matched its configured public channel ID: route 5 `FR, DE, JA, KO, TR, ZH`; route 6 `DA, FI, CS, SK, HU, RO`; route 7 `IS, BN, TL, MY, KM, LO`; route 8 `KK, AZ, KA, HY, SW, IT`. GitHub account `webpot-ru` subsequently created Environments `youtube-api-youtube-5`–`youtube-api-youtube-8` and stored the matching `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` secrets; the secret names were verified without reading values. The remaining activation gate is the full six-channel GitHub Actions identity readback for each route. Full-pair standby collection remains optional and does not block these active assignments.
+Projects `flashcardsluna-5`, `flashcardsluna-6`, `flashcardsluna-7` and `flashcardsluna-8` were created on 2026-07-27. YouTube Data API v3 is enabled in all four. Each Google Auth Platform app is External and In production, and each has one desktop client named `LunaCards YouTube Route N Desktop`. Each route's six active tokens were read back through `channels.list(mine=true)` on 2026-07-27 and matched its configured public channel ID: route 5 `FR, DE, JA, KO, TR, ZH`; route 6 `DA, FI, CS, SK, HU, RO`; route 7 `IS, BN, TL, MY, KM, LO`; route 8 `KK, AZ, KA, HY, SW, IT`. GitHub account `webpot-ru` subsequently created Environments `youtube-api-youtube-5`–`youtube-api-youtube-8` and stored the matching `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` secrets; the secret names were verified without reading values. The full six-channel GitHub Actions identity readbacks passed for route 5 ([30238235816](https://github.com/webpot-ru/luna/actions/runs/30238235816)), route 6 ([30238591503](https://github.com/webpot-ru/luna/actions/runs/30238591503)), route 7 ([30238592565](https://github.com/webpot-ru/luna/actions/runs/30238592565)) and route 8 ([30238593545](https://github.com/webpot-ru/luna/actions/runs/30238593545)): every expected active channel restored from the route secret and returned matching channel identity, banner and description evidence. These runs used the readback-only activation exception and made no branding, metadata, render, TTS, playlist or video-upload write. Routes 6–8 bundle their verified OAuth files under compatibility aliases for the historical configured token-file paths; future secret rebuilds must preserve that packaging mapping. Full-pair standby collection remains optional and does not block these active assignments.
 
 Before collecting tokens for a new route, generate its exact active-plus-standby checklist:
 
@@ -181,7 +181,7 @@ Existing primary project. Keep the high-priority shared channels here first.
   - Limit thumbnail generation to the allowlist where `customThumbnailUploadAllowed=true` (other channels use automatic first-frame fallback).
 - Before retrying uploads after a dispatcher/watch failure, run the read-only live-audit workflow `.github/workflows/youtube-live-publication-audit.yml` for the affected route and persist its rows if it finds `missingFromLocalRegistryCount > 0`. This workflow reads `channels.list` / `playlistItems.list` only, expands `route:youtube-N` with `scripts/resolve-youtube-support-list.mjs`, and merges live YouTube upload readback into `config/youtube-published-videos.json` without rendering, uploading, playlist writes or thumbnail generation.
 - New Google Cloud projects must be production/audited with matching YouTube API disclosure, OAuth consent configuration and GitHub environment secrets before they are used for public scheduled uploads.
-- Routes `youtube-5`–`youtube-8` remain publication-blocked until the route-specific GitHub Actions identity readback proves that each new `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` secret restores all six expected active channel tokens. The route resolver, campaign planner/preflight and bulk dispatchers fail before metadata, render, TTS or YouTube writes while `publicationReady=false`.
+- Routes `youtube-5`–`youtube-8` are publication-ready after their route-specific GitHub Actions identity readbacks proved that each `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` secret restores all six expected active channel tokens. The activation exception is no longer accepted for these ready routes; future blocked routes remain fail-closed before metadata, render, TTS or YouTube writes.
 - Token files, refresh tokens, client secrets and `.local` contents must stay out of git and out of this document.
 
 ## Before Adding Or Replacing API Project Routes
