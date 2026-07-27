@@ -20,6 +20,10 @@ on:
           - youtube-2
           - youtube-3
           - youtube-4
+          - youtube-5
+          - youtube-6
+          - youtube-7
+          - youtube-8
       manifest:
         description: "Git-tracked exact missing-only playlist image manifest."
         required: true
@@ -40,7 +44,7 @@ jobs:
   playlist-image-batch:
     runs-on: ubuntu-latest
     timeout-minutes: 180
-    environment: ${{ inputs.route == 'youtube-1' && 'youtube-api-branding' || inputs.route == 'youtube-2' && 'youtube-api-youtube-2' || inputs.route == 'youtube-3' && 'youtube-api-youtube-3' || 'youtube-api-youtube-4' }}
+    environment: ${{ inputs.route == 'youtube-1' && 'youtube-api-branding' || inputs.route == 'youtube-2' && 'youtube-api-youtube-2' || inputs.route == 'youtube-3' && 'youtube-api-youtube-3' || inputs.route == 'youtube-4' && 'youtube-api-youtube-4' || inputs.route == 'youtube-5' && 'youtube-api-youtube-5' || inputs.route == 'youtube-6' && 'youtube-api-youtube-6' || inputs.route == 'youtube-7' && 'youtube-api-youtube-7' || 'youtube-api-youtube-8' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -61,12 +65,17 @@ jobs:
         run: |
           set -euo pipefail
           case "$ROUTE" in
-            youtube-1) SUPPORTS="en,ru,es,pt,ja,tr,zh"; ENVIRONMENT_NAME="youtube-api-branding" ;;
-            youtube-2) SUPPORTS="vi,th"; ENVIRONMENT_NAME="youtube-api-youtube-2" ;;
-            youtube-3) SUPPORTS="sr,my"; ENVIRONMENT_NAME="youtube-api-youtube-3" ;;
-            youtube-4) SUPPORTS="ne,si,uz,ka,sw"; ENVIRONMENT_NAME="youtube-api-youtube-4" ;;
+            youtube-1) ENVIRONMENT_NAME="youtube-api-branding" ;;
+            youtube-2) ENVIRONMENT_NAME="youtube-api-youtube-2" ;;
+            youtube-3) ENVIRONMENT_NAME="youtube-api-youtube-3" ;;
+            youtube-4) ENVIRONMENT_NAME="youtube-api-youtube-4" ;;
+            youtube-5) ENVIRONMENT_NAME="youtube-api-youtube-5" ;;
+            youtube-6) ENVIRONMENT_NAME="youtube-api-youtube-6" ;;
+            youtube-7) ENVIRONMENT_NAME="youtube-api-youtube-7" ;;
+            youtube-8) ENVIRONMENT_NAME="youtube-api-youtube-8" ;;
             *) echo "::error::Unknown route: $ROUTE"; exit 1 ;;
           esac
+          SUPPORTS="$(node scripts/resolve-youtube-support-list.mjs --supports="route:$ROUTE")"
           if [ ! -f "$MANIFEST" ]; then
             echo "::error::Missing manifest: $MANIFEST"
             exit 1

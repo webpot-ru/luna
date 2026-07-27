@@ -75,6 +75,29 @@ export function loadCanonicalSupportRouting({
   });
 }
 
+export function publicationBlockerForRoute(route = {}) {
+  if (route.publicationReady === true) return "";
+  const routeName = route.key || route.label || "(unknown route)";
+  const reason = String(route.publicationBlockedReason || "publicationReady is false").trim();
+  return `Route ${routeName} is publication-blocked: ${reason}`;
+}
+
+export function assertPublicationReadyForSupports(routing, supports = []) {
+  const routes = new Map();
+  for (const supportRaw of supports) {
+    const support = canonicalSupportCode(supportRaw);
+    const route = routing.supportToRoute.get(support);
+    if (!route) throw new Error(`No physical YouTube channel route for canonical support=${support || supportRaw}.`);
+    routes.set(route.key || route.label, route);
+  }
+  const blockers = [...routes.values()]
+    .map((route) => publicationBlockerForRoute(route))
+    .filter(Boolean)
+    .sort();
+  if (blockers.length) throw new Error(blockers.join("\n"));
+  return [...routes.values()];
+}
+
 export function resolveCanonicalSupports({ requested = "ALL", excludeSupports = [], routing }) {
   const selector = String(requested || "ALL").trim();
   let supports;

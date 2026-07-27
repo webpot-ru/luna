@@ -30,6 +30,10 @@ on:
           - youtube-2
           - youtube-3
           - youtube-4
+          - youtube-5
+          - youtube-6
+          - youtube-7
+          - youtube-8
       youtube_environment:
         description: "GitHub environment with this route's OAuth bundle. Use auto for route default."
         required: true
@@ -41,6 +45,10 @@ on:
           - youtube-api-youtube-2
           - youtube-api-youtube-3
           - youtube-api-youtube-4
+          - youtube-api-youtube-5
+          - youtube-api-youtube-6
+          - youtube-api-youtube-7
+          - youtube-api-youtube-8
       supports:
         description: "Optional support language codes to limit repair, comma-separated."
         required: false
@@ -76,6 +84,10 @@ jobs:
           (github.event.inputs.route == 'youtube-2' && 'youtube-api-youtube-2') ||
           (github.event.inputs.route == 'youtube-3' && 'youtube-api-youtube-3') ||
           (github.event.inputs.route == 'youtube-4' && 'youtube-api-youtube-4') ||
+          (github.event.inputs.route == 'youtube-5' && 'youtube-api-youtube-5') ||
+          (github.event.inputs.route == 'youtube-6' && 'youtube-api-youtube-6') ||
+          (github.event.inputs.route == 'youtube-7' && 'youtube-api-youtube-7') ||
+          (github.event.inputs.route == 'youtube-8' && 'youtube-api-youtube-8') ||
           'youtube-api-branding'
         }}
     timeout-minutes: 120
@@ -87,6 +99,10 @@ jobs:
           (github.event.inputs.route == 'youtube-2' && 'youtube-api-youtube-2') ||
           (github.event.inputs.route == 'youtube-3' && 'youtube-api-youtube-3') ||
           (github.event.inputs.route == 'youtube-4' && 'youtube-api-youtube-4') ||
+          (github.event.inputs.route == 'youtube-5' && 'youtube-api-youtube-5') ||
+          (github.event.inputs.route == 'youtube-6' && 'youtube-api-youtube-6') ||
+          (github.event.inputs.route == 'youtube-7' && 'youtube-api-youtube-7') ||
+          (github.event.inputs.route == 'youtube-8' && 'youtube-api-youtube-8') ||
           'youtube-api-branding'
         }}
 
@@ -110,6 +126,10 @@ jobs:
             youtube-2) EXPECTED_ENV="youtube-api-youtube-2" ;;
             youtube-3) EXPECTED_ENV="youtube-api-youtube-3" ;;
             youtube-4) EXPECTED_ENV="youtube-api-youtube-4" ;;
+            youtube-5) EXPECTED_ENV="youtube-api-youtube-5" ;;
+            youtube-6) EXPECTED_ENV="youtube-api-youtube-6" ;;
+            youtube-7) EXPECTED_ENV="youtube-api-youtube-7" ;;
+            youtube-8) EXPECTED_ENV="youtube-api-youtube-8" ;;
             *) echo "::error::Unsupported route: $ROUTE"; exit 1 ;;
           esac
           if [ "$YOUTUBE_ENVIRONMENT" != "auto" ] && [ "$YOUTUBE_ENVIRONMENT" != "$EXPECTED_ENV" ]; then

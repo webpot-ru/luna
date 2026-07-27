@@ -37,6 +37,7 @@
     "generate:polyglot-youtube-metadata": "node scripts/generate-polyglot-youtube-metadata.mjs",
     "build:youtube-thumbnail-review": "node scripts/build-youtube-thumbnail-review-sheet.mjs",
     "plan:youtube-channel-tokens": "node scripts/plan-youtube-channel-tokens.mjs",
+    "test:youtube-channel-token-plan": "node scripts/plan-youtube-channel-tokens.test.mjs",
     "auth:youtube-channel": "node scripts/youtube-channel-branding.mjs --authorize",
     "auth:youtube-discovery": "node scripts/youtube-channel-branding.mjs --authorize --token-file=.local/youtube-oauth/tokens/discovery.json",
     "list:youtube-channels": "node scripts/youtube-channel-branding.mjs --list-channels",

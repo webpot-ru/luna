@@ -71,6 +71,18 @@ function main() {
     );
   }
 
+  const publicationBlockers = [...new Map(matches.map((item) => [item.route, item])).values()]
+    .map((item) => {
+      const route = projects.find((project) => project.key === item.route);
+      if (route?.publicationReady === true) return "";
+      return `Route ${item.route} is publication-blocked: ${String(route?.publicationBlockedReason || "publicationReady is false").trim()}`;
+    })
+    .filter(Boolean)
+    .sort();
+  if (publicationBlockers.length) {
+    throw new Error(publicationBlockers.join("\n"));
+  }
+
   const result = {
     ok: true,
     supportCodes,

@@ -12,6 +12,10 @@ on:
           - youtube-2
           - youtube-3
           - youtube-4
+          - youtube-5
+          - youtube-6
+          - youtube-7
+          - youtube-8
       support:
         description: "Optional one physical support channel for a bounded playlist canary; must belong to route."
         required: false
@@ -34,7 +38,7 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 45
-    environment: ${{ inputs.route == 'youtube-1' && 'youtube-api-branding' || inputs.route == 'youtube-2' && 'youtube-api-youtube-2' || inputs.route == 'youtube-3' && 'youtube-api-youtube-3' || 'youtube-api-youtube-4' }}
+    environment: ${{ inputs.route == 'youtube-1' && 'youtube-api-branding' || inputs.route == 'youtube-2' && 'youtube-api-youtube-2' || inputs.route == 'youtube-3' && 'youtube-api-youtube-3' || inputs.route == 'youtube-4' && 'youtube-api-youtube-4' || inputs.route == 'youtube-5' && 'youtube-api-youtube-5' || inputs.route == 'youtube-6' && 'youtube-api-youtube-6' || inputs.route == 'youtube-7' && 'youtube-api-youtube-7' || 'youtube-api-youtube-8' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -51,13 +55,7 @@ jobs:
           ROUTE: ${{ inputs.route }}
         run: |
           set -euo pipefail
-          case "$ROUTE" in
-            youtube-1) SUPPORTS="EN,RU,ES-419,PT-BR,JA,TR,ZH" ;;
-            youtube-2) SUPPORTS="VI,TH" ;;
-            youtube-3) SUPPORTS="SR,MY" ;;
-            youtube-4) SUPPORTS="NE,SI,UZ,KA,SW" ;;
-            *) echo "::error::Unknown route: $ROUTE"; exit 1 ;;
-          esac
+          SUPPORTS="$(node scripts/resolve-youtube-support-list.mjs --supports="route:$ROUTE")"
           if [ -n "${{ inputs.support }}" ]; then
             SUPPORTS="${{ inputs.support }}"
           fi
@@ -68,7 +66,7 @@ jobs:
         env:
           SUPPORTS: ${{ steps.route.outputs.supports }}
           PLAYLIST_ID: ${{ inputs.playlist_id }}
-          ENVIRONMENT_NAME: ${{ inputs.route == 'youtube-1' && 'youtube-api-branding' || inputs.route == 'youtube-2' && 'youtube-api-youtube-2' || inputs.route == 'youtube-3' && 'youtube-api-youtube-3' || 'youtube-api-youtube-4' }}
+          ENVIRONMENT_NAME: ${{ inputs.route == 'youtube-1' && 'youtube-api-branding' || inputs.route == 'youtube-2' && 'youtube-api-youtube-2' || inputs.route == 'youtube-3' && 'youtube-api-youtube-3' || inputs.route == 'youtube-4' && 'youtube-api-youtube-4' || inputs.route == 'youtube-5' && 'youtube-api-youtube-5' || inputs.route == 'youtube-6' && 'youtube-api-youtube-6' || inputs.route == 'youtube-7' && 'youtube-api-youtube-7' || 'youtube-api-youtube-8' }}
         run: node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORTS" --environment="$ENVIRONMENT_NAME"
 
       - name: Restore route OAuth bundle

@@ -22,16 +22,22 @@ jobs:
   repair:
     strategy:
       fail-fast: false
-      max-parallel: 4
+      max-parallel: 8
       matrix:
         include:
           - route: youtube-api-branding
-            supports: DE,EN,ES-419,ZH
+            supports: EN,ES-419
           - route: youtube-api-youtube-2
-            supports: NL,PL,RO,TH,VI
+            supports: NL,PL,TH,VI
           - route: youtube-api-youtube-3
-            supports: BG,TL
-          - route: youtube-api-youtube-4
+            supports: BG
+          - route: youtube-api-youtube-5
+            supports: DE,ZH
+          - route: youtube-api-youtube-6
+            supports: RO
+          - route: youtube-api-youtube-7
+            supports: TL
+          - route: youtube-api-youtube-8
             supports: AZ,SW
     runs-on: ubuntu-latest
     environment: ${{ matrix.route }}

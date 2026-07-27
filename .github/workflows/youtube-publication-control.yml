@@ -21,7 +21,7 @@ on:
         default: false
         type: boolean
       audit_routes:
-        description: "Routes to audit: ALL (default) or an explicit comma-separated subset such as youtube-2,youtube-3,youtube-4."
+        description: "Routes to audit: ALL (default) or an explicit comma-separated subset such as youtube-5,youtube-6."
         required: true
         default: "ALL"
       audit_supports:
@@ -61,6 +61,7 @@ jobs:
       route_count: ${{ steps.select.outputs.route_count }}
       route_keys: ${{ steps.select.outputs.route_keys }}
     steps:
+      - uses: actions/checkout@v4
       - id: select
         name: Validate and select audit routes
         shell: bash
@@ -71,20 +72,41 @@ jobs:
           PLAN_REQUESTED: ${{ github.event.inputs.campaign_ordinary_per_channel != '0' || github.event.inputs.campaign_polyglot_per_channel != '0' }}
           PERSIST_SNAPSHOT: ${{ github.event.inputs.persist_snapshot }}
         run: |
+          node scripts/check-youtube-api-project-routing.mjs
           node <<'NODE'
           const fs = require("node:fs");
-          const routes = [
-            { route: "youtube-1", environment: "youtube-api-branding", supports: "EN,ES-419,PT-BR,RU,HI,ID,FR,DE,JA,KO,TR,ZH" },
-            { route: "youtube-2", environment: "youtube-api-youtube-2", supports: "VI,TH,MS,PL,NL,SV,NO,DA,FI,CS,SK,HU,RO" },
-            { route: "youtube-3", environment: "youtube-api-youtube-3", supports: "BG,HR,SR,SL,LT,LV,ET,IS,BN,TL,MY,KM,LO" },
-            { route: "youtube-4", environment: "youtube-api-youtube-4", supports: "NE,SI,TA,TE,KN,ML,UZ,KK,AZ,KA,HY,SW,IT" },
-          ];
+          const routing = JSON.parse(fs.readFileSync("config/youtube-api-project-routing.json", "utf8"));
+          const channels = JSON.parse(fs.readFileSync("config/youtube-channels.json", "utf8")).channels || [];
+          const channelByKey = new Map(channels.map((channel) => [String(channel.key || "").toLowerCase(), channel]));
+          const canonicalSupport = (channelKey) => {
+            if (channelKey === "en") return "EN";
+            if (channelKey === "es") return "ES-419";
+            if (channelKey === "pt") return "PT-BR";
+            const channel = channelByKey.get(channelKey);
+            const supports = channel?.supportLangs || [];
+            if (supports.length !== 1) throw new Error(`cannot resolve canonical support for channel ${channelKey}`);
+            return String(supports[0]).toUpperCase();
+          };
+          const routes = (routing.projects || []).map((project) => ({
+            route: project.key,
+            environment: project.githubEnvironment,
+            publicationReady: project.publicationReady === true,
+            publicationBlockedReason: String(project.publicationBlockedReason || "publicationReady is false").trim(),
+            supports: (project.supportChannelKeys || []).map((key) => canonicalSupport(String(key).toLowerCase())).join(","),
+          }));
+          if (!routes.length || routes.some((row) => !row.route || !row.environment || !row.supports)) {
+            throw new Error("route config is incomplete");
+          }
+          const readyRoutes = routes.filter((row) => row.publicationReady);
+          if (!readyRoutes.length) throw new Error("no publication-ready routes are configured");
           const requested = String(process.env.AUDIT_ROUTES || "ALL").trim();
           const keys = requested.toUpperCase() === "ALL"
-            ? routes.map((row) => row.route)
+            ? readyRoutes.map((row) => row.route)
             : [...new Set(requested.split(",").map((value) => value.trim()).filter(Boolean))];
           const invalid = keys.filter((key) => !routes.some((row) => row.route === key));
           if (!keys.length || invalid.length) throw new Error(`invalid audit_routes: ${invalid.join(",") || requested}`);
+          const blocked = keys.map((key) => routes.find((row) => row.route === key)).filter((row) => !row.publicationReady);
+          if (blocked.length) throw new Error(`audit_routes include publication-blocked route(s): ${blocked.map((row) => `${row.route} (${row.publicationBlockedReason})`).join(", ")}`);
           let selected = routes.filter((row) => keys.includes(row.route));
           const auditSupports = [...new Set(String(process.env.AUDIT_SUPPORTS || "").split(",").map((value) => value.trim().toUpperCase()).filter(Boolean))];
           if (auditSupports.length) {
@@ -96,6 +118,9 @@ jobs:
             selected = selected.map((row) => ({ ...row, supports: row.supports.split(",").filter((support) => auditSupports.includes(support)).join(",") }))
               .filter((row) => row.supports);
             if (!selected.length) throw new Error("audit_supports selected no route supports");
+          }
+          if (process.env.PERSIST_SNAPSHOT === "true" && selected.length < routes.length) {
+            throw new Error("persist_snapshot requires every configured route to be publication-ready and selected; do not overwrite the global snapshot with partial route coverage");
           }
           if (process.env.PLAN_REQUESTED === "true" && selected.length < routes.length) {
             if (String(process.env.CAMPAIGN_SUPPORTS || "").toUpperCase() === "ALL") {

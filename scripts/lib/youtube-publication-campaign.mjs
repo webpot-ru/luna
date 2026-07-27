@@ -16,6 +16,7 @@ import {
 import {
   assertCanonicalSupportCount,
   loadCanonicalSupportRouting,
+  publicationBlockerForRoute,
   resolveCanonicalSupports,
 } from "./youtube-support-routing.mjs";
 import {
@@ -592,6 +593,13 @@ export function buildPublicationCampaign(options = {}) {
   const freshness = snapshotBlockers(deck, snapshot.generatedAt, now, maxSnapshotAgeMinutes, supports);
   const blockers = [...freshness.blockers, ...replacementBlockers];
   const warnings = [];
+  for (const route of new Map(supports.map((support) => {
+    const route = routing.supportToRoute.get(support);
+    return [route?.key || support, route];
+  })).values()) {
+    const publicationBlocker = publicationBlockerForRoute(route);
+    if (publicationBlocker) blockers.push(publicationBlocker);
+  }
   if (!playlistDiscoveryExists) blockers.push(`route-authenticated playlist discovery snapshot is missing: ${paths.playlistDiscovery}`);
   const playlistFreshness = playlistDiscoveryExists
     ? playlistDiscoveryBlockers(playlistDiscovery, now, maxSnapshotAgeMinutes, supports)
@@ -768,6 +776,22 @@ export function buildPublicationCampaign(options = {}) {
   const playlistCreateCountMaximum = playlistDiscoveryReady ? playlistCreateCount : assignments.length;
   const existingPlaylistCount = assignments.filter((row) => row.playlist.state === "resolved_existing" && row.playlist.youtubePlaylistId).length;
   const estimatedVideoUploadCalls = assignments.length;
+  const aggregateVideoUploadCallLimitPerQuotaDay = Number(
+    routing.parsed?.quotaPolicy?.aggregateVideoUploadCallLimitPerQuotaDay || 0,
+  );
+  if (!Number.isInteger(aggregateVideoUploadCallLimitPerQuotaDay) || aggregateVideoUploadCallLimitPerQuotaDay < 1) {
+    blockers.push("routing quota policy is missing a positive aggregateVideoUploadCallLimitPerQuotaDay");
+  } else if (estimatedVideoUploadCalls > aggregateVideoUploadCallLimitPerQuotaDay) {
+    blockers.push(
+      `campaign video uploads ${estimatedVideoUploadCalls} exceed the aggregate daily limit ${aggregateVideoUploadCallLimitPerQuotaDay}`,
+    );
+  }
+  if (routing.parsed?.quotaPolicy?.allowAutomaticRouteFallback !== false) {
+    blockers.push("routing quota policy must disable automatic route fallback");
+  }
+  if (routing.parsed?.quotaPolicy?.allowStandbyRouteQuotaUse !== false) {
+    blockers.push("routing quota policy must disable standby-route quota use");
+  }
   const estimatedPlaylistItemInsertUnits = assignments.length * 50;
   const estimatedPlaylistCreateUnitsMaximum = playlistCreateCountMaximum * 50;
   const estimatedThumbnailSetUnits = customThumbnailCount * 50;
@@ -873,6 +897,14 @@ export function buildPublicationCampaign(options = {}) {
     },
     estimatedUsage: {
       estimatedVideoUploadCalls,
+      aggregateVideoUploadCallLimitPerQuotaDay,
+      aggregateVideoUploadCallHeadroom: Math.max(
+        0,
+        aggregateVideoUploadCallLimitPerQuotaDay - estimatedVideoUploadCalls,
+      ),
+      quotaDayTimeZone: routing.parsed?.quotaPolicy?.quotaDayTimeZone || "",
+      automaticRouteFallbackAllowed: routing.parsed?.quotaPolicy?.allowAutomaticRouteFallback === true,
+      standbyRouteQuotaUseAllowed: routing.parsed?.quotaPolicy?.allowStandbyRouteQuotaUse === true,
       estimatedPlaylistItemInsertUnits,
       estimatedPlaylistCreateUnitsMaximum,
       estimatedThumbnailSetUnits,

@@ -101,6 +101,15 @@ const readyChannelConfig = {
   }],
 };
 write(path.join(configDir, "youtube-channels.json"), readyChannelConfig);
+write(path.join(configDir, "youtube-api-project-routing.json"), {
+  schemaVersion: 3,
+  projects: [{
+    key: "youtube-1",
+    supportVariants: ["EN"],
+    githubEnvironment: "youtube-api-branding",
+    publicationReady: true,
+  }],
+});
 
 const ordinaryArtifact = path.join(artifactRoot, "ordinary", "config");
 const polyglotArtifact = path.join(artifactRoot, "polyglot", "config");
@@ -157,6 +166,9 @@ assert.equal(preflight.ordinaryMatrix[0].langs, "DE");
 assert.equal(preflight.ordinaryMatrix[0].route_key, "youtube-1");
 assert.equal(preflight.polyglotMatrix[0].bundle, "global_europe_core");
 assert.equal(preflight.polyglotMatrix[0].route_key, "youtube-1");
+assert.equal(preflight.metadataMatrix[0].openai_token_budget, 2_000_000);
+assert.equal(preflight.summary.openAiCampaignTokenLimit, 2_000_000);
+assert.equal(preflight.summary.openAiAllocatedTokenBudget, 2_000_000);
 
 write(path.join(configDir, "youtube-channels.json"), {
   ...readyChannelConfig,

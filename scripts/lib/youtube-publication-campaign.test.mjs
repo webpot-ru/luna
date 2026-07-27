@@ -26,7 +26,13 @@ channels.channels = channels.channels.map((channel) => ({
   longVideoUploadAllowed: false,
   videoProductionReadiness: { status: "ready", reason: "fixture_ready", checkedAt: "2026-07-26" },
 }));
-const routingFixture = readJson("config/youtube-api-project-routing.json");
+const blockedRoutingFixture = readJson("config/youtube-api-project-routing.json");
+const routingFixture = structuredClone(blockedRoutingFixture);
+routingFixture.projects = routingFixture.projects.map((route) => ({
+  ...route,
+  publicationReady: true,
+  publicationBlockedReason: "",
+}));
 const canonicalRouting = loadCanonicalSupportRouting();
 const discoveryChannels = [...canonicalRouting.supportToChannel.entries()].map(([supportLang, channel]) => {
   return {
@@ -77,10 +83,25 @@ assert.equal(first.summary.supportCount, 51);
 assert.equal(first.summary.ordinaryCount, 255);
 assert.equal(first.summary.polyglotCount, 51);
 assert.equal(first.summary.assignmentCount, 306);
-assert.deepEqual(first.summary.routeCounts, { "youtube-1": 72, "youtube-2": 78, "youtube-3": 78, "youtube-4": 78 });
+const expectedRouteCounts = {
+  "youtube-1": 36,
+  "youtube-2": 42,
+  "youtube-3": 42,
+  "youtube-4": 42,
+  "youtube-5": 36,
+  "youtube-6": 36,
+  "youtube-7": 36,
+  "youtube-8": 36,
+};
+assert.deepEqual(first.summary.routeCounts, expectedRouteCounts);
 assert.equal(new Set(first.assignments.map((row) => row.assignmentKey)).size, 306);
 assert.equal(new Set(first.assignments.map((row) => row.slotKey)).size, 306);
 assert.equal(first.estimatedUsage.estimatedVideoUploadCalls, 306);
+assert.equal(first.estimatedUsage.aggregateVideoUploadCallLimitPerQuotaDay, 400);
+assert.equal(first.estimatedUsage.aggregateVideoUploadCallHeadroom, 94);
+assert.equal(first.estimatedUsage.quotaDayTimeZone, "America/Los_Angeles");
+assert.equal(first.estimatedUsage.automaticRouteFallbackAllowed, false);
+assert.equal(first.estimatedUsage.standbyRouteQuotaUseAllowed, false);
 assert.equal(first.estimatedUsage.estimatedPlaylistItemInsertUnits, 15_300);
 assert.equal(first.estimatedUsage.estimatedPlaylistCreateUnitsMaximum, 15_300);
 assert.equal(first.estimatedUsage.estimatedThumbnailSetUnits, 0);
@@ -90,17 +111,17 @@ assert.equal(first.summary.playlistCreateCount, 306);
 assert.equal(first.summary.existingPlaylistCount, 0);
 assert.deepEqual(
   Object.fromEntries(Object.entries(first.estimatedUsage.byRoute).map(([key, value]) => [key, value.estimatedVideoUploadCalls])),
-  { "youtube-1": 72, "youtube-2": 78, "youtube-3": 78, "youtube-4": 78 },
+  expectedRouteCounts,
 );
 assert(Object.values(first.estimatedUsage.byRoute).every((row) => row.estimatedVideoUploadCalls <= 100));
 assert(Object.values(first.estimatedUsage.byRoute).every((row) => row.estimatedGeneralQuotaUnitsMaximum <= 10_000));
 assert.equal(first.estimatedUsage.directGeminiRequestsCurrentWorkerLayout, 102);
-assert.equal(first.estimatedUsage.directGeminiRequestsCampaignRouteBatchSize5, 63);
+assert.equal(first.estimatedUsage.directGeminiRequestsCampaignRouteBatchSize5, 67);
 assert.equal(first.estimatedUsage.directGeminiRequestsCampaignWideBatchSize5, 62);
-assert.equal(first.estimatedUsage.metadataMaximumOpenAiAttempts, 63);
-assert.equal(first.estimatedUsage.metadataMaximumDirectGeminiAttempts, 126);
-assert.equal(first.estimatedUsage.metadataMaximumVectorEngineAttempts, 184);
-assert.equal(first.estimatedUsage.metadataMaximumProviderAttempts, 373);
+assert.equal(first.estimatedUsage.metadataMaximumOpenAiAttempts, 67);
+assert.equal(first.estimatedUsage.metadataMaximumDirectGeminiAttempts, 134);
+assert.equal(first.estimatedUsage.metadataMaximumVectorEngineAttempts, 185);
+assert.equal(first.estimatedUsage.metadataMaximumProviderAttempts, 386);
 assert.equal(first.estimatedUsage.renderJobCount, 306);
 assert(first.assignments.every((row) => row.thumbnail.mode === "first_frame_auto" && row.thumbnail.ready));
 assert(first.assignments.filter((row) => row.videoType === "polyglot").every((row) => (
@@ -112,6 +133,14 @@ assert(first.assignments.filter((row) => row.videoType === "polyglot").every((ro
 assert.equal(first.summary.fullPolyglotCount, 0);
 assert.equal(first.summary.shortUnverifiedPolyglotCount, 51);
 assert(first.assignments.every((row) => row.playlist.state === "verified_absent" && row.playlist.createAllowed));
+
+const blockedRoutePlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "FR",
+  routingPath: writeJson("routing-blocked-youtube-5.json", blockedRoutingFixture),
+});
+assert.equal(blockedRoutePlan.summary.applyReady, false);
+assert(blockedRoutePlan.blockers.some((row) => row.includes("Route youtube-5 is publication-blocked")));
 
 const productionBlockedChannels = readJson(paths.channelsPath);
 productionBlockedChannels.channels = productionBlockedChannels.channels.map((channel) => (
@@ -409,7 +438,10 @@ const noDurableDeckSource = buildPublicationCampaign({
 });
 assert(noDurableDeckSource.blockers.some((row) => row.includes("offline deck is not Git-tracked")));
 
-const oversizedRouteWave = buildPublicationCampaign({ ...baseOptions, ordinaryPerChannel: 8 });
+const oversizedAggregateWave = buildPublicationCampaign({ ...baseOptions, ordinaryPerChannel: 8 });
+assert(oversizedAggregateWave.blockers.some((row) => row.includes("aggregate daily limit 400")));
+
+const oversizedRouteWave = buildPublicationCampaign({ ...baseOptions, ordinaryPerChannel: 14 });
 assert(oversizedRouteWave.blockers.some((row) => row.includes("videos.insert bucket")));
 
 const laterHint = buildPublicationCampaign({ ...baseOptions, startDate: "2026-08-01" });
