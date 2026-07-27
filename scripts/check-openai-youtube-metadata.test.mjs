@@ -42,4 +42,11 @@ assert.equal(report.serviceTier, "data_sharing_incentive");
 assert.equal(report.usage.totalTokens, 150);
 assert.equal(JSON.parse(fs.readFileSync(output, "utf8")).status, "ok");
 
+const campaignWorkflow = fs.readFileSync(".github/workflows/youtube-publication-campaign.yml", "utf8");
+assert.match(campaignWorkflow, /BACKEND="openai"/);
+assert.match(campaignWorkflow, /--openai-model="gpt-5\.6-terra"/);
+assert.match(campaignWorkflow, /--openai-fallback-model="gpt-5\.6-luna"/);
+assert.doesNotMatch(campaignWorkflow, /BACKEND="openai,api"/);
+assert.match(campaignWorkflow, /VectorEngine is disabled for campaign metadata/);
+
 console.log("OpenAI YouTube metadata canary tests passed");

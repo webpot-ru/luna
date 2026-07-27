@@ -917,7 +917,7 @@ export function buildPublicationCampaign(options = {}) {
         + scheduledPolyglotSupportCount * polyglotPerChannel,
       directGeminiRequestsCampaignRouteBatchSize5: metadataRouteBatchCount,
       directGeminiRequestsCampaignWideBatchSize5: Math.ceil(assignments.length / 5),
-      metadataProviderOrder: ["openai_gpt_5_4", "direct_gemini_key_1", "direct_gemini_key_2", "vectorengine_confirmed"],
+      metadataProviderOrder: ["openai_gpt_5_6_terra", "openai_gpt_5_6_luna"],
       metadataBatchSize: 5,
       metadataLogicalBatchCount: metadataRouteBatchCount,
       metadataMaximumOpenAiAttempts: metadataRouteBatchCount,

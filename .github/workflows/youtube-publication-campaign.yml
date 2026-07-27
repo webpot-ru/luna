@@ -54,7 +54,7 @@ on:
         required: false
         default: ""
       confirm_vectorengine_metadata:
-        description: "Apply only: USE_VECTORENGINE_METADATA permits VectorEngine only after both direct Gemini keys fail."
+        description: "Disabled for campaign metadata; keep empty. The approved chain is Terra, then Luna."
         required: false
         default: ""
       confirm_openai_metadata:
@@ -267,25 +267,20 @@ jobs:
           YOUTUBE_METADATA_AI_STRICT: "1"
         run: |
           set -euo pipefail
-          BACKEND="api"
+          BACKEND="openai"
           OPENAI_ARGS=()
-          VECTOR_ARGS=()
           RESUME_ARGS=()
           if [ "${{ inputs.confirm_openai_metadata }}" = "USE_OPENAI_METADATA" ]; then
-            BACKEND="openai,api"
             OPENAI_ARGS+=("--confirm-openai=USE_OPENAI_METADATA")
-          elif [ -n "${{ inputs.confirm_openai_metadata }}" ]; then
-            echo "::error::confirm_openai_metadata must be empty or USE_OPENAI_METADATA"
+          else
+            echo "::error::campaign metadata requires confirm_openai_metadata=USE_OPENAI_METADATA"
             exit 1
           fi
           if [ -n "${{ inputs.metadata_resume_run_id }}" ]; then
             RESUME_ARGS+=("--resume-existing")
           fi
-          if [ "${{ inputs.confirm_vectorengine_metadata }}" = "USE_VECTORENGINE_METADATA" ]; then
-            BACKEND="${BACKEND},vectorengine"
-            VECTOR_ARGS+=("--confirm-vectorengine=USE_VECTORENGINE_METADATA")
-          elif [ -n "${{ inputs.confirm_vectorengine_metadata }}" ]; then
-            echo "::error::confirm_vectorengine_metadata must be empty or USE_VECTORENGINE_METADATA"
+          if [ -n "${{ inputs.confirm_vectorengine_metadata }}" ]; then
+            echo "::error::VectorEngine is disabled for campaign metadata; use only Terra and Luna."
             exit 1
           fi
           npm run generate:youtube-campaign-metadata -- \
@@ -302,7 +297,6 @@ jobs:
             --openai-daily-token-limit="$OPENAI_ROUTE_TOKEN_BUDGET" \
             --openai-service-tier="${OPENAI_SERVICE_TIER:-auto}" \
             "${OPENAI_ARGS[@]}" \
-            "${VECTOR_ARGS[@]}" \
             "${RESUME_ARGS[@]}" \
             --apply \
             --confirm=GENERATE_YOUTUBE_CAMPAIGN_METADATA
