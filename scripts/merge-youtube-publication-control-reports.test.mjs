@@ -21,7 +21,7 @@ const polyglotTail = {
   polyglotKey: "polyglot:deck:RU:slavic_core:hash",
 };
 
-for (let route = 1; route <= 4; route += 1) {
+for (let route = 1; route <= 8; route += 1) {
   const videoId = `video-${route}`;
   const report = {
     setId: "deck",
@@ -71,15 +71,16 @@ const merged = spawnSync(process.execPath, [
   `--input=${input}`,
   `--output=${output}`,
   `--markdown=${markdown}`,
-  "--expected-routes=4",
-  "--expected-route-keys=youtube-1,youtube-2,youtube-3,youtube-4",
+  "--expected-routes=8",
+  "--expected-route-keys=youtube-1,youtube-2,youtube-3,youtube-4,youtube-5,youtube-6,youtube-7,youtube-8",
+  "--all-routes",
   "--source-run=deck:all:123456789",
 ], { cwd: process.cwd(), encoding: "utf8" });
 assert.equal(merged.status, 0, merged.stderr || merged.stdout);
 
 const aggregate = JSON.parse(fs.readFileSync(output, "utf8"));
 assert.equal(aggregate.summary.complete, true);
-assert.deepEqual(aggregate.summary.receivedRouteKeys, ["youtube-1", "youtube-2", "youtube-3", "youtube-4"]);
+assert.deepEqual(aggregate.summary.receivedRouteKeys, ["youtube-1", "youtube-2", "youtube-3", "youtube-4", "youtube-5", "youtube-6", "youtube-7", "youtube-8"]);
 assert.equal(aggregate.routeScope.mode, "all_routes");
 assert.equal(aggregate.summary.healthy, true);
 assert.equal(aggregate.summary.advisoryCount, 1);
@@ -87,7 +88,7 @@ assert.equal(aggregate.advisories.length, 1);
 assert.equal(aggregate.summary.tailCount, 2);
 assert.equal(aggregate.summary.ordinaryTailCount, 1);
 assert.equal(aggregate.summary.polyglotTailCount, 1);
-assert.equal(aggregate.publications.length, 4);
+assert.equal(aggregate.publications.length, 8);
 assert.equal(aggregate.unclassifiedUploads.length, 1);
 assert.equal(aggregate.summary.unclassifiedUploadCount, 1);
 assert.equal(aggregate.summary.youtubeDeletedTombstoneCount, 1);
@@ -97,7 +98,7 @@ assert.equal(aggregate.summary.paginationComplete, true);
 assert.equal(aggregate.sourceRuns[0].githubRunUrl, "https://github.com/webpot-ru/luna/actions/runs/123456789");
 const markdownText = fs.readFileSync(markdown, "utf8");
 assert.match(markdownText, /Polyglot slavic_core/);
-assert.match(markdownText, /https:\/\/www\.youtube\.com\/watch\?v=video-4/);
+assert.match(markdownText, /https:\/\/www\.youtube\.com\/watch\?v=video-8/);
 assert.match(markdownText, /Unclassified uploads: 1/);
 assert.match(markdownText, /polyglot_full_tail_deferred_by_active_short_unverified/);
 

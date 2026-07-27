@@ -5,6 +5,7 @@ import { loadCanonicalSupportRouting } from "./lib/youtube-support-routing.mjs";
 import { mergePlaylistDiscoveryReports } from "./merge-youtube-playlist-discovery.mjs";
 
 const routing = loadCanonicalSupportRouting();
+const expectedRouteCount = routing.projects.length;
 const reports = routing.projects.map((route) => {
   const supports = [...routing.supportToRoute.entries()]
     .filter(([, supportRoute]) => supportRoute.key === route.key)
@@ -28,11 +29,11 @@ const reports = routing.projects.map((route) => {
 const merged = mergePlaylistDiscoveryReports({
   reports,
   routing,
-  expectedRoutes: 4,
+  expectedRoutes: expectedRouteCount,
   generatedAt: "2026-07-14T00:01:00.000Z",
 });
 assert.equal(merged.complete, true);
-assert.equal(merged.summary.routeCount, 4);
+assert.equal(merged.summary.routeCount, expectedRouteCount);
 assert.equal(merged.summary.supportCount, 51);
 assert.equal(merged.summary.blockerCount, 0);
 assert.equal(merged.summary.youtubeWrites, 0);
@@ -45,7 +46,7 @@ const subsetReports = reports.map((report) => ({
 const subset = mergePlaylistDiscoveryReports({
   reports: subsetReports,
   routing,
-  expectedRoutes: 4,
+  expectedRoutes: expectedRouteCount,
   expectedSupports: subsetSupports,
   generatedAt: "2026-07-14T00:01:00.000Z",
 });
@@ -54,7 +55,7 @@ assert.equal(subset.summary.expectedSupportCount, 5);
 assert.equal(subset.summary.supportCount, 5);
 assert.equal(subset.summary.blockerCount, 0);
 
-const incomplete = mergePlaylistDiscoveryReports({ reports: reports.slice(0, 3), routing, expectedRoutes: 4 });
+const incomplete = mergePlaylistDiscoveryReports({ reports: reports.slice(0, -1), routing, expectedRoutes: expectedRouteCount });
 assert.equal(incomplete.complete, false);
 assert(incomplete.blockers.some((row) => row.includes("route report count")));
 assert(incomplete.blockers.some((row) => row.includes("missing support discoveries")));

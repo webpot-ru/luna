@@ -20,8 +20,8 @@ const report = {
   mode: "youtube_publication_control_all_routes",
   summary: {
     complete: true,
-    expectedRouteCount: 4,
-    receivedRouteCount: 4,
+    expectedRouteCount: 8,
+    receivedRouteCount: 8,
     activeVideoCount: 3,
     publicCount: 2,
     scheduledCount: 1,
@@ -32,7 +32,7 @@ const report = {
     videoStatusReadbackComplete: true,
     paginationComplete: true,
   },
-  routes: Array.from({ length: 4 }, (_, index) => ({
+  routes: Array.from({ length: 8 }, (_, index) => ({
     file: `/tmp/youtube-publication-control-youtube-${index + 1}.json`,
     setId: "test-deck",
     supports: index === 0 ? ["EN"] : [`S${index + 1}`],
@@ -191,6 +191,8 @@ assert.equal(snapshot.unclassifiedUploads[0].youtubeVideoId, "unclassified-video
 assert.deepEqual(snapshot.unclassifiedUploads[0].sourceSetIds, ["test-deck"]);
 assert.equal(snapshot.decks[0].publications.find((row) => row.youtubeVideoId === "durable-observed")?.statusEvidence, "uploads_playlist_registry_match");
 assert.equal(snapshot.decks[0].evidence.strictApplyEvidence, true);
+assert.equal(snapshot.decks[0].evidence.expectedRouteCount, 8);
+assert.equal(snapshot.decks[0].evidence.routes.at(-1)?.routeKey, "youtube-8");
 assert.equal(snapshot.decks[0].duplicateGroups.length, 1);
 assert.equal(snapshot.decks[0].duplicateGroups[0].recommendedKeepVideoId, "durable-video");
 assert.deepEqual(snapshot.decks[0].duplicateGroups[0].candidateDeleteVideoIds, ["live-only-video"]);
