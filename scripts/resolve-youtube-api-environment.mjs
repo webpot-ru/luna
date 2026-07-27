@@ -2,12 +2,14 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 function parseArgs(argv) {
   const args = {};
   for (const arg of argv) {
     if (arg.startsWith("--support=")) args.support = arg.slice("--support=".length);
     else if (arg.startsWith("--environment=")) args.environment = arg.slice("--environment=".length);
+    else if (arg === "--activation-readback") args.activationReadback = true;
     else if (arg === "--json") args.json = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -25,15 +27,22 @@ function splitCodes(value) {
     .filter(Boolean);
 }
 
-function main() {
-  const args = parseArgs(process.argv.slice(2));
-  const supportCodes = splitCodes(args.support);
+function sortedUniqueCodes(values = []) {
+  return [...new Set(values.map((item) => normalizeCode(item)).filter(Boolean))].sort();
+}
+
+export function resolveYouTubeApiEnvironment({
+  routing,
+  supportCodes: requestedSupportCodes,
+  requestedEnvironment = "auto",
+  activationReadback = false,
+} = {}) {
+  const normalizedRequestedSupportCodes = (requestedSupportCodes || []).map((item) => normalizeCode(item)).filter(Boolean);
+  const supportCodes = sortedUniqueCodes(normalizedRequestedSupportCodes);
   if (!supportCodes.length) {
     throw new Error("--support must include at least one support language/channel code.");
   }
 
-  const configPath = path.resolve("config/youtube-api-project-routing.json");
-  const routing = JSON.parse(fs.readFileSync(configPath, "utf8"));
   const projects = routing.projects || [];
   const matches = [];
 
@@ -64,11 +73,34 @@ function main() {
   }
 
   const expectedEnvironment = environments[0];
-  const requestedEnvironment = String(args.environment || "auto").trim();
-  if (requestedEnvironment && requestedEnvironment !== "auto" && requestedEnvironment !== expectedEnvironment) {
+  const environment = String(requestedEnvironment || "auto").trim();
+  if (environment && environment !== "auto" && environment !== expectedEnvironment) {
     throw new Error(
       `GitHub environment mismatch: requested ${requestedEnvironment}, expected ${expectedEnvironment} for support=${supportCodes.join(",")}.`,
     );
+  }
+
+  const routes = [...new Map(matches.map((item) => [item.route, projects.find((project) => project.key === item.route)])).values()];
+  if (activationReadback) {
+    if (!environment || environment === "auto") {
+      throw new Error("--activation-readback requires an explicit matching --environment.");
+    }
+    if (routes.length !== 1) {
+      throw new Error("--activation-readback must be limited to exactly one YouTube API route.");
+    }
+    const [route] = routes;
+    if (route?.publicationReady === true) {
+      throw new Error(`--activation-readback is only allowed while ${route.key} is publication-blocked.`);
+    }
+    const expectedRouteSupports = sortedUniqueCodes(route?.supportVariants || []);
+    if (normalizedRequestedSupportCodes.length !== supportCodes.length) {
+      throw new Error("--activation-readback must list each active support exactly once.");
+    }
+    if (supportCodes.join("|") !== expectedRouteSupports.join("|")) {
+      throw new Error(
+        `--activation-readback for ${route?.key || "this route"} must include every active support exactly once: ${expectedRouteSupports.join(",")}.`,
+      );
+    }
   }
 
   const publicationBlockers = [...new Map(matches.map((item) => [item.route, item])).values()]
@@ -79,16 +111,29 @@ function main() {
     })
     .filter(Boolean)
     .sort();
-  if (publicationBlockers.length) {
+  if (publicationBlockers.length && !activationReadback) {
     throw new Error(publicationBlockers.join("\n"));
   }
 
-  const result = {
+  return {
     ok: true,
     supportCodes,
     githubEnvironment: expectedEnvironment,
     routes: matches,
+    activationReadback,
   };
+}
+
+function main() {
+  const args = parseArgs(process.argv.slice(2));
+  const configPath = path.resolve("config/youtube-api-project-routing.json");
+  const routing = JSON.parse(fs.readFileSync(configPath, "utf8"));
+  const result = resolveYouTubeApiEnvironment({
+    routing,
+    supportCodes: splitCodes(args.support),
+    requestedEnvironment: args.environment || "auto",
+    activationReadback: args.activationReadback === true,
+  });
 
   if (args.json) {
     console.log(JSON.stringify(result, null, 2));
@@ -97,9 +142,11 @@ function main() {
   }
 }
 
-try {
-  main();
-} catch (error) {
-  console.error(`::error::${error.message}`);
-  process.exit(1);
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  try {
+    main();
+  } catch (error) {
+    console.error(`::error::${error.message}`);
+    process.exit(1);
+  }
 }
