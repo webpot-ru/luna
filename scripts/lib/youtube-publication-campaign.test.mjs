@@ -247,6 +247,14 @@ assert.equal(subsetPlan.summary.applyReady, true);
 assert.equal(subsetPlan.summary.supportCount, subsetSupports.length);
 assert.equal(subsetPlan.summary.assignmentCount, 12);
 
+const subsetPlanFromCompleteDiscovery = buildPublicationCampaign({
+  ...baseOptions,
+  supports: subsetSupports.join(","),
+});
+assert.equal(subsetPlanFromCompleteDiscovery.summary.applyReady, true);
+assert.equal(subsetPlanFromCompleteDiscovery.summary.supportCount, subsetSupports.length);
+assert.equal(subsetPlanFromCompleteDiscovery.summary.assignmentCount, 12);
+
 const exclusionSnapshot = structuredClone(snapshot);
 const exclusionDeck = exclusionSnapshot.decks.find((deck) => deck.setId === "home_kitchen_cooking_actions_a1_a2");
 const hyTailIndex = exclusionDeck.tails.findIndex((tail) => (
