@@ -44,6 +44,11 @@ on:
           - youtube-api-youtube-6
           - youtube-api-youtube-7
           - youtube-api-youtube-8
+      activation_readback:
+        description: "Only for a blocked route's full six-channel OAuth activation readback; mode must be readback."
+        required: true
+        default: false
+        type: boolean
       force_configured:
         description: "Allow apply to touch configured_readback channels. Required with scope=all."
         required: true
@@ -81,7 +86,34 @@ jobs:
         env:
           CHANNELS_INPUT: ${{ github.event.inputs.channels }}
           YOUTUBE_ENVIRONMENT_INPUT: ${{ github.event.inputs.youtube_environment }}
-        run: node scripts/resolve-youtube-api-environment.mjs --support="$CHANNELS_INPUT" --environment="$YOUTUBE_ENVIRONMENT_INPUT"
+          ACTIVATION_READBACK_INPUT: ${{ github.event.inputs.activation_readback }}
+        run: |
+          set -euo pipefail
+          ARGS=("--support=$CHANNELS_INPUT" "--environment=$YOUTUBE_ENVIRONMENT_INPUT")
+          if [ "$ACTIVATION_READBACK_INPUT" = "true" ]; then
+            if [ "${{ github.event.inputs.mode }}" != "readback" ]; then
+              echo "::error::activation_readback is valid only with mode=readback"
+              exit 1
+            fi
+            ARGS+=("--activation-readback")
+          fi
+          node scripts/resolve-youtube-api-environment.mjs "${ARGS[@]}"
+
+      - name: Require exact activation-readback inputs
+        if: ${{ github.event.inputs.activation_readback == 'true' }}
+        shell: bash
+        env:
+          CHANNELS_INPUT: ${{ github.event.inputs.channels }}
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event.inputs.mode }}" != "readback" ]; then
+            echo "::error::activation_readback is valid only with mode=readback"
+            exit 1
+          fi
+          if [ -z "$CHANNELS_INPUT" ]; then
+            echo "::error::activation_readback requires an explicit full route channel list"
+            exit 1
+          fi
 
       - name: Restore YouTube OAuth bundle from secret
         if: ${{ github.event.inputs.mode == 'readback' || github.event.inputs.mode == 'apply' }}
