@@ -138,7 +138,7 @@ function main() {
   if (args.json) {
     console.log(JSON.stringify(result, null, 2));
   } else {
-    console.log(`YouTube API environment OK: ${supportCodes.join(",")} -> ${expectedEnvironment}`);
+    console.log(`YouTube API environment OK: ${result.supportCodes.join(",")} -> ${result.githubEnvironment}`);
   }
 }
 
