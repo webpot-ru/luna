@@ -17,6 +17,7 @@ import {
   ymdInZone,
 } from "./plan-youtube-publish-schedule.mjs";
 import { longVideoUploadAllowed, resolveYoutubeVideoProductionReadiness } from "./lib/youtube-video-production-readiness.mjs";
+import { loadCanonicalSupportRouting } from "./lib/youtube-support-routing.mjs";
 
 const CONFIRM = "CREATE_PARTIAL_YOUTUBE_RECOVERY_CAMPAIGN";
 const SHORT_MAX_SECONDS = 895;
@@ -26,6 +27,7 @@ function parseArgs(argv) {
     registry: "config/youtube-publication-campaigns.json",
     calendar: "config/youtube-publish-calendar.json",
     channels: "config/youtube-channels.json",
+    routing: "config/youtube-api-project-routing.json",
     policy: "config/youtube-publish-schedule-policy.json",
     plansDir: "config/youtube-publication-campaign-plans",
     minFutureMinutes: 90,
@@ -44,6 +46,7 @@ function parseArgs(argv) {
     else if (arg === "--registry" || arg.startsWith("--registry=")) options.registry = value();
     else if (arg === "--calendar" || arg.startsWith("--calendar=")) options.calendar = value();
     else if (arg === "--channels" || arg.startsWith("--channels=")) options.channels = value();
+    else if (arg === "--routing" || arg.startsWith("--routing=")) options.routing = value();
     else if (arg === "--policy" || arg.startsWith("--policy=")) options.policy = value();
     else if (arg === "--plans-dir" || arg.startsWith("--plans-dir=")) options.plansDir = value();
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = value();
@@ -145,6 +148,8 @@ function campaignAssignment(row) {
     productionReadiness: row.productionReadiness || null,
     channelKey: row.channelKey,
     youtubeChannelId: row.youtubeChannelId,
+    sourceRouteKey: row.sourceRouteKey || "",
+    sourceYoutubeEnvironment: row.sourceYoutubeEnvironment || "",
     routeKey: row.routeKey,
     youtubeEnvironment: row.youtubeEnvironment,
     publishAt: row.publishAt,
@@ -158,7 +163,7 @@ function campaignAssignment(row) {
   };
 }
 
-export function buildPartialRecovery({ registry, calendar, channels, policy, controlReports, campaignId, supports, assignmentKeys = [], polyglotScopeUpgrades = {}, polyglotScopeDowngrades = {}, now = new Date(), minFutureMinutes = 90, maxEvidenceAgeMinutes = 30 }) {
+export function buildPartialRecovery({ registry, calendar, channels, policy, routing = null, controlReports, campaignId, supports, assignmentKeys = [], polyglotScopeUpgrades = {}, polyglotScopeDowngrades = {}, now = new Date(), minFutureMinutes = 90, maxEvidenceAgeMinutes = 30 }) {
   const oldCampaign = (registry.campaigns || []).find((row) => row.campaignId === campaignId);
   assert(oldCampaign, `campaign not found: ${campaignId}`);
   const scopeChangeRequested = Object.keys(polyglotScopeUpgrades || {}).length > 0 || Object.keys(polyglotScopeDowngrades || {}).length > 0;
@@ -194,6 +199,23 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
       return matches[0];
     });
   }
+  selectedOldRows = selectedOldRows.map((row) => {
+    const sourceRouteKey = row.sourceRouteKey || row.routeKey || "";
+    const sourceYoutubeEnvironment = row.sourceYoutubeEnvironment || row.youtubeEnvironment || "";
+    if (!routing) return { ...row, sourceRouteKey, sourceYoutubeEnvironment };
+    const route = routing.supportToRoute?.get(row.supportLang);
+    assert(route, `${row.supportLang}: current canonical publication route is missing`);
+    assert(route.publicationReady === true, `${row.supportLang}: current canonical route ${route.key || "(unknown)"} is publication-blocked`);
+    const youtubeEnvironment = route.githubEnvironment || route.environment || "";
+    assert(youtubeEnvironment, `${row.supportLang}: current canonical route ${route.key || "(unknown)"} has no GitHub environment`);
+    return {
+      ...row,
+      sourceRouteKey,
+      sourceYoutubeEnvironment,
+      routeKey: route.key,
+      youtubeEnvironment,
+    };
+  });
   const selectedSupports = [...new Set(selectedOldRows.map((row) => row.supportLang))].sort();
   const scopeUpgrades = Object.fromEntries(Object.entries(polyglotScopeUpgrades || {}).map(([key, value]) => [String(key).trim(), String(value).trim()]));
   const scopeDowngrades = Object.fromEntries(Object.entries(polyglotScopeDowngrades || {}).map(([key, value]) => [String(key).trim(), String(value).trim()]));
@@ -275,6 +297,8 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
     const row = {
       ...oldRow,
       sourceAssignmentKey: oldRow.assignmentKey,
+      sourceRouteKey: oldRow.sourceRouteKey || "",
+      sourceYoutubeEnvironment: oldRow.sourceYoutubeEnvironment || "",
       requestedContentScope,
       contentScope,
       cardLimit: oldRow.videoType === "polyglot" ? 0 : oldRow.cardLimit,
@@ -320,7 +344,7 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
 
   const generatedAt = now.toISOString();
   const routeKeys = [...new Set([
-    ...Object.keys(oldCampaign.summary?.routeCounts || {}),
+    ...(routing ? [] : Object.keys(oldCampaign.summary?.routeCounts || {})),
     ...assignments.map((row) => row.routeKey).filter(Boolean),
   ])].sort();
   const routeCounts = Object.fromEntries(routeKeys.map((route) => [route, assignments.filter((row) => row.routeKey === route).length]));
@@ -374,6 +398,9 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
     },
     evidence: {
       partialRecoveryCampaign: { campaignId, manifestHash: oldCampaign.manifestHash, status: oldCampaign.status, scopeUpgrades, scopeDowngrades },
+      routeMigrations: assignments
+        .filter((row) => row.sourceRouteKey && row.sourceRouteKey !== row.routeKey)
+        .map((row) => ({ supportLang: row.supportLang, sourceRouteKey: row.sourceRouteKey, routeKey: row.routeKey })),
       routeControlReports: evidence,
       sourceFingerprints: oldCampaign.evidence?.sourceFingerprints || {},
       deckSource: oldCampaign.evidence?.deckSource || {},
@@ -491,6 +518,7 @@ function main() {
     registry: readJson(options.registry),
     calendar: readJson(options.calendar),
     channels: readJson(options.channels),
+    routing: loadCanonicalSupportRouting({ routingPath: options.routing, channelsPath: options.channels }),
     policy: readJson(options.policy),
     controlReports: String(options.controlReports).split(",").map(readJson),
     campaignId: options.campaignId,

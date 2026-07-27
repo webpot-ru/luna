@@ -229,6 +229,29 @@ assert.equal(upgradeResult.manifest.assignments[0].contentScope, "full");
 assert.equal(upgradeResult.manifest.assignments[0].maxDurationSeconds, 0);
 assert.match(upgradeResult.manifest.assignments[0].assignmentKey, /\|full$/u);
 assert.equal(upgradeResult.nextRegistry.campaigns[0].assignments[0].status, "superseded_partial_recovery");
+const reroutedUpgradeResult = buildPartialRecovery({
+  registry: upgradeRegistry,
+  calendar: upgradeCalendar,
+  channels: upgradeChannels,
+  routing: {
+    supportToRoute: new Map([["LO", {
+      key: "youtube-7",
+      githubEnvironment: "youtube-api-youtube-7",
+      publicationReady: true,
+    }]]),
+  },
+  policy,
+  controlReports: upgradeControl,
+  campaignId: "short-source",
+  assignmentKeys: [upgradeKey],
+  polyglotScopeUpgrades: { [upgradeKey]: "full" },
+  now: new Date(generatedAt),
+  minFutureMinutes: 90,
+});
+assert.equal(reroutedUpgradeResult.manifest.assignments[0].sourceRouteKey, "youtube-3");
+assert.equal(reroutedUpgradeResult.manifest.assignments[0].routeKey, "youtube-7");
+assert.equal(reroutedUpgradeResult.manifest.assignments[0].youtubeEnvironment, "youtube-api-youtube-7");
+assert.deepEqual(reroutedUpgradeResult.manifest.evidence.routeMigrations, [{ supportLang: "LO", sourceRouteKey: "youtube-3", routeKey: "youtube-7" }]);
 assert.throws(() => buildPartialRecovery({
   registry: upgradeRegistry,
   calendar: upgradeCalendar,

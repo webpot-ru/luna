@@ -27,6 +27,13 @@ channels.channels = channels.channels.map((channel) => ({
   videoProductionReadiness: { status: "ready", reason: "fixture_ready", checkedAt: "2026-07-26" },
 }));
 const blockedRoutingFixture = readJson("config/youtube-api-project-routing.json");
+blockedRoutingFixture.projects = blockedRoutingFixture.projects.map((route) => (
+  route.key === "youtube-5" ? {
+    ...route,
+    publicationReady: false,
+    publicationBlockedReason: "fixture route block",
+  } : route
+));
 const routingFixture = structuredClone(blockedRoutingFixture);
 routingFixture.projects = routingFixture.projects.map((route) => ({
   ...route,
