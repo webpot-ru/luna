@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 
 import { resolveYouTubeApiEnvironment } from "./resolve-youtube-api-environment.mjs";
@@ -17,6 +18,18 @@ assert.doesNotThrow(() =>
     requestedEnvironment: "youtube-api-branding",
   }),
 );
+
+const cliResult = spawnSync(
+  process.execPath,
+  [
+    "scripts/resolve-youtube-api-environment.mjs",
+    "--support=EN",
+    "--environment=youtube-api-branding",
+  ],
+  { encoding: "utf8" },
+);
+assert.equal(cliResult.status, 0, cliResult.stderr);
+assert.match(cliResult.stdout, /YouTube API environment OK: EN -> youtube-api-branding/);
 
 assert.throws(
   () =>
