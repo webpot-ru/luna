@@ -1,0 +1,800 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-27T10:55:18.729Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_kitchen_storage_cleaning_a2",
+  "inputs": {
+    "supports": "FR,HI,ID,JA,KO,PT-BR,RU,TR,ZH",
+    "supportCount": 9,
+    "ordinarySupportCount": 9,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 1,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "assignmentKeys": [
+      "ordinary|home_kitchen_storage_cleaning_a2|FR|HY",
+      "ordinary|home_kitchen_storage_cleaning_a2|HI|HY",
+      "ordinary|home_kitchen_storage_cleaning_a2|ID|HU",
+      "ordinary|home_kitchen_storage_cleaning_a2|JA|HU",
+      "ordinary|home_kitchen_storage_cleaning_a2|KO|HU",
+      "ordinary|home_kitchen_storage_cleaning_a2|PT-BR|HU",
+      "ordinary|home_kitchen_storage_cleaning_a2|RU|HU",
+      "ordinary|home_kitchen_storage_cleaning_a2|TR|HU",
+      "ordinary|home_kitchen_storage_cleaning_a2|ZH|HU"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 30,
+    "partialRecoveryOfCampaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-a08969343473",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-a08969343473",
+      "manifestHash": "cc8eff208aa5aad557196d1916f41fd1adb214761f23f1c8c15c17aaa993d8ff",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [
+      {
+        "supportLang": "FR",
+        "sourceRouteKey": "youtube-1",
+        "routeKey": "youtube-5"
+      },
+      {
+        "supportLang": "JA",
+        "sourceRouteKey": "youtube-1",
+        "routeKey": "youtube-5"
+      },
+      {
+        "supportLang": "KO",
+        "sourceRouteKey": "youtube-1",
+        "routeKey": "youtube-5"
+      },
+      {
+        "supportLang": "TR",
+        "sourceRouteKey": "youtube-1",
+        "routeKey": "youtube-5"
+      },
+      {
+        "supportLang": "ZH",
+        "sourceRouteKey": "youtube-1",
+        "routeKey": "youtube-5"
+      }
+    ],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-5",
+        "generatedAt": "2026-07-27T10:48:36.071Z",
+        "ageMinutes": 6.710966666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-1",
+        "generatedAt": "2026-07-27T10:48:47.250Z",
+        "ageMinutes": 6.52465,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "/private/tmp/luna-plan-WUykbs/youtube-publication-snapshot-y1-y3.json",
+        "exists": true,
+        "sha256": "74bb64df9e4c1f0320d053c3cd6de40760469f95afbd1fcd4b8b30cb94cd9bd9"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "b2269f0db0defbd3737bbfa2cced4f40db95c4f2cdc56fe68af8fed74a047736"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "73ccae0cc0c4e2e43307be36207c87f23b5ceac3eeb8026e9630f30bcc33e03d"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "e195a73d31716e2248f4031edfe6346331b670f8d4afab90abf346d70cb18c82"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "f17a556a75d68cf2ab21cd1f16748f6baffb7040b1a70dd8a9a2f51b5fb1b84c"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "a196218a381d84acd54c954b24785eb060d944ef11668fa768275955585b2d21"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "f6addacada00ae9a8e9d54d6e3adac2deba6ea41f382416f8b845d32dad695c2"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_kitchen_storage_cleaning_a2.json",
+        "exists": true,
+        "sha256": "1b32d508834b8f200eb4a056d9d9547e14f255f119b518747c6b15f1cc3c0021"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "5afe095a201f9ec513b8ca9979a32ca32c7172b3e520be8fac95e312ea8963fc"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "87ddd651e0d53863ab1b8f0751272028c59b96181927aa31448ef9188ba8beae"
+      },
+      "playlistDiscovery": {
+        "path": "/private/tmp/luna-plan-WUykbs/youtube-playlist-discovery-y1-y3-safe.json",
+        "exists": true,
+        "sha256": "08155e1d3b9313814c793a21c7c82e9837088e9ba80adb8feb459f64c3d6fae4"
+      }
+    },
+    "deckSource": {
+      "mode": "verified_drive_with_local_fingerprint",
+      "driveFileIdConfigured": true,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": false,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": "29aa5eec15c8e55207fc73d281323302df05cd8d",
+        "path": "data/decks/home_kitchen_storage_cleaning_a2.json"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 9,
+    "ordinaryCount": 9,
+    "polyglotCount": 0,
+    "assignmentCount": 9,
+    "firstPublishAt": "2026-07-27T12:30:00.000Z",
+    "lastPublishAt": "2026-07-28T12:30:00.000Z",
+    "customThumbnailCount": 5,
+    "automaticThumbnailCount": 4,
+    "existingPlaylistCount": 9,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 4,
+      "youtube-5": 5
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 9,
+    "estimatedPlaylistItemInsertUnits": 450,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 250,
+    "estimatedGeneralQuotaUnitsMaximum": 700,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 4,
+        "estimatedGeneralQuotaUnitsMaximum": 300
+      },
+      "youtube-5": {
+        "estimatedVideoUploadCalls": 5,
+        "estimatedGeneralQuotaUnitsMaximum": 400
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|FR|HY",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|FR|HY|fr",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "FR",
+      "targetLang": "HY",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fr-FR-DeniseNeural",
+        "supportLang": "FR"
+      },
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-07-27T12:30:00.000Z",
+      "localDate": "2026-07-27",
+      "localTime": "14:30",
+      "timeZone": "Europe/Paris",
+      "slotKey": "fr|2026-07-27T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "FR__HY__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLVwx8ywAclAc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Arménien A1: Everyday: mots",
+        "description": "Apprentissage de Arménien. Sujet de la leçon : FlashcardsLuna. Écoutez attentivement la prononciation des locuteurs natifs et répétez les mots pendant les pauses. Un mini-test interactif vous attend à la fin ! Entraînez-vous gratuitement sur notre site web",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-26T15:14:26.530Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|FR|HY",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|HI|HY",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|HI|HY|hi",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "HI",
+      "targetLang": "HY",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hi-IN-SwaraNeural",
+        "supportLang": "HI"
+      },
+      "channelKey": "hi",
+      "youtubeChannelId": "UCRWc-CxGQSN_pbC42scuQHA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-27T15:00:00.000Z",
+      "localDate": "2026-07-27",
+      "localTime": "20:30",
+      "timeZone": "Asia/Kolkata",
+      "slotKey": "hi|2026-07-27T15:00:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HI__HY__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLa-dvjz1wo_k",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "आर्मेनियाई A1: Everyday: शब्द",
+        "description": "हम आर्मेनियाई सीख रहे हैं। पाठ का विषय है: FlashcardsLuna। मूल उच्चारण को ध्यान से सुनें और ठहराव में शब्दों को दोहराएं। अंत में एक इंटरैक्टिव मिनी-टेस्ट आपका इंतजार कर रहा है! हमारी वेबसाइट पर मुफ़्त में अभ्यास करें",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-26T15:14:26.530Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|HI|HY",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ID|HU",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ID|HU|id",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "ID",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-27T13:30:00.000Z",
+      "localDate": "2026-07-27",
+      "localTime": "20:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-07-27T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLL_i1NQr2TQQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Hungaria A1: Everyday: kata",
+        "description": "Belajar Hungaria. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-26T15:14:26.530Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ID|HU",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|JA|HU",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|JA|HU|ja",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "JA",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ja-JP-NanamiNeural",
+        "supportLang": "JA"
+      },
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-07-27T14:30:00.000Z",
+      "localDate": "2026-07-27",
+      "localTime": "23:30",
+      "timeZone": "Asia/Tokyo",
+      "slotKey": "ja|2026-07-27T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/HU__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+        "sha256": "c1799e91047f204cb748147c5529a1163d932276ef29204b19bc140f33a33b78"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "JA__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLCq-hCGJa_7M",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ハンガリー語 A1: Everyday: 単語",
+        "description": "ハンガリー語の学習。レッスンのテーマは、FlashcardsLunaです。 ネイティブの発音を聞いて、ポーズの間に繰り返してください。 最後にミニテストがあります！ ウェブサイトで無料デッキを練習する",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-26T15:14:26.530Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|JA|HU",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|KO|HU",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|KO|HU|ko",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "KO",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ko-KR-InJoonNeural",
+        "supportLang": "KO"
+      },
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-07-27T14:30:00.000Z",
+      "localDate": "2026-07-27",
+      "localTime": "23:30",
+      "timeZone": "Asia/Seoul",
+      "slotKey": "ko|2026-07-27T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KO__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLQ_0MGPyD3UQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "헝가리어 A1: Everyday: 단어",
+        "description": "헝가리어 공부하기. 오늘의 주제는 FlashcardsLuna입니다. 원어민의 발음을 잘 듣고 따라 해보세요. 마지막에는 퀴즈가 준비되어 있습니다! 웹사이트에서 무료로 카드 세트를 연습하세요",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-26T15:14:26.530Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|KO|HU",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|PT-BR|HU",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|PT-BR|HU|pt",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "PT-BR",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pt-BR-FranciscaNeural",
+        "supportLang": "PT-BR"
+      },
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-27T19:30:00.000Z",
+      "localDate": "2026-07-27",
+      "localTime": "20:30",
+      "timeZone": "Europe/Lisbon",
+      "slotKey": "pt|2026-07-27T19:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/HU__H_ngaro/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+        "sha256": "bef5b0c3b7afdf1f80f5b0b1ccfcb0b3ad90de59056e412ba7cc44c0478367d8"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PT-BR__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLI2ICWY7XbHQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Húngaro A1: Everyday: flashcards FlashcardsLuna",
+        "description": "Estudando Húngaro. Tema da lição: FlashcardsLuna. Ouça atentamente a pronúncia dos falantes nativos e repita as palavras nas pausas. Um mini-teste interativo espera por você no final! Pratique baralhos grátis em nosso site",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-26T15:14:26.530Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|PT-BR|HU",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|RU|HU",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|RU|HU|ru",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "RU",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ru-RU-SvetlanaNeural",
+        "supportLang": "RU"
+      },
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-07-27T20:30:00.000Z",
+      "localDate": "2026-07-27",
+      "localTime": "23:30",
+      "timeZone": "Europe/Moscow",
+      "slotKey": "ru|2026-07-27T20:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/ru__RU__LunaCardsRU/HU__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+        "sha256": "dddf378c39fe9aa03ea1ab7ff57999a9ddae752e0d94085b517528e98c0f0c20"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "RU__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLx5nIeqMBQ7ndFHY8nQ4mUU7jmyg5aB_r",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Венгерский A1: бытовой словарь",
+        "description": "Видео FlashcardsLuna для русскоязычных, которые изучают Венгерский: карточки, произношение, паузы для повторения и короткие мини-тесты.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-26T15:14:26.530Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|RU|HU",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TR|HU",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TR|HU|tr",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "TR",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_tr-TR-EmelNeural",
+        "supportLang": "TR"
+      },
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-07-28T11:30:00.000Z",
+      "localDate": "2026-07-28",
+      "localTime": "14:30",
+      "timeZone": "Europe/Istanbul",
+      "slotKey": "tr|2026-07-28T11:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/tr__TR__LunaCardsTurkce/HU__Macarca/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+        "sha256": "1bd67157d6dce404a79d5414aa57008025ed6c859278a5f239ea1aa3a2ac817a"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLdyfXcMufKyo",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Macarca A1: Everyday: kelime",
+        "description": "Macarca öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-26T15:14:26.530Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|TR|HU",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|HU",
+      "calendarAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|HU|zh",
+      "videoType": "ordinary",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "ZH",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_zh-CN-XiaoxiaoNeural",
+        "supportLang": "ZH"
+      },
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-07-28T12:30:00.000Z",
+      "localDate": "2026-07-28",
+      "localTime": "20:30",
+      "timeZone": "Asia/Shanghai",
+      "slotKey": "zh|2026-07-28T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck3-zh-complete-20260724/video/by-set/home_kitchen_storage_cleaning_a2/ordinary/by-channel/zh__ZH__LunaCardsChinese/HU__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck3-zh-complete-20260724/manifest.json",
+        "sha256": "3d3af7887929870753eac786f571d6234e5544543bedc88fd799cbe6619a8e4d"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ZH__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBI6MUl4sEsI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "匈牙利语 A1：词汇和发音",
+        "description": "FlashcardsLuna 视频帮助中文母语者学习 匈牙利语：单词卡、发音、跟读停顿和简短小测。",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-26T15:14:26.530Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_kitchen_storage_cleaning_a2|ZH|HU",
+      "localSlotIndex": 4
+    }
+  ],
+  "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-27-ea039d42c9f0",
+  "manifestHash": "d37925a15af29c18d274963470748c012ba2f8e0bca00306be1c9ca4723826c1"
+}

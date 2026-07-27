@@ -350,14 +350,15 @@ function playlistDiscoveryBlockers(snapshot, now, maxAgeMinutes, requiredSupport
   const expectedSupports = [...new Set(requiredSupports.map((support) => canonicalSupportCode(support)).filter(Boolean))].sort();
   if (snapshot?.complete !== true || snapshot?.summary?.complete !== true) blockers.push("playlist discovery snapshot must be complete");
   if (Number(snapshot?.summary?.blockerCount || 0) !== 0) blockers.push(`playlist discovery snapshot blockerCount must be 0, got ${snapshot?.summary?.blockerCount}`);
-  if (Number(snapshot?.summary?.supportCount || 0) !== expectedSupports.length) {
-    blockers.push(`playlist discovery snapshot supportCount must be ${expectedSupports.length}, got ${snapshot?.summary?.supportCount}`);
+  const discoveredSupports = (snapshot?.channels || []).map((row) => canonicalSupportCode(row.supportLang)).filter(Boolean);
+  const actualSupports = [...new Set(discoveredSupports)].sort();
+  if (Number(snapshot?.summary?.supportCount || 0) !== actualSupports.length) {
+    blockers.push(`playlist discovery snapshot supportCount must match discovered supports: ${actualSupports.length}, got ${snapshot?.summary?.supportCount}`);
   }
-  const actualSupports = [...new Set((snapshot?.channels || []).map((row) => canonicalSupportCode(row.supportLang)).filter(Boolean))].sort();
+  const duplicateSupports = [...new Set(discoveredSupports.filter((support, index) => discoveredSupports.indexOf(support) !== index))];
+  if (duplicateSupports.length) blockers.push(`playlist discovery has duplicate supports: ${duplicateSupports.sort().join(",")}`);
   const missingSupports = expectedSupports.filter((support) => !actualSupports.includes(support));
-  const unexpectedSupports = actualSupports.filter((support) => !expectedSupports.includes(support));
   if (missingSupports.length) blockers.push(`playlist discovery is missing selected supports: ${missingSupports.join(",")}`);
-  if (unexpectedSupports.length) blockers.push(`playlist discovery has unexpected supports: ${unexpectedSupports.join(",")}`);
   const generatedMillis = Date.parse(snapshot?.generatedAt || "");
   const ageMinutes = Number.isFinite(generatedMillis) ? (now.getTime() - generatedMillis) / 60_000 : Number.POSITIVE_INFINITY;
   if (!Number.isFinite(ageMinutes) || ageMinutes < -5 || ageMinutes > maxAgeMinutes) {
