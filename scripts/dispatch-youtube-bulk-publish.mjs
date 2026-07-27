@@ -14,6 +14,7 @@ import {
   sameViewerLanguageTargetBlocker,
 } from "./lib/youtube-language-pair-policy.mjs";
 import {
+  assertPublicationReadyForSupports,
   loadCanonicalSupportRouting,
   resolveCanonicalSupports,
 } from "./lib/youtube-support-routing.mjs";
@@ -246,6 +247,7 @@ function resolveSupports(options, routing) {
     routing,
   });
   assertCanonicalSupportLanguages(resolved);
+  if (options.apply) assertPublicationReadyForSupports(routing, resolved);
   return resolved;
 }
 

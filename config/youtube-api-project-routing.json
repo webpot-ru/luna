@@ -1,13 +1,17 @@
 {
-  "schemaVersion": 1,
-  "status": "planning_local_contract",
+  "schemaVersion": 3,
+  "status": "eight_route_contract_github_activation_pending",
   "sourceOfTruth": "docs/youtube-api-project-routing.md",
   "generatedFor": "51 public YouTube support channels / 54 support-language variants",
   "projectLabels": [
     "youtube 1",
     "youtube 2",
     "youtube 3",
-    "youtube 4"
+    "youtube 4",
+    "youtube 5",
+    "youtube 6",
+    "youtube 7",
+    "youtube 8"
   ],
   "dailyCadence": {
     "publicReleasesPerSupportVariantPerDay": 6,
@@ -15,11 +19,27 @@
     "supportLanguageVariants": 54,
     "plannedPublicReleasesPerDay": 324
   },
+  "quotaPolicy": {
+    "purpose": "owner_managed_channel_partition_for_operational_convenience",
+    "quotaDayTimeZone": "America/Los_Angeles",
+    "aggregateVideoUploadCallLimitPerQuotaDay": 400,
+    "allowAutomaticRouteFallback": false,
+    "allowStandbyRouteQuotaUse": false,
+    "notes": [
+      "The eight routes do not raise the accepted aggregate upload allowance above the former four-route total.",
+      "A channel may be pre-authorized on its paired standby route, but publication must use only its one active supportChannelKeys assignment.",
+      "Changing a channel's active route is a reviewed config change; quota exhaustion never triggers automatic rerouting."
+    ]
+  },
   "routingRules": [
     "A public support channel is assigned to exactly one YouTube API project route.",
     "Regional support variants stay attached to their shared public channel: EN/EN-GB -> en, ES/ES-419 -> es, PT/PT-BR -> pt.",
+    "Routes are paired 1/5, 2/6, 3/7 and 4/8 for standby OAuth authorization only; standby authorization is not an active publication route.",
+    "Do not reroute or fail over a channel because its active route has exhausted quota.",
+    "All active routes together remain bounded by quotaPolicy.aggregateVideoUploadCallLimitPerQuotaDay.",
     "Do not put OAuth token JSON, client secret JSON, refresh tokens, or .local files in this config.",
     "Each real Google Cloud / YouTube API project must have its own GitHub environment secret bundle before live uploads use that route.",
+    "A route with publicationReady=false must fail before campaign metadata, render, TTS, YouTube or GitHub publication dispatch.",
     "This file is a local routing contract only; creating Google Cloud projects, OAuth clients, production status, quota extension requests, and GitHub secrets are external steps."
   ],
   "projects": [
@@ -28,11 +48,9 @@
       "label": "youtube 1",
       "status": "existing_primary_project",
       "githubEnvironment": "youtube-api-branding",
-      "notes": [
-        "Existing first project route. It currently maps to the already-used GitHub environment until a renamed production environment is introduced.",
-        "Contains the highest-priority shared channels first: EN/EN-GB, ES/ES-419, PT/PT-BR, plus RU and major audience channels."
-      ],
-      "supportChannelKeys": [
+      "publicationReady": true,
+      "pairedRouteKey": "youtube-5",
+      "plannedAuthorizationChannelKeys": [
         "en",
         "es",
         "pt",
@@ -46,6 +64,18 @@
         "tr",
         "zh"
       ],
+      "notes": [
+        "Existing first project route. It currently maps to the already-used GitHub environment until a renamed production environment is introduced.",
+        "The existing OAuth bundle may retain standby authorization for the channels actively assigned to youtube-5, but new publication uses only this route's supportChannelKeys."
+      ],
+      "supportChannelKeys": [
+        "en",
+        "es",
+        "pt",
+        "ru",
+        "hi",
+        "id"
+      ],
       "supportVariants": [
         "EN",
         "EN-GB",
@@ -55,26 +85,18 @@
         "PT",
         "RU",
         "HI",
-        "ID",
-        "FR",
-        "DE",
-        "JA",
-        "KO",
-        "TR",
-        "ZH"
+        "ID"
       ],
-      "plannedPublicReleasesPerDay": 90
+      "plannedPublicReleasesPerDay": 54
     },
     {
       "key": "youtube-2",
       "label": "youtube 2",
       "status": "github_secret_uploaded",
       "githubEnvironment": "youtube-api-youtube-2",
-      "notes": [
-        "Local OAuth reauthorization completed on 2026-06-22 for all 13 assigned channels using OAuth client 327715936948-...; read-only channels.list readback matched every expected channelId.",
-        "GitHub environment youtube-api-youtube-2 exists as of 2026-06-22. After explicit user risk approval, YOUTUBE_OAUTH_BUNDLE_TGZ_B64 was uploaded there; gh secret list readback shows updated 2026-06-22T06:12:05Z."
-      ],
-      "supportChannelKeys": [
+      "publicationReady": true,
+      "pairedRouteKey": "youtube-6",
+      "plannedAuthorizationChannelKeys": [
         "vi",
         "th",
         "ms",
@@ -89,6 +111,20 @@
         "hu",
         "ro"
       ],
+      "notes": [
+        "Local OAuth reauthorization completed on 2026-06-22 for all 13 assigned channels using OAuth client 327715936948-...; read-only channels.list readback matched every expected channelId.",
+        "GitHub environment youtube-api-youtube-2 exists as of 2026-06-22. After explicit user risk approval, YOUTUBE_OAUTH_BUNDLE_TGZ_B64 was uploaded there; gh secret list readback shows updated 2026-06-22T06:12:05Z.",
+        "The existing OAuth bundle may retain standby authorization for the channels actively assigned to youtube-6."
+      ],
+      "supportChannelKeys": [
+        "vi",
+        "th",
+        "ms",
+        "pl",
+        "nl",
+        "sv",
+        "no"
+      ],
       "supportVariants": [
         "VI",
         "TH",
@@ -96,27 +132,18 @@
         "PL",
         "NL",
         "SV",
-        "NO",
-        "DA",
-        "FI",
-        "CS",
-        "SK",
-        "HU",
-        "RO"
+        "NO"
       ],
-      "plannedPublicReleasesPerDay": 78
+      "plannedPublicReleasesPerDay": 42
     },
     {
       "key": "youtube-3",
       "label": "youtube 3",
       "status": "github_secret_uploaded",
       "githubEnvironment": "youtube-api-youtube-3",
-      "notes": [
-        "Local OAuth reauthorization completed on 2026-06-22 for all 13 assigned channels using OAuth client 1076963270652-...; read-only channels.list readback matched every expected channelId.",
-        "During setup, the first MY attempts selected the ML/Malayalam channel; this was caught by channelId readback and corrected before continuing.",
-        "After explicit user risk approval, YOUTUBE_OAUTH_BUNDLE_TGZ_B64 was uploaded to GitHub environment youtube-api-youtube-3; gh secret list readback shows updated 2026-06-22T06:58:15Z."
-      ],
-      "supportChannelKeys": [
+      "publicationReady": true,
+      "pairedRouteKey": "youtube-7",
+      "plannedAuthorizationChannelKeys": [
         "bg",
         "hr",
         "sr",
@@ -131,6 +158,21 @@
         "km",
         "lo"
       ],
+      "notes": [
+        "Local OAuth reauthorization completed on 2026-06-22 for all 13 assigned channels using OAuth client 1076963270652-...; read-only channels.list readback matched every expected channelId.",
+        "During setup, the first MY attempts selected the ML/Malayalam channel; this was caught by channelId readback and corrected before continuing.",
+        "After explicit user risk approval, YOUTUBE_OAUTH_BUNDLE_TGZ_B64 was uploaded to GitHub environment youtube-api-youtube-3; gh secret list readback shows updated 2026-06-22T06:58:15Z.",
+        "The existing OAuth bundle may retain standby authorization for the channels actively assigned to youtube-7."
+      ],
+      "supportChannelKeys": [
+        "bg",
+        "hr",
+        "sr",
+        "sl",
+        "lt",
+        "lv",
+        "et"
+      ],
       "supportVariants": [
         "BG",
         "HR",
@@ -138,27 +180,18 @@
         "SL",
         "LT",
         "LV",
-        "ET",
-        "IS",
-        "BN",
-        "TL",
-        "MY",
-        "KM",
-        "LO"
+        "ET"
       ],
-      "plannedPublicReleasesPerDay": 78
+      "plannedPublicReleasesPerDay": 42
     },
     {
       "key": "youtube-4",
       "label": "youtube 4",
       "status": "github_secret_uploaded",
       "githubEnvironment": "youtube-api-youtube-4",
-      "notes": [
-        "The fourth route has 13 public channels after IT moved from youtube-1; youtube-1 has 12, for 51 public support channels total.",
-        "Local OAuth reauthorization completed on 2026-06-22 for all 12 assigned channels using OAuth client 215536805171-...; read-only channels.list readback matched every expected channelId.",
-        "After explicit user risk approval, YOUTUBE_OAUTH_BUNDLE_TGZ_B64 was uploaded to GitHub environment youtube-api-youtube-4; gh secret list readback shows updated 2026-06-22T07:35:20Z."
-      ],
-      "supportChannelKeys": [
+      "publicationReady": true,
+      "pairedRouteKey": "youtube-8",
+      "plannedAuthorizationChannelKeys": [
         "ne",
         "si",
         "ta",
@@ -173,6 +206,20 @@
         "sw",
         "it"
       ],
+      "notes": [
+        "Local OAuth reauthorization completed on 2026-06-22 for all 12 assigned channels using OAuth client 215536805171-...; read-only channels.list readback matched every expected channelId.",
+        "After explicit user risk approval, YOUTUBE_OAUTH_BUNDLE_TGZ_B64 was uploaded to GitHub environment youtube-api-youtube-4; gh secret list readback shows updated 2026-06-22T07:35:20Z.",
+        "The existing OAuth bundle may retain standby authorization for the channels actively assigned to youtube-8."
+      ],
+      "supportChannelKeys": [
+        "ne",
+        "si",
+        "ta",
+        "te",
+        "kn",
+        "ml",
+        "uz"
+      ],
       "supportVariants": [
         "NE",
         "SI",
@@ -180,7 +227,192 @@
         "TE",
         "KN",
         "ML",
-        "UZ",
+        "UZ"
+      ],
+      "plannedPublicReleasesPerDay": 42
+    },
+    {
+      "key": "youtube-5",
+      "label": "youtube 5",
+      "status": "active_tokens_verified_github_bundle_pending",
+      "cloudProjectId": "flashcardsluna-5",
+      "githubEnvironment": "youtube-api-youtube-5",
+      "publicationReady": false,
+      "publicationBlockedReason": "GitHub Environment youtube-api-youtube-5 and its YOUTUBE_OAUTH_BUNDLE_TGZ_B64 secret are not yet configured; the current GitHub credential lacks repository-admin permission to create the environment.",
+      "pairedRouteKey": "youtube-1",
+      "plannedAuthorizationChannelKeys": [
+        "en",
+        "es",
+        "pt",
+        "ru",
+        "hi",
+        "id",
+        "fr",
+        "de",
+        "ja",
+        "ko",
+        "tr",
+        "zh"
+      ],
+      "notes": [
+        "Google Cloud project exists; YouTube Data API v3 is enabled; Google Auth Platform is External/In production; desktop OAuth client LunaCards YouTube Route 5 Desktop was created on 2026-07-27.",
+        "The six active channel tokens FR, DE, JA, KO, TR and ZH were verified with channel-by-channel channels.list(mine=true) on 2026-07-27. GitHub Environment/secret upload remains pending.",
+        "Full-pair standby token collection remains a future resilience task and is not needed for the active youtube-5 assignment.",
+        "The full youtube-1/youtube-5 pair is planned for standby authorization, but only these active supportChannelKeys may publish through youtube-5."
+      ],
+      "supportChannelKeys": [
+        "fr",
+        "de",
+        "ja",
+        "ko",
+        "tr",
+        "zh"
+      ],
+      "supportVariants": [
+        "FR",
+        "DE",
+        "JA",
+        "KO",
+        "TR",
+        "ZH"
+      ],
+      "plannedPublicReleasesPerDay": 36
+    },
+    {
+      "key": "youtube-6",
+      "label": "youtube 6",
+      "status": "active_tokens_verified_github_bundle_pending",
+      "cloudProjectId": "flashcardsluna-6",
+      "githubEnvironment": "youtube-api-youtube-6",
+      "publicationReady": false,
+      "publicationBlockedReason": "GitHub Environment youtube-api-youtube-6 and its YOUTUBE_OAUTH_BUNDLE_TGZ_B64 secret are not yet configured; the current GitHub credential lacks repository-admin permission to create the environment.",
+      "pairedRouteKey": "youtube-2",
+      "plannedAuthorizationChannelKeys": [
+        "vi",
+        "th",
+        "ms",
+        "pl",
+        "nl",
+        "sv",
+        "no",
+        "da",
+        "fi",
+        "cs",
+        "sk",
+        "hu",
+        "ro"
+      ],
+      "notes": [
+        "Google Cloud project exists; YouTube Data API v3 is enabled; Google Auth Platform is External/In production; desktop OAuth client LunaCards YouTube Route 6 Desktop was created on 2026-07-27.",
+        "The six active channel tokens DA, FI, CS, SK, HU and RO were verified with channel-by-channel channels.list(mine=true) on 2026-07-27. GitHub Environment/secret upload remains pending.",
+        "Full-pair standby token collection remains a future resilience task and is not needed for the active youtube-6 assignment.",
+        "The full youtube-2/youtube-6 pair is planned for standby authorization, but only these active supportChannelKeys may publish through youtube-6."
+      ],
+      "supportChannelKeys": [
+        "da",
+        "fi",
+        "cs",
+        "sk",
+        "hu",
+        "ro"
+      ],
+      "supportVariants": [
+        "DA",
+        "FI",
+        "CS",
+        "SK",
+        "HU",
+        "RO"
+      ],
+      "plannedPublicReleasesPerDay": 36
+    },
+    {
+      "key": "youtube-7",
+      "label": "youtube 7",
+      "status": "active_tokens_verified_github_bundle_pending",
+      "cloudProjectId": "flashcardsluna-7",
+      "githubEnvironment": "youtube-api-youtube-7",
+      "publicationReady": false,
+      "publicationBlockedReason": "GitHub Environment youtube-api-youtube-7 and its YOUTUBE_OAUTH_BUNDLE_TGZ_B64 secret are not yet configured; the current GitHub credential lacks repository-admin permission to create the environment.",
+      "pairedRouteKey": "youtube-3",
+      "plannedAuthorizationChannelKeys": [
+        "bg",
+        "hr",
+        "sr",
+        "sl",
+        "lt",
+        "lv",
+        "et",
+        "is",
+        "bn",
+        "tl",
+        "my",
+        "km",
+        "lo"
+      ],
+      "notes": [
+        "Google Cloud project exists; YouTube Data API v3 is enabled; Google Auth Platform is External/In production; desktop OAuth client LunaCards YouTube Route 7 Desktop was created on 2026-07-27.",
+        "The six active channel tokens IS, BN, TL, MY, KM and LO were verified with channel-by-channel channels.list(mine=true) on 2026-07-27. GitHub Environment/secret upload remains pending.",
+        "Full-pair standby token collection remains a future resilience task and is not needed for the active youtube-7 assignment.",
+        "The full youtube-3/youtube-7 pair is planned for standby authorization, but only these active supportChannelKeys may publish through youtube-7."
+      ],
+      "supportChannelKeys": [
+        "is",
+        "bn",
+        "tl",
+        "my",
+        "km",
+        "lo"
+      ],
+      "supportVariants": [
+        "IS",
+        "BN",
+        "TL",
+        "MY",
+        "KM",
+        "LO"
+      ],
+      "plannedPublicReleasesPerDay": 36
+    },
+    {
+      "key": "youtube-8",
+      "label": "youtube 8",
+      "status": "active_tokens_verified_github_bundle_pending",
+      "cloudProjectId": "flashcardsluna-8",
+      "githubEnvironment": "youtube-api-youtube-8",
+      "publicationReady": false,
+      "publicationBlockedReason": "GitHub Environment youtube-api-youtube-8 and its YOUTUBE_OAUTH_BUNDLE_TGZ_B64 secret are not yet configured; the current GitHub credential lacks repository-admin permission to create the environment.",
+      "pairedRouteKey": "youtube-4",
+      "plannedAuthorizationChannelKeys": [
+        "ne",
+        "si",
+        "ta",
+        "te",
+        "kn",
+        "ml",
+        "uz",
+        "kk",
+        "az",
+        "ka",
+        "hy",
+        "sw",
+        "it"
+      ],
+      "notes": [
+        "Google Cloud project exists; YouTube Data API v3 is enabled; Google Auth Platform is External/In production; desktop OAuth client LunaCards YouTube Route 8 Desktop was created on 2026-07-27.",
+        "The six active channel tokens KK, AZ, KA, HY, SW and IT were verified with channel-by-channel channels.list(mine=true) on 2026-07-27. GitHub Environment/secret upload remains pending.",
+        "Full-pair standby token collection remains a future resilience task and is not needed for the active youtube-8 assignment.",
+        "The full youtube-4/youtube-8 pair is planned for standby authorization, but only these active supportChannelKeys may publish through youtube-8."
+      ],
+      "supportChannelKeys": [
+        "kk",
+        "az",
+        "ka",
+        "hy",
+        "sw",
+        "it"
+      ],
+      "supportVariants": [
         "KK",
         "AZ",
         "KA",
@@ -188,7 +420,7 @@
         "SW",
         "IT"
       ],
-      "plannedPublicReleasesPerDay": 78
+      "plannedPublicReleasesPerDay": 36
     }
   ]
 }

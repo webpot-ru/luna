@@ -16,7 +16,7 @@ on:
           - dry_run
           - dispatch
       supports:
-        description: "Support codes, route:youtube-1, route:youtube-2, or ALL."
+        description: "Support codes, route:youtube-1 through route:youtube-8, or ALL."
         required: true
         default: "ALL"
       support_source:

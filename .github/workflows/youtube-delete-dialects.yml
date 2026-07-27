@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       route:
-        description: "API project route to process (e.g., youtube-1, youtube-2, youtube-3, youtube-4, or ALL)"
+        description: "Historical exact workflow: API route youtube-1 through youtube-4, or ALL."
         required: true
         default: "youtube-2"
       youtube_environment:

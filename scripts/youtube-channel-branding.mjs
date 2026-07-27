@@ -91,6 +91,7 @@ function printHelp() {
   console.log(`Usage:
   node scripts/youtube-channel-branding.mjs --dry-run [--channel=en]
   node scripts/youtube-channel-branding.mjs --authorize --channel=<key>
+  node scripts/youtube-channel-branding.mjs --authorize --channel=<key> --oauth-client-file=<route-client.json> --token-file=<route-token.json>
   node scripts/youtube-channel-branding.mjs --authorize --token-file=.local/youtube-oauth/tokens/discovery.json
   node scripts/youtube-channel-branding.mjs --list-channels [--token-file=.local/youtube-oauth/tokens/discovery.json]
   node scripts/youtube-channel-branding.mjs --resolve-handles [--write-resolved-channel-ids]
@@ -864,25 +865,27 @@ async function main() {
     return;
   }
 
-  const plans = [];
-  for (const channel of channels) {
-    plans.push(await buildChannelPlan(config, channel));
-  }
-
-  if (options.authorize) {
+  if (options.authorize && options.channel) {
     const channel = channels[0];
-    const plan = plans[0];
-    if (!plan.oauth.client.exists) {
-      fail(`Missing OAuth client file: ${plan.oauth.client.path}`);
+    const clientFile = options.oauthClientFile || channel.oauthClientFile || getDefaultOAuthClientFile(config);
+    const tokenFile = options.tokenFile || getTokenFile(config, channel);
+    const oauthClient = await fileInfo(clientFile);
+    if (!oauthClient.exists) {
+      fail(`Missing OAuth client file: ${oauthClient.path}`);
     }
     await authorizeOAuth({
-      clientFile: plan.oauth.client.path,
-      tokenFile: plan.oauth.token.path,
+      clientFile: oauthClient.path,
+      tokenFile,
       scope: options.scope,
       noBrowser: options.noBrowser,
       oauthPort: options.oauthPort,
     });
     return;
+  }
+
+  const plans = [];
+  for (const channel of channels) {
+    plans.push(await buildChannelPlan(config, channel));
   }
 
   if (options.json && !options.apply) {

@@ -16,7 +16,7 @@ on:
         required: true
         default: "home_kitchen_cookware_pilot_01"
       supports:
-        description: "Support codes, route:youtube-1, route:youtube-2, route:youtube-3, route:youtube-4, or ALL."
+        description: "Support codes, route:youtube-1 through route:youtube-8, or ALL."
         required: true
         default: "route:youtube-1"
       support_source:
@@ -41,6 +41,10 @@ on:
           - youtube-api-youtube-2
           - youtube-api-youtube-3
           - youtube-api-youtube-4
+          - youtube-api-youtube-5
+          - youtube-api-youtube-6
+          - youtube-api-youtube-7
+          - youtube-api-youtube-8
       max_pages:
         description: "Upload playlist pages to scan per support channel; 10 pages = up to 500 recent videos."
         required: true

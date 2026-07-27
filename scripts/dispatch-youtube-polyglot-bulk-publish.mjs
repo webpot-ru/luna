@@ -5,6 +5,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 
 import {
+  assertPublicationReadyForSupports,
   loadCanonicalSupportRouting,
   resolveCanonicalSupports,
 } from "./lib/youtube-support-routing.mjs";
@@ -245,11 +246,13 @@ function readJson(filePath) {
 }
 
 function resolveSupports(options, routing) {
-  return resolveCanonicalSupports({
+  const resolved = resolveCanonicalSupports({
     requested: options.supports,
     excludeSupports: options.excludeSupports,
     routing,
   });
+  if (options.apply) assertPublicationReadyForSupports(routing, resolved);
+  return resolved;
 }
 
 function bundleForSupport(support, options) {

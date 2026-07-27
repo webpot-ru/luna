@@ -319,7 +319,11 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, con
   }
 
   const generatedAt = now.toISOString();
-  const routeCounts = Object.fromEntries(["youtube-1", "youtube-2", "youtube-3", "youtube-4"].map((route) => [route, assignments.filter((row) => row.routeKey === route).length]));
+  const routeKeys = [...new Set([
+    ...Object.keys(oldCampaign.summary?.routeCounts || {}),
+    ...assignments.map((row) => row.routeKey).filter(Boolean),
+  ])].sort();
+  const routeCounts = Object.fromEntries(routeKeys.map((route) => [route, assignments.filter((row) => row.routeKey === route).length]));
   const customThumbnailCount = assignments.filter((row) => row.thumbnail?.mode === "custom").length;
   const playlistCreateCount = assignments.filter((row) => row.playlist?.state === "verified_absent").length;
   const ordinaryCount = assignments.filter((row) => row.videoType === "ordinary").length;

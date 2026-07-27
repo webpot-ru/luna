@@ -68,6 +68,8 @@ function main() {
   const registry = JSON.parse(fs.readFileSync(options.registry, "utf8"));
   const calendar = JSON.parse(fs.readFileSync(options.calendar, "utf8"));
   const channelRegistry = JSON.parse(fs.readFileSync(options.channels, "utf8"));
+  const routingConfig = JSON.parse(fs.readFileSync("config/youtube-api-project-routing.json", "utf8"));
+  const routesByKey = new Map((routingConfig.projects || []).map((route) => [route.key, route]));
   const campaign = (registry.campaigns || []).find((row) => row.campaignId === options.campaignId);
   if (!campaign) throw new Error(`Claimed campaign not found: ${options.campaignId}`);
   if (campaign.manifestHash !== options.manifestHash) throw new Error("Campaign manifest hash does not match durable registry");
@@ -97,6 +99,23 @@ function main() {
     .filter((row) => row.campaignId === campaign.campaignId)
     .map((row) => [calendarAssignmentKey(row), row]));
   for (const row of campaign.assignments || []) {
+    const route = routesByKey.get(row.routeKey);
+    const activeRouteForSupport = (routingConfig.projects || []).find((candidate) => (
+      (candidate.supportVariants || []).includes(row.supportLang)
+    ));
+    if (!route) {
+      blockers.push(`${row.assignmentKey}: route ${row.routeKey || "(missing)"} is not configured`);
+    } else {
+      if (route.publicationReady !== true) {
+        blockers.push(`${row.assignmentKey}: route ${route.key} is publication-blocked (${route.publicationBlockedReason || "publicationReady is false"})`);
+      }
+      if (row.youtubeEnvironment !== route.githubEnvironment) {
+        blockers.push(`${row.assignmentKey}: campaign route/environment is stale (${row.routeKey}/${row.youtubeEnvironment || "(missing)"}); expected ${route.key}/${route.githubEnvironment}; create a fresh rollover campaign`);
+      }
+      if (activeRouteForSupport && activeRouteForSupport.key !== route.key) {
+        blockers.push(`${row.assignmentKey}: campaign route ${route.key} is stale for ${row.supportLang}; active route is ${activeRouteForSupport.key}; create a fresh rollover campaign`);
+      }
+    }
     const channel = (channelRegistry.channels || []).find((candidate) => (candidate.supportLangs || []).includes(row.supportLang));
     if (!channel) {
       blockers.push(`${row.assignmentKey}: channel production configuration is missing for ${row.supportLang}`);
@@ -190,7 +209,34 @@ function main() {
     existing.assignment_count += 1;
     metadataByRoute.set(key, existing);
   }
-  const metadataMatrix = [...metadataByRoute.values()].sort((a, b) => a.route_key.localeCompare(b.route_key));
+  const openAiCampaignTokenLimit = 2_000_000;
+  const metadataRows = [...metadataByRoute.values()]
+    .sort((a, b) => a.route_key.localeCompare(b.route_key));
+  const metadataAssignmentCount = metadataRows
+    .reduce((total, row) => total + row.assignment_count, 0);
+  const provisionalMetadataRows = metadataRows.map((row) => {
+    const exactBudget = openAiCampaignTokenLimit * row.assignment_count / metadataAssignmentCount;
+    return {
+      ...row,
+      openai_token_budget: Math.floor(exactBudget),
+      openai_token_budget_fraction: exactBudget - Math.floor(exactBudget),
+    };
+  });
+  let tokenBudgetRemainder = openAiCampaignTokenLimit
+    - provisionalMetadataRows.reduce((total, row) => total + row.openai_token_budget, 0);
+  const remainderOrder = [...provisionalMetadataRows]
+    .sort((left, right) =>
+      right.openai_token_budget_fraction - left.openai_token_budget_fraction
+      || left.route_key.localeCompare(right.route_key));
+  for (const row of remainderOrder) {
+    if (tokenBudgetRemainder <= 0) break;
+    row.openai_token_budget += 1;
+    tokenBudgetRemainder -= 1;
+  }
+  const metadataMatrix = provisionalMetadataRows.map(({
+    openai_token_budget_fraction: _fraction,
+    ...row
+  }) => row);
   if (metadataMatrix.some((row) => !row.route_key || !row.youtube_environment)) blockers.push("metadata route matrix contains an empty route/environment");
   if (ordinaryMatrix.some((row) => !row.route_key)) blockers.push("ordinary worker matrix contains an empty route key");
   if (polyglotMatrix.some((row) => !row.route_key)) blockers.push("Polyglot worker matrix contains an empty route key");
@@ -217,6 +263,8 @@ function main() {
       ordinaryWorkerCount: ordinaryMatrix.length,
       polyglotWorkerCount: polyglotMatrix.length,
       metadataRouteCount: metadataMatrix.length,
+      openAiCampaignTokenLimit,
+      openAiAllocatedTokenBudget: metadataMatrix.reduce((total, row) => total + row.openai_token_budget, 0),
       blockerCount: 0,
     },
     ordinaryMatrix,
