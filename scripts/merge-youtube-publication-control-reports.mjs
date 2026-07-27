@@ -10,6 +10,7 @@ function parseArgs(argv) {
     expectedRoutes: 4,
     expectedRouteKeys: [],
     sourceRuns: [],
+    allRoutes: false,
   };
   for (const arg of argv) {
     if (arg.startsWith("--input=")) options.input = arg.slice("--input=".length);
@@ -18,6 +19,7 @@ function parseArgs(argv) {
     else if (arg.startsWith("--expected-routes=")) options.expectedRoutes = Number(arg.slice("--expected-routes=".length));
     else if (arg.startsWith("--expected-route-keys=")) options.expectedRouteKeys = arg.slice("--expected-route-keys=".length).split(",").map((value) => value.trim()).filter(Boolean);
     else if (arg.startsWith("--source-run=")) options.sourceRuns.push(arg.slice("--source-run=".length));
+    else if (arg === "--all-routes") options.allRoutes = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
   return options;
@@ -43,7 +45,7 @@ function findReports(root) {
     for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
       const full = path.join(directory, entry.name);
       if (entry.isDirectory()) visit(full);
-      else if (/youtube-publication-control-youtube-[1-4]\.json$/u.test(entry.name)) files.push(full);
+      else if (/youtube-publication-control-youtube-\d+\.json$/u.test(entry.name)) files.push(full);
     }
   };
   visit(root);
@@ -58,7 +60,7 @@ function main() {
   const options = parseArgs(process.argv.slice(2));
   const files = findReports(options.input);
   const routes = files.map((file) => ({ file, report: JSON.parse(fs.readFileSync(file, "utf8")) }));
-  const receivedRouteKeys = files.map((file) => path.basename(file).match(/youtube-publication-control-(youtube-[1-4])\.json$/u)?.[1] || "").filter(Boolean).sort();
+  const receivedRouteKeys = files.map((file) => path.basename(file).match(/youtube-publication-control-(youtube-\d+)\.json$/u)?.[1] || "").filter(Boolean).sort();
   const expectedRouteKeys = [...new Set(options.expectedRouteKeys)].sort();
   const missingRouteKeys = expectedRouteKeys.filter((route) => !receivedRouteKeys.includes(route));
   const unexpectedRouteKeys = expectedRouteKeys.length ? receivedRouteKeys.filter((route) => !expectedRouteKeys.includes(route)) : [];
@@ -108,7 +110,7 @@ function main() {
     generatedAt: new Date().toISOString(),
     mode: "youtube_publication_control_all_routes",
     routeScope: {
-      mode: expectedRouteKeys.length === 4 ? "all_routes" : "selected_routes",
+      mode: options.allRoutes ? "all_routes" : "selected_routes",
       expectedRouteKeys,
       receivedRouteKeys,
     },

@@ -60,6 +60,7 @@ jobs:
       matrix: ${{ steps.select.outputs.matrix }}
       route_count: ${{ steps.select.outputs.route_count }}
       route_keys: ${{ steps.select.outputs.route_keys }}
+      all_routes: ${{ steps.select.outputs.all_routes }}
     steps:
       - uses: actions/checkout@v4
       - id: select
@@ -135,6 +136,7 @@ jobs:
           fs.appendFileSync(output, `matrix=${JSON.stringify({ include: selected })}\n`);
           fs.appendFileSync(output, `route_count=${selected.length}\n`);
           fs.appendFileSync(output, `route_keys=${selected.map((row) => row.route).join(",")}\n`);
+          fs.appendFileSync(output, `all_routes=${requested.toUpperCase() === "ALL"}\n`);
           NODE
 
   audit-route:
@@ -239,15 +241,19 @@ jobs:
           CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
           EXPECTED_ROUTE_COUNT: ${{ needs.select-routes.outputs.route_count }}
           EXPECTED_ROUTE_KEYS: ${{ needs.select-routes.outputs.route_keys }}
+          ALL_ROUTES: ${{ needs.select-routes.outputs.all_routes }}
         run: |
           set -euo pipefail
-          npm run merge:youtube-publication-control -- \
-            --input=.control-artifacts \
-            --expected-routes="$EXPECTED_ROUTE_COUNT" \
-            --expected-route-keys="$EXPECTED_ROUTE_KEYS" \
-            --source-run="$SET_ID:$EXPECTED_ROUTE_KEYS:${GITHUB_RUN_ID}" \
-            --output=outputs/youtube-publication-control-all-routes.json \
-            --markdown=outputs/youtube-publication-control-all-routes.md
+          MERGE_ARGS=(
+            "--input=.control-artifacts"
+            "--expected-routes=$EXPECTED_ROUTE_COUNT"
+            "--expected-route-keys=$EXPECTED_ROUTE_KEYS"
+            "--source-run=$SET_ID:$EXPECTED_ROUTE_KEYS:${GITHUB_RUN_ID}"
+            "--output=outputs/youtube-publication-control-all-routes.json"
+            "--markdown=outputs/youtube-publication-control-all-routes.md"
+          )
+          if [ "$ALL_ROUTES" = "true" ]; then MERGE_ARGS+=("--all-routes"); fi
+          npm run merge:youtube-publication-control -- "${MERGE_ARGS[@]}"
           if jq -e '.summary.complete == true' outputs/youtube-publication-control-all-routes.json >/dev/null; then
             npm run build:youtube-publication-snapshot -- \
               --report=outputs/youtube-publication-control-all-routes.json \

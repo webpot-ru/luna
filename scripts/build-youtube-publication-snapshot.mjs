@@ -323,7 +323,7 @@ function channelSummaries(publications, tails, duplicates) {
 function routeEvidence(report) {
   return (report.routes || []).map((route) => ({
     artifact: path.basename(route.file || ""),
-    routeKey: path.basename(route.file || "").match(/youtube-publication-control-(youtube-[1-4])\.json$/u)?.[1] || "",
+    routeKey: path.basename(route.file || "").match(/youtube-publication-control-(youtube-\d+)\.json$/u)?.[1] || "",
     supports: (route.supports || []).map(canonicalSupportCode).filter(Boolean),
     supportCount: (route.supports || []).length,
     generatedAt: route.generatedAt || "",
@@ -381,7 +381,7 @@ function buildDeck(report, sourceRuns, nowMillis) {
     aggregateGeneratedAt: report.generatedAt || "",
     evidence: {
       routeCount: report.summary?.receivedRouteCount || routes.length,
-      expectedRouteCount: report.summary?.expectedRouteCount || 4,
+      expectedRouteCount: report.summary?.expectedRouteCount || routes.length,
       routeScope: report.routeScope || {
         mode: "all_routes",
         expectedRouteKeys: routes.map((route) => route.routeKey).filter(Boolean).sort(),
@@ -424,7 +424,7 @@ function markdownFor(snapshot) {
     "",
     `Сформировано: ${snapshot.generatedAt}`,
     "",
-    "Source of truth: live YouTube API readback через четыре GitHub OAuth route плюс durable registry/calendar comparison. Полный per-video список и точные URL находятся в `config/youtube-publication-snapshot.json`.",
+    "Source of truth: live YouTube API readback через выбранные GitHub OAuth routes плюс durable registry/calendar comparison. Полный per-video список и точные URL находятся в `config/youtube-publication-snapshot.json`.",
     "",
     "> Этот документ не разрешает удаление, повторную загрузку или публикацию. Любой YouTube write требует отдельного preflight и подтверждения.",
     "",
