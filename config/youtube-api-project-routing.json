@@ -22,11 +22,11 @@
   "quotaPolicy": {
     "purpose": "owner_managed_channel_partition_for_operational_convenience",
     "quotaDayTimeZone": "America/Los_Angeles",
-    "aggregateVideoUploadCallLimitPerQuotaDay": 400,
+    "aggregateVideoUploadCallLimitPerQuotaDay": 800,
     "allowAutomaticRouteFallback": false,
     "allowStandbyRouteQuotaUse": false,
     "notes": [
-      "The eight routes do not raise the accepted aggregate upload allowance above the former four-route total.",
+      "The owner-authorized aggregate allowance is 800 video uploads per America/Los_Angeles quota day: up to 100 on each of the eight active routes.",
       "A channel may be pre-authorized on its paired standby route, but publication must use only its one active supportChannelKeys assignment.",
       "Changing a channel's active route is a reviewed config change; quota exhaustion never triggers automatic rerouting."
     ]
@@ -36,7 +36,7 @@
     "Regional support variants stay attached to their shared public channel: EN/EN-GB -> en, ES/ES-419 -> es, PT/PT-BR -> pt.",
     "Routes are paired 1/5, 2/6, 3/7 and 4/8 for standby OAuth authorization only; standby authorization is not an active publication route.",
     "Do not reroute or fail over a channel because its active route has exhausted quota.",
-    "All active routes together remain bounded by quotaPolicy.aggregateVideoUploadCallLimitPerQuotaDay.",
+    "All active routes together remain bounded by quotaPolicy.aggregateVideoUploadCallLimitPerQuotaDay, with no more than 100 video uploads per active route per quota day.",
     "Do not put OAuth token JSON, client secret JSON, refresh tokens, or .local files in this config.",
     "Each real Google Cloud / YouTube API project must have its own GitHub environment secret bundle before live uploads use that route.",
     "A route with publicationReady=false must fail before campaign metadata, render, TTS, YouTube or GitHub publication dispatch.",
