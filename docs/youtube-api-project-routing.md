@@ -2,7 +2,7 @@
 
 Status: **source of truth for the eight-route active/standby contract. All routes `youtube-1`–`youtube-8` are publication-ready. Routes `youtube-5`–`youtube-8` have production OAuth clients, verified active channel tokens, separate GitHub Environments and OAuth bundle secrets, and completed full GitHub Actions identity readback for every active channel**.
 
-This document records how the 51 public YouTube support-language channels are assigned to eight Google Cloud / YouTube API routes named `youtube-1` through `youtube-8`. The eight routes exist for operational convenience and future reviewed rearrangement. They do **not** double the accepted aggregate publication allowance.
+This document records how the 51 public YouTube support-language channels are assigned to eight Google Cloud / YouTube API routes named `youtube-1` through `youtube-8`. The owner-approved quota contract permits up to `100` video uploads on each active route per America/Los_Angeles quota day, for an aggregate ceiling of `800`.
 
 The machine-readable mirror is `config/youtube-api-project-routing.json`; validate it with:
 
@@ -24,7 +24,7 @@ At the current publishing cadence of **6 scheduled public releases per support-l
 54 variants * 6 releases/day = 324 scheduled public releases/day
 ```
 
-All routes together are additionally bounded by **400 `videos.insert` calls per America/Los_Angeles quota day**. Standby authorization never raises this limit and must not be used as quota fallback.
+All routes together are additionally bounded by **800 `videos.insert` calls per America/Los_Angeles quota day**, with a maximum of **100 per active route**. Standby authorization never raises this limit and must not be used as quota fallback.
 
 Terminology rule: call routes `youtube-1` through `youtube-8` in plans and reports. Do not write only “Project 2” or “project 3”: those phrases are easily confused with Deck #2 / Deck #3. A deck must always be named by `Deck #N / set_id`; an API route must always be named by its route key.
 
@@ -42,7 +42,7 @@ Terminology rule: call routes `youtube-1` through `youtube-8` in plans and repor
 | `youtube-8` | Six-channel GitHub Actions identity readback passed; publication-ready | `youtube-api-youtube-8` | 6 | 6 | 36 |
 | **Total** |  |  | **51** | **54** | **324** |
 
-The standard 306-video campaign split is `36/42/42/42/36/36/36/36`. Per-route planned daily release counts are below 100, while the eight-route aggregate remains `324 <= 400`.
+The standard 306-video campaign split is `36/42/42/42/36/36/36/36`. Per-route planned daily release counts are below 100, while the eight-route aggregate remains `324 <= 800`.
 
 ## Active assignments and standby pairs
 
@@ -169,7 +169,7 @@ Existing primary project. Keep the high-priority shared channels here first.
 - `scripts/resolve-youtube-api-environment.mjs` / `npm run resolve:youtube-api-environment` validates that the requested support code(s) belong to the selected GitHub environment and that the route has `publicationReady=true`. If a support list spans multiple API routes, the workflow must fail and the work must be split into separate dispatches.
 - Default production dispatch shape is one support channel per run with `youtube_environment=auto`. Use an explicit GitHub environment only for debugging or replacement work, and only when it matches the route in `config/youtube-api-project-routing.json`.
 - If one API project hits quota or returns `quotaExceeded`, stop that route only. Do not retry through its paired standby route. A later route swap is a reviewed config/docs change, never automatic failover.
-- All publication plans and manual batches together must remain at or below 400 video upload calls per America/Los_Angeles quota day. The projects' separate technical quota counters do not expand this owner-imposed aggregate allowance.
+- All publication plans and manual batches together must remain at or below 800 video upload calls per America/Los_Angeles quota day, and at or below 100 on each active route. This is the owner-approved operational ceiling; actual Google Cloud/YouTube quota errors still stop only their affected route.
 - Bulk dispatcher defaults must keep route failure observable before launching more same-route writes: `.github/workflows/youtube-bulk-publish-dispatcher.yml` defaults to `max_active_per_route=1`. Raising it is a deliberate quota-risk decision, not a normal speed setting.
 - GitHub API watcher/dispatch limits (including secondary rate limits) are entirely separate from YouTube API quota. The bulk dispatcher retries workflow-dispatch GitHub API rate limits before starting more child runs. If a dispatcher run terminates due to GitHub throttling, any skipped targets (marked as `skippedDispatcherStoppedCount` or `skipped_dispatcher_stopped`) have not consumed any YouTube Data API quota. If logs show GitHub `API rate limit exceeded` or secondary rate-limit errors after bounded retries, stop new dispatches, keep already-started child runs running, and rely on child artifacts plus `persist-publish-state` for durable state.
 - A parent bulk dispatcher run is not upload proof. If its report shows `successCount=0`, missing child run ids, or child `dispatch_error` rows such as GitHub HTTP 403 rate limit / HTTP 422 unexpected workflow inputs, record that as `0` YouTube uploads and fix the GitHub dispatch contract before retrying. Proof of remote upload wave execution comes from child `youtube-video-publish.yml` runs, their artifacts, YouTube API readbacks, and persisted configuration updates (`config/youtube-published-videos.json`, `config/youtube-publish-calendar.json`, `config/youtube-playlists.json`).

@@ -104,8 +104,8 @@ assert.deepEqual(first.summary.routeCounts, expectedRouteCounts);
 assert.equal(new Set(first.assignments.map((row) => row.assignmentKey)).size, 306);
 assert.equal(new Set(first.assignments.map((row) => row.slotKey)).size, 306);
 assert.equal(first.estimatedUsage.estimatedVideoUploadCalls, 306);
-assert.equal(first.estimatedUsage.aggregateVideoUploadCallLimitPerQuotaDay, 400);
-assert.equal(first.estimatedUsage.aggregateVideoUploadCallHeadroom, 94);
+assert.equal(first.estimatedUsage.aggregateVideoUploadCallLimitPerQuotaDay, 800);
+assert.equal(first.estimatedUsage.aggregateVideoUploadCallHeadroom, 494);
 assert.equal(first.estimatedUsage.quotaDayTimeZone, "America/Los_Angeles");
 assert.equal(first.estimatedUsage.automaticRouteFallbackAllowed, false);
 assert.equal(first.estimatedUsage.standbyRouteQuotaUseAllowed, false);
@@ -445,8 +445,8 @@ const noDurableDeckSource = buildPublicationCampaign({
 });
 assert(noDurableDeckSource.blockers.some((row) => row.includes("offline deck is not Git-tracked")));
 
-const oversizedAggregateWave = buildPublicationCampaign({ ...baseOptions, ordinaryPerChannel: 8 });
-assert(oversizedAggregateWave.blockers.some((row) => row.includes("aggregate daily limit 400")));
+const oversizedAggregateWave = buildPublicationCampaign({ ...baseOptions, ordinaryPerChannel: 15 });
+assert(oversizedAggregateWave.blockers.some((row) => row.includes("aggregate daily limit 800")));
 
 const oversizedRouteWave = buildPublicationCampaign({ ...baseOptions, ordinaryPerChannel: 14 });
 assert(oversizedRouteWave.blockers.some((row) => row.includes("videos.insert bucket")));
