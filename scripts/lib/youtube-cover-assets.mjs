@@ -106,8 +106,14 @@ function buildCoverPlan({
   const enabledTypes = new Set(types);
   const selectedTargets = new Set(targets.map(normalizeCode));
   const selectedBundles = new Set(bundles.map(cleanText));
-  const bundleKeys = polyglotConfig.defaults?.productionBundleKeys || [];
   const bundleByKey = new Map((polyglotConfig.bundles || []).map((bundle) => [bundle.key, bundle]));
+  const bundleKeys = selectedBundles.size
+    ? [...selectedBundles]
+    : polyglotConfig.defaults?.productionBundleKeys || [];
+  const unknownBundleKeys = bundleKeys.filter((bundleKey) => !bundleByKey.has(bundleKey));
+  if (unknownBundleKeys.length) {
+    throw new Error(`Unknown Polyglot bundle: ${unknownBundleKeys.join(",")}`);
+  }
   const deckTargets = targetCodesForDeck(deck);
 
   for (const supportRaw of supports) {
@@ -165,9 +171,7 @@ function buildCoverPlan({
 
     if (enabledTypes.has("polyglot")) {
       for (const bundleKey of bundleKeys) {
-        if (selectedBundles.size && !selectedBundles.has(bundleKey)) continue;
         const bundle = bundleByKey.get(bundleKey);
-        if (!bundle) throw new Error(`Unknown production Polyglot bundle: ${bundleKey}`);
         const targetLangs = resolvePolyglotBundleTargets(bundle, supportLang).targetLangs;
         const targetLangsHash = hashTargets(targetLangs);
         const relativePath = [

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-28T03:12:59.591Z",
+  "status": "approved",
+  "sourceOfTruth": "Approved local base artwork plus deterministic no-provider text overlays.",
+  "configPath": "config/youtube-cover-templates.json",
+  "policy": {
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0,
+    "applyRequiresGitTrackedAssets": true
+  },
+  "counts": {
+    "setIds": [
+      "home_kitchen_storage_cleaning_a2"
+    ],
+    "supports": [
+      "ZH"
+    ],
+    "types": [
+      "polyglot"
+    ],
+    "coverCount": 1,
+    "ordinaryCount": 0,
+    "polyglotCount": 1,
+    "skippedCount": 0,
+    "outputRoot": "data/youtube-cover-assets/deck3-zh-southeast-asia-expansion-20260728",
+    "dryRun": false,
+    "externalProviderCalls": 0,
+    "youtubeWrites": 0
+  },
+  "outputs": {
+    "root": "data/youtube-cover-assets/deck3-zh-southeast-asia-expansion-20260728",
+    "manifest": "data/youtube-cover-assets/deck3-zh-southeast-asia-expansion-20260728/manifest.json",
+    "contactSheets": [
+      {
+        "setId": "home_kitchen_storage_cleaning_a2",
+        "supportLang": "ZH",
+        "videoType": "polyglot",
+        "coverCount": 1,
+        "relativePath": "data/youtube-cover-assets/deck3-zh-southeast-asia-expansion-20260728/video/contact-sheets/home_kitchen_storage_cleaning_a2__ZH__polyglot.jpg"
+      }
+    ]
+  },
+  "skipped": [],
+  "covers": [
+    {
+      "videoType": "polyglot",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "ZH",
+      "viewerSupportLang": "ZH",
+      "channelKey": "zh",
+      "channelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "channelHandle": "LunaCardsChinese",
+      "channelSupportLangs": [
+        "ZH"
+      ],
+      "bundleKey": "southeast_asia_core",
+      "bundleLabel": "Southeast Asia Core",
+      "contentScope": "full",
+      "targetLangs": [
+        "TH",
+        "VI",
+        "ID",
+        "MS"
+      ],
+      "targetLangsCsv": "TH,VI,ID,MS",
+      "targetLangsHash": "81d0b0623103",
+      "targetLanguageLines": [
+        "泰语 · 越南语",
+        "印度尼西亚语 · 马来语"
+      ],
+      "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:ZH:southeast_asia_core:81d0b0623103",
+      "title": "厨房收纳",
+      "description": "收纳和清洁。初级。",
+      "module": "家",
+      "category": "厨房",
+      "baseImage": "assets/youtube-cover-templates/deck3-polyglot-approved-base.png",
+      "visualTemplate": "polyglot-target-languages-large-lines-v1-deck3-storage-cleaning-base",
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/deck3-zh-southeast-asia-expansion-20260728/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/zh__ZH__LunaCardsChinese/ZH__southeast_asia_core__81d0b0623103__full.jpg",
+      "sidecarPath": "data/youtube-cover-assets/deck3-zh-southeast-asia-expansion-20260728/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/zh__ZH__LunaCardsChinese/ZH__southeast_asia_core__81d0b0623103__full.json",
+      "path": "/Users/lali/Documents/LUNA2/scratch/deck3-recovery-main-20260728/data/youtube-cover-assets/deck3-zh-southeast-asia-expansion-20260728/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/zh__ZH__LunaCardsChinese/ZH__southeast_asia_core__81d0b0623103__full.jpg",
+      "renderer": "sharp-svg-approved-template-overlay",
+      "dimensions": "1280x720",
+      "sizeBytes": 280084,
+      "sha256": "e8079e36cbc23ae1f25149f86b36e931a83f655213d57e309b99a89b85da1d6b"
+    }
+  ]
+}
