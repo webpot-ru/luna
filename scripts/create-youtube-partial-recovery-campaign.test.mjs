@@ -71,7 +71,8 @@ const missingRows = restoredRows;
 assert.equal(missingRows.length, expectedAssignmentCount);
 const assignmentKeys = missingRows.map((row) => row.assignmentKey);
 const generatedAt = "2026-07-19T03:00:00.000Z";
-const controlReports = ["youtube-1", "youtube-2", "youtube-3", "youtube-4"].map((routeKey) => {
+const routeKeys = [...new Set(missingRows.map((row) => row.routeKey).filter(Boolean))].sort();
+const controlReports = routeKeys.map((routeKey) => {
   const rows = missingRows.filter((row) => row.routeKey === routeKey);
   return {
     setId: sourceCampaign.setId,
@@ -109,7 +110,7 @@ assert.equal(result.manifest.inputs.polyglotSupportCount, currentRecovery.inputs
 assert.equal(result.manifest.inputs.allowPartialOrdinaryTail, true);
 assert.equal(result.manifest.summary.customThumbnailCount, missingRows.filter((row) => row.thumbnail?.mode === "custom").length);
 assert.equal(result.manifest.summary.automaticThumbnailCount, expectedAssignmentCount - result.manifest.summary.customThumbnailCount);
-assert.deepEqual(result.manifest.summary.routeCounts, Object.fromEntries(["youtube-1", "youtube-2", "youtube-3", "youtube-4"].map((route) => [route, missingRows.filter((row) => row.routeKey === route).length])));
+assert.deepEqual(result.manifest.summary.routeCounts, Object.fromEntries(routeKeys.map((route) => [route, missingRows.filter((row) => row.routeKey === route).length])));
 assert.equal(new Set(result.manifest.assignments.map((row) => row.assignmentKey)).size, expectedAssignmentCount);
 assert(result.manifest.assignments.every((row) => Date.parse(row.publishAt) >= Date.parse(generatedAt) + 90 * 60_000));
 
