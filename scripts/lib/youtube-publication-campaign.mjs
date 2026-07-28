@@ -52,6 +52,7 @@ const ACTIVE_CAMPAIGN_STATUSES = new Set([
 ]);
 const RELEASED_ASSIGNMENT_STATUSES = new Set([
   "superseded_partial_recovery",
+  "superseded_integrated_plan",
 ]);
 const SHORT_UNVERIFIED_MAX_DURATION_SECONDS = 895;
 const DEFAULT_SHORT_UNVERIFIED_CARD_LIMIT = 0;

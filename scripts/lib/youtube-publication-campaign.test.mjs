@@ -479,13 +479,14 @@ for (const support of new Set(first.assignments.map((row) => row.supportLang))) 
 }
 
 const manifestPath = writeJson("manifest.json", first);
+const claimFixtureAgeMinutes = Math.max(1, Math.ceil((Date.now() - Date.parse(first.generatedAt)) / 60_000) + 60);
 const claimArgs = [
   "scripts/claim-youtube-publication-campaign.mjs",
   `--manifest=${manifestPath}`,
   `--campaign-registry=${paths.campaignRegistryPath}`,
   `--calendar=${paths.calendarPath}`,
   `--plans-dir=${path.join(tempRoot, "plans")}`,
-  "--max-plan-age-minutes=20000",
+  `--max-plan-age-minutes=${claimFixtureAgeMinutes}`,
   "--apply",
   "--confirm=CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN",
   "--json",

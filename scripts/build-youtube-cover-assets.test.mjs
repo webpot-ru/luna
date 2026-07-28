@@ -35,7 +35,10 @@ const setConfig = {
 };
 const polyglotConfig = {
   defaults: { productionBundleKeys: ["global"] },
-  bundles: [{ key: "global", label: "Global", targetLangs: ["EN", "ES"], fallbackLangs: ["KA"] }],
+  bundles: [
+    { key: "global", label: "Global", targetLangs: ["EN", "ES"], fallbackLangs: ["KA"] },
+    { key: "southeast", label: "Southeast", targetLangs: ["SI", "KA"], fallbackLangs: ["EN"] },
+  ],
 };
 const plan = buildCoverPlan({
   setId: "test-deck",
@@ -80,6 +83,19 @@ assert.deepEqual(filteredPlan.covers.map((cover) => [cover.videoType, cover.targ
   ["ordinary", "ES"],
   ["polyglot", "global"],
 ]);
+
+const approvedExpansionPlan = buildCoverPlan({
+  setId: "test-deck",
+  setConfig,
+  deck,
+  channels,
+  supports: ["UZ"],
+  types: ["polyglot"],
+  bundles: ["southeast"],
+  polyglotConfig,
+  outputRoot: "data/test-covers",
+});
+assert.deepEqual(approvedExpansionPlan.covers.map((cover) => cover.bundleKey), ["southeast"]);
 
 const blockedPlan = buildCoverPlan({
   setId: "test-deck",
