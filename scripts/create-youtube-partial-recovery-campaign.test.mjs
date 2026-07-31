@@ -125,6 +125,26 @@ assert.equal(nextSource.assignmentKeys.filter((key) => assignmentKeys.includes(k
 assert.equal(result.nextCalendar.reservations.filter((row) => row.campaignId === result.manifest.campaignId && row.status === "campaign_claimed").length, expectedAssignmentCount);
 assert.equal(result.manifest.generatedAt, generatedAt);
 
+// A reconciliation_required source campaign can still own an exact tail.
+// The control selector then omits it from tails even though complete live
+// evidence proves that no video exists; recovery must preserve that key.
+const sourceClaimHiddenFromTail = structuredClone(controlReports);
+sourceClaimHiddenFromTail.forEach((report) => {
+  report.tails = report.tails.filter((tail) => tail.videoType !== "polyglot");
+});
+const hiddenTailResult = buildPartialRecovery({
+  registry,
+  calendar,
+  channels: historicalRecoveryChannels,
+  policy,
+  controlReports: sourceClaimHiddenFromTail,
+  campaignId: sourceCampaignId,
+  assignmentKeys,
+  now: new Date(generatedAt),
+  minFutureMinutes: 90,
+});
+assert.equal(hiddenTailResult.manifest.summary.assignmentCount, expectedAssignmentCount);
+
 const ordinaryRow = missingRows.find((row) => row.videoType === "ordinary");
 const collisionReports = structuredClone(controlReports);
 collisionReports.find((report) => report.supports.includes(ordinaryRow.supportLang)).publications.push({

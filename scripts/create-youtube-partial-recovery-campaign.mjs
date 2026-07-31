@@ -100,23 +100,19 @@ function validateRouteReport(report, expectedSetId, selectedRows, now, maxAgeMin
         publication.youtubeVideoId
         && assignmentKey(publication) === row.assignmentKey);
       assert(!collision, `${row.supportLang} -> ${row.targetLang}: ordinary assignment already exists live as ${collision?.youtubeVideoId}`);
-      const tail = (report.tails || []).find((candidate) =>
-        candidate.videoType === "ordinary"
-        && candidate.supportLang === row.supportLang
-        && candidate.targetLang === row.targetLang);
-      assert(tail, `${row.supportLang} -> ${row.targetLang}: expected ordinary tail is absent from control report`);
+      // A partial recovery reuses an already immutable, still-claimed exact
+      // assignment. The ordinary tail selector may deliberately omit it while
+      // the source claim remains active, so live collision evidence is the
+      // required gate here rather than a second tail-selection result.
       continue;
     }
     const collision = (report.publications || []).find((publication) =>
       publication.youtubeVideoId
       && polyglotProductSlotKey(publication) === polyglotProductSlotKey(row));
     assert(!collision, `${row.supportLang}: Polyglot product slot already exists live as ${collision?.youtubeVideoId}`);
-    const tail = (report.tails || []).find((candidate) =>
-      candidate.videoType === "polyglot"
-      && candidate.supportLang === row.supportLang
-      && candidate.bundleKey === row.bundleKey
-      && (candidate.contentScope || "full") === "full");
-    assert(tail, `${row.supportLang}: expected full Polyglot tail is absent from control report`);
+    // As above, a current selector can hide this source slot merely because
+    // the old campaign still owns it. The exact source identity plus complete
+    // no-collision live evidence is sufficient for partial recovery.
   }
   return {
     generatedAt: new Date(generatedAt).toISOString(),
