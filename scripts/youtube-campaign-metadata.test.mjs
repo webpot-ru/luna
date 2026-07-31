@@ -104,6 +104,11 @@ assert.match(
   "all eight project queues must start together for Polyglot publication",
 );
 const routeWorkerWorkflow = fs.readFileSync(".github/workflows/youtube-campaign-route-publish.yml", "utf8");
+assert.match(
+  routeWorkerWorkflow,
+  /permissions:\n\s+actions: read\n\s+contents: write/u,
+  "the nested route workflow must preserve the permissions required by its publication workflows",
+);
 assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?max-parallel: 5\n\s+matrix:/u, "each ordinary project queue must run five physical channels concurrently");
 assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?max-parallel: 5\n\s+matrix:/u, "each Polyglot project queue must run five physical channels concurrently");
 assert.match(routeWorkerWorkflow, /campaign_polyglot_rows: \$\{\{ matrix\.polyglot_rows \}\}/u, "the route worker must pass the complete Polyglot sequence for a physical channel");

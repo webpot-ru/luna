@@ -16,7 +16,8 @@ on:
       confirm_vectorengine_metadata: { required: false, type: string, default: "" }
 
 permissions:
-  contents: read
+  actions: read
+  contents: write
 
 jobs:
   prepare:
