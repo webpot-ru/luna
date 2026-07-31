@@ -18,6 +18,7 @@ import {
 } from "./plan-youtube-publish-schedule.mjs";
 
 const CONFIRM = "REARM_ZERO_UPLOAD_YOUTUBE_PUBLICATION_CAMPAIGN";
+const EXPAND_CONFIRM = "EXPAND_ZERO_UPLOAD_YOUTUBE_PUBLICATION_CAMPAIGN";
 
 function parseArgs(argv) {
   const options = {
@@ -39,6 +40,7 @@ function parseArgs(argv) {
     else if (arg === "--calendar" || arg.startsWith("--calendar=")) options.calendar = value();
     else if (arg === "--plans-dir" || arg.startsWith("--plans-dir=")) options.plansDir = value();
     else if (arg === "--min-future-minutes" || arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(value());
+    else if (arg === "--allow-expanded-zero-upload-recovery") options.allowExpandedZeroUploadRecovery = true;
     else if (arg === "--apply") options.apply = true;
     else if (arg === "--confirm" || arg.startsWith("--confirm=")) options.confirm = value();
     else if (arg === "--json") options.json = true;
@@ -110,6 +112,7 @@ export function buildZeroUploadRearm({
   replacementCampaignId,
   now = new Date(),
   minFutureMinutes = 300,
+  allowExpandedZeroUploadRecovery = false,
 }) {
   verifyCampaignManifest(manifest);
   assert(manifest.summary?.applyReady === true && (manifest.blockers || []).length === 0, "recovery manifest is not apply-ready");
@@ -132,7 +135,13 @@ export function buildZeroUploadRearm({
 
   const oldAssignmentKeys = sortedUnique((oldCampaign.assignments || []).map((row) => row.assignmentKey));
   const newAssignmentKeys = sortedUnique((manifest.assignments || []).map((row) => row.assignmentKey));
-  assert(equalArrays(oldAssignmentKeys, newAssignmentKeys), "recovery manifest assignment set differs from the zero-upload campaign");
+  if (allowExpandedZeroUploadRecovery) {
+    const missingOldAssignment = oldAssignmentKeys.find((key) => !newAssignmentKeys.includes(key));
+    assert(!missingOldAssignment, `expanded recovery manifest omits zero-upload assignment: ${missingOldAssignment}`);
+    assert(newAssignmentKeys.length > oldAssignmentKeys.length, "expanded recovery manifest must add at least one new assignment");
+  } else {
+    assert(equalArrays(oldAssignmentKeys, newAssignmentKeys), "recovery manifest assignment set differs from the zero-upload campaign");
+  }
   const liveAssignmentKeys = new Set((scopedAfterReport.publications || []).map((row) => row.assignmentKey).filter(Boolean));
   const liveRecoveryKey = newAssignmentKeys.find((key) => liveAssignmentKeys.has(key));
   assert(!liveRecoveryKey, `recovery assignment is already live: ${liveRecoveryKey}`);
@@ -179,11 +188,17 @@ export function buildZeroUploadRearm({
   };
   const nextRegistry = structuredClone(registry);
   const oldRegistryRow = nextRegistry.campaigns.find((row) => row.campaignId === replacementCampaignId);
-  oldRegistryRow.status = "superseded_zero_upload_recovery";
+  const supersededStatus = allowExpandedZeroUploadRecovery
+    ? "superseded_zero_upload_expansion"
+    : "superseded_zero_upload_recovery";
+  const recoverySource = allowExpandedZeroUploadRecovery
+    ? "youtube-publication-campaign-zero-upload-expansion"
+    : "youtube-publication-campaign-zero-upload-rearm";
+  oldRegistryRow.status = supersededStatus;
   oldRegistryRow.supersededAt = rearmedAt;
   oldRegistryRow.supersededByCampaignId = manifest.campaignId;
   oldRegistryRow.zeroUploadEvidence = zeroUploadEvidence;
-  for (const row of oldRegistryRow.assignments || []) row.status = "superseded_zero_upload_recovery";
+  for (const row of oldRegistryRow.assignments || []) row.status = supersededStatus;
   const newCampaign = {
     schemaVersion: 1,
     campaignId: manifest.campaignId,
@@ -194,6 +209,7 @@ export function buildZeroUploadRearm({
     generatedAt: manifest.generatedAt,
     manifestPath: durableManifestPath,
     recoveryOfCampaignId: replacementCampaignId,
+    ...(allowExpandedZeroUploadRecovery ? { expandedZeroUploadRecoveryOfCampaignId: replacementCampaignId } : {}),
     zeroUploadEvidence,
     inputs: manifest.inputs,
     summary: manifest.summary,
@@ -231,7 +247,7 @@ export function buildZeroUploadRearm({
   const nextCalendar = structuredClone(calendar);
   for (const row of nextCalendar.reservations || []) {
     if (row.campaignId !== replacementCampaignId || !isActiveCalendarReservation(row)) continue;
-    row.status = "superseded_zero_upload_recovery";
+    row.status = supersededStatus;
     row.updatedAt = rearmedAt;
     row.supersededByCampaignId = manifest.campaignId;
   }
@@ -241,7 +257,7 @@ export function buildZeroUploadRearm({
       campaignId: manifest.campaignId,
       campaignManifestHash: manifest.manifestHash,
       status: "campaign_claimed",
-      source: "youtube-publication-campaign-zero-upload-rearm",
+      source: recoverySource,
       recoveryOfCampaignId: replacementCampaignId,
       videoType: row.videoType,
       setId: row.setId,
@@ -272,6 +288,7 @@ export function buildZeroUploadRearm({
     nextCalendar,
     report: {
       status: "rearm_ready",
+      recoveryMode: allowExpandedZeroUploadRecovery ? "expanded_zero_upload_recovery" : "exact_zero_upload_rearm",
       replacementCampaignId,
       recoveryCampaignId: manifest.campaignId,
       manifestHash: manifest.manifestHash,
@@ -290,13 +307,14 @@ export function buildZeroUploadRearm({
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log(`node scripts/rearm-youtube-publication-campaign.mjs --manifest=<plan.json> --replacement-campaign-id=<id> --before-control-report=<json> --after-control-report=<json> [--apply --confirm=${CONFIRM}]`);
+    console.log(`node scripts/rearm-youtube-publication-campaign.mjs --manifest=<plan.json> --replacement-campaign-id=<id> --before-control-report=<json> --after-control-report=<json> [--allow-expanded-zero-upload-recovery] [--apply --confirm=${CONFIRM}|${EXPAND_CONFIRM}]`);
     return;
   }
   for (const key of ["manifest", "replacementCampaignId", "beforeControlReport", "afterControlReport"]) {
     if (!options[key]) throw new Error(`--${key.replaceAll(/[A-Z]/g, (value) => `-${value.toLowerCase()}`)} is required`);
   }
-  if (options.apply && options.confirm !== CONFIRM) throw new Error(`--apply requires --confirm=${CONFIRM}`);
+  const requiredConfirm = options.allowExpandedZeroUploadRecovery ? EXPAND_CONFIRM : CONFIRM;
+  if (options.apply && options.confirm !== requiredConfirm) throw new Error(`--apply requires --confirm=${requiredConfirm}`);
   const manifest = readJson(options.manifest);
   const sourceMismatches = verifyManifestSourceFingerprints(manifest);
   if (sourceMismatches.length) throw new Error(`recovery manifest source changed: ${sourceMismatches.map((row) => row.key).join(", ")}`);
@@ -309,6 +327,7 @@ function main() {
     replacementCampaignId: options.replacementCampaignId,
     now: new Date(),
     minFutureMinutes: options.minFutureMinutes,
+    allowExpandedZeroUploadRecovery: options.allowExpandedZeroUploadRecovery === true,
   });
   if (options.apply) {
     const durableManifestPath = path.join(options.plansDir, `${manifest.campaignId}.json`);

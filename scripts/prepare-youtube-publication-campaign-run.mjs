@@ -167,6 +167,7 @@ function main() {
   // manifests additionally record the explicit partial-tail flag.
   const allowPartialOrdinaryTail = campaign.inputs?.allowPartialOrdinaryTail === true
     || typeof campaign.inputs?.partialRecoveryOfCampaignId === "string";
+  const allowPartialPolyglotTail = campaign.inputs?.allowPartialPolyglotTail === true;
   const polyglotExpected = Number(campaign.inputs?.polyglotPerChannel || 0);
   const ordinaryMatrix = [...ordinaryBySupport.entries()].map(([support, rows]) => {
     if (allowPartialOrdinaryTail) {
@@ -183,14 +184,22 @@ function main() {
     };
   }).sort((a, b) => a.support.localeCompare(b.support));
   const polyglotMatrix = [...polyglotBySupport.entries()].map(([support, rows]) => {
-    if (rows.length !== polyglotExpected) blockers.push(`${support}: Polyglot rows ${rows.length} != ${polyglotExpected}`);
-    if (rows.length !== 1) blockers.push(`${support}: reusable Polyglot worker currently requires exactly one bundle per campaign`);
+    if (allowPartialPolyglotTail) {
+      if (rows.length < 1 || rows.length > polyglotExpected) {
+        blockers.push(`${support}: Polyglot rows ${rows.length} must be within 1..${polyglotExpected} for a partial tail campaign`);
+      }
+    } else if (rows.length !== polyglotExpected) blockers.push(`${support}: Polyglot rows ${rows.length} != ${polyglotExpected}`);
     return {
       support,
-      bundle: rows[0]?.bundleKey || "",
-      content_scope: rows[0]?.contentScope || "full",
-      card_limit: String(rows[0]?.cardLimit || 0),
-      max_duration_seconds: String(rows[0]?.contentScope === "full" ? 0 : (rows[0]?.maxDurationSeconds || 895)),
+      // One physical channel owns its full Polyglot sequence. The route wrapper
+      // limits concurrent support channels to five while this worker runs the
+      // exact bundle rows serially for that one support.
+      polyglot_rows: JSON.stringify(rows.map((row) => ({
+        bundle: row.bundleKey || "",
+        content_scope: row.contentScope || "full",
+        card_limit: String(row.cardLimit || 0),
+        max_duration_seconds: String(row.maxDurationSeconds || 895),
+      }))),
       route_key: rows[0]?.routeKey || "",
       schedule_start_date: /^\d{4}-\d{2}-\d{2}$/.test(campaign.inputs?.startDate || "") ? campaign.inputs.startDate : "",
     };
@@ -243,7 +252,8 @@ function main() {
   const supportCount = Number(campaign.inputs?.supportCount || 0);
   const ordinarySupportCount = Number(campaign.inputs?.ordinarySupportCount
     ?? (allowPartialOrdinaryTail ? ordinaryBySupport.size : supportCount));
-  const polyglotSupportCount = Number(campaign.inputs?.polyglotSupportCount ?? supportCount);
+  const polyglotSupportCount = Number(campaign.inputs?.polyglotSupportCount
+    ?? (allowPartialPolyglotTail ? polyglotBySupport.size : supportCount));
   if (ordinaryExpected > 0 && ordinaryMatrix.length !== ordinarySupportCount) {
     blockers.push(`ordinary support matrix count ${ordinaryMatrix.length} does not match campaign`);
   }

@@ -468,6 +468,7 @@ function crossScopePublicationMatchesCandidate(publication, candidate) {
 
 function validateWave(assignments, expectedSupportCount, ordinaryPerChannel, polyglotPerChannel, {
   allowPartialOrdinaryTail = false,
+  allowPartialPolyglotTail = false,
   deferredProductionAssignments = [],
 } = {}) {
   const blockers = [];
@@ -480,12 +481,49 @@ function validateWave(assignments, expectedSupportCount, ordinaryPerChannel, pol
   if (allowPartialOrdinaryTail) {
     if (ordinaryCount > expectedOrdinary) blockers.push(`ordinary assignment count ${ordinaryCount} exceeds maximum ${expectedOrdinary}`);
   } else if (ordinaryCount !== expectedOrdinary) blockers.push(`ordinary assignment count ${ordinaryCount} != ${expectedOrdinary}`);
-  if (polyglotCount !== expectedPolyglot) blockers.push(`Polyglot assignment count ${polyglotCount} != ${expectedPolyglot}`);
+  if (allowPartialPolyglotTail) {
+    if (polyglotCount > expectedPolyglot) blockers.push(`Polyglot assignment count ${polyglotCount} exceeds maximum ${expectedPolyglot}`);
+  } else if (polyglotCount !== expectedPolyglot) blockers.push(`Polyglot assignment count ${polyglotCount} != ${expectedPolyglot}`);
   const assignmentKeys = assignments.map((row) => row.assignmentKey);
   const slotKeys = assignments.map((row) => row.slotKey);
   if (new Set(assignmentKeys).size !== assignmentKeys.length) blockers.push("campaign contains duplicate assignment keys");
   if (new Set(slotKeys).size !== slotKeys.length) blockers.push("campaign contains duplicate channel publish slots");
   return blockers;
+}
+
+function capCandidatesByRoute(candidates, {
+  maxVideoUploadsPerRoute,
+  protectedAssignmentKeys = new Set(),
+}) {
+  const includedKeys = new Set();
+  const deferred = [];
+  const routes = [...new Set(candidates.map((row) => row.routeKey))].sort();
+  for (const routeKey of routes) {
+    const routeCandidates = candidates.filter((row) => row.routeKey === routeKey);
+    const protectedRows = routeCandidates.filter((row) => protectedAssignmentKeys.has(row.assignmentKey));
+    if (protectedRows.length > maxVideoUploadsPerRoute) {
+      throw new Error(`${routeKey}: ${protectedRows.length} protected zero-upload recovery assignments exceed the ${maxVideoUploadsPerRoute}-video daily route limit`);
+    }
+    const protectedKeys = new Set(protectedRows.map((row) => row.assignmentKey));
+    const chosen = [
+      ...protectedRows,
+      ...routeCandidates.filter((row) => !protectedKeys.has(row.assignmentKey))
+        .slice(0, maxVideoUploadsPerRoute - protectedRows.length),
+    ];
+    const chosenKeys = new Set(chosen.map((row) => row.assignmentKey));
+    for (const row of chosen) includedKeys.add(row.assignmentKey);
+    for (const row of routeCandidates) {
+      if (!chosenKeys.has(row.assignmentKey)) deferred.push({
+        ...row,
+        deferredReason: `route_daily_video_upload_limit_${maxVideoUploadsPerRoute}`,
+        deferredAtStage: "campaign_no_spend_route_quota_plan",
+      });
+    }
+  }
+  return {
+    selected: candidates.filter((row) => includedKeys.has(row.assignmentKey)),
+    deferred,
+  };
 }
 
 function zeroUploadReplacementBlockers(campaign, campaignId) {
@@ -516,6 +554,9 @@ export function buildPublicationCampaign(options = {}) {
   const ordinaryPerChannel = Number(options.ordinaryPerChannel ?? 5);
   const allowPartialOrdinaryTail = options.allowPartialOrdinaryTail === true;
   const polyglotPerChannel = Number(options.polyglotPerChannel ?? 1);
+  const allowPartialPolyglotTail = options.allowPartialPolyglotTail === true;
+  const allowPartialRouteQuotaTail = options.allowPartialRouteQuotaTail === true;
+  const maxVideoUploadsPerRoute = Number(options.maxVideoUploadsPerRoute ?? 100);
   const excludedOrdinaryTargets = new Set((Array.isArray(options.excludeOrdinaryTargets)
     ? options.excludeOrdinaryTargets
     : String(options.excludeOrdinaryTargets || "").split(","))
@@ -525,6 +566,9 @@ export function buildPublicationCampaign(options = {}) {
   const minFutureMinutes = Number(options.minFutureMinutes ?? 90);
   if (!Number.isInteger(ordinaryPerChannel) || ordinaryPerChannel < 0) throw new Error("ordinaryPerChannel must be a non-negative integer");
   if (!Number.isInteger(polyglotPerChannel) || polyglotPerChannel < 0) throw new Error("polyglotPerChannel must be a non-negative integer");
+  if (allowPartialRouteQuotaTail && (!Number.isInteger(maxVideoUploadsPerRoute) || maxVideoUploadsPerRoute < 1)) {
+    throw new Error("maxVideoUploadsPerRoute must be a positive integer when allowPartialRouteQuotaTail is enabled");
+  }
 
   const paths = {
     snapshot: options.snapshotPath || "config/youtube-publication-snapshot.json",
@@ -626,8 +670,9 @@ export function buildPublicationCampaign(options = {}) {
     });
   }
 
-  const selected = [];
+  let selected = [];
   const deferredProductionAssignments = [];
+  let routeQuotaDeferredAssignments = [];
   for (const support of supports) {
     const channel = routing.supportToChannel.get(support);
     const route = routing.supportToRoute.get(support);
@@ -667,8 +712,24 @@ export function buildPublicationCampaign(options = {}) {
       }
     }
     if (!allowPartialOrdinaryTail && ordinary.length !== ordinaryPerChannel) blockers.push(`${support}: only ${ordinary.length}/${ordinaryPerChannel} unclaimed ordinary tails available`);
-    if (polyglot.length !== polyglotPerChannel) blockers.push(`${support}: only ${polyglot.length}/${polyglotPerChannel} unclaimed full Polyglot tails available`);
+    if (!allowPartialPolyglotTail && polyglot.length !== polyglotPerChannel) blockers.push(`${support}: only ${polyglot.length}/${polyglotPerChannel} unclaimed full Polyglot tails available`);
     selected.push(...ordinary, ...polyglot);
+  }
+
+  if (allowPartialRouteQuotaTail) {
+    const protectedAssignmentKeys = new Set((replacementCampaign?.assignments || []).map((row) => row.assignmentKey).filter(Boolean));
+    const selectedKeys = new Set(selected.map((row) => row.assignmentKey));
+    const missingProtected = [...protectedAssignmentKeys].filter((key) => !selectedKeys.has(key));
+    if (missingProtected.length) {
+      blockers.push(`zero-upload recovery expansion is missing ${missingProtected.length} protected assignment(s) from ${replacementCampaignId}`);
+    } else {
+      const capped = capCandidatesByRoute(selected, { maxVideoUploadsPerRoute, protectedAssignmentKeys });
+      selected = capped.selected;
+      routeQuotaDeferredAssignments = capped.deferred;
+      if (routeQuotaDeferredAssignments.length) {
+        warnings.push(`${routeQuotaDeferredAssignments.length} tail assignment(s) are deferred only because their route reached the ${maxVideoUploadsPerRoute}-video daily upload limit`);
+      }
+    }
   }
 
   const baseOccupiedSlotKeys = new Set((planningCalendar.reservations || []).filter(isActiveCalendarReservation).map(slotKey));
@@ -739,6 +800,7 @@ export function buildPublicationCampaign(options = {}) {
 
   blockers.push(...validateWave(assignments, supports.length, ordinaryPerChannel, polyglotPerChannel, {
     allowPartialOrdinaryTail,
+    allowPartialPolyglotTail,
     deferredProductionAssignments,
   }));
   blockers.push(...validateResolvedPlaylistIdentities(assignments));
@@ -840,6 +902,9 @@ export function buildPublicationCampaign(options = {}) {
       productionDeferredSupportCount: deferredProductionSupportCount,
       ordinaryPerChannel,
       allowPartialOrdinaryTail,
+      allowPartialPolyglotTail,
+      allowPartialRouteQuotaTail,
+      maxVideoUploadsPerRoute: allowPartialRouteQuotaTail ? maxVideoUploadsPerRoute : null,
       polyglotPerChannel,
       excludeOrdinaryTargets: [...excludedOrdinaryTargets].sort().join(","),
       startDate: requestedStartDate || "auto",
@@ -873,6 +938,7 @@ export function buildPublicationCampaign(options = {}) {
         },
       } : {}),
       productionDeferredAssignments: deferredProductionAssignments,
+      routeQuotaDeferredAssignments,
       sourceFingerprints,
     },
     summary: {
@@ -883,6 +949,7 @@ export function buildPublicationCampaign(options = {}) {
       scheduledSupportCount,
       productionDeferredSupportCount: deferredProductionSupportCount,
       productionDeferredAssignmentCount: deferredProductionAssignments.length,
+      routeQuotaDeferredAssignmentCount: routeQuotaDeferredAssignments.length,
       ordinaryCount: assignments.filter((row) => row.videoType === "ordinary").length,
       polyglotCount: assignments.filter((row) => row.videoType === "polyglot").length,
       fullPolyglotCount: assignments.filter((row) => row.videoType === "polyglot" && row.contentScope === "full").length,

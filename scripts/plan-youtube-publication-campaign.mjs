@@ -10,6 +10,9 @@ function parseArgs(argv) {
     ordinaryPerChannel: 5,
     allowPartialOrdinaryTail: false,
     polyglotPerChannel: 1,
+    allowPartialPolyglotTail: false,
+    allowPartialRouteQuotaTail: false,
+    maxVideoUploadsPerRoute: 100,
     excludeOrdinaryTargets: "",
     minFutureMinutes: 90,
     maxSnapshotAgeMinutes: 30,
@@ -23,6 +26,9 @@ function parseArgs(argv) {
     else if (arg === "--ordinary-per-channel" || arg.startsWith("--ordinary-per-channel=")) options.ordinaryPerChannel = Number(value());
     else if (arg === "--allow-partial-ordinary-tail") options.allowPartialOrdinaryTail = true;
     else if (arg === "--polyglot-per-channel" || arg.startsWith("--polyglot-per-channel=")) options.polyglotPerChannel = Number(value());
+    else if (arg === "--allow-partial-polyglot-tail") options.allowPartialPolyglotTail = true;
+    else if (arg === "--allow-partial-route-quota-tail") options.allowPartialRouteQuotaTail = true;
+    else if (arg === "--max-video-uploads-per-route" || arg.startsWith("--max-video-uploads-per-route=")) options.maxVideoUploadsPerRoute = Number(value());
     else if (arg === "--exclude-ordinary-targets" || arg.startsWith("--exclude-ordinary-targets=")) options.excludeOrdinaryTargets = value();
     else if (arg === "--start-date" || arg.startsWith("--start-date=")) options.startDate = value();
     else if (arg === "--min-future-minutes" || arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(value());
@@ -49,7 +55,7 @@ function parseArgs(argv) {
 }
 
 function usage() {
-  return "node scripts/plan-youtube-publication-campaign.mjs --set=<set_id> [--supports=ALL] [--ordinary-per-channel=5] [--allow-partial-ordinary-tail] [--polyglot-per-channel=1] [--exclude-ordinary-targets=HY] [--start-date=YYYY-MM-DD] [--replacement-campaign-id=<id>]";
+  return "node scripts/plan-youtube-publication-campaign.mjs --set=<set_id> [--supports=ALL] [--ordinary-per-channel=5] [--allow-partial-ordinary-tail] [--polyglot-per-channel=1] [--allow-partial-polyglot-tail] [--allow-partial-route-quota-tail --max-video-uploads-per-route=100] [--exclude-ordinary-targets=HY] [--start-date=YYYY-MM-DD] [--replacement-campaign-id=<id>]";
 }
 
 function main() {

@@ -320,6 +320,69 @@ assert.equal(allowedExhaustedTailPlan.summary.applyReady, true);
 assert.equal(allowedExhaustedTailPlan.summary.ordinaryCount, 3);
 assert.equal(allowedExhaustedTailPlan.inputs.allowPartialOrdinaryTail, true);
 
+const enPolyglotInventoryPlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  ordinaryPerChannel: 0,
+  polyglotPerChannel: 20,
+  playlistDiscoveryPath: writeJson("playlist-discovery-en-polyglot-inventory.json", enDiscovery),
+});
+assert(enPolyglotInventoryPlan.summary.polyglotCount > 1);
+const claimedEnPolyglotKeys = enPolyglotInventoryPlan.assignments
+  .filter((row) => row.videoType === "polyglot")
+  .slice(0, -1)
+  .map((row) => row.assignmentKey);
+const partialPolyglotRegistryPath = writeJson("campaigns-partial-polyglot-tail.json", {
+  schemaVersion: 1,
+  campaigns: [{
+    campaignId: "claimed-en-polyglot-tail-fixture",
+    status: "claimed",
+    assignmentKeys: claimedEnPolyglotKeys,
+    slotKeys: [],
+    assignments: [],
+  }],
+});
+const strictPartialPolyglotPlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  ordinaryPerChannel: 0,
+  polyglotPerChannel: 20,
+  campaignRegistryPath: partialPolyglotRegistryPath,
+  playlistDiscoveryPath: writeJson("playlist-discovery-en-polyglot-partial-strict.json", enDiscovery),
+});
+assert(strictPartialPolyglotPlan.blockers.some((row) => row.includes("unclaimed full Polyglot tails available")));
+const allowedPartialPolyglotPlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  ordinaryPerChannel: 0,
+  polyglotPerChannel: 20,
+  allowPartialPolyglotTail: true,
+  campaignRegistryPath: partialPolyglotRegistryPath,
+  playlistDiscoveryPath: writeJson("playlist-discovery-en-polyglot-partial-allowed.json", enDiscovery),
+});
+assert.equal(allowedPartialPolyglotPlan.summary.applyReady, true);
+assert.equal(allowedPartialPolyglotPlan.inputs.allowPartialPolyglotTail, true);
+assert.equal(allowedPartialPolyglotPlan.summary.polyglotCount, 1);
+
+const routeQuotaTailPlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN,RU",
+  ordinaryPerChannel: 10,
+  polyglotPerChannel: 0,
+  allowPartialOrdinaryTail: true,
+  allowPartialRouteQuotaTail: true,
+  maxVideoUploadsPerRoute: 10,
+  playlistDiscoveryPath: writeJson("playlist-discovery-en-ru-route-quota-tail.json", {
+    ...readJson(paths.playlistDiscoveryPath),
+    summary: { complete: true, blockerCount: 0, supportCount: 2 },
+    channels: readJson(paths.playlistDiscoveryPath).channels.filter((channel) => ["EN", "RU"].includes(channel.supportLang)),
+  }),
+});
+assert.equal(routeQuotaTailPlan.summary.applyReady, true);
+assert.equal(routeQuotaTailPlan.summary.assignmentCount, 10);
+assert.equal(routeQuotaTailPlan.summary.routeQuotaDeferredAssignmentCount, 10);
+assert.equal(routeQuotaTailPlan.evidence.routeQuotaDeferredAssignments.length, 10);
+
 const releasedPartialRecoveryKey = claimedEnTailKeys[0];
 const releasedPartialRecoveryRegistryPath = writeJson("campaigns-released-partial-recovery.json", {
   schemaVersion: 1,
