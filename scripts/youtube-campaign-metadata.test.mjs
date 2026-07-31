@@ -91,14 +91,25 @@ const campaignWorkflow = fs.readFileSync(".github/workflows/youtube-publication-
 assert.match(
   campaignWorkflow,
   /  metadata:\n[\s\S]*?strategy:\n\s+fail-fast: false\n\s+max-parallel: 1\n\s+matrix:/u,
-  "campaign metadata routes must be serialized to protect the shared Gemini keys",
+  "campaign metadata routes must be serialized to protect the shared provider quota",
+);
+assert.match(
+  campaignWorkflow,
+  /  ordinary:\n[\s\S]*?strategy:\n\s+fail-fast: false\n[\s\S]*?max-parallel: 40\n\s+matrix:/u,
+  "a route subwave must start up to five ordinary workers per each of eight routes",
+);
+assert.match(
+  campaignWorkflow,
+  /  polyglot:\n[\s\S]*?strategy:\n\s+fail-fast: false\n[\s\S]*?max-parallel: 40\n\s+matrix:/u,
+  "a route subwave must start up to five Polyglot workers per each of eight routes",
 );
 assert.match(campaignWorkflow, /OPENAI_API_KEY: \$\{\{ secrets\.OPENAI_API_KEY \}\}/u);
-assert.match(campaignWorkflow, /BACKEND="openai,api"/u);
+assert.match(campaignWorkflow, /BACKEND="openai"/u);
 assert.match(campaignWorkflow, /--confirm-openai=USE_OPENAI_METADATA/u);
 assert.match(campaignWorkflow, /--openai-model="gpt-5\.6-terra"/u);
 assert.match(campaignWorkflow, /--openai-fallback-model="gpt-5\.6-luna"/u);
-assert.match(campaignWorkflow, /OPENAI_ROUTE_TOKEN_BUDGET: "500000"/u);
+assert.match(campaignWorkflow, /OPENAI_ROUTE_TOKEN_BUDGET: \$\{\{ matrix\.openai_token_budget \}\}/u);
+assert.match(campaignWorkflow, /VectorEngine is disabled for campaign metadata; use only Terra and Luna\./u);
 assert.doesNotMatch(campaignWorkflow, /OPENAI_METADATA_MODEL: \$\{\{ vars\.OPENAI_METADATA_MODEL \}\}/u);
 assert.ok(estimateOpenAiRequestTokenUpperBound({ prompt, schema: { type: "object", properties: {} } }) > Buffer.byteLength(prompt));
 
