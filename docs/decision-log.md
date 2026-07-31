@@ -37262,3 +37262,11 @@ Decision: define Polyglot deck completeness as four core bundle slots per physic
 Reasoning: the bundle catalog contains 13 reusable market combinations and previously labeled five of them Wave 1, while the accepted first-deck cover/product expectation was four videos per channel. Separating the four-slot product baseline from rollout-wave ranking prevents a fifth experimental bundle from silently becoming required work.
 
 Implementation: `config/polyglot-video-bundles.json.productLine.coreBundleKeys` is the machine baseline and `npm run audit:youtube-product-line` reports ordinary coverage, physical and strict-canonical Polyglot coverage, full versus `short_unverified` scope, duplicate slots, legacy support/bundle rows and playlist/progress debts without calling GitHub or YouTube APIs.
+
+## 2026-08-01: Deck #4 YouTube Cover Bases And Full Language Package Approved
+
+Decision: approve the separate ordinary and Polyglot visual bases for `home_kitchen_small_tools_supplies_a2` and build the full deterministic custom-thumbnail package for every currently confirmed channel.
+
+Scope: `16` physical channels with `customThumbnailUploadAllowed=true`, `845` ordinary target-language pairs and `64` full Polyglot covers across the four canonical bundles, for `909` manifest-listed JPGs in total. The accepted bases are `assets/youtube-cover-templates/deck4-ordinary-approved-base.png` and `assets/youtube-cover-templates/deck4-polyglot-approved-base.png`; the package is registered as `deck4-small-tools-supplies-approved-20260801`.
+
+Safety boundary: the offline Deck #4 source was exported from the current local database with the new `--local-only` mode, which stops before Google OAuth or Drive upload. The cover batch uses only deterministic Sharp/SVG overlays, makes zero provider calls and performs no YouTube write. GitHub persistence of these assets does not authorize video publication; a later Deck #4 parent campaign still requires its normal live-control preflight and explicit apply approval.

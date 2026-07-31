@@ -131,7 +131,9 @@ async function makeFilePublic(accessToken, fileId) {
 }
 
 async function main() {
-  const setId = process.argv[2] || "home_kitchen_cookware_pilot_01";
+  const args = process.argv.slice(2);
+  const localOnly = args.includes("--local-only");
+  const setId = args.find((arg) => !arg.startsWith("--")) || "home_kitchen_cookware_pilot_01";
   
   // 1. Get all unique languages from the database
   const langsSql = `
@@ -268,6 +270,11 @@ async function main() {
   const localFile = path.join(localDir, `${setId}.json`);
   fs.writeFileSync(localFile, JSON.stringify(deckData, null, 2), "utf8");
   console.log(`[SUCCESS] Saved offline data locally to: data/decks/${setId}.json`);
+
+  if (localOnly) {
+    console.log("[2/4] Local-only export complete; Google Drive authentication and upload were skipped.");
+    return;
+  }
   
   // 2. Upload to Google Drive
   console.log(`[2/4] Authenticating with Google Drive...`);
