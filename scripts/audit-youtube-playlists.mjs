@@ -95,7 +95,12 @@ async function youtubeJson({ accessToken, pathName, query = {} }) {
   }
   const response = await fetch(url, { headers: { authorization: `Bearer ${accessToken}` } });
   const text = await response.text();
-  if (!response.ok) throw new Error(`YouTube API GET ${url.pathname} failed (${response.status}): ${text}`);
+  if (!response.ok) {
+    const error = new Error(`YouTube API GET ${url.pathname} failed (${response.status}): ${text}`);
+    error.statusCode = response.status;
+    error.youtubePath = url.pathname;
+    throw error;
+  }
   return text ? JSON.parse(text) : {};
 }
 
@@ -139,7 +144,7 @@ async function readPlaylistItems({ accessToken, playlistId, maxPages }) {
   };
 }
 
-async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPlaylistPages, maxItemPages }) {
+export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPlaylistPages, maxItemPages }) {
   const playlists = [];
   let pageToken = "";
   let playlistPagesRead = 0;
@@ -167,20 +172,37 @@ async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPlaylistP
     if (!pageToken) break;
   }
   if (pageToken) throw new Error(`Playlist pagination exceeded maxPlaylistPages=${maxPlaylistPages}`);
+  const discoveredPlaylists = [];
+  const disappearedPlaylistIds = [];
   for (const playlist of playlists) {
     if (playlist.youtubeChannelId && playlist.youtubeChannelId !== expectedChannelId) {
       throw new Error(`Playlist ${playlist.id} belongs to unexpected channel ${playlist.youtubeChannelId}`);
     }
-    const items = await readPlaylistItems({ accessToken, playlistId: playlist.id, maxPages: maxItemPages });
+    let items;
+    try {
+      items = await readPlaylistItems({ accessToken, playlistId: playlist.id, maxPages: maxItemPages });
+    } catch (error) {
+      // `playlists.list(mine=true)` and `playlistItems.list` are not one
+      // transaction. A playlist removed between those two read-only calls is
+      // no longer a live playlist; keep the fact visible, but do not fail
+      // unrelated channel discovery or silently retain its stale identity.
+      if (error?.statusCode === 404 && error?.youtubePath === "/youtube/v3/playlistItems") {
+        disappearedPlaylistIds.push(playlist.id);
+        continue;
+      }
+      throw error;
+    }
     if (!items.paginationComplete) throw new Error(`Playlist item pagination exceeded maxItemPages=${maxItemPages} for ${playlist.id}`);
     playlist.videoIds = items.videoIds;
     playlist.itemPagesRead = items.pagesRead;
     playlist.itemPaginationComplete = true;
+    discoveredPlaylists.push(playlist);
   }
   return {
-    playlists,
+    playlists: discoveredPlaylists,
+    disappearedPlaylistIds,
     playlistPagesRead,
-    itemPagesRead: playlists.reduce((total, row) => total + Number(row.itemPagesRead || 0), 0),
+    itemPagesRead: discoveredPlaylists.reduce((total, row) => total + Number(row.itemPagesRead || 0), 0),
     paginationComplete: true,
   };
 }
@@ -213,6 +235,7 @@ export async function auditYoutubePlaylists(options) {
       complete: inventory.paginationComplete,
       playlistPagesRead: inventory.playlistPagesRead,
       itemPagesRead: inventory.itemPagesRead,
+      disappearedPlaylistIds: inventory.disappearedPlaylistIds,
       playlists: inventory.playlists,
     });
   }
@@ -227,6 +250,7 @@ export async function auditYoutubePlaylists(options) {
       playlistCount: channels.reduce((total, row) => total + row.playlists.length, 0),
       playlistPagesRead: channels.reduce((total, row) => total + row.playlistPagesRead, 0),
       itemPagesRead: channels.reduce((total, row) => total + row.itemPagesRead, 0),
+      disappearedPlaylistCount: channels.reduce((total, row) => total + (row.disappearedPlaylistIds || []).length, 0),
       youtubeReadCalls: channels.length + channels.reduce((total, row) => total + row.playlistPagesRead + row.itemPagesRead, 0),
       youtubeWrites: 0,
     },

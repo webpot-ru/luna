@@ -59,7 +59,7 @@
     "audit:youtube-live-publications": "node scripts/audit-youtube-live-publications.mjs",
     "audit:youtube-playlists": "node scripts/audit-youtube-playlists.mjs",
     "merge:youtube-playlist-discovery": "node scripts/merge-youtube-playlist-discovery.mjs",
-    "test:youtube-playlist-discovery": "node scripts/lib/youtube-playlist-discovery.test.mjs && node scripts/merge-youtube-playlist-discovery.test.mjs",
+    "test:youtube-playlist-discovery": "node scripts/audit-youtube-playlists.test.mjs && node scripts/lib/youtube-playlist-discovery.test.mjs && node scripts/merge-youtube-playlist-discovery.test.mjs",
     "test:youtube-live-publication-audit": "node scripts/audit-youtube-live-publications.test.mjs",
     "check:youtube-publication-control": "node scripts/check-youtube-publication-control.mjs",
     "check:youtube-scheduled-playlist-visibility": "node scripts/check-youtube-scheduled-playlist-visibility.mjs",
