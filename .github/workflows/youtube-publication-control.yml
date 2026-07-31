@@ -37,6 +37,20 @@ on:
         required: true
         default: false
         type: boolean
+      campaign_allow_partial_polyglot_tail:
+        description: "Allow an all-tail campaign to take every remaining Polyglot bundle per channel, including fewer than the maximum."
+        required: true
+        default: false
+        type: boolean
+      campaign_allow_partial_route_quota_tail:
+        description: "Keep every possible tail below each route's daily video-upload cap and record only the unavoidable next-day remainder."
+        required: true
+        default: false
+        type: boolean
+      campaign_max_video_uploads_per_route:
+        description: "Maximum videos.insert rows per API project for this quota day."
+        required: true
+        default: "100"
       campaign_polyglot_per_channel:
         description: "Optional no-spend campaign plan: next full Polyglot videos per physical channel; 0 disables campaign planning."
         required: true
@@ -277,6 +291,9 @@ jobs:
           ORDINARY_PER_CHANNEL: ${{ github.event.inputs.campaign_ordinary_per_channel }}
           ALLOW_PARTIAL_ORDINARY_TAIL: ${{ github.event.inputs.campaign_allow_partial_ordinary_tail }}
           POLYGLOT_PER_CHANNEL: ${{ github.event.inputs.campaign_polyglot_per_channel }}
+          ALLOW_PARTIAL_POLYGLOT_TAIL: ${{ github.event.inputs.campaign_allow_partial_polyglot_tail }}
+          ALLOW_PARTIAL_ROUTE_QUOTA_TAIL: ${{ github.event.inputs.campaign_allow_partial_route_quota_tail }}
+          MAX_VIDEO_UPLOADS_PER_ROUTE: ${{ github.event.inputs.campaign_max_video_uploads_per_route }}
           CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
           START_DATE: ${{ github.event.inputs.campaign_schedule_start_date }}
         run: |
@@ -331,6 +348,10 @@ jobs:
           )
           if [ -n "$START_DATE" ]; then ARGS+=("--start-date=$START_DATE"); fi
           if [ "$ALLOW_PARTIAL_ORDINARY_TAIL" = "true" ]; then ARGS+=("--allow-partial-ordinary-tail"); fi
+          if [ "$ALLOW_PARTIAL_POLYGLOT_TAIL" = "true" ]; then ARGS+=("--allow-partial-polyglot-tail"); fi
+          if [ "$ALLOW_PARTIAL_ROUTE_QUOTA_TAIL" = "true" ]; then
+            ARGS+=("--allow-partial-route-quota-tail" "--max-video-uploads-per-route=$MAX_VIDEO_UPLOADS_PER_ROUTE")
+          fi
           npm run plan:youtube-publication-campaign -- "${ARGS[@]}"
       - uses: actions/upload-artifact@v4
         if: always()
