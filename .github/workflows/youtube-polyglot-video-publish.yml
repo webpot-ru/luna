@@ -7,6 +7,7 @@ on:
       set_id: { required: true, type: string }
       support: { required: true, type: string }
       bundle: { required: true, type: string }
+      campaign_polyglot_rows: { required: false, type: string, default: "" }
       limit: { required: false, type: string, default: "0" }
       content_scope: { required: false, type: string, default: "full" }
       max_duration_seconds: { required: false, type: string, default: "895" }
@@ -164,6 +165,10 @@ on:
         description: "For public videos type PUBLISH_PUBLIC."
         required: false
         default: ""
+      campaign_polyglot_rows:
+        description: "Internal campaign sequence JSON. Leave empty for a normal one-bundle dispatch."
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -173,8 +178,55 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  youtube-polyglot-video:
+  prepare-polyglot-sequence:
     runs-on: ubuntu-latest
+    outputs:
+      worker_matrix: ${{ steps.sequence.outputs.worker_matrix }}
+    steps:
+      - id: sequence
+        shell: bash
+        env:
+          CAMPAIGN_ROWS: ${{ inputs.campaign_polyglot_rows }}
+          BUNDLE: ${{ inputs.bundle }}
+          LIMIT: ${{ inputs.limit }}
+          CONTENT_SCOPE: ${{ inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ inputs.max_duration_seconds }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require("node:fs");
+          const raw = String(process.env.CAMPAIGN_ROWS || "").trim();
+          const fallback = [{
+            bundle: String(process.env.BUNDLE || "").trim(),
+            card_limit: String(process.env.LIMIT || "0").trim(),
+            content_scope: String(process.env.CONTENT_SCOPE || "full").trim(),
+            max_duration_seconds: String(process.env.MAX_DURATION_SECONDS || "895").trim(),
+          }];
+          const rows = raw ? JSON.parse(raw) : fallback;
+          if (!Array.isArray(rows) || rows.length < 1) throw new Error("Polyglot worker sequence must contain at least one bundle row.");
+          const normalized = rows.map((row, index) => {
+            const bundle = String(row?.bundle || "").trim();
+            const card_limit = String(row?.card_limit ?? "0").trim();
+            const content_scope = String(row?.content_scope || "full").trim();
+            const max_duration_seconds = String(row?.max_duration_seconds ?? "895").trim();
+            if (!bundle) throw new Error(`Polyglot worker sequence row ${index + 1} has no bundle.`);
+            if (!/^\d+$/.test(card_limit)) throw new Error(`Polyglot worker sequence row ${index + 1} has an invalid card limit.`);
+            if (!["full", "short_unverified"].includes(content_scope)) throw new Error(`Polyglot worker sequence row ${index + 1} has an invalid content scope.`);
+            if (!/^\d+$/.test(max_duration_seconds)) throw new Error(`Polyglot worker sequence row ${index + 1} has an invalid duration.`);
+            return { bundle, card_limit, content_scope, max_duration_seconds };
+          });
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `worker_matrix=${JSON.stringify({ include: normalized })}\n`);
+          NODE
+
+  youtube-polyglot-video:
+    needs: prepare-polyglot-sequence
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      # One physical support channel owns all of its Polyglot tail bundles in
+      # order. The route wrapper controls five such channels concurrently.
+      max-parallel: 1
+      matrix: ${{ fromJSON(needs.prepare-polyglot-sequence.outputs.worker_matrix) }}
     environment: >-
       ${{
         (contains('|EN|EN-GB|ES|ES-419|PT|PT-BR|RU|HI|ID|en|en-gb|es|es-419|pt|pt-br|ru|hi|id|', format('|{0}|', inputs.support)) && 'youtube-api-branding') ||
@@ -207,9 +259,9 @@ jobs:
         env:
           MODE: ${{ inputs.mode }}
           SUPPORT: ${{ inputs.support }}
-          LIMIT: ${{ steps.polyglot_plan.outputs.effective_card_limit || inputs.limit }}
-          CONTENT_SCOPE: ${{ inputs.content_scope }}
-          MAX_DURATION_SECONDS: ${{ inputs.max_duration_seconds }}
+          LIMIT: ${{ steps.polyglot_plan.outputs.effective_card_limit || matrix.card_limit }}
+          CONTENT_SCOPE: ${{ matrix.content_scope }}
+          MAX_DURATION_SECONDS: ${{ matrix.max_duration_seconds }}
           PRIVACY: ${{ inputs.privacy }}
           PUBLISH_MODE: ${{ inputs.publish_mode }}
           SCHEDULE_START_DATE: ${{ inputs.schedule_start_date }}
@@ -430,10 +482,10 @@ jobs:
         env:
           SET_ID: ${{ inputs.set_id }}
           SUPPORT: ${{ inputs.support }}
-          BUNDLE: ${{ inputs.bundle }}
-          LIMIT: ${{ inputs.limit }}
-          CONTENT_SCOPE: ${{ inputs.content_scope }}
-          MAX_DURATION_SECONDS: ${{ inputs.max_duration_seconds }}
+          BUNDLE: ${{ matrix.bundle }}
+          LIMIT: ${{ matrix.card_limit }}
+          CONTENT_SCOPE: ${{ matrix.content_scope }}
+          MAX_DURATION_SECONDS: ${{ matrix.max_duration_seconds }}
           ALLOW_REPUBLISH: ${{ inputs.allow_republish }}
           CAMPAIGN_ID: ${{ inputs.campaign_id }}
           CAMPAIGN_MANIFEST_HASH: ${{ inputs.campaign_manifest_hash }}
@@ -524,10 +576,10 @@ jobs:
           MODE: ${{ inputs.mode }}
           SET_ID: ${{ inputs.set_id }}
           SUPPORT: ${{ inputs.support }}
-          BUNDLE: ${{ inputs.bundle }}
-          LIMIT: ${{ steps.polyglot_plan.outputs.effective_card_limit || inputs.limit }}
-          CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || inputs.content_scope }}
-          MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || inputs.max_duration_seconds }}
+          BUNDLE: ${{ matrix.bundle }}
+          LIMIT: ${{ steps.polyglot_plan.outputs.effective_card_limit || matrix.card_limit }}
+          CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || matrix.content_scope }}
+          MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || matrix.max_duration_seconds }}
           PRIVACY: ${{ inputs.privacy }}
           PUBLISH_MODE: ${{ inputs.publish_mode }}
           PUBLISH_AT: ${{ inputs.publish_at }}
@@ -616,7 +668,7 @@ jobs:
         env:
           MODE: ${{ inputs.mode }}
           SUPPORT: ${{ inputs.support }}
-          BUNDLE: ${{ inputs.bundle }}
+          BUNDLE: ${{ matrix.bundle }}
           TARGET_LANGS: ${{ steps.polyglot_plan.outputs.target_langs }}
         run: |
           set -euo pipefail
@@ -652,10 +704,10 @@ jobs:
           SUPPORT: ${{ inputs.support }}
           TARGET_LANGS: ${{ steps.polyglot_plan.outputs.target_langs }}
           POLYGLOT_KEY: ${{ steps.polyglot_plan.outputs.polyglot_key }}
-          LIMIT: ${{ steps.polyglot_plan.outputs.effective_card_limit || inputs.limit }}
+          LIMIT: ${{ steps.polyglot_plan.outputs.effective_card_limit || matrix.card_limit }}
           MODE: ${{ inputs.mode }}
-          CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || inputs.content_scope }}
-          MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || inputs.max_duration_seconds }}
+          CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || matrix.content_scope }}
+          MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || matrix.max_duration_seconds }}
         run: |
           set -euo pipefail
           BUILD_ARGS=("--set" "$SET_ID" "--support" "$SUPPORT" "--targets" "$TARGET_LANGS" "--content-scope" "$CONTENT_SCOPE")
@@ -674,8 +726,8 @@ jobs:
         if: ${{ inputs.mode != 'plan' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
-          MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || inputs.max_duration_seconds }}
-          CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || inputs.content_scope }}
+          MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || matrix.max_duration_seconds }}
+          CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || matrix.content_scope }}
           MODE: ${{ inputs.mode }}
         run: |
           set -euo pipefail
@@ -707,8 +759,8 @@ jobs:
           MODE: ${{ inputs.mode }}
           CREATE_PLAYLISTS: ${{ inputs.create_playlists }}
           ALLOW_REPUBLISH: ${{ inputs.allow_republish }}
-          CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || inputs.content_scope }}
-          MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || inputs.max_duration_seconds }}
+          CONTENT_SCOPE: ${{ steps.polyglot_plan.outputs.effective_content_scope || matrix.content_scope }}
+          MAX_DURATION_SECONDS: ${{ steps.polyglot_plan.outputs.effective_max_duration || matrix.max_duration_seconds }}
         run: |
           set -euo pipefail
           UPLOAD_PLAN_ARGS=("outputs/video-generator" "--write-registry" "--allow-auto-thumbnail-fallback" "--output=outputs/youtube-polyglot-upload-plan-github.json")
@@ -804,7 +856,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: youtube-polyglot-${{ inputs.set_id }}-${{ inputs.support }}-${{ inputs.bundle }}-${{ inputs.mode }}
+          name: youtube-polyglot-${{ inputs.set_id }}-${{ inputs.support }}-${{ matrix.bundle }}-${{ inputs.mode }}
           path: |
             outputs/video-generator/youtube-polyglot-plan-github.json
             outputs/youtube-polyglot-upload-plan-github.json

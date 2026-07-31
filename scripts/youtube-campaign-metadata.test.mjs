@@ -95,14 +95,21 @@ assert.match(
 );
 assert.match(
   campaignWorkflow,
-  /  ordinary:\n[\s\S]*?strategy:\n\s+fail-fast: false\n[\s\S]*?max-parallel: 40\n\s+matrix:/u,
-  "a route subwave must start up to five ordinary workers per each of eight routes",
+  /  ordinary:\n[\s\S]*?strategy:\n\s+fail-fast: false\n[\s\S]*?max-parallel: 8\n\s+matrix:\n\s+route_key: \[youtube-1, youtube-2, youtube-3, youtube-4, youtube-5, youtube-6, youtube-7, youtube-8\]/u,
+  "all eight project queues must start together for ordinary publication",
 );
 assert.match(
   campaignWorkflow,
-  /  polyglot:\n[\s\S]*?strategy:\n\s+fail-fast: false\n[\s\S]*?max-parallel: 40\n\s+matrix:/u,
-  "a route subwave must start up to five Polyglot workers per each of eight routes",
+  /  polyglot:\n[\s\S]*?strategy:\n\s+fail-fast: false\n[\s\S]*?max-parallel: 8\n\s+matrix:\n\s+route_key: \[youtube-1, youtube-2, youtube-3, youtube-4, youtube-5, youtube-6, youtube-7, youtube-8\]/u,
+  "all eight project queues must start together for Polyglot publication",
 );
+const routeWorkerWorkflow = fs.readFileSync(".github/workflows/youtube-campaign-route-publish.yml", "utf8");
+assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?max-parallel: 5\n\s+matrix:/u, "each ordinary project queue must run five physical channels concurrently");
+assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?max-parallel: 5\n\s+matrix:/u, "each Polyglot project queue must run five physical channels concurrently");
+assert.match(routeWorkerWorkflow, /campaign_polyglot_rows: \$\{\{ matrix\.polyglot_rows \}\}/u, "the route worker must pass the complete Polyglot sequence for a physical channel");
+const polyglotWorkflow = fs.readFileSync(".github/workflows/youtube-polyglot-video-publish.yml", "utf8");
+assert.match(polyglotWorkflow, /prepare-polyglot-sequence:[\s\S]*?worker_matrix/u, "Polyglot publication must prepare a per-channel sequence");
+assert.match(polyglotWorkflow, /youtube-polyglot-video:\n\s+needs: prepare-polyglot-sequence[\s\S]*?max-parallel: 1[\s\S]*?matrix: \$\{\{ fromJSON\(needs\.prepare-polyglot-sequence\.outputs\.worker_matrix\) \}\}/u, "all Polyglot bundles for one physical channel must stay serial");
 assert.match(campaignWorkflow, /OPENAI_API_KEY: \$\{\{ secrets\.OPENAI_API_KEY \}\}/u);
 assert.match(campaignWorkflow, /BACKEND="openai"/u);
 assert.match(campaignWorkflow, /--confirm-openai=USE_OPENAI_METADATA/u);

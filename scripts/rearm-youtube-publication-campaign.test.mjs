@@ -140,4 +140,58 @@ assert.throws(() => buildZeroUploadRearm({
   now: new Date("2026-07-14T07:00:00.000Z"),
 }), /assignment set differs/);
 
+const expandedAssignment = {
+  ...recoveryAssignment,
+  assignmentKey: "ordinary|deck|EN|IT",
+  calendarAssignmentKey: "ordinary|deck|EN|IT|en",
+  targetLang: "IT",
+  publishAt: "2026-07-14T15:00:00.000Z",
+  slotKey: "en|2026-07-14T15:00:00.000Z",
+  localTime: "16:00",
+};
+const expandedManifestWithoutHash = {
+  ...manifestWithoutHash,
+  campaignId: "expanded-campaign",
+  inputs: { ...manifestWithoutHash.inputs, ordinaryPerChannel: 2, allowPartialRouteQuotaTail: true },
+  summary: {
+    ...manifestWithoutHash.summary,
+    assignmentCount: 2,
+    lastPublishAt: expandedAssignment.publishAt,
+    routeCounts: { "youtube-1": 2 },
+  },
+  assignments: [recoveryAssignment, expandedAssignment],
+};
+const expandedManifest = { ...expandedManifestWithoutHash, manifestHash: sha256Json(expandedManifestWithoutHash) };
+const expandedResult = buildZeroUploadRearm({
+  registry,
+  calendar,
+  manifest: expandedManifest,
+  beforeReport: controlReport,
+  afterReport: controlReport,
+  replacementCampaignId,
+  now: new Date("2026-07-14T07:00:00.000Z"),
+  minFutureMinutes: 300,
+  allowExpandedZeroUploadRecovery: true,
+});
+assert.equal(expandedResult.report.recoveryMode, "expanded_zero_upload_recovery");
+assert.equal(expandedResult.nextRegistry.campaigns[0].status, "superseded_zero_upload_expansion");
+assert.equal(expandedResult.nextRegistry.campaigns[1].assignments.length, 2);
+assert.equal(expandedResult.nextCalendar.reservations.filter((row) => row.status === "campaign_claimed").length, 2);
+
+assert.throws(() => buildZeroUploadRearm({
+  registry,
+  calendar,
+  manifest: {
+    ...expandedManifest,
+    assignments: [expandedAssignment],
+    manifestHash: sha256Json({ ...expandedManifestWithoutHash, assignments: [expandedAssignment] }),
+  },
+  beforeReport: controlReport,
+  afterReport: controlReport,
+  replacementCampaignId,
+  now: new Date("2026-07-14T07:00:00.000Z"),
+  minFutureMinutes: 300,
+  allowExpandedZeroUploadRecovery: true,
+}), /omits zero-upload assignment/);
+
 console.log("youtube publication campaign zero-upload rearm tests passed");
