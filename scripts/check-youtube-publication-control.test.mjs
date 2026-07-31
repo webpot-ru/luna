@@ -409,6 +409,9 @@ assert.doesNotMatch(
   /CONTROL_ARGS=.*?"--strict"/u,
   "the read-only audit must retain complete evidence when it detects state drift",
 );
+assert.match(auditWorkflow, /campaign_allow_partial_polyglot_tail:/u, "all-tail control planning must expose an explicit partial Polyglot flag");
+assert.match(auditWorkflow, /campaign_allow_partial_route_quota_tail:/u, "all-tail control planning must expose the route quota cap flag");
+assert.match(auditWorkflow, /--allow-partial-route-quota-tail/u, "the control planner must forward the route quota cap to the immutable campaign plan");
 
 const ordinaryWorkerWorkflow = fs.readFileSync(".github/workflows/youtube-video-publish.yml", "utf8");
 assert.match(
