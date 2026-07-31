@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-31T03:58:43.734Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_kitchen_storage_cleaning_a2",
+  "inputs": {
+    "supports": "HY,SW",
+    "supportCount": 2,
+    "ordinarySupportCount": 0,
+    "polyglotSupportCount": 2,
+    "ordinaryPerChannel": 0,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "assignmentKeys": [
+      "polyglot|home_kitchen_storage_cleaning_a2|HY|global_europe_core|7a4233775927|short_unverified",
+      "polyglot|home_kitchen_storage_cleaning_a2|SW|global_europe_core|7a4233775927|full"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 30,
+    "partialRecoveryOfCampaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-31-9b914ee3c5ec",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-31-9b914ee3c5ec",
+      "manifestHash": "bd1cb356e6e5e8e4fb7571cf429e76acd1f219faebb161bd2c8d721317bcf980",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-8",
+        "generatedAt": "2026-07-31T03:47:53.372Z",
+        "ageMinutes": 10.839366666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "scratch/control-plan-30456839801-fresh/youtube-publication-control-home_kitchen_storage_cleaning_a2-all-routes-30456839801/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "1ddea08e99008fd8f1b76f0424e0d5cbb9c33601ed1f9d4954b3891cd7106651"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "664bb80d7ce04f644cebe7616b2b13a14fc66d8ee1266e6d8d61b5a96fb473f6"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "071fe44192b7341af572186979ee765ee0e8b462528d4e2028e847ae2f99e8c1"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "f17a556a75d68cf2ab21cd1f16748f6baffb7040b1a70dd8a9a2f51b5fb1b84c"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "4c969bf9e41e54d7a7048f03b5c79ad03131eba629220f89f1620bf3eee21650"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "f6addacada00ae9a8e9d54d6e3adac2deba6ea41f382416f8b845d32dad695c2"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_kitchen_storage_cleaning_a2.json",
+        "exists": true,
+        "sha256": "1b32d508834b8f200eb4a056d9d9547e14f255f119b518747c6b15f1cc3c0021"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "01105908f365d639acdcf110673b4c3b9b49ed06f8dda9eff1a63cdd348fd4e4"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "d9c7408806bbc077c51eaed2d28db8194b7b3fdc17dab2a755394f3faac81829"
+      },
+      "playlistDiscovery": {
+        "path": "scratch/control-plan-30456839801-fresh/youtube-publication-control-home_kitchen_storage_cleaning_a2-all-routes-30456839801/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "ac5c90f56bc1d9b4a2ffa021f0f5c181ad5859da05010f23951b18919fbf06d5"
+      }
+    },
+    "deckSource": {
+      "mode": "verified_drive_with_local_fingerprint",
+      "driveFileIdConfigured": true,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": false,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": "29aa5eec15c8e55207fc73d281323302df05cd8d",
+        "path": "data/decks/home_kitchen_storage_cleaning_a2.json"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 1,
+    "supportCount": 2,
+    "ordinaryCount": 0,
+    "polyglotCount": 2,
+    "assignmentCount": 2,
+    "firstPublishAt": "2026-08-02T13:30:00.000Z",
+    "lastPublishAt": "2026-08-02T14:30:00.000Z",
+    "customThumbnailCount": 1,
+    "automaticThumbnailCount": 1,
+    "existingPlaylistCount": 2,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-8": 2
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 2,
+    "estimatedPlaylistItemInsertUnits": 100,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 50,
+    "estimatedGeneralQuotaUnitsMaximum": 150,
+    "byRoute": {
+      "youtube-8": {
+        "estimatedVideoUploadCalls": 2,
+        "estimatedGeneralQuotaUnitsMaximum": 150
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "HY: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|HY|global_europe_core|7a4233775927|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|HY|global_europe_core|short_unverified|hy",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "HY",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsHash": "7a4233775927",
+      "bundleKey": "global_europe_core",
+      "sourceAssignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|HY|global_europe_core|7a4233775927|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:HY:global_europe_core:7a4233775927:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-08-02T13:30:00.000Z",
+      "localDate": "2026-08-02",
+      "localTime": "17:30",
+      "timeZone": "Asia/Yerevan",
+      "slotKey": "hy|2026-08-02T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__HY__global-europe-core__7a4233775927",
+        "youtubePlaylistId": "PLcqkiUCaHD84",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: անգլերեն, իսպաներեն, ֆրանսերեն, գերմաներեն",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: անգլերեն, իսպաներեն, ֆրանսերեն, գերմաներեն. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-28T02:42:24.844Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|SW|global_europe_core|7a4233775927|full",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_storage_cleaning_a2|SW|global_europe_core|full|sw",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_storage_cleaning_a2",
+      "supportLang": "SW",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsHash": "7a4233775927",
+      "bundleKey": "global_europe_core",
+      "sourceAssignmentKey": "polyglot|home_kitchen_storage_cleaning_a2|SW|global_europe_core|7a4233775927|full",
+      "requestedContentScope": "full",
+      "contentScope": "full",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "polyglotKey": "polyglot:home_kitchen_storage_cleaning_a2:SW:global_europe_core:7a4233775927:full",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sw-KE-ZuriNeural",
+        "supportLang": "SW"
+      },
+      "channelKey": "sw",
+      "youtubeChannelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-08-02T14:30:00.000Z",
+      "localDate": "2026-08-02",
+      "localTime": "17:30",
+      "timeZone": "Africa/Nairobi",
+      "slotKey": "sw|2026-08-02T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/sw__SW__LunaCardsSwahili/SW__global_europe_core__7a4233775927__full.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck3-storage-cleaning-approved-20260720/manifest.json",
+        "sha256": "a8551d2af789505aa61697c44a7a8c05f45434b1ceef9b9c72050cb07f245260"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__SW__global-europe-core__7a4233775927",
+        "youtubePlaylistId": "PLPvHqpytmlHs",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: Kiingereza, Kihispania, Kifaransa, Kijerumani",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Kiingereza, Kihispania, Kifaransa, Kijerumani. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-07-28T02:42:24.844Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 3
+    }
+  ],
+  "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-31-66ac56b7e906",
+  "manifestHash": "1332da682f8616c3002b2de84efe7041ec573d3e1ef7b1aed3cf7a7015907a6d"
+}
