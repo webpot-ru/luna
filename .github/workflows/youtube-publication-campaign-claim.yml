@@ -1,0 +1,99 @@
+name: Claim YouTube Publication Campaign
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: "Completed read-only control run containing the immutable plan artifact."
+        required: true
+      set_id:
+        description: "Deck set id used to select the aggregate artifact."
+        required: true
+      campaign_id:
+        description: "Exact campaign id expected in the downloaded plan."
+        required: true
+      manifest_hash:
+        description: "Exact immutable manifest hash expected in the downloaded plan."
+        required: true
+      target_branch:
+        description: "Branch to which the durable claim commit is pushed."
+        required: true
+      confirm:
+        description: "Type CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN."
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  claim:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_branch }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm ci || npm install
+
+      - name: Download the exact preflight artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+          SET_ID: ${{ inputs.set_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$SOURCE_RUN_ID" =~ ^[0-9]+$ ]]
+          mkdir -p /tmp/deck4-preflight
+          gh run download "$SOURCE_RUN_ID" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name "youtube-publication-control-${SET_ID}-all-routes-${SOURCE_RUN_ID}" \
+            --dir /tmp/deck4-preflight
+          plan_path="$(find /tmp/deck4-preflight -type f -name youtube-publication-campaign-plan.json -print -quit)"
+          snapshot_path="$(find /tmp/deck4-preflight -type f -name youtube-publication-snapshot.json -print -quit)"
+          discovery_path="$(find /tmp/deck4-preflight -type f -name youtube-playlist-discovery-snapshot.json -print -quit)"
+          test -s "$plan_path"
+          test -s "$snapshot_path"
+          test -s "$discovery_path"
+          mkdir -p outputs
+          cp "$plan_path" outputs/youtube-publication-campaign-plan.json
+          cp "$snapshot_path" outputs/youtube-publication-snapshot.json
+          cp "$discovery_path" outputs/youtube-playlist-discovery-snapshot.json
+
+      - name: Apply the exact claim locally on the runner
+        env:
+          CAMPAIGN_ID: ${{ inputs.campaign_id }}
+          MANIFEST_HASH: ${{ inputs.manifest_hash }}
+          CONFIRM: ${{ inputs.confirm }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$CONFIRM" = CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN
+          node -e 'const p=require("./outputs/youtube-publication-campaign-plan.json"); if(p.campaignId!==process.env.CAMPAIGN_ID||p.manifestHash!==process.env.MANIFEST_HASH||p.summary?.applyReady!==true||p.blockers?.length) process.exit(1);'
+          node scripts/claim-youtube-publication-campaign.mjs \
+            --manifest=outputs/youtube-publication-campaign-plan.json \
+            --apply \
+            --confirm=CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN \
+            --json
+
+      - name: Commit only the durable claim
+        env:
+          TARGET_BRANCH: ${{ inputs.target_branch }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          git add config/youtube-publication-campaigns.json \
+            config/youtube-publish-calendar.json \
+            config/youtube-publication-campaign-plans
+          git diff --cached --quiet && { echo "No claim changes were produced"; exit 1; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Claim YouTube publication campaign ${{ inputs.campaign_id }}"
+          git push origin "HEAD:refs/heads/$TARGET_BRANCH"
