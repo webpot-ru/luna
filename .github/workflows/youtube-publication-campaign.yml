@@ -210,7 +210,17 @@ jobs:
               : {};
             process.stdout.write(String(mapping[process.env.SET_ID] || ""));
           ')
-          if [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
+          DECK_PATH="data/decks/${SET_ID}.json"
+          CHECKED_OUT_MATCH=false
+          if [ -s "$DECK_PATH" ] && [ -n "$EXPECTED_DECK_SHA256" ]; then
+            if [ "$(sha256sum "$DECK_PATH" | cut -d' ' -f1)" = "$EXPECTED_DECK_SHA256" ]; then
+              CHECKED_OUT_MATCH=true
+              echo "Using the checked-out immutable offline deck for $SET_ID."
+            else
+              echo "Checked-out offline deck does not match the claimed SHA-256; trying the configured Drive source."
+            fi
+          fi
+          if [ "$CHECKED_OUT_MATCH" != true ] && [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
             mkdir -p data/decks
             curl -c /tmp/cookies -sL "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o /tmp/confirm.html
             CONFIRM=$(grep -o 'confirm=[^&" ]*' /tmp/confirm.html | head -n1 | cut -d= -f2 || true)
@@ -220,16 +230,16 @@ jobs:
               curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
             fi
           fi
-          if [ ! -s "data/decks/${SET_ID}.json" ] && [ -n "$HISTORICAL_DECK_BLOB" ]; then
+          if [ "$CHECKED_OUT_MATCH" != true ] && [ ! -s "$DECK_PATH" ] && [ -n "$HISTORICAL_DECK_BLOB" ]; then
             mkdir -p data/decks
-            git cat-file blob "$HISTORICAL_DECK_BLOB" > "data/decks/${SET_ID}.json"
-          elif [ ! -s "data/decks/${SET_ID}.json" ] && [ -n "$HISTORICAL_DECK_COMMIT" ]; then
+            git cat-file blob "$HISTORICAL_DECK_BLOB" > "$DECK_PATH"
+          elif [ "$CHECKED_OUT_MATCH" != true ] && [ ! -s "$DECK_PATH" ] && [ -n "$HISTORICAL_DECK_COMMIT" ]; then
             mkdir -p data/decks
-            git show "${HISTORICAL_DECK_COMMIT}:data/decks/${SET_ID}.json" > "data/decks/${SET_ID}.json"
+            git show "${HISTORICAL_DECK_COMMIT}:data/decks/${SET_ID}.json" > "$DECK_PATH"
           fi
-          test -s "data/decks/${SET_ID}.json"
+          test -s "$DECK_PATH"
           test -n "$EXPECTED_DECK_SHA256"
-          ACTUAL_DECK_SHA256="$(sha256sum "data/decks/${SET_ID}.json" | cut -d' ' -f1)"
+          ACTUAL_DECK_SHA256="$(sha256sum "$DECK_PATH" | cut -d' ' -f1)"
           if [ "$ACTUAL_DECK_SHA256" != "$EXPECTED_DECK_SHA256" ]; then
             echo "::error::Offline deck checksum mismatch for $SET_ID"
             exit 1
