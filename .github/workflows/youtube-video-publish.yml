@@ -486,6 +486,16 @@ jobs:
         run: |
           set -euo pipefail
           SET_ID="${{ inputs.set_id }}"
+          DECK_PATH="data/decks/${SET_ID}.json"
+          CHECKED_OUT_MATCH=false
+          if [ -s "$DECK_PATH" ] && [ -n "$EXPECTED_DECK_SHA256" ]; then
+            if [ "$(sha256sum "$DECK_PATH" | cut -d' ' -f1)" = "$EXPECTED_DECK_SHA256" ]; then
+              CHECKED_OUT_MATCH=true
+              echo "Using the checked-out immutable offline deck for $SET_ID."
+            else
+              echo "Checked-out offline deck does not match the claimed SHA-256; trying the configured Drive source."
+            fi
+          fi
           FILE_ID=$(node -e "
             const fs = require('fs');
             const path = require('path');
@@ -495,7 +505,7 @@ jobs:
               console.log(mapping['$SET_ID'] || '');
             }
           ")
-          if [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
+          if [ "$CHECKED_OUT_MATCH" != true ] && [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
             echo "Found Google Drive File ID for $SET_ID."
             mkdir -p data/decks
             curl -c /tmp/cookies -sL "https://docs.google.com/uc?export=download&id=${FILE_ID}" > /tmp/confirm.html
@@ -510,29 +520,29 @@ jobs:
             echo "No Google Drive File ID found for $SET_ID in data/deck-sources.json."
           fi
 
-          if [ ! -s "data/decks/${SET_ID}.json" ]; then
+          if [ "$CHECKED_OUT_MATCH" != true ] && [ ! -s "$DECK_PATH" ]; then
             if [ -n "$HISTORICAL_DECK_BLOB" ]; then
               echo "Restoring offline deck from exact Git blob $HISTORICAL_DECK_BLOB..."
               mkdir -p data/decks
-              git cat-file blob "$HISTORICAL_DECK_BLOB" > "data/decks/${SET_ID}.json"
+              git cat-file blob "$HISTORICAL_DECK_BLOB" > "$DECK_PATH"
             else
               COMMIT_TO_USE="$HISTORICAL_DECK_COMMIT"
             fi
-            if [ ! -s "data/decks/${SET_ID}.json" ] && [ -z "$COMMIT_TO_USE" ]; then
+            if [ ! -s "$DECK_PATH" ] && [ -z "$COMMIT_TO_USE" ]; then
               echo "Checking Git history for data/decks/${SET_ID}.json..."
               COMMIT_TO_USE=$(git log --all --format=%H -- "data/decks/${SET_ID}.json" | head -n1 || true)
             fi
-            if [ ! -s "data/decks/${SET_ID}.json" ] && [ -n "$COMMIT_TO_USE" ]; then
+            if [ ! -s "$DECK_PATH" ] && [ -n "$COMMIT_TO_USE" ]; then
               echo "Restoring offline deck from commit $COMMIT_TO_USE..."
               mkdir -p data/decks
-              git show "${COMMIT_TO_USE}:data/decks/${SET_ID}.json" > "data/decks/${SET_ID}.json"
-            elif [ ! -s "data/decks/${SET_ID}.json" ]; then
+              git show "${COMMIT_TO_USE}:data/decks/${SET_ID}.json" > "$DECK_PATH"
+            elif [ ! -s "$DECK_PATH" ]; then
               echo "No commit found containing data/decks/${SET_ID}.json."
             fi
           fi
 
-          if [ -s "data/decks/${SET_ID}.json" ] && [ -n "$EXPECTED_DECK_SHA256" ]; then
-            ACTUAL_DECK_SHA256="$(sha256sum "data/decks/${SET_ID}.json" | cut -d' ' -f1)"
+          if [ -s "$DECK_PATH" ] && [ -n "$EXPECTED_DECK_SHA256" ]; then
+            ACTUAL_DECK_SHA256="$(sha256sum "$DECK_PATH" | cut -d' ' -f1)"
             if [ "$ACTUAL_DECK_SHA256" != "$EXPECTED_DECK_SHA256" ]; then
               echo "::error::Offline deck checksum mismatch for $SET_ID"
               exit 1
