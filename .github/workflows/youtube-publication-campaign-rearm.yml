@@ -1,0 +1,156 @@
+name: Rearm Zero-Upload YouTube Publication Campaign
+
+on:
+  workflow_dispatch:
+    inputs:
+      set_id:
+        description: "Deck set id shared by the before/after control artifacts."
+        required: true
+      before_run_id:
+        description: "Complete all-route control run before the failed apply."
+        required: true
+      after_run_id:
+        description: "Complete all-route control run after the failed apply."
+        required: true
+      replacement_campaign_id:
+        description: "The reconciliation_required zero-upload campaign to supersede."
+        required: true
+      ordinary_per_channel:
+        description: "Ordinary rows to preserve in the replacement manifest."
+        required: true
+        default: "9"
+      polyglot_per_channel:
+        description: "Polyglot rows to preserve in the replacement manifest."
+        required: true
+        default: "1"
+      target_branch:
+        description: "Branch receiving the durable recovery state."
+        required: true
+      confirm:
+        description: "Type REARM_ZERO_UPLOAD_YOUTUBE_PUBLICATION_CAMPAIGN."
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  rearm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_branch }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm ci || npm install
+
+      - name: Download the complete before and after control artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SET_ID: ${{ inputs.set_id }}
+          BEFORE_RUN_ID: ${{ inputs.before_run_id }}
+          AFTER_RUN_ID: ${{ inputs.after_run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$BEFORE_RUN_ID" =~ ^[0-9]+$ ]]
+          [[ "$AFTER_RUN_ID" =~ ^[0-9]+$ ]]
+          mkdir -p /tmp/deck4-rearm-before /tmp/deck4-rearm-after
+          gh run download "$BEFORE_RUN_ID" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name "youtube-publication-control-${SET_ID}-all-routes-${BEFORE_RUN_ID}" \
+            --dir /tmp/deck4-rearm-before
+          gh run download "$AFTER_RUN_ID" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name "youtube-publication-control-${SET_ID}-all-routes-${AFTER_RUN_ID}" \
+            --dir /tmp/deck4-rearm-after
+          BEFORE_REPORT="$(find /tmp/deck4-rearm-before -type f -name youtube-publication-control-all-routes.json -print -quit)"
+          AFTER_REPORT="$(find /tmp/deck4-rearm-after -type f -name youtube-publication-control-all-routes.json -print -quit)"
+          AFTER_SNAPSHOT="$(find /tmp/deck4-rearm-after -type f -name youtube-publication-snapshot.json -print -quit)"
+          AFTER_DISCOVERY="$(find /tmp/deck4-rearm-after -type f -name youtube-playlist-discovery-snapshot.json -print -quit)"
+          test -s "$BEFORE_REPORT"
+          test -s "$AFTER_REPORT"
+          test -s "$AFTER_SNAPSHOT"
+          test -s "$AFTER_DISCOVERY"
+          mkdir -p outputs
+          cp "$BEFORE_REPORT" outputs/youtube-publication-control-before.json
+          cp "$AFTER_REPORT" outputs/youtube-publication-control-after.json
+          cp "$AFTER_SNAPSHOT" outputs/youtube-publication-snapshot-after.json
+          cp "$AFTER_DISCOVERY" outputs/youtube-playlist-discovery-after.json
+
+      - name: Build the exact replacement manifest without provider calls
+        env:
+          SET_ID: ${{ inputs.set_id }}
+          ORDINARY_PER_CHANNEL: ${{ inputs.ordinary_per_channel }}
+          POLYGLOT_PER_CHANNEL: ${{ inputs.polyglot_per_channel }}
+          REPLACEMENT_CAMPAIGN_ID: ${{ inputs.replacement_campaign_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run plan:youtube-publication-campaign -- \
+            --set="$SET_ID" \
+            --supports=ALL \
+            --ordinary-per-channel="$ORDINARY_PER_CHANNEL" \
+            --polyglot-per-channel="$POLYGLOT_PER_CHANNEL" \
+            --min-future-minutes=300 \
+            --max-snapshot-age-minutes=30 \
+            --snapshot=outputs/youtube-publication-snapshot-after.json \
+            --playlist-discovery=outputs/youtube-playlist-discovery-after.json \
+            --replacement-campaign-id="$REPLACEMENT_CAMPAIGN_ID" \
+            --output=outputs/youtube-publication-campaign-recovery-plan.json \
+            --require-apply-ready \
+            --json
+
+      - name: Apply the fail-closed zero-upload re-arm
+        env:
+          REPLACEMENT_CAMPAIGN_ID: ${{ inputs.replacement_campaign_id }}
+          CONFIRM: ${{ inputs.confirm }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$CONFIRM" = REARM_ZERO_UPLOAD_YOUTUBE_PUBLICATION_CAMPAIGN
+          node scripts/rearm-youtube-publication-campaign.mjs \
+            --manifest=outputs/youtube-publication-campaign-recovery-plan.json \
+            --replacement-campaign-id="$REPLACEMENT_CAMPAIGN_ID" \
+            --before-control-report=outputs/youtube-publication-control-before.json \
+            --after-control-report=outputs/youtube-publication-control-after.json \
+            --min-future-minutes=300 \
+            --apply \
+            --confirm=REARM_ZERO_UPLOAD_YOUTUBE_PUBLICATION_CAMPAIGN \
+            --json > outputs/youtube-publication-campaign-rearm.json
+          jq -e '.status == "rearmed" and .providerCalls == 0 and .youtubeWrites == 0 and .assignmentCount == 510' outputs/youtube-publication-campaign-rearm.json
+
+      - name: Commit only the durable recovery state
+        env:
+          TARGET_BRANCH: ${{ inputs.target_branch }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          git add config/youtube-publication-campaigns.json \
+            config/youtube-publish-calendar.json \
+            config/youtube-publication-campaign-plans
+          git diff --cached --quiet && { echo "No recovery changes were produced"; exit 1; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Rearm zero-upload Deck 4 YouTube campaign"
+          git push origin "HEAD:refs/heads/$TARGET_BRANCH"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-publication-campaign-rearm-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-publication-control-before.json
+            outputs/youtube-publication-control-after.json
+            outputs/youtube-publication-snapshot-after.json
+            outputs/youtube-playlist-discovery-after.json
+            outputs/youtube-publication-campaign-recovery-plan.json
+            outputs/youtube-publication-campaign-rearm.json
