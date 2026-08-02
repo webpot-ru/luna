@@ -61,14 +61,22 @@ jobs:
           [[ "$BEFORE_RUN_ID" =~ ^[0-9]+$ ]]
           [[ "$AFTER_RUN_ID" =~ ^[0-9]+$ ]]
           mkdir -p /tmp/deck4-rearm-before /tmp/deck4-rearm-after
-          gh run download "$BEFORE_RUN_ID" \
-            --repo "$GITHUB_REPOSITORY" \
-            --name "youtube-publication-control-${SET_ID}-all-routes-${BEFORE_RUN_ID}" \
-            --dir /tmp/deck4-rearm-before
-          gh run download "$AFTER_RUN_ID" \
-            --repo "$GITHUB_REPOSITORY" \
-            --name "youtube-publication-control-${SET_ID}-all-routes-${AFTER_RUN_ID}" \
-            --dir /tmp/deck4-rearm-after
+          download_artifact() {
+            local run_id="$1" artifact_name="$2" output_dir="$3"
+            for attempt in 1 2 3 4 5; do
+              if gh run download "$run_id" \
+                --repo "$GITHUB_REPOSITORY" \
+                --name "$artifact_name" \
+                --dir "$output_dir"; then
+                return 0
+              fi
+              echo "Artifact download retry $attempt for $artifact_name"
+              sleep 3
+            done
+            return 1
+          }
+          download_artifact "$BEFORE_RUN_ID" "youtube-publication-control-${SET_ID}-all-routes-${BEFORE_RUN_ID}" /tmp/deck4-rearm-before
+          download_artifact "$AFTER_RUN_ID" "youtube-publication-control-${SET_ID}-all-routes-${AFTER_RUN_ID}" /tmp/deck4-rearm-after
           BEFORE_REPORT="$(find /tmp/deck4-rearm-before -type f -name youtube-publication-control-all-routes.json -print -quit)"
           AFTER_REPORT="$(find /tmp/deck4-rearm-after -type f -name youtube-publication-control-all-routes.json -print -quit)"
           AFTER_SNAPSHOT="$(find /tmp/deck4-rearm-after -type f -name youtube-publication-snapshot.json -print -quit)"
