@@ -81,10 +81,18 @@ jobs:
           set -euo pipefail
           [[ "$BEFORE_RUN_ID" =~ ^[0-9]+$ ]]
           [[ "$AFTER_RUN_ID" =~ ^[0-9]+$ ]]
-          BEFORE_REPORT="$(find /tmp/deck4-rearm-before -type f -name youtube-publication-control-all-routes.json -print -quit)"
-          AFTER_REPORT="$(find /tmp/deck4-rearm-after -type f -name youtube-publication-control-all-routes.json -print -quit)"
-          AFTER_SNAPSHOT="$(find /tmp/deck4-rearm-after -type f -name youtube-publication-snapshot.json -print -quit)"
-          AFTER_DISCOVERY="$(find /tmp/deck4-rearm-after -type f -name youtube-playlist-discovery-snapshot.json -print -quit)"
+          echo "Before artifact files:"
+          find /tmp/deck4-rearm-before -type f -print | sort
+          echo "After artifact files:"
+          find /tmp/deck4-rearm-after -type f -print | sort
+          BEFORE_REPORT="$(find /tmp/deck4-rearm-before -type f -iname '*publication-control-all-routes.json' -print -quit)"
+          AFTER_REPORT="$(find /tmp/deck4-rearm-after -type f -iname '*publication-control-all-routes.json' -print -quit)"
+          AFTER_SNAPSHOT="$(find /tmp/deck4-rearm-after -type f -iname '*publication-snapshot.json' -print -quit)"
+          AFTER_DISCOVERY="$(find /tmp/deck4-rearm-after -type f -iname '*playlist-discovery-snapshot.json' -print -quit)"
+          echo "Selected before report: ${BEFORE_REPORT:-<missing>}"
+          echo "Selected after report: ${AFTER_REPORT:-<missing>}"
+          echo "Selected after snapshot: ${AFTER_SNAPSHOT:-<missing>}"
+          echo "Selected after discovery: ${AFTER_DISCOVERY:-<missing>}"
           test -s "$BEFORE_REPORT"
           test -s "$AFTER_REPORT"
           test -s "$AFTER_SNAPSHOT"
