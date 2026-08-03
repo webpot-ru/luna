@@ -202,7 +202,8 @@ async function youtubeMultipartImageUpload({ accessToken, method, query = {}, re
   const close = Buffer.from(`\r\n--${boundary}--\r\n`, "utf8");
   const body = Buffer.concat([metadata, media, close]);
   const url = new URL("playlistImages", "https://www.googleapis.com/upload/youtube/v3/");
-  for (const [key, value] of Object.entries({ uploadType: "multipart", part: "snippet", ...query })) {
+  const defaultPart = method === "PUT" ? "id,snippet" : "snippet";
+  for (const [key, value] of Object.entries({ uploadType: "multipart", part: defaultPart, ...query })) {
     if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, String(value));
   }
   const response = await fetch(url, {
