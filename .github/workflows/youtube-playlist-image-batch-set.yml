@@ -4,13 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "plan is local/read-only; apply inserts exact audit-proven missing playlist images."
+        description: "plan is local/read-only; apply inserts missing images; replace updates exact audit-proven existing images."
         required: true
         default: "plan"
         type: choice
         options:
           - plan
           - apply
+          - replace
       route:
         description: "Exact OAuth/quota shard."
         required: true
@@ -29,7 +30,7 @@ on:
         required: true
         default: "data/youtube-playlist-covers/youtube-playlist-cover-closeout-20260716/manifest.json"
       confirm_youtube_write:
-        description: "For apply type APPLY_YOUTUBE_PLAYLIST_IMAGES."
+        description: "For apply use APPLY_YOUTUBE_PLAYLIST_IMAGES; for replace use REPLACE_YOUTUBE_PLAYLIST_IMAGES."
         required: false
         default: ""
 
@@ -88,6 +89,10 @@ jobs:
             echo "::error::apply requires confirm_youtube_write=APPLY_YOUTUBE_PLAYLIST_IMAGES"
             exit 1
           fi
+          if [ "$MODE" = "replace" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "REPLACE_YOUTUBE_PLAYLIST_IMAGES" ]; then
+            echo "::error::replace requires confirm_youtube_write=REPLACE_YOUTUBE_PLAYLIST_IMAGES"
+            exit 1
+          fi
           echo "supports=$SUPPORTS" >> "$GITHUB_OUTPUT"
           echo "environment_name=$ENVIRONMENT_NAME" >> "$GITHUB_OUTPUT"
 
@@ -99,7 +104,7 @@ jobs:
         run: node scripts/resolve-youtube-api-environment.mjs --support="$SUPPORTS" --environment="$ENVIRONMENT_NAME"
 
       - name: Restore route OAuth bundle
-        if: ${{ inputs.mode == 'apply' }}
+        if: ${{ inputs.mode == 'apply' || inputs.mode == 'replace' }}
         shell: bash
         env:
           YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
@@ -130,6 +135,8 @@ jobs:
           )
           if [ "$MODE" = "apply" ]; then
             ARGS+=("--apply" "--confirm-youtube-write")
+          elif [ "$MODE" = "replace" ]; then
+            ARGS+=("--apply" "--confirm-youtube-write" "--replace-existing")
           fi
           node scripts/youtube-upload-playlist-images.mjs "${ARGS[@]}"
 
@@ -147,7 +154,7 @@ jobs:
 
   persist-playlist-image-state:
     needs: playlist-image-batch
-    if: ${{ always() && inputs.mode == 'apply' }}
+    if: ${{ always() && (inputs.mode == 'apply' || inputs.mode == 'replace') }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     concurrency:

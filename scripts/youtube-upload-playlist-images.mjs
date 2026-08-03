@@ -30,12 +30,14 @@ function parseArgs(argv) {
     oauthRoot: "",
     apply: false,
     confirmYoutubeWrite: false,
+    replaceExisting: false,
     skipUploaded: false,
     readbackAttempts: 8,
   };
   for (const arg of argv) {
     if (arg === "--apply") options.apply = true;
     else if (arg === "--confirm-youtube-write") options.confirmYoutubeWrite = true;
+    else if (arg === "--replace-existing") options.replaceExisting = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else if (arg.startsWith("--manifest=")) options.manifest = arg.slice("--manifest=".length);
     else if (arg.startsWith("--playlist-registry=")) options.playlistRegistry = arg.slice("--playlist-registry=".length);
@@ -64,6 +66,7 @@ function usage() {
     "",
     "Dry-run is default. Live writes require:",
     "  --apply --confirm-youtube-write",
+    "Existing playlist images are never replaced unless --replace-existing is explicit and the manifest carries installed-image readback evidence.",
   ].join("\n");
 }
 
@@ -450,6 +453,7 @@ async function main() {
       playlistKeys: options.playlistKeys,
       limitPerChannel: options.limitPerChannel,
       skipUploaded: options.skipUploaded,
+      replaceExisting: options.replaceExisting,
       readbackAttempts: options.readbackAttempts,
     },
     results: [],
@@ -476,9 +480,24 @@ async function main() {
     };
     report.results.push(result);
     try {
+      const replacementCandidate = options.replaceExisting && candidate.replacementMode === "replace_existing";
+      if (options.replaceExisting && !replacementCandidate) {
+        fail(`--replace-existing requires replacementMode=replace_existing for ${candidate.playlistKey}`);
+      }
       const userAuthorizedReapply = candidate.userAuthorizedReapply === true
         && candidate.reapplyReason === "operator_live_observation_missing";
-      if (options.apply && (
+      if (options.apply && replacementCandidate && (
+        candidate.exactMissingOnly !== false
+        || candidate.auditState !== "installed"
+        || !candidate.playlistImageId
+        || !candidate.auditReport
+        || !candidate.auditReportSha256
+        || candidate.auditEvidenceType !== "youtube_playlist_images_readback"
+        || candidate.capabilityEvidence !== "existing_playlist_image_readback"
+      )) {
+        fail(`Replacement requires installed-image readback evidence for ${candidate.playlistKey}`);
+      }
+      if (options.apply && !replacementCandidate && (
         candidate.exactMissingOnly !== true
         || candidate.auditState !== "absent"
         || !candidate.auditReport
@@ -497,7 +516,10 @@ async function main() {
       }
       const channel = channelByKey(channelRegistry, candidate.channelKey);
       if (!channel) fail(`No channel configured for channelKey=${candidate.channelKey}`);
-      if (channel.playlistImageUploadAllowed !== true) {
+      const canReplaceFromLiveEvidence = replacementCandidate
+        && candidate.auditState === "installed"
+        && candidate.capabilityEvidence === "existing_playlist_image_readback";
+      if (channel.playlistImageUploadAllowed !== true && !canReplaceFromLiveEvidence) {
         fail(`Channel ${candidate.channelKey} is not marked playlistImageUploadAllowed=true`);
       }
       const registryRows = candidateRegistryRows(candidate, playlistRegistries);
@@ -536,7 +558,10 @@ async function main() {
       }
       const existing = await listPlaylistImages({ accessToken, playlistId: candidate.playlistId });
       const currentImage = (existing.items || []).find((item) => samePlaylistImage(item, candidate.playlistId));
-      if (currentImage?.id) {
+      if (replacementCandidate && (!currentImage?.id || currentImage.id !== candidate.playlistImageId)) {
+        fail(`Replacement readback drift for ${candidate.playlistKey}: expected image ${candidate.playlistImageId}, got ${currentImage?.id || "(absent)"}`);
+      }
+      if (currentImage?.id && !replacementCandidate) {
         const readbackAt = new Date().toISOString();
         for (const registryRow of registryRows) {
           registryRow.entry.playlistImage = {
@@ -603,6 +628,7 @@ async function main() {
           sourceCoverPath: candidate.coverPath,
           sourceCoverGitTracked: result.coverGitTracked,
           playlistImagesEndpoint: "playlistImages",
+          ...(replacementCandidate ? { replacementMode: "replace_existing", sourceAuditReport: candidate.auditReport, sourceAuditReportSha256: candidate.auditReportSha256 } : {}),
         };
         registryRow.entry.lastReadbackAt = uploadedAt;
       }
@@ -610,6 +636,7 @@ async function main() {
 
       result.status = "uploaded";
       result.method = method;
+      result.replacementMode = replacementCandidate ? "replace_existing" : undefined;
       result.playlistImageId = readbackImage.id || imageId;
       result.readback = readbackImage;
       result.readbackAttempts = readbackResult.attemptsUsed;
