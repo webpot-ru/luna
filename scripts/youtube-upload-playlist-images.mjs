@@ -420,8 +420,10 @@ async function main() {
   }
 
   const manifest = readJson(options.manifest, "playlist image manifest");
-  if (options.apply && manifest.auditComplete !== true) {
-    fail("Apply requires an auditComplete exact missing-only manifest.");
+  const replacementManifest = manifest.exactReplacementOnly === true
+    && manifest.mode === "replace_existing_playlist_images";
+  if (options.apply && manifest.auditComplete !== true && !(options.replaceExisting && replacementManifest)) {
+    fail("Apply requires an auditComplete exact missing-only manifest or an exact replacement manifest.");
   }
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const playlistRegistry = loadPlaylistRegistry(options.playlistRegistry);
