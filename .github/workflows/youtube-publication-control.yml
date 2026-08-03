@@ -219,7 +219,7 @@ jobs:
             --allow-empty \
             --route-key="$ROUTE" \
             --max-playlist-pages=20 \
-            --max-item-pages=10 \
+            --max-item-pages=20 \
             --output="outputs/youtube-playlist-discovery-$ROUTE.json"
       - uses: actions/upload-artifact@v4
         if: always()
