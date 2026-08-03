@@ -219,6 +219,48 @@ async function youtubeMultipartImageUpload({ accessToken, method, query = {}, re
   return parseYouTubeJson(text, `YouTube playlistImages ${method}`);
 }
 
+async function youtubeResumableImageUpload({ accessToken, method, resource, filePath }) {
+  const media = fs.readFileSync(filePath);
+  const mimeType = detectMimeType(filePath);
+  const metadataText = JSON.stringify(resource);
+  const initiationUrl = new URL("playlistImages", "https://www.googleapis.com/resumable/upload/youtube/v3/");
+  initiationUrl.searchParams.set("uploadType", "resumable");
+  initiationUrl.searchParams.set("part", "snippet");
+
+  const initiationResponse = await fetch(initiationUrl, {
+    method,
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      "content-type": "application/json; charset=UTF-8",
+      "content-length": String(Buffer.byteLength(metadataText)),
+      "x-upload-content-type": mimeType,
+      "x-upload-content-length": String(media.length),
+    },
+    body: metadataText,
+  });
+  const initiationText = initiationResponse.status === 204 ? "" : await initiationResponse.text();
+  if (!initiationResponse.ok) {
+    fail(`YouTube playlistImages resumable initiation failed (${initiationResponse.status}): ${initiationText}`);
+  }
+  const uploadLocation = initiationResponse.headers.get("location");
+  if (!uploadLocation) fail("YouTube playlistImages resumable initiation returned no upload location.");
+
+  const uploadResponse = await fetch(uploadLocation, {
+    method: "PUT",
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      "content-type": mimeType,
+      "content-length": String(media.length),
+    },
+    body: media,
+  });
+  const uploadText = uploadResponse.status === 204 ? "" : await uploadResponse.text();
+  if (!uploadResponse.ok) {
+    fail(`YouTube playlistImages resumable media upload failed (${uploadResponse.status}): ${uploadText}`);
+  }
+  return parseYouTubeJson(uploadText, `YouTube playlistImages ${method} resumable`);
+}
+
 async function readAuthorizedChannel({ accessToken, expectedChannelId }) {
   const data = await youtubeJson({
     accessToken,
@@ -593,12 +635,19 @@ async function main() {
           type: "hero",
         },
       };
-      const uploaded = await youtubeMultipartImageUpload({
-        accessToken,
-        method: method === "update" ? "PUT" : "POST",
-        resource,
-        filePath: coverPath,
-      });
+      const uploaded = method === "update"
+        ? await youtubeResumableImageUpload({
+          accessToken,
+          method: "PUT",
+          resource,
+          filePath: coverPath,
+        })
+        : await youtubeMultipartImageUpload({
+          accessToken,
+          method: "POST",
+          resource,
+          filePath: coverPath,
+        });
       const imageId = uploaded?.id || currentImage?.id || "";
       result.responseImageId = imageId;
       const readbackResult = await readPlaylistImageWithRetry({
