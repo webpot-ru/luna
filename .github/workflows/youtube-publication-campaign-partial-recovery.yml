@@ -1,0 +1,196 @@
+name: Reconcile Partial YouTube Publication Campaign
+
+on:
+  workflow_dispatch:
+    inputs:
+      set_id:
+        description: "Deck set id shared by the source campaign and control artifact."
+        required: true
+      campaign_id:
+        description: "The reconciliation_required source campaign."
+        required: true
+      manifest_hash:
+        description: "Exact immutable source campaign manifest hash."
+        required: true
+      control_run_id:
+        description: "Complete healthy all-route control run proving the current live state."
+        required: true
+      target_branch:
+        description: "Branch receiving the durable recovery state."
+        required: true
+      min_future_minutes:
+        description: "Minimum future buffer for the replacement claims."
+        required: true
+        default: "90"
+      max_evidence_age_minutes:
+        description: "Maximum age of the downloaded control evidence."
+        required: true
+        default: "180"
+      confirm:
+        description: "Type CREATE_PARTIAL_YOUTUBE_RECOVERY_CAMPAIGN."
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_branch }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci || npm install
+
+      - name: Download the complete all-route control artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: youtube-publication-control-${{ inputs.set_id }}-all-routes-${{ inputs.control_run_id }}
+          path: .control-artifact
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.control_run_id }}
+          github-token: ${{ github.token }}
+
+      - name: Verify the fresh live evidence and derive exact missing keys
+        env:
+          SET_ID: ${{ inputs.set_id }}
+          CAMPAIGN_ID: ${{ inputs.campaign_id }}
+          MANIFEST_HASH: ${{ inputs.manifest_hash }}
+          CONTROL_RUN_ID: ${{ inputs.control_run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          REPORT="$(find .control-artifact -type f -name 'youtube-publication-control-all-routes.json' -print -quit)"
+          test -s "$REPORT"
+          export REPORT
+          node <<'NODE'
+          const fs = require("node:fs");
+          const path = require("node:path");
+          const report = JSON.parse(fs.readFileSync(process.env.REPORT, "utf8"));
+          const registry = JSON.parse(fs.readFileSync("config/youtube-publication-campaigns.json", "utf8"));
+          const campaign = (registry.campaigns || []).find((row) => row.campaignId === process.env.CAMPAIGN_ID);
+          if (!campaign) throw new Error(`Campaign not found: ${process.env.CAMPAIGN_ID}`);
+          if (campaign.setId !== process.env.SET_ID) throw new Error("Campaign set_id mismatch");
+          if (campaign.manifestHash !== process.env.MANIFEST_HASH) throw new Error("Campaign manifest hash mismatch");
+          if (campaign.status !== "reconciliation_required") throw new Error(`Expected reconciliation_required, got ${campaign.status}`);
+          const summary = report.summary || {};
+          const requiredZero = [
+            "blockerCount", "advisoryCount", "calendarAssignmentDuplicateCount",
+            "calendarSlotCollisionCount", "liveVideoMissingDurableRegistryCount",
+            "liveScheduleMissingCalendarCount", "unclassifiedRecentUploadCount",
+          ];
+          if (summary.complete !== true || summary.healthy !== true) throw new Error("All-route control report is not complete and healthy");
+          if (Number(summary.expectedRouteCount) !== 8 || Number(summary.receivedRouteCount) !== 8) throw new Error("All 8 routes are not covered");
+          if (summary.paginationComplete !== true || summary.videoStatusReadbackComplete !== true) throw new Error("Pagination/status readback is incomplete");
+          for (const key of requiredZero) if (Number(summary[key] || 0) !== 0) throw new Error(`${key} must be 0, got ${summary[key]}`);
+          if (!Array.isArray(report.publications)) throw new Error("Control report publications are missing");
+          const finalizer = campaign.finalizeSummary || {};
+          if (Number(finalizer.completedCount) !== 450 || Number(finalizer.observedCount) !== 450 || Number(finalizer.missingCount) !== 60) {
+            throw new Error(`Unexpected source finalizer summary: ${JSON.stringify(finalizer)}`);
+          }
+          const accepted = (campaign.assignments || []).filter((row) => row.status === "upload_accepted" && row.youtubeVideoId);
+          const missing = (campaign.assignments || []).filter((row) => !(row.status === "upload_accepted" && row.youtubeVideoId));
+          if (accepted.length !== 450 || missing.length !== 60) throw new Error(`Unexpected durable assignment split: ${accepted.length}/${missing.length}`);
+          const liveByAssignment = new Map(report.publications.map((row) => [row.assignmentKey, row]));
+          for (const row of accepted) {
+            const live = liveByAssignment.get(row.assignmentKey);
+            if (!live || live.youtubeVideoId !== row.youtubeVideoId || live.durableRegistryPresent !== true || live.liveReadbackPresent !== true) {
+              throw new Error(`Accepted assignment is not confirmed by the fresh audit: ${row.assignmentKey}`);
+            }
+          }
+          for (const row of missing) if (liveByAssignment.has(row.assignmentKey)) throw new Error(`Missing assignment already exists live: ${row.assignmentKey}`);
+          const ordinary = missing.filter((row) => row.videoType === "ordinary");
+          const polyglot = missing.filter((row) => row.videoType === "polyglot");
+          if (ordinary.length !== 9 || polyglot.length !== 51) throw new Error(`Expected 9 ordinary + 51 Polyglot missing, got ${ordinary.length} + ${polyglot.length}`);
+          const keyFile = "/tmp/youtube-partial-recovery-assignment-keys.json";
+          fs.writeFileSync(keyFile, JSON.stringify({ assignmentKeys: missing.map((row) => row.assignmentKey).sort() }, null, 2) + "\n");
+          const derivedDir = "/tmp/youtube-partial-recovery-route-reports";
+          fs.mkdirSync(derivedDir, { recursive: true });
+          const routeEntries = Object.values(report.routes || {});
+          if (routeEntries.length !== 8) throw new Error("Per-route evidence entries are missing");
+          const controls = [];
+          for (let index = 0; index < routeEntries.length; index += 1) {
+            const entry = routeEntries[index];
+            const derived = {
+              ...entry,
+              blockers: [],
+              advisories: [],
+              publications: report.publications,
+              tails: report.tails || [],
+            };
+            const file = path.join(derivedDir, `route-${index + 1}.json`);
+            fs.writeFileSync(file, JSON.stringify(derived, null, 2) + "\n");
+            controls.push(file);
+          }
+          fs.writeFileSync("/tmp/youtube-partial-recovery-control-reports.txt", controls.join(",") + "\n");
+          console.log(JSON.stringify({
+            sourceCampaign: process.env.CAMPAIGN_ID,
+            controlRunId: process.env.CONTROL_RUN_ID,
+            activeVideoCount: summary.activeVideoCount,
+            acceptedCount: accepted.length,
+            missingCount: missing.length,
+            ordinaryCount: ordinary.length,
+            polyglotCount: polyglot.length,
+            derivedControls: controls.length,
+          }, null, 2));
+          NODE
+
+      - name: Apply the exact partial recovery without provider or YouTube calls
+        env:
+          CAMPAIGN_ID: ${{ inputs.campaign_id }}
+          MIN_FUTURE_MINUTES: ${{ inputs.min_future_minutes }}
+          MAX_EVIDENCE_AGE_MINUTES: ${{ inputs.max_evidence_age_minutes }}
+          CONFIRM: ${{ inputs.confirm }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$CONFIRM" = CREATE_PARTIAL_YOUTUBE_RECOVERY_CAMPAIGN
+          CONTROL_REPORTS="$(cat /tmp/youtube-partial-recovery-control-reports.txt)"
+          node scripts/create-youtube-partial-recovery-campaign.mjs \
+            --campaign-id="$CAMPAIGN_ID" \
+            --assignment-keys-file=/tmp/youtube-partial-recovery-assignment-keys.json \
+            --control-reports="$CONTROL_REPORTS" \
+            --min-future-minutes="$MIN_FUTURE_MINUTES" \
+            --max-evidence-age-minutes="$MAX_EVIDENCE_AGE_MINUTES" \
+            --output=outputs/youtube-partial-recovery-manifest.json \
+            --apply \
+            --confirm=CREATE_PARTIAL_YOUTUBE_RECOVERY_CAMPAIGN
+          jq -e '.summary.applyReady == true and .summary.assignmentCount == 60 and .summary.ordinaryCount == 9 and .summary.polyglotCount == 51' outputs/youtube-partial-recovery-manifest.json
+          node -e 'const fs=require("fs"); const m=JSON.parse(fs.readFileSync("outputs/youtube-partial-recovery-manifest.json")); console.log(JSON.stringify({campaignId:m.campaignId,manifestHash:m.manifestHash,summary:m.summary},null,2))'
+
+      - name: Commit only the durable recovery state
+        env:
+          TARGET_BRANCH: ${{ inputs.target_branch }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          RECOVERY_CAMPAIGN_ID="$(node -p 'JSON.parse(require("fs").readFileSync("outputs/youtube-partial-recovery-manifest.json")).campaignId')"
+          PLAN_PATH="config/youtube-publication-campaign-plans/${RECOVERY_CAMPAIGN_ID}.json"
+          test -s "$PLAN_PATH"
+          git diff --check
+          git add config/youtube-publication-campaigns.json config/youtube-publish-calendar.json "$PLAN_PATH"
+          git diff --cached --check
+          git diff --cached --quiet && { echo "No durable partial recovery state was produced"; exit 1; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Create partial recovery campaign for Deck 4"
+          git push origin "HEAD:refs/heads/$TARGET_BRANCH"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-publication-campaign-partial-recovery-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-partial-recovery-manifest.json
+            /tmp/youtube-partial-recovery-assignment-keys.json
+            /tmp/youtube-partial-recovery-control-reports.txt
