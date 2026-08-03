@@ -406,8 +406,17 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
     }
   }
 
-  const cleanVoiceId = String(voiceId).replace(/^edge_/, "");
-  console.log(`[Local TTS] Generating: "${cleanedText.slice(0, 40)}..." using voice ${cleanVoiceId}`);
+  const primaryVoiceId = String(voiceId);
+  const primaryCleanVoiceId = primaryVoiceId.replace(/^edge_/, "");
+  // Edge TTS occasionally returns a zero-byte file for the Katja German
+  // voice even after the normal retry window. Keep the deterministic primary
+  // cache key, then try the stable German Conrad voice before failing the
+  // whole video build. Other languages and explicitly selected voices keep
+  // their existing single-voice behavior.
+  const voiceCandidates = [primaryVoiceId];
+  if (lang === "DE" && primaryCleanVoiceId === "de-DE-KatjaNeural") {
+    voiceCandidates.push("edge_de-DE-ConradNeural");
+  }
   
   let venvPath = "edge-tts";
   const localVenvPath = process.platform === "win32"
@@ -420,37 +429,50 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
   const retryCount = positiveIntegerEnv("EDGE_TTS_RETRIES", 4);
   const retryBaseMs = positiveIntegerEnv("EDGE_TTS_RETRY_BASE_MS", 1500);
   let lastError = null;
-  for (let attempt = 1; attempt <= retryCount; attempt += 1) {
-    try {
-      if (fs.existsSync(cachedPath)) fs.unlinkSync(cachedPath);
-    } catch (e) {}
-    try {
-      execFileSync(venvPath, [
-        "--voice", cleanVoiceId,
-        "--text", cleanedText,
-        "--write-media", cachedPath
-      ], {
-        stdio: "pipe",
-        timeout: positiveIntegerEnv("EDGE_TTS_TIMEOUT_MS", 90000),
-      });
-      if (fs.existsSync(cachedPath) && fs.statSync(cachedPath).size > 0) {
-        return cachedPath;
-      }
-      throw new Error("edge-tts wrote an empty audio file.");
-    } catch (err) {
-      lastError = err;
+  for (let voiceIndex = 0; voiceIndex < voiceCandidates.length; voiceIndex += 1) {
+    const candidateVoiceId = voiceCandidates[voiceIndex];
+    const candidateCleanVoiceId = candidateVoiceId.replace(/^edge_/, "");
+    const candidateTextHash = crypto.createHash("sha256").update(`${candidateVoiceId}_${cleanedText}`).digest("hex");
+    const candidateCachedPath = path.join(cacheDir, `${candidateTextHash}.mp3`);
+    if (fs.existsSync(candidateCachedPath) && fs.statSync(candidateCachedPath).size > 0) {
+      return candidateCachedPath;
+    }
+    console.log(`[Local TTS] Generating: "${cleanedText.slice(0, 40)}..." using voice ${candidateCleanVoiceId}`);
+    for (let attempt = 1; attempt <= retryCount; attempt += 1) {
       try {
-        if (fs.existsSync(cachedPath)) fs.unlinkSync(cachedPath);
+        if (fs.existsSync(candidateCachedPath)) fs.unlinkSync(candidateCachedPath);
       } catch (e) {}
-      if (attempt < retryCount) {
-        const waitMs = retryBaseMs * Math.pow(2, attempt - 1);
-        console.warn(`[Local TTS] edge-tts failed for "${cleanedText.slice(0, 40)}..." attempt ${attempt}/${retryCount}; retrying in ${waitMs}ms. ${formatExecError(err)}`);
-        await delay(waitMs);
+      try {
+        execFileSync(venvPath, [
+          "--voice", candidateCleanVoiceId,
+          "--text", cleanedText,
+          "--write-media", candidateCachedPath
+        ], {
+          stdio: "pipe",
+          timeout: positiveIntegerEnv("EDGE_TTS_TIMEOUT_MS", 90000),
+        });
+        if (fs.existsSync(candidateCachedPath) && fs.statSync(candidateCachedPath).size > 0) {
+          return candidateCachedPath;
+        }
+        throw new Error("edge-tts wrote an empty audio file.");
+      } catch (err) {
+        lastError = err;
+        try {
+          if (fs.existsSync(candidateCachedPath)) fs.unlinkSync(candidateCachedPath);
+        } catch (e) {}
+        if (attempt < retryCount) {
+          const waitMs = retryBaseMs * Math.pow(2, attempt - 1);
+          console.warn(`[Local TTS] edge-tts failed for "${cleanedText.slice(0, 40)}..." using ${candidateCleanVoiceId} attempt ${attempt}/${retryCount}; retrying in ${waitMs}ms. ${formatExecError(err)}`);
+          await delay(waitMs);
+        }
       }
+    }
+    if (voiceIndex < voiceCandidates.length - 1) {
+      console.warn(`[Local TTS] ${candidateCleanVoiceId} did not produce audio; trying the deterministic German fallback voice.`);
     }
   }
 
-  throw new Error(`Local edge-tts failed for text "${text}" after ${retryCount} attempts: ${formatExecError(lastError)}`);
+  throw new Error(`Local edge-tts failed for text "${text}" after ${retryCount} attempts per voice: ${formatExecError(lastError)}`);
 }
 
 // Get Audio Duration via ffprobe
