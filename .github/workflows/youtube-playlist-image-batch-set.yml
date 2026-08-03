@@ -29,6 +29,10 @@ on:
         description: "Git-tracked exact missing-only playlist image manifest."
         required: true
         default: "data/youtube-playlist-covers/youtube-playlist-cover-closeout-20260716/manifest.json"
+      limit_per_channel:
+        description: "Optional bounded control batch; 0 processes the full manifest selection."
+        required: false
+        default: "0"
       confirm_youtube_write:
         description: "For apply use APPLY_YOUTUBE_PLAYLIST_IMAGES; for replace use REPLACE_YOUTUBE_PLAYLIST_IMAGES."
         required: false
@@ -62,6 +66,7 @@ jobs:
           MODE: ${{ inputs.mode }}
           ROUTE: ${{ inputs.route }}
           MANIFEST: ${{ inputs.manifest }}
+          LIMIT_PER_CHANNEL: ${{ inputs.limit_per_channel }}
           CONFIRM_YOUTUBE_WRITE: ${{ inputs.confirm_youtube_write }}
         run: |
           set -euo pipefail
@@ -91,6 +96,10 @@ jobs:
           fi
           if [ "$MODE" = "replace" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "REPLACE_YOUTUBE_PLAYLIST_IMAGES" ]; then
             echo "::error::replace requires confirm_youtube_write=REPLACE_YOUTUBE_PLAYLIST_IMAGES"
+            exit 1
+          fi
+          if ! [[ "$LIMIT_PER_CHANNEL" =~ ^[0-9]+$ ]]; then
+            echo "::error::limit_per_channel must be a non-negative integer"
             exit 1
           fi
           echo "supports=$SUPPORTS" >> "$GITHUB_OUTPUT"
@@ -125,6 +134,7 @@ jobs:
           MANIFEST: ${{ inputs.manifest }}
           SUPPORTS: ${{ steps.route.outputs.supports }}
           ROUTE: ${{ inputs.route }}
+          LIMIT_PER_CHANNEL: ${{ inputs.limit_per_channel }}
         run: |
           set -euo pipefail
           ARGS=(
@@ -133,6 +143,9 @@ jobs:
             "--output-dir=outputs/youtube-playlist-image-closeout/$ROUTE"
             "--readback-attempts=1"
           )
+          if [ "$LIMIT_PER_CHANNEL" != "0" ]; then
+            ARGS+=("--limit-per-channel=$LIMIT_PER_CHANNEL")
+          fi
           if [ "$MODE" = "apply" ]; then
             ARGS+=("--apply" "--confirm-youtube-write")
           elif [ "$MODE" = "replace" ]; then
