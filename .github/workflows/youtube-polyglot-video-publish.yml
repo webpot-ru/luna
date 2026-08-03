@@ -633,7 +633,21 @@ jobs:
             const fs = require("fs");
             const report = JSON.parse(fs.readFileSync("outputs/video-generator/youtube-polyglot-plan-github.json", "utf8"));
             const candidate = report.candidate || {};
-            const playlist = candidate.playlist || {};
+            const campaignId = process.env.CAMPAIGN_ID || "";
+            const manifestHash = process.env.CAMPAIGN_MANIFEST_HASH || "";
+            const manifestPath = `config/youtube-publication-campaign-plans/${campaignId}.json`;
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+            if (manifest.campaignId !== campaignId || manifest.manifestHash !== manifestHash) {
+              throw new Error("target recovery manifest identity does not match the claimed campaign inputs");
+            }
+            const matches = (manifest.assignments || []).filter((row) => row.videoType === "polyglot"
+              && row.supportLang === candidate.supportLang
+              && row.bundleKey === candidate.bundleKey
+              && row.targetLangsHash === candidate.targetLangsHash);
+            if (matches.length !== 1) {
+              throw new Error(`target recovery manifest must contain exactly one matching Polyglot assignment; got ${matches.length}`);
+            }
+            const playlist = matches[0].playlist || {};
             if (!playlist.youtubePlaylistId || playlist.createAllowed !== false) {
               throw new Error("target recovery requires an existing durable playlist ID and createAllowed=false");
             }
