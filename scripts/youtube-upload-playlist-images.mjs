@@ -244,8 +244,11 @@ async function youtubeResumableImageUpload({ accessToken, method, resource, file
   }
   const uploadLocation = initiationResponse.headers.get("location");
   if (!uploadLocation) fail("YouTube playlistImages resumable initiation returned no upload location.");
+  const uploadUrl = new URL(uploadLocation);
+  if (!uploadUrl.searchParams.has("uploadType")) uploadUrl.searchParams.set("uploadType", "resumable");
+  if (!uploadUrl.searchParams.has("part")) uploadUrl.searchParams.set("part", "snippet");
 
-  const uploadResponse = await fetch(uploadLocation, {
+  const uploadResponse = await fetch(uploadUrl, {
     method: "PUT",
     headers: {
       authorization: `Bearer ${accessToken}`,
