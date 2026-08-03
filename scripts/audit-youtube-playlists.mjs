@@ -20,6 +20,7 @@ function parseArgs(argv) {
     // the read-only identity audit complete for those playlists while still
     // failing closed if an unexpectedly large playlist exceeds the safety cap.
     maxItemPages: 1000,
+    playlistIds: [],
     allowEmpty: false,
     json: false,
   };
@@ -32,6 +33,7 @@ function parseArgs(argv) {
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = value();
     else if (arg === "--max-playlist-pages" || arg.startsWith("--max-playlist-pages=")) options.maxPlaylistPages = Number(value());
     else if (arg === "--max-item-pages" || arg.startsWith("--max-item-pages=")) options.maxItemPages = Number(value());
+    else if (arg === "--playlist-ids" || arg.startsWith("--playlist-ids=")) options.playlistIds = value().split(",").map((id) => id.trim()).filter(Boolean);
     else if (arg === "--allow-empty") options.allowEmpty = true;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
@@ -123,7 +125,15 @@ async function readPlaylistItems({ accessToken, playlistId, maxPages }) {
   const videoIds = [];
   let pageToken = "";
   let pagesRead = 0;
+  let totalResults = null;
+  const seenPageTokens = new Set();
   for (let page = 0; page < maxPages; page += 1) {
+    if (pageToken) {
+      if (seenPageTokens.has(pageToken)) {
+        throw new Error(`Playlist item pagination token repeated for ${playlistId}; refusing an API pagination loop`);
+      }
+      seenPageTokens.add(pageToken);
+    }
     const response = await youtubeJson({
       accessToken,
       pathName: "playlistItems",
@@ -132,22 +142,29 @@ async function readPlaylistItems({ accessToken, playlistId, maxPages }) {
         playlistId,
         maxResults: 50,
         pageToken,
-        fields: "nextPageToken,items(contentDetails(videoId))",
+        fields: "nextPageToken,pageInfo(totalResults),items(contentDetails(videoId))",
       },
     });
     pagesRead += 1;
+    if (Number.isInteger(response.pageInfo?.totalResults)) totalResults = response.pageInfo.totalResults;
     videoIds.push(...(response.items || []).map((row) => row.contentDetails?.videoId).filter(Boolean));
-    pageToken = response.nextPageToken || "";
+    const nextPageToken = response.nextPageToken || "";
+    if (nextPageToken && nextPageToken === pageToken) {
+      throw new Error(`Playlist item pagination token repeated for ${playlistId}; refusing an API pagination loop`);
+    }
+    pageToken = nextPageToken;
     if (!pageToken) break;
   }
   return {
     videoIds: [...new Set(videoIds)],
     pagesRead,
+    totalResults,
     paginationComplete: !pageToken,
   };
 }
 
-export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPlaylistPages, maxItemPages }) {
+export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPlaylistPages, maxItemPages, playlistIds = [] }) {
+  const selectedPlaylistIds = [...new Set((playlistIds || []).map((id) => String(id || "").trim()).filter(Boolean))];
   const playlists = [];
   let pageToken = "";
   let playlistPagesRead = 0;
@@ -175,9 +192,17 @@ export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPl
     if (!pageToken) break;
   }
   if (pageToken) throw new Error(`Playlist pagination exceeded maxPlaylistPages=${maxPlaylistPages}`);
+  if (selectedPlaylistIds.length) {
+    const discoveredIds = new Set(playlists.map((playlist) => playlist.id));
+    const missingIds = selectedPlaylistIds.filter((id) => !discoveredIds.has(id));
+    if (missingIds.length) throw new Error(`Selected playlist ID(s) were not found in complete owned playlist discovery: ${missingIds.join(",")}`);
+  }
+  const playlistsToRead = selectedPlaylistIds.length
+    ? playlists.filter((playlist) => selectedPlaylistIds.includes(playlist.id))
+    : playlists;
   const discoveredPlaylists = [];
   const disappearedPlaylistIds = [];
-  for (const playlist of playlists) {
+  for (const playlist of playlistsToRead) {
     if (playlist.youtubeChannelId && playlist.youtubeChannelId !== expectedChannelId) {
       throw new Error(`Playlist ${playlist.id} belongs to unexpected channel ${playlist.youtubeChannelId}`);
     }
@@ -198,11 +223,14 @@ export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPl
     if (!items.paginationComplete) throw new Error(`Playlist item pagination exceeded maxItemPages=${maxItemPages} for ${playlist.id}`);
     playlist.videoIds = items.videoIds;
     playlist.itemPagesRead = items.pagesRead;
+    playlist.itemTotalResults = items.totalResults;
     playlist.itemPaginationComplete = true;
     discoveredPlaylists.push(playlist);
   }
   return {
     playlists: discoveredPlaylists,
+    scope: selectedPlaylistIds.length ? "selected_playlists" : "owned_playlists",
+    selectedPlaylistIds,
     disappearedPlaylistIds,
     playlistPagesRead,
     itemPagesRead: discoveredPlaylists.reduce((total, row) => total + Number(row.itemPagesRead || 0), 0),
@@ -215,6 +243,7 @@ export async function auditYoutubePlaylists(options) {
   if (!options.routeKey) throw new Error("--route-key is required");
   if (!Number.isInteger(options.maxPlaylistPages) || options.maxPlaylistPages < 1) throw new Error("--max-playlist-pages must be a positive integer");
   if (!Number.isInteger(options.maxItemPages) || options.maxItemPages < 1) throw new Error("--max-item-pages must be a positive integer");
+  if (new Set(options.playlistIds).size !== options.playlistIds.length) throw new Error("--playlist-ids must not contain duplicates");
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const clientFile = channelRegistry.defaults?.oauthClientFile || ".local/youtube-oauth/google-oauth-client.json";
   const channels = [];
@@ -229,12 +258,15 @@ export async function auditYoutubePlaylists(options) {
       expectedChannelId: channel.channelId,
       maxPlaylistPages: options.maxPlaylistPages,
       maxItemPages: options.maxItemPages,
+      playlistIds: options.playlistIds,
     });
     channels.push({
       supportLang,
       channelKey: channel.key,
       youtubeChannelId: channel.channelId,
       authorizedChannelTitle: authorized.snippet?.title || "",
+      scope: inventory.scope,
+      selectedPlaylistIds: inventory.selectedPlaylistIds,
       complete: inventory.paginationComplete,
       playlistPagesRead: inventory.playlistPagesRead,
       itemPagesRead: inventory.itemPagesRead,
@@ -246,6 +278,8 @@ export async function auditYoutubePlaylists(options) {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
     mode: "youtube_playlist_discovery_read_only",
+    scope: options.playlistIds.length ? "selected_playlists" : "owned_playlists",
+    selectedPlaylistIds: options.playlistIds,
     routeKey: options.routeKey,
     complete: channels.length === options.supports.length && channels.every((row) => row.complete),
     summary: {
@@ -265,7 +299,7 @@ export async function auditYoutubePlaylists(options) {
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log("node scripts/audit-youtube-playlists.mjs --support=EN,RU --route-key=youtube-1 --output=outputs/youtube-playlist-discovery-youtube-1.json");
+    console.log("node scripts/audit-youtube-playlists.mjs --support=EN,RU --route-key=youtube-1 [--playlist-ids=PL...,...] --output=outputs/youtube-playlist-discovery-youtube-1.json");
     return;
   }
   const report = await auditYoutubePlaylists(options);

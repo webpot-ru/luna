@@ -31,6 +31,8 @@ on:
       campaign_manifest_hash: { required: false, type: string, default: "" }
       campaign_metadata_route: { required: false, type: string, default: "" }
       campaign_owned_apply: { required: true, type: boolean }
+      playlist_preflight_mode: { required: false, type: string, default: "owned_complete" }
+      confirm_target_playlist_only: { required: false, type: string, default: "" }
       offline_deck_git_commit: { required: false, type: string, default: "" }
       offline_deck_git_blob: { required: false, type: string, default: "" }
       offline_deck_sha256: { required: false, type: string, default: "" }
@@ -169,6 +171,14 @@ on:
         description: "Internal campaign sequence JSON. Leave empty for a normal one-bundle dispatch."
         required: false
         default: ""
+      playlist_preflight_mode:
+        description: "Playlist preflight scope. owned_complete is the normal full owned-playlist audit; target_playlist_only is an explicitly confirmed exact-recovery mode."
+        required: true
+        default: "owned_complete"
+        type: choice
+        options:
+          - owned_complete
+          - target_playlist_only
 
 permissions:
   contents: read
@@ -280,6 +290,9 @@ jobs:
           CAMPAIGN_MANIFEST_HASH: ${{ inputs.campaign_manifest_hash }}
           CAMPAIGN_METADATA_ROUTE: ${{ inputs.campaign_metadata_route }}
           CAMPAIGN_OWNED_APPLY: ${{ inputs.campaign_owned_apply }}
+          PLAYLIST_PREFLIGHT_MODE: ${{ inputs.playlist_preflight_mode }}
+          CONFIRM_TARGET_PLAYLIST_ONLY: ${{ inputs.confirm_target_playlist_only }}
+          CREATE_PLAYLISTS: ${{ inputs.create_playlists }}
         run: |
           set -euo pipefail
           support_clean="$(printf '%s' "$SUPPORT" | tr '[:lower:]' '[:upper:]' | xargs)"
@@ -305,6 +318,23 @@ jobs:
           fi
           if [ "$MODE" = "apply" ] && [ "$CAMPAIGN_OWNED_APPLY" != "true" ]; then
             echo "::error::Direct apply is disabled. Use youtube-publication-campaign.yml with an already-claimed campaign."
+            exit 1
+          fi
+          if [ "$PLAYLIST_PREFLIGHT_MODE" != "owned_complete" ] && [ "$PLAYLIST_PREFLIGHT_MODE" != "target_playlist_only" ]; then
+            echo "::error::playlist_preflight_mode must be owned_complete or target_playlist_only"
+            exit 1
+          fi
+          if [ "$PLAYLIST_PREFLIGHT_MODE" = "target_playlist_only" ]; then
+            if [ "$MODE" != "apply" ] || [ "$CONFIRM_TARGET_PLAYLIST_ONLY" != "ALLOW_TARGET_PLAYLIST_ONLY_PREFLIGHT" ]; then
+              echo "::error::target_playlist_only requires apply and confirm_target_playlist_only=ALLOW_TARGET_PLAYLIST_ONLY_PREFLIGHT"
+              exit 1
+            fi
+            if [ "$CREATE_PLAYLISTS" = "true" ]; then
+              echo "::error::target_playlist_only refuses playlist creation; pass create_playlists=false"
+              exit 1
+            fi
+          elif [ -n "$CONFIRM_TARGET_PLAYLIST_ONLY" ]; then
+            echo "::error::confirm_target_playlist_only is only valid with playlist_preflight_mode=target_playlist_only"
             exit 1
           fi
           if ! printf '%s' "$LIMIT" | grep -Eq '^[0-9]+$'; then
@@ -557,7 +587,7 @@ jobs:
           npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
 
       - name: Preflight scheduled public playlist before metadata and render
-        if: ${{ inputs.mode == 'apply' && inputs.publish_mode == 'scheduled' && steps.polyglot_plan.outputs.already_published != 'true' }}
+        if: ${{ inputs.mode == 'apply' && inputs.publish_mode == 'scheduled' && inputs.playlist_preflight_mode == 'owned_complete' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
           SUPPORT: ${{ inputs.support }}
@@ -574,6 +604,69 @@ jobs:
             --route-key="$ROUTE_KEY" \
             --max-item-pages=1000 \
             --output=outputs/youtube-polyglot-playlist-discovery-github.json
+          npm run check:youtube-scheduled-playlist-visibility -- \
+            --plan=outputs/video-generator/youtube-polyglot-plan-github.json \
+            --discovery=outputs/youtube-polyglot-playlist-discovery-github.json \
+            --require-public \
+            --output=outputs/youtube-polyglot-playlist-visibility-github.json
+
+      - name: Preflight exact target Polyglot playlist before metadata and render
+        if: ${{ inputs.mode == 'apply' && inputs.publish_mode == 'scheduled' && inputs.playlist_preflight_mode == 'target_playlist_only' && steps.polyglot_plan.outputs.already_published != 'true' }}
+        shell: bash
+        env:
+          SUPPORT: ${{ inputs.support }}
+          CAMPAIGN_ID: ${{ inputs.campaign_id }}
+          CAMPAIGN_MANIFEST_HASH: ${{ inputs.campaign_manifest_hash }}
+          CAMPAIGN_OWNED_APPLY: ${{ inputs.campaign_owned_apply }}
+          CONFIRM_TARGET_PLAYLIST_ONLY: ${{ inputs.confirm_target_playlist_only }}
+        run: |
+          set -euo pipefail
+          if [ "$CAMPAIGN_OWNED_APPLY" != "true" ] || [ -z "$CAMPAIGN_ID" ] || [ -z "$CAMPAIGN_MANIFEST_HASH" ]; then
+            echo "::error::target_playlist_only requires an exact campaign-owned apply"
+            exit 1
+          fi
+          if [ "$CONFIRM_TARGET_PLAYLIST_ONLY" != "ALLOW_TARGET_PLAYLIST_ONLY_PREFLIGHT" ]; then
+            echo "::error::target_playlist_only confirmation is missing"
+            exit 1
+          fi
+          PLAYLIST_ID="$(node -e '
+            const fs = require("fs");
+            const report = JSON.parse(fs.readFileSync("outputs/video-generator/youtube-polyglot-plan-github.json", "utf8"));
+            const candidate = report.candidate || {};
+            const playlist = candidate.playlist || {};
+            if (!playlist.youtubePlaylistId || playlist.createAllowed !== false) {
+              throw new Error("target recovery requires an existing durable playlist ID and createAllowed=false");
+            }
+            process.stdout.write(playlist.youtubePlaylistId);
+          ')"
+          ROUTE_KEY="$(node --input-type=module -e '
+            import { canonicalSupportRouteKey, loadCanonicalSupportRouting } from "./scripts/lib/youtube-support-routing.mjs";
+            const route = canonicalSupportRouteKey(loadCanonicalSupportRouting(), process.env.SUPPORT);
+            if (!route) throw new Error(`Missing route for ${process.env.SUPPORT}`);
+            process.stdout.write(route);
+          ')"
+          npm run audit:youtube-playlists -- \
+            --support="$SUPPORT" \
+            --route-key="$ROUTE_KEY" \
+            --playlist-ids="$PLAYLIST_ID" \
+            --max-playlist-pages=1000 \
+            --max-item-pages=1000 \
+            --output=outputs/youtube-polyglot-playlist-discovery-github.json
+          PLAYLIST_ID="$PLAYLIST_ID" SUPPORT="$SUPPORT" node -e '
+            const fs = require("fs");
+            const report = JSON.parse(fs.readFileSync("outputs/youtube-polyglot-playlist-discovery-github.json", "utf8"));
+            const selected = String(process.env.PLAYLIST_ID || "");
+            if (report.scope !== "selected_playlists" || JSON.stringify(report.selectedPlaylistIds || []) !== JSON.stringify([selected])) {
+              throw new Error("target recovery requires selected_playlists discovery for exactly the planned playlist");
+            }
+            const channel = (report.channels || []).find((row) => row.supportLang === process.env.SUPPORT);
+            if (!channel || channel.complete !== true || channel.playlists?.length !== 1 || channel.playlists[0].id !== selected) {
+              throw new Error("target recovery discovery did not return exactly one complete owned target playlist");
+            }
+            if (channel.playlists[0].privacyStatus !== "public") {
+              throw new Error(`target recovery requires a public playlist; got ${channel.playlists[0].privacyStatus || "unknown"}`);
+            }
+          '
           npm run check:youtube-scheduled-playlist-visibility -- \
             --plan=outputs/video-generator/youtube-polyglot-plan-github.json \
             --discovery=outputs/youtube-polyglot-playlist-discovery-github.json \

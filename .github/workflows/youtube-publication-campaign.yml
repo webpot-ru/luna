@@ -61,6 +61,16 @@ on:
         description: "Apply only: USE_OPENAI_METADATA permits OpenAI Responses metadata generation."
         required: false
         default: ""
+      playlist_preflight_mode:
+        description: "Polyglot playlist preflight scope. owned_complete is normal; target_playlist_only is an explicitly confirmed exact-recovery mode."
+        required: false
+        default: "owned_complete"
+        type: choice
+        options: [owned_complete, target_playlist_only]
+      confirm_target_playlist_only:
+        description: "Apply exact-recovery mode only: type ALLOW_TARGET_PLAYLIST_ONLY_PREFLIGHT."
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -149,6 +159,18 @@ jobs:
           fi
           if [ -n "${{ inputs.video_cache_resume_run_id }}" ] && ! [[ "${{ inputs.video_cache_resume_run_id }}" =~ ^[0-9]+$ ]]; then
             echo "::error::video_cache_resume_run_id must be an exact numeric GitHub run id"
+            exit 1
+          fi
+          if [ "${{ inputs.playlist_preflight_mode }}" != "owned_complete" ] && [ "${{ inputs.playlist_preflight_mode }}" != "target_playlist_only" ]; then
+            echo "::error::playlist_preflight_mode must be owned_complete or target_playlist_only"
+            exit 1
+          fi
+          if [ "${{ inputs.playlist_preflight_mode }}" = "target_playlist_only" ] && [ "${{ inputs.confirm_target_playlist_only }}" != "ALLOW_TARGET_PLAYLIST_ONLY_PREFLIGHT" ]; then
+            echo "::error::target_playlist_only requires confirm_target_playlist_only=ALLOW_TARGET_PLAYLIST_ONLY_PREFLIGHT"
+            exit 1
+          fi
+          if [ "${{ inputs.playlist_preflight_mode }}" = "owned_complete" ] && [ -n "${{ inputs.confirm_target_playlist_only }}" ]; then
+            echo "::error::confirm_target_playlist_only is only valid with playlist_preflight_mode=target_playlist_only"
             exit 1
           fi
           if { [ -n "${{ inputs.video_cache_resume_run_id }}" ] && [ -z "${{ inputs.video_cache_resume_support }}" ]; } || { [ -z "${{ inputs.video_cache_resume_run_id }}" ] && [ -n "${{ inputs.video_cache_resume_support }}" ]; }; then
@@ -366,6 +388,8 @@ jobs:
       offline_deck_git_commit: ${{ needs.preflight.outputs.offline_deck_git_commit }}
       offline_deck_git_blob: ${{ needs.preflight.outputs.offline_deck_git_blob }}
       offline_deck_sha256: ${{ needs.preflight.outputs.offline_deck_sha256 }}
+      playlist_preflight_mode: ${{ inputs.playlist_preflight_mode }}
+      confirm_target_playlist_only: ${{ inputs.confirm_target_playlist_only }}
     secrets: inherit
 
   finalize:
