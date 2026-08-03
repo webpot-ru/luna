@@ -14,6 +14,8 @@ on:
       video_cache_resume_run_id: { required: false, type: string, default: "" }
       video_cache_resume_support: { required: false, type: string, default: "" }
       confirm_vectorengine_metadata: { required: false, type: string, default: "" }
+      playlist_preflight_mode: { required: false, type: string, default: "owned_complete" }
+      confirm_target_playlist_only: { required: false, type: string, default: "" }
 
 permissions:
   actions: read
@@ -120,13 +122,15 @@ jobs:
       publish_at: ""
       schedule_start_date: ${{ matrix.schedule_start_date }}
       schedule_min_future_minutes: "90"
-      create_playlists: true
+      create_playlists: ${{ inputs.playlist_preflight_mode != 'target_playlist_only' }}
       allow_republish: false
       generate_thumbnails: false
       confirm_render: RENDER_POLYGLOT_VIDEO
       confirm_tts: GENERATE_TTS_AUDIO
       confirm_metadata_spend: GENERATE_POLYGLOT_METADATA
       confirm_vectorengine_metadata: ${{ inputs.confirm_vectorengine_metadata }}
+      playlist_preflight_mode: ${{ inputs.playlist_preflight_mode }}
+      confirm_target_playlist_only: ${{ inputs.confirm_target_playlist_only }}
       confirm_youtube_write: APPLY_POLYGLOT_YOUTUBE_UPLOAD
       confirm_public: PUBLISH_PUBLIC
       campaign_id: ${{ inputs.campaign_id }}
