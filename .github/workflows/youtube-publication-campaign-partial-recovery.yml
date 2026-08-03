@@ -92,13 +92,24 @@ jobs:
           if (summary.paginationComplete !== true || summary.videoStatusReadbackComplete !== true) throw new Error("Pagination/status readback is incomplete");
           for (const key of requiredZero) if (Number(summary[key] || 0) !== 0) throw new Error(`${key} must be 0, got ${summary[key]}`);
           if (!Array.isArray(report.publications)) throw new Error("Control report publications are missing");
-          const finalizer = campaign.finalizeSummary || {};
-          if (Number(finalizer.completedCount) !== 450 || Number(finalizer.observedCount) !== 450 || Number(finalizer.missingCount) !== 60) {
-            throw new Error(`Unexpected source finalizer summary: ${JSON.stringify(finalizer)}`);
-          }
           const accepted = (campaign.assignments || []).filter((row) => row.status === "upload_accepted" && row.youtubeVideoId);
           const missing = (campaign.assignments || []).filter((row) => !(row.status === "upload_accepted" && row.youtubeVideoId));
-          if (accepted.length !== 450 || missing.length !== 60) throw new Error(`Unexpected durable assignment split: ${accepted.length}/${missing.length}`);
+          const finalizer = campaign.finalizeSummary || {};
+          const expectedCount = accepted.length + missing.length;
+          if (Number(finalizer.expectedCount) !== expectedCount
+            || Number(finalizer.completedCount) !== accepted.length
+            || Number(finalizer.observedCount) !== accepted.length
+            || Number(finalizer.missingCount) !== missing.length
+            || Number(finalizer.duplicateAssignmentCount || 0) !== 0
+            || Number(finalizer.duplicateVideoIdCount || 0) !== 0
+            || Number(finalizer.unexpectedPublicationCount || 0) !== 0
+            || Number(finalizer.receiptErrorCount || 0) !== 0) {
+            throw new Error(`Unexpected source finalizer summary: ${JSON.stringify(finalizer)} for durable split ${accepted.length}/${missing.length}`);
+          }
+          if (!missing.length) throw new Error("Source campaign has no missing assignments to recover");
+          const activeAssignmentKeys = new Set(campaign.assignmentKeys || []);
+          const inactiveMissing = missing.filter((row) => !activeAssignmentKeys.has(row.assignmentKey) || String(row.status || "").includes("superseded"));
+          if (inactiveMissing.length) throw new Error(`Missing assignments are no longer actively claimed: ${inactiveMissing.map((row) => row.assignmentKey).join(", ")}`);
           const liveByAssignment = new Map(report.publications.map((row) => [row.assignmentKey, row]));
           for (const row of accepted) {
             const live = liveByAssignment.get(row.assignmentKey);
@@ -109,7 +120,7 @@ jobs:
           for (const row of missing) if (liveByAssignment.has(row.assignmentKey)) throw new Error(`Missing assignment already exists live: ${row.assignmentKey}`);
           const ordinary = missing.filter((row) => row.videoType === "ordinary");
           const polyglot = missing.filter((row) => row.videoType === "polyglot");
-          if (ordinary.length !== 9 || polyglot.length !== 51) throw new Error(`Expected 9 ordinary + 51 Polyglot missing, got ${ordinary.length} + ${polyglot.length}`);
+          if (ordinary.length + polyglot.length !== missing.length) throw new Error("Missing assignments contain an unsupported video type");
           const keyFile = "/tmp/youtube-partial-recovery-assignment-keys.json";
           fs.writeFileSync(keyFile, JSON.stringify({ assignmentKeys: missing.map((row) => row.assignmentKey).sort() }, null, 2) + "\n");
           const derivedDir = "/tmp/youtube-partial-recovery-route-reports";
@@ -163,7 +174,7 @@ jobs:
             --output=outputs/youtube-partial-recovery-manifest.json \
             --apply \
             --confirm=CREATE_PARTIAL_YOUTUBE_RECOVERY_CAMPAIGN
-          jq -e '.summary.applyReady == true and .summary.assignmentCount == 60 and .summary.ordinaryCount == 9 and .summary.polyglotCount == 51' outputs/youtube-partial-recovery-manifest.json
+          jq -e '.summary.applyReady == true and .summary.assignmentCount >= 1 and ((.summary.ordinaryCount + .summary.polyglotCount) == .summary.assignmentCount)' outputs/youtube-partial-recovery-manifest.json
           node -e 'const fs=require("fs"); const m=JSON.parse(fs.readFileSync("outputs/youtube-partial-recovery-manifest.json")); console.log(JSON.stringify({campaignId:m.campaignId,manifestHash:m.manifestHash,summary:m.summary},null,2))'
 
       - name: Commit only the durable recovery state
