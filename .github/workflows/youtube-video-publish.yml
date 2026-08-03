@@ -621,6 +621,7 @@ jobs:
           npm run audit:youtube-playlists -- \
             --support="$SUPPORT" \
             --route-key="$ROUTE_KEY" \
+            --max-item-pages=20 \
             --output=outputs/youtube-ordinary-playlist-discovery-github.json
           npm run check:youtube-scheduled-playlist-visibility -- \
             --generation-targets=outputs/video-generator/youtube-generation-targets-github.json \

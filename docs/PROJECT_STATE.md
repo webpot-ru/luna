@@ -1,5 +1,7 @@
 # Project State
 
+- 2026-08-03 DA Polyglot recovery preflight [`30778912028`](https://github.com/webpot-ru/luna/actions/runs/30778912028) stopped before metadata/render/TTS/upload because owned-playlist discovery hit its old ten-page safety cap on playlist `PLBJP8efJ2p_w` (`Playlist item pagination exceeded maxItemPages=10`). The exact one-row campaign remains claimed with no YouTube receipt; the discovery cap is raised to 20 pages (1,000 items) for the read-only identity gate and keeps fail-closed behavior if pagination is still incomplete. A fresh parent retry is allowed only after this fix is merged.
+
 - 2026-08-02 Deck #4 offline publication source is now durable in Google Drive: `home_kitchen_small_tools_supplies_a2.json` was uploaded to the FlashcardsLuna folder as file `1QWVEcXk9YICokiydzxw3qptky3ChFLBc`, with `55,943,826` bytes and SHA-256 `7a520e3b1c1d55140e5c8670e247506a9d57c2026f91179186e5d5021149e909` verified by a full download. `data/deck-sources.json` maps the set id to this exact file. This is the same local source used for the Deck #4 cover package; no YouTube write occurred during source upload.
 
 - 2026-08-02 GitHub reproducibility correction for Deck #4: the exact `55,943,826`-byte JSON is also tracked at `data/decks/home_kitchen_small_tools_supplies_a2.json`. GitHub Actions therefore uses the SHA-verified tracked bytes first and does not depend on unauthenticated access to the private Drive file; the Drive mapping remains the verified external source/fallback.

@@ -16,7 +16,10 @@ function parseArgs(argv) {
     channelConfig: "config/youtube-channels.json",
     output: "outputs/youtube-playlist-discovery.json",
     maxPlaylistPages: 20,
-    maxItemPages: 10,
+    // Owned playlists can legitimately contain more than 500 entries. Keep
+    // the read-only identity audit complete for those playlists while still
+    // failing closed if an unexpectedly large playlist exceeds the safety cap.
+    maxItemPages: 20,
     allowEmpty: false,
     json: false,
   };
