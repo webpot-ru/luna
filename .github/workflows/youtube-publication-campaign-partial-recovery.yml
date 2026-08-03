@@ -83,7 +83,7 @@ jobs:
           if (campaign.status !== "reconciliation_required") throw new Error(`Expected reconciliation_required, got ${campaign.status}`);
           const summary = report.summary || {};
           const requiredZero = [
-            "blockerCount", "advisoryCount", "calendarAssignmentDuplicateCount",
+            "blockerCount", "calendarAssignmentDuplicateCount",
             "calendarSlotCollisionCount", "liveVideoMissingDurableRegistryCount",
             "liveScheduleMissingCalendarCount", "unclassifiedRecentUploadCount",
           ];
@@ -110,6 +110,9 @@ jobs:
           const activeAssignmentKeys = new Set(campaign.assignmentKeys || []);
           const inactiveMissing = missing.filter((row) => !activeAssignmentKeys.has(row.assignmentKey) || String(row.status || "").includes("superseded"));
           if (inactiveMissing.length) throw new Error(`Missing assignments are no longer actively claimed: ${inactiveMissing.map((row) => row.assignmentKey).join(", ")}`);
+          const selectedSupports = new Set(missing.map((row) => row.supportLang));
+          const selectedAdvisories = (report.advisories || []).filter((row) => row.supportLang && selectedSupports.has(row.supportLang));
+          if (selectedAdvisories.length) throw new Error(`Selected missing supports have live advisories: ${selectedAdvisories.map((row) => row.supportLang).join(", ")}`);
           const liveByAssignment = new Map(report.publications.map((row) => [row.assignmentKey, row]));
           for (const row of accepted) {
             const live = liveByAssignment.get(row.assignmentKey);

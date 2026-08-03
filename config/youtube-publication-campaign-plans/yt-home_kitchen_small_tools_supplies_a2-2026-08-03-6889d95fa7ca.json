@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-03T02:14:06.264Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_kitchen_small_tools_supplies_a2",
+  "inputs": {
+    "supports": "DA",
+    "supportCount": 1,
+    "ordinarySupportCount": 0,
+    "polyglotSupportCount": 1,
+    "ordinaryPerChannel": 0,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "assignmentKeys": [
+      "polyglot|home_kitchen_small_tools_supplies_a2|DA|global_europe_core|7a4233775927|short_unverified"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_kitchen_small_tools_supplies_a2-2026-08-03-962cf19176ea",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_kitchen_small_tools_supplies_a2-2026-08-03-962cf19176ea",
+      "manifestHash": "39f0a5b8f5c3eb06932eb944cf6ae4a15382459831eb45ae420830c9bb902b62",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-6",
+        "generatedAt": "2026-08-03T01:46:04.655Z",
+        "ageMinutes": 28.026816666666665,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot-after.json",
+        "exists": true,
+        "sha256": "a0e424eab546b73050f9f55dfbec92068c7cddb5888bd91633746d78e36b4595"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "d5ec1c94689924741d62aac11ebcbc305122a57a598fd289e3981b01b2d546df"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "79d2f7470a6952a60498511c3d3f28ca98220e96be8dbf11ec0fa039db3e2e3c"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "f17a556a75d68cf2ab21cd1f16748f6baffb7040b1a70dd8a9a2f51b5fb1b84c"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "f3831f9ac38d2c60a32a28d79d7adfe52ba23ff65dbe3ac9f3e02535783d454d"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "ddd939f2d5e45014410822df480e0025dc64cfc4a5bedf98ef0a6b82a0b21548"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_kitchen_small_tools_supplies_a2.json",
+        "exists": true,
+        "sha256": "7a520e3b1c1d55140e5c8670e247506a9d57c2026f91179186e5d5021149e909"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "7411d37b5bb0a70ac414def88445bc8c2caa4ac34b97613f146f53c33a423bfd"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-after.json",
+        "exists": true,
+        "sha256": "1ffd0ff0cb32641876d30715d6d2ccb48f3328d8c474df0fb219547ce075b251"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": true,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 1,
+    "supportCount": 1,
+    "ordinaryCount": 0,
+    "polyglotCount": 1,
+    "assignmentCount": 1,
+    "firstPublishAt": "2026-08-04T21:30:00.000Z",
+    "lastPublishAt": "2026-08-04T21:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 1,
+    "existingPlaylistCount": 1,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-6": 1
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 1,
+    "estimatedPlaylistItemInsertUnits": 50,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 50,
+    "byRoute": {
+      "youtube-6": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "DA: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_kitchen_small_tools_supplies_a2|DA|global_europe_core|7a4233775927|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_kitchen_small_tools_supplies_a2|DA|global_europe_core|short_unverified|da",
+      "videoType": "polyglot",
+      "setId": "home_kitchen_small_tools_supplies_a2",
+      "supportLang": "DA",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsHash": "7a4233775927",
+      "bundleKey": "global_europe_core",
+      "sourceAssignmentKey": "polyglot|home_kitchen_small_tools_supplies_a2|DA|global_europe_core|7a4233775927|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_kitchen_small_tools_supplies_a2:DA:global_europe_core:7a4233775927:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_da-DK-ChristelNeural",
+        "supportLang": "DA"
+      },
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-08-04T21:30:00.000Z",
+      "localDate": "2026-08-04",
+      "localTime": "23:30",
+      "timeZone": "Europe/Copenhagen",
+      "slotKey": "da|2026-08-04T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__DA__global-europe-core__7a4233775927",
+        "youtubePlaylistId": "PLXCx8ZEX83RQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: engelsk, spansk, fransk, tysk",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: engelsk, spansk, fransk, tysk. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-02T12:46:39.195Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 5
+    }
+  ],
+  "campaignId": "yt-home_kitchen_small_tools_supplies_a2-2026-08-03-6889d95fa7ca",
+  "manifestHash": "2b1a282360ad3d2d31b1556c31a37c53ed91185d20595dd50869bbb327b56756"
+}
