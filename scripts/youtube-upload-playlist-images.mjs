@@ -254,6 +254,7 @@ async function youtubeResumableImageUpload({ accessToken, method, resource, file
       authorization: `Bearer ${accessToken}`,
       "content-type": mimeType,
       "content-length": String(media.length),
+      "content-range": `bytes 0-${media.length - 1}/${media.length}`,
     },
     body: media,
   });
