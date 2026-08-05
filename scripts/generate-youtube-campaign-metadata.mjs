@@ -9,6 +9,7 @@ import {
   GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS,
   callGeminiApiJsonWithKeys,
   getDirectGeminiApiKeys,
+  isRecoverableGeminiProviderError,
   parseGeminiBackendChain,
   runGeminiBackendChain,
 } from "./lib/gemini-structured-json.mjs";
@@ -56,6 +57,27 @@ export function assertOpenAiDailyTokenBudget({ usedTokens, reservationTokens, li
 
 export function selectOpenAiMetadataModel({ assignmentCount, useLuna, primaryModel = "gpt-5.6-terra", fallbackModel = "gpt-5.6-luna", largeCampaignAssignments = DEFAULT_OPENAI_LARGE_CAMPAIGN_ASSIGNMENTS }) {
   return useLuna || assignmentCount >= largeCampaignAssignments ? fallbackModel : primaryModel;
+}
+
+export async function callOpenAiWithModelFallback({
+  request,
+  primaryModel,
+  fallbackModel,
+  callProvider = callOpenAiStructuredJson,
+}) {
+  if (!primaryModel) throw new Error("OpenAI primary model is required.");
+  const call = (model) => callProvider({ ...request, model });
+  try {
+    return await call(primaryModel);
+  } catch (error) {
+    const canUseFallback = fallbackModel
+      && fallbackModel !== primaryModel
+      && isRecoverableGeminiProviderError(error);
+    if (!canUseFallback) throw error;
+    const message = String(error?.message || error).replace(/\\s+/gu, " ").trim().slice(0, 800);
+    console.warn(`[OPENAI_MODEL_FALLBACK] ${primaryModel} -> ${fallbackModel}: ${message}`);
+    return call(fallbackModel);
+  }
 }
 
 function parseArgs(argv) {
@@ -413,15 +435,18 @@ async function generateBatch(tasks, options) {
   const result = await runGeminiBackendChain({
     backends,
     providers: {
-      openai: async () => callOpenAiStructuredJson({
-        ...request,
-        model: selectedOpenAiModel,
-        maxOutputTokens: OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS,
-        serviceTier: options.openaiServiceTier,
-        ...(Number.isFinite(options.openaiDailyTokenLimit) ? (() => {
-          assertOpenAiDailyTokenBudget({ usedTokens: options.openaiTokensUsedToday, reservationTokens: openAiReservation, limitTokens: options.openaiDailyTokenLimit });
-          return {};
-        })() : {}),
+      openai: async () => callOpenAiWithModelFallback({
+        request: {
+          ...request,
+          maxOutputTokens: OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS,
+          serviceTier: options.openaiServiceTier,
+          ...(Number.isFinite(options.openaiDailyTokenLimit) ? (() => {
+            assertOpenAiDailyTokenBudget({ usedTokens: options.openaiTokensUsedToday, reservationTokens: openAiReservation, limitTokens: options.openaiDailyTokenLimit });
+            return {};
+          })() : {}),
+        },
+        primaryModel: selectedOpenAiModel,
+        fallbackModel: options.openaiFallbackModel,
       }),
       api: async () => callGeminiApiJsonWithKeys(request),
       vectorengine: async () => generateVectorEngineCampaignMetadataSubBatches(taskRequests, {
@@ -709,3 +734,4 @@ if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === imp
     process.exit(1);
   });
 }
+

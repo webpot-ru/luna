@@ -12,6 +12,7 @@ import {
   DEFAULT_OPENAI_DAILY_TOKEN_LIMIT,
   DEFAULT_OPENAI_LARGE_CAMPAIGN_ASSIGNMENTS,
   assertOpenAiDailyTokenBudget,
+  callOpenAiWithModelFallback,
   selectOpenAiMetadataModel,
   DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE,
   buildCampaignMetadataPrompt,
@@ -40,6 +41,20 @@ assert.equal(DEFAULT_OPENAI_LARGE_CAMPAIGN_ASSIGNMENTS, 100);
 assert.equal(selectOpenAiMetadataModel({ assignmentCount: 99, useLuna: false }), "gpt-5.6-terra");
 assert.equal(selectOpenAiMetadataModel({ assignmentCount: 100, useLuna: false }), "gpt-5.6-luna");
 assert.equal(selectOpenAiMetadataModel({ assignmentCount: 1, useLuna: true }), "gpt-5.6-luna");
+
+const fallbackModels = [];
+const fallbackMetadata = await callOpenAiWithModelFallback({
+  request: { prompt: "test", schema: { type: "object" } },
+  primaryModel: "gpt-5.6-terra",
+  fallbackModel: "gpt-5.6-luna",
+  callProvider: async ({ model }) => {
+    fallbackModels.push(model);
+    if (model === "gpt-5.6-terra") throw new Error("OpenAI API HTTP 503: overloaded");
+    return { provider: "openai", model, value: { items: [] } };
+  },
+});
+assert.deepEqual(fallbackModels, ["gpt-5.6-terra", "gpt-5.6-luna"]);
+assert.equal(fallbackMetadata.model, "gpt-5.6-luna");
 assert.doesNotThrow(() => assertOpenAiDailyTokenBudget({ usedTokens: 1_900_000, reservationTokens: 100_000, limitTokens: 2_000_000 }));
 assert.throws(() => assertOpenAiDailyTokenBudget({ usedTokens: 1_900_001, reservationTokens: 100_000, limitTokens: 2_000_000 }), /daily token budget would be exceeded/);
 const response = {
@@ -360,3 +375,4 @@ const report = JSON.parse(fs.readFileSync(path.join(root, "outputs/copy.json"), 
 assert.equal(report.copiedCount, 1);
 
 console.log("youtube campaign metadata tests passed");
+
