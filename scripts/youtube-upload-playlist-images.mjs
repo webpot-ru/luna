@@ -228,7 +228,6 @@ async function youtubeResumableImageUpload({ accessToken, method, resource, file
   // from the discovery document is not the upload URL used by those clients.
   const initiationUrl = new URL("playlistImages", "https://www.googleapis.com/upload/youtube/v3/");
   initiationUrl.searchParams.set("uploadType", "resumable");
-  initiationUrl.searchParams.set("part", "snippet");
 
   const initiationResponse = await fetch(initiationUrl, {
     method,
