@@ -246,10 +246,12 @@ async function youtubeResumableImageUpload({ accessToken, method, resource, file
   }
   const uploadLocation = initiationResponse.headers.get("location");
   if (!uploadLocation) fail("YouTube playlistImages resumable initiation returned no upload location.");
-  // The Location is an opaque resumable-session URL. Do not append or rewrite
-  // query parameters on it; the session already captured the initiation
-  // parameters and YouTube rejects a mutated final URL as unexpectedPart.
-  const uploadResponse = await fetch(uploadLocation, {
+  // YouTube currently echoes part=snippet into the session Location but
+  // rejects that parameter on the final media PUT. Remove only that echoed
+  // response parameter; keep the opaque session identifier untouched.
+  const uploadUrl = new URL(uploadLocation);
+  uploadUrl.searchParams.delete("part");
+  const uploadResponse = await fetch(uploadUrl, {
     method: "PUT",
     headers: {
       authorization: `Bearer ${accessToken}`,
