@@ -17794,7 +17794,7 @@
       "status": "created_public",
       "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:43:54.480Z",
-      "lastReadbackAt": "2026-06-25T10:31:04.578Z",
+      "lastReadbackAt": "2026-08-05T08:56:26.935Z",
       "playlistMetadataRepair": {
         "repairedAt": "2026-06-25T10:31:04.578Z",
         "reason": "english_fallback_template",
@@ -17804,6 +17804,16 @@
         "replacementPath": "outputs/youtube-playlist-metadata-repair/ka_it_PL9DUl_AZ2ZDRtYnCUW_HkjM4A916s4AbF/playlist_metadata.json",
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
+      },
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-08-05T08:56:26.935Z",
+        "imageId": "PL9DUl_AZ2ZDRtYnCUW_HkjM4A916s4AbF.1",
+        "method": "existing_readback",
+        "sourceManifest": "data/youtube-playlist-covers/20260805-missing-only-wave4-5-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260805-missing-only-wave4-5-per-channel/assets/youtube-8/ka/KA__IT__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+        "sourceCoverGitTracked": true,
+        "playlistImagesEndpoint": "playlistImages"
       }
     },
     {
@@ -18051,7 +18061,7 @@
       "status": "created_public",
       "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:43:54.481Z",
-      "lastReadbackAt": "2026-06-25T10:31:25.672Z",
+      "lastReadbackAt": "2026-08-05T08:56:27.287Z",
       "playlistMetadataRepair": {
         "repairedAt": "2026-06-25T10:31:25.672Z",
         "reason": "english_fallback_template",
@@ -18061,6 +18071,16 @@
         "replacementPath": "outputs/youtube-playlist-metadata-repair/ka_pt_PL9DUl_AZ2ZDQCO4jkXV45C4EeUVNmu8F2/playlist_metadata.json",
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
+      },
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-08-05T08:56:27.287Z",
+        "imageId": "PL9DUl_AZ2ZDQCO4jkXV45C4EeUVNmu8F2.1",
+        "method": "existing_readback",
+        "sourceManifest": "data/youtube-playlist-covers/20260805-missing-only-wave4-5-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260805-missing-only-wave4-5-per-channel/assets/youtube-8/ka/KA__PT__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+        "sourceCoverGitTracked": true,
+        "playlistImagesEndpoint": "playlistImages"
       }
     },
     {
@@ -18132,7 +18152,7 @@
       "status": "created_public",
       "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-06-23T09:43:54.481Z",
-      "lastReadbackAt": "2026-06-25T10:31:46.737Z",
+      "lastReadbackAt": "2026-08-05T08:56:27.453Z",
       "playlistMetadataRepair": {
         "repairedAt": "2026-06-25T10:31:46.737Z",
         "reason": "english_fallback_template",
@@ -18142,6 +18162,16 @@
         "replacementPath": "outputs/youtube-playlist-metadata-repair/ka_ru_PL9DUl_AZ2ZDR0SpUlozPESYxpwPLrY04o/playlist_metadata.json",
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
+      },
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-08-05T08:56:27.453Z",
+        "imageId": "PL9DUl_AZ2ZDR0SpUlozPESYxpwPLrY04o.1",
+        "method": "existing_readback",
+        "sourceManifest": "data/youtube-playlist-covers/20260805-missing-only-wave4-5-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260805-missing-only-wave4-5-per-channel/assets/youtube-8/ka/KA__RU__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+        "sourceCoverGitTracked": true,
+        "playlistImagesEndpoint": "playlistImages"
       }
     },
     {
@@ -49442,7 +49472,17 @@
       "status": "created_public",
       "titleReviewStatus": "localization_fallback_needs_native_review",
       "createdAt": "2026-07-06T14:12:10.036Z",
-      "lastReadbackAt": "2026-07-06T14:12:22.745Z"
+      "lastReadbackAt": "2026-08-05T08:56:27.625Z",
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-08-05T08:56:27.625Z",
+        "imageId": "PLA3UEoOjEZ2I.1",
+        "method": "existing_readback",
+        "sourceManifest": "data/youtube-playlist-covers/20260805-missing-only-wave4-5-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260805-missing-only-wave4-5-per-channel/assets/youtube-8/ka/KA__UZ__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+        "sourceCoverGitTracked": true,
+        "playlistImagesEndpoint": "playlistImages"
+      }
     },
     {
       "playlist_key": "LV__VI__ordinary-vocabulary__a1-everyday",
@@ -53454,7 +53494,17 @@
       "status": "created_public",
       "titleReviewStatus": "localization_fallback_needs_native_review",
       "createdAt": "2026-07-12T11:51:10.664Z",
-      "lastReadbackAt": "2026-07-12T11:51:20.096Z"
+      "lastReadbackAt": "2026-08-05T08:56:27.115Z",
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-08-05T08:56:27.115Z",
+        "imageId": "PLAZRJIkuWwDw.1",
+        "method": "existing_readback",
+        "sourceManifest": "data/youtube-playlist-covers/20260805-missing-only-wave4-5-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260805-missing-only-wave4-5-per-channel/assets/youtube-8/ka/KA__LT__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+        "sourceCoverGitTracked": true,
+        "playlistImagesEndpoint": "playlistImages"
+      }
     },
     {
       "playlist_key": "ET__LT__ordinary-vocabulary__a1-everyday",
