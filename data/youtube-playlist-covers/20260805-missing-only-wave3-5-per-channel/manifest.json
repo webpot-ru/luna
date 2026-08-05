@@ -1,0 +1,2374 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-05T07:37:33.761Z",
+  "mode": "exact_missing_only_playlist_images",
+  "scope": {
+    "expectedRoutes": [
+      "youtube-1",
+      "youtube-2",
+      "youtube-3",
+      "youtube-4",
+      "youtube-5",
+      "youtube-6",
+      "youtube-7",
+      "youtube-8"
+    ],
+    "expectedChannels": [
+      "en",
+      "ja",
+      "ka",
+      "my",
+      "ne",
+      "si",
+      "sr",
+      "sw",
+      "th",
+      "tr",
+      "uz",
+      "vi"
+    ]
+  },
+  "auditReports": [
+    {
+      "file": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-1-30789851515.json",
+      "sha256": "77f777d35f1278933b0952a0744cd0d8f3c114b5fe0bdc203eeabb5c58b1afee"
+    },
+    {
+      "file": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-2-30789851681.json",
+      "sha256": "d18b7120c79d54833b416dde68fb2596511d05bb940bad158ba615d4e0f78b12"
+    },
+    {
+      "file": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-3-30789851588.json",
+      "sha256": "c36d96ca41fc254dbdcc11aa4b1350257f2e45a1d87cc112b6ca906f14093ef6"
+    },
+    {
+      "file": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "sha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee"
+    },
+    {
+      "file": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-5-30789851517.json",
+      "sha256": "7a2c033891df81d95fdfd35b3b8d657d17d66f8787900efa9d790bf5f82be1ef"
+    },
+    {
+      "file": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-6-30789851671.json",
+      "sha256": "7691b5ae1eb7a712d2d1508f0273dea0e88db652e070dc3d33292256716a5203"
+    },
+    {
+      "file": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-7-30789851585.json",
+      "sha256": "ec941a19d1b5c0a504cd31ca29f4505a05ffc6bf89450c01a13fa36778ff4eb3"
+    },
+    {
+      "file": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-8-30789851576.json",
+      "sha256": "67f327a6a76b4635b8d3577f509593268e216c977239b805a821e53301142dac"
+    }
+  ],
+  "auditComplete": true,
+  "missingRoutes": [],
+  "missingChannels": [],
+  "auditProblems": [],
+  "summary": {
+    "physicalRows": 43,
+    "installed": 0,
+    "ready": 43,
+    "blocked": 0,
+    "needsRender": 0,
+    "byChannel": [
+      {
+        "channelKey": "en",
+        "route": "youtube-1",
+        "installed": 0,
+        "absent": 0,
+        "ready": 5,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "ja",
+        "route": "youtube-5",
+        "installed": 0,
+        "absent": 0,
+        "ready": 5,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "ka",
+        "route": "youtube-8",
+        "installed": 0,
+        "absent": 0,
+        "ready": 5,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "my",
+        "route": "youtube-7",
+        "installed": 0,
+        "absent": 0,
+        "ready": 3,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "ne",
+        "route": "youtube-4",
+        "installed": 0,
+        "absent": 0,
+        "ready": 3,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "si",
+        "route": "youtube-4",
+        "installed": 0,
+        "absent": 0,
+        "ready": 5,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "sr",
+        "route": "youtube-3",
+        "installed": 0,
+        "absent": 0,
+        "ready": 2,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "sw",
+        "route": "youtube-8",
+        "installed": 0,
+        "absent": 0,
+        "ready": 3,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "th",
+        "route": "youtube-2",
+        "installed": 0,
+        "absent": 0,
+        "ready": 1,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "tr",
+        "route": "youtube-5",
+        "installed": 0,
+        "absent": 0,
+        "ready": 5,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "uz",
+        "route": "youtube-4",
+        "installed": 0,
+        "absent": 0,
+        "ready": 5,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "vi",
+        "route": "youtube-2",
+        "installed": 0,
+        "absent": 0,
+        "ready": 1,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      }
+    ],
+    "byRoute": [
+      {
+        "route": "youtube-1",
+        "ready": 5,
+        "channels": [
+          "en"
+        ],
+        "estimatedApplyQuotaUnits": 266
+      },
+      {
+        "route": "youtube-2",
+        "ready": 2,
+        "channels": [
+          "th",
+          "vi"
+        ],
+        "estimatedApplyQuotaUnits": 108
+      },
+      {
+        "route": "youtube-3",
+        "ready": 2,
+        "channels": [
+          "sr"
+        ],
+        "estimatedApplyQuotaUnits": 107
+      },
+      {
+        "route": "youtube-4",
+        "ready": 13,
+        "channels": [
+          "ne",
+          "si",
+          "uz"
+        ],
+        "estimatedApplyQuotaUnits": 692
+      },
+      {
+        "route": "youtube-5",
+        "ready": 10,
+        "channels": [
+          "ja",
+          "tr"
+        ],
+        "estimatedApplyQuotaUnits": 532
+      },
+      {
+        "route": "youtube-7",
+        "ready": 3,
+        "channels": [
+          "my"
+        ],
+        "estimatedApplyQuotaUnits": 160
+      },
+      {
+        "route": "youtube-8",
+        "ready": 8,
+        "channels": [
+          "ka",
+          "sw"
+        ],
+        "estimatedApplyQuotaUnits": 426
+      }
+    ],
+    "estimatedApplyQuotaUnits": 2291,
+    "youtubeWritesPlanned": 43
+  },
+  "records": [
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-1-30789851515.json",
+      "auditReportSha256": "77f777d35f1278933b0952a0744cd0d8f3c114b5fe0bdc203eeabb5c58b1afee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-1",
+      "channelKey": "en",
+      "channelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "supportLang": "EN",
+      "videoType": "ordinary",
+      "playlistKey": "EN__TR__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLHG0-QPCX-uA",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "EN__TR__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Turkish A1: Everyday Flashcards",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-1/en/EN__TR__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-1-30789851515.json",
+      "auditReportSha256": "77f777d35f1278933b0952a0744cd0d8f3c114b5fe0bdc203eeabb5c58b1afee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-1",
+      "channelKey": "en",
+      "channelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "supportLang": "EN",
+      "videoType": "ordinary",
+      "playlistKey": "EN__UZ__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLAvgXDVfHq3k",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "EN__UZ__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Uzbek A1: Everyday Flashcards",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-1/en/EN__UZ__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-1-30789851515.json",
+      "auditReportSha256": "77f777d35f1278933b0952a0744cd0d8f3c114b5fe0bdc203eeabb5c58b1afee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-1",
+      "channelKey": "en",
+      "channelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "supportLang": "EN",
+      "videoType": "ordinary",
+      "playlistKey": "EN__VI__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLSxDfzKePe2o",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "EN__VI__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Vietnamese A1: Everyday Flashcards",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-1/en/EN__VI__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-1-30789851515.json",
+      "auditReportSha256": "77f777d35f1278933b0952a0744cd0d8f3c114b5fe0bdc203eeabb5c58b1afee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-1",
+      "channelKey": "en",
+      "channelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "supportLang": "EN",
+      "videoType": "ordinary",
+      "playlistKey": "EN__ZH__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PL0KxNKcY3YJbFX0BOZ1MB47wdPnm7suwM",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "EN__ZH__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Chinese A1: Everyday Flashcards",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-1/en/EN__ZH__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-1-30789851515.json",
+      "auditReportSha256": "77f777d35f1278933b0952a0744cd0d8f3c114b5fe0bdc203eeabb5c58b1afee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-1",
+      "channelKey": "en",
+      "channelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "supportLang": "EN-GB",
+      "videoType": "ordinary",
+      "playlistKey": "EN-GB__AZ__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLHLJwK7QEPAo",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "EN-GB__AZ__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Azerbaijani A1: Everyday Flashcards",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-1/en/EN-GB__AZ__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-5-30789851517.json",
+      "auditReportSha256": "7a2c033891df81d95fdfd35b3b8d657d17d66f8787900efa9d790bf5f82be1ef",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-5",
+      "channelKey": "ja",
+      "channelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "supportLang": "JA",
+      "videoType": "ordinary",
+      "playlistKey": "JA__PT-BR__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLWrq-IaLG2bw",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "JA__PT-BR__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Portuguese (Brazil) A1: Everyday: 単語",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-5/ja/JA__PT-BR__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-5-30789851517.json",
+      "auditReportSha256": "7a2c033891df81d95fdfd35b3b8d657d17d66f8787900efa9d790bf5f82be1ef",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-5",
+      "channelKey": "ja",
+      "channelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "supportLang": "JA",
+      "videoType": "ordinary",
+      "playlistKey": "JA__RO__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLMKqbLuDWNO8",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "JA__RO__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Romanian A1: Everyday: 単語",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-5/ja/JA__RO__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-5-30789851517.json",
+      "auditReportSha256": "7a2c033891df81d95fdfd35b3b8d657d17d66f8787900efa9d790bf5f82be1ef",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-5",
+      "channelKey": "ja",
+      "channelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "supportLang": "JA",
+      "videoType": "ordinary",
+      "playlistKey": "JA__SI__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLGrSGkiJ_NP0",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "JA__SI__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "シンハラ語 A1: Everyday: 単語",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-5/ja/JA__SI__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-5-30789851517.json",
+      "auditReportSha256": "7a2c033891df81d95fdfd35b3b8d657d17d66f8787900efa9d790bf5f82be1ef",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-5",
+      "channelKey": "ja",
+      "channelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "supportLang": "JA",
+      "videoType": "ordinary",
+      "playlistKey": "JA__SK__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLaZkgO-CAXO0",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "JA__SK__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "スロバキア語 A1: Everyday: 単語",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-5/ja/JA__SK__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-5-30789851517.json",
+      "auditReportSha256": "7a2c033891df81d95fdfd35b3b8d657d17d66f8787900efa9d790bf5f82be1ef",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-5",
+      "channelKey": "ja",
+      "channelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "supportLang": "JA",
+      "videoType": "polyglot",
+      "playlistKey": "POLYGLOT__JA__east-asia-core__fa91433fb684",
+      "playlistId": "PLE5WOq12FowA",
+      "registryPath": "config/youtube-polyglot-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-polyglot-playlists.json",
+          "playlistKey": "POLYGLOT__JA__east-asia-core__fa91433fb684",
+          "videoType": "polyglot"
+        }
+      ],
+      "title": "Polyglot: 中国語, 韓国語, 英語",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-5/ja/POLYGLOT__JA__east-asia-core__fa91433fb684/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-8-30789851576.json",
+      "auditReportSha256": "67f327a6a76b4635b8d3577f509593268e216c977239b805a821e53301142dac",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-8",
+      "channelKey": "ka",
+      "channelId": "UCpZM_1u-nTHydEJz7cnjf7w",
+      "supportLang": "KA",
+      "videoType": "ordinary",
+      "playlistKey": "KA__ET__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PL9DUl_AZ2ZDQfVkp5lTaDqqIWrmHX9BcB",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "KA__ET__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "ესტონური ენის ლექსიკა დამწყებთათვის | FlashcardsLuna",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-8/ka/KA__ET__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-8-30789851576.json",
+      "auditReportSha256": "67f327a6a76b4635b8d3577f509593268e216c977239b805a821e53301142dac",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-8",
+      "channelKey": "ka",
+      "channelId": "UCpZM_1u-nTHydEJz7cnjf7w",
+      "supportLang": "KA",
+      "videoType": "ordinary",
+      "playlistKey": "KA__FI__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PL9DUl_AZ2ZDR6pZ3BZBZ7YNredLFDProk",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "KA__FI__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "ფინური ენის ლექსიკა დამწყებთათვის",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-8/ka/KA__FI__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-8-30789851576.json",
+      "auditReportSha256": "67f327a6a76b4635b8d3577f509593268e216c977239b805a821e53301142dac",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-8",
+      "channelKey": "ka",
+      "channelId": "UCpZM_1u-nTHydEJz7cnjf7w",
+      "supportLang": "KA",
+      "videoType": "ordinary",
+      "playlistKey": "KA__FR__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PL9DUl_AZ2ZDQOr3pkW6Paea_tbx7u7U7m",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "KA__FR__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "ფრანგული ენის ლექსიკა დამწყებთათვის | FlashcardsLuna",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-8/ka/KA__FR__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-8-30789851576.json",
+      "auditReportSha256": "67f327a6a76b4635b8d3577f509593268e216c977239b805a821e53301142dac",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-8",
+      "channelKey": "ka",
+      "channelId": "UCpZM_1u-nTHydEJz7cnjf7w",
+      "supportLang": "KA",
+      "videoType": "ordinary",
+      "playlistKey": "KA__HI__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PL9DUl_AZ2ZDQSYkoNqTISKwclQeSYw_Uq",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "KA__HI__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "ჰინდი ენის შესწავლა დამწყებთათვის | FlashcardsLuna",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-8/ka/KA__HI__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-8-30789851576.json",
+      "auditReportSha256": "67f327a6a76b4635b8d3577f509593268e216c977239b805a821e53301142dac",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-8",
+      "channelKey": "ka",
+      "channelId": "UCpZM_1u-nTHydEJz7cnjf7w",
+      "supportLang": "KA",
+      "videoType": "ordinary",
+      "playlistKey": "KA__HR__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLRr95R69Ho6I",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "KA__HR__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "ხორვატული ენის შესწავლა დამწყებთათვის | FlashcardsLuna",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-8/ka/KA__HR__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-7-30789851585.json",
+      "auditReportSha256": "ec941a19d1b5c0a504cd31ca29f4505a05ffc6bf89450c01a13fa36778ff4eb3",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-7",
+      "channelKey": "my",
+      "channelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "supportLang": "MY",
+      "videoType": "polyglot",
+      "playlistKey": "POLYGLOT__MY__global-europe-core__7a4233775927",
+      "playlistId": "PLFk3h2nkYPrA",
+      "registryPath": "config/youtube-polyglot-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-polyglot-playlists.json",
+          "playlistKey": "POLYGLOT__MY__global-europe-core__7a4233775927",
+          "videoType": "polyglot"
+        }
+      ],
+      "title": "အင်္ဂလိပ်၊ စပိန်၊ ပြင်သစ်၊ ဂျာမန် ဝေါဟာရများ (Polyglot Mode)",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-7/my/POLYGLOT__MY__global-europe-core__7a4233775927/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-7-30789851585.json",
+      "auditReportSha256": "ec941a19d1b5c0a504cd31ca29f4505a05ffc6bf89450c01a13fa36778ff4eb3",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-7",
+      "channelKey": "my",
+      "channelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "supportLang": "MY",
+      "videoType": "polyglot",
+      "playlistKey": "POLYGLOT__MY__romance-core__f34a59a474f1",
+      "playlistId": "PLAZRvuSysZ_g",
+      "registryPath": "config/youtube-polyglot-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-polyglot-playlists.json",
+          "playlistKey": "POLYGLOT__MY__romance-core__f34a59a474f1",
+          "videoType": "polyglot"
+        }
+      ],
+      "title": "Polyglot: စပိန်, ပြင်သစ်, အီတလီ, ပေါ်တူဂီ",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-7/my/POLYGLOT__MY__romance-core__f34a59a474f1/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-7-30789851585.json",
+      "auditReportSha256": "ec941a19d1b5c0a504cd31ca29f4505a05ffc6bf89450c01a13fa36778ff4eb3",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-7",
+      "channelKey": "my",
+      "channelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "supportLang": "MY",
+      "videoType": "polyglot",
+      "playlistKey": "POLYGLOT__MY__slavic-core__93d499d62441",
+      "playlistId": "PLIj1lmbD91B0",
+      "registryPath": "config/youtube-polyglot-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-polyglot-playlists.json",
+          "playlistKey": "POLYGLOT__MY__slavic-core__93d499d62441",
+          "videoType": "polyglot"
+        }
+      ],
+      "title": "Polyglot: ရုရှ၊ ပိုလန်၊ ချက်၊ ဆလိုဗက်",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-7/my/POLYGLOT__MY__slavic-core__93d499d62441/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "ne",
+      "channelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+      "supportLang": "NE",
+      "videoType": "polyglot",
+      "playlistKey": "POLYGLOT__NE__global-europe-core__7a4233775927",
+      "playlistId": "PLf95Xqig6hqg",
+      "registryPath": "config/youtube-polyglot-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-polyglot-playlists.json",
+          "playlistKey": "POLYGLOT__NE__global-europe-core__7a4233775927",
+          "videoType": "polyglot"
+        }
+      ],
+      "title": "बहुभाषी शब्दावली: अङ्ग्रेजी, स्पेनी, फ्रान्सेली, जर्मन (EN, ES, FR, DE)",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/ne/POLYGLOT__NE__global-europe-core__7a4233775927/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "ne",
+      "channelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+      "supportLang": "NE",
+      "videoType": "polyglot",
+      "playlistKey": "POLYGLOT__NE__romance-core__f34a59a474f1",
+      "playlistId": "PLbz_040BGok0",
+      "registryPath": "config/youtube-polyglot-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-polyglot-playlists.json",
+          "playlistKey": "POLYGLOT__NE__romance-core__f34a59a474f1",
+          "videoType": "polyglot"
+        }
+      ],
+      "title": "पोलिग्लट: स्पेनी, फ्रान्सेली, इटालेली, पोर्तुगी",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/ne/POLYGLOT__NE__romance-core__f34a59a474f1/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "ne",
+      "channelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+      "supportLang": "NE",
+      "videoType": "polyglot",
+      "playlistKey": "POLYGLOT__NE__slavic-core__93d499d62441",
+      "playlistId": "PLchZnq-pOQtM",
+      "registryPath": "config/youtube-polyglot-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-polyglot-playlists.json",
+          "playlistKey": "POLYGLOT__NE__slavic-core__93d499d62441",
+          "videoType": "polyglot"
+        }
+      ],
+      "title": "बहुभाषिक: रसियाली, पोलिस, चेक, स्लोभाकियाली",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/ne/POLYGLOT__NE__slavic-core__93d499d62441/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "si",
+      "channelId": "UCgGRZU3j02PQ58z5QcnhhMg",
+      "supportLang": "SI",
+      "videoType": "ordinary",
+      "playlistKey": "SI__EN__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLEVUaRDdRI36UVUYzyg6dU4yldFeP-EeJ",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "SI__EN__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "මුල සිට ඉංග්‍රීසි වචන මාලාව - FlashcardsLuna",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/si/SI__EN__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "si",
+      "channelId": "UCgGRZU3j02PQ58z5QcnhhMg",
+      "supportLang": "SI",
+      "videoType": "ordinary",
+      "playlistKey": "SI__EN-GB__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLEVUaRDdRI37aj1bnxWzAOdyjtegzDKqu",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "SI__EN-GB__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "සිංහලෙන් ඉංග්‍රීසි වචන මාලාව පුහුණුව | FlashcardsLuna",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/si/SI__EN-GB__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "si",
+      "channelId": "UCgGRZU3j02PQ58z5QcnhhMg",
+      "supportLang": "SI",
+      "videoType": "ordinary",
+      "playlistKey": "SI__ES__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLEVUaRDdRI37aLfGa6kkWvNFxy0JuNk6x",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "SI__ES__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "ස්පාඤ්ඤ භාෂාව මුල සිට ඉගෙන ගනිමු | FlashcardsLuna",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/si/SI__ES__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "si",
+      "channelId": "UCgGRZU3j02PQ58z5QcnhhMg",
+      "supportLang": "SI",
+      "videoType": "ordinary",
+      "playlistKey": "SI__ES-419__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLEVUaRDdRI34uQcrqga6Qa0b5wxNFirBT",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "SI__ES-419__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "ලතින් ඇමරිකානු ස්පාඤ්ඤ වචන මාලාව - A1 | FlashcardsLuna",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/si/SI__ES-419__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "si",
+      "channelId": "UCgGRZU3j02PQ58z5QcnhhMg",
+      "supportLang": "SI",
+      "videoType": "ordinary",
+      "playlistKey": "SI__ET__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLEVUaRDdRI37CwiyNIT2fqOAQoKsIdN7L",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "SI__ET__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "එස්තෝනියානු භාෂාව මුල සිට ඉගෙන ගනිමු | FlashcardsLuna",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/si/SI__ET__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-3-30789851588.json",
+      "auditReportSha256": "c36d96ca41fc254dbdcc11aa4b1350257f2e45a1d87cc112b6ca906f14093ef6",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-3",
+      "channelKey": "sr",
+      "channelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "supportLang": "SR",
+      "videoType": "ordinary",
+      "playlistKey": "SR__UZ__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLSYZVCKLLXHM",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "SR__UZ__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Узбечки A1: vokabular i izgovor",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-3/sr/SR__UZ__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-3-30789851588.json",
+      "auditReportSha256": "c36d96ca41fc254dbdcc11aa4b1350257f2e45a1d87cc112b6ca906f14093ef6",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-3",
+      "channelKey": "sr",
+      "channelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "supportLang": "SR",
+      "videoType": "ordinary",
+      "playlistKey": "SR__VI__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLF3YRfLv62VU",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "SR__VI__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Вијетнамски A1: vokabular i izgovor",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-3/sr/SR__VI__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-8-30789851576.json",
+      "auditReportSha256": "67f327a6a76b4635b8d3577f509593268e216c977239b805a821e53301142dac",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-8",
+      "channelKey": "sw",
+      "channelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
+      "supportLang": "SW",
+      "videoType": "ordinary",
+      "playlistKey": "SW__NO__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLEpbWpgcfkAc",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "SW__NO__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Kinorwe A1: Everyday: maneno",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-8/sw/SW__NO__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-8-30789851576.json",
+      "auditReportSha256": "67f327a6a76b4635b8d3577f509593268e216c977239b805a821e53301142dac",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-8",
+      "channelKey": "sw",
+      "channelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
+      "supportLang": "SW",
+      "videoType": "ordinary",
+      "playlistKey": "SW__PL__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLYMzahTF1LKc",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "SW__PL__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Kipolandi A1: Everyday: maneno",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-8/sw/SW__PL__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-8-30789851576.json",
+      "auditReportSha256": "67f327a6a76b4635b8d3577f509593268e216c977239b805a821e53301142dac",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-8",
+      "channelKey": "sw",
+      "channelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
+      "supportLang": "SW",
+      "videoType": "ordinary",
+      "playlistKey": "SW__PT-BR__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLBnIUewF5Hlc",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "SW__PT-BR__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Kireno (Brazil) A1: Everyday: maneno",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-8/sw/SW__PT-BR__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-2-30789851681.json",
+      "auditReportSha256": "d18b7120c79d54833b416dde68fb2596511d05bb940bad158ba615d4e0f78b12",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-2",
+      "channelKey": "th",
+      "channelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "supportLang": "TH",
+      "videoType": "ordinary",
+      "playlistKey": "TH__SV__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLDOiwPkbFJn8",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TH__SV__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "สวีเดน A1: คำศัพท์และการออกเสียง",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-2/th/TH__SV__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-5-30789851517.json",
+      "auditReportSha256": "7a2c033891df81d95fdfd35b3b8d657d17d66f8787900efa9d790bf5f82be1ef",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-5",
+      "channelKey": "tr",
+      "channelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "supportLang": "TR",
+      "videoType": "ordinary",
+      "playlistKey": "TR__NO__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLXXIs_0hlbVI",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TR__NO__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Norveççe A1: Everyday: kelime",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-5/tr/TR__NO__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-5-30789851517.json",
+      "auditReportSha256": "7a2c033891df81d95fdfd35b3b8d657d17d66f8787900efa9d790bf5f82be1ef",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-5",
+      "channelKey": "tr",
+      "channelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "supportLang": "TR",
+      "videoType": "ordinary",
+      "playlistKey": "TR__RO__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLMaX7PzxCvLI",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TR__RO__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Rumence A1: Everyday: kelime",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-5/tr/TR__RO__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-5-30789851517.json",
+      "auditReportSha256": "7a2c033891df81d95fdfd35b3b8d657d17d66f8787900efa9d790bf5f82be1ef",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-5",
+      "channelKey": "tr",
+      "channelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "supportLang": "TR",
+      "videoType": "ordinary",
+      "playlistKey": "TR__SI__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLUa4lRFkRi2k",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TR__SI__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Sinhali dili A1: Everyday: kelime",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-5/tr/TR__SI__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-5-30789851517.json",
+      "auditReportSha256": "7a2c033891df81d95fdfd35b3b8d657d17d66f8787900efa9d790bf5f82be1ef",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-5",
+      "channelKey": "tr",
+      "channelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "supportLang": "TR",
+      "videoType": "ordinary",
+      "playlistKey": "TR__SK__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLB002jB8tHwQ",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TR__SK__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Slovakça A1: Everyday: kelime",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-5/tr/TR__SK__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-5-30789851517.json",
+      "auditReportSha256": "7a2c033891df81d95fdfd35b3b8d657d17d66f8787900efa9d790bf5f82be1ef",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-5",
+      "channelKey": "tr",
+      "channelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "supportLang": "TR",
+      "videoType": "ordinary",
+      "playlistKey": "TR__SL__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLH_vOBniG_b4",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "TR__SL__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Slovence A1: Everyday: kelime",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-5/tr/TR__SL__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "uz",
+      "channelId": "UClFSxvtwOnc_pPv2rCnT-bg",
+      "supportLang": "UZ",
+      "videoType": "ordinary",
+      "playlistKey": "UZ__EN__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLPZPjxBw0kuJM18U0Vo1-d5Gaqm4hgbq7",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "UZ__EN__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Ingliz tili boshlang'ich daraja (A1) so'z boyligi",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/uz/UZ__EN__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "uz",
+      "channelId": "UClFSxvtwOnc_pPv2rCnT-bg",
+      "supportLang": "UZ",
+      "videoType": "ordinary",
+      "playlistKey": "UZ__EN-GB__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLPZPjxBw0kuL73fhs5tLetmba7q0PiDVt",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "UZ__EN-GB__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Ingliz tili A1 so'z boyligi | FlashcardsLuna",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/uz/UZ__EN-GB__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "uz",
+      "channelId": "UClFSxvtwOnc_pPv2rCnT-bg",
+      "supportLang": "UZ",
+      "videoType": "ordinary",
+      "playlistKey": "UZ__ES__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLPZPjxBw0kuLmqQR-_Ml9CVtYw5FvcSOC",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "UZ__ES__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Ispan Tili A1: So'z Boyligi va Talaffuz",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/uz/UZ__ES__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "uz",
+      "channelId": "UClFSxvtwOnc_pPv2rCnT-bg",
+      "supportLang": "UZ",
+      "videoType": "ordinary",
+      "playlistKey": "UZ__ES-419__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLPZPjxBw0kuLNOrEAa1VrHMM3V4WIZ10V",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "UZ__ES-419__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Ispan tili A1: So'z boyligi va talaffuz | FlashcardsLuna",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/uz/UZ__ES-419__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-4-30789851573.json",
+      "auditReportSha256": "2fc1e62d467c63a757c82dadb42d2afdf9b7ac6739f84fc5903a8d9abaa7b9ee",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-4",
+      "channelKey": "uz",
+      "channelId": "UClFSxvtwOnc_pPv2rCnT-bg",
+      "supportLang": "UZ",
+      "videoType": "ordinary",
+      "playlistKey": "UZ__ET__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLPZPjxBw0kuLtPQ_nT5eAyAcGtNrHBqEc",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "UZ__ET__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Eston tili so'z boyligini o'rganish | FlashcardsLuna",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-4/uz/UZ__ET__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": false,
+        "evidence": "user_confirmed_studio_capability_2026_07_13"
+      }
+    },
+    {
+      "exactMissingOnly": true,
+      "auditState": "absent",
+      "auditReport": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/audit-evidence/youtube-playlist-images-audit-youtube-2-30789851681.json",
+      "auditReportSha256": "d18b7120c79d54833b416dde68fb2596511d05bb940bad158ba615d4e0f78b12",
+      "auditEvidenceType": "youtube_playlist_images_readback",
+      "route": "youtube-2",
+      "channelKey": "vi",
+      "channelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "supportLang": "VI",
+      "videoType": "ordinary",
+      "playlistKey": "VI__SV__ordinary-vocabulary__a1-everyday",
+      "playlistId": "PLT7vZTFYVkEo",
+      "registryPath": "config/youtube-playlists.json",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "VI__SV__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "title": "Tiếng Thụy Điển A1: từ vựng và phát âm",
+      "coverPath": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/assets/youtube-2/vi/VI__SV__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+      "assetManifest": "data/youtube-playlist-covers/20260805-missing-only-wave3-5-per-channel/manifest.json",
+      "coverGitTracked": true,
+      "capability": {
+        "allowed": true,
+        "proven": true,
+        "evidence": "durable_api_upload_and_readback"
+      }
+    }
+  ],
+  "blocked": [],
+  "installed": [],
+  "batchSelection": {
+    "wave": 3,
+    "policy": "next five remaining exact-missing rows per enabled channel after waves 1 and 2",
+    "excludedPlaylistKeys": [
+      "EN__NO__ordinary-vocabulary__a1-everyday",
+      "EN__PT-BR__ordinary-vocabulary__a1-everyday",
+      "EN__RO__ordinary-vocabulary__a1-everyday",
+      "EN__SI__ordinary-vocabulary__a1-everyday",
+      "EN__SK__ordinary-vocabulary__a1-everyday",
+      "EN__SL__ordinary-vocabulary__a1-everyday",
+      "EN__SR__ordinary-vocabulary__a1-everyday",
+      "EN__SV__ordinary-vocabulary__a1-everyday",
+      "EN__TH__ordinary-vocabulary__a1-everyday",
+      "EN__TL__ordinary-vocabulary__a1-everyday",
+      "JA__HY__ordinary-vocabulary__a1-everyday",
+      "JA__KM__ordinary-vocabulary__a1-everyday",
+      "JA__KN__ordinary-vocabulary__a1-everyday",
+      "JA__KO__ordinary-vocabulary__a1-everyday",
+      "JA__LO__ordinary-vocabulary__a1-everyday",
+      "JA__LT__ordinary-vocabulary__a1-everyday",
+      "JA__NE__ordinary-vocabulary__a1-everyday",
+      "JA__NL__ordinary-vocabulary__a1-everyday",
+      "JA__NO__ordinary-vocabulary__a1-everyday",
+      "JA__PL__ordinary-vocabulary__a1-everyday",
+      "KA__AZ__ordinary-vocabulary__a1-everyday",
+      "KA__BG__ordinary-vocabulary__a1-everyday",
+      "KA__BN__ordinary-vocabulary__a1-everyday",
+      "KA__CS__ordinary-vocabulary__a1-everyday",
+      "KA__DA__ordinary-vocabulary__a1-everyday",
+      "KA__DE__ordinary-vocabulary__a1-everyday",
+      "KA__EN-GB__ordinary-vocabulary__a1-everyday",
+      "KA__EN__ordinary-vocabulary__a1-everyday",
+      "KA__ES-419__ordinary-vocabulary__a1-everyday",
+      "KA__ES__ordinary-vocabulary__a1-everyday",
+      "MY__HY__ordinary-vocabulary__a1-everyday",
+      "MY__NO__ordinary-vocabulary__a1-everyday",
+      "MY__PL__ordinary-vocabulary__a1-everyday",
+      "MY__PT-BR__ordinary-vocabulary__a1-everyday",
+      "MY__RO__ordinary-vocabulary__a1-everyday",
+      "MY__SI__ordinary-vocabulary__a1-everyday",
+      "MY__SK__ordinary-vocabulary__a1-everyday",
+      "MY__SL__ordinary-vocabulary__a1-everyday",
+      "MY__SR__ordinary-vocabulary__a1-everyday",
+      "NE__HY__ordinary-vocabulary__a1-everyday",
+      "NE__LT__ordinary-vocabulary__a1-everyday",
+      "NE__LV__ordinary-vocabulary__a1-everyday",
+      "NE__NO__ordinary-vocabulary__a1-everyday",
+      "NE__SL__ordinary-vocabulary__a1-everyday",
+      "NE__SR__ordinary-vocabulary__a1-everyday",
+      "NE__SV__ordinary-vocabulary__a1-everyday",
+      "NE__SW__ordinary-vocabulary__a1-everyday",
+      "NE__TA__ordinary-vocabulary__a1-everyday",
+      "POLYGLOT__MY__east-asia-core__69af08ca98ea",
+      "POLYGLOT__NE__east-asia-core__69af08ca98ea",
+      "POLYGLOT__SI__east-asia-core__69af08ca98ea",
+      "POLYGLOT__SI__global-europe-core__7a4233775927",
+      "POLYGLOT__SI__romance-core__f34a59a474f1",
+      "POLYGLOT__SI__slavic-core__93d499d62441",
+      "POLYGLOT__SR__east-asia-core__69af08ca98ea",
+      "POLYGLOT__SR__global-europe-core__7a4233775927",
+      "POLYGLOT__SR__romance-core__f34a59a474f1",
+      "POLYGLOT__SR__slavic-core__93d499d62441",
+      "POLYGLOT__SW__east-asia-core__69af08ca98ea",
+      "POLYGLOT__SW__global-europe-core__7a4233775927",
+      "POLYGLOT__SW__romance-core__f34a59a474f1",
+      "POLYGLOT__TH__east-asia-core__69af08ca98ea",
+      "POLYGLOT__TH__romance-core__f34a59a474f1",
+      "POLYGLOT__TH__slavic-core__93d499d62441",
+      "POLYGLOT__TR__east-asia-core__69af08ca98ea",
+      "POLYGLOT__TR__global-europe-core__7a4233775927",
+      "POLYGLOT__TR__romance-core__f34a59a474f1",
+      "POLYGLOT__TR__slavic-core__93d499d62441",
+      "POLYGLOT__UZ__east-asia-core__69af08ca98ea",
+      "POLYGLOT__UZ__global-europe-core__7a4233775927",
+      "POLYGLOT__UZ__romance-core__f34a59a474f1",
+      "POLYGLOT__UZ__slavic-core__93d499d62441",
+      "POLYGLOT__VI__east-asia-core__69af08ca98ea",
+      "POLYGLOT__VI__romance-core__f34a59a474f1",
+      "POLYGLOT__VI__slavic-core__93d499d62441",
+      "SI__AZ__ordinary-vocabulary__a1-everyday",
+      "SI__BG__ordinary-vocabulary__a1-everyday",
+      "SI__BN__ordinary-vocabulary__a1-everyday",
+      "SI__CS__ordinary-vocabulary__a1-everyday",
+      "SI__DA__ordinary-vocabulary__a1-everyday",
+      "SI__DE__ordinary-vocabulary__a1-everyday",
+      "SR__NE__ordinary-vocabulary__a1-everyday",
+      "SR__NL__ordinary-vocabulary__a1-everyday",
+      "SR__NO__ordinary-vocabulary__a1-everyday",
+      "SR__TH__ordinary-vocabulary__a1-everyday",
+      "SR__TL__ordinary-vocabulary__a1-everyday",
+      "SR__TR__ordinary-vocabulary__a1-everyday",
+      "SW__HI__ordinary-vocabulary__a1-everyday",
+      "SW__HR__ordinary-vocabulary__a1-everyday",
+      "SW__HU__ordinary-vocabulary__a1-everyday",
+      "SW__ML__ordinary-vocabulary__a1-everyday",
+      "SW__MY__ordinary-vocabulary__a1-everyday",
+      "SW__NE__ordinary-vocabulary__a1-everyday",
+      "SW__NL__ordinary-vocabulary__a1-everyday",
+      "TH__NO__ordinary-vocabulary__a1-everyday",
+      "TH__PT-BR__ordinary-vocabulary__a1-everyday",
+      "TH__RO__ordinary-vocabulary__a1-everyday",
+      "TH__SI__ordinary-vocabulary__a1-everyday",
+      "TH__SK__ordinary-vocabulary__a1-everyday",
+      "TH__SL__ordinary-vocabulary__a1-everyday",
+      "TH__SR__ordinary-vocabulary__a1-everyday",
+      "TR__HY__ordinary-vocabulary__a1-everyday",
+      "TR__KK__ordinary-vocabulary__a1-everyday",
+      "TR__KM__ordinary-vocabulary__a1-everyday",
+      "TR__KN__ordinary-vocabulary__a1-everyday",
+      "TR__KO__ordinary-vocabulary__a1-everyday",
+      "TR__LO__ordinary-vocabulary__a1-everyday",
+      "UZ__AZ__ordinary-vocabulary__a1-everyday",
+      "UZ__BG__ordinary-vocabulary__a1-everyday",
+      "UZ__BN__ordinary-vocabulary__a1-everyday",
+      "UZ__CS__ordinary-vocabulary__a1-everyday",
+      "UZ__DA__ordinary-vocabulary__a1-everyday",
+      "UZ__DE__ordinary-vocabulary__a1-everyday",
+      "VI__NO__ordinary-vocabulary__a1-everyday",
+      "VI__PT-BR__ordinary-vocabulary__a1-everyday",
+      "VI__RO__ordinary-vocabulary__a1-everyday",
+      "VI__SI__ordinary-vocabulary__a1-everyday",
+      "VI__SK__ordinary-vocabulary__a1-everyday",
+      "VI__SL__ordinary-vocabulary__a1-everyday",
+      "VI__SR__ordinary-vocabulary__a1-everyday"
+    ],
+    "sourceAudit": "2026-08-03 complete eight-route readback"
+  },
+  "fullAuditSummary": {
+    "physicalRows": 2966,
+    "installed": 425,
+    "ready": 314,
+    "blocked": 2227,
+    "needsRender": 0,
+    "byChannel": [
+      {
+        "channelKey": "az",
+        "route": "youtube-8",
+        "installed": 0,
+        "absent": 53,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 53,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "bg",
+        "route": "youtube-3",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "bn",
+        "route": "youtube-7",
+        "installed": 0,
+        "absent": 54,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 54,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "cs",
+        "route": "youtube-6",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "da",
+        "route": "youtube-6",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "de",
+        "route": "youtube-5",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "en",
+        "route": "youtube-1",
+        "installed": 40,
+        "absent": 34,
+        "ready": 34,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "es",
+        "route": "youtube-1",
+        "installed": 0,
+        "absent": 80,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 80,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "et",
+        "route": "youtube-3",
+        "installed": 0,
+        "absent": 55,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 55,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "fi",
+        "route": "youtube-6",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "fr",
+        "route": "youtube-5",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "hi",
+        "route": "youtube-1",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "hr",
+        "route": "youtube-3",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "hu",
+        "route": "youtube-6",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "hy",
+        "route": "youtube-8",
+        "installed": 0,
+        "absent": 52,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 52,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "id",
+        "route": "youtube-1",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "is",
+        "route": "youtube-7",
+        "installed": 0,
+        "absent": 54,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 54,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "it",
+        "route": "youtube-8",
+        "installed": 0,
+        "absent": 55,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 55,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "ja",
+        "route": "youtube-5",
+        "installed": 40,
+        "absent": 18,
+        "ready": 18,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "ka",
+        "route": "youtube-8",
+        "installed": 0,
+        "absent": 52,
+        "ready": 52,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 5,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "kk",
+        "route": "youtube-8",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "km",
+        "route": "youtube-7",
+        "installed": 0,
+        "absent": 56,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 56,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "kn",
+        "route": "youtube-4",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "ko",
+        "route": "youtube-5",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "lo",
+        "route": "youtube-7",
+        "installed": 0,
+        "absent": 56,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 56,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "lt",
+        "route": "youtube-3",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "lv",
+        "route": "youtube-3",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "ml",
+        "route": "youtube-4",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "ms",
+        "route": "youtube-2",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "my",
+        "route": "youtube-7",
+        "installed": 43,
+        "absent": 13,
+        "ready": 13,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "ne",
+        "route": "youtube-4",
+        "installed": 45,
+        "absent": 13,
+        "ready": 13,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "nl",
+        "route": "youtube-2",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "no",
+        "route": "youtube-2",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "pl",
+        "route": "youtube-2",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "pt",
+        "route": "youtube-1",
+        "installed": 0,
+        "absent": 70,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 70,
+        "noPlaylistId": 10,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "ro",
+        "route": "youtube-6",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "ru",
+        "route": "youtube-1",
+        "installed": 40,
+        "absent": 18,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 18,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "si",
+        "route": "youtube-4",
+        "installed": 0,
+        "absent": 57,
+        "ready": 57,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "sk",
+        "route": "youtube-6",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "sl",
+        "route": "youtube-3",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "sr",
+        "route": "youtube-3",
+        "installed": 45,
+        "absent": 12,
+        "ready": 12,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "sv",
+        "route": "youtube-2",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "sw",
+        "route": "youtube-8",
+        "installed": 44,
+        "absent": 13,
+        "ready": 13,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 1,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "ta",
+        "route": "youtube-4",
+        "installed": 0,
+        "absent": 57,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 57,
+        "noPlaylistId": 1,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "te",
+        "route": "youtube-4",
+        "installed": 0,
+        "absent": 51,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 51,
+        "noPlaylistId": 5,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "th",
+        "route": "youtube-2",
+        "installed": 47,
+        "absent": 11,
+        "ready": 11,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "tl",
+        "route": "youtube-7",
+        "installed": 0,
+        "absent": 55,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 55,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "tr",
+        "route": "youtube-5",
+        "installed": 34,
+        "absent": 24,
+        "ready": 24,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "uz",
+        "route": "youtube-4",
+        "installed": 0,
+        "absent": 56,
+        "ready": 56,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 1,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "vi",
+        "route": "youtube-2",
+        "installed": 47,
+        "absent": 11,
+        "ready": 11,
+        "needsRender": 0,
+        "blockedCapability": 0,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      },
+      {
+        "channelKey": "zh",
+        "route": "youtube-5",
+        "installed": 0,
+        "absent": 58,
+        "ready": 0,
+        "needsRender": 0,
+        "blockedCapability": 58,
+        "noPlaylistId": 0,
+        "unprovenOrError": 0
+      }
+    ],
+    "byRoute": [
+      {
+        "route": "youtube-1",
+        "ready": 34,
+        "channels": [
+          "en"
+        ],
+        "estimatedApplyQuotaUnits": 1803
+      },
+      {
+        "route": "youtube-2",
+        "ready": 22,
+        "channels": [
+          "th",
+          "vi"
+        ],
+        "estimatedApplyQuotaUnits": 1168
+      },
+      {
+        "route": "youtube-3",
+        "ready": 12,
+        "channels": [
+          "sr"
+        ],
+        "estimatedApplyQuotaUnits": 637
+      },
+      {
+        "route": "youtube-4",
+        "ready": 126,
+        "channels": [
+          "ne",
+          "si",
+          "uz"
+        ],
+        "estimatedApplyQuotaUnits": 6681
+      },
+      {
+        "route": "youtube-5",
+        "ready": 42,
+        "channels": [
+          "ja",
+          "tr"
+        ],
+        "estimatedApplyQuotaUnits": 2228
+      },
+      {
+        "route": "youtube-7",
+        "ready": 13,
+        "channels": [
+          "my"
+        ],
+        "estimatedApplyQuotaUnits": 690
+      },
+      {
+        "route": "youtube-8",
+        "ready": 65,
+        "channels": [
+          "ka",
+          "sw"
+        ],
+        "estimatedApplyQuotaUnits": 3447
+      }
+    ],
+    "estimatedApplyQuotaUnits": 16654,
+    "youtubeWritesPlanned": 314
+  }
+}
