@@ -18227,7 +18227,7 @@
       "status": "created_public",
       "titleReviewStatus": "ai_generated_playlist_metadata_repair",
       "createdAt": "2026-07-01T11:06:35.970Z",
-      "lastReadbackAt": "2026-07-02T08:33:47.621Z",
+      "lastReadbackAt": "2026-08-05T12:59:15.872Z",
       "playlistMetadataRepair": {
         "repairedAt": "2026-07-02T08:33:47.621Z",
         "reason": "english_fallback_template",
@@ -18237,6 +18237,16 @@
         "replacementPath": "outputs/youtube-playlist-metadata-repair/ka_nl_PLXMhP7I_a6U4/playlist_metadata.json",
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
+      },
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-08-05T12:59:15.872Z",
+        "imageId": "PLXMhP7I_a6U4.1",
+        "method": "existing_readback",
+        "sourceManifest": "data/youtube-playlist-covers/20260805-missing-only-wave11-5-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260805-missing-only-wave11-5-per-channel/assets/youtube-8/ka/KA__NL__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+        "sourceCoverGitTracked": true,
+        "playlistImagesEndpoint": "playlistImages"
       }
     },
     {
@@ -54939,12 +54949,22 @@
       "status": "planned_registry_from_live_snapshot",
       "titleReviewStatus": "localization_fallback_needs_native_review",
       "createdAt": "2026-07-13T10:28:09.504Z",
-      "lastReadbackAt": "2026-07-17T10:26:15.828Z",
+      "lastReadbackAt": "2026-08-05T12:59:16.050Z",
       "needsPlaylistDiscovery": true,
       "sourcePublicationSnapshot": "2026-07-13T10:12:02.102Z",
       "sourceVideoIds": [
         "sHJsIUQZo64"
-      ]
+      ],
+      "playlistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-08-05T12:59:16.050Z",
+        "imageId": "PLXIY38Vh5YZ8.1",
+        "method": "existing_readback",
+        "sourceManifest": "data/youtube-playlist-covers/20260805-missing-only-wave11-5-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260805-missing-only-wave11-5-per-channel/assets/youtube-8/ka/KA__SR__ordinary-vocabulary__a1-everyday/playlist_cover.jpg",
+        "sourceCoverGitTracked": true,
+        "playlistImagesEndpoint": "playlistImages"
+      }
     },
     {
       "playlist_key": "KA__SV__ordinary-vocabulary__a1-everyday",
