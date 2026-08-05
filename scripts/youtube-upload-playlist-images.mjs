@@ -223,7 +223,10 @@ async function youtubeResumableImageUpload({ accessToken, method, resource, file
   const media = fs.readFileSync(filePath);
   const mimeType = detectMimeType(filePath);
   const metadataText = JSON.stringify(resource);
-  const initiationUrl = new URL("playlistImages", "https://www.googleapis.com/resumable/upload/youtube/v3/");
+  // Keep the media URL aligned with the generated Google API clients. The
+  // resumable session is selected by uploadType; the /resumable/upload path
+  // from the discovery document is not the upload URL used by those clients.
+  const initiationUrl = new URL("playlistImages", "https://www.googleapis.com/upload/youtube/v3/");
   initiationUrl.searchParams.set("uploadType", "resumable");
   initiationUrl.searchParams.set("part", "snippet");
 
@@ -244,11 +247,10 @@ async function youtubeResumableImageUpload({ accessToken, method, resource, file
   }
   const uploadLocation = initiationResponse.headers.get("location");
   if (!uploadLocation) fail("YouTube playlistImages resumable initiation returned no upload location.");
-  const uploadUrl = new URL(uploadLocation);
-  if (!uploadUrl.searchParams.has("uploadType")) uploadUrl.searchParams.set("uploadType", "resumable");
-  if (!uploadUrl.searchParams.has("part")) uploadUrl.searchParams.set("part", "snippet");
-
-  const uploadResponse = await fetch(uploadUrl, {
+  // The Location is an opaque resumable-session URL. Do not append or rewrite
+  // query parameters on it; the session already captured the initiation
+  // parameters and YouTube rejects a mutated final URL as unexpectedPart.
+  const uploadResponse = await fetch(uploadLocation, {
     method: "PUT",
     headers: {
       authorization: `Bearer ${accessToken}`,
@@ -634,6 +636,7 @@ async function main() {
       }
       const method = currentImage?.id ? "update" : "insert";
       const resource = {
+        ...(method === "update" && currentImage?.id ? { id: currentImage.id } : {}),
         snippet: {
           playlistId: candidate.playlistId,
           type: "hero",
