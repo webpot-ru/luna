@@ -106,7 +106,9 @@ export function resolvePlaylistDiscovery({ assignment, registryEntry, discoveryC
     if (expectedMarker && description.includes(expectedMarker)) evidence.push("stable_key_marker");
     if (expectedTitle && normalizePlaylistText(row.title) === expectedTitle) evidence.push("exact_deterministic_title");
     const liveVideoIds = new Set((row.videoIds || []).map(String).filter(Boolean));
-    if ([...expectedSourceVideoIds].some((id) => liveVideoIds.has(id))) evidence.push("known_source_video_membership");
+    if (row.itemMembershipComplete !== false && [...expectedSourceVideoIds].some((id) => liveVideoIds.has(id))) {
+      evidence.push("known_source_video_membership");
+    }
     return { row, evidence };
   }).filter((match) => match.evidence.length > 0);
 
@@ -132,6 +134,15 @@ export function resolvePlaylistDiscovery({ assignment, registryEntry, discoveryC
       createAllowed: false,
       matchEvidence: matches[0].evidence,
     };
+  }
+
+  const incompleteMembershipPlaylistIds = live
+    .filter((row) => row.itemMembershipComplete === false)
+    .map((row) => playlistId(row))
+    .filter(Boolean);
+  if (incompleteMembershipPlaylistIds.length) {
+    blockers.push(`owned playlist item membership is incomplete; cannot prove playlist absence for ${expectedKey}: ${incompleteMembershipPlaylistIds.join(",")}`);
+    return { ready: false, state: "blocked", blockers, warnings, playlistKey: expectedKey, youtubePlaylistId: "", createAllowed: false };
   }
 
   return {

@@ -131,6 +131,8 @@ async function readPlaylistItems({ accessToken, playlistId, maxPages }) {
   let totalResultsStable = true;
   let totalResultsReportedForEveryPage = true;
   let terminalRepeatedTokenRecovered = false;
+  let terminalEmptyPageRecovered = false;
+  let itemMembershipComplete = true;
   const seenPageTokens = new Set();
   for (let page = 0; page < maxPages; page += 1) {
     if (pageToken) {
@@ -173,7 +175,18 @@ async function readPlaylistItems({ accessToken, playlistId, maxPages }) {
         && itemRowsRead === totalResults
         && playlistItemIds.size === totalResults;
       if (!completeByItemCount) {
-        throw new Error(`Playlist item pagination token repeated for ${playlistId}; refusing an API pagination loop`);
+        // Some public playlists declare an item that the endpoint does not
+        // return (for example, a deleted or inaccessible member), then return
+        // an empty page that repeats its own cursor. The owned playlist itself
+        // remains identity-readable, but its visible member set cannot prove absence.
+        const emptyTerminalRepeat = nextPageToken === pageToken && items.length === 0 && itemRowsRead > 0;
+        if (!emptyTerminalRepeat) {
+          throw new Error(`Playlist item pagination token repeated for ${playlistId}; refusing an API pagination loop`);
+        }
+        terminalEmptyPageRecovered = true;
+        itemMembershipComplete = false;
+        pageToken = "";
+        break;
       }
       terminalRepeatedTokenRecovered = true;
       pageToken = "";
@@ -189,6 +202,8 @@ async function readPlaylistItems({ accessToken, playlistId, maxPages }) {
     uniquePlaylistItemCount: playlistItemIds.size,
     totalResults,
     terminalRepeatedTokenRecovered,
+    terminalEmptyPageRecovered,
+    itemMembershipComplete,
     paginationComplete: !pageToken,
   };
 }
@@ -257,7 +272,9 @@ export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPl
     playlist.uniquePlaylistItemCount = items.uniquePlaylistItemCount;
     playlist.itemTotalResults = items.totalResults;
     playlist.terminalRepeatedTokenRecovered = items.terminalRepeatedTokenRecovered;
-    playlist.itemPaginationComplete = true;
+    playlist.terminalEmptyPageRecovered = items.terminalEmptyPageRecovered;
+    playlist.itemMembershipComplete = items.itemMembershipComplete;
+    playlist.itemPaginationComplete = items.itemMembershipComplete;
     discoveredPlaylists.push(playlist);
   }
   return {
@@ -268,6 +285,8 @@ export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPl
     playlistPagesRead,
     itemPagesRead: discoveredPlaylists.reduce((total, row) => total + Number(row.itemPagesRead || 0), 0),
     terminalRepeatedTokenRecoveryCount: discoveredPlaylists.filter((row) => row.terminalRepeatedTokenRecovered).length,
+    terminalEmptyPageRecoveryCount: discoveredPlaylists.filter((row) => row.terminalEmptyPageRecovered).length,
+    itemMembershipIncompletePlaylistCount: discoveredPlaylists.filter((row) => row.itemMembershipComplete === false).length,
     paginationComplete: true,
   };
 }
@@ -305,6 +324,8 @@ export async function auditYoutubePlaylists(options) {
       playlistPagesRead: inventory.playlistPagesRead,
       itemPagesRead: inventory.itemPagesRead,
       terminalRepeatedTokenRecoveryCount: inventory.terminalRepeatedTokenRecoveryCount,
+      terminalEmptyPageRecoveryCount: inventory.terminalEmptyPageRecoveryCount,
+      itemMembershipIncompletePlaylistCount: inventory.itemMembershipIncompletePlaylistCount,
       disappearedPlaylistIds: inventory.disappearedPlaylistIds,
       playlists: inventory.playlists,
     });
@@ -323,6 +344,8 @@ export async function auditYoutubePlaylists(options) {
       playlistPagesRead: channels.reduce((total, row) => total + row.playlistPagesRead, 0),
       itemPagesRead: channels.reduce((total, row) => total + row.itemPagesRead, 0),
       terminalRepeatedTokenRecoveryCount: channels.reduce((total, row) => total + row.terminalRepeatedTokenRecoveryCount, 0),
+      terminalEmptyPageRecoveryCount: channels.reduce((total, row) => total + row.terminalEmptyPageRecoveryCount, 0),
+      itemMembershipIncompletePlaylistCount: channels.reduce((total, row) => total + row.itemMembershipIncompletePlaylistCount, 0),
       disappearedPlaylistCount: channels.reduce((total, row) => total + (row.disappearedPlaylistIds || []).length, 0),
       youtubeReadCalls: channels.length + channels.reduce((total, row) => total + row.playlistPagesRead + row.itemPagesRead, 0),
       youtubeWrites: 0,

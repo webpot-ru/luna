@@ -60,6 +60,28 @@ const bySourceVideo = resolvePlaylistDiscovery({
 assert.equal(bySourceVideo.youtubePlaylistId, "PL-source");
 assert(bySourceVideo.matchEvidence.includes("known_source_video_membership"));
 
+const incompleteSourceVideo = resolvePlaylistDiscovery({
+  assignment,
+  registryEntry: { playlist_key: assignment.key, youtube_playlist_id: "", sourceVideoIds: ["video-1"] },
+  discoveryChannel: {
+    ...channel,
+    playlists: [{ id: "PL-incomplete", title: "Renamed", description: "", youtubeChannelId: "channel-en", privacyStatus: "public", videoIds: ["video-1"], itemMembershipComplete: false }],
+  },
+});
+assert.equal(incompleteSourceVideo.ready, false);
+assert(incompleteSourceVideo.blockers.some((row) => row.includes("cannot prove playlist absence")));
+
+const incompleteByTitle = resolvePlaylistDiscovery({
+  assignment,
+  registryEntry: { playlist_key: assignment.key, youtube_playlist_id: "" },
+  discoveryChannel: {
+    ...channel,
+    playlists: [{ id: "PL-incomplete-title", title: assignment.title, description: "", youtubeChannelId: "channel-en", privacyStatus: "public", videoIds: [], itemMembershipComplete: false }],
+  },
+});
+assert.equal(incompleteByTitle.ready, true);
+assert.equal(incompleteByTitle.state, "resolved_existing");
+
 const unlistedExisting = resolvePlaylistDiscovery({
   assignment,
   registryEntry: { playlist_key: assignment.key, youtube_playlist_id: "PL-unlisted" },
