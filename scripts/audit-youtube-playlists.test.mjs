@@ -19,6 +19,11 @@ try {
           items: [{ id: "PL-terminal-repeat", snippet: { title: "Terminal repeat", description: "", channelId: "channel-en" }, status: { privacyStatus: "public" } }],
         }), { status: 200 });
       }
+      if (playlistMode === "empty-terminal-repeat") {
+        return new Response(JSON.stringify({
+          items: [{ id: "PL-empty-terminal-repeat", snippet: { title: "Empty terminal repeat", description: "", channelId: "channel-en" }, status: { privacyStatus: "public" } }],
+        }), { status: 200 });
+      }
       return new Response(JSON.stringify({
         items: [
           { id: "PL-deleted", snippet: { title: "Gone", description: "", channelId: "channel-en" }, status: { privacyStatus: "public" } },
@@ -46,6 +51,18 @@ try {
             id: hasPageToken ? "item-terminal-2" : "item-terminal-1",
             contentDetails: { videoId: hasPageToken ? "video-terminal-2" : "video-terminal-1" },
           }],
+        }), { status: 200 });
+      }
+      if (request.searchParams.get("playlistId") === "PL-empty-terminal-repeat") {
+        const hasPageToken = Boolean(request.searchParams.get("pageToken"));
+        return new Response(JSON.stringify(hasPageToken ? {
+          nextPageToken: "empty-terminal-token",
+          pageInfo: { totalResults: 2 },
+          items: [],
+        } : {
+          nextPageToken: "empty-terminal-token",
+          pageInfo: { totalResults: 2 },
+          items: [{ id: "item-visible", contentDetails: { videoId: "video-visible" } }],
         }), { status: 200 });
       }
       return new Response(JSON.stringify({ items: [{ id: "item-live", contentDetails: { videoId: "video-live" } }] }), { status: 200 });
@@ -100,6 +117,21 @@ try {
   assert.equal(terminalRepeatReport.playlists[0].itemRowsRead, 2);
   assert.equal(terminalRepeatReport.playlists[0].uniquePlaylistItemCount, 2);
   assert.deepEqual(terminalRepeatReport.playlists[0].videoIds, ["video-terminal-1", "video-terminal-2"]);
+
+  playlistMode = "empty-terminal-repeat";
+  const emptyTerminalReport = await readOwnedPlaylists({
+    accessToken: "test-token",
+    expectedChannelId: "channel-en",
+    maxPlaylistPages: 2,
+    maxItemPages: 3,
+  });
+  assert.equal(emptyTerminalReport.paginationComplete, true);
+  assert.equal(emptyTerminalReport.terminalEmptyPageRecoveryCount, 1);
+  assert.equal(emptyTerminalReport.itemMembershipIncompletePlaylistCount, 1);
+  assert.equal(emptyTerminalReport.playlists[0].terminalEmptyPageRecovered, true);
+  assert.equal(emptyTerminalReport.playlists[0].itemMembershipComplete, false);
+  assert.equal(emptyTerminalReport.playlists[0].itemPaginationComplete, false);
+  assert.deepEqual(emptyTerminalReport.playlists[0].videoIds, ["video-visible"]);
 } finally {
   globalThis.fetch = originalFetch;
 }
