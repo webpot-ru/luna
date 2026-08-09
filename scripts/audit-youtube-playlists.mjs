@@ -123,9 +123,14 @@ async function readAuthorizedChannel({ accessToken, expectedChannelId }) {
 
 async function readPlaylistItems({ accessToken, playlistId, maxPages }) {
   const videoIds = [];
+  const playlistItemIds = new Set();
   let pageToken = "";
   let pagesRead = 0;
+  let itemRowsRead = 0;
   let totalResults = null;
+  let totalResultsStable = true;
+  let totalResultsReportedForEveryPage = true;
+  let terminalRepeatedTokenRecovered = false;
   const seenPageTokens = new Set();
   for (let page = 0; page < maxPages; page += 1) {
     if (pageToken) {
@@ -142,15 +147,37 @@ async function readPlaylistItems({ accessToken, playlistId, maxPages }) {
         playlistId,
         maxResults: 50,
         pageToken,
-        fields: "nextPageToken,pageInfo(totalResults),items(contentDetails(videoId))",
+        fields: "nextPageToken,pageInfo(totalResults),items(id,contentDetails(videoId))",
       },
     });
     pagesRead += 1;
-    if (Number.isInteger(response.pageInfo?.totalResults)) totalResults = response.pageInfo.totalResults;
-    videoIds.push(...(response.items || []).map((row) => row.contentDetails?.videoId).filter(Boolean));
+    if (Number.isInteger(response.pageInfo?.totalResults)) {
+      if (totalResults !== null && totalResults !== response.pageInfo.totalResults) totalResultsStable = false;
+      totalResults = response.pageInfo.totalResults;
+    } else {
+      totalResultsReportedForEveryPage = false;
+    }
+    const items = response.items || [];
+    itemRowsRead += items.length;
+    for (const item of items) {
+      if (item.id) playlistItemIds.add(item.id);
+      if (item.contentDetails?.videoId) videoIds.push(item.contentDetails.videoId);
+    }
     const nextPageToken = response.nextPageToken || "";
-    if (nextPageToken && nextPageToken === pageToken) {
-      throw new Error(`Playlist item pagination token repeated for ${playlistId}; refusing an API pagination loop`);
+    const repeatedToken = nextPageToken && (nextPageToken === pageToken || seenPageTokens.has(nextPageToken));
+    if (repeatedToken) {
+      const completeByItemCount = totalResultsStable
+        && totalResultsReportedForEveryPage
+        && Number.isInteger(totalResults)
+        && totalResults >= 0
+        && itemRowsRead === totalResults
+        && playlistItemIds.size === totalResults;
+      if (!completeByItemCount) {
+        throw new Error(`Playlist item pagination token repeated for ${playlistId}; refusing an API pagination loop`);
+      }
+      terminalRepeatedTokenRecovered = true;
+      pageToken = "";
+      break;
     }
     pageToken = nextPageToken;
     if (!pageToken) break;
@@ -158,7 +185,10 @@ async function readPlaylistItems({ accessToken, playlistId, maxPages }) {
   return {
     videoIds: [...new Set(videoIds)],
     pagesRead,
+    itemRowsRead,
+    uniquePlaylistItemCount: playlistItemIds.size,
     totalResults,
+    terminalRepeatedTokenRecovered,
     paginationComplete: !pageToken,
   };
 }
@@ -223,7 +253,10 @@ export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPl
     if (!items.paginationComplete) throw new Error(`Playlist item pagination exceeded maxItemPages=${maxItemPages} for ${playlist.id}`);
     playlist.videoIds = items.videoIds;
     playlist.itemPagesRead = items.pagesRead;
+    playlist.itemRowsRead = items.itemRowsRead;
+    playlist.uniquePlaylistItemCount = items.uniquePlaylistItemCount;
     playlist.itemTotalResults = items.totalResults;
+    playlist.terminalRepeatedTokenRecovered = items.terminalRepeatedTokenRecovered;
     playlist.itemPaginationComplete = true;
     discoveredPlaylists.push(playlist);
   }
@@ -234,6 +267,7 @@ export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPl
     disappearedPlaylistIds,
     playlistPagesRead,
     itemPagesRead: discoveredPlaylists.reduce((total, row) => total + Number(row.itemPagesRead || 0), 0),
+    terminalRepeatedTokenRecoveryCount: discoveredPlaylists.filter((row) => row.terminalRepeatedTokenRecovered).length,
     paginationComplete: true,
   };
 }
@@ -270,6 +304,7 @@ export async function auditYoutubePlaylists(options) {
       complete: inventory.paginationComplete,
       playlistPagesRead: inventory.playlistPagesRead,
       itemPagesRead: inventory.itemPagesRead,
+      terminalRepeatedTokenRecoveryCount: inventory.terminalRepeatedTokenRecoveryCount,
       disappearedPlaylistIds: inventory.disappearedPlaylistIds,
       playlists: inventory.playlists,
     });
@@ -287,6 +322,7 @@ export async function auditYoutubePlaylists(options) {
       playlistCount: channels.reduce((total, row) => total + row.playlists.length, 0),
       playlistPagesRead: channels.reduce((total, row) => total + row.playlistPagesRead, 0),
       itemPagesRead: channels.reduce((total, row) => total + row.itemPagesRead, 0),
+      terminalRepeatedTokenRecoveryCount: channels.reduce((total, row) => total + row.terminalRepeatedTokenRecoveryCount, 0),
       disappearedPlaylistCount: channels.reduce((total, row) => total + (row.disappearedPlaylistIds || []).length, 0),
       youtubeReadCalls: channels.length + channels.reduce((total, row) => total + row.playlistPagesRead + row.itemPagesRead, 0),
       youtubeWrites: 0,
