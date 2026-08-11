@@ -71,9 +71,10 @@ jobs:
           REPORT="$(find .control-artifact -type f -name 'youtube-publication-control-all-routes.json' -print -quit)"
           test -s "$REPORT"
           export REPORT
-          node <<'NODE'
-          const fs = require("node:fs");
-          const path = require("node:path");
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          import path from "node:path";
+          import { selectBlockingPartialRecoveryAdvisories } from "./scripts/lib/youtube-partial-recovery-advisories.mjs";
           const report = JSON.parse(fs.readFileSync(process.env.REPORT, "utf8"));
           const registry = JSON.parse(fs.readFileSync("config/youtube-publication-campaigns.json", "utf8"));
           const campaign = (registry.campaigns || []).find((row) => row.campaignId === process.env.CAMPAIGN_ID);
@@ -110,9 +111,8 @@ jobs:
           const activeAssignmentKeys = new Set(campaign.assignmentKeys || []);
           const inactiveMissing = missing.filter((row) => !activeAssignmentKeys.has(row.assignmentKey) || String(row.status || "").includes("superseded"));
           if (inactiveMissing.length) throw new Error(`Missing assignments are no longer actively claimed: ${inactiveMissing.map((row) => row.assignmentKey).join(", ")}`);
-          const selectedSupports = new Set(missing.map((row) => row.supportLang));
-          const selectedAdvisories = (report.advisories || []).filter((row) => row.supportLang && selectedSupports.has(row.supportLang));
-          if (selectedAdvisories.length) throw new Error(`Selected missing supports have live advisories: ${selectedAdvisories.map((row) => row.supportLang).join(", ")}`);
+          const selectedAdvisories = selectBlockingPartialRecoveryAdvisories(report.advisories || [], missing);
+          if (selectedAdvisories.length) throw new Error(`Selected missing assignments have live advisories: ${selectedAdvisories.map((row) => `${row.supportLang}:${row.bundleKey || row.type}`).join(", ")}`);
           const liveByAssignment = new Map(report.publications.map((row) => [row.assignmentKey, row]));
           for (const row of accepted) {
             const live = liveByAssignment.get(row.assignmentKey);

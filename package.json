@@ -92,7 +92,7 @@
     "test:youtube-publication-campaign-finalize": "node scripts/youtube-publication-campaign-finalize.test.mjs",
     "test:youtube-publication-campaign-rearm": "node scripts/rearm-youtube-publication-campaign.test.mjs",
     "test:youtube-publication-campaign-rollover": "node scripts/rollover-claimed-youtube-publication-campaign.test.mjs",
-    "test:youtube-publication-campaign-partial-recovery": "node scripts/create-youtube-partial-recovery-campaign.test.mjs",
+    "test:youtube-publication-campaign-partial-recovery": "node scripts/create-youtube-partial-recovery-campaign.test.mjs && node scripts/lib/youtube-partial-recovery-advisories.test.mjs",
     "test:youtube-publication-campaign-integrated-recovery": "node scripts/plan-youtube-integrated-recovery-wave.test.mjs",
     "test:youtube-campaign-playlist-uploader": "node scripts/youtube-campaign-playlist-uploader.test.mjs",
     "test:youtube-campaign-metadata": "node scripts/youtube-campaign-metadata.test.mjs",
