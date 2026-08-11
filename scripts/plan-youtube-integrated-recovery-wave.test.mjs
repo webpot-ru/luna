@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
 
-import { composeIntegratedRecoveryAssignments } from "./plan-youtube-integrated-recovery-wave.mjs";
+import { composeIntegratedRecoveryAssignments, sourceRowsFromCampaign } from "./plan-youtube-integrated-recovery-wave.mjs";
 
 function assignment({ assignmentKey, supportLang, videoType, slotKey }) {
   return {
@@ -61,5 +61,24 @@ assert.deepEqual(result.polyglotAssignments.map((row) => row.assignmentKey).sort
   "polyglot|set|B|old-bundle-b",
 ]);
 assert(result.polyglotAssignments.every((row) => row.integratedRecovery?.sourceCampaignId === "recovery-campaign"));
+
+const partialSource = sourceRowsFromCampaign({
+  registry: { campaigns: [{
+    campaignId: "partial",
+    setId: "set",
+    status: "reconciliation_required",
+    assignmentKeys: ["missing", "accepted"],
+    finalizeSummary: { missingCount: 1, duplicateAssignmentCount: 0, duplicateVideoIdCount: 0, unexpectedPublicationCount: 0 },
+    assignments: [
+      { assignmentKey: "missing", status: "claimed" },
+      { assignmentKey: "accepted", status: "upload_accepted", youtubeVideoId: "video-id" },
+    ],
+  }] },
+  setId: "set",
+  sourceCampaignId: "partial",
+  expectedSourceAssignments: 1,
+});
+assert.equal(partialSource.sourceMode, "partial_reconciliation_required");
+assert.deepEqual(partialSource.rows.map((row) => row.assignmentKey), ["missing"]);
 
 console.log("integrated recovery wave composition tests passed");

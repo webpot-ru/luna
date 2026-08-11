@@ -121,16 +121,26 @@ function sourceRowsFromCampaign({ registry, setId, sourceCampaignId, expectedSou
   const campaign = (registry.campaigns || []).find((row) => row.campaignId === sourceCampaignId);
   assert(campaign, `source campaign not found: ${sourceCampaignId}`);
   assert(campaign.setId === setId, `source campaign set mismatch: ${campaign.setId || "missing"}`);
-  assert(campaign.status === "claimed", `source campaign must remain unlaunched claimed, got ${campaign.status || "missing"}`);
-  assert(!campaign.finalizedAt && !campaign.finalizeSummary && !campaign.githubRunId && !campaign.dispatchRunId, `${sourceCampaignId}: source campaign has dispatch/finalizer evidence`);
-  const rows = (campaign.assignments || []).filter((row) => row.status === "claimed");
-  assert(rows.length === campaign.assignments.length, `${sourceCampaignId}: every source assignment must remain claimed`);
+  const isUnlaunched = campaign.status === "claimed";
+  const isPartialRecovery = campaign.status === "reconciliation_required";
+  assert(isUnlaunched || isPartialRecovery, `source campaign must be claimed or reconciliation_required, got ${campaign.status || "missing"}`);
+  if (isUnlaunched) {
+    assert(!campaign.finalizedAt && !campaign.finalizeSummary && !campaign.githubRunId && !campaign.dispatchRunId, `${sourceCampaignId}: unlaunched source campaign has dispatch/finalizer evidence`);
+  } else {
+    const summary = campaign.finalizeSummary || {};
+    assert(Number(summary.duplicateAssignmentCount || 0) === 0, `${sourceCampaignId}: source campaign has duplicate assignment evidence`);
+    assert(Number(summary.duplicateVideoIdCount || 0) === 0, `${sourceCampaignId}: source campaign has duplicate video ID evidence`);
+    assert(Number(summary.unexpectedPublicationCount || 0) === 0, `${sourceCampaignId}: source campaign has unexpected publication evidence`);
+  }
+  const rows = (campaign.assignments || []).filter((row) => row.status === "claimed" && !hasUploadReceipt(row));
+  if (isUnlaunched) assert(rows.length === campaign.assignments.length, `${sourceCampaignId}: every unlaunched source assignment must remain claimed`);
+  else assert(Number(campaign.finalizeSummary?.missingCount || 0) === rows.length, `${sourceCampaignId}: missing receipt count does not match recoverable claimed rows`);
   assert(rows.length === expectedSourceAssignments, `${sourceCampaignId}: source assignment count ${rows.length} != ${expectedSourceAssignments}`);
   for (const row of rows) {
     assert(!hasUploadReceipt(row), `${row.assignmentKey}: source row has upload receipt evidence`);
     assert((campaign.assignmentKeys || []).includes(row.assignmentKey), `${row.assignmentKey}: source row is missing from active campaign keys`);
   }
-  return { campaign, rows };
+  return { campaign, rows, sourceMode: isUnlaunched ? "unlaunched_claimed" : "partial_reconciliation_required" };
 }
 
 function previewPaths(options, now) {
@@ -143,15 +153,24 @@ function previewPaths(options, now) {
   };
 }
 
-function buildUnlaunchedPreview({ registry, calendar, sourceCampaignId }) {
+function buildUnlaunchedPreview({ registry, calendar, sourceCampaignId, sourceRows }) {
+  const sourceAssignmentKeys = new Set(sourceRows.map((row) => row.assignmentKey));
+  const sourceSlotKeys = new Set(sourceRows.map((row) => row.slotKey));
+  const sourceCalendarKeys = new Set(sourceRows.map((row) => row.calendarAssignmentKey));
   const previewRegistry = structuredClone(registry);
   for (const campaign of previewRegistry.campaigns || []) {
     if (campaign.campaignId !== sourceCampaignId) continue;
-    campaign.status = "superseded_integrated_plan_preview";
+    campaign.assignmentKeys = (campaign.assignmentKeys || []).filter((key) => !sourceAssignmentKeys.has(key));
+    campaign.slotKeys = (campaign.slotKeys || []).filter((key) => !sourceSlotKeys.has(key));
+    for (const row of campaign.assignments || []) {
+      if (sourceAssignmentKeys.has(row.assignmentKey)) row.status = "superseded_integrated_plan";
+    }
+    const remainingActive = (campaign.assignments || []).some((row) => row.status === "claimed" || row.status === "upload_accepted" || row.status === "upload_accepted_reconciliation_required");
+    if (!remainingActive) campaign.status = "superseded_integrated_plan_preview";
   }
   const previewCalendar = structuredClone(calendar);
   for (const row of previewCalendar.reservations || []) {
-    if (row.campaignId === sourceCampaignId && isActiveCalendarReservation(row)) {
+    if (row.campaignId === sourceCampaignId && sourceCalendarKeys.has(calendarAssignmentKey(row)) && isActiveCalendarReservation(row)) {
       row.status = "superseded_integrated_plan_preview";
     }
   }
@@ -362,6 +381,8 @@ export function composeIntegratedRecoveryAssignments({ supports, baseAssignments
   return { ordinary, polyglotAssignments: polyglot.output, pendingPolyglot: polyglot.pending };
 }
 
+export { sourceRowsFromCampaign };
+
 export function buildIntegratedRecoveryWave(options) {
   assert(options.controlReport, "--control-report is required");
   const now = options.now instanceof Date ? options.now : new Date(options.generatedAt || Date.now());
@@ -370,13 +391,13 @@ export function buildIntegratedRecoveryWave(options) {
   const policy = readJson(options.policy);
   const routing = readJson(options.routing);
   const controlReport = readJson(options.controlReport);
-  const { campaign: sourceCampaign, rows: sourceRows } = sourceRowsFromCampaign({
+  const { campaign: sourceCampaign, rows: sourceRows, sourceMode } = sourceRowsFromCampaign({
     registry,
     setId: options.setId,
     sourceCampaignId: options.sourceCampaignId,
     expectedSourceAssignments: options.expectedSourceAssignments,
   });
-  const preview = buildUnlaunchedPreview({ registry, calendar, sourceCampaignId: options.sourceCampaignId });
+  const preview = buildUnlaunchedPreview({ registry, calendar, sourceCampaignId: options.sourceCampaignId, sourceRows });
   const temporary = previewPaths(options, now);
   writeJson(temporary.registry, preview.previewRegistry);
   writeJson(temporary.calendar, preview.previewCalendar);
@@ -442,7 +463,7 @@ export function buildIntegratedRecoveryWave(options) {
   const controlEvidence = validateLiveControl({ report: controlReport, assignments, now, maxSnapshotAgeMinutes: options.maxSnapshotAgeMinutes });
   const usage = aggregateUsage({ assignments, routing });
   blockers.push(...usage.blockers);
-  const warnings = [...(base.warnings || []), `${options.sourceCampaignId}: all ${sourceRows.length} unlaunched recovery assignments are pinned into this 11+1 wave`];
+  const warnings = [...(base.warnings || []), `${options.sourceCampaignId}: all ${sourceRows.length} no-receipt recovery assignments are pinned into this ${options.ordinaryPerChannel}+${options.polyglotPerChannel} wave`];
   const summary = {
     applyReady: blockers.length === 0,
     blockerCount: blockers.length,
@@ -481,6 +502,7 @@ export function buildIntegratedRecoveryWave(options) {
     integratedRecovery: {
       sourceCampaignId: options.sourceCampaignId,
       sourceManifestHash: sourceCampaign.manifestHash,
+      sourceMode,
       sourceAssignmentCount: sourceRows.length,
       sourceOrdinaryCount: sourceRows.filter((row) => row.videoType === "ordinary").length,
       sourcePolyglotCount: sourceRows.filter((row) => row.videoType === "polyglot").length,

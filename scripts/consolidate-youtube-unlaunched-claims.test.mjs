@@ -79,4 +79,49 @@ assert.equal(result.nextRegistry.campaigns.find((row) => row.campaignId === mani
 assert.equal(result.nextCalendar.reservations.filter((row) => row.campaignId === manifest.campaignId).length, 1);
 assert.equal(result.nextCalendar.reservations.find((row) => row.campaignId === "old").status, "superseded_integrated_plan");
 
+const acceptedAssignment = {
+  ...assignment,
+  assignmentKey: "ordinary|deck|EN|DE",
+  calendarAssignmentKey: "ordinary|deck|EN|DE|en",
+  targetLang: "DE",
+  publishAt: "2026-07-28T12:30:00.000Z",
+  slotKey: "en|2026-07-28T12:30:00.000Z",
+  youtubeVideoId: "accepted-video",
+};
+const partialRegistry = {
+  schemaVersion: 1,
+  campaigns: [{
+    campaignId: "partial",
+    setId: "deck",
+    status: "reconciliation_required",
+    assignmentKeys: [assignment.assignmentKey, acceptedAssignment.assignmentKey],
+    slotKeys: [assignment.slotKey, acceptedAssignment.slotKey],
+    assignments: [
+      { ...assignment, status: "claimed" },
+      { ...acceptedAssignment, status: "upload_accepted" },
+    ],
+  }],
+};
+const partialCalendar = {
+  schemaVersion: 1,
+  reservations: [
+    { campaignId: "partial", campaignManifestHash: "old-hash", status: "campaign_claimed", ...assignment },
+    { campaignId: "partial", campaignManifestHash: "old-hash", status: "campaign_upload_accepted", ...acceptedAssignment },
+  ],
+};
+const partialResult = buildUnlaunchedClaimConsolidation({
+  registry: partialRegistry,
+  calendar: partialCalendar,
+  manifest,
+  controlReport,
+  sourceCampaignId: "partial",
+  now: new Date("2026-07-28T03:01:00.000Z"),
+  expectedSourceClaims: 1,
+});
+const retainedPartial = partialResult.nextRegistry.campaigns.find((row) => row.campaignId === "partial");
+assert.equal(retainedPartial.status, "reconciliation_required");
+assert.equal(retainedPartial.assignments.find((row) => row.assignmentKey === assignment.assignmentKey).status, "superseded_integrated_plan");
+assert.equal(retainedPartial.assignments.find((row) => row.assignmentKey === acceptedAssignment.assignmentKey).status, "upload_accepted");
+assert.equal(partialResult.report.selectedSourceCampaignId, "partial");
+
 console.log("youtube unlaunched claim consolidation tests passed");
