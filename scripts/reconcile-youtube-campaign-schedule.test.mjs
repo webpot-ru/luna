@@ -38,7 +38,7 @@ write("ordinary.json", { publications: [{
 write("polyglot.json", { publications: [] });
 write("report.json", {
   generatedAt: "2026-07-22T10:00:00.000Z",
-  summary: { complete: true, paginationComplete: true, videoStatusReadbackComplete: true, expectedRouteCount: 4, receivedRouteCount: 4 },
+  summary: { complete: true, paginationComplete: true, videoStatusReadbackComplete: true, expectedRouteCount: 8, receivedRouteCount: 8 },
   publications: [{ ...assignment, youtubeVideoId: "video-test", liveReadbackPresent: true, state: "scheduled", privacyStatus: "private", publishAt: "2026-07-23T08:30:00.000Z" }],
   blockers: [{ type: "live_schedule_missing_calendar", youtubeVideoId: "video-test" }],
 });
@@ -85,6 +85,15 @@ const incomplete = spawnSync(process.execPath, args, { cwd: root, encoding: "utf
 assert.notEqual(incomplete.status, 0);
 assert.match(incomplete.stderr, /incomplete all-route live evidence/);
 
+write("report.json", {
+  summary: { complete: true, paginationComplete: true, videoStatusReadbackComplete: true, expectedRouteCount: 8, receivedRouteCount: 7 },
+  publications: [],
+  blockers: [],
+});
+const missingRoute = spawnSync(process.execPath, args, { cwd: root, encoding: "utf8" });
+assert.notEqual(missingRoute.status, 0);
+assert.match(missingRoute.stderr, /incomplete all-route live evidence/);
+
 const polyglotRoot = fs.mkdtempSync(path.join(os.tmpdir(), "youtube-campaign-schedule-polyglot-test-"));
 const polyglotAssignment = {
   assignmentKey: "polyglot|deck|KM|romance_core|f34a59a474f1|short_unverified",
@@ -122,7 +131,7 @@ writePolyglot("polyglot.json", { publications: [{
 }] });
 writePolyglot("report.json", {
   generatedAt: "2026-07-22T10:00:00.000Z",
-  summary: { complete: true, paginationComplete: true, videoStatusReadbackComplete: true, expectedRouteCount: 4, receivedRouteCount: 4 },
+  summary: { complete: true, paginationComplete: true, videoStatusReadbackComplete: true, expectedRouteCount: 8, receivedRouteCount: 8 },
   publications: [{ ...polyglotAssignment, youtubeVideoId: "polyglot-video-test", liveReadbackPresent: true, state: "scheduled", privacyStatus: "private", publishAt: "2026-07-23T08:30:00.000Z" }],
   blockers: [{ type: "live_schedule_missing_calendar", youtubeVideoId: "polyglot-video-test" }],
 });
