@@ -382274,15 +382274,33 @@
       "privacyStatus": "public",
       "publishAt": "",
       "scheduledPublishAt": "",
-      "publicationStatus": "live_youtube_upload_detected",
+      "publicationStatus": "published_uploaded",
       "thumbnailSet": null,
       "thumbnailUploadMode": "",
       "needsThumbnailPermission": false,
-      "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-08-11T03:20:00.469Z",
       "targetLang": "LV",
-      "targetLangs": []
+      "targetLangs": [],
+      "youtubePlaylistId": "PLDVcJccNFHT4",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLDVcJccNFHT4",
+      "playlistItemId": "UExEVmNKY2NORkhUNC4wMTcyMDhGQUE4NTIzM0Y5",
+      "playlistInsertRepairedAt": "2026-08-11T03:25:32.565Z",
+      "playlistInsertRepairStatus": "inserted",
+      "playlistInsertRepairGithubRunId": "31455316106",
+      "playlistInsertRepairGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/31455316106",
+      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video.",
+      "lastReadbackAt": "2026-08-11T03:25:32.565Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "public",
+        "publishAt": "",
+        "playlistItemReadback": "inserted",
+        "playlistId": "PLDVcJccNFHT4",
+        "playlistPrivacyStatus": "public",
+        "playlistItemId": "UExEVmNKY2NORkhUNC4wMTcyMDhGQUE4NTIzM0Y5",
+        "playlistInsertRepairedAt": "2026-08-11T03:25:32.565Z"
+      }
     }
   ]
 }
