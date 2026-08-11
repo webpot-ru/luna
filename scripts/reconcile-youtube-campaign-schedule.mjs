@@ -76,11 +76,14 @@ function activeCampaignPublications(ordinary, polyglot, campaign) {
 }
 
 function completeReport(report) {
+  const expectedRouteCount = Number(report?.summary?.expectedRouteCount);
+  const receivedRouteCount = Number(report?.summary?.receivedRouteCount);
   return report?.summary?.complete === true
     && report.summary.paginationComplete === true
     && report.summary.videoStatusReadbackComplete === true
-    && report.summary.expectedRouteCount === 4
-    && report.summary.receivedRouteCount === 4;
+    && Number.isInteger(expectedRouteCount)
+    && expectedRouteCount > 0
+    && receivedRouteCount === expectedRouteCount;
 }
 
 function slotKey(row) {
