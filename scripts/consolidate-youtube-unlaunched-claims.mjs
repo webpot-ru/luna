@@ -41,6 +41,7 @@ function parseArgs(argv) {
     output: "outputs/youtube-unlaunched-claim-consolidation.json",
     maxControlAgeMinutes: 30,
     expectedSourceClaims: 0,
+    sourceCampaignId: "",
     apply: false,
   };
   for (let index = 0; index < argv.length; index += 1) {
@@ -53,6 +54,7 @@ function parseArgs(argv) {
     else if (arg === "--plans-dir" || arg.startsWith("--plans-dir=")) options.plansDir = value();
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = value();
     else if (arg === "--expected-source-claims" || arg.startsWith("--expected-source-claims=")) options.expectedSourceClaims = Number(value());
+    else if (arg === "--source-campaign-id" || arg.startsWith("--source-campaign-id=")) options.sourceCampaignId = value();
     else if (arg === "--max-control-age-minutes" || arg.startsWith("--max-control-age-minutes=")) options.maxControlAgeMinutes = Number(value());
     else if (arg === "--apply") options.apply = true;
     else if (arg === "--confirm" || arg.startsWith("--confirm=")) options.confirm = value();
@@ -62,10 +64,11 @@ function parseArgs(argv) {
   return options;
 }
 
-function activeClaimRows(registry, setId) {
+function activeClaimRows(registry, setId, sourceCampaignId = "") {
   const rows = [];
   for (const campaign of registry.campaigns || []) {
     if (!isCampaignStatusActive(campaign.status)) continue;
+    if (sourceCampaignId && campaign.campaignId !== sourceCampaignId) continue;
     for (const assignment of campaign.assignments || []) {
       if (assignment.setId !== setId || assignment.status !== "claimed") continue;
       assert(!hasUploadReceipt(assignment), `${campaign.campaignId}: ${assignment.assignmentKey} has upload receipt evidence and cannot be consolidated`);
@@ -121,7 +124,7 @@ function campaignRow(manifest, claimedAt, sourceCampaigns) {
   };
 }
 
-export function buildUnlaunchedClaimConsolidation({ registry, calendar, manifest, controlReport, now = new Date(), expectedSourceClaims = 0, maxControlAgeMinutes = 30 }) {
+export function buildUnlaunchedClaimConsolidation({ registry, calendar, manifest, controlReport, now = new Date(), expectedSourceClaims = 0, maxControlAgeMinutes = 30, sourceCampaignId = "" }) {
   verifyCampaignManifest(manifest);
   assert(manifest.summary?.applyReady === true && (manifest.blockers || []).length === 0, "manifest is not apply-ready");
   const ordinaryPerChannel = Number(manifest.inputs?.ordinaryPerChannel || 0);
@@ -129,7 +132,7 @@ export function buildUnlaunchedClaimConsolidation({ registry, calendar, manifest
   const supportCount = Number(manifest.inputs?.supportCount || 0);
   assert(supportCount > 0, "manifest support count is missing");
   assert(manifest.assignments.length === supportCount * (ordinaryPerChannel + polyglotPerChannel), "manifest assignment count does not match declared per-channel wave");
-  const sourceRows = activeClaimRows(registry, manifest.setId);
+  const sourceRows = activeClaimRows(registry, manifest.setId, sourceCampaignId);
   assert(sourceRows.length > 0, `no unlaunched active claims found for ${manifest.setId}`);
   if (expectedSourceClaims) assert(sourceRows.length === expectedSourceClaims, `source claim count ${sourceRows.length} != expected ${expectedSourceClaims}`);
   const controlEvidence = validateControl(controlReport, manifest, now, maxControlAgeMinutes);
@@ -256,6 +259,7 @@ export function buildUnlaunchedClaimConsolidation({ registry, calendar, manifest
       manifestHash: manifest.manifestHash,
       assignmentCount: manifest.assignments.length,
       sourceClaimCount: sourceRows.length,
+      selectedSourceCampaignId: sourceCampaignId,
       sourceCampaigns: sourceCampaigns.map((campaignId) => ({ campaignId, assignmentCount: sourceByCampaign.get(campaignId).length })),
       controlEvidence,
       providerCalls: 0,
@@ -268,7 +272,7 @@ export function buildUnlaunchedClaimConsolidation({ registry, calendar, manifest
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log(`node scripts/consolidate-youtube-unlaunched-claims.mjs --manifest=<plan.json> --control-report=<all-routes.json> [--expected-source-claims=409] [--apply --confirm=${CONFIRM}]`);
+    console.log(`node scripts/consolidate-youtube-unlaunched-claims.mjs --manifest=<plan.json> --control-report=<all-routes.json> [--source-campaign-id=<id>] [--expected-source-claims=409] [--apply --confirm=${CONFIRM}]`);
     return;
   }
   assert(options.manifest && options.controlReport, "--manifest and --control-report are required");
@@ -280,6 +284,7 @@ function main() {
     manifest,
     controlReport: readJson(options.controlReport),
     expectedSourceClaims: options.expectedSourceClaims,
+    sourceCampaignId: options.sourceCampaignId,
     maxControlAgeMinutes: options.maxControlAgeMinutes,
   });
   if (options.apply) {
