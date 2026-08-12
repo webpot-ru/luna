@@ -339,10 +339,7 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, rou
   }
 
   const generatedAt = now.toISOString();
-  const routeKeys = [...new Set([
-    ...(routing ? [] : Object.keys(oldCampaign.summary?.routeCounts || {})),
-    ...assignments.map((row) => row.routeKey).filter(Boolean),
-  ])].sort();
+  const routeKeys = [...new Set(assignments.map((row) => row.routeKey).filter(Boolean))].sort();
   const routeCounts = Object.fromEntries(routeKeys.map((route) => [route, assignments.filter((row) => row.routeKey === route).length]));
   const customThumbnailCount = assignments.filter((row) => row.thumbnail?.mode === "custom").length;
   const playlistCreateCount = assignments.filter((row) => row.playlist?.state === "verified_absent").length;
