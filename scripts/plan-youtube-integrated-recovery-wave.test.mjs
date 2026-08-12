@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
 
-import { composeIntegratedRecoveryAssignments, sourceRowsFromCampaign } from "./plan-youtube-integrated-recovery-wave.mjs";
+import {
+  composeIntegratedRecoveryAssignments,
+  sourceRowsFromActiveClaims,
+  sourceRowsFromCampaign,
+} from "./plan-youtube-integrated-recovery-wave.mjs";
 
 function assignment({ assignmentKey, supportLang, videoType, slotKey }) {
   return {
@@ -80,5 +84,53 @@ const partialSource = sourceRowsFromCampaign({
 });
 assert.equal(partialSource.sourceMode, "partial_reconciliation_required");
 assert.deepEqual(partialSource.rows.map((row) => row.assignmentKey), ["missing"]);
+
+const multiSource = sourceRowsFromActiveClaims({
+  registry: { campaigns: [
+    {
+      campaignId: "first",
+      setId: "set",
+      status: "reconciliation_required",
+      finalizedAt: "2026-08-01T00:00:00.000Z",
+      finalizeSummary: { missingCount: 1 },
+      assignmentKeys: ["ordinary|set|A|a1", "accepted"],
+      assignments: [
+        { assignmentKey: "ordinary|set|A|a1", setId: "set", videoType: "ordinary", status: "claimed" },
+        { assignmentKey: "accepted", setId: "set", videoType: "ordinary", status: "upload_accepted", youtubeVideoId: "video" },
+      ],
+    },
+    {
+      campaignId: "second",
+      setId: "set",
+      status: "claimed",
+      assignmentKeys: ["polyglot|set|B|bundle|hash|short_unverified"],
+      assignments: [{
+        assignmentKey: "polyglot|set|B|bundle|hash|short_unverified",
+        setId: "set",
+        supportLang: "B",
+        videoType: "polyglot",
+        bundleKey: "bundle",
+        contentScope: "short_unverified",
+        status: "claimed",
+      }],
+    },
+  ] },
+  setId: "set",
+  expectedSourceAssignments: 2,
+});
+assert.equal(multiSource.sourceMode, "multi_campaign_completion");
+assert.deepEqual(multiSource.rows.map((row) => row.integratedRecoverySourceCampaignId).sort(), ["first", "second"]);
+
+assert.throws(() => sourceRowsFromActiveClaims({
+  registry: { campaigns: [{
+    campaignId: "still-running",
+    setId: "set",
+    status: "running",
+    assignmentKeys: ["ordinary|set|A|a1"],
+    assignments: [{ assignmentKey: "ordinary|set|A|a1", setId: "set", videoType: "ordinary", status: "claimed" }],
+  }] },
+  setId: "set",
+  expectedSourceAssignments: 1,
+}), /in-flight campaign/u);
 
 console.log("integrated recovery wave composition tests passed");

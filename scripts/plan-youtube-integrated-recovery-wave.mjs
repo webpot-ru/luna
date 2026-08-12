@@ -6,6 +6,7 @@ import { pathToFileURL } from "node:url";
 import {
   buildPublicationCampaign,
   fileFingerprint,
+  isCampaignStatusActive,
   sha256Json,
   verifyCampaignManifest,
 } from "./lib/youtube-publication-campaign.mjs";
@@ -33,6 +34,7 @@ function parseArgs(argv) {
     sourceCampaignId: DEFAULT_SOURCE_CAMPAIGN_ID,
     ordinaryPerChannel: 11,
     polyglotPerChannel: 1,
+    completeDeckTails: false,
     minFutureMinutes: 90,
     maxSnapshotAgeMinutes: 30,
     expectedSourceAssignments: 113,
@@ -55,6 +57,7 @@ function parseArgs(argv) {
     else if (arg === "--source-campaign-id" || arg.startsWith("--source-campaign-id=")) options.sourceCampaignId = value();
     else if (arg === "--ordinary-per-channel" || arg.startsWith("--ordinary-per-channel=")) options.ordinaryPerChannel = Number(value());
     else if (arg === "--polyglot-per-channel" || arg.startsWith("--polyglot-per-channel=")) options.polyglotPerChannel = Number(value());
+    else if (arg === "--complete-deck-tails") options.completeDeckTails = true;
     else if (arg === "--min-future-minutes" || arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(value());
     else if (arg === "--max-snapshot-age-minutes" || arg.startsWith("--max-snapshot-age-minutes=")) options.maxSnapshotAgeMinutes = Number(value());
     else if (arg === "--expected-source-assignments" || arg.startsWith("--expected-source-assignments=")) options.expectedSourceAssignments = Number(value());
@@ -81,7 +84,7 @@ function parseArgs(argv) {
 }
 
 function usage() {
-  return "node scripts/plan-youtube-integrated-recovery-wave.mjs --control-report=<all-routes.json> [--set=<set_id>] [--source-campaign-id=<id>] [--ordinary-per-channel=11] [--polyglot-per-channel=1]";
+  return "node scripts/plan-youtube-integrated-recovery-wave.mjs --control-report=<all-routes.json> [--set=<set_id>] [--source-campaign-id=<id>] [--ordinary-per-channel=11] [--polyglot-per-channel=1] [--complete-deck-tails]";
 }
 
 function assert(condition, message) {
@@ -143,6 +146,35 @@ function sourceRowsFromCampaign({ registry, setId, sourceCampaignId, expectedSou
   return { campaign, rows, sourceMode: isUnlaunched ? "unlaunched_claimed" : "partial_reconciliation_required" };
 }
 
+export function sourceRowsFromActiveClaims({ registry, setId, expectedSourceAssignments }) {
+  const campaigns = [];
+  const rows = [];
+  for (const campaign of registry.campaigns || []) {
+    if (campaign.setId !== setId || !isCampaignStatusActive(campaign.status)) continue;
+    const selected = (campaign.assignments || [])
+      .filter((row) => row.status === "claimed" && !hasUploadReceipt(row));
+    if (!selected.length) continue;
+    if (campaign.status === "reconciliation_required") {
+      assert(campaign.finalizedAt && campaign.finalizeSummary, `${campaign.campaignId}: reconciliation source is missing terminal finalizer evidence`);
+    } else {
+      assert(campaign.status === "claimed", `${campaign.campaignId}: completion cannot consolidate claims from an in-flight campaign (${campaign.status})`);
+      assert(!campaign.finalizedAt && !campaign.finalizeSummary && !campaign.githubRunId && !campaign.dispatchRunId, `${campaign.campaignId}: claimed completion source has dispatch/finalizer evidence`);
+    }
+    for (const row of selected) {
+      assert((campaign.assignmentKeys || []).includes(row.assignmentKey), `${campaign.campaignId}: ${row.assignmentKey} is missing from active campaign keys`);
+      rows.push({ ...row, integratedRecoverySourceCampaignId: campaign.campaignId });
+    }
+    campaigns.push(campaign);
+  }
+  assert(rows.length > 0, `${setId}: no active no-receipt claims are available for completion`);
+  if (expectedSourceAssignments) {
+    assert(rows.length === expectedSourceAssignments, `${setId}: active source assignment count ${rows.length} != ${expectedSourceAssignments}`);
+  }
+  assert(new Set(rows.map((row) => row.assignmentKey)).size === rows.length, `${setId}: duplicate active source assignment keys`);
+  assert(new Set(rows.filter(isPolyglotRow).map(polyglotProductSlotKey)).size === rows.filter(isPolyglotRow).length, `${setId}: duplicate active Polyglot product claims`);
+  return { campaigns, rows, sourceMode: "multi_campaign_completion" };
+}
+
 function previewPaths(options, now) {
   const stamp = now.toISOString().replace(/[:.]/gu, "-");
   const directory = path.join("scratch", `integrated-recovery-preview-${stamp}`);
@@ -171,6 +203,45 @@ function buildUnlaunchedPreview({ registry, calendar, sourceCampaignId, sourceRo
   const previewCalendar = structuredClone(calendar);
   for (const row of previewCalendar.reservations || []) {
     if (row.campaignId === sourceCampaignId && sourceCalendarKeys.has(calendarAssignmentKey(row)) && isActiveCalendarReservation(row)) {
+      row.status = "superseded_integrated_plan_preview";
+    }
+  }
+  return { previewRegistry, previewCalendar };
+}
+
+function buildMultiSourcePreview({ registry, calendar, sourceRows }) {
+  const sourceByCampaign = new Map();
+  for (const row of sourceRows) {
+    const campaignId = row.integratedRecoverySourceCampaignId;
+    assert(campaignId, `${row.assignmentKey}: completion source campaign is missing`);
+    const selected = sourceByCampaign.get(campaignId) || [];
+    selected.push(row);
+    sourceByCampaign.set(campaignId, selected);
+  }
+  const previewRegistry = structuredClone(registry);
+  for (const campaign of previewRegistry.campaigns || []) {
+    const selected = sourceByCampaign.get(campaign.campaignId) || [];
+    if (!selected.length) continue;
+    const assignmentKeys = new Set(selected.map((row) => row.assignmentKey));
+    const slotKeys = new Set(selected.map((row) => row.slotKey));
+    campaign.assignmentKeys = (campaign.assignmentKeys || []).filter((key) => !assignmentKeys.has(key));
+    campaign.slotKeys = (campaign.slotKeys || []).filter((key) => !slotKeys.has(key));
+    for (const row of campaign.assignments || []) {
+      if (assignmentKeys.has(row.assignmentKey)) row.status = "superseded_integrated_plan";
+    }
+    const remainingActive = (campaign.assignments || []).some((row) => (
+      row.status === "claimed"
+      || row.status === "upload_accepted"
+      || row.status === "upload_accepted_reconciliation_required"
+    ));
+    if (!remainingActive) campaign.status = "superseded_integrated_plan_preview";
+  }
+  const sourceCalendarKeys = new Set(sourceRows.map((row) => (
+    `${row.integratedRecoverySourceCampaignId}|${row.calendarAssignmentKey}`
+  )));
+  const previewCalendar = structuredClone(calendar);
+  for (const row of previewCalendar.reservations || []) {
+    if (sourceCalendarKeys.has(`${row.campaignId}|${calendarAssignmentKey(row)}`) && isActiveCalendarReservation(row)) {
       row.status = "superseded_integrated_plan_preview";
     }
   }
@@ -375,6 +446,173 @@ function sourceFingerprints({ base, options }) {
   return fingerprints;
 }
 
+function setDifference(left, right) {
+  return [...left].filter((value) => !right.has(value)).sort();
+}
+
+export function buildCompletionTailWave(options) {
+  assert(options.controlReport, "--control-report is required");
+  const now = options.now instanceof Date ? options.now : new Date(options.generatedAt || Date.now());
+  const registry = readJson(options.registry);
+  const calendar = readJson(options.calendar);
+  const controlReport = readJson(options.controlReport);
+  const source = sourceRowsFromActiveClaims({
+    registry,
+    setId: options.setId,
+    expectedSourceAssignments: options.expectedSourceAssignments,
+  });
+  const preview = buildMultiSourcePreview({ registry, calendar, sourceRows: source.rows });
+  const temporary = previewPaths(options, now);
+  writeJson(temporary.registry, preview.previewRegistry);
+  writeJson(temporary.calendar, preview.previewCalendar);
+  const base = buildPublicationCampaign({
+    setId: options.setId,
+    supports: "ALL",
+    ordinaryPerChannel: options.ordinaryPerChannel,
+    allowPartialOrdinaryTail: true,
+    polyglotPerChannel: options.polyglotPerChannel,
+    allowPartialPolyglotTail: true,
+    minFutureMinutes: options.minFutureMinutes,
+    maxSnapshotAgeMinutes: options.maxSnapshotAgeMinutes,
+    startDate: options.startDate || "",
+    now,
+    snapshotPath: options.snapshot,
+    calendarPath: temporary.calendar,
+    campaignRegistryPath: temporary.registry,
+    policyPath: options.policy,
+    routingPath: options.routing,
+    channelsPath: options.channels,
+    coverRegistryPath: options.covers,
+    ordinaryPlaylistRegistryPath: options.ordinaryPlaylists,
+    polyglotPlaylistRegistryPath: options.polyglotPlaylists,
+    playlistDiscoveryPath: options.playlistDiscovery,
+  });
+  const blockers = [...(base.blockers || [])];
+  const expectedOrdinary = new Set((controlReport.tails || [])
+    .filter((row) => row.videoType === "ordinary" && row.setId === options.setId)
+    .map(assignmentKey));
+  const actualOrdinary = new Set(base.assignments
+    .filter((row) => row.videoType === "ordinary")
+    .map((row) => row.assignmentKey));
+  const sourcePolyglotRows = source.rows.filter(isPolyglotRow);
+  const expectedPolyglot = new Set(sourcePolyglotRows.map((row) => row.assignmentKey));
+  const actualPolyglot = new Set(base.assignments
+    .filter(isPolyglotRow)
+    .map((row) => row.assignmentKey));
+  const controlPolyglotProducts = new Set((controlReport.tails || [])
+    .filter((row) => row.videoType === "polyglot" && row.setId === options.setId)
+    .map(polyglotProductSlotKey));
+  const uncoveredSourceProducts = sourcePolyglotRows
+    .filter((row) => !controlPolyglotProducts.has(polyglotProductSlotKey(row)))
+    .map((row) => row.assignmentKey);
+  const missingOrdinary = setDifference(expectedOrdinary, actualOrdinary);
+  const unexpectedOrdinary = setDifference(actualOrdinary, expectedOrdinary);
+  const missingPolyglot = setDifference(expectedPolyglot, actualPolyglot);
+  const unexpectedPolyglot = setDifference(actualPolyglot, expectedPolyglot);
+  if (missingOrdinary.length || unexpectedOrdinary.length) {
+    blockers.push(`completion ordinary coverage mismatch: missing=${missingOrdinary.length}, unexpected=${unexpectedOrdinary.length}`);
+  }
+  if (missingPolyglot.length || unexpectedPolyglot.length || uncoveredSourceProducts.length) {
+    blockers.push(`completion Polyglot coverage mismatch: missing=${missingPolyglot.length}, unexpected=${unexpectedPolyglot.length}, not_in_control_tails=${uncoveredSourceProducts.length}`);
+  }
+  const sourceByKey = new Map(source.rows.map((row) => [row.assignmentKey, row]));
+  const assignments = base.assignments.map((row) => {
+    const sourceRow = sourceByKey.get(row.assignmentKey);
+    if (!sourceRow) return row;
+    return {
+      ...row,
+      integratedRecovery: {
+        sourceCampaignId: sourceRow.integratedRecoverySourceCampaignId,
+        sourceAssignmentKey: sourceRow.assignmentKey,
+        scheduleCarrierAssignmentKey: row.assignmentKey,
+      },
+    };
+  });
+  const sourceKeys = new Set(source.rows.map((row) => row.assignmentKey));
+  const assignmentKeys = new Set(assignments.map((row) => row.assignmentKey));
+  const missingSourceKeys = setDifference(sourceKeys, assignmentKeys);
+  if (missingSourceKeys.length) blockers.push(`completion manifest is missing ${missingSourceKeys.length} active source claim(s)`);
+  const controlEvidence = validateLiveControl({
+    report: controlReport,
+    assignments,
+    now,
+    maxSnapshotAgeMinutes: options.maxSnapshotAgeMinutes,
+  });
+  const routing = readJson(options.routing);
+  const usage = aggregateUsage({ assignments, routing });
+  blockers.push(...usage.blockers);
+  const sourceCampaigns = source.campaigns.map((campaign) => ({
+    campaignId: campaign.campaignId,
+    manifestHash: campaign.manifestHash || "",
+    status: campaign.status,
+    assignmentCount: source.rows.filter((row) => row.integratedRecoverySourceCampaignId === campaign.campaignId).length,
+  })).sort((left, right) => left.campaignId.localeCompare(right.campaignId));
+  const ordinarySupportCount = new Set(assignments.filter((row) => row.videoType === "ordinary").map((row) => row.supportLang)).size;
+  const polyglotSupportCount = new Set(assignments.filter(isPolyglotRow).map((row) => row.supportLang)).size;
+  const summary = {
+    ...base.summary,
+    applyReady: blockers.length === 0,
+    blockerCount: blockers.length,
+    warningCount: (base.warnings || []).length + 1,
+    ordinaryCount: actualOrdinary.size,
+    polyglotCount: actualPolyglot.size,
+    fullPolyglotCount: assignments.filter((row) => isPolyglotRow(row) && row.contentScope === "full").length,
+    shortUnverifiedPolyglotCount: assignments.filter((row) => isPolyglotRow(row) && row.contentScope === "short_unverified").length,
+    assignmentCount: assignments.length,
+    routeCounts: usage.routeCounts,
+  };
+  const inputs = {
+    ...base.inputs,
+    ordinarySupportCount,
+    polyglotSupportCount,
+    allowPartialOrdinaryTail: true,
+    allowPartialPolyglotTail: true,
+    completionTailMode: true,
+    integratedRecoveryAssignmentCount: source.rows.length,
+    integratedRecoverySourceCampaignIds: sourceCampaigns.map((row) => row.campaignId),
+  };
+  const evidence = {
+    ...base.evidence,
+    sourceFingerprints: sourceFingerprints({ base, options }),
+    integratedRecovery: {
+      sourceMode: source.sourceMode,
+      sourceCampaigns,
+      sourceAssignmentCount: source.rows.length,
+      sourceOrdinaryCount: source.rows.filter((row) => row.videoType === "ordinary").length,
+      sourcePolyglotCount: sourcePolyglotRows.length,
+      sourceAssignmentsIncludedExactly: missingSourceKeys.length === 0,
+      ordinaryControlTailCount: expectedOrdinary.size,
+      controlEvidence,
+      previewPaths: temporary,
+    },
+  };
+  const core = {
+    schemaVersion: 1,
+    generatedAt: now.toISOString(),
+    mode: "read_only_no_spend_completion_tail_plan",
+    setId: options.setId,
+    inputs,
+    evidence,
+    summary,
+    estimatedUsage: {
+      ...base.estimatedUsage,
+      ...usage.estimatedUsage,
+    },
+    blockers,
+    warnings: [
+      ...(base.warnings || []),
+      `${source.rows.length} active no-receipt claims from ${sourceCampaigns.length} campaigns are pinned into the exact deck-completion wave`,
+    ],
+    assignments,
+  };
+  const identityHash = sha256Json({ setId: core.setId, inputs: core.inputs, evidence: core.evidence, assignments: core.assignments });
+  const start = options.startDate || now.toISOString().slice(0, 10);
+  const manifest = { ...core, campaignId: `yt-${options.setId}-${start}-${identityHash.slice(0, 12)}` };
+  manifest.manifestHash = sha256Json(manifest);
+  verifyCampaignManifest(manifest);
+  return manifest;
+}
+
 export function composeIntegratedRecoveryAssignments({ supports, baseAssignments, sourceRows, ordinaryPerChannel, sourceCampaignId }) {
   const ordinary = composeOrdinaryAssignments({ supports, baseAssignments, sourceRows, ordinaryPerChannel, sourceCampaignId });
   const polyglot = composePolyglotAssignments({ supports, baseAssignments, sourceRows, sourceCampaignId });
@@ -384,6 +622,7 @@ export function composeIntegratedRecoveryAssignments({ supports, baseAssignments
 export { sourceRowsFromCampaign };
 
 export function buildIntegratedRecoveryWave(options) {
+  if (options.completeDeckTails) return buildCompletionTailWave(options);
   assert(options.controlReport, "--control-report is required");
   const now = options.now instanceof Date ? options.now : new Date(options.generatedAt || Date.now());
   const registry = readJson(options.registry);
@@ -544,7 +783,7 @@ function main() {
     campaignId: manifest.campaignId,
     manifestHash: manifest.manifestHash,
     ...manifest.summary,
-    sourceCampaignId: options.sourceCampaignId,
+    sourceCampaignId: options.completeDeckTails ? "ALL_ACTIVE" : options.sourceCampaignId,
     sourceAssignmentCount: options.expectedSourceAssignments,
     manifestPath: options.output,
   };

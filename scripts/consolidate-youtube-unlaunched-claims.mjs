@@ -69,8 +69,17 @@ function activeClaimRows(registry, setId, sourceCampaignId = "") {
   for (const campaign of registry.campaigns || []) {
     if (!isCampaignStatusActive(campaign.status)) continue;
     if (sourceCampaignId && campaign.campaignId !== sourceCampaignId) continue;
-    for (const assignment of campaign.assignments || []) {
-      if (assignment.setId !== setId || assignment.status !== "claimed") continue;
+    const selected = (campaign.assignments || []).filter((assignment) => (
+      assignment.setId === setId && assignment.status === "claimed"
+    ));
+    if (!selected.length) continue;
+    if (campaign.status === "reconciliation_required") {
+      assert(campaign.finalizedAt && campaign.finalizeSummary, `${campaign.campaignId}: reconciliation source is missing terminal finalizer evidence`);
+    } else {
+      assert(campaign.status === "claimed", `${campaign.campaignId}: cannot consolidate claims from an in-flight campaign (${campaign.status})`);
+      assert(!campaign.finalizedAt && !campaign.finalizeSummary && !campaign.githubRunId && !campaign.dispatchRunId, `${campaign.campaignId}: claimed source has dispatch/finalizer evidence`);
+    }
+    for (const assignment of selected) {
       assert(!hasUploadReceipt(assignment), `${campaign.campaignId}: ${assignment.assignmentKey} has upload receipt evidence and cannot be consolidated`);
       assert((campaign.assignmentKeys || []).includes(assignment.assignmentKey), `${campaign.campaignId}: ${assignment.assignmentKey} is not an active top-level claim`);
       rows.push({ campaignId: campaign.campaignId, assignment });
@@ -124,17 +133,71 @@ function campaignRow(manifest, claimedAt, sourceCampaigns) {
   };
 }
 
+function validateManifestWaveShape(manifest) {
+  const supportCount = Number(manifest.inputs?.supportCount || 0);
+  const ordinaryPerChannel = Number(manifest.inputs?.ordinaryPerChannel || 0);
+  const polyglotPerChannel = Number(manifest.inputs?.polyglotPerChannel || 0);
+  const allowPartialOrdinaryTail = manifest.inputs?.allowPartialOrdinaryTail === true;
+  const allowPartialPolyglotTail = manifest.inputs?.allowPartialPolyglotTail === true;
+  assert(supportCount > 0, "manifest support count is missing");
+  assert(Number.isInteger(ordinaryPerChannel) && ordinaryPerChannel >= 0, "manifest ordinaryPerChannel is invalid");
+  assert(Number.isInteger(polyglotPerChannel) && polyglotPerChannel >= 0, "manifest polyglotPerChannel is invalid");
+  const byType = (videoType) => {
+    const grouped = new Map();
+    for (const row of (manifest.assignments || []).filter((candidate) => candidate.videoType === videoType)) {
+      const rows = grouped.get(row.supportLang) || [];
+      rows.push(row);
+      grouped.set(row.supportLang, rows);
+    }
+    return grouped;
+  };
+  const ordinary = byType("ordinary");
+  const polyglot = byType("polyglot");
+  const validate = ({ grouped, maximum, partial, declaredSupportCount, label }) => {
+    if (maximum === 0) {
+      assert(grouped.size === 0, `${label} rows exist while ${label}PerChannel is 0`);
+      return;
+    }
+    const expectedSupports = Number(declaredSupportCount ?? (partial ? grouped.size : supportCount));
+    assert(grouped.size === expectedSupports, `${label} support count ${grouped.size} != ${expectedSupports}`);
+    for (const [support, rows] of grouped) {
+      if (partial) assert(rows.length >= 1 && rows.length <= maximum, `${support}: ${label} rows ${rows.length} must be within 1..${maximum}`);
+      else assert(rows.length === maximum, `${support}: ${label} rows ${rows.length} != ${maximum}`);
+    }
+  };
+  validate({
+    grouped: ordinary,
+    maximum: ordinaryPerChannel,
+    partial: allowPartialOrdinaryTail,
+    declaredSupportCount: manifest.inputs?.ordinarySupportCount,
+    label: "ordinary",
+  });
+  validate({
+    grouped: polyglot,
+    maximum: polyglotPerChannel,
+    partial: allowPartialPolyglotTail,
+    declaredSupportCount: manifest.inputs?.polyglotSupportCount,
+    label: "Polyglot",
+  });
+  assert(new Set((manifest.assignments || []).map((row) => row.assignmentKey)).size === manifest.assignments.length, "manifest contains duplicate assignment keys");
+  assert(new Set((manifest.assignments || []).map((row) => row.slotKey)).size === manifest.assignments.length, "manifest contains duplicate channel slots");
+}
+
 export function buildUnlaunchedClaimConsolidation({ registry, calendar, manifest, controlReport, now = new Date(), expectedSourceClaims = 0, maxControlAgeMinutes = 30, sourceCampaignId = "" }) {
   verifyCampaignManifest(manifest);
   assert(manifest.summary?.applyReady === true && (manifest.blockers || []).length === 0, "manifest is not apply-ready");
-  const ordinaryPerChannel = Number(manifest.inputs?.ordinaryPerChannel || 0);
-  const polyglotPerChannel = Number(manifest.inputs?.polyglotPerChannel || 0);
-  const supportCount = Number(manifest.inputs?.supportCount || 0);
-  assert(supportCount > 0, "manifest support count is missing");
-  assert(manifest.assignments.length === supportCount * (ordinaryPerChannel + polyglotPerChannel), "manifest assignment count does not match declared per-channel wave");
+  validateManifestWaveShape(manifest);
   const sourceRows = activeClaimRows(registry, manifest.setId, sourceCampaignId);
   assert(sourceRows.length > 0, `no unlaunched active claims found for ${manifest.setId}`);
   if (expectedSourceClaims) assert(sourceRows.length === expectedSourceClaims, `source claim count ${sourceRows.length} != expected ${expectedSourceClaims}`);
+  const manifestAssignments = new Map((manifest.assignments || []).map((row) => [row.assignmentKey, row]));
+  for (const source of sourceRows) {
+    const selected = manifestAssignments.get(source.assignment.assignmentKey);
+    assert(selected, `${source.campaignId}: active source claim is missing from the consolidated manifest: ${source.assignment.assignmentKey}`);
+    if (isPolyglotRow(source.assignment)) {
+      assert(polyglotProductSlotKey(selected) === polyglotProductSlotKey(source.assignment), `${source.assignment.assignmentKey}: consolidated Polyglot product identity changed`);
+    }
+  }
   const controlEvidence = validateControl(controlReport, manifest, now, maxControlAgeMinutes);
   assert(!(registry.campaigns || []).some((row) => row.campaignId === manifest.campaignId), `campaign already exists: ${manifest.campaignId}`);
 
