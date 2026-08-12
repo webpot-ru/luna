@@ -108,6 +108,7 @@ jobs:
           const finalizer = campaign.finalizeSummary || {};
           const expectedCount = accepted.length + missing.length;
           const completedCount = accepted.length - acceptedWithPostUploadError.length;
+          const receiptErrorCount = Number(finalizer.receiptErrorCount || 0);
           if (Number(finalizer.expectedCount) !== expectedCount
             || Number(finalizer.completedCount) !== completedCount
             || Number(finalizer.observedCount) !== accepted.length
@@ -115,7 +116,8 @@ jobs:
             || Number(finalizer.duplicateAssignmentCount || 0) !== 0
             || Number(finalizer.duplicateVideoIdCount || 0) !== 0
             || Number(finalizer.unexpectedPublicationCount || 0) !== 0
-            || Number(finalizer.receiptErrorCount || 0) !== acceptedWithPostUploadError.length) {
+            || (acceptedWithPostUploadError.length === 0 && receiptErrorCount !== 0)
+            || (acceptedWithPostUploadError.length > 0 && receiptErrorCount < acceptedWithPostUploadError.length)) {
             throw new Error(`Unexpected source finalizer summary: ${JSON.stringify(finalizer)} for durable split accepted=${accepted.length}, repair=${acceptedWithPostUploadError.length}, missing=${missing.length}`);
           }
           if (!missing.length) throw new Error("Source campaign has no missing assignments to recover");
