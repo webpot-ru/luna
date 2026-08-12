@@ -768,7 +768,7 @@ Acceptance gate before mass use:
 | **AZ** | Азербайджанский | `edge_az-AZ-BanuNeural` | 🌟 Обновлен (женский) |
 | **KA** | Грузинский | `edge_ka-GE-EkaNeural` | 🌟 Обновлен (женский) |
 | **CS** | Чешский | `edge_cs-CZ-VlastaNeural` | 2026-07-08 same-locale female refresh |
-| **SK** | Словацкий | `edge_sk-SK-ViktoriaNeural` | 2026-07-08 same-locale female refresh |
+| **SK** | Словацкий | `edge_sk-SK-LukasNeural` | 2026-08-12 primary after empty-audio incident; deterministic same-locale fallback `Viktoria` |
 | **SR** | Сербский | `edge_sr-RS-SophieNeural` | 2026-07-08 same-locale female refresh |
 | **MS** | Малайский | `edge_ms-MY-YasminNeural` | Без изменений (женский) |
 | **UZ** | Узбекский | `edge_uz-UZ-MadinaNeural` | Без изменений (женский) |

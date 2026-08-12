@@ -24,6 +24,10 @@ import {
   normalizeYouTubeMetadata,
   validateAiMetadataLanguage,
 } from "./lib/youtube-metadata.mjs";
+import {
+  campaignTitleFallbackReasons,
+  minimumYouTubeTitleLength,
+} from "./lib/youtube-metadata-title-policy.mjs";
 
 const APPLY_CONFIRM = "GENERATE_YOUTUBE_CAMPAIGN_METADATA";
 const VECTOR_CONFIRM = "USE_VECTORENGINE_METADATA";
@@ -318,7 +322,7 @@ export function buildCampaignMetadataPrompt(tasks) {
     "For a non-English support language, never return English template tags. If a tag cannot be localized confidently, use that task's fallbackTags instead of inventing English tags.",
     "Do not merge, omit or duplicate tasks.",
     "For Polyglot tasks, playlistTitle and playlistDescription are required; ordinary tasks may leave them empty.",
-    "Titles must be natural, <=100 characters and not clickbait.",
+    "Titles must be natural, 25-100 Unicode characters and not clickbait; ZH, JA and KO titles may be 15-100 Unicode characters.",
     "Descriptions must be concise: 3-5 short sentences and 250-900 Unicode characters; ZH, JA and KO descriptions may be 150-900 Unicode characters.",
     "Descriptions must include the task courseUrl exactly once and describe vocabulary, pronunciation, repeat pauses and review.",
     "Polyglot playlistDescription must be no more than 600 Unicode characters.",
@@ -475,7 +479,20 @@ export function finalizeCampaignMetadata(task, generated, provider) {
     ? "openai-responses-campaign-batch"
     : `gemini-${provider.backend}-campaign-batch`;
   const supportLang = String(task.assignment.supportLang || "").toUpperCase();
+  const minimumTitleLength = minimumYouTubeTitleLength(supportLang);
   const minimumDescriptionLength = ["ZH", "JA", "KO"].includes(supportLang) ? 150 : 250;
+  const generatedTitle = String(generated.title || "").trim();
+  const titleFallbackReasons = campaignTitleFallbackReasons({
+    title: generatedTitle,
+    supportLang,
+    videoType: task.assignment.videoType,
+    targetLanguageName: task.template.targetLanguageName,
+    deckTitle: task.template.deckTitle,
+  });
+  const title = titleFallbackReasons.length === 0 ? generatedTitle : String(task.template.title || "").trim();
+  if (Array.from(title).length < minimumTitleLength) {
+    throw new Error(`${task.assignment.assignmentKey}: title is below ${minimumTitleLength} Unicode characters after localized template fallback`);
+  }
   const generatedDescription = String(generated.description || "").trim();
   const description = Array.from(generatedDescription).length >= minimumDescriptionLength
     ? generatedDescription
@@ -485,7 +502,7 @@ export function finalizeCampaignMetadata(task, generated, provider) {
   }
   const merged = normalizeYouTubeMetadata({
     ...task.template,
-    title: generated.title,
+    title,
     description,
     tags: generated.tags,
     hashtags: generated.hashtags,
@@ -505,6 +522,11 @@ export function finalizeCampaignMetadata(task, generated, provider) {
       serviceTier: provider.serviceTier || "",
     },
   });
+  merged.aiMetadata.titleFallbackToTemplate = title !== generatedTitle;
+  if (merged.aiMetadata.titleFallbackToTemplate) {
+    merged.aiMetadata.titleFallbackReason = titleFallbackReasons.join(",");
+    merged.aiMetadata.titleFallbackReasons = titleFallbackReasons;
+  }
   merged.aiMetadata.descriptionFallbackToTemplate = description !== generatedDescription;
   merged.campaignPlaylist = structuredClone(task.assignment.playlist || {});
   merged.playlist_key = task.assignment.playlist?.playlistKey || merged.playlist_key || "";
@@ -734,4 +756,3 @@ if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === imp
     process.exit(1);
   });
 }
-

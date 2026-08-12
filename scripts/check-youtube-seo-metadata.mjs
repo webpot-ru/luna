@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { buildPlaylistAssignment } from "./lib/youtube-playlists.mjs";
 import { getPublicCourseUrl } from "./lib/video-public-url.mjs";
+import { minimumYouTubeTitleLength } from "./lib/youtube-metadata-title-policy.mjs";
 
 const options = {
   output: "",
@@ -218,7 +219,7 @@ function validate(metadata, file) {
   if (!title) blockers.push("missing title");
   if (!description) blockers.push("missing description");
   const isCjk = ["ZH", "JA", "KO"].includes(String(metadata.supportLang).toUpperCase());
-  const minTitleLength = isCjk ? 15 : 25;
+  const minTitleLength = minimumYouTubeTitleLength(metadata.supportLang);
   const minDescLength = isCjk ? 150 : 250;
   if (titleLength < minTitleLength) blockers.push(`title too short for search intent: ${titleLength}`);
   if (titleLength > 100) blockers.push(`title too long for YouTube upload: ${titleLength}`);

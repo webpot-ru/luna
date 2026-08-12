@@ -21,7 +21,7 @@ export const defaultVoiceMap = {
   FI: "edge_fi-FI-NooraNeural",
   PL: "edge_pl-PL-ZofiaNeural",
   CS: "edge_cs-CZ-VlastaNeural",
-  SK: "edge_sk-SK-ViktoriaNeural",
+  SK: "edge_sk-SK-LukasNeural",
   HU: "edge_hu-HU-NoemiNeural",
   RO: "edge_ro-RO-AlinaNeural",
   BG: "edge_bg-BG-KalinaNeural",
