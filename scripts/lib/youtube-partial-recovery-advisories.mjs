@@ -6,6 +6,34 @@ const polyglotSlotKey = ({ supportLang, bundleKey, contentScope }) => [
   String(contentScope || "").trim(),
 ].join("|");
 
+const ACCEPTED_STATUSES = new Set([
+  "upload_accepted",
+  "upload_accepted_reconciliation_required",
+]);
+
+export function classifyPartialRecoveryAssignments(assignments = []) {
+  const accepted = [];
+  const acceptedWithPostUploadError = [];
+  const missing = [];
+  const unsupported = [];
+
+  for (const row of assignments) {
+    const status = String(row.status || "");
+    if (ACCEPTED_STATUSES.has(status) && row.youtubeVideoId) {
+      accepted.push(row);
+      if (status === "upload_accepted_reconciliation_required") acceptedWithPostUploadError.push(row);
+      continue;
+    }
+    if (status === "claimed" && !row.youtubeVideoId && !row.youtubeVideoUrl) {
+      missing.push(row);
+      continue;
+    }
+    unsupported.push(row);
+  }
+
+  return { accepted, acceptedWithPostUploadError, missing, unsupported };
+}
+
 export function selectBlockingPartialRecoveryAdvisories(advisories = [], missingAssignments = []) {
   const selectedSupports = new Set(missingAssignments.map((row) => normalize(row.supportLang)).filter(Boolean));
   const selectedPolyglotSlots = new Set(

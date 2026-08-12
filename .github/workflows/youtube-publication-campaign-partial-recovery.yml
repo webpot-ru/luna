@@ -74,7 +74,10 @@ jobs:
           node --input-type=module <<'NODE'
           import fs from "node:fs";
           import path from "node:path";
-          import { selectBlockingPartialRecoveryAdvisories } from "./scripts/lib/youtube-partial-recovery-advisories.mjs";
+          import {
+            classifyPartialRecoveryAssignments,
+            selectBlockingPartialRecoveryAdvisories,
+          } from "./scripts/lib/youtube-partial-recovery-advisories.mjs";
           const report = JSON.parse(fs.readFileSync(process.env.REPORT, "utf8"));
           const registry = JSON.parse(fs.readFileSync("config/youtube-publication-campaigns.json", "utf8"));
           const campaign = (registry.campaigns || []).find((row) => row.campaignId === process.env.CAMPAIGN_ID);
@@ -93,19 +96,27 @@ jobs:
           if (summary.paginationComplete !== true || summary.videoStatusReadbackComplete !== true) throw new Error("Pagination/status readback is incomplete");
           for (const key of requiredZero) if (Number(summary[key] || 0) !== 0) throw new Error(`${key} must be 0, got ${summary[key]}`);
           if (!Array.isArray(report.publications)) throw new Error("Control report publications are missing");
-          const accepted = (campaign.assignments || []).filter((row) => row.status === "upload_accepted" && row.youtubeVideoId);
-          const missing = (campaign.assignments || []).filter((row) => !(row.status === "upload_accepted" && row.youtubeVideoId));
+          const {
+            accepted,
+            acceptedWithPostUploadError,
+            missing,
+            unsupported,
+          } = classifyPartialRecoveryAssignments(campaign.assignments || []);
+          if (unsupported.length) {
+            throw new Error(`Source campaign contains unsupported assignment states: ${unsupported.map((row) => `${row.assignmentKey}:${row.status || "missing"}`).join(", ")}`);
+          }
           const finalizer = campaign.finalizeSummary || {};
           const expectedCount = accepted.length + missing.length;
+          const completedCount = accepted.length - acceptedWithPostUploadError.length;
           if (Number(finalizer.expectedCount) !== expectedCount
-            || Number(finalizer.completedCount) !== accepted.length
+            || Number(finalizer.completedCount) !== completedCount
             || Number(finalizer.observedCount) !== accepted.length
             || Number(finalizer.missingCount) !== missing.length
             || Number(finalizer.duplicateAssignmentCount || 0) !== 0
             || Number(finalizer.duplicateVideoIdCount || 0) !== 0
             || Number(finalizer.unexpectedPublicationCount || 0) !== 0
-            || Number(finalizer.receiptErrorCount || 0) !== 0) {
-            throw new Error(`Unexpected source finalizer summary: ${JSON.stringify(finalizer)} for durable split ${accepted.length}/${missing.length}`);
+            || Number(finalizer.receiptErrorCount || 0) !== acceptedWithPostUploadError.length) {
+            throw new Error(`Unexpected source finalizer summary: ${JSON.stringify(finalizer)} for durable split accepted=${accepted.length}, repair=${acceptedWithPostUploadError.length}, missing=${missing.length}`);
           }
           if (!missing.length) throw new Error("Source campaign has no missing assignments to recover");
           const activeAssignmentKeys = new Set(campaign.assignmentKeys || []);
@@ -150,6 +161,7 @@ jobs:
             controlRunId: process.env.CONTROL_RUN_ID,
             activeVideoCount: summary.activeVideoCount,
             acceptedCount: accepted.length,
+            acceptedWithPostUploadErrorCount: acceptedWithPostUploadError.length,
             missingCount: missing.length,
             ordinaryCount: ordinary.length,
             polyglotCount: polyglot.length,

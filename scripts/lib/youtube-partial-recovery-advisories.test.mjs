@@ -1,6 +1,20 @@
 import assert from "node:assert/strict";
 
-import { selectBlockingPartialRecoveryAdvisories } from "./youtube-partial-recovery-advisories.mjs";
+import {
+  classifyPartialRecoveryAssignments,
+  selectBlockingPartialRecoveryAdvisories,
+} from "./youtube-partial-recovery-advisories.mjs";
+
+const classified = classifyPartialRecoveryAssignments([
+  { assignmentKey: "accepted", status: "upload_accepted", youtubeVideoId: "video-1" },
+  { assignmentKey: "thumbnail-repair", status: "upload_accepted_reconciliation_required", youtubeVideoId: "video-2" },
+  { assignmentKey: "missing", status: "claimed" },
+  { assignmentKey: "unsafe", status: "upload_accepted_reconciliation_required" },
+]);
+assert.deepEqual(classified.accepted.map((row) => row.assignmentKey), ["accepted", "thumbnail-repair"]);
+assert.deepEqual(classified.acceptedWithPostUploadError.map((row) => row.assignmentKey), ["thumbnail-repair"]);
+assert.deepEqual(classified.missing.map((row) => row.assignmentKey), ["missing"]);
+assert.deepEqual(classified.unsupported.map((row) => row.assignmentKey), ["unsafe"]);
 
 const deferredFull = {
   type: "polyglot_full_tail_deferred_by_active_short_unverified",
