@@ -164,7 +164,7 @@ assert.equal(prepare.status, 0, prepare.stderr || prepare.stdout);
 const preflight = JSON.parse(fs.readFileSync(path.join(root, "outputs/preflight.json"), "utf8"));
 assert.equal(preflight.ordinaryMatrix[0].langs, "DE");
 assert.equal(preflight.ordinaryMatrix[0].route_key, "youtube-1");
-assert.equal(preflight.polyglotMatrix[0].bundle, "global_europe_core");
+assert.equal(JSON.parse(preflight.polyglotMatrix[0].polyglot_rows)[0].bundle, "global_europe_core");
 assert.equal(preflight.polyglotMatrix[0].route_key, "youtube-1");
 assert.equal(preflight.metadataMatrix[0].openai_token_budget, 2_000_000);
 assert.equal(preflight.summary.openAiCampaignTokenLimit, 2_000_000);
@@ -426,6 +426,89 @@ assert.equal(polyglotOnlyPrepare.status, 0, polyglotOnlyPrepare.stderr || polygl
 const polyglotOnlyPreflight = JSON.parse(fs.readFileSync(path.join(root, "outputs/preflight-polyglot-only.json"), "utf8"));
 assert.equal(polyglotOnlyPreflight.ordinaryMatrix.length, 0);
 assert.equal(polyglotOnlyPreflight.polyglotMatrix.length, 1);
+
+const secondPolyglotAssignment = {
+  ...polyglotAssignment,
+  assignmentKey: "polyglot|deck|EN|east_asia_core|east-hash|short_unverified",
+  calendarAssignmentKey: "polyglot-slot|deck|EN|east_asia_core|short_unverified|en",
+  polyglotKey: "polyglot:deck:EN:east_asia_core:east-hash:short_unverified",
+  targetLang: "JA,KO,ZH",
+  targetLangs: ["JA", "KO", "ZH"],
+  targetLangsHash: "east-hash",
+  bundleKey: "east_asia_core",
+  contentScope: "short_unverified",
+  maxDurationSeconds: 895,
+  publishAt: "2026-07-20T14:30:00.000Z",
+  playlist: {
+    ready: true,
+    state: "resolved_existing",
+    playlistKey: "POLYGLOT__EN__east-asia-core__east-hash",
+    youtubePlaylistId: "polyglot-east-playlist",
+    createAllowed: false,
+  },
+};
+const exactMultiPolyglotRecoveryCampaign = {
+  ...polyglotOnlyCampaign,
+  campaignId: "campaign-exact-multi-polyglot-recovery",
+  inputs: {
+    ...polyglotOnlyCampaign.inputs,
+    partialRecoveryOfCampaignId: "campaign-source",
+    assignmentKeys: [polyglotAssignment.assignmentKey, secondPolyglotAssignment.assignmentKey],
+    polyglotSupportCount: 1,
+  },
+  assignments: [polyglotAssignment, secondPolyglotAssignment],
+  assignmentKeys: [polyglotAssignment.assignmentKey, secondPolyglotAssignment.assignmentKey],
+  slotKeys: ["en|2026-07-20T11:30:00.000Z", "en|2026-07-20T14:30:00.000Z"],
+};
+write(path.join(configDir, "youtube-publication-campaigns.json"), {
+  schemaVersion: 1,
+  campaigns: [exactMultiPolyglotRecoveryCampaign],
+});
+write(path.join(configDir, "youtube-publish-calendar.json"), {
+  schemaVersion: 1,
+  reservations: [polyglotAssignment, secondPolyglotAssignment].map((row) => ({
+    ...row,
+    campaignId: exactMultiPolyglotRecoveryCampaign.campaignId,
+    campaignManifestHash: exactMultiPolyglotRecoveryCampaign.manifestHash,
+    status: "campaign_claimed",
+  })),
+});
+const exactMultiPolyglotRecoveryPrepare = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/prepare-youtube-publication-campaign-run.mjs"),
+  "--campaign-id=campaign-exact-multi-polyglot-recovery",
+  "--manifest-hash=manifest-hash",
+  "--registry=config/youtube-publication-campaigns.json",
+  "--calendar=config/youtube-publish-calendar.json",
+  "--output=outputs/preflight-exact-multi-polyglot-recovery.json",
+], { cwd: root, encoding: "utf8" });
+assert.equal(
+  exactMultiPolyglotRecoveryPrepare.status,
+  0,
+  exactMultiPolyglotRecoveryPrepare.stderr || exactMultiPolyglotRecoveryPrepare.stdout,
+);
+const exactMultiPolyglotRecoveryPreflight = JSON.parse(fs.readFileSync(
+  path.join(root, "outputs/preflight-exact-multi-polyglot-recovery.json"),
+  "utf8",
+));
+assert.equal(exactMultiPolyglotRecoveryPreflight.polyglotMatrix.length, 1);
+assert.deepEqual(
+  JSON.parse(exactMultiPolyglotRecoveryPreflight.polyglotMatrix[0].polyglot_rows).map((row) => row.bundle),
+  ["global_europe_core", "east_asia_core"],
+);
+
+write(path.join(configDir, "youtube-publication-campaigns.json"), {
+  schemaVersion: 1,
+  campaigns: [polyglotOnlyCampaign],
+});
+write(path.join(configDir, "youtube-publish-calendar.json"), {
+  schemaVersion: 1,
+  reservations: [{
+    ...polyglotAssignment,
+    campaignId: polyglotOnlyCampaign.campaignId,
+    campaignManifestHash: polyglotOnlyCampaign.manifestHash,
+    status: "campaign_claimed",
+  }],
+});
 
 const polyglotOnlyArtifactRoot = path.join(root, "artifacts-polyglot-only");
 const polyglotOnlyArtifact = path.join(polyglotOnlyArtifactRoot, "polyglot", "config");

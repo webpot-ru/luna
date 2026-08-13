@@ -407,12 +407,12 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
   }
 
   const primaryVoiceId = String(voiceId);
-  const primaryCleanVoiceId = primaryVoiceId.replace(/^edge_/, "");
   // Edge TTS occasionally returns a zero-byte file for the Katja German
   // voice even after the normal retry window. Keep the deterministic primary
   // cache key, then try the stable German Conrad voice before failing the
   // whole video build. Other languages and explicitly selected voices keep
   // their existing single-voice behavior.
+  const primaryCleanVoiceId = primaryVoiceId.replace(/^edge_/, "");
   const voiceCandidates = [primaryVoiceId];
   if (lang === "DE" && primaryCleanVoiceId === "de-DE-KatjaNeural") {
     voiceCandidates.push("edge_de-DE-ConradNeural");

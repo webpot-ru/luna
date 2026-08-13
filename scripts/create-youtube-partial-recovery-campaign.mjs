@@ -346,6 +346,7 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, rou
   const ordinaryCount = assignments.filter((row) => row.videoType === "ordinary").length;
   const polyglotCount = assignments.filter((row) => row.videoType === "polyglot").length;
   const ordinaryCountsBySupport = selectedSupports.map((support) => assignments.filter((row) => row.supportLang === support && row.videoType === "ordinary").length);
+  const polyglotCountsBySupport = selectedSupports.map((support) => assignments.filter((row) => row.supportLang === support && row.videoType === "polyglot").length);
   const estimatedUsage = {
     estimatedVideoUploadCalls: assignments.length,
     estimatedPlaylistItemInsertUnits: assignments.length * 50,
@@ -377,7 +378,11 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, rou
       // support language. The dispatch preflight must preserve that exact tail
       // instead of treating the largest per-support count as a full-wave rule.
       allowPartialOrdinaryTail: true,
-      polyglotPerChannel: polyglotCount > 0 ? 1 : 0,
+      polyglotPerChannel: Math.max(0, ...polyglotCountsBySupport),
+      // A recovery can carry more than one distinct Polyglot product for one
+      // support (for example romance_core plus east_asia_core). Keep each
+      // immutable row and let the per-channel worker execute them serially.
+      allowPartialPolyglotTail: polyglotCount > 0,
       assignmentKeys: assignments.map((row) => row.assignmentKey),
       startDate: "auto",
       minFutureMinutes,

@@ -75,6 +75,31 @@ function main() {
   if (campaign.manifestHash !== options.manifestHash) throw new Error("Campaign manifest hash does not match durable registry");
   if (campaign.status !== "claimed") throw new Error(`Campaign status must be claimed before first dispatch, got ${campaign.status}`);
   const blockers = [];
+  const hasPartialRecoveryIdentity = typeof campaign.inputs?.partialRecoveryOfCampaignId === "string"
+    && campaign.inputs.partialRecoveryOfCampaignId.trim().length > 0;
+  const recoveryInputKeys = Array.isArray(campaign.inputs?.assignmentKeys)
+    ? campaign.inputs.assignmentKeys.map(String)
+    : [];
+  const campaignDeclaredKeys = Array.isArray(campaign.assignmentKeys)
+    ? campaign.assignmentKeys.map(String)
+    : [];
+  const campaignRowKeys = (campaign.assignments || []).map((row) => String(row.assignmentKey || ""));
+  const campaignHasPolyglotRows = (campaign.assignments || []).some((row) => row.videoType === "polyglot");
+  const campaignKeySet = new Set(campaignRowKeys);
+  const recoveryInputKeySet = new Set(recoveryInputKeys);
+  const campaignDeclaredKeySet = new Set(campaignDeclaredKeys);
+  const isExactKeyPartialRecovery = hasPartialRecoveryIdentity
+    && recoveryInputKeys.length > 0
+    && campaignDeclaredKeys.length === recoveryInputKeys.length
+    && recoveryInputKeys.length === campaignRowKeys.length
+    && recoveryInputKeySet.size === recoveryInputKeys.length
+    && campaignDeclaredKeySet.size === campaignDeclaredKeys.length
+    && campaignKeySet.size === campaignRowKeys.length
+    && recoveryInputKeys.every((key) => campaignDeclaredKeySet.has(key))
+    && recoveryInputKeys.every((key) => campaignKeySet.has(key));
+  if (hasPartialRecoveryIdentity && campaignHasPolyglotRows && !isExactKeyPartialRecovery) {
+    blockers.push("partial recovery input assignment keys do not exactly match the immutable campaign assignments");
+  }
   const offlineDeckFingerprint = campaign.evidence?.sourceFingerprints?.offlineDeck || {};
   const historicalDeckSource = campaign.evidence?.deckSource?.historicalGitBlob || {};
   const historicalDeckSourceValid = historicalGitBlobIsValid(historicalDeckSource);
@@ -166,7 +191,7 @@ function main() {
   // recovery manifests. Keep those immutable manifests dispatchable while new
   // manifests additionally record the explicit partial-tail flag.
   const allowPartialOrdinaryTail = campaign.inputs?.allowPartialOrdinaryTail === true
-    || typeof campaign.inputs?.partialRecoveryOfCampaignId === "string";
+    || hasPartialRecoveryIdentity;
   const allowPartialPolyglotTail = campaign.inputs?.allowPartialPolyglotTail === true;
   const polyglotExpected = Number(campaign.inputs?.polyglotPerChannel || 0);
   const ordinaryMatrix = [...ordinaryBySupport.entries()].map(([support, rows]) => {
@@ -184,7 +209,14 @@ function main() {
     };
   }).sort((a, b) => a.support.localeCompare(b.support));
   const polyglotMatrix = [...polyglotBySupport.entries()].map(([support, rows]) => {
-    if (allowPartialPolyglotTail) {
+    if (isExactKeyPartialRecovery) {
+      // Exact-key recovery may combine missing Polyglot products from several
+      // source waves for one physical channel. The immutable assignment-key
+      // set is the authority; the per-channel worker runs those rows serially.
+      if (polyglotExpected < 1 || rows.length < 1) {
+        blockers.push(`${support}: exact partial recovery has Polyglot rows but polyglotPerChannel is ${polyglotExpected}`);
+      }
+    } else if (allowPartialPolyglotTail) {
       if (rows.length < 1 || rows.length > polyglotExpected) {
         blockers.push(`${support}: Polyglot rows ${rows.length} must be within 1..${polyglotExpected} for a partial tail campaign`);
       }
@@ -253,7 +285,7 @@ function main() {
   const ordinarySupportCount = Number(campaign.inputs?.ordinarySupportCount
     ?? (allowPartialOrdinaryTail ? ordinaryBySupport.size : supportCount));
   const polyglotSupportCount = Number(campaign.inputs?.polyglotSupportCount
-    ?? (allowPartialPolyglotTail ? polyglotBySupport.size : supportCount));
+    ?? (allowPartialPolyglotTail || isExactKeyPartialRecovery ? polyglotBySupport.size : supportCount));
   if (ordinaryExpected > 0 && ordinaryMatrix.length !== ordinarySupportCount) {
     blockers.push(`ordinary support matrix count ${ordinaryMatrix.length} does not match campaign`);
   }

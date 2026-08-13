@@ -23,6 +23,7 @@ import {
 } from "./generate-youtube-campaign-metadata.mjs";
 import { callOpenAiStructuredJson, estimateOpenAiRequestTokenUpperBound, resolveOpenAiServiceTier } from "./lib/openai-structured-json.mjs";
 import { runGeminiBackendChain } from "./lib/gemini-structured-json.mjs";
+import { campaignTitleFallbackReasons, minimumYouTubeTitleLength } from "./lib/youtube-metadata-title-policy.mjs";
 
 const tasks = [
   { requestId: "ordinary|deck|EN|DE", videoType: "ordinary", supportLang: "EN", targetLang: "DE" },
@@ -32,6 +33,7 @@ const prompt = buildCampaignMetadataPrompt(tasks);
 assert.match(prompt, /2 independent FlashcardsLuna/);
 assert.match(prompt, /ordinary\|deck\|EN\|DE/);
 assert.match(prompt, /250-900 Unicode characters/);
+assert.match(prompt, /25-100 Unicode characters/);
 assert.match(prompt, /ZH, JA and KO descriptions may be 150-900 Unicode characters/);
 assert.match(prompt, /fallbackTags/u);
 assert.equal(CAMPAIGN_MAX_OUTPUT_TOKENS, 60000);
@@ -101,6 +103,57 @@ const czechMetadata = finalizeCampaignMetadata(czechPolyglotTask, {
 assert.deepEqual(czechMetadata.tags, czechPolyglotTask.template.tags);
 assert.equal(czechMetadata.aiMetadata.tagsFallbackToTemplate, true);
 assert.equal(czechMetadata.aiMetadata.languageGate.status, "pass");
+
+const turkishOrdinaryTask = {
+  assignment: {
+    assignmentKey: "ordinary|deck|TR|TA",
+    supportLang: "TR",
+    targetLang: "TA",
+    videoType: "ordinary",
+    campaignId: "campaign",
+    campaignManifestHash: "hash",
+    publishAt: "2026-08-13T20:30:00.000Z",
+    playlist: { playlistKey: "TR__TA__ordinary", youtubePlaylistId: "PL-test" },
+  },
+  template: {
+    setId: "deck",
+    supportLang: "TR",
+    targetLang: "TA",
+    targetLanguageName: "Tamilce",
+    deckTitle: "Küçük mutfak aletleri",
+    title: "Tamilce A1: Küçük mutfak aletleri | 32 kelime",
+    description: "Tamilce küçük mutfak aletleri kelimelerini FlashcardsLuna ile çalışın. Kelimeleri dinleyin, telaffuzu takip edin ve verilen aralarda yüksek sesle tekrar edin. Dersin sonunda kısa bir tekrar ve mini test ile öğrendiklerinizi kontrol edin. Kartları düzenli olarak gözden geçirmek için https://flashcardsluna.com adresini kullanın.",
+    tags: ["Tamilce", "mutfak kelimeleri", "telaffuz", "kelime çalışması", "FlashcardsLuna"],
+    hashtags: ["#FlashcardsLuna", "#Tamilce", "#Kelime"],
+  },
+};
+const turkishMetadata = finalizeCampaignMetadata(turkishOrdinaryTask, {
+  title: "타밀어 초급: 작은 주방 도구 단어 32개",
+  description: turkishOrdinaryTask.template.description,
+  tags: turkishOrdinaryTask.template.tags,
+  hashtags: turkishOrdinaryTask.template.hashtags,
+}, { backend: "openai", backendChain: ["openai"], model: "gpt-test", batchSize: 5 });
+assert.equal(turkishMetadata.title, turkishOrdinaryTask.template.title);
+assert.equal(turkishMetadata.aiMetadata.titleFallbackToTemplate, true);
+assert.deepEqual(turkishMetadata.aiMetadata.titleFallbackReasons, [
+  "below_search_intent_minimum",
+  "missing_target_language_name",
+  "missing_deck_title",
+]);
+assert.equal(minimumYouTubeTitleLength("TR"), 25);
+assert.equal(minimumYouTubeTitleLength("JA"), 15);
+assert.deepEqual(campaignTitleFallbackReasons({ title: "x".repeat(24), supportLang: "TR" }), ["below_search_intent_minimum"]);
+assert.deepEqual(campaignTitleFallbackReasons({ title: "日".repeat(14), supportLang: "JA" }), ["below_search_intent_minimum"]);
+assert.deepEqual(campaignTitleFallbackReasons({ title: "日".repeat(15), supportLang: "JA" }), []);
+assert.deepEqual(campaignTitleFallbackReasons({ title: "x".repeat(101), supportLang: "TR" }), ["above_youtube_maximum"]);
+const validTurkishTitle = "Tamilce A1: Küçük mutfak aletleri | 32 kelime";
+assert.deepEqual(campaignTitleFallbackReasons({
+  title: validTurkishTitle,
+  supportLang: "TR",
+  videoType: "ordinary",
+  targetLanguageName: "Tamilce",
+  deckTitle: "Küçük mutfak aletleri",
+}), []);
 assert.equal(DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE, 2);
 const campaignWorkflow = fs.readFileSync(".github/workflows/youtube-publication-campaign.yml", "utf8");
 assert.match(
@@ -375,4 +428,3 @@ const report = JSON.parse(fs.readFileSync(path.join(root, "outputs/copy.json"), 
 assert.equal(report.copiedCount, 1);
 
 console.log("youtube campaign metadata tests passed");
-

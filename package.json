@@ -96,6 +96,7 @@
     "test:youtube-publication-campaign-integrated-recovery": "node scripts/plan-youtube-integrated-recovery-wave.test.mjs && node scripts/consolidate-youtube-unlaunched-claims.test.mjs",
     "test:youtube-campaign-playlist-uploader": "node scripts/youtube-campaign-playlist-uploader.test.mjs",
     "test:youtube-campaign-metadata": "node scripts/youtube-campaign-metadata.test.mjs",
+    "test:youtube-tts-voice-fallback": "node scripts/tts-voice-fallback.test.mjs",
     "test:youtube-metadata-unicode": "node scripts/check-youtube-metadata.test.mjs",
     "test:polyglot-youtube-metadata-unicode": "node scripts/check-polyglot-youtube-metadata.test.mjs",
     "test:youtube-openai-metadata-canary": "node scripts/check-openai-youtube-metadata.test.mjs",
