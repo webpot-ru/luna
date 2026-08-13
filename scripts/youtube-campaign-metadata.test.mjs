@@ -427,4 +427,91 @@ assert(fs.existsSync(path.join(root, "outputs/video-generator/deck_de_en/youtube
 const report = JSON.parse(fs.readFileSync(path.join(root, "outputs/copy.json"), "utf8"));
 assert.equal(report.copiedCount, 1);
 
+// Two Polyglot bundles can share one physical support channel. Their
+// campaign metadata destinations must remain distinct instead of silently
+// overwriting the first bundle during the copy step.
+const polyAssignments = [
+  {
+    assignmentKey: "polyglot|deck|SL|romance_core|romance-hash|short_unverified",
+    videoType: "polyglot",
+    setId: "deck",
+    supportLang: "SL",
+    bundleKey: "romance_core",
+    targetLangs: ["ES", "FR", "IT", "PT"],
+    publishAt: "2026-07-20T09:30:00.000Z",
+    playlist: {
+      ready: true,
+      state: "resolved_existing",
+      playlistKey: "POLYGLOT__SL__ROMANCE__short_unverified",
+      youtubePlaylistId: "PL-romance",
+      createAllowed: false,
+    },
+  },
+  {
+    assignmentKey: "polyglot|deck|SL|east_asia_core|east-hash|short_unverified",
+    videoType: "polyglot",
+    setId: "deck",
+    supportLang: "SL",
+    bundleKey: "east_asia_core",
+    targetLangs: ["ZH", "JA", "KO"],
+    publishAt: "2026-07-20T12:30:00.000Z",
+    playlist: {
+      ready: true,
+      state: "resolved_existing",
+      playlistKey: "POLYGLOT__SL__EAST_ASIA__short_unverified",
+      youtubePlaylistId: "PL-east-asia",
+      createAllowed: false,
+    },
+  },
+];
+const campaignWithPolyglot = JSON.parse(fs.readFileSync(path.join(configDir, "youtube-publication-campaigns.json"), "utf8"));
+campaignWithPolyglot.campaigns[0].assignments.push(...polyAssignments);
+fs.writeFileSync(path.join(configDir, "youtube-publication-campaigns.json"), `${JSON.stringify(campaignWithPolyglot, null, 2)}\n`);
+const polyArtifactDir = path.join(root, "artifacts", "route-2");
+fs.mkdirSync(path.join(polyArtifactDir, "metadata"), { recursive: true });
+const polyEntries = polyAssignments.map((polyAssignment) => {
+  const metadataRelativePath = `metadata/${polyAssignment.bundleKey}.json`;
+  const polyMetadata = {
+    videoType: "polyglot",
+    campaignId: "campaign",
+    campaignManifestHash: "hash",
+    publishAt: polyAssignment.publishAt,
+    scheduledPublishAt: polyAssignment.publishAt,
+    bundleKey: polyAssignment.bundleKey,
+    campaignPlaylist: polyAssignment.playlist,
+  };
+  const polyBody = `${JSON.stringify(polyMetadata, null, 2)}\n`;
+  fs.writeFileSync(path.join(polyArtifactDir, metadataRelativePath), polyBody);
+  return {
+    assignmentKey: polyAssignment.assignmentKey,
+    videoType: "polyglot",
+    supportLang: polyAssignment.supportLang,
+    bundleKey: polyAssignment.bundleKey,
+    artifactPath: metadataRelativePath,
+    destination: `outputs/video-generator/deck_polyglot_sl_${polyAssignment.bundleKey}/youtube_metadata.json`,
+    sha256: crypto.createHash("sha256").update(polyBody).digest("hex"),
+  };
+});
+fs.writeFileSync(path.join(polyArtifactDir, "index.json"), `${JSON.stringify({
+  campaignId: "campaign",
+  manifestHash: "hash",
+  routeKey: "youtube-2",
+  entries: polyEntries,
+}, null, 2)}\n`);
+const polyCopy = spawnSync(process.execPath, [
+  path.join(process.cwd(), "scripts/copy-youtube-campaign-metadata.mjs"),
+  "--campaign-id=campaign",
+  "--manifest-hash=hash",
+  "--video-type=polyglot",
+  "--support=SL",
+  "--input-root=artifacts",
+  "--registry=config/youtube-publication-campaigns.json",
+  "--output=outputs/poly-copy.json",
+], { cwd: root, encoding: "utf8" });
+assert.equal(polyCopy.status, 0, polyCopy.stderr || polyCopy.stdout);
+assert(fs.existsSync(path.join(root, "outputs/video-generator/deck_polyglot_sl_romance_core/youtube_metadata.json")));
+assert(fs.existsSync(path.join(root, "outputs/video-generator/deck_polyglot_sl_east_asia_core/youtube_metadata.json")));
+const polyReport = JSON.parse(fs.readFileSync(path.join(root, "outputs/poly-copy.json"), "utf8"));
+assert.equal(polyReport.copiedCount, 2);
+
 console.log("youtube campaign metadata tests passed");

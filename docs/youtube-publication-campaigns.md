@@ -146,6 +146,8 @@ Metadata generator пишет атомарный `index.json` checkpoint до pr
 
 Campaign child workflows получают `campaign_id`, поэтому их standalone persist jobs автоматически отключены. Campaign-поля доступны только через внутренний `workflow_call` и не занимают ограниченный 25 inputs ручной формы. После всех workers один parent finalizer последовательно объединяет artifacts, сопоставляет publications с `campaignId + manifestHash`, обновляет registry/calendar/receipts и делает один exact state commit.
 
+Если один support-канал имеет несколько Polyglot bundles, route metadata artifact хранит их раздельно: destination включает `set + support + bundle`. Reusable worker после копирования обязан видеть ровно один `youtube_metadata.json`; перезапись одного bundle метаданными другого является blocker, а не допустимым fallback.
+
 Отключать `--strict` для campaign-owned worker запрещено. Исторический обход скрывал расхождение контракта: checker записывал `evidence.strict=false`, а uploader всё равно требовал `strict=true`, поэтому будущий campaign upload мог дойти до uploader только чтобы остановиться до `videos.insert`. Type-scoped strict control устраняет ложный cross-type drift внутри одной незавершённой кампании без ослабления duplicate, status, registry, unclassified-upload и shared-calendar gates.
 
 Перед `playlists.insert` campaign uploader повторно перечисляет все owned playlists и ищет stable key marker или exact deterministic title. Найденный один playlist используется без создания; несколько совпадений блокируют write; только complete no-match разрешает один create. Новый playlist получает marker `LunaCards playlist key: <stable-key>` в description.
