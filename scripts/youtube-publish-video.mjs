@@ -320,6 +320,9 @@ function resolveExistingPath(filePath, label) {
 }
 
 function defaultVideoPath(metadataFile, metadata) {
+  const explicitVideoPath = [metadata.videoPath, metadata.videoFile, metadata.renderedVideoPath]
+    .find((candidate) => typeof candidate === "string" && candidate.trim() && fs.existsSync(candidate));
+  if (explicitVideoPath) return path.resolve(explicitVideoPath);
   const dir = path.dirname(metadataFile);
   const preferred = path.join(dir, `lesson_${String(metadata.targetLang || "").toLowerCase()}_${String(metadata.supportLang || "").toLowerCase()}.mp4`);
   if (fs.existsSync(preferred)) return preferred;
