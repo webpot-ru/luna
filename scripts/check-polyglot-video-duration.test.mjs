@@ -15,11 +15,11 @@ fs.writeFileSync(path.join(videoDir, "video.mp4"), "fixture");
 fs.writeFileSync(path.join(videoDir, "youtube_metadata.json"), JSON.stringify({ supportLang: "EN", videoPath: path.join(videoDir, "video.mp4") }));
 const channelConfig = path.join(root, "channels.json");
 
-function run({ allowed, duration, scope = "full", requireMeasuredSelection = false, writeMetadata = false }) {
+function run({ allowed, duration, scope = "full", requireMeasuredSelection = false, writeMetadata = false, input = videoDir }) {
   fs.writeFileSync(channelConfig, JSON.stringify({ channels: [{ key: "en", supportLangs: ["EN", "EN-GB"], longVideoUploadAllowed: allowed }] }));
   return spawnSync(process.execPath, [
     "scripts/check-polyglot-video-duration.mjs",
-    videoDir,
+    input,
     `--channel-config=${channelConfig}`,
     `--ffprobe=${ffprobe}`,
     `--content-scope=${scope}`,
@@ -43,4 +43,29 @@ assert.equal(run({ allowed: true, duration: 800, scope: "short_unverified", requ
 const written = JSON.parse(fs.readFileSync(path.join(videoDir, "youtube_metadata.json"), "utf8"));
 assert.equal(written.contentScope, "short_unverified", "duration gate persists short content scope");
 assert.equal(written.wordLimit, 20, "duration gate persists measured selected-card count");
+
+const renderedDir = path.join(root, "rendered");
+const bundleMetadataDir = path.join(root, "bundle-metadata");
+fs.mkdirSync(renderedDir);
+fs.mkdirSync(bundleMetadataDir);
+fs.writeFileSync(path.join(renderedDir, "video.mp4"), "fixture");
+fs.writeFileSync(path.join(renderedDir, "polyglot-duration-selection.json"), JSON.stringify({
+  selectionMethod: "measured_tts_audio_prefix",
+  selectedCardCount: 18,
+  projectedDurationSeconds: 720,
+}));
+fs.writeFileSync(path.join(bundleMetadataDir, "youtube_metadata.json"), JSON.stringify({
+  supportLang: "EN",
+  videoPath: path.join(renderedDir, "video.mp4"),
+}));
+assert.equal(run({
+  allowed: true,
+  duration: 720,
+  scope: "short_unverified",
+  requireMeasuredSelection: true,
+  writeMetadata: true,
+  input: bundleMetadataDir,
+}).status, 0, "measured selection next to rendered video passes for bundle metadata");
+const bundleMetadata = JSON.parse(fs.readFileSync(path.join(bundleMetadataDir, "youtube_metadata.json"), "utf8"));
+assert.equal(bundleMetadata.durationSelection.selectedCardCount, 18, "render-directory selection is persisted to bundle metadata");
 console.log("Polyglot duration/capability tests passed");

@@ -77,11 +77,16 @@ function defaultVideoPath(metadataFile, metadata) {
     .sort()[0] || "";
 }
 
-function loadMeasuredSelection(metadataFile) {
-  const selectionPath = path.join(path.dirname(metadataFile), "polyglot-duration-selection.json");
-  if (!fs.existsSync(selectionPath)) return { selectionPath, selection: null };
-  const selection = JSON.parse(fs.readFileSync(selectionPath, "utf8"));
-  return { selectionPath, selection };
+function loadMeasuredSelection(metadataFile, metadata) {
+  const candidateDirectories = [path.dirname(metadataFile)];
+  if (metadata?.videoPath) candidateDirectories.push(path.dirname(path.resolve(metadata.videoPath)));
+  const selectionPaths = [...new Set(candidateDirectories.map((directory) => path.join(directory, "polyglot-duration-selection.json")))];
+  for (const selectionPath of selectionPaths) {
+    if (!fs.existsSync(selectionPath)) continue;
+    const selection = JSON.parse(fs.readFileSync(selectionPath, "utf8"));
+    return { selectionPath, selection };
+  }
+  return { selectionPath: selectionPaths[0], selection: null };
 }
 
 function probeDuration(videoPath, ffprobe) {
@@ -112,7 +117,7 @@ function main() {
   const results = metadataFiles.map((metadataFile) => {
     const metadata = JSON.parse(fs.readFileSync(metadataFile, "utf8"));
     const videoPath = defaultVideoPath(metadataFile, metadata);
-    const { selectionPath, selection } = loadMeasuredSelection(metadataFile);
+    const { selectionPath, selection } = loadMeasuredSelection(metadataFile, metadata);
     const channel = findChannelForCanonicalSupport(channelRegistry, metadata.supportLang);
     const longVideoCapability = capabilityStatus(channel);
     const blockers = [];
