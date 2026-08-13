@@ -559,7 +559,15 @@ export function finalizeCampaignMetadata(task, generated, provider) {
 
 function destinationFor(assignment) {
   if (assignment.videoType === "polyglot") {
-    return path.join("outputs/video-generator", `${assignment.setId}_polyglot_${assignment.supportLang.toLowerCase()}`, "youtube_metadata.json");
+    // A support channel may own more than one Polyglot bundle. Keep each
+    // campaign metadata document isolated so the copy step cannot silently
+    // overwrite one bundle with another (for example SL romance_core and
+    // east_asia_core).
+    return path.join(
+      "outputs/video-generator",
+      `${assignment.setId}_polyglot_${assignment.supportLang.toLowerCase()}_${safeSegment(assignment.bundleKey)}`,
+      "youtube_metadata.json",
+    );
   }
   return path.join("outputs/video-generator", `${assignment.setId}_${assignment.targetLang.toLowerCase()}_${assignment.supportLang.toLowerCase()}`, "youtube_metadata.json");
 }

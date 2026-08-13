@@ -30,6 +30,10 @@ function sha256(filePath) {
   return crypto.createHash("sha256").update(fs.readFileSync(filePath)).digest("hex");
 }
 
+function safeSegment(value) {
+  return String(value || "").replace(/[^a-zA-Z0-9._-]+/gu, "_").replace(/^_+|_+$/gu, "");
+}
+
 function findIndexes(root) {
   const indexes = [];
   const visit = (directory, depth) => {
@@ -46,7 +50,11 @@ function findIndexes(root) {
 
 function expectedDestination(assignment) {
   if (assignment.videoType === "polyglot") {
-    return path.resolve("outputs/video-generator", `${assignment.setId}_polyglot_${assignment.supportLang.toLowerCase()}`, "youtube_metadata.json");
+    return path.resolve(
+      "outputs/video-generator",
+      `${assignment.setId}_polyglot_${assignment.supportLang.toLowerCase()}_${safeSegment(assignment.bundleKey)}`,
+      "youtube_metadata.json",
+    );
   }
   return path.resolve("outputs/video-generator", `${assignment.setId}_${assignment.targetLang.toLowerCase()}_${assignment.supportLang.toLowerCase()}`, "youtube_metadata.json");
 }
