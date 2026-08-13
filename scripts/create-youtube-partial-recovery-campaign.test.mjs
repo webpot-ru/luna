@@ -108,6 +108,11 @@ assert.equal(result.manifest.summary.polyglotCount, missingRows.filter((row) => 
 assert.equal(result.manifest.inputs.ordinarySupportCount, currentRecovery.inputs.ordinarySupportCount);
 assert.equal(result.manifest.inputs.polyglotSupportCount, currentRecovery.inputs.polyglotSupportCount);
 assert.equal(result.manifest.inputs.allowPartialOrdinaryTail, true);
+assert.equal(result.manifest.inputs.allowPartialPolyglotTail, result.manifest.summary.polyglotCount > 0);
+assert.equal(
+  result.manifest.inputs.polyglotPerChannel,
+  Math.max(0, ...new Set(missingRows.map((row) => row.supportLang)).values().map((support) => missingRows.filter((row) => row.supportLang === support && row.videoType === "polyglot").length)),
+);
 assert.equal(result.manifest.summary.customThumbnailCount, missingRows.filter((row) => row.thumbnail?.mode === "custom").length);
 assert.equal(result.manifest.summary.automaticThumbnailCount, expectedAssignmentCount - result.manifest.summary.customThumbnailCount);
 assert.deepEqual(result.manifest.summary.routeCounts, Object.fromEntries(routeKeys.map((route) => [route, missingRows.filter((row) => row.routeKey === route).length])));
