@@ -29,6 +29,7 @@ const report = {
     tailCount: 1,
     ordinaryTailCount: 1,
     polyglotTailCount: 0,
+    polyglotFallbackCoveredCount: 1,
     videoStatusReadbackComplete: true,
     paginationComplete: true,
   },
@@ -118,6 +119,17 @@ const report = {
     youtubeStatus: null,
   }],
   tails: [{ videoType: "ordinary", setId: "test-deck", supportLang: "EN", targetLang: "FR" }],
+  fallbackCoveredPolyglotTails: [{
+    videoType: "polyglot",
+    setId: "test-deck",
+    supportLang: "EN",
+    bundleKey: "global_europe_core",
+    contentScope: "full",
+    targetLangs: ["ES", "FR", "DE", "IT"],
+    coverageStatus: "covered_by_short_unverified",
+    deferredReason: "active_short_unverified",
+    activeVideoIds: ["short-fallback"],
+  }],
   calendarDayGaps: [],
 };
 fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
@@ -197,6 +209,9 @@ assert.equal(snapshot.decks[0].duplicateGroups.length, 1);
 assert.equal(snapshot.decks[0].duplicateGroups[0].recommendedKeepVideoId, "durable-video");
 assert.deepEqual(snapshot.decks[0].duplicateGroups[0].candidateDeleteVideoIds, ["live-only-video"]);
 assert.equal(snapshot.decks[0].channels.find((row) => row.supportLang === "EN")?.scheduledCount, 1);
+assert.equal(snapshot.decks[0].summary.polyglotFallbackCoveredCount, 1);
+assert.equal(snapshot.decks[0].fallbackCoveredPolyglotTails[0].activeVideoIds[0], "short-fallback");
+assert.equal(snapshot.decks[0].channels.find((row) => row.supportLang === "EN")?.polyglotFallbackCoveredCount, 1);
 assert.equal(snapshot.decks[0].evidence.routes[0].artifact, "youtube-publication-control-youtube-1.json");
 assert.ok(!JSON.stringify(snapshot).includes("/tmp/"));
 const markdown = fs.readFileSync(markdownPath, "utf8");
@@ -206,6 +221,7 @@ assert.match(markdown, /Нераспознанные загрузки/);
 assert.match(markdown, /unclassified-video/);
 assert.match(markdown, /Обложки плейлистов/);
 assert.match(markdown, /EN=\[FR\]/);
+assert.match(markdown, /Short fallback уже покрывает/);
 
 const missingManifestConfigPath = path.join(root, "youtube-cover-assets-missing-manifest.json");
 fs.writeFileSync(missingManifestConfigPath, `${JSON.stringify({

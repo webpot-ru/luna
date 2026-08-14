@@ -68,6 +68,9 @@ function main() {
   const tails = uniqueRows(routes.flatMap(({ report }) => report.tails || []), (row) => row.videoType === "polyglot"
     ? `polyglot|${row.polyglotKey}`
     : `ordinary|${row.setId}|${row.supportLang}|${row.targetLang}`);
+  const fallbackCoveredPolyglotTails = uniqueRows(routes.flatMap(({ report }) => report.fallbackCoveredPolyglotTails || []), (row) => (
+    `polyglot|${row.polyglotKey || row.setId + "|" + row.supportLang + "|" + row.bundleKey}`
+  ));
   const publications = uniqueRows(routes.flatMap(({ report }) => report.publications || []), (row) => row.youtubeVideoId);
   const unclassifiedUploads = uniqueRows(routes.flatMap(({ report }) => report.unclassifiedUploads || []), (row) => row.youtubeVideoId);
   const deletedTombstones = uniqueRows(routes.flatMap(({ report }) => report.deletedTombstones || []), (row) => row.youtubeVideoId);
@@ -89,6 +92,7 @@ function main() {
     tailCount: tails.length,
     ordinaryTailCount: tails.filter((row) => row.videoType !== "polyglot").length,
     polyglotTailCount: tails.filter((row) => row.videoType === "polyglot").length,
+    polyglotFallbackCoveredCount: fallbackCoveredPolyglotTails.length,
     activeVideoCount: routes.reduce((sum, item) => sum + Number(item.report.summary?.activeVideoCount || 0), 0),
     publicCount: routes.reduce((sum, item) => sum + Number(item.report.summary?.publicCount || 0), 0),
     scheduledCount: routes.reduce((sum, item) => sum + Number(item.report.summary?.scheduledCount || 0), 0),
@@ -130,6 +134,7 @@ function main() {
     unclassifiedUploads,
     deletedTombstones,
     tails,
+    fallbackCoveredPolyglotTails,
     calendarDayGaps,
   };
   fs.mkdirSync(path.dirname(options.output), { recursive: true });
@@ -148,6 +153,7 @@ function main() {
     `- videos.list status readback complete: ${summary.videoStatusReadbackComplete}`,
     `- Explicit pagination complete: ${summary.paginationComplete}`,
     `- Tails: ${summary.tailCount} (ordinary ${summary.ordinaryTailCount}, Polyglot ${summary.polyglotTailCount})`,
+    `- Polyglot fallback covered by active short: ${summary.polyglotFallbackCoveredCount}`,
     `- Blockers: ${summary.blockerCount}`,
     `- Advisories: ${summary.advisoryCount}`,
     `- Scheduled live videos missing calendar: ${summary.liveScheduleMissingCalendarCount}`,
@@ -164,6 +170,12 @@ function main() {
     ...(tails.length ? tails.map((row) => row.videoType === "polyglot"
       ? `- ${row.supportLang} -> Polyglot ${row.bundleKey} (${row.contentScope || "full"}) [${(row.targetLangs || []).join(",")}]`
       : `- ${row.supportLang} -> ${row.targetLang}`) : ["- none"]),
+    "",
+    "## Polyglot fallback covered",
+    "",
+    ...(fallbackCoveredPolyglotTails.length ? fallbackCoveredPolyglotTails.map((row) => (
+      `- ${row.supportLang} -> Polyglot ${row.bundleKey} (full deferred; active short fallback ${row.activeVideoIds?.join(", ") || "see JSON"})`
+    )) : ["- none"]),
     "",
     "## Publications",
     "",

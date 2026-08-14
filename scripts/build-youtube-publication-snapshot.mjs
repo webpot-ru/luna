@@ -284,10 +284,11 @@ function buildPlaylistCoverReadiness(assetConfigPath, playlistRegistryPath) {
   };
 }
 
-function channelSummaries(publications, tails, duplicates) {
+function channelSummaries(publications, tails, duplicates, fallbackCoveredPolyglotTails = []) {
   const supports = new Set([
     ...publications.map((row) => row.supportLang),
     ...tails.map((row) => canonicalSupportCode(row.supportLang)),
+    ...fallbackCoveredPolyglotTails.map((row) => canonicalSupportCode(row.supportLang)),
     ...duplicates.map((row) => row.supportLang),
   ].filter(Boolean));
   return [...supports].sort().map((supportLang) => {
@@ -296,6 +297,7 @@ function channelSummaries(publications, tails, duplicates) {
     const scheduled = liveRows.filter((row) => row.state === "scheduled");
     const scheduleRange = minMax(scheduled.map((row) => row.publishAt));
     const channelTails = tails.filter((row) => canonicalSupportCode(row.supportLang) === supportLang);
+    const channelFallbackCovered = fallbackCoveredPolyglotTails.filter((row) => canonicalSupportCode(row.supportLang) === supportLang);
     const liveDuplicates = duplicates.filter((row) => row.supportLang === supportLang && row.evidenceTypes.includes("duplicate_live_assignment"));
     const registryOnlyDuplicates = duplicates.filter((row) => row.supportLang === supportLang
       && row.evidenceTypes.includes("duplicate_registry_assignment")
@@ -312,6 +314,7 @@ function channelSummaries(publications, tails, duplicates) {
       statusUnknownCount: liveRows.filter((row) => row.state === "status_unknown").length,
       ordinaryTailCount: channelTails.filter((row) => row.videoType !== "polyglot").length,
       polyglotTailCount: channelTails.filter((row) => row.videoType === "polyglot").length,
+      polyglotFallbackCoveredCount: channelFallbackCovered.length,
       liveDuplicateGroupCount: liveDuplicates.length,
       registryOnlyDuplicateGroupCount: registryOnlyDuplicates.length,
       nextPublishAt: scheduleRange.first,
@@ -369,6 +372,17 @@ function buildDeck(report, sourceRuns, nowMillis) {
     contentScope: row.videoType === "polyglot" ? row.contentScope || "full" : "",
     targetLangs: row.videoType === "polyglot" ? (row.targetLangs || []).map(normalizeCode).filter(Boolean) : [],
   }));
+  const fallbackCoveredPolyglotTails = (report.fallbackCoveredPolyglotTails || []).map((row) => ({
+    videoType: "polyglot",
+    setId: row.setId || setId,
+    supportLang: canonicalSupportCode(row.supportLang),
+    bundleKey: row.bundleKey || "",
+    contentScope: row.contentScope || "full",
+    targetLangs: (row.targetLangs || []).map(normalizeCode).filter(Boolean),
+    coverageStatus: row.coverageStatus || "covered_by_short_unverified",
+    deferredReason: row.deferredReason || "active_short_unverified",
+    activeVideoIds: [...new Set((row.activeVideoIds || []).filter(Boolean))].sort(),
+  }));
   const {
     unclassifiedUploadCount: _routeUnclassifiedUploadCount,
     unclassifiedRecentUploadCount: _routeUnclassifiedRecentUploadCount,
@@ -407,9 +421,10 @@ function buildDeck(report, sourceRuns, nowMillis) {
       liveDuplicateGroupCount: liveDuplicateGroups.length,
       registryOnlyDuplicateGroupCount: registryOnlyDuplicateGroups.length,
     },
-    channels: channelSummaries(publications, tails, duplicates),
+    channels: channelSummaries(publications, tails, duplicates, fallbackCoveredPolyglotTails),
     duplicateGroups: duplicates,
     tails,
+    fallbackCoveredPolyglotTails,
     calendarDayGaps: report.calendarDayGaps || [],
     unclassifiedUploads,
     publications: publications.sort((a, b) => [a.supportLang, a.state, a.publishAt, a.videoType, a.targetLang, a.bundleKey, a.youtubeVideoId].join("|").localeCompare(
@@ -430,11 +445,11 @@ function markdownFor(snapshot) {
     "",
     "## Сводка",
     "",
-    "| Deck | API routes | Live видео | Public | Scheduled | Private без будущей даты | Статус не прочитан | Durable-only | Хвосты ordinary | Хвосты Polyglot full | Live дубли | Registry-only дубли | Calendar blockers | Strict evidence |",
-    "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
+    "| Deck | API routes | Live видео | Public | Scheduled | Private без будущей даты | Статус не прочитан | Durable-only | Хвосты ordinary | Хвосты Polyglot full | Short fallback уже есть | Live дубли | Registry-only дубли | Calendar blockers | Strict evidence |",
+    "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
   ];
   for (const deck of snapshot.decks) {
-    lines.push(`| \`${deck.setId}\` | ${deck.evidence.routeCount}/${deck.evidence.expectedRouteCount} | ${deck.summary.liveVideoCount} | ${deck.summary.livePublicCount} | ${deck.summary.liveScheduledCount} | ${deck.summary.livePrivateUnscheduledCount} | ${deck.summary.liveStatusUnknownCount} | ${deck.summary.durableOnlyVideoCount} | ${deck.summary.ordinaryTailCount} | ${deck.summary.polyglotTailCount} | ${deck.summary.liveDuplicateGroupCount} | ${deck.summary.registryOnlyDuplicateGroupCount} | ${deck.summary.liveScheduleMissingCalendarCount || 0} | ${deck.evidence.strictApplyEvidence ? "yes" : "no"} |`);
+    lines.push(`| \`${deck.setId}\` | ${deck.evidence.routeCount}/${deck.evidence.expectedRouteCount} | ${deck.summary.liveVideoCount} | ${deck.summary.livePublicCount} | ${deck.summary.liveScheduledCount} | ${deck.summary.livePrivateUnscheduledCount} | ${deck.summary.liveStatusUnknownCount} | ${deck.summary.durableOnlyVideoCount} | ${deck.summary.ordinaryTailCount} | ${deck.summary.polyglotTailCount} | ${deck.summary.polyglotFallbackCoveredCount || 0} | ${deck.summary.liveDuplicateGroupCount} | ${deck.summary.registryOnlyDuplicateGroupCount} | ${deck.summary.liveScheduleMissingCalendarCount || 0} | ${deck.evidence.strictApplyEvidence ? "yes" : "no"} |`);
   }
   const playlistCovers = snapshot.coverReadiness.playlist;
   lines.push(
@@ -471,9 +486,9 @@ function markdownFor(snapshot) {
       "",
       "### Каналы",
       "",
-      "| Support | Live видео | Public | Scheduled | Private | Статус ? | Durable-only | Ordinary tails | Polyglot tails | Live дубли | Registry-only | Следующая публикация | Последняя в очереди |",
-      "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |",
-      ...deck.channels.map((channel) => `| ${channel.supportLang} | ${channel.liveVideoCount} | ${channel.publicCount} | ${channel.scheduledCount} | ${channel.privateUnscheduledCount} | ${channel.statusUnknownCount} | ${channel.durableOnlyCount} | ${channel.ordinaryTailCount} | ${channel.polyglotTailCount} | ${channel.liveDuplicateGroupCount} | ${channel.registryOnlyDuplicateGroupCount} | ${channel.nextPublishAt || "-"} | ${channel.lastScheduledPublishAt || "-"} |`),
+      "| Support | Live видео | Public | Scheduled | Private | Статус ? | Durable-only | Ordinary tails | Polyglot tails | Short fallback | Live дубли | Registry-only | Следующая публикация | Последняя в очереди |",
+      "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |",
+      ...deck.channels.map((channel) => `| ${channel.supportLang} | ${channel.liveVideoCount} | ${channel.publicCount} | ${channel.scheduledCount} | ${channel.privateUnscheduledCount} | ${channel.statusUnknownCount} | ${channel.durableOnlyCount} | ${channel.ordinaryTailCount} | ${channel.polyglotTailCount} | ${channel.polyglotFallbackCoveredCount || 0} | ${channel.liveDuplicateGroupCount} | ${channel.registryOnlyDuplicateGroupCount} | ${channel.nextPublishAt || "-"} | ${channel.lastScheduledPublishAt || "-"} |`),
       "",
       "### Дубли",
       "",
@@ -494,6 +509,11 @@ function markdownFor(snapshot) {
     }
     for (const [supportLang, tails] of [...tailsBySupport.entries()].sort()) {
       lines.push(`- ${supportLang}: ordinary ${tails.ordinary.length}${tails.ordinary.length ? ` [${tails.ordinary.join(", ")}]` : ""}; Polyglot full ${tails.polyglot.length}${tails.polyglot.length ? ` [${tails.polyglot.join(", ")}]` : ""}.`);
+    }
+    lines.push("", "### Short fallback уже покрывает", "");
+    if (!deck.fallbackCoveredPolyglotTails.length) lines.push("- Нет.");
+    for (const row of deck.fallbackCoveredPolyglotTails) {
+      lines.push(`- ${row.supportLang}: Polyglot ${row.bundleKey}; full отложен, активный short fallback: ${(row.activeVideoIds || []).join(", ") || "см. JSON"}.`);
     }
   }
   lines.push(

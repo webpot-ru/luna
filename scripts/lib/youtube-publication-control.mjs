@@ -470,6 +470,7 @@ export function buildPublicationControlReport({
   const activePolyglotProductSlots = new Set(polyglotRows.map(polyglotProductSlotKey));
   const activePolyglotTargetSets = new Set(polyglotRows.map(polyglotTargetSetKey));
   const polyglotTails = [];
+  const fallbackCoveredPolyglotTails = [];
   const polyglotBundleMismatches = [];
   const polyglotCrossScopeConflicts = [];
   for (const [supportRaw, assignments] of Object.entries(includesPolyglot ? desiredPolyglotAssignmentsBySupport || {} : {})) {
@@ -499,7 +500,10 @@ export function buildPublicationControlReport({
         polyglotProductSlotKey(row) === expectedProductSlot
         && polyglotContentScope(row) !== polyglotContentScope(expected)
       ));
+      let fallbackCovered = false;
       if (otherScopeRows.length) {
+        const activeShortRows = otherScopeRows.filter((row) => polyglotContentScope(row) === "short_unverified");
+        fallbackCovered = polyglotContentScope(expected) === "full" && activeShortRows.length > 0;
         polyglotCrossScopeConflicts.push({
           setId,
           supportLang,
@@ -507,8 +511,24 @@ export function buildPublicationControlReport({
           expectedContentScope: polyglotContentScope(expected),
           activeScopes: [...new Set(otherScopeRows.map(polyglotContentScope))].sort(),
           activeVideoIds: uniqueVideoIds(otherScopeRows),
+          coverageStatus: fallbackCovered ? "covered_by_short_unverified" : "upgrade_required",
         });
+        if (fallbackCovered) {
+          fallbackCoveredPolyglotTails.push({
+            videoType: "polyglot",
+            setId,
+            supportLang,
+            bundleKey: assignment.bundleKey || "",
+            contentScope: "full",
+            targetLangs: (assignment.targetLangs || []).map(normalizeCode).filter(Boolean),
+            polyglotKey: assignment.polyglotKey || "",
+            coverageStatus: "covered_by_short_unverified",
+            deferredReason: "active_short_unverified",
+            activeVideoIds: uniqueVideoIds(activeShortRows),
+          });
+        }
       }
+      if (fallbackCovered) continue;
       if (!assignment.polyglotKey || activePolyglotKeys.has(expectedKey) || activePolyglotTargetSets.has(expectedTargetSet)) continue;
       polyglotTails.push({
         videoType: "polyglot",
@@ -663,6 +683,7 @@ export function buildPublicationControlReport({
       proposedPolyglotCrossScopeConflictCount: proposedPolyglotCrossScopeConflicts.length,
       polyglotBundleTargetMismatchCount: polyglotBundleMismatches.length,
       polyglotRequiredScopeBlockedByOtherScopeCount: polyglotCrossScopeConflicts.length,
+      polyglotFallbackCoveredCount: fallbackCoveredPolyglotTails.length,
       advisoryCount: advisories.length,
       liveAuditPaginationComplete: liveAudit?.paginationComplete === true,
       liveStatusNotReturnedCount: statusNotReturnedRows.length,
@@ -688,6 +709,7 @@ export function buildPublicationControlReport({
     })),
     unclassifiedUploads,
     tails,
+    fallbackCoveredPolyglotTails,
     calendarDayGaps: dayGaps,
   };
 }
