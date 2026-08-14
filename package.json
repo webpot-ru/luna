@@ -120,6 +120,7 @@
     "plan:youtube-analytics-readback": "node scripts/plan-youtube-analytics-readback.mjs",
     "read:youtube-video-statistics": "node scripts/read-youtube-video-statistics.mjs",
     "apply:youtube-publish": "node scripts/youtube-publish-video.mjs",
+    "test:youtube-publish-video-path": "node scripts/youtube-publish-video-path.test.mjs",
     "merge:youtube-publish-state": "node scripts/merge-youtube-publish-state.mjs",
     "merge:youtube-playlist-insert-state": "node scripts/merge-youtube-playlist-insert-state.mjs",
     "merge:youtube-playlist-metadata-state": "node scripts/merge-youtube-playlist-metadata-state.mjs",
