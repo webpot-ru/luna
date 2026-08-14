@@ -43,6 +43,16 @@ for (let route = 1; route <= 8; route += 1) {
       supportLang: "SV",
       bundleKey: "east_asia_core",
     }] : [],
+    fallbackCoveredPolyglotTails: route === 1 ? [{
+      videoType: "polyglot",
+      setId: "deck",
+      supportLang: "SV",
+      bundleKey: "east_asia_core",
+      contentScope: "full",
+      polyglotKey: "polyglot:deck:SV:east_asia_core:short-hash",
+      coverageStatus: "covered_by_short_unverified",
+      activeVideoIds: ["short-video"],
+    }] : [],
     tails: route === 1 ? [ordinaryTail] : (route <= 3 ? [polyglotTail] : []),
     publications: [{
       videoType: "ordinary",
@@ -88,6 +98,8 @@ assert.equal(aggregate.advisories.length, 1);
 assert.equal(aggregate.summary.tailCount, 2);
 assert.equal(aggregate.summary.ordinaryTailCount, 1);
 assert.equal(aggregate.summary.polyglotTailCount, 1);
+assert.equal(aggregate.summary.polyglotFallbackCoveredCount, 1);
+assert.equal(aggregate.fallbackCoveredPolyglotTails.length, 1);
 assert.equal(aggregate.publications.length, 8);
 assert.equal(aggregate.unclassifiedUploads.length, 1);
 assert.equal(aggregate.summary.unclassifiedUploadCount, 1);
@@ -101,6 +113,7 @@ assert.match(markdownText, /Polyglot slavic_core/);
 assert.match(markdownText, /https:\/\/www\.youtube\.com\/watch\?v=video-8/);
 assert.match(markdownText, /Unclassified uploads: 1/);
 assert.match(markdownText, /polyglot_full_tail_deferred_by_active_short_unverified/);
+assert.match(markdownText, /Polyglot fallback covered/);
 
 const scopedOutput = path.join(root, "scoped.json");
 const scopedInput = path.join(root, "scoped-input");

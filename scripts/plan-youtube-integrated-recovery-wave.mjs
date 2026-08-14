@@ -499,11 +499,20 @@ export function buildCompletionTailWave(options) {
   const actualPolyglot = new Set(base.assignments
     .filter(isPolyglotRow)
     .map((row) => row.assignmentKey));
-  const controlPolyglotProducts = new Set((controlReport.tails || [])
+  const controlPolyglotProducts = new Set([
+    ...(controlReport.tails || []),
+    ...(controlReport.fallbackCoveredPolyglotTails || []),
+  ]
+    .filter((row) => row.videoType === "polyglot" && row.setId === options.setId)
+    .map(polyglotProductSlotKey));
+  const fallbackCoveredPolyglotProducts = new Set((controlReport.fallbackCoveredPolyglotTails || [])
     .filter((row) => row.videoType === "polyglot" && row.setId === options.setId)
     .map(polyglotProductSlotKey));
   const uncoveredSourceProducts = sourcePolyglotRows
     .filter((row) => !controlPolyglotProducts.has(polyglotProductSlotKey(row)))
+    .map((row) => row.assignmentKey);
+  const fallbackCoveredSourceProducts = sourcePolyglotRows
+    .filter((row) => fallbackCoveredPolyglotProducts.has(polyglotProductSlotKey(row)))
     .map((row) => row.assignmentKey);
   const missingOrdinary = setDifference(expectedOrdinary, actualOrdinary);
   const unexpectedOrdinary = setDifference(actualOrdinary, expectedOrdinary);
@@ -514,6 +523,9 @@ export function buildCompletionTailWave(options) {
   }
   if (missingPolyglot.length || unexpectedPolyglot.length || uncoveredSourceProducts.length) {
     blockers.push(`completion Polyglot coverage mismatch: missing=${missingPolyglot.length}, unexpected=${unexpectedPolyglot.length}, not_in_control_tails=${uncoveredSourceProducts.length}`);
+  }
+  if (fallbackCoveredSourceProducts.length) {
+    blockers.push(`completion Polyglot scope upgrade is blocked by active short fallback for ${fallbackCoveredSourceProducts.length} source assignment(s); use an explicit verified full upgrade`);
   }
   const sourceByKey = new Map(source.rows.map((row) => [row.assignmentKey, row]));
   const assignments = base.assignments.map((row) => {
