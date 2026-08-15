@@ -305,4 +305,7 @@ async function main() {
   console.log(`\n🎉 All done! You can now git commit and push to trigger cloud rendering.`);
 }
 
-main().catch(console.error);
+main().catch((error) => {
+  console.error(error.stack || error.message);
+  process.exitCode = 1;
+});

@@ -605,19 +605,37 @@ async function fetchEnglishCourseMetadata(setId) {
   return null;
 }
 
-// Fetch cards data from Postgres
-export async function fetchDeckCards(setId, targetLang, supportLang) {
+export function resolveOfflineDeckCards(offlineData, targetLang, supportLang) {
   const targetCode = normalizeLanguageCode(targetLang);
   const supportCode = normalizeLanguageCode(supportLang);
   const targetDbLang = getDbLanguageCode(targetCode);
   const supportDbLang = getDbLanguageCode(supportCode);
-  const offlineData = getOfflineDeckData(setId);
-  if (offlineData) {
-    const exactCards = offlineData.cards?.[supportCode]?.[targetCode];
-    if (exactCards) return exactCards;
+  const exactCards = offlineData?.cards?.[supportCode]?.[targetCode];
+  if (Array.isArray(exactCards) && exactCards.length > 0) return exactCards;
 
-    const dbMappedCards = offlineData.cards?.[supportDbLang]?.[targetDbLang];
-    if (dbMappedCards) return dbMappedCards;
+  const dbMappedCards = offlineData?.cards?.[supportDbLang]?.[targetDbLang];
+  if (Array.isArray(dbMappedCards) && dbMappedCards.length > 0) return dbMappedCards;
+  return null;
+}
+
+// Fetch cards from the immutable offline deck first. GitHub runners do not own
+// the project-local Postgres service, so an incomplete JSON must fail closed
+// before metadata, TTS, rendering, or any provider/YouTube write can start.
+export async function fetchDeckCards(setId, targetLang, supportLang, options = {}) {
+  const targetCode = normalizeLanguageCode(targetLang);
+  const supportCode = normalizeLanguageCode(supportLang);
+  const targetDbLang = getDbLanguageCode(targetCode);
+  const supportDbLang = getDbLanguageCode(supportCode);
+  const offlineData = Object.hasOwn(options, "offlineData")
+    ? options.offlineData
+    : getOfflineDeckData(setId);
+  const offlineCards = resolveOfflineDeckCards(offlineData, targetCode, supportCode);
+  if (offlineCards) return offlineCards;
+
+  const runningInGitHubActions = options.runningInGitHubActions
+    ?? process.env.GITHUB_ACTIONS === "true";
+  if (runningInGitHubActions) {
+    throw new Error(`GitHub video generation requires offline cards for ${setId}/${supportCode}->${targetCode}`);
   }
 
   const sql = `
@@ -663,7 +681,8 @@ export async function fetchDeckCards(setId, targetLang, supportLang) {
       order by msm.display_order, msm.meaning_id
     ) rows;
   `;
-  return psqlJson(sql);
+  const databaseLoader = options.databaseLoader || psqlJson;
+  return databaseLoader(sql);
 }
 
 // Fetch localized deck title
