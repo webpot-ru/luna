@@ -5,7 +5,11 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 
-import { buildPublicationCampaign, verifyCampaignManifest } from "./youtube-publication-campaign.mjs";
+import {
+  buildPublicationCampaign,
+  offlineDeckAssignmentCoverageBlockers,
+  verifyCampaignManifest,
+} from "./youtube-publication-campaign.mjs";
 import { loadCanonicalSupportRouting } from "./youtube-support-routing.mjs";
 
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "youtube-publication-campaign-"));
@@ -18,6 +22,16 @@ const readJson = (filePath) => JSON.parse(fs.readFileSync(filePath, "utf8"));
 
 const snapshot = readJson("config/youtube-publication-snapshot.json");
 snapshot.generatedAt = "2026-07-14T00:00:00.000Z";
+const fixtureDeck = snapshot.decks.find((row) => row.setId === "home_kitchen_cooking_actions_a1_a2");
+const offlineDeckCards = {};
+for (const tail of fixtureDeck.tails || []) {
+  const support = tail.supportLang;
+  const targets = tail.videoType === "polyglot" ? tail.targetLangs : [tail.targetLang];
+  offlineDeckCards[support] ||= {};
+  for (const target of targets || []) {
+    if (target && target !== support) offlineDeckCards[support][target] ||= [{ meaning_id: "fixture-card" }];
+  }
+}
 const channels = readJson("config/youtube-channels.json");
 channels.channels = channels.channels.map((channel) => ({
   ...channel,
@@ -60,7 +74,10 @@ const paths = {
   campaignRegistryPath: writeJson("campaigns.json", { schemaVersion: 1, campaigns: [] }),
   coverRegistryPath: writeJson("covers.json", { schemaVersion: 1, policy: { activeStatus: "approved" }, manifests: [] }),
   deckSourcesPath: writeJson("deck-sources.json", { home_kitchen_cooking_actions_a1_a2: "test-drive-file-id" }),
-  offlineDeckPath: writeJson("offline-deck.json", { setId: "home_kitchen_cooking_actions_a1_a2" }),
+  offlineDeckPath: writeJson("offline-deck.json", {
+    setId: "home_kitchen_cooking_actions_a1_a2",
+    cards: offlineDeckCards,
+  }),
   ordinaryPlaylistRegistryPath: writeJson("ordinary-playlists.json", { schemaVersion: 1, playlists: [] }),
   polyglotPlaylistRegistryPath: writeJson("polyglot-playlists.json", { schemaVersion: 1, playlists: [] }),
   playlistDiscoveryPath: writeJson("playlist-discovery.json", {
@@ -82,6 +99,19 @@ const baseOptions = {
   now: new Date("2026-07-14T00:00:00.000Z"),
   ...paths,
 };
+
+assert.deepEqual(offlineDeckAssignmentCoverageBlockers({ cards: { ID: {} } }, [{
+  assignmentKey: "ordinary|home_bathroom_essentials_a1|ID|AZ",
+  videoType: "ordinary",
+  supportLang: "ID",
+  targetLang: "AZ",
+}]), ["ordinary|home_bathroom_essentials_a1|ID|AZ: offline deck cards missing for ID->AZ"]);
+assert.deepEqual(offlineDeckAssignmentCoverageBlockers({ cards: { ID: { AZ: [{ meaning_id: "fixture" }] } } }, [{
+  assignmentKey: "ordinary|home_bathroom_essentials_a1|ID|AZ",
+  videoType: "ordinary",
+  supportLang: "ID",
+  targetLang: "AZ",
+}]), []);
 
 const first = buildPublicationCampaign(baseOptions);
 verifyCampaignManifest(first);

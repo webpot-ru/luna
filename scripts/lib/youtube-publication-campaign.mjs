@@ -32,6 +32,7 @@ import {
   findPlaylistEntry,
 } from "./youtube-playlists.mjs";
 import { resolveYoutubeVideoProductionReadiness } from "./youtube-video-production-readiness.mjs";
+import { getDbLanguageCode } from "./video-language-codes.mjs";
 import {
   buildPolyglotPlaylistAssignment,
   findPolyglotPlaylistEntry,
@@ -152,7 +153,7 @@ function historicalGitBlobSource(filePath, explicitBlobId = "") {
   };
 }
 
-function deckCardCount({ offlineDeckPath, historicalDeckSource }) {
+function readOfflineDeck({ offlineDeckPath, historicalDeckSource }) {
   let source = "";
   if (fs.existsSync(offlineDeckPath)) source = fs.readFileSync(offlineDeckPath, "utf8");
   else if (historicalDeckSource?.available && historicalDeckSource?.blobId) {
@@ -164,7 +165,17 @@ function deckCardCount({ offlineDeckPath, historicalDeckSource }) {
   }
   if (!source) return null;
   try {
-    const cards = JSON.parse(source).cards;
+    return JSON.parse(source);
+  } catch {
+    return null;
+  }
+}
+
+function deckCardCount({ offlineDeckPath, historicalDeckSource }) {
+  const offlineDeck = readOfflineDeck({ offlineDeckPath, historicalDeckSource });
+  if (!offlineDeck) return null;
+  try {
+    const cards = offlineDeck.cards;
     const counts = new Set(Object.values(cards || {})
       .flatMap((bySupport) => Object.values(bySupport || {}))
       .filter(Array.isArray)
@@ -173,6 +184,28 @@ function deckCardCount({ offlineDeckPath, historicalDeckSource }) {
   } catch {
     return null;
   }
+}
+
+export function offlineDeckAssignmentCoverageBlockers(offlineDeck, assignments) {
+  if (!offlineDeck?.cards) return ["offline deck cards matrix is missing"];
+  const blockers = [];
+  for (const row of assignments || []) {
+    const support = normalizeCode(row.supportLang);
+    const supportDb = getDbLanguageCode(support);
+    const targets = row.videoType === "polyglot"
+      ? (row.targetLangs || []).map(normalizeCode).filter(Boolean)
+      : [normalizeCode(row.targetLang)].filter(Boolean);
+    for (const target of targets) {
+      const targetDb = getDbLanguageCode(target);
+      const exact = offlineDeck.cards?.[support]?.[target];
+      const mapped = offlineDeck.cards?.[supportDb]?.[targetDb];
+      if ((!Array.isArray(exact) || exact.length === 0)
+        && (!Array.isArray(mapped) || mapped.length === 0)) {
+        blockers.push(`${row.assignmentKey}: offline deck cards missing for ${support}->${target}`);
+      }
+    }
+  }
+  return blockers;
 }
 
 function targetHash(targetLangs) {
@@ -635,6 +668,7 @@ export function buildPublicationCampaign(options = {}) {
     ? historicalGitBlobSource(paths.offlineDeck, options.historicalDeckBlob)
     : { available: false, matchesLocalFile: false, commit: "", blobId: "", localBlobId: "" };
   const claims = campaignClaimSets(planningCampaignRegistry);
+  const offlineDeck = readOfflineDeck({ offlineDeckPath: paths.offlineDeck, historicalDeckSource });
   const cardCount = deckCardCount({ offlineDeckPath: paths.offlineDeck, historicalDeckSource });
   const freshness = snapshotBlockers(deck, snapshot.generatedAt, now, maxSnapshotAgeMinutes, supports);
   const blockers = [...freshness.blockers, ...replacementBlockers];
@@ -803,6 +837,7 @@ export function buildPublicationCampaign(options = {}) {
     allowPartialPolyglotTail,
     deferredProductionAssignments,
   }));
+  blockers.push(...offlineDeckAssignmentCoverageBlockers(offlineDeck, assignments));
   blockers.push(...validateResolvedPlaylistIdentities(assignments));
   const routeCounts = Object.fromEntries(routing.projects.map((route) => [route.key, assignments.filter((row) => row.routeKey === route.key).length]));
   const metadataRouteBatchCount = Object.values(routeCounts)
