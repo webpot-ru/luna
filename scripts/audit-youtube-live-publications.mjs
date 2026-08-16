@@ -14,6 +14,8 @@ const DEFAULT_PUBLICATION_REGISTRY_PATH = "config/youtube-published-videos.json"
 const DEFAULT_POLYGLOT_PUBLICATION_REGISTRY_PATH = "config/youtube-polyglot-published-videos.json";
 const DEFAULT_MAX_UPLOAD_PLAYLIST_PAGES = 10;
 const DEFAULT_AUDIT_EXCLUSIONS_PATH = "config/youtube-live-audit-exclusions.json";
+const DEFAULT_YOUTUBE_READ_ATTEMPTS = 3;
+const DEFAULT_YOUTUBE_READ_RETRY_BASE_MS = 1_000;
 
 function parseArgs(argv) {
   const options = {
@@ -188,18 +190,71 @@ async function getAccessToken({ clientFile, tokenFile }) {
   return nextToken.access_token;
 }
 
-async function youtubeJson({ accessToken, pathName, query = {} }) {
+function isRetryableYoutubeReadStatus(status) {
+  return [408, 409, 425, 429].includes(Number(status)) || Number(status) >= 500;
+}
+
+function boundedErrorMessage(error) {
+  return String(error?.message || error || "unknown error").replace(/\s+/gu, " ").slice(0, 240);
+}
+
+async function youtubeJson({
+  accessToken,
+  pathName,
+  query = {},
+  fetchImpl = globalThis.fetch,
+  sleepImpl = (delayMs) => new Promise((resolve) => setTimeout(resolve, delayMs)),
+  warnImpl = console.warn,
+  maxAttempts = DEFAULT_YOUTUBE_READ_ATTEMPTS,
+  retryBaseMs = DEFAULT_YOUTUBE_READ_RETRY_BASE_MS,
+}) {
   const url = new URL(pathName, "https://www.googleapis.com/youtube/v3/");
   for (const [key, value] of Object.entries(query)) {
     if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, String(value));
   }
-  const response = await fetch(url, {
-    method: "GET",
-    headers: { authorization: `Bearer ${accessToken}` },
-  });
-  const text = await response.text();
-  if (!response.ok) fail(`YouTube API GET ${url.pathname} failed (${response.status}): ${text}`);
-  return text ? JSON.parse(text) : {};
+
+  const attempts = Number(maxAttempts);
+  const baseDelayMs = Number(retryBaseMs);
+  if (!Number.isInteger(attempts) || attempts < 1) {
+    throw new Error("YouTube read maxAttempts must be a positive integer.");
+  }
+  if (!Number.isFinite(baseDelayMs) || baseDelayMs < 0) {
+    throw new Error("YouTube read retryBaseMs must be a non-negative number.");
+  }
+
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    let response;
+    let text;
+    try {
+      response = await fetchImpl(url, {
+        method: "GET",
+        headers: { authorization: `Bearer ${accessToken}` },
+      });
+      text = await response.text();
+    } catch (error) {
+      if (attempt >= attempts) throw error;
+      const delayMs = baseDelayMs * (2 ** (attempt - 1));
+      warnImpl(
+        `[YOUTUBE_READ_RETRY] GET ${url.pathname} attempt ${attempt}/${attempts} failed before response; retrying in ${delayMs}ms: ${boundedErrorMessage(error)}`,
+      );
+      await sleepImpl(delayMs);
+      continue;
+    }
+
+    if (response.ok) return text ? JSON.parse(text) : {};
+
+    const error = new Error(`YouTube API GET ${url.pathname} failed (${response.status}): ${text}`);
+    error.status = response.status;
+    if (attempt >= attempts || !isRetryableYoutubeReadStatus(response.status)) throw error;
+
+    const delayMs = baseDelayMs * (2 ** (attempt - 1));
+    warnImpl(
+      `[YOUTUBE_READ_RETRY] GET ${url.pathname} attempt ${attempt}/${attempts} returned ${response.status}; retrying in ${delayMs}ms.`,
+    );
+    await sleepImpl(delayMs);
+  }
+
+  throw new Error(`YouTube API GET ${url.pathname} exhausted its bounded retry window.`);
 }
 
 async function readAuthorizedChannel({ accessToken, expectedChannelId }) {
@@ -709,8 +764,10 @@ export {
   courseSetBySlug,
   earliestAuditWindowStart,
   inferPublicationFromDescription,
+  isRetryableYoutubeReadStatus,
   isYoutubeDeletedTombstone,
   markPotentialCurrentSetUnmatched,
   publicationFromRegistryItem,
   validateAuditExclusions,
+  youtubeJson,
 };
