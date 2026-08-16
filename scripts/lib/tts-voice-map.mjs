@@ -27,7 +27,7 @@ export const defaultVoiceMap = {
   BG: "edge_bg-BG-KalinaNeural",
   HR: "edge_hr-HR-GabrijelaNeural",
   SR: "edge_sr-RS-SophieNeural",
-  SL: "edge_sl-SI-PetraNeural",
+  SL: "edge_sl-SI-RokNeural",
   LT: "edge_lt-LT-OnaNeural",
   LV: "edge_lv-LV-EveritaNeural",
   ET: "edge_et-EE-AnuNeural",

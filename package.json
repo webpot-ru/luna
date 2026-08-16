@@ -90,6 +90,7 @@
     "test:youtube-support-routing": "node scripts/lib/youtube-support-routing.test.mjs",
     "test:youtube-publication-campaign": "node scripts/lib/youtube-publication-campaign.test.mjs",
     "test:youtube-publication-campaign-finalize": "node scripts/youtube-publication-campaign-finalize.test.mjs",
+    "test:youtube-publication-campaign-receipts-reconcile": "node scripts/reconcile-youtube-publication-campaign-receipts.test.mjs",
     "test:youtube-publication-campaign-rearm": "node scripts/rearm-youtube-publication-campaign.test.mjs",
     "test:youtube-publication-campaign-rollover": "node scripts/rollover-claimed-youtube-publication-campaign.test.mjs",
     "test:youtube-publication-campaign-partial-recovery": "node scripts/create-youtube-partial-recovery-campaign.test.mjs && node scripts/lib/youtube-partial-recovery-advisories.test.mjs",
