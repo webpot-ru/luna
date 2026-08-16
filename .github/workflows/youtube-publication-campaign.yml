@@ -54,7 +54,7 @@ on:
         required: false
         default: ""
       confirm_vectorengine_metadata:
-        description: "Disabled for campaign metadata; keep empty. The approved chain is Terra, then Luna."
+        description: "Disabled for campaign metadata; keep empty. Small campaigns use Terra -> Luna; large campaigns use Luna -> Terra."
         required: false
         default: ""
       confirm_openai_metadata:
