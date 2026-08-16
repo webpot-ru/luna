@@ -4,11 +4,106 @@ import assert from "node:assert/strict";
 import {
   courseSetBySlug,
   inferPublicationFromDescription,
+  isRetryableYoutubeReadStatus,
   isYoutubeDeletedTombstone,
   markPotentialCurrentSetUnmatched,
   publicationFromRegistryItem,
   validateAuditExclusions,
+  youtubeJson,
 } from "./audit-youtube-live-publications.mjs";
+
+function jsonResponse(body, { status = 200 } = {}) {
+  return {
+    ok: status >= 200 && status < 300,
+    status,
+    text: async () => JSON.stringify(body),
+  };
+}
+
+assert.equal(isRetryableYoutubeReadStatus(429), true);
+assert.equal(isRetryableYoutubeReadStatus(503), true);
+assert.equal(isRetryableYoutubeReadStatus(401), false);
+
+{
+  const waits = [];
+  let calls = 0;
+  const result = await youtubeJson({
+    accessToken: "test-token",
+    pathName: "channels",
+    fetchImpl: async () => {
+      calls += 1;
+      if (calls === 1) throw new TypeError("fetch failed");
+      return jsonResponse({ items: [{ id: "channel" }] });
+    },
+    sleepImpl: async (delayMs) => waits.push(delayMs),
+    warnImpl: () => {},
+    retryBaseMs: 7,
+  });
+  assert.equal(calls, 2);
+  assert.deepEqual(waits, [7]);
+  assert.equal(result.items[0].id, "channel");
+}
+
+{
+  const waits = [];
+  let calls = 0;
+  const result = await youtubeJson({
+    accessToken: "test-token",
+    pathName: "playlistItems",
+    fetchImpl: async () => {
+      calls += 1;
+      if (calls === 1) return jsonResponse({ error: "temporary" }, { status: 503 });
+      return jsonResponse({ items: [] });
+    },
+    sleepImpl: async (delayMs) => waits.push(delayMs),
+    warnImpl: () => {},
+    retryBaseMs: 11,
+  });
+  assert.equal(calls, 2);
+  assert.deepEqual(waits, [11]);
+  assert.deepEqual(result, { items: [] });
+}
+
+{
+  let calls = 0;
+  await assert.rejects(
+    youtubeJson({
+      accessToken: "test-token",
+      pathName: "channels",
+      fetchImpl: async () => {
+        calls += 1;
+        return jsonResponse({ error: "unauthorized" }, { status: 401 });
+      },
+      sleepImpl: async () => assert.fail("401 must not retry"),
+      warnImpl: () => {},
+      retryBaseMs: 0,
+    }),
+    /failed \(401\)/,
+  );
+  assert.equal(calls, 1);
+}
+
+{
+  const waits = [];
+  let calls = 0;
+  await assert.rejects(
+    youtubeJson({
+      accessToken: "test-token",
+      pathName: "videos",
+      fetchImpl: async () => {
+        calls += 1;
+        throw new TypeError("fetch failed");
+      },
+      sleepImpl: async (delayMs) => waits.push(delayMs),
+      warnImpl: () => {},
+      maxAttempts: 3,
+      retryBaseMs: 5,
+    }),
+    /fetch failed/,
+  );
+  assert.equal(calls, 3);
+  assert.deepEqual(waits, [5, 10]);
+}
 
 assert.equal(isYoutubeDeletedTombstone({ title: "Deleted video", youtubeStatus: { uploadStatus: "not_returned" } }), true);
 assert.equal(isYoutubeDeletedTombstone({ title: "Deleted video", youtubeStatus: { uploadStatus: "uploaded" } }), false);
