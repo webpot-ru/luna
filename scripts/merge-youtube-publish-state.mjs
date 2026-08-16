@@ -14,12 +14,14 @@ function parseArgs(argv) {
     artifactDir: DEFAULT_ARTIFACT_DIR,
     repoRoot: process.cwd(),
     summary: DEFAULT_SUMMARY_PATH,
+    thumbnailStateOnly: false,
   };
   for (const arg of argv) {
     if (arg === "--help" || arg === "-h") options.help = true;
     else if (arg.startsWith("--artifact-dir=")) options.artifactDir = arg.slice("--artifact-dir=".length);
     else if (arg.startsWith("--repo-root=")) options.repoRoot = arg.slice("--repo-root=".length);
     else if (arg.startsWith("--summary=")) options.summary = arg.slice("--summary=".length);
+    else if (arg === "--thumbnail-state-only") options.thumbnailStateOnly = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
   return options;
@@ -29,6 +31,7 @@ function usage() {
   return [
     "Usage:",
     "  node scripts/merge-youtube-publish-state.mjs --artifact-dir=.state-artifact",
+    "  node scripts/merge-youtube-publish-state.mjs --artifact-dir=.state-artifact --thumbnail-state-only",
     "",
     "Merges non-secret YouTube publish state from a GitHub Actions artifact into",
     "the current checkout without overwriting newer local state for existing keys.",
@@ -267,6 +270,70 @@ function mergePublications(currentRegistry, incomingRegistry, { authoritativeRea
     }
     if (changed) summary.updated += 1;
     else summary.skipped += 1;
+  }
+
+  return summary;
+}
+
+function samePublicationIdentity(current, incoming) {
+  return String(current.setId || "") === String(incoming.setId || "")
+    && normalizeLanguageCode(current.supportLang) === normalizeLanguageCode(incoming.supportLang)
+    && String(current.videoType || "ordinary") === String(incoming.videoType || "ordinary")
+    && normalizeLanguageCode(current.targetLang || current.targetLangsCsv)
+      === normalizeLanguageCode(incoming.targetLang || incoming.targetLangsCsv);
+}
+
+function copyNewerTimestamp(current, incoming, field) {
+  if (isEmpty(incoming[field])) return false;
+  const currentTime = Date.parse(current[field] || 0) || 0;
+  const incomingTime = Date.parse(incoming[field]) || 0;
+  if (incomingTime <= currentTime) return false;
+  current[field] = incoming[field];
+  return true;
+}
+
+function mergeThumbnailStateOnly(currentRegistry, incomingRegistry, allowedVideoIds) {
+  const currentRows = currentRegistry.publications || [];
+  const incomingRows = (incomingRegistry.publications || [])
+    .filter((row) => row?.youtubeVideoId && row.thumbnailSet === true && allowedVideoIds.has(row.youtubeVideoId));
+  const byVideoId = new Map();
+  for (const row of currentRows) {
+    if (!row?.youtubeVideoId) continue;
+    const rows = byVideoId.get(row.youtubeVideoId) || [];
+    rows.push(row);
+    byVideoId.set(row.youtubeVideoId, rows);
+  }
+  const summary = { created: 0, updated: 0, skipped: 0 };
+
+  for (const incoming of incomingRows) {
+    const matches = byVideoId.get(incoming.youtubeVideoId) || [];
+    if (matches.length === 0) {
+      summary.skipped += 1;
+      continue;
+    }
+    const missingMatches = matches.filter((row) => row.thumbnailSet === false);
+    if (missingMatches.length === 0) {
+      summary.skipped += 1;
+      continue;
+    }
+    if (missingMatches.length !== 1) {
+      throw new Error(`Thumbnail-state merge requires one current thumbnailSet=false row for video ${incoming.youtubeVideoId}, got ${missingMatches.length}`);
+    }
+    const current = missingMatches[0];
+    if (!samePublicationIdentity(current, incoming)) {
+      throw new Error(`Thumbnail-state identity mismatch for video ${incoming.youtubeVideoId}`);
+    }
+    current.thumbnailSet = true;
+    for (const field of ["thumbnailUploadMode", "thumbnailSource"]) {
+      if (isEmpty(current[field]) && !isEmpty(incoming[field])) current[field] = incoming[field];
+    }
+    for (const field of ["thumbnailUploadedAt", "lastThumbnailReadbackAt", "lastReadbackAt"]) {
+      copyNewerTimestamp(current, incoming, field);
+    }
+    for (const field of ["thumbnailSetError", "needsThumbnailPermission"]) {
+      if (Object.hasOwn(current, field) && !Object.hasOwn(incoming, field)) delete current[field];
+    }
+    summary.updated += 1;
   }
 
   return summary;
@@ -548,6 +615,52 @@ function mergeYoutubePublishState(options) {
     channels: { updated: 0, skipped: 0 },
     liveAudit: { created: 0, updated: 0, skipped: 0, hasIncoming: false, sourcePath: "" },
   };
+
+  if (options.thumbnailStateOnly) {
+    const ledgerPath = resolveArtifactPath(
+      artifactDir,
+      "outputs/youtube-thumbnail-ledger.jsonl",
+      "youtube-thumbnail-ledger.jsonl",
+    );
+    if (!ledgerPath) throw new Error("Thumbnail-state merge requires youtube-thumbnail-ledger.jsonl");
+    const ledgerRows = fs.readFileSync(ledgerPath, "utf8")
+      .split(/\r?\n/)
+      .filter(Boolean)
+      .map((line) => JSON.parse(line));
+    const allowedVideoIds = new Set(ledgerRows
+      .filter((row) => row.action === "youtube_set_video_thumbnail" && row.status === "custom_thumbnail_set")
+      .map((row) => String(row.videoId || ""))
+      .filter(Boolean));
+    if (!allowedVideoIds.size) throw new Error("Thumbnail-state ledger contains no successful custom_thumbnail_set rows");
+    summary.thumbnailEvidence = {
+      ledgerPath: path.relative(artifactDir, ledgerPath),
+      successfulVideoCount: allowedVideoIds.size,
+      videoIds: [...allowedVideoIds].sort(),
+    };
+    const publications = loadPair(repoRoot, artifactDir, "config/youtube-published-videos.json", () => ({
+      schemaVersion: 1,
+      publications: [],
+    }));
+    if (publications.hasIncoming) {
+      summary.publications = mergeThumbnailStateOnly(publications.current, publications.incoming, allowedVideoIds);
+      if (writeJsonIfChanged(publications.currentPath, publications.current)) {
+        summary.filesChanged.push("config/youtube-published-videos.json");
+      }
+    }
+    const polyglotPublications = loadPair(repoRoot, artifactDir, "config/youtube-polyglot-published-videos.json", () => ({
+      schemaVersion: 1,
+      publications: [],
+    }));
+    if (polyglotPublications.hasIncoming) {
+      summary.polyglotPublications = mergeThumbnailStateOnly(polyglotPublications.current, polyglotPublications.incoming, allowedVideoIds);
+      if (writeJsonIfChanged(polyglotPublications.currentPath, polyglotPublications.current)) {
+        summary.filesChanged.push("config/youtube-polyglot-published-videos.json");
+      }
+    }
+    const summaryPath = path.resolve(repoRoot, options.summary);
+    writeJsonIfChanged(summaryPath, summary);
+    return summary;
+  }
 
   const publications = loadPair(repoRoot, artifactDir, "config/youtube-published-videos.json", () => ({
     schemaVersion: 1,
