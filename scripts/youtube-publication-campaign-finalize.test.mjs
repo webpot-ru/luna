@@ -7,6 +7,17 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 
 const repoRoot = process.cwd();
+const campaignWorkflow = fs.readFileSync(
+  path.join(repoRoot, ".github/workflows/youtube-publication-campaign.yml"),
+  "utf8",
+);
+const polyglotJob = campaignWorkflow.match(/\n  polyglot:\n([\s\S]*?)\n  finalize:\n/u)?.[1] || "";
+assert.match(polyglotJob, /needs: \[preflight, metadata, ordinary\]/u);
+assert.match(polyglotJob, /always\(\) && !cancelled\(\)/u);
+assert.match(polyglotJob, /needs\.preflight\.result == 'success'/u);
+assert.match(polyglotJob, /needs\.metadata\.result == 'success'/u);
+assert.doesNotMatch(polyglotJob, /needs\.ordinary\.result/u);
+
 const root = fs.mkdtempSync(path.join(os.tmpdir(), "youtube-campaign-finalize-"));
 const configDir = path.join(root, "config");
 const artifactRoot = path.join(root, "artifacts");

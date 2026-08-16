@@ -369,7 +369,11 @@ jobs:
     secrets: inherit
 
   polyglot:
-    if: ${{ always() && inputs.mode == 'apply' && needs.preflight.result == 'success' && needs.metadata.result == 'success' && needs.preflight.outputs.polyglot_worker_count != '0' && (needs.preflight.outputs.ordinary_worker_count == '0' || needs.ordinary.result == 'success') }}
+    # Wait for the ordinary phase to finish so the same support channel is not
+    # rendered/uploaded by both phases at once. A partial ordinary failure must
+    # not suppress independent Polyglot workers; the finalizer records both
+    # phases and leaves only exact missing assignments for recovery.
+    if: ${{ always() && !cancelled() && inputs.mode == 'apply' && needs.preflight.result == 'success' && needs.metadata.result == 'success' && needs.preflight.outputs.polyglot_worker_count != '0' }}
     needs: [preflight, metadata, ordinary]
     strategy:
       fail-fast: false
