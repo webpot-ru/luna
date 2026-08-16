@@ -63,6 +63,13 @@ export function selectOpenAiMetadataModel({ assignmentCount, useLuna, primaryMod
   return useLuna || assignmentCount >= largeCampaignAssignments ? fallbackModel : primaryModel;
 }
 
+export function selectOpenAiMetadataAlternateModel({ selectedModel, primaryModel, fallbackModel }) {
+  const candidates = selectedModel === fallbackModel
+    ? [primaryModel]
+    : [fallbackModel, primaryModel];
+  return candidates.find((model) => model && model !== selectedModel) || "";
+}
+
 export async function callOpenAiWithModelFallback({
   request,
   primaryModel,
@@ -435,6 +442,11 @@ async function generateBatch(tasks, options) {
     fallbackModel: options.openaiFallbackModel,
     largeCampaignAssignments: options.openaiLargeCampaignAssignments,
   });
+  const selectedOpenAiAlternateModel = selectOpenAiMetadataAlternateModel({
+    selectedModel: selectedOpenAiModel,
+    primaryModel: options.openaiModel,
+    fallbackModel: options.openaiFallbackModel,
+  });
   const openAiReservation = estimateOpenAiRequestTokenUpperBound(request) + OPENAI_CAMPAIGN_MAX_OUTPUT_TOKENS;
   const result = await runGeminiBackendChain({
     backends,
@@ -450,7 +462,7 @@ async function generateBatch(tasks, options) {
           })() : {}),
         },
         primaryModel: selectedOpenAiModel,
-        fallbackModel: options.openaiFallbackModel,
+        fallbackModel: selectedOpenAiAlternateModel,
       }),
       api: async () => callGeminiApiJsonWithKeys(request),
       vectorengine: async () => generateVectorEngineCampaignMetadataSubBatches(taskRequests, {

@@ -13,6 +13,7 @@ import {
   DEFAULT_OPENAI_LARGE_CAMPAIGN_ASSIGNMENTS,
   assertOpenAiDailyTokenBudget,
   callOpenAiWithModelFallback,
+  selectOpenAiMetadataAlternateModel,
   selectOpenAiMetadataModel,
   DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE,
   buildCampaignMetadataPrompt,
@@ -43,6 +44,16 @@ assert.equal(DEFAULT_OPENAI_LARGE_CAMPAIGN_ASSIGNMENTS, 100);
 assert.equal(selectOpenAiMetadataModel({ assignmentCount: 99, useLuna: false }), "gpt-5.6-terra");
 assert.equal(selectOpenAiMetadataModel({ assignmentCount: 100, useLuna: false }), "gpt-5.6-luna");
 assert.equal(selectOpenAiMetadataModel({ assignmentCount: 1, useLuna: true }), "gpt-5.6-luna");
+assert.equal(selectOpenAiMetadataAlternateModel({
+  selectedModel: "gpt-5.6-luna",
+  primaryModel: "gpt-5.6-terra",
+  fallbackModel: "gpt-5.6-luna",
+}), "gpt-5.6-terra");
+assert.equal(selectOpenAiMetadataAlternateModel({
+  selectedModel: "gpt-5.6-terra",
+  primaryModel: "gpt-5.6-terra",
+  fallbackModel: "gpt-5.6-luna",
+}), "gpt-5.6-luna");
 
 const fallbackModels = [];
 const fallbackMetadata = await callOpenAiWithModelFallback({
@@ -57,6 +68,99 @@ const fallbackMetadata = await callOpenAiWithModelFallback({
 });
 assert.deepEqual(fallbackModels, ["gpt-5.6-terra", "gpt-5.6-luna"]);
 assert.equal(fallbackMetadata.model, "gpt-5.6-luna");
+
+const incidentTask = {
+  requestId: "ordinary|home_bathroom_essentials_a1|HU|HY",
+  videoType: "ordinary",
+  supportLang: "HU",
+  targetLang: "HY",
+};
+const incidentRequest = {
+  prompt: "Deck 5 metadata regression",
+  schema: {
+    type: "object",
+    properties: {
+      items: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: { requestId: { type: "string" } },
+        },
+      },
+    },
+  },
+  validateValue: (value) => validateCampaignMetadataResponse(value, [incidentTask]),
+};
+function openAiStructuredResponse(items, model) {
+  return {
+    ok: true,
+    status: 200,
+    json: async () => ({
+      id: `resp-${model}`,
+      status: "completed",
+      model,
+      service_tier: "data_sharing_incentive",
+      output: [{
+        type: "message",
+        content: [{ type: "output_text", text: JSON.stringify({ items }) }],
+      }],
+      usage: { input_tokens: 10, output_tokens: 5, total_tokens: 15 },
+    }),
+  };
+}
+const lunaToTerraModels = [];
+const lunaToTerraResult = await callOpenAiWithModelFallback({
+  request: incidentRequest,
+  primaryModel: "gpt-5.6-luna",
+  fallbackModel: "gpt-5.6-terra",
+  callProvider: async ({ model, ...request }) => {
+    lunaToTerraModels.push(model);
+    const items = model === "gpt-5.6-luna"
+      ? [{ requestId: "ordinary|home_bathroom_essentials_a1|HU|HY|HY" }]
+      : [{ requestId: incidentTask.requestId }];
+    return callOpenAiStructuredJson({
+      ...request,
+      apiKey: "test-key",
+      fetchImpl: async () => openAiStructuredResponse(items, model),
+    });
+  },
+});
+assert.deepEqual(lunaToTerraModels, ["gpt-5.6-luna", "gpt-5.6-terra"]);
+assert.equal(lunaToTerraResult.model, "gpt-5.6-terra");
+
+const validLunaModels = [];
+await callOpenAiWithModelFallback({
+  request: incidentRequest,
+  primaryModel: "gpt-5.6-luna",
+  fallbackModel: "gpt-5.6-terra",
+  callProvider: async ({ model, ...request }) => {
+    validLunaModels.push(model);
+    return callOpenAiStructuredJson({
+      ...request,
+      apiKey: "test-key",
+      fetchImpl: async () => openAiStructuredResponse([{ requestId: incidentTask.requestId }], model),
+    });
+  },
+});
+assert.deepEqual(validLunaModels, ["gpt-5.6-luna"]);
+
+const invalidBothModels = [];
+await assert.rejects(() => callOpenAiWithModelFallback({
+  request: incidentRequest,
+  primaryModel: "gpt-5.6-luna",
+  fallbackModel: "gpt-5.6-terra",
+  callProvider: async ({ model, ...request }) => {
+    invalidBothModels.push(model);
+    return callOpenAiStructuredJson({
+      ...request,
+      apiKey: "test-key",
+      fetchImpl: async () => openAiStructuredResponse([
+        { requestId: "ordinary|home_bathroom_essentials_a1|HU|HY|HY" },
+      ], model),
+    });
+  },
+}), /Unexpected campaign metadata requestId/u);
+assert.deepEqual(invalidBothModels, ["gpt-5.6-luna", "gpt-5.6-terra"]);
 assert.doesNotThrow(() => assertOpenAiDailyTokenBudget({ usedTokens: 1_900_000, reservationTokens: 100_000, limitTokens: 2_000_000 }));
 assert.throws(() => assertOpenAiDailyTokenBudget({ usedTokens: 1_900_001, reservationTokens: 100_000, limitTokens: 2_000_000 }), /daily token budget would be exceeded/);
 const response = {
