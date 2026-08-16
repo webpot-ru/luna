@@ -159,7 +159,7 @@ jobs:
           set -euo pipefail
           mkdir -p /tmp/youtube-thumbnail-source
           gh run download "$SOURCE_RUN_ID" --repo "$GITHUB_REPOSITORY" --dir /tmp/youtube-thumbnail-source
-          find /tmp/youtube-thumbnail-source -name youtube_metadata.json -o -name youtube_thumbnail.jpg | sort | head -n 40
+          find /tmp/youtube-thumbnail-source \( -name youtube_metadata.json -o -name youtube_thumbnail.jpg \) | sort | sed -n '1,40p'
 
       - name: Locate matching metadata and thumbnail
         id: locate

@@ -16,9 +16,9 @@ on:
         required: true
         default: "outputs/design-prototypes/youtube-thumbnail-home_kitchen_cookware_pilot_01-confirmed-channel-covers-20260704/manifest.json"
       set_id:
-        description: "Set/deck id to match in config/youtube-published-videos.json."
-        required: true
-        default: "home_kitchen_cookware_pilot_01"
+        description: "Optional set/deck id filter. Leave empty for an exact multi-deck manifest."
+        required: false
+        default: ""
       support:
         description: "Support language(s) for this batch. Apply requires a non-empty single-route list."
         required: false
@@ -67,7 +67,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: youtube-thumbnail-batch-set-${{ github.ref_name }}
+  group: youtube-thumbnail-batch-set-${{ github.ref_name }}-${{ github.event.inputs.youtube_environment }}
   cancel-in-progress: false
 
 jobs:
