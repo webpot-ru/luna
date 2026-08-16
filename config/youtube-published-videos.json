@@ -439231,6 +439231,39 @@
         "publishAt": "2026-08-17T06:30:00Z",
         "thumbnailStatus": "custom_set"
       }
+    },
+    {
+      "schemaVersion": 1,
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "UZ",
+      "targetLang": "ES",
+      "targetLangs": [],
+      "youtubeVideoId": "P-ExEaoyr4c",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=P-ExEaoyr4c",
+      "channelKey": "uz",
+      "youtubeChannelId": "UClFSxvtwOnc_pPv2rCnT-bg",
+      "routeKey": "youtube-4",
+      "privacyStatus": "private",
+      "publishAt": "2026-08-17T18:30:00.000Z",
+      "scheduledPublishAt": "2026-08-17T18:30:00.000Z",
+      "publicationStatus": "upload_accepted_reconciliation_required",
+      "thumbnailSet": false,
+      "thumbnailUploadMode": "custom_pending_lost_receipt",
+      "needsThumbnailPermission": true,
+      "youtubePlaylistId": "PLPZPjxBw0kuLmqQR-_Ml9CVtYw5FvcSOC",
+      "playlistItemId": "",
+      "needsPlaylistInsert": true,
+      "postUploadError": "lost receipt after videos.insert; custom thumbnail and playlist item are not confirmed",
+      "source": "exact_live_control_lost_receipt_reconciliation",
+      "reconciledAt": "2026-08-15T19:44:06.187Z",
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|UZ|ES",
+      "campaignId": "yt-home_bathroom_essentials_a1-2026-08-15-9fa2c65442bd",
+      "campaignManifestHash": "99f2716649a70b85df61e0dc3ccb73200dcecf60b1e76657443a49db63fdae43",
+      "playlist_key": "UZ__ES__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "31899114043",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/31899114043",
+      "stateRecovery": "exact_live_control_lost_receipt_after_videos_insert"
     }
   ]
 }
