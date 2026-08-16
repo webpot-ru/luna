@@ -1,0 +1,1326 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-16T19:10:30.000Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_bathroom_essentials_a1",
+  "inputs": {
+    "supports": "PL,TR",
+    "supportCount": 2,
+    "ordinarySupportCount": 2,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 9,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|home_bathroom_essentials_a1|PL|ET",
+      "ordinary|home_bathroom_essentials_a1|PL|FI",
+      "ordinary|home_bathroom_essentials_a1|PL|FR",
+      "ordinary|home_bathroom_essentials_a1|PL|HI",
+      "ordinary|home_bathroom_essentials_a1|PL|HR",
+      "ordinary|home_bathroom_essentials_a1|PL|HU",
+      "ordinary|home_bathroom_essentials_a1|PL|HY",
+      "ordinary|home_bathroom_essentials_a1|PL|ID",
+      "ordinary|home_bathroom_essentials_a1|PL|IS",
+      "ordinary|home_bathroom_essentials_a1|TR|ET",
+      "ordinary|home_bathroom_essentials_a1|TR|FI",
+      "ordinary|home_bathroom_essentials_a1|TR|FR",
+      "ordinary|home_bathroom_essentials_a1|TR|HI",
+      "ordinary|home_bathroom_essentials_a1|TR|HR",
+      "ordinary|home_bathroom_essentials_a1|TR|HU",
+      "ordinary|home_bathroom_essentials_a1|TR|HY",
+      "ordinary|home_bathroom_essentials_a1|TR|ID",
+      "ordinary|home_bathroom_essentials_a1|TR|IS"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_bathroom_essentials_a1-2026-08-16-c4c92732cef4",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_bathroom_essentials_a1-2026-08-16-c4c92732cef4",
+      "manifestHash": "aac3e48038b122d108a8fa82238108bafe6606151be203871aa768828bdfddb8",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-08-16T19:01:37.632Z",
+        "ageMinutes": 8.8728,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-5",
+        "generatedAt": "2026-08-16T19:01:29.352Z",
+        "ageMinutes": 9.0108,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/review/run-31956257199-control/youtube-publication-control-home_bathroom_essentials_a1-all-routes-31956257199/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "7a1d6de9e44dad16647f3c59a8b89005110afbae25706be4cbac10d1b74cb387"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "8e3992ee563f34d6ab46ecb3a6feab49db8272f00fb8f6881cef0518a79515c6"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "14cf3f6610887ea5f92b702d2633d7e90225f20478863dffb62cb244254b580d"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "c6a6ce648cab8aa76df206c34fa508026b4025835475a9948b785cbd71c61f0a"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "ddd939f2d5e45014410822df480e0025dc64cfc4a5bedf98ef0a6b82a0b21548"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_bathroom_essentials_a1.json",
+        "exists": true,
+        "sha256": "cf055a519034bfe99467a574f8681060b8a452f66e1633616e6b3b7ed08c10f7"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "7411d37b5bb0a70ac414def88445bc8c2caa4ac34b97613f146f53c33a423bfd"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/review/run-31949175847-control/youtube-publication-control-home_bathroom_essentials_a1-all-routes-31949175847/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "cee717ded4b5f1d399579d05385534a2ca7a5a851f768314bd7611e80cd33cfd"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 2,
+    "ordinaryCount": 18,
+    "polyglotCount": 0,
+    "assignmentCount": 18,
+    "firstPublishAt": "2026-08-17T20:30:00.000Z",
+    "lastPublishAt": "2026-08-19T09:30:00.000Z",
+    "customThumbnailCount": 9,
+    "automaticThumbnailCount": 9,
+    "existingPlaylistCount": 18,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-2": 9,
+      "youtube-5": 9
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 18,
+    "estimatedPlaylistItemInsertUnits": 900,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 450,
+    "estimatedGeneralQuotaUnitsMaximum": 1350,
+    "byRoute": {
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 9,
+        "estimatedGeneralQuotaUnitsMaximum": 450
+      },
+      "youtube-5": {
+        "estimatedVideoUploadCalls": 9,
+        "estimatedGeneralQuotaUnitsMaximum": 900
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|PL|ET",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|ET|pl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "PL",
+      "targetLang": "ET",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-08-18T06:30:00.000Z",
+      "localDate": "2026-08-18",
+      "localTime": "08:30",
+      "timeZone": "Europe/Warsaw",
+      "slotKey": "pl|2026-08-18T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PL__ET__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBKaXeretxlxa1-UiVtm883ZlVN8oJbgS",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Estoński A1: słownictwo i wymowa",
+        "description": "Filmy FlashcardsLuna dla polskojęzycznych osób uczących się Estoński: fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|ET",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pl-PL-ZofiaNeural",
+        "supportLang": "PL"
+      },
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|PL|FI",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|FI|pl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "PL",
+      "targetLang": "FI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-08-17T21:30:00.000Z",
+      "localDate": "2026-08-17",
+      "localTime": "23:30",
+      "timeZone": "Europe/Warsaw",
+      "slotKey": "pl|2026-08-17T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PL__FI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBKaXeretxlzrAaxlrJ4iioVHTBnIlDdo",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Fiński A1: słownictwo i wymowa",
+        "description": "Filmy FlashcardsLuna dla polskojęzycznych osób uczących się Fiński: fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|FI",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pl-PL-ZofiaNeural",
+        "supportLang": "PL"
+      },
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|PL|FR",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|FR|pl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "PL",
+      "targetLang": "FR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-08-18T09:30:00.000Z",
+      "localDate": "2026-08-18",
+      "localTime": "11:30",
+      "timeZone": "Europe/Warsaw",
+      "slotKey": "pl|2026-08-18T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PL__FR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBKaXeretxly5s2YBLIEK_39Vl9a3gvXr",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Francuski A1: słownictwo i wymowa",
+        "description": "Filmy FlashcardsLuna dla polskojęzycznych osób uczących się Francuski: fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|FR",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pl-PL-ZofiaNeural",
+        "supportLang": "PL"
+      },
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|PL|HI",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|HI|pl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "PL",
+      "targetLang": "HI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-08-18T12:30:00.000Z",
+      "localDate": "2026-08-18",
+      "localTime": "14:30",
+      "timeZone": "Europe/Warsaw",
+      "slotKey": "pl|2026-08-18T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PL__HI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBKaXeretxlzJzYNHQfg3x22g_hdyGV3B",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Hindi A1: słownictwo i wymowa",
+        "description": "Filmy FlashcardsLuna dla polskojęzycznych osób uczących się Hindi: fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|HI",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pl-PL-ZofiaNeural",
+        "supportLang": "PL"
+      },
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|PL|HR",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|HR|pl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "PL",
+      "targetLang": "HR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-08-18T15:30:00.000Z",
+      "localDate": "2026-08-18",
+      "localTime": "17:30",
+      "timeZone": "Europe/Warsaw",
+      "slotKey": "pl|2026-08-18T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PL__HR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLFz4OygQvTFU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Chorwacki A1: słownictwo i wymowa",
+        "description": "Filmy FlashcardsLuna dla polskojęzycznych osób uczących się Chorwacki: fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|HR",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pl-PL-ZofiaNeural",
+        "supportLang": "PL"
+      },
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|PL|HU",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|HU|pl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "PL",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-08-18T18:30:00.000Z",
+      "localDate": "2026-08-18",
+      "localTime": "20:30",
+      "timeZone": "Europe/Warsaw",
+      "slotKey": "pl|2026-08-18T18:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PL__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLTILFoZvYatM",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Węgierski A1: słownictwo i wymowa",
+        "description": "Filmy FlashcardsLuna dla polskojęzycznych osób uczących się Węgierski: fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|HU",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pl-PL-ZofiaNeural",
+        "supportLang": "PL"
+      },
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|PL|HY",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|HY|pl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "PL",
+      "targetLang": "HY",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-08-18T21:30:00.000Z",
+      "localDate": "2026-08-18",
+      "localTime": "23:30",
+      "timeZone": "Europe/Warsaw",
+      "slotKey": "pl|2026-08-18T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "PL__HY__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLTl0-jpcSh_c",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Ormiański A1: słownictwo i wymowa",
+        "description": "Filmy FlashcardsLuna dla polskojęzycznych osób uczących się Ormiański: fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|HY",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pl-PL-ZofiaNeural",
+        "supportLang": "PL"
+      },
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|PL|ID",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|ID|pl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "PL",
+      "targetLang": "ID",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-08-19T06:30:00.000Z",
+      "localDate": "2026-08-19",
+      "localTime": "08:30",
+      "timeZone": "Europe/Warsaw",
+      "slotKey": "pl|2026-08-19T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PL__ID__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAmQHf2l9h3A",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Indonezyjski A1: słownictwo i wymowa",
+        "description": "Filmy FlashcardsLuna dla polskojęzycznych osób uczących się Indonezyjski: fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|ID",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pl-PL-ZofiaNeural",
+        "supportLang": "PL"
+      },
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|PL|IS",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|IS|pl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "PL",
+      "targetLang": "IS",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-08-19T09:30:00.000Z",
+      "localDate": "2026-08-19",
+      "localTime": "11:30",
+      "timeZone": "Europe/Warsaw",
+      "slotKey": "pl|2026-08-19T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PL__IS__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLYKMxWivkgQc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Islandzki A1: słownictwo i wymowa",
+        "description": "Filmy FlashcardsLuna dla polskojęzycznych osób uczących się Islandzki: fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|PL|IS",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pl-PL-ZofiaNeural",
+        "supportLang": "PL"
+      },
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TR|ET",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|ET|tr",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TR",
+      "targetLang": "ET",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-08-18T05:30:00.000Z",
+      "localDate": "2026-08-18",
+      "localTime": "08:30",
+      "timeZone": "Europe/Istanbul",
+      "slotKey": "tr|2026-08-18T05:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/video/by-set/home_bathroom_essentials_a1/ordinary/by-channel/tr__TR__LunaCardsTurkce/ET__Estonca/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/manifest.json",
+        "sha256": "1cf5acce57b18ef910e8651d5d516321343c678b3a3e730b20d006f345aa4e75"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__ET__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL3W-a-xbXEZmoE7tcsDc9hVCkQzCCAcf7",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Estonca A1: Everyday: kelime",
+        "description": "Estonca öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-5",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-5",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|ET",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_tr-TR-EmelNeural",
+        "supportLang": "TR"
+      },
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TR|FI",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|FI|tr",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TR",
+      "targetLang": "FI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-08-17T20:30:00.000Z",
+      "localDate": "2026-08-17",
+      "localTime": "23:30",
+      "timeZone": "Europe/Istanbul",
+      "slotKey": "tr|2026-08-17T20:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/video/by-set/home_bathroom_essentials_a1/ordinary/by-channel/tr__TR__LunaCardsTurkce/FI__Fince/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/manifest.json",
+        "sha256": "05bad908a0b7cb16924d73f6bb64cfe63be4ccef048423417d49fc02ef254dff"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__FI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL3W-a-xbXEZl0Iuz4i6DU1J-AyWibprLH",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Fince A1: Everyday: kelime",
+        "description": "Fince öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-5",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-5",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|FI",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_tr-TR-EmelNeural",
+        "supportLang": "TR"
+      },
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TR|FR",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|FR|tr",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TR",
+      "targetLang": "FR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-08-18T08:30:00.000Z",
+      "localDate": "2026-08-18",
+      "localTime": "11:30",
+      "timeZone": "Europe/Istanbul",
+      "slotKey": "tr|2026-08-18T08:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/video/by-set/home_bathroom_essentials_a1/ordinary/by-channel/tr__TR__LunaCardsTurkce/FR__Frans_zca/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/manifest.json",
+        "sha256": "ec66dc23ddd3a9f355e81010cc85bf59b19e9971534fe352f57a6bb6ee233ff6"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__FR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL3W-a-xbXEZn5SuGkyoqFbrd_H7fULj0i",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Fransızca A1: Everyday: kelime",
+        "description": "Fransızca öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-5",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-5",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|FR",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_tr-TR-EmelNeural",
+        "supportLang": "TR"
+      },
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TR|HI",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|HI|tr",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TR",
+      "targetLang": "HI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-08-18T11:30:00.000Z",
+      "localDate": "2026-08-18",
+      "localTime": "14:30",
+      "timeZone": "Europe/Istanbul",
+      "slotKey": "tr|2026-08-18T11:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/video/by-set/home_bathroom_essentials_a1/ordinary/by-channel/tr__TR__LunaCardsTurkce/HI__Hint_e/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/manifest.json",
+        "sha256": "a11c51f5bf2fe5917b364de56f83de0cd6c03e8ba80cc2a4ccff049e9a24cabf"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__HI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL3W-a-xbXEZk2mJOm0KfuUBfHtVLWp_Qj",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Hintçe A1: Everyday: kelime",
+        "description": "Hintçe öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-5",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-5",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|HI",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_tr-TR-EmelNeural",
+        "supportLang": "TR"
+      },
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TR|HR",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|HR|tr",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TR",
+      "targetLang": "HR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-08-18T14:30:00.000Z",
+      "localDate": "2026-08-18",
+      "localTime": "17:30",
+      "timeZone": "Europe/Istanbul",
+      "slotKey": "tr|2026-08-18T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/video/by-set/home_bathroom_essentials_a1/ordinary/by-channel/tr__TR__LunaCardsTurkce/HR__H_rvat_a/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/manifest.json",
+        "sha256": "c0709fe3c56e85bee19410b1bbb696d7e4e9d95356e81ba198b9c065cd731272"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__HR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLaDpxjefG_Hk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Hırvatça A1: Everyday: kelime",
+        "description": "Hırvatça öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-5",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-5",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|HR",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_tr-TR-EmelNeural",
+        "supportLang": "TR"
+      },
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TR|HU",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|HU|tr",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TR",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-08-18T17:30:00.000Z",
+      "localDate": "2026-08-18",
+      "localTime": "20:30",
+      "timeZone": "Europe/Istanbul",
+      "slotKey": "tr|2026-08-18T17:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/video/by-set/home_bathroom_essentials_a1/ordinary/by-channel/tr__TR__LunaCardsTurkce/HU__Macarca/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/manifest.json",
+        "sha256": "a47e540ad2d7d37b860ef0ad40b51272918187feccddea58d345857ad4c83569"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLdyfXcMufKyo",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Macarca A1: Everyday: kelime",
+        "description": "Macarca öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-5",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-5",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|HU",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_tr-TR-EmelNeural",
+        "supportLang": "TR"
+      },
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TR|HY",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|HY|tr",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TR",
+      "targetLang": "HY",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-08-18T20:30:00.000Z",
+      "localDate": "2026-08-18",
+      "localTime": "23:30",
+      "timeZone": "Europe/Istanbul",
+      "slotKey": "tr|2026-08-18T20:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/video/by-set/home_bathroom_essentials_a1/ordinary/by-channel/tr__TR__LunaCardsTurkce/HY__Ermenice/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/manifest.json",
+        "sha256": "7b3d6d813f5af87103da9b689901d884a47425434d33a1d2121e17925d252b6e"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "TR__HY__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLbuzim0Mp1r0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Ermenice A1: Everyday: kelime",
+        "description": "Ermenice öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-5",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-5",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|HY",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_tr-TR-EmelNeural",
+        "supportLang": "TR"
+      },
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TR|ID",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|ID|tr",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TR",
+      "targetLang": "ID",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-08-19T05:30:00.000Z",
+      "localDate": "2026-08-19",
+      "localTime": "08:30",
+      "timeZone": "Europe/Istanbul",
+      "slotKey": "tr|2026-08-19T05:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/video/by-set/home_bathroom_essentials_a1/ordinary/by-channel/tr__TR__LunaCardsTurkce/ID__Endonezce/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/manifest.json",
+        "sha256": "cd5d8f0c970bbd98f0f25373bf96d461aa8f1051317226091bbef7b69e911e41"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__ID__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLa98TqGMgfkY",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Endonezce A1: Everyday: kelime",
+        "description": "Endonezce öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-5",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-5",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|ID",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_tr-TR-EmelNeural",
+        "supportLang": "TR"
+      },
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TR|IS",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|IS|tr",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TR",
+      "targetLang": "IS",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-08-19T08:30:00.000Z",
+      "localDate": "2026-08-19",
+      "localTime": "11:30",
+      "timeZone": "Europe/Istanbul",
+      "slotKey": "tr|2026-08-19T08:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/video/by-set/home_bathroom_essentials_a1/ordinary/by-channel/tr__TR__LunaCardsTurkce/IS__zlandaca/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck5-bathroom-approved-20260815/manifest.json",
+        "sha256": "c4dc4dad4428853af8e3188e18202284e384f95885dd80ecaa96a785fdc45da5"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__IS__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLYBgRmRuoiCg",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "İzlandaca A1: Everyday: kelime",
+        "description": "İzlandaca öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-16T13:18:52.171Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-5",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-5",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TR|IS",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_tr-TR-EmelNeural",
+        "supportLang": "TR"
+      },
+      "localSlotIndex": 1
+    }
+  ],
+  "campaignId": "yt-home_bathroom_essentials_a1-2026-08-16-f5882dee2c6a",
+  "manifestHash": "a1fb43a540287c915115bb055e9020c929af3cbd46c45979b179bfc30f76555c"
+}
