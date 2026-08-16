@@ -134,3 +134,83 @@ assert.equal(ordinaryRegistry.publications[0].readback?.privacyStatus, "public")
 assert.ok(!ordinaryRegistry.publications.some((row) => row.youtubeVideoId === "live-polyglot"));
 
 console.log("youtube publish state merge tests passed");
+
+const thumbnailRoot = fs.mkdtempSync(path.join(os.tmpdir(), "youtube-thumbnail-state-merge-test-"));
+const thumbnailArtifact = path.join(thumbnailRoot, "artifact");
+const thumbnailConfig = path.join(thumbnailRoot, "config");
+const thumbnailArtifactConfig = path.join(thumbnailArtifact, "config");
+fs.mkdirSync(thumbnailConfig, { recursive: true });
+fs.mkdirSync(thumbnailArtifactConfig, { recursive: true });
+
+const thumbnailTarget = {
+  setId: "test-deck",
+  supportLang: "VI",
+  targetLang: "KK",
+  videoType: "ordinary",
+  youtubeVideoId: "thumbnail-target",
+  thumbnailSet: false,
+  lastReadbackAt: "2026-08-16T12:00:00.000Z",
+  readback: { privacyStatus: "public", thumbnailStatus: "unknown" },
+};
+const unrelated = {
+  setId: "test-deck",
+  supportLang: "EN",
+  targetLang: "FR",
+  videoType: "ordinary",
+  youtubeVideoId: "unrelated-video",
+  thumbnailSet: true,
+  lastReadbackAt: "2026-08-16T12:30:00.000Z",
+  readback: { privacyStatus: "public", thumbnailStatus: "custom_set" },
+};
+fs.writeFileSync(path.join(thumbnailConfig, "youtube-published-videos.json"), `${JSON.stringify({
+  schemaVersion: 1,
+  publications: [thumbnailTarget, unrelated],
+}, null, 2)}\n`);
+fs.writeFileSync(path.join(thumbnailConfig, "youtube-polyglot-published-videos.json"), '{"schemaVersion":1,"publications":[]}\n');
+fs.writeFileSync(path.join(thumbnailArtifactConfig, "youtube-published-videos.json"), `${JSON.stringify({
+  schemaVersion: 1,
+  publications: [{
+    ...thumbnailTarget,
+    thumbnailSet: true,
+    thumbnailSource: "approved-tracked-jpg",
+    lastReadbackAt: "2026-08-16T12:44:00.000Z",
+  }, {
+    ...unrelated,
+    lastReadbackAt: "2026-07-01T00:00:00.000Z",
+    readback: { privacyStatus: "public", thumbnailStatus: "unknown" },
+  }, {
+    setId: "deleted-deck",
+    supportLang: "EN",
+    targetLang: "DE",
+    videoType: "ordinary",
+    youtubeVideoId: "stale-artifact-only",
+    thumbnailSet: true,
+  }],
+}, null, 2)}\n`);
+fs.mkdirSync(path.join(thumbnailArtifact, "outputs"), { recursive: true });
+fs.writeFileSync(path.join(thumbnailArtifact, "outputs", "youtube-thumbnail-ledger.jsonl"), `${JSON.stringify({
+  action: "youtube_set_video_thumbnail",
+  status: "custom_thumbnail_set",
+  videoId: "thumbnail-target",
+})}\n`);
+
+const thumbnailResult = spawnSync(process.execPath, [
+  "scripts/merge-youtube-publish-state.mjs",
+  `--repo-root=${thumbnailRoot}`,
+  `--artifact-dir=${thumbnailArtifact}`,
+  "--thumbnail-state-only",
+  "--summary=thumbnail-merge-summary.json",
+], { cwd: process.cwd(), encoding: "utf8" });
+assert.equal(thumbnailResult.status, 0, thumbnailResult.stderr || thumbnailResult.stdout);
+const thumbnailRegistry = JSON.parse(fs.readFileSync(path.join(thumbnailConfig, "youtube-published-videos.json"), "utf8"));
+const mergedThumbnailTarget = thumbnailRegistry.publications.find((row) => row.youtubeVideoId === "thumbnail-target");
+assert.equal(mergedThumbnailTarget.thumbnailSet, true);
+assert.equal(mergedThumbnailTarget.thumbnailSource, "approved-tracked-jpg");
+assert.equal(mergedThumbnailTarget.lastReadbackAt, "2026-08-16T12:44:00.000Z");
+assert.deepEqual(thumbnailRegistry.publications.find((row) => row.youtubeVideoId === "unrelated-video"), unrelated);
+assert.ok(!thumbnailRegistry.publications.some((row) => row.youtubeVideoId === "stale-artifact-only"));
+const thumbnailSummary = JSON.parse(fs.readFileSync(path.join(thumbnailRoot, "thumbnail-merge-summary.json"), "utf8"));
+assert.deepEqual(thumbnailSummary.filesChanged, ["config/youtube-published-videos.json"]);
+assert.equal(thumbnailSummary.publications.updated, 1);
+
+console.log("youtube thumbnail-only state merge tests passed");

@@ -67,7 +67,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: youtube-thumbnail-batch-set-${{ github.ref_name }}-${{ github.event.inputs.youtube_environment }}
+  group: youtube-thumbnail-batch-set-${{ github.ref_name }}
   cancel-in-progress: false
 
 jobs:
@@ -339,6 +339,7 @@ jobs:
           git pull --ff-only origin "$BRANCH_NAME"
           node scripts/merge-youtube-publish-state.mjs \
             --artifact-dir=.state-artifact \
+            --thumbnail-state-only \
             --summary=outputs/review/youtube-thumbnail-batch-state-merge-${GITHUB_RUN_ID}.json
           if git diff --quiet -- config/youtube-published-videos.json config/youtube-polyglot-published-videos.json config/youtube-channels.json; then
             echo "No thumbnail state changes to commit."
