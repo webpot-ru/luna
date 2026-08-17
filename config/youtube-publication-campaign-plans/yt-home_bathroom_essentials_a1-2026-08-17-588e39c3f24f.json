@@ -1,0 +1,887 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-17T12:57:46.411Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_bathroom_essentials_a1",
+  "inputs": {
+    "supports": "DE,TL",
+    "supportCount": 2,
+    "ordinarySupportCount": 2,
+    "polyglotSupportCount": 1,
+    "ordinaryPerChannel": 9,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "ordinary|home_bathroom_essentials_a1|DE|LV",
+      "ordinary|home_bathroom_essentials_a1|TL|IT",
+      "ordinary|home_bathroom_essentials_a1|TL|JA",
+      "ordinary|home_bathroom_essentials_a1|TL|KA",
+      "ordinary|home_bathroom_essentials_a1|TL|KK",
+      "ordinary|home_bathroom_essentials_a1|TL|KM",
+      "ordinary|home_bathroom_essentials_a1|TL|KN",
+      "ordinary|home_bathroom_essentials_a1|TL|KO",
+      "ordinary|home_bathroom_essentials_a1|TL|LO",
+      "ordinary|home_bathroom_essentials_a1|TL|LT",
+      "polyglot|home_bathroom_essentials_a1|TL|east_asia_core|69af08ca98ea|short_unverified"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_bathroom_essentials_a1-2026-08-17-630098eb982d",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_bathroom_essentials_a1-2026-08-17-630098eb982d",
+      "manifestHash": "466195e94a5e777593545eefd723e3a92b31b0470b029bdebf3909b5ef528b97",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-5",
+        "generatedAt": "2026-08-17T12:51:18.532Z",
+        "ageMinutes": 6.46465,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-7",
+        "generatedAt": "2026-08-17T12:51:20.677Z",
+        "ageMinutes": 6.4289,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "c1a7d5dafa3cd2aab420fa89f2eed6b66223d42c3198642e1716822fd73b69e8"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "3d771cb0424fa7a6c7cc3c5ec38152bc96ce3216b42a936a5377bc137704d698"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "a368ff576684f645f28d43c0b91cfa26a8eca93b163fb4bd4226957a7d0a68a9"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "c6a6ce648cab8aa76df206c34fa508026b4025835475a9948b785cbd71c61f0a"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "ddd939f2d5e45014410822df480e0025dc64cfc4a5bedf98ef0a6b82a0b21548"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_bathroom_essentials_a1.json",
+        "exists": true,
+        "sha256": "cf055a519034bfe99467a574f8681060b8a452f66e1633616e6b3b7ed08c10f7"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "7411d37b5bb0a70ac414def88445bc8c2caa4ac34b97613f146f53c33a423bfd"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "93aa79749938bcc9802f9de58fd6b0dbb6fb55c90b1a421524fdf7ff25c5551e"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 1,
+    "supportCount": 2,
+    "ordinaryCount": 10,
+    "polyglotCount": 1,
+    "assignmentCount": 11,
+    "firstPublishAt": "2026-08-19T09:30:00.000Z",
+    "lastPublishAt": "2026-08-21T00:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 11,
+    "existingPlaylistCount": 11,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-5": 1,
+      "youtube-7": 10
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 11,
+    "estimatedPlaylistItemInsertUnits": 550,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 550,
+    "byRoute": {
+      "youtube-5": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      },
+      "youtube-7": {
+        "estimatedVideoUploadCalls": 10,
+        "estimatedGeneralQuotaUnitsMaximum": 500
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "TL: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|DE|LV",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|DE|LV|de",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "DE",
+      "targetLang": "LV",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_de-DE-KatjaNeural",
+        "supportLang": "DE"
+      },
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-08-20T21:30:00.000Z",
+      "localDate": "2026-08-20",
+      "localTime": "23:30",
+      "timeZone": "Europe/Berlin",
+      "slotKey": "de|2026-08-20T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "DE__LV__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLUx8IiqxCvj8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Lettisch A1: Everyday: Wörter",
+        "description": "Wir lernen Lettisch. Lektionsthema: FlashcardsLuna. Hören Sie aufmerksam auf die muttersprachliche Aussprache und wiederholen Sie die Wörter in den Pausen. Am Ende erwartet Sie ein interaktiver Mini-Test! Übe Kartensätze kostenlos auf unserer Website",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-17T07:30:54.515Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-5",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-5",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|DE|LV",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TL|IT",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|IT|tl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TL",
+      "targetLang": "IT",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fil-PH-BlessicaNeural",
+        "supportLang": "TL"
+      },
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-19T09:30:00.000Z",
+      "localDate": "2026-08-19",
+      "localTime": "17:30",
+      "timeZone": "Asia/Manila",
+      "slotKey": "tl|2026-08-19T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TL__IT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL-4RMx8aFFeAkohjlF3lcEwCEHXIXUbcT",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Italian A1: bokabularyo at pagbigkas",
+        "description": "Mga video ng FlashcardsLuna para sa mga nagsasalita ng Filipino na nag-aaral ng Italian: flashcards, pagbigkas, mga pahinga para ulitin, at maiikling mini-test.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-17T07:30:54.515Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|IT",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TL|JA",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|JA|tl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TL",
+      "targetLang": "JA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fil-PH-BlessicaNeural",
+        "supportLang": "TL"
+      },
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-19T12:30:00.000Z",
+      "localDate": "2026-08-19",
+      "localTime": "20:30",
+      "timeZone": "Asia/Manila",
+      "slotKey": "tl|2026-08-19T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TL__JA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLPylDsl0EbEQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Japanese A1: bokabularyo at pagbigkas",
+        "description": "Mga video ng FlashcardsLuna para sa mga nagsasalita ng Filipino na nag-aaral ng Japanese: flashcards, pagbigkas, mga pahinga para ulitin, at maiikling mini-test.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-17T07:30:54.515Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|JA",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KA",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KA|tl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TL",
+      "targetLang": "KA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fil-PH-BlessicaNeural",
+        "supportLang": "TL"
+      },
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-19T15:30:00.000Z",
+      "localDate": "2026-08-19",
+      "localTime": "23:30",
+      "timeZone": "Asia/Manila",
+      "slotKey": "tl|2026-08-19T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TL__KA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLJ_SzeYyULzc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Georgian A1: bokabularyo at pagbigkas",
+        "description": "Mga video ng FlashcardsLuna para sa mga nagsasalita ng Filipino na nag-aaral ng Georgian: flashcards, pagbigkas, mga pahinga para ulitin, at maiikling mini-test.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-17T07:30:54.515Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KA",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KK",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KK|tl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TL",
+      "targetLang": "KK",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fil-PH-BlessicaNeural",
+        "supportLang": "TL"
+      },
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-20T00:30:00.000Z",
+      "localDate": "2026-08-20",
+      "localTime": "08:30",
+      "timeZone": "Asia/Manila",
+      "slotKey": "tl|2026-08-20T00:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "TL__KK__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLA0B-fUOmrBQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kazakh A1: bokabularyo at pagbigkas",
+        "description": "Mga video ng FlashcardsLuna para sa mga nagsasalita ng Filipino na nag-aaral ng Kazakh: flashcards, pagbigkas, mga pahinga para ulitin, at maiikling mini-test.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-17T07:30:54.515Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KK",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KM",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KM|tl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TL",
+      "targetLang": "KM",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fil-PH-BlessicaNeural",
+        "supportLang": "TL"
+      },
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-20T03:30:00.000Z",
+      "localDate": "2026-08-20",
+      "localTime": "11:30",
+      "timeZone": "Asia/Manila",
+      "slotKey": "tl|2026-08-20T03:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "TL__KM__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLFUllov1Bcgg",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Khmer A1: bokabularyo at pagbigkas",
+        "description": "Mga video ng FlashcardsLuna para sa mga nagsasalita ng Filipino na nag-aaral ng Khmer: flashcards, pagbigkas, mga pahinga para ulitin, at maiikling mini-test.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-17T07:30:54.515Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KM",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KN",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KN|tl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TL",
+      "targetLang": "KN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fil-PH-BlessicaNeural",
+        "supportLang": "TL"
+      },
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-20T06:30:00.000Z",
+      "localDate": "2026-08-20",
+      "localTime": "14:30",
+      "timeZone": "Asia/Manila",
+      "slotKey": "tl|2026-08-20T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "TL__KN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLUNnCaLvfWtc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kannada A1: bokabularyo at pagbigkas",
+        "description": "Mga video ng FlashcardsLuna para sa mga nagsasalita ng Filipino na nag-aaral ng Kannada: flashcards, pagbigkas, mga pahinga para ulitin, at maiikling mini-test.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-17T07:30:54.515Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KN",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KO",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KO|tl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TL",
+      "targetLang": "KO",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fil-PH-BlessicaNeural",
+        "supportLang": "TL"
+      },
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-20T09:30:00.000Z",
+      "localDate": "2026-08-20",
+      "localTime": "17:30",
+      "timeZone": "Asia/Manila",
+      "slotKey": "tl|2026-08-20T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TL__KO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLG7AtsZCWJ9o",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Korean A1: bokabularyo at pagbigkas",
+        "description": "Mga video ng FlashcardsLuna para sa mga nagsasalita ng Filipino na nag-aaral ng Korean: flashcards, pagbigkas, mga pahinga para ulitin, at maiikling mini-test.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-17T07:30:54.515Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|KO",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TL|LO",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|LO|tl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TL",
+      "targetLang": "LO",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fil-PH-BlessicaNeural",
+        "supportLang": "TL"
+      },
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-20T12:30:00.000Z",
+      "localDate": "2026-08-20",
+      "localTime": "20:30",
+      "timeZone": "Asia/Manila",
+      "slotKey": "tl|2026-08-20T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "TL__LO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLQ91CM07VvMI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Lao A1: bokabularyo at pagbigkas",
+        "description": "Mga video ng FlashcardsLuna para sa mga nagsasalita ng Filipino na nag-aaral ng Lao: flashcards, pagbigkas, mga pahinga para ulitin, at maiikling mini-test.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-17T07:30:54.515Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|LO",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_bathroom_essentials_a1|TL|LT",
+      "calendarAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|LT|tl",
+      "videoType": "ordinary",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TL",
+      "targetLang": "LT",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fil-PH-BlessicaNeural",
+        "supportLang": "TL"
+      },
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-20T15:30:00.000Z",
+      "localDate": "2026-08-20",
+      "localTime": "23:30",
+      "timeZone": "Asia/Manila",
+      "slotKey": "tl|2026-08-20T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "TL__LT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLEUsDua-hqYk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Lithuanian A1: bokabularyo at pagbigkas",
+        "description": "Mga video ng FlashcardsLuna para sa mga nagsasalita ng Filipino na nag-aaral ng Lithuanian: flashcards, pagbigkas, mga pahinga para ulitin, at maiikling mini-test.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-17T07:30:54.515Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bathroom_essentials_a1|TL|LT",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "polyglot|home_bathroom_essentials_a1|TL|east_asia_core|69af08ca98ea|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_bathroom_essentials_a1|TL|east_asia_core|short_unverified|tl",
+      "videoType": "polyglot",
+      "setId": "home_bathroom_essentials_a1",
+      "supportLang": "TL",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_bathroom_essentials_a1:TL:east_asia_core:69af08ca98ea:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fil-PH-BlessicaNeural",
+        "supportLang": "TL"
+      },
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-21T00:30:00.000Z",
+      "localDate": "2026-08-21",
+      "localTime": "08:30",
+      "timeZone": "Asia/Manila",
+      "slotKey": "tl|2026-08-21T00:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__TL__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLQbT7ijCp6tA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: Chinese, Japanese, Korean",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Chinese, Japanese, Korean. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-17T07:30:54.515Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "polyglot|home_bathroom_essentials_a1|TL|east_asia_core|69af08ca98ea|short_unverified",
+      "localSlotIndex": 0
+    }
+  ],
+  "campaignId": "yt-home_bathroom_essentials_a1-2026-08-17-588e39c3f24f",
+  "manifestHash": "203cb2943743dcca0aaf4e5663f7caab3fc54e2b9e6fbdeff35f063172f1f576"
+}
