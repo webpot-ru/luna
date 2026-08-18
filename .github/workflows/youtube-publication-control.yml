@@ -160,10 +160,14 @@ jobs:
             if (outside.length) throw new Error(`campaign_supports outside selected audit_routes: ${outside.join(",")}`);
           }
           const output = process.env.GITHUB_OUTPUT;
-          fs.appendFileSync(output, `matrix=${JSON.stringify({ include: selected })}\n`);
-          fs.appendFileSync(output, `route_count=${selected.length}\n`);
-          fs.appendFileSync(output, `route_keys=${selected.map((row) => row.route).join(",")}\n`);
-          fs.appendFileSync(output, `all_routes=${requested.toUpperCase() === "ALL"}\n`);
+          fs.appendFileSync(output, `matrix=${JSON.stringify({ include: selected })}
+`);
+          fs.appendFileSync(output, `route_count=${selected.length}
+`);
+          fs.appendFileSync(output, `route_keys=${selected.map((row) => row.route).join(",")}
+`);
+          fs.appendFileSync(output, `all_routes=${requested.toUpperCase() === "ALL"}
+`);
           NODE
 
   audit-route:
@@ -425,4 +429,48 @@ jobs:
           git commit -m "Refresh YouTube publication snapshot"
           git push origin "HEAD:$BRANCH_NAME"
           git status --short --branch --untracked-files=all
-\n\n  claim-campaign:\n    needs: aggregate\n    if: ${{ github.event.inputs.claim_campaign == \047true\047 && needs.aggregate.result == \047success\047 }}\n    runs-on: ubuntu-latest\n    permissions:\n      contents: write\n    concurrency:\n      group: youtube-publication-claim-${{ github.event.inputs.claim_target_branch }}\n      cancel-in-progress: false\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: ${{ github.event.inputs.claim_target_branch }}\n          fetch-depth: 0\n      - uses: actions/setup-node@v4\n        with:\n          node-version: "20"\n      - run: npm ci || npm install\n      - uses: actions/download-artifact@v4\n        with:\n          name: youtube-publication-control-${{ github.event.inputs.set_id }}-all-routes-${{ github.run_id }}\n          path: .claim-artifact\n      - name: Claim the exact fresh no-spend plan\n        shell: bash\n        env:\n          TARGET_BRANCH: ${{ github.event.inputs.claim_target_branch }}\n          CLAIM_CONFIRM: ${{ github.event.inputs.claim_confirm }}\n        run: |\n          set -euo pipefail\n          test "$CLAIM_CONFIRM" = "CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN"\n          test -n "$TARGET_BRANCH"\n          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"\n          test -s .claim-artifact/youtube-publication-campaign-plan.json\n          cp .claim-artifact/youtube-publication-campaign-plan.json outputs/youtube-publication-campaign-plan.json\n          node -e \047const p=require("./outputs/youtube-publication-campaign-plan.json"); if(p.summary?.applyReady!==true || p.blockers?.length) process.exit(1);\047\n          node scripts/claim-youtube-publication-campaign.mjs --manifest=outputs/youtube-publication-campaign-plan.json --apply --confirm=CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN --json\n          git diff --check\n          git add config/youtube-publication-campaigns.json config/youtube-publish-calendar.json config/youtube-publication-campaign-plans\n          git diff --cached --quiet && { echo "No claim changes were produced"; exit 1; }\n          git config user.name "github-actions[bot]"\n          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"\n          git commit -m "Claim YouTube publication campaign from control ${{ github.run_id }}"\n          git push origin "HEAD:refs/heads/$TARGET_BRANCH"\n
+
+
+  claim-campaign:
+    needs: aggregate
+    if: ${{ github.event.inputs.claim_campaign == 'true' && needs.aggregate.result == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: youtube-publication-claim-${{ github.event.inputs.claim_target_branch }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.claim_target_branch }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci || npm install
+      - uses: actions/download-artifact@v4
+        with:
+          name: youtube-publication-control-${{ github.event.inputs.set_id }}-all-routes-${{ github.run_id }}
+          path: .claim-artifact
+      - name: Claim the exact fresh no-spend plan
+        shell: bash
+        env:
+          TARGET_BRANCH: ${{ github.event.inputs.claim_target_branch }}
+          CLAIM_CONFIRM: ${{ github.event.inputs.claim_confirm }}
+        run: |
+          set -euo pipefail
+          test "$CLAIM_CONFIRM" = "CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN"
+          test -n "$TARGET_BRANCH"
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test -s .claim-artifact/youtube-publication-campaign-plan.json
+          cp .claim-artifact/youtube-publication-campaign-plan.json outputs/youtube-publication-campaign-plan.json
+          node -e 'const p=require("./outputs/youtube-publication-campaign-plan.json"); if(p.summary?.applyReady!==true || p.blockers?.length) process.exit(1);'
+          node scripts/claim-youtube-publication-campaign.mjs --manifest=outputs/youtube-publication-campaign-plan.json --apply --confirm=CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN --json
+          git diff --check
+          git add config/youtube-publication-campaigns.json config/youtube-publish-calendar.json config/youtube-publication-campaign-plans
+          git diff --cached --quiet && { echo "No claim changes were produced"; exit 1; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Claim YouTube publication campaign from control ${{ github.run_id }}"
+          git push origin "HEAD:refs/heads/$TARGET_BRANCH"
