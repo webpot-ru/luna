@@ -459,7 +459,11 @@ jobs:
           test -n "$TARGET_BRANCH"
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
           test -s .claim-artifact/youtube-publication-campaign-plan.json
+          test -s .claim-artifact/youtube-publication-snapshot.json
+          test -s .claim-artifact/youtube-playlist-discovery-snapshot.json
           cp .claim-artifact/youtube-publication-campaign-plan.json outputs/youtube-publication-campaign-plan.json
+          cp .claim-artifact/youtube-publication-snapshot.json outputs/youtube-publication-snapshot.json
+          cp .claim-artifact/youtube-playlist-discovery-snapshot.json outputs/youtube-playlist-discovery-snapshot.json
           node -e 'const p=require("./outputs/youtube-publication-campaign-plan.json"); if(p.summary?.applyReady!==true || p.blockers?.length) process.exit(1);'
           node scripts/claim-youtube-publication-campaign.mjs --manifest=outputs/youtube-publication-campaign-plan.json --apply --confirm=CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN --json
           git diff --check
