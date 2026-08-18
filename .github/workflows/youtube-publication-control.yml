@@ -1,0 +1,414 @@
+name: YouTube Publication Control
+
+on:
+  workflow_dispatch:
+    inputs:
+      set_id:
+        description: "Deck set ID to reconcile across all 51 channels."
+        required: true
+        default: "home_kitchen_cooking_actions_a1_a2"
+      targets:
+        description: "Optional target-language subset. Empty means the full canonical target set."
+        required: false
+        default: ""
+      max_pages:
+        description: "Upload-playlist pages per channel (50 videos each)."
+        required: true
+        default: "10"
+      persist_snapshot:
+        description: "Commit only the generated publication snapshot/map to this branch after a complete read-only audit."
+        required: true
+        default: false
+        type: boolean
+      audit_routes:
+        description: "Routes to audit: ALL (default) or an explicit comma-separated subset such as youtube-5,youtube-6."
+        required: true
+        default: "ALL"
+      audit_supports:
+        description: "Read-only only: optional exact support subset within explicit audit_routes, for example HY. Empty keeps every support on each selected route."
+        required: false
+        default: ""
+      campaign_ordinary_per_channel:
+        description: "Optional no-spend campaign plan: next ordinary videos per physical channel; 0 disables campaign planning."
+        required: true
+        default: "0"
+      campaign_allow_partial_ordinary_tail:
+        description: "Allow a final ordinary tail campaign to take fewer than the requested count only where the deck has no more unclaimed assignments."
+        required: true
+        default: false
+        type: boolean
+      campaign_allow_partial_polyglot_tail:
+        description: "Allow an all-tail campaign to take every remaining Polyglot bundle per channel, including fewer than the maximum."
+        required: true
+        default: false
+        type: boolean
+      campaign_allow_partial_route_quota_tail:
+        description: "Keep every possible tail below each route's daily video-upload cap and record only the unavoidable next-day remainder."
+        required: true
+        default: false
+        type: boolean
+      campaign_max_video_uploads_per_route:
+        description: "Maximum videos.insert rows per API project for this quota day."
+        required: true
+        default: "100"
+      campaign_polyglot_per_channel:
+        description: "Optional no-spend campaign plan: next full Polyglot videos per physical channel; 0 disables campaign planning."
+        required: true
+        default: "0"
+      campaign_supports:
+        description: "Canonical support subset for the optional campaign plan and its playlist preflight. ALL checks every physical channel."
+        required: true
+        default: "ALL"
+      campaign_schedule_start_date:
+        description: "Optional YYYY-MM-DD hint; the planner still fills earlier empty policy slots first."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  select-routes:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.select.outputs.matrix }}
+      route_count: ${{ steps.select.outputs.route_count }}
+      route_keys: ${{ steps.select.outputs.route_keys }}
+      all_routes: ${{ steps.select.outputs.all_routes }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: select
+        name: Validate and select audit routes
+        shell: bash
+        env:
+          AUDIT_ROUTES: ${{ github.event.inputs.audit_routes }}
+          AUDIT_SUPPORTS: ${{ github.event.inputs.audit_supports }}
+          CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
+          PLAN_REQUESTED: ${{ github.event.inputs.campaign_ordinary_per_channel != '0' || github.event.inputs.campaign_polyglot_per_channel != '0' }}
+          PERSIST_SNAPSHOT: ${{ github.event.inputs.persist_snapshot }}
+        run: |
+          node scripts/check-youtube-api-project-routing.mjs
+          node <<'NODE'
+          const fs = require("node:fs");
+          const routing = JSON.parse(fs.readFileSync("config/youtube-api-project-routing.json", "utf8"));
+          const channels = JSON.parse(fs.readFileSync("config/youtube-channels.json", "utf8")).channels || [];
+          const channelByKey = new Map(channels.map((channel) => [String(channel.key || "").toLowerCase(), channel]));
+          const canonicalSupport = (channelKey) => {
+            if (channelKey === "en") return "EN";
+            if (channelKey === "es") return "ES-419";
+            if (channelKey === "pt") return "PT-BR";
+            const channel = channelByKey.get(channelKey);
+            const supports = channel?.supportLangs || [];
+            if (supports.length !== 1) throw new Error(`cannot resolve canonical support for channel ${channelKey}`);
+            return String(supports[0]).toUpperCase();
+          };
+          const routes = (routing.projects || []).map((project) => ({
+            route: project.key,
+            environment: project.githubEnvironment,
+            publicationReady: project.publicationReady === true,
+            publicationBlockedReason: String(project.publicationBlockedReason || "publicationReady is false").trim(),
+            supports: (project.supportChannelKeys || []).map((key) => canonicalSupport(String(key).toLowerCase())).join(","),
+          }));
+          if (!routes.length || routes.some((row) => !row.route || !row.environment || !row.supports)) {
+            throw new Error("route config is incomplete");
+          }
+          const readyRoutes = routes.filter((row) => row.publicationReady);
+          if (!readyRoutes.length) throw new Error("no publication-ready routes are configured");
+          const requested = String(process.env.AUDIT_ROUTES || "ALL").trim();
+          const keys = requested.toUpperCase() === "ALL"
+            ? readyRoutes.map((row) => row.route)
+            : [...new Set(requested.split(",").map((value) => value.trim()).filter(Boolean))];
+          const invalid = keys.filter((key) => !routes.some((row) => row.route === key));
+          if (!keys.length || invalid.length) throw new Error(`invalid audit_routes: ${invalid.join(",") || requested}`);
+          const blocked = keys.map((key) => routes.find((row) => row.route === key)).filter((row) => !row.publicationReady);
+          if (blocked.length) throw new Error(`audit_routes include publication-blocked route(s): ${blocked.map((row) => `${row.route} (${row.publicationBlockedReason})`).join(", ")}`);
+          let selected = routes.filter((row) => keys.includes(row.route));
+          const auditSupports = [...new Set(String(process.env.AUDIT_SUPPORTS || "").split(",").map((value) => value.trim().toUpperCase()).filter(Boolean))];
+          if (auditSupports.length) {
+            if (requested.toUpperCase() === "ALL") throw new Error("audit_supports requires explicit audit_routes; ALL would hide route coverage.");
+            if (process.env.PLAN_REQUESTED === "true" || process.env.PERSIST_SNAPSHOT === "true") throw new Error("audit_supports is evidence-only and cannot plan or persist a snapshot.");
+            const allowed = new Set(selected.flatMap((row) => row.supports.split(",")));
+            const outside = auditSupports.filter((support) => !allowed.has(support));
+            if (outside.length) throw new Error(`audit_supports outside selected audit_routes: ${outside.join(",")}`);
+            selected = selected.map((row) => ({ ...row, supports: row.supports.split(",").filter((support) => auditSupports.includes(support)).join(",") }))
+              .filter((row) => row.supports);
+            if (!selected.length) throw new Error("audit_supports selected no route supports");
+          }
+          if (process.env.PERSIST_SNAPSHOT === "true" && selected.length < routes.length) {
+            throw new Error("persist_snapshot requires every configured route to be publication-ready and selected; do not overwrite the global snapshot with partial route coverage");
+          }
+          if (process.env.PLAN_REQUESTED === "true" && selected.length < routes.length) {
+            if (String(process.env.CAMPAIGN_SUPPORTS || "").toUpperCase() === "ALL") {
+              throw new Error("route-scoped campaign planning requires an explicit campaign_supports list");
+            }
+            const allowed = new Set(selected.flatMap((row) => row.supports.split(",")));
+            const supports = String(process.env.CAMPAIGN_SUPPORTS || "").split(",").map((value) => value.trim().toUpperCase()).filter(Boolean);
+            const outside = supports.filter((support) => !allowed.has(support));
+            if (outside.length) throw new Error(`campaign_supports outside selected audit_routes: ${outside.join(",")}`);
+          }
+          const output = process.env.GITHUB_OUTPUT;
+          fs.appendFileSync(output, `matrix=${JSON.stringify({ include: selected })}\n`);
+          fs.appendFileSync(output, `route_count=${selected.length}\n`);
+          fs.appendFileSync(output, `route_keys=${selected.map((row) => row.route).join(",")}\n`);
+          fs.appendFileSync(output, `all_routes=${requested.toUpperCase() === "ALL"}\n`);
+          NODE
+
+  audit-route:
+    needs: select-routes
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.select-routes.outputs.matrix) }}
+    runs-on: ubuntu-latest
+    environment: ${{ matrix.environment }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci || npm install
+      - name: Restore route OAuth bundle
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${YOUTUBE_OAUTH_BUNDLE_TGZ_B64:-}"
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+      - name: Read live publications and build route control report
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          TARGETS: ${{ github.event.inputs.targets }}
+          MAX_PAGES: ${{ github.event.inputs.max_pages }}
+          SUPPORTS: ${{ matrix.supports }}
+          ROUTE: ${{ matrix.route }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORTS" --max-pages "$MAX_PAGES" --include-video-status --output="outputs/youtube-live-publications-$ROUTE.json" --json
+          # This is an evidence collection workflow. Drift is recorded in the
+          # control report and blocks campaign planning, but must not discard a
+          # complete API readback or prevent its all-route snapshot from being built.
+          CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORTS" "--live-audit=outputs/youtube-live-publications-$ROUTE.json" "--output=outputs/youtube-publication-control-$ROUTE.json")
+          if [ -n "$TARGETS" ]; then CONTROL_ARGS+=("--targets=$TARGETS"); fi
+          npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
+      - name: Read selected campaign playlists for stable identity discovery
+        if: ${{ github.event.inputs.campaign_ordinary_per_channel != '0' || github.event.inputs.campaign_polyglot_per_channel != '0' }}
+        env:
+          SUPPORTS: ${{ matrix.supports }}
+          CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
+          ROUTE: ${{ matrix.route }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$CAMPAIGN_SUPPORTS" = "ALL" ]; then
+            SELECTED_SUPPORTS="$SUPPORTS"
+          else
+            SELECTED_SUPPORTS="$(node -e '
+              const requested = new Set(process.argv[1].split(",").map((value) => value.trim().toUpperCase()).filter(Boolean));
+              const routeSupports = process.argv[2].split(",").map((value) => value.trim().toUpperCase()).filter(Boolean);
+              process.stdout.write(routeSupports.filter((support) => requested.has(support)).join(","));
+            ' "$CAMPAIGN_SUPPORTS" "$SUPPORTS")"
+          fi
+          npm run audit:youtube-playlists -- \
+            --support="$SELECTED_SUPPORTS" \
+            --allow-empty \
+            --route-key="$ROUTE" \
+            --max-playlist-pages=20 \
+            --max-item-pages=1000 \
+            --output="outputs/youtube-playlist-discovery-$ROUTE.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-publication-control-${{ github.event.inputs.set_id }}-${{ matrix.route }}-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-live-publications-${{ matrix.route }}.json
+            outputs/youtube-publication-control-${{ matrix.route }}.json
+            outputs/youtube-playlist-discovery-${{ matrix.route }}.json
+
+  aggregate:
+    needs: [select-routes, audit-route]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: youtube-publication-control-${{ github.event.inputs.set_id }}-*-${{ github.run_id }}
+          path: .control-artifacts
+      - name: Build all-route report
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          PLAN_REQUESTED: ${{ github.event.inputs.campaign_ordinary_per_channel != '0' || github.event.inputs.campaign_polyglot_per_channel != '0' }}
+          CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
+          EXPECTED_ROUTE_COUNT: ${{ needs.select-routes.outputs.route_count }}
+          EXPECTED_ROUTE_KEYS: ${{ needs.select-routes.outputs.route_keys }}
+          ALL_ROUTES: ${{ needs.select-routes.outputs.all_routes }}
+        run: |
+          set -euo pipefail
+          MERGE_ARGS=(
+            "--input=.control-artifacts"
+            "--expected-routes=$EXPECTED_ROUTE_COUNT"
+            "--expected-route-keys=$EXPECTED_ROUTE_KEYS"
+            "--source-run=$SET_ID:$EXPECTED_ROUTE_KEYS:${GITHUB_RUN_ID}"
+            "--output=outputs/youtube-publication-control-all-routes.json"
+            "--markdown=outputs/youtube-publication-control-all-routes.md"
+          )
+          if [ "$ALL_ROUTES" = "true" ]; then MERGE_ARGS+=("--all-routes"); fi
+          npm run merge:youtube-publication-control -- "${MERGE_ARGS[@]}"
+          if jq -e '.summary.complete == true' outputs/youtube-publication-control-all-routes.json >/dev/null; then
+            npm run build:youtube-publication-snapshot -- \
+              --report=outputs/youtube-publication-control-all-routes.json \
+              --output=outputs/youtube-publication-snapshot.json \
+              --markdown=outputs/youtube-publication-map.md
+          else
+            echo "::warning::All-route audit is incomplete; refusing to build or persist a durable snapshot."
+          fi
+          if [ "$PLAN_REQUESTED" = "true" ]; then
+            npm run merge:youtube-playlist-discovery -- \
+              --input=.control-artifacts \
+              --expected-routes="$EXPECTED_ROUTE_COUNT" \
+              --supports="$CAMPAIGN_SUPPORTS" \
+              --output=outputs/youtube-playlist-discovery-snapshot.json
+          fi
+      - name: Build one no-spend immutable campaign plan from the same live evidence
+        if: ${{ github.event.inputs.campaign_ordinary_per_channel != '0' || github.event.inputs.campaign_polyglot_per_channel != '0' }}
+        shell: bash
+        env:
+          SET_ID: ${{ github.event.inputs.set_id }}
+          ORDINARY_PER_CHANNEL: ${{ github.event.inputs.campaign_ordinary_per_channel }}
+          ALLOW_PARTIAL_ORDINARY_TAIL: ${{ github.event.inputs.campaign_allow_partial_ordinary_tail }}
+          POLYGLOT_PER_CHANNEL: ${{ github.event.inputs.campaign_polyglot_per_channel }}
+          ALLOW_PARTIAL_POLYGLOT_TAIL: ${{ github.event.inputs.campaign_allow_partial_polyglot_tail }}
+          ALLOW_PARTIAL_ROUTE_QUOTA_TAIL: ${{ github.event.inputs.campaign_allow_partial_route_quota_tail }}
+          MAX_VIDEO_UPLOADS_PER_ROUTE: ${{ github.event.inputs.campaign_max_video_uploads_per_route }}
+          CAMPAIGN_SUPPORTS: ${{ github.event.inputs.campaign_supports }}
+          START_DATE: ${{ github.event.inputs.campaign_schedule_start_date }}
+        run: |
+          set -euo pipefail
+          test -s outputs/youtube-publication-snapshot.json
+          test -s outputs/youtube-playlist-discovery-snapshot.json
+          DECK_PATH="data/decks/${SET_ID}.json"
+          if [ ! -s "$DECK_PATH" ]; then
+            mkdir -p data/decks
+            FILE_ID="$(node -e '
+              const fs = require("fs");
+              const mapping = fs.existsSync("data/deck-sources.json")
+                ? JSON.parse(fs.readFileSync("data/deck-sources.json", "utf8"))
+                : {};
+              process.stdout.write(String(mapping[process.env.SET_ID] || ""));
+            ')"
+            if [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
+              curl -c /tmp/cookies -sL "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o /tmp/confirm.html
+              CONFIRM=$(grep -o 'confirm=[^&" ]*' /tmp/confirm.html | head -n1 | cut -d= -f2 || true)
+              if [ -n "$CONFIRM" ]; then
+                curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&confirm=${CONFIRM}&id=${FILE_ID}" -o "$DECK_PATH"
+              else
+                curl -Lb /tmp/cookies "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "$DECK_PATH"
+              fi
+            fi
+          fi
+          if [ ! -s "$DECK_PATH" ]; then
+            mkdir -p data/decks
+            HISTORICAL_COMMIT=""
+            while IFS= read -r CANDIDATE; do
+              if git cat-file -e "${CANDIDATE}:${DECK_PATH}" 2>/dev/null; then
+                HISTORICAL_COMMIT="$CANDIDATE"
+                break
+              fi
+            done < <(git log --all --format=%H -- "$DECK_PATH")
+            if [ -n "$HISTORICAL_COMMIT" ]; then
+              git show "${HISTORICAL_COMMIT}:${DECK_PATH}" > "$DECK_PATH"
+            fi
+          fi
+          test -s "$DECK_PATH"
+          ARGS=(
+            "--set=$SET_ID"
+            "--supports=$CAMPAIGN_SUPPORTS"
+            "--ordinary-per-channel=$ORDINARY_PER_CHANNEL"
+            "--polyglot-per-channel=$POLYGLOT_PER_CHANNEL"
+            "--min-future-minutes=90"
+            "--max-snapshot-age-minutes=30"
+            "--snapshot=outputs/youtube-publication-snapshot.json"
+            "--playlist-discovery=outputs/youtube-playlist-discovery-snapshot.json"
+            "--output=outputs/youtube-publication-campaign-plan.json"
+            --json
+          )
+          if [ -n "$START_DATE" ]; then ARGS+=("--start-date=$START_DATE"); fi
+          if [ "$ALLOW_PARTIAL_ORDINARY_TAIL" = "true" ]; then ARGS+=("--allow-partial-ordinary-tail"); fi
+          if [ "$ALLOW_PARTIAL_POLYGLOT_TAIL" = "true" ]; then ARGS+=("--allow-partial-polyglot-tail"); fi
+          if [ "$ALLOW_PARTIAL_ROUTE_QUOTA_TAIL" = "true" ]; then
+            ARGS+=("--allow-partial-route-quota-tail" "--max-video-uploads-per-route=$MAX_VIDEO_UPLOADS_PER_ROUTE")
+          fi
+          npm run plan:youtube-publication-campaign -- "${ARGS[@]}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-publication-control-${{ github.event.inputs.set_id }}-all-routes-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-publication-control-all-routes.json
+            outputs/youtube-publication-control-all-routes.md
+            outputs/youtube-publication-snapshot.json
+            outputs/youtube-publication-map.md
+            outputs/youtube-playlist-discovery-snapshot.json
+            outputs/youtube-publication-campaign-plan.json
+
+  persist-snapshot:
+    needs: aggregate
+    if: ${{ github.event.inputs.persist_snapshot == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: youtube-publication-snapshot-${{ github.ref_name }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          name: youtube-publication-control-${{ github.event.inputs.set_id }}-all-routes-${{ github.run_id }}
+          path: .snapshot-artifact
+      - name: Persist generated snapshot only
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          cp .snapshot-artifact/youtube-publication-snapshot.json config/youtube-publication-snapshot.json
+          cp .snapshot-artifact/youtube-publication-map.md docs/youtube-publication-map.md
+          if test -s .snapshot-artifact/youtube-playlist-discovery-snapshot.json; then
+            cp .snapshot-artifact/youtube-playlist-discovery-snapshot.json config/youtube-playlist-discovery-snapshot.json
+          fi
+          git status --short --branch --untracked-files=all
+          git diff --name-status
+          git add config/youtube-publication-snapshot.json docs/youtube-publication-map.md
+          if test -s .snapshot-artifact/youtube-playlist-discovery-snapshot.json; then
+            git add config/youtube-playlist-discovery-snapshot.json
+          fi
+          git diff --cached --name-status
+          if git diff --cached --quiet; then
+            echo "Publication snapshot is unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Refresh YouTube publication snapshot"
+          git push origin "HEAD:$BRANCH_NAME"
+          git status --short --branch --untracked-files=all
