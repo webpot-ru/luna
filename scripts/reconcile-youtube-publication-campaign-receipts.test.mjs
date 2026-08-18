@@ -158,4 +158,68 @@ const recoveredCalendar = JSON.parse(fs.readFileSync(calendar, "utf8")).reservat
 assert.equal(recoveredCalendar.youtubeVideoId, "video-lost");
 assert.equal(recoveredCalendar.status, "campaign_upload_accepted_reconciliation_required");
 
+const preReconciledCampaignRegistry = write("campaigns-pre-reconciled.json", {
+  campaigns: [{
+    campaignId,
+    manifestHash,
+    status: "reconciliation_required",
+    assignments: [accepted, lost],
+    assignmentKeys: [accepted.assignmentKey, lost.assignmentKey],
+  }],
+});
+const preReconciledCalendar = write("calendar-pre-reconciled.json", { reservations: [accepted, lost].map((row) => ({
+  ...row,
+  campaignId,
+  campaignManifestHash: manifestHash,
+  youtubeVideoId: row.assignmentKey === lost.assignmentKey ? "video-lost" : row.youtubeVideoId,
+  status: "campaign_upload_accepted",
+})) });
+const preReconciledOrdinaryRegistry = write("ordinary-pre-reconciled.json", { publications: [
+  {
+    ...accepted,
+    videoType: undefined,
+    campaignId,
+    campaignManifestHash: manifestHash,
+    thumbnailSet: true,
+    youtubePlaylistId: "playlist-en",
+    playlistItemId: "item-en",
+  },
+  {
+    ...lost,
+    youtubeVideoId: "video-lost",
+    youtubeVideoUrl: "https://www.youtube.com/watch?v=video-lost",
+    campaignId,
+    campaignManifestHash: manifestHash,
+    thumbnailSet: false,
+    youtubePlaylistId: "playlist-es",
+    playlistItemId: "",
+    needsPlaylistInsert: true,
+    needsThumbnailPermission: true,
+    videoType: undefined,
+  },
+] });
+const preReconciledControl = write("control-pre-reconciled.json", {
+  generatedAt: "2026-08-16T04:34:18.361Z",
+  summary: { complete: true, paginationComplete: true, videoStatusReadbackComplete: true },
+  blockers: [],
+  publications: [{ ...liveAccepted }, { ...liveLost, durableRegistryPresent: true }],
+});
+const preReconciled = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/reconcile-youtube-publication-campaign-receipts.mjs"),
+  `--campaign-id=${campaignId}`,
+  `--manifest-hash=${manifestHash}`,
+  `--control-report=${preReconciledControl}`,
+  `--finalizer-report=${finalizer}`,
+  `--campaign-registry=${preReconciledCampaignRegistry}`,
+  `--calendar=${preReconciledCalendar}`,
+  `--ordinary-registry=${preReconciledOrdinaryRegistry}`,
+  `--polyglot-registry=${polyglotRegistry}`,
+  `--lost-receipt-assignment-key=${lost.assignmentKey}`,
+  "--lost-receipt-video-id=video-lost",
+  "--confirm=RECONCILE_LOST_YOUTUBE_UPLOAD_RECEIPT",
+  "--apply",
+], { encoding: "utf8" });
+assert.equal(preReconciled.status, 0, preReconciled.stderr || preReconciled.stdout);
+assert.equal(JSON.parse(preReconciled.stdout).lostReceiptRecoveredCount, 1);
+
 console.log("youtube lost receipt reconciliation tests passed");
