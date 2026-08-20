@@ -1,3 +1,4 @@
+- 2026-08-20 Deck #6 cover package includes the confirmed ZH custom-thumbnail channel; final reviewed count is `144` ordinary + `16` Polyglot (`160` total) for `16` confirmed custom-thumbnail supports.
 - 2026-08-20 Deck #6 cover package is prepared and reviewed: exact next 9 ordinary + 1 Polyglot for each of 15 confirmed custom-thumbnail supports (`135` ordinary + `15` Polyglot), deterministic overlays only, no YouTube writes.
 - 2026-08-20 Deck #6 `Bedroom Basics` source is mapped to Drive JSON `1fDx4nn3aKk_R5R0tZ6dUWfHSYkBjm5su`; the approved Bedroom cover base is registered for deterministic ordinary/Polyglot overlays. Publication planning remains separate until a fresh control produces the exact immutable campaign.
 # Project State
