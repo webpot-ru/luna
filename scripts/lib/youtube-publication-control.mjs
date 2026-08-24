@@ -591,6 +591,16 @@ export function buildPublicationControlReport({
       supports: (liveAudit?.supportReports || []).filter((row) => row.paginationComplete !== true).map((row) => canonicalSupportCode(row.supportLang)),
     }]
     : [];
+  const liveUploadPlaylistBlockers = (liveAudit?.supportReports || [])
+    .filter((row) => row.playlistNotFound === true)
+    .map((row) => ({
+      type: "live_upload_playlist_not_found",
+      supportLang: canonicalSupportCode(row.supportLang),
+      channelKey: row.channelKey || "",
+      youtubeChannelId: row.youtubeChannelId || "",
+      uploadsPlaylistId: row.uploadsPlaylistId || row.playlistError?.playlistId || "",
+      reason: row.playlistError?.reason || "playlistNotFound",
+    }));
   const liveStatusBlockers = statusNotReturnedRows.map((row) => ({
     type: "live_video_status_not_returned",
     youtubeVideoId: row.youtubeVideoId || "",
@@ -650,6 +660,7 @@ export function buildPublicationControlReport({
     ...polyglotBundleMismatches.map((item) => ({ type: "polyglot_bundle_target_mismatch", ...item })),
     ...liveStatusBlockers,
     ...unclassifiedUploadBlockers,
+    ...liveUploadPlaylistBlockers,
     ...liveAuditPaginationBlockers,
   ];
   const dayGaps = calendarDayGaps(futureCalendarRows, gapStartDateByChannel);

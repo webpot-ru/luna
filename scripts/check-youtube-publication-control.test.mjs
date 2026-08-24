@@ -41,6 +41,24 @@ const healthy = buildPublicationControlReport({
 assert.equal(healthy.summary.healthy, true);
 assert.deepEqual(healthy.tails.map((row) => row.targetLang), ["FR"]);
 
+const missingUploadsPlaylist = buildPublicationControlReport({
+  ...base,
+  liveAudit: {
+    supportReports: [{
+      supportLang: "EN",
+      channelKey: "en",
+      youtubeChannelId: "channel-en",
+      uploadsPlaylistId: "UU-deleted",
+      playlistNotFound: true,
+      playlistError: { playlistId: "UU-deleted", reason: "playlistNotFound" },
+      matchedPublications: [],
+    }],
+  },
+  requireCompleteLiveAudit: true,
+});
+assert.ok(missingUploadsPlaylist.blockers.some((item) => item.type === "live_upload_playlist_not_found"));
+assert.ok(missingUploadsPlaylist.blockers.some((item) => item.type === "live_audit_pagination_incomplete"));
+
 const liveDuplicate = buildPublicationControlReport({
   ...base,
   ordinaryRegistry: { publications: [canonical] },
