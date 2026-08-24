@@ -1068,6 +1068,19 @@ export function verifyManifestSourceFingerprints(manifest) {
     const current = fileFingerprint(fingerprint.path, {
       optional: !fingerprint.exists || key === "campaignRegistry" || key === "offlineDeck",
     });
+    // A read-only control may fingerprint an immutable deck downloaded from
+    // the configured Drive source. The claim branch intentionally does not
+    // commit that source file; the apply preflight downloads it again and
+    // verifies the exact SHA-256 before any metadata, render, TTS or YouTube
+    // work. Keep the claim gate strict for a present/mismatched local file,
+    // but do not reject a missing local copy when this Drive-backed contract
+    // is explicit in the plan evidence.
+    const driveBackedOfflineDeck = key === "offlineDeck"
+      && fingerprint.exists === true
+      && !current.exists
+      && manifest.evidence?.deckSource?.mode === "verified_drive_with_local_fingerprint"
+      && manifest.evidence?.deckSource?.driveFileIdConfigured === true;
+    if (driveBackedOfflineDeck) continue;
     if (current.exists !== fingerprint.exists || current.sha256 !== fingerprint.sha256) {
       mismatches.push({ key, planned: fingerprint, current });
     }
