@@ -84,6 +84,27 @@ assert.equal(isRetryableYoutubeReadStatus(401), false);
 }
 
 {
+  let error;
+  try {
+    await youtubeJson({
+      accessToken: "test-token",
+      pathName: "playlistItems",
+      fetchImpl: async () => jsonResponse({
+        error: { errors: [{ reason: "playlistNotFound" }] },
+      }, { status: 404 }),
+      sleepImpl: async () => assert.fail("playlistNotFound must not retry"),
+      warnImpl: () => {},
+      retryBaseMs: 0,
+    });
+  } catch (caught) {
+    error = caught;
+  }
+  assert.equal(error?.status, 404);
+  assert.equal(error?.youtubeReason, "playlistNotFound");
+  assert.equal(error?.youtubePath, "/youtube/v3/playlistItems");
+}
+
+{
   const waits = [];
   let calls = 0;
   await assert.rejects(

@@ -245,6 +245,14 @@ async function youtubeJson({
 
     const error = new Error(`YouTube API GET ${url.pathname} failed (${response.status}): ${text}`);
     error.status = response.status;
+    error.youtubePath = url.pathname;
+    error.responseBody = text;
+    try {
+      const payload = text ? JSON.parse(text) : {};
+      error.youtubeReason = payload?.error?.errors?.[0]?.reason || "";
+    } catch {
+      error.youtubeReason = "";
+    }
     if (attempt >= attempts || !isRetryableYoutubeReadStatus(response.status)) throw error;
 
     const delayMs = baseDelayMs * (2 ** (attempt - 1));
@@ -280,17 +288,38 @@ async function readUploadPlaylistItems({ accessToken, uploadsPlaylistId, maxPage
   let pageToken = "";
   let pagesRead = 0;
   for (let page = 0; page < maxPages; page += 1) {
-    const response = await youtubeJson({
-      accessToken,
-      pathName: "playlistItems",
-      query: {
-        part: "snippet,contentDetails",
-        playlistId: uploadsPlaylistId,
-        maxResults: 50,
-        pageToken,
-        fields: "nextPageToken,items(snippet(publishedAt,title,description,resourceId(videoId)),contentDetails(videoId,videoPublishedAt))",
-      },
-    });
+    let response;
+    try {
+      response = await youtubeJson({
+        accessToken,
+        pathName: "playlistItems",
+        query: {
+          part: "snippet,contentDetails",
+          playlistId: uploadsPlaylistId,
+          maxResults: 50,
+          pageToken,
+          fields: "nextPageToken,items(snippet(publishedAt,title,description,resourceId(videoId)),contentDetails(videoId,videoPublishedAt))",
+        },
+      });
+    } catch (error) {
+      if (error.status === 404 && error.youtubeReason === "playlistNotFound") {
+        return {
+          items,
+          pagesRead,
+          paginationComplete: false,
+          nextPageTokenPresent: Boolean(pageToken),
+          playlistNotFound: true,
+          playlistError: {
+            playlistId: uploadsPlaylistId,
+            status: error.status,
+            reason: error.youtubeReason,
+            youtubePath: error.youtubePath || "playlistItems",
+            responseBody: error.responseBody || "",
+          },
+        };
+      }
+      throw error;
+    }
     pagesRead += 1;
     items.push(...(response.items || []));
     pageToken = response.nextPageToken || "";
@@ -301,6 +330,8 @@ async function readUploadPlaylistItems({ accessToken, uploadsPlaylistId, maxPage
     pagesRead,
     paginationComplete: !pageToken,
     nextPageTokenPresent: Boolean(pageToken),
+    playlistNotFound: false,
+    playlistError: null,
   };
 }
 
@@ -648,6 +679,8 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
     pagesRead: uploadReadback.pagesRead,
     paginationComplete: uploadReadback.paginationComplete,
     nextPageTokenPresent: uploadReadback.nextPageTokenPresent,
+    playlistNotFound: uploadReadback.playlistNotFound === true,
+    playlistError: uploadReadback.playlistError,
     scannedUploadItems: items.length,
     matchedPublications,
     knownOtherPublicationCount: knownOtherPublications.length,
