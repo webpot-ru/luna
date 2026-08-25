@@ -3,7 +3,7 @@ name: YouTube Campaign Route Publish
 on:
   workflow_call:
     inputs:
-      video_type: { required: true, type: string }
+      video_type: { required: false, type: string, default: "combined" }
       route_key: { required: true, type: string }
       campaign_id: { required: true, type: string }
       campaign_manifest_hash: { required: true, type: string }
@@ -25,8 +25,10 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     outputs:
-      worker_count: ${{ steps.route_matrix.outputs.worker_count }}
-      worker_matrix: ${{ steps.route_matrix.outputs.worker_matrix }}
+      ordinary_worker_count: ${{ steps.route_matrix.outputs.ordinary_worker_count }}
+      ordinary_worker_matrix: ${{ steps.route_matrix.outputs.ordinary_worker_matrix }}
+      polyglot_worker_count: ${{ steps.route_matrix.outputs.polyglot_worker_count }}
+      polyglot_worker_matrix: ${{ steps.route_matrix.outputs.polyglot_worker_matrix }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -55,21 +57,24 @@ jobs:
           const report = JSON.parse(fs.readFileSync("outputs/youtube-publication-campaign-route-preflight.json", "utf8"));
           const route = process.env.ROUTE_KEY;
           const type = process.env.VIDEO_TYPE;
-          if (!["ordinary", "polyglot"].includes(type)) throw new Error(`unsupported video_type: ${type}`);
-          const source = type === "ordinary" ? report.ordinaryMatrix : report.polyglotMatrix;
-          const include = source.filter((row) => row.route_key === route);
-          if (include.some((row) => !row.support || !row.route_key)) throw new Error(`${route}: invalid worker matrix row`);
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, `worker_count=${include.length}\n`);
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, `worker_matrix=${JSON.stringify({ include })}\n`);
+          if (!["ordinary", "polyglot", "combined"].includes(type)) throw new Error(`unsupported video_type: ${type}`);
+          const select = (source, enabled) => enabled ? source.filter((row) => row.route_key === route) : [];
+          const ordinary = select(report.ordinaryMatrix, type !== "polyglot");
+          const polyglot = select(report.polyglotMatrix, type !== "ordinary");
+          for (const [phase, include] of [["ordinary", ordinary], ["polyglot", polyglot]]) {
+            if (include.some((row) => !row.support || !row.route_key)) throw new Error(`${route}: invalid ${phase} worker matrix row`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `${phase}_worker_count=${include.length}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `${phase}_worker_matrix=${JSON.stringify({ include })}\n`);
+          }
           NODE
 
   ordinary:
-    if: ${{ inputs.video_type == 'ordinary' && needs.prepare.outputs.worker_count != '0' }}
+    if: ${{ (inputs.video_type == 'ordinary' || inputs.video_type == 'combined') && needs.prepare.outputs.ordinary_worker_count != '0' }}
     needs: prepare
     strategy:
       fail-fast: false
       max-parallel: 5
-      matrix: ${{ fromJSON(needs.prepare.outputs.worker_matrix) }}
+      matrix: ${{ fromJSON(needs.prepare.outputs.ordinary_worker_matrix) }}
     uses: ./.github/workflows/youtube-video-publish.yml
     with:
       mode: apply
@@ -104,12 +109,15 @@ jobs:
     secrets: inherit
 
   polyglot:
-    if: ${{ inputs.video_type == 'polyglot' && needs.prepare.outputs.worker_count != '0' }}
-    needs: prepare
+    # This route does not wait for ordinary work in the other seven projects.
+    # A failed ordinary worker in this route still must not suppress its
+    # independent Polyglot tail; exact receipts drive final recovery.
+    if: ${{ always() && !cancelled() && needs.prepare.result == 'success' && (inputs.video_type == 'polyglot' || inputs.video_type == 'combined') && needs.prepare.outputs.polyglot_worker_count != '0' }}
+    needs: [prepare, ordinary]
     strategy:
       fail-fast: false
       max-parallel: 5
-      matrix: ${{ fromJSON(needs.prepare.outputs.worker_matrix) }}
+      matrix: ${{ fromJSON(needs.prepare.outputs.polyglot_worker_matrix) }}
     uses: ./.github/workflows/youtube-polyglot-video-publish.yml
     with:
       mode: apply
