@@ -283,8 +283,16 @@ assert.match(routeWorkerWorkflow, /inputs\.video_type == 'polyglot' \|\| inputs\
 assert.doesNotMatch(campaignWorkflow, /needs: \[preflight, metadata, ordinary\]/u, "Polyglot must not wait for the global ordinary matrix");
 assert.match(routeWorkerWorkflow, /campaign_polyglot_rows: \$\{\{ matrix\.polyglot_rows \}\}/u, "the route worker must pass the complete Polyglot sequence for a physical channel");
 const polyglotWorkflow = fs.readFileSync(".github/workflows/youtube-polyglot-video-publish.yml", "utf8");
+const ordinaryWorkflow = fs.readFileSync(".github/workflows/youtube-video-publish.yml", "utf8");
 assert.match(polyglotWorkflow, /prepare-polyglot-sequence:[\s\S]*?worker_matrix/u, "Polyglot publication must prepare a per-channel sequence");
 assert.match(polyglotWorkflow, /youtube-polyglot-video:\n\s+needs: prepare-polyglot-sequence[\s\S]*?max-parallel: 1[\s\S]*?matrix: \$\{\{ fromJSON\(needs\.prepare-polyglot-sequence\.outputs\.worker_matrix\) \}\}/u, "all Polyglot bundles for one physical channel must stay serial");
+for (const [label, workflow] of [["ordinary", ordinaryWorkflow], ["Polyglot", polyglotWorkflow]]) {
+  assert.match(workflow, /Set up Node\.js[\s\S]*?node-version: "20"\n\s+cache: "npm"/u, `${label} workers must restore the npm download cache`);
+  assert.match(workflow, /Restore pip download cache[\s\S]*?path: ~\/\.cache\/pip[\s\S]*?python-3\.10-edge-tts-v1/u, `${label} workers must restore the pip download cache`);
+  assert.match(workflow, /Install Python TTS dependency[\s\S]*?run: pip install edge-tts/u, `${label} workers must keep the existing edge-tts install contract`);
+  assert.match(workflow, /Restore Playwright browser cache[\s\S]*?path: ~\/\.cache\/ms-playwright[\s\S]*?hashFiles\('package-lock\.json'\)/u, `${label} workers must restore the lockfile-keyed Playwright browser cache`);
+  assert.match(workflow, /if command -v ffmpeg >\/dev\/null 2>&1; then[\s\S]*?ffmpeg -version \| head -n 1[\s\S]*?sudo apt-get install -y ffmpeg/u, `${label} workers must reuse hosted FFmpeg or retain the apt fallback`);
+}
 assert.match(campaignWorkflow, /OPENAI_API_KEY: \$\{\{ secrets\.OPENAI_API_KEY \}\}/u);
 assert.match(campaignWorkflow, /BACKEND="openai"/u);
 assert.match(campaignWorkflow, /--confirm-openai=USE_OPENAI_METADATA/u);

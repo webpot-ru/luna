@@ -308,6 +308,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
       - name: Validate YouTube API route environment
         shell: bash
@@ -395,16 +396,33 @@ jobs:
 
       - name: Install system dependencies and FFmpeg
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          if command -v ffmpeg >/dev/null 2>&1; then
+            ffmpeg -version | head -n 1
+          else
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
+      - name: Restore pip download cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-3.10-edge-tts-v1
+
       - name: Install Python TTS dependency
         run: pip install edge-tts
+
+      - name: Restore Playwright browser cache
+        if: ${{ inputs.source_run_id == '' }}
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
 
       - name: Install Playwright Chromium with dependencies
         if: ${{ inputs.source_run_id == '' }}
