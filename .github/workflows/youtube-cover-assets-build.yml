@@ -34,6 +34,24 @@ jobs:
         with:
           node-version: "20"
       - run: npm ci || npm install
+      - name: Restore configured offline deck sources
+        env:
+          SET_IDS: ${{ github.event.inputs.set_ids }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p data/decks
+          IFS=',' read -ra DECK_IDS <<< "$SET_IDS"
+          for SET_ID in "${DECK_IDS[@]}"; do
+            FILE_ID=$(SET_ID="$SET_ID" node -e '
+              const fs = require("fs");
+              const mapping = JSON.parse(fs.readFileSync("data/deck-sources.json", "utf8"));
+              process.stdout.write(String(mapping[process.env.SET_ID] || ""));
+            ')
+            test -n "$FILE_ID" && test "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE"
+            curl -L --fail --silent --show-error "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "data/decks/${SET_ID}.json"
+            test -s "data/decks/${SET_ID}.json"
+          done
       - name: Install Unicode fonts for deterministic overlays
         run: |
           sudo apt-get update
