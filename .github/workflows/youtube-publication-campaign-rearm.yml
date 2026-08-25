@@ -159,7 +159,7 @@ jobs:
             --ordinary-per-channel="$ORDINARY_PER_CHANNEL" \
             --polyglot-per-channel="$POLYGLOT_PER_CHANNEL" \
             --min-future-minutes=300 \
-            --max-snapshot-age-minutes=30 \
+            --max-snapshot-age-minutes=300 \
             --snapshot=outputs/youtube-publication-snapshot-after.json \
             --playlist-discovery=outputs/youtube-playlist-discovery-after.json \
             --replacement-campaign-id="$REPLACEMENT_CAMPAIGN_ID" \
