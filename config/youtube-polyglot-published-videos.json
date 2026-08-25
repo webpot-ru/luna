@@ -54575,8 +54575,8 @@
       "channelHandle": "@lunacardsislenska",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-08-25T23:30:00.000Z",
-      "scheduledPublishAt": "2026-08-25T23:30:00.000Z",
+      "publishAt": "2026-08-25T23:30:00Z",
+      "scheduledPublishAt": "2026-08-25T23:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -54593,11 +54593,11 @@
       "uploadedAt": "2026-08-24T12:54:50.535Z",
       "lastReadbackAt": "2026-08-24T12:54:50.535Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-08-25T23:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
