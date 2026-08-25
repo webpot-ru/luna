@@ -422,6 +422,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
       - name: Validate route publication readiness before provider work
         if: ${{ inputs.mode != 'plan' }}
@@ -796,11 +797,22 @@ jobs:
           fi
           npm run check:polyglot-youtube-metadata -- "${CHECK_ARGS[@]}"
 
+      - name: Restore Playwright browser cache
+        if: ${{ inputs.mode != 'plan' && steps.polyglot_plan.outputs.already_published != 'true' }}
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+
       - name: Install render dependencies
         if: ${{ inputs.mode != 'plan' && steps.polyglot_plan.outputs.already_published != 'true' }}
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          if command -v ffmpeg >/dev/null 2>&1; then
+            ffmpeg -version | head -n 1
+          else
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
           npx playwright install chromium --with-deps
 
       - name: Set up Python for audio render
@@ -808,6 +820,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
+
+      - name: Restore pip download cache
+        if: ${{ (inputs.mode == 'render_audio' || inputs.mode == 'apply') && steps.polyglot_plan.outputs.already_published != 'true' }}
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-3.10-edge-tts-v1
 
       - name: Install Python TTS dependency
         if: ${{ (inputs.mode == 'render_audio' || inputs.mode == 'apply') && steps.polyglot_plan.outputs.already_published != 'true' }}
