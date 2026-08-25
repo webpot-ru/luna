@@ -1,0 +1,752 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-25T09:14:29.123Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_bedroom_basics_a1",
+  "inputs": {
+    "supports": "IS",
+    "supportCount": 1,
+    "ordinarySupportCount": 1,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 9,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|home_bedroom_basics_a1|IS|AZ",
+      "ordinary|home_bedroom_basics_a1|IS|BG",
+      "ordinary|home_bedroom_basics_a1|IS|BN",
+      "ordinary|home_bedroom_basics_a1|IS|CS",
+      "ordinary|home_bedroom_basics_a1|IS|DA",
+      "ordinary|home_bedroom_basics_a1|IS|DE",
+      "ordinary|home_bedroom_basics_a1|IS|EN",
+      "ordinary|home_bedroom_basics_a1|IS|EN-GB",
+      "ordinary|home_bedroom_basics_a1|IS|ES"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 30,
+    "partialRecoveryOfCampaignId": "yt-home_bedroom_basics_a1-2026-08-24-ec8d63e33ef4",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_bedroom_basics_a1-2026-08-24-ec8d63e33ef4",
+      "manifestHash": "ab3cda6ca7d72d34733b3b13ada2bb915c0c3837e9441e9030fe16b5d9554860",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-7",
+        "generatedAt": "2026-08-25T09:11:28.466Z",
+        "ageMinutes": 3.01095,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "4fae2352af1c744578627ecb181c450e45e6554cdb0c1451e4afd2bfc1045214"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "27cf4c49c069c23bb5eecdf7b5699c7199341b19072070f4cb794817b8c58c96"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "3aee1538380400ea937d4f56b5db944ba54a84c30dc54278a128accf6df7eea8"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "ffe7620fff7905699e853f2d84c7a8ca95989d07d9e0190e5f73001bb4feed37"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "3421c6f0dc7e8ba0ca96bf330c2744cf6dac4f66b6e3a211cdbe984b9fc9dbe1"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_bedroom_basics_a1.json",
+        "exists": true,
+        "sha256": "70162cb8a7b5c25438a7925061cae1da02c74a2e934d7e08ab99885d793be06f"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "7411d37b5bb0a70ac414def88445bc8c2caa4ac34b97613f146f53c33a423bfd"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "b9f536edf764f5a5a68200fee0b1a95645ae7c3007677bdf68946c3a6e131499"
+      }
+    },
+    "deckSource": {
+      "mode": "verified_drive_with_local_fingerprint",
+      "driveFileIdConfigured": true,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": false,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": "a5da46c86e7bd8b353b45bbeb1acfdeffcbda6e1",
+        "path": "data/decks/home_bedroom_basics_a1.json"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 9,
+    "polyglotCount": 0,
+    "assignmentCount": 9,
+    "firstPublishAt": "2026-08-25T11:30:00.000Z",
+    "lastPublishAt": "2026-08-26T20:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 9,
+    "existingPlaylistCount": 9,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-7": 9
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 9,
+    "estimatedPlaylistItemInsertUnits": 450,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 450,
+    "byRoute": {
+      "youtube-7": {
+        "estimatedVideoUploadCalls": 9,
+        "estimatedGeneralQuotaUnitsMaximum": 450
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|IS|AZ",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|AZ|is",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "IS",
+      "targetLang": "AZ",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_is-IS-GudrunNeural",
+        "supportLang": "IS"
+      },
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-25T11:30:00.000Z",
+      "localDate": "2026-08-25",
+      "localTime": "11:30",
+      "timeZone": "Atlantic/Reykjavik",
+      "slotKey": "is|2026-08-25T11:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IS__AZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLpeJ1xDbc2x2RjJIBrveOgsAkLKsSs99N",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Aserska A1: orðaforði og framburður",
+        "description": "FlashcardsLuna myndbönd fyrir íslenskumælandi sem læra Aserska: orðaspjöld, framburð, endurtekningarhlé og stutt smápróf.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-24T10:51:17.775Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|AZ",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|IS|BG",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|BG|is",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "IS",
+      "targetLang": "BG",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_is-IS-GudrunNeural",
+        "supportLang": "IS"
+      },
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-25T14:30:00.000Z",
+      "localDate": "2026-08-25",
+      "localTime": "14:30",
+      "timeZone": "Atlantic/Reykjavik",
+      "slotKey": "is|2026-08-25T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IS__BG__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLpeJ1xDbc2x139yxERii3HPz2AdGB40lO",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Búlgarska A1: orðaforði og framburður",
+        "description": "FlashcardsLuna myndbönd fyrir íslenskumælandi sem læra Búlgarska: orðaspjöld, framburð, endurtekningarhlé og stutt smápróf.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-24T10:51:17.775Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|BG",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|IS|BN",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|BN|is",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "IS",
+      "targetLang": "BN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_is-IS-GudrunNeural",
+        "supportLang": "IS"
+      },
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-25T17:30:00.000Z",
+      "localDate": "2026-08-25",
+      "localTime": "17:30",
+      "timeZone": "Atlantic/Reykjavik",
+      "slotKey": "is|2026-08-25T17:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IS__BN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLpeJ1xDbc2x1_uvc_9uA0UkLWM_5NyBc8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Bengalska A1: orðaforði og framburður",
+        "description": "FlashcardsLuna myndbönd fyrir íslenskumælandi sem læra Bengalska: orðaspjöld, framburð, endurtekningarhlé og stutt smápróf.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-24T10:51:17.775Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|BN",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|IS|CS",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|CS|is",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "IS",
+      "targetLang": "CS",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_is-IS-GudrunNeural",
+        "supportLang": "IS"
+      },
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-25T20:30:00.000Z",
+      "localDate": "2026-08-25",
+      "localTime": "20:30",
+      "timeZone": "Atlantic/Reykjavik",
+      "slotKey": "is|2026-08-25T20:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IS__CS__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLpeJ1xDbc2x33Cyuk3futeoX6A3O_r9m9",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tékkneska A1: orðaforði og framburður",
+        "description": "FlashcardsLuna myndbönd fyrir íslenskumælandi sem læra Tékkneska: orðaspjöld, framburð, endurtekningarhlé og stutt smápróf.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-24T10:51:17.775Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|CS",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|IS|DA",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|DA|is",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "IS",
+      "targetLang": "DA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_is-IS-GudrunNeural",
+        "supportLang": "IS"
+      },
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-26T08:30:00.000Z",
+      "localDate": "2026-08-26",
+      "localTime": "08:30",
+      "timeZone": "Atlantic/Reykjavik",
+      "slotKey": "is|2026-08-26T08:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IS__DA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLpeJ1xDbc2x0ihfrK2-tC3O_vAdf2KiHB",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Danska A1: orðaforði og framburður",
+        "description": "FlashcardsLuna myndbönd fyrir íslenskumælandi sem læra Danska: orðaspjöld, framburð, endurtekningarhlé og stutt smápróf.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-24T10:51:17.775Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|DA",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|IS|DE",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|DE|is",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "IS",
+      "targetLang": "DE",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_is-IS-GudrunNeural",
+        "supportLang": "IS"
+      },
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-26T11:30:00.000Z",
+      "localDate": "2026-08-26",
+      "localTime": "11:30",
+      "timeZone": "Atlantic/Reykjavik",
+      "slotKey": "is|2026-08-26T11:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IS__DE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLpeJ1xDbc2x0jgEaO78OjFVZnT2Iam-di",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Þýska A1: orðaforði og framburður",
+        "description": "FlashcardsLuna myndbönd fyrir íslenskumælandi sem læra Þýska: orðaspjöld, framburð, endurtekningarhlé og stutt smápróf.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-24T10:51:17.775Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|DE",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|IS|EN",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|EN|is",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "IS",
+      "targetLang": "EN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_is-IS-GudrunNeural",
+        "supportLang": "IS"
+      },
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-26T14:30:00.000Z",
+      "localDate": "2026-08-26",
+      "localTime": "14:30",
+      "timeZone": "Atlantic/Reykjavik",
+      "slotKey": "is|2026-08-26T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IS__EN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLpeJ1xDbc2x3_-3IBb7hkV2OPdBLq1yt9",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Enska A1: orðaforði og framburður",
+        "description": "FlashcardsLuna myndbönd fyrir íslenskumælandi sem læra Enska: orðaspjöld, framburð, endurtekningarhlé og stutt smápróf.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-24T10:51:17.775Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|EN",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|IS|EN-GB",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|EN-GB|is",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "IS",
+      "targetLang": "EN-GB",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_is-IS-GudrunNeural",
+        "supportLang": "IS"
+      },
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-26T17:30:00.000Z",
+      "localDate": "2026-08-26",
+      "localTime": "17:30",
+      "timeZone": "Atlantic/Reykjavik",
+      "slotKey": "is|2026-08-26T17:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IS__EN-GB__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLpeJ1xDbc2x18nYtN79xMH8JxEBcDYk3b",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Enska (Bretland) A1: orðaforði og framburður",
+        "description": "FlashcardsLuna myndbönd fyrir íslenskumælandi sem læra Enska (Bretland): orðaspjöld, framburð, endurtekningarhlé og stutt smápróf.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-24T10:51:17.775Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|EN-GB",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|IS|ES",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|ES|is",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "IS",
+      "targetLang": "ES",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_is-IS-GudrunNeural",
+        "supportLang": "IS"
+      },
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-26T20:30:00.000Z",
+      "localDate": "2026-08-26",
+      "localTime": "20:30",
+      "timeZone": "Atlantic/Reykjavik",
+      "slotKey": "is|2026-08-26T20:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IS__ES__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLpeJ1xDbc2x2pbSqnEXCUHFN1A1ANziUx",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Spænska A1: orðaforði og framburður",
+        "description": "FlashcardsLuna myndbönd fyrir íslenskumælandi sem læra Spænska: orðaspjöld, framburð, endurtekningarhlé og stutt smápróf.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-24T10:51:17.775Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|IS|ES",
+      "localSlotIndex": 4
+    }
+  ],
+  "campaignId": "yt-home_bedroom_basics_a1-2026-08-25-a2adcdeb89f5",
+  "manifestHash": "2ce35f09fccd6e6f1b3a57520a7f9323a35956a54a273bcdb10edebd13513c50"
+}
