@@ -262,8 +262,8 @@ assert.equal(DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE, 2);
 const campaignWorkflow = fs.readFileSync(".github/workflows/youtube-publication-campaign.yml", "utf8");
 assert.match(
   campaignWorkflow,
-  /  metadata:\n[\s\S]*?strategy:\n\s+fail-fast: false\n\s+max-parallel: 1\n\s+matrix:/u,
-  "campaign metadata routes must be serialized to protect the shared provider quota",
+  /  metadata:\n[\s\S]*?strategy:\n\s+fail-fast: false[\s\S]*?\n\s+max-parallel: 4\n\s+matrix:/u,
+  "campaign metadata routes must allow four bounded concurrent provider jobs",
 );
 assert.match(
   campaignWorkflow,
