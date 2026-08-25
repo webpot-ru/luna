@@ -142,7 +142,7 @@ jobs:
             fi
           fi
           test -s "$DECK_PATH"
-          node -e 'const deck = require(process.argv[1]); if (!deck.cards || !Object.keys(deck.cards).length) process.exit(1);' "$DECK_PATH"
+          node -e 'const fs = require("fs"); const deck = JSON.parse(fs.readFileSync(process.argv[1], "utf8")); if (!deck.cards || !Object.keys(deck.cards).length) process.exit(1);' "$DECK_PATH"
 
       - name: Build the exact replacement manifest without provider calls
         env:
