@@ -602,3 +602,4 @@ Start with:
 
 - No app build/test/deploy was run as part of this documentation-only contour rollout.
 - No live safe-trash move was performed to avoid creating test artifacts in `Trash/`.
+- 2026-08-25 Deck #6 recovery control [`32815800407`](https://github.com/webpot-ru/luna/actions/runs/32815800407) is complete across all eight routes with zero duplicates; it found exactly 28 durable calendar publishAt mismatches for already-live videos. A dry-run reconciliation updates only those 28 calendar rows to the live YouTube schedule. The exact offline Deck6 JSON was re-uploaded and verified in Drive as `deck6-recovery-home_bedroom_basics_a1.json` (`45,327,393` bytes, SHA-256 `70162cb8a7b5c25438a7925061cae1da02c74a2e934d7e08ab99885d793be06`, file `1B8Oct0bb88cWikOlTfTOHT1gkgrjw3nn`). No new YouTube upload has been run; only the nine missing IS ordinary rows remain eligible for exact recovery after the calendar fix is merged.
