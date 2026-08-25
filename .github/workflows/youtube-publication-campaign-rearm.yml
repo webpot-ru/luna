@@ -51,13 +51,13 @@ jobs:
 
       - name: Prepare artifact directories
         shell: bash
-        run: mkdir -p /tmp/deck4-rearm-before /tmp/deck4-rearm-after
+        run: mkdir -p /tmp/youtube-rearm-before /tmp/youtube-rearm-after
 
       - name: Download the complete before control artifact
         uses: actions/download-artifact@v4
         with:
           name: youtube-publication-control-${{ inputs.set_id }}-all-routes-${{ inputs.before_run_id }}
-          path: /tmp/deck4-rearm-before
+          path: /tmp/youtube-rearm-before
           repository: ${{ github.repository }}
           run-id: ${{ inputs.before_run_id }}
           github-token: ${{ github.token }}
@@ -66,7 +66,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: youtube-publication-control-${{ inputs.set_id }}-all-routes-${{ inputs.after_run_id }}
-          path: /tmp/deck4-rearm-after
+          path: /tmp/youtube-rearm-after
           repository: ${{ github.repository }}
           run-id: ${{ inputs.after_run_id }}
           github-token: ${{ github.token }}
@@ -82,14 +82,14 @@ jobs:
           [[ "$BEFORE_RUN_ID" =~ ^[0-9]+$ ]]
           [[ "$AFTER_RUN_ID" =~ ^[0-9]+$ ]]
           echo "Before artifact files:"
-          find /tmp/deck4-rearm-before -type f -print | sort
+          find /tmp/youtube-rearm-before -type f -print | sort
           echo "After artifact files:"
-          find /tmp/deck4-rearm-after -type f -print | sort
-          BEFORE_REPORT="$(find /tmp/deck4-rearm-before -type f -iname '*publication-control-all-routes.json' -print -quit)"
-          AFTER_REPORT="$(find /tmp/deck4-rearm-after -type f -iname '*publication-control-all-routes.json' -print -quit)"
-          AFTER_SNAPSHOT="$(find /tmp/deck4-rearm-after -type f -iname '*publication-snapshot.json' -print -quit)"
-          BEFORE_DISCOVERY="$(find /tmp/deck4-rearm-before -type f -iname '*playlist-discovery-snapshot.json' -print -quit)"
-          AFTER_DISCOVERY="$(find /tmp/deck4-rearm-after -type f -iname '*playlist-discovery-snapshot.json' -print -quit)"
+          find /tmp/youtube-rearm-after -type f -print | sort
+          BEFORE_REPORT="$(find /tmp/youtube-rearm-before -type f -iname '*publication-control-all-routes.json' -print -quit)"
+          AFTER_REPORT="$(find /tmp/youtube-rearm-after -type f -iname '*publication-control-all-routes.json' -print -quit)"
+          AFTER_SNAPSHOT="$(find /tmp/youtube-rearm-after -type f -iname '*publication-snapshot.json' -print -quit)"
+          BEFORE_DISCOVERY="$(find /tmp/youtube-rearm-before -type f -iname '*playlist-discovery-snapshot.json' -print -quit)"
+          AFTER_DISCOVERY="$(find /tmp/youtube-rearm-after -type f -iname '*playlist-discovery-snapshot.json' -print -quit)"
           if [ -z "$AFTER_DISCOVERY" ] && [ -n "$BEFORE_DISCOVERY" ]; then
             echo "After audit has no playlist-discovery artifact; using the complete before artifact after the zero-upload live-ID equality check."
             AFTER_DISCOVERY="$BEFORE_DISCOVERY"
@@ -108,6 +108,41 @@ jobs:
           cp "$AFTER_REPORT" outputs/youtube-publication-control-after.json
           cp "$AFTER_SNAPSHOT" outputs/youtube-publication-snapshot-after.json
           cp "$AFTER_DISCOVERY" outputs/youtube-playlist-discovery-after.json
+
+      - name: Restore immutable offline deck for recovery plan
+        env:
+          SET_ID: ${{ inputs.set_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          DECK_PATH="data/decks/${SET_ID}.json"
+          if [ ! -s "$DECK_PATH" ]; then
+            mkdir -p data/decks
+            FILE_ID="$(node -e '
+              const fs = require("fs");
+              const mapping = fs.existsSync("data/deck-sources.json")
+                ? JSON.parse(fs.readFileSync("data/deck-sources.json", "utf8"))
+                : {};
+              process.stdout.write(String(mapping[process.env.SET_ID] || ""));
+            ')"
+            if [ -n "$FILE_ID" ] && [ "$FILE_ID" != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" ]; then
+              curl -fsSL "https://docs.google.com/uc?export=download&id=${FILE_ID}" -o "$DECK_PATH"
+            fi
+          fi
+          if [ ! -s "$DECK_PATH" ]; then
+            HISTORICAL_COMMIT=""
+            while IFS= read -r CANDIDATE; do
+              if git cat-file -e "${CANDIDATE}:${DECK_PATH}" 2>/dev/null; then
+                HISTORICAL_COMMIT="$CANDIDATE"
+                break
+              fi
+            done < <(git log --all --format=%H -- "$DECK_PATH")
+            if [ -n "$HISTORICAL_COMMIT" ]; then
+              git show "${HISTORICAL_COMMIT}:${DECK_PATH}" > "$DECK_PATH"
+            fi
+          fi
+          test -s "$DECK_PATH"
+          node -e 'const deck = require(process.argv[1]); if (!deck.cards || !Object.keys(deck.cards).length) process.exit(1);' "$DECK_PATH"
 
       - name: Build the exact replacement manifest without provider calls
         env:
@@ -164,7 +199,7 @@ jobs:
           git diff --cached --quiet && { echo "No recovery changes were produced"; exit 1; }
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Rearm zero-upload Deck 4 YouTube campaign"
+          git commit -m "Rearm zero-upload YouTube publication campaign"
           git push origin "HEAD:refs/heads/$TARGET_BRANCH"
 
       - uses: actions/upload-artifact@v4
