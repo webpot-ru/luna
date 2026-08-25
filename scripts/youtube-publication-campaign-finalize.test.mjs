@@ -11,12 +11,19 @@ const campaignWorkflow = fs.readFileSync(
   path.join(repoRoot, ".github/workflows/youtube-publication-campaign.yml"),
   "utf8",
 );
-const polyglotJob = campaignWorkflow.match(/\n  polyglot:\n([\s\S]*?)\n  finalize:\n/u)?.[1] || "";
-assert.match(polyglotJob, /needs: \[preflight, metadata, ordinary\]/u);
+const routeWorkflow = fs.readFileSync(
+  path.join(repoRoot, ".github/workflows/youtube-campaign-route-publish.yml"),
+  "utf8",
+);
+const routesJob = campaignWorkflow.match(/\n  routes:\n([\s\S]*?)\n  finalize:\n/u)?.[1] || "";
+const polyglotJob = routeWorkflow.match(/\n  polyglot:\n([\s\S]*)/u)?.[1] || "";
+assert.match(routesJob, /needs: \[preflight, metadata\]/u);
+assert.match(routesJob, /video_type: combined/u);
+assert.match(polyglotJob, /needs: \[prepare, ordinary\]/u);
 assert.match(polyglotJob, /always\(\) && !cancelled\(\)/u);
-assert.match(polyglotJob, /needs\.preflight\.result == 'success'/u);
-assert.match(polyglotJob, /needs\.metadata\.result == 'success'/u);
+assert.match(polyglotJob, /needs\.prepare\.result == 'success'/u);
 assert.doesNotMatch(polyglotJob, /needs\.ordinary\.result/u);
+assert.doesNotMatch(campaignWorkflow, /\n  polyglot:\n/u);
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), "youtube-campaign-finalize-"));
 const configDir = path.join(root, "config");

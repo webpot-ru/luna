@@ -267,13 +267,8 @@ assert.match(
 );
 assert.match(
   campaignWorkflow,
-  /  ordinary:\n[\s\S]*?strategy:\n\s+fail-fast: false\n[\s\S]*?max-parallel: 8\n\s+matrix:\n\s+route_key: \[youtube-1, youtube-2, youtube-3, youtube-4, youtube-5, youtube-6, youtube-7, youtube-8\]/u,
-  "all eight project queues must start together for ordinary publication",
-);
-assert.match(
-  campaignWorkflow,
-  /  polyglot:\n[\s\S]*?strategy:\n\s+fail-fast: false\n[\s\S]*?max-parallel: 8\n\s+matrix:\n\s+route_key: \[youtube-1, youtube-2, youtube-3, youtube-4, youtube-5, youtube-6, youtube-7, youtube-8\]/u,
-  "all eight project queues must start together for Polyglot publication",
+  /  routes:\n[\s\S]*?strategy:\n\s+fail-fast: false\n[\s\S]*?max-parallel: 8\n\s+matrix:\n\s+route_key: \[youtube-1, youtube-2, youtube-3, youtube-4, youtube-5, youtube-6, youtube-7, youtube-8\][\s\S]*?video_type: combined/u,
+  "all eight project queues must start together and own both publication phases",
 );
 const routeWorkerWorkflow = fs.readFileSync(".github/workflows/youtube-campaign-route-publish.yml", "utf8");
 assert.match(
@@ -283,6 +278,9 @@ assert.match(
 );
 assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?max-parallel: 5\n\s+matrix:/u, "each ordinary project queue must run five physical channels concurrently");
 assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?max-parallel: 5\n\s+matrix:/u, "each Polyglot project queue must run five physical channels concurrently");
+assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?needs: \[prepare, ordinary\]/u, "each project must start Polyglot after its own ordinary queue");
+assert.match(routeWorkerWorkflow, /inputs\.video_type == 'polyglot' \|\| inputs\.video_type == 'combined'/u, "combined route publication must include Polyglot");
+assert.doesNotMatch(campaignWorkflow, /needs: \[preflight, metadata, ordinary\]/u, "Polyglot must not wait for the global ordinary matrix");
 assert.match(routeWorkerWorkflow, /campaign_polyglot_rows: \$\{\{ matrix\.polyglot_rows \}\}/u, "the route worker must pass the complete Polyglot sequence for a physical channel");
 const polyglotWorkflow = fs.readFileSync(".github/workflows/youtube-polyglot-video-publish.yml", "utf8");
 assert.match(polyglotWorkflow, /prepare-polyglot-sequence:[\s\S]*?worker_matrix/u, "Polyglot publication must prepare a per-channel sequence");

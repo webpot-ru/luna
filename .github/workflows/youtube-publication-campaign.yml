@@ -345,20 +345,20 @@ jobs:
           if-no-files-found: warn
           path: outputs/youtube-campaign-metadata/${{ matrix.route_key }}
 
-  ordinary:
-    if: ${{ inputs.mode == 'apply' && needs.preflight.outputs.ordinary_worker_count != '0' }}
+  routes:
+    if: ${{ inputs.mode == 'apply' && (needs.preflight.outputs.ordinary_worker_count != '0' || needs.preflight.outputs.polyglot_worker_count != '0') }}
     needs: [preflight, metadata]
     strategy:
       fail-fast: false
-      # Eight project queues run together. Each nested route workflow owns the
-      # complete queue for its project and runs no more than five channels at
-      # once, taking the next channel as one finishes.
+      # Eight project queues run together. Within each route, up to five
+      # ordinary channels run first; that route starts its own Polyglot queue as
+      # soon as its ordinary queue finishes, without waiting for other routes.
       max-parallel: 8
       matrix:
         route_key: [youtube-1, youtube-2, youtube-3, youtube-4, youtube-5, youtube-6, youtube-7, youtube-8]
     uses: ./.github/workflows/youtube-campaign-route-publish.yml
     with:
-      video_type: ordinary
+      video_type: combined
       route_key: ${{ matrix.route_key }}
       campaign_id: ${{ inputs.campaign_id }}
       campaign_manifest_hash: ${{ inputs.campaign_manifest_hash }}
@@ -369,39 +369,13 @@ jobs:
       offline_deck_sha256: ${{ needs.preflight.outputs.offline_deck_sha256 }}
       video_cache_resume_run_id: ${{ inputs.video_cache_resume_run_id }}
       video_cache_resume_support: ${{ inputs.video_cache_resume_support }}
-    secrets: inherit
-
-  polyglot:
-    # Wait for the ordinary phase to finish so the same support channel is not
-    # rendered/uploaded by both phases at once. A partial ordinary failure must
-    # not suppress independent Polyglot workers; the finalizer records both
-    # phases and leaves only exact missing assignments for recovery.
-    if: ${{ always() && !cancelled() && inputs.mode == 'apply' && needs.preflight.result == 'success' && needs.metadata.result == 'success' && needs.preflight.outputs.polyglot_worker_count != '0' }}
-    needs: [preflight, metadata, ordinary]
-    strategy:
-      fail-fast: false
-      # Same eight project queues and five-channel per-project cap as ordinary.
-      max-parallel: 8
-      matrix:
-        route_key: [youtube-1, youtube-2, youtube-3, youtube-4, youtube-5, youtube-6, youtube-7, youtube-8]
-    uses: ./.github/workflows/youtube-campaign-route-publish.yml
-    with:
-      video_type: polyglot
-      route_key: ${{ matrix.route_key }}
-      campaign_id: ${{ inputs.campaign_id }}
-      campaign_manifest_hash: ${{ inputs.campaign_manifest_hash }}
-      set_id: ${{ needs.preflight.outputs.set_id }}
-      confirm_vectorengine_metadata: ${{ inputs.confirm_vectorengine_metadata }}
-      offline_deck_git_commit: ${{ needs.preflight.outputs.offline_deck_git_commit }}
-      offline_deck_git_blob: ${{ needs.preflight.outputs.offline_deck_git_blob }}
-      offline_deck_sha256: ${{ needs.preflight.outputs.offline_deck_sha256 }}
       playlist_preflight_mode: ${{ inputs.playlist_preflight_mode }}
       confirm_target_playlist_only: ${{ inputs.confirm_target_playlist_only }}
     secrets: inherit
 
   finalize:
     if: ${{ always() && inputs.mode == 'apply' && needs.preflight.result == 'success' }}
-    needs: [preflight, ordinary, polyglot]
+    needs: [preflight, routes]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -437,8 +411,8 @@ jobs:
           npm run finalize:youtube-publication-campaign -- \
             --campaign-id="${{ inputs.campaign_id }}" \
             --artifacts-root=.campaign-artifacts \
-            --ordinary-result="${{ needs.ordinary.result }}" \
-            --polyglot-result="${{ needs.polyglot.result }}" \
+            --ordinary-result="${{ needs.routes.result }}" \
+            --polyglot-result="${{ needs.routes.result }}" \
             --output=outputs/youtube-publication-campaign-finalize.json
 
       - name: Commit and push exact durable state
