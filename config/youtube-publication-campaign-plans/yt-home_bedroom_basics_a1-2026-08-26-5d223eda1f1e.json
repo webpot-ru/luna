@@ -1,0 +1,1131 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-26T06:52:30.000Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_bedroom_basics_a1",
+  "inputs": {
+    "supports": "LO,PT-BR",
+    "supportCount": 2,
+    "ordinarySupportCount": 2,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 9,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|home_bedroom_basics_a1|LO|ES-419",
+      "ordinary|home_bedroom_basics_a1|LO|ET",
+      "ordinary|home_bedroom_basics_a1|LO|FI",
+      "ordinary|home_bedroom_basics_a1|LO|FR",
+      "ordinary|home_bedroom_basics_a1|LO|HI",
+      "ordinary|home_bedroom_basics_a1|LO|HR",
+      "ordinary|home_bedroom_basics_a1|LO|HU",
+      "ordinary|home_bedroom_basics_a1|LO|HY",
+      "ordinary|home_bedroom_basics_a1|LO|ID",
+      "ordinary|home_bedroom_basics_a1|PT-BR|FR",
+      "ordinary|home_bedroom_basics_a1|PT-BR|HI",
+      "ordinary|home_bedroom_basics_a1|PT-BR|HR",
+      "ordinary|home_bedroom_basics_a1|PT-BR|HU",
+      "ordinary|home_bedroom_basics_a1|PT-BR|HY",
+      "ordinary|home_bedroom_basics_a1|PT-BR|ID"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 30,
+    "partialRecoveryOfCampaignId": "yt-home_bedroom_basics_a1-2026-08-25-6a37cbc4b34b",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_bedroom_basics_a1-2026-08-25-6a37cbc4b34b",
+      "manifestHash": "0753343edbe33488cfb87a73b2179d9ad4122f41a7dd4377fa5bf1de9beb28f6",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-7",
+        "generatedAt": "2026-08-26T06:36:50.591Z",
+        "ageMinutes": 15.656816666666666,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-1",
+        "generatedAt": "2026-08-26T06:36:46.070Z",
+        "ageMinutes": 15.732166666666666,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot-after.json",
+        "exists": true,
+        "sha256": "1e85a385dbe13fdb1147a395a438fca4dcb4270bc3b0593898801c515cc6554c"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "23dac4ac96bd61c2408c67270126114c3640db05fd846d85590d4d123f3dd3c7"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "a1d5e7930994c5ae985c126bc68155e0841a4dcc2b4766e759f32ce745a2dff9"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "24bacee31bae8bba4dd9cabd69496630156580fcfd1638c67537d352c23755bd"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_bedroom_basics_a1.json",
+        "exists": true,
+        "sha256": "70162cb8a7b5c25438a7925061cae1da02c74a2e934d7e08ab99885d793be06f"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "7411d37b5bb0a70ac414def88445bc8c2caa4ac34b97613f146f53c33a423bfd"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-after.json",
+        "exists": true,
+        "sha256": "b8449d7883bed94dda81f514f84a6521272819d2ae07538f3370018f94c66efe"
+      }
+    },
+    "deckSource": {
+      "mode": "verified_drive_with_local_fingerprint",
+      "driveFileIdConfigured": true,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": false,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": "a5da46c86e7bd8b353b45bbeb1acfdeffcbda6e1",
+        "path": "data/decks/home_bedroom_basics_a1.json"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 2,
+    "ordinaryCount": 15,
+    "polyglotCount": 0,
+    "assignmentCount": 15,
+    "firstPublishAt": "2026-08-26T10:30:00.000Z",
+    "lastPublishAt": "2026-08-27T16:30:00.000Z",
+    "customThumbnailCount": 6,
+    "automaticThumbnailCount": 9,
+    "existingPlaylistCount": 15,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 6,
+      "youtube-7": 9
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 15,
+    "estimatedPlaylistItemInsertUnits": 750,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 300,
+    "estimatedGeneralQuotaUnitsMaximum": 1050,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 6,
+        "estimatedGeneralQuotaUnitsMaximum": 600
+      },
+      "youtube-7": {
+        "estimatedVideoUploadCalls": 9,
+        "estimatedGeneralQuotaUnitsMaximum": 450
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|LO|ES-419",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|ES-419|lo",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "LO",
+      "targetLang": "ES-419",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-26T10:30:00.000Z",
+      "localDate": "2026-08-26",
+      "localTime": "17:30",
+      "timeZone": "Asia/Vientiane",
+      "slotKey": "lo|2026-08-26T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LO__ES-419__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL7X-KEhNMxcPKtzGEN0l7MeoNavvRYH1K",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ສະແປນນິຊ (ລາຕິນ ອາເມລິກາ) A1: ຄຳສັບ ແລະ ການອອກສຽງ",
+        "description": "ວິດີໂອ FlashcardsLuna ສຳລັບຜູ້ເວົ້າພາສາລາວທີ່ກຳລັງຮຽນ ສະແປນນິຊ (ລາຕິນ ອາເມລິກາ): ບັດຄຳສັບ, ການອອກສຽງ, ຊ່ວງພັກເພື່ອຝຶກຊ້ຳ ແລະ ບົດທົດສອບສັ້ນ.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|ES-419",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lo-LA-KeomanyNeural",
+        "supportLang": "LO"
+      },
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|LO|ET",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|ET|lo",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "LO",
+      "targetLang": "ET",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-27T01:30:00.000Z",
+      "localDate": "2026-08-27",
+      "localTime": "08:30",
+      "timeZone": "Asia/Vientiane",
+      "slotKey": "lo|2026-08-27T01:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LO__ET__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL7X-KEhNMxcPW9Tq4aJBAeM54zU9I2rfV",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ເອສໂຕນຽນ A1: ຄຳສັບ ແລະ ການອອກສຽງ",
+        "description": "ວິດີໂອ FlashcardsLuna ສຳລັບຜູ້ເວົ້າພາສາລາວທີ່ກຳລັງຮຽນ ເອສໂຕນຽນ: ບັດຄຳສັບ, ການອອກສຽງ, ຊ່ວງພັກເພື່ອຝຶກຊ້ຳ ແລະ ບົດທົດສອບສັ້ນ.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|ET",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lo-LA-KeomanyNeural",
+        "supportLang": "LO"
+      },
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|LO|FI",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|FI|lo",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "LO",
+      "targetLang": "FI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-26T13:30:00.000Z",
+      "localDate": "2026-08-26",
+      "localTime": "20:30",
+      "timeZone": "Asia/Vientiane",
+      "slotKey": "lo|2026-08-26T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LO__FI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL7X-KEhNMxcPl7hCnkXVK8K4ya6v6Sm5_",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ຟິນນິຊ A1: ຄຳສັບ ແລະ ການອອກສຽງ",
+        "description": "ວິດີໂອ FlashcardsLuna ສຳລັບຜູ້ເວົ້າພາສາລາວທີ່ກຳລັງຮຽນ ຟິນນິຊ: ບັດຄຳສັບ, ການອອກສຽງ, ຊ່ວງພັກເພື່ອຝຶກຊ້ຳ ແລະ ບົດທົດສອບສັ້ນ.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|FI",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lo-LA-KeomanyNeural",
+        "supportLang": "LO"
+      },
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|LO|FR",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|FR|lo",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "LO",
+      "targetLang": "FR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-26T16:30:00.000Z",
+      "localDate": "2026-08-26",
+      "localTime": "23:30",
+      "timeZone": "Asia/Vientiane",
+      "slotKey": "lo|2026-08-26T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LO__FR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL7X-KEhNMxcPjf9JZ1ltaSlO8igmz7GX0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ຝຣັ່ງ A1: ຄຳສັບ ແລະ ການອອກສຽງ",
+        "description": "ວິດີໂອ FlashcardsLuna ສຳລັບຜູ້ເວົ້າພາສາລາວທີ່ກຳລັງຮຽນ ຝຣັ່ງ: ບັດຄຳສັບ, ການອອກສຽງ, ຊ່ວງພັກເພື່ອຝຶກຊ້ຳ ແລະ ບົດທົດສອບສັ້ນ.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|FR",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lo-LA-KeomanyNeural",
+        "supportLang": "LO"
+      },
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|LO|HI",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|HI|lo",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "LO",
+      "targetLang": "HI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-27T04:30:00.000Z",
+      "localDate": "2026-08-27",
+      "localTime": "11:30",
+      "timeZone": "Asia/Vientiane",
+      "slotKey": "lo|2026-08-27T04:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LO__HI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL7X-KEhNMxcPp2rrNZSn6Q9LiYuh4dlcO",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ຮິນດິ A1: ຄຳສັບ ແລະ ການອອກສຽງ",
+        "description": "ວິດີໂອ FlashcardsLuna ສຳລັບຜູ້ເວົ້າພາສາລາວທີ່ກຳລັງຮຽນ ຮິນດິ: ບັດຄຳສັບ, ການອອກສຽງ, ຊ່ວງພັກເພື່ອຝຶກຊ້ຳ ແລະ ບົດທົດສອບສັ້ນ.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|HI",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lo-LA-KeomanyNeural",
+        "supportLang": "LO"
+      },
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|LO|HR",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|HR|lo",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "LO",
+      "targetLang": "HR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-27T07:30:00.000Z",
+      "localDate": "2026-08-27",
+      "localTime": "14:30",
+      "timeZone": "Asia/Vientiane",
+      "slotKey": "lo|2026-08-27T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LO__HR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLNkNPMXJ_V6k",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ໂຄຣເອທຽນ A1: ຄຳສັບ ແລະ ການອອກສຽງ",
+        "description": "ວິດີໂອ FlashcardsLuna ສຳລັບຜູ້ເວົ້າພາສາລາວທີ່ກຳລັງຮຽນ ໂຄຣເອທຽນ: ບັດຄຳສັບ, ການອອກສຽງ, ຊ່ວງພັກເພື່ອຝຶກຊ້ຳ ແລະ ບົດທົດສອບສັ້ນ.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|HR",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lo-LA-KeomanyNeural",
+        "supportLang": "LO"
+      },
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|LO|HU",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|HU|lo",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "LO",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-27T10:30:00.000Z",
+      "localDate": "2026-08-27",
+      "localTime": "17:30",
+      "timeZone": "Asia/Vientiane",
+      "slotKey": "lo|2026-08-27T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LO__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLB3kRbTpg1mk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ຮັງກາຣຽນ A1: ຄຳສັບ ແລະ ການອອກສຽງ",
+        "description": "ວິດີໂອ FlashcardsLuna ສຳລັບຜູ້ເວົ້າພາສາລາວທີ່ກຳລັງຮຽນ ຮັງກາຣຽນ: ບັດຄຳສັບ, ການອອກສຽງ, ຊ່ວງພັກເພື່ອຝຶກຊ້ຳ ແລະ ບົດທົດສອບສັ້ນ.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|HU",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lo-LA-KeomanyNeural",
+        "supportLang": "LO"
+      },
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|LO|HY",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|HY|lo",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "LO",
+      "targetLang": "HY",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-27T13:30:00.000Z",
+      "localDate": "2026-08-27",
+      "localTime": "20:30",
+      "timeZone": "Asia/Vientiane",
+      "slotKey": "lo|2026-08-27T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "LO__HY__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLL-aGcoWVRs8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ອາເມນຽນ A1: ຄຳສັບ ແລະ ການອອກສຽງ",
+        "description": "ວິດີໂອ FlashcardsLuna ສຳລັບຜູ້ເວົ້າພາສາລາວທີ່ກຳລັງຮຽນ ອາເມນຽນ: ບັດຄຳສັບ, ການອອກສຽງ, ຊ່ວງພັກເພື່ອຝຶກຊ້ຳ ແລະ ບົດທົດສອບສັ້ນ.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|HY",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lo-LA-KeomanyNeural",
+        "supportLang": "LO"
+      },
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|LO|ID",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|ID|lo",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "LO",
+      "targetLang": "ID",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-08-27T16:30:00.000Z",
+      "localDate": "2026-08-27",
+      "localTime": "23:30",
+      "timeZone": "Asia/Vientiane",
+      "slotKey": "lo|2026-08-27T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LO__ID__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLd2l-_Pb70As",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ອິນໂດເນຊຽນ A1: ຄຳສັບ ແລະ ການອອກສຽງ",
+        "description": "ວິດີໂອ FlashcardsLuna ສຳລັບຜູ້ເວົ້າພາສາລາວທີ່ກຳລັງຮຽນ ອິນໂດເນຊຽນ: ບັດຄຳສັບ, ການອອກສຽງ, ຊ່ວງພັກເພື່ອຝຶກຊ້ຳ ແລະ ບົດທົດສອບສັ້ນ.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|LO|ID",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lo-LA-KeomanyNeural",
+        "supportLang": "LO"
+      },
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|FR",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|FR|pt",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "PT-BR",
+      "targetLang": "FR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-08-26T19:30:00.000Z",
+      "localDate": "2026-08-26",
+      "localTime": "20:30",
+      "timeZone": "Europe/Lisbon",
+      "slotKey": "pt|2026-08-26T19:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck6-bedroom-approved-20260825/video/by-set/home_bedroom_basics_a1/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/FR__Franc_s/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck6-bedroom-approved-20260825/manifest.json",
+        "sha256": "88a9afc3c2afea3fb63dab70fb3e1e3b9f048edbd98d4b99ba6518b439939e6e"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PT-BR__FR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLo82WO05fbhTvXxM3EPL-O5WcGkAtmB4x",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Francês A1: Everyday: flashcards FlashcardsLuna",
+        "description": "Estudando Francês. Tema da lição: FlashcardsLuna. Ouça atentamente a pronúncia dos falantes nativos e repita as palavras nas pausas. Um mini-teste interativo espera por você no final! Pratique baralhos grátis em nosso site",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|FR",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pt-BR-FranciscaNeural",
+        "supportLang": "PT-BR"
+      },
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|HI",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|HI|pt",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "PT-BR",
+      "targetLang": "HI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-08-26T22:30:00.000Z",
+      "localDate": "2026-08-26",
+      "localTime": "23:30",
+      "timeZone": "Europe/Lisbon",
+      "slotKey": "pt|2026-08-26T22:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck6-bedroom-approved-20260825/video/by-set/home_bedroom_basics_a1/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/HI__Hindi/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck6-bedroom-approved-20260825/manifest.json",
+        "sha256": "16c8d5374d0a1412217cfe3255f99cec3636322e4acaaf2a260f0e28bec17137"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PT-BR__HI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLo82WO05fbhSmfIEb7auX7b2WAm_krtPP",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Hindi A1: Everyday: flashcards FlashcardsLuna",
+        "description": "Estudando Hindi. Tema da lição: FlashcardsLuna. Ouça atentamente a pronúncia dos falantes nativos e repita as palavras nas pausas. Um mini-teste interativo espera por você no final! Pratique baralhos grátis em nosso site",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|HI",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pt-BR-FranciscaNeural",
+        "supportLang": "PT-BR"
+      },
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|HR",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|HR|pt",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "PT-BR",
+      "targetLang": "HR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-08-27T07:30:00.000Z",
+      "localDate": "2026-08-27",
+      "localTime": "08:30",
+      "timeZone": "Europe/Lisbon",
+      "slotKey": "pt|2026-08-27T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck6-bedroom-approved-20260825/video/by-set/home_bedroom_basics_a1/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/HR__Croata/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck6-bedroom-approved-20260825/manifest.json",
+        "sha256": "12b103158f20cc17564076d86859ec4981668b4dfb0d67fad6ea06409cf74208"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PT-BR__HR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBQC_ITc1j4o",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Croata A1: Everyday: flashcards FlashcardsLuna",
+        "description": "Estudando Croata. Tema da lição: FlashcardsLuna. Ouça atentamente a pronúncia dos falantes nativos e repita as palavras nas pausas. Um mini-teste interativo espera por você no final! Pratique baralhos grátis em nosso site",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|HR",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pt-BR-FranciscaNeural",
+        "supportLang": "PT-BR"
+      },
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|HU",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|HU|pt",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "PT-BR",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-08-27T10:30:00.000Z",
+      "localDate": "2026-08-27",
+      "localTime": "11:30",
+      "timeZone": "Europe/Lisbon",
+      "slotKey": "pt|2026-08-27T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck6-bedroom-approved-20260825/video/by-set/home_bedroom_basics_a1/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/HU__H_ngaro/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck6-bedroom-approved-20260825/manifest.json",
+        "sha256": "b993349ef6e633e9652238bdd51ef313e01e27a5223d5e1143b1e2027cea1f74"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PT-BR__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLI2ICWY7XbHQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Húngaro A1: Everyday: flashcards FlashcardsLuna",
+        "description": "Estudando Húngaro. Tema da lição: FlashcardsLuna. Ouça atentamente a pronúncia dos falantes nativos e repita as palavras nas pausas. Um mini-teste interativo espera por você no final! Pratique baralhos grátis em nosso site",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|HU",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pt-BR-FranciscaNeural",
+        "supportLang": "PT-BR"
+      },
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|HY",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|HY|pt",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "PT-BR",
+      "targetLang": "HY",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-08-27T13:30:00.000Z",
+      "localDate": "2026-08-27",
+      "localTime": "14:30",
+      "timeZone": "Europe/Lisbon",
+      "slotKey": "pt|2026-08-27T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck6-bedroom-approved-20260825/video/by-set/home_bedroom_basics_a1/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/HY__Arm_nio/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck6-bedroom-approved-20260825/manifest.json",
+        "sha256": "1aef5f00731bec7a55b3be0915f36aa25c71de23bcf33ce14c31477134ae3ef0"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PT-BR__HY__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLHHiHm7ANVj0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Armênio A1: Everyday: flashcards FlashcardsLuna",
+        "description": "Estudando Armênio. Tema da lição: FlashcardsLuna. Ouça atentamente a pronúncia dos falantes nativos e repita as palavras nas pausas. Um mini-teste interativo espera por você no final! Pratique baralhos grátis em nosso site",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|HY",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pt-BR-FranciscaNeural",
+        "supportLang": "PT-BR"
+      },
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|ID",
+      "calendarAssignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|ID|pt",
+      "videoType": "ordinary",
+      "setId": "home_bedroom_basics_a1",
+      "supportLang": "PT-BR",
+      "targetLang": "ID",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "pt",
+      "youtubeChannelId": "UCum2kkNUyqu84_yxDxt-ECA",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-08-27T16:30:00.000Z",
+      "localDate": "2026-08-27",
+      "localTime": "17:30",
+      "timeZone": "Europe/Lisbon",
+      "slotKey": "pt|2026-08-27T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck6-bedroom-approved-20260825/video/by-set/home_bedroom_basics_a1/ordinary/by-channel/pt__PT-BR__LunaCardsPortugues/ID__Indon_sio/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck6-bedroom-approved-20260825/manifest.json",
+        "sha256": "41d348b58864e48ad4967da772cd365959f1ab8dd1a5a9e1e4c4b675d6116abd"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "PT-BR__ID__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLRN6qVPmHw_o",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Indonésio A1: Everyday: flashcards FlashcardsLuna",
+        "description": "Estudando Indonésio. Tema da lição: FlashcardsLuna. Ouça atentamente a pronúncia dos falantes nativos e repita as palavras nas pausas. Um mini-teste interativo espera por você no final! Pratique baralhos grátis em nosso site",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-25T14:59:33.973Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_bedroom_basics_a1|PT-BR|ID",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pt-BR-FranciscaNeural",
+        "supportLang": "PT-BR"
+      },
+      "localSlotIndex": 3
+    }
+  ],
+  "campaignId": "yt-home_bedroom_basics_a1-2026-08-26-5d223eda1f1e",
+  "manifestHash": "bc233da1e4038c054a87eba512b4a7e207a641c6f46aa8f4df68e8a3957a5a9b"
+}
