@@ -180,12 +180,13 @@ function main() {
     }
     const allowedBlockerTypes = new Set(["live_schedule_missing_calendar", "live_video_missing_durable_registry"]);
     const blockers = control.blockers || [];
-    const hasExactMissingState = blockers.length === 2
+    const hasExactMissingState = blockers.length >= 1
+      && blockers.length <= 2
       && blockers.every((row) => row.youtubeVideoId === options.lostReceiptVideoId && allowedBlockerTypes.has(row.type))
-      && new Set(blockers.map((row) => row.type)).size === 2;
+      && new Set(blockers.map((row) => row.type)).size === blockers.length;
     const hasAlreadyReconciledDurableState = blockers.length === 0;
     if (!hasExactMissingState && !hasAlreadyReconciledDurableState) {
-      throw new Error("Lost receipt control blockers are neither the exact missing-calendar plus missing-registry pair nor a clean post-reconciliation state.");
+      throw new Error("Lost receipt control blockers are neither an exact missing-calendar/registry subset nor a clean post-reconciliation state.");
     }
   }
 
@@ -193,14 +194,19 @@ function main() {
   const polyglotRegistry = readJson(options.polyglotRegistry);
   const allRegistries = [ordinaryRegistry, polyglotRegistry];
   const calendar = readJson(options.calendar);
-  if (lostReceiptRequested && (control.blockers || []).length === 0) {
+  if (lostReceiptRequested) {
     const assignment = additionalObservedAssignments[0];
     const live = matches.get(assignment.assignmentKey);
     const registry = assignment.videoType === "polyglot" ? polyglotRegistry : ordinaryRegistry;
     const registryRows = (registry.publications || []).filter((row) => matchesRegistryRow(assignment, row, live.youtubeVideoId));
     const calendarRows = (calendar.reservations || []).filter((row) => matchesCalendarRow(assignment, row, campaign));
-    if (registryRows.length !== 1 || calendarRows.length !== 1 || calendarRows[0].youtubeVideoId !== live.youtubeVideoId) {
-      throw new Error("Clean lost-receipt control requires one exact pre-reconciled registry and calendar receipt.");
+    const blockerTypes = new Set((control.blockers || []).map((row) => row.type));
+    const registryReceiptPresent = registryRows.length === 1;
+    const calendarReceiptPresent = calendarRows.length === 1 && calendarRows[0].youtubeVideoId === live.youtubeVideoId;
+    if (registryRows.length > 1 || calendarRows.length !== 1
+      || blockerTypes.has("live_video_missing_durable_registry") === registryReceiptPresent
+      || blockerTypes.has("live_schedule_missing_calendar") === calendarReceiptPresent) {
+      throw new Error("Lost-receipt blockers do not exactly match the durable registry and calendar state.");
     }
   }
   const reconciledAt = finalizer.generatedAt || new Date().toISOString();
