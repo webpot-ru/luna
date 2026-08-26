@@ -124,6 +124,45 @@ const unsafe = spawnSync(process.execPath, baseArgs, { encoding: "utf8" });
 assert.notEqual(unsafe.status, 0);
 assert.match(unsafe.stderr, /Evidence count mismatch/u);
 
+const partialCampaignRegistry = write("campaigns-partial.json", JSON.parse(fs.readFileSync(campaignRegistry, "utf8")));
+const partialCalendar = write("calendar-partial.json", JSON.parse(fs.readFileSync(calendar, "utf8")));
+const partialOrdinaryRegistry = write("ordinary-partial.json", {
+  publications: [
+    ...JSON.parse(fs.readFileSync(ordinaryRegistry, "utf8")).publications,
+    {
+      ...lost,
+      youtubeVideoId: "video-lost",
+      youtubeVideoUrl: "https://www.youtube.com/watch?v=video-lost",
+      campaignId,
+      campaignManifestHash: manifestHash,
+      publicationStatus: "upload_accepted_reconciliation_required",
+      videoType: "ordinary",
+    },
+  ],
+});
+const partialControl = write("control-partial.json", {
+  ...JSON.parse(fs.readFileSync(control, "utf8")),
+  blockers: [{ type: "live_schedule_missing_calendar", youtubeVideoId: "video-lost" }],
+  publications: [liveAccepted, { ...liveLost, durableRegistryPresent: true }],
+});
+const partialApplied = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/reconcile-youtube-publication-campaign-receipts.mjs"),
+  `--campaign-id=${campaignId}`,
+  `--manifest-hash=${manifestHash}`,
+  `--control-report=${partialControl}`,
+  `--finalizer-report=${finalizer}`,
+  `--campaign-registry=${partialCampaignRegistry}`,
+  `--calendar=${partialCalendar}`,
+  `--ordinary-registry=${partialOrdinaryRegistry}`,
+  `--polyglot-registry=${polyglotRegistry}`,
+  `--lost-receipt-assignment-key=${lost.assignmentKey}`,
+  "--lost-receipt-video-id=video-lost",
+  "--confirm=RECONCILE_LOST_YOUTUBE_UPLOAD_RECEIPT",
+  "--apply",
+], { encoding: "utf8" });
+assert.equal(partialApplied.status, 0, partialApplied.stderr || partialApplied.stdout);
+assert.equal(JSON.parse(partialApplied.stdout).missingAssignmentCount, 0);
+
 const applied = spawnSync(process.execPath, [
   ...baseArgs,
   `--lost-receipt-assignment-key=${lost.assignmentKey}`,
