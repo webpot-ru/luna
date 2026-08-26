@@ -59807,8 +59807,8 @@
       "channelHandle": "@lunacardseesti",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-08-29T11:30:00.000Z",
-      "scheduledPublishAt": "2026-08-29T11:30:00.000Z",
+      "publishAt": "2026-08-29T11:30:00Z",
+      "scheduledPublishAt": "2026-08-29T11:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -59825,11 +59825,11 @@
       "uploadedAt": "2026-08-26T12:33:18.021Z",
       "lastReadbackAt": "2026-08-26T12:33:18.021Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-08-29T11:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -60143,8 +60143,8 @@
       "channelHandle": "@lunacardsindonesia",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-08-29T13:30:00.000Z",
-      "scheduledPublishAt": "2026-08-29T13:30:00.000Z",
+      "publishAt": "2026-08-29T13:30:00Z",
+      "scheduledPublishAt": "2026-08-29T13:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -60161,11 +60161,11 @@
       "uploadedAt": "2026-08-26T12:24:08.152Z",
       "lastReadbackAt": "2026-08-26T12:24:08.152Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-08-29T13:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -60701,8 +60701,8 @@
       "channelHandle": "@lunacardslietuviu",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-08-29T11:30:00.000Z",
-      "scheduledPublishAt": "2026-08-29T11:30:00.000Z",
+      "publishAt": "2026-08-29T11:30:00Z",
+      "scheduledPublishAt": "2026-08-29T11:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -60719,11 +60719,11 @@
       "uploadedAt": "2026-08-26T12:33:04.780Z",
       "lastReadbackAt": "2026-08-26T12:33:04.780Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-08-29T11:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -62055,6 +62055,118 @@
         "privacyStatus": "private",
         "publishAt": "2026-08-29T12:30:00Z",
         "thumbnailStatus": "custom_set"
+      }
+    },
+    {
+      "videoType": "polyglot",
+      "polyglotKey": "polyglot:home_living_room_basics_a1:HU:global_europe_core:7a4233775927",
+      "bundleKey": "global_europe_core",
+      "bundleLabel": "Global Europe Core",
+      "contentScope": "short_unverified",
+      "wordLimit": 30,
+      "videoDurationSeconds": 883.52,
+      "maxDurationSeconds": 895,
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "targetLangsHash": "7a4233775927",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HU",
+      "targetLang": "EN,ES,FR,DE",
+      "playlist_key": "POLYGLOT__HU__global-europe-core__7a4233775927",
+      "title": "Nappali szókincs 4 nyelven: angol, spanyol, francia, német",
+      "youtubeVideoId": "YODCDpH0W1A",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=YODCDpH0W1A",
+      "youtubePlaylistId": "PLLVrbV16aXT0",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLLVrbV16aXT0",
+      "playlistItemId": "UExMVnJiVjE2YVhUMC41MzJCQjBCNDIyRkJDN0VD",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "channelHandle": "@lunacardsmagyar",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publishAt": "2026-08-29T12:30:00.000Z",
+      "scheduledPublishAt": "2026-08-29T12:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "metadataSource": "openai-responses-campaign-batch",
+      "metadataModel": "gpt-5.6-terra",
+      "campaignId": "yt-home_living_room_basics_a1-2026-08-26-4c326ee669a6",
+      "campaignManifestHash": "88d30edaf5b28305cfccf58bac4f97c25a4a8be5a5791a46d35b6836dc922272",
+      "githubRunId": "33013199261",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/33013199261",
+      "uploadedAt": "2026-08-26T21:27:34.452Z",
+      "lastReadbackAt": "2026-08-26T21:27:34.452Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "private",
+        "publishAt": "2026-08-29T12:30:00Z",
+        "thumbnailStatus": "auto_first_frame"
+      }
+    },
+    {
+      "videoType": "polyglot",
+      "polyglotKey": "polyglot:home_living_room_basics_a1:SL:global_europe_core:7a4233775927",
+      "bundleKey": "global_europe_core",
+      "bundleLabel": "Global Europe Core",
+      "contentScope": "short_unverified",
+      "wordLimit": 30,
+      "videoDurationSeconds": 886.08,
+      "maxDurationSeconds": 895,
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "targetLangsHash": "7a4233775927",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "SL",
+      "targetLang": "EN,ES,FR,DE",
+      "playlist_key": "POLYGLOT__SL__global-europe-core__7a4233775927",
+      "title": "Večjezično besedišče: dnevna soba v 4 jezikih",
+      "youtubeVideoId": "pHZ7zkreq54",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=pHZ7zkreq54",
+      "youtubePlaylistId": "PLXFD64K5g6Uk",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLXFD64K5g6Uk",
+      "playlistItemId": "UExYRkQ2NEs1ZzZVay4xMkVGQjNCMUM1N0RFNEUx",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "channelHandle": "@lunacardsslovenscina",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publishAt": "2026-08-29T12:30:00.000Z",
+      "scheduledPublishAt": "2026-08-29T12:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "metadataSource": "openai-responses-campaign-batch",
+      "metadataModel": "gpt-5.6-terra",
+      "campaignId": "yt-home_living_room_basics_a1-2026-08-26-4c326ee669a6",
+      "campaignManifestHash": "88d30edaf5b28305cfccf58bac4f97c25a4a8be5a5791a46d35b6836dc922272",
+      "githubRunId": "33013199261",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/33013199261",
+      "uploadedAt": "2026-08-26T21:26:56.281Z",
+      "lastReadbackAt": "2026-08-26T21:26:56.281Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "private",
+        "publishAt": "2026-08-29T12:30:00Z",
+        "thumbnailStatus": "auto_first_frame"
       }
     }
   ]
