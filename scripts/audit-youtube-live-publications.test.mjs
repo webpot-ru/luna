@@ -8,6 +8,7 @@ import {
   isYoutubeDeletedTombstone,
   markPotentialCurrentSetUnmatched,
   publicationFromRegistryItem,
+  readUploadPlaylistItems,
   validateAuditExclusions,
   youtubeJson,
 } from "./audit-youtube-live-publications.mjs";
@@ -127,6 +128,35 @@ assert.equal(isRetryableYoutubeReadStatus(401), false);
 }
 
 assert.equal(isYoutubeDeletedTombstone({ title: "Deleted video", youtubeStatus: { uploadStatus: "not_returned" } }), true);
+
+{
+  const calls = [];
+  let failedTokenOnce = false;
+  const report = await readUploadPlaylistItems({
+    accessToken: "test-token",
+    uploadsPlaylistId: "UU-test",
+    maxPages: 3,
+    warnImpl: () => {},
+    youtubeJsonImpl: async ({ query }) => {
+      calls.push(query.pageToken);
+      if (!query.pageToken) return { items: [{ contentDetails: { videoId: "first" } }], nextPageToken: "stale-token" };
+      if (!failedTokenOnce) {
+        failedTokenOnce = true;
+        const error = new Error("playlistNotFound");
+        error.status = 404;
+        error.youtubeReason = "playlistNotFound";
+        throw error;
+      }
+      return { items: [{ contentDetails: { videoId: "second" } }] };
+    },
+  });
+  assert.deepEqual(calls, ["", "stale-token", "", "stale-token"]);
+  assert.equal(report.paginationComplete, true);
+  assert.equal(report.playlistNotFound, false);
+  assert.equal(report.paginationRestartCount, 1);
+  assert.equal(report.items.length, 2);
+}
+
 assert.equal(isYoutubeDeletedTombstone({ title: "Deleted video", youtubeStatus: { uploadStatus: "uploaded" } }), false);
 
 const exclusions = validateAuditExclusions({
