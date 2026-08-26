@@ -486,6 +486,23 @@ function hasOnlyEnglishTagBlockers(languageGate) {
     && languageGate.blockers.every((blocker) => /English-template tags$/u.test(blocker));
 }
 
+export function extendLocalizedTitleToMinimum(title, minimumLength, task) {
+  const base = String(title || "").trim();
+  const segments = [
+    base,
+    "FlashcardsLuna",
+    String(task?.template?.targetLanguageName || "").trim(),
+    String(task?.template?.deckTitle || "").trim(),
+  ].filter(Boolean);
+  const uniqueSegments = [...new Set(segments)];
+  for (let count = 1; count <= uniqueSegments.length; count += 1) {
+    const candidate = uniqueSegments.slice(0, count).join(" | ");
+    const length = Array.from(candidate).length;
+    if (length >= minimumLength && length <= 100) return candidate;
+  }
+  return base;
+}
+
 export function finalizeCampaignMetadata(task, generated, provider) {
   const source = provider.backend === "openai"
     ? "openai-responses-campaign-batch"
@@ -501,7 +518,10 @@ export function finalizeCampaignMetadata(task, generated, provider) {
     targetLanguageName: task.template.targetLanguageName,
     deckTitle: task.template.deckTitle,
   });
-  const title = titleFallbackReasons.length === 0 ? generatedTitle : String(task.template.title || "").trim();
+  const localizedTemplateTitle = String(task.template.title || "").trim();
+  const title = titleFallbackReasons.length === 0
+    ? generatedTitle
+    : extendLocalizedTitleToMinimum(localizedTemplateTitle, minimumTitleLength, task);
   if (Array.from(title).length < minimumTitleLength) {
     throw new Error(`${task.assignment.assignmentKey}: title is below ${minimumTitleLength} Unicode characters after localized template fallback`);
   }
