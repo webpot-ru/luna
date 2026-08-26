@@ -277,6 +277,7 @@ assert.match(
   "the nested route workflow must preserve the permissions required by its publication workflows",
 );
 assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?max-parallel: 5\n\s+matrix:/u, "each ordinary project queue must run five physical channels concurrently");
+assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?concurrency: "3"/u, "each ordinary channel must build three videos concurrently");
 assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?max-parallel: 5\n\s+matrix:/u, "each Polyglot project queue must run five physical channels concurrently");
 assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?needs: \[prepare, ordinary\]/u, "each project must start Polyglot after its own ordinary queue");
 assert.match(routeWorkerWorkflow, /inputs\.video_type == 'polyglot' \|\| inputs\.video_type == 'combined'/u, "combined route publication must include Polyglot");
@@ -284,6 +285,7 @@ assert.doesNotMatch(campaignWorkflow, /needs: \[preflight, metadata, ordinary\]/
 assert.match(routeWorkerWorkflow, /campaign_polyglot_rows: \$\{\{ matrix\.polyglot_rows \}\}/u, "the route worker must pass the complete Polyglot sequence for a physical channel");
 const polyglotWorkflow = fs.readFileSync(".github/workflows/youtube-polyglot-video-publish.yml", "utf8");
 const ordinaryWorkflow = fs.readFileSync(".github/workflows/youtube-video-publish.yml", "utf8");
+assert.match(ordinaryWorkflow, /workflow_call:[\s\S]*?concurrency: \{ required: false, type: string, default: "3" \}/u, "ordinary reusable workflow must default to three concurrent video builds");
 assert.match(polyglotWorkflow, /prepare-polyglot-sequence:[\s\S]*?worker_matrix/u, "Polyglot publication must prepare a per-channel sequence");
 assert.match(polyglotWorkflow, /youtube-polyglot-video:\n\s+needs: prepare-polyglot-sequence[\s\S]*?max-parallel: 1[\s\S]*?matrix: \$\{\{ fromJSON\(needs\.prepare-polyglot-sequence\.outputs\.worker_matrix\) \}\}/u, "all Polyglot bundles for one physical channel must stay serial");
 for (const [label, workflow] of [["ordinary", ordinaryWorkflow], ["Polyglot", polyglotWorkflow]]) {

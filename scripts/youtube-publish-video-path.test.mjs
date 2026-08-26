@@ -47,4 +47,9 @@ const result = spawnSync(process.execPath, [
 assert.equal(result.status, 0, result.stderr || result.stdout);
 assert.ok(result.stdout.includes(`video=${renderedVideoPath}`), result.stdout);
 
+const publisherSource = fs.readFileSync("scripts/youtube-publish-video.mjs", "utf8");
+assert.match(publisherSource, /YOUTUBE_UPLOAD_INIT_ATTEMPTS/);
+assert.match(publisherSource, /before media upload/);
+assert.doesNotMatch(publisherSource, /video media upload failed[\s\S]{0,500}retrying/);
+
 console.log("youtube publish video path tests passed");
