@@ -17,6 +17,7 @@ import {
   selectOpenAiMetadataModel,
   DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE,
   buildCampaignMetadataPrompt,
+  extendLocalizedTitleToMinimum,
   finalizeCampaignMetadata,
   generateVectorEngineCampaignMetadataSubBatches,
   loadReusableMetadataCheckpoint,
@@ -244,6 +245,43 @@ assert.deepEqual(turkishMetadata.aiMetadata.titleFallbackReasons, [
   "missing_target_language_name",
   "missing_deck_title",
 ]);
+
+const icelandicOrdinaryTask = {
+  assignment: {
+    assignmentKey: "ordinary|home_living_room_basics_a1|IS|DE",
+    supportLang: "IS",
+    targetLang: "DE",
+    videoType: "ordinary",
+    campaignId: "campaign",
+    campaignManifestHash: "hash",
+    publishAt: "2026-08-27T20:30:00.000Z",
+    playlist: { playlistKey: "IS__DE__ordinary", youtubePlaylistId: "PL-test" },
+  },
+  template: {
+    setId: "home_living_room_basics_a1",
+    supportLang: "IS",
+    targetLang: "DE",
+    targetLanguageName: "Þýska",
+    deckTitle: "Stofan",
+    title: "Þýska: Stofan",
+    description: turkishOrdinaryTask.template.description,
+    tags: ["Þýska", "orðaforði", "FlashcardsLuna"],
+    hashtags: ["#FlashcardsLuna", "#Þýska"],
+  },
+};
+assert.equal(
+  extendLocalizedTitleToMinimum(icelandicOrdinaryTask.template.title, 25, icelandicOrdinaryTask),
+  "Þýska: Stofan | FlashcardsLuna",
+);
+const icelandicMetadata = finalizeCampaignMetadata(icelandicOrdinaryTask, {
+  title: "Deutsch Wohnzimmer",
+  description: icelandicOrdinaryTask.template.description,
+  tags: icelandicOrdinaryTask.template.tags,
+  hashtags: icelandicOrdinaryTask.template.hashtags,
+}, { backend: "openai", backendChain: ["openai"], model: "gpt-test", batchSize: 5 });
+assert.equal(icelandicMetadata.title, "Þýska: Stofan | FlashcardsLuna");
+assert.equal(icelandicMetadata.aiMetadata.titleFallbackToTemplate, true);
+assert.ok(Array.from(icelandicMetadata.title).length >= 25);
 assert.equal(minimumYouTubeTitleLength("TR"), 25);
 assert.equal(minimumYouTubeTitleLength("JA"), 15);
 assert.deepEqual(campaignTitleFallbackReasons({ title: "x".repeat(24), supportLang: "TR" }), ["below_search_intent_minimum"]);
