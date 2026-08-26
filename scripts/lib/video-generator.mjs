@@ -68,6 +68,37 @@ function formatExecError(error) {
   return parts.join(" | ");
 }
 
+export function isUsableEdgeMp3(filePath) {
+  try {
+    const stat = fs.statSync(filePath);
+    if (!stat.isFile() || stat.size < 128) return false;
+    const header = Buffer.alloc(3);
+    const descriptor = fs.openSync(filePath, "r");
+    try {
+      fs.readSync(descriptor, header, 0, header.length, 0);
+    } finally {
+      fs.closeSync(descriptor);
+    }
+    return header.toString("ascii") === "ID3"
+      || (header[0] === 0xff && (header[1] & 0xe0) === 0xe0);
+  } catch {
+    return false;
+  }
+}
+
+export function edgeVoiceCandidates(lang, voiceId) {
+  const primaryVoiceId = String(voiceId);
+  const primaryCleanVoiceId = primaryVoiceId.replace(/^edge_/, "");
+  const candidates = [primaryVoiceId];
+  if (lang === "DE" && primaryCleanVoiceId === "de-DE-KatjaNeural") {
+    candidates.push("edge_de-DE-ConradNeural");
+  }
+  if (lang === "LO" && primaryCleanVoiceId === "lo-LA-KeomanyNeural") {
+    candidates.push("edge_lo-LA-ChanthavongNeural");
+  }
+  return candidates;
+}
+
 async function fetchWithRetry(url, options = {}, retries = 3, backoff = 2000) {
   for (let attempt = 0; attempt < retries; attempt++) {
     const controller = new AbortController();
@@ -406,17 +437,9 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
     }
   }
 
-  const primaryVoiceId = String(voiceId);
-  // Edge TTS occasionally returns a zero-byte file for the Katja German
-  // voice even after the normal retry window. Keep the deterministic primary
-  // cache key, then try the stable German Conrad voice before failing the
-  // whole video build. Other languages and explicitly selected voices keep
-  // their existing single-voice behavior.
-  const primaryCleanVoiceId = primaryVoiceId.replace(/^edge_/, "");
-  const voiceCandidates = [primaryVoiceId];
-  if (lang === "DE" && primaryCleanVoiceId === "de-DE-KatjaNeural") {
-    voiceCandidates.push("edge_de-DE-ConradNeural");
-  }
+  // Keep the configured voice as the deterministic primary. A small, explicit
+  // fallback list covers voices that have returned empty media in production.
+  const voiceCandidates = edgeVoiceCandidates(lang, voiceId);
   
   let venvPath = "edge-tts";
   const localVenvPath = process.platform === "win32"
@@ -434,31 +457,41 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
     const candidateCleanVoiceId = candidateVoiceId.replace(/^edge_/, "");
     const candidateTextHash = crypto.createHash("sha256").update(`${candidateVoiceId}_${cleanedText}`).digest("hex");
     const candidateCachedPath = path.join(cacheDir, `${candidateTextHash}.mp3`);
-    if (fs.existsSync(candidateCachedPath) && fs.statSync(candidateCachedPath).size > 0) {
+    if (isUsableEdgeMp3(candidateCachedPath)) {
       return candidateCachedPath;
     }
     console.log(`[Local TTS] Generating: "${cleanedText.slice(0, 40)}..." using voice ${candidateCleanVoiceId}`);
     for (let attempt = 1; attempt <= retryCount; attempt += 1) {
-      try {
-        if (fs.existsSync(candidateCachedPath)) fs.unlinkSync(candidateCachedPath);
-      } catch (e) {}
+      const temporaryPath = `${candidateCachedPath}.${process.pid}.${crypto.randomUUID()}.tmp.mp3`;
       try {
         execFileSync(venvPath, [
           "--voice", candidateCleanVoiceId,
           "--text", cleanedText,
-          "--write-media", candidateCachedPath
+          "--write-media", temporaryPath
         ], {
           stdio: "pipe",
           timeout: positiveIntegerEnv("EDGE_TTS_TIMEOUT_MS", 90000),
         });
-        if (fs.existsSync(candidateCachedPath) && fs.statSync(candidateCachedPath).size > 0) {
+        if (isUsableEdgeMp3(temporaryPath)) {
+          // Publish a complete file atomically. Parallel video builds may ask
+          // for the same phrase, but they never delete or read one another's
+          // in-progress cache file.
+          try {
+            fs.renameSync(temporaryPath, candidateCachedPath);
+          } catch (renameError) {
+            // On platforms that do not replace an existing destination, a
+            // concurrent writer may have won the race with the same valid
+            // phrase. Reuse that completed canonical file.
+            if (!isUsableEdgeMp3(candidateCachedPath)) throw renameError;
+            fs.unlinkSync(temporaryPath);
+          }
           return candidateCachedPath;
         }
-        throw new Error("edge-tts wrote an empty audio file.");
+        throw new Error("edge-tts wrote an empty or invalid MP3 file.");
       } catch (err) {
         lastError = err;
         try {
-          if (fs.existsSync(candidateCachedPath)) fs.unlinkSync(candidateCachedPath);
+          if (fs.existsSync(temporaryPath)) fs.unlinkSync(temporaryPath);
         } catch (e) {}
         if (attempt < retryCount) {
           const waitMs = retryBaseMs * Math.pow(2, attempt - 1);
@@ -468,7 +501,7 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
       }
     }
     if (voiceIndex < voiceCandidates.length - 1) {
-      console.warn(`[Local TTS] ${candidateCleanVoiceId} did not produce audio; trying the deterministic German fallback voice.`);
+      console.warn(`[Local TTS] ${candidateCleanVoiceId} did not produce audio; trying the deterministic fallback voice.`);
     }
   }
 

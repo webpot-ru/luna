@@ -2,7 +2,12 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 
-import { fetchDeckCards, resolveOfflineDeckCards } from "./lib/video-generator.mjs";
+import {
+  edgeVoiceCandidates,
+  fetchDeckCards,
+  isUsableEdgeMp3,
+  resolveOfflineDeckCards,
+} from "./lib/video-generator.mjs";
 
 const completeOfflineDeck = {
   cards: {
@@ -18,6 +23,14 @@ const completeOfflineDeck = {
 assert.equal(resolveOfflineDeckCards(completeOfflineDeck, "AZ", "ID")?.length, 1);
 assert.equal(resolveOfflineDeckCards(completeOfflineDeck, "EN", "NO")?.length, 1);
 assert.equal(resolveOfflineDeckCards(completeOfflineDeck, "FR", "ID"), null);
+assert.deepEqual(edgeVoiceCandidates("LO", "edge_lo-LA-KeomanyNeural"), [
+  "edge_lo-LA-KeomanyNeural",
+  "edge_lo-LA-ChanthavongNeural",
+]);
+assert.deepEqual(edgeVoiceCandidates("LO", "edge_lo-LA-ChanthavongNeural"), [
+  "edge_lo-LA-ChanthavongNeural",
+]);
+assert.equal(isUsableEdgeMp3(new URL(import.meta.url)), false);
 
 let databaseCalls = 0;
 await assert.rejects(
@@ -51,5 +64,9 @@ assert.doesNotMatch(compatibilityExporter, /const supportLangs = \[/);
 
 const canonicalExporter = fs.readFileSync("scripts/export-and-upload-deck.mjs", "utf8");
 assert.match(canonicalExporter, /process\.exitCode = 1/);
+
+const videoGeneratorSource = fs.readFileSync("scripts/lib/video-generator.mjs", "utf8");
+assert.match(videoGeneratorSource, /crypto\.randomUUID\(\).*\.tmp\.mp3/);
+assert.doesNotMatch(videoGeneratorSource, /unlinkSync\(candidateCachedPath\)/);
 
 console.log("video-generator offline deck tests passed");
