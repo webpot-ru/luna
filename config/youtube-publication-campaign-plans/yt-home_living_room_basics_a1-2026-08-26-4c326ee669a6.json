@@ -1,0 +1,1962 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-26T20:37:08.886Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_living_room_basics_a1",
+  "inputs": {
+    "supports": "ET,HU,ID,LT,SL",
+    "supportCount": 5,
+    "ordinarySupportCount": 5,
+    "polyglotSupportCount": 2,
+    "ordinaryPerChannel": 7,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "ordinary|home_living_room_basics_a1|ET|EN",
+      "ordinary|home_living_room_basics_a1|ET|ES",
+      "ordinary|home_living_room_basics_a1|HU|BN",
+      "ordinary|home_living_room_basics_a1|HU|CS",
+      "ordinary|home_living_room_basics_a1|HU|DA",
+      "ordinary|home_living_room_basics_a1|HU|DE",
+      "ordinary|home_living_room_basics_a1|HU|EN",
+      "ordinary|home_living_room_basics_a1|HU|EN-GB",
+      "ordinary|home_living_room_basics_a1|HU|ES",
+      "polyglot|home_living_room_basics_a1|HU|global_europe_core|7a4233775927|short_unverified",
+      "ordinary|home_living_room_basics_a1|ID|CS",
+      "ordinary|home_living_room_basics_a1|ID|DA",
+      "ordinary|home_living_room_basics_a1|ID|DE",
+      "ordinary|home_living_room_basics_a1|ID|EN",
+      "ordinary|home_living_room_basics_a1|ID|EN-GB",
+      "ordinary|home_living_room_basics_a1|ID|ES",
+      "ordinary|home_living_room_basics_a1|LT|CS",
+      "ordinary|home_living_room_basics_a1|LT|DA",
+      "ordinary|home_living_room_basics_a1|LT|DE",
+      "ordinary|home_living_room_basics_a1|LT|EN",
+      "ordinary|home_living_room_basics_a1|LT|EN-GB",
+      "ordinary|home_living_room_basics_a1|LT|ES",
+      "ordinary|home_living_room_basics_a1|SL|DA",
+      "ordinary|home_living_room_basics_a1|SL|DE",
+      "ordinary|home_living_room_basics_a1|SL|EN",
+      "ordinary|home_living_room_basics_a1|SL|EN-GB",
+      "ordinary|home_living_room_basics_a1|SL|ES",
+      "polyglot|home_living_room_basics_a1|SL|global_europe_core|7a4233775927|short_unverified"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_living_room_basics_a1-2026-08-26-401e270323ce",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_living_room_basics_a1-2026-08-26-401e270323ce",
+      "manifestHash": "79e715e69b194100224eb3726abb3ee19efe9fc626b1adca02d4b6df42efaea6",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-3",
+        "generatedAt": "2026-08-26T20:21:01.714Z",
+        "ageMinutes": 16.119533333333333,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-6",
+        "generatedAt": "2026-08-26T20:20:57.747Z",
+        "ageMinutes": 16.18565,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-1",
+        "generatedAt": "2026-08-26T20:21:09.532Z",
+        "ageMinutes": 15.989233333333333,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot-after.json",
+        "exists": true,
+        "sha256": "34126fedc47a1e3f24251188cd8387edb8600591a40497f5124071c729a56aba"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "95374e8eae3e10e013d819280a484f40d71b3e9306e1c512bfa30b31ad6cf825"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "869f5515008897e3d7537212d9e48afcff0ef451a0be445b39e2b0e8a11cce47"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "94793b62cb5c9cd0111b3f59fd0773ffc0bb593176d21c62a48db5a812d3daf8"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_living_room_basics_a1.json",
+        "exists": true,
+        "sha256": "25b2ac634f3735d669d64ea62c266e32eef06cbc38bf9ac88c0acbfff535247f"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "7411d37b5bb0a70ac414def88445bc8c2caa4ac34b97613f146f53c33a423bfd"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-after.json",
+        "exists": true,
+        "sha256": "c9fcfa85d1a5bad0b3f9fe48904ea68c4b2ba6b71d47a04937083156ec7b01d8"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 2,
+    "supportCount": 5,
+    "ordinaryCount": 26,
+    "polyglotCount": 2,
+    "assignmentCount": 28,
+    "firstPublishAt": "2026-08-28T09:30:00.000Z",
+    "lastPublishAt": "2026-08-29T12:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 28,
+    "existingPlaylistCount": 28,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 6,
+      "youtube-3": 14,
+      "youtube-6": 8
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 28,
+    "estimatedPlaylistItemInsertUnits": 1400,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 1400,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 6,
+        "estimatedGeneralQuotaUnitsMaximum": 300
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 14,
+        "estimatedGeneralQuotaUnitsMaximum": 700
+      },
+      "youtube-6": {
+        "estimatedVideoUploadCalls": 8,
+        "estimatedGeneralQuotaUnitsMaximum": 400
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "HU: short_unverified <=895s",
+    "SL: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|ET|EN",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|ET|EN|et",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "ET",
+      "targetLang": "EN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-28T20:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "23:30",
+      "timeZone": "Europe/Tallinn",
+      "slotKey": "et|2026-08-28T20:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ET__EN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLSzlbZS0FhfbGK9YX8Z1yRzbuBASxXMvo",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Inglise A1: sõnavara ja hääldus",
+        "description": "FlashcardsLuna videod eesti keelt kõnelevatele õppijatele, kes õpivad Inglise: sõnakaardid, hääldus, kordamispausid ja lühikesed minitestid.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|ET|EN",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_et-EE-AnuNeural",
+        "supportLang": "ET"
+      },
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|ET|ES",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|ET|ES|et",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "ET",
+      "targetLang": "ES",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-29T08:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "11:30",
+      "timeZone": "Europe/Tallinn",
+      "slotKey": "et|2026-08-29T08:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ET__ES__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLSzlbZS0FhfZrSerlLbndv6hC3wAFRhkq",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Hispaania A1: sõnavara ja hääldus",
+        "description": "FlashcardsLuna videod eesti keelt kõnelevatele õppijatele, kes õpivad Hispaania: sõnakaardid, hääldus, kordamispausid ja lühikesed minitestid.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|ET|ES",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_et-EE-AnuNeural",
+        "supportLang": "ET"
+      },
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HU|BN",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HU|BN|hu",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HU",
+      "targetLang": "BN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-08-28T09:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "11:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-08-28T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__BN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL69POo7FXhRL9C4ngORDDA5EbZ9sw-f22",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Bangla A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Bangla nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HU|BN",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HU|CS",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HU|CS|hu",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HU",
+      "targetLang": "CS",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-08-28T12:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "14:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-08-28T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__CS__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL69POo7FXhRL02ob4aLcoFoVRCFrXJZQz",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Cseh A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Cseh nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HU|CS",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HU|DA",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HU|DA|hu",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HU",
+      "targetLang": "DA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-08-28T15:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "17:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-08-28T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__DA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL69POo7FXhRJtOo0mc_1pwQjW0iqY5YTE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Dán A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Dán nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HU|DA",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HU|DE",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HU|DE|hu",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HU",
+      "targetLang": "DE",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-08-28T18:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "20:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-08-28T18:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__DE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL69POo7FXhRKXnr61blgodnTP426Szysd",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Német A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Német nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HU|DE",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HU|EN",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HU|EN|hu",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HU",
+      "targetLang": "EN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-08-28T21:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "23:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-08-28T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__EN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL69POo7FXhRLnCxjWpiAX1SkJ6wBHBljr",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Angol A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Angol nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HU|EN",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HU|EN-GB",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HU|EN-GB|hu",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HU",
+      "targetLang": "EN-GB",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-08-29T06:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "08:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-08-29T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__EN-GB__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL69POo7FXhRL6e6E50a0WCXwgUM19H3aD",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Angol (Egyesült Királyság) A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Angol (Egyesült Királyság) nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HU|EN-GB",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HU|ES",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HU|ES|hu",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HU",
+      "targetLang": "ES",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-08-29T09:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "11:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-08-29T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__ES__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL69POo7FXhRKP6lXGyAOKMiKK032PjrS-",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Spanyol A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Spanyol nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HU|ES",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "polyglot|home_living_room_basics_a1|HU|global_europe_core|7a4233775927|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_living_room_basics_a1|HU|global_europe_core|short_unverified|hu",
+      "videoType": "polyglot",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HU",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsHash": "7a4233775927",
+      "bundleKey": "global_europe_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_living_room_basics_a1:HU:global_europe_core:7a4233775927:short_unverified",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-08-29T12:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "14:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-08-29T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__HU__global-europe-core__7a4233775927",
+        "youtubePlaylistId": "PLLVrbV16aXT0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: angol, spanyol, francia, német",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: angol, spanyol, francia, német. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "polyglot|home_living_room_basics_a1|HU|global_europe_core|7a4233775927|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|ID|CS",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|ID|CS|id",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "ID",
+      "targetLang": "CS",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-08-28T13:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "20:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-08-28T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__CS__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf6QJ7eQtIOv-ZOs-In5nUoqqh6Xn3sBp",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Ceko A1: Everyday: kata",
+        "description": "Belajar Ceko. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|ID|CS",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|ID|DA",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|ID|DA|id",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "ID",
+      "targetLang": "DA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-08-28T16:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "23:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-08-28T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__DA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf6QJ7eQtIOv15iOV928BZeBRi7_Niabf",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Dansk A1: Everyday: kata",
+        "description": "Belajar Dansk. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|ID|DA",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|ID|DE",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|ID|DE|id",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "ID",
+      "targetLang": "DE",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-08-29T01:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "08:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-08-29T01:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__DE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf6QJ7eQtIOsucQLoubDmi-M2paqpl8YM",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Jerman A1: Everyday: kata",
+        "description": "Belajar Jerman. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|ID|DE",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|ID|EN",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|ID|EN|id",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "ID",
+      "targetLang": "EN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-08-29T04:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "11:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-08-29T04:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__EN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf6QJ7eQtIOstm0v8CNHFdIQmz0GGiR6F",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Inggris A1: Everyday: kata",
+        "description": "Belajar Inggris. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|ID|EN",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|ID|EN-GB",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|ID|EN-GB|id",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "ID",
+      "targetLang": "EN-GB",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-08-29T07:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "14:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-08-29T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__EN-GB__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf6QJ7eQtIOvItfLzVNRkYQH2ClGgG7Lh",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Inggris (Inggris Raya) A1: Everyday: kata",
+        "description": "Belajar Inggris (Inggris Raya). Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|ID|EN-GB",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|ID|ES",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|ID|ES|id",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "ID",
+      "targetLang": "ES",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-08-29T10:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "17:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-08-29T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__ES__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf6QJ7eQtIOuwBHpDJJgUiYRgyFeDFx9d",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Spanyol A1: Everyday: kata",
+        "description": "Belajar Spanyol. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|ID|ES",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|LT|CS",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|LT|CS|lt",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "LT",
+      "targetLang": "CS",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-28T11:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "14:30",
+      "timeZone": "Europe/Vilnius",
+      "slotKey": "lt|2026-08-28T11:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LT__CS__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAy7CrRODEjmFFhZJ83PjyluSypsJyDGW",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Čekų A1: žodynas ir tarimas",
+        "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Čekų: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|LT|CS",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lt-LT-OnaNeural",
+        "supportLang": "LT"
+      },
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|LT|DA",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|LT|DA|lt",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "LT",
+      "targetLang": "DA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-28T14:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "17:30",
+      "timeZone": "Europe/Vilnius",
+      "slotKey": "lt|2026-08-28T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LT__DA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAy7CrRODEjnPTvmPE_3DyxjXPjb922nX",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Danų A1: žodynas ir tarimas",
+        "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Danų: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|LT|DA",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lt-LT-OnaNeural",
+        "supportLang": "LT"
+      },
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|LT|DE",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|LT|DE|lt",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "LT",
+      "targetLang": "DE",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-28T17:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "20:30",
+      "timeZone": "Europe/Vilnius",
+      "slotKey": "lt|2026-08-28T17:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LT__DE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAy7CrRODEjkwtt5XmnHLJ7kB6QKsqXkE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Vokiečių A1: žodynas ir tarimas",
+        "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Vokiečių: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|LT|DE",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lt-LT-OnaNeural",
+        "supportLang": "LT"
+      },
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|LT|EN",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|LT|EN|lt",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "LT",
+      "targetLang": "EN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-28T20:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "23:30",
+      "timeZone": "Europe/Vilnius",
+      "slotKey": "lt|2026-08-28T20:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LT__EN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAy7CrRODEjmePVIsA0ZTLr-9xubHl9tO",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Anglų A1: žodynas ir tarimas",
+        "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Anglų: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|LT|EN",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lt-LT-OnaNeural",
+        "supportLang": "LT"
+      },
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|LT|EN-GB",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|LT|EN-GB|lt",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "LT",
+      "targetLang": "EN-GB",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-29T05:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "08:30",
+      "timeZone": "Europe/Vilnius",
+      "slotKey": "lt|2026-08-29T05:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LT__EN-GB__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAy7CrRODEjmek6synjaqc4iSv8iVOdkb",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Anglų (Jungtinė Karalystė) A1: žodynas ir tarimas",
+        "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Anglų (Jungtinė Karalystė): kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|LT|EN-GB",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lt-LT-OnaNeural",
+        "supportLang": "LT"
+      },
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|LT|ES",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|LT|ES|lt",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "LT",
+      "targetLang": "ES",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-29T08:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "11:30",
+      "timeZone": "Europe/Vilnius",
+      "slotKey": "lt|2026-08-29T08:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LT__ES__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAy7CrRODEjmr9VdiTygH5TRdTwSnLyyn",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Ispanų A1: žodynas ir tarimas",
+        "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Ispanų: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|LT|ES",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lt-LT-OnaNeural",
+        "supportLang": "LT"
+      },
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|SL|DA",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|SL|DA|sl",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "SL",
+      "targetLang": "DA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-28T15:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "17:30",
+      "timeZone": "Europe/Ljubljana",
+      "slotKey": "sl|2026-08-28T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SL__DA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLrRO7cv1Ua_QhSmQHmCPHLgaTGPxQfHFk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Danščina A1: besedišče in izgovorjava",
+        "description": "Videi FlashcardsLuna za slovensko govoreče, ki se učijo Danščina: kartice, izgovorjava, premori za ponavljanje in kratki mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|SL|DA",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sl-SI-RokNeural",
+        "supportLang": "SL"
+      },
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|SL|DE",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|SL|DE|sl",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "SL",
+      "targetLang": "DE",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-28T18:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "20:30",
+      "timeZone": "Europe/Ljubljana",
+      "slotKey": "sl|2026-08-28T18:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SL__DE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLrRO7cv1Ua_Sldfh-NufsOIWwjwDFS46q",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Nemščina A1: besedišče in izgovorjava",
+        "description": "Videi FlashcardsLuna za slovensko govoreče, ki se učijo Nemščina: kartice, izgovorjava, premori za ponavljanje in kratki mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|SL|DE",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sl-SI-RokNeural",
+        "supportLang": "SL"
+      },
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|SL|EN",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|SL|EN|sl",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "SL",
+      "targetLang": "EN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-28T21:30:00.000Z",
+      "localDate": "2026-08-28",
+      "localTime": "23:30",
+      "timeZone": "Europe/Ljubljana",
+      "slotKey": "sl|2026-08-28T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SL__EN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLrRO7cv1Ua_TPq387DCcO4dDYZqEpS88t",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Angleščina A1: besedišče in izgovorjava",
+        "description": "Videi FlashcardsLuna za slovensko govoreče, ki se učijo Angleščina: kartice, izgovorjava, premori za ponavljanje in kratki mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|SL|EN",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sl-SI-RokNeural",
+        "supportLang": "SL"
+      },
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|SL|EN-GB",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|SL|EN-GB|sl",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "SL",
+      "targetLang": "EN-GB",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-29T06:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "08:30",
+      "timeZone": "Europe/Ljubljana",
+      "slotKey": "sl|2026-08-29T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SL__EN-GB__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLrRO7cv1Ua_QCEgoC69vPhu_HOhjTc7bI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Angleščina (Združeno kraljestvo) A1: besedišče in izgovorjava",
+        "description": "Videi FlashcardsLuna za slovensko govoreče, ki se učijo Angleščina (Združeno kraljestvo): kartice, izgovorjava, premori za ponavljanje in kratki mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|SL|EN-GB",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sl-SI-RokNeural",
+        "supportLang": "SL"
+      },
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|SL|ES",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|SL|ES|sl",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "SL",
+      "targetLang": "ES",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "contentScope": "",
+      "polyglotKey": "",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-29T09:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "11:30",
+      "timeZone": "Europe/Ljubljana",
+      "slotKey": "sl|2026-08-29T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SL__ES__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLrRO7cv1Ua_RgW01mgrHjpMFGpGln2nhB",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Španščina A1: besedišče in izgovorjava",
+        "description": "Videi FlashcardsLuna za slovensko govoreče, ki se učijo Španščina: kartice, izgovorjava, premori za ponavljanje in kratki mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|SL|ES",
+      "requestedContentScope": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sl-SI-RokNeural",
+        "supportLang": "SL"
+      },
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "polyglot|home_living_room_basics_a1|SL|global_europe_core|7a4233775927|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_living_room_basics_a1|SL|global_europe_core|short_unverified|sl",
+      "videoType": "polyglot",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "SL",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsHash": "7a4233775927",
+      "bundleKey": "global_europe_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_living_room_basics_a1:SL:global_europe_core:7a4233775927:short_unverified",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-29T12:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "14:30",
+      "timeZone": "Europe/Ljubljana",
+      "slotKey": "sl|2026-08-29T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__SL__global-europe-core__7a4233775927",
+        "youtubePlaylistId": "PLXFD64K5g6Uk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: angleščina, španščina, francoščina, nemščina",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: angleščina, španščina, francoščina, nemščina. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-26T11:13:31.488Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "polyglot|home_living_room_basics_a1|SL|global_europe_core|7a4233775927|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sl-SI-RokNeural",
+        "supportLang": "SL"
+      },
+      "localSlotIndex": 2
+    }
+  ],
+  "campaignId": "yt-home_living_room_basics_a1-2026-08-26-4c326ee669a6",
+  "manifestHash": "88d30edaf5b28305cfccf58bac4f97c25a4a8be5a5791a46d35b6836dc922272"
+}
