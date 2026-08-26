@@ -283,14 +283,23 @@ async function readAuthorizedChannel({ accessToken, expectedChannelId }) {
   return item;
 }
 
-async function readUploadPlaylistItems({ accessToken, uploadsPlaylistId, maxPages }) {
-  const items = [];
-  let pageToken = "";
-  let pagesRead = 0;
-  for (let page = 0; page < maxPages; page += 1) {
+async function readUploadPlaylistItems({
+  accessToken,
+  uploadsPlaylistId,
+  maxPages,
+  youtubeJsonImpl = youtubeJson,
+  warnImpl = console.warn,
+  maxPaginationRestarts = 1,
+}) {
+  for (let restart = 0; restart <= maxPaginationRestarts; restart += 1) {
+    const items = [];
+    let pageToken = "";
+    let pagesRead = 0;
+    let restartPagination = false;
+    for (let page = 0; page < maxPages; page += 1) {
     let response;
     try {
-      response = await youtubeJson({
+      response = await youtubeJsonImpl({
         accessToken,
         pathName: "playlistItems",
         query: {
@@ -303,6 +312,13 @@ async function readUploadPlaylistItems({ accessToken, uploadsPlaylistId, maxPage
       });
     } catch (error) {
       if (error.status === 404 && error.youtubeReason === "playlistNotFound") {
+        if (pageToken && pagesRead > 0 && restart < maxPaginationRestarts) {
+          warnImpl(
+            `[YOUTUBE_PAGINATION_RESTART] uploads playlist ${uploadsPlaylistId} returned playlistNotFound after ${pagesRead} page(s); restarting once from the first page.`,
+          );
+          restartPagination = true;
+          break;
+        }
         return {
           items,
           pagesRead,
@@ -316,6 +332,7 @@ async function readUploadPlaylistItems({ accessToken, uploadsPlaylistId, maxPage
             youtubePath: error.youtubePath || "playlistItems",
             responseBody: error.responseBody || "",
           },
+          paginationRestartCount: restart,
         };
       }
       throw error;
@@ -324,15 +341,19 @@ async function readUploadPlaylistItems({ accessToken, uploadsPlaylistId, maxPage
     items.push(...(response.items || []));
     pageToken = response.nextPageToken || "";
     if (!pageToken) break;
+    }
+    if (restartPagination) continue;
+    return {
+      items,
+      pagesRead,
+      paginationComplete: !pageToken,
+      nextPageTokenPresent: Boolean(pageToken),
+      playlistNotFound: false,
+      playlistError: null,
+      paginationRestartCount: restart,
+    };
   }
-  return {
-    items,
-    pagesRead,
-    paginationComplete: !pageToken,
-    nextPageTokenPresent: Boolean(pageToken),
-    playlistNotFound: false,
-    playlistError: null,
-  };
+  throw new Error(`Uploads playlist ${uploadsPlaylistId} exhausted its bounded pagination restart window.`);
 }
 
 async function readVideoStatuses({ accessToken, videoIds }) {
@@ -801,6 +822,7 @@ export {
   isYoutubeDeletedTombstone,
   markPotentialCurrentSetUnmatched,
   publicationFromRegistryItem,
+  readUploadPlaylistItems,
   validateAuditExclusions,
   youtubeJson,
 };
