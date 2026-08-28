@@ -1,0 +1,833 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-28T15:52:51.428Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_living_room_basics_a1",
+  "inputs": {
+    "supports": "BG,ET,KO",
+    "supportCount": 3,
+    "ordinarySupportCount": 2,
+    "polyglotSupportCount": 1,
+    "ordinaryPerChannel": 8,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "ordinary|home_living_room_basics_a1|BG|JA",
+      "ordinary|home_living_room_basics_a1|BG|KA",
+      "ordinary|home_living_room_basics_a1|BG|KK",
+      "ordinary|home_living_room_basics_a1|BG|KM",
+      "ordinary|home_living_room_basics_a1|BG|KN",
+      "ordinary|home_living_room_basics_a1|BG|KO",
+      "ordinary|home_living_room_basics_a1|BG|LO",
+      "ordinary|home_living_room_basics_a1|BG|LT",
+      "polyglot|home_living_room_basics_a1|ET|east_asia_core|69af08ca98ea|short_unverified",
+      "ordinary|home_living_room_basics_a1|KO|LT"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_living_room_basics_a1-2026-08-28-7620e3262c87",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_living_room_basics_a1-2026-08-28-7620e3262c87",
+      "manifestHash": "329dcb66fa0cb625c5c8ff5f34d40cb5829ee31a8953bf59baccd2e866c3450d",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-3",
+        "generatedAt": "2026-08-28T15:44:02.759Z",
+        "ageMinutes": 8.81115,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-5",
+        "generatedAt": "2026-08-28T15:44:04.131Z",
+        "ageMinutes": 8.788283333333334,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "16d3cba0e0f77f7073721f2460eb3603697ebd7c2467ca1f6a851ca87aba857e"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "d73a59d2869b640bfb2cf99560b218ff99ee450635af8a681e73068078f06022"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "cadf786edb8d4fe66239bc1740bd833dd0fd6f0d54397ff0e756142ac40a9ce9"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "94793b62cb5c9cd0111b3f59fd0773ffc0bb593176d21c62a48db5a812d3daf8"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_living_room_basics_a1.json",
+        "exists": true,
+        "sha256": "25b2ac634f3735d669d64ea62c266e32eef06cbc38bf9ac88c0acbfff535247f"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "7411d37b5bb0a70ac414def88445bc8c2caa4ac34b97613f146f53c33a423bfd"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "32e21b9e73212b6170b9574af267556d0cdf968f106c15462e2f20386f159b2c"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 1,
+    "supportCount": 3,
+    "ordinaryCount": 9,
+    "polyglotCount": 1,
+    "assignmentCount": 10,
+    "firstPublishAt": "2026-08-31T11:30:00.000Z",
+    "lastPublishAt": "2026-09-01T17:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 10,
+    "existingPlaylistCount": 10,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-3": 9,
+      "youtube-5": 1
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 10,
+    "estimatedPlaylistItemInsertUnits": 500,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 500,
+    "byRoute": {
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 9,
+        "estimatedGeneralQuotaUnitsMaximum": 450
+      },
+      "youtube-5": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "ET: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|BG|JA",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|BG|JA|bg",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "BG",
+      "targetLang": "JA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_bg-BG-KalinaNeural",
+        "supportLang": "BG"
+      },
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-31T11:30:00.000Z",
+      "localDate": "2026-08-31",
+      "localTime": "14:30",
+      "timeZone": "Europe/Sofia",
+      "slotKey": "bg|2026-08-31T11:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "BG__JA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLNpGLUVQsU-o",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Японски A1: думи и произношение",
+        "description": "FlashcardsLuna видеа за българскоговорящи, които учат Японски: карти с думи, произношение, паузи за повторение и кратки мини тестове.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-28T10:50:38.132Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|BG|JA",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|BG|KA",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|BG|KA|bg",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "BG",
+      "targetLang": "KA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_bg-BG-KalinaNeural",
+        "supportLang": "BG"
+      },
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-31T14:30:00.000Z",
+      "localDate": "2026-08-31",
+      "localTime": "17:30",
+      "timeZone": "Europe/Sofia",
+      "slotKey": "bg|2026-08-31T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "BG__KA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLe2QgmOeN3_k",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Грузински A1: думи и произношение",
+        "description": "FlashcardsLuna видеа за българскоговорящи, които учат Грузински: карти с думи, произношение, паузи за повторение и кратки мини тестове.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-28T10:50:38.132Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|BG|KA",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|BG|KK",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|BG|KK|bg",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "BG",
+      "targetLang": "KK",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_bg-BG-KalinaNeural",
+        "supportLang": "BG"
+      },
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-31T17:30:00.000Z",
+      "localDate": "2026-08-31",
+      "localTime": "20:30",
+      "timeZone": "Europe/Sofia",
+      "slotKey": "bg|2026-08-31T17:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "BG__KK__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLOkSNfUEuTgc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Казахски A1: думи и произношение",
+        "description": "FlashcardsLuna видеа за българскоговорящи, които учат Казахски: карти с думи, произношение, паузи за повторение и кратки мини тестове.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-28T10:50:38.132Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|BG|KK",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|BG|KM",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|BG|KM|bg",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "BG",
+      "targetLang": "KM",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_bg-BG-KalinaNeural",
+        "supportLang": "BG"
+      },
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-31T20:30:00.000Z",
+      "localDate": "2026-08-31",
+      "localTime": "23:30",
+      "timeZone": "Europe/Sofia",
+      "slotKey": "bg|2026-08-31T20:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "BG__KM__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLGmzPPmDrQN4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Кхмерски A1: думи и произношение",
+        "description": "FlashcardsLuna видеа за българскоговорящи, които учат Кхмерски: карти с думи, произношение, паузи за повторение и кратки мини тестове.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-28T10:50:38.132Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|BG|KM",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|BG|KN",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|BG|KN|bg",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "BG",
+      "targetLang": "KN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_bg-BG-KalinaNeural",
+        "supportLang": "BG"
+      },
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-01T05:30:00.000Z",
+      "localDate": "2026-09-01",
+      "localTime": "08:30",
+      "timeZone": "Europe/Sofia",
+      "slotKey": "bg|2026-09-01T05:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "BG__KN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLEPQ5Xke_Dqs",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Каннада A1: думи и произношение",
+        "description": "FlashcardsLuna видеа за българскоговорящи, които учат Каннада: карти с думи, произношение, паузи за повторение и кратки мини тестове.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-28T10:50:38.132Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|BG|KN",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|BG|KO",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|BG|KO|bg",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "BG",
+      "targetLang": "KO",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_bg-BG-KalinaNeural",
+        "supportLang": "BG"
+      },
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-01T08:30:00.000Z",
+      "localDate": "2026-09-01",
+      "localTime": "11:30",
+      "timeZone": "Europe/Sofia",
+      "slotKey": "bg|2026-09-01T08:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "BG__KO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLVXDQXPZkbm4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Корейски A1: думи и произношение",
+        "description": "FlashcardsLuna видеа за българскоговорящи, които учат Корейски: карти с думи, произношение, паузи за повторение и кратки мини тестове.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-28T10:50:38.132Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|BG|KO",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|BG|LO",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|BG|LO|bg",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "BG",
+      "targetLang": "LO",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_bg-BG-KalinaNeural",
+        "supportLang": "BG"
+      },
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-01T11:30:00.000Z",
+      "localDate": "2026-09-01",
+      "localTime": "14:30",
+      "timeZone": "Europe/Sofia",
+      "slotKey": "bg|2026-09-01T11:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "BG__LO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLTKNJFjOCCMM",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Лаоски A1: думи и произношение",
+        "description": "FlashcardsLuna видеа за българскоговорящи, които учат Лаоски: карти с думи, произношение, паузи за повторение и кратки мини тестове.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-28T10:50:38.132Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|BG|LO",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|BG|LT",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|BG|LT|bg",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "BG",
+      "targetLang": "LT",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_bg-BG-KalinaNeural",
+        "supportLang": "BG"
+      },
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-01T14:30:00.000Z",
+      "localDate": "2026-09-01",
+      "localTime": "17:30",
+      "timeZone": "Europe/Sofia",
+      "slotKey": "bg|2026-09-01T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "BG__LT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLRa7rmhx6Tk8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Литовски A1: думи и произношение",
+        "description": "FlashcardsLuna видеа за българскоговорящи, които учат Литовски: карти с думи, произношение, паузи за повторение и кратки мини тестове.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-28T10:50:38.132Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|BG|LT",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "polyglot|home_living_room_basics_a1|ET|east_asia_core|69af08ca98ea|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_living_room_basics_a1|ET|east_asia_core|short_unverified|et",
+      "videoType": "polyglot",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "ET",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_living_room_basics_a1:ET:east_asia_core:69af08ca98ea:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_et-EE-AnuNeural",
+        "supportLang": "ET"
+      },
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-01T17:30:00.000Z",
+      "localDate": "2026-09-01",
+      "localTime": "20:30",
+      "timeZone": "Europe/Tallinn",
+      "slotKey": "et|2026-09-01T17:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__ET__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLM0Ujiy94WPM",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: hiina, jaapani, korea",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: hiina, jaapani, korea. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-28T10:50:38.132Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "polyglot|home_living_room_basics_a1|ET|east_asia_core|69af08ca98ea|short_unverified",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|KO|LT",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|KO|LT|ko",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "KO",
+      "targetLang": "LT",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ko-KR-InJoonNeural",
+        "supportLang": "KO"
+      },
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-09-01T14:30:00.000Z",
+      "localDate": "2026-09-01",
+      "localTime": "23:30",
+      "timeZone": "Asia/Seoul",
+      "slotKey": "ko|2026-09-01T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "KO__LT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLEi646A9dZ5Q",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "리투아니아어 A1: Everyday: 단어",
+        "description": "리투아니아어 공부하기. 오늘의 주제는 FlashcardsLuna입니다. 원어민의 발음을 잘 듣고 따라 해보세요. 마지막에는 퀴즈가 준비되어 있습니다! 웹사이트에서 무료로 카드 세트를 연습하세요",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-28T10:50:38.132Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-5",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-5",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|KO|LT",
+      "localSlotIndex": 5
+    }
+  ],
+  "campaignId": "yt-home_living_room_basics_a1-2026-08-28-2dbeb2e0df4f",
+  "manifestHash": "5d1edc48a73cbc8e1cb65cd27f88e8c867961f6d42c674978bfce2161952ef3d"
+}
