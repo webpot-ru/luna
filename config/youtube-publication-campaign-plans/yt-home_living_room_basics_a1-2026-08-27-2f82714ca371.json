@@ -1,0 +1,1085 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-27T18:30:36.860Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_living_room_basics_a1",
+  "inputs": {
+    "supports": "HY,LT",
+    "supportCount": 2,
+    "ordinarySupportCount": 2,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 9,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|home_living_room_basics_a1|HY|ES-419",
+      "ordinary|home_living_room_basics_a1|HY|ET",
+      "ordinary|home_living_room_basics_a1|HY|FI",
+      "ordinary|home_living_room_basics_a1|HY|FR",
+      "ordinary|home_living_room_basics_a1|HY|HI",
+      "ordinary|home_living_room_basics_a1|HY|HR",
+      "ordinary|home_living_room_basics_a1|HY|HU",
+      "ordinary|home_living_room_basics_a1|HY|ID",
+      "ordinary|home_living_room_basics_a1|HY|IS",
+      "ordinary|home_living_room_basics_a1|LT|HI",
+      "ordinary|home_living_room_basics_a1|LT|HR",
+      "ordinary|home_living_room_basics_a1|LT|HU",
+      "ordinary|home_living_room_basics_a1|LT|HY",
+      "ordinary|home_living_room_basics_a1|LT|ID"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_living_room_basics_a1-2026-08-27-db36e6795a5f",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_living_room_basics_a1-2026-08-27-db36e6795a5f",
+      "manifestHash": "b518b29e7113ab8cd84d85b0a82c424c349d95cc673525c54774fe8cc51d70aa",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-8",
+        "generatedAt": "2026-08-27T17:39:15.364Z",
+        "ageMinutes": 51.358266666666665,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-3",
+        "generatedAt": "2026-08-27T17:39:06.676Z",
+        "ageMinutes": 51.50306666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "21f104d35f83a26701f464e11ee42b55689594b2ab5d2c8c8ef92aecf3edbf34"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "a25fb8de9c4785f55e4be48f0946a1ff72f734f4db77f4df391de877d6727926"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "96bdb32920980cad3b9448712f7d935cef09ebb5f1e83807636ab108fe38f2b0"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "94793b62cb5c9cd0111b3f59fd0773ffc0bb593176d21c62a48db5a812d3daf8"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_living_room_basics_a1.json",
+        "exists": true,
+        "sha256": "25b2ac634f3735d669d64ea62c266e32eef06cbc38bf9ac88c0acbfff535247f"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "7411d37b5bb0a70ac414def88445bc8c2caa4ac34b97613f146f53c33a423bfd"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "506e7337084f374ed135766a512f9c97faa1d7a24d4b2c846765d37744847fda"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 2,
+    "ordinaryCount": 14,
+    "polyglotCount": 0,
+    "assignmentCount": 14,
+    "firstPublishAt": "2026-08-29T16:30:00.000Z",
+    "lastPublishAt": "2026-08-31T04:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 14,
+    "existingPlaylistCount": 14,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-3": 5,
+      "youtube-8": 9
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 14,
+    "estimatedPlaylistItemInsertUnits": 700,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 700,
+    "byRoute": {
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 5,
+        "estimatedGeneralQuotaUnitsMaximum": 250
+      },
+      "youtube-8": {
+        "estimatedVideoUploadCalls": 9,
+        "estimatedGeneralQuotaUnitsMaximum": 450
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HY|ES-419",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HY|ES-419|hy",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HY",
+      "targetLang": "ES-419",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-08-30T04:30:00.000Z",
+      "localDate": "2026-08-30",
+      "localTime": "08:30",
+      "timeZone": "Asia/Yerevan",
+      "slotKey": "hy|2026-08-30T04:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HY__ES-419__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLZwNB7td1xoA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Իսպաներեն (Լատինական Ամերիկա) A1: Everyday: բառ",
+        "description": "Սովորում ենք Իսպաներեն (Լատինական Ամերիկա)։ Դասի թեման է՝ FlashcardsLuna։ Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ: Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ: Մարզեք հավաքածուները անվճար մեր կայքում",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HY|ES-419",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HY|ET",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HY|ET|hy",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HY",
+      "targetLang": "ET",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-08-29T16:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "20:30",
+      "timeZone": "Asia/Yerevan",
+      "slotKey": "hy|2026-08-29T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HY__ET__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLFyXuibfoOkY",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Էստոներեն A1: Everyday: բառ",
+        "description": "Սովորում ենք Էստոներեն։ Դասի թեման է՝ FlashcardsLuna։ Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ: Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ: Մարզեք հավաքածուները անվճար մեր կայքում",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HY|ET",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HY|FI",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HY|FI|hy",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HY",
+      "targetLang": "FI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-08-29T19:30:00.000Z",
+      "localDate": "2026-08-29",
+      "localTime": "23:30",
+      "timeZone": "Asia/Yerevan",
+      "slotKey": "hy|2026-08-29T19:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HY__FI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLSDAt8JhBtWQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Ֆիններեն A1: Everyday: բառ",
+        "description": "Սովորում ենք Ֆիններեն։ Դասի թեման է՝ FlashcardsLuna։ Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ: Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ: Մարզեք հավաքածուները անվճար մեր կայքում",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HY|FI",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HY|FR",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HY|FR|hy",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HY",
+      "targetLang": "FR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-08-30T07:30:00.000Z",
+      "localDate": "2026-08-30",
+      "localTime": "11:30",
+      "timeZone": "Asia/Yerevan",
+      "slotKey": "hy|2026-08-30T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HY__FR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLRIDxMATN3sU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Ֆրանսերեն A1: Everyday: բառ",
+        "description": "Սովորում ենք Ֆրանսերեն։ Դասի թեման է՝ FlashcardsLuna։ Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ: Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ: Մարզեք հավաքածուները անվճար մեր կայքում",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HY|FR",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HY|HI",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HY|HI|hy",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HY",
+      "targetLang": "HI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-08-30T10:30:00.000Z",
+      "localDate": "2026-08-30",
+      "localTime": "14:30",
+      "timeZone": "Asia/Yerevan",
+      "slotKey": "hy|2026-08-30T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HY__HI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLRJ9x82zGvN4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Հինդի A1: Everyday: բառ",
+        "description": "Սովորում ենք Հինդի։ Դասի թեման է՝ FlashcardsLuna։ Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ: Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ: Մարզեք հավաքածուները անվճար մեր կայքում",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HY|HI",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HY|HR",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HY|HR|hy",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HY",
+      "targetLang": "HR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-08-30T13:30:00.000Z",
+      "localDate": "2026-08-30",
+      "localTime": "17:30",
+      "timeZone": "Asia/Yerevan",
+      "slotKey": "hy|2026-08-30T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HY__HR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLElxV1T8ymC0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Խորվաթերեն A1: Everyday: բառ",
+        "description": "Սովորում ենք Խորվաթերեն։ Դասի թեման է՝ FlashcardsLuna։ Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ: Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ: Մարզեք հավաքածուները անվճար մեր կայքում",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HY|HR",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HY|HU",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HY|HU|hy",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HY",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-08-30T16:30:00.000Z",
+      "localDate": "2026-08-30",
+      "localTime": "20:30",
+      "timeZone": "Asia/Yerevan",
+      "slotKey": "hy|2026-08-30T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HY__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLD-fh80_sd00",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Հունգարերեն A1: Everyday: բառ",
+        "description": "Սովորում ենք Հունգարերեն։ Դասի թեման է՝ FlashcardsLuna։ Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ: Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ: Մարզեք հավաքածուները անվճար մեր կայքում",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HY|HU",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HY|ID",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HY|ID|hy",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HY",
+      "targetLang": "ID",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-08-30T19:30:00.000Z",
+      "localDate": "2026-08-30",
+      "localTime": "23:30",
+      "timeZone": "Asia/Yerevan",
+      "slotKey": "hy|2026-08-30T19:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HY__ID__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLVGEIO6mZiqQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Ինդոնեզերեն A1: Everyday: բառ",
+        "description": "Սովորում ենք Ինդոնեզերեն։ Դասի թեման է՝ FlashcardsLuna։ Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ: Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ: Մարզեք հավաքածուները անվճար մեր կայքում",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HY|ID",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|HY|IS",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|HY|IS|hy",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "HY",
+      "targetLang": "IS",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-08-31T04:30:00.000Z",
+      "localDate": "2026-08-31",
+      "localTime": "08:30",
+      "timeZone": "Asia/Yerevan",
+      "slotKey": "hy|2026-08-31T04:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HY__IS__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLatX_gWVASIQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Իսլանդերեն A1: Everyday: բառ",
+        "description": "Սովորում ենք Իսլանդերեն։ Դասի թեման է՝ FlashcardsLuna։ Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ: Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ: Մարզեք հավաքածուները անվճար մեր կայքում",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|HY|IS",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|LT|HI",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|LT|HI|lt",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "LT",
+      "targetLang": "HI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lt-LT-OnaNeural",
+        "supportLang": "LT"
+      },
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-30T08:30:00.000Z",
+      "localDate": "2026-08-30",
+      "localTime": "11:30",
+      "timeZone": "Europe/Vilnius",
+      "slotKey": "lt|2026-08-30T08:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LT__HI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAy7CrRODEjl0O2YVW7jY9T9spYCkc7z0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Hindi A1: žodynas ir tarimas",
+        "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Hindi: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|LT|HI",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|LT|HR",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|LT|HR|lt",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "LT",
+      "targetLang": "HR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lt-LT-OnaNeural",
+        "supportLang": "LT"
+      },
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-30T11:30:00.000Z",
+      "localDate": "2026-08-30",
+      "localTime": "14:30",
+      "timeZone": "Europe/Vilnius",
+      "slotKey": "lt|2026-08-30T11:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LT__HR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLLHK4s2ENnAs",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kroatų A1: žodynas ir tarimas",
+        "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Kroatų: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|LT|HR",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|LT|HU",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|LT|HU|lt",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "LT",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lt-LT-OnaNeural",
+        "supportLang": "LT"
+      },
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-30T14:30:00.000Z",
+      "localDate": "2026-08-30",
+      "localTime": "17:30",
+      "timeZone": "Europe/Vilnius",
+      "slotKey": "lt|2026-08-30T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LT__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLSyZDdKePRmQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Vengrų A1: žodynas ir tarimas",
+        "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Vengrų: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|LT|HU",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|LT|HY",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|LT|HY|lt",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "LT",
+      "targetLang": "HY",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lt-LT-OnaNeural",
+        "supportLang": "LT"
+      },
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-30T17:30:00.000Z",
+      "localDate": "2026-08-30",
+      "localTime": "20:30",
+      "timeZone": "Europe/Vilnius",
+      "slotKey": "lt|2026-08-30T17:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "LT__HY__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLSeb6sAJAf9Y",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Armėnų A1: žodynas ir tarimas",
+        "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Armėnų: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|LT|HY",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_living_room_basics_a1|LT|ID",
+      "calendarAssignmentKey": "ordinary|home_living_room_basics_a1|LT|ID|lt",
+      "videoType": "ordinary",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "LT",
+      "targetLang": "ID",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lt-LT-OnaNeural",
+        "supportLang": "LT"
+      },
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-08-30T20:30:00.000Z",
+      "localDate": "2026-08-30",
+      "localTime": "23:30",
+      "timeZone": "Europe/Vilnius",
+      "slotKey": "lt|2026-08-30T20:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LT__ID__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLOPlW-Pbc0Vc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Indoneziečių A1: žodynas ir tarimas",
+        "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Indoneziečių: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-08-27T15:01:58.678Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_living_room_basics_a1|LT|ID",
+      "localSlotIndex": 5
+    }
+  ],
+  "campaignId": "yt-home_living_room_basics_a1-2026-08-27-2f82714ca371",
+  "manifestHash": "e877a39b4467de11a8956e82f84f2e9cd621077d4117ef5ab652ac4d358ed8fe"
+}
