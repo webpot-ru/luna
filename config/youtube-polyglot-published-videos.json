@@ -65095,8 +65095,8 @@
       "channelHandle": "@lunacardsbulgarski",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-09-01T17:30:00.000Z",
-      "scheduledPublishAt": "2026-09-01T17:30:00.000Z",
+      "publishAt": "2026-09-01T17:30:00Z",
+      "scheduledPublishAt": "2026-09-01T17:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -65113,11 +65113,11 @@
       "uploadedAt": "2026-08-28T12:11:18.711Z",
       "lastReadbackAt": "2026-08-28T12:11:18.711Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-09-01T17:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -66246,8 +66246,8 @@
       "channelHandle": "@lunacardskorean",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-09-01T23:30:00.000Z",
-      "scheduledPublishAt": "2026-09-01T23:30:00.000Z",
+      "publishAt": "2026-09-01T23:30:00Z",
+      "scheduledPublishAt": "2026-09-01T23:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -66264,11 +66264,11 @@
       "uploadedAt": "2026-08-28T12:03:41.530Z",
       "lastReadbackAt": "2026-08-28T12:03:41.530Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-09-01T23:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -67741,6 +67741,61 @@
         "privacyStatus": "private",
         "publishAt": "2026-09-02T00:30:00Z",
         "thumbnailStatus": "custom_set"
+      }
+    },
+    {
+      "videoType": "polyglot",
+      "polyglotKey": "polyglot:home_living_room_basics_a1:ET:east_asia_core:69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "bundleLabel": "East Asia Core",
+      "contentScope": "short_unverified",
+      "wordLimit": 30,
+      "videoDurationSeconds": 664.12,
+      "maxDurationSeconds": 895,
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "targetLangsHash": "69af08ca98ea",
+      "setId": "home_living_room_basics_a1",
+      "supportLang": "ET",
+      "targetLang": "ZH,JA,KO",
+      "playlist_key": "POLYGLOT__ET__east-asia-core__69af08ca98ea",
+      "title": "Polüglot: elutoa sõnavara hiina, jaapani ja korea keeles",
+      "youtubeVideoId": "4bLX-yYR3ec",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=4bLX-yYR3ec",
+      "youtubePlaylistId": "PLM0Ujiy94WPM",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLM0Ujiy94WPM",
+      "playlistItemId": "UExNMFVqaXk5NFdQTS4wOTA3OTZBNzVEMTUzOTMy",
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "channelHandle": "@lunacardseesti",
+      "privacyStatus": "private",
+      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publishAt": "2026-09-01T17:30:00.000Z",
+      "scheduledPublishAt": "2026-09-01T17:30:00.000Z",
+      "desiredPrivacyStatus": "public",
+      "needsVisibilityPromotion": false,
+      "thumbnailSet": false,
+      "thumbnailLogoOverlay": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "thumbnailSource": "youtube-auto-first-frame",
+      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "metadataSource": "openai-responses-campaign-batch",
+      "metadataModel": "gpt-5.6-terra",
+      "campaignId": "yt-home_living_room_basics_a1-2026-08-28-2dbeb2e0df4f",
+      "campaignManifestHash": "5d1edc48a73cbc8e1cb65cd27f88e8c867961f6d42c674978bfce2161952ef3d",
+      "githubRunId": "33187747257",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/33187747257",
+      "uploadedAt": "2026-08-28T16:25:19.665Z",
+      "lastReadbackAt": "2026-08-28T16:25:19.665Z",
+      "readback": {
+        "uploadStatus": "uploaded",
+        "privacyStatus": "private",
+        "publishAt": "2026-09-01T17:30:00Z",
+        "thumbnailStatus": "auto_first_frame"
       }
     }
   ]
