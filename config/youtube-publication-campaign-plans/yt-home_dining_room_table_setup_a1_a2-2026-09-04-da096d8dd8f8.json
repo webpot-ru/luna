@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-04T10:57:28.781Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_dining_room_table_setup_a1_a2",
+  "inputs": {
+    "supports": "MY",
+    "supportCount": 1,
+    "ordinarySupportCount": 0,
+    "polyglotSupportCount": 1,
+    "ordinaryPerChannel": 0,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "polyglot|home_dining_room_table_setup_a1_a2|MY|east_asia_core|69af08ca98ea|full"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_dining_room_table_setup_a1_a2-2026-09-04-cee61a8f48f1",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_dining_room_table_setup_a1_a2-2026-09-04-cee61a8f48f1",
+      "manifestHash": "86fef4d8aae8a2ad21156f38849b87e736222316d2336938c7cce53d0a333262",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-7",
+        "generatedAt": "2026-09-04T10:15:05.574Z",
+        "ageMinutes": 42.386783333333334,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "85dffd96df801f3feac24ebef079fcf33a17745dd1b52aef84d439ac4294dd1c"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "3a368b3676b6df396fb7a2a0adde248299bb4d850560eb6cb4317ba6fbfa8b4f"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "9fc0b054749594c40289cf2d46b35b72bb56dff0bef94e6d8ccd34c6390863d4"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "c06e490953893185b13b4475769c2535eaed2ab31a500ca0e0f6ebc35cf6d60e"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_dining_room_table_setup_a1_a2.json",
+        "exists": true,
+        "sha256": "a5efef7d019b0bd6dd60d838cfa1094cfb0e921a340b0249a897e641b1f84b25"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "7411d37b5bb0a70ac414def88445bc8c2caa4ac34b97613f146f53c33a423bfd"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "387c79924f9532b7d7bbab9d3e65ff415f261dbdfa9b6ebd1f169a33234476f9"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 0,
+    "polyglotCount": 1,
+    "assignmentCount": 1,
+    "firstPublishAt": "2026-09-11T08:00:00.000Z",
+    "lastPublishAt": "2026-09-11T08:00:00.000Z",
+    "customThumbnailCount": 1,
+    "automaticThumbnailCount": 0,
+    "existingPlaylistCount": 1,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-7": 1
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 1,
+    "estimatedPlaylistItemInsertUnits": 50,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 50,
+    "estimatedGeneralQuotaUnitsMaximum": 100,
+    "byRoute": {
+      "youtube-7": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 100
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_dining_room_table_setup_a1_a2|MY|east_asia_core|69af08ca98ea|full",
+      "calendarAssignmentKey": "polyglot-slot|home_dining_room_table_setup_a1_a2|MY|east_asia_core|full|my",
+      "videoType": "polyglot",
+      "setId": "home_dining_room_table_setup_a1_a2",
+      "supportLang": "MY",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "requestedContentScope": "full",
+      "contentScope": "full",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "polyglotKey": "polyglot:home_dining_room_table_setup_a1_a2:MY:east_asia_core:69af08ca98ea:full",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_my-MM-NilarNeural",
+        "supportLang": "MY"
+      },
+      "channelKey": "my",
+      "youtubeChannelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-09-11T08:00:00.000Z",
+      "localDate": "2026-09-11",
+      "localTime": "14:30",
+      "timeZone": "Asia/Yangon",
+      "slotKey": "my|2026-09-11T08:00:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck8-dining-room-approved-20260831/video/by-set/home_dining_room_table_setup_a1_a2/polyglot/by-channel/my__MY__LunaCardsBurmese/MY__east_asia_core__69af08ca98ea__full.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck8-dining-room-approved-20260831/manifest.json",
+        "sha256": "f4f153d7869071af016f51093fc4c183af2e16de49cfdd70f03746e99a214aeb"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__MY__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLQxpok-h4uek",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: တရုတ်, ဂျပန်, ကိုရီးယား",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: တရုတ်, ဂျပန်, ကိုရီးယား. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-04T07:09:21.300Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "sourceAssignmentKey": "polyglot|home_dining_room_table_setup_a1_a2|MY|east_asia_core|69af08ca98ea|full",
+      "localSlotIndex": 2
+    }
+  ],
+  "campaignId": "yt-home_dining_room_table_setup_a1_a2-2026-09-04-da096d8dd8f8",
+  "manifestHash": "673d196bb63c2326e1629b94e61eb9c70d94c7fa415507cddf5eeb819f3032fa"
+}
