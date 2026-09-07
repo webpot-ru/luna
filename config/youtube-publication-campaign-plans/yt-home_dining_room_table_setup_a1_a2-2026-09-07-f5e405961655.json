@@ -1,0 +1,683 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-07T09:36:56.259Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_dining_room_table_setup_a1_a2",
+  "inputs": {
+    "supports": "HU",
+    "supportCount": 1,
+    "ordinarySupportCount": 1,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 8,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|home_dining_room_table_setup_a1_a2|HU|RU",
+      "ordinary|home_dining_room_table_setup_a1_a2|HU|SI",
+      "ordinary|home_dining_room_table_setup_a1_a2|HU|SK",
+      "ordinary|home_dining_room_table_setup_a1_a2|HU|SL",
+      "ordinary|home_dining_room_table_setup_a1_a2|HU|SR",
+      "ordinary|home_dining_room_table_setup_a1_a2|HU|SV",
+      "ordinary|home_dining_room_table_setup_a1_a2|HU|SW",
+      "ordinary|home_dining_room_table_setup_a1_a2|HU|TA"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_dining_room_table_setup_a1_a2-2026-09-07-21bd61d0178b",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_dining_room_table_setup_a1_a2-2026-09-07-21bd61d0178b",
+      "manifestHash": "18abcbbf6c884ea53a7f0d639f05bbcf1d3e6e5366d0591d971280a4aafb716e",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-6",
+        "generatedAt": "2026-09-07T08:41:19.391Z",
+        "ageMinutes": 55.614466666666665,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "/private/tmp/deck8-audit-34089723708.yzFGTz/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "df3e57290bdadb55ac076d62b089699709ff07dc6b2689bef586f4e98f624678"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "71053762411c4f182337babb2d27e11d84e9ac20f2ca7b79d3c1abc86e55efaa"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "d1c02d95a7e6a61c8eb3df90fc9615225fa428f244375f07571aaf1bdd41ba0f"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "c06e490953893185b13b4475769c2535eaed2ab31a500ca0e0f6ebc35cf6d60e"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_dining_room_table_setup_a1_a2.json",
+        "exists": true,
+        "sha256": "a5efef7d019b0bd6dd60d838cfa1094cfb0e921a340b0249a897e641b1f84b25"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "7411d37b5bb0a70ac414def88445bc8c2caa4ac34b97613f146f53c33a423bfd"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "/private/tmp/deck8-audit-34089723708.yzFGTz/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "c179e349f1a052ba839d8252480e2f02b9df504cd3a12c3d49ca74d022fd16e6"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 8,
+    "polyglotCount": 0,
+    "assignmentCount": 8,
+    "firstPublishAt": "2026-09-13T12:30:00.000Z",
+    "lastPublishAt": "2026-09-14T15:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 8,
+    "existingPlaylistCount": 8,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-6": 8
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 8,
+    "estimatedPlaylistItemInsertUnits": 400,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 400,
+    "byRoute": {
+      "youtube-6": {
+        "estimatedVideoUploadCalls": 8,
+        "estimatedGeneralQuotaUnitsMaximum": 400
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|RU",
+      "calendarAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|RU|hu",
+      "videoType": "ordinary",
+      "setId": "home_dining_room_table_setup_a1_a2",
+      "supportLang": "HU",
+      "targetLang": "RU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-09-13T12:30:00.000Z",
+      "localDate": "2026-09-13",
+      "localTime": "14:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-09-13T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__RU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL69POo7FXhRINp1ts7UMAnueDJ1IucSX9",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Orosz A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Orosz nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-07T06:18:47.471Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|RU",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SI",
+      "calendarAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SI|hu",
+      "videoType": "ordinary",
+      "setId": "home_dining_room_table_setup_a1_a2",
+      "supportLang": "HU",
+      "targetLang": "SI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-09-13T15:30:00.000Z",
+      "localDate": "2026-09-13",
+      "localTime": "17:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-09-13T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__SI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLGJ3KMIwgiq8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Szingaléz A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Szingaléz nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-07T06:18:47.471Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SI",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SK",
+      "calendarAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SK|hu",
+      "videoType": "ordinary",
+      "setId": "home_dining_room_table_setup_a1_a2",
+      "supportLang": "HU",
+      "targetLang": "SK",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-09-13T18:30:00.000Z",
+      "localDate": "2026-09-13",
+      "localTime": "20:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-09-13T18:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__SK__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLcMsr8u8d-SU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Szlovák A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Szlovák nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-07T06:18:47.471Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SK",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SL",
+      "calendarAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SL|hu",
+      "videoType": "ordinary",
+      "setId": "home_dining_room_table_setup_a1_a2",
+      "supportLang": "HU",
+      "targetLang": "SL",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-09-13T21:30:00.000Z",
+      "localDate": "2026-09-13",
+      "localTime": "23:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-09-13T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__SL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLck4EMw877O8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Szlovén A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Szlovén nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-07T06:18:47.471Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SL",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SR",
+      "calendarAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SR|hu",
+      "videoType": "ordinary",
+      "setId": "home_dining_room_table_setup_a1_a2",
+      "supportLang": "HU",
+      "targetLang": "SR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-09-14T06:30:00.000Z",
+      "localDate": "2026-09-14",
+      "localTime": "08:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-09-14T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__SR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLcjCAKlaYFGQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Szerb A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Szerb nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-07T06:18:47.471Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SR",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SV",
+      "calendarAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SV|hu",
+      "videoType": "ordinary",
+      "setId": "home_dining_room_table_setup_a1_a2",
+      "supportLang": "HU",
+      "targetLang": "SV",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-09-14T09:30:00.000Z",
+      "localDate": "2026-09-14",
+      "localTime": "11:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-09-14T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__SV__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLFCHoEPtl1TY",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Svéd A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Svéd nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-07T06:18:47.471Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SV",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SW",
+      "calendarAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SW|hu",
+      "videoType": "ordinary",
+      "setId": "home_dining_room_table_setup_a1_a2",
+      "supportLang": "HU",
+      "targetLang": "SW",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-09-14T12:30:00.000Z",
+      "localDate": "2026-09-14",
+      "localTime": "14:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-09-14T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HU__SW__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLNFT8dvFdi68",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Szuahéli A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Szuahéli nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-07T06:18:47.471Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|SW",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|TA",
+      "calendarAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|TA|hu",
+      "videoType": "ordinary",
+      "setId": "home_dining_room_table_setup_a1_a2",
+      "supportLang": "HU",
+      "targetLang": "TA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-09-14T15:30:00.000Z",
+      "localDate": "2026-09-14",
+      "localTime": "17:30",
+      "timeZone": "Europe/Budapest",
+      "slotKey": "hu|2026-09-14T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HU__TA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLYbE0ElMKKDY",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tamil A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Tamil nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-07T06:18:47.471Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "sourceAssignmentKey": "ordinary|home_dining_room_table_setup_a1_a2|HU|TA",
+      "localSlotIndex": 3
+    }
+  ],
+  "campaignId": "yt-home_dining_room_table_setup_a1_a2-2026-09-07-f5e405961655",
+  "manifestHash": "da800087f1eb9492a7e5ab6c585482688fc43c94fe302d02c03d7a0d22ef99fa"
+}
