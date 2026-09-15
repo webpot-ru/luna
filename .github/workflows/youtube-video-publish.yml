@@ -360,6 +360,7 @@ jobs:
           npm run audit:youtube-live-publications -- \
             --set "$SET_ID" \
             --support "$SUPPORT_INPUT" \
+            --max-pages=100 \
             --include-video-status \
             --output=outputs/youtube-live-publications-github.json \
             --json
@@ -982,7 +983,7 @@ jobs:
           LANGS_INPUT: ${{ inputs.langs }}
         run: |
           set -euo pipefail
-          npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORT_INPUT" --include-video-status --output=outputs/youtube-live-publications-github.json --json
+          npm run audit:youtube-live-publications -- --set "$SET_ID" --support "$SUPPORT_INPUT" --max-pages=100 --include-video-status --output=outputs/youtube-live-publications-github.json --json
           CONTROL_ARGS=("--set=$SET_ID" "--support=$SUPPORT_INPUT" "--video-types=ordinary" "--live-audit=outputs/youtube-live-publications-github.json" "--output=outputs/youtube-publication-control-github.json" "--strict")
           if [ -n "$LANGS_INPUT" ]; then CONTROL_ARGS+=("--targets=$LANGS_INPUT" "--block-existing-targets"); fi
           npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
