@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-15T09:59:50.282Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_entryway_outerwear_a1",
+  "inputs": {
+    "supports": "EN",
+    "supportCount": 1,
+    "ordinarySupportCount": 0,
+    "polyglotSupportCount": 1,
+    "ordinaryPerChannel": 0,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "polyglot|home_entryway_outerwear_a1|EN|east_asia_core|69af08ca98ea|full"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_entryway_outerwear_a1-2026-09-14-1a9e750f0478",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_entryway_outerwear_a1-2026-09-14-1a9e750f0478",
+      "manifestHash": "91d4a6ff8c35e13df5c19d6413a668ba52b890cdb019619a053909872446f612",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-1",
+        "generatedAt": "2026-09-15T09:48:16.514Z",
+        "ageMinutes": 11.5628,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "4fba771fc04db9c4d5bd313677c7b7e4e26b5c11a8b29f0772edad1a09f87fdc"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "f88ee443a76a33e526729f36af5a9464c8d1c4379668d0b2712a39fd32d7ce0f"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "0df9e616547e7f81950f32dc3df312e07b577f48811c59104cdb3d1c46b9d347"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "2ab7ccc340f39317871dcc10791bd1e018dea4532f32201f12ada6de42194fe2"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_entryway_outerwear_a1.json",
+        "exists": true,
+        "sha256": "754e809873100cb99c4b8a9e032c44283feb83ead3e29a8c0ec4d73f2002dd25"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "7411d37b5bb0a70ac414def88445bc8c2caa4ac34b97613f146f53c33a423bfd"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "b151808040a60d90deeda10d2c1ad7fc95660a30eb8a18371cf863ac5a34e1be"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 0,
+    "polyglotCount": 1,
+    "assignmentCount": 1,
+    "firstPublishAt": "2026-09-20T12:30:00.000Z",
+    "lastPublishAt": "2026-09-20T12:30:00.000Z",
+    "customThumbnailCount": 1,
+    "automaticThumbnailCount": 0,
+    "existingPlaylistCount": 1,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 1
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 1,
+    "estimatedPlaylistItemInsertUnits": 50,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 50,
+    "estimatedGeneralQuotaUnitsMaximum": 100,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 100
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_entryway_outerwear_a1|EN|east_asia_core|69af08ca98ea|full",
+      "calendarAssignmentKey": "polyglot-slot|home_entryway_outerwear_a1|EN|east_asia_core|full|en",
+      "videoType": "polyglot",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "EN",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "requestedContentScope": "full",
+      "contentScope": "full",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "polyglotKey": "polyglot:home_entryway_outerwear_a1:EN:east_asia_core:69af08ca98ea:full",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_en-US-JennyNeural",
+        "supportLang": "EN"
+      },
+      "channelKey": "en",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-09-20T12:30:00.000Z",
+      "localDate": "2026-09-20",
+      "localTime": "08:30",
+      "timeZone": "America/New_York",
+      "slotKey": "en|2026-09-20T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/polyglot/by-channel/en__EN__flashcardsluna/EN__east_asia_core__69af08ca98ea__full.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "538bf472237ea48210570f7f5013ef7c5f07f392c0952490bb25fbc760c1d4a9"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__EN__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLM3hzWEUA26A",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: Chinese, Japanese, Korean",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Chinese, Japanese, Korean. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-14T16:00:55.731Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "polyglot|home_entryway_outerwear_a1|EN|east_asia_core|69af08ca98ea|full",
+      "localSlotIndex": 0
+    }
+  ],
+  "campaignId": "yt-home_entryway_outerwear_a1-2026-09-15-9dab5c50c65b",
+  "manifestHash": "88df81ef165565fe287cdd142e4a902ac128258fc6081abba068e98bb655efd5"
+}
