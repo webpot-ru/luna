@@ -595,7 +595,7 @@ export function buildPublicationCampaign(options = {}) {
     : String(options.excludeOrdinaryTargets || "").split(","))
     .map(normalizeCode)
     .filter(Boolean));
-  const maxSnapshotAgeMinutes = Number(options.maxSnapshotAgeMinutes ?? 30);
+  const maxSnapshotAgeMinutes = Number(options.maxSnapshotAgeMinutes ?? 180);
   const minFutureMinutes = Number(options.minFutureMinutes ?? 90);
   if (!Number.isInteger(ordinaryPerChannel) || ordinaryPerChannel < 0) throw new Error("ordinaryPerChannel must be a non-negative integer");
   if (!Number.isInteger(polyglotPerChannel) || polyglotPerChannel < 0) throw new Error("polyglotPerChannel must be a non-negative integer");

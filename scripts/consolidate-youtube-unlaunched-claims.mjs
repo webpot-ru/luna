@@ -39,7 +39,7 @@ function parseArgs(argv) {
     calendar: "config/youtube-publish-calendar.json",
     plansDir: "config/youtube-publication-campaign-plans",
     output: "outputs/youtube-unlaunched-claim-consolidation.json",
-    maxControlAgeMinutes: 30,
+    maxControlAgeMinutes: 180,
     expectedSourceClaims: 0,
     sourceCampaignId: "",
     apply: false,
@@ -183,7 +183,7 @@ function validateManifestWaveShape(manifest) {
   assert(new Set((manifest.assignments || []).map((row) => row.slotKey)).size === manifest.assignments.length, "manifest contains duplicate channel slots");
 }
 
-export function buildUnlaunchedClaimConsolidation({ registry, calendar, manifest, controlReport, now = new Date(), expectedSourceClaims = 0, maxControlAgeMinutes = 30, sourceCampaignId = "" }) {
+export function buildUnlaunchedClaimConsolidation({ registry, calendar, manifest, controlReport, now = new Date(), expectedSourceClaims = 0, maxControlAgeMinutes = 180, sourceCampaignId = "" }) {
   verifyCampaignManifest(manifest);
   assert(manifest.summary?.applyReady === true && (manifest.blockers || []).length === 0, "manifest is not apply-ready");
   validateManifestWaveShape(manifest);

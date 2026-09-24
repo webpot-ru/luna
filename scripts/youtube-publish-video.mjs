@@ -117,7 +117,7 @@ function requireFreshPublicationControl(reportPath, metadata) {
   const report = JSON.parse(fs.readFileSync(resolved, "utf8"));
   const generatedAt = Date.parse(report.generatedAt || "");
   const liveGeneratedAt = Date.parse(report.evidence?.liveAuditGeneratedAt || "");
-  const maxAgeMillis = 30 * 60 * 1000;
+  const maxAgeMillis = 180 * 60 * 1000;
   const now = Date.now();
   if (
     report.summary?.healthy !== true

@@ -31,7 +31,7 @@ function parseArgs(argv) {
     policy: "config/youtube-publish-schedule-policy.json",
     plansDir: "config/youtube-publication-campaign-plans",
     minFutureMinutes: 90,
-    maxEvidenceAgeMinutes: 30,
+    maxEvidenceAgeMinutes: 180,
     apply: false,
   };
   for (let index = 0; index < argv.length; index += 1) {
@@ -159,7 +159,7 @@ function campaignAssignment(row) {
   };
 }
 
-export function buildPartialRecovery({ registry, calendar, channels, policy, routing = null, controlReports, campaignId, supports, assignmentKeys = [], polyglotScopeUpgrades = {}, polyglotScopeDowngrades = {}, now = new Date(), minFutureMinutes = 90, maxEvidenceAgeMinutes = 30 }) {
+export function buildPartialRecovery({ registry, calendar, channels, policy, routing = null, controlReports, campaignId, supports, assignmentKeys = [], polyglotScopeUpgrades = {}, polyglotScopeDowngrades = {}, now = new Date(), minFutureMinutes = 90, maxEvidenceAgeMinutes = 180 }) {
   const oldCampaign = (registry.campaigns || []).find((row) => row.campaignId === campaignId);
   assert(oldCampaign, `campaign not found: ${campaignId}`);
   const scopeChangeRequested = Object.keys(polyglotScopeUpgrades || {}).length > 0 || Object.keys(polyglotScopeDowngrades || {}).length > 0;

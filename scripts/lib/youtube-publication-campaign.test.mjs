@@ -171,6 +171,28 @@ assert.equal(first.summary.fullPolyglotCount, 0);
 assert.equal(first.summary.shortUnverifiedPolyglotCount, 51);
 assert(first.assignments.every((row) => row.playlist.state === "verified_absent" && row.playlist.createAllowed));
 
+const twoHourEvidencePlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  ordinaryPerChannel: 1,
+  polyglotPerChannel: 0,
+  maxSnapshotAgeMinutes: undefined,
+  now: new Date("2026-07-14T02:00:00.000Z"),
+});
+assert.equal(twoHourEvidencePlan.inputs.maxSnapshotAgeMinutes, 180);
+assert(!twoHourEvidencePlan.blockers.some((row) => row.includes("snapshot is not fresh enough")));
+
+const expiredThreeHourEvidencePlan = buildPublicationCampaign({
+  ...baseOptions,
+  supports: "EN",
+  ordinaryPerChannel: 1,
+  polyglotPerChannel: 0,
+  maxSnapshotAgeMinutes: undefined,
+  now: new Date("2026-07-14T03:01:00.000Z"),
+});
+assert(expiredThreeHourEvidencePlan.blockers.some((row) => row.includes("snapshot is not fresh enough")));
+assert(expiredThreeHourEvidencePlan.blockers.some((row) => row.includes("playlist discovery snapshot is not fresh enough")));
+
 const ordinarySixteenOnly = buildPublicationCampaign({
   ...baseOptions,
   ordinaryPerChannel: 16,

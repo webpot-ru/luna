@@ -133,7 +133,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ARGS=("--set=${{ inputs.set_id }}" "--supports=${{ inputs.supports }}" "--ordinary-per-channel=${{ inputs.ordinary_per_channel }}" "--polyglot-per-channel=${{ inputs.polyglot_per_channel }}" "--min-future-minutes=90" "--max-snapshot-age-minutes=30" "--output=outputs/youtube-publication-campaign-plan.json" --require-apply-ready --json)
+          ARGS=("--set=${{ inputs.set_id }}" "--supports=${{ inputs.supports }}" "--ordinary-per-channel=${{ inputs.ordinary_per_channel }}" "--polyglot-per-channel=${{ inputs.polyglot_per_channel }}" "--min-future-minutes=90" "--max-snapshot-age-minutes=180" "--output=outputs/youtube-publication-campaign-plan.json" --require-apply-ready --json)
           if [ -n "${{ inputs.schedule_start_date }}" ]; then
             ARGS+=("--start-date=${{ inputs.schedule_start_date }}")
           fi

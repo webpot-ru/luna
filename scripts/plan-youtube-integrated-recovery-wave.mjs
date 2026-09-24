@@ -36,7 +36,7 @@ function parseArgs(argv) {
     polyglotPerChannel: 1,
     completeDeckTails: false,
     minFutureMinutes: 90,
-    maxSnapshotAgeMinutes: 30,
+    maxSnapshotAgeMinutes: 180,
     expectedSourceAssignments: 113,
     registry: "config/youtube-publication-campaigns.json",
     calendar: "config/youtube-publish-calendar.json",
