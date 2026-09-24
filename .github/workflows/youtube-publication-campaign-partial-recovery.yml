@@ -92,7 +92,9 @@ jobs:
             "liveScheduleMissingCalendarCount", "unclassifiedRecentUploadCount",
           ];
           if (summary.complete !== true || summary.healthy !== true) throw new Error("All-route control report is not complete and healthy");
-          if (Number(summary.expectedRouteCount) !== 8 || Number(summary.receivedRouteCount) !== 8) throw new Error("All 8 routes are not covered");
+          const routing = JSON.parse(fs.readFileSync("config/youtube-api-project-routing.json", "utf8"));
+          const expectedRouteCount = (routing.projects || []).filter((route) => route.publicationReady === true).length;
+          if (Number(summary.expectedRouteCount) !== expectedRouteCount || Number(summary.receivedRouteCount) !== expectedRouteCount) throw new Error(`All ${expectedRouteCount} active routes are not covered`);
           if (summary.paginationComplete !== true || summary.videoStatusReadbackComplete !== true) throw new Error("Pagination/status readback is incomplete");
           for (const key of requiredZero) if (Number(summary[key] || 0) !== 0) throw new Error(`${key} must be 0, got ${summary[key]}`);
           if (!Array.isArray(report.publications)) throw new Error("Control report publications are missing");
@@ -142,7 +144,7 @@ jobs:
           const derivedDir = "/tmp/youtube-partial-recovery-route-reports";
           fs.mkdirSync(derivedDir, { recursive: true });
           const routeEntries = Object.values(report.routes || {});
-          if (routeEntries.length !== 8) throw new Error("Per-route evidence entries are missing");
+          if (routeEntries.length !== expectedRouteCount) throw new Error("Per-route evidence entries are missing");
           const controls = [];
           for (let index = 0; index < routeEntries.length; index += 1) {
             const entry = routeEntries[index];

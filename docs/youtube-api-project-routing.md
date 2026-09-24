@@ -1,8 +1,8 @@
 # YouTube API Project Routing
 
-Status: **source of truth for the eight-route active/standby contract. All routes `youtube-1`–`youtube-8` are publication-ready. Routes `youtube-5`–`youtube-8` have production OAuth clients, verified active channel tokens, separate GitHub Environments and OAuth bundle secrets, and completed full GitHub Actions identity readback for every active channel**.
+Status: **source of truth for the four-route active contract. All 51 support channels are active on `youtube-1`–`youtube-4`; `youtube-5`–`youtube-8` are retained as inactive legacy routes and are blocked for new publication. Their GitHub environments/secrets and historical campaign evidence are preserved.**
 
-This document records how the 51 public YouTube support-language channels are assigned to eight Google Cloud / YouTube API routes named `youtube-1` through `youtube-8`. The owner-approved quota contract permits up to `100` video uploads on each active route per America/Los_Angeles quota day, for an aggregate ceiling of `800`.
+This document records how the 51 public YouTube support-language channels are assigned to four active Google Cloud / YouTube API routes named `youtube-1` through `youtube-4`. The user-provided YouTube quota approval grants each of projects 1–4 a daily limit of `1,100 videos.insert` calls and `510,000` general units for six months from approval. The configured active-route aggregate is `4,400` video inserts per America/Los_Angeles quota day. Projects 5–8 remain preserved but inactive.
 
 The machine-readable mirror is `config/youtube-api-project-routing.json`; validate it with:
 
@@ -24,7 +24,7 @@ At the current publishing cadence of **6 scheduled public releases per support-l
 54 variants * 6 releases/day = 324 scheduled public releases/day
 ```
 
-All routes together are additionally bounded by **800 `videos.insert` calls per America/Los_Angeles quota day**, with a maximum of **100 per active route**. Standby authorization never raises this limit and must not be used as quota fallback.
+For the current approval window, active projects 1–4 are additionally bounded by **4,400 `videos.insert` calls per America/Los_Angeles quota day**, with a maximum of **1,100 per active project** and **510,000 general units per project**. Routes 5–8 are inactive and must not be used as quota fallback.
 
 Terminology rule: call routes `youtube-1` through `youtube-8` in plans and reports. Do not write only “Project 2” or “project 3”: those phrases are easily confused with Deck #2 / Deck #3. A deck must always be named by `Deck #N / set_id`; an API route must always be named by its route key.
 
@@ -32,30 +32,26 @@ Terminology rule: call routes `youtube-1` through `youtube-8` in plans and repor
 
 | API project route | Status | GitHub environment | Public channels | Support variants | Planned scheduled public releases/day |
 | --- | --- | --- | ---: | ---: | ---: |
-| `youtube-1` | Existing OAuth bundle; active split ready after code deployment | `youtube-api-branding` | 6 | 9 | 54 |
-| `youtube-2` | Existing OAuth bundle; active split ready after code deployment | `youtube-api-youtube-2` | 7 | 7 | 42 |
-| `youtube-3` | Existing OAuth bundle; active split ready after code deployment | `youtube-api-youtube-3` | 7 | 7 | 42 |
-| `youtube-4` | Existing OAuth bundle; active split ready after code deployment | `youtube-api-youtube-4` | 7 | 7 | 42 |
-| `youtube-5` | Six-channel GitHub Actions identity readback passed; publication-ready | `youtube-api-youtube-5` | 6 | 6 | 36 |
-| `youtube-6` | Six-channel GitHub Actions identity readback passed; publication-ready | `youtube-api-youtube-6` | 6 | 6 | 36 |
-| `youtube-7` | Six-channel GitHub Actions identity readback passed; publication-ready | `youtube-api-youtube-7` | 6 | 6 | 36 |
-| `youtube-8` | Six-channel GitHub Actions identity readback passed; publication-ready | `youtube-api-youtube-8` | 6 | 6 | 36 |
-| **Total** |  |  | **51** | **54** | **324** |
+| `youtube-1` | Active; original paired OAuth bundle | `youtube-api-branding` | 12 | 15 | 90 |
+| `youtube-2` | Active; original paired OAuth bundle | `youtube-api-youtube-2` | 13 | 13 | 78 |
+| `youtube-3` | Active; original paired OAuth bundle | `youtube-api-youtube-3` | 13 | 13 | 78 |
+| `youtube-4` | Active; original paired OAuth bundle | `youtube-api-youtube-4` | 13 | 13 | 78 |
+| `youtube-5` | Inactive legacy route; blocked for new publication | `youtube-api-youtube-5` | 0 | 0 | 0 |
+| `youtube-6` | Inactive legacy route; blocked for new publication | `youtube-api-youtube-6` | 0 | 0 | 0 |
+| `youtube-7` | Inactive legacy route; blocked for new publication | `youtube-api-youtube-7` | 0 | 0 | 0 |
+| `youtube-8` | Inactive legacy route; blocked for new publication | `youtube-api-youtube-8` | 0 | 0 | 0 |
+| **Active total** |  |  | **51** | **54** | **324** |
 
-The standard 306-video campaign split is `36/42/42/42/36/36/36/36`. Per-route planned daily release counts are below 100, while the eight-route aggregate remains `324 <= 800`.
+The standard 306-video campaign split is `90/78/78/78` scheduled public releases across the four active routes. A 16-ordinary-per-channel wave would use `192/208/208/208` video inserts (`816` total), below each project's approved `1,100` daily insert limit; exact general-quota estimates and live tails still require a fresh preflight.
 
 ## Active assignments and standby pairs
 
 | Active route | Active channel keys | Canonical support variants | Standby pair | Full planned authorization on each paired route |
 | --- | --- | --- | --- | --- |
-| `youtube-1` | `en, es, pt, ru, hi, id` | `EN, EN-GB, ES-419, ES, PT-BR, PT, RU, HI, ID` | `youtube-5` | 12 channels: union of routes 1 and 5 |
-| `youtube-5` | `fr, de, ja, ko, tr, zh` | `FR, DE, JA, KO, TR, ZH` | `youtube-1` | 12 channels: union of routes 1 and 5 |
-| `youtube-2` | `vi, th, ms, pl, nl, sv, no` | `VI, TH, MS, PL, NL, SV, NO` | `youtube-6` | 13 channels: union of routes 2 and 6 |
-| `youtube-6` | `da, fi, cs, sk, hu, ro` | `DA, FI, CS, SK, HU, RO` | `youtube-2` | 13 channels: union of routes 2 and 6 |
-| `youtube-3` | `bg, hr, sr, sl, lt, lv, et` | `BG, HR, SR, SL, LT, LV, ET` | `youtube-7` | 13 channels: union of routes 3 and 7 |
-| `youtube-7` | `is, bn, tl, my, km, lo` | `IS, BN, TL, MY, KM, LO` | `youtube-3` | 13 channels: union of routes 3 and 7 |
-| `youtube-4` | `ne, si, ta, te, kn, ml, uz` | `NE, SI, TA, TE, KN, ML, UZ` | `youtube-8` | 13 channels: union of routes 4 and 8 |
-| `youtube-8` | `kk, az, ka, hy, sw, it` | `KK, AZ, KA, HY, SW, IT` | `youtube-4` | 13 channels: union of routes 4 and 8 |
+| `youtube-1` | `en, es, pt, ru, hi, id, fr, de, ja, ko, tr, zh` | `EN, EN-GB, ES-419, ES, PT-BR, PT, RU, HI, ID, FR, DE, JA, KO, TR, ZH` | `youtube-5` (inactive) | 12 channels: original 1/5 OAuth pair |
+| `youtube-2` | `vi, th, ms, pl, nl, sv, no, da, fi, cs, sk, hu, ro` | `VI, TH, MS, PL, NL, SV, NO, DA, FI, CS, SK, HU, RO` | `youtube-6` (inactive) | 13 channels: original 2/6 OAuth pair |
+| `youtube-3` | `bg, hr, sr, sl, lt, lv, et, is, bn, tl, my, km, lo` | `BG, HR, SR, SL, LT, LV, ET, IS, BN, TL, MY, KM, LO` | `youtube-7` (inactive) | 13 channels: original 3/7 OAuth pair |
+| `youtube-4` | `ne, si, ta, te, kn, ml, uz, kk, az, ka, hy, sw, it` | `NE, SI, TA, TE, KN, ML, UZ, KK, AZ, KA, HY, SW, IT` | `youtube-8` (inactive) | 13 channels: original 4/8 OAuth pair |
 
 `supportChannelKeys` is the only active publication assignment. `plannedAuthorizationChannelKeys` may contain the full pair so the owner can swap channels later without repeating OAuth, but a token existing in the standby bundle does not make that route active. A swap requires one reviewed config/docs change that removes the channel from its old active route and adds it to the new one; validation must still prove exactly one active route per channel.
 
@@ -79,7 +75,7 @@ Use the same command for `youtube-6`, `youtube-7` and `youtube-8`. The planner d
 
 ## Historical four-route assignment before the 2026-07-27 split
 
-This section is evidence only and is superseded by the active assignment table above.
+The grouping below has been restored as the active assignment above. Projects 5–8 remain inactive; their existing secrets and GitHub environments are intentionally preserved.
 
 ### youtube 1
 
@@ -169,7 +165,7 @@ Existing primary project. Keep the high-priority shared channels here first.
 - `scripts/resolve-youtube-api-environment.mjs` / `npm run resolve:youtube-api-environment` validates that the requested support code(s) belong to the selected GitHub environment and that the route has `publicationReady=true`. If a support list spans multiple API routes, the workflow must fail and the work must be split into separate dispatches.
 - Default production dispatch shape is one support channel per run with `youtube_environment=auto`. Use an explicit GitHub environment only for debugging or replacement work, and only when it matches the route in `config/youtube-api-project-routing.json`.
 - If one API project hits quota or returns `quotaExceeded`, stop that route only. Do not retry through its paired standby route. A later route swap is a reviewed config/docs change, never automatic failover.
-- All publication plans and manual batches together must remain at or below 800 video upload calls per America/Los_Angeles quota day, and at or below 100 on each active route. This is the owner-approved operational ceiling; actual Google Cloud/YouTube quota errors still stop only their affected route.
+- All publication plans and manual batches together must remain at or below 4,400 video upload calls per America/Los_Angeles quota day, and at or below 1,100 on each active route 1–4, subject to the six-month quota grant. Actual Google Cloud/YouTube quota errors still stop only their affected route. Routes 5–8 are not quota fallback.
 - Bulk dispatcher defaults must keep route failure observable before launching more same-route writes: `.github/workflows/youtube-bulk-publish-dispatcher.yml` defaults to `max_active_per_route=1`. Raising it is a deliberate quota-risk decision, not a normal speed setting.
 - GitHub API watcher/dispatch limits (including secondary rate limits) are entirely separate from YouTube API quota. The bulk dispatcher retries workflow-dispatch GitHub API rate limits before starting more child runs. If a dispatcher run terminates due to GitHub throttling, any skipped targets (marked as `skippedDispatcherStoppedCount` or `skipped_dispatcher_stopped`) have not consumed any YouTube Data API quota. If logs show GitHub `API rate limit exceeded` or secondary rate-limit errors after bounded retries, stop new dispatches, keep already-started child runs running, and rely on child artifacts plus `persist-publish-state` for durable state.
 - A parent bulk dispatcher run is not upload proof. If its report shows `successCount=0`, missing child run ids, or child `dispatch_error` rows such as GitHub HTTP 403 rate limit / HTTP 422 unexpected workflow inputs, record that as `0` YouTube uploads and fix the GitHub dispatch contract before retrying. Proof of remote upload wave execution comes from child `youtube-video-publish.yml` runs, their artifacts, YouTube API readbacks, and persisted configuration updates (`config/youtube-published-videos.json`, `config/youtube-publish-calendar.json`, `config/youtube-playlists.json`).
@@ -181,7 +177,7 @@ Existing primary project. Keep the high-priority shared channels here first.
   - Limit thumbnail generation to the allowlist where `customThumbnailUploadAllowed=true` (other channels use automatic first-frame fallback).
 - Before retrying uploads after a dispatcher/watch failure, run the read-only live-audit workflow `.github/workflows/youtube-live-publication-audit.yml` for the affected route and persist its rows if it finds `missingFromLocalRegistryCount > 0`. This workflow reads `channels.list` / `playlistItems.list` only, expands `route:youtube-N` with `scripts/resolve-youtube-support-list.mjs`, and merges live YouTube upload readback into `config/youtube-published-videos.json` without rendering, uploading, playlist writes or thumbnail generation.
 - New Google Cloud projects must be production/audited with matching YouTube API disclosure, OAuth consent configuration and GitHub environment secrets before they are used for public scheduled uploads.
-- Routes `youtube-5`–`youtube-8` are publication-ready after their route-specific GitHub Actions identity readbacks proved that each `YOUTUBE_OAUTH_BUNDLE_TGZ_B64` secret restores all six expected active channel tokens. The activation exception is no longer accepted for these ready routes; future blocked routes remain fail-closed before metadata, render, TTS or YouTube writes.
+- Historical identity readbacks for routes `youtube-5`–`youtube-8` remain evidence for those credentials only. Those routes are now marked inactive; all new campaign assignments must resolve to route 1–4 and the original paired OAuth bundle.
 - Token files, refresh tokens, client secrets and `.local` contents must stay out of git and out of this document.
 
 ## Before Adding Or Replacing API Project Routes

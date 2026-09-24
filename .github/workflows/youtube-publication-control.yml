@@ -21,7 +21,7 @@ on:
         default: false
         type: boolean
       audit_routes:
-        description: "Routes to audit: ALL (default) or an explicit comma-separated subset such as youtube-5,youtube-6."
+        description: "Routes to audit: ALL (default) or an explicit comma-separated subset such as youtube-3,youtube-4."
         required: true
         default: "ALL"
       audit_supports:
@@ -50,7 +50,7 @@ on:
       campaign_max_video_uploads_per_route:
         description: "Maximum videos.insert rows per API project for this quota day."
         required: true
-        default: "100"
+        default: "1100"
       campaign_polyglot_per_channel:
         description: "Optional no-spend campaign plan: next full Polyglot videos per physical channel; 0 disables campaign planning."
         required: true
@@ -122,7 +122,7 @@ jobs:
             publicationBlockedReason: String(project.publicationBlockedReason || "publicationReady is false").trim(),
             supports: (project.supportChannelKeys || []).map((key) => canonicalSupport(String(key).toLowerCase())).join(","),
           }));
-          if (!routes.length || routes.some((row) => !row.route || !row.environment || !row.supports)) {
+          if (!routes.length || routes.some((row) => !row.route || !row.environment || (row.publicationReady && !row.supports))) {
             throw new Error("route config is incomplete");
           }
           const readyRoutes = routes.filter((row) => row.publicationReady);

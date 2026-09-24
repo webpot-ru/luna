@@ -44,6 +44,7 @@ const expectedVariants = new Set(expectedVariantList);
 const releasesPerVariant = routing.dailyCadence?.publicReleasesPerSupportVariantPerDay;
 const expectedProjectCount = routing.projectLabels?.length;
 const aggregateUploadLimit = routing.quotaPolicy?.aggregateVideoUploadCallLimitPerQuotaDay;
+const activeProjectCount = routing.projects?.filter((project) => project.publicationReady === true).length || 0;
 
 if (!Array.isArray(routing.projects) || !routing.projects.length) {
   fail('projects must be a non-empty array');
@@ -62,6 +63,9 @@ for (const duplicate of duplicates(projectLabels)) fail(`duplicate project label
 for (const duplicate of duplicates(githubEnvironments)) fail(`duplicate GitHub environment: ${duplicate}`);
 if (routing.projectLabels?.join('|') !== projectLabels.join('|')) {
   fail(`projectLabels do not match projects order: expected ${projectLabels.join(', ')}`);
+}
+if (Number(routing.quotaPolicy?.activeProjectCount) !== activeProjectCount) {
+  fail(`active project count ${activeProjectCount} does not match quotaPolicy.activeProjectCount=${routing.quotaPolicy?.activeProjectCount}`);
 }
 
 for (const key of assignedChannels) {
@@ -103,11 +107,22 @@ for (const project of routing.projects) {
   if (project.publicationReady === false && !String(project.publicationBlockedReason || '').trim()) {
     fail(`${project.label} publicationBlockedReason is required while publicationReady=false`);
   }
-  if (!channelCount) {
+  if (project.publicationReady && !channelCount) {
     fail(`${project.label} has no active support channels`);
   }
-  if (project.plannedPublicReleasesPerDay > 100) {
-    fail(`${project.label} has ${project.plannedPublicReleasesPerDay} planned releases; expected <= 100`);
+  if (!project.publicationReady && (channelCount || variantCount || project.plannedPublicReleasesPerDay)) {
+    fail(`${project.label} is inactive but still has active assignments or planned releases`);
+  }
+  const routeVideoLimit = Number(project.videoInsertDailyLimit || 0);
+  const routeGeneralLimit = Number(project.generalQuotaUnitsDailyLimit || 0);
+  if (project.publicationReady && (!Number.isInteger(routeVideoLimit) || routeVideoLimit < 1)) {
+    fail(`${project.label} is missing a positive videoInsertDailyLimit`);
+  }
+  if (project.publicationReady && (!Number.isInteger(routeGeneralLimit) || routeGeneralLimit < 1)) {
+    fail(`${project.label} is missing a positive generalQuotaUnitsDailyLimit`);
+  }
+  if (project.publicationReady && project.plannedPublicReleasesPerDay > routeVideoLimit) {
+    fail(`${project.label} has ${project.plannedPublicReleasesPerDay} planned releases; expected <= ${routeVideoLimit}`);
   }
 
   if (project.plannedPublicReleasesPerDay !== expectedDaily) {
@@ -182,7 +197,7 @@ if (routing.quotaPolicy?.allowStandbyRouteQuotaUse !== false) {
 
 if (!process.exitCode) {
   console.log(
-    `YouTube API project routing OK: ${assignedChannels.length} channels, ${assignedVariants.length} variants, ${totalReleases}/${aggregateUploadLimit} planned daily releases across ${routing.projects.length} configured routes.`
+    `YouTube API project routing OK: ${assignedChannels.length} channels, ${assignedVariants.length} variants, ${totalReleases}/${aggregateUploadLimit} planned daily releases across ${activeProjectCount} active (${routing.projects.length} configured) routes.`
   );
   for (const project of routing.projects) {
     console.log(

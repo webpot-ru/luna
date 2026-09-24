@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "status": "eight_route_contract_publication_ready",
+  "status": "four_route_contract_publication_ready",
   "sourceOfTruth": "docs/youtube-api-project-routing.md",
   "generatedFor": "51 public YouTube support channels / 54 support-language variants",
   "projectLabels": [
@@ -21,14 +21,17 @@
   },
   "quotaPolicy": {
     "purpose": "owner_managed_channel_partition_for_operational_convenience",
+    "activeProjectCount": 4,
     "quotaDayTimeZone": "America/Los_Angeles",
-    "aggregateVideoUploadCallLimitPerQuotaDay": 800,
+    "aggregateVideoUploadCallLimitPerQuotaDay": 4400,
+    "perProjectVideoInsertDailyLimit": 1100,
+    "perProjectGeneralQuotaUnitsDailyLimit": 510000,
     "allowAutomaticRouteFallback": false,
     "allowStandbyRouteQuotaUse": false,
     "notes": [
-      "The owner-authorized aggregate allowance is 800 video uploads per America/Los_Angeles quota day: up to 100 on each of the eight active routes.",
-      "A channel may be pre-authorized on its paired standby route, but publication must use only its one active supportChannelKeys assignment.",
-      "Changing a channel's active route is a reviewed config change; quota exhaustion never triggers automatic rerouting."
+      "The user supplied the six-month quota approval for Google Cloud projects 1-4: 1100 videos.insert calls and 510000 general units per project per America/Los_Angeles quota day.",
+      "All 51 channels are actively assigned to youtube-1 through youtube-4; routes youtube-5 through youtube-8 remain configured as inactive legacy routes and are not automatic fallbacks.",
+      "Quota exhaustion never triggers automatic rerouting."
     ]
   },
   "routingRules": [
@@ -74,7 +77,13 @@
         "pt",
         "ru",
         "hi",
-        "id"
+        "id",
+        "fr",
+        "de",
+        "ja",
+        "ko",
+        "tr",
+        "zh"
       ],
       "supportVariants": [
         "EN",
@@ -85,9 +94,17 @@
         "PT",
         "RU",
         "HI",
-        "ID"
+        "ID",
+        "FR",
+        "DE",
+        "JA",
+        "KO",
+        "TR",
+        "ZH"
       ],
-      "plannedPublicReleasesPerDay": 54
+      "plannedPublicReleasesPerDay": 90,
+      "videoInsertDailyLimit": 1100,
+      "generalQuotaUnitsDailyLimit": 510000
     },
     {
       "key": "youtube-2",
@@ -123,7 +140,13 @@
         "pl",
         "nl",
         "sv",
-        "no"
+        "no",
+        "da",
+        "fi",
+        "cs",
+        "sk",
+        "hu",
+        "ro"
       ],
       "supportVariants": [
         "VI",
@@ -132,9 +155,17 @@
         "PL",
         "NL",
         "SV",
-        "NO"
+        "NO",
+        "DA",
+        "FI",
+        "CS",
+        "SK",
+        "HU",
+        "RO"
       ],
-      "plannedPublicReleasesPerDay": 42
+      "plannedPublicReleasesPerDay": 78,
+      "videoInsertDailyLimit": 1100,
+      "generalQuotaUnitsDailyLimit": 510000
     },
     {
       "key": "youtube-3",
@@ -171,7 +202,13 @@
         "sl",
         "lt",
         "lv",
-        "et"
+        "et",
+        "is",
+        "bn",
+        "tl",
+        "my",
+        "km",
+        "lo"
       ],
       "supportVariants": [
         "BG",
@@ -180,9 +217,17 @@
         "SL",
         "LT",
         "LV",
-        "ET"
+        "ET",
+        "IS",
+        "BN",
+        "TL",
+        "MY",
+        "KM",
+        "LO"
       ],
-      "plannedPublicReleasesPerDay": 42
+      "plannedPublicReleasesPerDay": 78,
+      "videoInsertDailyLimit": 1100,
+      "generalQuotaUnitsDailyLimit": 510000
     },
     {
       "key": "youtube-4",
@@ -218,7 +263,13 @@
         "te",
         "kn",
         "ml",
-        "uz"
+        "uz",
+        "kk",
+        "az",
+        "ka",
+        "hy",
+        "sw",
+        "it"
       ],
       "supportVariants": [
         "NE",
@@ -227,9 +278,17 @@
         "TE",
         "KN",
         "ML",
-        "UZ"
+        "UZ",
+        "KK",
+        "AZ",
+        "KA",
+        "HY",
+        "SW",
+        "IT"
       ],
-      "plannedPublicReleasesPerDay": 42
+      "plannedPublicReleasesPerDay": 78,
+      "videoInsertDailyLimit": 1100,
+      "generalQuotaUnitsDailyLimit": 510000
     },
     {
       "key": "youtube-5",
@@ -237,7 +296,8 @@
       "status": "github_actions_identity_readback_verified",
       "cloudProjectId": "flashcardsluna-5",
       "githubEnvironment": "youtube-api-youtube-5",
-      "publicationReady": true,
+      "publicationReady": false,
+      "publicationBlockedReason": "Inactive legacy route; new campaigns use youtube-1 with the original paired OAuth bundle.",
       "pairedRouteKey": "youtube-1",
       "plannedAuthorizationChannelKeys": [
         "en",
@@ -259,23 +319,9 @@
         "Full-pair standby token collection remains a future resilience task and is not needed for the active youtube-5 assignment.",
         "The full youtube-1/youtube-5 pair is planned for standby authorization, but only these active supportChannelKeys may publish through youtube-5."
       ],
-      "supportChannelKeys": [
-        "fr",
-        "de",
-        "ja",
-        "ko",
-        "tr",
-        "zh"
-      ],
-      "supportVariants": [
-        "FR",
-        "DE",
-        "JA",
-        "KO",
-        "TR",
-        "ZH"
-      ],
-      "plannedPublicReleasesPerDay": 36
+      "supportChannelKeys": [],
+      "supportVariants": [],
+      "plannedPublicReleasesPerDay": 0
     },
     {
       "key": "youtube-6",
@@ -283,7 +329,8 @@
       "status": "github_actions_identity_readback_verified",
       "cloudProjectId": "flashcardsluna-6",
       "githubEnvironment": "youtube-api-youtube-6",
-      "publicationReady": true,
+      "publicationReady": false,
+      "publicationBlockedReason": "Inactive legacy route; new campaigns use youtube-2 with the original paired OAuth bundle.",
       "pairedRouteKey": "youtube-2",
       "plannedAuthorizationChannelKeys": [
         "vi",
@@ -306,23 +353,9 @@
         "Full-pair standby token collection remains a future resilience task and is not needed for the active youtube-6 assignment.",
         "The full youtube-2/youtube-6 pair is planned for standby authorization, but only these active supportChannelKeys may publish through youtube-6."
       ],
-      "supportChannelKeys": [
-        "da",
-        "fi",
-        "cs",
-        "sk",
-        "hu",
-        "ro"
-      ],
-      "supportVariants": [
-        "DA",
-        "FI",
-        "CS",
-        "SK",
-        "HU",
-        "RO"
-      ],
-      "plannedPublicReleasesPerDay": 36
+      "supportChannelKeys": [],
+      "supportVariants": [],
+      "plannedPublicReleasesPerDay": 0
     },
     {
       "key": "youtube-7",
@@ -330,7 +363,8 @@
       "status": "github_actions_identity_readback_verified",
       "cloudProjectId": "flashcardsluna-7",
       "githubEnvironment": "youtube-api-youtube-7",
-      "publicationReady": true,
+      "publicationReady": false,
+      "publicationBlockedReason": "Inactive legacy route; new campaigns use youtube-3 with the original paired OAuth bundle.",
       "pairedRouteKey": "youtube-3",
       "plannedAuthorizationChannelKeys": [
         "bg",
@@ -353,23 +387,9 @@
         "Full-pair standby token collection remains a future resilience task and is not needed for the active youtube-7 assignment.",
         "The full youtube-3/youtube-7 pair is planned for standby authorization, but only these active supportChannelKeys may publish through youtube-7."
       ],
-      "supportChannelKeys": [
-        "is",
-        "bn",
-        "tl",
-        "my",
-        "km",
-        "lo"
-      ],
-      "supportVariants": [
-        "IS",
-        "BN",
-        "TL",
-        "MY",
-        "KM",
-        "LO"
-      ],
-      "plannedPublicReleasesPerDay": 36
+      "supportChannelKeys": [],
+      "supportVariants": [],
+      "plannedPublicReleasesPerDay": 0
     },
     {
       "key": "youtube-8",
@@ -377,7 +397,8 @@
       "status": "github_actions_identity_readback_verified",
       "cloudProjectId": "flashcardsluna-8",
       "githubEnvironment": "youtube-api-youtube-8",
-      "publicationReady": true,
+      "publicationReady": false,
+      "publicationBlockedReason": "Inactive legacy route; new campaigns use youtube-4 with the original paired OAuth bundle.",
       "pairedRouteKey": "youtube-4",
       "plannedAuthorizationChannelKeys": [
         "ne",
@@ -400,23 +421,9 @@
         "Full-pair standby token collection remains a future resilience task and is not needed for the active youtube-8 assignment.",
         "The full youtube-4/youtube-8 pair is planned for standby authorization, but only these active supportChannelKeys may publish through youtube-8."
       ],
-      "supportChannelKeys": [
-        "kk",
-        "az",
-        "ka",
-        "hy",
-        "sw",
-        "it"
-      ],
-      "supportVariants": [
-        "KK",
-        "AZ",
-        "KA",
-        "HY",
-        "SW",
-        "IT"
-      ],
-      "plannedPublicReleasesPerDay": 36
+      "supportChannelKeys": [],
+      "supportVariants": [],
+      "plannedPublicReleasesPerDay": 0
     }
   ]
 }

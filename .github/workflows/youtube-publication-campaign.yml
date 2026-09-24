@@ -204,7 +204,7 @@ jobs:
       fail-fast: false
       # The shared 2M campaign budget is divided across routes. Four concurrent
       # route jobs keep Terra/Luna utilization bounded without serializing all
-      # eight projects behind GitHub runner startup time.
+      # four active projects behind GitHub runner startup time.
       max-parallel: 4
       matrix: ${{ fromJSON(needs.preflight.outputs.metadata_matrix) }}
     steps:
@@ -350,12 +350,12 @@ jobs:
     needs: [preflight, metadata]
     strategy:
       fail-fast: false
-      # Eight project queues run together. Within each route, up to five
+      # Four active project queues run together. Within each route, up to five
       # ordinary channels run first; that route starts its own Polyglot queue as
       # soon as its ordinary queue finishes, without waiting for other routes.
-      max-parallel: 8
+      max-parallel: 4
       matrix:
-        route_key: [youtube-1, youtube-2, youtube-3, youtube-4, youtube-5, youtube-6, youtube-7, youtube-8]
+        route_key: [youtube-1, youtube-2, youtube-3, youtube-4]
     uses: ./.github/workflows/youtube-campaign-route-publish.yml
     with:
       video_type: combined
