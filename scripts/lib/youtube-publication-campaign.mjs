@@ -589,7 +589,7 @@ export function buildPublicationCampaign(options = {}) {
   const polyglotPerChannel = Number(options.polyglotPerChannel ?? 1);
   const allowPartialPolyglotTail = options.allowPartialPolyglotTail === true;
   const allowPartialRouteQuotaTail = options.allowPartialRouteQuotaTail === true;
-  const maxVideoUploadsPerRoute = Number(options.maxVideoUploadsPerRoute ?? 100);
+  let maxVideoUploadsPerRoute = Number(options.maxVideoUploadsPerRoute || 0);
   const excludedOrdinaryTargets = new Set((Array.isArray(options.excludeOrdinaryTargets)
     ? options.excludeOrdinaryTargets
     : String(options.excludeOrdinaryTargets || "").split(","))
@@ -656,6 +656,9 @@ export function buildPublicationCampaign(options = {}) {
     channels: [],
   });
   const routing = loadCanonicalSupportRouting({ routingPath: paths.routing, channelsPath: paths.channels });
+  if (!maxVideoUploadsPerRoute) {
+    maxVideoUploadsPerRoute = Number(routing.parsed?.quotaPolicy?.perProjectVideoInsertDailyLimit || 100);
+  }
   assertCanonicalSupportCount(routing, 51);
   const supports = resolveCanonicalSupports({ requested: options.supports || "ALL", routing });
   const coverInventory = loadApprovedCovers(paths.covers);
@@ -913,11 +916,14 @@ export function buildPublicationCampaign(options = {}) {
     }];
   }));
   for (const [routeKey, usage] of Object.entries(byRoute)) {
-    if (usage.estimatedVideoUploadCalls > 100) {
-      blockers.push(`${routeKey}: ${usage.estimatedVideoUploadCalls} video uploads exceed the default 100-call videos.insert bucket`);
+    const route = routing.projects.find((project) => project.key === routeKey);
+    const routeVideoLimit = Number(route?.videoInsertDailyLimit || routing.parsed?.quotaPolicy?.perProjectVideoInsertDailyLimit || 100);
+    const routeGeneralLimit = Number(route?.generalQuotaUnitsDailyLimit || routing.parsed?.quotaPolicy?.perProjectGeneralQuotaUnitsDailyLimit || 10_000);
+    if (usage.estimatedVideoUploadCalls > routeVideoLimit) {
+      blockers.push(`${routeKey}: ${usage.estimatedVideoUploadCalls} video uploads exceed the ${routeVideoLimit}-call videos.insert bucket`);
     }
-    if (usage.estimatedGeneralQuotaUnitsMaximum > 10_000) {
-      blockers.push(`${routeKey}: estimated general quota maximum ${usage.estimatedGeneralQuotaUnitsMaximum} exceeds the default 10000-unit pool`);
+    if (usage.estimatedGeneralQuotaUnitsMaximum > routeGeneralLimit) {
+      blockers.push(`${routeKey}: estimated general quota maximum ${usage.estimatedGeneralQuotaUnitsMaximum} exceeds the ${routeGeneralLimit}-unit pool`);
     }
   }
   const sourceFingerprints = Object.fromEntries(Object.entries(paths).map(([key, filePath]) => [

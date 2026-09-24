@@ -7,7 +7,7 @@ import { resolveYouTubeApiEnvironment } from "./resolve-youtube-api-environment.
 
 const routing = JSON.parse(fs.readFileSync("config/youtube-api-project-routing.json", "utf8"));
 const blockedRouting = JSON.parse(JSON.stringify(routing));
-const blockedRoute = blockedRouting.projects.find((route) => route.key === "youtube-5");
+const blockedRoute = blockedRouting.projects.find((route) => route.key === "youtube-1");
 blockedRoute.publicationReady = false;
 blockedRoute.publicationBlockedReason = "activation test fixture";
 
@@ -20,10 +20,10 @@ assert.doesNotThrow(() =>
 );
 
 for (const [supportCode, environment] of [
-  ["FR", "youtube-api-youtube-5"],
-  ["DA", "youtube-api-youtube-6"],
-  ["IS", "youtube-api-youtube-7"],
-  ["KK", "youtube-api-youtube-8"],
+  ["FR", "youtube-api-branding"],
+  ["DA", "youtube-api-youtube-2"],
+  ["IS", "youtube-api-youtube-3"],
+  ["KK", "youtube-api-youtube-4"],
 ]) {
   assert.doesNotThrow(() =>
     resolveYouTubeApiEnvironment({
@@ -51,16 +51,21 @@ assert.throws(
     resolveYouTubeApiEnvironment({
       routing: blockedRouting,
       supportCodes: ["FR"],
-      requestedEnvironment: "youtube-api-youtube-5",
+      requestedEnvironment: "youtube-api-branding",
     }),
-  /youtube-5 is publication-blocked/,
+  /youtube-1 is publication-blocked/,
+);
+
+assert.throws(
+  () => resolveYouTubeApiEnvironment({ routing, supportCodes: ["FR"], requestedEnvironment: "youtube-api-youtube-5" }),
+  /environment mismatch/,
 );
 
 assert.doesNotThrow(() =>
   resolveYouTubeApiEnvironment({
     routing: blockedRouting,
-    supportCodes: ["FR", "DE", "JA", "KO", "TR", "ZH"],
-    requestedEnvironment: "youtube-api-youtube-5",
+    supportCodes: ["EN", "EN-GB", "ES-419", "ES", "PT-BR", "PT", "RU", "HI", "ID", "FR", "DE", "JA", "KO", "TR", "ZH"],
+    requestedEnvironment: "youtube-api-branding",
     activationReadback: true,
   }),
 );
@@ -69,8 +74,8 @@ assert.throws(
   () =>
     resolveYouTubeApiEnvironment({
       routing: blockedRouting,
-      supportCodes: ["FR"],
-      requestedEnvironment: "youtube-api-youtube-5",
+      supportCodes: ["EN"],
+      requestedEnvironment: "youtube-api-branding",
       activationReadback: true,
     }),
   /must include every active support exactly once/,
@@ -80,8 +85,8 @@ assert.throws(
   () =>
     resolveYouTubeApiEnvironment({
       routing: blockedRouting,
-      supportCodes: ["FR", "DE", "JA", "KO", "TR", "ZH", "ZH"],
-      requestedEnvironment: "youtube-api-youtube-5",
+      supportCodes: ["EN", "EN-GB", "ES-419", "ES", "PT-BR", "PT", "RU", "HI", "ID", "FR", "DE", "JA", "KO", "TR", "ZH", "ZH"],
+      requestedEnvironment: "youtube-api-branding",
       activationReadback: true,
     }),
   /must list each active support exactly once/,
@@ -99,16 +104,16 @@ assert.throws(
 );
 
 const readyRouting = JSON.parse(JSON.stringify(blockedRouting));
-readyRouting.projects.find((route) => route.key === "youtube-5").publicationReady = true;
+readyRouting.projects.find((route) => route.key === "youtube-1").publicationReady = true;
 assert.throws(
   () =>
     resolveYouTubeApiEnvironment({
       routing: readyRouting,
-      supportCodes: ["FR", "DE", "JA", "KO", "TR", "ZH"],
-      requestedEnvironment: "youtube-api-youtube-5",
+      supportCodes: ["EN", "EN-GB", "ES-419", "ES", "PT-BR", "PT", "RU", "HI", "ID", "FR", "DE", "JA", "KO", "TR", "ZH"],
+      requestedEnvironment: "youtube-api-branding",
       activationReadback: true,
     }),
-  /only allowed while youtube-5 is publication-blocked/,
+  /only allowed while youtube-1 is publication-blocked/,
 );
 
 console.log("youtube API environment activation-readback tests passed");

@@ -32,6 +32,8 @@ Creating or steering a visible task is not approval to dispatch GitHub workflows
 
 ## Safe YouTube Publish Protocol
 
+**Текущий routing/quota override (2026-09-24):** источник истины — `docs/youtube-api-project-routing.md`. Для новых кампаний активны только `youtube-1`–`youtube-4` с предоставленной пользователем квотой `1,100 videos.insert` и `510,000` general units на проект в сутки; `youtube-5`–`youtube-8` сохранены как неактивные legacy routes. Старые упоминания eight-route apply и предела `100/800` относятся только к историческим run-ам.
+
 For ordinary, Polyglot, thumbnail-only, playlist-image and repair waves, Codex must use this sequence:
 
 1. **Read-only audit.** Read the relevant registries, current branch/ref, route assignment, existing publications, calendar reservations, approved cover manifests and recent run evidence. Do not dispatch or call paid providers.

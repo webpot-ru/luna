@@ -410,8 +410,11 @@ function aggregateUsage({ assignments, routing }) {
   if (quota.allowAutomaticRouteFallback !== false) blockers.push("routing quota policy must disable automatic route fallback");
   if (quota.allowStandbyRouteQuotaUse !== false) blockers.push("routing quota policy must disable standby-route quota use");
   for (const [routeKey, usage] of Object.entries(byRoute)) {
-    if (usage.estimatedVideoUploadCalls > 100) blockers.push(`${routeKey}: ${usage.estimatedVideoUploadCalls} video uploads exceed the default 100-call videos.insert bucket`);
-    if (usage.estimatedGeneralQuotaUnitsMaximum > 10_000) blockers.push(`${routeKey}: estimated general quota maximum ${usage.estimatedGeneralQuotaUnitsMaximum} exceeds the default 10000-unit pool`);
+    const route = routing.projects.find((project) => project.key === routeKey);
+    const routeVideoLimit = Number(route?.videoInsertDailyLimit || quota.perProjectVideoInsertDailyLimit || 100);
+    const routeGeneralLimit = Number(route?.generalQuotaUnitsDailyLimit || quota.perProjectGeneralQuotaUnitsDailyLimit || 10_000);
+    if (usage.estimatedVideoUploadCalls > routeVideoLimit) blockers.push(`${routeKey}: ${usage.estimatedVideoUploadCalls} video uploads exceed the ${routeVideoLimit}-call videos.insert bucket`);
+    if (usage.estimatedGeneralQuotaUnitsMaximum > routeGeneralLimit) blockers.push(`${routeKey}: estimated general quota maximum ${usage.estimatedGeneralQuotaUnitsMaximum} exceeds the ${routeGeneralLimit}-unit pool`);
   }
   const customThumbnailCount = assignments.filter((row) => row.thumbnail?.mode === "custom").length;
   const playlistCreateCount = assignments.filter((row) => row.playlist?.state === "verified_absent" && row.playlist?.createAllowed).length;
