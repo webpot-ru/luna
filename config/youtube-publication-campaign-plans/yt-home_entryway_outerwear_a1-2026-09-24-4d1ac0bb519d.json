@@ -1,0 +1,1494 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-24T00:54:41.640Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_entryway_outerwear_a1",
+  "inputs": {
+    "supports": "FR,IS,IT,LV,ML,SK,SV",
+    "supportCount": 7,
+    "ordinarySupportCount": 5,
+    "polyglotSupportCount": 4,
+    "ordinaryPerChannel": 8,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "polyglot|home_entryway_outerwear_a1|FR|slavic_core|93d499d62441|short_unverified",
+      "ordinary|home_entryway_outerwear_a1|IS|PT",
+      "ordinary|home_entryway_outerwear_a1|IT|NO",
+      "ordinary|home_entryway_outerwear_a1|IT|PL",
+      "ordinary|home_entryway_outerwear_a1|IT|PT",
+      "ordinary|home_entryway_outerwear_a1|LV|ML",
+      "ordinary|home_entryway_outerwear_a1|LV|MS",
+      "ordinary|home_entryway_outerwear_a1|LV|MY",
+      "ordinary|home_entryway_outerwear_a1|LV|NE",
+      "ordinary|home_entryway_outerwear_a1|LV|NL",
+      "ordinary|home_entryway_outerwear_a1|LV|NO",
+      "ordinary|home_entryway_outerwear_a1|LV|PL",
+      "ordinary|home_entryway_outerwear_a1|LV|PT",
+      "ordinary|home_entryway_outerwear_a1|ML|PT",
+      "polyglot|home_entryway_outerwear_a1|ML|slavic_core|93d499d62441|short_unverified",
+      "ordinary|home_entryway_outerwear_a1|SK|NO",
+      "ordinary|home_entryway_outerwear_a1|SK|PL",
+      "polyglot|home_entryway_outerwear_a1|SK|slavic_core|849600d8d591|short_unverified",
+      "polyglot|home_entryway_outerwear_a1|SV|slavic_core|93d499d62441|short_unverified"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_entryway_outerwear_a1-2026-09-15-0c84380e0201",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_entryway_outerwear_a1-2026-09-15-0c84380e0201",
+      "manifestHash": "d486a07ca4d2b136661039f156fd45142ecc94476cca7904d471052d077b3e48",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-7",
+        "generatedAt": "2026-09-24T00:48:02.956Z",
+        "ageMinutes": 6.644733333333333,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-8",
+        "generatedAt": "2026-09-24T00:47:53.400Z",
+        "ageMinutes": 6.804,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-3",
+        "generatedAt": "2026-09-24T00:47:55.378Z",
+        "ageMinutes": 6.7710333333333335,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-4",
+        "generatedAt": "2026-09-24T00:47:38.906Z",
+        "ageMinutes": 7.045566666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-6",
+        "generatedAt": "2026-09-24T00:47:52.728Z",
+        "ageMinutes": 6.8152,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-5",
+        "generatedAt": "2026-09-24T00:47:33.551Z",
+        "ageMinutes": 7.134816666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-09-24T00:48:30.473Z",
+        "ageMinutes": 6.186116666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "850e8dbde725f6745c2c3a435abd681448493b7a0def44b819b84c2723067af8"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "483366b4a7efa14f350898fdc21dbbd58dc2f4094f81df0bae7aeadd7459527c"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "39782490925ffeba5560062c2b853bfb922728c8fb65e9389f473a35930086e5"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "cfc08156541390376cc261ae7b5a75ac9cb2a17b6565cac5c66a689810e14fa7"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "2ab7ccc340f39317871dcc10791bd1e018dea4532f32201f12ada6de42194fe2"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_entryway_outerwear_a1.json",
+        "exists": true,
+        "sha256": "754e809873100cb99c4b8a9e032c44283feb83ead3e29a8c0ec4d73f2002dd25"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "7411d37b5bb0a70ac414def88445bc8c2caa4ac34b97613f146f53c33a423bfd"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "4ad3198f37db65e0ce180903c31f9fe23f02992a5544ce46e1c37ddf3afe1c82"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 4,
+    "supportCount": 7,
+    "ordinaryCount": 15,
+    "polyglotCount": 4,
+    "assignmentCount": 19,
+    "firstPublishAt": "2026-09-24T03:00:00.000Z",
+    "lastPublishAt": "2026-09-25T08:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 19,
+    "existingPlaylistCount": 19,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-2": 1,
+      "youtube-3": 8,
+      "youtube-4": 2,
+      "youtube-5": 1,
+      "youtube-6": 3,
+      "youtube-7": 1,
+      "youtube-8": 3
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 19,
+    "estimatedPlaylistItemInsertUnits": 950,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 950,
+    "byRoute": {
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 8,
+        "estimatedGeneralQuotaUnitsMaximum": 400
+      },
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 2,
+        "estimatedGeneralQuotaUnitsMaximum": 100
+      },
+      "youtube-5": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      },
+      "youtube-6": {
+        "estimatedVideoUploadCalls": 3,
+        "estimatedGeneralQuotaUnitsMaximum": 150
+      },
+      "youtube-7": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      },
+      "youtube-8": {
+        "estimatedVideoUploadCalls": 3,
+        "estimatedGeneralQuotaUnitsMaximum": 150
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "FR: short_unverified <=895s",
+    "ML: short_unverified <=895s",
+    "SK: short_unverified <=895s",
+    "SV: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_entryway_outerwear_a1|FR|slavic_core|93d499d62441|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_entryway_outerwear_a1|FR|slavic_core|short_unverified|fr",
+      "videoType": "polyglot",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "FR",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "sourceAssignmentKey": "polyglot|home_entryway_outerwear_a1|FR|slavic_core|93d499d62441|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_entryway_outerwear_a1:FR:slavic_core:93d499d62441:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fr-FR-DeniseNeural",
+        "supportLang": "FR"
+      },
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "sourceRouteKey": "youtube-5",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-5",
+      "routeKey": "youtube-5",
+      "youtubeEnvironment": "youtube-api-youtube-5",
+      "publishAt": "2026-09-24T06:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "08:30",
+      "timeZone": "Europe/Paris",
+      "slotKey": "fr|2026-09-24T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__FR__slavic-core__93d499d62441",
+        "youtubePlaylistId": "PLLCiFm6IxGFk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Mode polyglotte : russe, polonais, tchèque, slovaque",
+        "description": "FlashcardsLuna: playlist pour le mode polyglotte. Apprenez plusieurs langues à la fois : russe, polonais, tchèque, slovaque. Jeux thématiques, cartes, prononciation et révision. Bundle : slavic_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|IS|PT",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|IS|PT|is",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "IS",
+      "targetLang": "PT",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|IS|PT",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_is-IS-GudrunNeural",
+        "supportLang": "IS"
+      },
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "sourceRouteKey": "youtube-7",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-7",
+      "routeKey": "youtube-7",
+      "youtubeEnvironment": "youtube-api-youtube-7",
+      "publishAt": "2026-09-24T08:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "08:30",
+      "timeZone": "Atlantic/Reykjavik",
+      "slotKey": "is|2026-09-24T08:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IS__PT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLpeJ1xDbc2x1j-vnfHWQEN8OaYnMJK8RK",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Portúgalska A1: orðaforði og framburður",
+        "description": "FlashcardsLuna myndbönd fyrir íslenskumælandi sem læra Portúgalska: orðaspjöld, framburð, endurtekningarhlé og stutt smápróf.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|IT|NO",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|IT|NO|it",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "IT",
+      "targetLang": "NO",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|IT|NO",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_it-IT-IsabellaNeural",
+        "supportLang": "IT"
+      },
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-09-24T06:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "08:30",
+      "timeZone": "Europe/Rome",
+      "slotKey": "it|2026-09-24T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "IT__NO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLUKnh-bJbJpI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Norvegese A1: Everyday: parole",
+        "description": "Impariamo il Norvegese. Argomento della lezione: FlashcardsLuna. Ascolta attentamente la pronuncia dei madrelingua e ripeti le parole durante le pause. Alla fine ti aspetta un mini-test interattivo! Esercitati gratis con i mazzi sul nostro sito",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|IT|PL",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|IT|PL|it",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "IT",
+      "targetLang": "PL",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|IT|PL",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_it-IT-IsabellaNeural",
+        "supportLang": "IT"
+      },
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-09-24T09:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "11:30",
+      "timeZone": "Europe/Rome",
+      "slotKey": "it|2026-09-24T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "IT__PL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLQrDSqlJUu4o",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polacco A1: Everyday: parole",
+        "description": "Impariamo il Polacco. Argomento della lezione: FlashcardsLuna. Ascolta attentamente la pronuncia dei madrelingua e ripeti le parole durante le pause. Alla fine ti aspetta un mini-test interattivo! Esercitati gratis con i mazzi sul nostro sito",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|IT|PT",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|IT|PT|it",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "IT",
+      "targetLang": "PT",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|IT|PT",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_it-IT-IsabellaNeural",
+        "supportLang": "IT"
+      },
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "sourceRouteKey": "youtube-8",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-8",
+      "routeKey": "youtube-8",
+      "youtubeEnvironment": "youtube-api-youtube-8",
+      "publishAt": "2026-09-24T12:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "14:30",
+      "timeZone": "Europe/Rome",
+      "slotKey": "it|2026-09-24T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IT__PT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBYghFsxRVBOt1LBlneEjNypX-Z-kylHS",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Portoghese A1: Everyday: parole",
+        "description": "Impariamo il Portoghese. Argomento della lezione: FlashcardsLuna. Ascolta attentamente la pronuncia dei madrelingua e ripeti le parole durante le pause. Alla fine ti aspetta un mini-test interattivo! Esercitati gratis con i mazzi sul nostro sito",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|LV|ML",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|ML|lv",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "LV",
+      "targetLang": "ML",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|ML",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-24T05:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "08:30",
+      "timeZone": "Europe/Riga",
+      "slotKey": "lv|2026-09-24T05:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LV__ML__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLRatMUYWEddw",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Malajalu A1: vārdu krājums un izruna",
+        "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Malajalu: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|LV|MS",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|MS|lv",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "LV",
+      "targetLang": "MS",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|MS",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-24T08:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "11:30",
+      "timeZone": "Europe/Riga",
+      "slotKey": "lv|2026-09-24T08:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LV__MS__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAfCFsFRj03c",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Malajiešu A1: vārdu krājums un izruna",
+        "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Malajiešu: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|LV|MY",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|MY|lv",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "LV",
+      "targetLang": "MY",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|MY",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-24T11:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "14:30",
+      "timeZone": "Europe/Riga",
+      "slotKey": "lv|2026-09-24T11:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LV__MY__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLdvN7p1UA22s",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Birmiešu A1: vārdu krājums un izruna",
+        "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Birmiešu: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|LV|NE",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|NE|lv",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "LV",
+      "targetLang": "NE",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|NE",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-24T14:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "17:30",
+      "timeZone": "Europe/Riga",
+      "slotKey": "lv|2026-09-24T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LV__NE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLOR7D0mMytm4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Nepāliešu A1: vārdu krājums un izruna",
+        "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Nepāliešu: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|LV|NL",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|NL|lv",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "LV",
+      "targetLang": "NL",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|NL",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-24T17:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "20:30",
+      "timeZone": "Europe/Riga",
+      "slotKey": "lv|2026-09-24T17:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LV__NL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf06itWk5tGU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Holandiešu A1: vārdu krājums un izruna",
+        "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Holandiešu: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|LV|NO",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|NO|lv",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "LV",
+      "targetLang": "NO",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|NO",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-24T20:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "23:30",
+      "timeZone": "Europe/Riga",
+      "slotKey": "lv|2026-09-24T20:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "LV__NO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLXAbs4bBMrSE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Norvēģu A1: vārdu krājums un izruna",
+        "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Norvēģu: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|LV|PL",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|PL|lv",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "LV",
+      "targetLang": "PL",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|PL",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-25T05:30:00.000Z",
+      "localDate": "2026-09-25",
+      "localTime": "08:30",
+      "timeZone": "Europe/Riga",
+      "slotKey": "lv|2026-09-25T05:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "LV__PL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLMSUEJ27MfIk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Poļu A1: vārdu krājums un izruna",
+        "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Poļu: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|LV|PT",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|PT|lv",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "LV",
+      "targetLang": "PT",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|PT",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-25T08:30:00.000Z",
+      "localDate": "2026-09-25",
+      "localTime": "11:30",
+      "timeZone": "Europe/Riga",
+      "slotKey": "lv|2026-09-25T08:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LV__PT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL8Cf5ER310bLuCbYK2CLRt9TAjzv66j2H",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Portugāļu A1: vārdu krājums un izruna",
+        "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Portugāļu: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|ML|PT",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|ML|PT|ml",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "ML",
+      "targetLang": "PT",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|ML|PT",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ml-IN-SobhanaNeural",
+        "supportLang": "ML"
+      },
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-09-24T03:00:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "08:30",
+      "timeZone": "Asia/Kolkata",
+      "slotKey": "ml|2026-09-24T03:00:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ML__PT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLgZZTTzYOUoVi3TfTb1jLteCpaq63NRij",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "പോർച്ചുഗീസ് A1: Everyday: വാക്കുകൾ",
+        "description": "നാം പോർച്ചുഗീസ് പഠിക്കുന്നു. പാഠഭാഗം: FlashcardsLuna. ഉച്ചാരണം ശ്രദ്ധാപൂർവ്വം കേൾക്കുക, ഇടവേളകളിൽ വാക്കുകൾ ആവർത്തിക്കുക. അവസാനം ഒരു ഇന്ററാക്ടീവ് മിനി-ടെസ്റ്റ് നിങ്ങൾക്കായി കാത്തിരിക്കുന്നു! ഞങ്ങളുടെ വെബ്‌സൈറ്റിൽ സൗജന്യമായി പരിശീലിക്കുക",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "polyglot|home_entryway_outerwear_a1|ML|slavic_core|93d499d62441|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_entryway_outerwear_a1|ML|slavic_core|short_unverified|ml",
+      "videoType": "polyglot",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "ML",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "sourceAssignmentKey": "polyglot|home_entryway_outerwear_a1|ML|slavic_core|93d499d62441|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_entryway_outerwear_a1:ML:slavic_core:93d499d62441:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ml-IN-SobhanaNeural",
+        "supportLang": "ML"
+      },
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-09-24T06:00:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "11:30",
+      "timeZone": "Asia/Kolkata",
+      "slotKey": "ml|2026-09-24T06:00:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__ML__slavic-core__93d499d62441",
+        "youtubePlaylistId": "PLDDOQTMgQFQ8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: റഷ്യൻ, പോളിഷ്, ചെക്ക്, സ്ലോവാക്",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: റഷ്യൻ, പോളിഷ്, ചെക്ക്, സ്ലോവാക്. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|SK|NO",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|SK|NO|sk",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "SK",
+      "targetLang": "NO",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|SK|NO",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sk-SK-LukasNeural",
+        "supportLang": "SK"
+      },
+      "channelKey": "sk",
+      "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-09-24T06:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "08:30",
+      "timeZone": "Europe/Bratislava",
+      "slotKey": "sk|2026-09-24T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "SK__NO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLFvL1z5PJtqE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Nórčina A1: slovná zásoba a výslovnosť",
+        "description": "Videá FlashcardsLuna pre slovensky hovoriacich študentov, ktorí sa učia Nórčina: kartičky, výslovnosť, pauzy na opakovanie a krátke mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|SK|PL",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|SK|PL|sk",
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "SK",
+      "targetLang": "PL",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|SK|PL",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sk-SK-LukasNeural",
+        "supportLang": "SK"
+      },
+      "channelKey": "sk",
+      "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-09-24T09:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "11:30",
+      "timeZone": "Europe/Bratislava",
+      "slotKey": "sk|2026-09-24T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SK__PL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLTGlVcOCaSsM",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Poľština A1: slovná zásoba a výslovnosť",
+        "description": "Videá FlashcardsLuna pre slovensky hovoriacich študentov, ktorí sa učia Poľština: kartičky, výslovnosť, pauzy na opakovanie a krátke mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "polyglot|home_entryway_outerwear_a1|SK|slavic_core|849600d8d591|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_entryway_outerwear_a1|SK|slavic_core|short_unverified|sk",
+      "videoType": "polyglot",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "SK",
+      "targetLang": "RU,PL,CS,BG",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "BG"
+      ],
+      "targetLangsHash": "849600d8d591",
+      "bundleKey": "slavic_core",
+      "sourceAssignmentKey": "polyglot|home_entryway_outerwear_a1|SK|slavic_core|849600d8d591|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_entryway_outerwear_a1:SK:slavic_core:849600d8d591:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sk-SK-LukasNeural",
+        "supportLang": "SK"
+      },
+      "channelKey": "sk",
+      "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
+      "sourceRouteKey": "youtube-6",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-6",
+      "routeKey": "youtube-6",
+      "youtubeEnvironment": "youtube-api-youtube-6",
+      "publishAt": "2026-09-24T12:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "14:30",
+      "timeZone": "Europe/Bratislava",
+      "slotKey": "sk|2026-09-24T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__SK__slavic-core__849600d8d591",
+        "youtubePlaylistId": "PLYr1wYJWIf-Y",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: ruština, poľština, čeština, bulharčina",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ruština, poľština, čeština, bulharčina. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "polyglot|home_entryway_outerwear_a1|SV|slavic_core|93d499d62441|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_entryway_outerwear_a1|SV|slavic_core|short_unverified|sv",
+      "videoType": "polyglot",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "SV",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "sourceAssignmentKey": "polyglot|home_entryway_outerwear_a1|SV|slavic_core|93d499d62441|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_entryway_outerwear_a1:SV:slavic_core:93d499d62441:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sv-SE-SofieNeural",
+        "supportLang": "SV"
+      },
+      "channelKey": "sv",
+      "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-09-24T06:30:00.000Z",
+      "localDate": "2026-09-24",
+      "localTime": "08:30",
+      "timeZone": "Europe/Stockholm",
+      "slotKey": "sv|2026-09-24T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__SV__slavic-core__93d499d62441",
+        "youtubePlaylistId": "PLIdwPIDMLB5A",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: ryska, polska, tjeckiska, slovakiska",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ryska, polska, tjeckiska, slovakiska. Themed decks, flashcards, pronunciation and review. Bundle: slavic_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-15T10:46:03.485Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    }
+  ],
+  "campaignId": "yt-home_entryway_outerwear_a1-2026-09-24-4d1ac0bb519d",
+  "manifestHash": "c2335e1d2a94c624f94a65c788a584b1e419cd9efd60c79bd576764d1b8028ee"
+}
