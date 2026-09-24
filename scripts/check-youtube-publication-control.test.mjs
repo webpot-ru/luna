@@ -446,6 +446,8 @@ assert.doesNotMatch(
 assert.match(auditWorkflow, /campaign_allow_partial_polyglot_tail:/u, "all-tail control planning must expose an explicit partial Polyglot flag");
 assert.match(auditWorkflow, /campaign_allow_partial_route_quota_tail:/u, "all-tail control planning must expose the route quota cap flag");
 assert.match(auditWorkflow, /--allow-partial-route-quota-tail/u, "the control planner must forward the route quota cap to the immutable campaign plan");
+assert.match(auditWorkflow, /PERSIST_SNAPSHOT === "true" && selected\.length < readyRoutes\.length/u, "snapshot completeness must compare against active routes, not inactive legacy routes");
+assert.match(auditWorkflow, /PLAN_REQUESTED === "true" && selected\.length < readyRoutes\.length/u, "all-active-route campaign planning must not be misclassified as route-scoped when inactive legacy routes exist");
 
 const ordinaryWorkerWorkflow = fs.readFileSync(".github/workflows/youtube-video-publish.yml", "utf8");
 assert.match(
