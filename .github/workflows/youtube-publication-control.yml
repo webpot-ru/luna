@@ -147,10 +147,10 @@ jobs:
               .filter((row) => row.supports);
             if (!selected.length) throw new Error("audit_supports selected no route supports");
           }
-          if (process.env.PERSIST_SNAPSHOT === "true" && selected.length < routes.length) {
-            throw new Error("persist_snapshot requires every configured route to be publication-ready and selected; do not overwrite the global snapshot with partial route coverage");
+          if (process.env.PERSIST_SNAPSHOT === "true" && selected.length < readyRoutes.length) {
+            throw new Error("persist_snapshot requires every active route to be selected; do not overwrite the global snapshot with partial route coverage");
           }
-          if (process.env.PLAN_REQUESTED === "true" && selected.length < routes.length) {
+          if (process.env.PLAN_REQUESTED === "true" && selected.length < readyRoutes.length) {
             if (String(process.env.CAMPAIGN_SUPPORTS || "").toUpperCase() === "ALL") {
               throw new Error("route-scoped campaign planning requires an explicit campaign_supports list");
             }
