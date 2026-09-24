@@ -15,7 +15,7 @@ function parseArgs(argv) {
     maxVideoUploadsPerRoute: undefined,
     excludeOrdinaryTargets: "",
     minFutureMinutes: 90,
-    maxSnapshotAgeMinutes: 30,
+    maxSnapshotAgeMinutes: 180,
     output: "outputs/youtube-publication-campaign-plan.json",
   };
   for (let index = 0; index < argv.length; index += 1) {

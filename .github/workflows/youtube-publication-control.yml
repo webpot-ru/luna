@@ -353,7 +353,7 @@ jobs:
             "--ordinary-per-channel=$ORDINARY_PER_CHANNEL"
             "--polyglot-per-channel=$POLYGLOT_PER_CHANNEL"
             "--min-future-minutes=90"
-            "--max-snapshot-age-minutes=30"
+            "--max-snapshot-age-minutes=180"
             "--snapshot=outputs/youtube-publication-snapshot.json"
             "--playlist-discovery=outputs/youtube-playlist-discovery-snapshot.json"
             "--output=outputs/youtube-publication-campaign-plan.json"

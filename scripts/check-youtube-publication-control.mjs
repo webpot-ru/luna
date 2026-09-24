@@ -146,7 +146,7 @@ async function main() {
     const missingSupports = options.supports.filter((support) => !auditedSupports.has(support));
     if (missingSupports.length) throw new Error(`Strict live audit is missing supports: ${missingSupports.join(",")}`);
     const generatedAt = Date.parse(liveAudit.generatedAt || "");
-    if (!Number.isFinite(generatedAt) || Date.now() - generatedAt > 30 * 60 * 1000 || generatedAt > Date.now() + 60_000) {
+    if (!Number.isFinite(generatedAt) || Date.now() - generatedAt > 180 * 60 * 1000 || generatedAt > Date.now() + 60_000) {
       throw new Error(`Strict live audit is stale or invalid: ${liveAudit.generatedAt || "missing generatedAt"}`);
     }
   }

@@ -17,7 +17,7 @@ function parseArgs(argv) {
     campaignRegistry: "config/youtube-publication-campaigns.json",
     calendar: "config/youtube-publish-calendar.json",
     plansDir: "config/youtube-publication-campaign-plans",
-    maxPlanAgeMinutes: 30,
+    maxPlanAgeMinutes: 180,
     apply: false,
     confirm: "",
   };
