@@ -55,7 +55,10 @@ assert.equal(subset.summary.expectedSupportCount, 5);
 assert.equal(subset.summary.supportCount, 5);
 assert.equal(subset.summary.blockerCount, 0);
 
-const incomplete = mergePlaylistDiscoveryReports({ reports: reports.slice(0, -1), routing, expectedRoutes: expectedRouteCount });
+const populatedRouteIndex = reports.findIndex((report) => report.channels.length > 0);
+assert.notEqual(populatedRouteIndex, -1);
+const incompleteReports = reports.filter((_, index) => index !== populatedRouteIndex);
+const incomplete = mergePlaylistDiscoveryReports({ reports: incompleteReports, routing, expectedRoutes: expectedRouteCount });
 assert.equal(incomplete.complete, false);
 assert(incomplete.blockers.some((row) => row.includes("route report count")));
 assert(incomplete.blockers.some((row) => row.includes("missing support discoveries")));
