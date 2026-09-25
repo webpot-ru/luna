@@ -603,6 +603,9 @@ async function main() {
   if (!Number.isFinite(options.minFutureMinutes) || options.minFutureMinutes < 0) {
     throw new Error(`--min-future-minutes must be a non-negative number, got: ${options.minFutureMinutes}`);
   }
+  if (options.campaignId && options.reschedulePastReservations) {
+    throw new Error("Claimed campaign slots are immutable; --reschedule-past-reservations is not allowed.");
+  }
   const minPublishMillis = options.minFutureMinutes > 0
     ? Date.now() + options.minFutureMinutes * 60 * 1000
     : 0;
@@ -692,6 +695,17 @@ async function main() {
     b.setId,
     b.metadataFile,
   ].join("|")));
+
+  if (options.campaignId) {
+    const staleClaims = rawRows.filter((row) => (
+      row.existingCalendarReservation?.campaignId === options.campaignId
+      && row.existingCalendarReservation?.campaignManifestHash === options.campaignManifestHash
+      && !isFutureSafePublishAt(row.existingCalendarReservation.publishAt, minPublishMillis)
+    ));
+    if (staleClaims.length) {
+      throw new Error(`Claimed campaign publishAt is no longer future-safe for ${staleClaims.map((row) => reservationAssignmentKey(row)).join(", ")}; use an exact rollover or recovery before upload.`);
+    }
+  }
 
   const plannedSlotKeys = new Set();
   const scheduledCountByChannel = new Map();
