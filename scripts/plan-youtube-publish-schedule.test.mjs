@@ -227,4 +227,57 @@ const tombstoneDoesNotOccupySlot = runPlanner([ordinaryMetadata], path.join(root
 assert.equal(tombstoneDoesNotOccupySlot.summary.scheduledCount, 1);
 assert.equal(tombstoneDoesNotOccupySlot.rows[0].publishAt, `${tomorrow}T08:00:00.000Z`);
 
+const campaignCalendarPath = path.join(root, "campaign-calendar.json");
+const claimedPublishAt = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+const claimedCalendar = {
+  schemaVersion: 1,
+  reservations: [{
+    videoType: "ordinary",
+    setId: "test-deck",
+    supportLang: "EN",
+    targetLang: "DE",
+    channelKey: "en",
+    publishAt: claimedPublishAt,
+    status: "campaign_claimed",
+    campaignId: "campaign-schedule-fixture",
+    campaignManifestHash: "manifest-schedule-fixture",
+  }],
+};
+fs.writeFileSync(campaignCalendarPath, `${JSON.stringify(claimedCalendar, null, 2)}\n`);
+const campaignArgs = [
+  "scripts/plan-youtube-publish-schedule.mjs",
+  ordinaryMetadata,
+  "--channel-config=config/youtube-channels.json",
+  `--policy=${policyPath}`,
+  `--calendar=${campaignCalendarPath}`,
+  `--publication-registry=${ordinaryRegistryPath}`,
+  `--polyglot-publication-registry=${polyglotRegistryPath}`,
+  "--campaign-id=campaign-schedule-fixture",
+  "--campaign-manifest-hash=manifest-schedule-fixture",
+  "--min-future-minutes=90",
+  "--write-metadata",
+  "--write-calendar",
+  `--output=${path.join(root, "campaign-stale-report.json")}`,
+];
+const unsafeReschedule = spawnSync(process.execPath, [...campaignArgs, "--reschedule-past-reservations"], {
+  cwd: process.cwd(), encoding: "utf8",
+});
+assert.notEqual(unsafeReschedule.status, 0);
+assert.match(unsafeReschedule.stderr, /Claimed campaign slots are immutable/u);
+const staleClaim = spawnSync(process.execPath, campaignArgs, { cwd: process.cwd(), encoding: "utf8" });
+assert.notEqual(staleClaim.status, 0);
+assert.match(staleClaim.stderr, /claimed campaign publishAt is no longer future-safe/iu);
+assert.deepEqual(JSON.parse(fs.readFileSync(campaignCalendarPath, "utf8")), claimedCalendar);
+
+const futureClaimedCalendar = {
+  ...claimedCalendar,
+  reservations: [{ ...claimedCalendar.reservations[0], publishAt: `${tomorrow}T08:00:00.000Z` }],
+};
+fs.writeFileSync(campaignCalendarPath, `${JSON.stringify(futureClaimedCalendar, null, 2)}\n`);
+const validClaim = spawnSync(process.execPath, campaignArgs, { cwd: process.cwd(), encoding: "utf8" });
+assert.equal(validClaim.status, 0, validClaim.stderr || validClaim.stdout);
+const validClaimReport = JSON.parse(fs.readFileSync(path.join(root, "campaign-stale-report.json"), "utf8"));
+assert.equal(validClaimReport.rows[0].publishAt, futureClaimedCalendar.reservations[0].publishAt);
+assert.equal(JSON.parse(fs.readFileSync(campaignCalendarPath, "utf8")).reservations[0].publishAt, futureClaimedCalendar.reservations[0].publishAt);
+
 console.log("youtube publish schedule tests passed");

@@ -180,4 +180,67 @@ const targetDrift = spawnSync(process.execPath, polyglotArgs, { cwd: polyglotRoo
 assert.notEqual(targetDrift.status, 0);
 assert.match(targetDrift.stderr, /Snapshot assignment identity differs/);
 
+const partialRoot = fs.mkdtempSync(path.join(os.tmpdir(), "youtube-campaign-schedule-partial-test-"));
+const writePartial = (name, value) => fs.writeFileSync(path.join(partialRoot, name), `${JSON.stringify(value, null, 2)}\n`);
+const missingAssignment = {
+  ...assignment,
+  assignmentKey: "ordinary|deck|EN|FR",
+  calendarAssignmentKey: "ordinary|deck|EN|FR|en",
+  targetLang: "FR",
+  publishAt: "2026-07-22T09:30:00.000Z",
+  status: "claimed",
+  youtubeVideoId: "",
+};
+writePartial("campaigns.json", { campaigns: [{
+  campaignId, manifestHash, status: "reconciliation_required",
+  assignments: [assignment, missingAssignment],
+  finalizeSummary: { expectedCount: 2, observedCount: 1, completedCount: 0, missingCount: 1,
+    duplicateAssignmentCount: 0, duplicateVideoIdCount: 0, unexpectedPublicationCount: 0, receiptErrorCount: 1 },
+}] });
+writePartial("calendar.json", { reservations: [
+  { ...assignment, campaignId, campaignManifestHash: manifestHash, status: "campaign_upload_accepted" },
+  { ...missingAssignment, campaignId, campaignManifestHash: manifestHash, status: "campaign_claimed" },
+] });
+writePartial("ordinary.json", { publications: [{
+  setId: "deck", supportLang: "EN", targetLang: "DE", channelKey: "en", youtubeVideoId: "video-test",
+  campaignId, campaignManifestHash: manifestHash, publicationStatus: "scheduled_uploaded",
+  publishAt: "2026-07-23T08:30:00.000Z", scheduledPublishAt: "2026-07-23T08:30:00.000Z",
+}] });
+writePartial("polyglot.json", { publications: [] });
+writePartial("report.json", {
+  generatedAt: "2026-07-22T10:00:00.000Z",
+  summary: { complete: true, paginationComplete: true, videoStatusReadbackComplete: true, expectedRouteCount: 4, receivedRouteCount: 4 },
+  publications: [{ ...assignment, youtubeVideoId: "video-test", liveReadbackPresent: true,
+    state: "scheduled", privacyStatus: "private", publishAt: "2026-07-23T08:30:00.000Z" }],
+  blockers: [{ type: "live_schedule_missing_calendar", youtubeVideoId: "video-test" }],
+});
+writePartial("snapshot.json", { decks: [{ publications: [{
+  ...assignment, youtubeVideoId: "video-test", liveReadbackPresent: true,
+  state: "scheduled", privacyStatus: "private", publishAt: "2026-07-23T08:30:00.000Z",
+}] }] });
+const partialArgs = [
+  path.join(repoRoot, "scripts/reconcile-youtube-campaign-schedule.mjs"),
+  `--campaign-id=${campaignId}`, "--report=report.json", "--snapshot=snapshot.json",
+  "--campaign-registry=campaigns.json", "--calendar=calendar.json", "--ordinary-registry=ordinary.json",
+  "--polyglot-registry=polyglot.json", "--output=output.json",
+];
+const partialDryRun = spawnSync(process.execPath, partialArgs, { cwd: partialRoot, encoding: "utf8" });
+assert.equal(partialDryRun.status, 0, partialDryRun.stderr || partialDryRun.stdout);
+assert.equal(JSON.parse(fs.readFileSync(path.join(partialRoot, "output.json"), "utf8")).summary.missingAssignmentCount, 1);
+const partialApply = spawnSync(process.execPath, [...partialArgs, "--apply", "--confirm=RECONCILE_YOUTUBE_CAMPAIGN_SCHEDULE"], { cwd: partialRoot, encoding: "utf8" });
+assert.equal(partialApply.status, 0, partialApply.stderr || partialApply.stdout);
+const partialCampaign = JSON.parse(fs.readFileSync(path.join(partialRoot, "campaigns.json"), "utf8")).campaigns[0];
+const partialCalendar = JSON.parse(fs.readFileSync(path.join(partialRoot, "calendar.json"), "utf8")).reservations;
+assert.equal(partialCampaign.status, "reconciliation_required");
+assert.equal(partialCampaign.finalizedAt, undefined);
+assert.equal(partialCampaign.finalizeSummary.completedCount, 1);
+assert.equal(partialCampaign.finalizeSummary.missingCount, 1);
+assert.equal(partialCampaign.assignments[1].status, "claimed");
+assert.equal(partialCalendar[0].publishAt, "2026-07-23T08:30:00.000Z");
+assert.equal(partialCalendar[1].publishAt, missingAssignment.publishAt);
+assert.equal(partialCalendar[1].status, "campaign_claimed");
+const partialRepeat = spawnSync(process.execPath, [...partialArgs, "--apply", "--confirm=RECONCILE_YOUTUBE_CAMPAIGN_SCHEDULE"], { cwd: partialRoot, encoding: "utf8" });
+assert.equal(partialRepeat.status, 0, partialRepeat.stderr || partialRepeat.stdout);
+assert.equal(JSON.parse(fs.readFileSync(path.join(partialRoot, "campaigns.json"), "utf8")).campaigns[0].status, "reconciliation_required");
+
 console.log("youtube campaign schedule reconciliation tests passed");

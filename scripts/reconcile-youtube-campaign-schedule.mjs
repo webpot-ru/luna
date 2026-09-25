@@ -119,8 +119,10 @@ function planReconciliation({ campaign, report, snapshot, calendar, ordinary, po
     "Campaign must be reconciliation_required, or a prior reconciliation from this exact report.",
   );
   assert(campaign.finalizeSummary?.expectedCount === campaign.assignments.length, "Campaign finalizer evidence is incomplete.");
-  assert(campaign.finalizeSummary?.observedCount === campaign.assignments.length, "Campaign has assignments without observed upload receipts.");
-  assert(campaign.finalizeSummary?.missingCount === 0, "Campaign has missing assignments; use partial recovery instead.");
+  assert(
+    campaign.finalizeSummary?.observedCount + campaign.finalizeSummary?.missingCount === campaign.assignments.length,
+    "Campaign observed and missing counts do not cover every assignment.",
+  );
   assert(campaign.finalizeSummary?.duplicateAssignmentCount === 0 && campaign.finalizeSummary?.duplicateVideoIdCount === 0, "Campaign has duplicate receipt evidence.");
   assert(campaign.finalizeSummary?.unexpectedPublicationCount === 0, "Campaign has unexpected publication evidence.");
 
@@ -132,9 +134,17 @@ function planReconciliation({ campaign, report, snapshot, calendar, ordinary, po
     rows.push(publication);
     byAssignment.set(key, rows);
   }
+  const observedAssignments = campaign.assignments.filter((assignment) => Boolean(assignment.youtubeVideoId));
+  assert(observedAssignments.length === campaign.finalizeSummary.observedCount, "Observed assignment count differs from finalizer evidence.");
+  assert(publications.length === observedAssignments.length, "Active durable publication count differs from observed assignments.");
   for (const assignment of campaign.assignments) {
     const rows = byAssignment.get(assignment.assignmentKey) || [];
-    assert(rows.length === 1, `Expected exactly one active durable publication for ${assignment.assignmentKey}.`);
+    assert(rows.length === (assignment.youtubeVideoId ? 1 : 0), `Durable publication count differs from receipt for ${assignment.assignmentKey}.`);
+    if (assignment.youtubeVideoId) {
+      assert(rows[0].youtubeVideoId === assignment.youtubeVideoId, `Durable video ID differs from receipt for ${assignment.assignmentKey}.`);
+    } else {
+      assert(assignment.status === "claimed", `Missing assignment has an unexpected status: ${assignment.assignmentKey}.`);
+    }
   }
 
   const liveByVideoId = new Map((report.publications || [])
@@ -148,7 +158,7 @@ function planReconciliation({ campaign, report, snapshot, calendar, ordinary, po
   const changes = [];
   const mismatchVideoIds = new Set();
 
-  for (const assignment of campaign.assignments) {
+  for (const assignment of observedAssignments) {
     const publication = byAssignment.get(assignment.assignmentKey)[0];
     const actualPublishAt = publication.scheduledPublishAt || publication.publishAt || publication.readback?.publishAt || "";
     if (sameInstant(actualPublishAt, assignment.publishAt)) continue;
@@ -194,6 +204,11 @@ function planReconciliation({ campaign, report, snapshot, calendar, ordinary, po
     .filter((blocker) => blocker.type === "live_schedule_missing_calendar")
     .map((blocker) => blocker.youtubeVideoId));
   assert(reportMismatchIds.size === mismatchVideoIds.size && [...mismatchVideoIds].every((id) => reportMismatchIds.has(id)), "Live report schedule blockers do not exactly match campaign receipt mismatches.");
+  assert(
+    campaign.finalizeSummary.receiptErrorCount === changes.length
+      || (campaign.finalizeSummary.receiptErrorCount === 0 && campaign.scheduleReconciliation),
+    "Finalizer receipt-error count differs from the exact live schedule mismatches.",
+  );
 
   return { changes, reconciledAt: now };
 }
@@ -203,15 +218,18 @@ function applyReconciliation({ campaign, calendar, changes, reportPath, reconcil
   for (const reservation of calendar.reservations || []) {
     const change = changesByAssignment.get(assignmentKey(reservation));
     if (reservation.campaignId !== campaign.campaignId) continue;
+    if (!change && campaign.finalizeSummary.missingCount > 0) continue;
     if (change) reservation.publishAt = change.actualPublishAt;
-    reservation.status = "campaign_finalized";
+    reservation.status = campaign.finalizeSummary.missingCount === 0 ? "campaign_finalized" : "campaign_upload_accepted";
     reservation.updatedAt = reconciledAt;
     reservation.scheduleReconciledAt = reconciledAt;
     reservation.scheduleReconciliationSource = reportPath;
   }
   campaign.assignments = campaign.assignments.map((assignment) => {
     const change = changesByAssignment.get(assignment.assignmentKey);
-    if (!change) return { ...assignment, status: "upload_accepted" };
+    if (!change) return campaign.finalizeSummary.missingCount === 0
+      ? { ...assignment, status: "upload_accepted" }
+      : assignment;
     return {
       ...assignment,
       status: "upload_accepted_schedule_reconciled",
@@ -220,11 +238,13 @@ function applyReconciliation({ campaign, calendar, changes, reportPath, reconcil
       scheduleReconciliationSource: reportPath,
     };
   });
-  campaign.status = "finalized";
-  campaign.finalizedAt = reconciledAt;
+  if (campaign.finalizeSummary.missingCount === 0) {
+    campaign.status = "finalized";
+    campaign.finalizedAt = reconciledAt;
+  }
   campaign.finalizeSummary = {
     ...campaign.finalizeSummary,
-    completedCount: campaign.assignments.length,
+    completedCount: campaign.finalizeSummary.observedCount,
     receiptErrorCount: 0,
   };
   campaign.scheduleReconciliation = {
@@ -266,7 +286,11 @@ function main() {
     sourceSnapshot: options.snapshot,
     sourceSnapshotGeneratedAt: snapshot.generatedAt || "",
     reconciledAt,
-    summary: { resolvedPublishAtMismatchCount: changes.length, unchangedAssignmentCount: campaign.assignments.length - changes.length },
+    summary: {
+      resolvedPublishAtMismatchCount: changes.length,
+      unchangedAssignmentCount: campaign.finalizeSummary.observedCount - changes.length,
+      missingAssignmentCount: campaign.finalizeSummary.missingCount,
+    },
     changes,
   };
   if (options.apply) {

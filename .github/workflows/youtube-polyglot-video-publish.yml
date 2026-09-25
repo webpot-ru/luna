@@ -775,9 +775,11 @@ jobs:
           CAMPAIGN_MANIFEST_HASH: ${{ inputs.campaign_manifest_hash }}
         run: |
           set -euo pipefail
-          SCHEDULE_ARGS=(outputs/video-generator "--start-date=$SCHEDULE_START_DATE" "--policy=config/youtube-publish-schedule-policy.json" "--calendar=config/youtube-publish-calendar.json" "--publication-registry=config/youtube-published-videos.json" "--polyglot-publication-registry=config/youtube-polyglot-published-videos.json" --write-metadata --write-calendar --reschedule-past-reservations --fill-earliest "--min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES" "--output=outputs/youtube-polyglot-publish-schedule-github.json")
+          SCHEDULE_ARGS=(outputs/video-generator "--start-date=$SCHEDULE_START_DATE" "--policy=config/youtube-publish-schedule-policy.json" "--calendar=config/youtube-publish-calendar.json" "--publication-registry=config/youtube-published-videos.json" "--polyglot-publication-registry=config/youtube-polyglot-published-videos.json" --write-metadata --write-calendar --fill-earliest "--min-future-minutes=$SCHEDULE_MIN_FUTURE_MINUTES" "--output=outputs/youtube-polyglot-publish-schedule-github.json")
           if [ -n "$CAMPAIGN_ID" ]; then
             SCHEDULE_ARGS+=("--campaign-id=$CAMPAIGN_ID" "--campaign-manifest-hash=$CAMPAIGN_MANIFEST_HASH")
+          else
+            SCHEDULE_ARGS+=(--reschedule-past-reservations)
           fi
           npm run plan:youtube-publish-schedule -- "${SCHEDULE_ARGS[@]}"
 
