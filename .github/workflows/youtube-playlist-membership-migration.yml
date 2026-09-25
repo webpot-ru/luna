@@ -7,7 +7,7 @@ on:
         description: "Exact reviewed migration ID"
         required: true
       confirm_youtube_write:
-        description: "Type APPLY_EXACT_PLAYLIST_MEMBERSHIP_20"
+        description: "Type APPLY_EXACT_PLAYLIST_MEMBERSHIP_RECOVERY_17"
         required: true
 
 permissions:
@@ -32,7 +32,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$MIGRATION_ID" = "deck1-canonical-playlist-membership-20260925"
-          test "$CONFIRM" = "APPLY_EXACT_PLAYLIST_MEMBERSHIP_20"
+          test "$CONFIRM" = "APPLY_EXACT_PLAYLIST_MEMBERSHIP_RECOVERY_17"
           node scripts/youtube-migrate-playlist-membership.mjs
 
   routes:
@@ -73,7 +73,7 @@ jobs:
           set -euo pipefail
           node scripts/youtube-migrate-playlist-membership.mjs \
             --route="$ROUTE" --apply \
-            --confirm=APPLY_EXACT_PLAYLIST_MEMBERSHIP_20 \
+            --confirm=APPLY_EXACT_PLAYLIST_MEMBERSHIP_RECOVERY_17 \
             --receipts="receipts/$ROUTE.jsonl"
       - name: Preserve verified receipts even after a later row fails
         if: always()

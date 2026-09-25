@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
-import { MANIFEST_PATH, validateManifest } from "./youtube-migrate-playlist-membership.mjs";
+import { MANIFEST_PATH, validateManifest, waitForMembership } from "./youtube-migrate-playlist-membership.mjs";
 import { mergeReceipts } from "./merge-youtube-playlist-membership-migration.mjs";
 
 const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
@@ -11,12 +11,24 @@ const clone = (value) => structuredClone(value);
 
 test("exact manifest has 20 unique validated existing videos", () => {
   assert.deepEqual(validateManifest(manifest), { rows: 20, ordinary: 19, polyglot: 1 });
+  assert.equal(manifest.recovery.maximumNewPlaylistInserts, 17);
+  assert.equal(manifest.recovery.alreadyAcceptedVideoIds.length, 3);
   const bad = clone(manifest);
   bad.rows[1].youtubeVideoId = bad.rows[0].youtubeVideoId;
   assert.throws(() => validateManifest(bad), /Duplicate migration video/);
   const redirected = clone(manifest);
   redirected.rows[0].destinationPlaylistId = "PL_UNAPPROVED";
   assert.throws(() => validateManifest(redirected), /Canonical playlist identity mismatch/);
+});
+
+test("readback waits for propagation using GET without repeating the insert", async () => {
+  let reads = 0;
+  let pauses = 0;
+  const item = await waitForMembership(async () => (++reads === 3 ? { id: "existing-item" } : null), { attempts: 5, delayMs: 1, pause: async () => { pauses += 1; } });
+  assert.equal(item.id, "existing-item");
+  assert.equal(reads, 3);
+  assert.equal(pauses, 2);
+  assert.equal(await waitForMembership(async () => null, { attempts: 2, delayMs: 1, pause: async () => {} }), null);
 });
 
 test("migration code has no video upload or playlist deletion path", () => {

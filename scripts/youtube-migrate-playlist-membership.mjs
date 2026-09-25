@@ -8,9 +8,11 @@ const ROUTES = new Set(["youtube-1", "youtube-3", "youtube-4"]);
 const fail = (message) => { throw new Error(message); };
 const readJson = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+const ACCEPTED_FROM_SOURCE_RUN = new Set(["kagAu_6Ry9E", "0kgDTI2hTdg", "r6qSzH_CXy4"]);
 
 export function validateManifest(manifest, { root = process.cwd() } = {}) {
   if (manifest.schemaVersion !== 1 || manifest.id !== "deck1-canonical-playlist-membership-20260925" || manifest.rows?.length !== 20) fail("Unexpected migration manifest identity/count.");
+  if (manifest.recovery?.sourceApplyRunId !== "36135383035" || manifest.recovery?.readOnlyControlRunId !== "36157849874" || manifest.recovery?.maximumNewPlaylistInserts !== 17 || !same([...manifest.recovery.alreadyAcceptedVideoIds].sort(), [...ACCEPTED_FROM_SOURCE_RUN].sort())) fail("Unexpected exact recovery-17 evidence/scope.");
   const ordinary = readJson(path.join(root, "config/youtube-published-videos.json")).publications;
   const polyglot = readJson(path.join(root, "config/youtube-polyglot-published-videos.json")).publications;
   const ordinaryLists = readJson(path.join(root, "config/youtube-playlists.json")).playlists;
@@ -104,6 +106,15 @@ async function membership(token, playlistId, videoId) {
   return matches[0] || null;
 }
 
+export async function waitForMembership(read, { attempts = 18, delayMs = 10_000, pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms)) } = {}) {
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const item = await read();
+    if (item?.id) return item;
+    if (attempt < attempts) await pause(delayMs);
+  }
+  return null;
+}
+
 async function preflightRow(item, token) {
   const video = await one(token, "videos", { part: "snippet,status", id: item.youtubeVideoId, fields: "items(id,snippet(channelId,title),status(privacyStatus,uploadStatus))" }, "video");
   if (video.id !== item.youtubeVideoId || video.snippet?.channelId !== item.youtubeChannelId || video.snippet?.title !== item.title || video.status?.privacyStatus !== "public" || video.status?.uploadStatus !== "processed") fail(`Live video identity/status mismatch for ${item.youtubeVideoId}.`);
@@ -127,7 +138,7 @@ async function main() {
   if (!ROUTES.has(args.route)) fail(`Unsupported route ${args.route}.`);
   const rows = manifest.rows.filter((row) => row.route === args.route);
   if (!args.apply) { console.log(JSON.stringify({ status: "local_route_plan_ok", route: args.route, rows: rows.length })); return; }
-  if (args.confirm !== "APPLY_EXACT_PLAYLIST_MEMBERSHIP_20" || !args.receipts) fail("Apply confirmation and receipts path required.");
+  if (args.confirm !== "APPLY_EXACT_PLAYLIST_MEMBERSHIP_RECOVERY_17" || !args.receipts) fail("Exact recovery-17 confirmation and receipts path required.");
   const routing = readJson("config/youtube-api-project-routing.json").projects.find((row) => row.key === args.route);
   if (process.env.EFFECTIVE_YOUTUBE_ENVIRONMENT !== routing.githubEnvironment) fail(`OAuth environment mismatch for ${args.route}.`);
   const channels = readJson("config/youtube-channels.json").channels;
@@ -144,17 +155,21 @@ async function main() {
     }
     before.set(item.youtubeVideoId, await preflightRow(item, tokens.get(item.channelKey)));
   }
+  for (const item of rows) if (ACCEPTED_FROM_SOURCE_RUN.has(item.youtubeVideoId) && !before.get(item.youtubeVideoId)) fail(`Previously accepted video ${item.youtubeVideoId} is no longer in its canonical playlist; refuse any write on this route.`);
   fs.mkdirSync(path.dirname(args.receipts), { recursive: true });
   for (const item of rows) {
     const token = tokens.get(item.channelKey);
     const current = await membership(token, item.destinationPlaylistId, item.youtubeVideoId);
     let inserted = false;
+    if (ACCEPTED_FROM_SOURCE_RUN.has(item.youtubeVideoId) && !current) fail(`Previously accepted membership vanished for ${item.youtubeVideoId}; no repeat insert.`);
     if (!current) {
       // Intentionally no retry after this POST: a lost response could mean success.
       await api(token, "POST", "playlistItems", { part: "snippet", fields: "id,snippet(playlistId,resourceId(videoId))" }, { snippet: { playlistId: item.destinationPlaylistId, resourceId: { kind: "youtube#video", videoId: item.youtubeVideoId } } });
       inserted = true;
     }
-    const verified = await membership(token, item.destinationPlaylistId, item.youtubeVideoId);
+    // YouTube may accept playlistItems.insert before listing the new membership.
+    // Poll GET only; never repeat the POST after an ambiguous result.
+    const verified = await waitForMembership(() => membership(token, item.destinationPlaylistId, item.youtubeVideoId));
     if (!verified?.id) fail(`Playlist insertion readback missing for ${item.youtubeVideoId}; stop without retry.`);
     const receipt = { migrationId: manifest.id, route: args.route, youtubeVideoId: item.youtubeVideoId, destinationPlaylistId: item.destinationPlaylistId, destinationPlaylistKey: item.destinationPlaylistKey, playlistItemId: verified.id, inserted, alreadyPresentBeforePreflight: Boolean(before.get(item.youtubeVideoId)), verifiedAt: new Date().toISOString(), githubRunId: process.env.GITHUB_RUN_ID || "" };
     fs.appendFileSync(args.receipts, `${JSON.stringify(receipt)}\n`);
