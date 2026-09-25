@@ -8272,7 +8272,6 @@
       "thumbnailSet": null,
       "thumbnailUploadMode": "",
       "needsThumbnailPermission": false,
-      "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-07-13T15:28:25.283Z",
       "targetLang": "EN,ES,FR,DE",
@@ -8286,7 +8285,22 @@
       "targetLangsHash": "7a4233775927",
       "bundleKey": "global_europe_core",
       "contentScope": "full",
-      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:MY:global_europe_core:7a4233775927"
+      "polyglotKey": "polyglot:home_kitchen_cookware_pilot_01:MY:global_europe_core:7a4233775927",
+      "playlistMembershipMigration": {
+        "migrationId": "deck1-canonical-playlist-membership-20260925",
+        "previousPlaylistIds": [
+          "PLINcl0ruTYss"
+        ],
+        "previousPlaylistItemId": "",
+        "verifiedAt": "2026-09-25T17:50:32.365Z",
+        "githubRunId": "36169247500",
+        "inserted": true
+      },
+      "playlist_key": "POLYGLOT__MY__global-europe-core__7a4233775927",
+      "youtubePlaylistId": "PLFk3h2nkYPrA",
+      "youtubePlaylistUrl": "https://www.youtube.com/playlist?list=PLFk3h2nkYPrA",
+      "playlistItemId": "UExGazNoMm5rWVByQS40NzZCMERDMjVEN0RFRThB",
+      "lastReadbackAt": "2026-09-25T17:50:32.365Z"
     },
     {
       "videoType": "polyglot",
