@@ -1,0 +1,122 @@
+name: YouTube Exact Playlist Membership Migration
+
+on:
+  workflow_dispatch:
+    inputs:
+      migration_id:
+        description: "Exact reviewed migration ID"
+        required: true
+      confirm_youtube_write:
+        description: "Type APPLY_EXACT_PLAYLIST_MEMBERSHIP_20"
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: youtube-exact-playlist-membership-migration
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate exact migration and confirmation
+        env:
+          MIGRATION_ID: ${{ inputs.migration_id }}
+          CONFIRM: ${{ inputs.confirm_youtube_write }}
+        run: |
+          set -euo pipefail
+          test "$MIGRATION_ID" = "deck1-canonical-playlist-membership-20260925"
+          test "$CONFIRM" = "APPLY_EXACT_PLAYLIST_MEMBERSHIP_20"
+          node scripts/youtube-migrate-playlist-membership.mjs
+
+  routes:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - route: youtube-1
+            environment: youtube-api-branding
+          - route: youtube-3
+            environment: youtube-api-youtube-3
+          - route: youtube-4
+            environment: youtube-api-youtube-4
+    environment: ${{ matrix.environment }}
+    env:
+      EFFECTIVE_YOUTUBE_ENVIRONMENT: ${{ matrix.environment }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Restore exact route OAuth bundle
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        run: |
+          set -euo pipefail
+          test -n "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+      - name: Verify live identity and add only absent exact memberships
+        env:
+          ROUTE: ${{ matrix.route }}
+        run: |
+          set -euo pipefail
+          node scripts/youtube-migrate-playlist-membership.mjs \
+            --route="$ROUTE" --apply \
+            --confirm=APPLY_EXACT_PLAYLIST_MEMBERSHIP_20 \
+            --receipts="receipts/$ROUTE.jsonl"
+      - name: Preserve verified receipts even after a later row fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-membership-receipts-${{ matrix.route }}-${{ github.run_id }}
+          path: receipts/${{ matrix.route }}.jsonl
+          if-no-files-found: ignore
+          retention-days: 30
+
+  persist-verified-memberships:
+    needs: [validate, routes]
+    if: always() && needs.validate.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Download only this run's receipts
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: youtube-membership-receipts-*-${{ github.run_id }}
+          path: receipts
+          merge-multiple: true
+      - name: Merge verified rows into durable registries
+        run: |
+          set -euo pipefail
+          git pull --ff-only origin main
+          node scripts/merge-youtube-playlist-membership-migration.mjs --receipts-dir=receipts
+          git add -- config/youtube-published-videos.json config/youtube-polyglot-published-videos.json
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No registry changes."
+            exit 0
+          fi
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Reconcile verified Deck 1 playlist memberships'
+          git push origin HEAD:main

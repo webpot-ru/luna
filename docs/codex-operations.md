@@ -234,3 +234,5 @@ npm run plan:youtube-channel-tokens
 ```
 
 Do not call work complete if only local files were checked but the requested outcome depends on Google Sheets, YouTube, GitHub Actions, public site routes, or another external readback.
+
+Exact transfer of an already-uploaded video into a canonical playlist is governed by [YouTube Publication Campaigns](youtube-publication-campaigns.md#перенос-уже-загруженного-видео-в-канонический-плейлист). It is a separate `playlistItems.insert` workflow with fresh same-channel readback and verified receipts; it never reuploads the video or deletes source playlists.
