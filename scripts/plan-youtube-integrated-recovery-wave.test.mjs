@@ -2,10 +2,22 @@
 import assert from "node:assert/strict";
 
 import {
+  completionTailSupports,
   composeIntegratedRecoveryAssignments,
   sourceRowsFromActiveClaims,
   sourceRowsFromCampaign,
 } from "./plan-youtube-integrated-recovery-wave.mjs";
+
+assert.deepEqual(completionTailSupports({
+  controlReport: { tails: [
+    { setId: "set", videoType: "ordinary", supportLang: "B" },
+    { setId: "set", videoType: "ordinary", supportLang: "A" },
+    { setId: "set", videoType: "polyglot", supportLang: "C" },
+    { setId: "other", videoType: "ordinary", supportLang: "D" },
+  ] },
+  sourceRows: [{ supportLang: "B" }, { supportLang: "E", videoType: "polyglot" }],
+  setId: "set",
+}), ["A", "B", "E"]);
 
 function assignment({ assignmentKey, supportLang, videoType, slotKey }) {
   return {
