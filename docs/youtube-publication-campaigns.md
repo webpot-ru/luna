@@ -157,6 +157,8 @@ npm run claim:youtube-publication-campaign -- \
 
 Для exact partial recovery route report может содержать уже известные blockers других support-каналов, если эти blockers появились после parent upload и не относятся к выбранному recovery. Такой recovery допускается только когда complete/status/pagination evidence остаётся свежим, у выбранных support-каналов и у global-слоя blockers ровно ноль, а validator явно сохраняет число проигнорированных unrelated blockers. Он не разрешает обходить blocker выбранного канала, global blocker, duplicate или product-slot collision.
 
+Source assignment со статусом `upload_accepted_schedule_reconciled` после проверенной локальной сверки расписания считается уже принятой публикацией только при наличии YouTube video ID. Exact partial recovery обязана подтвердить этот ID в свежем live control и не включает такую строку в missing/reupload; строка с этим статусом без ID остаётся blocker. Это сохраняет принятые видео при восстановлении остальных `claimed` хвостов той же кампании.
+
 `youtube-video-publish.yml` и `youtube-polyglot-video-publish.yml` являются только внутренними reusable workers: их ручной `workflow_dispatch mode=apply` намеренно запрещён. Это исключает независимые calendar claims, per-child live control и competing state commits; новые волны запускаются только через уже claimed campaign.
 
 ## Точный repair scheduled даты
