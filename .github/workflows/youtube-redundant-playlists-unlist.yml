@@ -1,0 +1,193 @@
+name: YouTube Exact Redundant Playlists Unlist
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest_id:
+        description: "Exact reviewed 61-playlist manifest ID"
+        required: true
+      confirm_youtube_write:
+        description: "Type UNLIST_EXACT_REDUNDANT_PLAYLISTS_61"
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: youtube-exact-redundant-playlists-unlist
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate exact 61-playlist scope and confirmation
+        env:
+          MANIFEST_ID: ${{ inputs.manifest_id }}
+          CONFIRM: ${{ inputs.confirm_youtube_write }}
+        run: |
+          set -euo pipefail
+          test "$MANIFEST_ID" = "youtube-redundant-playlists-unlist-20260926"
+          test "$CONFIRM" = "UNLIST_EXACT_REDUNDANT_PLAYLISTS_61"
+          node scripts/youtube-unlist-redundant-playlists.mjs
+
+  preflight:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - route: youtube-1
+            environment: youtube-api-branding
+          - route: youtube-2
+            environment: youtube-api-youtube-2
+          - route: youtube-3
+            environment: youtube-api-youtube-3
+          - route: youtube-4
+            environment: youtube-api-youtube-4
+    environment: ${{ matrix.environment }}
+    env:
+      EFFECTIVE_YOUTUBE_ENVIRONMENT: ${{ matrix.environment }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Restore exact route OAuth bundle
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        run: |
+          set -euo pipefail
+          test -n "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+      - name: Verify every source and canonical playlist without writes
+        env:
+          ROUTE: ${{ matrix.route }}
+        run: |
+          set -euo pipefail
+          node scripts/youtube-unlist-redundant-playlists.mjs --route="$ROUTE" --mode=preflight --report="outputs/unlist-preflight-$ROUTE.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-unlist-preflight-${{ matrix.route }}-${{ github.run_id }}
+          path: outputs/unlist-preflight-${{ matrix.route }}.json
+          if-no-files-found: ignore
+          retention-days: 30
+
+  gate:
+    needs: [validate, preflight]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require all four authenticated preflights
+        env:
+          VALIDATE_RESULT: ${{ needs.validate.result }}
+          PREFLIGHT_RESULT: ${{ needs.preflight.result }}
+        run: |
+          test "$VALIDATE_RESULT" = success
+          test "$PREFLIGHT_RESULT" = success
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: youtube-unlist-preflight-*-${{ github.run_id }}
+          path: preflight
+          merge-multiple: true
+      - name: Verify exact cross-route evidence count
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const counts = {'youtube-1':26,'youtube-2':12,'youtube-3':18,'youtube-4':5};
+          for (const [route, expected] of Object.entries(counts)) {
+            const p = `preflight/unlist-preflight-${route}.json`;
+            const row = JSON.parse(fs.readFileSync(p, 'utf8'));
+            if (row.route !== route || row.checked !== expected || row.public + row.alreadyUnlisted !== expected || row.youtubeWrites !== 0) throw Error(`Incomplete preflight ${route}`);
+          }
+          NODE
+
+  apply:
+    needs: gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - route: youtube-1
+            environment: youtube-api-branding
+          - route: youtube-2
+            environment: youtube-api-youtube-2
+          - route: youtube-3
+            environment: youtube-api-youtube-3
+          - route: youtube-4
+            environment: youtube-api-youtube-4
+    environment: ${{ matrix.environment }}
+    env:
+      EFFECTIVE_YOUTUBE_ENVIRONMENT: ${{ matrix.environment }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Restore exact route OAuth bundle
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        run: |
+          set -euo pipefail
+          test -n "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+          test -d .local/youtube-oauth/tokens
+      - name: Recheck live state and unlist only exact extra playlists
+        env:
+          ROUTE: ${{ matrix.route }}
+        run: |
+          set -euo pipefail
+          node scripts/youtube-unlist-redundant-playlists.mjs --route="$ROUTE" --mode=apply --confirm=UNLIST_EXACT_REDUNDANT_PLAYLISTS_61 --receipts="receipts/$ROUTE.jsonl"
+      - name: Preserve verified receipts even after a later row fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-unlist-receipts-${{ matrix.route }}-${{ github.run_id }}
+          path: receipts/${{ matrix.route }}.jsonl
+          if-no-files-found: ignore
+          retention-days: 30
+
+  persist-verified-state:
+    needs: [gate, apply]
+    if: always() && needs.gate.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: youtube-unlist-receipts-*-${{ github.run_id }}
+          path: receipts
+          merge-multiple: true
+      - name: Persist only verified privacy readbacks
+        run: |
+          set -euo pipefail
+          git pull --ff-only origin main
+          node scripts/merge-youtube-playlist-unlist-receipts.mjs --receipts-dir=receipts
+          git add -- config/youtube-playlist-visibility-migrations.json
+          git diff --cached --check
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Record verified redundant playlist visibility changes'
+          git push origin HEAD:main
