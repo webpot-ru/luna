@@ -9,6 +9,7 @@ const polyglotSlotKey = ({ supportLang, bundleKey, contentScope }) => [
 const ACCEPTED_STATUSES = new Set([
   "upload_accepted",
   "upload_accepted_reconciliation_required",
+  "upload_accepted_schedule_reconciled",
 ]);
 
 export function classifyPartialRecoveryAssignments(assignments = []) {
