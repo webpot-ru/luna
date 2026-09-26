@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
-import { MANIFEST_PATH, validateManifest, validateLivePair } from "./youtube-unlist-redundant-playlists.mjs";
+import { MANIFEST_PATH, validateManifest, validateLivePair, buildUnlistUpdate } from "./youtube-unlist-redundant-playlists.mjs";
 import { mergeReceipts } from "./merge-youtube-playlist-unlist-receipts.mjs";
 
 const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
@@ -33,6 +33,9 @@ test("live pair accepts only content-redundant extra on same owned public channe
   current.extra.snippet.channelId = sample.youtubeChannelId;
   current.extra.contentDetails.itemCount += 1;
   assert.throws(() => validateLivePair(sample, current.extra, current.canonical), /playlist_item_count_incomplete/);
+  current.extra.contentDetails.itemCount = sample.videoIds.length;
+  current.extra.snippet.tags = ["legacy"];
+  assert.throws(() => validateLivePair(sample, current.extra, current.canonical), /legacy_tags_need_manual_review/);
 });
 
 test("verified receipts persist only exact unlisted rows, idempotently", () => {
@@ -44,6 +47,15 @@ test("verified receipts persist only exact unlisted rows, idempotently", () => {
   assert.deepEqual(mergeReceipts(manifest, [receipt], ledger), { received: 1, updated: 1, durableCount: 1 });
   assert.deepEqual(mergeReceipts(manifest, [receipt], ledger), { received: 1, updated: 0, durableCount: 1 });
   assert.throws(() => mergeReceipts(manifest, [{ ...receipt, canonicalPlaylistId: "WRONG" }], { schemaVersion: 1, entries: [] }), /Invalid unlist receipt/);
+});
+
+test("visibility request declares snippet and preserves current mutable metadata", () => {
+  const playlist = { id: sample.extraPlaylistId, snippet: { title: sample.title, description: "Existing description", defaultLanguage: "en" }, status: { privacyStatus: "public", podcastStatus: "disabled" } };
+  const update = buildUnlistUpdate(playlist);
+  assert.equal(update.query.part, "snippet,status");
+  assert.deepEqual(update.body, { id: sample.extraPlaylistId, snippet: { title: sample.title, description: "Existing description", defaultLanguage: "en" }, status: { privacyStatus: "unlisted", podcastStatus: "disabled" } });
+  assert.equal(playlist.status.privacyStatus, "public");
+  assert.throws(() => buildUnlistUpdate({ ...playlist, snippet: { ...playlist.snippet, tags: ["legacy"] } }), /Legacy playlist tags need manual review/);
 });
 
 test("workflow and worker have no video upload or delete path", () => {
