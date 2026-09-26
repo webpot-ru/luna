@@ -54,6 +54,7 @@ export function validateLivePair(row, extra, canonical) {
   if (canonical?.status?.privacyStatus !== "public") blockers.push("canonical_not_public");
   if (!["public", "unlisted"].includes(extra?.status?.privacyStatus)) blockers.push("extra_privacy_unexpected");
   if (norm(extra?.snippet?.title) !== norm(row.title) || norm(canonical?.snippet?.title) !== norm(row.title)) blockers.push("title_drift");
+  if (extra?.snippet?.tags?.length) blockers.push("legacy_tags_need_manual_review");
   if (extra?.contentDetails?.itemCount !== extra?.videoIds?.length || canonical?.contentDetails?.itemCount !== canonical?.videoIds?.length) blockers.push("playlist_item_count_incomplete");
   if (!sameSet(extra?.videoIds || [], row.videoIds)) blockers.push("extra_membership_drift");
   const canonicalVideos = new Set(canonical?.videoIds || []);
@@ -107,7 +108,27 @@ async function one(token, endpoint, query, label) {
 
 async function readPlaylist(token, playlistId) {
   return one(token, "playlists", { part: "snippet,status,contentDetails", id: playlistId,
-    fields: "items(id,snippet(channelId,title,description,defaultLanguage),status(privacyStatus,podcastStatus),contentDetails(itemCount))" }, `playlist ${playlistId}`);
+    fields: "items(id,snippet(channelId,title,description,defaultLanguage,tags),status(privacyStatus,podcastStatus),contentDetails(itemCount))" }, `playlist ${playlistId}`);
+}
+
+export function buildUnlistUpdate(playlist) {
+  if (!playlist?.id || !playlist.snippet?.title) fail("Playlist ID/title required for metadata-preserving visibility update.");
+  if (playlist.snippet.tags?.length) fail(`Legacy playlist tags need manual review for ${playlist.id}.`);
+  return {
+    query: { part: "snippet,status", fields: "id,snippet(title,description,defaultLanguage),status(privacyStatus,podcastStatus)" },
+    body: {
+      id: playlist.id,
+      snippet: {
+        title: playlist.snippet.title,
+        description: playlist.snippet.description || "",
+        ...(playlist.snippet.defaultLanguage ? { defaultLanguage: playlist.snippet.defaultLanguage } : {}),
+      },
+      status: {
+        privacyStatus: "unlisted",
+        ...(playlist.status?.podcastStatus ? { podcastStatus: playlist.status.podcastStatus } : {}),
+      },
+    },
+  };
 }
 
 async function videoIds(token, playlistId) {
@@ -149,6 +170,7 @@ async function waitForPrivacy(token, row, before, { attempts = 18, delayMs = 10_
     if (after.status?.privacyStatus === "unlisted") {
       if (after.snippet?.title !== before.snippet?.title || after.snippet?.description !== before.snippet?.description
         || (after.snippet?.defaultLanguage || "") !== (before.snippet?.defaultLanguage || "")
+        || !sameSet(after.snippet?.tags || [], before.snippet?.tags || [])
         || (after.status?.podcastStatus || "") !== (before.status?.podcastStatus || "")) {
         fail(`Metadata changed unexpectedly for ${row.extraPlaylistId}; no further writes on this route.`);
       }
@@ -201,13 +223,11 @@ async function main() {
     const current = await livePair(token, row);
     const alreadyUnlisted = current.extra.status.privacyStatus === "unlisted";
     if (!alreadyUnlisted) {
-      // part=status changes only status; snippet.title is included to satisfy the API contract.
+      // The YouTube API requires snippet in part when it is in the request body.
+      // Resend every mutable snippet field we support unchanged and verify readback.
       // No retry after this PUT, because a lost response may mean the write succeeded.
-      await api(token, "PUT", "playlists", { part: "status", fields: "id,status(privacyStatus,podcastStatus)" }, {
-        id: row.extraPlaylistId,
-        snippet: { title: current.extra.snippet.title },
-        status: { privacyStatus: "unlisted", ...(current.extra.status?.podcastStatus ? { podcastStatus: current.extra.status.podcastStatus } : {}) },
-      });
+      const update = buildUnlistUpdate(current.extra);
+      await api(token, "PUT", "playlists", update.query, update.body);
     }
     const after = await waitForPrivacy(token, row, current.extra);
     const receipt = { manifestId: manifest.id, route: options.route, extraPlaylistId: row.extraPlaylistId,
