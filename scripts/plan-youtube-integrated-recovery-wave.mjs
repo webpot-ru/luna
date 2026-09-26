@@ -175,6 +175,16 @@ export function sourceRowsFromActiveClaims({ registry, setId, expectedSourceAssi
   return { campaigns, rows, sourceMode: "multi_campaign_completion" };
 }
 
+export function completionTailSupports({ controlReport, sourceRows, setId }) {
+  const supports = [
+    ...(controlReport.tails || [])
+      .filter((row) => row.setId === setId && row.videoType === "ordinary")
+      .map((row) => row.supportLang),
+    ...sourceRows.map((row) => row.supportLang),
+  ];
+  return [...new Set(supports.map((value) => String(value || "").trim().toUpperCase()).filter(Boolean))].sort();
+}
+
 function previewPaths(options, now) {
   const stamp = now.toISOString().replace(/[:.]/gu, "-");
   const directory = path.join("scratch", `integrated-recovery-preview-${stamp}`);
@@ -464,13 +474,15 @@ export function buildCompletionTailWave(options) {
     setId: options.setId,
     expectedSourceAssignments: options.expectedSourceAssignments,
   });
+  const selectedSupports = completionTailSupports({ controlReport, sourceRows: source.rows, setId: options.setId });
+  assert(selectedSupports.length > 0, `${options.setId}: completion tail has no selected supports`);
   const preview = buildMultiSourcePreview({ registry, calendar, sourceRows: source.rows });
   const temporary = previewPaths(options, now);
   writeJson(temporary.registry, preview.previewRegistry);
   writeJson(temporary.calendar, preview.previewCalendar);
   const base = buildPublicationCampaign({
     setId: options.setId,
-    supports: "ALL",
+    supports: selectedSupports.join(","),
     ordinaryPerChannel: options.ordinaryPerChannel,
     allowPartialOrdinaryTail: true,
     polyglotPerChannel: options.polyglotPerChannel,
