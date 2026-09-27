@@ -931,6 +931,7 @@ qrcode npm package
 - если `targetLang` неизвестен, но `set_id` опубликован, URL остается localized course page, например `https://flashcardsluna.com/ru/courses/kitchenware-basic`;
 - если `set_id` еще не опубликован на сайте или slug не проверен, QR ведет на localized courses page, например `https://flashcardsluna.com/ru/courses`;
 - не выводить URL из `content_sets.slug` автоматически: DB slug и public site slug могут отличаться, а несуществующий dynamic route может выглядеть как HTTP 200 из-за Next.js fallback.
+- Для `home_furniture_basics_a1` опубликованный slug — `furniture-basics`, а не выводимый из `set_id` `home-furniture-basics`: 2026-09-27 public `https://flashcardsluna.com/en/courses/furniture-basics` ответил HTTP 200 с title `Furniture. | FlashcardsLuna` и description `Furniture words. Basic level.`; `/en`, `/ru` и `/zh` study routes с этим slug ответили HTTP 200. В отличие от него `/en/courses/home-furniture-basics` ответил 404. Поэтому этот exact slug зафиксирован в `config/video-public-course-links.json`; текущий failed control run `36316203668` не является preflight evidence для публикации и требует нового запуска после merge исправления.
 - QR генерируется локально как SVG data URI через `qrcode`; production renderer не должен зависеть от `api.qrserver.com` или заранее сохраненных QR-файлов.
 
 ### YouTube metadata generation

@@ -30,6 +30,17 @@ for (const [input, expected] of sitePathCases) {
 }
 
 const cookware = "home_kitchen_cookware_pilot_01";
+const furniture = "home_furniture_basics_a1";
+
+assert.equal(
+  getPublicCourseUrl({ setId: furniture, supportLang: "EN", targetLang: "ES" }),
+  "https://flashcardsluna.com/en/courses/furniture-basics/study/standard?langs=es"
+);
+
+assert.equal(
+  getPublicCourseUrl({ setId: furniture, supportLang: "RU", targetLang: "ZH" }),
+  "https://flashcardsluna.com/ru/courses/furniture-basics/study/standard?langs=zh"
+);
 
 assert.equal(
   getPublicCourseUrl({ setId: cookware, supportLang: "EN-GB", targetLang: "ES-419" }),
