@@ -1,0 +1,3950 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-27T08:43:08.080Z",
+  "mode": "read_only_no_spend_completion_tail_plan",
+  "setId": "home_entryway_outerwear_a1",
+  "inputs": {
+    "supports": "AZ,BG,BN,CS,DA,DE,ET,FI,FR,HI,HR,HU,HY,ID,IS,IT,JA,KA,KK,KM,KN,KO,LO,LT,LV,ML,MS,MY,NE,NL,NO,PL,RO,RU,SI,SK,SL,SR,SV,SW,TA,TE,TH,TL,TR,UZ,VI,ZH",
+    "supportCount": 48,
+    "ordinarySupportCount": 48,
+    "polyglotSupportCount": 0,
+    "productionDeferredSupportCount": 0,
+    "ordinaryPerChannel": 4,
+    "allowPartialOrdinaryTail": true,
+    "allowPartialPolyglotTail": true,
+    "allowPartialRouteQuotaTail": false,
+    "maxVideoUploadsPerRoute": null,
+    "polyglotPerChannel": 0,
+    "excludeOrdinaryTargets": "",
+    "startDate": "auto",
+    "minFutureMinutes": 180,
+    "maxSnapshotAgeMinutes": 180,
+    "completionTailMode": true,
+    "integratedRecoveryAssignmentCount": 3,
+    "integratedRecoverySourceCampaignIds": [
+      "yt-home_entryway_outerwear_a1-2026-09-26-cd03a46c611a"
+    ]
+  },
+  "evidence": {
+    "snapshotGeneratedAt": "2026-09-27T08:36:11.765Z",
+    "snapshotAgeMinutes": 6.938583333333334,
+    "playlistDiscoveryGeneratedAt": "2026-09-27T08:36:12.094Z",
+    "playlistDiscoveryAgeMinutes": 6.9331,
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    },
+    "productionDeferredAssignments": [],
+    "routeQuotaDeferredAssignments": [],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/review/deck9-control-36306280864/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "8d376419b3c717d2b3dc8243bd5b43abf5b98782aea386f5957c8dcc276376d1"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "773cd75d6aaf3e477052acecc50356985bde8f0f26488e9f90cbcc935ab26f7d"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "5ad67dac50172810d7039bff479b9591f7baf1d0abd514c346c1c80e5e987e02"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "2ab7ccc340f39317871dcc10791bd1e018dea4532f32201f12ada6de42194fe2"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_entryway_outerwear_a1.json",
+        "exists": true,
+        "sha256": "754e809873100cb99c4b8a9e032c44283feb83ead3e29a8c0ec4d73f2002dd25"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/review/deck9-control-36306280864/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "24ece35d967cefb5010ba80d4e95957fbf564f8cd3fca40f8febeb631528d0c4"
+      }
+    },
+    "integratedRecovery": {
+      "sourceMode": "multi_campaign_completion",
+      "sourceCampaigns": [
+        {
+          "campaignId": "yt-home_entryway_outerwear_a1-2026-09-26-cd03a46c611a",
+          "manifestHash": "becbb26da126eaeff5cc640d3c2240771406758908fb73ac6f73d9b8b3dfdd1d",
+          "status": "reconciliation_required",
+          "assignmentCount": 3
+        }
+      ],
+      "sourceAssignmentCount": 3,
+      "sourceOrdinaryCount": 3,
+      "sourcePolyglotCount": 0,
+      "sourceAssignmentsIncludedExactly": true,
+      "ordinaryControlTailCount": 51,
+      "controlEvidence": {
+        "generatedAt": "2026-09-27T08:36:11.522Z",
+        "ageMinutes": 6.942633333333333,
+        "activeVideoCount": 2853
+      },
+      "previewPaths": {
+        "directory": "scratch/integrated-recovery-preview-2026-09-27T08-43-08-080Z",
+        "registry": "scratch/integrated-recovery-preview-2026-09-27T08-43-08-080Z/youtube-publication-campaigns.preview.json",
+        "calendar": "scratch/integrated-recovery-preview-2026-09-27T08-43-08-080Z/youtube-publish-calendar.preview.json"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 33,
+    "supportCount": 48,
+    "scheduledSupportCount": 48,
+    "productionDeferredSupportCount": 0,
+    "productionDeferredAssignmentCount": 0,
+    "routeQuotaDeferredAssignmentCount": 0,
+    "ordinaryCount": 51,
+    "polyglotCount": 0,
+    "fullPolyglotCount": 0,
+    "shortUnverifiedPolyglotCount": 0,
+    "assignmentCount": 51,
+    "firstPublishAt": "2026-09-27T12:30:00.000Z",
+    "lastPublishAt": "2026-09-28T20:30:00.000Z",
+    "customThumbnailCount": 13,
+    "automaticThumbnailCount": 38,
+    "existingPlaylistCount": 51,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 9,
+      "youtube-2": 16,
+      "youtube-3": 13,
+      "youtube-4": 13,
+      "youtube-5": 0,
+      "youtube-6": 0,
+      "youtube-7": 0,
+      "youtube-8": 0
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 51,
+    "aggregateVideoUploadCallLimitPerQuotaDay": 4400,
+    "aggregateVideoUploadCallHeadroom": 4349,
+    "quotaDayTimeZone": "America/Los_Angeles",
+    "automaticRouteFallbackAllowed": false,
+    "standbyRouteQuotaUseAllowed": false,
+    "estimatedPlaylistItemInsertUnits": 2550,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 650,
+    "estimatedGeneralQuotaUnitsMaximum": 3200,
+    "estimatedQuotaUnitsMaximum": 3251,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 9,
+        "estimatedPlaylistItemInsertUnits": 450,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 200,
+        "estimatedGeneralQuotaUnitsMaximum": 650,
+        "estimatedQuotaUnitsMaximum": 659
+      },
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 16,
+        "estimatedPlaylistItemInsertUnits": 800,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 100,
+        "estimatedGeneralQuotaUnitsMaximum": 900,
+        "estimatedQuotaUnitsMaximum": 916
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 13,
+        "estimatedPlaylistItemInsertUnits": 650,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 100,
+        "estimatedGeneralQuotaUnitsMaximum": 750,
+        "estimatedQuotaUnitsMaximum": 763
+      },
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 13,
+        "estimatedPlaylistItemInsertUnits": 650,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 250,
+        "estimatedGeneralQuotaUnitsMaximum": 900,
+        "estimatedQuotaUnitsMaximum": 913
+      },
+      "youtube-5": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      },
+      "youtube-6": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      },
+      "youtube-7": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      },
+      "youtube-8": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      }
+    },
+    "directGeminiRequestsCurrentWorkerLayout": 48,
+    "directGeminiRequestsCampaignRouteBatchSize5": 12,
+    "directGeminiRequestsCampaignWideBatchSize5": 11,
+    "metadataProviderOrder": [
+      "openai_gpt_5_6_terra",
+      "openai_gpt_5_6_luna"
+    ],
+    "metadataBatchSize": 5,
+    "metadataLogicalBatchCount": 12,
+    "metadataMaximumOpenAiAttempts": 12,
+    "metadataMaximumDirectGeminiAttempts": 24,
+    "metadataMaximumVectorEngineAttempts": 31,
+    "metadataMaximumProviderAttempts": 67,
+    "renderJobCount": 51,
+    "ttsSynthesisRequestEstimate": {
+      "mode": "cache_aware_upper_bound",
+      "cardCount": 35,
+      "ordinaryRequestsPerSupportMaximum": 180,
+      "ordinaryRequestsMaximum": 8640,
+      "polyglotRequestsMaximum": 0,
+      "totalRequestsMaximum": 8640,
+      "note": "Short Polyglot card count is duration-measured at render time; this is an upper bound because audio is prepared before final prefix selection."
+    },
+    "providerCallsDuringPlan": 0,
+    "youtubeWritesDuringPlan": 0
+  },
+  "blockers": [],
+  "warnings": [
+    "ordinary|home_entryway_outerwear_a1|AZ|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|BG|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|BN|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|CS|TR: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|CS|UZ: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|CS|VI: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|CS|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|DA|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|DE|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|ET|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|FR|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|HI|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|HR|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|HY|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|ID|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|IS|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|IT|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|JA|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|KA|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|KM|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|KN|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|KO|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|LO|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|ML|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|NE|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|RU|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|SI|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|SW|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|TA|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|TE|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|TL|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_entryway_outerwear_a1|TR|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "3 active no-receipt claims from 1 campaigns are pinned into the exact deck-completion wave"
+  ],
+  "assignments": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "AZ",
+      "targetLang": "ZH",
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_az-AZ-BanuNeural",
+        "supportLang": "AZ"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|AZ|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|AZ|ZH|az",
+      "publishAt": "2026-09-27T13:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Baku",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "az|2026-09-27T13:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T13:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "AZ__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL7jzfVz1zRZkH-y8LLWo0c5hq9UPh3HC6",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Çin A1: Everyday: söz",
+        "description": "Çin dilini öyrənirik. Dərs mövzusu: FlashcardsLuna. Yerli natiqlərin tələffüzünü dinləyin və fasilələrdə sözləri təkrarlayın. Sonda sizi interaktiv mini-test gözləyir! Saytımızda dəstləri pulsuz məşq edin",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "BG",
+      "targetLang": "ZH",
+      "channelKey": "bg",
+      "youtubeChannelId": "UC4SzVEpoXGu16igGcTyhu6g",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_bg-BG-KalinaNeural",
+        "supportLang": "BG"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|BG|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|BG|ZH|bg",
+      "publishAt": "2026-09-27T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Sofia",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "bg|2026-09-27T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "BG__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLbx8Ii8MSQqoaU3IO709jkuXWj9eLedPF",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Китайски A1: думи и произношение",
+        "description": "FlashcardsLuna видеа за българскоговорящи, които учат Китайски: карти с думи, произношение, паузи за повторение и кратки мини тестове.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "BN",
+      "targetLang": "ZH",
+      "channelKey": "bn",
+      "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_bn-IN-TanishaaNeural",
+        "supportLang": "BN"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|BN|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|BN|ZH|bn",
+      "publishAt": "2026-09-27T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Dhaka",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "bn|2026-09-27T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "BN__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLwCCtV2GZMEU2RAnK2gDurPUBupJKIeG8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "চীনা A1: শব্দভান্ডার ও উচ্চারণ",
+        "description": "FlashcardsLuna ভিডিও বাংলা ভাষাভাষীদের চীনা শেখাতে সাহায্য করে: ফ্ল্যাশকার্ড, উচ্চারণ, পুনরাবৃত্তির বিরতি এবং ছোট পরীক্ষা।",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "CS",
+      "targetLang": "TR",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_cs-CZ-VlastaNeural",
+        "supportLang": "CS"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|CS|TR",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|CS|TR|cs",
+      "publishAt": "2026-09-27T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Prague",
+      "localDate": "2026-09-27",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "cs|2026-09-27T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "CS__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLYngL-Nz1hy0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Turečtina A1: slovíčka a výslovnost",
+        "description": "Videa FlashcardsLuna pro česky mluvící studenty, kteří se učí Turečtina: kartičky, výslovnost, pauzy na opakování a krátké mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      },
+      "integratedRecovery": {
+        "sourceCampaignId": "yt-home_entryway_outerwear_a1-2026-09-26-cd03a46c611a",
+        "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|CS|TR",
+        "scheduleCarrierAssignmentKey": "ordinary|home_entryway_outerwear_a1|CS|TR"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "CS",
+      "targetLang": "UZ",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_cs-CZ-VlastaNeural",
+        "supportLang": "CS"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|CS|UZ",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|CS|UZ|cs",
+      "publishAt": "2026-09-27T15:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Prague",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "cs|2026-09-27T15:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T15:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "CS__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBMi1xAr0Lkw",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Uzbečtina A1: slovíčka a výslovnost",
+        "description": "Videa FlashcardsLuna pro česky mluvící studenty, kteří se učí Uzbečtina: kartičky, výslovnost, pauzy na opakování a krátké mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      },
+      "integratedRecovery": {
+        "sourceCampaignId": "yt-home_entryway_outerwear_a1-2026-09-26-cd03a46c611a",
+        "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|CS|UZ",
+        "scheduleCarrierAssignmentKey": "ordinary|home_entryway_outerwear_a1|CS|UZ"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "CS",
+      "targetLang": "VI",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_cs-CZ-VlastaNeural",
+        "supportLang": "CS"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|CS|VI",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|CS|VI|cs",
+      "publishAt": "2026-09-27T18:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Prague",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "cs|2026-09-27T18:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T18:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "CS__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLOztgI_czOUU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Vietnamština A1: slovíčka a výslovnost",
+        "description": "Videa FlashcardsLuna pro česky mluvící studenty, kteří se učí Vietnamština: kartičky, výslovnost, pauzy na opakování a krátké mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      },
+      "integratedRecovery": {
+        "sourceCampaignId": "yt-home_entryway_outerwear_a1-2026-09-26-cd03a46c611a",
+        "sourceAssignmentKey": "ordinary|home_entryway_outerwear_a1|CS|VI",
+        "scheduleCarrierAssignmentKey": "ordinary|home_entryway_outerwear_a1|CS|VI"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "CS",
+      "targetLang": "ZH",
+      "channelKey": "cs",
+      "youtubeChannelId": "UCgPMgF6HAG8mOqYRnIG65hQ",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_cs-CZ-VlastaNeural",
+        "supportLang": "CS"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|CS|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|CS|ZH|cs",
+      "publishAt": "2026-09-27T21:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Prague",
+      "localDate": "2026-09-27",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "cs|2026-09-27T21:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T21:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "CS__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBqL9gOb0y_DXmHk6vp3kbJlkqMoz_kmu",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Čínština A1: slovíčka a výslovnost",
+        "description": "Videa FlashcardsLuna pro česky mluvící studenty, kteří se učí Čínština: kartičky, výslovnost, pauzy na opakování a krátké mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "DA",
+      "targetLang": "ZH",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_da-DK-ChristelNeural",
+        "supportLang": "DA"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|DA|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|DA|ZH|da",
+      "publishAt": "2026-09-27T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-09-27",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "da|2026-09-27T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DA__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL6IMd0kswUtmOsbhEEBxvy1BYV6U8e7Rd",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kinesisk A1: ordforråd og udtale",
+        "description": "FlashcardsLuna-videoer for dansktalende, der lærer Kinesisk: flashcards, udtale, gentagelsespauser og korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "DE",
+      "targetLang": "ZH",
+      "channelKey": "de",
+      "youtubeChannelId": "UCxWOoYT2yaJze-nCX55Cpgw",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_de-DE-KatjaNeural",
+        "supportLang": "DE"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|DE|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|DE|ZH|de",
+      "publishAt": "2026-09-27T15:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Berlin",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "de|2026-09-27T15:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T15:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DE__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL4fX1EHX1YdCkVyVOF1grhSABT0A5F7Yc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Chinesisch A1: Everyday: Wörter",
+        "description": "Wir lernen Chinesisch. Lektionsthema: FlashcardsLuna. Hören Sie aufmerksam auf die muttersprachliche Aussprache und wiederholen Sie die Wörter in den Pausen. Am Ende erwartet Sie ein interaktiver Mini-Test! Übe Kartensätze kostenlos auf unserer Website",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "ET",
+      "targetLang": "ZH",
+      "channelKey": "et",
+      "youtubeChannelId": "UC2nA8gsivL__x6JKl-fs0uw",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_et-EE-AnuNeural",
+        "supportLang": "ET"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|ET|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|ET|ZH|et",
+      "publishAt": "2026-09-27T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Tallinn",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "et|2026-09-27T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ET__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLCKAQTbe2XF4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Hiina A1: sõnavara ja hääldus",
+        "description": "FlashcardsLuna videod eesti keelt kõnelevatele õppijatele, kes õpivad Hiina: sõnakaardid, hääldus, kordamispausid ja lühikesed minitestid.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "FI",
+      "targetLang": "ZH",
+      "channelKey": "fi",
+      "youtubeChannelId": "UCZkiQ6y2W8aCUuaiP3N665A",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fi-FI-NooraNeural",
+        "supportLang": "FI"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|FI|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|FI|ZH|fi",
+      "publishAt": "2026-09-27T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Helsinki",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "fi|2026-09-27T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "FI__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLKCx1gZsG8Xk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kiina A1: sanasto ja ääntäminen",
+        "description": "FlashcardsLuna-videot suomenkielisille oppijoille, jotka opiskelevat Kiina: sanakortit, ääntäminen, toistotauot ja lyhyet minitestit.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "FR",
+      "targetLang": "ZH",
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fr-FR-DeniseNeural",
+        "supportLang": "FR"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|FR|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|FR|ZH|fr",
+      "publishAt": "2026-09-27T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Paris",
+      "localDate": "2026-09-27",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "fr|2026-09-27T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "FR__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLv2OL0Ok6XoKPAQkr0iqVhCD-oYrWV4Mx",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Chinois A1: Everyday: mots",
+        "description": "Apprentissage de Chinois. Sujet de la leçon : FlashcardsLuna. Écoutez attentivement la prononciation des locuteurs natifs et répétez les mots pendant les pauses. Un mini-test interactif vous attend à la fin ! Entraînez-vous gratuitement sur notre site web",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "HI",
+      "targetLang": "ZH",
+      "channelKey": "hi",
+      "youtubeChannelId": "UCRWc-CxGQSN_pbC42scuQHA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hi-IN-SwaraNeural",
+        "supportLang": "HI"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|HI|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|HI|ZH|hi",
+      "publishAt": "2026-09-27T15:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "hi|2026-09-27T15:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T15:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HI__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLfzQkQfUWET8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "चीनी A1: Everyday: शब्द",
+        "description": "हम चीनी सीख रहे हैं। पाठ का विषय है: FlashcardsLuna। मूल उच्चारण को ध्यान से सुनें और ठहराव में शब्दों को दोहराएं। अंत में एक इंटरैक्टिव मिनी-टेस्ट आपका इंतजार कर रहा है! हमारी वेबसाइट पर मुफ़्त में अभ्यास करें",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "HR",
+      "targetLang": "ZH",
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hr-HR-GabrijelaNeural",
+        "supportLang": "HR"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|HR|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|HR|ZH|hr",
+      "publishAt": "2026-09-27T15:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Zagreb",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "hr|2026-09-27T15:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T15:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HR__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLbyF6xeXYIjI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kineski A1: rječnik i izgovor",
+        "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Kineski: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "HU",
+      "targetLang": "ZH",
+      "channelKey": "hu",
+      "youtubeChannelId": "UCTcNExukG4ceYxY7bs7l1iA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hu-HU-NoemiNeural",
+        "supportLang": "HU"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|HU|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|HU|ZH|hu",
+      "publishAt": "2026-09-27T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Budapest",
+      "localDate": "2026-09-27",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "hu|2026-09-27T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HU__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLDFoQk7YUc_8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kínai A1: szókincs és kiejtés",
+        "description": "FlashcardsLuna videók magyar anyanyelvű tanulóknak, akik Kínai nyelvet tanulnak: szókártyák, kiejtés, ismétlési szünetek és rövid mini tesztek.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "HY",
+      "targetLang": "ZH",
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|HY|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|HY|ZH|hy",
+      "publishAt": "2026-09-27T16:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Yerevan",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "hy|2026-09-27T16:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T16:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_capability_unknown"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HY__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLbmVMp71ItSU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Չինարեն A1: Everyday: բառ",
+        "description": "Սովորում ենք Չինարեն։ Դասի թեման է՝ FlashcardsLuna։ Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ: Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ: Մարզեք հավաքածուները անվճար մեր կայքում",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "ID",
+      "targetLang": "ZH",
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|ID|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|ID|ZH|id",
+      "publishAt": "2026-09-27T13:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Jakarta",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "id|2026-09-27T13:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T13:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLNLVT-htGblI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tionghoa A1: Everyday: kata",
+        "description": "Belajar Tionghoa. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "IS",
+      "targetLang": "ZH",
+      "channelKey": "is",
+      "youtubeChannelId": "UCUyFKGP-CNiSpmdFcoms6QA",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_is-IS-GudrunNeural",
+        "supportLang": "IS"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|IS|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|IS|ZH|is",
+      "publishAt": "2026-09-27T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Atlantic/Reykjavik",
+      "localDate": "2026-09-27",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "is|2026-09-27T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IS__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLRTVSegPFkTA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kínverska A1: orðaforði og framburður",
+        "description": "FlashcardsLuna myndbönd fyrir íslenskumælandi sem læra Kínverska: orðaspjöld, framburð, endurtekningarhlé og stutt smápróf.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "IT",
+      "targetLang": "ZH",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_it-IT-IsabellaNeural",
+        "supportLang": "IT"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|IT|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|IT|ZH|it",
+      "publishAt": "2026-09-27T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-09-27",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "it|2026-09-27T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IT__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBYghFsxRVBNqHuk848m6hLD7i6ZTVm9T",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Cinese A1: Everyday: parole",
+        "description": "Impariamo il Cinese. Argomento della lezione: FlashcardsLuna. Ascolta attentamente la pronuncia dei madrelingua e ripeti le parole durante le pause. Alla fine ti aspetta un mini-test interattivo! Esercitati gratis con i mazzi sul nostro sito",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "JA",
+      "targetLang": "ZH",
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ja-JP-NanamiNeural",
+        "supportLang": "JA"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|JA|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|JA|ZH|ja",
+      "publishAt": "2026-09-27T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Tokyo",
+      "localDate": "2026-09-27",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "ja|2026-09-27T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/ja__JA__LunaCardsJapan/ZH__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "57b18819d8272d68dbee023c617811e8cefee6fcc447952785199e82f32cd68f"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "JA__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLWbRbcCn7L8I",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "中国語 A1: Everyday: 単語",
+        "description": "中国語の学習。レッスンのテーマは、FlashcardsLunaです。 ネイティブの発音を聞いて、ポーズの間に繰り返してください。 最後にミニテストがあります！ ウェブサイトで無料デッキを練習する",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "KA",
+      "targetLang": "ZH",
+      "channelKey": "ka",
+      "youtubeChannelId": "UCpZM_1u-nTHydEJz7cnjf7w",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ka-GE-EkaNeural",
+        "supportLang": "KA"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|KA|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|KA|ZH|ka",
+      "publishAt": "2026-09-27T13:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Tbilisi",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "ka|2026-09-27T13:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T13:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/ka__KA__LunaCardsGeorgian/ZH__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "a8951266656aff97612cca6bc8164d3a1c2bd5e641c37450fcf9de8a3af5a17b"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KA__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLSzxCYmjUYlM",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ჩინური A1: Everyday: სიტყვა",
+        "description": "ვსწავლობთ ჩინური ენას. გაკვეთილის თემა: FlashcardsLuna. მოუსმინეთ მშობლიურ გამოთქმას და გაიმეორეთ სიტყვები პაუზების დროს. ბოლოს გელით ინტერაქტიული მინი-ტესტი! ივარჯიშეთ კოლექციებზე უფასოდ ჩვენს საიტზე",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "KK",
+      "targetLang": "ZH",
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|KK|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|KK|ZH|kk",
+      "publishAt": "2026-09-27T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Almaty",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "kk|2026-09-27T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "KK__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLF8HGaBT33Qg",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Қытай тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Қытай тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "KM",
+      "targetLang": "ZH",
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_km-KH-SreymomNeural",
+        "supportLang": "KM"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|KM|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|KM|ZH|km",
+      "publishAt": "2026-09-27T13:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Phnom_Penh",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "km|2026-09-27T13:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T13:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KM__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLfPMH3kjhA64",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ចិន A1: វាក្យសព្ទ និងការបញ្ចេញសំឡេង",
+        "description": "វីដេអូ FlashcardsLuna សម្រាប់អ្នកនិយាយភាសាខ្មែរ ដែលកំពុងរៀន ចិន: កាតពាក្យ ការបញ្ចេញសំឡេង ពេលសម្រាកសម្រាប់និយាយតាម និងតេស្តខ្លីៗ។",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "KN",
+      "targetLang": "ZH",
+      "channelKey": "kn",
+      "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kn-IN-SapnaNeural",
+        "supportLang": "KN"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|KN|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|KN|ZH|kn",
+      "publishAt": "2026-09-27T15:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "kn|2026-09-27T15:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T15:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KN__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf_oRAp8WRng",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ಚೈನೀಸ್ A1: Everyday: ಪದಗಳು",
+        "description": "ನಾವು ಚೈನೀಸ್ ಕಲಿಯುತ್ತಿದ್ದೇವೆ. ಪಾಠದ ವಿಷಯ: FlashcardsLuna. ಸ್ಥಳೀಯ ಉಚ್ಚಾರಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಕೇಳಿ ಮತ್ತು ವಿರಾಮಗಳಲ್ಲಿ ಪದಗಳನ್ನು ಪುನರಾವರ್ತಿಸಿ. ಕೊನೆಯಲ್ಲಿ ಸಂವಾದಾತ್ಮಕ ಮಿನಿ-ಟೆಸ್ಟ್ ನಿಮಗಾಗಿ ಕಾಯುತ್ತಿದೆ! ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "KO",
+      "targetLang": "ZH",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ko-KR-InJoonNeural",
+        "supportLang": "KO"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|KO|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|KO|ZH|ko",
+      "publishAt": "2026-09-27T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-09-27",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "ko|2026-09-27T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KO__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLaD_Acrp93ck",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "중국어 A1: Everyday: 단어",
+        "description": "중국어 공부하기. 오늘의 주제는 FlashcardsLuna입니다. 원어민의 발음을 잘 듣고 따라 해보세요. 마지막에는 퀴즈가 준비되어 있습니다! 웹사이트에서 무료로 카드 세트를 연습하세요",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "LO",
+      "targetLang": "ZH",
+      "channelKey": "lo",
+      "youtubeChannelId": "UCbER-ysJ3PVsIRG6hgr_PHw",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lo-LA-KeomanyNeural",
+        "supportLang": "LO"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|LO|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|LO|ZH|lo",
+      "publishAt": "2026-09-27T13:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Vientiane",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "lo|2026-09-27T13:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T13:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "LO__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLDKHe5RhUFn0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ຈີນ A1: ຄຳສັບ ແລະ ການອອກສຽງ",
+        "description": "ວິດີໂອ FlashcardsLuna ສຳລັບຜູ້ເວົ້າພາສາລາວທີ່ກຳລັງຮຽນ ຈີນ: ບັດຄຳສັບ, ການອອກສຽງ, ຊ່ວງພັກເພື່ອຝຶກຊ້ຳ ແລະ ບົດທົດສອບສັ້ນ.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "LT",
+      "targetLang": "ZH",
+      "channelKey": "lt",
+      "youtubeChannelId": "UCg5P8O4UQ8Uo7RL_OTHzukw",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lt-LT-OnaNeural",
+        "supportLang": "LT"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|LT|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|LT|ZH|lt",
+      "publishAt": "2026-09-27T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Vilnius",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "lt|2026-09-27T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "LT__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLIwTL4ZEv0Zg",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kinų A1: žodynas ir tarimas",
+        "description": "FlashcardsLuna vaizdo įrašai lietuviškai kalbantiems, kurie mokosi Kinų: kortelės, tarimas, pauzės kartojimui ir trumpi mini testai.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "LV",
+      "targetLang": "ZH",
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|LV|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|LV|ZH|lv",
+      "publishAt": "2026-09-28T20:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Riga",
+      "localDate": "2026-09-28",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "lv|2026-09-28T20:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-29T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-01T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-05T20:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-28T20:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "LV__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLNwf5qAGPVlk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Ķīniešu A1: vārdu krājums un izruna",
+        "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Ķīniešu: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "ML",
+      "targetLang": "ZH",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ml-IN-SobhanaNeural",
+        "supportLang": "ML"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|ML|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|ML|ZH|ml",
+      "publishAt": "2026-09-27T18:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-09-27",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "ml|2026-09-27T18:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T18:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ML__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLdXciXm1qSac",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ചൈനീസ് A1: Everyday: വാക്കുകൾ",
+        "description": "നാം ചൈനീസ് പഠിക്കുന്നു. പാഠഭാഗം: FlashcardsLuna. ഉച്ചാരണം ശ്രദ്ധാപൂർവ്വം കേൾക്കുക, ഇടവേളകളിൽ വാക്കുകൾ ആവർത്തിക്കുക. അവസാനം ഒരു ഇന്ററാക്ടീവ് മിനി-ടെസ്റ്റ് നിങ്ങൾക്കായി കാത്തിരിക്കുന്നു! ഞങ്ങളുടെ വെബ്‌സൈറ്റിൽ സൗജന്യമായി പരിശീലിക്കുക",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "MS",
+      "targetLang": "ZH",
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ms-MY-YasminNeural",
+        "supportLang": "MS"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|MS|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|MS|ZH|ms",
+      "publishAt": "2026-09-27T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "ms|2026-09-27T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "MS__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLajaWqdMTWaQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Cina A1: kosa kata dan sebutan",
+        "description": "Video FlashcardsLuna untuk penutur bahasa Melayu yang belajar Cina: kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "MY",
+      "targetLang": "ZH",
+      "channelKey": "my",
+      "youtubeChannelId": "UCP7ua8Qn3qCjABUkMV5GICg",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_my-MM-NilarNeural",
+        "supportLang": "MY"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|MY|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|MY|ZH|my",
+      "publishAt": "2026-09-27T14:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Yangon",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "my|2026-09-27T14:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/my__MY__LunaCardsBurmese/ZH__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "361828350d78e6cdc62ac2f48fb7f67fa86553caa60ed962dd8f4039c878b877"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "MY__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLY0HFMI7YcjA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "တရုတ် A1: ဝေါဟာရနှင့် အသံထွက်",
+        "description": "FlashcardsLuna ဗီဒီယိုများသည် မြန်မာဘာသာပြောသူများ တရုတ် ကို လေ့လာရန်အတွက် ကတ်များ၊ အသံထွက်၊ ထပ်ဆိုရန် ခဏနားချိန်များနှင့် စမ်းသပ်မေးခွန်းတိုများ ပါဝင်သည်။",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "NE",
+      "targetLang": "ZH",
+      "channelKey": "ne",
+      "youtubeChannelId": "UCL1bQyM5VsxW8-n8KUqln2A",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ne-NP-HemkalaNeural",
+        "supportLang": "NE"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|NE|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|NE|ZH|ne",
+      "publishAt": "2026-09-27T14:45:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Kathmandu",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "ne|2026-09-27T14:45:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:45:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:45:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/ne__NE__LunaCardsNepali/ZH__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "d7a3dd7ce91badbe1785405969a832383d68fbbcd38ba866adfc070e6123a1ff"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "NE__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLc5l5EGiBE1Q",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "चिनियाँ A1: Everyday: शब्दहरू",
+        "description": "हामी चिनियाँ सिक्दैछौं। पाठको विषय: FlashcardsLuna। स्थानीय वक्ताको उच्चारण ध्यान दिएर सुन्नुहोस् र पजहरूमा शब्दहरू दोहोर्याउनुहोस्। अन्त्यमा एक अन्तरक्रियात्मक मिनी-टेस्ट तपाईंको पर्खाइमा छ! हाम्रो वेबसाइटमा निःशुल्क फ्ल्यासकार्डहरू अभ्यास गर्नुहोस्",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "NL",
+      "targetLang": "ZH",
+      "channelKey": "nl",
+      "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_nl-NL-ColetteNeural",
+        "supportLang": "NL"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|NL|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|NL|ZH|nl",
+      "publishAt": "2026-09-27T15:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Amsterdam",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "nl|2026-09-27T15:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T15:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "NL__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLZlyEwvqsQ-8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Chinees A1: woordenschat en uitspraak",
+        "description": "FlashcardsLuna-video's voor Nederlandstaligen die Chinees leren: flashcards, uitspraak, pauzes om te herhalen en korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "NO",
+      "targetLang": "ZH",
+      "channelKey": "no",
+      "youtubeChannelId": "UCK2IIhxCoPUW3wI6xBPYkfA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_nb-NO-PernilleNeural",
+        "supportLang": "NO"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|NO|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|NO|ZH|no",
+      "publishAt": "2026-09-27T15:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Oslo",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "no|2026-09-27T15:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T15:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "NO__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLK_yKCRSF5k8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kinesisk A1: ordforråd og uttale",
+        "description": "FlashcardsLuna-videoer for norsktalende som lærer Kinesisk: flashcards, uttale, pauser for repetisjon og korte minitester.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "PL",
+      "targetLang": "ZH",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pl-PL-ZofiaNeural",
+        "supportLang": "PL"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|PL|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|PL|ZH|pl",
+      "publishAt": "2026-09-27T18:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Warsaw",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "pl|2026-09-27T18:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T18:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "PL__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLDuqCZZ2ql6k",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Chiński A1: słownictwo i wymowa",
+        "description": "Filmy FlashcardsLuna dla polskojęzycznych osób uczących się Chiński: fiszki, wymowa, pauzy na powtarzanie i krótkie mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "RO",
+      "targetLang": "ZH",
+      "channelKey": "ro",
+      "youtubeChannelId": "UCvc_hya6nn2z8Q2WzHCuBWw",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ro-RO-AlinaNeural",
+        "supportLang": "RO"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|RO|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|RO|ZH|ro",
+      "publishAt": "2026-09-27T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Bucharest",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "ro|2026-09-27T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "RO__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLL4UxH0GMsOo",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Chineză A1: vocabular și pronunție",
+        "description": "Videoclipuri FlashcardsLuna pentru vorbitorii de română care învață Chineză: carduri, pronunție, pauze pentru repetare și mini teste scurte.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "RU",
+      "targetLang": "ZH",
+      "channelKey": "ru",
+      "youtubeChannelId": "UC1f5EyXEMejXIumH9104GMA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ru-RU-SvetlanaNeural",
+        "supportLang": "RU"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|RU|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|RU|ZH|ru",
+      "publishAt": "2026-09-27T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Moscow",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "ru|2026-09-27T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/ru__RU__LunaCardsRU/ZH__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "8c06bf71647957421a3880d052f94a287bc2c1450eaf2d8df6fd6dfcd15ca524"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "RU__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLx5nIeqMBQ7kTCBC3tiU9CHPOXxHQPwLj",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Китайский A1: бытовой словарь",
+        "description": "Видео FlashcardsLuna для русскоязычных, которые изучают Китайский: карточки, произношение, паузы для повторения и короткие мини-тесты.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "SI",
+      "targetLang": "ZH",
+      "channelKey": "si",
+      "youtubeChannelId": "UCgGRZU3j02PQ58z5QcnhhMg",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_si-LK-ThiliniNeural",
+        "supportLang": "SI"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|SI|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|SI|ZH|si",
+      "publishAt": "2026-09-27T15:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Colombo",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "si|2026-09-27T15:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T15:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/si__SI__LunaCardsSinhala/ZH__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "649458d1462f92d805fb5dcbc8938c0b2dafb47363d60fd1afeb1ebbffed7d00"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SI__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLfmbrnK43sSU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "චීන A1: Everyday: වචන",
+        "description": "අපි චීන ඉගෙන ගනිමු. පාඩමේ මාතෘකාව: FlashcardsLuna. දේශීය උච්චාරණයට හොඳින් සවන් දී විරාමයන් අතරතුර වචන නැවත කියන්න. අවසානයේදී ඔබට කුඩා පරීක්ෂණයක් ඇත! අපගේ වෙබ් අඩවියෙන් නොමිලේ වචන පුහුණු වන්න",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "SK",
+      "targetLang": "ZH",
+      "channelKey": "sk",
+      "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sk-SK-LukasNeural",
+        "supportLang": "SK"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|SK|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|SK|ZH|sk",
+      "publishAt": "2026-09-28T06:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Bratislava",
+      "localDate": "2026-09-28",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "sk|2026-09-28T06:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-29T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-01T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-05T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-28T06:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "SK__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLNBUVFYAO0DE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Čínština A1: slovná zásoba a výslovnosť",
+        "description": "Videá FlashcardsLuna pre slovensky hovoriacich študentov, ktorí sa učia Čínština: kartičky, výslovnosť, pauzy na opakovanie a krátke mini testy.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "SL",
+      "targetLang": "ZH",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sl-SI-RokNeural",
+        "supportLang": "SL"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|SL|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|SL|ZH|sl",
+      "publishAt": "2026-09-27T15:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Ljubljana",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "sl|2026-09-27T15:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T15:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "SL__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLMna1JqMw5l8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kitajščina A1: besedišče in izgovorjava",
+        "description": "Videi FlashcardsLuna za slovensko govoreče, ki se učijo Kitajščina: kartice, izgovorjava, premori za ponavljanje in kratki mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "SR",
+      "targetLang": "ZH",
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sr-RS-SophieNeural",
+        "supportLang": "SR"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|SR|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|SR|ZH|sr",
+      "publishAt": "2026-09-27T15:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Belgrade",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "sr|2026-09-27T15:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T15:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/sr__SR__LunaCardsSrpski/ZH__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "b0e8aa1f58c518f88b30dc5d2e242670a2097ffdc428271a742137a0afed3267"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "SR__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLO8YnjlnqG4U",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Кинески A1: vokabular i izgovor",
+        "description": "FlashcardsLuna video snimci za govornike srpskog koji uče Кинески: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "SV",
+      "targetLang": "ZH",
+      "channelKey": "sv",
+      "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sv-SE-SofieNeural",
+        "supportLang": "SV"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|SV|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|SV|ZH|sv",
+      "publishAt": "2026-09-27T21:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Stockholm",
+      "localDate": "2026-09-27",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "sv|2026-09-27T21:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T21:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "SV__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLIa-H4aMw4Ns",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kinesiska A1: ordförråd och uttal",
+        "description": "FlashcardsLuna-videor för svensktalande som lär sig Kinesiska: flashcards, uttal, pauser för upprepning och korta minitest.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "SW",
+      "targetLang": "ZH",
+      "channelKey": "sw",
+      "youtubeChannelId": "UCZ0eMlkJpAQDkQQLAy0gTkw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sw-KE-ZuriNeural",
+        "supportLang": "SW"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|SW|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|SW|ZH|sw",
+      "publishAt": "2026-09-27T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Africa/Nairobi",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "sw|2026-09-27T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/sw__SW__LunaCardsSwahili/ZH__Kichina/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "c1d87cc6ab21e3e19c59241a9afe46b4e1775681fcf87b903a053e02802c258c"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SW__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLN3219GEK_nI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kichina A1: Everyday: maneno",
+        "description": "Tunajifunza Kichina. Mada ya somo: FlashcardsLuna. Sikiliza kwa makini matamshi ya wazawa na urudie maneno wakati wa mapumziko. Mtihani mdogo wa maingiliano unakusubiri mwishoni! Jifunze kadi za masomo bila malipo kwenye tovuti yetu",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "TA",
+      "targetLang": "ZH",
+      "channelKey": "ta",
+      "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ta-IN-PallaviNeural",
+        "supportLang": "TA"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|TA|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|TA|ZH|ta",
+      "publishAt": "2026-09-27T15:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "ta|2026-09-27T15:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T15:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TA__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLGnyCBcGDxvk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "சீனம் A1: Everyday: சொற்கள்",
+        "description": "நாம் சீனம் கற்கிறோம். பாடத் தலைப்பு: FlashcardsLuna. உள்ளூர் உச்சரிப்பைக் கவனமாகக் கேட்டு, இடைவெளிகளின் போது சொற்களைத் திரும்பக் கூறவும். இறுதியில் ஒரு ஊடாடும் மினி-தேர்வு உங்களுக்காகக் காத்திருக்கிறது! எங்கள் இணையதளத்தில் இலவசமாகப் பயிற்சி செய்யுங்கள்",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "TE",
+      "targetLang": "ZH",
+      "channelKey": "te",
+      "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_te-IN-ShrutiNeural",
+        "supportLang": "TE"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|TE|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|TE|ZH|te",
+      "publishAt": "2026-09-27T18:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-09-27",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "te|2026-09-27T18:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T18:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TE__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLIzSqe0glOtU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "చైనీస్ A1: Everyday: పదాలు",
+        "description": "మనం చైనీస్ నేర్చుకుంటున్నాము. పాఠం అంశం: FlashcardsLuna. స్థానిక ఉచ్చారణను జాగ్రత్తగా వినండి మరియు విరామాలలో పదాలను పునరావృతం చేయండి. చివరలో ఒక ఇంటరాక్టివ్ మినీ-టెస్ట్ మీ కోసం వేచి ఉంది! మా వెబ్‌సైట్‌లో ఉచితంగా ప్రాక్టీస్ చేయండి",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "TH",
+      "targetLang": "ZH",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_th-TH-PremwadeeNeural",
+        "supportLang": "TH"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|TH|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|TH|ZH|th",
+      "publishAt": "2026-09-27T13:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "th|2026-09-27T13:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T13:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/th__TH__LunaCardsThai/ZH__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "e59ea91b8593e1e7903daec50671030560e76618b940382ce9932d1bb3e619da"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "TH__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLSSvG0o64kjA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "จีน A1: คำศัพท์และการออกเสียง",
+        "description": "วิดีโอ FlashcardsLuna สำหรับผู้พูดภาษาไทยที่กำลังเรียน จีน: แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "TL",
+      "targetLang": "ZH",
+      "channelKey": "tl",
+      "youtubeChannelId": "UCL2Oj2QZ-f46Ud5rERoNTiQ",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fil-PH-BlessicaNeural",
+        "supportLang": "TL"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|TL|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|TL|ZH|tl",
+      "publishAt": "2026-09-27T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Manila",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "tl|2026-09-27T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TL__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLDtnSX99QUL8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Chinese A1: bokabularyo at pagbigkas",
+        "description": "Mga video ng FlashcardsLuna para sa mga nagsasalita ng Filipino na nag-aaral ng Chinese: flashcards, pagbigkas, mga pahinga para ulitin, at maiikling mini-test.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "TR",
+      "targetLang": "ZH",
+      "channelKey": "tr",
+      "youtubeChannelId": "UCK1TH_xjgvr3kegKM52WWBA",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_tr-TR-EmelNeural",
+        "supportLang": "TR"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|TR|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|TR|ZH|tr",
+      "publishAt": "2026-09-27T14:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Europe/Istanbul",
+      "localDate": "2026-09-27",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "tr|2026-09-27T14:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/tr__TR__LunaCardsTurkce/ZH__ince/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "3e3db7a1fdb256a6e9aca3399de2a9c330b47a269e52a6efbb4762188162c99c"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TR__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLZ1fJ7EZPAio",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Çince A1: Everyday: kelime",
+        "description": "Çince öğreniyoruz. Ders konusu: FlashcardsLuna. Ana dili olanların telaffuzunu dinleyin ve duraklamalarda kelimeleri tekrarlayın. Sonunda sizi etkileşimli bir mini test bekliyor! Sitemizde desteleri ücretsiz olarak çalışın",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "UZ",
+      "targetLang": "ZH",
+      "channelKey": "uz",
+      "youtubeChannelId": "UClFSxvtwOnc_pPv2rCnT-bg",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_uz-UZ-MadinaNeural",
+        "supportLang": "UZ"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|UZ|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|UZ|ZH|uz",
+      "publishAt": "2026-09-27T15:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Tashkent",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "uz|2026-09-27T15:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T15:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/uz__UZ__LunaCardsUzbek/ZH__Xitoy/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "df4889a18fd6261bdd3b6eafbde488b8f6c325977751a5649aa3c754043a9029"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "UZ__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLGKxLS1q_m58",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Xitoy A1: lug'at va talaffuz",
+        "description": "FlashcardsLuna videolari o'zbek tilida so'zlashuvchilar uchun Xitoy o'rganishga yordam beradi: kartochkalar, talaffuz, takrorlash pauzalari va qisqa mini-testlar.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "VI",
+      "targetLang": "ZH",
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_vi-VN-HoaiMyNeural",
+        "supportLang": "VI"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|VI|ZH",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|VI|ZH|vi",
+      "publishAt": "2026-09-27T13:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "vi|2026-09-27T13:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T13:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/vi__VI__LunaCardsTiengViet/ZH__Ti_ng_Trung/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "1539282a1f593747fbad5201fd532458c7bf7b2d12c8e8d33b163af4f1b5aac9"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "VI__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLHbh0oTXPO30",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tiếng Trung A1: từ vựng và phát âm",
+        "description": "Video FlashcardsLuna dành cho người nói tiếng Việt học Tiếng Trung: thẻ ghi nhớ, phát âm, khoảng dừng để lặp lại và bài kiểm tra ngắn.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_entryway_outerwear_a1",
+      "supportLang": "ZH",
+      "targetLang": "VI",
+      "channelKey": "zh",
+      "youtubeChannelId": "UCrfd0Uuob-LX7rzHRWF7e4w",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_zh-CN-XiaoxiaoNeural",
+        "supportLang": "ZH"
+      },
+      "assignmentKey": "ordinary|home_entryway_outerwear_a1|ZH|VI",
+      "calendarAssignmentKey": "ordinary|home_entryway_outerwear_a1|ZH|VI|zh",
+      "publishAt": "2026-09-27T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-09-27",
+      "timeZone": "Asia/Shanghai",
+      "localDate": "2026-09-27",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "zh|2026-09-27T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-28T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-09-30T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-04T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-27T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/video/by-set/home_entryway_outerwear_a1/ordinary/by-channel/zh__ZH__LunaCardsChinese/VI__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck9-entryway-outerwear-approved-20260908/manifest.json",
+        "sha256": "9627d110ae285d543e60eae05edc4bb941d80f8ec44533a88d8700b041d4e5b7"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "ZH__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLIQuWEBAH2kg",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "越南语 A1：词汇和发音",
+        "description": "FlashcardsLuna 视频帮助中文母语者学习 越南语：单词卡、发音、跟读停顿和简短小测。",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T08:36:12.094Z"
+      }
+    }
+  ],
+  "campaignId": "yt-home_entryway_outerwear_a1-2026-09-27-8670450ee922",
+  "manifestHash": "2ef3feb7c40222527849dc105d99b248bde1f665596db9f3afb268ed4fc44616"
+}
