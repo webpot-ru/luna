@@ -95832,6 +95832,49 @@
         "publishAt": "2026-09-30T00:30:00Z",
         "thumbnailStatus": "custom_set"
       }
+    },
+    {
+      "schemaVersion": 1,
+      "videoType": "polyglot",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "ML",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "youtubeVideoId": "Ut0IYw_Vh2E",
+      "youtubeVideoUrl": "https://www.youtube.com/watch?v=Ut0IYw_Vh2E",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "routeKey": "youtube-4",
+      "privacyStatus": "private",
+      "publishAt": "2026-09-30T06:00:00.000Z",
+      "scheduledPublishAt": "2026-09-30T06:00:00.000Z",
+      "publicationStatus": "upload_accepted_reconciliation_required",
+      "thumbnailSet": false,
+      "thumbnailUploadMode": "first_frame_auto",
+      "needsThumbnailPermission": false,
+      "youtubePlaylistId": "PLGouiavsr9ks",
+      "playlistItemId": "",
+      "needsPlaylistInsert": true,
+      "postUploadError": "lost receipt after videos.insert; custom thumbnail and playlist item are not confirmed",
+      "source": "exact_live_control_lost_receipt_reconciliation",
+      "reconciledAt": "2026-09-27T15:31:22.449Z",
+      "assignmentKey": "polyglot|home_furniture_basics_a1|ML|global_europe_core|7a4233775927|short_unverified",
+      "campaignId": "yt-home_furniture_basics_a1-2026-09-27-d181eb302985",
+      "campaignManifestHash": "60af67bcc86aa48bb74e7f841e8455f6281f4c0a4a73f8dac61c63743587f4f1",
+      "playlist_key": "POLYGLOT__ML__global-europe-core__7a4233775927",
+      "githubRunId": "36323392466",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/36323392466",
+      "stateRecovery": "exact_live_control_lost_receipt_after_videos_insert",
+      "bundleKey": "global_europe_core",
+      "contentScope": "short_unverified",
+      "targetLangsCsv": "EN,ES,FR,DE",
+      "targetLangsHash": "7a4233775927",
+      "polyglotKey": "polyglot:home_furniture_basics_a1:ML:global_europe_core:7a4233775927:short_unverified"
     }
   ]
 }
