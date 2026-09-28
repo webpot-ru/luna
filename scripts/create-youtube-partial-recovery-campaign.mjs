@@ -2,8 +2,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { spawnSync } from "node:child_process";
 
-import { sha256Json, verifyCampaignManifest } from "./lib/youtube-publication-campaign.mjs";
+import {
+  fileFingerprint,
+  offlineDeckAssignmentCoverageBlockers,
+  sha256Json,
+  verifyCampaignManifest,
+} from "./lib/youtube-publication-campaign.mjs";
 import {
   assignmentKey,
   calendarAssignmentKey,
@@ -53,6 +59,7 @@ function parseArgs(argv) {
     else if (arg === "--generated-at" || arg.startsWith("--generated-at=")) options.generatedAt = value();
     else if (arg === "--min-future-minutes" || arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(value());
     else if (arg === "--max-evidence-age-minutes" || arg.startsWith("--max-evidence-age-minutes=")) options.maxEvidenceAgeMinutes = Number(value());
+    else if (arg === "--expected-offline-deck-sha256" || arg.startsWith("--expected-offline-deck-sha256=")) options.expectedOfflineDeckSha256 = value();
     else if (arg === "--apply") options.apply = true;
     else if (arg === "--confirm" || arg.startsWith("--confirm=")) options.confirm = value();
     else if (arg === "--help" || arg === "-h") options.help = true;
@@ -82,6 +89,39 @@ function canonicalSupports(csv) {
 
 function channelForSupport(channels, support) {
   return (channels.channels || []).find((row) => (row.supportLangs || []).includes(support));
+}
+
+export function resolveOfflineDeckRevision(oldCampaign, selectedRows, expectedSha256 = "") {
+  const previous = oldCampaign.evidence?.sourceFingerprints?.offlineDeck;
+  const expected = String(expectedSha256 || "").trim().toLowerCase();
+  assert(!expected || /^[a-f0-9]{64}$/u.test(expected), "expected offline deck SHA-256 must contain 64 hexadecimal characters");
+  if (!previous?.exists || !previous.path || !previous.sha256) {
+    assert(!expected, "explicit offline deck revision requires a previous immutable fingerprint");
+    return null;
+  }
+  const current = fileFingerprint(previous.path, { optional: true });
+  if (!current.exists) {
+    assert(!expected, "explicit offline deck revision requires a present Git-tracked source");
+    return null;
+  }
+  if (current.sha256 === previous.sha256) {
+    assert(!expected, "explicit offline deck revision was requested but the source has not changed");
+    return null;
+  }
+  assert(expected, `offline deck source changed from ${previous.sha256} to ${current.sha256}; exact expected SHA-256 is required`);
+  assert(current.sha256 === expected, `offline deck SHA-256 mismatch: expected ${expected}, got ${current.sha256}`);
+  assert(oldCampaign.evidence?.deckSource?.mode === "git_offline_json", "explicit offline deck revision requires git_offline_json source mode");
+  assert(previous.path === `data/decks/${oldCampaign.setId}.json`, "offline deck revision path is not the canonical deck source");
+  const tracked = spawnSync("git", ["ls-files", "--error-unmatch", "--", previous.path], { stdio: "ignore" });
+  assert(tracked.status === 0, "explicit offline deck revision requires a Git-tracked source");
+  const deck = readJson(previous.path);
+  assert(deck.setId === oldCampaign.setId, "revised offline deck setId does not match the campaign");
+  const coverage = offlineDeckAssignmentCoverageBlockers(deck, selectedRows);
+  assert(coverage.length === 0, `revised offline deck does not cover exact missing assignments: ${coverage.join("; ")}`);
+  return {
+    fingerprint: current,
+    evidence: { path: previous.path, previousSha256: previous.sha256, expectedSha256: expected },
+  };
 }
 
 function validateRouteReport(report, expectedSetId, selectedRows, now, maxAgeMinutes) {
@@ -159,7 +199,7 @@ function campaignAssignment(row) {
   };
 }
 
-export function buildPartialRecovery({ registry, calendar, channels, policy, routing = null, controlReports, campaignId, supports, assignmentKeys = [], polyglotScopeUpgrades = {}, polyglotScopeDowngrades = {}, now = new Date(), minFutureMinutes = 90, maxEvidenceAgeMinutes = 180 }) {
+export function buildPartialRecovery({ registry, calendar, channels, policy, routing = null, controlReports, campaignId, supports, assignmentKeys = [], polyglotScopeUpgrades = {}, polyglotScopeDowngrades = {}, expectedOfflineDeckSha256 = "", now = new Date(), minFutureMinutes = 90, maxEvidenceAgeMinutes = 180 }) {
   const oldCampaign = (registry.campaigns || []).find((row) => row.campaignId === campaignId);
   assert(oldCampaign, `campaign not found: ${campaignId}`);
   const scopeChangeRequested = Object.keys(polyglotScopeUpgrades || {}).length > 0 || Object.keys(polyglotScopeDowngrades || {}).length > 0;
@@ -212,6 +252,7 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, rou
       youtubeEnvironment,
     };
   });
+  const offlineDeckRevision = resolveOfflineDeckRevision(oldCampaign, selectedOldRows, expectedOfflineDeckSha256);
   const selectedSupports = [...new Set(selectedOldRows.map((row) => row.supportLang))].sort();
   const scopeUpgrades = Object.fromEntries(Object.entries(polyglotScopeUpgrades || {}).map(([key, value]) => [String(key).trim(), String(value).trim()]));
   const scopeDowngrades = Object.fromEntries(Object.entries(polyglotScopeDowngrades || {}).map(([key, value]) => [String(key).trim(), String(value).trim()]));
@@ -388,6 +429,7 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, rou
       minFutureMinutes,
       maxSnapshotAgeMinutes: maxEvidenceAgeMinutes,
       partialRecoveryOfCampaignId: campaignId,
+      ...(offlineDeckRevision ? { expectedOfflineDeckSha256: offlineDeckRevision.fingerprint.sha256 } : {}),
       polyglotScopeUpgrades: Object.entries(scopeUpgrades).map(([sourceAssignmentKey, contentScope]) => ({ sourceAssignmentKey, contentScope })),
       polyglotScopeDowngrades: Object.entries(scopeDowngrades).map(([sourceAssignmentKey, contentScope]) => ({ sourceAssignmentKey, contentScope })),
       automaticPolyglotScopeDowngrades: assignments
@@ -400,8 +442,12 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, rou
         .filter((row) => row.sourceRouteKey && row.sourceRouteKey !== row.routeKey)
         .map((row) => ({ supportLang: row.supportLang, sourceRouteKey: row.sourceRouteKey, routeKey: row.routeKey })),
       routeControlReports: evidence,
-      sourceFingerprints: oldCampaign.evidence?.sourceFingerprints || {},
+      sourceFingerprints: {
+        ...(oldCampaign.evidence?.sourceFingerprints || {}),
+        ...(offlineDeckRevision ? { offlineDeck: offlineDeckRevision.fingerprint } : {}),
+      },
       deckSource: oldCampaign.evidence?.deckSource || {},
+      ...(offlineDeckRevision ? { offlineDeckRevision: offlineDeckRevision.evidence } : {}),
     },
     summary: {
       applyReady: true,
@@ -501,7 +547,7 @@ export function buildPartialRecovery({ registry, calendar, channels, policy, rou
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log(`node scripts/create-youtube-partial-recovery-campaign.mjs --campaign-id=<id> (--supports=JA,RU | --assignment-keys-file=<keys.json>) --control-reports=<a.json,b.json> [--polyglot-scope-upgrades-file=<json>] [--polyglot-scope-downgrades-file=<json>] [--generated-at=<ISO>] [--apply --confirm=${CONFIRM}]`);
+    console.log(`node scripts/create-youtube-partial-recovery-campaign.mjs --campaign-id=<id> (--supports=JA,RU | --assignment-keys-file=<keys.json>) --control-reports=<a.json,b.json> [--expected-offline-deck-sha256=<sha256>] [--polyglot-scope-upgrades-file=<json>] [--polyglot-scope-downgrades-file=<json>] [--generated-at=<ISO>] [--apply --confirm=${CONFIRM}]`);
     return;
   }
   assert(options.campaignId && (options.supports || options.assignmentKeysFile) && options.controlReports, "--campaign-id, --control-reports and either --supports or --assignment-keys-file are required");
@@ -526,6 +572,7 @@ function main() {
       : [],
     polyglotScopeUpgrades,
     polyglotScopeDowngrades,
+    expectedOfflineDeckSha256: options.expectedOfflineDeckSha256,
     now,
     minFutureMinutes: options.minFutureMinutes,
     maxEvidenceAgeMinutes: options.maxEvidenceAgeMinutes,

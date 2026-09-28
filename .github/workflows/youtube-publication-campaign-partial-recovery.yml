@@ -26,6 +26,10 @@ on:
         description: "Maximum age of the downloaded control evidence."
         required: true
         default: "180"
+      expected_offline_deck_sha256:
+        description: "Optional exact new SHA-256 for an explicitly reviewed Git-tracked offline deck revision. Empty refuses source drift."
+        required: false
+        default: ""
       confirm:
         description: "Type CREATE_PARTIAL_YOUTUBE_RECOVERY_CAMPAIGN."
         required: true
@@ -178,6 +182,7 @@ jobs:
           CAMPAIGN_ID: ${{ inputs.campaign_id }}
           MIN_FUTURE_MINUTES: ${{ inputs.min_future_minutes }}
           MAX_EVIDENCE_AGE_MINUTES: ${{ inputs.max_evidence_age_minutes }}
+          EXPECTED_OFFLINE_DECK_SHA256: ${{ inputs.expected_offline_deck_sha256 }}
           CONFIRM: ${{ inputs.confirm }}
         shell: bash
         run: |
@@ -190,6 +195,7 @@ jobs:
             --control-reports="$CONTROL_REPORTS" \
             --min-future-minutes="$MIN_FUTURE_MINUTES" \
             --max-evidence-age-minutes="$MAX_EVIDENCE_AGE_MINUTES" \
+            --expected-offline-deck-sha256="$EXPECTED_OFFLINE_DECK_SHA256" \
             --output=outputs/youtube-partial-recovery-manifest.json \
             --apply \
             --confirm=CREATE_PARTIAL_YOUTUBE_RECOVERY_CAMPAIGN

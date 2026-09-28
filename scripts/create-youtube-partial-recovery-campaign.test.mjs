@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 
 import { buildPartialRecovery } from "./create-youtube-partial-recovery-campaign.mjs";
+import { fileFingerprint } from "./lib/youtube-publication-campaign.mjs";
 import { calendarAssignmentKey } from "./lib/youtube-publication-control.mjs";
 
 const durableRegistry = JSON.parse(fs.readFileSync("config/youtube-publication-campaigns.json", "utf8"));
@@ -71,6 +72,14 @@ const missingRows = restoredRows;
 assert.equal(missingRows.length, expectedAssignmentCount);
 const assignmentKeys = missingRows.map((row) => row.assignmentKey);
 const generatedAt = "2026-07-19T03:00:00.000Z";
+const sourceDeckFingerprint = sourceCampaign.evidence?.sourceFingerprints?.offlineDeck;
+const currentDeckFingerprint = sourceDeckFingerprint?.path
+  ? fileFingerprint(sourceDeckFingerprint.path, { optional: true })
+  : null;
+const expectedOfflineDeckSha256 = currentDeckFingerprint?.exists
+  && currentDeckFingerprint.sha256 !== sourceDeckFingerprint.sha256
+  ? currentDeckFingerprint.sha256
+  : "";
 const routeKeys = [...new Set(missingRows.map((row) => row.routeKey).filter(Boolean))].sort();
 const controlReports = routeKeys.map((routeKey) => {
   const rows = missingRows.filter((row) => row.routeKey === routeKey);
@@ -88,6 +97,18 @@ const controlReports = routeKeys.map((routeKey) => {
   };
 });
 
+if (expectedOfflineDeckSha256) {
+  assert.throws(() => buildPartialRecovery({
+    registry, calendar, channels: historicalRecoveryChannels, policy, controlReports,
+    campaignId: sourceCampaignId, assignmentKeys, now: new Date(generatedAt),
+  }), /exact expected SHA-256 is required/);
+  assert.throws(() => buildPartialRecovery({
+    registry, calendar, channels: historicalRecoveryChannels, policy, controlReports,
+    campaignId: sourceCampaignId, assignmentKeys, now: new Date(generatedAt),
+    expectedOfflineDeckSha256: "0".repeat(64),
+  }), /offline deck SHA-256 mismatch/);
+}
+
 const result = buildPartialRecovery({
   registry,
   calendar,
@@ -96,6 +117,7 @@ const result = buildPartialRecovery({
   controlReports,
   campaignId: sourceCampaignId,
   assignmentKeys,
+  expectedOfflineDeckSha256,
   now: new Date(generatedAt),
   minFutureMinutes: 90,
 });
@@ -129,6 +151,11 @@ assert.equal(nextSource.assignments.filter((row) =>
 assert.equal(nextSource.assignmentKeys.filter((key) => assignmentKeys.includes(key)).length, 0);
 assert.equal(result.nextCalendar.reservations.filter((row) => row.campaignId === result.manifest.campaignId && row.status === "campaign_claimed").length, expectedAssignmentCount);
 assert.equal(result.manifest.generatedAt, generatedAt);
+if (expectedOfflineDeckSha256) {
+  assert.equal(result.manifest.inputs.expectedOfflineDeckSha256, expectedOfflineDeckSha256);
+  assert.equal(result.manifest.evidence.sourceFingerprints.offlineDeck.sha256, expectedOfflineDeckSha256);
+  assert.equal(result.manifest.evidence.offlineDeckRevision.previousSha256, sourceDeckFingerprint.sha256);
+}
 
 // A reconciliation_required source campaign can still own an exact tail.
 // The control selector then omits it from tails even though complete live
@@ -145,6 +172,7 @@ const hiddenTailResult = buildPartialRecovery({
   controlReports: sourceClaimHiddenFromTail,
   campaignId: sourceCampaignId,
   assignmentKeys,
+  expectedOfflineDeckSha256,
   now: new Date(generatedAt),
   minFutureMinutes: 90,
 });
@@ -164,6 +192,7 @@ assert.throws(() => buildPartialRecovery({
   controlReports: collisionReports,
   campaignId: sourceCampaignId,
   assignmentKeys,
+  expectedOfflineDeckSha256,
   now: new Date(generatedAt),
 }), /ordinary assignment already exists live/);
 
