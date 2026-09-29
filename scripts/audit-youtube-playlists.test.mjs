@@ -24,6 +24,11 @@ try {
           items: [{ id: "PL-empty-terminal-repeat", snippet: { title: "Empty terminal repeat", description: "", channelId: "channel-en" }, status: { privacyStatus: "public" } }],
         }), { status: 200 });
       }
+      if (playlistMode === "rss-recovery" || playlistMode === "rss-incomplete") {
+        return new Response(JSON.stringify({
+          items: [{ id: "PL-rss", snippet: { title: "Owned public", channelId: "channel-en" }, status: { privacyStatus: "public" }, contentDetails: { itemCount: playlistMode === "rss-recovery" ? 2 : 3 } }],
+        }), { status: 200 });
+      }
       return new Response(JSON.stringify({
         items: [
           { id: "PL-deleted", snippet: { title: "Gone", description: "", channelId: "channel-en" }, status: { privacyStatus: "public" } },
@@ -32,7 +37,7 @@ try {
       }), { status: 200 });
     }
     if (request.pathname === "/youtube/v3/playlistItems") {
-      if (request.searchParams.get("playlistId") === "PL-deleted") {
+      if (["PL-deleted", "PL-rss"].includes(request.searchParams.get("playlistId"))) {
         return new Response(JSON.stringify({ error: { code: 404, errors: [{ reason: "playlistNotFound" }] } }), { status: 404 });
       }
       if (request.searchParams.get("playlistId") === "PL-loop") {
@@ -66,6 +71,9 @@ try {
         }), { status: 200 });
       }
       return new Response(JSON.stringify({ items: [{ id: "item-live", contentDetails: { videoId: "video-live" } }] }), { status: 200 });
+    }
+    if (request.pathname === "/feeds/videos.xml") {
+      return new Response('<feed><yt:playlistId>PL-rss</yt:playlistId><yt:channelId>channel-en</yt:channelId><yt:videoId>video-00001</yt:videoId><yt:videoId>video-00002</yt:videoId></feed>', { status: 200 });
     }
     throw new Error(`Unexpected YouTube request: ${request}`);
   };
@@ -117,6 +125,18 @@ try {
   assert.equal(terminalRepeatReport.playlists[0].itemRowsRead, 2);
   assert.equal(terminalRepeatReport.playlists[0].uniquePlaylistItemCount, 2);
   assert.deepEqual(terminalRepeatReport.playlists[0].videoIds, ["video-terminal-1", "video-terminal-2"]);
+
+  playlistMode = "rss-recovery";
+  const rssReport = await readOwnedPlaylists({ accessToken: "test-token", expectedChannelId: "channel-en", maxPlaylistPages: 2, maxItemPages: 2 });
+  assert.deepEqual(rssReport.disappearedPlaylistIds, []);
+  assert.deepEqual(rssReport.playlists[0].videoIds, ["video-00001", "video-00002"]);
+  assert.equal(rssReport.playlists[0].membershipSource, "verified_public_feed_after_api_404");
+  assert.equal(rssReport.playlists[0].itemMembershipComplete, true);
+
+  playlistMode = "rss-incomplete";
+  const incompleteRssReport = await readOwnedPlaylists({ accessToken: "test-token", expectedChannelId: "channel-en", maxPlaylistPages: 2, maxItemPages: 2 });
+  assert.deepEqual(incompleteRssReport.disappearedPlaylistIds, ["PL-rss"]);
+  assert.deepEqual(incompleteRssReport.playlists, []);
 
   playlistMode = "empty-terminal-repeat";
   const emptyTerminalReport = await readOwnedPlaylists({

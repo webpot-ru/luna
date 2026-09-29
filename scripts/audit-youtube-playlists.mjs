@@ -208,6 +208,34 @@ async function readPlaylistItems({ accessToken, playlistId, maxPages }) {
   };
 }
 
+async function readPublicPlaylistFeed({ playlist, expectedChannelId }) {
+  const itemCount = Number(playlist.itemCount);
+  // The public Atom feed exposes at most the recent items. It can prove a
+  // complete member set only for a small playlist with an authenticated count.
+  if (playlist.privacyStatus !== "public" || !Number.isInteger(itemCount)
+      || itemCount < 0 || itemCount > 15) return null;
+  const url = new URL("https://www.youtube.com/feeds/videos.xml");
+  url.searchParams.set("playlist_id", playlist.id);
+  const response = await fetch(url);
+  if (!response.ok) return null;
+  const xml = await response.text();
+  const feedPlaylistId = xml.match(/<yt:playlistId>([^<]+)<\/yt:playlistId>/u)?.[1];
+  const feedChannelId = xml.match(/<yt:channelId>([^<]+)<\/yt:channelId>/u)?.[1];
+  const videoIds = [...xml.matchAll(/<yt:videoId>([A-Za-z0-9_-]{11})<\/yt:videoId>/gu)].map((match) => match[1]);
+  if (feedPlaylistId !== playlist.id || feedChannelId !== expectedChannelId
+      || videoIds.length !== itemCount || new Set(videoIds).size !== itemCount) return null;
+  return {
+    videoIds,
+    pagesRead: 0,
+    itemRowsRead: itemCount,
+    uniquePlaylistItemCount: itemCount,
+    totalResults: itemCount,
+    itemMembershipComplete: true,
+    paginationComplete: true,
+    membershipSource: "verified_public_feed_after_api_404",
+  };
+}
+
 export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPlaylistPages, maxItemPages, playlistIds = [] }) {
   const selectedPlaylistIds = [...new Set((playlistIds || []).map((id) => String(id || "").trim()).filter(Boolean))];
   const playlists = [];
@@ -218,11 +246,11 @@ export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPl
       accessToken,
       pathName: "playlists",
       query: {
-        part: "snippet,status",
+        part: "snippet,status,contentDetails",
         mine: "true",
         maxResults: 50,
         pageToken,
-        fields: "nextPageToken,items(id,snippet(title,description,channelId),status(privacyStatus))",
+        fields: "nextPageToken,items(id,snippet(title,description,channelId),status(privacyStatus),contentDetails(itemCount))",
       },
     });
     playlistPagesRead += 1;
@@ -232,6 +260,7 @@ export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPl
       description: row.snippet?.description || "",
       youtubeChannelId: row.snippet?.channelId || "",
       privacyStatus: row.status?.privacyStatus || "",
+      itemCount: row.contentDetails?.itemCount,
     })));
     pageToken = response.nextPageToken || "";
     if (!pageToken) break;
@@ -255,15 +284,19 @@ export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPl
     try {
       items = await readPlaylistItems({ accessToken, playlistId: playlist.id, maxPages: maxItemPages });
     } catch (error) {
-      // `playlists.list(mine=true)` and `playlistItems.list` are not one
-      // transaction. A playlist removed between those two read-only calls is
-      // no longer a live playlist; keep the fact visible, but do not fail
-      // unrelated channel discovery or silently retain its stale identity.
+      // An owned public playlist can return 404 from playlistItems.list while
+      // its public feed still lists every member. Recover identity only when
+      // the authenticated item count and feed ID/owner/member set agree.
+      // Otherwise retain the unavailable ID as a blocker for callers.
       if (error?.statusCode === 404 && error?.youtubePath === "/youtube/v3/playlistItems") {
-        disappearedPlaylistIds.push(playlist.id);
-        continue;
+        items = await readPublicPlaylistFeed({ playlist, expectedChannelId }).catch(() => null);
+        if (!items) {
+          disappearedPlaylistIds.push(playlist.id);
+          continue;
+        }
+      } else {
+        throw error;
       }
-      throw error;
     }
     if (!items.paginationComplete) throw new Error(`Playlist item pagination exceeded maxItemPages=${maxItemPages} for ${playlist.id}`);
     playlist.videoIds = items.videoIds;
@@ -275,6 +308,7 @@ export async function readOwnedPlaylists({ accessToken, expectedChannelId, maxPl
     playlist.terminalEmptyPageRecovered = items.terminalEmptyPageRecovered;
     playlist.itemMembershipComplete = items.itemMembershipComplete;
     playlist.itemPaginationComplete = items.itemMembershipComplete;
+    if (items.membershipSource) playlist.membershipSource = items.membershipSource;
     discoveredPlaylists.push(playlist);
   }
   return {
