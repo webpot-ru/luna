@@ -1,0 +1,881 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-29T15:35:00.878Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_furniture_basics_a1",
+  "inputs": {
+    "supports": "ID,KM,NL",
+    "supportCount": 3,
+    "ordinarySupportCount": 2,
+    "polyglotSupportCount": 2,
+    "ordinaryPerChannel": 3,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "ordinary|home_furniture_basics_a1|ID|ET",
+      "ordinary|home_furniture_basics_a1|ID|FI",
+      "ordinary|home_furniture_basics_a1|ID|FR",
+      "polyglot|home_furniture_basics_a1|ID|global_europe_core|7a4233775927|short_unverified",
+      "ordinary|home_furniture_basics_a1|KM|ET",
+      "ordinary|home_furniture_basics_a1|KM|FI",
+      "ordinary|home_furniture_basics_a1|KM|FR",
+      "polyglot|home_furniture_basics_a1|NL|global_europe_core|7a4233775927|short_unverified"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 300,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_furniture_basics_a1-2026-09-28-65ad233f3ba4",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": [],
+    "rolloverSourceCampaignId": "yt-home_furniture_basics_a1-2026-09-29-0da7f1929474"
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_furniture_basics_a1-2026-09-28-65ad233f3ba4",
+      "manifestHash": "fb4cd5b6b168dac541dc2591f8f3b23c326a8abdaadcec2b34da2367ffec93e4",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-1",
+        "generatedAt": "2026-09-29T03:55:59.395Z",
+        "ageMinutes": 18.315283333333333,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-3",
+        "generatedAt": "2026-09-29T03:55:36.250Z",
+        "ageMinutes": 18.701033333333335,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-09-29T03:56:03.575Z",
+        "ageMinutes": 18.245616666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "d6fe066e7b60f08948604b9f2f6ed15d933d31f95dfcf72a66921e956c94315f"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "7f3ec26261f0ede05f49d7d100f3595c23a9b5a93b36ea3c917e7747f94e1ed0"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "9f5d01dcfaef39a9c3fd1719c788046bad161f53b1a162c53468263882a12b07"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "011859dd0291aeea5513e1a528709d103d666d813620482ca6c46e8c7ee0d12f"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_furniture_basics_a1.json",
+        "exists": true,
+        "sha256": "f4b3907e062e3fb9dfc812d9fb98fd4a3c487ffd8fa883e6f8eb0631a5343a31"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "c895447dff9a9b8ff9f673d426da6a9048ee60ad54e09ddc9627449d088c8494"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    },
+    "claimedCampaignRollover": {
+      "sourceCampaignId": "yt-home_furniture_basics_a1-2026-09-29-0da7f1929474",
+      "sourceManifestHash": "ffddde613c27c3bd1567e2c226154ed4520ac5ba0fb3872df936a3739ef0438c",
+      "proof": "fresh_control_report_plus_zero_durable_receipts",
+      "controlSourceRuns": [
+        {
+          "setId": "home_furniture_basics_a1",
+          "route": "youtube-1,youtube-2,youtube-3,youtube-4",
+          "githubRunId": "36589656894",
+          "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/36589656894"
+        }
+      ],
+      "activeVideoCount": 706
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 2,
+    "supportCount": 3,
+    "ordinaryCount": 6,
+    "polyglotCount": 2,
+    "assignmentCount": 8,
+    "firstPublishAt": "2026-09-29T21:30:00.000Z",
+    "lastPublishAt": "2026-09-30T10:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 8,
+    "existingPlaylistCount": 8,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 4,
+      "youtube-2": 1,
+      "youtube-3": 3
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 8,
+    "estimatedPlaylistItemInsertUnits": 400,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 400,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 4,
+        "estimatedGeneralQuotaUnitsMaximum": 200
+      },
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 3,
+        "estimatedGeneralQuotaUnitsMaximum": 150
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "ID: short_unverified <=895s",
+    "NL: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_furniture_basics_a1|ID|ET",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|ID|ET|id",
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "ID",
+      "targetLang": "ET",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_furniture_basics_a1|ID|ET",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-09-30T01:30:00.000Z",
+      "localDate": "2026-09-30",
+      "localTime": "08:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-09-30T01:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__ET__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf6QJ7eQtIOvouWKQZUb7pSz3fZARafzo",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Estonia A1: Everyday: kata",
+        "description": "Belajar Estonia. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T13:19:52.564Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-01T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-03T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-07T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-30T01:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "ordinary|home_furniture_basics_a1|ID|FI",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|ID|FI|id",
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "ID",
+      "targetLang": "FI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_furniture_basics_a1|ID|FI",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-09-30T04:30:00.000Z",
+      "localDate": "2026-09-30",
+      "localTime": "11:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-09-30T04:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__FI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf6QJ7eQtIOvH3SwjeTv16xvPsBMmVbkP",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Suomi A1: Everyday: kata",
+        "description": "Belajar Suomi. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T13:19:52.564Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 1,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-01T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-03T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-07T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-30T04:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "ordinary|home_furniture_basics_a1|ID|FR",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|ID|FR|id",
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "ID",
+      "targetLang": "FR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_furniture_basics_a1|ID|FR",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-09-30T07:30:00.000Z",
+      "localDate": "2026-09-30",
+      "localTime": "14:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-09-30T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ID__FR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf6QJ7eQtIOsAtNCbGUFIHc-2NbdIrYvt",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Prancis A1: Everyday: kata",
+        "description": "Belajar Prancis. Topik pelajaran: FlashcardsLuna. Dengarkan baik-baik pengucapan penutur asli dan ulangi kata-kata dalam jeda. Tes mini interaktif menanti Anda di akhir video! Latih dek kartu gratis di situs web kami",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T13:19:52.564Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 2,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-01T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-03T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-07T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-30T07:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_furniture_basics_a1|ID|global_europe_core|7a4233775927|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_furniture_basics_a1|ID|global_europe_core|short_unverified|id",
+      "videoType": "polyglot",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "ID",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsHash": "7a4233775927",
+      "bundleKey": "global_europe_core",
+      "sourceAssignmentKey": "polyglot|home_furniture_basics_a1|ID|global_europe_core|7a4233775927|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_furniture_basics_a1:ID:global_europe_core:7a4233775927:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-09-30T10:30:00.000Z",
+      "localDate": "2026-09-30",
+      "localTime": "17:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-09-30T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__ID__global-europe-core__7a4233775927",
+        "youtubePlaylistId": "PLO9JVnQTFQaQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: Inggris, Spanyol, Prancis, Jerman",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Inggris, Spanyol, Prancis, Jerman. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T13:19:52.564Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 3,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-01T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-03T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-07T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-30T10:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "ordinary|home_furniture_basics_a1|KM|ET",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|KM|ET|km",
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "KM",
+      "targetLang": "ET",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_furniture_basics_a1|KM|ET",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_km-KH-SreymomNeural",
+        "supportLang": "KM"
+      },
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-30T04:30:00.000Z",
+      "localDate": "2026-09-30",
+      "localTime": "11:30",
+      "timeZone": "Asia/Phnom_Penh",
+      "slotKey": "km|2026-09-30T04:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KM__ET__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLOhl_fqw6f2SdJDKMF5wD5kopxjtbHMN8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "អេស្តូនី A1: វាក្យសព្ទ និងការបញ្ចេញសំឡេង",
+        "description": "វីដេអូ FlashcardsLuna សម្រាប់អ្នកនិយាយភាសាខ្មែរ ដែលកំពុងរៀន អេស្តូនី: កាតពាក្យ ការបញ្ចេញសំឡេង ពេលសម្រាកសម្រាប់និយាយតាម និងតេស្តខ្លីៗ។",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T13:19:52.564Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 1,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-01T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-03T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-07T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-30T04:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "ordinary|home_furniture_basics_a1|KM|FI",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|KM|FI|km",
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "KM",
+      "targetLang": "FI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_furniture_basics_a1|KM|FI",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_km-KH-SreymomNeural",
+        "supportLang": "KM"
+      },
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-30T07:30:00.000Z",
+      "localDate": "2026-09-30",
+      "localTime": "14:30",
+      "timeZone": "Asia/Phnom_Penh",
+      "slotKey": "km|2026-09-30T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KM__FI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLOhl_fqw6f2Ry5z7gsDarQDPgdlD7X5Pc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ហ្វាំងឡង់ A1: វាក្យសព្ទ និងការបញ្ចេញសំឡេង",
+        "description": "វីដេអូ FlashcardsLuna សម្រាប់អ្នកនិយាយភាសាខ្មែរ ដែលកំពុងរៀន ហ្វាំងឡង់: កាតពាក្យ ការបញ្ចេញសំឡេង ពេលសម្រាកសម្រាប់និយាយតាម និងតេស្តខ្លីៗ។",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T13:19:52.564Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 2,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-01T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-03T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-07T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-30T07:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "ordinary|home_furniture_basics_a1|KM|FR",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|KM|FR|km",
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "KM",
+      "targetLang": "FR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_furniture_basics_a1|KM|FR",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_km-KH-SreymomNeural",
+        "supportLang": "KM"
+      },
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-09-30T10:30:00.000Z",
+      "localDate": "2026-09-30",
+      "localTime": "17:30",
+      "timeZone": "Asia/Phnom_Penh",
+      "slotKey": "km|2026-09-30T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KM__FR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLOhl_fqw6f2RDlpq1uTFcUMDnzZy7HzkI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "បារាំង A1: វាក្យសព្ទ និងការបញ្ចេញសំឡេង",
+        "description": "វីដេអូ FlashcardsLuna សម្រាប់អ្នកនិយាយភាសាខ្មែរ ដែលកំពុងរៀន បារាំង: កាតពាក្យ ការបញ្ចេញសំឡេង ពេលសម្រាកសម្រាប់និយាយតាម និងតេស្តខ្លីៗ។",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T13:19:52.564Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 3,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-01T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-03T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-07T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-30T10:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "assignmentKey": "polyglot|home_furniture_basics_a1|NL|global_europe_core|7a4233775927|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_furniture_basics_a1|NL|global_europe_core|short_unverified|nl",
+      "videoType": "polyglot",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "NL",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsHash": "7a4233775927",
+      "bundleKey": "global_europe_core",
+      "sourceAssignmentKey": "polyglot|home_furniture_basics_a1|NL|global_europe_core|7a4233775927|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_furniture_basics_a1:NL:global_europe_core:7a4233775927:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_nl-NL-ColetteNeural",
+        "supportLang": "NL"
+      },
+      "channelKey": "nl",
+      "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-09-29T21:30:00.000Z",
+      "localDate": "2026-09-29",
+      "localTime": "23:30",
+      "timeZone": "Europe/Amsterdam",
+      "slotKey": "nl|2026-09-29T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__NL__global-europe-core__7a4233775927",
+        "youtubePlaylistId": "PLWD66ALyk9Ek",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: Engels, Spaans, Frans, Duits",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Engels, Spaans, Frans, Duits. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-27T13:19:52.564Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 5,
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-09-30T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-02T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-06T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-10-29T21:30:00.000Z"
+        }
+      ]
+    }
+  ],
+  "campaignId": "yt-home_furniture_basics_a1-2026-09-29-9b318229922f",
+  "manifestHash": "2bcfa5aed974196028ff04e517d24981f12543a1223220986354287893f88bf8"
+}
