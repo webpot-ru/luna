@@ -1,0 +1,421 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-01T16:39:00.000Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_furniture_basics_a1",
+  "inputs": {
+    "supports": "NL",
+    "supportCount": 1,
+    "ordinarySupportCount": 1,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 4,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|home_furniture_basics_a1|NL|KM",
+      "ordinary|home_furniture_basics_a1|NL|KN",
+      "ordinary|home_furniture_basics_a1|NL|KO",
+      "ordinary|home_furniture_basics_a1|NL|LO"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_furniture_basics_a1-2026-10-01-6285efc110a5",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_furniture_basics_a1-2026-10-01-6285efc110a5",
+      "manifestHash": "4cc2e0e51847d032cd1c2a752fbfbcc57722c857f096c8eba022de210b2c01ad",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-10-01T16:06:59.988Z",
+        "ageMinutes": 32.0002,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "1384f2f377e087e5e13ae4b6016b16893b44c1328adebe1eb967f1fc46cc08f4"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "1c40a7793314197de7e93fbb1fb2c240dd1acecdd41e483617d1d63744f75fbb"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "c461b2d60e7c9874c3596acc65fd97ffa05c01fa4ccdb420359495e8a609bcf5"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "011859dd0291aeea5513e1a528709d103d666d813620482ca6c46e8c7ee0d12f"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_furniture_basics_a1.json",
+        "exists": true,
+        "sha256": "f4b3907e062e3fb9dfc812d9fb98fd4a3c487ffd8fa883e6f8eb0631a5343a31"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "45694276109a3300480966fe0d1d3195c393111859d8e6a8038a2a3b1f750eba"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 4,
+    "polyglotCount": 0,
+    "assignmentCount": 4,
+    "firstPublishAt": "2026-10-01T18:30:00.000Z",
+    "lastPublishAt": "2026-10-02T09:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 4,
+    "existingPlaylistCount": 4,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-2": 4
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 4,
+    "estimatedPlaylistItemInsertUnits": 200,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 200,
+    "byRoute": {
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 4,
+        "estimatedGeneralQuotaUnitsMaximum": 200
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_furniture_basics_a1|NL|KM",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|NL|KM|nl",
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "NL",
+      "targetLang": "KM",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_furniture_basics_a1|NL|KM",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_nl-NL-ColetteNeural",
+        "supportLang": "NL"
+      },
+      "channelKey": "nl",
+      "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-10-01T18:30:00.000Z",
+      "localDate": "2026-10-01",
+      "localTime": "20:30",
+      "timeZone": "Europe/Amsterdam",
+      "slotKey": "nl|2026-10-01T18:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "NL__KM__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBiERbjpgi9s",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Khmer A1: woordenschat en uitspraak",
+        "description": "FlashcardsLuna-video's voor Nederlandstaligen die Khmer leren: flashcards, uitspraak, pauzes om te herhalen en korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-29T17:29:12.908Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_furniture_basics_a1|NL|KN",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|NL|KN|nl",
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "NL",
+      "targetLang": "KN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_furniture_basics_a1|NL|KN",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_nl-NL-ColetteNeural",
+        "supportLang": "NL"
+      },
+      "channelKey": "nl",
+      "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-10-01T21:30:00.000Z",
+      "localDate": "2026-10-01",
+      "localTime": "23:30",
+      "timeZone": "Europe/Amsterdam",
+      "slotKey": "nl|2026-10-01T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "NL__KN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLHOrjHDRgin8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kannada A1: woordenschat en uitspraak",
+        "description": "FlashcardsLuna-video's voor Nederlandstaligen die Kannada leren: flashcards, uitspraak, pauzes om te herhalen en korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-29T17:29:12.908Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_furniture_basics_a1|NL|KO",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|NL|KO|nl",
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "NL",
+      "targetLang": "KO",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_furniture_basics_a1|NL|KO",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_nl-NL-ColetteNeural",
+        "supportLang": "NL"
+      },
+      "channelKey": "nl",
+      "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-10-02T06:30:00.000Z",
+      "localDate": "2026-10-02",
+      "localTime": "08:30",
+      "timeZone": "Europe/Amsterdam",
+      "slotKey": "nl|2026-10-02T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "NL__KO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLOHnIK6I5C8A",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Koreaans A1: woordenschat en uitspraak",
+        "description": "FlashcardsLuna-video's voor Nederlandstaligen die Koreaans leren: flashcards, uitspraak, pauzes om te herhalen en korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-29T17:29:12.908Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_furniture_basics_a1|NL|LO",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|NL|LO|nl",
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "NL",
+      "targetLang": "LO",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|home_furniture_basics_a1|NL|LO",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_nl-NL-ColetteNeural",
+        "supportLang": "NL"
+      },
+      "channelKey": "nl",
+      "youtubeChannelId": "UCjinhTDSmgEvx0_4YNTo0Zg",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-10-02T09:30:00.000Z",
+      "localDate": "2026-10-02",
+      "localTime": "11:30",
+      "timeZone": "Europe/Amsterdam",
+      "slotKey": "nl|2026-10-02T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "NL__LO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLES92NqRezus",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Laotiaans A1: woordenschat en uitspraak",
+        "description": "FlashcardsLuna-video's voor Nederlandstaligen die Laotiaans leren: flashcards, uitspraak, pauzes om te herhalen en korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-09-29T17:29:12.908Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 1
+    }
+  ],
+  "campaignId": "yt-home_furniture_basics_a1-2026-10-01-2e1913cd8ec8",
+  "manifestHash": "3480cd26c3e8870c3d25f2f90d5bd2851d953ac1ae6dec0744164cc0a3d13221"
+}
