@@ -98,15 +98,22 @@ async function youtubeJson({ accessToken, pathName, query = {} }) {
   for (const [key, value] of Object.entries(query)) {
     if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, String(value));
   }
-  const response = await fetch(url, { headers: { authorization: `Bearer ${accessToken}` } });
-  const text = await response.text();
-  if (!response.ok) {
-    const error = new Error(`YouTube API GET ${url.pathname} failed (${response.status}): ${text}`);
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    const response = await fetch(url, { headers: { authorization: `Bearer ${accessToken}` } });
+    const text = await response.text();
+    if (response.ok) return text ? JSON.parse(text) : {};
+    // Only read-only transient backend responses are retried. Keep the same
+    // page token so no failed page is skipped or treated as an empty result.
+    if ([500, 502, 503, 504].includes(response.status) && attempt < 3) {
+      await new Promise((resolve) => setTimeout(resolve, attempt * 500));
+      continue;
+    }
+    const identity = query.playlistId ? ` playlistId=${query.playlistId}` : "";
+    const error = new Error(`YouTube API GET ${url.pathname}${identity} failed (${response.status}) after ${attempt} attempts: ${text}`);
     error.statusCode = response.status;
     error.youtubePath = url.pathname;
     throw error;
   }
-  return text ? JSON.parse(text) : {};
 }
 
 async function readAuthorizedChannel({ accessToken, expectedChannelId }) {
