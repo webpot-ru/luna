@@ -6,9 +6,13 @@ import { readOwnedPlaylists } from "./audit-youtube-playlists.mjs";
 const originalFetch = globalThis.fetch;
 try {
   let playlistMode = "normal";
+  let retryItemCalls = 0;
   globalThis.fetch = async (url) => {
     const request = new URL(url);
     if (request.pathname === "/youtube/v3/playlists") {
+      if (["transient-503", "persistent-503", "forbidden-403"].includes(playlistMode)) {
+        return new Response(JSON.stringify({ items: [{ id: "PL-retry", snippet: { channelId: "channel-en" }, status: { privacyStatus: "public" } }] }), { status: 200 });
+      }
       if (playlistMode === "loop") {
         return new Response(JSON.stringify({
           items: [{ id: "PL-loop", snippet: { title: "Loop", description: "", channelId: "channel-en" }, status: { privacyStatus: "public" } }],
@@ -37,6 +41,14 @@ try {
       }), { status: 200 });
     }
     if (request.pathname === "/youtube/v3/playlistItems") {
+      if (request.searchParams.get("playlistId") === "PL-retry") {
+        retryItemCalls += 1;
+        const status = playlistMode === "forbidden-403" ? 403 : 503;
+        if (playlistMode !== "transient-503" || retryItemCalls === 1) {
+          return new Response(JSON.stringify({ error: { code: status } }), { status });
+        }
+        return new Response(JSON.stringify({ items: [{ id: "retry-item", contentDetails: { videoId: "retry-video" } }] }), { status: 200 });
+      }
       if (["PL-deleted", "PL-rss"].includes(request.searchParams.get("playlistId"))) {
         return new Response(JSON.stringify({ error: { code: 404, errors: [{ reason: "playlistNotFound" }] } }), { status: 404 });
       }
@@ -152,6 +164,19 @@ try {
   assert.equal(emptyTerminalReport.playlists[0].itemMembershipComplete, false);
   assert.equal(emptyTerminalReport.playlists[0].itemPaginationComplete, false);
   assert.deepEqual(emptyTerminalReport.playlists[0].videoIds, ["video-visible"]);
+  playlistMode = "transient-503";
+  retryItemCalls = 0;
+  const retried = await readOwnedPlaylists({ accessToken: "test-token", expectedChannelId: "channel-en", maxPlaylistPages: 2, maxItemPages: 2 });
+  assert.equal(retryItemCalls, 2);
+  assert.deepEqual(retried.playlists[0].videoIds, ["retry-video"]);
+  playlistMode = "persistent-503";
+  retryItemCalls = 0;
+  await assert.rejects(() => readOwnedPlaylists({ accessToken: "test-token", expectedChannelId: "channel-en", maxPlaylistPages: 2, maxItemPages: 2 }), /playlistId=PL-retry failed \(503\) after 3 attempts/);
+  assert.equal(retryItemCalls, 3);
+  playlistMode = "forbidden-403";
+  retryItemCalls = 0;
+  await assert.rejects(() => readOwnedPlaylists({ accessToken: "test-token", expectedChannelId: "channel-en", maxPlaylistPages: 2, maxItemPages: 2 }), /failed \(403\) after 1 attempts/);
+  assert.equal(retryItemCalls, 1);
 } finally {
   globalThis.fetch = originalFetch;
 }
