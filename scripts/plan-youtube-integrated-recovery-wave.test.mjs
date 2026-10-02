@@ -78,6 +78,10 @@ assert.deepEqual(result.polyglotAssignments.map((row) => row.assignmentKey).sort
 ]);
 assert(result.polyglotAssignments.every((row) => row.integratedRecovery?.sourceCampaignId === "recovery-campaign"));
 
+const ordinaryOnlySource = composeIntegratedRecoveryAssignments({ supports: ["A", "B"], baseAssignments, sourceRows: sourceRows.filter((row) => row.videoType === "ordinary"), ordinaryPerChannel: 2, sourceCampaignId: "ordinary-recovery" });
+assert.deepEqual(ordinaryOnlySource.polyglotAssignments, baseAssignments.filter((row) => row.videoType === "polyglot"));
+assert.equal(ordinaryOnlySource.pendingPolyglot.length, 0);
+
 const partialSource = sourceRowsFromCampaign({
   registry: { campaigns: [{
     campaignId: "partial",
@@ -96,6 +100,29 @@ const partialSource = sourceRowsFromCampaign({
 });
 assert.equal(partialSource.sourceMode, "partial_reconciliation_required");
 assert.deepEqual(partialSource.rows.map((row) => row.assignmentKey), ["missing"]);
+
+const partiallyRecoveredRegistry = { campaigns: [
+  {
+    campaignId: "source-after-recovery", setId: "set", status: "reconciliation_required",
+    assignmentKeys: ["still-missing"], finalizeSummary: { missingCount: 2 },
+    assignments: [
+      { assignmentKey: "still-missing", status: "claimed" },
+      { assignmentKey: "already-recovered", status: "superseded_partial_recovery", supersededByCampaignId: "finished-recovery" },
+    ],
+  },
+  {
+    campaignId: "finished-recovery", setId: "set", status: "finalized",
+    finalizeSummary: { missingCount: 0, receiptErrorCount: 0 },
+    assignments: [{ assignmentKey: "already-recovered", status: "upload_accepted", youtubeVideoId: "accepted-id" }],
+  },
+] };
+assert.deepEqual(sourceRowsFromCampaign({ registry: partiallyRecoveredRegistry, setId: "set", sourceCampaignId: "source-after-recovery", expectedSourceAssignments: 1 }).rows.map((row) => row.assignmentKey), ["still-missing"]);
+const unfinishedSuccessor = structuredClone(partiallyRecoveredRegistry);
+unfinishedSuccessor.campaigns[1].status = "claimed";
+assert.throws(() => sourceRowsFromCampaign({ registry: unfinishedSuccessor, setId: "set", sourceCampaignId: "source-after-recovery", expectedSourceAssignments: 1 }), /lacks a finalized accepted recovery receipt/);
+const missingReceipt = structuredClone(partiallyRecoveredRegistry);
+delete missingReceipt.campaigns[1].assignments[0].youtubeVideoId;
+assert.throws(() => sourceRowsFromCampaign({ registry: missingReceipt, setId: "set", sourceCampaignId: "source-after-recovery", expectedSourceAssignments: 1 }), /lacks a finalized accepted recovery receipt/);
 
 const multiSource = sourceRowsFromActiveClaims({
   registry: { campaigns: [

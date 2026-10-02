@@ -137,7 +137,25 @@ function sourceRowsFromCampaign({ registry, setId, sourceCampaignId, expectedSou
   }
   const rows = (campaign.assignments || []).filter((row) => row.status === "claimed" && !hasUploadReceipt(row));
   if (isUnlaunched) assert(rows.length === campaign.assignments.length, `${sourceCampaignId}: every unlaunched source assignment must remain claimed`);
-  else assert(Number(campaign.finalizeSummary?.missingCount || 0) === rows.length, `${sourceCampaignId}: missing receipt count does not match recoverable claimed rows`);
+  else {
+    // A terminal finalizer describes the original missing set. Some of those
+    // rows can already have been accepted by a later exact recovery campaign.
+    const recovered = (campaign.assignments || []).filter((row) => row.status === "superseded_partial_recovery" && !hasUploadReceipt(row));
+    for (const row of recovered) {
+      const successor = (registry.campaigns || []).find((entry) => entry.campaignId === row.supersededByCampaignId);
+      const matches = (successor?.assignments || []).filter((entry) => entry.assignmentKey === row.assignmentKey);
+      assert(successor?.setId === setId && successor.status === "finalized"
+        && Number(successor.finalizeSummary?.missingCount) === 0
+        && Number(successor.finalizeSummary?.receiptErrorCount || 0) === 0
+        && Number(successor.finalizeSummary?.duplicateAssignmentCount || 0) === 0
+        && Number(successor.finalizeSummary?.duplicateVideoIdCount || 0) === 0
+        && Number(successor.finalizeSummary?.unexpectedPublicationCount || 0) === 0
+        && matches.length === 1 && matches[0].status === "upload_accepted" && matches[0].youtubeVideoId,
+      `${row.assignmentKey}: superseded source row lacks a finalized accepted recovery receipt`);
+      assert(!(campaign.assignmentKeys || []).includes(row.assignmentKey), `${row.assignmentKey}: recovered source row is still actively claimed`);
+    }
+    assert(Number(campaign.finalizeSummary?.missingCount || 0) === rows.length + recovered.length, `${sourceCampaignId}: missing receipt count does not match recoverable and already recovered rows`);
+  }
   assert(rows.length === expectedSourceAssignments, `${sourceCampaignId}: source assignment count ${rows.length} != ${expectedSourceAssignments}`);
   for (const row of rows) {
     assert(!hasUploadReceipt(row), `${row.assignmentKey}: source row has upload receipt evidence`);
@@ -318,6 +336,10 @@ function composePolyglotAssignments({ supports, baseAssignments, sourceRows, sou
   const pending = [];
   for (const support of supports) {
     const source = sourceBySupport.get(support) || [];
+    if (!source.length) {
+      output.push(...(baseBySupport.get(support) || []));
+      continue;
+    }
     assert(source.length === 1, `${support}: source Polyglot tails ${source.length} != 1`);
     const carrier = (baseBySupport.get(support) || [])[0];
     if (!carrier) {
