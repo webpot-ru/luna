@@ -3,6 +3,16 @@ name: YouTube Delete Duplicate Videos
 on:
   workflow_dispatch:
     inputs:
+      target_file:
+        description: "Exact reviewed tracked KEEP/DELETE plan."
+        required: true
+        default: "config/youtube-duplicate-delete-plans/2026-07-13-decks-1-2-32.json"
+      mode:
+        description: "preflight reads owner-only media status; apply repeats guards and deletes only the exact plan IDs."
+        required: true
+        default: "preflight"
+        type: choice
+        options: [preflight, apply]
       route:
         description: "Historical exact deletion plan route: youtube-1 through youtube-4."
         required: true
@@ -64,16 +74,26 @@ jobs:
         shell: bash
         env:
           ROUTE: ${{ github.event.inputs.route }}
-          TARGET_FILE: config/youtube-duplicate-delete-plans/2026-07-13-decks-1-2-32.json
+          TARGET_FILE: ${{ github.event.inputs.target_file }}
+          MODE: ${{ github.event.inputs.mode }}
+          YOUTUBE_ENVIRONMENT: ${{ github.event.inputs.youtube_environment }}
           CONFIRM_WRITE: ${{ github.event.inputs.confirm_youtube_write }}
         run: |
           set -euo pipefail
+          [[ "$TARGET_FILE" == config/youtube-duplicate-delete-plans/*.json ]]
+          [[ "$TARGET_FILE" != *..* ]]
+          git ls-files --error-unmatch -- "$TARGET_FILE" >/dev/null
+          test "$ROUTE" = youtube-2 || test "$ROUTE" = youtube-1 || test "$ROUTE" = youtube-3 || test "$ROUTE" = youtube-4
+          node -e 'const fs=require("fs");const r=JSON.parse(fs.readFileSync("config/youtube-api-project-routing.json")).projects.find(x=>x.key===process.env.ROUTE);if(!r||r.githubEnvironment!==process.env.YOUTUBE_ENVIRONMENT)throw Error("OAuth route/environment mismatch");'
           ARGS=("--route=$ROUTE" "--target-file=$TARGET_FILE" "--report-file=outputs/youtube-duplicate-deletion-report-$ROUTE.json")
-          if [ "$CONFIRM_WRITE" = "APPLY_YOUTUBE_DELETE" ]; then
+          if [ "$MODE" = apply ]; then
+            test "$CONFIRM_WRITE" = "APPLY_YOUTUBE_DELETE"
             ARGS+=("--apply" "--confirm-youtube-write")
             echo "Confirming live YouTube deletions..."
           else
-            echo "Running in DRY-RUN mode..."
+            test "$MODE" = preflight
+            ARGS+=("--preflight")
+            echo "Running authenticated read-only preflight..."
           fi
           node scripts/youtube-delete-duplicate-videos.mjs "${ARGS[@]}"
 
