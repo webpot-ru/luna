@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-04",
+  "expectedTargetCount": 1,
+  "purpose": "User-approved removal ONLY of the unfinished orphan allocated by ambiguous resumable init HTTP409; no completed video may be removed.",
+  "targets": [{
+    "setId": "home_furniture_basics_a1", "videoType": "ordinary", "supportLang": "MS", "targetLang": "SV",
+    "keepVideoId": "QPfNgPnUTbY", "deleteVideoId": "Dol8GLzDtt0", "route": "youtube-2",
+    "requireIncompleteUpload": true, "expectedTitle": "Sweden A1: Perabot | 30 perkataan asas"
+  }]
+}

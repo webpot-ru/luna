@@ -38,6 +38,7 @@ import {
   upsertPublication,
 } from "./lib/youtube-publication-registry.mjs";
 import { estimateYoutubeUploadQuota } from "./lib/youtube-quota-model.mjs";
+import { startResumableSession } from "./lib/youtube-resumable-init.mjs";
 import {
   descriptionWithPlaylistIdentity,
   normalizePlaylistText,
@@ -689,45 +690,16 @@ async function uploadVideoResumable({ accessToken, videoPath, metadata, privacyS
   };
   if (publishAt) resource.status.publishAt = publishAt;
 
-  const initAttempts = envInteger("YOUTUBE_UPLOAD_INIT_ATTEMPTS", 3, { min: 1, max: 8 });
-  const initRetryBaseMs = envInteger("YOUTUBE_UPLOAD_INIT_RETRY_BASE_MS", 1500, { min: 0, max: 120000 });
-  let init = null;
-  for (let attempt = 1; attempt <= initAttempts; attempt += 1) {
-    try {
-      init = await fetch(initUrl, {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-          "content-type": "application/json; charset=UTF-8",
-          "x-upload-content-type": detectMimeType(videoPath),
-          "x-upload-content-length": String(stat.size),
-        },
-        body: JSON.stringify(resource),
-      });
-    } catch (error) {
-      if (attempt >= initAttempts) {
-        fail(`YouTube videos.insert init request failed after ${attempt} attempts: ${error?.message || error}`);
-      }
-      const delayMs = initRetryBaseMs * Math.pow(2, attempt - 1);
-      console.warn(`YouTube videos.insert init request failed before media upload (attempt ${attempt}/${initAttempts}); retrying in ${delayMs}ms. ${error?.message || error}`);
-      await sleep(delayMs);
-      continue;
-    }
-
-    if (init.ok) break;
-    const errorText = await init.text();
-    const retryable = [408, 409, 425, 429].includes(init.status)
-      || (init.status >= 500 && init.status <= 599);
-    if (!retryable || attempt >= initAttempts) {
-      fail(`YouTube videos.insert init failed (${init.status}) after ${attempt} attempts: ${errorText}`);
-    }
-    const delayMs = Math.max(retryAfterMs(init), initRetryBaseMs * Math.pow(2, attempt - 1));
-    console.warn(`YouTube videos.insert init failed (${init.status}) before media upload (attempt ${attempt}/${initAttempts}); retrying in ${delayMs}ms. ${errorText}`);
-    await sleep(delayMs);
-  }
-  if (!init?.ok) fail("YouTube videos.insert init did not complete.");
-  const uploadUrl = init.headers.get("location");
-  if (!uploadUrl) fail("YouTube videos.insert did not return a resumable upload URL.");
+  const uploadUrl = await startResumableSession({
+    url: initUrl,
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      "content-type": "application/json; charset=UTF-8",
+      "x-upload-content-type": detectMimeType(videoPath),
+      "x-upload-content-length": String(stat.size),
+    },
+    resource,
+  });
 
   const media = fs.readFileSync(videoPath);
   const upload = await fetch(uploadUrl, {

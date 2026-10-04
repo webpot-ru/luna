@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { assertIncompleteUploadPair } from "./lib/youtube-incomplete-upload-guard.mjs";
 import {
   DEFAULT_CHANNEL_CONFIG_PATH,
   findChannelForSupport,
@@ -23,11 +24,13 @@ function parseArgs(argv) {
     targetFile: "",
     reportFile: "outputs/youtube-duplicate-deletion-report.json",
     apply: false,
+    preflight: false,
     confirmYoutubeWrite: false,
   };
 
   for (const arg of argv) {
     if (arg === "--apply") options.apply = true;
+    else if (arg === "--preflight") options.preflight = true;
     else if (arg === "--confirm-youtube-write") options.confirmYoutubeWrite = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else if (arg.startsWith("--support=")) options.supportLang = arg.slice("--support=".length).toUpperCase();
@@ -105,7 +108,7 @@ function routeForChannel(routing, channel) {
 
 async function readVideos(accessToken, ids) {
   const url = new URL("videos", "https://www.googleapis.com/youtube/v3/");
-  url.searchParams.set("part", "id,snippet,status,statistics");
+  url.searchParams.set("part", "id,snippet,status,statistics,contentDetails,processingDetails,fileDetails");
   url.searchParams.set("id", ids.join(","));
   const response = await fetch(url, { headers: { authorization: `Bearer ${accessToken}` } });
   if (!response.ok) throw new Error(`YouTube API preflight failed (${response.status}): ${await response.text()}`);
@@ -350,7 +353,7 @@ async function main() {
   console.log(`Found ${candidates.length} duplicate groups to process (with ${candidates.reduce((sum, c) => sum + c.del.length, 0)} videos to delete).`);
   if (options.targetFile && candidates.length === 0) throw new Error(`Exact target file has no rows for ${options.route}.`);
 
-  if (!options.apply) {
+  if (!options.apply && !options.preflight) {
     console.log("\nDRY-RUN MODE (No deletions will be performed). Run with --apply --confirm-youtube-write to perform deletions.");
     for (const c of candidates) {
       console.log(`Group: ${c.key} (Route: ${c.route}, Channel: ${c.channel?.key || 'unknown'})`);
@@ -367,6 +370,7 @@ async function main() {
   const clientFile = channelRegistry.defaults?.oauthClientFile || ".local/youtube-oauth/google-oauth-client.json";
   const accessTokens = new Map();
   const liveById = new Map();
+  const preflightEvidence = [];
   const byChannel = new Map();
   for (const candidate of candidates) {
     const rows = byChannel.get(candidate.channel.key) || [];
@@ -393,14 +397,25 @@ async function main() {
       if (deleteViews > keepViews) {
         throw new Error(`Popularity changed for ${candidate.key}: DELETE has ${deleteViews} views, KEEP has ${keepViews}.`);
       }
+      if (candidate.keep.requireIncompleteUpload === true) {
+        const evidence = assertIncompleteUploadPair({ keep: keepLive, remove: deleteLive, title: candidate.keep.expectedTitle });
+        preflightEvidence.push({ key: candidate.key, channelId: channel.channelId, ...evidence });
+        console.log(JSON.stringify(evidence));
+      }
       console.log(`PREFLIGHT OK ${candidate.key}: KEEP ${candidate.keep.youtubeVideoId} (${keepViews}), DELETE ${candidate.del[0].youtubeVideoId} (${deleteViews}).`);
     }
+  }
+  if (!options.apply) {
+    fs.mkdirSync(path.dirname(options.reportFile), { recursive: true });
+    fs.writeFileSync(options.reportFile, `${JSON.stringify({ schemaVersion: 1, generatedAt: new Date().toISOString(), mode: "preflight", route: options.route, preflight: preflightEvidence, deleted: [], errors: [] }, null, 2)}\n`, "utf8");
+    console.log("Authenticated preflight completed; no YouTube writes.");
+    return;
   }
   console.log("ALL PREFLIGHT CHECKS PASSED. STARTING LIVE DELETIONS...");
   let processedCount = 0;
   let errorCount = 0;
   let stopped = false;
-  const report = { schemaVersion: 1, generatedAt: new Date().toISOString(), route: options.route, targetFile: options.targetFile, deleted: [], errors: [] };
+  const report = { schemaVersion: 1, generatedAt: new Date().toISOString(), route: options.route, targetFile: options.targetFile, preflight: preflightEvidence, deleted: [], errors: [] };
 
   for (const c of candidates) {
     if (!c.channel) {
