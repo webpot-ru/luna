@@ -31,6 +31,7 @@
     "import:youtube-campaign-covers": "node scripts/import-youtube-campaign-covers-from-git.mjs",
     "test:youtube-cover-assets": "node scripts/build-youtube-cover-assets.test.mjs",
     "test:youtube-playlist-images": "node scripts/youtube-upload-playlist-images.test.mjs",
+    "test:youtube-playlist-cover-layout": "node scripts/render-youtube-playlist-cover-overlays.test.mjs",
     "reconcile:youtube-playlist-registry-snapshot": "node scripts/reconcile-youtube-playlist-registry-from-snapshot.mjs",
     "test:youtube-playlist-registry-snapshot-reconcile": "node scripts/reconcile-youtube-playlist-registry-from-snapshot.test.mjs",
     "copy:pre-rendered-thumbnails": "node scripts/copy-pre-rendered-thumbnails.mjs",

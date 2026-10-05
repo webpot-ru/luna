@@ -4,6 +4,7 @@ import crypto from "node:crypto";
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 import sharp from "sharp";
 
@@ -13,14 +14,16 @@ const DEFAULT_BASE = "assets/youtube-cover-templates/playlist-universal-approved
 const DEFAULT_OUTPUT = "data/youtube-playlist-covers/youtube-playlist-cover-closeout-20260716/assets";
 
 function parseArgs(argv) {
-  const options = { keysFile: "", base: DEFAULT_BASE, outputRoot: DEFAULT_OUTPUT };
+  const options = { keysFile: "", base: DEFAULT_BASE, outputRoot: DEFAULT_OUTPUT, layout: "square" };
   for (const arg of argv) {
     if (arg.startsWith("--keys-file=")) options.keysFile = arg.slice("--keys-file=".length);
     else if (arg.startsWith("--base=")) options.base = arg.slice("--base=".length);
     else if (arg.startsWith("--output-root=")) options.outputRoot = arg.slice("--output-root=".length);
+    else if (arg.startsWith("--layout=")) options.layout = arg.slice("--layout=".length);
     else if (arg === "--help" || arg === "-h") options.help = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
+  if (!["square", "horizontal"].includes(options.layout)) throw new Error("--layout must be square or horizontal");
   return options;
 }
 
@@ -122,14 +125,74 @@ function overlaySvg(row) {
     </svg>`;
 }
 
-async function contactSheet(records, outputPath) {
+function fitHorizontalText(value, width, sizes, maximumLines) {
+  if (!String(value || '').trim()) return { lines: [], size: sizes[0] };
+  const segments = [...new Intl.Segmenter(undefined, { granularity: "word" }).segment(String(value).trim())].map(x => x.segment);
+  for (const size of sizes) {
+    const lines = [];
+    let current = "", currentWidth = 0;
+    for (const token of segments) {
+      const tokenWidth = Array.from(token).reduce((sum, char) => sum + unit(char), 0) * size;
+      if (current && currentWidth + tokenWidth > width) {
+        lines.push(current.trim());
+        current = token.trimStart();
+        currentWidth = Array.from(current).reduce((sum, char) => sum + unit(char), 0) * size;
+      } else { current += token; currentWidth += tokenWidth; }
+    }
+    if (current.trim()) lines.push(current.trim());
+    const allowedLines = size > 43 ? 1 : size > 36 ? Math.min(2, maximumLines) : maximumLines;
+    const widths = lines.map(line => Array.from(line).reduce((sum, char) => sum + unit(char), 0) * size);
+    if (lines.length <= allowedLines && widths.every(w => w <= width)) return { lines, size };
+  }
+  throw new Error(`Horizontal playlist copy cannot fit safely: ${value}`);
+}
+
+function horizontalOverlaySvg(row) {
+  const [headline, detail] = splitTitle(row.title);
+  const polyglot = row.videoType === "polyglot";
+  const h = fitHorizontalText(headline, 490, [53, 43, 36, 32, 28, 24, 20], 3);
+  const d = fitHorizontalText(detail, 490, [34, 28, 24, 22, 20], 3);
+  const headlineLines = h.lines, headlineSize = h.size;
+  const detailLines = d.lines, detailSize = d.size;
+  const footer = polyglot ? "Polyglot" : footerFor(String(row.supportLang || "").toUpperCase(), "ordinary");
+  const f = fitHorizontalText(footer, 410, [21, 19, 17], 2);
+  return `<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+    <rect x="64" y="78" width="229" height="43" rx="21" fill="#f0fafb" stroke="#b4dce6"/>
+    ${textSvg(["FlashcardsLuna"], { x: 84, y: 107, size: 23, lineHeight: 27, color: "#21768c" })}
+    ${textSvg(headlineLines, { x: 64, y: 218, size: headlineSize, lineHeight: headlineSize * 1.1, color: "#08204e" })}
+    ${textSvg(detailLines, { x: 64, y: 361, size: detailSize, lineHeight: detailSize * 1.15, color: "#08204e" })}
+    <rect x="64" y="496" width="510" height="65" rx="32" fill="#fffdf7" stroke="#e2ddcf"/>
+    <circle cx="94" cy="528" r="10" fill="#64b977"/>
+    ${textSvg(f.lines, { x: 122, y: 529, size: f.size, lineHeight: 25, color: "#213d59" })}
+  </svg>`;
+}
+
+async function renderPlaylistCover(row, options, coverPath) {
+  const horizontal = options.layout === "horizontal";
+  if (horizontal) {
+    const right = await sharp(options.base).resize(720, 720, { fit: "contain" }).toBuffer();
+    await sharp({ create: { width: 1280, height: 720, channels: 3, background: "#faf6ec" } })
+      .composite([{ input: right, left: 560, top: 0 }, { input: Buffer.from(horizontalOverlaySvg(row)), left: 0, top: 0 }])
+      .jpeg({ quality: 92, chromaSubsampling: "4:4:4" }).toFile(coverPath);
+  } else {
+    await sharp(options.base).resize(1024, 1024, { fit: "fill" })
+      .composite([{ input: Buffer.from(overlaySvg(row)), top: 0, left: 0 }])
+      .jpeg({ quality: 92, chromaSubsampling: "4:4:4" }).toFile(coverPath);
+  }
+  const metadata = await sharp(coverPath).metadata();
+  if (metadata.width !== (horizontal ? 1280 : 1024) || metadata.height !== (horizontal ? 720 : 1024) || metadata.format !== "jpeg") throw new Error(`Invalid cover: ${coverPath}`);
+  if (fs.statSync(coverPath).size >= 2_000_000) throw new Error(`Cover exceeds 2MB: ${coverPath}`);
+}
+
+async function contactSheet(records, outputPath, layout = "square") {
   if (!records.length) return;
-  const size = 192;
+  const width = layout === "horizontal" ? 320 : 192;
+  const height = layout === "horizontal" ? 180 : 192;
   const columns = 5;
   const rows = Math.ceil(records.length / columns);
-  const thumbs = await Promise.all(records.map((record) => sharp(record.coverPath).resize(size, size).jpeg({ quality: 80 }).toBuffer()));
-  await sharp({ create: { width: columns * size, height: rows * size, channels: 3, background: "#f4f7fa" } })
-    .composite(thumbs.map((input, index) => ({ input, left: (index % columns) * size, top: Math.floor(index / columns) * size })))
+  const thumbs = await Promise.all(records.map((record) => sharp(record.coverPath).resize(width, height).jpeg({ quality: 80 }).toBuffer()));
+  await sharp({ create: { width: columns * width, height: rows * height, channels: 3, background: "#f4f7fa" } })
+    .composite(thumbs.map((input, index) => ({ input, left: (index % columns) * width, top: Math.floor(index / columns) * height })))
     .jpeg({ quality: 86 })
     .toFile(outputPath);
 }
@@ -137,7 +200,7 @@ async function contactSheet(records, outputPath) {
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
-    console.log("Usage: node scripts/render-youtube-playlist-cover-overlays.mjs --keys-file=<exact keys>");
+    console.log("Usage: node scripts/render-youtube-playlist-cover-overlays.mjs --keys-file=<exact keys> [--layout=square|horizontal]");
     return;
   }
   if (!options.keysFile || !fs.existsSync(options.keysFile)) throw new Error("--keys-file is required");
@@ -158,13 +221,7 @@ async function main() {
     const folder = path.join(options.outputRoot, "by-channel", safeSegment(row.channelKey), safeSegment(playlistKey));
     const coverPath = path.join(folder, "playlist_cover.jpg");
     fs.mkdirSync(folder, { recursive: true });
-    await sharp(options.base)
-      .resize(1024, 1024, { fit: "fill" })
-      .composite([{ input: Buffer.from(overlaySvg(row)), top: 0, left: 0 }])
-      .jpeg({ quality: 92, chromaSubsampling: "4:4:4" })
-      .toFile(coverPath);
-    const metadata = await sharp(coverPath).metadata();
-    if (metadata.width !== 1024 || metadata.height !== 1024 || metadata.format !== "jpeg") throw new Error(`Invalid cover: ${coverPath}`);
+    await renderPlaylistCover(row, options, coverPath);
     const record = {
       playlistKey,
       registryPath: row.registryPath,
@@ -179,6 +236,8 @@ async function main() {
       coverPath,
       baseImage: options.base,
       renderer: "sharp-svg-approved-playlist-overlay",
+      layout: options.layout,
+      dimensions: options.layout === "horizontal" ? "1280x720" : "1024x1024",
       sizeBytes: fs.statSync(coverPath).size,
       sha256: sha256(coverPath),
       uploadEligible: Boolean(row.youtube_playlist_id),
@@ -187,12 +246,13 @@ async function main() {
     fs.writeFileSync(path.join(folder, "playlist.json"), `${JSON.stringify(record, null, 2)}\n`);
     records.push(record);
   }
-  await contactSheet(records, path.join(options.outputRoot, "contact-sheet.jpg"));
+  await contactSheet(records, path.join(options.outputRoot, "contact-sheet.jpg"), options.layout);
   const manifest = {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
     baseImage: options.base,
     renderer: "sharp-svg-approved-playlist-overlay",
+    layout: options.layout,
     externalProviderCalls: 0,
     youtubeWrites: 0,
     records,
@@ -205,7 +265,9 @@ function isGitTracked(filePath) {
   return spawnSync("git", ["ls-files", "--error-unmatch", "--", filePath], { cwd: process.cwd(), stdio: "ignore" }).status === 0;
 }
 
-main().catch((error) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main().catch((error) => {
   console.error(error.stack || error.message);
   process.exit(1);
 });
+
+export { parseArgs, horizontalOverlaySvg, overlaySvg, renderPlaylistCover, fitHorizontalText };
