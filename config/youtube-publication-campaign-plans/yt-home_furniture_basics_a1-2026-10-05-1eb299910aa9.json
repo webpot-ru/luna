@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-05T04:03:33.576Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_furniture_basics_a1",
+  "inputs": {
+    "supports": "MS",
+    "supportCount": 1,
+    "ordinarySupportCount": 0,
+    "polyglotSupportCount": 1,
+    "ordinaryPerChannel": 0,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "polyglot|home_furniture_basics_a1|MS|east_asia_core|69af08ca98ea|short_unverified"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_furniture_basics_a1-2026-10-03-e68af37228ef",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_furniture_basics_a1-2026-10-03-e68af37228ef",
+      "manifestHash": "94b46f7f355337e59d3a6dc6bb2002f12b229e9f9a1cf4e4989748dd9124f140",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-10-05T03:51:28.938Z",
+        "ageMinutes": 12.0773,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/review/deck10-wave10plus1-36969206786/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "2bd5ee512ada64f2e1fe7ba7acdb492cac558e7c3a96a8ecf879b144c680b56d"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "1eaf9c0f18ed0e42caea5e831eb18f9040b77a097315a70c50357dded353c0c1"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "2e84a5366b94807e510174750b35ead8ca34caae3d1191c65e01b2e49d006837"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "011859dd0291aeea5513e1a528709d103d666d813620482ca6c46e8c7ee0d12f"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_furniture_basics_a1.json",
+        "exists": true,
+        "sha256": "f4b3907e062e3fb9dfc812d9fb98fd4a3c487ffd8fa883e6f8eb0631a5343a31"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/review/deck10-wave10plus1-36969206786/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "a9b621e7c0541175e47ec6622d552d033b2277b5793b95beb38686a81bb1e9b2"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 1,
+    "supportCount": 1,
+    "ordinaryCount": 0,
+    "polyglotCount": 1,
+    "assignmentCount": 1,
+    "firstPublishAt": "2026-10-05T06:30:00.000Z",
+    "lastPublishAt": "2026-10-05T06:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 1,
+    "existingPlaylistCount": 1,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-2": 1
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 1,
+    "estimatedPlaylistItemInsertUnits": 50,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 50,
+    "byRoute": {
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "MS: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_furniture_basics_a1|MS|east_asia_core|69af08ca98ea|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_furniture_basics_a1|MS|east_asia_core|short_unverified|ms",
+      "videoType": "polyglot",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "MS",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "sourceAssignmentKey": "polyglot|home_furniture_basics_a1|MS|east_asia_core|69af08ca98ea|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_furniture_basics_a1:MS:east_asia_core:69af08ca98ea:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ms-MY-YasminNeural",
+        "supportLang": "MS"
+      },
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-10-05T06:30:00.000Z",
+      "localDate": "2026-10-05",
+      "localTime": "14:30",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "slotKey": "ms|2026-10-05T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__MS__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLJMRCVF56AYQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: Cina, Jepun, Korea",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Cina, Jepun, Korea. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-02T05:42:28.898Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 2
+    }
+  ],
+  "campaignId": "yt-home_furniture_basics_a1-2026-10-05-1eb299910aa9",
+  "manifestHash": "4087bb66ae5cff5839369bdf6835ed68c334d38afd8be228f46f9f5695a0726f"
+}
