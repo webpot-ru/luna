@@ -125,7 +125,7 @@ function overlaySvg(row) {
     </svg>`;
 }
 
-function fitHorizontalText(value, width, sizes, maximumLines) {
+function fitHorizontalText(value, width, sizes, maximumLines, allowLargeMultiline = false) {
   if (!String(value || '').trim()) return { lines: [], size: sizes[0] };
   const segments = [...new Intl.Segmenter(undefined, { granularity: "word" }).segment(String(value).trim())].map(x => x.segment);
   for (const size of sizes) {
@@ -140,7 +140,7 @@ function fitHorizontalText(value, width, sizes, maximumLines) {
       } else { current += token; currentWidth += tokenWidth; }
     }
     if (current.trim()) lines.push(current.trim());
-    const allowedLines = size > 43 ? 1 : size > 36 ? Math.min(2, maximumLines) : maximumLines;
+    const allowedLines = allowLargeMultiline ? (size > 64 ? 1 : maximumLines) : size > 43 ? 1 : size > 36 ? Math.min(2, maximumLines) : maximumLines;
     const widths = lines.map(line => Array.from(line).reduce((sum, char) => sum + unit(char), 0) * size);
     if (lines.length <= allowedLines && widths.every(w => w <= width)) return { lines, size };
   }
@@ -150,12 +150,15 @@ function fitHorizontalText(value, width, sizes, maximumLines) {
 function horizontalOverlaySvg(row) {
   const [headline, detail] = splitTitle(row.title);
   const polyglot = row.videoType === "polyglot";
-  const h = fitHorizontalText(headline, 490, [53, 43, 36, 32, 28, 24, 20], 3);
-  const d = fitHorizontalText(detail, 490, [34, 28, 24, 22, 20], 3);
+  const h = fitHorizontalText(headline, 490,
+    polyglot ? [80, 72, 64, 56, 48, 40, 32, 24, 20] : [64, 60, 56, 52, 48, 44, 40, 36, 32, 28, 24, 20],
+    detail ? 2 : 3, true);
+  const d = fitHorizontalText(detail, 490, [46, 42, 38, 34, 30, 26, 22, 20], polyglot ? 3 : 2, true);
   const headlineLines = h.lines, headlineSize = h.size;
   const detailLines = d.lines, detailSize = d.size;
   const footer = polyglot ? "Polyglot" : footerFor(String(row.supportLang || "").toUpperCase(), "ordinary");
   const f = fitHorizontalText(footer, 410, [21, 19, 17], 2);
+  const footerY = f.lines.length > 1 ? 516 : 535;
   return `<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
     <rect x="64" y="78" width="229" height="43" rx="21" fill="#f0fafb" stroke="#b4dce6"/>
     ${textSvg(["FlashcardsLuna"], { x: 84, y: 107, size: 23, lineHeight: 27, color: "#21768c" })}
@@ -163,7 +166,7 @@ function horizontalOverlaySvg(row) {
     ${textSvg(detailLines, { x: 64, y: 361, size: detailSize, lineHeight: detailSize * 1.15, color: "#08204e" })}
     <rect x="64" y="496" width="510" height="65" rx="32" fill="#fffdf7" stroke="#e2ddcf"/>
     <circle cx="94" cy="528" r="10" fill="#64b977"/>
-    ${textSvg(f.lines, { x: 122, y: 529, size: f.size, lineHeight: 25, color: "#213d59" })}
+    ${textSvg(f.lines, { x: 122, y: footerY, size: f.size, lineHeight: 25, color: "#213d59" })}
   </svg>`;
 }
 
