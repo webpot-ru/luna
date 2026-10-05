@@ -1,0 +1,531 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-05T06:36:59.504Z",
+  "mode": "read_only_no_spend_plan",
+  "setId": "home_furniture_basics_a1",
+  "inputs": {
+    "supports": "HY,LV",
+    "supportCount": 2,
+    "ordinarySupportCount": 2,
+    "polyglotSupportCount": 0,
+    "productionDeferredSupportCount": 0,
+    "ordinaryPerChannel": 2,
+    "allowPartialOrdinaryTail": true,
+    "allowPartialPolyglotTail": false,
+    "allowPartialRouteQuotaTail": false,
+    "maxVideoUploadsPerRoute": null,
+    "polyglotPerChannel": 0,
+    "excludeOrdinaryTargets": "",
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180
+  },
+  "evidence": {
+    "snapshotGeneratedAt": "2026-10-05T06:36:58.988Z",
+    "snapshotAgeMinutes": 0.0086,
+    "playlistDiscoveryGeneratedAt": "2026-10-05T06:36:59.304Z",
+    "playlistDiscoveryAgeMinutes": 0.0033333333333333335,
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    },
+    "productionDeferredAssignments": [],
+    "routeQuotaDeferredAssignments": [],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "90a23e15dd2946070225e185cd438d23418307ae6d1566f9bfb7b23d345d30bc"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "2360f08dac2202ba8804e97a3b79537ca60e8b85f6ecacd68d36791b6b7911dc"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "0fdedf416ad9d3055113cd671992c0d644a01f1db4ca344e2961f22f9226e395"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "011859dd0291aeea5513e1a528709d103d666d813620482ca6c46e8c7ee0d12f"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_furniture_basics_a1.json",
+        "exists": true,
+        "sha256": "f4b3907e062e3fb9dfc812d9fb98fd4a3c487ffd8fa883e6f8eb0631a5343a31"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "b284e2860518ac1ccb86458160c11afac2639c100e7248f4707d57ce8b24bf96"
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 2,
+    "supportCount": 2,
+    "scheduledSupportCount": 2,
+    "productionDeferredSupportCount": 0,
+    "productionDeferredAssignmentCount": 0,
+    "routeQuotaDeferredAssignmentCount": 0,
+    "ordinaryCount": 4,
+    "polyglotCount": 0,
+    "fullPolyglotCount": 0,
+    "shortUnverifiedPolyglotCount": 0,
+    "assignmentCount": 4,
+    "firstPublishAt": "2026-10-08T07:30:00.000Z",
+    "lastPublishAt": "2026-10-08T11:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 4,
+    "existingPlaylistCount": 4,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 0,
+      "youtube-2": 0,
+      "youtube-3": 2,
+      "youtube-4": 2,
+      "youtube-5": 0,
+      "youtube-6": 0,
+      "youtube-7": 0,
+      "youtube-8": 0
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 4,
+    "aggregateVideoUploadCallLimitPerQuotaDay": 4400,
+    "aggregateVideoUploadCallHeadroom": 4396,
+    "quotaDayTimeZone": "America/Los_Angeles",
+    "automaticRouteFallbackAllowed": false,
+    "standbyRouteQuotaUseAllowed": false,
+    "estimatedPlaylistItemInsertUnits": 200,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 200,
+    "estimatedQuotaUnitsMaximum": 204,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      },
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 2,
+        "estimatedPlaylistItemInsertUnits": 100,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 100,
+        "estimatedQuotaUnitsMaximum": 102
+      },
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 2,
+        "estimatedPlaylistItemInsertUnits": 100,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 100,
+        "estimatedQuotaUnitsMaximum": 102
+      },
+      "youtube-5": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      },
+      "youtube-6": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      },
+      "youtube-7": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      },
+      "youtube-8": {
+        "estimatedVideoUploadCalls": 0,
+        "estimatedPlaylistItemInsertUnits": 0,
+        "estimatedPlaylistCreateUnitsMaximum": 0,
+        "estimatedThumbnailSetUnits": 0,
+        "estimatedGeneralQuotaUnitsMaximum": 0,
+        "estimatedQuotaUnitsMaximum": 0
+      }
+    },
+    "directGeminiRequestsCurrentWorkerLayout": 2,
+    "directGeminiRequestsCampaignRouteBatchSize5": 2,
+    "directGeminiRequestsCampaignWideBatchSize5": 1,
+    "metadataProviderOrder": [
+      "openai_gpt_5_6_terra",
+      "openai_gpt_5_6_luna"
+    ],
+    "metadataBatchSize": 5,
+    "metadataLogicalBatchCount": 2,
+    "metadataMaximumOpenAiAttempts": 2,
+    "metadataMaximumDirectGeminiAttempts": 4,
+    "metadataMaximumVectorEngineAttempts": 2,
+    "metadataMaximumProviderAttempts": 8,
+    "renderJobCount": 4,
+    "ttsSynthesisRequestEstimate": {
+      "mode": "cache_aware_upper_bound",
+      "cardCount": 30,
+      "ordinaryRequestsPerSupportMaximum": 93,
+      "ordinaryRequestsMaximum": 186,
+      "polyglotRequestsMaximum": 0,
+      "totalRequestsMaximum": 186,
+      "note": "Short Polyglot card count is duration-measured at render time; this is an upper bound because audio is prepared before final prefix selection."
+    },
+    "providerCallsDuringPlan": 0,
+    "youtubeWritesDuringPlan": 0
+  },
+  "blockers": [],
+  "warnings": [
+    "ordinary|home_furniture_basics_a1|HY|VI: durable playlist title differs from the current deterministic title; ID remains authoritative",
+    "ordinary|home_furniture_basics_a1|HY|ZH: durable playlist title differs from the current deterministic title; ID remains authoritative"
+  ],
+  "assignments": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "HY",
+      "targetLang": "VI",
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "assignmentKey": "ordinary|home_furniture_basics_a1|HY|VI",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|HY|VI|hy",
+      "publishAt": "2026-10-08T07:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-05",
+      "timeZone": "Asia/Yerevan",
+      "localDate": "2026-10-08",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "hy|2026-10-08T07:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-09T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-11T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-15T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-07T07:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_capability_unknown"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HY__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLMCiTCV8i-fk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Վիետնամերեն A1: Everyday: բառ",
+        "description": "Սովորում ենք Վիետնամերեն։ Դասի թեման է՝ FlashcardsLuna։ Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ: Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ: Մարզեք հավաքածուները անվճար մեր կայքում",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-05T06:36:59.304Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "HY",
+      "targetLang": "ZH",
+      "channelKey": "hy",
+      "youtubeChannelId": "UC5WPu4yUJK56oyPI_g7sHRw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "ready",
+        "reason": "user_confirmed_ai33_generation",
+        "checkedAt": "2026-07-26",
+        "provider": "ai33",
+        "voiceId": "ai33_elevenlabs_qJBO8ZmKp4te7NTtYgzz",
+        "supportLang": "HY"
+      },
+      "assignmentKey": "ordinary|home_furniture_basics_a1|HY|ZH",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|HY|ZH|hy",
+      "publishAt": "2026-10-08T10:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-05",
+      "timeZone": "Asia/Yerevan",
+      "localDate": "2026-10-08",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "hy|2026-10-08T10:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-09T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-11T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-15T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-07T10:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_capability_unknown"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HY__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLbmVMp71ItSU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Չինարեն A1: Everyday: բառ",
+        "description": "Սովորում ենք Չինարեն։ Դասի թեման է՝ FlashcardsLuna։ Լսեք կրողների արտասանությունը և կրկնեք բառերը դադարների ժամանակ: Վերջում ձեզ սպասում է ինտերակտիվ մինի-թեստ: Մարզեք հավաքածուները անվճար մեր կայքում",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-05T06:36:59.304Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "LV",
+      "targetLang": "VI",
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "assignmentKey": "ordinary|home_furniture_basics_a1|LV|VI",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|LV|VI|lv",
+      "publishAt": "2026-10-08T08:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-05",
+      "timeZone": "Europe/Riga",
+      "localDate": "2026-10-08",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "lv|2026-10-08T08:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-09T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-11T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-15T08:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-07T08:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "LV__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLEiq3wVOO5-c",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Vjetnamiešu A1: vārdu krājums un izruna",
+        "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Vjetnamiešu: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-05T06:36:59.304Z"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_furniture_basics_a1",
+      "supportLang": "LV",
+      "targetLang": "ZH",
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "assignmentKey": "ordinary|home_furniture_basics_a1|LV|ZH",
+      "calendarAssignmentKey": "ordinary|home_furniture_basics_a1|LV|ZH|lv",
+      "publishAt": "2026-10-08T11:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-05",
+      "timeZone": "Europe/Riga",
+      "localDate": "2026-10-08",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "lv|2026-10-08T11:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-09T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-11T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-15T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-07T11:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "LV__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLNwf5qAGPVlk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Ķīniešu A1: vārdu krājums un izruna",
+        "description": "FlashcardsLuna video latviski runājošiem, kuri mācās Ķīniešu: kartītes, izruna, pauzes atkārtošanai un īsi mini testi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-05T06:36:59.304Z"
+      }
+    }
+  ],
+  "campaignId": "yt-home_furniture_basics_a1-2026-10-05-5fbed182f3f4",
+  "manifestHash": "7e75127930cadf7fb02a61f29a5caed38a2bbaf0be4a114188bcf0dbe937b495"
+}
