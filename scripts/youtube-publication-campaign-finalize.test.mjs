@@ -593,6 +593,8 @@ assert.equal(finalReport.complete, true);
 assert.equal(finalReport.completedCount, 2);
 const finalCampaign = JSON.parse(fs.readFileSync(path.join(configDir, "youtube-publication-campaigns.json"), "utf8")).campaigns[0];
 assert.equal(finalCampaign.status, "finalized");
+const finalRegistryText = fs.readFileSync(path.join(configDir, "youtube-publication-campaigns.json"), "utf8");
+assert.equal(finalRegistryText, `${JSON.stringify(JSON.parse(finalRegistryText))}\n`);
 assert.deepEqual(finalCampaign.assignments.map((row) => row.youtubeVideoId).sort(), ["ordinary-video", "polyglot-video"]);
 const finalCalendar = JSON.parse(fs.readFileSync(path.join(configDir, "youtube-publish-calendar.json"), "utf8"));
 assert(finalCalendar.reservations.every((row) => row.status === "campaign_finalized" && row.youtubeVideoId));

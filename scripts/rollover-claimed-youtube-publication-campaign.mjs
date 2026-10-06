@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
+import { serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { calendarAssignmentKey, effectiveScheduleStartDate, isPolyglotRow, polyglotProductSlotKey } from "./lib/youtube-publication-control.mjs";
@@ -21,7 +22,7 @@ const isAssignmentClaimActive = (row = {}) => {
 function writeJson(file, value) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   const temporary = `${file}.tmp-${process.pid}`;
-  fs.writeFileSync(temporary, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+  fs.writeFileSync(temporary, serializeYoutubeDurableJson(file, value), "utf8");
   fs.renameSync(temporary, file);
 }
 

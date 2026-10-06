@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
+import { serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import path from "node:path";
 
 import { mergeYoutubePublishState } from "./merge-youtube-publish-state.mjs";
@@ -44,7 +45,7 @@ function readJson(filePath, fallback = null) {
 
 function writeJson(filePath, value) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
-  fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+  fs.writeFileSync(filePath, serializeYoutubeDurableJson(filePath, value), "utf8");
 }
 
 function artifactStateRoots(root) {

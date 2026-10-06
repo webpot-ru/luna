@@ -1,5 +1,25 @@
 # YouTube Publication Campaigns
 
+## Durable ledger size and receipt-only persistence recovery
+
+The campaign ledger retains its existing JSON schema, every campaign and every
+historical receipt. Writers serialize `youtube-publication-campaigns.json` as
+compact JSON (whitespace only), while manifests and other reports remain pretty
+printed. The shared serializer refuses an output over95MiB before writing; this
+keeps a margin below GitHub's100MiB single-blob limit. This is not permission to
+drop history or weaken manifest hashes, source fingerprints or receipt gates.
+
+If uploads succeeded but the finalizer push failed, never retry the parent or
+workers. The separately approved `youtube-publication-state-recovery.yml` reads
+the completed source parent's final report and worker artifacts, runs only the
+existing state merger/finalizer, and compares exact expected/accepted/observed/
+missing counts, artifact count and zero duplicate/receipt errors before pushing
+only durable state to a clean review branch. It has no OAuth/provider secrets,
+TTS/render/upload jobs or YouTube mutation calls. Review and merge this state
+before planning a missing-only upload recovery. Future final artifacts include
+the non-secret durable ledgers as well as the report so accepted state remains
+recoverable after a push failure.
+
 Source of truth для повторяемых смешанных волн публикации: несколько следующих ordinary-видео плюс Polyglot на каждый из 51 физического support-канала, без повторного выбора уже опубликованного контента и без независимой гонки календарей.
 
 ## Перенос уже загруженного видео в канонический плейлист

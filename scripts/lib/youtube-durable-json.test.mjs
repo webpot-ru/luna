@@ -1,0 +1,12 @@
+import assert from "node:assert/strict";
+import { serializeYoutubeDurableJson } from "./youtube-durable-json.mjs";
+const value = { campaigns: [{ assignmentKey: "keep", youtubeVideoId: "keep", title: "Հայերեն 日本語", status: "upload_accepted" }] };
+const text = serializeYoutubeDurableJson("config/youtube-publication-campaigns.json", value);
+assert.deepEqual(JSON.parse(text), value);
+assert.equal(text, `${JSON.stringify(value)}\n`);
+assert.equal(serializeYoutubeDurableJson("plan.json", value), `${JSON.stringify(value, null, 2)}\n`);
+const bytes = Buffer.byteLength(text);
+assert.equal(serializeYoutubeDurableJson("youtube-publication-campaigns.json", value, bytes), text);
+assert.throws(() => serializeYoutubeDurableJson("youtube-publication-campaigns.json", value, bytes - 1), /safe GitHub blob budget/);
+assert.throws(() => serializeYoutubeDurableJson("calendar.json", value, 1), /safe GitHub blob budget/);
+console.log("youtube durable JSON tests passed");
