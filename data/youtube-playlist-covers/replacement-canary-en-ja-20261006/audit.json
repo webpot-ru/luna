@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-06T03:08:42.209Z",
+  "completedAt": "2026-10-06T03:08:42.554Z",
+  "mode": "read_only_playlist_images_audit",
+  "filters": {
+    "supports": [
+      "EN"
+    ],
+    "playlistIds": [
+      "PLL_bSMFxVOWY"
+    ]
+  },
+  "policy": {
+    "youtubeWrites": 0,
+    "retries": 0,
+    "endpoint": "playlistImages.list"
+  },
+  "summary": {
+    "physicalPlaylists": 1,
+    "installed": 1,
+    "absent": 0,
+    "unproven": 0,
+    "noPlaylistId": 0,
+    "errors": 0,
+    "playlistImagesListCalls": 1,
+    "channelIdentityCalls": 1,
+    "durableInstalled": 1,
+    "youtubeWrites": 0,
+    "plannedPlaylistImagesListCalls": 1,
+    "plannedChannelIdentityCalls": 1,
+    "plannedQuotaUnits": 2,
+    "byChannel": [
+      {
+        "channelKey": "en",
+        "route": "youtube-1",
+        "total": 1,
+        "installed": 1,
+        "absent": 0,
+        "unproven": 0,
+        "noPlaylistId": 0,
+        "errors": 0,
+        "durableInstalled": 1
+      }
+    ],
+    "estimatedQuotaUnits": 2
+  },
+  "rows": [
+    {
+      "registryPath": "config/youtube-playlists.json",
+      "videoType": "ordinary",
+      "playlistKey": "EN__JA__ordinary-vocabulary__a1-everyday",
+      "channelKey": "en",
+      "supportLang": "EN",
+      "playlistId": "PLL_bSMFxVOWY",
+      "youtubeChannelId": "UCKdKPQXo5PZQqqD0PdMY-LQ",
+      "title": "Japanese A1 Vocabulary Lessons | FlashcardsLuna",
+      "durablePlaylistImage": {
+        "status": "uploaded",
+        "uploadedAt": "2026-07-09T08:51:19.099Z",
+        "imageId": "PLL_bSMFxVOWY.1",
+        "method": "insert",
+        "sourceManifest": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/manifest.json",
+        "sourceCoverPath": "data/youtube-playlist-covers/20260709-route-safe-seventh-ten-per-channel/by-channel/en/EN_JA_ordinary-vocabulary_a1-everyday/playlist_cover.jpg",
+        "playlistImagesEndpoint": "playlistImages"
+      },
+      "route": "youtube-1",
+      "registryRows": [
+        {
+          "registryPath": "config/youtube-playlists.json",
+          "playlistKey": "EN__JA__ordinary-vocabulary__a1-everyday",
+          "videoType": "ordinary"
+        }
+      ],
+      "state": "installed",
+      "playlistImagesListCalled": true,
+      "channelIdentityRead": true,
+      "playlistImages": [
+        {
+          "id": "PLL_bSMFxVOWY.1",
+          "playlistId": "PLL_bSMFxVOWY",
+          "type": "hero",
+          "width": 1024,
+          "height": 1024
+        }
+      ],
+      "readbackAt": "2026-10-06T03:08:42.554Z"
+    }
+  ]
+}

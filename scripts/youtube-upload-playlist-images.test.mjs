@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
 
-import { selectCandidates } from "./youtube-upload-playlist-images.mjs";
+import { selectCandidates, replacementEvidence, playlistImageAction } from "./youtube-upload-playlist-images.mjs";
 
 const manifest = {
   records: [{
@@ -97,3 +97,17 @@ assert.equal(polyglotSelected[0].registryPath, polyglotRegistryPath);
 assert.equal(polyglotSelected[0].playlistIdSource, "durable_registry");
 
 console.log("youtube playlist image selection tests passed");
+
+const replacement = {channelKey:"en", playlistId:"playlist-one", expectedImageId:"image-old", sha256:"a".repeat(64), auditState:"installed", auditEvidenceType:"youtube_playlist_images_readback"};
+const audit = {completedAt:new Date().toISOString(), mode:"read_only_playlist_images_audit", policy:{youtubeWrites:0,endpoint:"playlistImages.list"},rows:[{channelKey:"en",playlistId:"playlist-one",state:"installed",channelIdentityRead:true,playlistImages:[{id:"image-old",playlistId:"playlist-one",type:"hero"}]}]};
+replacementEvidence(replacement,audit);
+assert.equal(playlistImageAction({id:"image-old"}, replacement, true),"update");
+assert.equal(playlistImageAction({id:"image-old"}, replacement, false),"existing_readback");
+assert.equal(playlistImageAction(null,replacement,false),"insert");
+assert.throws(()=>playlistImageAction(null,replacement,true),/disappeared/);
+assert.throws(()=>playlistImageAction({id:"image-other"},replacement,true),/changed/);
+assert.throws(()=>replacementEvidence({...replacement,sha256:""},audit),/SHA256/);
+assert.throws(()=>replacementEvidence(replacement,{...audit,completedAt:"2020-01-01T00:00:00Z"}),/fresh/);
+assert.throws(()=>replacementEvidence(replacement,{...audit,rows:[]}),/does not prove/);
+assert.throws(()=>replacementEvidence(replacement,{...audit,rows:[{...audit.rows[0],channelIdentityRead:false}]}),/does not prove/);
+console.log("Exact existing-image replacement gates passed");
