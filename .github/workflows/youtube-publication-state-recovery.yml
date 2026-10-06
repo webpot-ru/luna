@@ -64,20 +64,23 @@ jobs:
       - name: Validate preserved report before receipt merge
         run: |
           node -e 'const r=require("./.source-final/youtube-publication-campaign-finalize.json"); if(r.campaignId!==process.env.CAMPAIGN_ID||r.manifestHash!==process.env.MANIFEST_HASH||!r.observedCount||["duplicateAssignments","duplicateVideoIds","unexpectedPublications","receiptErrors"].some(k=>!Array.isArray(r[k])||r[k].length))throw Error("source receipt evidence unsafe");'
-      - name: Download ordinary receipts without running workers
-        uses: actions/download-artifact@v4
-        with:
-          run-id: ${{ inputs.source_run_id }}
-          github-token: ${{ github.token }}
-          pattern: youtube-video-publish-apply-*
-          path: .campaign-artifacts
-      - name: Download Polyglot receipts without running workers
-        uses: actions/download-artifact@v4
-        with:
-          run-id: ${{ inputs.source_run_id }}
-          github-token: ${{ github.token }}
-          pattern: youtube-polyglot-*-apply
-          path: .campaign-artifacts
+      - name: Enumerate every source artifact page and download exact receipt IDs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p outputs
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" > outputs/youtube-state-recovery-artifact-pages.json
+          node scripts/select-youtube-receipt-artifacts.mjs outputs/youtube-state-recovery-artifact-pages.json .source-final/youtube-publication-campaign-finalize.json outputs/youtube-state-recovery-receipts.tsv
+          while IFS=$'\t' read -r artifact_id artifact_name; do
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" > /tmp/current-receipt.zip
+            destination=".campaign-artifacts/$artifact_name"
+            mkdir -p "$destination"
+            unzip -Z1 /tmp/current-receipt.zip > /tmp/archive-entries.txt
+            node -e 'const fs=require("fs"),rows=fs.readFileSync("/tmp/archive-entries.txt","utf8").trim().split("\n"); if(rows.some(p=>p.startsWith("/")||p.includes("\\")||p.split("/").includes("..")))throw Error("unsafe archive path"); const selected=rows.filter(p=>/^config\/[^/]+\.json$/.test(p)||p==="outputs/youtube-live-publications-github.json");if(!selected.length)throw Error("no receipt state in artifact");fs.writeFileSync("/tmp/receipt-entries.txt",selected.join("\n")+"\n");'
+            while IFS= read -r entry; do
+              unzip -q /tmp/current-receipt.zip "$entry" -d "$destination"
+            done < /tmp/receipt-entries.txt
+          done < outputs/youtube-state-recovery-receipts.tsv
       - name: Restore exact accepted state and verify no receipt drift
         shell: bash
         run: |
@@ -105,6 +108,8 @@ jobs:
           retention-days: 30
           path: |
             outputs/youtube-publication-campaign-finalize.json
+            outputs/youtube-state-recovery-artifact-pages.json
+            outputs/youtube-state-recovery-receipts.tsv
             config/youtube-publication-campaigns.json
             config/youtube-publish-calendar.json
             config/youtube-published-videos.json
