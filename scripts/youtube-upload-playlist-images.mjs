@@ -186,6 +186,16 @@ function assertImageShape(filePath) {
   if (stat.size > 2 * 1024 * 1024) fail(`Playlist image exceeds 2 MB: ${filePath}`);
 }
 
+function playlistImageMediaUrl(method, query = {}) {
+  const url = new URL("playlistImages", "https://www.googleapis.com/upload/youtube/v3/");
+  // update's part is optional in Discovery; snippet is rejected by the live PUT endpoint.
+  const defaults = method === "PUT" ? { uploadType: "multipart" } : { uploadType: "multipart", part: "snippet" };
+  for (const [key, value] of Object.entries({ ...defaults, ...query })) {
+    if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, String(value));
+  }
+  return url;
+}
+
 async function youtubeMultipartImageUpload({ accessToken, method, query = {}, resource, filePath }) {
   const media = fs.readFileSync(filePath);
   const boundary = `playlist-image-${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -204,10 +214,7 @@ async function youtubeMultipartImageUpload({ accessToken, method, query = {}, re
   );
   const close = Buffer.from(`\r\n--${boundary}--\r\n`, "utf8");
   const body = Buffer.concat([metadata, media, close]);
-  const url = new URL("playlistImages", "https://www.googleapis.com/upload/youtube/v3/");
-  for (const [key, value] of Object.entries({ uploadType: "multipart", part: "snippet", ...query })) {
-    if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, String(value));
-  }
+  const url = playlistImageMediaUrl(method, query);
   const response = await fetch(url, {
     method,
     headers: {
@@ -675,4 +682,4 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   });
 }
 
-export { isGitTracked, selectCandidates, replacementEvidence, playlistImageAction };
+export { isGitTracked, selectCandidates, replacementEvidence, playlistImageAction, playlistImageMediaUrl };

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
 
-import { selectCandidates, replacementEvidence, playlistImageAction } from "./youtube-upload-playlist-images.mjs";
+import { selectCandidates, replacementEvidence, playlistImageAction, playlistImageMediaUrl } from "./youtube-upload-playlist-images.mjs";
 
 const manifest = {
   records: [{
@@ -111,3 +111,8 @@ assert.throws(()=>replacementEvidence(replacement,{...audit,completedAt:"2020-01
 assert.throws(()=>replacementEvidence(replacement,{...audit,rows:[]}),/does not prove/);
 assert.throws(()=>replacementEvidence(replacement,{...audit,rows:[{...audit.rows[0],channelIdentityRead:false}]}),/does not prove/);
 console.log("Exact existing-image replacement gates passed");
+assert.equal(playlistImageMediaUrl("PUT").searchParams.has("part"),false);
+assert.equal(playlistImageMediaUrl("PUT").searchParams.get("uploadType"),"multipart");
+assert.equal(playlistImageMediaUrl("POST").searchParams.get("part"),"snippet");
+assert.equal(playlistImageMediaUrl("PUT").pathname,"/upload/youtube/v3/playlistImages");
+console.log("Playlist PUT optional-part request regression PASS");
