@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
+import { serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import path from "node:path";
 
 import {
@@ -45,7 +46,7 @@ function readJson(filePath, fallback) {
 function writeJsonAtomic(filePath, value) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   const temporaryPath = `${filePath}.tmp-${process.pid}`;
-  fs.writeFileSync(temporaryPath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+  fs.writeFileSync(temporaryPath, serializeYoutubeDurableJson(filePath, value), "utf8");
   fs.renameSync(temporaryPath, filePath);
 }
 

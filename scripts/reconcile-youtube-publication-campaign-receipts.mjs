@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
+import { serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 
 function parseArgs(argv) {
   const options = {
@@ -38,7 +39,7 @@ function readJson(filePath) {
 }
 
 function writeJson(filePath, value) {
-  fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+  fs.writeFileSync(filePath, serializeYoutubeDurableJson(filePath, value), "utf8");
 }
 
 function normalizeCode(value) {

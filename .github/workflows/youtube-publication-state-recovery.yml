@@ -1,0 +1,112 @@
+name: Recover YouTube Publication State Only
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        required: true
+        description: Completed parent run with preserved upload receipts.
+      campaign_id:
+        required: true
+        description: Exact already-uploaded campaign, never a new upload.
+      manifest_hash:
+        required: true
+        description: Immutable source campaign hash.
+      target_branch:
+        required: true
+        description: Existing clean codex branch based on current main.
+      confirm:
+        required: true
+        description: Type RECOVER_YOUTUBE_STATE_WITHOUT_UPLOAD.
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  recover-state:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+      CAMPAIGN_ID: ${{ inputs.campaign_id }}
+      MANIFEST_HASH: ${{ inputs.manifest_hash }}
+      TARGET_BRANCH: ${{ inputs.target_branch }}
+      CONFIRM: ${{ inputs.confirm }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_branch }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate exact completed source and clean target
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$CONFIRM" = RECOVER_YOUTUBE_STATE_WITHOUT_UPLOAD
+          [[ "$SOURCE_RUN_ID" =~ ^[0-9]+$ ]]
+          [[ "$TARGET_BRANCH" == codex/* ]]
+          git fetch origin main
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)"
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID" > /tmp/source-run.json
+          node -e 'const r=require("/tmp/source-run.json"); if(r.status!=="completed"||r.path!==".github/workflows/youtube-publication-campaign.yml")throw Error("not a completed campaign parent");'
+          node -e 'const fs=require("fs"),r=JSON.parse(fs.readFileSync("config/youtube-publication-campaigns.json")); const c=r.campaigns.find(c=>c.campaignId===process.env.CAMPAIGN_ID);if(!c||c.manifestHash!==process.env.MANIFEST_HASH||c.status!=="claimed")throw Error("campaign drift or already persisted");'
+      - name: Download source final report
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ inputs.source_run_id }}
+          github-token: ${{ github.token }}
+          name: youtube-publication-campaign-final-${{ inputs.source_run_id }}
+          path: .source-final
+      - name: Validate preserved report before receipt merge
+        run: |
+          node -e 'const r=require("./.source-final/youtube-publication-campaign-finalize.json"); if(r.campaignId!==process.env.CAMPAIGN_ID||r.manifestHash!==process.env.MANIFEST_HASH||!r.observedCount||["duplicateAssignments","duplicateVideoIds","unexpectedPublications","receiptErrors"].some(k=>!Array.isArray(r[k])||r[k].length))throw Error("source receipt evidence unsafe");'
+      - name: Download ordinary receipts without running workers
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ inputs.source_run_id }}
+          github-token: ${{ github.token }}
+          pattern: youtube-video-publish-apply-*
+          path: .campaign-artifacts
+      - name: Download Polyglot receipts without running workers
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ inputs.source_run_id }}
+          github-token: ${{ github.token }}
+          pattern: youtube-polyglot-*-apply
+          path: .campaign-artifacts
+      - name: Restore exact accepted state and verify no receipt drift
+        shell: bash
+        run: |
+          set -euo pipefail
+          ORDINARY_RESULT=$(node -p 'require("./.source-final/youtube-publication-campaign-finalize.json").workerResults.ordinary')
+          POLYGLOT_RESULT=$(node -p 'require("./.source-final/youtube-publication-campaign-finalize.json").workerResults.polyglot')
+          node scripts/finalize-youtube-publication-campaign.mjs --campaign-id="$CAMPAIGN_ID" --artifacts-root=.campaign-artifacts --ordinary-result="$ORDINARY_RESULT" --polyglot-result="$POLYGLOT_RESULT" > /tmp/recovery-log.json
+          node -e 'const a=require("./.source-final/youtube-publication-campaign-finalize.json"),b=require("./outputs/youtube-publication-campaign-finalize.json");for(const k of ["campaignId","manifestHash","expectedCount","completedCount","observedCount","missingCount","artifactCount"])if(a[k]!==b[k])throw Error("receipt drift: "+k);for(const k of ["duplicateAssignments","duplicateVideoIds","unexpectedPublications","receiptErrors"])if(b[k].length)throw Error("unsafe receipts: "+k);'
+      - name: Persist only recovered durable state to review branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          git add config/youtube-publication-campaigns.json config/youtube-publish-calendar.json config/youtube-published-videos.json config/youtube-playlists.json config/youtube-polyglot-published-videos.json config/youtube-polyglot-playlists.json config/youtube-polyglot-progress.json config/youtube-channels.json
+          git diff --cached --quiet && { echo "No recovery changes"; exit 1; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Recover accepted YouTube receipts without upload: $CAMPAIGN_ID"
+          git push origin "HEAD:refs/heads/$TARGET_BRANCH"
+      - name: Preserve compact report and recovered registries
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-state-recovery-${{ github.run_id }}
+          retention-days: 30
+          path: |
+            outputs/youtube-publication-campaign-finalize.json
+            config/youtube-publication-campaigns.json
+            config/youtube-publish-calendar.json
+            config/youtube-published-videos.json
+            config/youtube-polyglot-published-videos.json
+            config/youtube-polyglot-progress.json
