@@ -20,6 +20,15 @@ before planning a missing-only upload recovery. Future final artifacts include
 the non-secret durable ledgers as well as the report so accepted state remains
 recoverable after a push failure.
 
+Cross-run receipt recovery enumerates every GitHub artifact page with
+`gh api --paginate --slurp`, checks total/unique IDs and exact source artifact
+count, and downloads each selected receipt archive by ID. It extracts only
+config JSON and live-audit JSON, not video/audio media. Do not use cross-run
+pattern downloads that silently enumerate only the first100 artifacts: Deck11
+had108 total artifacts, and that truncated read omitted4ordinary worker bundles
+(ET/FR/HR/KK) containing36already accepted receipts. Rebuilt counts must still
+match the source report; incomplete evidence is never permission to reupload.
+
 Source of truth для повторяемых смешанных волн публикации: несколько следующих ordinary-видео плюс Polyglot на каждый из 51 физического support-канала, без повторного выбора уже опубликованного контента и без независимой гонки календарей.
 
 ## Перенос уже загруженного видео в канонический плейлист
