@@ -32,6 +32,15 @@ on:
         description: "For apply type APPLY_YOUTUBE_PLAYLIST_IMAGES."
         required: false
         default: ""
+      replace_existing:
+        description: "Use exact installed-image replacement evidence instead of missing-only insert."
+        required: false
+        type: boolean
+        default: false
+      confirm_existing_image_replacement:
+        description: "For replacement apply type REPLACE_EXISTING_YOUTUBE_PLAYLIST_IMAGES."
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -62,6 +71,8 @@ jobs:
           ROUTE: ${{ inputs.route }}
           MANIFEST: ${{ inputs.manifest }}
           CONFIRM_YOUTUBE_WRITE: ${{ inputs.confirm_youtube_write }}
+          REPLACE_EXISTING: ${{ inputs.replace_existing }}
+          CONFIRM_REPLACEMENT: ${{ inputs.confirm_existing_image_replacement }}
         run: |
           set -euo pipefail
           case "$ROUTE" in
@@ -86,6 +97,10 @@ jobs:
           fi
           if [ "$MODE" = "apply" ] && [ "$CONFIRM_YOUTUBE_WRITE" != "APPLY_YOUTUBE_PLAYLIST_IMAGES" ]; then
             echo "::error::apply requires confirm_youtube_write=APPLY_YOUTUBE_PLAYLIST_IMAGES"
+            exit 1
+          fi
+          if [ "$MODE" = "apply" ] && [ "$REPLACE_EXISTING" = "true" ] && [ "$CONFIRM_REPLACEMENT" != "REPLACE_EXISTING_YOUTUBE_PLAYLIST_IMAGES" ]; then
+            echo "::error::Replacement requires exact replacement confirmation"
             exit 1
           fi
           echo "supports=$SUPPORTS" >> "$GITHUB_OUTPUT"
@@ -120,6 +135,7 @@ jobs:
           MANIFEST: ${{ inputs.manifest }}
           SUPPORTS: ${{ steps.route.outputs.supports }}
           ROUTE: ${{ inputs.route }}
+          REPLACE_EXISTING: ${{ inputs.replace_existing }}
         run: |
           set -euo pipefail
           ARGS=(
@@ -130,6 +146,12 @@ jobs:
           )
           if [ "$MODE" = "apply" ]; then
             ARGS+=("--apply" "--confirm-youtube-write")
+          fi
+          if [ "$REPLACE_EXISTING" = "true" ]; then
+            ARGS+=("--replace-existing")
+            if [ "$MODE" = "apply" ]; then
+              ARGS+=("--confirm-existing-image-replacement")
+            fi
           fi
           node scripts/youtube-upload-playlist-images.mjs "${ARGS[@]}"
 

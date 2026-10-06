@@ -31,10 +31,14 @@ function parseArgs(argv) {
     apply: false,
     confirmYoutubeWrite: false,
     skipUploaded: false,
+    replaceExisting: false,
+    confirmReplacement: false,
     readbackAttempts: 8,
   };
   for (const arg of argv) {
     if (arg === "--apply") options.apply = true;
+    else if (arg === "--replace-existing") options.replaceExisting = true;
+    else if (arg === "--confirm-existing-image-replacement") options.confirmReplacement = true;
     else if (arg === "--confirm-youtube-write") options.confirmYoutubeWrite = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else if (arg.startsWith("--manifest=")) options.manifest = arg.slice("--manifest=".length);
@@ -64,6 +68,8 @@ function usage() {
     "",
     "Dry-run is default. Live writes require:",
     "  --apply --confirm-youtube-write",
+    "Existing-image replacement additionally requires an audited replace_existing manifest:",
+    "  --replace-existing --confirm-existing-image-replacement",
   ].join("\n");
 }
 
@@ -405,6 +411,25 @@ function saveReport(reportPath, report) {
   fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 }
 
+function replacementEvidence(candidate, audit, now = Date.now()) {
+  if (candidate.auditState !== "installed" || !candidate.expectedImageId || !/^[a-f0-9]{64}$/i.test(candidate.sha256 || "")
+    || candidate.auditEvidenceType !== "youtube_playlist_images_readback") fail("Replacement requires installed-image identity and exact cover SHA256.");
+  const age = now - Date.parse(audit.completedAt || "");
+  if (!Number.isFinite(age) || age < 0 || age > 180 * 60_000 || audit.mode !== "read_only_playlist_images_audit"
+    || audit.policy?.youtubeWrites !== 0 || audit.policy?.endpoint !== "playlistImages.list") fail("Replacement audit must be complete and fresh (180 minutes).");
+  const rows = (audit.rows || []).filter(r => r.channelKey === candidate.channelKey && r.playlistId === candidate.playlistId);
+  if (rows.length !== 1 || rows[0].state !== "installed" || rows[0].channelIdentityRead !== true
+    || rows[0].error || !(rows[0].playlistImages || []).some(i => i.id === candidate.expectedImageId && i.playlistId === candidate.playlistId && i.type === "hero")) fail("Replacement audit does not prove the expected existing image.");
+}
+
+function playlistImageAction(currentImage, candidate, replaceExisting) {
+  if (replaceExisting) {
+    if (!currentImage?.id || currentImage.id !== candidate.expectedImageId) fail("Existing playlist image changed or disappeared; replacement stopped.");
+    return "update";
+  }
+  return currentImage?.id ? "existing_readback" : "insert";
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
@@ -412,6 +437,8 @@ async function main() {
     return;
   }
   if (options.apply && !options.confirmYoutubeWrite) fail("Apply mode requires --confirm-youtube-write.");
+  if (options.replaceExisting && options.skipUploaded) fail("Replacement cannot use --skip-uploaded.");
+  if (options.apply && options.replaceExisting && !options.confirmReplacement) fail("Replacement requires --confirm-existing-image-replacement.");
   if (!Number.isInteger(options.readbackAttempts) || options.readbackAttempts < 1 || options.readbackAttempts > 8) {
     fail("--readback-attempts must be an integer between 1 and 8.");
   }
@@ -420,6 +447,7 @@ async function main() {
   if (options.apply && manifest.auditComplete !== true) {
     fail("Apply requires an auditComplete exact missing-only manifest.");
   }
+  if (options.replaceExisting && manifest.operation !== "replace_existing") fail("Replacement requires an explicit replace_existing manifest.");
   const channelRegistry = loadYoutubeChannels(options.channelConfig);
   const playlistRegistry = loadPlaylistRegistry(options.playlistRegistry);
   const polyglotPlaylistRegistry = loadPlaylistRegistry(options.polyglotPlaylistRegistry);
@@ -437,6 +465,9 @@ async function main() {
     skipUploaded: options.skipUploaded,
   });
   if (!candidates.length) fail("No upload-eligible playlist image candidates matched the filters.");
+  if (options.replaceExisting && new Set(candidates.map(c => `${c.channelKey}:${c.playlistId}`)).size !== candidates.length) {
+    fail("Replacement manifest contains duplicate physical playlists.");
+  }
 
   const nowSlug = new Date().toISOString().replace(/[:.]/g, "-");
   const reportPath = path.join(options.outputDir, `playlist-image-upload-${options.apply ? "apply" : "plan"}-${nowSlug}.json`);
@@ -451,6 +482,7 @@ async function main() {
       limitPerChannel: options.limitPerChannel,
       skipUploaded: options.skipUploaded,
       readbackAttempts: options.readbackAttempts,
+      replaceExisting: options.replaceExisting,
     },
     results: [],
     summary: {},
@@ -478,7 +510,7 @@ async function main() {
     try {
       const userAuthorizedReapply = candidate.userAuthorizedReapply === true
         && candidate.reapplyReason === "operator_live_observation_missing";
-      if (options.apply && (
+      if (options.apply && !options.replaceExisting && (
         candidate.exactMissingOnly !== true
         || candidate.auditState !== "absent"
         || !candidate.auditReport
@@ -488,12 +520,14 @@ async function main() {
         fail(`Apply requires exact missing-only YouTube readback evidence or an explicit user-authorized reapply for ${candidate.playlistKey}`);
       }
       if (options.apply) {
+        if (!candidate.auditReport || !candidate.auditReportSha256) fail("Missing audit evidence path/hash.");
         const auditPath = path.resolve(candidate.auditReport);
         if (!fs.existsSync(auditPath) || sha256(auditPath) !== candidate.auditReportSha256) {
           fail(`Audit evidence hash mismatch for ${candidate.playlistKey}`);
         }
         result.auditReport = candidate.auditReport;
         result.auditReportSha256 = candidate.auditReportSha256;
+        if (options.replaceExisting) replacementEvidence(candidate, readJson(auditPath, "replacement audit"));
       }
       const channel = channelByKey(channelRegistry, candidate.channelKey);
       if (!channel) fail(`No channel configured for channelKey=${candidate.channelKey}`);
@@ -510,6 +544,7 @@ async function main() {
       const coverPath = path.resolve(candidate.coverPath);
       if (!fs.existsSync(coverPath)) fail(`Missing cover image: ${candidate.coverPath}`);
       assertImageShape(coverPath);
+      if (options.replaceExisting && sha256(coverPath) !== candidate.sha256) fail("Replacement cover checksum mismatch.");
       result.coverGitTracked = isGitTracked(coverPath);
       if (options.apply && !result.coverGitTracked) {
         fail(`Refusing untracked playlist cover in apply mode: ${candidate.coverPath}`);
@@ -536,17 +571,16 @@ async function main() {
       }
       const existing = await listPlaylistImages({ accessToken, playlistId: candidate.playlistId });
       const currentImage = (existing.items || []).find((item) => samePlaylistImage(item, candidate.playlistId));
-      if (currentImage?.id) {
+      const method = playlistImageAction(currentImage, candidate, options.replaceExisting);
+      if (method === "existing_readback") {
         const readbackAt = new Date().toISOString();
         for (const registryRow of registryRows) {
           registryRow.entry.playlistImage = {
+            ...registryRow.entry.playlistImage,
             status: "uploaded",
             uploadedAt: readbackAt,
             imageId: currentImage.id,
             method: "existing_readback",
-            sourceManifest: options.manifest,
-            sourceCoverPath: candidate.coverPath,
-            sourceCoverGitTracked: result.coverGitTracked,
             playlistImagesEndpoint: "playlistImages",
           };
           registryRow.entry.lastReadbackAt = readbackAt;
@@ -554,12 +588,12 @@ async function main() {
         saveCandidateRegistries(registryRows);
         result.status = "uploaded";
         result.method = "existing_readback";
+        result.coverApplied = false;
         result.playlistImageId = currentImage.id;
         result.readback = currentImage;
         result.uploadedAt = readbackAt;
         continue;
       }
-      const method = currentImage?.id ? "update" : "insert";
       const resource = {
         ...(currentImage?.id ? { id: currentImage.id } : {}),
         snippet: {
@@ -601,6 +635,7 @@ async function main() {
           method,
           sourceManifest: options.manifest,
           sourceCoverPath: candidate.coverPath,
+          sourceCoverSha256: sha256(coverPath),
           sourceCoverGitTracked: result.coverGitTracked,
           playlistImagesEndpoint: "playlistImages",
         };
@@ -610,6 +645,7 @@ async function main() {
 
       result.status = "uploaded";
       result.method = method;
+      result.coverApplied = true;
       result.playlistImageId = readbackImage.id || imageId;
       result.readback = readbackImage;
       result.readbackAttempts = readbackResult.attemptsUsed;
@@ -639,4 +675,4 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   });
 }
 
-export { isGitTracked, selectCandidates };
+export { isGitTracked, selectCandidates, replacementEvidence, playlistImageAction };
