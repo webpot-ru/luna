@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-07T02:09:34.513Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_laundry_cleaning_basics_a1_a2",
+  "inputs": {
+    "supports": "DA",
+    "supportCount": 1,
+    "ordinarySupportCount": 0,
+    "polyglotSupportCount": 1,
+    "ordinaryPerChannel": 0,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "polyglot|home_laundry_cleaning_basics_a1_a2|DA|global_europe_core|7a4233775927|short_unverified"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-06-dd4d58cdee7b",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-06-dd4d58cdee7b",
+      "manifestHash": "f26becb1c07c5edd76e26ce6264f6e059dad3e4a22e46f7b7b0266cabca2e2af",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-10-07T01:42:57.996Z",
+        "ageMinutes": 26.608616666666666,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "ef2799673a41f13e66714ef1ac41487eddc36f628426b3628752790d8bdcdacc"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "3fa9a71f82ae5879b0325a4248b9c218ab542ed6fd21484cab5b97e1f1e239dc"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "b174e1204c48c9a316862c9d7f325dc68dce0dfb3050aa5fbe69e9a9ccc04a38"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "cad3a058e6fae8979861d68358bdca9ccfec9cb1f1904f2a1c01536a0d9730d3"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_laundry_cleaning_basics_a1_a2.json",
+        "exists": true,
+        "sha256": "f998e95f9bae7fc3db3cc0428dc78ab6594fab00e7935fa857ca83bd6e355556"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "d0f44723e32aa771f45228e8bf2e848deb1a7d332a0e32da7f0c418d85f611fe"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 1,
+    "supportCount": 1,
+    "ordinaryCount": 0,
+    "polyglotCount": 1,
+    "assignmentCount": 1,
+    "firstPublishAt": "2026-10-09T15:30:00.000Z",
+    "lastPublishAt": "2026-10-09T15:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 1,
+    "existingPlaylistCount": 1,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-2": 1
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 1,
+    "estimatedPlaylistItemInsertUnits": 50,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 50,
+    "byRoute": {
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "DA: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_laundry_cleaning_basics_a1_a2|DA|global_europe_core|7a4233775927|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_laundry_cleaning_basics_a1_a2|DA|global_europe_core|short_unverified|da",
+      "videoType": "polyglot",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsHash": "7a4233775927",
+      "bundleKey": "global_europe_core",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_laundry_cleaning_basics_a1_a2:DA:global_europe_core:7a4233775927:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_da-DK-ChristelNeural",
+        "supportLang": "DA"
+      },
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-10-09T15:30:00.000Z",
+      "localDate": "2026-10-09",
+      "localTime": "17:30",
+      "timeZone": "Europe/Copenhagen",
+      "slotKey": "da|2026-10-09T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__DA__global-europe-core__7a4233775927",
+        "youtubePlaylistId": "PLXCx8ZEX83RQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: engelsk, spansk, fransk, tysk",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: engelsk, spansk, fransk, tysk. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-06T13:20:58.907Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "polyglot|home_laundry_cleaning_basics_a1_a2|DA|global_europe_core|7a4233775927|short_unverified",
+      "localSlotIndex": 3
+    }
+  ],
+  "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-07-d69eb8958b5b",
+  "manifestHash": "357feec81e0a35ded3dcee7050c0029938ef13b86cceacbfdffde6e1f6456dfe"
+}
