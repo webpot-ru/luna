@@ -1,0 +1,95 @@
+name: Upload Approved Ready Media Route
+on:
+  workflow_call:
+    inputs:
+      campaign_id: { required: true, type: string }
+      manifest_hash: { required: true, type: string }
+      spec: { required: true, type: string }
+      route: { required: true, type: string }
+      environment: { required: true, type: string }
+permissions:
+  contents: read
+  actions: read
+jobs:
+  upload-ready:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: ${{ inputs.environment }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SPEC: ${{ inputs.spec }}
+      CAMPAIGN: ${{ inputs.campaign_id }}
+      HASH: ${{ inputs.manifest_hash }}
+      ROUTE: ${{ inputs.route }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: npm ci
+      - name: Validate claimed campaign and approved reuse scope
+        run: |
+          node scripts/prepare-youtube-publication-campaign-run.mjs --campaign-id="$CAMPAIGN" --manifest-hash="$HASH" --output=outputs/ready-media-preflight.json
+          node scripts/run-youtube-ready-media-recovery.mjs --spec="$SPEC" --campaign="$CAMPAIGN" --preflight=true
+      - name: Download exact source artifact IDs and only selected media
+        shell: bash
+        run: |
+          set -euo pipefail
+          SOURCE_RUN=$(node -p 'JSON.parse(require("fs").readFileSync(process.env.SPEC)).sourceRunId')
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN" > /tmp/ready-source.json
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN/artifacts?per_page=100" > /tmp/ready-artifacts.json
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const spec=JSON.parse(fs.readFileSync(process.env.SPEC));
+          const run=JSON.parse(fs.readFileSync('/tmp/ready-source.json'));
+          if(run.status!=='completed'||run.head_sha!==spec.sourceHeadSha||run.path!=='.github/workflows/youtube-publication-campaign.yml')throw Error('Ready media source run mismatch');
+          const pages=JSON.parse(fs.readFileSync('/tmp/ready-artifacts.json')),all=pages.flatMap(p=>p.artifacts);
+          if(all.length!==pages[0].total_count||new Set(all.map(a=>a.id)).size!==all.length)throw Error('Ready media artifact pagination incomplete');
+          const registry=JSON.parse(fs.readFileSync('config/youtube-publication-campaigns.json'));
+          const campaign=registry.campaigns.find(c=>c.campaignId===process.env.CAMPAIGN);
+          const keys=new Set(campaign.assignments.filter(a=>a.routeKey===process.env.ROUTE).map(a=>a.assignmentKey));
+          const assets=spec.assets.filter(a=>keys.has(a.assignmentKey));
+          for(const asset of assets){const found=all.find(a=>a.id===asset.artifactId);if(!found||found.expired||found.name!==asset.artifactName)throw Error('Ready media artifact drift');}
+          fs.writeFileSync('/tmp/ready-download.tsv',assets.map(a=>[a.artifactId,a.artifactName,a.videoPath,a.metadataPath].join('\t')).join('\n')+'\n');
+          NODE
+          while IFS=$'\t' read -r artifact_id name video metadata; do
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" > /tmp/ready-media.zip
+            mkdir -p ".ready-media/$name"
+            unzip -Z1 /tmp/ready-media.zip > /tmp/ready-entries.txt
+            node -e 'const fs=require("fs");if(fs.readFileSync("/tmp/ready-entries.txt","utf8").split("\n").some(p=>p.startsWith("/")||p.includes("\\")||p.split("/").includes("..")))throw Error("Unsafe ready archive");'
+            unzip -q /tmp/ready-media.zip "$video" "$metadata" -d ".ready-media/$name"
+          done < /tmp/ready-download.tsv
+      - name: Restore route-owned OAuth bundle
+        env:
+          YOUTUBE_OAUTH_BUNDLE_TGZ_B64: ${{ secrets.YOUTUBE_OAUTH_BUNDLE_TGZ_B64 }}
+        run: |
+          set -euo pipefail
+          test -n "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64"
+          printf '%s' "$YOUTUBE_OAUTH_BUNDLE_TGZ_B64" | base64 -d | tar -xzf -
+          test -f .local/youtube-oauth/google-oauth-client.json
+      - name: Ensure existing FFprobe runtime
+        run: |
+          if ! command -v ffprobe >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+      - name: Upload verified ready MP4s without metadata, TTS or render generation
+        run: |
+          node scripts/run-youtube-ready-media-recovery.mjs --spec="$SPEC" --campaign="$CAMPAIGN" --route="$ROUTE" --artifacts=.ready-media --confirm=UPLOAD_APPROVED_READY_MEDIA
+      - name: Preserve non-secret receipts even after partial failure
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-video-publish-apply-ready-media-${{ inputs.route }}-${{ github.run_id }}
+          retention-days: 30
+          path: |
+            outputs/ready-media/
+            outputs/ready-media-preflight.json
+            outputs/youtube-publish-ledger.jsonl
+            outputs/youtube-live-publications-github.json
+            config/youtube-published-videos.json
+            config/youtube-polyglot-published-videos.json
+            config/youtube-polyglot-progress.json
+            config/youtube-publish-calendar.json
+            config/youtube-playlists.json
+            config/youtube-polyglot-playlists.json

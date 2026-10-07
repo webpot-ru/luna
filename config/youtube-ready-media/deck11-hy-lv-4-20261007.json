@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "sourceRunId": "37471664115",
+  "sourceHeadSha": "23800b70a51aa692998a40d5f5689ff32218ccd2",
+  "sourceCampaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-06-dd4d58cdee7b",
+  "sourceManifestHash": "f26becb1c07c5edd76e26ce6264f6e059dad3e4a22e46f7b7b0266cabca2e2af",
+  "productionContracts": {
+    "scripts/lib/video-generator.mjs": "a7b30093da81f0dc6df3f5b1092ac6e34c44c4c09f3c9c611feb8400db14ea01",
+    "scripts/lib/tts-voice-map.mjs": "b1f316c7977c73c7c1b71019f61bbba32842aa7c0a73f919b66ed677f5fe0c47",
+    "scripts/build-deck-video.mjs": "7619f00b2613217072ecb6151765e1c87313867005bc0a9ef882a68f22c57713",
+    "scripts/build-polyglot-video.mjs": "122898c0b9241f8ded918fd641b88e9228940861e715813acfa09d13e3e0ef1d",
+    "config/video-localization.json": "89b20f7d51a2eda19def93f22c0d18a8db39bad316ef83278ff7b00760d56510",
+    "config/video-public-course-links.json": "cbc67dbe09485b6e1c234703c75272c4b0e9c08c1b936a04b3471d903e0a342c",
+    "scripts/lib/polyglot-slide-template.mjs": "89d3138177632c71c8d87197b79bbca3db9e12d269508a08ca70bc3598245487"
+  },
+  "assets": [
+    {
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|HY|ES",
+      "artifactId": 11419790658,
+      "artifactName": "youtube-video-publish-apply-home_laundry_cleaning_basics_a1_a2-HY-37471664115",
+      "metadataPath": "outputs/video-generator/home_laundry_cleaning_basics_a1_a2_es_hy/youtube_metadata.json",
+      "videoPath": "outputs/video-generator/home_laundry_cleaning_basics_a1_a2_es_hy/lesson_es_hy.mp4",
+      "metadataSha256": "f2c4fd966d8cc732d2b777e4de6f6346fa95ca951eadc1bee9cb87121cb603a2",
+      "videoSha256": "b9e9f837e74550bac7407faac82e5ef51b3701203103f572d2c4f61a2a32d74f",
+      "durationSeconds": 342.24
+    },
+    {
+      "assignmentKey": "polyglot|home_laundry_cleaning_basics_a1_a2|HY|global_europe_core|7a4233775927|short_unverified",
+      "artifactId": 11423612024,
+      "artifactName": "youtube-polyglot-home_laundry_cleaning_basics_a1_a2-HY-global_europe_core-apply",
+      "metadataPath": "outputs/video-generator/home_laundry_cleaning_basics_a1_a2_polyglot_hy_global_europe_core/youtube_metadata.json",
+      "videoPath": "outputs/video-generator/home_laundry_cleaning_basics_a1_a2_polyglot_hy/polyglot_en_es_fr_de_hy.mp4",
+      "metadataSha256": "02eda631bf5143c230de31cfbd7e439080875a243bcb0ceee76e6f4c6049bbd0",
+      "videoSha256": "038b99e4e5aa3159170902f729fe5141d814b05bb5143d335a3a0aab44ef44f9",
+      "durationSeconds": 882.64
+    },
+    {
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|LV|ES",
+      "artifactId": 11419728157,
+      "artifactName": "youtube-video-publish-apply-home_laundry_cleaning_basics_a1_a2-LV-37471664115",
+      "metadataPath": "outputs/video-generator/home_laundry_cleaning_basics_a1_a2_es_lv/youtube_metadata.json",
+      "videoPath": "outputs/video-generator/home_laundry_cleaning_basics_a1_a2_es_lv/lesson_es_lv.mp4",
+      "metadataSha256": "bed0c3a802566c894e315ee19f21291dd3990bdc3716239dbb03f577f4fe12c8",
+      "videoSha256": "e4e18c1797cc041483c512bf33a39be06c32ee2c8de5ac27731c33277c79feba",
+      "durationSeconds": 366.76
+    },
+    {
+      "assignmentKey": "polyglot|home_laundry_cleaning_basics_a1_a2|LV|global_europe_core|7a4233775927|short_unverified",
+      "artifactId": 11424105542,
+      "artifactName": "youtube-polyglot-home_laundry_cleaning_basics_a1_a2-LV-global_europe_core-apply",
+      "metadataPath": "outputs/video-generator/home_laundry_cleaning_basics_a1_a2_polyglot_lv_global_europe_core/youtube_metadata.json",
+      "videoPath": "outputs/video-generator/home_laundry_cleaning_basics_a1_a2_polyglot_lv/polyglot_en_es_fr_de_lv.mp4",
+      "metadataSha256": "edbcbb679154aabe21fe9f13a7bd60ea11a9a4667251c96e7a6d1531795d7f90",
+      "videoSha256": "2d4056892b5222c83b50ab0ad92a60f8b6ecf944c741f58ccb45b0658ba7ae4c",
+      "durationSeconds": 870.24
+    }
+  ]
+}

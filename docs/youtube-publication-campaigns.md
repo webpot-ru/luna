@@ -2,6 +2,32 @@
 
 ## Durable ledger size and receipt-only persistence recovery
 
+### Ready-MP4 exact recovery through the parent
+
+`youtube-publication-campaign.yml` may opt in with a Git-tracked
+`ready_media_spec=config/youtube-ready-media/<approved-spec>.json` and
+`confirm_ready_media=REUSE_APPROVED_READY_MEDIA`. Default production is unchanged.
+This bounded path handles at most four reviewed missing assignments; it is not
+a new bulk-generation mechanism. Metadata and normal render/TTS routes are
+skipped completely. Source artifacts are fetched by exact ID from a completed
+source parent with the approved head SHA; only the selected MP4/metadata are
+extracted. The spec pins source campaign/hash, media/metadata SHA256, measured
+durations and production-code/localization/voice contracts.
+
+Before any write, the path verifies exact claimed partial-recovery ownership,
+unaccepted source rows superseded only by this claim, unchanged deck/voices/
+target sets/channel/playlist identities, audio/video streams and horizontal16:9
+geometry. Unverified Polyglot remains <=895s. Existing approved metadata copy is
+preserved; only campaign identity, local path and future claimed slots are
+rebound. Each assignment obtains fresh complete live-publication and owned
+playlist readback, then uses the existing `youtube-publish-video.mjs` uploader
+without republish or playlist creation. Separate assignments continue independently
+after a failed row; that row is never retried. Receipts remain artifacts even on
+failure and the ordinary parent finalizer persists accepted/missing truth once.
+No direct child dispatch, paid metadata, TTS or render generation is allowed in
+this mode. This mode cannot prove a channel's upload limit has unlocked; a fresh
+channel `uploadLimitExceeded` may still reject the existing media upload.
+
 The campaign ledger retains its existing JSON schema, every campaign and every
 historical receipt. Writers serialize `youtube-publication-campaigns.json` as
 compact JSON (whitespace only), while manifests and other reports remain pretty
