@@ -58,6 +58,11 @@ export function prepareReadyMedia({ spec, campaign, source, artifactRoot, asset,
   assert(assignmentKey(metadata) === row.assignmentKey && metadata.campaignId === source.campaignId
     && metadata.campaignManifestHash === source.manifestHash, "Ready media metadata identity mismatch");
   assert(metadata.youtubePlaylistId === row.playlist.youtubePlaylistId, "Ready media playlist identity changed");
+  const mediaBound = row.videoType === "polyglot"
+    ? typeof metadata.videoPath === "string" && (metadata.videoPath === asset.videoPath || metadata.videoPath.endsWith(`/${asset.videoPath}`))
+    : path.posix.dirname(asset.videoPath) === path.posix.dirname(asset.metadataPath)
+      && path.posix.basename(asset.videoPath) === `lesson_${row.targetLang.toLowerCase()}_${row.supportLang.toLowerCase()}.mp4`;
+  assert(mediaBound, "Ready media metadata/video binding mismatch");
   const media = probe || JSON.parse(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-show_entries", "stream=codec_type,width,height", "-of", "json", videoPath], { encoding: "utf8" }));
   const seconds = Number(media.format?.duration);
   assert(Number.isFinite(seconds) && seconds > 0 && Math.abs(seconds - asset.durationSeconds) < 0.1
