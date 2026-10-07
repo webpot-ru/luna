@@ -41,6 +41,14 @@ on:
         description: "Apply recovery only: prior campaign run whose validated completed metadata batches may be reused."
         required: false
         default: ""
+      ready_media_spec:
+        description: "Exact recovery only: committed approved ready-MP4 manifest; skips metadata/TTS/render generation."
+        required: false
+        default: ""
+      confirm_ready_media:
+        description: "Type REUSE_APPROVED_READY_MEDIA for the committed exact media spec."
+        required: false
+        default: ""
       video_cache_resume_run_id:
         description: "Apply recovery only: failed child run whose exact ordinary audio cache may be reused after target-contract validation."
         required: false
@@ -183,6 +191,25 @@ jobs:
             --github-output="$GITHUB_OUTPUT" \
             --output=outputs/youtube-publication-campaign-run-preflight.json
 
+      - name: Gate optional ready-media reuse without provider calls
+        if: ${{ inputs.ready_media_spec != '' || inputs.confirm_ready_media != '' }}
+        env:
+          SPEC: ${{ inputs.ready_media_spec }}
+          CAMPAIGN: ${{ inputs.campaign_id }}
+          CONFIRM: ${{ inputs.confirm_ready_media }}
+          MODE: ${{ inputs.mode }}
+          METADATA_RESUME: ${{ inputs.metadata_resume_run_id }}
+          CACHE_RESUME: ${{ inputs.video_cache_resume_run_id }}
+        run: |
+          set -euo pipefail
+          test "$MODE" = apply
+          test "$CONFIRM" = REUSE_APPROVED_READY_MEDIA
+          test -z "$METADATA_RESUME"
+          test -z "$CACHE_RESUME"
+          [[ "$SPEC" =~ ^config/youtube-ready-media/[a-zA-Z0-9_-]+\.json$ ]]
+          git ls-files --error-unmatch "$SPEC"
+          node scripts/run-youtube-ready-media-recovery.mjs --spec="$SPEC" --campaign="$CAMPAIGN" --preflight=true
+
       - name: Upload preflight evidence
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
@@ -195,7 +222,7 @@ jobs:
             outputs/youtube-publication-campaign-run-preflight.json
 
   metadata:
-    if: ${{ inputs.mode == 'apply' }}
+    if: ${{ inputs.mode == 'apply' && inputs.ready_media_spec == '' }}
     needs: preflight
     runs-on: ubuntu-latest
     timeout-minutes: 180
@@ -346,7 +373,7 @@ jobs:
           path: outputs/youtube-campaign-metadata/${{ matrix.route_key }}
 
   routes:
-    if: ${{ inputs.mode == 'apply' && (needs.preflight.outputs.ordinary_worker_count != '0' || needs.preflight.outputs.polyglot_worker_count != '0') }}
+    if: ${{ inputs.mode == 'apply' && inputs.ready_media_spec == '' && (needs.preflight.outputs.ordinary_worker_count != '0' || needs.preflight.outputs.polyglot_worker_count != '0') }}
     needs: [preflight, metadata]
     strategy:
       fail-fast: false
@@ -373,9 +400,25 @@ jobs:
       confirm_target_playlist_only: ${{ inputs.confirm_target_playlist_only }}
     secrets: inherit
 
+  ready_media:
+    if: ${{ inputs.mode == 'apply' && inputs.ready_media_spec != '' }}
+    needs: preflight
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJSON(needs.preflight.outputs.metadata_matrix) }}
+    uses: ./.github/workflows/youtube-ready-media-route.yml
+    with:
+      campaign_id: ${{ inputs.campaign_id }}
+      manifest_hash: ${{ inputs.campaign_manifest_hash }}
+      spec: ${{ inputs.ready_media_spec }}
+      route: ${{ matrix.route_key }}
+      environment: ${{ matrix.youtube_environment }}
+    secrets: inherit
+
   finalize:
     if: ${{ always() && inputs.mode == 'apply' && needs.preflight.result == 'success' }}
-    needs: [preflight, routes]
+    needs: [preflight, routes, ready_media]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -411,8 +454,8 @@ jobs:
           npm run finalize:youtube-publication-campaign -- \
             --campaign-id="${{ inputs.campaign_id }}" \
             --artifacts-root=.campaign-artifacts \
-            --ordinary-result="${{ needs.routes.result }}" \
-            --polyglot-result="${{ needs.routes.result }}" \
+            --ordinary-result="${{ inputs.ready_media_spec != '' && needs.ready_media.result || needs.routes.result }}" \
+            --polyglot-result="${{ inputs.ready_media_spec != '' && needs.ready_media.result || needs.routes.result }}" \
             --output=outputs/youtube-publication-campaign-finalize.json
 
       - name: Commit and push exact durable state
