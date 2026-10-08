@@ -1,5 +1,15 @@
 # YouTube Publication Campaigns
 
+## Read-only OAuth authentication recovery
+
+The live-publication audit handles a YouTube GET `401` with one forced OAuth
+access-token refresh and one replay of that same read. The refreshed token is
+shared with subsequent channel, pagination and video-status reads. A rejected
+refresh or a second `401` fails closed; normal transient-read retry bounds remain
+unchanged. This applies only to `audit-youtube-live-publications.mjs`, not upload
+initialization or any YouTube mutation. Refresh-token validity must be proved by
+an authenticated readback, not inferred from token expiry or this local repair.
+
 ## Durable ledger size and receipt-only persistence recovery
 
 ### Ready-MP4 exact recovery through the parent
