@@ -178,8 +178,18 @@ async function getAccessToken({ clientFile, tokenFile, forceRefresh = false }) {
     headers: { "content-type": "application/x-www-form-urlencoded" },
     body,
   });
-  if (!response.ok) fail(`OAuth token refresh failed (${response.status}): ${await response.text()}`);
+  if (!response.ok) {
+    let reason = "unclassified";
+    try {
+      const payload = await response.json();
+      if (/^[a-z_]{1,64}$/.test(String(payload.error || ""))) reason = payload.error;
+    } catch { /* Never log the raw OAuth response. */ }
+    fail(`OAuth token refresh failed (${response.status}); reason=${reason}`);
+  }
   const refreshed = await response.json();
+  if (typeof refreshed.access_token !== "string" || !refreshed.access_token.trim()) {
+    fail("OAuth token refresh returned no access token.");
+  }
   const nextToken = {
     ...token,
     ...refreshed,
@@ -207,6 +217,7 @@ async function youtubeJson({
   warnImpl = console.warn,
   maxAttempts = DEFAULT_YOUTUBE_READ_ATTEMPTS,
   retryBaseMs = DEFAULT_YOUTUBE_READ_RETRY_BASE_MS,
+  diagnosticPage = 0,
 }) {
   const url = new URL(pathName, "https://www.googleapis.com/youtube/v3/");
   for (const [key, value] of Object.entries(query)) {
@@ -216,6 +227,16 @@ async function youtubeJson({
   const attempts = Number(maxAttempts);
   const tokenSession = typeof accessToken === "object" && accessToken !== null ? accessToken : null;
   let authRefreshAttempted = false;
+  const diagnostic = (event, status = 0) => {
+    if (!tokenSession?.diagnostics) return;
+    const support = /^[A-Z0-9-]{1,12}$/.test(tokenSession.support || "") ? tokenSession.support : "unknown";
+    warnImpl(`[YOUTUBE_AUTH_DIAGNOSTIC] ${JSON.stringify({
+      event, support, endpoint: url.pathname, page: diagnosticPage,
+      continuation: Boolean(query.pageToken), status,
+      generation: tokenSession.generation || 0,
+      refreshedAgeMs: tokenSession.refreshedAt ? Date.now() - tokenSession.refreshedAt : null,
+    })}`);
+  };
   const baseDelayMs = Number(retryBaseMs);
   if (!Number.isInteger(attempts) || attempts < 1) {
     throw new Error("YouTube read maxAttempts must be a positive integer.");
@@ -228,11 +249,13 @@ async function youtubeJson({
     let response;
     let text;
     try {
+      diagnostic("request");
       response = await fetchImpl(url, {
         method: "GET",
         headers: { authorization: `Bearer ${tokenSession ? tokenSession.value : accessToken}` },
       });
       text = await response.text();
+      diagnostic("response", response.status);
     } catch (error) {
       if (attempt >= attempts) throw error;
       const delayMs = baseDelayMs * (2 ** (attempt - 1));
@@ -249,11 +272,20 @@ async function youtubeJson({
     if (response.status === 401 && tokenSession?.refresh && !authRefreshAttempted) {
       authRefreshAttempted = true;
       warnImpl(`[YOUTUBE_AUTH_REFRESH] GET ${url.pathname} returned 401; refreshing once.`);
-      const refreshed = await tokenSession.refresh();
+      let refreshed;
+      try {
+        refreshed = await tokenSession.refresh();
+      } catch (error) {
+        diagnostic("refresh_failed");
+        throw error;
+      }
       if (typeof refreshed !== "string" || !refreshed.trim()) {
         throw new Error("OAuth refresh returned no access token.");
       }
       tokenSession.value = refreshed;
+      tokenSession.generation = (tokenSession.generation || 0) + 1;
+      tokenSession.refreshedAt = Date.now();
+      diagnostic("refresh_succeeded");
       // Authentication recovery has its own one-shot budget, including when
       // the transient-read budget is already exhausted.
       attempt -= 1;
@@ -319,6 +351,7 @@ async function readUploadPlaylistItems({
       response = await youtubeJsonImpl({
         accessToken,
         pathName: "playlistItems",
+        diagnosticPage: page + 1,
         query: {
           part: "snippet,contentDetails",
           playlistId: uploadsPlaylistId,
@@ -614,6 +647,9 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
   const accessToken = {
     value: await getAccessToken({ clientFile, tokenFile }),
     refresh: () => getAccessToken({ clientFile, tokenFile, forceRefresh: true }),
+    diagnostics: true,
+    support: normalizeCode(supportLang),
+    generation: 0,
   };
   const authorizedChannel = await readAuthorizedChannel({ accessToken, expectedChannelId: channel.channelId });
   const uploadsPlaylistId = authorizedChannel.contentDetails?.relatedPlaylists?.uploads || "";
