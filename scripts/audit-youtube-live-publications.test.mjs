@@ -26,6 +26,47 @@ assert.equal(isRetryableYoutubeReadStatus(503), true);
 assert.equal(isRetryableYoutubeReadStatus(401), false);
 
 {
+  let refreshes = 0;
+  const session = { value: "old-token", refresh: async () => { refreshes += 1; return "new-token"; } };
+  const headers = [];
+  const fetchImpl = async (_url, options) => {
+    assert.equal(options.method, "GET");
+    headers.push(options.headers.authorization);
+    return options.headers.authorization === "Bearer old-token"
+      ? jsonResponse({ error: "unauthorized" }, { status: 401 })
+      : jsonResponse({ items: [] });
+  };
+  await youtubeJson({ accessToken: session, pathName: "channels", fetchImpl, maxAttempts: 1, warnImpl: () => {} });
+  await youtubeJson({ accessToken: session, pathName: "playlistItems", fetchImpl, warnImpl: () => {} });
+  assert.equal(refreshes, 1);
+  assert.deepEqual(headers, ["Bearer old-token", "Bearer new-token", "Bearer new-token"]);
+}
+
+{
+  let calls = 0;
+  let refreshes = 0;
+  await assert.rejects(youtubeJson({
+    accessToken: { value: "old", refresh: async () => { refreshes += 1; return "new"; } },
+    pathName: "videos",
+    fetchImpl: async () => { calls += 1; return jsonResponse({}, { status: 401 }); },
+    warnImpl: () => {},
+  }), /failed \(401\)/);
+  assert.equal(calls, 2);
+  assert.equal(refreshes, 1);
+}
+
+{
+  let calls = 0;
+  await assert.rejects(youtubeJson({
+    accessToken: { value: "old", refresh: async () => { throw new Error("OAuth refresh rejected"); } },
+    pathName: "channels",
+    fetchImpl: async () => { calls += 1; return jsonResponse({}, { status: 401 }); },
+    warnImpl: () => {},
+  }), /OAuth refresh rejected/);
+  assert.equal(calls, 1);
+}
+
+{
   const waits = [];
   let calls = 0;
   const result = await youtubeJson({

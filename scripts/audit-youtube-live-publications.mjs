@@ -161,10 +161,10 @@ function tokenFileFor(channelRegistry, channel) {
   return path.join(defaults.tokenDir || ".local/youtube-oauth/tokens", `${channel.key}.json`);
 }
 
-async function getAccessToken({ clientFile, tokenFile }) {
+async function getAccessToken({ clientFile, tokenFile, forceRefresh = false }) {
   const client = loadOAuthClient(clientFile);
   const token = readJson(tokenFile, "OAuth token");
-  if (token.access_token && Number(token.expires_at || 0) > Date.now() + 60_000) return token.access_token;
+  if (!forceRefresh && token.access_token && Number(token.expires_at || 0) > Date.now() + 60_000) return token.access_token;
   if (!token.refresh_token) fail(`OAuth token file has no refresh_token: ${tokenFile}`);
 
   const body = new URLSearchParams({
@@ -214,6 +214,8 @@ async function youtubeJson({
   }
 
   const attempts = Number(maxAttempts);
+  const tokenSession = typeof accessToken === "object" && accessToken !== null ? accessToken : null;
+  let authRefreshAttempted = false;
   const baseDelayMs = Number(retryBaseMs);
   if (!Number.isInteger(attempts) || attempts < 1) {
     throw new Error("YouTube read maxAttempts must be a positive integer.");
@@ -228,7 +230,7 @@ async function youtubeJson({
     try {
       response = await fetchImpl(url, {
         method: "GET",
-        headers: { authorization: `Bearer ${accessToken}` },
+        headers: { authorization: `Bearer ${tokenSession ? tokenSession.value : accessToken}` },
       });
       text = await response.text();
     } catch (error) {
@@ -242,6 +244,21 @@ async function youtubeJson({
     }
 
     if (response.ok) return text ? JSON.parse(text) : {};
+
+    // Only this GET reader may refresh/replay. Upload creation is not involved.
+    if (response.status === 401 && tokenSession?.refresh && !authRefreshAttempted) {
+      authRefreshAttempted = true;
+      warnImpl(`[YOUTUBE_AUTH_REFRESH] GET ${url.pathname} returned 401; refreshing once.`);
+      const refreshed = await tokenSession.refresh();
+      if (typeof refreshed !== "string" || !refreshed.trim()) {
+        throw new Error("OAuth refresh returned no access token.");
+      }
+      tokenSession.value = refreshed;
+      // Authentication recovery has its own one-shot budget, including when
+      // the transient-read budget is already exhausted.
+      attempt -= 1;
+      continue;
+    }
 
     const error = new Error(`YouTube API GET ${url.pathname} failed (${response.status}): ${text}`);
     error.status = response.status;
@@ -594,7 +611,10 @@ async function auditSupport({ options, channelRegistry, publicationRegistry, cou
 
   const clientFile = channelRegistry.defaults?.oauthClientFile || ".local/youtube-oauth/google-oauth-client.json";
   const tokenFile = tokenFileFor(channelRegistry, channel);
-  const accessToken = await getAccessToken({ clientFile, tokenFile });
+  const accessToken = {
+    value: await getAccessToken({ clientFile, tokenFile }),
+    refresh: () => getAccessToken({ clientFile, tokenFile, forceRefresh: true }),
+  };
   const authorizedChannel = await readAuthorizedChannel({ accessToken, expectedChannelId: channel.channelId });
   const uploadsPlaylistId = authorizedChannel.contentDetails?.relatedPlaylists?.uploads || "";
   if (!uploadsPlaylistId) fail(`YouTube channel ${channel.channelId} did not expose an uploads playlist.`);
