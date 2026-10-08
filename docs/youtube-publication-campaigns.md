@@ -10,6 +10,14 @@ unchanged. This applies only to `audit-youtube-live-publications.mjs`, not uploa
 initialization or any YouTube mutation. Refresh-token validity must be proved by
 an authenticated readback, not inferred from token expiry or this local repair.
 
+Read-only audits emit a safe authentication diagnostic with support code,
+endpoint path, upload page number, continuation-present boolean, HTTP status,
+refresh generation and elapsed time since refresh. They never emit bearer tokens,
+refresh tokens, page-token values, OAuth client values or raw OAuth responses.
+Refresh failure reports only HTTP status and an allowlisted OAuth error code;
+a refresh response missing an access token is rejected before saving credentials.
+Diagnostics do not introduce retries, token inspection APIs or YouTube writes.
+
 ## Durable ledger size and receipt-only persistence recovery
 
 ### Ready-MP4 exact recovery through the parent

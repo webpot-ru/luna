@@ -26,6 +26,25 @@ assert.equal(isRetryableYoutubeReadStatus(503), true);
 assert.equal(isRetryableYoutubeReadStatus(401), false);
 
 {
+  const logs = [];
+  let calls = 0;
+  const session = { value: "SECRET-old", refresh: async () => "SECRET-new", diagnostics: true, support: "LV" };
+  await youtubeJson({
+    accessToken: session, pathName: "playlistItems", diagnosticPage: 3,
+    query: { pageToken: "SECRET-page-token" },
+    fetchImpl: async () => jsonResponse({}, { status: ++calls === 1 ? 401 : 200 }),
+    warnImpl: (line) => logs.push(line),
+  });
+  const output = logs.join("\n");
+  assert.equal(output.includes("SECRET"), false);
+  assert.match(output, /"page":3/);
+  assert.match(output, /"support":"LV"/);
+  assert.match(output, /"event":"refresh_succeeded"/);
+  assert.match(output, /"generation":1/);
+  assert.match(output, /"status":200/);
+}
+
+{
   let refreshes = 0;
   const session = { value: "old-token", refresh: async () => { refreshes += 1; return "new-token"; } };
   const headers = [];
