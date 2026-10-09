@@ -22,6 +22,18 @@ Diagnostics do not introduce retries, token inspection APIs or YouTube writes.
 
 ### Ready-MP4 exact recovery through the parent
 
+A second exact recovery may reuse the original media via optional
+`mediaSourceCampaignId` / `mediaSourceManifestHash` in its tracked spec. The
+direct claim source remains `sourceCampaignId` / `sourceManifestHash`. Exactly
+one extra lineage hop is allowed: the direct source must be a partial recovery
+of the media source, the original missing row must be superseded to that direct
+source, and the direct missing row must be superseded to the new claimed target.
+Neither ancestor may have an accepted YouTube ID for a selected row. Assignment,
+voice, channel, playlist, content-scope and offline-deck contracts must match at
+both hops. Original metadata is bound to the media-source ID/hash, while the
+existing artifact-ID/head-SHA/file-checksum gates remain unchanged. This is not
+permission to replay accepted rows or follow an arbitrary recovery chain.
+
 `youtube-publication-campaign.yml` may opt in with a Git-tracked
 `ready_media_spec=config/youtube-ready-media/<approved-spec>.json` and
 `confirm_ready_media=REUSE_APPROVED_READY_MEDIA`. Default production is unchanged.

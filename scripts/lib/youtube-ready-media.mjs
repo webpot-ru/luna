@@ -15,9 +15,17 @@ export function readyMediaPath(root, relative) {
   return resolved;
 }
 
-export function verifyReadyMediaScope(spec, campaign, source) {
+export function verifyReadyMediaScope(spec, campaign, source, mediaSource = source) {
   assert(spec.schemaVersion === 1 && /^\d+$/.test(String(spec.sourceRunId)) && /^[a-f0-9]{40}$/.test(spec.sourceHeadSha), "Invalid ready media source");
   assert(source?.campaignId === spec.sourceCampaignId && source.manifestHash === spec.sourceManifestHash, "Ready media source campaign/hash mismatch");
+  const chained = Boolean(spec.mediaSourceCampaignId);
+  if (chained) {
+    assert(mediaSource?.campaignId === spec.mediaSourceCampaignId
+      && mediaSource.manifestHash === spec.mediaSourceManifestHash
+      && source.inputs?.partialRecoveryOfCampaignId === mediaSource.campaignId
+      && source.setId === mediaSource.setId, "Ready media lineage mismatch");
+    assert(source.evidence?.sourceFingerprints?.offlineDeck?.sha256 === mediaSource.evidence?.sourceFingerprints?.offlineDeck?.sha256, "Ready media lineage deck hash changed");
+  } else assert(!spec.mediaSourceManifestHash && mediaSource === source, "Unexpected ready media lineage");
   assert(campaign.status === "claimed" && campaign.setId === source.setId
     && campaign.inputs?.partialRecoveryOfCampaignId === source.campaignId, "Ready media requires a claimed exact partial recovery");
   assert(spec.assets.length > 0 && spec.assets.length <= 4 && spec.assets.length === campaign.assignments.length, "Ready media exact scope count mismatch");
@@ -28,10 +36,16 @@ export function verifyReadyMediaScope(spec, campaign, source) {
     assert(row && old && !row.youtubeVideoId && !old.youtubeVideoId
       && row.status === "claimed" && old.status === "superseded_partial_recovery"
       && old.supersededByCampaignId === campaign.campaignId, "Ready media source assignment is accepted, missing or not owned");
+    const original = chained ? mediaSource.assignments.find(a => a.assignmentKey === asset.assignmentKey) : old;
+    assert(original && !original.youtubeVideoId && (!chained || (original.status === "superseded_partial_recovery"
+      && original.supersededByCampaignId === source.campaignId)), "Ready media lineage assignment not owned or already accepted");
     for (const key of ["videoType", "setId", "supportLang", "targetLang", "bundleKey", "contentScope", "targetLangsHash", "maxDurationSeconds", "youtubeChannelId", "channelKey"]) {
       assert(JSON.stringify(row[key] ?? "") === JSON.stringify(old[key] ?? ""), `Ready media contract changed: ${key}`);
+      assert(JSON.stringify(old[key] ?? "") === JSON.stringify(original[key] ?? ""), `Ready media lineage contract changed: ${key}`);
     }
     assert(row.productionReadiness?.voiceId === old.productionReadiness?.voiceId, "Ready media voice changed");
+    assert(old.productionReadiness?.voiceId === original.productionReadiness?.voiceId
+      && old.playlist?.youtubePlaylistId === original.playlist?.youtubePlaylistId, "Ready media lineage voice/playlist changed");
     assert(row.thumbnail?.mode === "first_frame_auto" && row.playlist?.ready === true
       && row.playlist.state === "resolved_existing" && row.playlist.createAllowed === false
       && row.playlist.youtubePlaylistId === old.playlist.youtubePlaylistId, "Ready media requires existing playlist and automatic thumbnail");
@@ -47,7 +61,7 @@ export function verifyReadyMediaScope(spec, campaign, source) {
   assert(campaign.evidence?.sourceFingerprints?.offlineDeck?.sha256 === source.evidence?.sourceFingerprints?.offlineDeck?.sha256, "Ready media deck hash changed");
 }
 
-export function prepareReadyMedia({ spec, campaign, source, artifactRoot, asset, probe, now = Date.now() }) {
+export function prepareReadyMedia({ spec, campaign, source, mediaSource = source, artifactRoot, asset, probe, now = Date.now() }) {
   const row = campaign.assignments.find(a => a.assignmentKey === asset.assignmentKey);
   assert(row, "Ready media assignment absent");
   const root = readyMediaPath(artifactRoot, asset.artifactName);
@@ -55,8 +69,10 @@ export function prepareReadyMedia({ spec, campaign, source, artifactRoot, asset,
   const videoPath = readyMediaPath(root, asset.videoPath);
   assert(readyMediaSha256(metadataPath) === asset.metadataSha256 && readyMediaSha256(videoPath) === asset.videoSha256, "Ready media file checksum mismatch");
   const metadata = JSON.parse(fs.readFileSync(metadataPath, "utf8"));
-  assert(assignmentKey(metadata) === row.assignmentKey && metadata.campaignId === source.campaignId
-    && metadata.campaignManifestHash === source.manifestHash, "Ready media metadata identity mismatch");
+  assert(mediaSource.campaignId === (spec.mediaSourceCampaignId || spec.sourceCampaignId)
+    && mediaSource.manifestHash === (spec.mediaSourceManifestHash || spec.sourceManifestHash), "Ready media metadata provenance mismatch");
+  assert(assignmentKey(metadata) === row.assignmentKey && metadata.campaignId === mediaSource.campaignId
+    && metadata.campaignManifestHash === mediaSource.manifestHash, "Ready media metadata identity mismatch");
   assert(metadata.youtubePlaylistId === row.playlist.youtubePlaylistId, "Ready media playlist identity changed");
   const mediaBound = row.videoType === "polyglot"
     ? typeof metadata.videoPath === "string" && (metadata.videoPath === asset.videoPath || metadata.videoPath.endsWith(`/${asset.videoPath}`))
