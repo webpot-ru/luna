@@ -11,7 +11,8 @@ const spec = read(args.spec);
 const registry = read("config/youtube-publication-campaigns.json");
 const campaign = registry.campaigns.find(c => c.campaignId === args.campaign);
 const source = registry.campaigns.find(c => c.campaignId === spec.sourceCampaignId);
-verifyReadyMediaScope(spec, campaign, source);
+const mediaSource = spec.mediaSourceCampaignId ? registry.campaigns.find(c => c.campaignId === spec.mediaSourceCampaignId) : source;
+verifyReadyMediaScope(spec, campaign, source, mediaSource);
 for (const [file, hash] of Object.entries(spec.productionContracts || {})) {
   if (!/^(scripts|config)\/[^\s]+\.(mjs|json)$/.test(file) || file.split("/").includes("..")
     || !/^[a-f0-9]{64}$/.test(hash)) throw new Error("Unsafe production contract path/hash");
@@ -30,6 +31,7 @@ const output = "outputs/ready-media";
 fs.mkdirSync(output, { recursive: true });
 // Validate all files in the lane before any YouTube call.
 const prepared = selected.map(row => ({ row, metadata: prepareReadyMedia({ spec, campaign, source,
+  mediaSource,
   artifactRoot: args.artifacts, asset: spec.assets.find(a => a.assignmentKey === row.assignmentKey) }) }));
 const failures = [];
 for (const { row, metadata } of prepared) {
