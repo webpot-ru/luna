@@ -58,6 +58,7 @@ function parseArgs(argv) {
     else if (arg === "--ordinary-per-channel" || arg.startsWith("--ordinary-per-channel=")) options.ordinaryPerChannel = Number(value());
     else if (arg === "--polyglot-per-channel" || arg.startsWith("--polyglot-per-channel=")) options.polyglotPerChannel = Number(value());
     else if (arg === "--complete-deck-tails") options.completeDeckTails = true;
+    else if (arg === "--add-recovery-on-top") options.addRecoveryOnTop = true;
     else if (arg === "--min-future-minutes" || arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(value());
     else if (arg === "--max-snapshot-age-minutes" || arg.startsWith("--max-snapshot-age-minutes=")) options.maxSnapshotAgeMinutes = Number(value());
     else if (arg === "--expected-source-assignments" || arg.startsWith("--expected-source-assignments=")) options.expectedSourceAssignments = Number(value());
@@ -670,7 +671,32 @@ export function composeIntegratedRecoveryAssignments({ supports, baseAssignments
 
 export { sourceRowsFromCampaign };
 
+export function composeAdditiveRecoveryAssignments({ supports, baseAssignments, sourceRows, ordinaryPerChannel, polyglotPerChannel }) {
+  const keys = new Set(baseAssignments.map((row) => row.assignmentKey));
+  assert(keys.size === baseAssignments.length, "additive base contains duplicate assignments");
+  for (const support of supports) {
+    for (const [type, count] of [["ordinary", ordinaryPerChannel], ["polyglot", polyglotPerChannel]]) {
+      assert(baseAssignments.filter((row) => row.supportLang === support && row.videoType === type).length === count,
+        `${support}: additive base must retain exactly ${count} new ${type} assignments`);
+    }
+  }
+  assert(baseAssignments.every((row) => supports.includes(row.supportLang)), "additive base contains unknown support");
+  for (const row of sourceRows) {
+    assert(supports.includes(row.supportLang), `${row.assignmentKey}: recovery support is outside the new wave`);
+    assert(["ordinary", "polyglot"].includes(row.videoType), `${row.assignmentKey}: unsupported recovery type`);
+    assert(!hasUploadReceipt(row), `${row.assignmentKey}: accepted recovery cannot be replayed`);
+    assert(!keys.has(row.assignmentKey), `${row.assignmentKey}: recovery overlaps new assignments`);
+    keys.add(row.assignmentKey);
+  }
+  return {
+    ordinary: baseAssignments.filter((row) => row.videoType === "ordinary"),
+    polyglotAssignments: baseAssignments.filter((row) => row.videoType === "polyglot"),
+    pendingPolyglot: sourceRows,
+  };
+}
+
 export function buildIntegratedRecoveryWave(options) {
+  assert(!(options.addRecoveryOnTop && options.completeDeckTails), "additive recovery cannot be combined with deck completion");
   if (options.completeDeckTails) return buildCompletionTailWave(options);
   assert(options.controlReport, "--control-report is required");
   const now = options.now instanceof Date ? options.now : new Date(options.generatedAt || Date.now());
@@ -698,8 +724,8 @@ export function buildIntegratedRecoveryWave(options) {
     startDate: options.startDate || "",
     now,
     snapshotPath: options.snapshot,
-    calendarPath: temporary.calendar,
-    campaignRegistryPath: temporary.registry,
+    calendarPath: options.addRecoveryOnTop ? options.calendar : temporary.calendar,
+    campaignRegistryPath: options.addRecoveryOnTop ? options.registry : temporary.registry,
     policyPath: options.policy,
     routingPath: options.routing,
     channelsPath: options.channels,
@@ -712,14 +738,15 @@ export function buildIntegratedRecoveryWave(options) {
     "ZH: only 0/1 unclaimed full Polyglot tails available",
     "Polyglot assignment count 50 != 51",
   ]);
-  const unexpectedBaseBlockers = (base.blockers || []).filter((row) => !expectedPreviewBlockers.has(row));
+  const unexpectedBaseBlockers = (base.blockers || []).filter((row) => options.addRecoveryOnTop || !expectedPreviewBlockers.has(row));
   assert(unexpectedBaseBlockers.length === 0, `preview has unexpected blockers: ${unexpectedBaseBlockers.join("; ")}`);
   const supports = String(base.inputs?.supports || "").split(",").filter(Boolean);
-  const composed = composeIntegratedRecoveryAssignments({
+  const composed = (options.addRecoveryOnTop ? composeAdditiveRecoveryAssignments : composeIntegratedRecoveryAssignments)({
     supports,
     baseAssignments: base.assignments,
     sourceRows,
     ordinaryPerChannel: options.ordinaryPerChannel,
+    polyglotPerChannel: options.polyglotPerChannel,
     sourceCampaignId: options.sourceCampaignId,
   });
   const pending = assignPendingPolyglotSlots({
@@ -734,15 +761,17 @@ export function buildIntegratedRecoveryWave(options) {
   const assignments = [...composed.ordinary, ...composed.polyglotAssignments, ...pending]
     .sort((left, right) => `${left.supportLang}|${left.videoType}|${left.assignmentKey}`.localeCompare(`${right.supportLang}|${right.videoType}|${right.assignmentKey}`));
   const blockers = [];
-  const expectedCount = supports.length * (options.ordinaryPerChannel + options.polyglotPerChannel);
+  const expectedCount = supports.length * (options.ordinaryPerChannel + options.polyglotPerChannel) + (options.addRecoveryOnTop ? sourceRows.length : 0);
   if (assignments.length !== expectedCount) blockers.push(`assignment count ${assignments.length} != ${expectedCount}`);
   if (new Set(assignments.map((row) => row.assignmentKey)).size !== assignments.length) blockers.push("campaign contains duplicate assignment keys");
   if (new Set(assignments.map((row) => row.slotKey)).size !== assignments.length) blockers.push("campaign contains duplicate channel publish slots");
   for (const support of supports) {
     const ordinary = assignments.filter((row) => row.supportLang === support && row.videoType === "ordinary");
     const polyglot = assignments.filter((row) => row.supportLang === support && row.videoType === "polyglot");
-    if (ordinary.length !== options.ordinaryPerChannel) blockers.push(`${support}: ordinary assignment count ${ordinary.length} != ${options.ordinaryPerChannel}`);
-    if (polyglot.length !== options.polyglotPerChannel) blockers.push(`${support}: Polyglot assignment count ${polyglot.length} != ${options.polyglotPerChannel}`);
+    const expectedOrdinary = options.ordinaryPerChannel + (options.addRecoveryOnTop ? sourceRows.filter((row) => row.supportLang === support && row.videoType === "ordinary").length : 0);
+    const expectedPolyglot = options.polyglotPerChannel + (options.addRecoveryOnTop ? sourceRows.filter((row) => row.supportLang === support && row.videoType === "polyglot").length : 0);
+    if (ordinary.length !== expectedOrdinary) blockers.push(`${support}: ordinary assignment count ${ordinary.length} != ${expectedOrdinary}`);
+    if (polyglot.length !== expectedPolyglot) blockers.push(`${support}: Polyglot assignment count ${polyglot.length} != ${expectedPolyglot}`);
   }
   const sourceKeys = new Set(sourceRows.map((row) => row.assignmentKey));
   const finalKeys = new Set(assignments.map((row) => row.assignmentKey));
@@ -783,6 +812,17 @@ export function buildIntegratedRecoveryWave(options) {
     polyglotPerChannel: options.polyglotPerChannel,
     integratedRecoverySourceCampaignId: options.sourceCampaignId,
     integratedRecoveryAssignmentCount: sourceRows.length,
+    ...(options.addRecoveryOnTop ? {
+      additiveRecovery: true,
+      newOrdinaryPerChannel: options.ordinaryPerChannel,
+      newPolyglotPerChannel: options.polyglotPerChannel,
+      newAssignmentKeys: base.assignments.map((row) => row.assignmentKey),
+      recoveryAssignmentKeys: sourceRows.map((row) => row.assignmentKey),
+      ordinaryPerChannel: Math.max(...supports.map((support) => assignments.filter((row) => row.supportLang === support && row.videoType === "ordinary").length)),
+      polyglotPerChannel: Math.max(...supports.map((support) => assignments.filter((row) => row.supportLang === support && row.videoType === "polyglot").length)),
+      allowPartialOrdinaryTail: true,
+      allowPartialPolyglotTail: true,
+    } : {}),
   };
   const evidence = {
     ...base.evidence,

@@ -305,8 +305,8 @@ assert.match(
 );
 assert.match(
   campaignWorkflow,
-  /  routes:\n[\s\S]*?strategy:\n\s+fail-fast: false\n[\s\S]*?max-parallel: 8\n\s+matrix:\n\s+route_key: \[youtube-1, youtube-2, youtube-3, youtube-4, youtube-5, youtube-6, youtube-7, youtube-8\][\s\S]*?video_type: combined/u,
-  "all eight project queues must start together and own both publication phases",
+  /  routes:\n[\s\S]*?strategy:\n\s+fail-fast: false\n[\s\S]*?max-parallel: 4\n\s+matrix:\n\s+route_key: \[youtube-1, youtube-2, youtube-3, youtube-4\][\s\S]*?video_type: combined/u,
+  "all four active project queues must start together and own both publication phases",
 );
 const routeWorkerWorkflow = fs.readFileSync(".github/workflows/youtube-campaign-route-publish.yml", "utf8");
 assert.match(

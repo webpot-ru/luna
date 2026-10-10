@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import {
   completionTailSupports,
   composeIntegratedRecoveryAssignments,
+  composeAdditiveRecoveryAssignments,
   sourceRowsFromActiveClaims,
   sourceRowsFromCampaign,
 } from "./plan-youtube-integrated-recovery-wave.mjs";
@@ -79,6 +80,15 @@ assert.deepEqual(result.polyglotAssignments.map((row) => row.assignmentKey).sort
 assert(result.polyglotAssignments.every((row) => row.integratedRecovery?.sourceCampaignId === "recovery-campaign"));
 
 const ordinaryOnlySource = composeIntegratedRecoveryAssignments({ supports: ["A", "B"], baseAssignments, sourceRows: sourceRows.filter((row) => row.videoType === "ordinary"), ordinaryPerChannel: 2, sourceCampaignId: "ordinary-recovery" });
+const additiveOptions = { supports: ["A", "B"], baseAssignments, sourceRows: [sourceRows[1], sourceRows[3]], ordinaryPerChannel: 2, polyglotPerChannel: 1 };
+const additive = composeAdditiveRecoveryAssignments(additiveOptions);
+assert.deepEqual([...additive.ordinary, ...additive.polyglotAssignments], baseAssignments.filter((row) => row.videoType === "ordinary").concat(baseAssignments.filter((row) => row.videoType === "polyglot")));
+assert.equal(additive.ordinary.length + additive.polyglotAssignments.length + additive.pendingPolyglot.length, 8);
+assert.deepEqual(additive.pendingPolyglot, additiveOptions.sourceRows);
+assert.throws(() => composeAdditiveRecoveryAssignments({ ...additiveOptions, sourceRows: [sourceRows[0]] }), /overlaps new assignments/);
+assert.throws(() => composeAdditiveRecoveryAssignments({ ...additiveOptions, sourceRows: [{ ...sourceRows[1], youtubeVideoId: "accepted" }] }), /cannot be replayed/);
+assert.throws(() => composeAdditiveRecoveryAssignments({ ...additiveOptions, baseAssignments: baseAssignments.slice(1) }), /retain exactly/);
+assert.throws(() => composeAdditiveRecoveryAssignments({ ...additiveOptions, sourceRows: [sourceRows[1], sourceRows[1]] }), /overlaps new assignments/);
 assert.deepEqual(ordinaryOnlySource.polyglotAssignments, baseAssignments.filter((row) => row.videoType === "polyglot"));
 assert.equal(ordinaryOnlySource.pendingPolyglot.length, 0);
 

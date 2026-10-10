@@ -11,6 +11,7 @@ import {
   polyglotProductSlotKey,
 } from "./lib/youtube-publication-control.mjs";
 import { isCampaignStatusActive, verifyCampaignManifest } from "./lib/youtube-publication-campaign.mjs";
+import { composeAdditiveRecoveryAssignments } from "./plan-youtube-integrated-recovery-wave.mjs";
 import { isActiveCalendarReservation, slotKey } from "./plan-youtube-publish-schedule.mjs";
 
 const CONFIRM = "CONSOLIDATE_UNLAUNCHED_YOUTUBE_CLAIMS";
@@ -191,6 +192,23 @@ export function buildUnlaunchedClaimConsolidation({ registry, calendar, manifest
   const sourceRows = activeClaimRows(registry, manifest.setId, sourceCampaignId);
   assert(sourceRows.length > 0, `no unlaunched active claims found for ${manifest.setId}`);
   if (expectedSourceClaims) assert(sourceRows.length === expectedSourceClaims, `source claim count ${sourceRows.length} != expected ${expectedSourceClaims}`);
+  if (manifest.inputs?.additiveRecovery === true) {
+    const newKeys = manifest.inputs.newAssignmentKeys || [];
+    const recoveryKeys = manifest.inputs.recoveryAssignmentKeys || [];
+    assert(new Set(newKeys).size === newKeys.length, "additive new keys contain duplicates");
+    assert(new Set(recoveryKeys).size === recoveryKeys.length, "additive recovery keys contain duplicates");
+    assert(JSON.stringify([...recoveryKeys].sort()) === JSON.stringify(sourceRows.map((row) => row.assignment.assignmentKey).sort()), "additive recovery keys differ from exact source claims");
+    assert(newKeys.length + recoveryKeys.length === manifest.assignments.length, "additive assignments must equal new plus recovery keys");
+    const baseAssignments = manifest.assignments.filter((row) => newKeys.includes(row.assignmentKey));
+    assert(baseAssignments.length === newKeys.length, "additive new keys are missing from manifest");
+    composeAdditiveRecoveryAssignments({
+      supports: String(manifest.inputs.supports || "").split(",").filter(Boolean),
+      baseAssignments,
+      sourceRows: sourceRows.map((row) => row.assignment),
+      ordinaryPerChannel: manifest.inputs.newOrdinaryPerChannel,
+      polyglotPerChannel: manifest.inputs.newPolyglotPerChannel,
+    });
+  }
   const manifestAssignments = new Map((manifest.assignments || []).map((row) => [row.assignmentKey, row]));
   for (const source of sourceRows) {
     const selected = manifestAssignments.get(source.assignment.assignmentKey);
