@@ -1,0 +1,1812 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-11T02:56:01.309Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_laundry_cleaning_basics_a1_a2",
+  "inputs": {
+    "supports": "DA,LV,TH",
+    "supportCount": 3,
+    "ordinarySupportCount": 2,
+    "polyglotSupportCount": 1,
+    "ordinaryPerChannel": 9,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 2,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "ordinary|home_laundry_cleaning_basics_a1_a2|DA|IT",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|DA|JA",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KA",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KK",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KM",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KN",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KO",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|DA|LO",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|DA|LT",
+      "polyglot|home_laundry_cleaning_basics_a1_a2|LV|global_europe_core|7a4233775927|short_unverified",
+      "polyglot|home_laundry_cleaning_basics_a1_a2|LV|east_asia_core|69af08ca98ea|short_unverified",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|TH|IS",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|TH|IT",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|TH|JA",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KA",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KK",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KM",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KN",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KO",
+      "ordinary|home_laundry_cleaning_basics_a1_a2|TH|LO"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 360,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-10-9fd177a93642",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-10-9fd177a93642",
+      "manifestHash": "015f8fbfbb87338de71b2b07be87aa43ddefe05da0c13ee497edc1485c8d202c",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-10-11T02:38:23.802Z",
+        "ageMinutes": 17.625116666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-3",
+        "generatedAt": "2026-10-11T02:37:14.436Z",
+        "ageMinutes": 18.781216666666666,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/review/deck11-additive512-20261010/control/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "b3a8bd5450eb6d551d06ebcdc233112acd5a406d1396514311ea5c36b54c86a5"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "6759c5523ef46d1de0dfc74170045a934f51117b1b057ab8771b2d34a9433895"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "f333208fb0bdf55597cfd22b51ecb96f9192ed461d3f4a8644ee2b112d6fec4e"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "cad3a058e6fae8979861d68358bdca9ccfec9cb1f1904f2a1c01536a0d9730d3"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_laundry_cleaning_basics_a1_a2.json",
+        "exists": true,
+        "sha256": "f998e95f9bae7fc3db3cc0428dc78ab6594fab00e7935fa857ca83bd6e355556"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/review/deck11-additive512-20261010/control/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "19cd2195ef47d2be059e43f4b4f9cb8610dff6417265f651db93f2bbf421a02e"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 2,
+    "supportCount": 3,
+    "ordinaryCount": 18,
+    "polyglotCount": 2,
+    "assignmentCount": 20,
+    "firstPublishAt": "2026-10-11T10:30:00.000Z",
+    "lastPublishAt": "2026-10-13T17:30:00.000Z",
+    "customThumbnailCount": 9,
+    "automaticThumbnailCount": 11,
+    "existingPlaylistCount": 20,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-2": 18,
+      "youtube-3": 2
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 20,
+    "estimatedPlaylistItemInsertUnits": 1000,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 450,
+    "estimatedGeneralQuotaUnitsMaximum": 1450,
+    "byRoute": {
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 18,
+        "estimatedGeneralQuotaUnitsMaximum": 1350
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 2,
+        "estimatedGeneralQuotaUnitsMaximum": 100
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "LV: short_unverified <=895s",
+    "LV: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "IT",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_da-DK-ChristelNeural",
+        "supportLang": "DA"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|IT",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|IT|da",
+      "publishAt": "2026-10-11T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-10",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-10-11",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "da|2026-10-11T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-12T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-14T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-18T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-10T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DA__IT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL6IMd0kswUtmslAeCyzue9b2Lw7YZ1Qy8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Italiensk A1: ordforråd og udtale",
+        "description": "FlashcardsLuna-videoer for dansktalende, der lærer Italiensk: flashcards, udtale, gentagelsespauser og korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|IT",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "JA",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_da-DK-ChristelNeural",
+        "supportLang": "DA"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|JA",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|JA|da",
+      "publishAt": "2026-10-11T15:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-10",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-10-11",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "da|2026-10-11T15:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-12T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-14T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-18T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-10T15:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DA__JA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBJP8efJ2p_w",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Japansk A1: ordforråd og udtale",
+        "description": "FlashcardsLuna-videoer for dansktalende, der lærer Japansk: flashcards, udtale, gentagelsespauser og korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|JA",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "KA",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_da-DK-ChristelNeural",
+        "supportLang": "DA"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KA",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KA|da",
+      "publishAt": "2026-10-11T18:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-10",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-10-11",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "da|2026-10-11T18:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-12T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-14T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-18T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-10T18:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DA__KA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLO_4TYCbmHs8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Georgisk A1: ordforråd og udtale",
+        "description": "FlashcardsLuna-videoer for dansktalende, der lærer Georgisk: flashcards, udtale, gentagelsespauser og korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KA",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "KK",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_da-DK-ChristelNeural",
+        "supportLang": "DA"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KK",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KK|da",
+      "publishAt": "2026-10-11T21:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-10",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-10-11",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "da|2026-10-11T21:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-12T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-14T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-18T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-10T21:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DA__KK__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLGBC41LuijFE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kasakhisk A1: ordforråd og udtale",
+        "description": "FlashcardsLuna-videoer for dansktalende, der lærer Kasakhisk: flashcards, udtale, gentagelsespauser og korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KK",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "KM",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_da-DK-ChristelNeural",
+        "supportLang": "DA"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KM",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KM|da",
+      "publishAt": "2026-10-12T06:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-10",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-10-12",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "da|2026-10-12T06:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-13T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-15T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-19T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-11T06:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DA__KM__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLIi6SDm4fXnI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Khmer A1: ordforråd og udtale",
+        "description": "FlashcardsLuna-videoer for dansktalende, der lærer Khmer: flashcards, udtale, gentagelsespauser og korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KM",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "KN",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_da-DK-ChristelNeural",
+        "supportLang": "DA"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KN",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KN|da",
+      "publishAt": "2026-10-12T09:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-10",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-10-12",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "da|2026-10-12T09:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-13T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-15T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-19T09:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-11T09:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DA__KN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLa3q886UxZ5w",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Kannada A1: ordforråd og udtale",
+        "description": "FlashcardsLuna-videoer for dansktalende, der lærer Kannada: flashcards, udtale, gentagelsespauser og korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KN",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "KO",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_da-DK-ChristelNeural",
+        "supportLang": "DA"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KO",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KO|da",
+      "publishAt": "2026-10-12T12:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-10",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-10-12",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "da|2026-10-12T12:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-13T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-15T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-19T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-11T12:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DA__KO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLC0jKOBQQjBY",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Koreansk A1: ordforråd og udtale",
+        "description": "FlashcardsLuna-videoer for dansktalende, der lærer Koreansk: flashcards, udtale, gentagelsespauser og korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|KO",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "LO",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_da-DK-ChristelNeural",
+        "supportLang": "DA"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|LO",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|LO|da",
+      "publishAt": "2026-10-12T15:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-10",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-10-12",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "da|2026-10-12T15:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-13T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-15T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-19T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-11T15:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DA__LO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLUJ9UOLoGr74",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Lao A1: ordforråd og udtale",
+        "description": "FlashcardsLuna-videoer for dansktalende, der lærer Lao: flashcards, udtale, gentagelsespauser og korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|LO",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "DA",
+      "targetLang": "LT",
+      "channelKey": "da",
+      "youtubeChannelId": "UCrnzx48mt-kLWGLymdTCsTw",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_da-DK-ChristelNeural",
+        "supportLang": "DA"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|LT",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|LT|da",
+      "publishAt": "2026-10-12T18:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-10",
+      "timeZone": "Europe/Copenhagen",
+      "localDate": "2026-10-12",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "da|2026-10-12T18:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-13T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-15T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-19T18:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-11T18:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "DA__LT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf_ZJBuoarQ4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Litauisk A1: ordforråd og udtale",
+        "description": "FlashcardsLuna-videoer for dansktalende, der lærer Litauisk: flashcards, udtale, gentagelsespauser og korte mini-tests.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|DA|LT",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "assignmentKey": "polyglot|home_laundry_cleaning_basics_a1_a2|LV|global_europe_core|7a4233775927|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_laundry_cleaning_basics_a1_a2|LV|global_europe_core|short_unverified|lv",
+      "videoType": "polyglot",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "LV",
+      "targetLang": "EN,ES,FR,DE",
+      "targetLangs": [
+        "EN",
+        "ES",
+        "FR",
+        "DE"
+      ],
+      "targetLangsHash": "7a4233775927",
+      "bundleKey": "global_europe_core",
+      "sourceAssignmentKey": "polyglot|home_laundry_cleaning_basics_a1_a2|LV|global_europe_core|7a4233775927|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_laundry_cleaning_basics_a1_a2:LV:global_europe_core:7a4233775927:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-10-13T14:30:00.000Z",
+      "localDate": "2026-10-13",
+      "localTime": "17:30",
+      "timeZone": "Europe/Riga",
+      "slotKey": "lv|2026-10-13T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__LV__global-europe-core__7a4233775927",
+        "youtubePlaylistId": "PLKnG6f0Xf_qc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: angļu, spāņu, franču, vācu",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: angļu, spāņu, franču, vācu. Themed decks, flashcards, pronunciation and review. Bundle: global_europe_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-06T13:20:58.907Z"
+      },
+      "status": "planned",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-10",
+      "localSlotIndex": 3,
+      "analyticsCheckpointsAt": [
+        "2026-10-14T17:30:00.000Z",
+        "2026-10-16T17:30:00.000Z",
+        "2026-10-20T17:30:00.000Z",
+        "2026-11-12T17:30:00.000Z"
+      ],
+      "integratedRecovery": {
+        "sourceCampaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-09-f6c6e24679c9",
+        "sourceAssignmentKey": "polyglot|home_laundry_cleaning_basics_a1_a2|LV|global_europe_core|7a4233775927|short_unverified",
+        "scheduleCarrierAssignmentKey": "new_free_slot"
+      }
+    },
+    {
+      "videoType": "polyglot",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "LV",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsCsv": "ZH,JA,KO",
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_lv-LV-EveritaNeural",
+        "supportLang": "LV"
+      },
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "polyglotKey": "polyglot:home_laundry_cleaning_basics_a1_a2:LV:east_asia_core:69af08ca98ea:short_unverified",
+      "assignmentKey": "polyglot|home_laundry_cleaning_basics_a1_a2|LV|east_asia_core|69af08ca98ea|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_laundry_cleaning_basics_a1_a2|LV|east_asia_core|short_unverified|lv",
+      "publishAt": "2026-10-13T17:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-10",
+      "timeZone": "Europe/Riga",
+      "localDate": "2026-10-13",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "lv|2026-10-13T17:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-14T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-16T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-20T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-12T14:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__LV__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLXhLx7waUrvg",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: ķīniešu, japāņu, korejiešu",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ķīniešu, japāņu, korejiešu. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "polyglot|home_laundry_cleaning_basics_a1_a2|LV|east_asia_core|69af08ca98ea|short_unverified"
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "TH",
+      "targetLang": "IS",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_th-TH-PremwadeeNeural",
+        "supportLang": "TH"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|IS",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|IS|th",
+      "publishAt": "2026-10-11T10:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-11",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-10-11",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "th|2026-10-11T10:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-12T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-14T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-18T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-10T07:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/video/by-set/home_laundry_cleaning_basics_a1_a2/ordinary/by-channel/th__TH__LunaCardsThai/IS__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/manifest.json",
+        "sha256": "8fcf95a397f5a4d1f214d2dab3d8b2cbff602bd15042e9294cbaaa4c8a45c35f"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TH__IS__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLeEkwdA99QVw",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ไอซ์แลนด์ A1: คำศัพท์และการออกเสียง",
+        "description": "วิดีโอ FlashcardsLuna สำหรับผู้พูดภาษาไทยที่กำลังเรียน ไอซ์แลนด์: แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|IS",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "TH",
+      "targetLang": "IT",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_th-TH-PremwadeeNeural",
+        "supportLang": "TH"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|IT",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|IT|th",
+      "publishAt": "2026-10-11T13:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-11",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-10-11",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "th|2026-10-11T13:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-12T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-14T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-18T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-10T10:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/video/by-set/home_laundry_cleaning_basics_a1_a2/ordinary/by-channel/th__TH__LunaCardsThai/IT__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/manifest.json",
+        "sha256": "c3111d55632f9227bb936d0eae5542d755801ec3d5aeec26683ac017006ff522"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TH__IT__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL7CNPPbAeUfOcAlpk4B8h8m8rJBm5a_ju",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "อิตาลี A1: คำศัพท์และการออกเสียง",
+        "description": "วิดีโอ FlashcardsLuna สำหรับผู้พูดภาษาไทยที่กำลังเรียน อิตาลี: แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|IT",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "TH",
+      "targetLang": "JA",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_th-TH-PremwadeeNeural",
+        "supportLang": "TH"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|JA",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|JA|th",
+      "publishAt": "2026-10-11T16:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-11",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-10-11",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "th|2026-10-11T16:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-12T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-14T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-18T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-10T13:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/video/by-set/home_laundry_cleaning_basics_a1_a2/ordinary/by-channel/th__TH__LunaCardsThai/JA__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/manifest.json",
+        "sha256": "d1e61f7fffaad1cd21746cf5e65d2401c3cc4bb66a5b1e1e195e272c9f7f6a90"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TH__JA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLEOe2GSXtxzs",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ญี่ปุ่น A1: คำศัพท์และการออกเสียง",
+        "description": "วิดีโอ FlashcardsLuna สำหรับผู้พูดภาษาไทยที่กำลังเรียน ญี่ปุ่น: แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|JA",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "TH",
+      "targetLang": "KA",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_th-TH-PremwadeeNeural",
+        "supportLang": "TH"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KA",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KA|th",
+      "publishAt": "2026-10-12T01:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-11",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-10-12",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "th|2026-10-12T01:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-12T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-14T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-18T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-10T16:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/video/by-set/home_laundry_cleaning_basics_a1_a2/ordinary/by-channel/th__TH__LunaCardsThai/KA__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/manifest.json",
+        "sha256": "9d9efea8a2c70c3899fda752f8f12aef94f51eec64fa76faec69634a83692242"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TH__KA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLWZncmbw_uFs",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "จอร์เจีย A1: คำศัพท์และการออกเสียง",
+        "description": "วิดีโอ FlashcardsLuna สำหรับผู้พูดภาษาไทยที่กำลังเรียน จอร์เจีย: แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KA",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "TH",
+      "targetLang": "KK",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_th-TH-PremwadeeNeural",
+        "supportLang": "TH"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KK",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KK|th",
+      "publishAt": "2026-10-12T04:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-11",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-10-12",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "th|2026-10-12T04:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-13T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-15T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-19T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-11T01:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/video/by-set/home_laundry_cleaning_basics_a1_a2/ordinary/by-channel/th__TH__LunaCardsThai/KK__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/manifest.json",
+        "sha256": "4cc8787c311d73245352625fb39977eec45a2b6606078fcde56e953caac8c8ac"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TH__KK__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLS-TqSqoY0Vw",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "คาซัค A1: คำศัพท์และการออกเสียง",
+        "description": "วิดีโอ FlashcardsLuna สำหรับผู้พูดภาษาไทยที่กำลังเรียน คาซัค: แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KK",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "TH",
+      "targetLang": "KM",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_th-TH-PremwadeeNeural",
+        "supportLang": "TH"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KM",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KM|th",
+      "publishAt": "2026-10-12T07:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-11",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-10-12",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "th|2026-10-12T07:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-13T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-15T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-19T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-11T04:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/video/by-set/home_laundry_cleaning_basics_a1_a2/ordinary/by-channel/th__TH__LunaCardsThai/KM__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/manifest.json",
+        "sha256": "5f4f7c215a237741d58a93768774e8dd8d44c9fbecb225f0b506afc8525af66d"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TH__KM__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLK-6mmEoEZL0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "เขมร A1: คำศัพท์และการออกเสียง",
+        "description": "วิดีโอ FlashcardsLuna สำหรับผู้พูดภาษาไทยที่กำลังเรียน เขมร: แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KM",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "TH",
+      "targetLang": "KN",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_th-TH-PremwadeeNeural",
+        "supportLang": "TH"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KN",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KN|th",
+      "publishAt": "2026-10-12T10:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-11",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-10-12",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "th|2026-10-12T10:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-13T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-15T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-19T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-11T07:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/video/by-set/home_laundry_cleaning_basics_a1_a2/ordinary/by-channel/th__TH__LunaCardsThai/KN__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/manifest.json",
+        "sha256": "5c9ea403f17b53bf89be8555bdeb14fd329b0c2da3b6bb618476c36f0af1f00d"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TH__KN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLEyARoeOEW5M",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "กันนาดา A1: คำศัพท์และการออกเสียง",
+        "description": "วิดีโอ FlashcardsLuna สำหรับผู้พูดภาษาไทยที่กำลังเรียน กันนาดา: แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KN",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "TH",
+      "targetLang": "KO",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_th-TH-PremwadeeNeural",
+        "supportLang": "TH"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KO",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KO|th",
+      "publishAt": "2026-10-12T13:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-11",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-10-12",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "th|2026-10-12T13:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-13T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-15T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-19T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-11T10:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/video/by-set/home_laundry_cleaning_basics_a1_a2/ordinary/by-channel/th__TH__LunaCardsThai/KO__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/manifest.json",
+        "sha256": "94309c788d48848984285330753386b843018b002154581df6e083778384b180"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TH__KO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLCYwIsUW-kg0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "เกาหลี A1: คำศัพท์และการออกเสียง",
+        "description": "วิดีโอ FlashcardsLuna สำหรับผู้พูดภาษาไทยที่กำลังเรียน เกาหลี: แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|KO",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "TH",
+      "targetLang": "LO",
+      "channelKey": "th",
+      "youtubeChannelId": "UCr6WU1cxr5S22hMEsYoRdWA",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_th-TH-PremwadeeNeural",
+        "supportLang": "TH"
+      },
+      "assignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|LO",
+      "calendarAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|LO|th",
+      "publishAt": "2026-10-13T01:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-11",
+      "timeZone": "Asia/Bangkok",
+      "localDate": "2026-10-13",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "th|2026-10-13T01:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-13T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-15T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-19T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-11T13:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/video/by-set/home_laundry_cleaning_basics_a1_a2/ordinary/by-channel/th__TH__LunaCardsThai/LO__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck11-laundry-cleaning-approved-20261005/manifest.json",
+        "sha256": "dfb75b1adda950c40c16d48e21272ca75e6d8d7df7f79abc915058341d3ccd6e"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TH__LO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLSYhjliP-qmE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ลาว A1: คำศัพท์และการออกเสียง",
+        "description": "วิดีโอ FlashcardsLuna สำหรับผู้พูดภาษาไทยที่กำลังเรียน ลาว: แฟลชการ์ด การออกเสียง ช่วงหยุดเพื่อพูดตาม และแบบทดสอบสั้น ๆ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-10T13:47:59.229Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|home_laundry_cleaning_basics_a1_a2|TH|LO",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    }
+  ],
+  "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-11-9ef6241965e5",
+  "manifestHash": "f53476101993c1eb5900236d356300e3cf56f4da9ee7e980dc6f9e173cf86218"
+}
