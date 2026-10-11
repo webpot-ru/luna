@@ -2,6 +2,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 function parseArgs(argv) {
   const options = {
@@ -16,6 +17,8 @@ function parseArgs(argv) {
     else if (arg === "--manifest-hash" || arg.startsWith("--manifest-hash=")) options.manifestHash = value();
     else if (arg === "--video-type" || arg.startsWith("--video-type=")) options.videoType = value();
     else if (arg === "--support" || arg.startsWith("--support=")) options.support = value().trim().toUpperCase();
+    else if (arg === "--bundle" || arg.startsWith("--bundle=")) options.bundle = value();
+    else if (arg === "--content-scope" || arg.startsWith("--content-scope=")) options.contentScope = value();
     else if (arg === "--input-root" || arg.startsWith("--input-root=")) options.inputRoot = value();
     else if (arg === "--registry" || arg.startsWith("--registry=")) options.registry = value();
     else if (arg === "--output" || arg.startsWith("--output=")) options.output = value();
@@ -59,6 +62,17 @@ function expectedDestination(assignment) {
   return path.resolve("outputs/video-generator", `${assignment.setId}_${assignment.targetLang.toLowerCase()}_${assignment.supportLang.toLowerCase()}`, "youtube_metadata.json");
 }
 
+export function selectCampaignMetadataAssignments(assignments, options) {
+  if ((options.bundle || options.contentScope) && options.videoType !== "polyglot") {
+    throw new Error("Bundle/scope selection is only supported for Polyglot");
+  }
+  if (Boolean(options.bundle) !== Boolean(options.contentScope)) throw new Error("Exact Polyglot selection requires both bundle and content scope");
+  const selected = assignments.filter((row) => row.videoType === options.videoType && row.supportLang === options.support
+    && (!options.bundle || (row.bundleKey === options.bundle && (row.contentScope || "full") === options.contentScope)));
+  if (options.bundle && selected.length !== 1) throw new Error(`Exact Polyglot metadata selection requires one assignment, got ${selected.length}`);
+  return selected;
+}
+
 function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.help) {
@@ -71,9 +85,7 @@ function main() {
   const registry = JSON.parse(fs.readFileSync(options.registry, "utf8"));
   const campaign = (registry.campaigns || []).find((row) => row.campaignId === options.campaignId);
   if (!campaign || campaign.manifestHash !== options.manifestHash) throw new Error("Durable campaign identity mismatch");
-  const expected = (campaign.assignments || []).filter((row) => (
-    row.videoType === options.videoType && row.supportLang === options.support
-  ));
+  const expected = selectCampaignMetadataAssignments(campaign.assignments || [], options);
   if (!expected.length) throw new Error(`No expected ${options.videoType} assignments for ${options.support}`);
 
   const indexes = findIndexes(options.inputRoot);
@@ -141,9 +153,9 @@ function main() {
   }, null, 2));
 }
 
-try {
-  main();
-} catch (error) {
-  console.error(error.stack || error.message);
-  process.exit(1);
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  try { main(); } catch (error) {
+    console.error(error.stack || error.message);
+    process.exit(1);
+  }
 }
