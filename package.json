@@ -120,6 +120,7 @@
     "prepare:youtube-publication-campaign-run": "node scripts/prepare-youtube-publication-campaign-run.mjs",
     "generate:youtube-campaign-metadata": "node scripts/generate-youtube-campaign-metadata.mjs",
     "copy:youtube-campaign-metadata": "node scripts/copy-youtube-campaign-metadata.mjs",
+    "test:youtube-campaign-metadata-copy": "node scripts/copy-youtube-campaign-metadata.test.mjs",
     "plan:youtube-analytics-readback": "node scripts/plan-youtube-analytics-readback.mjs",
     "read:youtube-video-statistics": "node scripts/read-youtube-video-statistics.mjs",
     "apply:youtube-publish": "node scripts/youtube-publish-video.mjs",

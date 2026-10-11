@@ -731,6 +731,8 @@ jobs:
               --manifest-hash="$CAMPAIGN_MANIFEST_HASH" \
               --video-type=polyglot \
               --support="$SUPPORT" \
+              --bundle="$BUNDLE" \
+              --content-scope="$CONTENT_SCOPE" \
               --input-root=.campaign-metadata \
               --output=outputs/polyglot-campaign-metadata-copy-github.json
             exit 0

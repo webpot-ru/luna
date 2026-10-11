@@ -1,5 +1,11 @@
 # YouTube Publication Campaigns
 
+## Exact Polyglot worker metadata isolation
+
+Campaign metadata copying supports paired `--bundle` and `--content-scope` selectors for a single Polyglot worker. Both are required together and must resolve exactly one durable assignment. The Polyglot workflow passes its matrix bundle/effective scope, so a channel with multiple bundles does not copy unrelated metadata into `outputs/video-generator`. Ordinary copying and legacy unfiltered per-support copying remain unchanged. Missing/ambiguous assignments fail before copying/render/upload; checksums, campaign hash, publishAt and playlist identity gates remain mandatory. Regression test: `npm run test:youtube-campaign-metadata-copy`.
+
+2026-10-11 Deck11 parent38060130727 accepted/observed492of512;20no-ID rows are exact DA9 + TH9 + LV2Polyglot. TR/east_asia_core/full already has ID `KpD0-YIWaD0` and is excluded from video recovery; it needs thumbnail-only repair via exact committed manifest `config/youtube-thumbnail-repairs/deck11-tr-eastasia-20261011.json`, no generation/video upload. Two receipt errors refer to this one existing TR video (required thumbnail absent + post-upload403). A successful custom-thumbnail write must be reconciled into campaign receipts, not followed by a new videos.insert.
+
 ## Read-only OAuth authentication recovery
 
 The live-publication audit handles a YouTube GET `401` with one forced OAuth
