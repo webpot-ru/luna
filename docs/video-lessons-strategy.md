@@ -1,5 +1,11 @@
 # Video Lessons Strategy & Specifications
 
+## Edge TTS October 2026 endpoint compatibility
+
+Edge speech calls use the process-only adapter `scripts/edge-tts-compatible.py`, based on upstream `rany2/edge-tts` PR491 endpoint/date changes. It redirects synthesis to Microsoft's `api.msedgeservices.com/tts/cognitiveservices/websocket/v1` and parses HTTP Date independent of locale. Installed files, voice list, configured voices, MP3 format and cache identity remain unchanged; no proxy or alternate provider. `EDGE_TTS_PYTHON` may select an existing interpreter; otherwise use source-tools venv Python or system Python. Errors report class/status without authentication URLs.
+
+Before recovery after handshake403, use `.github/workflows/edge-tts-endpoint-smoke.yml`: exactly three short EN/Jenny, DA/Christel and LV/Everita samples; verify MP3/24kHz/mono and positive duration through ffprobe. No OAuth/metadata/video/upload. Unit test: `python3 scripts/edge-tts-compatible.test.py`. The smoke uses existing edge-tts7.2.8; no additional production dependency. Dispatch is not speech success. Recover only terminal-finalizer/live-proven missing rows from parent38241451055, never all512 or accepted IDs.
+
 Этот документ фиксирует архитектуру, спецификации генерации и стратегию дистрибуции видеоуроков FlashcardsLuna на YouTube для привлечения поискового трафика на [flashcardsluna.com](https://flashcardsluna.com/). Список всех сгенерированных уроков и ссылки на них ведутся в [Video Lessons Registry](video-lessons-registry.md).
 
 Статус: **Source of Truth**. Любые изменения в дизайне, структуре звука или дистрибуции видео должны фиксироваться здесь.

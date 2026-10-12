@@ -441,10 +441,10 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
   // fallback list covers voices that have returned empty media in production.
   const voiceCandidates = edgeVoiceCandidates(lang, voiceId);
   
-  let venvPath = "edge-tts";
+  let venvPath = process.env.EDGE_TTS_PYTHON || (process.platform === "win32" ? "python" : "python3");
   const localVenvPath = process.platform === "win32"
-    ? path.resolve(".venv-source-tools/Scripts/edge-tts.exe")
-    : path.resolve(".venv-source-tools/bin/edge-tts");
+    ? path.resolve(".venv-source-tools/Scripts/python.exe")
+    : path.resolve(".venv-source-tools/bin/python");
   if (fs.existsSync(localVenvPath)) {
     venvPath = localVenvPath;
   }
@@ -465,6 +465,7 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
       const temporaryPath = `${candidateCachedPath}.${process.pid}.${crypto.randomUUID()}.tmp.mp3`;
       try {
         execFileSync(venvPath, [
+          path.resolve("scripts/edge-tts-compatible.py"),
           "--voice", candidateCleanVoiceId,
           "--text", cleanedText,
           "--write-media", temporaryPath
