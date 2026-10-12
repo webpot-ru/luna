@@ -1,0 +1,50 @@
+name: Edge TTS Endpoint Smoke
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install existing dependency and media probe
+        run: |
+          pip install edge-tts==7.2.8
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+      - name: Test endpoint and three unchanged voices
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/edge-tts-compatible.test.py
+          mkdir -p outputs/review/edge-tts-smoke
+          python scripts/edge-tts-compatible.py --voice en-US-JennyNeural --text "Learning Norwegian. Lesson topic: Laundry and Cleaning." --write-media outputs/review/edge-tts-smoke/en.mp3
+          python scripts/edge-tts-compatible.py --voice da-DK-ChristelNeural --text "Vi lærer Nederlandsk. Lektionens emne: Vask og rengøring." --write-media outputs/review/edge-tts-smoke/da.mp3
+          python scripts/edge-tts-compatible.py --voice lv-LV-EveritaNeural --text "Veļas mazgāšana un tīrīšana." --write-media outputs/review/edge-tts-smoke/lv.mp3
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          rows = []
+          for language in ("en", "da", "lv"):
+              path = Path(f"outputs/review/edge-tts-smoke/{language}.mp3")
+              probe = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(path)]))
+              audio = [s for s in probe["streams"] if s["codec_type"] == "audio"]
+              assert len(audio) == 1 and audio[0]["codec_name"] == "mp3"
+              assert audio[0]["sample_rate"] == "24000" and audio[0]["channels"] == 1
+              duration = float(probe["format"]["duration"])
+              assert duration > 0 and path.stat().st_size > 128
+              rows.append({"language": language, "duration": duration, "bytes": path.stat().st_size, "sampleRate": 24000, "channels": 1})
+          Path("outputs/review/edge-tts-smoke/report.json").write_text(json.dumps(rows, indent=2))
+          print(json.dumps(rows, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: edge-tts-endpoint-smoke-${{ github.run_id }}
+          path: outputs/review/edge-tts-smoke
+          if-no-files-found: warn
