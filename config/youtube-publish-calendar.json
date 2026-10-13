@@ -1960816,7 +1960816,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-13-78dbf76773e9",
       "campaignManifestHash": "a5228bed3cd1587324f43959025c948100853b78f4e93c796d336a4e0b7cdbd0",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_laundry_cleaning_basics_a1_a2",
@@ -1960840,7 +1960840,36 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-10-13T00:57:00.913Z",
-      "updatedAt": "2026-10-13T00:57:00.913Z"
+      "updatedAt": "2026-10-13T03:20:31.326Z",
+      "bundleLabel": "Slavic Core",
+      "targetLangsCsv": "RU,PL,CS,SK",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_laundry_cleaning_basics_a1_a2_polyglot_it_slavic_core/youtube_metadata.json",
+      "title": "Vocabolario poliglotta: bucato e pulizie in 4 lingue",
+      "playlist_key": "POLYGLOT__IT__slavic-core__93d499d62441",
+      "githubRunId": "38338004735",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/38338004735",
+      "youtubeVideoId": "jTLOy76CEB0",
+      "youtubePlaylistId": "PLFBhdhoA7uog",
+      "playlistItemId": "UExGQmhkaG9BN3VvZy45NDk1REZENzhEMzU5MDQz",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-15T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-17T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-21T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-13T15:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -1960870,7 +1960899,33 @@
       "localTime": "11:30",
       "localSlotIndex": 1,
       "createdAt": "2026-10-13T00:57:00.913Z",
-      "updatedAt": "2026-10-13T00:57:00.913Z"
+      "updatedAt": "2026-10-13T00:57:00.913Z",
+      "bundleLabel": "Slavic Core",
+      "targetLangsCsv": "RU,PL,CS,SK",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_laundry_cleaning_basics_a1_a2_polyglot_lv_slavic_core/youtube_metadata.json",
+      "title": "Vairāku valodu vārdu krājums: Veļa un tīrīšana | 4 slāvu valodas",
+      "playlist_key": "POLYGLOT__LV__slavic-core__93d499d62441",
+      "githubRunId": "38241451055",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/38241451055",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-16T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-18T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-22T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-14T11:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -1960899,7 +1960954,33 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-10-13T00:57:00.913Z",
-      "updatedAt": "2026-10-13T00:57:00.913Z"
+      "updatedAt": "2026-10-13T00:57:00.913Z",
+      "bundleLabel": "East Asia Core",
+      "targetLangsCsv": "ZH,JA,KO",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_laundry_cleaning_basics_a1_a2_polyglot_lv_east_asia_core/youtube_metadata.json",
+      "title": "Daudzvalodu vārdu krājums: veļa un tīrīšana | ķīniešu, japāņu, korejiešu",
+      "playlist_key": "POLYGLOT__LV__east-asia-core__69af08ca98ea",
+      "githubRunId": "38060130727",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/38060130727",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-14T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-16T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-20T14:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-12T14:30:00.000Z"
+        }
+      ]
     }
   ]
 }
