@@ -1943252,7 +1943252,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-12-2a424b64c828",
       "campaignManifestHash": "efe115c44859887ed772943c2422cf352cc37b4a40000d3b278a92b275ea13b2",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_laundry_cleaning_basics_a1_a2",
@@ -1943276,7 +1943276,7 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-10-12T13:47:49.275Z",
-      "updatedAt": "2026-10-12T13:47:49.275Z",
+      "updatedAt": "2026-10-13T00:57:00.913Z",
       "bundleLabel": "Slavic Core",
       "targetLangsCsv": "RU,PL,CS,SK",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -1943302,7 +1943302,9 @@
           "hoursAfterPublish": 720,
           "dueAt": "2026-11-13T15:30:00.000Z"
         }
-      ]
+      ],
+      "supersededAt": "2026-10-13T00:57:00.913Z",
+      "supersededByCampaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-13-78dbf76773e9"
     },
     {
       "schemaVersion": 1,
@@ -1948051,7 +1948053,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-12-2a424b64c828",
       "campaignManifestHash": "efe115c44859887ed772943c2422cf352cc37b4a40000d3b278a92b275ea13b2",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_laundry_cleaning_basics_a1_a2",
@@ -1948075,7 +1948077,7 @@
       "localTime": "11:30",
       "localSlotIndex": 1,
       "createdAt": "2026-10-12T13:47:49.275Z",
-      "updatedAt": "2026-10-12T13:47:49.275Z",
+      "updatedAt": "2026-10-13T00:57:00.913Z",
       "bundleLabel": "Slavic Core",
       "targetLangsCsv": "RU,PL,CS,SK",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -1948101,13 +1948103,15 @@
           "hoursAfterPublish": 720,
           "dueAt": "2026-11-14T11:30:00.000Z"
         }
-      ]
+      ],
+      "supersededAt": "2026-10-13T00:57:00.913Z",
+      "supersededByCampaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-13-78dbf76773e9"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-12-2a424b64c828",
       "campaignManifestHash": "efe115c44859887ed772943c2422cf352cc37b4a40000d3b278a92b275ea13b2",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_laundry_cleaning_basics_a1_a2",
@@ -1948130,7 +1948134,7 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-10-12T13:47:49.275Z",
-      "updatedAt": "2026-10-12T13:47:49.275Z",
+      "updatedAt": "2026-10-13T00:57:00.913Z",
       "bundleLabel": "East Asia Core",
       "targetLangsCsv": "ZH,JA,KO",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -1948156,7 +1948160,9 @@
           "hoursAfterPublish": 720,
           "dueAt": "2026-11-12T14:30:00.000Z"
         }
-      ]
+      ],
+      "supersededAt": "2026-10-13T00:57:00.913Z",
+      "supersededByCampaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-13-78dbf76773e9"
     },
     {
       "schemaVersion": 1,
@@ -1960805,6 +1960811,95 @@
       "youtubeVideoId": "XkgVrafD6LI",
       "youtubePlaylistId": "PLCh53C-z11k0",
       "playlistItemId": "UExDaDUzQy16MTFrMC45NDk1REZENzhEMzU5MDQz"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-13-78dbf76773e9",
+      "campaignManifestHash": "a5228bed3cd1587324f43959025c948100853b78f4e93c796d336a4e0b7cdbd0",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "IT",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_laundry_cleaning_basics_a1_a2:IT:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "publishAt": "2026-10-14T15:30:00.000Z",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-10-14",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-10-13T00:57:00.913Z",
+      "updatedAt": "2026-10-13T00:57:00.913Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-13-78dbf76773e9",
+      "campaignManifestHash": "a5228bed3cd1587324f43959025c948100853b78f4e93c796d336a4e0b7cdbd0",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "LV",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_laundry_cleaning_basics_a1_a2:LV:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "publishAt": "2026-10-15T08:30:00.000Z",
+      "timeZone": "Europe/Riga",
+      "localDate": "2026-10-15",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "createdAt": "2026-10-13T00:57:00.913Z",
+      "updatedAt": "2026-10-13T00:57:00.913Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-13-78dbf76773e9",
+      "campaignManifestHash": "a5228bed3cd1587324f43959025c948100853b78f4e93c796d336a4e0b7cdbd0",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "LV",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_laundry_cleaning_basics_a1_a2:LV:east_asia_core:69af08ca98ea:short_unverified",
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "publishAt": "2026-10-15T11:30:00.000Z",
+      "timeZone": "Europe/Riga",
+      "localDate": "2026-10-15",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "createdAt": "2026-10-13T00:57:00.913Z",
+      "updatedAt": "2026-10-13T00:57:00.913Z"
     }
   ]
 }
