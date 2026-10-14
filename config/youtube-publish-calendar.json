@@ -1045399,7 +1045399,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-14-5b8e6b155016",
       "campaignManifestHash": "77ef9db22d248dafafb82edae4f39b0ead53e7c5dcaa1cdd79b5b094fb502449",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-integrated-claim-consolidation",
       "videoType": "polyglot",
       "setId": "home_laundry_cleaning_basics_a1_a2",
@@ -1045430,7 +1045430,9 @@
         "2026-11-14T08:30:00.000Z"
       ],
       "createdAt": "2026-10-14T01:55:37.322Z",
-      "updatedAt": "2026-10-14T01:55:37.322Z"
+      "updatedAt": "2026-10-14T07:38:04.316Z",
+      "supersededAt": "2026-10-14T07:38:04.316Z",
+      "supersededByCampaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-14-79976ad11754"
     },
     {
       "schemaVersion": 1,
@@ -1985371,6 +1985373,36 @@
       "youtubeVideoId": "vA0JWgDc9tQ",
       "youtubePlaylistId": "PLDMSmCS1Cp4I",
       "playlistItemId": "UExETVNtQ1MxQ3A0SS5GNjNDRDREMDQxOThCMDQ2"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_laundry_cleaning_basics_a1_a2-2026-10-14-79976ad11754",
+      "campaignManifestHash": "022c19ea6c26071d7082eca7f435edd987c14a403a1b07183238a28a1a33cf91",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_laundry_cleaning_basics_a1_a2",
+      "supportLang": "LV",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_laundry_cleaning_basics_a1_a2:LV:slavic_core:93d499d62441:short_unverified",
+      "channelKey": "lv",
+      "youtubeChannelId": "UCP01tFSt8NZ7cMfIQDRjQ4A",
+      "publishAt": "2026-10-15T08:30:00.000Z",
+      "timeZone": "Europe/Riga",
+      "localDate": "2026-10-15",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "createdAt": "2026-10-14T07:38:04.316Z",
+      "updatedAt": "2026-10-14T07:38:04.316Z"
     }
   ]
 }
