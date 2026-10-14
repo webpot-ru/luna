@@ -59,6 +59,7 @@ function parseArgs(argv) {
     else if (arg === "--polyglot-per-channel" || arg.startsWith("--polyglot-per-channel=")) options.polyglotPerChannel = Number(value());
     else if (arg === "--complete-deck-tails") options.completeDeckTails = true;
     else if (arg === "--add-recovery-on-top") options.addRecoveryOnTop = true;
+    else if (arg.startsWith("--ordinary-count-overrides=")) options.ordinaryPerChannelOverrides = Object.fromEntries(value().split(",").map((entry) => { const [support, count] = entry.split(":"); return [support, Number(count)]; }));
     else if (arg === "--min-future-minutes" || arg.startsWith("--min-future-minutes=")) options.minFutureMinutes = Number(value());
     else if (arg === "--max-snapshot-age-minutes" || arg.startsWith("--max-snapshot-age-minutes=")) options.maxSnapshotAgeMinutes = Number(value());
     else if (arg === "--expected-source-assignments" || arg.startsWith("--expected-source-assignments=")) options.expectedSourceAssignments = Number(value());
@@ -671,11 +672,15 @@ export function composeIntegratedRecoveryAssignments({ supports, baseAssignments
 
 export { sourceRowsFromCampaign };
 
-export function composeAdditiveRecoveryAssignments({ supports, baseAssignments, sourceRows, ordinaryPerChannel, polyglotPerChannel }) {
+export function composeAdditiveRecoveryAssignments({ supports, baseAssignments, sourceRows, ordinaryPerChannel, polyglotPerChannel, ordinaryPerChannelOverrides = {} }) {
+  for (const [support, count] of Object.entries(ordinaryPerChannelOverrides)) {
+    assert(supports.includes(support), `unknown ordinary override support: ${support}`);
+    assert(Number.isInteger(count) && count >= 0 && count <= ordinaryPerChannel, `${support}: invalid ordinary count override`);
+  }
   const keys = new Set(baseAssignments.map((row) => row.assignmentKey));
   assert(keys.size === baseAssignments.length, "additive base contains duplicate assignments");
   for (const support of supports) {
-    for (const [type, count] of [["ordinary", ordinaryPerChannel], ["polyglot", polyglotPerChannel]]) {
+    for (const [type, count] of [["ordinary", ordinaryPerChannelOverrides[support] ?? ordinaryPerChannel], ["polyglot", polyglotPerChannel]]) {
       assert(baseAssignments.filter((row) => row.supportLang === support && row.videoType === type).length === count,
         `${support}: additive base must retain exactly ${count} new ${type} assignments`);
     }
@@ -697,6 +702,7 @@ export function composeAdditiveRecoveryAssignments({ supports, baseAssignments, 
 
 export function buildIntegratedRecoveryWave(options) {
   assert(!(options.addRecoveryOnTop && options.completeDeckTails), "additive recovery cannot be combined with deck completion");
+  assert(!Object.keys(options.ordinaryPerChannelOverrides || {}).length || options.addRecoveryOnTop, "ordinary count overrides require explicit additive recovery mode");
   if (options.completeDeckTails) return buildCompletionTailWave(options);
   assert(options.controlReport, "--control-report is required");
   const now = options.now instanceof Date ? options.now : new Date(options.generatedAt || Date.now());
@@ -741,13 +747,15 @@ export function buildIntegratedRecoveryWave(options) {
   const unexpectedBaseBlockers = (base.blockers || []).filter((row) => options.addRecoveryOnTop || !expectedPreviewBlockers.has(row));
   assert(unexpectedBaseBlockers.length === 0, `preview has unexpected blockers: ${unexpectedBaseBlockers.join("; ")}`);
   const supports = String(base.inputs?.supports || "").split(",").filter(Boolean);
+  const newAssignments = base.assignments.filter((row, index, all) => row.videoType !== "ordinary" || all.slice(0, index).filter((prior) => prior.supportLang === row.supportLang && prior.videoType === "ordinary").length < (options.ordinaryPerChannelOverrides?.[row.supportLang] ?? options.ordinaryPerChannel));
   const composed = (options.addRecoveryOnTop ? composeAdditiveRecoveryAssignments : composeIntegratedRecoveryAssignments)({
     supports,
-    baseAssignments: base.assignments,
+    baseAssignments: newAssignments,
     sourceRows,
     ordinaryPerChannel: options.ordinaryPerChannel,
     polyglotPerChannel: options.polyglotPerChannel,
     sourceCampaignId: options.sourceCampaignId,
+    ordinaryPerChannelOverrides: options.ordinaryPerChannelOverrides,
   });
   const pending = assignPendingPolyglotSlots({
     pending: composed.pendingPolyglot,
@@ -761,14 +769,14 @@ export function buildIntegratedRecoveryWave(options) {
   const assignments = [...composed.ordinary, ...composed.polyglotAssignments, ...pending]
     .sort((left, right) => `${left.supportLang}|${left.videoType}|${left.assignmentKey}`.localeCompare(`${right.supportLang}|${right.videoType}|${right.assignmentKey}`));
   const blockers = [];
-  const expectedCount = supports.length * (options.ordinaryPerChannel + options.polyglotPerChannel) + (options.addRecoveryOnTop ? sourceRows.length : 0);
+  const expectedCount = supports.reduce((sum, support) => sum + (options.ordinaryPerChannelOverrides?.[support] ?? options.ordinaryPerChannel) + options.polyglotPerChannel, 0) + (options.addRecoveryOnTop ? sourceRows.length : 0);
   if (assignments.length !== expectedCount) blockers.push(`assignment count ${assignments.length} != ${expectedCount}`);
   if (new Set(assignments.map((row) => row.assignmentKey)).size !== assignments.length) blockers.push("campaign contains duplicate assignment keys");
   if (new Set(assignments.map((row) => row.slotKey)).size !== assignments.length) blockers.push("campaign contains duplicate channel publish slots");
   for (const support of supports) {
     const ordinary = assignments.filter((row) => row.supportLang === support && row.videoType === "ordinary");
     const polyglot = assignments.filter((row) => row.supportLang === support && row.videoType === "polyglot");
-    const expectedOrdinary = options.ordinaryPerChannel + (options.addRecoveryOnTop ? sourceRows.filter((row) => row.supportLang === support && row.videoType === "ordinary").length : 0);
+    const expectedOrdinary = (options.ordinaryPerChannelOverrides?.[support] ?? options.ordinaryPerChannel) + (options.addRecoveryOnTop ? sourceRows.filter((row) => row.supportLang === support && row.videoType === "ordinary").length : 0);
     const expectedPolyglot = options.polyglotPerChannel + (options.addRecoveryOnTop ? sourceRows.filter((row) => row.supportLang === support && row.videoType === "polyglot").length : 0);
     if (ordinary.length !== expectedOrdinary) blockers.push(`${support}: ordinary assignment count ${ordinary.length} != ${expectedOrdinary}`);
     if (polyglot.length !== expectedPolyglot) blockers.push(`${support}: Polyglot assignment count ${polyglot.length} != ${expectedPolyglot}`);
@@ -805,8 +813,8 @@ export function buildIntegratedRecoveryWave(options) {
   };
   const inputs = {
     ...base.inputs,
-    ordinarySupportCount: supports.length,
-    polyglotSupportCount: supports.length,
+    ordinarySupportCount: new Set(assignments.filter((row) => row.videoType === "ordinary").map((row) => row.supportLang)).size,
+    polyglotSupportCount: new Set(assignments.filter((row) => row.videoType === "polyglot").map((row) => row.supportLang)).size,
     productionDeferredSupportCount: 0,
     ordinaryPerChannel: options.ordinaryPerChannel,
     polyglotPerChannel: options.polyglotPerChannel,
@@ -816,7 +824,8 @@ export function buildIntegratedRecoveryWave(options) {
       additiveRecovery: true,
       newOrdinaryPerChannel: options.ordinaryPerChannel,
       newPolyglotPerChannel: options.polyglotPerChannel,
-      newAssignmentKeys: base.assignments.map((row) => row.assignmentKey),
+      newOrdinaryPerChannelOverrides: options.ordinaryPerChannelOverrides || {},
+      newAssignmentKeys: newAssignments.map((row) => row.assignmentKey),
       recoveryAssignmentKeys: sourceRows.map((row) => row.assignmentKey),
       ordinaryPerChannel: Math.max(...supports.map((support) => assignments.filter((row) => row.supportLang === support && row.videoType === "ordinary").length)),
       polyglotPerChannel: Math.max(...supports.map((support) => assignments.filter((row) => row.supportLang === support && row.videoType === "polyglot").length)),

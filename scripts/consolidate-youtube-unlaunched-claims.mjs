@@ -207,6 +207,7 @@ export function buildUnlaunchedClaimConsolidation({ registry, calendar, manifest
       sourceRows: sourceRows.map((row) => row.assignment),
       ordinaryPerChannel: manifest.inputs.newOrdinaryPerChannel,
       polyglotPerChannel: manifest.inputs.newPolyglotPerChannel,
+      ordinaryPerChannelOverrides: manifest.inputs.newOrdinaryPerChannelOverrides || {},
     });
   }
   const manifestAssignments = new Map((manifest.assignments || []).map((row) => [row.assignmentKey, row]));

@@ -89,6 +89,11 @@ assert.throws(() => composeAdditiveRecoveryAssignments({ ...additiveOptions, sou
 assert.throws(() => composeAdditiveRecoveryAssignments({ ...additiveOptions, sourceRows: [{ ...sourceRows[1], youtubeVideoId: "accepted" }] }), /cannot be replayed/);
 assert.throws(() => composeAdditiveRecoveryAssignments({ ...additiveOptions, baseAssignments: baseAssignments.slice(1) }), /retain exactly/);
 assert.throws(() => composeAdditiveRecoveryAssignments({ ...additiveOptions, sourceRows: [sourceRows[1], sourceRows[1]] }), /overlaps new assignments/);
+const budgetOptions = { ...additiveOptions, ordinaryPerChannelOverrides: { A: 1 }, baseAssignments: baseAssignments.filter((row) => row.assignmentKey !== baseAssignments[0].assignmentKey) };
+assert.equal(composeAdditiveRecoveryAssignments(budgetOptions).ordinary.length, 3);
+assert.throws(() => composeAdditiveRecoveryAssignments({ ...budgetOptions, baseAssignments }), /retain exactly/);
+assert.throws(() => composeAdditiveRecoveryAssignments({ ...budgetOptions, ordinaryPerChannelOverrides: { A: 3 } }), /invalid ordinary count override/);
+assert.throws(() => composeAdditiveRecoveryAssignments({ ...budgetOptions, ordinaryPerChannelOverrides: { UNKNOWN: 1 } }), /unknown ordinary override/);
 assert.deepEqual(ordinaryOnlySource.polyglotAssignments, baseAssignments.filter((row) => row.videoType === "polyglot"));
 assert.equal(ordinaryOnlySource.pendingPolyglot.length, 0);
 
