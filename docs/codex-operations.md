@@ -125,6 +125,8 @@ Note: the desktop `exec_command` tool used by some Codex app sessions may not be
 
 Allowed default automation class: **read-only drift check**.
 
+Exact user-approved exception (2026-10-15 only): one scheduled wake-up at16:02Asia/Bangkok may dispatch the already verified and merged Deck11 final406ordinary/0Polyglot campaign `yt-home_laundry_cleaning_basics_a1_a2-2026-10-15-7d336543d94b` / `fccc00ff42f0c8406198962fc4ccf9032ec5c6d392e5d82d63f4f4893b8104cb`, after mergedmanifest/claimedstate/futureslots and no-priordispatch checks. This direct user request overrides the unattended-publication default for that one parent only; it grants no retry, replacement, newwave, directchild, quota bypass or accepted reupload. Delete the one-shot automation after dispatch or a blocker.
+
 Safe automation prompt:
 
 ```text
