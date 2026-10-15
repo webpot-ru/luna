@@ -157,6 +157,7 @@ function buildCoverPlan({
           targetLabel: `${targetName} A1`,
           title: localized.title,
           description: localized.description,
+          descriptionLayout: setConfig.descriptionLayout || "legacy-single-line",
           module: localized.module,
           category: localized.category,
           baseImage: setConfig.ordinaryBasePath,
@@ -203,6 +204,7 @@ function buildCoverPlan({
           polyglotKey: `polyglot:${setId}:${supportLang}:${bundleKey}:${targetLangsHash}`,
           title: localized.title,
           description: localized.description,
+          descriptionLayout: setConfig.descriptionLayout || "legacy-single-line",
           module: localized.module,
           category: localized.category,
           baseImage: setConfig.polyglotBasePath,
@@ -227,8 +229,41 @@ function fontFamilyForText(value) {
   return "Noto Sans, Arial, sans-serif";
 }
 
-function textElement(value, { x, y, size, weight = 400, color = "#07164d" }) {
-  return `<text x="${x}" y="${y}" font-family="${fontFamilyForText(value)}" font-size="${size}" font-weight="${weight}" fill="${color}">${xmlEscape(value)}</text>`;
+function textElement(value, { x, y, size, weight = 400, color = "#07164d", textLength }) {
+  const bounded = textLength ? ` textLength="${textLength}" lengthAdjust="spacingAndGlyphs"` : "";
+  return `<text x="${x}" y="${y}" font-family="${fontFamilyForText(value)}" font-size="${size}" font-weight="${weight}" fill="${color}"${bounded}>${xmlEscape(value)}</text>`;
+}
+
+function descriptionWeight(value) {
+  return visualWeight(String(value).replace(/\p{Script=Cyrillic}/gu, char => char === char.toUpperCase() ? "A" : "a"));
+}
+
+function fitCoverDescription(value, width) {
+  const text = String(value || "").trim();
+  if (!text) return { lines: [], size: 24 };
+  const segments = [...new Intl.Segmenter(undefined, { granularity: "word" }).segment(text)].map(row => row.segment);
+  for (const size of [24, 23, 22, 21, 20, 19]) {
+    const lines = [];
+    let current = "";
+    for (const segment of segments) {
+      if (current && descriptionWeight(current + segment) * size * 1.12 > width) {
+        lines.push(current.trim());
+        current = segment.trimStart();
+      } else current += segment;
+    }
+    if (current.trim()) lines.push(current.trim());
+    if (lines.length <= 2 && lines.every(line => descriptionWeight(line) * size * 1.12 <= width)) return { lines, size };
+  }
+  throw new Error("Cover description does not fit the two-line safe area");
+}
+
+function coverDescriptionSvg(cover, { width, top, legacyY, legacySize }) {
+  if (cover.descriptionLayout !== "wrapped-safe-area-v1") return textElement(cover.description, { x: 136, y: legacyY, size: legacySize, color: "#23334c" });
+  const { lines, size } = fitCoverDescription(cover.description, width);
+  return lines.map((line, index) => textElement(line, {
+    x: 136, y: top + (lines.length === 1 ? 41 : 26 + index * 24), size,
+    color: "#23334c", textLength: Math.min(width, Math.ceil(descriptionWeight(line) * size * 1.12)),
+  })).join("");
 }
 
 function commonBottomDecoration() {
@@ -258,7 +293,7 @@ function ordinaryOverlaySvg(cover) {
       ${textElement(cover.title, { x: 79, y: titleY, size: titleSize, weight: 400, color: "#08204e" })}
       <rect x="78" y="430" width="570" height="64" rx="32" fill="#fffefa" fill-opacity="0.94" stroke="#e7e2d5" stroke-width="2"/>
       <circle cx="112" cy="462" r="10" fill="#65b776"/>
-      ${textElement(cover.description, { x: 136, y: 472, size: descriptionSize, color: "#23334c" })}
+      ${coverDescriptionSvg(cover, { width: 488, top: 430, legacyY: 472, legacySize: descriptionSize })}
       ${commonBottomDecoration()}
     </svg>`;
 }
@@ -283,7 +318,7 @@ function polyglotOverlaySvg(cover) {
       ${textElement(cover.title, { x: 79, y: 389, size: titleSize, color: "#08204e" })}
       <rect x="78" y="438" width="610" height="64" rx="32" fill="#fffefa" fill-opacity="0.94" stroke="#e7e2d5" stroke-width="2"/>
       <circle cx="112" cy="470" r="10" fill="#65b776"/>
-      ${textElement(cover.description, { x: 136, y: 480, size: descriptionSize, color: "#23334c" })}
+      ${coverDescriptionSvg(cover, { width: 528, top: 438, legacyY: 480, legacySize: descriptionSize })}
       ${commonBottomDecoration()}
     </svg>`;
 }
@@ -291,6 +326,7 @@ function polyglotOverlaySvg(cover) {
 export {
   buildCoverPlan,
   fittedFontSize,
+  fitCoverDescription,
   fontFamilyForText,
   hashTargets,
   languageLabel,

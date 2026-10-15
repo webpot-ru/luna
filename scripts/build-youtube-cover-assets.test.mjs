@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import {
   buildCoverPlan,
   fittedFontSize,
+  fitCoverDescription,
   fontFamilyForText,
   ordinaryOverlaySvg,
   polyglotOverlaySvg,
@@ -63,6 +64,14 @@ const polyglot = plan.covers.find((cover) => cover.videoType === "polyglot");
 assert.match(ordinaryOverlaySvg(ordinary), /FlashcardsLuna/);
 assert.match(polyglotOverlaySvg(polyglot), /Polyglot/);
 assert.equal(xmlEscape("A&B <C>"), "A&amp;B &lt;C&gt;");
+const longDescription = "Слова для рабочего стола и кабинета. Начальный уровень.";
+assert.equal(fitCoverDescription(longDescription, 488).lines.length, 2);
+assert.match(ordinaryOverlaySvg({ ...ordinary, description: longDescription, descriptionLayout: "wrapped-safe-area-v1" }), /lengthAdjust="spacingAndGlyphs"/);
+assert.doesNotMatch(ordinaryOverlaySvg(ordinary), /lengthAdjust=/);
+assert.throws(() => fitCoverDescription("W".repeat(300), 488), /does not fit/);
+for (const text of ["คำศัพท์โต๊ะทำงาน ระดับต้น", "මේසය සහ කාර්යාල වචන. මූලික මට්ටම.", "စားပွဲနှင့် ရုံးသုံးစကားလုံးများ။ အခြေခံအဆင့်။"]) {
+  assert.ok(fitCoverDescription(text, 528).lines.length <= 2);
+}
 assert.ok(fittedFontSize("A very long language label", 200, 68, 24) >= 24);
 assert.match(fontFamilyForText("සිංහල"), /Sinhala MN/);
 assert.doesNotMatch(fontFamilyForText("English"), /Sinhala MN/);
