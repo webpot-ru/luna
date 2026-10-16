@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
+import fs from "node:fs";
 
 import {
   courseSetBySlug,
@@ -298,4 +299,7 @@ const reviewed = markPotentialCurrentSetUnmatched({
 assert.equal(reviewed.potentialCurrentSet, false);
 assert.equal(reviewed.reviewedNonProduct, true);
 
+const productionCourseLinks = JSON.parse(fs.readFileSync(new URL("../config/video-public-course-links.json", import.meta.url), "utf8"));
+assert.equal(productionCourseLinks.publishedCourseSlugBySetId.home_office_desk_a1_a2, "home-office-desk");
+assert.equal(courseSetBySlug(productionCourseLinks).get("home-office-desk"), "home_office_desk_a1_a2");
 console.log("youtube live publication audit classification tests passed");

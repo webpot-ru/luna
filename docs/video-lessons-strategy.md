@@ -1,5 +1,7 @@
 # Video Lessons Strategy & Specifications
 
+2026-10-16 Deck12 course routing: `home_office_desk_a1_a2` maps to published course slug `home-office-desk` in `config/video-public-course-links.json`. The English course page was read back successfully with Home Office content. This restores live-audit classification; the previous control stopped before claim or uploads. Regression tests verify the production mapping and reverse lookup. Publication still requires a successful fresh control and exact claimed manifest.
+
 ## Edge TTS October 2026 endpoint compatibility
 
 Edge speech calls use the process-only adapter `scripts/edge-tts-compatible.py`, based on upstream `rany2/edge-tts` PR491 endpoint/date changes. It redirects synthesis to Microsoft's `api.msedgeservices.com/tts/cognitiveservices/websocket/v1` and parses HTTP Date independent of locale. Installed files, voice list, configured voices, MP3 format and cache identity remain unchanged; no proxy or alternate provider. `EDGE_TTS_PYTHON` may select an existing interpreter; otherwise use source-tools venv Python or system Python. Errors report class/status without authentication URLs.
