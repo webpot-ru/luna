@@ -4,6 +4,11 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { hasPolyglotPricingCopy } from "./lib/polyglot-description-policy.mjs";
+
+assert.equal(hasPolyglotPricingCopy("Sluit af met een review en oefen gratis via:"), true);
+assert.equal(hasPolyglotPricingCopy("Oefen de woorden en herhaal de kaarten."), false);
+assert.equal(hasPolyglotPricingCopy("Try free practice"), true);
 
 import { buildPolyglotPlaylistAssignment } from "./lib/polyglot-youtube-playlists.mjs";
 

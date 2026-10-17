@@ -1,5 +1,7 @@
 # YouTube Publication Campaigns
 
+Polyglot campaign metadata applies the same pricing-copy policy as the final metadata checker before rendering. If generated description copy contains forbidden pricing/free/paid wording, use the existing localized template description instead; if that template also violates the policy, fail before TTS/render/upload. The final checker remains strict. This covers the Deck12 NL `oefen gratis` failure without changing voices or accepted publications.
+
 ## Exact Polyglot worker metadata isolation
 
 Campaign metadata copying supports paired `--bundle` and `--content-scope` selectors for a single Polyglot worker. Both are required together and must resolve exactly one durable assignment. The Polyglot workflow passes its matrix bundle/effective scope, so a channel with multiple bundles does not copy unrelated metadata into `outputs/video-generator`. Ordinary copying and legacy unfiltered per-support copying remain unchanged. Missing/ambiguous assignments fail before copying/render/upload; checksums, campaign hash, publishAt and playlist identity gates remain mandatory. Regression test: `npm run test:youtube-campaign-metadata-copy`.
