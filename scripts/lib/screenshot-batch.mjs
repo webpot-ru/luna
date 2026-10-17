@@ -33,7 +33,10 @@ async function main() {
     await page.setViewportSize({ width: 1920, height: 1080 });
 
     // Load renderer template once
-    await page.goto(`file://${rendererPath}`);
+    // Preserve the load gate (including styles/fonts), but allow a busy runner
+    // more than Playwright's default 30 seconds. Never capture a partial page.
+    await page.goto(`file://${rendererPath}`, { waitUntil: "load", timeout: 120000 });
+    await page.waitForFunction(() => typeof window.renderTask === "function", null, { timeout: 30000 });
     
     // Give browser brief time to initialize Tailwind / Fonts
     await page.waitForTimeout(200);
@@ -42,8 +45,12 @@ async function main() {
       const task = taskChunk[i];
       
       // Update DOM dynamically in client page
-      await page.evaluate((t) => {
+      await page.evaluate(async (t) => {
         window.renderTask(t);
+        await Promise.race([
+          document.fonts.ready,
+          new Promise((_, reject) => setTimeout(() => reject(new Error("Renderer fonts not ready")), 30000)),
+        ]);
       }, task);
       
       // Capture screenshot

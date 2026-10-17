@@ -1,5 +1,7 @@
 # Video Lessons Strategy & Specifications
 
+2026-10-17 Deck12 local repair: HTTP429 Edge TTS retries retain the configured voices and existing attempt budget, with bounded 30/60/120-second cooldowns and jitter. Screenshot capture retains the full page-load gate with a120-second timeout, renderTask readiness and per-task font readiness. No dependencies or providers changed. Local tests are not proof of provider recovery. Source parent38900488913 accepted474/510 with36missing and zero duplicate/receipt errors; recovery must exclude all474 accepted IDs.
+
 2026-10-16 Deck12 course routing: `home_office_desk_a1_a2` maps to published course slug `home-office-desk` in `config/video-public-course-links.json`. The English course page was read back successfully with Home Office content. This restores live-audit classification; the previous control stopped before claim or uploads. Regression tests verify the production mapping and reverse lookup. Publication still requires a successful fresh control and exact claimed manifest.
 
 ## Edge TTS October 2026 endpoint compatibility

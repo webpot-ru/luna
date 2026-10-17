@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { edgeTtsRetryDelay } from "./edge-tts-backoff.mjs";
 import { appendAi33TaskLedger, readAi33TaskForCache } from "./ai33-task-ledger.mjs";
 import { execSync, execFileSync } from "node:child_process";
 import { psqlJson } from "./qa-utils.mjs";
@@ -495,7 +496,7 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
           if (fs.existsSync(temporaryPath)) fs.unlinkSync(temporaryPath);
         } catch (e) {}
         if (attempt < retryCount) {
-          const waitMs = retryBaseMs * Math.pow(2, attempt - 1);
+          const waitMs = edgeTtsRetryDelay(formatExecError(err), attempt, retryBaseMs);
           console.warn(`[Local TTS] edge-tts failed for "${cleanedText.slice(0, 40)}..." using ${candidateCleanVoiceId} attempt ${attempt}/${retryCount}; retrying in ${waitMs}ms. ${formatExecError(err)}`);
           await delay(waitMs);
         }
