@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { hasPolyglotPricingCopy } from "./lib/polyglot-description-policy.mjs";
 
 import { getPublicStudyLanguageCodes, isSpecificStudyCourseUrl } from "./lib/video-public-url.mjs";
 import {
@@ -157,7 +158,7 @@ function validate(metadata, file) {
     blockers.push(`courseUrl langs mismatch: expected ${expectedUrlTargets.join(",")} got ${urlTargets.join(",")}`);
   }
   if (courseUrl && !description.includes(courseUrl)) blockers.push("description missing exact courseUrl");
-  if (/free|paid|pricing|subscription|tariff|бесплат|платн|тариф|precio|gratis|pago/iu.test(description)) {
+  if (hasPolyglotPricingCopy(description)) {
     blockers.push("description contains pricing/free/paid wording");
   }
   if (!/180/u.test(description)) warnings.push("description should mention 180+ themed decks");

@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
+import { hasPolyglotPricingCopy } from "./lib/polyglot-description-policy.mjs";
 
 import {
   GEMINI_STRUCTURED_BATCH_MAX_OUTPUT_TOKENS,
@@ -527,10 +528,14 @@ export function finalizeCampaignMetadata(task, generated, provider) {
   }
   const generatedDescription = String(generated.description || "").trim();
   const description = Array.from(generatedDescription).length >= minimumDescriptionLength
+    && !(task.assignment.videoType === "polyglot" && hasPolyglotPricingCopy(generatedDescription))
     ? generatedDescription
     : String(task.template.description || "").trim();
   if (Array.from(description).length < minimumDescriptionLength) {
     throw new Error(`${task.assignment.assignmentKey}: description is below ${minimumDescriptionLength} Unicode characters after localized template fallback`);
+  }
+  if (task.assignment.videoType === "polyglot" && hasPolyglotPricingCopy(description)) {
+    throw new Error(`${task.assignment.assignmentKey}: localized description fallback contains pricing copy`);
   }
   const merged = normalizeYouTubeMetadata({
     ...task.template,
