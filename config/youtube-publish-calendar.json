@@ -2077723,7 +2077723,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-18-50da3c0f0099",
       "campaignManifestHash": "6f9eba03a9160da4805edfbd33195d67d61adf2995883ace41b3dcef307bd8d4",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2077747,13 +2077747,42 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-10-18T05:05:26.461Z",
-      "updatedAt": "2026-10-18T05:05:26.461Z"
+      "updatedAt": "2026-10-18T05:42:30.646Z",
+      "bundleLabel": "Romance Core",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_office_desk_a1_a2_polyglot_bn_romance_core/youtube_metadata.json",
+      "title": "হোম অফিসের শব্দভান্ডার: স্প্যানিশ, ফরাসি, ইতালীয় ও পর্তুগিজ",
+      "playlist_key": "POLYGLOT__BN__romance-core__f34a59a474f1",
+      "githubRunId": "39100268154",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39100268154",
+      "youtubeVideoId": "-irWVMa6K-w",
+      "youtubePlaylistId": "PLYOdZ-Ozi6x0",
+      "playlistItemId": "UExZT2RaLU96aTZ4MC40NzZCMERDMjVEN0RFRThB",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-21T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-23T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-27T11:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-19T11:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-18-50da3c0f0099",
       "campaignManifestHash": "6f9eba03a9160da4805edfbd33195d67d61adf2995883ace41b3dcef307bd8d4",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2077777,7 +2077806,36 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-10-18T05:05:26.461Z",
-      "updatedAt": "2026-10-18T05:05:26.461Z"
+      "updatedAt": "2026-10-18T05:42:30.646Z",
+      "bundleLabel": "Romance Core",
+      "targetLangsCsv": "ES,FR,IT,PT",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_office_desk_a1_a2_polyglot_pl_romance_core/youtube_metadata.json",
+      "title": "Słownictwo wielojęzyczne: Domowe biuro | 4 języki",
+      "playlist_key": "POLYGLOT__PL__romance-core__f34a59a474f1",
+      "githubRunId": "39011946312",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39011946312",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-21T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-23T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-27T12:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-19T12:30:00.000Z"
+        }
+      ],
+      "youtubeVideoId": "epAl-62QKvo",
+      "youtubePlaylistId": "PLNC-PrKq9lEc",
+      "playlistItemId": "UExOQy1QcktxOWxFYy40NzZCMERDMjVEN0RFRThB"
     }
   ]
 }
