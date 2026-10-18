@@ -2077135,7 +2077135,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-18-0ad0d15dce63",
       "campaignManifestHash": "146233253abe7d3dce04359a45d69fbebc7e0fc07ddf8fd70226fa25043790c8",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2077159,7 +2077159,7 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-10-18T01:11:21.224Z",
-      "updatedAt": "2026-10-18T01:11:21.224Z",
+      "updatedAt": "2026-10-18T05:05:26.461Z",
       "bundleLabel": "Romance Core",
       "targetLangsCsv": "ES,FR,IT,PT",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -2077185,7 +2077185,9 @@
           "hoursAfterPublish": 720,
           "dueAt": "2026-11-19T11:30:00.000Z"
         }
-      ]
+      ],
+      "supersededAt": "2026-10-18T05:05:26.461Z",
+      "supersededByCampaignId": "yt-home_office_desk_a1_a2-2026-10-18-50da3c0f0099"
     },
     {
       "schemaVersion": 1,
@@ -2077663,7 +2077665,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-18-0ad0d15dce63",
       "campaignManifestHash": "146233253abe7d3dce04359a45d69fbebc7e0fc07ddf8fd70226fa25043790c8",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2077687,7 +2077689,7 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-10-18T01:11:21.224Z",
-      "updatedAt": "2026-10-18T01:11:21.224Z",
+      "updatedAt": "2026-10-18T05:05:26.461Z",
       "bundleLabel": "Romance Core",
       "targetLangsCsv": "ES,FR,IT,PT",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -2077713,7 +2077715,69 @@
           "hoursAfterPublish": 720,
           "dueAt": "2026-11-19T12:30:00.000Z"
         }
-      ]
+      ],
+      "supersededAt": "2026-10-18T05:05:26.461Z",
+      "supersededByCampaignId": "yt-home_office_desk_a1_a2-2026-10-18-50da3c0f0099"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_office_desk_a1_a2-2026-10-18-50da3c0f0099",
+      "campaignManifestHash": "6f9eba03a9160da4805edfbd33195d67d61adf2995883ace41b3dcef307bd8d4",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "BN",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:BN:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "bn",
+      "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
+      "publishAt": "2026-10-20T11:30:00.000Z",
+      "timeZone": "Asia/Dhaka",
+      "localDate": "2026-10-20",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "createdAt": "2026-10-18T05:05:26.461Z",
+      "updatedAt": "2026-10-18T05:05:26.461Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_office_desk_a1_a2-2026-10-18-50da3c0f0099",
+      "campaignManifestHash": "6f9eba03a9160da4805edfbd33195d67d61adf2995883ace41b3dcef307bd8d4",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "PL",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:PL:romance_core:f34a59a474f1:short_unverified",
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "publishAt": "2026-10-20T12:30:00.000Z",
+      "timeZone": "Europe/Warsaw",
+      "localDate": "2026-10-20",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "createdAt": "2026-10-18T05:05:26.461Z",
+      "updatedAt": "2026-10-18T05:05:26.461Z"
     }
   ]
 }

@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-18T05:05:26.461Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_office_desk_a1_a2",
+  "inputs": {
+    "supports": "BN,PL",
+    "supportCount": 2,
+    "ordinarySupportCount": 0,
+    "polyglotSupportCount": 2,
+    "ordinaryPerChannel": 0,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "polyglot|home_office_desk_a1_a2|BN|romance_core|f34a59a474f1|short_unverified",
+      "polyglot|home_office_desk_a1_a2|PL|romance_core|f34a59a474f1|short_unverified"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 360,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_office_desk_a1_a2-2026-10-18-0ad0d15dce63",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_office_desk_a1_a2-2026-10-18-0ad0d15dce63",
+      "manifestHash": "146233253abe7d3dce04359a45d69fbebc7e0fc07ddf8fd70226fa25043790c8",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-3",
+        "generatedAt": "2026-10-18T04:53:59.697Z",
+        "ageMinutes": 11.446066666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-10-18T04:53:17.100Z",
+        "ageMinutes": 12.156016666666666,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "e607b9b0097b239eeab2e635efb3e8dbc27db437e52a6a2e8da236950d5bd950"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "720145a5d42ec06f0d237e0f64739831c7bd1f79f08cab8d95bef74ba5406f23"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "4999e5fb123771f09424698f1f09e0b2ac23019377aa545cd2c245df6b247c32"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "2f09563cf81d5194d29d29a92604419cbe9d9f356b8f5a5a592dd68cf5e8d976"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_office_desk_a1_a2.json",
+        "exists": true,
+        "sha256": "ce770c59281738c9ac5ea00a5533c5d29acf09b2083221eda4cf8e01eebb1ab7"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "360cfa3c8c5eccc41c8be58210a59379dde27e12dd5e6d83d67d0c2233b035ba"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 2,
+    "supportCount": 2,
+    "ordinaryCount": 0,
+    "polyglotCount": 2,
+    "assignmentCount": 2,
+    "firstPublishAt": "2026-10-20T11:30:00.000Z",
+    "lastPublishAt": "2026-10-20T12:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 2,
+    "existingPlaylistCount": 2,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-2": 1,
+      "youtube-3": 1
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 2,
+    "estimatedPlaylistItemInsertUnits": 100,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 100,
+    "byRoute": {
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "BN: short_unverified <=895s",
+    "PL: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_office_desk_a1_a2|BN|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_office_desk_a1_a2|BN|romance_core|short_unverified|bn",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "BN",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "sourceAssignmentKey": "polyglot|home_office_desk_a1_a2|BN|romance_core|f34a59a474f1|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:BN:romance_core:f34a59a474f1:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_bn-IN-TanishaaNeural",
+        "supportLang": "BN"
+      },
+      "channelKey": "bn",
+      "youtubeChannelId": "UC7b5gr-bgZ2dZ4hgNNv5YBg",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-10-20T11:30:00.000Z",
+      "localDate": "2026-10-20",
+      "localTime": "17:30",
+      "timeZone": "Asia/Dhaka",
+      "slotKey": "bn|2026-10-20T11:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__BN__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "PLYOdZ-Ozi6x0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: স্প্যানিশ, ফরাসি, ইতালীয়, পর্তুগিজ",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: স্প্যানিশ, ফরাসি, ইতালীয়, পর্তুগিজ. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-17T05:36:40.839Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "polyglot|home_office_desk_a1_a2|PL|romance_core|f34a59a474f1|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_office_desk_a1_a2|PL|romance_core|short_unverified|pl",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "PL",
+      "targetLang": "ES,FR,IT,PT",
+      "targetLangs": [
+        "ES",
+        "FR",
+        "IT",
+        "PT"
+      ],
+      "targetLangsHash": "f34a59a474f1",
+      "bundleKey": "romance_core",
+      "sourceAssignmentKey": "polyglot|home_office_desk_a1_a2|PL|romance_core|f34a59a474f1|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:PL:romance_core:f34a59a474f1:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_pl-PL-ZofiaNeural",
+        "supportLang": "PL"
+      },
+      "channelKey": "pl",
+      "youtubeChannelId": "UCvwHEuWlEdVZ8YLVOJbigyw",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-10-20T12:30:00.000Z",
+      "localDate": "2026-10-20",
+      "localTime": "14:30",
+      "timeZone": "Europe/Warsaw",
+      "slotKey": "pl|2026-10-20T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__PL__romance-core__f34a59a474f1",
+        "youtubePlaylistId": "PLNC-PrKq9lEc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: hiszpański, francuski, włoski, portugalski",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: hiszpański, francuski, włoski, portugalski. Themed decks, flashcards, pronunciation and review. Bundle: romance_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-17T05:36:40.839Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 2
+    }
+  ],
+  "campaignId": "yt-home_office_desk_a1_a2-2026-10-18-50da3c0f0099",
+  "manifestHash": "6f9eba03a9160da4805edfbd33195d67d61adf2995883ace41b3dcef307bd8d4"
+}
