@@ -6,6 +6,7 @@ import { spawnSync } from "node:child_process";
 
 import { assignmentKey, calendarAssignmentKey } from "./lib/youtube-publication-control.mjs";
 import { longVideoUploadAllowed, resolveYoutubeVideoProductionReadiness } from "./lib/youtube-video-production-readiness.mjs";
+import { ordinaryCountOverrides } from "./lib/youtube-campaign-counts.mjs";
 
 function parseArgs(argv) {
   const options = {
@@ -187,6 +188,15 @@ function main() {
     target.set(row.supportLang, values);
   }
   const ordinaryExpected = Number(campaign.inputs?.ordinaryPerChannel || 0);
+  const declaredSupports = String(campaign.inputs?.supports || "").split(",").filter(Boolean);
+  const overrides = ordinaryCountOverrides(campaign.inputs?.ordinaryPerChannelOverrides, declaredSupports, ordinaryExpected);
+  // Explicit mixed waves remain exact, not a permissive partial-tail mode.
+  // Include absent supports so deleting a whole worker cannot pass this gate.
+  for (const [support, count] of Object.entries(overrides)) {
+    if ((ordinaryBySupport.get(support)?.length || 0) !== count) {
+      blockers.push(`${support}: ordinary rows ${ordinaryBySupport.get(support)?.length || 0} != explicit override ${count}`);
+    }
+  }
   // `partialRecoveryOfCampaignId` is the durable identity of pre-flag partial
   // recovery manifests. Keep those immutable manifests dispatchable while new
   // manifests additionally record the explicit partial-tail flag.
@@ -195,11 +205,12 @@ function main() {
   const allowPartialPolyglotTail = campaign.inputs?.allowPartialPolyglotTail === true;
   const polyglotExpected = Number(campaign.inputs?.polyglotPerChannel || 0);
   const ordinaryMatrix = [...ordinaryBySupport.entries()].map(([support, rows]) => {
+    const expected = overrides[support] ?? ordinaryExpected;
     if (allowPartialOrdinaryTail) {
-      if (rows.length < 1 || rows.length > ordinaryExpected) {
-        blockers.push(`${support}: ordinary rows ${rows.length} must be within 1..${ordinaryExpected} for a partial tail campaign`);
+      if (rows.length < 1 || rows.length > expected) {
+        blockers.push(`${support}: ordinary rows ${rows.length} must be within 1..${expected} for a partial tail campaign`);
       }
-    } else if (rows.length !== ordinaryExpected) blockers.push(`${support}: ordinary rows ${rows.length} != ${ordinaryExpected}`);
+    } else if (rows.length !== expected) blockers.push(`${support}: ordinary rows ${rows.length} != ${expected}`);
     return {
       support,
       langs: rows.map((row) => row.targetLang).join(","),

@@ -11,6 +11,12 @@ import {
   verifyCampaignManifest,
 } from "./youtube-publication-campaign.mjs";
 import { loadCanonicalSupportRouting } from "./youtube-support-routing.mjs";
+import { ordinaryCountOverrides } from "./youtube-campaign-counts.mjs";
+
+assert.deepEqual(ordinaryCountOverrides("RU:3,EN:2", ["EN", "RU"], 5), { EN: 2, RU: 3 });
+for (const value of ["EN:2,EN:3", "UNKNOWN:2", "EN:6", "EN:0", "EN:-1", "EN:1.5", "EN:2junk", [], { EN: "2" }]) {
+  assert.throws(() => ordinaryCountOverrides(value, ["EN", "RU"], 5));
+}
 
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "youtube-publication-campaign-"));
 const writeJson = (name, value) => {
@@ -114,6 +120,27 @@ assert.deepEqual(offlineDeckAssignmentCoverageBlockers({ cards: { ID: { AZ: [{ m
 }]), []);
 
 const first = buildPublicationCampaign(baseOptions);
+const twelveSupports = [...canonicalRouting.supportToChannel.keys()].slice(0, 16);
+const nineOverrides = Object.fromEntries([...canonicalRouting.supportToChannel.keys()]
+  .filter((support) => !twelveSupports.includes(support)).map((support) => [support, 9]));
+const mixed = buildPublicationCampaign({ ...baseOptions, ordinaryPerChannel: 12, ordinaryPerChannelOverrides: nineOverrides });
+verifyCampaignManifest(mixed);
+assert.equal(mixed.summary.applyReady, true, mixed.blockers.join("; "));
+assert.equal(mixed.summary.assignmentCount, 558);
+assert.equal(mixed.summary.ordinaryCount, 507);
+assert.equal(mixed.summary.polyglotCount, 51);
+assert.equal(mixed.inputs.allowPartialOrdinaryTail, false);
+assert.deepEqual(mixed.inputs.ordinaryPerChannelOverrides, nineOverrides);
+for (const support of canonicalRouting.supportToChannel.keys()) {
+  assert.equal(mixed.assignments.filter((row) => row.supportLang === support && row.videoType === "ordinary").length, nineOverrides[support] ?? 12);
+  assert.equal(mixed.assignments.filter((row) => row.supportLang === support && row.videoType === "polyglot").length, 1);
+}
+assert.equal(new Set(mixed.assignments.map((row) => row.assignmentKey)).size, 558);
+assert.equal(new Set(mixed.assignments.map((row) => row.slotKey)).size, 558);
+assert.equal(mixed.estimatedUsage.estimatedVideoUploadCalls, 558);
+for (const override of [{ UNKNOWN: 9 }, { EN: 13 }]) {
+  assert.throws(() => buildPublicationCampaign({ ...baseOptions, ordinaryPerChannel: 12, ordinaryPerChannelOverrides: override }));
+}
 verifyCampaignManifest(first);
 assert.equal(first.summary.applyReady, true);
 assert.equal(first.summary.supportCount, 51);

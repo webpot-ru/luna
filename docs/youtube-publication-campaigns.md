@@ -1,5 +1,31 @@
 # YouTube Publication Campaigns
 
+## Explicit mixed ordinary counts
+
+One new campaign may use owner-approved per-support ordinary counts without a
+recovery source or permissive partial-tail mode. Set `--ordinary-per-channel` to
+the maximum and `--ordinary-count-overrides=FR:9,ID:9,...` for exact smaller
+counts. The read-only control workflow exposes the same CSV as
+`campaign_ordinary_count_overrides`. Only selected canonical supports, unique
+keys and integer counts in `1..ordinary_per_channel` are accepted. An empty map
+preserves the existing uniform-wave behavior and immutable manifest shape.
+
+The normalized `inputs.ordinaryPerChannelOverrides` map is hashed into the
+immutable manifest. Selection, exact total counts and parent worker preflight
+validate these counts. Missing workers, count drift and unknown supports fail
+closed; this is not permission to silently publish fewer videos. Claim, routes,
+quota, covers, public playlists, fresh live truth and accepted-ID exclusion
+remain mandatory. Apply uses the merged immutable manifest, not a new override
+passed at dispatch. Neither phone verification nor an upload-limit exemption is
+inferred from custom-thumbnail capability.
+
+Owner-approved Deck12 wave (2026-10-19): 16 custom-thumbnail-enabled physical
+channels get 12 ordinary + 1 Polyglot; the other 35 get 9 + 1, total
+558 = 507 ordinary + 51 Polyglot. Explicit support mapping is reviewed before
+claim; full/short follows `longVideoUploadAllowed`, not the ordinary count.
+One night attempt is planned for 2026-10-21 00:15 Asia/Bangkok; a time buffer is
+not evidence that YouTube's per-channel upload limit has cleared.
+
 Polyglot campaign metadata applies the same pricing-copy policy as the final metadata checker before rendering. If generated description copy contains forbidden pricing/free/paid wording, use the existing localized template description instead; if that template also violates the policy, fail before TTS/render/upload. The final checker remains strict. This covers the Deck12 NL `oefen gratis` failure without changing voices or accepted publications.
 
 ## Exact Polyglot worker metadata isolation

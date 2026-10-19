@@ -24,6 +24,7 @@ function parseArgs(argv) {
     if (arg === "--set" || arg.startsWith("--set=")) options.setId = value();
     else if (arg === "--supports" || arg.startsWith("--supports=")) options.supports = value();
     else if (arg === "--ordinary-per-channel" || arg.startsWith("--ordinary-per-channel=")) options.ordinaryPerChannel = Number(value());
+    else if (arg === "--ordinary-count-overrides" || arg.startsWith("--ordinary-count-overrides=")) options.ordinaryPerChannelOverrides = value();
     else if (arg === "--allow-partial-ordinary-tail") options.allowPartialOrdinaryTail = true;
     else if (arg === "--polyglot-per-channel" || arg.startsWith("--polyglot-per-channel=")) options.polyglotPerChannel = Number(value());
     else if (arg === "--allow-partial-polyglot-tail") options.allowPartialPolyglotTail = true;
@@ -55,7 +56,7 @@ function parseArgs(argv) {
 }
 
 function usage() {
-  return "node scripts/plan-youtube-publication-campaign.mjs --set=<set_id> [--supports=ALL] [--ordinary-per-channel=5] [--allow-partial-ordinary-tail] [--polyglot-per-channel=1] [--allow-partial-polyglot-tail] [--allow-partial-route-quota-tail --max-video-uploads-per-route=<route quota>] [--exclude-ordinary-targets=HY] [--start-date=YYYY-MM-DD] [--replacement-campaign-id=<id>]";
+  return "node scripts/plan-youtube-publication-campaign.mjs --set=<set_id> [--supports=ALL] [--ordinary-per-channel=5] [--ordinary-count-overrides=EN:3,RU:4] [--allow-partial-ordinary-tail] [--polyglot-per-channel=1] [--allow-partial-polyglot-tail] [--allow-partial-route-quota-tail --max-video-uploads-per-route=<route quota>] [--exclude-ordinary-targets=HY] [--start-date=YYYY-MM-DD] [--replacement-campaign-id=<id>]";
 }
 
 function main() {
