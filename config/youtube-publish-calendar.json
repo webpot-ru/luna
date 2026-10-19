@@ -2117072,7 +2117072,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-e1c87ce505b6",
       "campaignManifestHash": "c12a4ba9cad2b47655d6348b6f412fb75746a84039c2e9ab751ead21dda97c16",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2117095,7 +2117095,7 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-10-19T01:29:53.599Z",
-      "updatedAt": "2026-10-19T01:29:53.599Z",
+      "updatedAt": "2026-10-19T03:33:38.143Z",
       "bundleLabel": "East Asia Core",
       "targetLangsCsv": "ZH,JA,EN",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -2117121,13 +2117121,15 @@
           "hoursAfterPublish": 720,
           "dueAt": "2026-11-20T23:30:00.000Z"
         }
-      ]
+      ],
+      "supersededAt": "2026-10-19T03:33:38.143Z",
+      "supersededByCampaignId": "yt-home_office_desk_a1_a2-2026-10-19-b4810025cdba"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-e1c87ce505b6",
       "campaignManifestHash": "c12a4ba9cad2b47655d6348b6f412fb75746a84039c2e9ab751ead21dda97c16",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2117150,7 +2117152,7 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-10-19T01:29:53.599Z",
-      "updatedAt": "2026-10-19T01:29:53.599Z",
+      "updatedAt": "2026-10-19T03:33:38.143Z",
       "bundleLabel": "East Asia Core",
       "targetLangsCsv": "ZH,JA,KO",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -2117176,13 +2117178,15 @@
           "hoursAfterPublish": 720,
           "dueAt": "2026-11-21T03:00:00.000Z"
         }
-      ]
+      ],
+      "supersededAt": "2026-10-19T03:33:38.143Z",
+      "supersededByCampaignId": "yt-home_office_desk_a1_a2-2026-10-19-b4810025cdba"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-e1c87ce505b6",
       "campaignManifestHash": "c12a4ba9cad2b47655d6348b6f412fb75746a84039c2e9ab751ead21dda97c16",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2117205,7 +2117209,7 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-10-19T01:29:53.599Z",
-      "updatedAt": "2026-10-19T01:29:53.599Z",
+      "updatedAt": "2026-10-19T03:33:38.143Z",
       "bundleLabel": "East Asia Core",
       "targetLangsCsv": "ZH,JA,KO",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -2117231,13 +2117235,15 @@
           "hoursAfterPublish": 720,
           "dueAt": "2026-11-20T21:30:00.000Z"
         }
-      ]
+      ],
+      "supersededAt": "2026-10-19T03:33:38.143Z",
+      "supersededByCampaignId": "yt-home_office_desk_a1_a2-2026-10-19-b4810025cdba"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-e1c87ce505b6",
       "campaignManifestHash": "c12a4ba9cad2b47655d6348b6f412fb75746a84039c2e9ab751ead21dda97c16",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2117260,7 +2117266,7 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-10-19T01:29:53.599Z",
-      "updatedAt": "2026-10-19T01:29:53.599Z",
+      "updatedAt": "2026-10-19T03:33:38.143Z",
       "bundleLabel": "East Asia Core",
       "targetLangsCsv": "ZH,JA,KO",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -2117286,7 +2117292,9 @@
           "hoursAfterPublish": 720,
           "dueAt": "2026-11-20T21:30:00.000Z"
         }
-      ]
+      ],
+      "supersededAt": "2026-10-19T03:33:38.143Z",
+      "supersededByCampaignId": "yt-home_office_desk_a1_a2-2026-10-19-b4810025cdba"
     },
     {
       "schemaVersion": 1,
@@ -2117403,6 +2117411,122 @@
       "youtubeVideoId": "edZLfcGn6wI",
       "youtubePlaylistId": "PLTLbMG68YxN4",
       "playlistItemId": "UExUTGJNRzY4WXhONC5GNjNDRDREMDQxOThCMDQ2"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-b4810025cdba",
+      "campaignManifestHash": "55493c6dd1050916e92ebf96031de32f1d763f98a2d9e05fe714e0e8b9e16726",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "KO",
+      "targetLang": "ZH,JA,EN",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "EN"
+      ],
+      "targetLangsHash": "62f96bfdd5ad",
+      "bundleKey": "east_asia_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:KO:east_asia_core:62f96bfdd5ad:short_unverified",
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "publishAt": "2026-10-21T23:30:00.000Z",
+      "timeZone": "Asia/Seoul",
+      "localDate": "2026-10-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "createdAt": "2026-10-19T03:33:38.143Z",
+      "updatedAt": "2026-10-19T03:33:38.143Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-b4810025cdba",
+      "campaignManifestHash": "55493c6dd1050916e92ebf96031de32f1d763f98a2d9e05fe714e0e8b9e16726",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "ML",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:ML:east_asia_core:69af08ca98ea:short_unverified",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "publishAt": "2026-10-22T03:00:00.000Z",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-10-22",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "createdAt": "2026-10-19T03:33:38.143Z",
+      "updatedAt": "2026-10-19T03:33:38.143Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-b4810025cdba",
+      "campaignManifestHash": "55493c6dd1050916e92ebf96031de32f1d763f98a2d9e05fe714e0e8b9e16726",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "SK",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:SK:east_asia_core:69af08ca98ea:short_unverified",
+      "channelKey": "sk",
+      "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
+      "publishAt": "2026-10-21T21:30:00.000Z",
+      "timeZone": "Europe/Bratislava",
+      "localDate": "2026-10-21",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-10-19T03:33:38.143Z",
+      "updatedAt": "2026-10-19T03:33:38.143Z"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-b4810025cdba",
+      "campaignManifestHash": "55493c6dd1050916e92ebf96031de32f1d763f98a2d9e05fe714e0e8b9e16726",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "SL",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "contentScope": "short_unverified",
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:SL:east_asia_core:69af08ca98ea:short_unverified",
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "publishAt": "2026-10-21T21:30:00.000Z",
+      "timeZone": "Europe/Ljubljana",
+      "localDate": "2026-10-21",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "createdAt": "2026-10-19T03:33:38.143Z",
+      "updatedAt": "2026-10-19T03:33:38.143Z"
     }
   ]
 }
