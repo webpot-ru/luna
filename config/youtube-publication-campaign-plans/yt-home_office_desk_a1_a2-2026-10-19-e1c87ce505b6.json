@@ -1,0 +1,748 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-19T01:29:53.599Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_office_desk_a1_a2",
+  "inputs": {
+    "supports": "FR,ID,KO,ML,SK,SL,SV,TE",
+    "supportCount": 8,
+    "ordinarySupportCount": 0,
+    "polyglotSupportCount": 8,
+    "ordinaryPerChannel": 0,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "polyglot|home_office_desk_a1_a2|FR|east_asia_core|69af08ca98ea|short_unverified",
+      "polyglot|home_office_desk_a1_a2|ID|east_asia_core|69af08ca98ea|short_unverified",
+      "polyglot|home_office_desk_a1_a2|KO|east_asia_core|62f96bfdd5ad|short_unverified",
+      "polyglot|home_office_desk_a1_a2|ML|east_asia_core|69af08ca98ea|short_unverified",
+      "polyglot|home_office_desk_a1_a2|SK|east_asia_core|69af08ca98ea|short_unverified",
+      "polyglot|home_office_desk_a1_a2|SL|east_asia_core|69af08ca98ea|short_unverified",
+      "polyglot|home_office_desk_a1_a2|SV|east_asia_core|69af08ca98ea|short_unverified",
+      "polyglot|home_office_desk_a1_a2|TE|east_asia_core|69af08ca98ea|short_unverified"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 360,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_office_desk_a1_a2-2026-10-18-97c32fa3ea80",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_office_desk_a1_a2-2026-10-18-97c32fa3ea80",
+      "manifestHash": "0da36291947a0f05a0d25a5068c56f54ac3e96ca9e96725653fd87068ff73f6e",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-1",
+        "generatedAt": "2026-10-19T01:17:26.371Z",
+        "ageMinutes": 12.4538,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-4",
+        "generatedAt": "2026-10-19T01:18:25.860Z",
+        "ageMinutes": 11.462316666666666,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-10-19T01:17:27.323Z",
+        "ageMinutes": 12.437933333333334,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-3",
+        "generatedAt": "2026-10-19T01:18:05.118Z",
+        "ageMinutes": 11.808016666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "9307450388cbc1c6dec4836960298953d4da5385e714cdac69dabddf2ba58ce0"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "f6754e963cd89fd799d50d6a1be0f0487accfecc1f29d1d2be525bcb71304f44"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "c53ba83facaa6629579c5cef89a43c28428c595716fd633dea7cb8a8be938315"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "2f09563cf81d5194d29d29a92604419cbe9d9f356b8f5a5a592dd68cf5e8d976"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_office_desk_a1_a2.json",
+        "exists": true,
+        "sha256": "ce770c59281738c9ac5ea00a5533c5d29acf09b2083221eda4cf8e01eebb1ab7"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "57cee93e653e1570b44d44f35a1fa236959cee321914ea81fd6fbae25fb3ed5c"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 8,
+    "supportCount": 8,
+    "ordinaryCount": 0,
+    "polyglotCount": 8,
+    "assignmentCount": 8,
+    "firstPublishAt": "2026-10-21T21:30:00.000Z",
+    "lastPublishAt": "2026-10-22T06:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 8,
+    "existingPlaylistCount": 8,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 3,
+      "youtube-2": 2,
+      "youtube-3": 1,
+      "youtube-4": 2
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 8,
+    "estimatedPlaylistItemInsertUnits": 400,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 400,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 3,
+        "estimatedGeneralQuotaUnitsMaximum": 150
+      },
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 2,
+        "estimatedGeneralQuotaUnitsMaximum": 100
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 50
+      },
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 2,
+        "estimatedGeneralQuotaUnitsMaximum": 100
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [
+    "FR: short_unverified <=895s",
+    "ID: short_unverified <=895s",
+    "KO: short_unverified <=895s",
+    "ML: short_unverified <=895s",
+    "SK: short_unverified <=895s",
+    "SL: short_unverified <=895s",
+    "SV: short_unverified <=895s",
+    "TE: short_unverified <=895s"
+  ],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_office_desk_a1_a2|FR|east_asia_core|69af08ca98ea|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_office_desk_a1_a2|FR|east_asia_core|short_unverified|fr",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "FR",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "sourceAssignmentKey": "polyglot|home_office_desk_a1_a2|FR|east_asia_core|69af08ca98ea|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:FR:east_asia_core:69af08ca98ea:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_fr-FR-DeniseNeural",
+        "supportLang": "FR"
+      },
+      "channelKey": "fr",
+      "youtubeChannelId": "UCJZrNMM2-mljabRkBVnwK8A",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-10-22T06:30:00.000Z",
+      "localDate": "2026-10-22",
+      "localTime": "08:30",
+      "timeZone": "Europe/Paris",
+      "slotKey": "fr|2026-10-22T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__FR__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLbWWklDRc6uM",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Mode polyglotte : chinois, japonais, coréen",
+        "description": "FlashcardsLuna: playlist pour le mode polyglotte. Apprenez plusieurs langues à la fois : chinois, japonais, coréen. Jeux thématiques, cartes, prononciation et révision. Bundle : east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-18T09:35:35.762Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "polyglot|home_office_desk_a1_a2|ID|east_asia_core|69af08ca98ea|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_office_desk_a1_a2|ID|east_asia_core|short_unverified|id",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "ID",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "sourceAssignmentKey": "polyglot|home_office_desk_a1_a2|ID|east_asia_core|69af08ca98ea|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:ID:east_asia_core:69af08ca98ea:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_id-ID-GadisNeural",
+        "supportLang": "ID"
+      },
+      "channelKey": "id",
+      "youtubeChannelId": "UCn1USCTagnirdXvWTbADqEQ",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-10-22T01:30:00.000Z",
+      "localDate": "2026-10-22",
+      "localTime": "08:30",
+      "timeZone": "Asia/Jakarta",
+      "slotKey": "id|2026-10-22T01:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__ID__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLV-MEGbPZpdI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: Tionghoa, Jepang, Korea",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: Tionghoa, Jepang, Korea. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-18T09:35:35.762Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "polyglot|home_office_desk_a1_a2|KO|east_asia_core|62f96bfdd5ad|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_office_desk_a1_a2|KO|east_asia_core|short_unverified|ko",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "KO",
+      "targetLang": "ZH,JA,EN",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "EN"
+      ],
+      "targetLangsHash": "62f96bfdd5ad",
+      "bundleKey": "east_asia_core",
+      "sourceAssignmentKey": "polyglot|home_office_desk_a1_a2|KO|east_asia_core|62f96bfdd5ad|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:KO:east_asia_core:62f96bfdd5ad:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ko-KR-InJoonNeural",
+        "supportLang": "KO"
+      },
+      "channelKey": "ko",
+      "youtubeChannelId": "UCmW-V6tCaAPYAgrvL9RZibQ",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-10-21T23:30:00.000Z",
+      "localDate": "2026-10-22",
+      "localTime": "08:30",
+      "timeZone": "Asia/Seoul",
+      "slotKey": "ko|2026-10-21T23:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__KO__east-asia-core__62f96bfdd5ad",
+        "youtubePlaylistId": "PLbLK0i0Wyv4c",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: 중국어, 일본어, 영어",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: 중국어, 일본어, 영어. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-18T09:35:35.762Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "polyglot|home_office_desk_a1_a2|ML|east_asia_core|69af08ca98ea|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_office_desk_a1_a2|ML|east_asia_core|short_unverified|ml",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "ML",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "sourceAssignmentKey": "polyglot|home_office_desk_a1_a2|ML|east_asia_core|69af08ca98ea|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:ML:east_asia_core:69af08ca98ea:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ml-IN-SobhanaNeural",
+        "supportLang": "ML"
+      },
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-10-22T03:00:00.000Z",
+      "localDate": "2026-10-22",
+      "localTime": "08:30",
+      "timeZone": "Asia/Kolkata",
+      "slotKey": "ml|2026-10-22T03:00:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "POLYGLOT__ML__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLfRrPjcGcbsE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: ചൈനീസ്, ജാപ്പനീസ്, കൊറിയൻ",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: ചൈനീസ്, ജാപ്പനീസ്, കൊറിയൻ. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-18T09:35:35.762Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "polyglot|home_office_desk_a1_a2|SK|east_asia_core|69af08ca98ea|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_office_desk_a1_a2|SK|east_asia_core|short_unverified|sk",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "SK",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "sourceAssignmentKey": "polyglot|home_office_desk_a1_a2|SK|east_asia_core|69af08ca98ea|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:SK:east_asia_core:69af08ca98ea:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sk-SK-LukasNeural",
+        "supportLang": "SK"
+      },
+      "channelKey": "sk",
+      "youtubeChannelId": "UCIDc0SUyxjZTnFt-luxKlog",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-10-21T21:30:00.000Z",
+      "localDate": "2026-10-21",
+      "localTime": "23:30",
+      "timeZone": "Europe/Bratislava",
+      "slotKey": "sk|2026-10-21T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__SK__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLZKoFxySgt7c",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: čínština, japončina, kórejčina",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: čínština, japončina, kórejčina. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-18T09:35:35.762Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "polyglot|home_office_desk_a1_a2|SL|east_asia_core|69af08ca98ea|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_office_desk_a1_a2|SL|east_asia_core|short_unverified|sl",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "SL",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "sourceAssignmentKey": "polyglot|home_office_desk_a1_a2|SL|east_asia_core|69af08ca98ea|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:SL:east_asia_core:69af08ca98ea:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sl-SI-RokNeural",
+        "supportLang": "SL"
+      },
+      "channelKey": "sl",
+      "youtubeChannelId": "UCXhLXcLyGuV-hCVuTEIyQsA",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-10-21T21:30:00.000Z",
+      "localDate": "2026-10-21",
+      "localTime": "23:30",
+      "timeZone": "Europe/Ljubljana",
+      "slotKey": "sl|2026-10-21T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__SL__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLNiJt3pcmJv4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: kitajščina, japonščina, korejščina",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: kitajščina, japonščina, korejščina. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-18T09:35:35.762Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "polyglot|home_office_desk_a1_a2|SV|east_asia_core|69af08ca98ea|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_office_desk_a1_a2|SV|east_asia_core|short_unverified|sv",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "SV",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "sourceAssignmentKey": "polyglot|home_office_desk_a1_a2|SV|east_asia_core|69af08ca98ea|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:SV:east_asia_core:69af08ca98ea:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sv-SE-SofieNeural",
+        "supportLang": "SV"
+      },
+      "channelKey": "sv",
+      "youtubeChannelId": "UC1JztX4RUpFZ-x8TxQjM-4w",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-10-21T21:30:00.000Z",
+      "localDate": "2026-10-21",
+      "localTime": "23:30",
+      "timeZone": "Europe/Stockholm",
+      "slotKey": "sv|2026-10-21T21:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__SV__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLB5hMOfhdVK8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: kinesiska, japanska, koreanska",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: kinesiska, japanska, koreanska. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-18T09:35:35.762Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "polyglot|home_office_desk_a1_a2|TE|east_asia_core|69af08ca98ea|short_unverified",
+      "calendarAssignmentKey": "polyglot-slot|home_office_desk_a1_a2|TE|east_asia_core|short_unverified|te",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "TE",
+      "targetLang": "ZH,JA,KO",
+      "targetLangs": [
+        "ZH",
+        "JA",
+        "KO"
+      ],
+      "targetLangsHash": "69af08ca98ea",
+      "bundleKey": "east_asia_core",
+      "sourceAssignmentKey": "polyglot|home_office_desk_a1_a2|TE|east_asia_core|69af08ca98ea|short_unverified",
+      "requestedContentScope": "short_unverified",
+      "contentScope": "short_unverified",
+      "cardLimit": 0,
+      "maxDurationSeconds": 895,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:TE:east_asia_core:69af08ca98ea:short_unverified",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_te-IN-ShrutiNeural",
+        "supportLang": "TE"
+      },
+      "channelKey": "te",
+      "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-10-22T03:00:00.000Z",
+      "localDate": "2026-10-22",
+      "localTime": "08:30",
+      "timeZone": "Asia/Kolkata",
+      "slotKey": "te|2026-10-22T03:00:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__TE__east-asia-core__69af08ca98ea",
+        "youtubePlaylistId": "PLTLbMG68YxN4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: చైనీస్, జపనీస్, కొరియన్",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: చైనీస్, జపనీస్, కొరియన్. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-18T09:35:35.762Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    }
+  ],
+  "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-e1c87ce505b6",
+  "manifestHash": "c12a4ba9cad2b47655d6348b6f412fb75746a84039c2e9ab751ead21dda97c16"
+}
