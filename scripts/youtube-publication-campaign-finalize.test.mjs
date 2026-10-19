@@ -273,6 +273,32 @@ assert.equal(partialTailPrepare.status, 0, partialTailPrepare.stderr || partialT
 const partialTailPreflight = JSON.parse(fs.readFileSync(path.join(root, "outputs/preflight-partial-tail.json"), "utf8"));
 assert.equal(partialTailPreflight.ordinaryMatrix[0].langs, "DE");
 
+// The explicit count works without relaxing strict tails. A changed count or
+// missing worker must fail before metadata/provider/upload work.
+const mixedCountCampaign = {
+  ...partialTailCampaign,
+  inputs: { ...partialTailCampaign.inputs, supports: "EN", supportCount: 1, ordinarySupportCount: 1,
+    allowPartialOrdinaryTail: false, ordinaryPerChannelOverrides: { EN: 1 } },
+};
+const checkMixedCount = (candidate) => {
+  write(path.join(configDir, "youtube-publication-campaigns.json"), { schemaVersion: 1, campaigns: [candidate] });
+  return spawnSync(process.execPath, [
+    path.join(repoRoot, "scripts/prepare-youtube-publication-campaign-run.mjs"),
+    `--campaign-id=${candidate.campaignId}`, "--manifest-hash=manifest-hash",
+    "--registry=config/youtube-publication-campaigns.json", "--calendar=config/youtube-publish-calendar.json",
+    "--output=outputs/preflight-mixed-count.json",
+  ], { cwd: root, encoding: "utf8" });
+};
+const mixedCountResult = checkMixedCount(mixedCountCampaign);
+assert.equal(mixedCountResult.status, 0, mixedCountResult.stderr || mixedCountResult.stdout);
+assert.notEqual(checkMixedCount({ ...mixedCountCampaign,
+  inputs: { ...mixedCountCampaign.inputs, ordinaryPerChannelOverrides: { EN: 2 } },
+}).status, 0);
+assert.notEqual(checkMixedCount({ ...mixedCountCampaign, assignments: [], assignmentKeys: [], slotKeys: [] }).status, 0);
+assert.notEqual(checkMixedCount({ ...mixedCountCampaign,
+  inputs: { ...mixedCountCampaign.inputs, ordinaryPerChannelOverrides: { UNKNOWN: 1 } },
+}).status, 0);
+
 const legacyPartialRecoveryCampaign = {
   ...partialTailCampaign,
   campaignId: "campaign-legacy-partial-recovery",

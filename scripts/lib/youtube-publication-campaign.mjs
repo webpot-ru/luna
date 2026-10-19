@@ -33,6 +33,7 @@ import {
 } from "./youtube-playlists.mjs";
 import { resolveYoutubeVideoProductionReadiness } from "./youtube-video-production-readiness.mjs";
 import { getDbLanguageCode } from "./video-language-codes.mjs";
+import { ordinaryCountOverrides } from "./youtube-campaign-counts.mjs";
 import {
   buildPolyglotPlaylistAssignment,
   findPolyglotPlaylistEntry,
@@ -503,11 +504,12 @@ function validateWave(assignments, expectedSupportCount, ordinaryPerChannel, pol
   allowPartialOrdinaryTail = false,
   allowPartialPolyglotTail = false,
   deferredProductionAssignments = [],
+  expectedOrdinaryCount = expectedSupportCount * ordinaryPerChannel,
 } = {}) {
   const blockers = [];
   const deferredOrdinary = deferredProductionAssignments.filter((row) => row.videoType === "ordinary").length;
   const deferredPolyglot = deferredProductionAssignments.filter((row) => row.videoType === "polyglot").length;
-  const expectedOrdinary = expectedSupportCount * ordinaryPerChannel - deferredOrdinary;
+  const expectedOrdinary = expectedOrdinaryCount - deferredOrdinary;
   const expectedPolyglot = expectedSupportCount * polyglotPerChannel - deferredPolyglot;
   const ordinaryCount = assignments.filter((row) => row.videoType === "ordinary").length;
   const polyglotCount = assignments.filter((row) => row.videoType === "polyglot").length;
@@ -661,6 +663,7 @@ export function buildPublicationCampaign(options = {}) {
   }
   assertCanonicalSupportCount(routing, 51);
   const supports = resolveCanonicalSupports({ requested: options.supports || "ALL", routing });
+  const ordinaryPerChannelOverrides = ordinaryCountOverrides(options.ordinaryPerChannelOverrides, supports, ordinaryPerChannel);
   const coverInventory = loadApprovedCovers(paths.covers);
   const deckSources = readJson(paths.deckSources, {});
   const driveFileId = String(deckSources[setId] || "").trim();
@@ -711,13 +714,14 @@ export function buildPublicationCampaign(options = {}) {
   const deferredProductionAssignments = [];
   let routeQuotaDeferredAssignments = [];
   for (const support of supports) {
+    const ordinaryLimit = ordinaryPerChannelOverrides[support] ?? ordinaryPerChannel;
     const channel = routing.supportToChannel.get(support);
     const route = routing.supportToRoute.get(support);
     const tails = tailsBySupport.get(support);
     const ordinary = tails.ordinary
       .map((tail) => buildCandidate({ tail, channel, route, channelRegistry: routing.channelRegistry }))
       .filter((candidate) => !claims.assignments.has(candidate.assignmentKey))
-      .slice(0, ordinaryPerChannel);
+      .slice(0, ordinaryLimit);
     const polyglotCandidates = tails.polyglot
       .map((tail) => buildCandidate({ tail, channel, route, channelRegistry: routing.channelRegistry }));
     const polyglot = polyglotCandidates
@@ -748,7 +752,7 @@ export function buildPublicationCampaign(options = {}) {
         blockers.push(`${support}: ${candidate.bundleKey} ${candidate.contentScope} is blocked by active ${polyglotContentScope(conflicting)} Polyglot video ${conflicting.youtubeVideoId || "without durable ID"}`);
       }
     }
-    if (!allowPartialOrdinaryTail && ordinary.length !== ordinaryPerChannel) blockers.push(`${support}: only ${ordinary.length}/${ordinaryPerChannel} unclaimed ordinary tails available`);
+    if (!allowPartialOrdinaryTail && ordinary.length !== ordinaryLimit) blockers.push(`${support}: only ${ordinary.length}/${ordinaryLimit} unclaimed ordinary tails available`);
     if (!allowPartialPolyglotTail && polyglot.length !== polyglotPerChannel) blockers.push(`${support}: only ${polyglot.length}/${polyglotPerChannel} unclaimed full Polyglot tails available`);
     selected.push(...ordinary, ...polyglot);
   }
@@ -839,6 +843,7 @@ export function buildPublicationCampaign(options = {}) {
     allowPartialOrdinaryTail,
     allowPartialPolyglotTail,
     deferredProductionAssignments,
+    expectedOrdinaryCount: supports.reduce((sum, support) => sum + (ordinaryPerChannelOverrides[support] ?? ordinaryPerChannel), 0),
   }));
   blockers.push(...offlineDeckAssignmentCoverageBlockers(offlineDeck, assignments));
   blockers.push(...validateResolvedPlaylistIdentities(assignments));
@@ -942,6 +947,7 @@ export function buildPublicationCampaign(options = {}) {
       polyglotSupportCount: scheduledPolyglotSupportCount,
       productionDeferredSupportCount: deferredProductionSupportCount,
       ordinaryPerChannel,
+      ...(Object.keys(ordinaryPerChannelOverrides).length ? { ordinaryPerChannelOverrides } : {}),
       allowPartialOrdinaryTail,
       allowPartialPolyglotTail,
       allowPartialRouteQuotaTail,
