@@ -2116956,7 +2116956,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-e1c87ce505b6",
       "campaignManifestHash": "c12a4ba9cad2b47655d6348b6f412fb75746a84039c2e9ab751ead21dda97c16",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2116979,13 +2116979,42 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-10-19T01:29:53.599Z",
-      "updatedAt": "2026-10-19T01:29:53.599Z"
+      "updatedAt": "2026-10-19T02:23:53.180Z",
+      "bundleLabel": "East Asia Core",
+      "targetLangsCsv": "ZH,JA,KO",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_office_desk_a1_a2_polyglot_fr_east_asia_core/youtube_metadata.json",
+      "title": "Vocabulaire polyglotte : bureau à domicile en chinois, japonais et coréen",
+      "playlist_key": "POLYGLOT__FR__east-asia-core__69af08ca98ea",
+      "githubRunId": "39186206522",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39186206522",
+      "youtubeVideoId": "oHM-sDiUJ1A",
+      "youtubePlaylistId": "PLbWWklDRc6uM",
+      "playlistItemId": "UExiV1drbERSYzZ1TS5GNjNDRDREMDQxOThCMDQ2",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-23T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-25T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-29T06:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-21T06:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-e1c87ce505b6",
       "campaignManifestHash": "c12a4ba9cad2b47655d6348b6f412fb75746a84039c2e9ab751ead21dda97c16",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2117008,7 +2117037,36 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-10-19T01:29:53.599Z",
-      "updatedAt": "2026-10-19T01:29:53.599Z"
+      "updatedAt": "2026-10-19T02:23:53.180Z",
+      "bundleLabel": "East Asia Core",
+      "targetLangsCsv": "ZH,JA,KO",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_office_desk_a1_a2_polyglot_id_east_asia_core/youtube_metadata.json",
+      "title": "Kosakata Poliglot: Ruang Kerja | Tionghoa, Jepang, Korea",
+      "playlist_key": "POLYGLOT__ID__east-asia-core__69af08ca98ea",
+      "githubRunId": "39117589384",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39117589384",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-23T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-25T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-29T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-21T01:30:00.000Z"
+        }
+      ],
+      "youtubeVideoId": "HKwqfGUpGSY",
+      "youtubePlaylistId": "PLV-MEGbPZpdI",
+      "playlistItemId": "UExWLU1FR2JQWnBkSS5GNjNDRDREMDQxOThCMDQ2"
     },
     {
       "schemaVersion": 1,
@@ -2117037,7 +2117095,33 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-10-19T01:29:53.599Z",
-      "updatedAt": "2026-10-19T01:29:53.599Z"
+      "updatedAt": "2026-10-19T01:29:53.599Z",
+      "bundleLabel": "East Asia Core",
+      "targetLangsCsv": "ZH,JA,EN",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_office_desk_a1_a2_polyglot_ko_east_asia_core/youtube_metadata.json",
+      "title": "Polyglot 홈오피스 어휘 | 중국어 일본어 영어 35개",
+      "playlist_key": "POLYGLOT__KO__east-asia-core__62f96bfdd5ad",
+      "githubRunId": "39117589384",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39117589384",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-22T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-24T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-28T23:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-20T23:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -2117066,7 +2117150,33 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-10-19T01:29:53.599Z",
-      "updatedAt": "2026-10-19T01:29:53.599Z"
+      "updatedAt": "2026-10-19T01:29:53.599Z",
+      "bundleLabel": "East Asia Core",
+      "targetLangsCsv": "ZH,JA,KO",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_office_desk_a1_a2_polyglot_ml_east_asia_core/youtube_metadata.json",
+      "title": "Polyglot വാക്കുകൾ: വീട്ടിലെ ഓഫീസ് | ചൈനീസ്, ജാപ്പനീസ്, കൊറിയൻ",
+      "playlist_key": "POLYGLOT__ML__east-asia-core__69af08ca98ea",
+      "githubRunId": "39117589384",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39117589384",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-23T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-25T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-29T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-21T03:00:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -2117095,7 +2117205,33 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-10-19T01:29:53.599Z",
-      "updatedAt": "2026-10-19T01:29:53.599Z"
+      "updatedAt": "2026-10-19T01:29:53.599Z",
+      "bundleLabel": "East Asia Core",
+      "targetLangsCsv": "ZH,JA,KO",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_office_desk_a1_a2_polyglot_sk_east_asia_core/youtube_metadata.json",
+      "title": "Polyglot slovná zásoba: Domáca kancelária v 3 jazykoch",
+      "playlist_key": "POLYGLOT__SK__east-asia-core__69af08ca98ea",
+      "githubRunId": "39117589384",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39117589384",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-22T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-24T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-28T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-20T21:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -2117124,13 +2117260,39 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-10-19T01:29:53.599Z",
-      "updatedAt": "2026-10-19T01:29:53.599Z"
+      "updatedAt": "2026-10-19T01:29:53.599Z",
+      "bundleLabel": "East Asia Core",
+      "targetLangsCsv": "ZH,JA,KO",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_office_desk_a1_a2_polyglot_sl_east_asia_core/youtube_metadata.json",
+      "title": "Večjezične besede: Domača pisarna | kitajščina, japonščina, korejščina",
+      "playlist_key": "POLYGLOT__SL__east-asia-core__69af08ca98ea",
+      "githubRunId": "39117589384",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39117589384",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-22T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-24T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-28T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-20T21:30:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-e1c87ce505b6",
       "campaignManifestHash": "c12a4ba9cad2b47655d6348b6f412fb75746a84039c2e9ab751ead21dda97c16",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2117153,13 +2117315,42 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-10-19T01:29:53.599Z",
-      "updatedAt": "2026-10-19T01:29:53.599Z"
+      "updatedAt": "2026-10-19T02:23:53.180Z",
+      "bundleLabel": "East Asia Core",
+      "targetLangsCsv": "ZH,JA,KO",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_office_desk_a1_a2_polyglot_sv_east_asia_core/youtube_metadata.json",
+      "title": "Polyglot: Hemmakontor på kinesiska, japanska och koreanska",
+      "playlist_key": "POLYGLOT__SV__east-asia-core__69af08ca98ea",
+      "githubRunId": "39117589384",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39117589384",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-22T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-24T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-28T21:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-20T21:30:00.000Z"
+        }
+      ],
+      "youtubeVideoId": "8armxDSNyK4",
+      "youtubePlaylistId": "PLB5hMOfhdVK8",
+      "playlistItemId": "UExCNWhNT2ZoZFZLOC5GNjNDRDREMDQxOThCMDQ2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-19-e1c87ce505b6",
       "campaignManifestHash": "c12a4ba9cad2b47655d6348b6f412fb75746a84039c2e9ab751ead21dda97c16",
-      "status": "campaign_claimed",
+      "status": "campaign_upload_accepted",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2117182,7 +2117373,36 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-10-19T01:29:53.599Z",
-      "updatedAt": "2026-10-19T01:29:53.599Z"
+      "updatedAt": "2026-10-19T02:23:53.180Z",
+      "bundleLabel": "East Asia Core",
+      "targetLangsCsv": "ZH,JA,KO",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_office_desk_a1_a2_polyglot_te_east_asia_core/youtube_metadata.json",
+      "title": "బహుభాషా పదజాలం: ఇంటి కార్యాలయం | చైనీస్, జపనీస్, కొరియన్",
+      "playlist_key": "POLYGLOT__TE__east-asia-core__69af08ca98ea",
+      "githubRunId": "39117589384",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39117589384",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-23T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-25T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-29T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-21T03:00:00.000Z"
+        }
+      ],
+      "youtubeVideoId": "edZLfcGn6wI",
+      "youtubePlaylistId": "PLTLbMG68YxN4",
+      "playlistItemId": "UExUTGJNRzY4WXhONC5GNjNDRDREMDQxOThCMDQ2"
     }
   ]
 }
