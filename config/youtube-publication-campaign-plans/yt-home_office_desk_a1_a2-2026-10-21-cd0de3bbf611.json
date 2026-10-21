@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-21T11:40:54.000Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_office_desk_a1_a2",
+  "inputs": {
+    "supports": "ES-419",
+    "supportCount": 1,
+    "ordinarySupportCount": 1,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 2,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|home_office_desk_a1_a2|ES-419|TL",
+      "ordinary|home_office_desk_a1_a2|ES-419|TR"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 360,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_office_desk_a1_a2-2026-10-21-abfbf30f4a05",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_office_desk_a1_a2-2026-10-21-abfbf30f4a05",
+      "manifestHash": "67277da8fb68d56669fa36d1350d6f9f96e3cb0a8fbfddba752156c4d8237ae8",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-1",
+        "generatedAt": "2026-10-21T11:40:48.944Z",
+        "ageMinutes": 0.08426666666666667,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/review/deck12-office-covers-20261015/control508-plan-39556840435/youtube-publication-control-home_office_desk_a1_a2-all-routes-39556840435/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "38b62ec83a4f4622de7119f8cbeb0b70512bf2c6796049038c7101231fcb0acc"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "3b0be2fe6f6cb9164cb15f7665766a4cd421710e2e7306a2d14bb27c677b4f50"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "bf62c8f9a71a1a4358c7b027a6c8b1ed26126dacbf1139d327b55d3e4edffc9d"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "2f09563cf81d5194d29d29a92604419cbe9d9f356b8f5a5a592dd68cf5e8d976"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_office_desk_a1_a2.json",
+        "exists": true,
+        "sha256": "ce770c59281738c9ac5ea00a5533c5d29acf09b2083221eda4cf8e01eebb1ab7"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/review/deck12-office-covers-20261015/control508-plan-39556840435/youtube-publication-control-home_office_desk_a1_a2-all-routes-39556840435/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "6a2dbe3426e77257b28a8fce3387fc40507c0f4937dd10f7400f79d9e23efc55"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 2,
+    "polyglotCount": 0,
+    "assignmentCount": 2,
+    "firstPublishAt": "2026-10-25T19:30:00.000Z",
+    "lastPublishAt": "2026-10-25T22:30:00.000Z",
+    "customThumbnailCount": 2,
+    "automaticThumbnailCount": 0,
+    "existingPlaylistCount": 2,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 2
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 2,
+    "estimatedPlaylistItemInsertUnits": 100,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 100,
+    "estimatedGeneralQuotaUnitsMaximum": 200,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 2,
+        "estimatedGeneralQuotaUnitsMaximum": 200
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "videoType": "ordinary",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "ES-419",
+      "targetLang": "TL",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_es-MX-DaliaNeural",
+        "supportLang": "ES-419"
+      },
+      "assignmentKey": "ordinary|home_office_desk_a1_a2|ES-419|TL",
+      "calendarAssignmentKey": "ordinary|home_office_desk_a1_a2|ES-419|TL|es",
+      "publishAt": "2026-10-25T19:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-21",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-10-25",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "es|2026-10-25T19:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-26T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-28T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-01T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-24T19:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck12-home-office-approved-20261015-v2/video/by-set/home_office_desk_a1_a2/ordinary/by-channel/es__ES-419__LunaCardsEspanol/TL__Filipino/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck12-home-office-approved-20261015-v2/manifest.json",
+        "sha256": "80675ad3bd8e1d12c7c6c5fb1f8dd718122731838a72ee3150131e8e781e32ab"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ES-419__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLWXePEXojYiM",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Filipino A1: Everyday: tarjetas FlashcardsLuna",
+        "description": "Aprendiendo Filipino. Tema de la lección: FlashcardsLuna. Escuche atentamente la pronunciación de los hablantes nativos y repita las palabras en las pausas. ¡Un mini-test interactivo le espera al final! Practica mazos gratis en nuestro sitio web",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-21T06:52:36.065Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_office_desk_a1_a2|ES-419|TL",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "ES-419",
+      "targetLang": "TR",
+      "channelKey": "es",
+      "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
+      "youtubeEnvironment": "youtube-api-branding",
+      "routeKey": "youtube-1",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_es-MX-DaliaNeural",
+        "supportLang": "ES-419"
+      },
+      "assignmentKey": "ordinary|home_office_desk_a1_a2|ES-419|TR",
+      "calendarAssignmentKey": "ordinary|home_office_desk_a1_a2|ES-419|TR|es",
+      "publishAt": "2026-10-25T22:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-10-21",
+      "timeZone": "Europe/Madrid",
+      "localDate": "2026-10-25",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "es|2026-10-25T22:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-26T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-28T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-01T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-24T22:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck12-home-office-approved-20261015-v2/video/by-set/home_office_desk_a1_a2/ordinary/by-channel/es__ES-419__LunaCardsEspanol/TR__Turco/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck12-home-office-approved-20261015-v2/manifest.json",
+        "sha256": "8f09f45efe1b487bd96cfdd2e9ff77461b01967a968d68bd6efe3f05f8207477"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ES-419__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLJyyBz8AzBKc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Turco A1: Everyday: tarjetas FlashcardsLuna",
+        "description": "Aprendiendo Turco. Tema de la lección: FlashcardsLuna. Escuche atentamente la pronunciación de los hablantes nativos y repita las palabras en las pausas. ¡Un mini-test interactivo le espera al final! Practica mazos gratis en nuestro sitio web",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-10-21T06:52:36.065Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "ordinary|home_office_desk_a1_a2|ES-419|TR",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    }
+  ],
+  "campaignId": "yt-home_office_desk_a1_a2-2026-10-21-cd0de3bbf611",
+  "manifestHash": "5978d20a9bcc73cbc2da7b77dbf7057527f1f63f9a5014c74347af44dd130a4e"
+}
