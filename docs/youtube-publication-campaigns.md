@@ -1,5 +1,19 @@
 # YouTube Publication Campaigns
 
+## Exact Deck12 final SR synthesis budget — 2026-10-22
+
+Owner explicitly renewed the remaining full SR `slavic_core` recovery after the
+previous pre-upload TTS429 failure. Only `home_office_desk_a1_a2` / SR /
+RU,PL,CS,SK / unlimited full scope caps `EDGE_TTS_RETRIES` at3 per phrase (a
+smaller configured budget is preserved). Existing429cooldowns30/60seconds plus
+jitter remain unchanged; no voice, provider, endpoint or upload-init retries are
+added. Other decks/supports/scopes retain their configured/default budgets.
+Both previously failing phrases (`kancelarijska stolica`/sr-RS-SophieNeural and
+`stolní počítač`/cs-CZ-VlastaNeural) passed fresh local MP3 probes on22October.
+This proves those probes only, not future runner/provider availability. Fresh
+complete control, exact missing-only claim and durable accepted-ID exclusion
+remain mandatory; the2903accepted Deck12 videos must never be replayed.
+
 ## Explicit mixed ordinary counts
 
 One new campaign may use owner-approved per-support ordinary counts without a

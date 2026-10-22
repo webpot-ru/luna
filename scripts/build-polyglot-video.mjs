@@ -21,6 +21,7 @@ import { getPublicCourseDisplayUrl, getPublicCourseUrl, getQrCodeImageUrl } from
 import { outroIconNames } from "./lib/video-outro-icons.mjs";
 import { BRAND_NAME } from "./lib/brand.mjs";
 import { selectMaximumPolyglotCardPrefix } from "./lib/polyglot-duration-selection.mjs";
+import { applyDeck12SrFullTtsBudget } from "./lib/edge-tts-backoff.mjs";
 
 const localizationPath = path.resolve("config/video-localization.json");
 const localizationData = JSON.parse(fs.readFileSync(localizationPath, "utf8"));
@@ -329,6 +330,9 @@ async function loadPolyglotCards() {
 }
 
 async function main() {
+  if (applyDeck12SrFullTtsBudget({setId, supportLang, targetLangs, limit, maxDurationSeconds})) {
+    console.log(`Exact Deck12 SR full recovery Edge TTS maximum attempts per phrase: ${process.env.EDGE_TTS_RETRIES}`);
+  }
   console.log(`=== ${BRAND_NAME} Polyglot Video Generator ===`);
   console.log(`Set ID: ${setId}`);
   console.log(`Support Language: ${supportLang} (Voice: ${voiceSupport})`);
