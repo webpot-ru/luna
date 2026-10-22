@@ -2222069,7 +2222069,33 @@
       "localTime": "11:30",
       "localSlotIndex": 1,
       "createdAt": "2026-10-22T16:20:58.248Z",
-      "updatedAt": "2026-10-22T16:20:58.248Z"
+      "updatedAt": "2026-10-22T16:20:58.248Z",
+      "bundleLabel": "Slavic Core",
+      "targetLangsCsv": "RU,PL,CS,SK",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_office_desk_a1_a2_polyglot_sr_slavic_core/youtube_metadata.json",
+      "title": "Višejezički vokabular: Kućna kancelarija | 4 slovenska jezika",
+      "playlist_key": "POLYGLOT__SR__slavic-core__93d499d62441",
+      "githubRunId": "39375151111",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39375151111",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-10-25T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-10-27T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-10-31T15:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-11-23T15:30:00.000Z"
+        }
+      ]
     }
   ]
 }
