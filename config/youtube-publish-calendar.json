@@ -2222045,7 +2222045,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-22-e1bf33c9d989",
       "campaignManifestHash": "5fa1ea4bcde78c37f12ec54fecbb37ca5f8aa9fae5732398d1c1a85a7af2131c",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -2222069,7 +2222069,7 @@
       "localTime": "11:30",
       "localSlotIndex": 1,
       "createdAt": "2026-10-22T16:20:58.248Z",
-      "updatedAt": "2026-10-22T16:20:58.248Z",
+      "updatedAt": "2026-10-22T16:52:49.596Z",
       "bundleLabel": "Slavic Core",
       "targetLangsCsv": "RU,PL,CS,SK",
       "policyPath": "config/youtube-publish-schedule-policy.json",
@@ -2222095,7 +2222095,39 @@
           "hoursAfterPublish": 720,
           "dueAt": "2026-11-23T15:30:00.000Z"
         }
-      ]
+      ],
+      "supersededAt": "2026-10-22T16:52:49.596Z",
+      "supersededByCampaignId": "yt-home_office_desk_a1_a2-2026-10-22-a4b9430dc54a"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_office_desk_a1_a2-2026-10-22-a4b9430dc54a",
+      "campaignManifestHash": "c9b7a82d9db50b6e175a5c44cad6a63e95ae95da0d54f97d87c34b2ec7db9ab2",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "SR",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:SR:slavic_core:93d499d62441:full",
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "publishAt": "2026-10-27T10:30:00.000Z",
+      "timeZone": "Europe/Belgrade",
+      "localDate": "2026-10-27",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "createdAt": "2026-10-22T16:52:49.596Z",
+      "updatedAt": "2026-10-22T16:52:49.596Z"
     }
   ]
 }
