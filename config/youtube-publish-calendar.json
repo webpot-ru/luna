@@ -1784701,7 +1784701,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_office_desk_a1_a2-2026-10-22-ffe7ca46351a",
       "campaignManifestHash": "117de3c95fb2c6d6aba8b3032fb64570404cf35314e6d445713d1928bd4c877c",
-      "status": "campaign_claimed",
+      "status": "superseded_partial_recovery",
       "source": "youtube-publication-campaign-integrated-claim-consolidation",
       "videoType": "polyglot",
       "setId": "home_office_desk_a1_a2",
@@ -1784744,14 +1784744,16 @@
         }
       ],
       "createdAt": "2026-10-22T09:02:21.790Z",
-      "updatedAt": "2026-10-22T09:02:21.790Z",
+      "updatedAt": "2026-10-22T14:16:25.689Z",
       "bundleLabel": "Slavic Core",
       "policyPath": "config/youtube-publish-schedule-policy.json",
       "metadataFile": "outputs/video-generator/home_office_desk_a1_a2_polyglot_sr_slavic_core/youtube_metadata.json",
       "title": "Višejezički vokabular: Kućna kancelarija | 4 slovenska jezika",
       "playlist_key": "POLYGLOT__SR__slavic-core__93d499d62441",
       "githubRunId": "39375151111",
-      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39375151111"
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/39375151111",
+      "supersededAt": "2026-10-22T14:16:25.689Z",
+      "supersededByCampaignId": "yt-home_office_desk_a1_a2-2026-10-22-d5ae9b2a5f34"
     },
     {
       "schemaVersion": 1,
@@ -2221974,6 +2221976,36 @@
       "youtubeVideoId": "3G7Y0lR4swg",
       "youtubePlaylistId": "PLIQuWEBAH2kg",
       "playlistItemId": "UExJUXVXRUJBSDJrZy45NDk1REZENzhEMzU5MDQz"
+    },
+    {
+      "schemaVersion": 1,
+      "campaignId": "yt-home_office_desk_a1_a2-2026-10-22-d5ae9b2a5f34",
+      "campaignManifestHash": "cfbbd7dc52feed8021435775a5a0a0f6ccb697669a2f93d5534bf459b86a36bb",
+      "status": "campaign_claimed",
+      "source": "youtube-publication-campaign-partial-recovery",
+      "videoType": "polyglot",
+      "setId": "home_office_desk_a1_a2",
+      "supportLang": "SR",
+      "targetLang": "RU,PL,CS,SK",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsHash": "93d499d62441",
+      "bundleKey": "slavic_core",
+      "contentScope": "full",
+      "polyglotKey": "polyglot:home_office_desk_a1_a2:SR:slavic_core:93d499d62441:full",
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "publishAt": "2026-10-27T10:30:00.000Z",
+      "timeZone": "Europe/Belgrade",
+      "localDate": "2026-10-27",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "createdAt": "2026-10-22T14:16:25.689Z",
+      "updatedAt": "2026-10-22T14:16:25.689Z"
     }
   ]
 }
