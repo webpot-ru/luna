@@ -1,5 +1,33 @@
 # Video Lessons Strategy & Specifications
 
+## Deck13 owner-approved offline cover review — 2026-10-22
+
+The owner approved a clean Deck13 base via built-in Codex imagegen (no paid image
+API), then deterministic overlays for all54 language variants and no Deck13
+YouTube writes. Base: `assets/youtube-cover-templates/deck13-home-exterior-illustrated-base-v1.png`.
+Deck13 alone opts into `ordinaryLevelLabel=A1–A2` and wrapped descriptions.
+`npm run build:youtube-cover-assets -- --offline-review` includes requested
+configured variants irrespective of channel thumbnail permission, labels the
+manifest `offline_review_only` and EVERY cover `uploadEligible=false`. It never
+changes capabilities or registers production assets. Default permission filtering
+is unchanged. Norwegian NO uses exported NB metadata. Full54-language review:
+2859ordinary+216Polyglot=3075covers, same-viewer exclusions preserved. Technical
+package checks are not native translation certification or owner acceptance.
+
+Owner-approved Git preparation (2026-10-23) promotes this reviewed package to
+`approved` in `config/youtube-cover-assets.json`, without any publication.
+All3075current JPGs and their sidecars are retained for54variants. Only909
+canonical-support assets (845ordinary+64Polyglot across16custom-enabled
+channels) become `uploadEligible=true`; the other2166remain false. Real channel
+permissions are not edited. Registration and eligibility do not authorize a
+YouTube write. The108extra JPGs are current54x2contact sheets, not stale builds;
+they stay local, are explicitly excluded from the Git allowlist and are marked
+local-only in the manifest. No images are removed or moved to Trash.
+Package inventory/check evidence is `git-preparation-audit.json` beside the
+manifest. Git staging uses the3075manifest paths,3075sidecar paths and exact
+support files, never a recursive add of the package directory. This keeps the
+contact sheets and unrelated scratch/SR state out of the cover commit.
+
 2026-10-17 Deck12 local repair: HTTP429 Edge TTS retries retain the configured voices and existing attempt budget, with bounded 30/60/120-second cooldowns and jitter. Screenshot capture retains the full page-load gate with a120-second timeout, renderTask readiness and per-task font readiness. No dependencies or providers changed. Local tests are not proof of provider recovery. Source parent38900488913 accepted474/510 with36missing and zero duplicate/receipt errors; recovery must exclude all474 accepted IDs.
 
 2026-10-16 Deck12 course routing: `home_office_desk_a1_a2` maps to published course slug `home-office-desk` in `config/video-public-course-links.json`. The English course page was read back successfully with Home Office content. This restores live-audit classification; the previous control stopped before claim or uploads. Regression tests verify the production mapping and reverse lookup. Publication still requires a successful fresh control and exact claimed manifest.

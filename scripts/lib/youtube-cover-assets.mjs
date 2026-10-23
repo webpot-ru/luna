@@ -55,10 +55,11 @@ function languageLabel(targetLang, supportLang) {
 function localizedDeckText(deck, supportLang) {
   const code = normalizeCode(supportLang);
   const metadata = deck.courseMetadata || deck.course_metadata || {};
-  const title = metadata.title?.[code] || deck.titles?.[code] || metadata.title?.EN || deck.titles?.EN || deck.setId || "Vocabulary";
-  const description = metadata.description?.[code] || deck.descriptions?.[code] || metadata.description?.EN || deck.descriptions?.EN || "";
-  const module = metadata.module?.[code] || metadata.module?.EN || "";
-  const category = metadata.category?.[code] || metadata.category?.EN || "";
+  const dataCode = code === "NO" ? "NB" : code;
+  const title = metadata.title?.[code] || metadata.title?.[dataCode] || deck.titles?.[code] || deck.titles?.[dataCode] || metadata.title?.EN || deck.titles?.EN || deck.setId || "Vocabulary";
+  const description = metadata.description?.[code] || metadata.description?.[dataCode] || deck.descriptions?.[code] || deck.descriptions?.[dataCode] || metadata.description?.EN || deck.descriptions?.EN || "";
+  const module = metadata.module?.[code] || metadata.module?.[dataCode] || metadata.module?.EN || "";
+  const category = metadata.category?.[code] || metadata.category?.[dataCode] || metadata.category?.EN || "";
   return {
     title: stripTerminalPunctuation(title),
     description: cleanText(description),
@@ -100,6 +101,7 @@ function buildCoverPlan({
   bundles = [],
   polyglotConfig,
   outputRoot,
+  offlineReview = false,
 }) {
   const covers = [];
   const skipped = [];
@@ -120,7 +122,7 @@ function buildCoverPlan({
     const supportLang = normalizeCode(supportRaw);
     const channel = findChannel(channels, supportLang);
     if (!channel) throw new Error(`No YouTube channel configured for support=${supportLang}`);
-    if (channel.customThumbnailUploadAllowed !== true) {
+    if (channel.customThumbnailUploadAllowed !== true && !offlineReview) {
       skipped.push({ setId, supportLang, reason: "custom_thumbnail_upload_not_allowed" });
       continue;
     }
@@ -154,16 +156,17 @@ function buildCoverPlan({
           channelSupportLangs: channel.supportLangs || [supportLang],
           targetLang,
           targetName,
-          targetLabel: `${targetName} A1`,
+          targetLabel: `${targetName} ${setConfig.ordinaryLevelLabel || "A1"}`,
           title: localized.title,
           description: localized.description,
           descriptionLayout: setConfig.descriptionLayout || "legacy-single-line",
+          measureHeadings: setConfig.measureHeadings === true,
           module: localized.module,
           category: localized.category,
           baseImage: setConfig.ordinaryBasePath,
           visualTemplate: setConfig.ordinaryTemplate,
           showModule: setConfig.showModuleOnOrdinary === true,
-          uploadEligible: true,
+          uploadEligible: !offlineReview && channel.customThumbnailUploadAllowed === true,
           relativePath,
           sidecarPath: relativePath.replace(/youtube_thumbnail\.jpg$/u, "video.json"),
         });
@@ -205,11 +208,12 @@ function buildCoverPlan({
           title: localized.title,
           description: localized.description,
           descriptionLayout: setConfig.descriptionLayout || "legacy-single-line",
+          measureHeadings: setConfig.measureHeadings === true,
           module: localized.module,
           category: localized.category,
           baseImage: setConfig.polyglotBasePath,
           visualTemplate: setConfig.polyglotTemplate,
-          uploadEligible: true,
+          uploadEligible: !offlineReview && channel.customThumbnailUploadAllowed === true,
           relativePath,
           sidecarPath: relativePath.replace(/\.jpg$/u, ".json"),
         });
@@ -278,8 +282,8 @@ function commonBottomDecoration() {
 }
 
 function ordinaryOverlaySvg(cover) {
-  const targetSize = fittedFontSize(cover.targetLabel, 590, 68, 34);
-  const titleSize = fittedFontSize(cover.title, 590, 48, 28);
+  const targetSize = cover.measuredTargetFontSize || fittedFontSize(cover.targetLabel, 590, 68, 34);
+  const titleSize = cover.measuredTitleFontSize || fittedFontSize(cover.title, 590, 48, 28);
   const descriptionSize = fittedFontSize(cover.description, 540, 29, 19);
   const moduleText = [cover.module, cover.category].filter(Boolean).join(" · ");
   const targetY = cover.showModule ? 275 : 238;
@@ -300,8 +304,8 @@ function ordinaryOverlaySvg(cover) {
 
 function polyglotOverlaySvg(cover) {
   const moduleText = [cover.module, cover.category].filter(Boolean).join(" · ");
-  const lineSizes = cover.targetLanguageLines.map((line) => fittedFontSize(line, 570, 38, 24));
-  const titleSize = fittedFontSize(cover.title, 590, 48, 28);
+  const lineSizes = cover.measuredTargetLineSizes || cover.targetLanguageLines.map((line) => fittedFontSize(line, 570, 38, 24));
+  const titleSize = cover.measuredTitleFontSize || fittedFontSize(cover.title, 590, 48, 28);
   const descriptionSize = fittedFontSize(cover.description, 540, 29, 19);
   const secondLine = cover.targetLanguageLines[1] || "";
   return `

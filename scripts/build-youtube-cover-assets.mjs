@@ -9,6 +9,9 @@ import sharp from "sharp";
 
 import {
   buildCoverPlan,
+  fittedFontSize,
+  fontFamilyForText,
+  xmlEscape,
   normalizeCode,
   ordinaryOverlaySvg,
   polyglotOverlaySvg,
@@ -33,6 +36,7 @@ function parseArgs(argv) {
     outputRoot: "",
     concurrency: 4,
     dryRun: false,
+    offlineReview: false,
     json: false,
   };
   for (let index = 0; index < argv.length; index += 1) {
@@ -50,6 +54,7 @@ function parseArgs(argv) {
     else if (arg === "--output-root" || arg.startsWith("--output-root=")) options.outputRoot = value();
     else if (arg === "--concurrency" || arg.startsWith("--concurrency=")) options.concurrency = Number(value());
     else if (arg === "--dry-run") options.dryRun = true;
+    else if (arg === "--offline-review") options.offlineReview = true;
     else if (arg === "--json") options.json = true;
     else if (arg === "--help" || arg === "-h") options.help = true;
     else throw new Error(`Unknown argument: ${arg}`);
@@ -87,7 +92,39 @@ async function runPool(items, concurrency, worker) {
   await Promise.all(runners);
 }
 
+const headingMeasurements = new Map();
+async function measureCoverHeadings(cover) {
+  if (!cover.measureHeadings) return cover;
+  async function fit(text, initialSize, maxWidth, maxHeight) {
+    const family = fontFamilyForText(text).split(",")[0];
+    for (let size = initialSize; size >= 12; size -= 1) {
+      const key = `${family}|${size}|${text}`;
+      if (!headingMeasurements.has(key)) {
+        const measurement = sharp({
+          text: { text: xmlEscape(text), font: `${family} ${size}`, rgba: true, dpi: 72 },
+        }).toBuffer({ resolveWithObject: true }).then((result) => result.info);
+        headingMeasurements.set(key, measurement);
+      }
+      const measured = await headingMeasurements.get(key);
+      if (measured.width <= maxWidth && measured.height <= maxHeight) return size;
+    }
+    throw new Error(`Cover heading does not fit: ${cover.supportLang}/${cover.targetLang || cover.bundleKey}`);
+  }
+  const result = {
+    ...cover,
+    measuredTitleFontSize: await fit(cover.title, fittedFontSize(cover.title, 590, 48, 28), 590, 58),
+  };
+  if (cover.videoType === "ordinary") {
+    result.measuredTargetFontSize = await fit(cover.targetLabel, fittedFontSize(cover.targetLabel, 590, 68, 34), 590, 70);
+  } else {
+    result.measuredTargetLineSizes = await Promise.all(cover.targetLanguageLines.map((line) =>
+      fit(line, fittedFontSize(line, 570, 38, 24), 570, 42)));
+  }
+  return result;
+}
+
 async function renderCover(cover) {
+  cover = await measureCoverHeadings(cover);
   if (!fs.existsSync(cover.baseImage)) throw new Error(`Approved base image not found: ${cover.baseImage}`);
   const overlay = cover.videoType === "polyglot" ? polyglotOverlaySvg(cover) : ordinaryOverlaySvg(cover);
   fs.mkdirSync(path.dirname(cover.relativePath), { recursive: true });
@@ -151,6 +188,7 @@ function summaryFor(plan, options) {
     skippedCount: plan.skipped.length,
     outputRoot: options.outputRoot,
     dryRun: options.dryRun,
+    offlineReview: options.offlineReview,
     externalProviderCalls: 0,
     youtubeWrites: 0,
   };
@@ -192,6 +230,7 @@ async function main() {
       bundles: options.bundles,
       polyglotConfig,
       outputRoot: options.outputRoot,
+      offlineReview: options.offlineReview,
     });
     plan.covers.push(...setPlan.covers);
     plan.skipped.push(...setPlan.skipped);
@@ -225,7 +264,7 @@ async function main() {
   const manifest = {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),
-    status: "approved",
+    status: options.offlineReview ? "offline_review_only" : "approved",
     sourceOfTruth: "Approved local base artwork plus deterministic no-provider text overlays.",
     configPath: options.config,
     policy: {
@@ -255,4 +294,4 @@ if (import.meta.url === invokedPath) {
   });
 }
 
-export { buildContactSheet, main, parseArgs, renderCover, summaryFor };
+export { buildContactSheet, main, measureCoverHeadings, parseArgs, renderCover, summaryFor };
