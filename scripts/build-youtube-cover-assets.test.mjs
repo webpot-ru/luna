@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
+import sharp from "sharp";
+import { measureCoverHeadings, parseArgs } from "./build-youtube-cover-assets.mjs";
 
 import {
   buildCoverPlan,
@@ -118,5 +120,39 @@ const blockedPlan = buildCoverPlan({
 });
 assert.equal(blockedPlan.covers.length, 0);
 assert.equal(blockedPlan.skipped[0].reason, "custom_thumbnail_upload_not_allowed");
+
+const offlinePlan = buildCoverPlan({
+  setId: "test-deck", setConfig: { ...setConfig, ordinaryLevelLabel: "A1–A2" }, deck,
+  channels: [{ ...channels[0], customThumbnailUploadAllowed: false }], supports: ["UZ"], types: ["ordinary"],
+  polyglotConfig, outputRoot: "data/test-review-covers", offlineReview: true,
+});
+assert.ok(offlinePlan.covers.length > 0);
+assert.ok(offlinePlan.covers.every((row) => row.uploadEligible === false && row.targetLabel.endsWith("A1–A2")));
+const norwegianPlan = buildCoverPlan({
+  setId: "test-deck", setConfig, deck,
+  channels: [{ key: "no", supportLangs: ["NO"], customThumbnailUploadAllowed: true }], supports: ["NO"], types: ["ordinary"],
+  polyglotConfig, outputRoot: "data/test-no-covers",
+});
+assert.ok(norwegianPlan.covers.length > 0);
+assert.ok(norwegianPlan.covers.every((row) => row.title === "Kort"));
+
+assert.equal(parseArgs([]).offlineReview, false);
+assert.equal(parseArgs(["--offline-review"]).offlineReview, true);
+assert.equal(await measureCoverHeadings(ordinary), ordinary);
+const measured = await measureCoverHeadings({
+  ...ordinary,
+  measureHeadings: true,
+  targetLabel: "English (United Kingdom and Northern Ireland) A1–A2",
+});
+const measuredText = await sharp({ text: {
+  text: measured.targetLabel,
+  font: `Noto Sans ${measured.measuredTargetFontSize}`,
+  rgba: true,
+  dpi: 72,
+} }).toBuffer({ resolveWithObject: true });
+assert.ok(measuredText.info.width <= 590);
+assert.ok(measuredText.info.height <= 70);
+assert.ok(measured.measuredTargetFontSize > 0);
+assert.match(ordinaryOverlaySvg(measured), new RegExp(`font-size="${measured.measuredTargetFontSize}"`));
 
 console.log("youtube cover asset tests passed");
