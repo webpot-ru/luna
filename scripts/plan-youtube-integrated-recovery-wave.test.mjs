@@ -2,6 +2,7 @@
 import assert from "node:assert/strict";
 
 import {
+  buildIntegratedRecoveryWave,
   completionTailSupports,
   composeIntegratedRecoveryAssignments,
   composeAdditiveRecoveryAssignments,
@@ -78,6 +79,41 @@ assert.deepEqual(result.polyglotAssignments.map((row) => row.assignmentKey).sort
   "polyglot|set|B|old-bundle-b",
 ]);
 assert(result.polyglotAssignments.every((row) => row.integratedRecovery?.sourceCampaignId === "recovery-campaign"));
+
+const integratedOptions = { supports: ["A", "B"], baseAssignments, sourceRows, ordinaryPerChannel: 2, sourceCampaignId: "recovery-campaign" };
+assert.deepEqual(composeIntegratedRecoveryAssignments({ ...integratedOptions, ordinaryPerChannelOverrides: {} }), result);
+assert.deepEqual(composeIntegratedRecoveryAssignments({ ...integratedOptions, ordinaryPerChannelOverrides: { A: 2, B: 2 } }), result);
+
+const integratedBudgetOptions = {
+  ...integratedOptions,
+  ordinaryPerChannel: 3,
+  ordinaryPerChannelOverrides: { A: 2 },
+  baseAssignments: [...baseAssignments, assignment({ assignmentKey: "ordinary|set|B|b3", supportLang: "B", videoType: "ordinary", slotKey: "b|04" })],
+  sourceRows: [sourceRows[1]],
+};
+const integratedBudget = composeIntegratedRecoveryAssignments(integratedBudgetOptions);
+assert.deepEqual(integratedBudget.ordinary.filter((row) => row.supportLang === "A").map((row) => row.assignmentKey), ["ordinary|set|A|a3", "ordinary|set|A|a2"]);
+assert.equal(integratedBudget.ordinary.filter((row) => row.supportLang === "B").length, 3);
+const pinnedTail = integratedBudget.ordinary.find((row) => row.assignmentKey === sourceRows[1].assignmentKey);
+assert.equal(pinnedTail.slotKey, "a|01");
+assert.equal(pinnedTail.integratedRecovery.sourceCampaignId, "recovery-campaign");
+assert.equal(pinnedTail.integratedRecovery.scheduleCarrierAssignmentKey, baseAssignments[0].assignmentKey);
+assert.equal(integratedBudget.ordinary.filter((row) => row.supportLang === "A" && !row.integratedRecovery).length, 1);
+const integratedBudgetAssignments = [...integratedBudget.ordinary, ...integratedBudget.polyglotAssignments];
+assert.equal(new Set(integratedBudgetAssignments.map((row) => row.assignmentKey)).size, integratedBudgetAssignments.length);
+assert.equal(new Set(integratedBudgetAssignments.map((row) => row.slotKey)).size, integratedBudgetAssignments.length);
+assert.equal(integratedBudget.pendingPolyglot.length, 0);
+assert.throws(() => composeIntegratedRecoveryAssignments({ ...integratedBudgetOptions, sourceRows: sourceRows.slice(0, 2), ordinaryPerChannelOverrides: { A: 1 } }), /A: source ordinary tails 2 exceed configured 1/);
+assert.throws(() => composeIntegratedRecoveryAssignments({ ...integratedBudgetOptions, ordinaryPerChannelOverrides: { UNKNOWN: 1 } }), /unknown ordinary override support: UNKNOWN/);
+for (const count of [-1, 4, 1.5]) {
+  assert.throws(() => composeIntegratedRecoveryAssignments({ ...integratedBudgetOptions, ordinaryPerChannelOverrides: { A: count } }), /A: invalid ordinary count override/);
+}
+assert.throws(() => composeIntegratedRecoveryAssignments({ ...integratedBudgetOptions, ordinaryPerChannelOverrides: { A: 3 } }), /A: preview ordinary rows 2 != 3/);
+const zeroOrdinary = composeIntegratedRecoveryAssignments({ ...integratedBudgetOptions, ordinaryPerChannelOverrides: { A: 0 }, sourceRows: [], baseAssignments: integratedBudgetOptions.baseAssignments.filter((row) => row.supportLang !== "A" || row.videoType !== "ordinary") });
+assert.equal(zeroOrdinary.ordinary.filter((row) => row.supportLang === "A").length, 0);
+assert.equal(zeroOrdinary.ordinary.filter((row) => row.supportLang === "B").length, 3);
+assert.throws(() => buildIntegratedRecoveryWave({ completeDeckTails: true, ordinaryPerChannelOverrides: { A: 2 } }), /ordinary count overrides cannot be combined with deck completion/);
+assert.throws(() => buildIntegratedRecoveryWave({ ordinaryPerChannelOverrides: { A: 2 } }), /--control-report is required/);
 
 const ordinaryOnlySource = composeIntegratedRecoveryAssignments({ supports: ["A", "B"], baseAssignments, sourceRows: sourceRows.filter((row) => row.videoType === "ordinary"), ordinaryPerChannel: 2, sourceCampaignId: "ordinary-recovery" });
 const additiveOptions = { supports: ["A", "B"], baseAssignments, sourceRows: [sourceRows[1], sourceRows[3]], ordinaryPerChannel: 2, polyglotPerChannel: 1 };

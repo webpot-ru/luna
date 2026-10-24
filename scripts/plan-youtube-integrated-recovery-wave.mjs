@@ -303,15 +303,20 @@ function transferSourceToSlot(source, slotCarrier, sourceCampaignId) {
   };
 }
 
-function composeOrdinaryAssignments({ supports, baseAssignments, sourceRows, ordinaryPerChannel, sourceCampaignId }) {
+function composeOrdinaryAssignments({ supports, baseAssignments, sourceRows, ordinaryPerChannel, sourceCampaignId, ordinaryPerChannelOverrides = {} }) {
+  for (const [support, count] of Object.entries(ordinaryPerChannelOverrides)) {
+    assert(supports.includes(support), `unknown ordinary override support: ${support}`);
+    assert(Number.isInteger(count) && count >= 0 && count <= ordinaryPerChannel, `${support}: invalid ordinary count override`);
+  }
   const sourceBySupport = groupBySupport(sourceRows, "ordinary");
   const baseBySupport = groupBySupport(baseAssignments, "ordinary");
   const output = [];
   for (const support of supports) {
+    const target = ordinaryPerChannelOverrides[support] ?? ordinaryPerChannel;
     const source = sourceBySupport.get(support) || [];
     const base = baseBySupport.get(support) || [];
-    assert(source.length <= ordinaryPerChannel, `${support}: source ordinary tails ${source.length} exceed configured ${ordinaryPerChannel}`);
-    assert(base.length === ordinaryPerChannel, `${support}: preview ordinary rows ${base.length} != ${ordinaryPerChannel}`);
+    assert(source.length <= target, `${support}: source ordinary tails ${source.length} exceed configured ${target}`);
+    assert(base.length === target, `${support}: preview ordinary rows ${base.length} != ${target}`);
     const sourceKeys = new Set(source.map((row) => row.assignmentKey));
     assert(sourceKeys.size === source.length, `${support}: duplicate source ordinary assignment key`);
     const baseByKey = new Map(base.map((row) => [row.assignmentKey, row]));
@@ -322,10 +327,10 @@ function composeOrdinaryAssignments({ supports, baseAssignments, sourceRows, ord
       assert(carrier, `${support}: no free schedule carrier remains for source ordinary ${row.assignmentKey}`);
       rows.push(transferSourceToSlot(row, carrier, sourceCampaignId));
     }
-    const neededFresh = ordinaryPerChannel - source.length;
+    const neededFresh = target - source.length;
     assert(freeCarriers.length === neededFresh, `${support}: fresh ordinary complement ${freeCarriers.length} != ${neededFresh}`);
     rows.push(...freeCarriers);
-    assert(rows.length === ordinaryPerChannel, `${support}: composed ordinary count ${rows.length} != ${ordinaryPerChannel}`);
+    assert(rows.length === target, `${support}: composed ordinary count ${rows.length} != ${target}`);
     output.push(...rows);
   }
   return output;
@@ -664,8 +669,8 @@ export function buildCompletionTailWave(options) {
   return manifest;
 }
 
-export function composeIntegratedRecoveryAssignments({ supports, baseAssignments, sourceRows, ordinaryPerChannel, sourceCampaignId }) {
-  const ordinary = composeOrdinaryAssignments({ supports, baseAssignments, sourceRows, ordinaryPerChannel, sourceCampaignId });
+export function composeIntegratedRecoveryAssignments({ supports, baseAssignments, sourceRows, ordinaryPerChannel, sourceCampaignId, ordinaryPerChannelOverrides = {} }) {
+  const ordinary = composeOrdinaryAssignments({ supports, baseAssignments, sourceRows, ordinaryPerChannel, sourceCampaignId, ordinaryPerChannelOverrides });
   const polyglot = composePolyglotAssignments({ supports, baseAssignments, sourceRows, sourceCampaignId });
   return { ordinary, polyglotAssignments: polyglot.output, pendingPolyglot: polyglot.pending };
 }
@@ -702,7 +707,7 @@ export function composeAdditiveRecoveryAssignments({ supports, baseAssignments, 
 
 export function buildIntegratedRecoveryWave(options) {
   assert(!(options.addRecoveryOnTop && options.completeDeckTails), "additive recovery cannot be combined with deck completion");
-  assert(!Object.keys(options.ordinaryPerChannelOverrides || {}).length || options.addRecoveryOnTop, "ordinary count overrides require explicit additive recovery mode");
+  assert(!Object.keys(options.ordinaryPerChannelOverrides || {}).length || !options.completeDeckTails, "ordinary count overrides cannot be combined with deck completion");
   if (options.completeDeckTails) return buildCompletionTailWave(options);
   assert(options.controlReport, "--control-report is required");
   const now = options.now instanceof Date ? options.now : new Date(options.generatedAt || Date.now());
@@ -831,7 +836,7 @@ export function buildIntegratedRecoveryWave(options) {
       polyglotPerChannel: Math.max(...supports.map((support) => assignments.filter((row) => row.supportLang === support && row.videoType === "polyglot").length)),
       allowPartialOrdinaryTail: true,
       allowPartialPolyglotTail: true,
-    } : {}),
+    } : Object.keys(options.ordinaryPerChannelOverrides || {}).length ? { ordinaryPerChannelOverrides: options.ordinaryPerChannelOverrides, allowPartialOrdinaryTail: true } : {}),
   };
   const evidence = {
     ...base.evidence,
