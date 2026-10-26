@@ -2,6 +2,7 @@
 import assert from "node:assert/strict";
 import crypto from "node:crypto";
 import fs from "node:fs";
+import { planYoutubeCampaignHistoryArchive, readYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
@@ -644,5 +645,39 @@ const failedReport = JSON.parse(fs.readFileSync(path.join(root, "outputs/final-f
 assert.equal(failedReport.complete, false);
 assert.equal(failedReport.status, "reconciliation_required");
 assert.equal(failedReport.receiptErrors.some((row) => row.code === "post_upload_error"), true);
+
+// A real finalizer invocation must preserve a segmented history ledger, not
+// silently turn an index into a partial registry or duplicate archived IDs.
+const archivedCampaign = {
+  campaignId: "historical-complete", setId: "historical-deck", status: "finalized",
+  assignments: [{ assignmentKey: "historical-key", youtubeVideoId: "historical-video" }],
+};
+const historyRegistryPath = path.join(configDir, "youtube-publication-campaigns.json");
+write(historyRegistryPath, { schemaVersion: 1, campaigns: [archivedCampaign, campaign] });
+const historyPlan = planYoutubeCampaignHistoryArchive(historyRegistryPath);
+fs.mkdirSync(path.dirname(historyPlan.historyPath), { recursive: true });
+fs.writeFileSync(historyPlan.historyPath, historyPlan.historyText);
+write(historyRegistryPath, historyPlan.index);
+write(path.join(configDir, "youtube-publish-calendar.json"), {
+  schemaVersion: 1, reservations: [ordinaryAssignment, polyglotAssignment].map((row) => ({
+    ...row, campaignId: campaign.campaignId, campaignManifestHash: campaign.manifestHash, status: "campaign_claimed",
+  })),
+});
+for (const name of ["youtube-published-videos.json", "youtube-polyglot-published-videos.json"]) {
+  write(path.join(configDir, name), { schemaVersion: 1, publications: [] });
+}
+const historyFinalize = spawnSync(process.execPath, [
+  path.join(repoRoot, "scripts/finalize-youtube-publication-campaign.mjs"),
+  "--campaign-id=campaign-test", "--artifacts-root=artifacts",
+  "--ordinary-result=success", "--polyglot-result=success", "--output=outputs/final-history.json",
+], { cwd: root, encoding: "utf8" });
+assert.equal(historyFinalize.status, 0, historyFinalize.stderr || historyFinalize.stdout);
+assert.equal(JSON.parse(fs.readFileSync(path.join(root, "outputs/final-history.json"))).complete, true);
+const hydratedHistory = readYoutubeDurableJson(historyRegistryPath);
+assert.equal(hydratedHistory.campaigns.length, 2);
+assert.deepEqual(hydratedHistory.campaigns[0], archivedCampaign);
+assert.equal(hydratedHistory.campaigns[1].status, "finalized");
+assert.deepEqual(hydratedHistory.campaigns[1].assignments.map((row) => row.youtubeVideoId).sort(), ["ordinary-video", "polyglot-video"]);
+assert.equal(fs.readFileSync(historyPlan.historyPath, "utf8"), historyPlan.historyText);
 
 console.log("youtube publication campaign finalizer tests passed");

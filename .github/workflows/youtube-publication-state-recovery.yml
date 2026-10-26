@@ -53,7 +53,7 @@ jobs:
           test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)"
           gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID" > /tmp/source-run.json
           node -e 'const r=require("/tmp/source-run.json"); if(r.status!=="completed"||r.path!==".github/workflows/youtube-publication-campaign.yml")throw Error("not a completed campaign parent");'
-          node -e 'const fs=require("fs"),r=JSON.parse(fs.readFileSync("config/youtube-publication-campaigns.json")); const c=r.campaigns.find(c=>c.campaignId===process.env.CAMPAIGN_ID);if(!c||c.manifestHash!==process.env.MANIFEST_HASH||c.status!=="claimed")throw Error("campaign drift or already persisted");'
+          node --input-type=module -e 'import {readYoutubeDurableJson} from "./scripts/lib/youtube-durable-json.mjs"; const r=readYoutubeDurableJson("config/youtube-publication-campaigns.json"),c=r.campaigns.find(c=>c.campaignId===process.env.CAMPAIGN_ID);if(!c||c.manifestHash!==process.env.MANIFEST_HASH||c.status!=="claimed")throw Error("campaign drift or already persisted");'
       - name: Download source final report
         uses: actions/download-artifact@v4
         with:
@@ -111,6 +111,7 @@ jobs:
             outputs/youtube-state-recovery-artifact-pages.json
             outputs/youtube-state-recovery-receipts.tsv
             config/youtube-publication-campaigns.json
+            config/youtube-publication-campaign-history/
             config/youtube-publish-calendar.json
             config/youtube-published-videos.json
             config/youtube-polyglot-published-videos.json

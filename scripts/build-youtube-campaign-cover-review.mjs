@@ -4,6 +4,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { readYoutubeDurableJson, serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 
 import { buildContactSheet, renderCover } from "./build-youtube-cover-assets.mjs";
 import { languageLabel, safeSegment, targetLines } from "./lib/youtube-cover-assets.mjs";
@@ -49,11 +50,11 @@ function parseArgs(argv) {
 
 function readJson(filePath, label) {
   if (!fs.existsSync(filePath)) throw new Error(`${label} not found: ${filePath}`);
-  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+  return readYoutubeDurableJson(filePath);
 }
 
 function writeJson(filePath, value) {
-  fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+  fs.writeFileSync(filePath, serializeYoutubeDurableJson(filePath, value), "utf8");
 }
 
 function sha256(value) {

@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import { readYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 
 import { buildPartialRecovery } from "./create-youtube-partial-recovery-campaign.mjs";
 import { fileFingerprint } from "./lib/youtube-publication-campaign.mjs";
 import { calendarAssignmentKey } from "./lib/youtube-publication-control.mjs";
 
-const durableRegistry = JSON.parse(fs.readFileSync("config/youtube-publication-campaigns.json", "utf8"));
+const durableRegistry = readYoutubeDurableJson("config/youtube-publication-campaigns.json");
 const durableCalendar = JSON.parse(fs.readFileSync("config/youtube-publish-calendar.json", "utf8"));
 const channels = JSON.parse(fs.readFileSync("config/youtube-channels.json", "utf8"));
 const historicalRecoveryChannels = structuredClone(channels);

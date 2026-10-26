@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import crypto from "node:crypto";
 import fs from "node:fs";
-import { serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
+import { readYoutubeDurableJson, serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import path from "node:path";
 
 import { assignmentKey, calendarAssignmentKey, isActiveReservation } from "./lib/youtube-publication-control.mjs";
@@ -41,7 +41,7 @@ function parseArgs(argv) {
 }
 
 function readJson(filePath) {
-  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+  return readYoutubeDurableJson(filePath);
 }
 
 function writeJson(filePath, value) {

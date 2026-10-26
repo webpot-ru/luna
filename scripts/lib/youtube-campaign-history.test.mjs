@@ -1,0 +1,71 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+import { planYoutubeCampaignHistoryArchive, readYoutubeDurableJson, serializeYoutubeDurableJson } from "./youtube-durable-json.mjs";
+
+fs.mkdirSync("scratch", { recursive: true });
+const root = fs.mkdtempSync("scratch/campaign-history-test-");
+const registryPath = path.join(root, "youtube-publication-campaigns.json");
+const done = { campaignId: "done", status: "finalized", assignments: [{ assignmentKey: "keep", youtubeVideoId: "keep-id" }] };
+const active = { campaignId: "active", status: "claimed", assignments: [{ assignmentKey: "pending", status: "claimed" }] };
+const partial = { campaignId: "partial", status: "reconciliation_required", assignments: [{ youtubeVideoId: "prior-id" }] };
+const legacy = { schemaVersion: 1, sourceOfTruth: "unchanged", campaigns: [active, done, partial] };
+const write = (p, j) => fs.writeFileSync(p, `${JSON.stringify(j)}\n`);
+write(registryPath, legacy);
+assert.deepEqual(readYoutubeDurableJson(registryPath), legacy);
+const plan = planYoutubeCampaignHistoryArchive(registryPath);
+assert.equal(plan.reference.campaignCount, 1);
+assert.equal(plan.reference.sha256, crypto.createHash("sha256").update(plan.historyText).digest("hex"));
+assert.deepEqual(plan.index.campaigns, [active, partial]);
+assert.deepEqual(plan.index.campaignOrder, ["active", "done", "partial"]);
+fs.mkdirSync(path.dirname(plan.historyPath), { recursive: true });
+fs.writeFileSync(plan.historyPath, plan.historyText);
+write(registryPath, plan.index);
+let hydrated = readYoutubeDurableJson(registryPath);
+assert.deepEqual(hydrated.campaigns, legacy.campaigns);
+assert.deepEqual(JSON.parse(serializeYoutubeDurableJson(registryPath, hydrated)), plan.index);
+assert.throws(() => serializeYoutubeDurableJson(registryPath, plan.index), /hydrate the ledger first/);
+assert.throws(() => serializeYoutubeDurableJson(registryPath, hydrated, 1), /safe GitHub blob budget/);
+
+// Copy-on-write historical reconciliation preserves both versions and all IDs.
+hydrated.campaigns[1].receiptReconciled = true;
+write(registryPath, JSON.parse(serializeYoutubeDurableJson(registryPath, hydrated)));
+assert.equal(readYoutubeDurableJson(registryPath).campaigns[1].receiptReconciled, true);
+assert.equal(JSON.parse(fs.readFileSync(plan.historyPath)).campaigns[0].receiptReconciled, undefined);
+hydrated.campaigns.push({ campaignId: "next", status: "claimed", assignments: [] });
+write(registryPath, JSON.parse(serializeYoutubeDurableJson(registryPath, hydrated)));
+assert.equal(readYoutubeDurableJson(registryPath).campaigns.length, 4);
+
+// A downloaded artifact must be usable without the original worktree/index.
+const copied = path.join(root, "artifact", "config");
+fs.mkdirSync(path.join(copied, "youtube-publication-campaign-history"), { recursive: true });
+fs.copyFileSync(registryPath, path.join(copied, path.basename(registryPath)));
+fs.copyFileSync(plan.historyPath, path.join(copied, plan.reference.path));
+assert.deepEqual(readYoutubeDurableJson(path.join(copied, path.basename(registryPath))), readYoutubeDurableJson(registryPath));
+
+const current = JSON.parse(fs.readFileSync(registryPath));
+write(registryPath, { ...current, campaignOrder: ["active", "active"] });
+assert.throws(() => readYoutubeDurableJson(registryPath), /index\/order mismatch/);
+write(registryPath, { ...current, campaigns: [...current.campaigns, current.campaigns[0]] });
+assert.throws(() => readYoutubeDurableJson(registryPath), /duplicate campaign ID/);
+write(registryPath, { ...current, campaignArchives: [{ ...plan.reference, path: "../secret.json" }] });
+assert.throws(() => readYoutubeDurableJson(registryPath), /archive path/);
+write(registryPath, { ...current, campaignArchives: [plan.reference, plan.reference] });
+assert.throws(() => readYoutubeDurableJson(registryPath), /duplicate campaign archive path/);
+write(registryPath, current);
+const duplicateHistory = `${JSON.stringify({ schemaVersion: 1, campaigns: [{ ...done, extra: true }] })}\n`;
+const duplicateSha = crypto.createHash("sha256").update(duplicateHistory).digest("hex");
+const duplicateRef = { path: `youtube-publication-campaign-history/${duplicateSha}.json`, sha256: duplicateSha, campaignCount: 1 };
+fs.writeFileSync(path.join(root, duplicateRef.path), duplicateHistory);
+write(registryPath, { ...current, campaignArchives: [plan.reference, duplicateRef] });
+assert.throws(() => readYoutubeDurableJson(registryPath), /duplicate campaign ID/);
+write(registryPath, current);
+fs.writeFileSync(plan.historyPath, `${plan.historyText} `);
+assert.throws(() => readYoutubeDurableJson(registryPath), /checksum mismatch/);
+fs.writeFileSync(plan.historyPath, plan.historyText);
+const missing = path.join(root, "missing", path.basename(registryPath));
+fs.mkdirSync(path.dirname(missing), { recursive: true });
+write(missing, current);
+assert.throws(() => readYoutubeDurableJson(missing), /ENOENT/);
+console.log("youtube campaign history tests passed");

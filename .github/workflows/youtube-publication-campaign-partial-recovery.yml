@@ -78,12 +78,13 @@ jobs:
           node --input-type=module <<'NODE'
           import fs from "node:fs";
           import path from "node:path";
+          import { readYoutubeDurableJson } from "./scripts/lib/youtube-durable-json.mjs";
           import {
             classifyPartialRecoveryAssignments,
             selectBlockingPartialRecoveryAdvisories,
           } from "./scripts/lib/youtube-partial-recovery-advisories.mjs";
           const report = JSON.parse(fs.readFileSync(process.env.REPORT, "utf8"));
-          const registry = JSON.parse(fs.readFileSync("config/youtube-publication-campaigns.json", "utf8"));
+          const registry = readYoutubeDurableJson("config/youtube-publication-campaigns.json");
           const campaign = (registry.campaigns || []).find((row) => row.campaignId === process.env.CAMPAIGN_ID);
           if (!campaign) throw new Error(`Campaign not found: ${process.env.CAMPAIGN_ID}`);
           if (campaign.setId !== process.env.SET_ID) throw new Error("Campaign set_id mismatch");

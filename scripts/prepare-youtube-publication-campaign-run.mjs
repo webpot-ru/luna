@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import crypto from "node:crypto";
 import fs from "node:fs";
+import { readYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 
@@ -66,7 +67,7 @@ function main() {
     return;
   }
   if (!options.campaignId || !options.manifestHash) throw new Error("--campaign-id and --manifest-hash are required");
-  const registry = JSON.parse(fs.readFileSync(options.registry, "utf8"));
+  const registry = readYoutubeDurableJson(options.registry);
   const calendar = JSON.parse(fs.readFileSync(options.calendar, "utf8"));
   const channelRegistry = JSON.parse(fs.readFileSync(options.channels, "utf8"));
   const routingConfig = JSON.parse(fs.readFileSync("config/youtube-api-project-routing.json", "utf8"));
@@ -76,6 +77,10 @@ function main() {
   if (campaign.manifestHash !== options.manifestHash) throw new Error("Campaign manifest hash does not match durable registry");
   if (campaign.status !== "claimed") throw new Error(`Campaign status must be claimed before first dispatch, got ${campaign.status}`);
   const blockers = [];
+  for (const archive of registry.campaignArchives || []) {
+    const historyPath = path.join(path.dirname(options.registry), archive.path);
+    if (!isGitTracked(historyPath)) blockers.push(`Campaign history must be Git-tracked: ${historyPath}`);
+  }
   const hasPartialRecoveryIdentity = typeof campaign.inputs?.partialRecoveryOfCampaignId === "string"
     && campaign.inputs.partialRecoveryOfCampaignId.trim().length > 0;
   const recoveryInputKeys = Array.isArray(campaign.inputs?.assignmentKeys)

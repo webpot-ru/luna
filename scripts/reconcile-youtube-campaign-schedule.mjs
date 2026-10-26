@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-import { serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
+import { readYoutubeDurableJson, serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import path from "node:path";
 
 import {
@@ -48,7 +48,7 @@ function parseArgs(argv) {
 
 function readJson(filePath) {
   if (!fs.existsSync(filePath)) throw new Error(`Required JSON file not found: ${filePath}`);
-  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+  return readYoutubeDurableJson(filePath);
 }
 
 function writeJson(filePath, value) {

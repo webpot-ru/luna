@@ -113,6 +113,31 @@ printed. The shared serializer refuses an output over95MiB before writing; this
 keeps a margin below GitHub's100MiB single-blob limit. This is not permission to
 drop history or weaken manifest hashes, source fingerprints or receipt gates.
 
+### Content-addressed campaign history (owner approved 2026-10-26)
+
+When the ledger reaches the safe blob budget, run the no-spend local migration
+`node scripts/archive-youtube-publication-campaign-history.mjs` first as a dry-run,
+then with `--apply --confirm=ARCHIVE_FINALIZED_YOUTUBE_CAMPAIGNS`. It moves only
+complete `finalized` campaign payloads into an immutable SHA-256-named JSON under
+`config/youtube-publication-campaign-history/`. No receipt, assignment, YouTube ID,
+campaign status or calendar reservation is removed or changed. Active and
+reconciliation-required campaigns remain inline. The root ledger keeps
+`campaignArchives` (path, checksum and count) plus `campaignOrder` (all IDs in
+original order); every campaign consumer uses `readYoutubeDurableJson` to hydrate
+the complete logical registry, including historical recovery references.
+
+Missing/tampered history, unsafe paths, duplicate IDs across archives or invalid
+ordering fail closed. Writers retain the same 95MiB guard for each Git blob;
+unchanged historical payloads stay in history. An explicitly edited historical
+campaign becomes a newer inline override, never a second active publication;
+the immutable old payload is preserved. Scratch previews may resolve the same
+hash-pinned canonical history; downloaded final-state artifacts include adjacent
+history files and are self-contained. The parent finalizer and state-recovery
+artifact uploads include the history directory. Commit the reader/writer changes,
+the root index and immutable history together before dispatching publication.
+Migration is storage-only: it does not authorize uploads, thumbnail repair,
+provider calls, dropping old data or increasing the safe blob limit.
+
 If uploads succeeded but the finalizer push failed, never retry the parent or
 workers. The separately approved `youtube-publication-state-recovery.yml` reads
 the completed source parent's final report and worker artifacts, runs only the

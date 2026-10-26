@@ -40,12 +40,13 @@ jobs:
           gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN/artifacts?per_page=100" > /tmp/ready-artifacts.json
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
+          import { readYoutubeDurableJson } from './scripts/lib/youtube-durable-json.mjs';
           const spec=JSON.parse(fs.readFileSync(process.env.SPEC));
           const run=JSON.parse(fs.readFileSync('/tmp/ready-source.json'));
           if(run.status!=='completed'||run.head_sha!==spec.sourceHeadSha||run.path!=='.github/workflows/youtube-publication-campaign.yml')throw Error('Ready media source run mismatch');
           const pages=JSON.parse(fs.readFileSync('/tmp/ready-artifacts.json')),all=pages.flatMap(p=>p.artifacts);
           if(all.length!==pages[0].total_count||new Set(all.map(a=>a.id)).size!==all.length)throw Error('Ready media artifact pagination incomplete');
-          const registry=JSON.parse(fs.readFileSync('config/youtube-publication-campaigns.json'));
+          const registry=readYoutubeDurableJson('config/youtube-publication-campaigns.json');
           const campaign=registry.campaigns.find(c=>c.campaignId===process.env.CAMPAIGN);
           const keys=new Set(campaign.assignments.filter(a=>a.routeKey===process.env.ROUTE).map(a=>a.assignmentKey));
           const assets=spec.assets.filter(a=>keys.has(a.assignmentKey));

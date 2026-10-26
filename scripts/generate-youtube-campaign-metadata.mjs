@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import crypto from "node:crypto";
 import fs from "node:fs";
+import { readYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
@@ -239,7 +240,7 @@ function readClaimedCampaign(options) {
   if (!options.campaignId || !options.manifestHash || !options.routeKey) {
     throw new Error("--campaign-id, --manifest-hash and --route-key are required");
   }
-  const registry = JSON.parse(fs.readFileSync(options.registry, "utf8"));
+  const registry = readYoutubeDurableJson(options.registry);
   const campaign = (registry.campaigns || []).find((row) => row.campaignId === options.campaignId);
   if (!campaign) throw new Error(`Campaign not found: ${options.campaignId}`);
   if (campaign.manifestHash !== options.manifestHash) throw new Error("Campaign manifest hash mismatch");

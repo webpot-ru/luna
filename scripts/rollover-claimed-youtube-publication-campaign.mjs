@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-import { serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
+import { readYoutubeDurableJson, serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { calendarAssignmentKey, effectiveScheduleStartDate, isPolyglotRow, polyglotProductSlotKey } from "./lib/youtube-publication-control.mjs";
@@ -8,7 +8,7 @@ import { isCampaignStatusActive, sha256Json, verifyCampaignManifest } from "./li
 import { channelPolicy, findFreeSlot, isActiveCalendarReservation, slotKey, ymdInZone } from "./plan-youtube-publish-schedule.mjs";
 
 const CONFIRM = "ROLLOVER_UNLAUNCHED_CLAIMED_YOUTUBE_CAMPAIGN";
-const readJson = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
+const readJson = (file) => readYoutubeDurableJson(file);
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
 const unique = (values) => [...new Set(values.filter(Boolean))].sort();
 const equal = (left, right) => left.length === right.length && left.every((value, index) => value === right[index]);

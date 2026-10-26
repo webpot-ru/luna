@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-import { serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
+import { readYoutubeDurableJson, serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import path from "node:path";
 
 import {
@@ -40,7 +40,7 @@ function parseArgs(argv) {
 }
 
 function readJson(filePath, fallback) {
-  return fs.existsSync(filePath) ? JSON.parse(fs.readFileSync(filePath, "utf8")) : structuredClone(fallback);
+  return fs.existsSync(filePath) ? readYoutubeDurableJson(filePath) : structuredClone(fallback);
 }
 
 function writeJsonAtomic(filePath, value) {

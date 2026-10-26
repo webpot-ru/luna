@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { readYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 
 import {
   buildPublicationCampaign,
@@ -94,7 +95,7 @@ function assert(condition, message) {
 }
 
 function readJson(filePath) {
-  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+  return readYoutubeDurableJson(filePath);
 }
 
 function writeJson(filePath, value) {

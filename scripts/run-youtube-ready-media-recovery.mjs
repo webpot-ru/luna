@@ -3,10 +3,10 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { prepareReadyMedia, readyMediaSha256, verifyReadyMediaScope } from "./lib/youtube-ready-media.mjs";
 import { assignmentKey } from "./lib/youtube-publication-control.mjs";
-import { serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
+import { readYoutubeDurableJson, serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 
 const args = Object.fromEntries(process.argv.slice(2).map(a => a.replace(/^--/, "").split(/=(.*)/s).slice(0, 2)));
-const read = f => JSON.parse(fs.readFileSync(f, "utf8"));
+const read = f => readYoutubeDurableJson(f);
 const spec = read(args.spec);
 const registry = read("config/youtube-publication-campaigns.json");
 const campaign = registry.campaigns.find(c => c.campaignId === args.campaign);
