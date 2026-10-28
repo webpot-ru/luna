@@ -123,6 +123,14 @@ Note: the desktop `exec_command` tool used by some Codex app sessions may not be
 
 ## Automations
 
+Optional manually invoked fast-lane preparation (2026-10-28): see
+[YouTube Publication Campaigns](youtube-publication-campaigns.md#optional-experimental-fast-lane--prepared-2026-10-28).
+The separately named experimental workflow removes chat handoffs for a single
+explicitly approved exact batch, using a fresh control, standard claim and one
+standard parent dispatch. It has no schedule, watch loop or automatic recovery;
+preview is the default. Creating this variant does not authorize tomorrow's
+uploads, paid processing or a Git push. Existing workflows remain the fallback.
+
 Allowed default automation class: **read-only drift check**.
 
 Exact user-approved exception (2026-10-15 only): one scheduled wake-up at16:02Asia/Bangkok may dispatch the already verified and merged Deck11 final406ordinary/0Polyglot campaign `yt-home_laundry_cleaning_basics_a1_a2-2026-10-15-7d336543d94b` / `fccc00ff42f0c8406198962fc4ccf9032ec5c6d392e5d82d63f4f4893b8104cb`, after mergedmanifest/claimedstate/futureslots and no-priordispatch checks. This direct user request overrides the unattended-publication default for that one parent only; it grants no retry, replacement, newwave, directchild, quota bypass or accepted reupload. Delete the one-shot automation after dispatch or a blocker.

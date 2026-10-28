@@ -1,5 +1,98 @@
 # YouTube Publication Campaigns
 
+## Optional experimental fast lane — prepared 2026-10-28
+
+Owner requested a separate faster variant for the following day's batch while
+preserving the old process. `.github/workflows/youtube-publication-fast-lane.yml`
+is an optional generated copy of the standard control workflow, followed by one
+dispatch of the unchanged `youtube-publication-campaign.yml`. The original
+control, parent, ordinary and Polyglot workers are unchanged. This is preparation
+only: no timetable, tomorrow's batch count, Git publication or production run is
+authorized by creating this variant.
+
+Default `fast_apply=false` is read-only preview; `claim_campaign` must also be
+false. An explicitly approved run sets both to true, `claim_target_branch=main`,
+`claim_confirm=CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN`,
+`fast_confirm_apply=APPLY_YOUTUBE_PUBLICATION_CAMPAIGN` and
+`fast_confirm_metadata=USE_OPENAI_METADATA`. Supply the separately approved
+`expected_assignment_count` and standard set/support/count/override inputs.
+All-route full readback, evidence <=180min, exact total, no permissive partial
+flags and existing public playlists are required before claim. A mismatch stops
+before writing claims. `persist_snapshot` must remain false; only the normal
+three claim files are committed by the existing claim job.
+
+After claim, the variant verifies that main consists of exactly that one new
+three-file claim commit, the immutable plan equals the artifact and the standard
+parent prepare passes. One paginated parent inventory rejects an existing parent
+for that claim, including failed/cancelled attempts, and rejects another active
+parent. It sends exactly one workflow-dispatch request with no retry/watch loop.
+An attempted/accepted request receipt and strict preflight are uploaded even on
+failure; an ambiguous response requires reconciliation, never an automatic retry.
+These receipts prove dispatch intent/acceptance only, not video acceptance.
+Normal finalizer and durable video-ID verification remain mandatory.
+
+The speed improvement is removal of chat handoff delays between control, claim
+and parent dispatch. Voices, video quality, render/TTS/upload concurrency, the
+<=895s short rule, paid metadata settings, channel locks and live-upload gates
+are unchanged. This is not an upload-limit workaround. No automatic recovery,
+thumbnail repair, existing-video replay or scheduled next wave is added.
+
+Maintain with `node scripts/build-youtube-fast-lane-workflow.mjs`; check parity
+using `--check` and run `node scripts/youtube-fast-lane.test.mjs`. This preserves
+the old workflow byte-for-byte and prevents the fork from silently drifting.
+The original control + claim + parent process remains the fallback. Do not retry
+a consumed claim through the old path; reconcile accepted IDs first. Local tests
+do not prove cloud token permissions or actual production dispatch; a separately
+approved first trial is still required.
+
+### Exact missing-only recovery in the fast lane
+
+The owner also requested support for selective failed-batch top-ups. Leave
+`recovery_source_campaign_id` empty for an ordinary new batch. For recovery,
+supply that terminal campaign ID plus its exact
+`recovery_source_manifest_hash`. An empty `recovery_assignment_keys` selects
+ALL still-active source assignments without an accepted ID. Alternatively,
+provide a JSON array of the explicitly approved source keys. Duplicates,
+foreign/superseded keys, non-terminal sources and accepted video IDs fail closed.
+In both cases `expected_assignment_count` must match exactly; no new assignment
+is added to fill an expected total. Ordinary count inputs activate playlist
+discovery in recovery mode; actual per-support counts come from the selected
+immutable source rows, not those regular-wave maxima or overrides.
+
+The fast lane uses the existing `buildPartialRecovery` implementation from
+`create-youtube-partial-recovery-campaign.mjs`, without changing that generator.
+All four original route reports are packaged with the aggregate artifact. The
+preview, pre-claim verification and parent-dispatch verification require fresh
+complete all-route evidence, every accepted source ID matched live, every
+selected ordinary/product slot absent live, and complete owned public-playlist
+evidence for the selected rows. A source video accepted with a post-upload
+thumbnail/playlist error is still excluded from videos.insert recovery. Such
+repairs require their own explicit scope.
+
+Recovery preserves the exact key set, target languages, full/short scope, voice,
+route and approved cover contracts. No scope upgrade/downgrade, new-wave filler,
+media-cache resume or automatic thumbnail repair is exposed here. The standard
+partial generator may replace the explanatory automatic-thumbnail reason and
+normalize full-duration arguments; it may not change those content contracts.
+Short scope remains <=895s and the unchanged worker measures actual duration.
+
+The claim rebuilds the exact preview using its original generation time and
+checks byte-level JSON equality after checking freshness against the REAL
+current clock. This is deterministic reconstruction, never a timestamp refresh.
+All three durable payloads are serialized and pass the existing size guard
+before writing. Only selected missing source claims/calendar rows are
+superseded and the new exact manifest/claim is added by the standard builder;
+accepted rows and other campaigns are preserved. After claim, the selected
+superseded rows must belong specifically to that new recovery ID. The same
+strict parent prepare and single-dispatch/no-retry guard apply as for new waves.
+
+Additional local verification:
+`node scripts/lib/youtube-fast-lane-recovery.test.mjs` and
+`node scripts/create-youtube-partial-recovery-campaign.test.mjs`. The old control,
+partial generator and publication workflows remain unchanged as the fallback.
+Cloud execution of this optional wrapper is still unverified; local preparation
+does not authorize publishing the new code or starting a future batch.
+
 ## Exact Deck12 final SR synthesis budget — 2026-10-22
 
 Owner explicitly renewed the remaining full SR `slavic_core` recovery after the
