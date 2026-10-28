@@ -2,6 +2,41 @@
 
 ## Optional experimental fast lane — prepared 2026-10-28
 
+### Reuse a completed fresh control instead of repeating the audit
+
+Set `reuse_control_run_id` to an existing complete all-route control when its
+original evidence is <=180min and the audited data/core code have not changed.
+The variant skips `select-routes`, all new route audit jobs and `aggregate`;
+`reuse-control` downloads the original full artifacts and rebuilds only the
+no-spend plan. With no ID, the original fresh-audit path remains available.
+An invalid/stale source stops; it never silently falls back to another audit.
+
+The source must be a completed main run of the standard controller or fast
+lane with all four audit jobs and aggregate successful. A later claim failure
+is acceptable only if parent dispatch was skipped and no publication parent has
+been created since that audit began. Active parents also prohibit reuse. All
+artifact/job pages must be read completely, every artifact must be present and
+unexpired, original video/status pagination must be complete, and playlists must
+be complete for all51supports. The source commit must be an ancestor of current
+main. Git differences may contain only the explicit fast-lane wrapper/test files
+or documentation; changed registries, calendar, source deck, cover assets,
+channels, audit code, standard generator or production workflows stop reuse.
+
+Evidence JSON is copied byte-for-byte. Original control/playlist timestamps
+remain unchanged and are checked against the real current clock again before
+claim and dispatch. The rebuilt plan gets its actual new generation time, not
+a refreshed audit time. Source run/head and reuse proof are saved in
+`youtube-fast-lane-reuse.json`. Existing accepted-ID exclusion, exact count and
+source selection, public owned playlists, strict parent prepare and fresh
+per-worker pre-upload readback all remain in place.
+
+The generated variant keeps GitHub's25inputlimit by omitting the unused
+`campaign_max_video_uploads_per_route` override. Permissive quota-tail mode is
+still forbidden; the standard routing/planner quota policy remains unchanged.
+Check reuse with `node scripts/lib/youtube-fast-lane-control-reuse.test.mjs`.
+This mode was requested after explicitly cancelling trial40731153486 before
+claim/upload, to avoid repeating an already valid source audit.
+
 Owner requested a separate faster variant for the following day's batch while
 preserving the old process. `.github/workflows/youtube-publication-fast-lane.yml`
 is an optional generated copy of the standard control workflow, followed by one

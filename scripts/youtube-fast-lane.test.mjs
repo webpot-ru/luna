@@ -78,7 +78,12 @@ const old = fs.readFileSync(".github/workflows/youtube-publication-control.yml",
 const generated = buildFastLaneWorkflow(old);
 assert.equal(fs.readFileSync(".github/workflows/youtube-publication-fast-lane.yml", "utf8"), generated);
 assert(generated.indexOf("Check exact approved scope before any claim write") < generated.indexOf("      - name: Claim the exact fresh no-spend plan"));
-assert(generated.includes("needs: [aggregate, claim-campaign]"));
+assert(generated.includes("needs: [aggregate, reuse-control]"));
+assert(generated.includes("!cancelled() && github.event.inputs.claim_campaign == 'true'"));
+assert(generated.includes("  dispatch-approved-parent:\n    needs: claim-campaign"));
+assert(generated.includes("if: ${{ github.event.inputs.reuse_control_run_id == '' }}"));
+assert(generated.includes("node scripts/youtube-fast-lane.mjs import-control outputs"));
+assert(generated.includes("node scripts/youtube-fast-lane.mjs plan-imported outputs .control-artifacts"));
 assert(generated.includes("      actions: write"));
 assert(generated.includes("node scripts/youtube-fast-lane.mjs claim .claim-artifact"));
 assert(generated.includes("node scripts/youtube-fast-lane.mjs plan-recovery outputs .control-artifacts"));

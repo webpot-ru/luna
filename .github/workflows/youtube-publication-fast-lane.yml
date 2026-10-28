@@ -52,10 +52,6 @@ on:
         required: true
         default: false
         type: boolean
-      campaign_max_video_uploads_per_route:
-        description: "Maximum videos.insert rows per API project for this quota day."
-        required: true
-        default: "1100"
       campaign_polyglot_per_channel:
         description: "Optional no-spend campaign plan: next full Polyglot videos per physical channel; 0 disables campaign planning."
         required: true
@@ -117,6 +113,11 @@ on:
         required: false
         default: ""
         description: "Recovery only: approved JSON key array; empty selects ALL still-active source missing rows. Exact total remains mandatory."
+      reuse_control_run_id:
+        type: string
+        required: false
+        default: ""
+        description: "Optional complete control younger than180min with unchanged inputs: skip all new audit jobs; otherwise stop."
 
 permissions:
   contents: read
@@ -127,6 +128,7 @@ concurrency:
 
 jobs:
   select-routes:
+    if: ${{ github.event.inputs.reuse_control_run_id == '' }}
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.select.outputs.matrix }}
@@ -294,7 +296,7 @@ jobs:
 
   aggregate:
     needs: [select-routes, audit-route]
-    if: always()
+    if: ${{ always() && github.event.inputs.reuse_control_run_id == '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -482,8 +484,8 @@ jobs:
           git status --short --branch --untracked-files=all
 
   claim-campaign:
-    needs: aggregate
-    if: ${{ github.event.inputs.claim_campaign == 'true' && needs.aggregate.result == 'success' }}
+    needs: [aggregate, reuse-control]
+    if: ${{ !cancelled() && github.event.inputs.claim_campaign == 'true' && (needs.aggregate.result == 'success' || needs.reuse-control.result == 'success') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -531,8 +533,42 @@ jobs:
           git commit -m "Claim YouTube publication campaign from control ${{ github.run_id }}"
           git push origin "HEAD:refs/heads/$TARGET_BRANCH"
 
+  reuse-control:
+    if: ${{ github.event.inputs.reuse_control_run_id != '' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Import verified existing control without a new audit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/youtube-fast-lane.mjs import-control outputs
+      - name: Build exact plan from original evidence
+        run: node scripts/youtube-fast-lane.mjs plan-imported outputs .control-artifacts
+      - name: Validate exact approved scope
+        run: node scripts/youtube-fast-lane.mjs verify outputs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-publication-control-${{ github.event.inputs.set_id }}-all-routes-${{ github.run_id }}
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-publication-control-all-routes.json
+            outputs/youtube-publication-snapshot.json
+            outputs/youtube-playlist-discovery-snapshot.json
+            outputs/youtube-publication-campaign-plan.json
+            outputs/youtube-fast-lane-route-reports.json
+            outputs/youtube-fast-lane-reuse.json
+
   dispatch-approved-parent:
-    needs: [aggregate, claim-campaign]
+    needs: claim-campaign
     if: ${{ needs.claim-campaign.result == 'success' && github.event.inputs.fast_apply == 'true' }}
     runs-on: ubuntu-latest
     permissions:

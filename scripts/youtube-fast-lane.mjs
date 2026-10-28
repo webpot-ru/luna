@@ -10,6 +10,8 @@ import { ordinaryCountOverrides } from "./lib/youtube-campaign-counts.mjs";
 import { buildPartialRecovery } from "./create-youtube-partial-recovery-campaign.mjs";
 import { readYoutubeDurableJson, serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import { recoveryRequest, selectRecoveryRows, verifyRecoveryRows } from "./lib/youtube-fast-lane-recovery.mjs";
+import { assertReusableControl } from "./lib/youtube-fast-lane-control-reuse.mjs";
+import { selectBlockingPartialRecoveryAdvisories } from "./lib/youtube-partial-recovery-advisories.mjs";
 
 const read = (p) => JSON.parse(fs.readFileSync(p, "utf8"));
 const enabled = (value) => value === true || value === "true";
@@ -21,6 +23,7 @@ export function authorizeFastLane(event, ref) {
   assert.equal(i.audit_routes, "ALL");
   assert(!i.audit_supports, "Partial audit is not supported");
   const recovery = recoveryRequest(i);
+  assert(!i.reuse_control_run_id || /^[1-9][0-9]*$/.test(i.reuse_control_run_id), "Existing control ID must be numeric");
   assert(Number(i.campaign_ordinary_per_channel) > 0 || Number(i.campaign_polyglot_per_channel) > 0, "Playlist discovery must be activated");
   for (const key of ["persist_snapshot", "campaign_allow_partial_ordinary_tail", "campaign_allow_partial_polyglot_tail", "campaign_allow_partial_route_quota_tail"]) assert(!enabled(i[key]), `${key} is not supported`);
   const apply = enabled(i.fast_apply);
@@ -42,6 +45,7 @@ export function verifyFastLaneEvidence({ event, ref, control, playlists, manifes
   if (recovery) {
     assert.equal(source?.setId, inputs.set_id);
     const selected = selectRecoveryRows({ source, request: recovery, expectedCount: inputs.expected_assignment_count, selectedSupports: supports, claimedCampaignId });
+    assert.equal(selectBlockingPartialRecoveryAdvisories(control.advisories || [], selected).length, 0, "Selected recovery advisories block this scope");
     verifyRecoveryRows({ source, selected, manifest, control, playlists });
     assert.deepEqual(manifest.inputs.supports.split(",").sort(), [...new Set(selected.map((r) => r.supportLang))].sort());
   } else {
@@ -97,7 +101,45 @@ function main() {
   const { inputs, apply, recovery } = authorizeFastLane(event, ref);
   if (mode === "authorize") return console.log("Explicit scope authorization: PASS");
   if (mode === "is-recovery") { process.exitCode = recovery ? 0 : 1; return; }
-  assert(["plan-recovery", "claim", "verify", "dispatch"].includes(mode), "Expected authorize, plan-recovery, claim, verify or dispatch");
+  if (mode === "import-control") {
+    assert(inputs.reuse_control_run_id, "An existing control ID is required");
+    const repo = process.env.GITHUB_REPOSITORY;
+    assert.match(repo || "", /^[\w.-]+\/[\w.-]+$/);
+    const gh = (...a) => execFileSync("gh", a, { encoding: "utf8", maxBuffer: 32 * 1024 * 1024 });
+    const git = (...a) => execFileSync("git", a, { encoding: "utf8" }).trim();
+    const id = inputs.reuse_control_run_id;
+    const run = JSON.parse(gh("api", `repos/${repo}/actions/runs/${id}`));
+    assert.equal(run.repository?.full_name, repo, "Cross-repository control reuse is forbidden");
+    assert.match(run.head_sha || "", /^[a-f0-9]{40}$/);
+    const jobPages = JSON.parse(gh("api", "--paginate", "--slurp", `repos/${repo}/actions/runs/${id}/jobs?per_page=100`));
+    const jobs = jobPages.flatMap((p) => p.jobs);
+    assert.equal(jobs.length, jobPages[0].total_count, "Incomplete source job pagination");
+    const pages = JSON.parse(gh("api", "--paginate", "--slurp", `repos/${repo}/actions/runs/${id}/artifacts?per_page=100`));
+    const artifacts = pages.flatMap((p) => p.artifacts);
+    assert.equal(artifacts.length, pages[0].total_count, "Incomplete source artifact pagination");
+    execFileSync("git", ["merge-base", "--is-ancestor", run.head_sha, "HEAD"]);
+    const changedPaths = git("diff", "--name-only", run.head_sha, "HEAD").split("\n").filter(Boolean);
+    const inventory = JSON.parse(gh("api", "--paginate", "--slurp", `repos/${repo}/actions/workflows/youtube-publication-campaign.yml/runs?per_page=100`));
+    const parentRuns = inventory.flatMap((p) => p.workflow_runs);
+    const dest = process.argv[4] || ".control-artifacts";
+    gh("run", "download", id, "--repo", repo, "--dir", dest);
+    const all = path.join(dest, `youtube-publication-control-${inputs.set_id}-all-routes-${id}`);
+    const control = read(path.join(all, "youtube-publication-control-all-routes.json"));
+    const playlists = read(path.join(all, "youtube-playlist-discovery-snapshot.json"));
+    assertReusableControl({ run, jobs, artifacts, changedPaths, parentRuns, setId: inputs.set_id, control, playlists });
+    const routes = ["youtube-1", "youtube-2", "youtube-3", "youtube-4"];
+    for (const route of routes) {
+      const report = read(path.join(dest, `youtube-publication-control-${inputs.set_id}-${route}-${id}`, `youtube-publication-control-${route}.json`));
+      assert.equal(report.setId, inputs.set_id, "Source route has a different deck");
+    }
+    const snapshot = read(path.join(all, "youtube-publication-snapshot.json"));
+    assert(snapshot.decks?.some((d) => d.setId === inputs.set_id), "Requested deck is missing from snapshot");
+    fs.mkdirSync(artifactRoot, { recursive: true });
+    for (const file of ["youtube-publication-control-all-routes.json", "youtube-publication-snapshot.json", "youtube-playlist-discovery-snapshot.json"]) fs.copyFileSync(path.join(all, file), path.join(artifactRoot, file));
+    fs.writeFileSync(path.join(artifactRoot, "youtube-fast-lane-reuse.json"), JSON.stringify({ sourceRunId: id, sourceHead: run.head_sha, currentHead: git("rev-parse", "HEAD"), controlGeneratedAt: control.generatedAt, playlistGeneratedAt: playlists.generatedAt, checkedAt: new Date().toISOString(), changedPaths, newAuditCalls: 0 }, null, 2));
+    return console.log(`Reused original complete control ${id}; no new audit and no timestamp changes`);
+  }
+  assert(["plan-recovery", "plan-imported", "claim", "verify", "dispatch"].includes(mode), "Unknown fast-lane mode");
   let registry;
   let source;
   if (recovery) {
@@ -117,7 +159,16 @@ function main() {
       controlReports: reports, campaignId: source.campaignId, assignmentKeys: selected.map((r) => r.assignmentKey),
       now, minFutureMinutes: 90, maxEvidenceAgeMinutes: 180 });
   };
-  if (mode === "plan-recovery") {
+  if (mode === "plan-imported" && !recovery) {
+    const args = ["scripts/plan-youtube-publication-campaign.mjs", `--set=${inputs.set_id}`, `--supports=${inputs.campaign_supports}`,
+      `--ordinary-per-channel=${inputs.campaign_ordinary_per_channel}`, `--polyglot-per-channel=${inputs.campaign_polyglot_per_channel}`,
+      `--snapshot=${path.join(artifactRoot, "youtube-publication-snapshot.json")}`, `--playlist-discovery=${path.join(artifactRoot, "youtube-playlist-discovery-snapshot.json")}`,
+      `--output=${path.join(artifactRoot, "youtube-publication-campaign-plan.json")}`, "--max-snapshot-age-minutes=180", "--min-future-minutes=90", "--require-apply-ready", "--json"];
+    if (inputs.campaign_ordinary_count_overrides) args.push(`--ordinary-count-overrides=${inputs.campaign_ordinary_count_overrides}`);
+    if (inputs.campaign_schedule_start_date) args.push(`--start-date=${inputs.campaign_schedule_start_date}`);
+    return execFileSync(process.execPath, args, { stdio: "inherit" });
+  }
+  if (mode === "plan-recovery" || mode === "plan-imported") {
     const reports = [];
     const walk = (dir) => { for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
       const p = path.join(dir, e.name);
