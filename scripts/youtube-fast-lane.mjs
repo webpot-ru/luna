@@ -82,6 +82,14 @@ export function assertUnusedClaimParent(runs, head) {
   assert(!runs.some((r) => r.status !== "completed"), "Another publication parent is active");
 }
 
+export function assertSameRecoveryManifest(rebuilt, persisted) {
+  // JSON artifacts omit undefined object properties. Compare that actual wire
+  // representation, while keeping both immutable hashes and all real values strict.
+  verifyCampaignManifest(rebuilt);
+  verifyCampaignManifest(persisted);
+  assert.deepEqual(JSON.parse(JSON.stringify(rebuilt)), persisted, "Recovery changed between preview and claim");
+}
+
 function main() {
   const [mode, artifactRoot] = process.argv.slice(2);
   const event = read(process.env.GITHUB_EVENT_PATH);
@@ -137,7 +145,7 @@ function main() {
     if (!recovery) return execFileSync(process.execPath, ["scripts/claim-youtube-publication-campaign.mjs", "--manifest=outputs/youtube-publication-campaign-plan.json", "--apply", "--confirm=CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN", "--json"], { stdio: "inherit" });
     const result = recover(read(path.join(artifactRoot, "youtube-fast-lane-route-reports.json")), new Date(manifest.generatedAt));
     // Rebuild the exact original plan; real-clock freshness was checked above. Never refresh timestamps.
-    assert.deepEqual(result.manifest, manifest, "Recovery changed between preview and claim");
+    assertSameRecoveryManifest(result.manifest, manifest);
     const files = {
       "config/youtube-publication-campaigns.json": result.nextRegistry,
       "config/youtube-publish-calendar.json": result.nextCalendar,

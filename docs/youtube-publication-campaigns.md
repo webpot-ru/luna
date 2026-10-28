@@ -79,6 +79,14 @@ Short scope remains <=895s and the unchanged worker measures actual duration.
 The claim rebuilds the exact preview using its original generation time and
 checks byte-level JSON equality after checking freshness against the REAL
 current clock. This is deterministic reconstruction, never a timestamp refresh.
+The comparison uses the actual JSON representation: the standard builder's
+undefined `youtubeVideoId` / `youtubeVideoUrl` properties are omitted by JSON
+serialization. Both immutable hashes are still verified, and null, empty strings,
+accepted IDs, changed slots or any other persisted-value changes remain errors.
+The first cloud trial `40719896858` stopped before claim/provider/upload because
+the initial in-memory comparison incorrectly distinguished omitted JSON keys
+from undefined properties. Its source state and accepted IDs were unchanged;
+this local correction does not authorize repeating that consumed trial.
 All three durable payloads are serialized and pass the existing size guard
 before writing. Only selected missing source claims/calendar rows are
 superseded and the new exact manifest/claim is added by the standard builder;

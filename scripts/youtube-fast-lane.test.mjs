@@ -2,7 +2,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import crypto from "node:crypto";
-import { authorizeFastLane, verifyFastLaneEvidence, assertUnusedClaimParent } from "./youtube-fast-lane.mjs";
+import { authorizeFastLane, verifyFastLaneEvidence, assertUnusedClaimParent, assertSameRecoveryManifest } from "./youtube-fast-lane.mjs";
 import { buildFastLaneWorkflow } from "./build-youtube-fast-lane-workflow.mjs";
 
 const ref = "refs/heads/main";
@@ -57,6 +57,19 @@ fails((f) => { f.manifest.inputs.ordinaryPerChannel = 2; });
 fails((f) => { f.manifest.summary.productionDeferredAssignmentCount = 1; });
 fails((f) => { f.event.inputs.expected_assignment_count = "2"; f.manifest.summary.assignmentCount = 2; f.manifest.assignments.push({ ...f.manifest.assignments[0] }); });
 const corrupt = sign(fixture()); corrupt.manifest.setId = "tampered"; assert.throws(() => verifyFastLaneEvidence(corrupt));
+const roundTrip = fixture();
+roundTrip.manifest.assignments[0].youtubeVideoId = undefined;
+roundTrip.manifest.assignments[0].youtubeVideoUrl = undefined;
+sign(roundTrip);
+const stored = JSON.parse(JSON.stringify(roundTrip.manifest));
+assertSameRecoveryManifest(roundTrip.manifest, stored);
+for (const value of [null, "", "accepted-id-must-never-be-ignored"]) {
+  const changed = structuredClone(roundTrip); changed.manifest.assignments[0].youtubeVideoId = value; sign(changed);
+  assert.throws(() => assertSameRecoveryManifest(changed.manifest, stored));
+}
+const changedSlot = structuredClone(roundTrip); changedSlot.manifest.assignments[0].slotKey = "other-slot"; sign(changedSlot);
+assert.throws(() => assertSameRecoveryManifest(changedSlot.manifest, stored));
+assert.throws(() => assertSameRecoveryManifest({ ...roundTrip.manifest, manifestHash: "tampered" }, stored));
 assertUnusedClaimParent([{ head_sha: "old", status: "completed" }], "new");
 for (const conclusion of ["success", "failure", "cancelled"]) assert.throws(() => assertUnusedClaimParent([{ head_sha: "new", status: "completed", conclusion }], "new"));
 assert.throws(() => assertUnusedClaimParent([{ head_sha: "old", status: "queued" }], "new"));
