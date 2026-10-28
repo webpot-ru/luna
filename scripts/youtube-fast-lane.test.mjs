@@ -81,6 +81,28 @@ assert(generated.indexOf("Check exact approved scope before any claim write") < 
 assert(generated.includes("needs: [aggregate, reuse-control]"));
 assert(generated.includes("!cancelled() && github.event.inputs.claim_campaign == 'true'"));
 assert(generated.includes("  dispatch-approved-parent:\n    needs: claim-campaign"));
+// Exercise the emitted job condition, including GitHub's implicit success()
+// rule when there is no explicit status function. A skipped audit ancestor
+// must not suppress dispatch after a successful claim in reuse mode.
+const dispatchSection = generated.split("  dispatch-approved-parent:\n")[1];
+const condition = dispatchSection.match(/if: \$\{\{ (.+) \}\}/)[1];
+const evaluateDispatch = (expression, { cancelled = false, claim = "success", apply = "true", ancestorsSucceeded = true } = {}) => {
+  const explicitStatus = /\b(cancelled|always|success|failure)\s*\(/.test(expression);
+  if (!explicitStatus && !ancestorsSucceeded) return false;
+  const js = expression.replaceAll("needs.claim-campaign.result", "needs['claim-campaign'].result");
+  return new Function("cancelled", "needs", "github", `return (${js});`)(
+    () => cancelled, { "claim-campaign": { result: claim } }, { event: { inputs: { fast_apply: apply } } },
+  );
+};
+assert.equal(evaluateDispatch(condition), true);
+assert.equal(evaluateDispatch(condition, { ancestorsSucceeded: false }), true, "Reuse mode: skipped audit ancestors must allow dispatch after claim success");
+assert.equal(evaluateDispatch(condition, { cancelled: true }), false);
+assert.equal(evaluateDispatch(condition, { claim: "failure", ancestorsSucceeded: false }), false);
+assert.equal(evaluateDispatch(condition, { claim: "skipped", ancestorsSucceeded: false }), false);
+assert.equal(evaluateDispatch(condition, { claim: "cancelled" }), false);
+assert.equal(evaluateDispatch(condition, { apply: "false" }), false);
+const oldCondition = condition.replace("!cancelled() && ", "");
+assert.equal(evaluateDispatch(oldCondition, { ancestorsSucceeded: false }), false, "Regression reproduces trial40733568353's skipped dispatch");
 assert(generated.includes("if: ${{ github.event.inputs.reuse_control_run_id == '' }}"));
 assert(generated.includes("node scripts/youtube-fast-lane.mjs import-control outputs"));
 assert(generated.includes("node scripts/youtube-fast-lane.mjs plan-imported outputs .control-artifacts"));
@@ -90,4 +112,4 @@ assert(generated.includes("node scripts/youtube-fast-lane.mjs plan-recovery outp
 assert(generated.includes("outputs/youtube-fast-lane-route-reports.json"));
 assert(!/\bcron:|workflow_run:|gh run watch/.test(generated));
 assert.throws(() => buildFastLaneWorkflow("unknown controller"));
-console.log("PASS: preview/explicit approval, exact scope, freshness, duplicate prevention, completed failed-attempt guard, original-controller parity; no external calls");
+console.log("PASS: preview/explicit approval, exact scope, freshness, duplicate prevention, JSON roundtrip, skipped-ancestor dispatch/cancellation guards, original-controller parity; no external calls");

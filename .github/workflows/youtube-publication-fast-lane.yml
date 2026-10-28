@@ -569,7 +569,7 @@ jobs:
 
   dispatch-approved-parent:
     needs: claim-campaign
-    if: ${{ needs.claim-campaign.result == 'success' && github.event.inputs.fast_apply == 'true' }}
+    if: ${{ !cancelled() && needs.claim-campaign.result == 'success' && github.event.inputs.fast_apply == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read

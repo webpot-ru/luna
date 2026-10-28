@@ -37,6 +37,17 @@ Check reuse with `node scripts/lib/youtube-fast-lane-control-reuse.test.mjs`.
 This mode was requested after explicitly cancelling trial40731153486 before
 claim/upload, to avoid repeating an already valid source audit.
 
+In trial40733568353, reuse and claim succeeded but the dispatch job was skipped:
+its condition lacked an explicit status function, so GitHub's implicit success
+check propagated skipped audit ancestors down the dependency chain. Dispatch now
+requires `!cancelled()` AND a successful claim AND explicit `fast_apply=true`.
+This overrides that implicit check while still prohibiting dispatch on failure,
+skipped claim, preview or cancellation. The regression evaluates the emitted
+condition for both paths and reproduces the old skipped-ancestor failure.
+See [GitHub's status-check expressions](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions#status-check-functions).
+The first207parent40737872306 was separately dispatched once against the already
+validated claim; publishing this workflow correction must not replay that parent.
+
 Owner requested a separate faster variant for the following day's batch while
 preserving the old process. `.github/workflows/youtube-publication-fast-lane.yml`
 is an optional generated copy of the standard control workflow, followed by one

@@ -69,7 +69,7 @@ export function buildFastLaneWorkflow(source) {
     "            outputs/youtube-playlist-discovery-snapshot.json", "            outputs/youtube-publication-campaign-plan.json",
     "            outputs/youtube-fast-lane-route-reports.json", "            outputs/youtube-fast-lane-reuse.json",
     "", "  dispatch-approved-parent:", "    needs: claim-campaign",
-    "    if: ${{ needs.claim-campaign.result == 'success' && github.event.inputs.fast_apply == 'true' }}",
+    "    if: ${{ !cancelled() && needs.claim-campaign.result == 'success' && github.event.inputs.fast_apply == 'true' }}",
     "    runs-on: ubuntu-latest", "    permissions:", "      contents: read", "      actions: write",
     "    steps:", "      - uses: actions/checkout@v4", "        with:", "          ref: main", "          fetch-depth: 0",
     "      - uses: actions/setup-node@v4", "        with:", '          node-version: "20"',
