@@ -1,5 +1,15 @@
 # Video Lessons Strategy & Specifications
 
+## Deck14 local cover review — 2026-10-28
+
+For `home_apartment_common_areas_a2` / Sort14, the owner approved the ordinary/Polyglot watercolor samples on 2026-10-28. The preserved approved base is `assets/youtube-cover-templates/deck14-apartment-common-areas-illustrated-approved-base.png`; the original draft remains untouched. The standard local-only deck exporter produced `data/decks/home_apartment_common_areas_a2.json` from canonical Postgres data: 35 cards and Course Metadata on 54 languages, SHA256 `b0e044bc71f53559d659a6843d79d82c74b78457d1532b62c1f5e3f0ee7d2ffa`.
+
+`npm run build:youtube-cover-assets -- --set=home_apartment_common_areas_a2 --offline-review` with the explicit 54-language support list produced the review package `data/youtube-cover-assets/deck14-apartment-all54-review-20261028/manifest.json`: exactly 3,075 JPG covers (2,859 ordinary, 216 Polyglot) plus 108 contact sheets. Every manifest cover passes canonical metadata/target label identity, sidecar, SHA256, unique identity/path, 1280x720 JPEG and under-2MB checks; no missing or unlisted covers. No image-provider calls or YouTube writes occurred during the deterministic build. Russian canonical copy is `Места в доме` / `Общие зоны дома. Начальный уровень.`, replacing the explicitly provisional sample copy; existing translations were not rewritten.
+
+QA evidence and 54-language ordinary/Polyglot overview sheets live in `outputs/review/deck14-covers-20261028/`. Overview geometry was inspected for all 54 support languages; TH/MY/KA/JA Polyglot samples were also inspected at full size. This is not native-language approval of every translation.
+
+The owner subsequently approved the complete package and commit/push on 2026-10-28, explicitly excluding video publication and SR actions. Registry entry `deck14-apartment-approved-20261028` in `config/youtube-cover-assets.json` points to this manifest. As for Deck13, all3,075 covers and their sidecars are retained, but only909canonical-support assets (845ordinary+64Polyglot across16custom-enabled channels) are upload-eligible; the other2,166 remain ineligible. The108current contact sheets are preserved locally and excluded from the exact Git allowlist, as are the draft base and scratch. The approved base, template/asset registries, documentation and canonical offline deck export accompany the covers so a clean runner has the reproducible source. `git-preparation-audit.json` records the exact scope. Approval and registry eligibility do not authorize a YouTube write. Upload permissions, video schedules, voices, routes and existing video IDs are unchanged.
+
 ## Deck13 owner-approved offline cover review — 2026-10-22
 
 The owner approved a clean Deck13 base via built-in Codex imagegen (no paid image
