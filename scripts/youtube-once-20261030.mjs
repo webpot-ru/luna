@@ -8,8 +8,8 @@ import { readYoutubeDurableJson } from './lib/youtube-durable-json.mjs';
 
 export const POLICY = Object.freeze({
   repo: 'webpot-ru/luna', workflow: 'youtube-once-20261030.yml',
-  opens: '2026-10-29T20:20:00Z', closes: '2026-10-29T22:20:00Z',
-  srOpens: '2026-10-30T00:05:00Z', srCloses: '2026-10-30T02:05:00Z',
+  opens: '2026-10-29T20:20:00Z', closes: '2026-10-29T22:00:00Z',
+  srOpens: '2026-10-29T22:00:00Z', srCloses: '2026-10-30T00:00:00Z',
   approvedAt: '2026-10-29T02:38:15Z',
   setId: 'home_apartment_common_areas_a2', count: 583,
   srIds: ['_ksC50YFLdQ', 'v5j866U2V6E'],
@@ -183,11 +183,11 @@ function main() {
   assert.equal(env.GITHUB_REPOSITORY, POLICY.repo);
   if (env.GITHUB_EVENT_NAME === 'workflow_dispatch') {
     batchInputs(read('config/youtube-publication-campaign-plans/yt-home_apartment_common_areas_a2-2026-10-28-62247f3a208f.json'));
-    return summary('Preview only: 2026-10-30 batch03:20Bangkok, SR thumbnails07:05Bangkok; next583 standard fresh plan (SR7ordinary+1poly) + exact two SR thumbnails. No dispatch or writes.');
+    return summary('Preview only: 2026-10-30 batch03:20Bangkok, SR thumbnails05:00Bangkok; next583 standard fresh plan (SR7ordinary+1poly) + exact two SR thumbnails. No dispatch or writes.');
   }
   if (env.GITHUB_EVENT_NAME === 'schedule') {
     const cron = read(env.GITHUB_EVENT_PATH).schedule;
-    assert(['20 20 29 10 *', '5 0 30 10 *'].includes(cron), 'Unknown cron');
+    assert(['20 20 29 10 *', '0 22 29 10 *'].includes(cron), 'Unknown cron');
     const phase = cron === '20 20 29 10 *' ? 'batch' : 'sr';
     // Date/attempt/ref gate precedes even the first API inventory.
     assertStart({ now: Date.now(), eventName: env.GITHUB_EVENT_NAME, ref: env.GITHUB_REF,
@@ -225,7 +225,7 @@ function main() {
     assert(!known.some(r => r.stage === 'sr'), 'SR attempt already consumed');
     assert.notEqual(source.conclusion, 'cancelled', 'Cancellation stops scheduled follow-up');
     summary(`Fresh batch coordinator completed: ${source.conclusion}. No automatic batch retry.`);
-    return summary('Batch wrapper is terminal. SR repair remains separately scheduled for07:05Bangkok; no early thumbnail write.');
+    return summary('Batch wrapper is terminal. SR repair remains separately scheduled for05:00Bangkok; no early thumbnail write.');
   }
   const srReceipt = known.find(r => r.stage === 'sr' && r.childRunId === source.id);
   if (srReceipt) {

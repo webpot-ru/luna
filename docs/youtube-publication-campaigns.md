@@ -7,16 +7,16 @@ the workflow changes, then moved **only the new batch to03:20Bangkok** on
 October30. `youtube-once-20261030.yml` has two distinct one-time windows:
 
 - Batch: **2026-10-29T20:20UTC / October30 03:20Asia/Bangkok**, accepting a delayed
-  scheduler start only until22:20UTC (05:20Bangkok).
-- SR thumbnails: **2026-10-30T00:05UTC / October30 07:05Asia/Bangkok**, accepting
-  a delayed scheduler start only until02:05UTC (09:05Bangkok).
+  scheduler start only until22:00UTC (05:00Bangkok), before the SR phase.
+- SR thumbnails: **2026-10-29T22:00UTC / October30 05:00Asia/Bangkok**, accepting
+  a delayed scheduler start only until October30 00:00UTC (07:00Bangkok).
 
 Year/date/phase guards reject annual future cron firings and prevent either
 phase from consuming the other's one attempt. GitHub can delay scheduled events,
 so these are requested starts, not exact upload or public-release guarantees.
 Manual dispatch is a no-write preview. The Codex read-only batch check moves to
-**06:20Bangkok**, three hours after the new batch start; at that check SR is still
-waiting for its07:05schedule, and its eventual completion is verified by GitHub.
+**06:20Bangkok**, three hours after the new batch start; it now also checks the SR attempt
+scheduled at05:00. Both final results are independently verified by GitHub.
 
 The initial attempt dispatches the existing fast lane once with fresh all-route
 control, strict583expected assignments and paid-metadata confirmation. The owner
@@ -32,8 +32,8 @@ the scheduler does not silently reduce/fill scope or reuse accepted IDs. Full vs
 short_unverified<=895s, approved covers and normal future calendar slots remain
 unchanged. No existing publication/control/worker workflow is modified.
 
-SR repair has its own07:05scheduled phase and can never be triggered early by
-the03:20batch's completion. At07:05it requires a bound terminal fast-lane
+SR repair has its own05:00scheduled phase and can never be triggered early by
+the03:20batch's completion. At05:00it requires a bound terminal fast-lane
 wrapper, so thumbnail persistence cannot invalidate an in-flight claim's main-head
 guard. If the wrapper is still active or its dispatch is ambiguous, SR stops for
 reconciliation rather than polling/retrying. Fast-lane failure never retries the

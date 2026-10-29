@@ -16,9 +16,11 @@ for (const change of [
 ]) assert.throws(() => assertStart({ ...start, ...change }));
 assert.doesNotThrow(() => assertStart({ ...start, priorRuns: [{ id: 100, event: 'schedule', created_at: POLICY.opens }] }));
 
-// Distinct UTC dates: batch03:20Bangkok, SR07:05Bangkok. Neither phase can run early.
+// Both cron entries are October29UTC: batch03:20Bangkok, SR05:00Bangkok. Neither phase can run early.
 assert.equal(new Date(start.now).toLocaleString('en-GB', { timeZone: 'Asia/Bangkok', hour12: false }), '30/10/2026, 03:20:00');
 const srStart = { ...start, now: Date.parse(POLICY.srOpens), phase: 'sr' };
+assert.equal(new Date(srStart.now).toLocaleString('en-GB', { timeZone: 'Asia/Bangkok', hour12: false }), '30/10/2026, 05:00:00');
+assert.equal(POLICY.closes, POLICY.srOpens, 'No overlap between batch and SR start windows');
 assert.doesNotThrow(() => assertStart(srStart));
 assert.throws(() => assertStart({ ...srStart, now: Date.parse(POLICY.srOpens) - 1 }));
 assert.throws(() => assertStart({ ...srStart, now: Date.parse(POLICY.srCloses) }));
@@ -75,7 +77,7 @@ const output = execFileSync(process.execPath, ['scripts/youtube-once-20261030.mj
 assert.match(output, /Preview only/);
 const workflow = fs.readFileSync('.github/workflows/youtube-once-20261030.yml', 'utf8');
 assert.match(workflow, /cron: '20 20 29 10 \*'/);
-assert.match(workflow, /cron: '5 0 30 10 \*'/);
+assert.match(workflow, /cron: '0 22 29 10 \*'/);
 assert.match(workflow, /types: \[completed\]/);
 assert.match(workflow, /cancel-in-progress: false/);
 assert(!workflow.includes('secrets: inherit'));

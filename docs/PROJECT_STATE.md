@@ -6,6 +6,8 @@
 - 2026-08-20 Deck #6 `Bedroom Basics` source is mapped to Drive JSON `1fDx4nn3aKk_R5R0tZ6dUWfHSYkBjm5su`; the approved Bedroom cover base is registered for deterministic ordinary/Polyglot overlays. Publication planning remains separate until a fresh control produces the exact immutable campaign.
 # Project State
 
+- 2026-10-29 owner moved only the two Deck13 SR thumbnail repairs to October30 05:00Bangkok (October29 22:00UTC). Deck14 next583 batch stays03:20, read-only check stays06:20 and now covers both tasks. Separate nonoverlapping start windows retain the terminal fast-lane prerequisite and all duplicate/accepted-ID guards; this earlier SR attempt is explicit owner choice, not proof the thumbnail rate limit will clear.
+
 - 2026-10-29 owner reduced only SR by two ordinary videos in the October30 03:20Bangkok batch, reserving two thumbnail requests for the old Deck13 covers at07:05. Exact next batch is583=532ordinary+51Polyglots:15supports14ordinary,35supports9ordinary,SR7ordinary+1Polyglot. Other channels, full/short policy, times and accepted IDs are unchanged; original585manifest remains immutable. This does not guarantee the SR thumbnail limit will clear.
 
 - 2026-10-29 owner moved the next Deck14 batch to October30 03:20Bangkok (October29 20:20UTC). The two old Deck13 SR thumbnails remain October30 07:05Bangkok; separate date/phase guards and cron entries prevent an early thumbnail write or duplicate batch. The read-only Codex batch check moves to06:20Bangkok, with SR still pending until07:05. No current upload or accepted video is changed by this timetable update.

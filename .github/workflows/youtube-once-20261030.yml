@@ -4,8 +4,8 @@ on:
   schedule:
     # Batch: 2026-10-30 03:20 Bangkok = October29 20:20UTC.
     - cron: '20 20 29 10 *'
-    # SR thumbnails remain 2026-10-30 07:05 Bangkok.
-    - cron: '5 0 30 10 *'
+    # SR thumbnails: 2026-10-30 05:00 Bangkok = October29 22:00UTC.
+    - cron: '0 22 29 10 *'
   workflow_dispatch: {}
   workflow_run:
     workflows:
