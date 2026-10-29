@@ -1489226,7 +1489226,7 @@
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=C-M6ti6OIXI",
       "publicationStatus": "live_youtube_upload_detected",
       "uploadedAt": "2026-10-28T13:52:46Z",
-      "lastReadbackAt": "2026-10-28T14:44:04.123Z",
+      "lastReadbackAt": "2026-10-29T00:56:53.977Z",
       "readbackSource": "youtube_uploads_playlist",
       "liveReadbackOnly": true,
       "urlSupportLang": "TH",
@@ -1489270,7 +1489270,9 @@
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-28-62247f3a208f",
       "campaignManifestHash": "15db013ad72e86483c29dffc4a58155d09878abdcbbfae863dcc622857acdc52",
       "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n    \"errors\": [\n      {\n        \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"forbidden\",\n        \"location\": \"videoId\",\n        \"locationType\": \"parameter\"\n      }\n    ]\n  }\n}\n",
-      "thumbnailSet": false
+      "thumbnailSet": true,
+      "thumbnailUploadedAt": "2026-10-29T00:56:53.977Z",
+      "lastThumbnailReadbackAt": "2026-10-29T00:56:53.977Z"
     },
     {
       "setId": "home_apartment_common_areas_a2",
