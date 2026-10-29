@@ -51,6 +51,14 @@ GitHub Actions runner time and external API usage continue independently after d
 
 Publication mode for approved production waves is scheduled unless the user explicitly approves an immediate-public canary. Scheduled means upload as private with a future `publishAt`; setting `privacy=public` is not equivalent to scheduled publication.
 
+The owner-approved October30 one-time GitHub schedule is a bounded exception to
+Codex-operated manual stage handoffs, not general retry authority. Its event-driven
+coordinator and exact date/run receipts are specified in
+`docs/youtube-publication-campaigns.md`. It uses completion events rather than
+watch/poll loops, preserves all normal claim/upload gates, and replaces (never
+duplicates) the two prior Codex timers. Publishing this scheduled code does not
+authorize running production before the approved date.
+
 ## Local vs Worktree
 
 Default split:

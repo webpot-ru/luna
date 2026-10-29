@@ -1,5 +1,54 @@
 # YouTube Publication Campaigns
 
+## Owner-approved one-time GitHub schedule: 2026-10-30
+
+The owner explicitly approved moving both Codex timers to GitHub and publishing
+the workflow changes. `youtube-once-20261030.yml` starts at `00:05 UTC` / `07:05
+Asia/Bangkok` on October30. Its script permits the initial scheduled attempt only
+on **2026-10-30 between00:05 and02:05UTC**; the annual cron cannot publish next
+year. GitHub can delay scheduled events, so07:05 is a requested start rather than
+an exact upload or public-release guarantee. Manual dispatch is a no-write preview.
+
+The initial attempt dispatches the existing fast lane once with fresh all-route
+control, strict585expected assignments, paid-metadata confirmation and the exact
+previous Deck14 grouping:15supports14ordinary,36supports9ordinary(includingSR),
+plus51Polyglots. The prior immutable plan is the grouping authority, not the
+custom-thumbnail allowlist. Insufficient tails, changed counts, invalid playlists,
+quota/readiness/identity gates or an intervening publication stop before claim;
+the scheduler does not silently reduce/fill scope or reuse accepted IDs. Full vs
+short_unverified<=895s, approved covers and normal future calendar slots remain
+unchanged. No existing publication/control/worker workflow is modified.
+
+Both tasks enter the07:05 schedule, but the actual SR thumbnail request is
+serialized **after the fast-lane wrapper completes**, because thumbnail persistence
+changes main and would otherwise invalidate the claim's main-head guard. A bound
+`workflow_run` event, not a polling loop, performs that continuation. Fast-lane
+failure never retries the batch; the separately approved SR repair may proceed
+after a terminal failure, but cancellation stops the continuation. Only the
+existing exact SR manifest and IDs`_ksC50YFLdQ`/`v5j866U2V6E` are permitted;
+force_reupload=false and exact_missing_only=true remain required. Already-set
+both IDs skip the write; mixed/unknown state stops for reconciliation.
+
+Run-ID/head/workflow/repository provenance and persisted attempt receipts bind
+all follow-ups. A date-window guard, attempt-number guard, same-workflow run
+inventory and serialized coordinator prevent duplicate orchestration. One POST
+is issued per task, with a receipt written before the call. An ambiguous response
+or ID lookup stops without retry. No watch/sleep loop or new credential/dependency
+is introduced; the existing GITHUB_TOKEN has only contents:read/actions:write.
+
+Completion events read complete artifact pagination and durable main. Batch
+verification compares finalizer assignments/counts/errors and preserved accepted
+identities; thumbnail verification requires both successful per-ID receipts and
+durable thumbnailSet=true. Results and links are stored in coordinator artifacts
+and GitHub job summaries. Failed or incomplete tasks are not automatically
+recovered. Old Codex timers`14-30-07-05` and`sr-13-30-07-05` must be disabled after
+the published workflow/read-only preview are verified. This schedule authorizes
+no other date, deck, replay, provider/image generation or following wave.
+
+Check with `node scripts/youtube-once-20261030.test.mjs` plus YAML parsing and
+the unchanged fast-lane regression suite. The schedule remains unexecuted until
+its approved date; local checks and preview do not prove future YouTube acceptance.
+
 ## Optional experimental fast lane — prepared 2026-10-28
 
 ### Reuse a completed fresh control instead of repeating the audit

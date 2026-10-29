@@ -1,0 +1,53 @@
+name: YouTube October 30 approved one-time batches
+
+on:
+  schedule:
+    # 2026-10-30 07:05 Asia/Bangkok. The script rejects every other date.
+    - cron: '5 0 30 10 *'
+  workflow_dispatch: {}
+  workflow_run:
+    workflows:
+      - YouTube Publication Fast Lane (experimental)
+      - YouTube Thumbnail Batch Set
+      - YouTube Publication Campaign
+    types: [completed]
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: youtube-approved-once-20261030
+  cancel-in-progress: false
+
+jobs:
+  coordinate:
+    if: >-
+      github.repository == 'webpot-ru/luna' &&
+      (github.event_name != 'workflow_run' ||
+       (startsWith(github.event.workflow_run.created_at, '2026-10-30') &&
+        github.event.workflow_run.head_branch == 'main' &&
+        github.event.workflow_run.repository.full_name == 'webpot-ru/luna'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Coordinate one approved attempt or verify a completed child
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/youtube-once-20261030.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-20261030-receipt-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            outputs/youtube-once-20261030/receipt.json
+            outputs/youtube-once-20261030/sr-preflight.json
