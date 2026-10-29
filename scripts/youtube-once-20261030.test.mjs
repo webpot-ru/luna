@@ -29,12 +29,16 @@ assert.throws(() => assertStart({ ...srStart, priorRuns: [{ id: 99, event: 'sche
 const first = JSON.parse(fs.readFileSync('config/youtube-publication-campaign-plans/yt-home_apartment_common_areas_a2-2026-10-28-62247f3a208f.json'));
 const inputs = batchInputs(first);
 assert.doesNotThrow(() => authorizeFastLane({ inputs }, 'refs/heads/main'));
-assert.equal(inputs.expected_assignment_count, '585');
+assert.equal(inputs.expected_assignment_count, '583');
 assert.equal(inputs.reuse_control_run_id, '');
 assert.equal(inputs.recovery_source_campaign_id, '');
 assert.equal(inputs.campaign_ordinary_count_overrides.split(',').length, 36);
-assert(inputs.campaign_ordinary_count_overrides.split(',').includes('SR:9'));
-assert.equal(15 * 14 + 36 * 9 + 51, POLICY.count);
+assert(inputs.campaign_ordinary_count_overrides.split(',').includes('SR:7'));
+assert.equal(15 * 14 + 35 * 9 + 7 + 51, POLICY.count);
+assert.equal(first.inputs.ordinaryPerChannelOverrides.SR, 9, 'Original immutable plan must not be mutated');
+for (const [support, count] of Object.entries(first.inputs.ordinaryPerChannelOverrides)) {
+  assert(inputs.campaign_ordinary_count_overrides.split(',').includes(`${support}:${support === 'SR' ? 7 : count}`));
+}
 const drift = structuredClone(first); drift.inputs.ordinaryPerChannelOverrides.SR = 14;
 assert.throws(() => batchInputs(drift));
 
@@ -54,8 +58,8 @@ assert.throws(() => assertSrReady({ ...terminalFast, status: 'in_progress' }, an
 assert.throws(() => assertSrReady({ ...terminalFast, conclusion: 'cancelled' }, anchor, [], Date.parse(POLICY.srOpens)));
 assert.throws(() => assertSrReady(terminalFast, anchor, [{ stage: 'sr' }], Date.parse(POLICY.srOpens)));
 
-const final = { assignments: Array.from({ length: 585 }, (_, n) => ({ youtubeVideoId: `id${n}` })),
-  finalizeSummary: { expectedCount: 585, observedCount: 585, missingCount: 0, duplicateAssignmentCount: 0,
+const final = { assignments: Array.from({ length: POLICY.count }, (_, n) => ({ youtubeVideoId: `id${n}` })),
+  finalizeSummary: { expectedCount: POLICY.count, observedCount: POLICY.count, missingCount: 0, duplicateAssignmentCount: 0,
     duplicateVideoIdCount: 0, unexpectedPublicationCount: 0, receiptErrorCount: 0 } };
 assert.doesNotThrow(() => assertBatchFinal(final));
 for (const field of ['missingCount', 'duplicateAssignmentCount', 'duplicateVideoIdCount', 'unexpectedPublicationCount', 'receiptErrorCount']) {
@@ -75,4 +79,4 @@ assert.match(workflow, /cron: '5 0 30 10 \*'/);
 assert.match(workflow, /types: \[completed\]/);
 assert.match(workflow, /cancel-in-progress: false/);
 assert(!workflow.includes('secrets: inherit'));
-console.log('PASS one-time date/rerun gates, child provenance, exact prior585 grouping, unchanged fast-lane authorization, finalizer counts and preview.');
+console.log('PASS one-time date/rerun gates, child provenance, exact583 scope with only SR reduced by2, unchanged fast-lane authorization, finalizer counts and preview.');

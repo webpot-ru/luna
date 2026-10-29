@@ -11,7 +11,7 @@ export const POLICY = Object.freeze({
   opens: '2026-10-29T20:20:00Z', closes: '2026-10-29T22:20:00Z',
   srOpens: '2026-10-30T00:05:00Z', srCloses: '2026-10-30T02:05:00Z',
   approvedAt: '2026-10-29T02:38:15Z',
-  setId: 'home_apartment_common_areas_a2', count: 585,
+  setId: 'home_apartment_common_areas_a2', count: 583,
   srIds: ['_ksC50YFLdQ', 'v5j866U2V6E'],
   manifest: 'config/youtube-thumbnail-repairs/deck13-zh-sr-20261026.json',
 });
@@ -52,10 +52,13 @@ export function batchInputs(firstPlan) {
   assert.equal(firstPlan.assignments.length, 585);
   assert.equal(firstPlan.inputs.ordinaryPerChannel, 14);
   assert.equal(firstPlan.inputs.polyglotPerChannel, 1);
-  const overrides = firstPlan.inputs.ordinaryPerChannelOverrides;
+  const originalOverrides = firstPlan.inputs.ordinaryPerChannelOverrides;
+  const overrides = { ...originalOverrides };
   assert.equal(Object.keys(overrides).length, 36);
   assert(Object.values(overrides).every(n => n === 9));
-  assert.equal(overrides.SR, 9, 'Preserve the actual prior grouping, not the thumbnail allowlist');
+  assert.equal(overrides.SR, 9, 'Validate the original grouping before the approved SR reduction');
+  // Owner reserves two SR thumbnail writes for the old Deck13 covers this time.
+  overrides.SR = 7;
   return {
     set_id: POLICY.setId, targets: '', max_pages: '100', persist_snapshot: 'false',
     audit_routes: 'ALL', audit_supports: '', campaign_supports: 'ALL',
@@ -64,7 +67,7 @@ export function batchInputs(firstPlan) {
     campaign_allow_partial_ordinary_tail: 'false', campaign_allow_partial_polyglot_tail: 'false',
     campaign_allow_partial_route_quota_tail: 'false', campaign_schedule_start_date: '2026-10-30',
     claim_campaign: 'true', claim_target_branch: 'main', claim_confirm: 'CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN',
-    fast_apply: 'true', expected_assignment_count: '585',
+    fast_apply: 'true', expected_assignment_count: String(POLICY.count),
     fast_confirm_apply: 'APPLY_YOUTUBE_PUBLICATION_CAMPAIGN', fast_confirm_metadata: 'USE_OPENAI_METADATA',
     recovery_source_campaign_id: '', recovery_source_manifest_hash: '', recovery_assignment_keys: '', reuse_control_run_id: '',
   };
@@ -180,7 +183,7 @@ function main() {
   assert.equal(env.GITHUB_REPOSITORY, POLICY.repo);
   if (env.GITHUB_EVENT_NAME === 'workflow_dispatch') {
     batchInputs(read('config/youtube-publication-campaign-plans/yt-home_apartment_common_areas_a2-2026-10-28-62247f3a208f.json'));
-    return summary('Preview only: 2026-10-30 batch03:20Bangkok, SR thumbnails07:05Bangkok; next585 standard fresh plan + exact two SR thumbnails. No dispatch or writes.');
+    return summary('Preview only: 2026-10-30 batch03:20Bangkok, SR thumbnails07:05Bangkok; next583 standard fresh plan (SR7ordinary+1poly) + exact two SR thumbnails. No dispatch or writes.');
   }
   if (env.GITHUB_EVENT_NAME === 'schedule') {
     const cron = read(env.GITHUB_EVENT_PATH).schedule;

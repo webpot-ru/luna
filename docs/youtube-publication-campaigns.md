@@ -19,10 +19,14 @@ Manual dispatch is a no-write preview. The Codex read-only batch check moves to
 waiting for its07:05schedule, and its eventual completion is verified by GitHub.
 
 The initial attempt dispatches the existing fast lane once with fresh all-route
-control, strict585expected assignments, paid-metadata confirmation and the exact
-previous Deck14 grouping:15supports14ordinary,36supports9ordinary(includingSR),
-plus51Polyglots. The prior immutable plan is the grouping authority, not the
-custom-thumbnail allowlist. Insufficient tails, changed counts, invalid playlists,
+control, strict583expected assignments and paid-metadata confirmation. The owner
+explicitly reduced only SR by two ordinary videos to reserve two thumbnail writes
+for its old Deck13 covers:15supports14ordinary,35supports9ordinary,SR7ordinary,
+plus51Polyglots (SR still gets one Polyglot). This reduction applies only to this
+batch. The prior immutable585plan validates the other channel counts and remains
+unchanged. The prior grouping is the authority, not the
+custom-thumbnail allowlist. Two fewer videos remove two new thumbnail requests;
+this does not guarantee YouTube will lift its thumbnail limit. Insufficient tails, changed counts, invalid playlists,
 quota/readiness/identity gates or an intervening publication stop before claim;
 the scheduler does not silently reduce/fill scope or reuse accepted IDs. Full vs
 short_unverified<=895s, approved covers and normal future calendar slots remain
