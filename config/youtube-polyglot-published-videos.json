@@ -139445,7 +139445,7 @@
       "scheduledPublishAt": "2026-11-07T14:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "custom",
       "thumbnailSource": "pre-rendered-design-prototype",
@@ -139457,13 +139457,15 @@
       "githubRunId": "40688094911",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/40688094911",
       "uploadedAt": "2026-10-28T14:26:19.858Z",
-      "lastReadbackAt": "2026-10-28T14:26:19.858Z",
+      "lastReadbackAt": "2026-10-29T00:21:08.647Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-11-07T14:30:00Z",
         "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n    \"errors\": [\n      {\n        \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"forbidden\",\n        \"location\": \"videoId\",\n        \"locationType\": \"parameter\"\n      }\n    ]\n  }\n}\n"
-      }
+      },
+      "thumbnailUploadedAt": "2026-10-29T00:21:08.647Z",
+      "lastThumbnailReadbackAt": "2026-10-29T00:21:08.647Z"
     },
     {
       "videoType": "polyglot",
