@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { POLICY, assertStart, batchInputs, assertChild, assertBatchFinal } from './youtube-once-20261030.mjs';
+import { POLICY, assertStart, batchInputs, assertChild, assertBatchFinal, assertSrReady } from './youtube-once-20261030.mjs';
 import { authorizeFastLane } from './youtube-fast-lane.mjs';
 
 const start = { now: Date.parse(POLICY.opens), eventName: 'schedule', ref: 'refs/heads/main', attempt: '1', priorRuns: [], runId: 100 };
@@ -15,6 +15,16 @@ for (const change of [
   { priorRuns: [{ id: 99, event: 'schedule', created_at: POLICY.opens, conclusion: 'cancelled' }] },
 ]) assert.throws(() => assertStart({ ...start, ...change }));
 assert.doesNotThrow(() => assertStart({ ...start, priorRuns: [{ id: 100, event: 'schedule', created_at: POLICY.opens }] }));
+
+// Distinct UTC dates: batch03:20Bangkok, SR07:05Bangkok. Neither phase can run early.
+assert.equal(new Date(start.now).toLocaleString('en-GB', { timeZone: 'Asia/Bangkok', hour12: false }), '30/10/2026, 03:20:00');
+const srStart = { ...start, now: Date.parse(POLICY.srOpens), phase: 'sr' };
+assert.doesNotThrow(() => assertStart(srStart));
+assert.throws(() => assertStart({ ...srStart, now: Date.parse(POLICY.srOpens) - 1 }));
+assert.throws(() => assertStart({ ...srStart, now: Date.parse(POLICY.srCloses) }));
+assert.throws(() => assertStart({ ...start, now: Date.parse(POLICY.srOpens) }));
+assert.doesNotThrow(() => assertStart({ ...srStart, priorRuns: [{ id: 99, event: 'schedule', created_at: POLICY.opens }] }));
+assert.throws(() => assertStart({ ...srStart, priorRuns: [{ id: 99, event: 'schedule', created_at: POLICY.srOpens }] }));
 
 const first = JSON.parse(fs.readFileSync('config/youtube-publication-campaign-plans/yt-home_apartment_common_areas_a2-2026-10-28-62247f3a208f.json'));
 const inputs = batchInputs(first);
@@ -36,6 +46,14 @@ for (const change of [{ id: 124 }, { head_branch: 'fork' }, { event: 'pull_reque
   assert.throws(() => assertChild({ ...child, ...change }, 123, 'youtube-publication-fast-lane.yml'));
 }
 
+const terminalFast = { ...child, head_sha: 'approved-head', conclusion: 'success' };
+const anchor = { childRunId: 123, head: 'approved-head' };
+assert.doesNotThrow(() => assertSrReady(terminalFast, anchor, [], Date.parse(POLICY.srOpens)));
+assert.throws(() => assertSrReady(terminalFast, anchor, [], Date.parse(POLICY.opens)));
+assert.throws(() => assertSrReady({ ...terminalFast, status: 'in_progress' }, anchor, [], Date.parse(POLICY.srOpens)));
+assert.throws(() => assertSrReady({ ...terminalFast, conclusion: 'cancelled' }, anchor, [], Date.parse(POLICY.srOpens)));
+assert.throws(() => assertSrReady(terminalFast, anchor, [{ stage: 'sr' }], Date.parse(POLICY.srOpens)));
+
 const final = { assignments: Array.from({ length: 585 }, (_, n) => ({ youtubeVideoId: `id${n}` })),
   finalizeSummary: { expectedCount: 585, observedCount: 585, missingCount: 0, duplicateAssignmentCount: 0,
     duplicateVideoIdCount: 0, unexpectedPublicationCount: 0, receiptErrorCount: 0 } };
@@ -52,6 +70,7 @@ const output = execFileSync(process.execPath, ['scripts/youtube-once-20261030.mj
 });
 assert.match(output, /Preview only/);
 const workflow = fs.readFileSync('.github/workflows/youtube-once-20261030.yml', 'utf8');
+assert.match(workflow, /cron: '20 20 29 10 \*'/);
 assert.match(workflow, /cron: '5 0 30 10 \*'/);
 assert.match(workflow, /types: \[completed\]/);
 assert.match(workflow, /cancel-in-progress: false/);

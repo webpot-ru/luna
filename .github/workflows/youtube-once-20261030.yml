@@ -2,7 +2,9 @@ name: YouTube October 30 approved one-time batches
 
 on:
   schedule:
-    # 2026-10-30 07:05 Asia/Bangkok. The script rejects every other date.
+    # Batch: 2026-10-30 03:20 Bangkok = October29 20:20UTC.
+    - cron: '20 20 29 10 *'
+    # SR thumbnails remain 2026-10-30 07:05 Bangkok.
     - cron: '5 0 30 10 *'
   workflow_dispatch: {}
   workflow_run:
@@ -25,7 +27,8 @@ jobs:
     if: >-
       github.repository == 'webpot-ru/luna' &&
       (github.event_name != 'workflow_run' ||
-       (startsWith(github.event.workflow_run.created_at, '2026-10-30') &&
+       ((startsWith(github.event.workflow_run.created_at, '2026-10-29') ||
+         startsWith(github.event.workflow_run.created_at, '2026-10-30')) &&
         github.event.workflow_run.head_branch == 'main' &&
         github.event.workflow_run.repository.full_name == 'webpot-ru/luna'))
     runs-on: ubuntu-latest

@@ -8,7 +8,8 @@ import { readYoutubeDurableJson } from './lib/youtube-durable-json.mjs';
 
 export const POLICY = Object.freeze({
   repo: 'webpot-ru/luna', workflow: 'youtube-once-20261030.yml',
-  opens: '2026-10-30T00:05:00Z', closes: '2026-10-30T02:05:00Z',
+  opens: '2026-10-29T20:20:00Z', closes: '2026-10-29T22:20:00Z',
+  srOpens: '2026-10-30T00:05:00Z', srCloses: '2026-10-30T02:05:00Z',
   approvedAt: '2026-10-29T02:38:15Z',
   setId: 'home_apartment_common_areas_a2', count: 585,
   srIds: ['_ksC50YFLdQ', 'v5j866U2V6E'],
@@ -33,13 +34,16 @@ const summary = text => {
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${text}\n\n`);
 };
 
-export function assertStart({ now, eventName, ref, attempt, priorRuns, runId }) {
+export function assertStart({ now, eventName, ref, attempt, priorRuns, runId, phase = 'batch' }) {
+  assert(['batch', 'sr'].includes(phase));
+  const opens = phase === 'batch' ? POLICY.opens : POLICY.srOpens;
+  const closes = phase === 'batch' ? POLICY.closes : POLICY.srCloses;
   assert.equal(eventName, 'schedule', 'Manual invocation is preview-only');
   assert.equal(ref, 'refs/heads/main');
   assert.equal(String(attempt), '1', 'Reruns cannot consume another attempt');
-  assert(now >= Date.parse(POLICY.opens) && now < Date.parse(POLICY.closes), 'Outside the approved one-time window');
+  assert(now >= Date.parse(opens) && now < Date.parse(closes), 'Outside the approved one-time window');
   assert(!priorRuns.some(r => String(r.id) !== String(runId) && r.event === 'schedule' &&
-    Date.parse(r.created_at) >= Date.parse(POLICY.opens) && Date.parse(r.created_at) < Date.parse(POLICY.closes)),
+    Date.parse(r.created_at) >= Date.parse(opens) && Date.parse(r.created_at) < Date.parse(closes)),
   'Another scheduled coordinator already consumed this date');
 }
 
@@ -141,21 +145,59 @@ function dispatch(workflow, inputs, receipt) {
   summary(`One ${receipt.stage} attempt: [${receipt.childRunId}](${receipt.childUrl}). Dispatch is not completion proof.`);
 }
 
+export function assertSrReady(source, anchor, known, now) {
+  assert(now >= Date.parse(POLICY.srOpens) && now < Date.parse(POLICY.srCloses), 'Outside the SR repair window');
+  assertChild(source, anchor.childRunId, 'youtube-publication-fast-lane.yml');
+  assert.equal(source.head_sha, anchor.head);
+  assert(!known.some(r => r.stage === 'sr'), 'SR attempt already consumed');
+  assert.notEqual(source.conclusion, 'cancelled', 'Cancellation stops scheduled follow-up');
+}
+
+function startSr(anchor, known) {
+  const source = api(`actions/runs/${anchor.childRunId}`);
+  assertSrReady(source, anchor, known, Date.now());
+  preserveAccepted(anchor.baseline);
+  const sr = POLICY.srIds.map(id => registries().find(r => r.youtubeVideoId === id));
+  assert(sr.every(Boolean));
+  if (sr.every(r => r.thumbnailSet === true)) return summary('Both SR thumbnails already installed; no write.');
+  assert(sr.every(r => r.thumbnailSet === false), 'Mixed/unknown SR state: reconcile instead of replaying');
+  assert(!runs('youtube-thumbnail-batch-set.yml').some(r => Date.parse(r.created_at) >= Date.parse(POLICY.opens)),
+    'Another thumbnail attempt exists for this date; reconcile before writing');
+  execFileSync(process.execPath, ['scripts/plan-youtube-thumbnail-batch-from-manifest.mjs',
+    `--manifest=${POLICY.manifest}`, '--set-id=home_structure_exterior_a1_a2', '--support=SR',
+    '--require-missing-state', '--require-exact-video-id', '--require-git-tracked', '--fail-on-blockers', `--output=${OUT}/sr-preflight.json`], { stdio: 'inherit' });
+  const plan = read(`${OUT}/sr-preflight.json`);
+  assert.deepEqual(plan.readyRows.map(r => r.youtubeVideoId).sort(), [...POLICY.srIds].sort());
+  const receipt = { stage: 'sr', anchorRunId: anchor.anchorRunId, head: api('commits/main').sha };
+  return dispatch('youtube-thumbnail-batch-set.yml', { mode: 'apply', manifest_path: POLICY.manifest,
+    set_id: 'home_structure_exterior_a1_a2', support: 'SR', youtube_environment: 'youtube-api-youtube-3',
+    force_reupload: 'false', exact_missing_only: 'true', confirm_youtube_write: 'APPLY_YOUTUBE_THUMBNAIL_BATCH' }, receipt);
+}
+
 function main() {
   fs.mkdirSync(OUT, { recursive: true });
   const env = process.env;
   assert.equal(env.GITHUB_REPOSITORY, POLICY.repo);
   if (env.GITHUB_EVENT_NAME === 'workflow_dispatch') {
     batchInputs(read('config/youtube-publication-campaign-plans/yt-home_apartment_common_areas_a2-2026-10-28-62247f3a208f.json'));
-    return summary('Preview only: fixed 2026-10-30 07:05 Bangkok; next585 standard fresh plan + exact two SR thumbnails. No dispatch or writes.');
+    return summary('Preview only: 2026-10-30 batch03:20Bangkok, SR thumbnails07:05Bangkok; next585 standard fresh plan + exact two SR thumbnails. No dispatch or writes.');
   }
   if (env.GITHUB_EVENT_NAME === 'schedule') {
+    const cron = read(env.GITHUB_EVENT_PATH).schedule;
+    assert(['20 20 29 10 *', '5 0 30 10 *'].includes(cron), 'Unknown cron');
+    const phase = cron === '20 20 29 10 *' ? 'batch' : 'sr';
     // Date/attempt/ref gate precedes even the first API inventory.
     assertStart({ now: Date.now(), eventName: env.GITHUB_EVENT_NAME, ref: env.GITHUB_REF,
-      attempt: env.GITHUB_RUN_ATTEMPT, priorRuns: [], runId: env.GITHUB_RUN_ID });
+      attempt: env.GITHUB_RUN_ATTEMPT, priorRuns: [], runId: env.GITHUB_RUN_ID, phase });
     const selfRuns = runs(POLICY.workflow);
     assertStart({ now: Date.now(), eventName: env.GITHUB_EVENT_NAME, ref: env.GITHUB_REF,
-      attempt: env.GITHUB_RUN_ATTEMPT, priorRuns: selfRuns, runId: env.GITHUB_RUN_ID });
+      attempt: env.GITHUB_RUN_ATTEMPT, priorRuns: selfRuns, runId: env.GITHUB_RUN_ID, phase });
+    if (phase === 'sr') {
+      const known = receipts(selfRuns);
+      const anchors = known.filter(r => r.stage === 'batch' && r.childRunId);
+      assert.equal(anchors.length, 1, 'Need exactly one prior batch receipt for safe SR continuation');
+      return startSr(anchors[0], known);
+    }
     assert(!runs('youtube-publication-campaign.yml').some(r => Date.parse(r.created_at) >= Date.parse(POLICY.approvedAt)),
       'A later publication attempt requires reconciliation before this new wave');
     assert(!runs('youtube-publication-fast-lane.yml').some(r => !['completed'].includes(r.status)), 'Another fast lane is active');
@@ -166,7 +208,7 @@ function main() {
   assert.equal(env.GITHUB_EVENT_NAME, 'workflow_run');
   assert.equal(env.GITHUB_RUN_ATTEMPT, '1', 'No coordinator reruns');
   const source = read(env.GITHUB_EVENT_PATH).workflow_run;
-  if (!source.created_at.startsWith('2026-10-30') || Date.parse(source.created_at) < Date.parse(POLICY.opens)) return summary('Unrelated date; no action.');
+  if (Date.parse(source.created_at) < Date.parse(POLICY.opens) || Date.parse(source.created_at) >= Date.parse('2026-10-31T00:00:00Z')) return summary('Unrelated date; no action.');
   const selfRuns = runs(POLICY.workflow);
   const known = receipts(selfRuns);
   const anchors = known.filter(r => r.stage === 'batch' && r.childRunId);
@@ -180,21 +222,7 @@ function main() {
     assert(!known.some(r => r.stage === 'sr'), 'SR attempt already consumed');
     assert.notEqual(source.conclusion, 'cancelled', 'Cancellation stops scheduled follow-up');
     summary(`Fresh batch coordinator completed: ${source.conclusion}. No automatic batch retry.`);
-    const sr = POLICY.srIds.map(id => registries().find(r => r.youtubeVideoId === id));
-    assert(sr.every(Boolean));
-    if (sr.every(r => r.thumbnailSet === true)) return summary('Both SR thumbnails already installed; no write.');
-    assert(sr.every(r => r.thumbnailSet === false), 'Mixed/unknown SR state: reconcile instead of replaying');
-    assert(!runs('youtube-thumbnail-batch-set.yml').some(r => Date.parse(r.created_at) >= Date.parse(POLICY.opens)),
-      'Another thumbnail attempt exists for this date; reconcile before writing');
-    execFileSync(process.execPath, ['scripts/plan-youtube-thumbnail-batch-from-manifest.mjs',
-      `--manifest=${POLICY.manifest}`, '--set-id=home_structure_exterior_a1_a2', '--support=SR',
-      '--require-missing-state', '--require-exact-video-id', '--require-git-tracked', '--fail-on-blockers', `--output=${OUT}/sr-preflight.json`], { stdio: 'inherit' });
-    const plan = read(`${OUT}/sr-preflight.json`);
-    assert.deepEqual(plan.readyRows.map(r => r.youtubeVideoId).sort(), [...POLICY.srIds].sort());
-    const receipt = { stage: 'sr', anchorRunId: anchor.anchorRunId, head: api('commits/main').sha };
-    return dispatch('youtube-thumbnail-batch-set.yml', { mode: 'apply', manifest_path: POLICY.manifest,
-      set_id: 'home_structure_exterior_a1_a2', support: 'SR', youtube_environment: 'youtube-api-youtube-3',
-      force_reupload: 'false', exact_missing_only: 'true', confirm_youtube_write: 'APPLY_YOUTUBE_THUMBNAIL_BATCH' }, receipt);
+    return summary('Batch wrapper is terminal. SR repair remains separately scheduled for07:05Bangkok; no early thumbnail write.');
   }
   const srReceipt = known.find(r => r.stage === 'sr' && r.childRunId === source.id);
   if (srReceipt) {

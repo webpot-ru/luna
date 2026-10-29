@@ -3,11 +3,20 @@
 ## Owner-approved one-time GitHub schedule: 2026-10-30
 
 The owner explicitly approved moving both Codex timers to GitHub and publishing
-the workflow changes. `youtube-once-20261030.yml` starts at `00:05 UTC` / `07:05
-Asia/Bangkok` on October30. Its script permits the initial scheduled attempt only
-on **2026-10-30 between00:05 and02:05UTC**; the annual cron cannot publish next
-year. GitHub can delay scheduled events, so07:05 is a requested start rather than
-an exact upload or public-release guarantee. Manual dispatch is a no-write preview.
+the workflow changes, then moved **only the new batch to03:20Bangkok** on
+October30. `youtube-once-20261030.yml` has two distinct one-time windows:
+
+- Batch: **2026-10-29T20:20UTC / October30 03:20Asia/Bangkok**, accepting a delayed
+  scheduler start only until22:20UTC (05:20Bangkok).
+- SR thumbnails: **2026-10-30T00:05UTC / October30 07:05Asia/Bangkok**, accepting
+  a delayed scheduler start only until02:05UTC (09:05Bangkok).
+
+Year/date/phase guards reject annual future cron firings and prevent either
+phase from consuming the other's one attempt. GitHub can delay scheduled events,
+so these are requested starts, not exact upload or public-release guarantees.
+Manual dispatch is a no-write preview. The Codex read-only batch check moves to
+**06:20Bangkok**, three hours after the new batch start; at that check SR is still
+waiting for its07:05schedule, and its eventual completion is verified by GitHub.
 
 The initial attempt dispatches the existing fast lane once with fresh all-route
 control, strict585expected assignments, paid-metadata confirmation and the exact
@@ -19,12 +28,13 @@ the scheduler does not silently reduce/fill scope or reuse accepted IDs. Full vs
 short_unverified<=895s, approved covers and normal future calendar slots remain
 unchanged. No existing publication/control/worker workflow is modified.
 
-Both tasks enter the07:05 schedule, but the actual SR thumbnail request is
-serialized **after the fast-lane wrapper completes**, because thumbnail persistence
-changes main and would otherwise invalidate the claim's main-head guard. A bound
-`workflow_run` event, not a polling loop, performs that continuation. Fast-lane
-failure never retries the batch; the separately approved SR repair may proceed
-after a terminal failure, but cancellation stops the continuation. Only the
+SR repair has its own07:05scheduled phase and can never be triggered early by
+the03:20batch's completion. At07:05it requires a bound terminal fast-lane
+wrapper, so thumbnail persistence cannot invalidate an in-flight claim's main-head
+guard. If the wrapper is still active or its dispatch is ambiguous, SR stops for
+reconciliation rather than polling/retrying. Fast-lane failure never retries the
+batch; the separately approved SR repair may proceed after a terminal failure,
+but cancellation stops it. Only the
 existing exact SR manifest and IDs`_ksC50YFLdQ`/`v5j866U2V6E` are permitted;
 force_reupload=false and exact_missing_only=true remain required. Already-set
 both IDs skip the write; mixed/unknown state stops for reconciliation.
