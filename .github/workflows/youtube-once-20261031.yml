@@ -1,0 +1,51 @@
+name: YouTube October 31 approved batch 636
+
+on:
+  schedule:
+    # October31 10:00Asia/Bangkok = 03:00UTC. Other dates/years are refused.
+    - cron: '0 3 31 10 *'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Preview by default; start only the explicitly approved636 batch.'
+        type: choice
+        options: [preview, start]
+        default: preview
+        required: true
+      confirm:
+        description: 'Manual start requires START_APPROVED_20261031_636.'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: youtube-approved-once-20261031
+  cancel-in-progress: false
+
+jobs:
+  start-approved-batch:
+    if: github.repository == 'webpot-ru/luna'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Preview or start the single owner-approved636 attempt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/youtube-once-20261031.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-20261031-receipt-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: outputs/youtube-once-20261031/receipt.json

@@ -1,5 +1,46 @@
 # YouTube Publication Campaigns
 
+## Owner-approved next batch: October31 10:00Bangkok
+
+`youtube-once-20261031.yml` starts the next Deck14 process at **2026-10-31
+03:00UTC / 10:00Asia/Bangkok**. Latest owner instruction replaces10+1/14+1:
+**15channels15ordinary+1Polyglot**, **36channels10ordinary+1Polyglot**, exact
+**636=585ordinary+51Polyglots**. SR is back to10ordinary+1Polyglot; its prior
+reduction by two applied only to the previous batch. The original immutable585
+plan validates physical channel grouping and is never rewritten.
+
+The starter invokes the unchanged fast lane exactly once: fresh all-route
+control and complete public playlist discovery, exact636plan, normal three-file
+claim/strict parent prepare, then one standard publication parent. Every existing
+accepted ID is excluded. Paid OpenAI metadata remains part of the approved normal
+workflow; no new images/providers/voices/dependencies are introduced. Full only
+for longVideoUploadAllowed=true, otherwise measured short_unverified<=895seconds;
+automatic thumbnails never exclude a video. Scope/count/readiness/playlist/quota
+failures stop instead of silently reducing scope or replaying videos. Public
+release uses future free policy calendar slots, not immediate publication at10:00.
+
+Lessons from October30: delays may start later that same day until
+**17:00UTC / midnight Bangkok**, without a narrow hourly expiry. Lower-bound,
+date/year guards remain. GitHub scheduling is not a minute-exact service.
+Serialized startup and full prior-coordinator inventory reject duplicates,
+including cancelled/failed/unrecorded attempts. A receipt is written before the
+single POST; ambiguity stops without retry. Manual mode defaults preview and
+requires the separate exact approval token for a renewed start. Publishing code
+or running preview does not initiate production now.
+
+The entry point uses only the proven fast-lane control→claim→parent path, with
+**no nested workflow_run dependency**: October30continuations were not observed.
+Starter artifact records childRunId/head/count; fast-lane artifact records exact
+campaignID/hash/claimhead. A separate one-shot read-only Codex check at
+**13:00Bangkok** follows these IDs, verifies full final artifacts/durable accepted
+IDs, counts/errors and preservation of previous IDs, then deletes its monitor.
+It never retries uploads; active progress is reported once without polling loops.
+
+Check `node scripts/youtube-once-20261031.test.mjs`, YAML parsing and the unchanged
+fast-lane tests. October30workflow, accepted583batch and repairedSRcovers remain
+untouched. Tests/preview are not proof of future YouTube acceptance.
+
+
 ## Owner-approved one-time GitHub schedule: 2026-10-30
 
 The owner explicitly approved both scheduled tasks, publishing workflow fixes,
