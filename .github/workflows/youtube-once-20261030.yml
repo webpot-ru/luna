@@ -6,7 +6,18 @@ on:
     - cron: '20 20 29 10 *'
     # SR thumbnails: 2026-10-30 05:00 Bangkok = October29 22:00UTC.
     - cron: '0 22 29 10 *'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Preview by default. Batch is the owner-approved583 attempt; sr is only the two existing thumbnails.'
+        type: choice
+        options: [preview, batch, sr]
+        default: preview
+        required: true
+      confirm:
+        description: 'For a renewed approved action: RUN_APPROVED_20261030_ONCE'
+        default: ''
+        required: false
   workflow_run:
     workflows:
       - YouTube Publication Fast Lane (experimental)

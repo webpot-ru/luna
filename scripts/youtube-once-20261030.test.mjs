@@ -2,31 +2,45 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { POLICY, assertStart, batchInputs, assertChild, assertBatchFinal, assertSrReady } from './youtube-once-20261030.mjs';
+import { POLICY, assertStart, batchInputs, assertChild, assertBatchFinal, assertSrReady, assertCoordinatorInventory } from './youtube-once-20261030.mjs';
 import { authorizeFastLane } from './youtube-fast-lane.mjs';
 
-const start = { now: Date.parse(POLICY.opens), eventName: 'schedule', ref: 'refs/heads/main', attempt: '1', priorRuns: [], runId: 100 };
+const start = { now: Date.parse(POLICY.opens), eventName: 'schedule', ref: 'refs/heads/main', attempt: '1', priorReceipts: [] };
 assert.doesNotThrow(() => assertStart(start));
 for (const change of [
   { now: start.now - 1 }, { now: Date.parse(POLICY.closes) },
   { now: Date.parse('2027-10-30T00:05:00Z') }, { attempt: '2' },
   { eventName: 'workflow_dispatch' }, { ref: 'refs/heads/test' },
-  { priorRuns: [{ id: 99, event: 'schedule', created_at: POLICY.opens, conclusion: 'failure' }] },
-  { priorRuns: [{ id: 99, event: 'schedule', created_at: POLICY.opens, conclusion: 'cancelled' }] },
+  { priorReceipts: [{ stage: 'batch', status: 'attempt_started_no_retry' }] },
+  { priorReceipts: [{ stage: 'batch', status: 'request_accepted', childRunId: 123 }] },
 ]) assert.throws(() => assertStart({ ...start, ...change }));
-assert.doesNotThrow(() => assertStart({ ...start, priorRuns: [{ id: 100, event: 'schedule', created_at: POLICY.opens }] }));
-
-// Both cron entries are October29UTC: batch03:20Bangkok, SR05:00Bangkok. Neither phase can run early.
 assert.equal(new Date(start.now).toLocaleString('en-GB', { timeZone: 'Asia/Bangkok', hour12: false }), '30/10/2026, 03:20:00');
 const srStart = { ...start, now: Date.parse(POLICY.srOpens), phase: 'sr' };
 assert.equal(new Date(srStart.now).toLocaleString('en-GB', { timeZone: 'Asia/Bangkok', hour12: false }), '30/10/2026, 05:00:00');
-assert.equal(POLICY.closes, POLICY.srOpens, 'No overlap between batch and SR start windows');
 assert.doesNotThrow(() => assertStart(srStart));
 assert.throws(() => assertStart({ ...srStart, now: Date.parse(POLICY.srOpens) - 1 }));
 assert.throws(() => assertStart({ ...srStart, now: Date.parse(POLICY.srCloses) }));
-assert.throws(() => assertStart({ ...start, now: Date.parse(POLICY.srOpens) }));
-assert.doesNotThrow(() => assertStart({ ...srStart, priorRuns: [{ id: 99, event: 'schedule', created_at: POLICY.opens }] }));
-assert.throws(() => assertStart({ ...srStart, priorRuns: [{ id: 99, event: 'schedule', created_at: POLICY.srOpens }] }));
+assert.doesNotThrow(() => assertStart({ ...srStart, priorReceipts: [{ stage: 'batch' }] }));
+assert.throws(() => assertStart({ ...srStart, priorReceipts: [{ stage: 'sr' }] }));
+// Reproduce both actual delayed job times: they now pass without bypassing any upload gate.
+for (const now of ['2026-10-30T00:01:38Z', '2026-10-30T01:38:08Z']) {
+  assert.doesNotThrow(() => assertStart({ ...start, now: Date.parse(now) }));
+  assert.doesNotThrow(() => assertStart({ ...srStart, now: Date.parse(now) }));
+}
+const approvedManual = { ...start, now: Date.parse('2026-10-30T02:00:00Z'), eventName: 'workflow_dispatch',
+  manualAction: 'batch', confirmation: 'RUN_APPROVED_20261030_ONCE' };
+assert.doesNotThrow(() => assertStart(approvedManual));
+assert.throws(() => assertStart({ ...approvedManual, confirmation: '' }));
+assert.throws(() => assertStart({ ...approvedManual, manualAction: 'sr' }));
+assert.throws(() => assertStart({ ...approvedManual, priorReceipts: [{ stage: 'batch' }] }));
+
+const expired = { id: 40976690245, created_at: '2026-10-29T23:58:43Z', conclusion: 'failure', head_sha: '3fbcd1d93d589bf7f5568b2e0f7918e4ece186cd' };
+assert.doesNotThrow(() => assertCoordinatorInventory([expired], [], 500, 'batch'));
+assert.throws(() => assertCoordinatorInventory([{ ...expired, id: 501 }], [], 500, 'batch'));
+assert.throws(() => assertCoordinatorInventory([{ ...expired, conclusion: 'success' }], [], 500, 'batch'));
+const previous = { ...expired, id: 502 };
+assert.throws(() => assertCoordinatorInventory([previous], [{ coordinatorRunId: 502, stage: 'batch' }], 500, 'batch'));
+assert.doesNotThrow(() => assertCoordinatorInventory([previous], [{ coordinatorRunId: 502, stage: 'batch' }], 500, 'sr'));
 
 const first = JSON.parse(fs.readFileSync('config/youtube-publication-campaign-plans/yt-home_apartment_common_areas_a2-2026-10-28-62247f3a208f.json'));
 const inputs = batchInputs(first);

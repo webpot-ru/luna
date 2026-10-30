@@ -2,21 +2,28 @@
 
 ## Owner-approved one-time GitHub schedule: 2026-10-30
 
-The owner explicitly approved moving both Codex timers to GitHub and publishing
-the workflow changes, then moved **only the new batch to03:20Bangkok** on
-October30. `youtube-once-20261030.yml` has two distinct one-time windows:
+The owner explicitly approved both scheduled tasks, publishing workflow fixes,
+and on October30 renewed approval to fix expired windows and run583plus the two
+existing SR thumbnails now. GitHub delayed both original scheduler jobs past the
+old short windows:40976690245 and40986660847 exited before any POST/receipt,
+claim, provider or YouTube operation. Neither consumed a publication attempt.
 
-- Batch: **2026-10-29T20:20UTC / October30 03:20Asia/Bangkok**, accepting a delayed
-  scheduler start only until22:00UTC (05:00Bangkok), before the SR phase.
-- SR thumbnails: **2026-10-29T22:00UTC / October30 05:00Asia/Bangkok**, accepting
-  a delayed scheduler start only until October30 00:00UTC (07:00Bangkok).
+The requested starts remain October30 **03:20Bangkok** for the583batch and
+**05:00Bangkok** for SR. Delayed starts are accepted until the end of that same
+Bangkok day: **2026-10-30T17:00UTC**, never next year or before the lower bound.
+Read-only inventories load coordinator receipts before any write: an existing
+`attempt_started_no_retry` or accepted receipt consumes its scope even when a
+POST response or child-ID lookup was ambiguous. An expired pre-dispatch job with
+no receipt does not consume a YouTube attempt. There is no automatic upload retry.
 
-Year/date/phase guards reject annual future cron firings and prevent either
-phase from consuming the other's one attempt. GitHub can delay scheduled events,
-so these are requested starts, not exact upload or public-release guarantees.
-Manual dispatch is a no-write preview. The Codex read-only batch check moves to
-**06:20Bangkok**, three hours after the new batch start; it now also checks the SR attempt
-scheduled at05:00. Both final results are independently verified by GitHub.
+Manual dispatch defaults to a no-write preview. An explicitly renewed approved
+start uses action=`batch` (or exact`sr`) and
+confirm=`RUN_APPROVED_20261030_ONCE`, main only, attempt1only and the same date
+and receipt guards. The batch completion event starts the independently approved
+SR task once after its lower bound if it has not already been attempted, so
+thumbnail persistence cannot invalidate the in-flight claim's main-head guard.
+Cancellation still stops continuation. All normal fast-lane/parent gates remain.
+The old one-shot Codex monitor was completed/deleted after diagnosing the failures.
 
 The initial attempt dispatches the existing fast lane once with fresh all-route
 control, strict583expected assignments and paid-metadata confirmation. The owner
@@ -32,8 +39,8 @@ the scheduler does not silently reduce/fill scope or reuse accepted IDs. Full vs
 short_unverified<=895s, approved covers and normal future calendar slots remain
 unchanged. No existing publication/control/worker workflow is modified.
 
-SR repair has its own05:00scheduled phase and can never be triggered early by
-the03:20batch's completion. At05:00it requires a bound terminal fast-lane
+SR repair has its own05:00lower bound and can never be triggered early by
+the batch's completion. It requires a bound terminal fast-lane
 wrapper, so thumbnail persistence cannot invalidate an in-flight claim's main-head
 guard. If the wrapper is still active or its dispatch is ambiguous, SR stops for
 reconciliation rather than polling/retrying. Fast-lane failure never retries the

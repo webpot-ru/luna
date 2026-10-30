@@ -8,9 +8,10 @@ import { readYoutubeDurableJson } from './lib/youtube-durable-json.mjs';
 
 export const POLICY = Object.freeze({
   repo: 'webpot-ru/luna', workflow: 'youtube-once-20261030.yml',
-  opens: '2026-10-29T20:20:00Z', closes: '2026-10-29T22:00:00Z',
-  srOpens: '2026-10-29T22:00:00Z', srCloses: '2026-10-30T00:00:00Z',
+  opens: '2026-10-29T20:20:00Z', closes: '2026-10-30T17:00:00Z',
+  srOpens: '2026-10-29T22:00:00Z', srCloses: '2026-10-30T17:00:00Z',
   approvedAt: '2026-10-29T02:38:15Z',
+  verifiedExpiredRunIds: [40976690245, 40986660847],
   setId: 'home_apartment_common_areas_a2', count: 583,
   srIds: ['_ksC50YFLdQ', 'v5j866U2V6E'],
   manifest: 'config/youtube-thumbnail-repairs/deck13-zh-sr-20261026.json',
@@ -34,17 +35,34 @@ const summary = text => {
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${text}\n\n`);
 };
 
-export function assertStart({ now, eventName, ref, attempt, priorRuns, runId, phase = 'batch' }) {
+export function assertStart({ now, eventName, ref, attempt, priorReceipts = [], phase = 'batch', manualAction = '', confirmation = '' }) {
   assert(['batch', 'sr'].includes(phase));
   const opens = phase === 'batch' ? POLICY.opens : POLICY.srOpens;
   const closes = phase === 'batch' ? POLICY.closes : POLICY.srCloses;
-  assert.equal(eventName, 'schedule', 'Manual invocation is preview-only');
   assert.equal(ref, 'refs/heads/main');
   assert.equal(String(attempt), '1', 'Reruns cannot consume another attempt');
-  assert(now >= Date.parse(opens) && now < Date.parse(closes), 'Outside the approved one-time window');
-  assert(!priorRuns.some(r => String(r.id) !== String(runId) && r.event === 'schedule' &&
-    Date.parse(r.created_at) >= Date.parse(opens) && Date.parse(r.created_at) < Date.parse(closes)),
-  'Another scheduled coordinator already consumed this date');
+  if (eventName === 'workflow_dispatch') {
+    assert.equal(manualAction, phase, 'Manual action must match the approved scope');
+    assert.equal(confirmation, 'RUN_APPROVED_20261030_ONCE', 'Explicit renewed approval required');
+  } else assert.equal(eventName, 'schedule');
+  assert(now >= Date.parse(opens) && now < Date.parse(closes), 'Outside the approved October30 Bangkok date');
+  // A pre-dispatch expired job has no receipt and consumed no YouTube attempt.
+  // Any attempted POST, including an ambiguous response, consumes this scope.
+  assert(!priorReceipts.some(r => r.stage === phase), 'This approved scope already has a dispatch attempt');
+}
+
+export function assertCoordinatorInventory(priorRuns, known, currentRunId, phase) {
+  for (const run of priorRuns) {
+    if (String(run.id) === String(currentRunId) || Date.parse(run.created_at) < Date.parse(POLICY.opens)) continue;
+    if (POLICY.verifiedExpiredRunIds.includes(Number(run.id))) {
+      assert.equal(run.conclusion, 'failure');
+      assert.equal(run.head_sha, '3fbcd1d93d589bf7f5568b2e0f7918e4ece186cd');
+      continue; // These two exact logs were verified to stop before any dispatch.
+    }
+    const record = known.find(r => String(r.coordinatorRunId) === String(run.id));
+    assert(record, `Unrecorded coordinator ${run.id}: reconcile before another attempt`);
+    assert.notEqual(record.stage, phase, 'A previous coordinator already consumed this scope');
+  }
 }
 
 export function batchInputs(firstPlan) {
@@ -121,13 +139,14 @@ function receipts(selfRuns) {
     const dest = `${OUT}/coordinators/${r.id}`;
     download(r.id, name, dest);
     const p = `${dest}/receipt.json`;
-    if (fs.existsSync(p)) result.push(read(p));
+    if (fs.existsSync(p)) result.push({ ...read(p), coordinatorRunId: r.id });
   }
   return result;
 }
 function dispatch(workflow, inputs, receipt) {
   assert.equal(execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), receipt.head,
     'Main changed after coordinator checkout; stop instead of dispatching stale code');
+  receipt.coordinatorRunId = Number(process.env.GITHUB_RUN_ID);
   receipt.workflow = workflow;
   receipt.inputs = inputs;
   receipt.requestedAt = new Date().toISOString();
@@ -160,6 +179,7 @@ function startSr(anchor, known) {
   const source = api(`actions/runs/${anchor.childRunId}`);
   assertSrReady(source, anchor, known, Date.now());
   preserveAccepted(anchor.baseline);
+  assertCoordinatorInventory(runs(POLICY.workflow), known, process.env.GITHUB_RUN_ID, 'sr');
   const sr = POLICY.srIds.map(id => registries().find(r => r.youtubeVideoId === id));
   assert(sr.every(Boolean));
   if (sr.every(r => r.thumbnailSet === true)) return summary('Both SR thumbnails already installed; no write.');
@@ -181,22 +201,26 @@ function main() {
   fs.mkdirSync(OUT, { recursive: true });
   const env = process.env;
   assert.equal(env.GITHUB_REPOSITORY, POLICY.repo);
-  if (env.GITHUB_EVENT_NAME === 'workflow_dispatch') {
+  const event = env.GITHUB_EVENT_PATH && fs.existsSync(env.GITHUB_EVENT_PATH) ? read(env.GITHUB_EVENT_PATH) : {};
+  const manualAction = event.inputs?.action || 'preview';
+  if (env.GITHUB_EVENT_NAME === 'workflow_dispatch' && manualAction === 'preview') {
     batchInputs(read('config/youtube-publication-campaign-plans/yt-home_apartment_common_areas_a2-2026-10-28-62247f3a208f.json'));
-    return summary('Preview only: 2026-10-30 batch03:20Bangkok, SR thumbnails05:00Bangkok; next583 standard fresh plan (SR7ordinary+1poly) + exact two SR thumbnails. No dispatch or writes.');
+    return summary('Preview only: next583 standard fresh plan (SR7ordinary+1poly) + exact two SR thumbnails. No dispatch or writes.');
   }
-  if (env.GITHUB_EVENT_NAME === 'schedule') {
-    const cron = read(env.GITHUB_EVENT_PATH).schedule;
-    assert(['20 20 29 10 *', '0 22 29 10 *'].includes(cron), 'Unknown cron');
-    const phase = cron === '20 20 29 10 *' ? 'batch' : 'sr';
-    // Date/attempt/ref gate precedes even the first API inventory.
-    assertStart({ now: Date.now(), eventName: env.GITHUB_EVENT_NAME, ref: env.GITHUB_REF,
-      attempt: env.GITHUB_RUN_ATTEMPT, priorRuns: [], runId: env.GITHUB_RUN_ID, phase });
+  if (env.GITHUB_EVENT_NAME === 'schedule' || env.GITHUB_EVENT_NAME === 'workflow_dispatch') {
+    let phase = manualAction;
+    if (env.GITHUB_EVENT_NAME === 'schedule') {
+      assert(['20 20 29 10 *', '0 22 29 10 *'].includes(event.schedule), 'Unknown cron');
+      phase = event.schedule === '20 20 29 10 *' ? 'batch' : 'sr';
+    }
+    const guard = { now: Date.now(), eventName: env.GITHUB_EVENT_NAME, ref: env.GITHUB_REF,
+      attempt: env.GITHUB_RUN_ATTEMPT, phase, manualAction, confirmation: event.inputs?.confirm || '' };
+    assertStart(guard); // Reject dates/reruns/unauthorized manual requests before API calls.
     const selfRuns = runs(POLICY.workflow);
-    assertStart({ now: Date.now(), eventName: env.GITHUB_EVENT_NAME, ref: env.GITHUB_REF,
-      attempt: env.GITHUB_RUN_ATTEMPT, priorRuns: selfRuns, runId: env.GITHUB_RUN_ID, phase });
+    const known = receipts(selfRuns);
+    assertCoordinatorInventory(selfRuns, known, env.GITHUB_RUN_ID, phase);
+    assertStart({ ...guard, now: Date.now(), priorReceipts: known });
     if (phase === 'sr') {
-      const known = receipts(selfRuns);
       const anchors = known.filter(r => r.stage === 'batch' && r.childRunId);
       assert.equal(anchors.length, 1, 'Need exactly one prior batch receipt for safe SR continuation');
       return startSr(anchors[0], known);
@@ -225,7 +249,8 @@ function main() {
     assert(!known.some(r => r.stage === 'sr'), 'SR attempt already consumed');
     assert.notEqual(source.conclusion, 'cancelled', 'Cancellation stops scheduled follow-up');
     summary(`Fresh batch coordinator completed: ${source.conclusion}. No automatic batch retry.`);
-    return summary('Batch wrapper is terminal. SR repair remains separately scheduled for05:00Bangkok; no early thumbnail write.');
+    if (Date.now() < Date.parse(POLICY.srOpens)) return summary('SR is not due yet; no early write.');
+    return startSr(anchor, known);
   }
   const srReceipt = known.find(r => r.stage === 'sr' && r.childRunId === source.id);
   if (srReceipt) {
