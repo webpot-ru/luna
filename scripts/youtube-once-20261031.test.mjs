@@ -10,12 +10,14 @@ const original = JSON.parse(fs.readFileSync('config/youtube-publication-campaign
 const before = JSON.stringify(original);
 const inputs = buildInputs(original);
 assert.equal(JSON.stringify(original), before);
-assert.equal(inputs.expected_assignment_count, '636');
+assert.equal(inputs.expected_assignment_count, '600');
 assert.equal(inputs.campaign_ordinary_per_channel, '15');
 assert.equal(inputs.campaign_polyglot_per_channel, '1');
 assert.equal(inputs.campaign_ordinary_count_overrides.split(',').length, 36);
-assert(inputs.campaign_ordinary_count_overrides.split(',').includes('SR:10'));
-assert.equal(15 * 16 + 36 * 11, POLICY.count);
+assert(inputs.campaign_ordinary_count_overrides.split(',').includes('SR:9'));
+assert.equal(15 * 16 + 36 * 10, POLICY.count);
+const plannedCounts = Object.fromEntries(inputs.campaign_ordinary_count_overrides.split(',').map(s => { const [k,v] = s.split(':'); return [k, Number(v)]; }));
+assert.equal(original.inputs.supports.split(',').reduce((sum, support) => sum + (plannedCounts[support] ?? 15) + 1, 0), POLICY.count);
 assert.equal(inputs.recovery_source_campaign_id, '');
 assert.equal(inputs.reuse_control_run_id, '');
 assert.equal(inputs.campaign_allow_partial_route_quota_tail, 'false');
@@ -56,5 +58,5 @@ const output = execFileSync(process.execPath, [scriptPath.pathname], {
     GITHUB_EVENT_PATH: '', GITHUB_STEP_SUMMARY: '' }, encoding: 'utf8',
 });
 assert.match(output, /Preview only/);
-assert.match(output, /636/);
-console.log('PASS636 group math/SR10/unchanged source, fast-lane authorization, Bangkok date, multi-hour delay, no early/next-year/rerun/duplicate, child proof, valid JSON receipt and no-write preview.');
+assert.match(output, /600/);
+console.log('PASS600 group math/SR9/unchanged source, fast-lane authorization, Bangkok date, multi-hour delay, no early/next-year/rerun/duplicate, child proof, valid JSON receipt and no-write preview.');

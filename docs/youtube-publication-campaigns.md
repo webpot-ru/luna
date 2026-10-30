@@ -3,14 +3,14 @@
 ## Owner-approved next batch: October31 10:00Bangkok
 
 `youtube-once-20261031.yml` starts the next Deck14 process at **2026-10-31
-03:00UTC / 10:00Asia/Bangkok**. Latest owner instruction replaces10+1/14+1:
-**15channels15ordinary+1Polyglot**, **36channels10ordinary+1Polyglot**, exact
-**636=585ordinary+51Polyglots**. SR is back to10ordinary+1Polyglot; its prior
+03:00UTC / 10:00Asia/Bangkok**. Owner restored the previous9+1lower group; the higher15+1group remains:
+**15channels15ordinary+1Polyglot**, **36channels9ordinary+1Polyglot**, exact
+**600=549ordinary+51Polyglots**. SR is back to9ordinary+1Polyglot; its prior
 reduction by two applied only to the previous batch. The original immutable585
 plan validates physical channel grouping and is never rewritten.
 
 The starter invokes the unchanged fast lane exactly once: fresh all-route
-control and complete public playlist discovery, exact636plan, normal three-file
+control and complete public playlist discovery, exact600plan, normal three-file
 claim/strict parent prepare, then one standard publication parent. Every existing
 accepted ID is excluded. Paid OpenAI metadata remains part of the approved normal
 workflow; no new images/providers/voices/dependencies are introduced. Full only

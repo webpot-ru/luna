@@ -1,4 +1,4 @@
-name: YouTube October 31 approved batch 636
+name: YouTube October 31 approved batch 600
 
 on:
   schedule:
@@ -7,13 +7,13 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: 'Preview by default; start only the explicitly approved636 batch.'
+        description: 'Preview by default; start only the explicitly approved600 batch.'
         type: choice
         options: [preview, start]
         default: preview
         required: true
       confirm:
-        description: 'Manual start requires START_APPROVED_20261031_636.'
+        description: 'Manual start requires START_APPROVED_20261031_600.'
         required: false
         default: ''
 
@@ -38,7 +38,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Preview or start the single owner-approved636 attempt
+      - name: Preview or start the single owner-approved600 attempt
         env:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/youtube-once-20261031.mjs

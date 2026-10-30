@@ -7,8 +7,8 @@ import { pathToFileURL } from 'node:url';
 export const POLICY = Object.freeze({
   repo: 'webpot-ru/luna', workflow: 'youtube-once-20261031.yml',
   opens: '2026-10-31T03:00:00Z', closes: '2026-10-31T17:00:00Z',
-  approvedAt: '2026-10-30T06:01:25Z', count: 636, setId: 'home_apartment_common_areas_a2',
-  confirmation: 'START_APPROVED_20261031_636',
+  approvedAt: '2026-10-30T06:01:25Z', count: 600, setId: 'home_apartment_common_areas_a2',
+  confirmation: 'START_APPROVED_20261031_600',
 });
 const OUT = 'outputs/youtube-once-20261031';
 const read = file => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -43,7 +43,7 @@ export function buildInputs(firstPlan) {
     set_id: POLICY.setId, targets: '', max_pages: '100', persist_snapshot: 'false',
     audit_routes: 'ALL', audit_supports: '', campaign_supports: 'ALL',
     campaign_ordinary_per_channel: '15', campaign_polyglot_per_channel: '1',
-    campaign_ordinary_count_overrides: Object.keys(prior).sort().map(s => `${s}:10`).join(','),
+    campaign_ordinary_count_overrides: Object.keys(prior).sort().map(s => `${s}:9`).join(','),
     campaign_allow_partial_ordinary_tail: 'false', campaign_allow_partial_polyglot_tail: 'false',
     campaign_allow_partial_route_quota_tail: 'false', campaign_schedule_start_date: '2026-10-31',
     claim_campaign: 'true', claim_target_branch: 'main', claim_confirm: 'CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN',
@@ -81,7 +81,7 @@ function main() {
   const event = env.GITHUB_EVENT_PATH && fs.existsSync(env.GITHUB_EVENT_PATH) ? read(env.GITHUB_EVENT_PATH) : {};
   const inputs = buildInputs(read('config/youtube-publication-campaign-plans/yt-home_apartment_common_areas_a2-2026-10-28-62247f3a208f.json'));
   if (env.GITHUB_EVENT_NAME === 'workflow_dispatch' && (event.inputs?.action || 'preview') === 'preview') {
-    return summary('Preview only: October31 10:00Asia/Bangkok; 636 = 15channels(15+1) + 36channels(10+1), including SR10+1. No dispatch, claim, render, paid generation or YouTube write.');
+    return summary('Preview only: October31 10:00Asia/Bangkok; 600 = 15channels(15+1) + 36channels(9+1), including SR9+1. No dispatch, claim, render, paid generation or YouTube write.');
   }
   const guard = { now: Date.now(), eventName: env.GITHUB_EVENT_NAME, event, ref: env.GITHUB_REF,
     attempt: env.GITHUB_RUN_ATTEMPT, runId: env.GITHUB_RUN_ID };
@@ -108,7 +108,7 @@ function main() {
   receipt.childRunId = child.id;
   receipt.childUrl = child.html_url;
   save(receipt);
-  summary(`Started one approved636 fast lane: [${child.id}](${child.html_url}). Fresh control must pass before claim/upload. Existing videos excluded; this is not acceptance proof.`);
+  summary(`Started one approved600 fast lane: [${child.id}](${child.html_url}). Fresh control must pass before claim/upload. Existing videos excluded; this is not acceptance proof.`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
