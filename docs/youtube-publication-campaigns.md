@@ -1,5 +1,25 @@
 # YouTube Publication Campaigns
 
+## October31 missed cron and renewed one-time start
+
+At2026-10-31T07:02UTC GitHub returned zero repository runs for October31;
+this workflow had only the successful October30preview. The workflow was active,
+on default branch main with valid03:00UTC cron. No coordinator, claim or upload
+started. This is absence of a schedule event, not an upload failure or a guard
+failure. GitHub does not expose the precise scheduler cause; official docs allow
+schedule delays and dropped events, especially at the start of an hour:
+https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule
+
+The owner renewed one exact600start now. Retire this missed cron before using
+manual action=start with the exact confirmation. This prevents a later cron from
+competing with the renewed manual attempt. Existing serialized coordinator,
+all-prior-run inventory, receipt-before-POST, fresh control, exact600claim and
+accepted-ID exclusion gates remain unchanged. No retry or second wave is allowed.
+A successful manual dispatch cannot establish cron reliability. Future unattended
+starts need a separately validated delivery strategy; do not claim this fixes the
+external scheduler. First scheduled10:00 below is historical, superseded by the
+renewed manual start on October31.
+
 ## Owner-approved next batch: October31 10:00Bangkok
 
 `youtube-once-20261031.yml` starts the next Deck14 process at **2026-10-31

@@ -6,6 +6,8 @@
 - 2026-08-20 Deck #6 `Bedroom Basics` source is mapped to Drive JSON `1fDx4nn3aKk_R5R0tZ6dUWfHSYkBjm5su`; the approved Bedroom cover base is registered for deterministic ordinary/Polyglot overlays. Publication planning remains separate until a fresh control produces the exact immutable campaign.
 # Project State
 
+- 2026-10-31 scheduled600run never appeared (active workflow/default main/zero repository runs at07:02UTC). Exact GitHub scheduler cause is unavailable; no code or upload ran. Owner renewed one manual600start now. Retire the missed cron before manual dispatch, preserving exactcount/freshcontrol/acceptedexclusion/receipt/duplicate gates. This does not prove future cron reliability.
+
 - 2026-10-30 owner corrected only the October31 lower-channel count back to its previous9ordinary+1Polyglot. The higher15-channel group stays15+1. Exact next batch is600=549ordinary+51Polyglots:15channels16videos and36channels10videos (SR9+1). Start remains October31 10:00Bangkok, read-only check13:00; all anti-replay/date/fresh-control gates remain unchanged. This supersedes the earlier636scope below.
 
 - 2026-10-30 next Deck14 process explicitly approved for October31 10:00Asia/Bangkok (03:00UTC), latest scope15ordinary+1Polyglot for the prior15-channel group and10+1for the other36, includingSR10+1:636=585ordinary+51Polyglots. Preparation/schedule publication only now; fresh control/strict636claim/one standard parent at the approved time. Separate starter tolerates delays through that Bangkok day and rejects early/next-year/rerun/duplicate attempts. Manual calls default preview; no dependency on the absent October30workflow_run continuation. Existing accepted videos/covers/voices/routes remain unchanged.

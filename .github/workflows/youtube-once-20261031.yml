@@ -1,9 +1,8 @@
 name: YouTube October 31 approved batch 600
 
 on:
-  schedule:
-    # October31 10:00Asia/Bangkok = 03:00UTC. Other dates/years are refused.
-    - cron: '0 3 31 10 *'
+  # October31 cron produced no run; owner renewed one manual start.
+  # Retire the missed schedule before dispatch to avoid delayed-event competition.
   workflow_dispatch:
     inputs:
       action:
