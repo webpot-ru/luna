@@ -2494229,7 +2494229,7 @@
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "polyglot",
       "setId": "home_apartment_common_areas_a2",
@@ -2494252,13 +2494252,42 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "bundleLabel": "East Asia Core",
+      "targetLangsCsv": "ZH,JA,KO",
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_polyglot_ml_east_asia_core/youtube_metadata.json",
+      "title": "പൊതുപ്രദേശങ്ങൾ: ചൈനീസ്, ജാപ്പനീസ്, കൊറിയൻ പദാവലി",
+      "playlist_key": "POLYGLOT__ML__east-asia-core__69af08ca98ea",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "hWfX9tEVUh4",
+      "youtubePlaylistId": "PLfRrPjcGcbsE",
+      "playlistItemId": "UExmUnJQamNHY2JzRS40NzZCMERDMjVEN0RFRThB",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-08T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-10T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-14T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-07T12:00:00.000Z"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494277,13 +2494306,40 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-11T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-13T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-17T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-10T10:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_lv_vi/youtube_metadata.json",
+      "title": "Tiếng Latvia A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__LV__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "XIUK3sqd_BM",
+      "youtubePlaylistId": "PLECJkunKBtRs",
+      "playlistItemId": "UExFQ0prdW5LQnRScy45ODRDNTg0QjA4NkFBNkQy"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494302,13 +2494358,40 @@
       "localTime": "08:30",
       "localSlotIndex": 0,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-11T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-13T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-17T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-10T13:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_ml_vi/youtube_metadata.json",
+      "title": "Tiếng Malayalam A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__ML__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "CoJ9f27oLUo",
+      "youtubePlaylistId": "PLcpiwQOneXsI",
+      "playlistItemId": "UExjcGl3UU9uZVhzSS45ODRDNTg0QjA4NkFBNkQy"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494327,13 +2494410,40 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-11T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-13T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-17T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-10T16:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_ms_vi/youtube_metadata.json",
+      "title": "Tiếng Mã Lai A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__MS__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "4eKIVwh8ihA",
+      "youtubePlaylistId": "PLSL2Vvoelmcc",
+      "playlistItemId": "UExTTDJWdm9lbG1jYy45ODRDNTg0QjA4NkFBNkQy"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494352,13 +2494462,40 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-12T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-14T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-18T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-11T01:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_my_vi/youtube_metadata.json",
+      "title": "Tiếng Miến Điện A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__MY__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "SJUhbyR4JFs",
+      "youtubePlaylistId": "PLEb6VYUx95J0",
+      "playlistItemId": "UExFYjZWWVV4OTVKMC45ODRDNTg0QjA4NkFBNkQy"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494377,13 +2494514,40 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-12T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-14T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-18T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-11T04:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_ne_vi/youtube_metadata.json",
+      "title": "Tiếng Nepal A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__NE__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "Vtnx6MMtpJM",
+      "youtubePlaylistId": "PLBJwBpqNNRkw",
+      "playlistItemId": "UExCSndCcHFOTlJrdy45ODRDNTg0QjA4NkFBNkQy"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494402,13 +2494566,40 @@
       "localTime": "11:30",
       "localSlotIndex": 1,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-12T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-14T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-18T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-11T07:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_nl_vi/youtube_metadata.json",
+      "title": "Tiếng Hà Lan A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__NL__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "yn1jlAIAENQ",
+      "youtubePlaylistId": "PLcIVNKK04rec",
+      "playlistItemId": "UExjSVZOS0swNHJlYy45ODRDNTg0QjA4NkFBNkQy"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494427,13 +2494618,40 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-12T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-14T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-18T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-11T10:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_no_vi/youtube_metadata.json",
+      "title": "Tiếng Na Uy A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__NO__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "h5M53H9fj6k",
+      "youtubePlaylistId": "PLPYFh_YH23_8",
+      "playlistItemId": "UExQWUZoX1lIMjNfOC5EMEEwRUY5M0RDRTU3NDJC"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494452,13 +2494670,40 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-12T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-14T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-18T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-11T13:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_pl_vi/youtube_metadata.json",
+      "title": "Tiếng Ba Lan A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__PL__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "vfsHDCp2yUg",
+      "youtubePlaylistId": "PLcL4HHGvKtX0",
+      "playlistItemId": "UExjTDRISEd2S3RYMC45ODRDNTg0QjA4NkFBNkQy"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494477,13 +2494722,40 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-12T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-14T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-18T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-11T16:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_pt_vi/youtube_metadata.json",
+      "title": "Tiếng Bồ Đào Nha A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__PT__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "yHqC4IQNIRw",
+      "youtubePlaylistId": "PLP-RVRjbJRL8Rad7Lz5HO9jjo2x8_8d0j",
+      "playlistItemId": "UExQLVJWUmpiSlJMOFJhZDdMejVITzlqam8yeDhfOGQwai4zMDg5MkQ5MEVDMEM1NTg2"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494502,13 +2494774,40 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-13T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-15T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-19T01:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-12T01:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_pt-br_vi/youtube_metadata.json",
+      "title": "Tiếng Bồ Đào Nha (Brazil) A1: Khu chung cư | 35 từ",
+      "playlist_key": "VI__PT-BR__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "XgV9aVq0opA",
+      "youtubePlaylistId": "PLNBxfH-D5q00",
+      "playlistItemId": "UExOQnhmSC1ENXEwMC45ODRDNTg0QjA4NkFBNkQy"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494527,13 +2494826,40 @@
       "localTime": "11:30",
       "localSlotIndex": 1,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-13T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-15T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-19T04:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-12T04:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_ro_vi/youtube_metadata.json",
+      "title": "Tiếng Romania A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__RO__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "7caRlQIiEek",
+      "youtubePlaylistId": "PLAm9stAiPX04",
+      "playlistItemId": "UExBbTlzdEFpUFgwNC45ODRDNTg0QjA4NkFBNkQy"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494552,13 +2494878,40 @@
       "localTime": "14:30",
       "localSlotIndex": 2,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-13T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-15T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-19T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-12T07:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_ru_vi/youtube_metadata.json",
+      "title": "Tiếng Nga A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__RU__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "f4Ag9jXzYBE",
+      "youtubePlaylistId": "PLP-RVRjbJRL9ONOgm7EImjfYHtjZ9kj4M",
+      "playlistItemId": "UExQLVJWUmpiSlJMOU9OT2dtN0VJbWpmWUh0alo5a2o0TS45ODRDNTg0QjA4NkFBNkQy"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494577,13 +2494930,40 @@
       "localTime": "17:30",
       "localSlotIndex": 3,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-13T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-15T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-19T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-12T10:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_si_vi/youtube_metadata.json",
+      "title": "Tiếng Sinhala A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__SI__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "pgWNowBPO1w",
+      "youtubePlaylistId": "PLKM7H6zzjFmc",
+      "playlistItemId": "UExLTTdINnp6akZtYy45ODRDNTg0QjA4NkFBNkQy"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494602,13 +2494982,40 @@
       "localTime": "20:30",
       "localSlotIndex": 4,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-13T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-15T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-19T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-12T13:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_sk_vi/youtube_metadata.json",
+      "title": "Tiếng Slovak A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__SK__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "iLzFMIZpoBc",
+      "youtubePlaylistId": "PLS2ccZGMvwEw",
+      "playlistItemId": "UExTMmNjWkdNdndFdy45ODRDNTg0QjA4NkFBNkQy"
     },
     {
       "schemaVersion": 1,
       "campaignId": "yt-home_apartment_common_areas_a2-2026-10-31-7f1eba82e9f2",
       "campaignManifestHash": "cfdd2e08105c2fb7f9aee18e7577ae438adc1b2173ae0c7eef7a4f10a6f68b47",
-      "status": "campaign_claimed",
+      "status": "campaign_finalized",
       "source": "youtube-publication-campaign-partial-recovery",
       "videoType": "ordinary",
       "setId": "home_apartment_common_areas_a2",
@@ -2494627,7 +2495034,34 @@
       "localTime": "23:30",
       "localSlotIndex": 5,
       "createdAt": "2026-10-31T11:55:15.881Z",
-      "updatedAt": "2026-10-31T11:55:15.881Z"
+      "updatedAt": "2026-10-31T12:30:45.401Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-13T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-11-15T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-11-19T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-12T16:30:00.000Z"
+        }
+      ],
+      "policyPath": "config/youtube-publish-schedule-policy.json",
+      "metadataFile": "outputs/video-generator/home_apartment_common_areas_a2_sl_vi/youtube_metadata.json",
+      "title": "Tiếng Slovenia A1: Từ vựng khu chung cư | 35 từ",
+      "playlist_key": "VI__SL__ordinary-vocabulary__a1-everyday",
+      "githubRunId": "41199364017",
+      "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41199364017",
+      "youtubeVideoId": "XJpLdJG47Fo",
+      "youtubePlaylistId": "PLSivQOYtkWG0",
+      "playlistItemId": "UExTaXZRT1l0a1dHMC45ODRDNTg0QjA4NkFBNkQy"
     }
   ]
 }
