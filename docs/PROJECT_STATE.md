@@ -6,6 +6,48 @@
 - 2026-08-20 Deck #6 `Bedroom Basics` source is mapped to Drive JSON `1fDx4nn3aKk_R5R0tZ6dUWfHSYkBjm5su`; the approved Bedroom cover base is registered for deterministic ordinary/Polyglot overlays. Publication planning remains separate until a fresh control produces the exact immutable campaign.
 # Project State
 
+## Owner-approved retirement of Deck1-13 video-cover packages
+
+OnOctober31 the owner explicitly confirmed direct deletion without Trash of
+exactly27,559unchanged tracked files (3,822,560,011bytes) from37generated
+video-cover directories for Deck1-13. The exact path/blob inventory is retained
+locally in scratch/decks1-13-cover-removal-20261031/inventory.json. No original
+base/templates, Deck14files, shared playlist covers, video registry, campaign
+manifest, publication calendar, metadata receipt or YouTube video is removed.
+Cover registry descriptors pointing into these removed packages are archived
+(status no longer approved), retaining their identities for history. Future
+old-deck cover repair requires explicit historical asset restoration first.
+
+Deletion removes these files from the CURRENT main tree, not from Git history.
+The blob-filtered/sparse production checkouts avoid downloading deleted historic
+images; no force-push/history rewrite or repository garbage collection occurs.
+This commit also publishes the tested video-worker disk fix below. No upload or
+missing16recovery is dispatched by committing this patch.
+
+
+## Video-worker disk follow-up (October31)
+
+Parent41184632358 durably accepted584/600 (534ordinary50Polyglot), no duplicate,
+receipt or unexpected-publication errors. Exact missing16are VI15ordinary and
+ML1east_asia_core short_unverified. Both video workers ran out of disk; metadata
+repair succeeded but filtering historical blobs alone still checked out every
+current cover package. The worker checkout now initially omits deck JSON and
+cover trees, then expands only to the input deck and approved manifests relevant
+to its canonical support. This keeps the normal approved cover package, manifest,
+JPGs/sidecars unchanged and Git-tracked. Other decks never enter this workspace.
+Commit/tree history remains available for historical deck restore. No cleanup or
+file deletion is introduced. A built-in Node disk check requires8GiB free after
+hydration, before dependencies/OAuth/audit/TTS/render/upload. FFmpeg installation
+uses --no-install-recommends; encoder options, package itself and output quality
+are unchanged. Insufficient disk stops without provider/YouTube writes.
+
+Local tests check exact inclusion/exclusion, unsafe paths/supports, disk boundary,
+and workflow order. Cloud rendering with this follow-up is not yet verified.
+This fix does not itself dispatch a recovery. Never replay584accepted assignments;
+any next upload must use only the reconciled16missing keys and a separately
+approved exact recovery. All earlier accepted video IDs remain protected.
+
+
 - 2026-10-31 owner approved runner disk repair and ONE same-immutable600metadata-only retry after parent41181170424 zero uploads. Checkout avoids historical image blobs; metadata excludes images. Reuse validated438metadata entries on routes2/3/4; route1needs162. Restore ONLY target top-level claimed status after exact zero-upload evidence; calendar/assignments/accepted IDs unchanged.
 
 - 2026-10-31 scheduled600run never appeared (active workflow/default main/zero repository runs at07:02UTC). Exact GitHub scheduler cause is unavailable; no code or upload ran. Owner renewed one manual600start now. Retire the missed cron before manual dispatch, preserving exactcount/freshcontrol/acceptedexclusion/receipt/duplicate gates. This does not prove future cron reliability.

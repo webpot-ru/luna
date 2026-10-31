@@ -256,7 +256,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/data/decks/
+            !/data/youtube-cover-assets/
+            !/data/youtube-playlist-covers/
+
+      - name: Hydrate only this deck and verify worker disk before providers
+        env:
+          SET_ID: ${{ inputs.set_id }}
+          SUPPORT: ${{ inputs.support }}
+        run: node scripts/prepare-youtube-worker-checkout.mjs
 
       - name: Verify required Polyglot workflow helpers
         shell: bash
@@ -816,7 +827,7 @@ jobs:
             ffmpeg -version | head -n 1
           else
             sudo apt-get update
-            sudo apt-get install -y ffmpeg
+            sudo apt-get install -y --no-install-recommends ffmpeg
           fi
           npx playwright install chromium --with-deps
 
