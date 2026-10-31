@@ -1,0 +1,56 @@
+name: YouTube November 1 approved batch 522
+
+on:
+  schedule:
+    # First attempt: November1 17:00Asia/Bangkok = 10:00UTC.
+    - cron: '0 10 1 11 *'
+    # Delivery fallbacks only; an existing coordinator blocks any second attempt.
+    - cron: '17,37,57 10-16 1 11 *'
+  workflow_dispatch:
+    inputs:
+      action:
+        type: choice
+        options: [preview, start]
+        default: preview
+        required: true
+      confirm:
+        description: 'Manual start requires START_APPROVED_20261101_522.'
+        default: ''
+        required: false
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: youtube-approved-once-20261101
+  cancel-in-progress: false
+
+jobs:
+  start-approved-batch:
+    if: github.repository == 'webpot-ru/luna'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/
+            /config/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Preview or start one approved 522 attempt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/youtube-once-20261101.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-20261101-receipt-${{ github.run_id }}
+          path: outputs/youtube-once-20261101/receipt.json
+          if-no-files-found: warn
+          retention-days: 30

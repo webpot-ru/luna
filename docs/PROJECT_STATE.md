@@ -6,6 +6,50 @@
 - 2026-08-20 Deck #6 `Bedroom Basics` source is mapped to Drive JSON `1fDx4nn3aKk_R5R0tZ6dUWfHSYkBjm5su`; the approved Bedroom cover base is registered for deterministic ordinary/Polyglot overlays. Publication planning remains separate until a fresh control produces the exact immutable campaign.
 # Project State
 
+## Owner-approved November1 17:00Bangkok batch522
+
+The owner selected522videos for **2026-11-01 17:00Asia/Bangkok =10:00UTC**:
+471ordinary+51Polyglots. The previous15+1/9+1limits are capped by the proven
+remaining tail:12supports10ordinary+1Polyglot;39supports9ordinary+1Polyglot
+(includingEN/ES-419/PT-BR/SR). Whole1136tail is NOTapproved. Original immutable
+585manifest is read only to verify physical grouping, never replayed or changed.
+Full Polyglot remains only for longVideoUploadAllowed=true; all other channels
+receive measured short_unverified<=895seconds. No images or voices are changed.
+
+`youtube-once-20261101.yml` first cron is `0 10 1 11 *`. Off-hour delivery
+fallbacks are `17,37,57 10-16 1 11 *` on the SAMEday only. These handle absence of
+the primary event, not a failed production attempt. GitHub cron remains best
+effort; this is not a minute-exact guarantee. The script refuses early/next-year
+production and any start after17:00UTC/end of that Bangkok day. Manual defaults
+to a network-free preview; start requires START_APPROVED_20261101_522.
+
+A serialized coordinator fully paginates its run inventory. Any earlier same-day
+coordinator consumes this scope even if failed, cancelled or without a receipt.
+Subsequent cron ticks return no-op, never retry. Later pending ticks do not block
+the oldest coordinator. Unknown/ambiguous inventory or child identity stops.
+A receipt is written before the single fast-lane dispatch. This prevents a
+second attempt; it deliberately may require owner intervention after a cancelled
+or failed earlier coordinator. A preview on the approved day after the opening
+also blocks a later production start; use preview on preparation day only.
+
+The unchanged fast lane performs fresh4-route control and full owned public
+playlist discovery, exact522plan/accepted-ID exclusion, only3claim files then
+ONEstandard parent. Count/readiness/quota/playlist failures stop; no silent
+scope reduction, ready-media resume, old600/16replay or automatic recovery. Any
+intervening parent after preparation approval also stops for reconciliation.
+Paid OpenAI metadata is the approved standard lane, no paid image API. Video
+publication times follow future free policy calendar slots;17:00is processstart.
+
+Starter checkout is shallow/sparse scripts+config, not the images or full Git
+history. Production workers retain the tested disk/cover checks. The receipt
+artifact is youtube-20261101-receipt-<runId>, recording childRunId/head/count;
+fast-lane receipt then records campaignID/hash/claimhead. Follow only those IDs.
+No Codex production timer, polling loop or extra wave is created. Verification
+is local tests, YAML parsing and a no-write cloud preview; these are not proof
+of future YouTube acceptance. Published scheduling itself does not start video
+production before the approved date.
+
+
 ## Owner-approved retirement of Deck1-13 video-cover packages
 
 OnOctober31 the owner explicitly confirmed direct deletion without Trash of

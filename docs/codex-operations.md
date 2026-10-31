@@ -32,6 +32,8 @@ Creating or steering a visible task is not approval to dispatch GitHub workflows
 
 ## Safe YouTube Publish Protocol
 
+Explicit owner approval onOctober31 additionally authorizes ONE date-bounded GitHub-scheduled Deck14 batch522 onNovember1 17:00Asia/Bangkok (10:00UTC). Same-day fallback cron events may only deliver the first missing attempt; an existing coordinator, failed/cancelled attempt or ambiguous receipt forbids a second dispatch. Fresh control/exact claim/accepted-ID exclusion and all standard publish gates remain mandatory. See the November1 section in `docs/youtube-publication-campaigns.md`. No present upload or automatic recovery is approved by creating this schedule.
+
 **Текущий routing/quota override (2026-09-24):** источник истины — `docs/youtube-api-project-routing.md`. Для новых кампаний активны только `youtube-1`–`youtube-4` с предоставленной пользователем квотой `1,100 videos.insert` и `510,000` general units на проект в сутки; `youtube-5`–`youtube-8` сохранены как неактивные legacy routes. Старые упоминания eight-route apply и предела `100/800` относятся только к историческим run-ам.
 
 For ordinary, Polyglot, thumbnail-only, playlist-image and repair waves, Codex must use this sequence:
