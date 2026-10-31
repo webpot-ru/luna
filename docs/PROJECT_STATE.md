@@ -6,6 +6,8 @@
 - 2026-08-20 Deck #6 `Bedroom Basics` source is mapped to Drive JSON `1fDx4nn3aKk_R5R0tZ6dUWfHSYkBjm5su`; the approved Bedroom cover base is registered for deterministic ordinary/Polyglot overlays. Publication planning remains separate until a fresh control produces the exact immutable campaign.
 # Project State
 
+- 2026-10-31 owner approved runner disk repair and ONE same-immutable600metadata-only retry after parent41181170424 zero uploads. Checkout avoids historical image blobs; metadata excludes images. Reuse validated438metadata entries on routes2/3/4; route1needs162. Restore ONLY target top-level claimed status after exact zero-upload evidence; calendar/assignments/accepted IDs unchanged.
+
 - 2026-10-31 scheduled600run never appeared (active workflow/default main/zero repository runs at07:02UTC). Exact GitHub scheduler cause is unavailable; no code or upload ran. Owner renewed one manual600start now. Retire the missed cron before manual dispatch, preserving exactcount/freshcontrol/acceptedexclusion/receipt/duplicate gates. This does not prove future cron reliability.
 
 - 2026-10-30 owner corrected only the October31 lower-channel count back to its previous9ordinary+1Polyglot. The higher15-channel group stays15+1. Exact next batch is600=549ordinary+51Polyglots:15channels16videos and36channels10videos (SR9+1). Start remains October31 10:00Bangkok, read-only check13:00; all anti-replay/date/fresh-control gates remain unchanged. This supersedes the earlier636scope below.

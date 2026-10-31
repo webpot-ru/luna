@@ -213,6 +213,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          filter: blob:none
 
       - name: Refuse unsafe broad publish inputs
         shell: bash
@@ -1101,6 +1102,7 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
+          filter: blob:none
 
       - name: Download publish state artifact
         id: download_publish_state

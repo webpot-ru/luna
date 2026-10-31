@@ -1,5 +1,31 @@
 # YouTube Publication Campaigns
 
+## Runner disk and exact metadata-only recovery (October31)
+
+Parent41181170424 failed during setup-node on youtube-1 with confirmed
+No space left on device. Checkout used full blob history in a repository whose
+current tracked tree alone is6.57GiB (cover JPGs account for4.73GiB). The precise
+per-directory runner usage was not retained; full history is an avoidable disk
+amplifier, not a measured sole cause. Production checkout now retains commit/tree
+history but filters historical blobs with blob:none. Metadata checkout instead
+uses sparse patterns (implicitly blob-filtered) excluding cover images/assets;
+metadata does not consume images. Preflight/workers keep current approved covers
+and exact checksum/ownership validation. No deletion or external disk-cleanup
+action is introduced. Historical deck blobs remain fetchable through Git.
+
+Owner approved one retry of the SAME immutable600campaign2689f2ea79e0/hash
+d3d8fbb7e1c3b6a560c4ae6ed74f846c506973ec393202c4358f9aa8bc1f05d4.
+Finalizer proves expected600/observed0/completed0/missing600, zero workers,
+receipts/duplicates/unexpected entries, all assignment rows still claimed/noID.
+Only that campaign top-level status is restored from reconciliation_required to
+claimed; retain the prior zero-upload finalizeSummary and all calendar/assignment
+rows. No new campaign or second content wave is created. Existing metadata-only
+exception permits this exact approved state recovery without another full audit.
+Use metadata_resume_run_id=41181170424: validate all438completed entries from
+routes2/3/4 with the standard checkpoint loader; missing route1 generates162.
+Mismatch/corruption stops; original provider limits and strict upload controls
+remain unchanged. No ready-media, video-cache or accepted-ID replay is allowed.
+
 ## October31 missed cron and renewed one-time start
 
 At2026-10-31T07:02UTC GitHub returned zero repository runs for October31;
