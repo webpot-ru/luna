@@ -261,3 +261,12 @@ Exact transfer of an already-uploaded video into a canonical playlist is governe
 
 The exact 61-playlist visibility cleanup is documented in [YouTube Publication Campaigns](youtube-publication-campaigns.md#видимость-дополнительных-плейлистов-после-переноса). It may change only reviewed extra playlists from public to unlisted after fresh four-route membership and ownership verification; canonical playlists and videos remain untouched. Verified per-playlist receipts, not the dispatch badge, are durable state; no blanket retry or deletion is allowed.
 The first apply `36225672576` made zero visibility changes because YouTube rejected `part=status` plus a `snippet` body with HTTP 400 `unexpectedPart`. The corrected request declares `part=snippet,status`, resends existing mutable snippet/status fields unchanged except `privacyStatus=unlisted`, blocks legacy tags, and verifies metadata after readback. Only a separately authorized single replacement dispatch may use that fix.
+
+
+## November2 approved one-time Deck14 batch324
+
+Owner chose2November2026 18:00Asia/Bangkok=11:00UTC. Exact324 ordinary=36canonical channels x9 includingSR9, zeroPolyglots. After success290 ordinary remain;614 is not one authorized batch. Fresh all4route control, complete owned public playlists, accepted-ID exclusion, immutable exact claim and standard strict parent preflight required beforeONEparent. Existing videos, Deck15 and old workflows unchanged.
+
+Newstarter youtube-once-20261102.yml primarycron0 11 2 11*, deliverybackups17,37,57 11-16 2 11*. Harddate/year/window11:00..17:00UTC. Anyearliercoordinator(failed/cancelled/missingreceipt too)blocks every later tick. No automatic retries/workflow_run/Codexproductiontimer. Manualdefaultpreview. Write receipt beforeONEfastlanePOST, matchchildexacthead; ambiguitySTOP. Count/scopechangeSTOP. Futurecalendarpublication slots unchanged;18:00isproductionstart,notpublishAt.
+
+GitHubcron delivery can delay or be absent; preview does not prove futurecron delivery. Missingstart requiresreportandrenewedmanualauthority; noautomaticreplay. FreshcapabilitychecksretainfullonlylongVideoUploadAllowedtrue/otherwise measuredshort<=895s policy, although this exactbatchhaszeroPolyglots.
