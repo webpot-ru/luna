@@ -1,0 +1,46 @@
+{
+  "count": 3075,
+  "ordinary": 2859,
+  "polyglot": 216,
+  "languages": 54,
+  "maxBytes": 481255,
+  "errors": [],
+  "samples": [
+    {
+      "support": "RU",
+      "type": "ordinary",
+      "path": "data/youtube-cover-assets/deck15-garden-all54-review-20261101/video/by-set/home_outdoor_garden_a2/ordinary/by-channel/ru__RU__LunaCardsRU/EN__item/youtube_thumbnail.jpg"
+    },
+    {
+      "support": "EN",
+      "type": "ordinary",
+      "path": "data/youtube-cover-assets/deck15-garden-all54-review-20261101/video/by-set/home_outdoor_garden_a2/ordinary/by-channel/en__EN__flashcardsluna/ES__Spanish/youtube_thumbnail.jpg"
+    },
+    {
+      "support": "TH",
+      "type": "ordinary",
+      "path": "data/youtube-cover-assets/deck15-garden-all54-review-20261101/video/by-set/home_outdoor_garden_a2/ordinary/by-channel/th__TH__LunaCardsThai/EN__item/youtube_thumbnail.jpg"
+    },
+    {
+      "support": "JA",
+      "type": "ordinary",
+      "path": "data/youtube-cover-assets/deck15-garden-all54-review-20261101/video/by-set/home_outdoor_garden_a2/ordinary/by-channel/ja__JA__LunaCardsJapan/EN__item/youtube_thumbnail.jpg"
+    },
+    {
+      "support": "SI",
+      "type": "polyglot",
+      "path": "data/youtube-cover-assets/deck15-garden-all54-review-20261101/video/by-set/home_outdoor_garden_a2/polyglot/by-channel/si__SI__LunaCardsSinhala/SI__global_europe_core__7a4233775927__full.jpg"
+    },
+    {
+      "support": "SR",
+      "type": "polyglot",
+      "path": "data/youtube-cover-assets/deck15-garden-all54-review-20261101/video/by-set/home_outdoor_garden_a2/polyglot/by-channel/sr__SR__LunaCardsSrpski/SR__global_europe_core__7a4233775927__full.jpg"
+    }
+  ],
+  "checks": "All JPEG dimensions, size, hash, sidecar, localized text presence, unique identities. Visual/native linguistic review not exhaustive.",
+  "status": "git_preparation_ready",
+  "excludedContactSheets": 108,
+  "uploadEligible": 909,
+  "commitCoverCount": 3075,
+  "deckSHA256": "3fb527f2b3ff1dcfa569c714dcba6ef7c3a719a011f4e2b003810878309969de"
+}
