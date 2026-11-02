@@ -6,6 +6,9 @@ import { authorizeFastLane, verifyFastLaneEvidence, assertUnusedClaimParent, ass
 import { buildFastLaneWorkflow } from "./build-youtube-fast-lane-workflow.mjs";
 
 const ref = "refs/heads/main";
+import { loadCanonicalSupportRouting } from "./lib/youtube-support-routing.mjs";
+const routing = loadCanonicalSupportRouting();
+const playlistChannels = () => [...routing.supportToChannel].map(([supportLang,c]) => ({supportLang, youtubeChannelId:c.channelId, routeKey:routing.supportToRoute.get(supportLang).key, complete:true}));
 const now = Date.parse("2026-10-29T00:00:00Z");
 const inputs = { set_id: "fixture", campaign_supports: "EN", audit_routes: "ALL", expected_assignment_count: "1",
   campaign_ordinary_per_channel: "1", campaign_polyglot_per_channel: "0" };
@@ -16,7 +19,7 @@ const fixture = () => ({ event: structuredClone(event), ref, now,
     expectedRouteCount: 4, receivedRouteCount: 4, blockerCount: 0, calendarAssignmentDuplicateCount: 0,
     calendarSlotCollisionCount: 0, unclassifiedRecentUploadCount: 0, liveVideoMissingDurableRegistryCount: 0,
     liveStatusNotReturnedCount: 0, liveScheduleMissingCalendarCount: 0 } },
-  playlists: { generatedAt: new Date(now).toISOString(), summary: { complete: true, supportCount: 51, blockerCount: 0, youtubeWrites: 0 } },
+  playlists: { generatedAt: new Date(now).toISOString(), summary: { complete: true, supportCount: 51, blockerCount: 0, youtubeWrites: 0 }, channels: playlistChannels() },
   manifest: { generatedAt: new Date(now).toISOString(), setId: "fixture", campaignId: "fixture-1",
     inputs: { supports: "EN", ordinaryPerChannel: 1, polyglotPerChannel: 0 },
     summary: { assignmentCount: 1, applyReady: true, blockerCount: 0, playlistCreateCount: 0,
@@ -73,6 +76,28 @@ assert.throws(() => assertSameRecoveryManifest({ ...roundTrip.manifest, manifest
 assertUnusedClaimParent([{ head_sha: "old", status: "completed" }], "new");
 for (const conclusion of ["success", "failure", "cancelled"]) assert.throws(() => assertUnusedClaimParent([{ head_sha: "new", status: "completed", conclusion }], "new"));
 assert.throws(() => assertUnusedClaimParent([{ head_sha: "old", status: "queued" }], "new"));
+
+// A selected subset may use exact subset evidence or a complete all-channel snapshot.
+const lower = Object.keys(JSON.parse(fs.readFileSync("config/youtube-publication-campaign-plans/yt-home_apartment_common_areas_a2-2026-10-28-62247f3a208f.json")).inputs.ordinaryPerChannelOverrides).sort();
+assert.equal(lower.length,36);
+const subsetFixture = (supports=lower, fullEvidence=false) => {
+  const f=fixture(); f.event.inputs.campaign_supports=supports.join(","); f.event.inputs.expected_assignment_count=String(supports.length);
+  f.manifest.inputs.supports=supports.join(","); f.manifest.summary.assignmentCount=supports.length;
+  f.manifest.assignments=supports.map(s=>({supportLang:s,assignmentKey:`fixture|${s}|JA`,slotKey:`slot|${s}`}));
+  if(!fullEvidence) { f.playlists.channels=f.playlists.channels.filter(c=>supports.includes(c.supportLang)); f.playlists.summary.supportCount=supports.length; }
+  return f;
+};
+verifyFastLaneEvidence(sign(subsetFixture()));
+verifyFastLaneEvidence(sign(subsetFixture(lower,true)));
+verifyFastLaneEvidence(sign(subsetFixture([...routing.supportToChannel.keys()])));
+const badSubset = mutate => {const f=subsetFixture();mutate(f);assert.throws(()=>verifyFastLaneEvidence(sign(f)));};
+badSubset(f=>{f.playlists.channels[0]=playlistChannels().find(c=>c.supportLang==='EN');}); // same count, wrong selected support
+badSubset(f=>{f.playlists.channels[0]=structuredClone(f.playlists.channels[1]);});
+badSubset(f=>{f.playlists.channels[0].complete=false;});
+badSubset(f=>{f.playlists.channels[0].youtubeChannelId='foreign-owner';});
+badSubset(f=>{f.playlists.channels[0].routeKey='youtube-8';});
+badSubset(f=>{f.playlists.summary.supportCount=51;});
+badSubset(f=>{f.playlists.summary.youtubeWrites=1;});
 
 const old = fs.readFileSync(".github/workflows/youtube-publication-control.yml", "utf8");
 const generated = buildFastLaneWorkflow(old);
