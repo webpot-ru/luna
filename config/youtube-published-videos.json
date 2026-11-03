@@ -1600969,14 +1600969,12 @@
       "privacyStatus": "private",
       "publishAt": "2026-11-09T13:30:00Z",
       "scheduledPublishAt": "2026-11-09T13:30:00Z",
-      "publicationStatus": "upload_accepted_reconciliation_required",
+      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
       "thumbnailSet": false,
       "thumbnailUploadMode": "first_frame_auto",
       "needsThumbnailPermission": false,
       "youtubePlaylistId": "PLLHtLXhHgrI0",
-      "playlistItemId": "",
-      "needsPlaylistInsert": true,
-      "postUploadError": "lost receipt after videos.insert; custom thumbnail and playlist item are not confirmed",
+      "playlistItemId": "UExMSHRMWGhIZ3JJMC40NzZCMERDMjVEN0RFRThB",
       "source": "exact_live_control_lost_receipt_reconciliation",
       "reconciledAt": "2026-11-03T12:41:58.219Z",
       "assignmentKey": "ordinary|home_apartment_common_areas_a2|AZ|TE",
@@ -1600991,9 +1600989,20 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-11-09T13:30:00Z",
-        "uploadStatus": "uploaded"
+        "uploadStatus": "uploaded",
+        "playlistItemReadback": "inserted",
+        "playlistId": "PLLHtLXhHgrI0",
+        "playlistPrivacyStatus": "public",
+        "playlistItemId": "UExMSHRMWGhIZ3JJMC40NzZCMERDMjVEN0RFRThB",
+        "playlistInsertRepairedAt": "2026-11-03T16:20:07.638Z"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "playlistInsertRepairedAt": "2026-11-03T16:20:07.638Z",
+      "playlistInsertRepairStatus": "inserted",
+      "playlistInsertRepairGithubRunId": "41672634097",
+      "playlistInsertRepairGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41672634097",
+      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video.",
+      "lastReadbackAt": "2026-11-03T16:20:07.638Z"
     },
     {
       "setId": "home_apartment_common_areas_a2",
