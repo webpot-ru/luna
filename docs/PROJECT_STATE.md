@@ -857,3 +857,6 @@ Recovered AZTE counts as upload_accepted_reconciliation_required and is NEVEReli
 
 
 2026-11-01 Deck15 cover preparation: owner approved Outdoor Home & Garden base and full package. 3075 JPEGs (2859 ordinary/216 Polyglot) for 54 variants verified; 909 eligible for 16 custom-thumbnail-enabled canonical supports. Deterministic overlays; 108 local contact sheets excluded; canonical offline deck export and base included. GitHub cover submission only, no campaign claim, video dispatch or existing-video change. Native linguistic certification is not implied.
+
+
+2026-11-04 Deck15 course binding: control41834661350 stopped on all4routes before audit reports because home_outdoor_garden_a2 lacked a published course slug. Verified https://flashcardsluna.com/en/courses/outdoor-home-garden HTTP200 (Garden); added only this set mapping. Ordinary EN/ES-419 and SR Polyglot URL regressions pass. Owner approved this config/test/docs fix commit/push and a fresh read-only control/600plan (15supports15+1,36supports9+1 includingSR); claim/provider/upload/publication remain NOTauthorized. Existing publication/calendar/accepted video data untouched.
