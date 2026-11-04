@@ -261,3 +261,21 @@ Exact transfer of an already-uploaded video into a canonical playlist is governe
 
 The exact 61-playlist visibility cleanup is documented in [YouTube Publication Campaigns](youtube-publication-campaigns.md#видимость-дополнительных-плейлистов-после-переноса). It may change only reviewed extra playlists from public to unlisted after fresh four-route membership and ownership verification; canonical playlists and videos remain untouched. Verified per-playlist receipts, not the dispatch badge, are durable state; no blanket retry or deletion is allowed.
 The first apply `36225672576` made zero visibility changes because YouTube rejected `part=status` plus a `snippet` body with HTTP 400 `unexpectedPart`. The corrected request declares `part=snippet,status`, resends existing mutable snippet/status fields unchanged except `privacyStatus=unlisted`, blocks legacy tags, and verifies metadata after readback. Only a separately authorized single replacement dispatch may use that fix.
+
+
+## November2 approved one-time Deck14 batch324
+
+Owner chose2November2026 18:00Asia/Bangkok=11:00UTC. Exact324 ordinary=36canonical channels x9 includingSR9, zeroPolyglots. After success290 ordinary remain;614 is not one authorized batch. Fresh all4route control, complete owned public playlists, accepted-ID exclusion, immutable exact claim and standard strict parent preflight required beforeONEparent. Existing videos, Deck15 and old workflows unchanged.
+
+Newstarter youtube-once-20261102.yml primarycron0 11 2 11*, deliverybackups17,37,57 11-16 2 11*. Harddate/year/window11:00..17:00UTC. Anyearliercoordinator(failed/cancelled/missingreceipt too)blocks every later tick. No automatic retries/workflow_run/Codexproductiontimer. Manualdefaultpreview. Write receipt beforeONEfastlanePOST, matchchildexacthead; ambiguitySTOP. Count/scopechangeSTOP. Futurecalendarpublication slots unchanged;18:00isproductionstart,notpublishAt.
+
+GitHubcron delivery can delay or be absent; preview does not prove futurecron delivery. Missingstart requiresreportandrenewedmanualauthority; noautomaticreplay. FreshcapabilitychecksretainfullonlylongVideoUploadAllowedtrue/otherwise measuredshort<=895s policy, although this exactbatchhaszeroPolyglots.
+
+
+## November3 21:00 source-only recovery191
+
+Owner renewed one recovery attempt for November3 2026 21:00Asia/Bangkok=14:00UTC. Source parent41630498764 finalized99/290accepted,191missing,0duplicate/receipt/unexpected errors. All six artifact config blobs matched durablemain5057a8da18c79a1a6f1c74c16efaebe6039d79d2; all29120prior unique assignment/videoID pairs preserved. Verified remaining191 ordinary=26supports7each+SR9. Failed upload samples on all4routes/SR show videos.insert init400uploadLimitExceeded; timing is not an unlock guarantee.
+
+New youtube-once-20261103-2100.yml pins sourcecampaign yt-home_apartment_common_areas_a2-2026-11-03-445b9d5789c9 and hash5db84f510a650ee43f5441707dfc5c75bf6e2d58894122c8155619ea903871de plus191explicit missing assignment keys. No newwave/Polyglots/accepted99replay. All other existing IDs are excluded. ordinary1/poly0 inputs activate read-only playlist discovery only; standard partial-recovery manifest is authoritative. Fresh all4route control, complete public owned playlists for27selected supports, individual99acceptedlive matching, selectedkeysabsentlive, exact191claim and strictstandardparentpreflight required. Alloriginal voices/covers/routes/scopes retained. No timestamp reuse or fake refresh. Count/scope/blocker changes stop.
+
+Cron0 14 3 11*; delivery-only backups17,37,57 14-16 3 11*. Hardyear/date/window14Z..17Z; manualdefaultpreview. Anyearliercoordinator includingfailure/cancellation/missingreceipt consumes attempt; later ticks no-op. Receipt saved beforeONEfastlanePOST. No workflow_run dependency, pollingloop, automaticretry, Codexproductiontimer or manual dispatchnow. Cron can be delayed or absent; preview is not deliveryproof. No further retry without renewed owner authority.21:00 is productionstart,notpublishAt; existingfuturecalendarpolicy unchanged.

@@ -1,4 +1,28 @@
 import assert from "node:assert/strict";
+import { canonicalSupportCode } from "./youtube-publication-control.mjs";
+import { loadCanonicalSupportRouting } from "./youtube-support-routing.mjs";
+
+export function assertPlaylistDiscoverySupports(playlists, supports, routing = loadCanonicalSupportRouting()) {
+  assert.equal(playlists.summary?.complete, true, "Playlist discovery must be complete");
+  assert.equal(playlists.summary?.blockerCount, 0);
+  assert.equal(playlists.summary?.youtubeWrites, 0);
+  const channels = playlists.channels || [];
+  const actual = channels.map(c => canonicalSupportCode(c.supportLang));
+  assert(actual.every(s => routing.supportToChannel.has(s)), "Unknown playlist discovery support");
+  assert.equal(new Set(actual).size, actual.length, "Duplicate playlist support evidence");
+  assert.equal(playlists.summary.supportCount, actual.length, "Playlist support count differs from channel evidence");
+  if (playlists.summary.expectedSupportCount !== undefined) assert.equal(playlists.summary.expectedSupportCount, actual.length);
+  const required = [...new Set(supports.map(canonicalSupportCode))];
+  assert(required.length > 0, "Selected playlist scope is empty");
+  assert(required.every(s => actual.includes(s)), "A selected support is missing complete playlist evidence");
+  for (const c of channels) {
+    const support = canonicalSupportCode(c.supportLang);
+    assert.equal(c.complete, true, `Incomplete playlist discovery: ${support}`);
+    assert.equal(c.youtubeChannelId, routing.supportToChannel.get(support).channelId, `Playlist owner mismatch: ${support}`);
+    assert.equal(c.routeKey, routing.supportToRoute.get(support).key, `Playlist route mismatch: ${support}`);
+  }
+}
+
 
 const WRAPPER_PATHS = new Set([
   ".github/workflows/youtube-publication-fast-lane.yml",
@@ -7,7 +31,7 @@ const WRAPPER_PATHS = new Set([
   "scripts/lib/youtube-fast-lane-control-reuse.mjs", "scripts/lib/youtube-fast-lane-control-reuse.test.mjs",
 ]);
 
-export function assertReusableControl({ run, jobs, artifacts, changedPaths, parentRuns, setId, control, playlists, now = Date.now() }) {
+export function assertReusableControl({ run, jobs, artifacts, changedPaths, parentRuns, setId, control, playlists, selectedSupports, verifiedSourcePlan = false, now = Date.now() }) {
   assert.equal(run.status, "completed", "Source control must be terminal");
   assert(["success", "failure"].includes(run.conclusion), "Cancelled/incomplete source controls cannot be reused");
   assert.equal(run.head_branch, "main", "Reuse only a reviewed main run");
@@ -17,7 +41,14 @@ export function assertReusableControl({ run, jobs, artifacts, changedPaths, pare
   const audit = jobs.filter((j) => j.name.startsWith("audit-route ("));
   assert.equal(audit.length, 4, "Source must contain exactly four audit jobs");
   assert(audit.every((j) => j.conclusion === "success"), "Source route audit failed");
-  assert(jobs.some((j) => j.name === "aggregate" && j.conclusion === "success") || jobs.some((j) => j.name === "reuse-control" && j.conclusion === "success"), "Source aggregate did not succeed");
+  const aggregate = jobs.find(j => j.name === "aggregate");
+  const failedSteps = aggregate?.steps?.filter(s => s.conclusion === "failure") || [];
+  const verifiedPlanBeforeClaim = verifiedSourcePlan && aggregate?.conclusion === "failure" &&
+    failedSteps.length === 1 && failedSteps[0].name === "Build one no-spend immutable campaign plan from the same live evidence" &&
+    jobs.some(j => j.name === "claim-campaign" && j.conclusion === "skipped") &&
+    jobs.some(j => j.name === "dispatch-approved-parent" && j.conclusion === "skipped");
+  assert(aggregate?.conclusion === "success" || jobs.some(j => j.name === "reuse-control" && j.conclusion === "success") || verifiedPlanBeforeClaim,
+    "Source aggregate failed without a fully verified exact pre-claim plan");
   assert(jobs.every((j) => j.name !== "dispatch-approved-parent" || j.conclusion === "skipped"), "Source already requested a publication parent");
   for (const p of changedPaths) assert(WRAPPER_PATHS.has(p) || p.startsWith("docs/"), `Audit inputs/core code changed since source control: ${p}`);
   assert(artifacts.length >= 5 && new Set(artifacts.map((a) => a.id)).size === artifacts.length, "Artifact pagination/identities incomplete");
@@ -29,8 +60,7 @@ export function assertReusableControl({ run, jobs, artifacts, changedPaths, pare
   assert.equal(control.summary?.expectedRouteCount, 4); assert.equal(control.summary?.receivedRouteCount, 4);
   assert.equal(control.summary?.paginationComplete, true); assert.equal(control.summary?.videoStatusReadbackComplete, true);
   assert.equal(control.summary?.blockerCount, 0);
-  assert.equal(playlists.summary?.complete, true); assert.equal(playlists.summary?.supportCount, 51);
-  assert.equal(playlists.summary?.blockerCount, 0);
+  assertPlaylistDiscoverySupports(playlists, selectedSupports || [...loadCanonicalSupportRouting().supportToChannel.keys()]);
   assert.equal(control.setId || setId, setId);
   for (const item of [control, playlists]) {
     const age = (now - Date.parse(item.generatedAt)) / 60000;

@@ -10,7 +10,7 @@ import { ordinaryCountOverrides } from "./lib/youtube-campaign-counts.mjs";
 import { buildPartialRecovery } from "./create-youtube-partial-recovery-campaign.mjs";
 import { readYoutubeDurableJson, serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import { recoveryRequest, selectRecoveryRows, verifyRecoveryRows } from "./lib/youtube-fast-lane-recovery.mjs";
-import { assertReusableControl } from "./lib/youtube-fast-lane-control-reuse.mjs";
+import { assertReusableControl, assertPlaylistDiscoverySupports } from "./lib/youtube-fast-lane-control-reuse.mjs";
 import { selectBlockingPartialRecoveryAdvisories } from "./lib/youtube-partial-recovery-advisories.mjs";
 
 const read = (p) => JSON.parse(fs.readFileSync(p, "utf8"));
@@ -60,10 +60,7 @@ export function verifyFastLaneEvidence({ event, ref, control, playlists, manifes
   assert.equal(c.expectedRouteCount, 4); assert.equal(c.receivedRouteCount, 4);
   for (const key of ["blockerCount", "calendarAssignmentDuplicateCount", "calendarSlotCollisionCount", "unclassifiedRecentUploadCount", "liveVideoMissingDurableRegistryCount", "liveStatusNotReturnedCount", "liveScheduleMissingCalendarCount"]) assert.equal(c[key], 0, `Control ${key}`);
   assert.equal(control.blockers.length, 0);
-  assert.equal(playlists.summary.complete, true);
-  assert.equal(playlists.summary.supportCount, 51);
-  assert.equal(playlists.summary.blockerCount, 0);
-  assert.equal(playlists.summary.youtubeWrites, 0);
+  assertPlaylistDiscoverySupports(playlists, supports);
   for (const evidence of [control, playlists, manifest]) {
     const age = (now - Date.parse(evidence.generatedAt)) / 60000;
     assert(age >= -5 && age <= 180, "Evidence must be fresh (<=180min)");
@@ -126,7 +123,14 @@ function main() {
     const all = path.join(dest, `youtube-publication-control-${inputs.set_id}-all-routes-${id}`);
     const control = read(path.join(all, "youtube-publication-control-all-routes.json"));
     const playlists = read(path.join(all, "youtube-playlist-discovery-snapshot.json"));
-    assertReusableControl({ run, jobs, artifacts, changedPaths, parentRuns, setId: inputs.set_id, control, playlists });
+    const selectedSupports = resolveCanonicalSupports({ requested: inputs.campaign_supports, routing: loadCanonicalSupportRouting() });
+    let verifiedSourcePlan = false;
+    if (!jobs.some(j => (j.name === "aggregate" || j.name === "reuse-control") && j.conclusion === "success")) {
+      assert(!recovery, "Failed aggregate recovery reuse requires separate source-lineage verification");
+      verifyFastLaneEvidence({ event, ref, control, playlists, manifest: read(path.join(all, "youtube-publication-campaign-plan.json")) });
+      verifiedSourcePlan = true;
+    }
+    assertReusableControl({ run, jobs, artifacts, changedPaths, parentRuns, setId: inputs.set_id, control, playlists, selectedSupports, verifiedSourcePlan });
     const routes = ["youtube-1", "youtube-2", "youtube-3", "youtube-4"];
     for (const route of routes) {
       const report = read(path.join(dest, `youtube-publication-control-${inputs.set_id}-${route}-${id}`, `youtube-publication-control-${route}.json`));
