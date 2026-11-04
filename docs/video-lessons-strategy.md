@@ -1602,3 +1602,6 @@ Before launching `romance_core` for the first-deck eligible-channel wave, use th
 Для больших курсовых выпусков на 150/300 слов не делать одно Polyglot-видео на весь файл: разбивать на части по 25-40 слов или использовать уже существующую part/lesson структуру. Иначе 4-язычный Polyglot превращается в 60+ минут пассивного видео, хуже удерживает внимание и сложнее проверяется перед публикацией.
 
 Сгенерированное видео и кэш-файлы сохраняются в директории `outputs/video-generator/home_kitchen_cookware_pilot_01_polyglot_ru/`.
+
+
+2026-11-01 Deck15 cover preparation: owner approved Outdoor Home & Garden base and full package. 3075 JPEGs (2859 ordinary/216 Polyglot) for 54 variants verified; 909 eligible for 16 custom-thumbnail-enabled canonical supports. Deterministic overlays; 108 local contact sheets excluded; canonical offline deck export and base included. GitHub cover submission only, no campaign claim, video dispatch or existing-video change. Native linguistic certification is not implied.
