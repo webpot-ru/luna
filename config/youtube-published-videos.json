@@ -1615246,7 +1615246,7 @@
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=TIPWOhAHvwg",
       "publicationStatus": "live_youtube_upload_detected",
       "uploadedAt": "2026-11-04T14:53:24Z",
-      "lastReadbackAt": "2026-11-04T15:41:38.448Z",
+      "lastReadbackAt": "2026-11-05T04:20:58.034Z",
       "readbackSource": "youtube_uploads_playlist",
       "liveReadbackOnly": true,
       "urlSupportLang": "KA",
@@ -1615290,7 +1615290,9 @@
       "campaignId": "yt-home_outdoor_garden_a2-2026-11-04-3e2c058b5f5e",
       "campaignManifestHash": "93ba311c5ad1324f27198d7493d1c2d689493efdefd23a5e42e4073c9f0f5723",
       "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (404): {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"The video that you are trying to insert a thumbnail image for cannot be found. Check the value of the request's \\u003ccode\\u003evideoId\\u003c/code\\u003e parameter to ensure that it is correct.\",\n    \"errors\": [\n      {\n        \"message\": \"The video that you are trying to insert a thumbnail image for cannot be found. Check the value of the request's \\u003ccode\\u003evideoId\\u003c/code\\u003e parameter to ensure that it is correct.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"videoNotFound\",\n        \"location\": \"videoId\",\n        \"locationType\": \"parameter\"\n      }\n    ]\n  }\n}\n",
-      "thumbnailSet": false
+      "thumbnailSet": true,
+      "thumbnailUploadedAt": "2026-11-05T04:20:58.034Z",
+      "lastThumbnailReadbackAt": "2026-11-05T04:20:58.034Z"
     },
     {
       "setId": "home_outdoor_garden_a2",
