@@ -1615289,7 +1615289,8 @@
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/41844638498",
       "campaignId": "yt-home_outdoor_garden_a2-2026-11-04-3e2c058b5f5e",
       "campaignManifestHash": "93ba311c5ad1324f27198d7493d1c2d689493efdefd23a5e42e4073c9f0f5723",
-      "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (404): {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"The video that you are trying to insert a thumbnail image for cannot be found. Check the value of the request's \\u003ccode\\u003evideoId\\u003c/code\\u003e parameter to ensure that it is correct.\",\n    \"errors\": [\n      {\n        \"message\": \"The video that you are trying to insert a thumbnail image for cannot be found. Check the value of the request's \\u003ccode\\u003evideoId\\u003c/code\\u003e parameter to ensure that it is correct.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"videoNotFound\",\n        \"location\": \"videoId\",\n        \"locationType\": \"parameter\"\n      }\n    ]\n  }\n}\n"
+      "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (404): {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"The video that you are trying to insert a thumbnail image for cannot be found. Check the value of the request's \\u003ccode\\u003evideoId\\u003c/code\\u003e parameter to ensure that it is correct.\",\n    \"errors\": [\n      {\n        \"message\": \"The video that you are trying to insert a thumbnail image for cannot be found. Check the value of the request's \\u003ccode\\u003evideoId\\u003c/code\\u003e parameter to ensure that it is correct.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"videoNotFound\",\n        \"location\": \"videoId\",\n        \"locationType\": \"parameter\"\n      }\n    ]\n  }\n}\n",
+      "thumbnailSet": false
     },
     {
       "setId": "home_outdoor_garden_a2",
