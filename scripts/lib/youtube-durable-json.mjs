@@ -88,8 +88,11 @@ export function planYoutubeCampaignHistoryArchive(filePath) {
 // History stays immutable and content-addressed. Changed historical campaigns
 // become explicit inline overrides; old receipts remain in the history blob.
 export function serializeYoutubeDurableJson(filePath, value, maxBytes = 95 * 1024 * 1024) {
-  const isLedger = path.basename(filePath) === LEDGER;
-  const compact = isLedger || path.basename(path.dirname(filePath)) === HISTORY;
+  const basename = path.basename(filePath);
+  const isLedger = basename === LEDGER;
+  const compact = isLedger
+    || basename === "youtube-publish-calendar.json"
+    || path.basename(path.dirname(filePath)) === HISTORY;
   const stored = isLedger && value.campaignArchives?.length
     ? indexedRegistry(value, loadArchives(filePath, value.campaignArchives))
     : value;

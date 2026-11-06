@@ -114,7 +114,9 @@ const result = spawnSync(process.execPath, [
 ], { cwd: process.cwd(), encoding: "utf8" });
 assert.equal(result.status, 0, result.stderr || result.stdout);
 
-const calendar = JSON.parse(fs.readFileSync(path.join(config, "youtube-publish-calendar.json"), "utf8"));
+const calendarText = fs.readFileSync(path.join(config, "youtube-publish-calendar.json"), "utf8");
+const calendar = JSON.parse(calendarText);
+assert.equal(calendarText, `${JSON.stringify(calendar)}\n`);
 assert.equal(calendar.reservations.length, 2, "different polyglotKey values must not collapse even when targetLangs are equal");
 assert.equal(calendar.reservations.find((row) => row.polyglotKey === incomingKey)?.youtubeVideoId, "incoming-video");
 

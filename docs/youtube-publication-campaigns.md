@@ -497,10 +497,11 @@ this mode. This mode cannot prove a channel's upload limit has unlocked; a fresh
 channel `uploadLimitExceeded` may still reject the existing media upload.
 
 The campaign ledger retains its existing JSON schema, every campaign and every
-historical receipt. Writers serialize `youtube-publication-campaigns.json` as
-compact JSON (whitespace only), while manifests and other reports remain pretty
-printed. The shared serializer refuses an output over95MiB before writing; this
-keeps a margin below GitHub's100MiB single-blob limit. This is not permission to
+historical receipt. The shared serializer writes the campaign ledger and
+publication calendar as compact JSON, preserving every reservation and field.
+The publication state merge uses the same calendar serializer. Manifests and
+reports retain their existing formatting. The serializer refuses output above
+95 MiB to stay below GitHub's 100 MiB single-blob limit. This is not permission to
 drop history or weaken manifest hashes, source fingerprints or receipt gates.
 
 ### Content-addressed campaign history (owner approved 2026-10-26)

@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { serializeYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 import { calendarAssignmentKey as semanticCalendarAssignmentKey } from "./lib/youtube-publication-control.mjs";
 
 const DEFAULT_ARTIFACT_DIR = ".state-artifact";
@@ -42,8 +43,8 @@ function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
-function writeJsonIfChanged(filePath, data) {
-  const next = `${JSON.stringify(data, null, 2)}\n`;
+function writeJsonIfChanged(filePath, data, serialize = (value) => `${JSON.stringify(value, null, 2)}\n`) {
+  const next = serialize(data);
   const current = fs.existsSync(filePath) ? fs.readFileSync(filePath, "utf8") : "";
   if (current === next) return false;
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
@@ -724,7 +725,9 @@ function mergeYoutubePublishState(options) {
         ...(polyglotPublications.current.publications || []),
       ],
     });
-    if (writeJsonIfChanged(calendar.currentPath, calendar.current)) summary.filesChanged.push("config/youtube-publish-calendar.json");
+    if (writeJsonIfChanged(calendar.currentPath, calendar.current, (value) => serializeYoutubeDurableJson(calendar.currentPath, value))) {
+      summary.filesChanged.push("config/youtube-publish-calendar.json");
+    }
   }
 
   const playlists = loadPair(repoRoot, artifactDir, "config/youtube-playlists.json", () => ({
