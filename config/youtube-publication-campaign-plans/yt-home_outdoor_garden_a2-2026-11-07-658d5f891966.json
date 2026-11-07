@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-07T08:52:06.046Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_outdoor_garden_a2",
+  "inputs": {
+    "supports": "JA",
+    "supportCount": 1,
+    "ordinarySupportCount": 0,
+    "polyglotSupportCount": 1,
+    "ordinaryPerChannel": 0,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 1,
+    "allowPartialPolyglotTail": true,
+    "assignmentKeys": [
+      "polyglot|home_outdoor_garden_a2|JA|east_asia_core|fa91433fb684|full"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_outdoor_garden_a2-2026-11-07-d0a3c9a3dfa7",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_outdoor_garden_a2-2026-11-07-d0a3c9a3dfa7",
+      "manifestHash": "ea7c632bd0d82389bde873596c705380e6fabd267691a081dc3c16ead3d4c539",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-1",
+        "generatedAt": "2026-11-07T08:10:03.848Z",
+        "ageMinutes": 42.036633333333334,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "6f1f431a9102652de4635b7e963b3e897b1e6de4793342ff8888ded1ec09c265"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "41006b436b1f8ac2f46db083572099ebf2c66a85d65a65a941c6582535441cfc"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "0eb5e5d011ca226a2b8c27758c9722891f4a83e970cbd9058416c730b3dc3502"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "911943f1b6a41fd2153746b10bd76a830293f3cbef145855a389ac1a50a539a8"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_outdoor_garden_a2.json",
+        "exists": true,
+        "sha256": "3fb527f2b3ff1dcfa569c714dcba6ef7c3a719a011f4e2b003810878309969de"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "edb6db23de8efc9a07225a7bdfb230228de8403c4e2d9dc38d34a79fdbb98f12"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 0,
+    "polyglotCount": 1,
+    "assignmentCount": 1,
+    "firstPublishAt": "2026-11-22T14:30:00.000Z",
+    "lastPublishAt": "2026-11-22T14:30:00.000Z",
+    "customThumbnailCount": 1,
+    "automaticThumbnailCount": 0,
+    "existingPlaylistCount": 1,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-1": 1
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 1,
+    "estimatedPlaylistItemInsertUnits": 50,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 50,
+    "estimatedGeneralQuotaUnitsMaximum": 100,
+    "byRoute": {
+      "youtube-1": {
+        "estimatedVideoUploadCalls": 1,
+        "estimatedGeneralQuotaUnitsMaximum": 100
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "polyglot|home_outdoor_garden_a2|JA|east_asia_core|fa91433fb684|full",
+      "calendarAssignmentKey": "polyglot-slot|home_outdoor_garden_a2|JA|east_asia_core|full|ja",
+      "videoType": "polyglot",
+      "setId": "home_outdoor_garden_a2",
+      "supportLang": "JA",
+      "targetLang": "ZH,KO,EN",
+      "targetLangs": [
+        "ZH",
+        "KO",
+        "EN"
+      ],
+      "targetLangsHash": "fa91433fb684",
+      "bundleKey": "east_asia_core",
+      "requestedContentScope": "full",
+      "contentScope": "full",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": true,
+      "polyglotKey": "polyglot:home_outdoor_garden_a2:JA:east_asia_core:fa91433fb684:full",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ja-JP-NanamiNeural",
+        "supportLang": "JA"
+      },
+      "channelKey": "ja",
+      "youtubeChannelId": "UCtMXvbx1zFJNBm3S1PGDt3w",
+      "routeKey": "youtube-1",
+      "youtubeEnvironment": "youtube-api-branding",
+      "publishAt": "2026-11-22T14:30:00.000Z",
+      "localDate": "2026-11-22",
+      "localTime": "23:30",
+      "timeZone": "Asia/Tokyo",
+      "slotKey": "ja|2026-11-22T14:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck15-garden-all54-review-20261101/video/by-set/home_outdoor_garden_a2/polyglot/by-channel/ja__JA__LunaCardsJapan/JA__east_asia_core__fa91433fb684__full.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck15-garden-all54-review-20261101/manifest.json",
+        "sha256": "9962737e48edeed7165556bab5904beb242c5df25fb168f5b5db08503a4c83b5"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "POLYGLOT__JA__east-asia-core__fa91433fb684",
+        "youtubePlaylistId": "PLE5WOq12FowA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Polyglot: 中国語, 韓国語, 英語",
+        "description": "FlashcardsLuna playlist for Polyglot mode. Learn several languages at once: 中国語, 韓国語, 英語. Themed decks, flashcards, pronunciation and review. Bundle: east_asia_core.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-07T04:16:22.698Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-1",
+      "sourceYoutubeEnvironment": "youtube-api-branding",
+      "sourceAssignmentKey": "polyglot|home_outdoor_garden_a2|JA|east_asia_core|fa91433fb684|full",
+      "localSlotIndex": 5
+    }
+  ],
+  "campaignId": "yt-home_outdoor_garden_a2-2026-11-07-658d5f891966",
+  "manifestHash": "41dd2f50e1140f85aed158068b8ff6f21d15b9a4d3dfc6e2a0dcd3ca545068bc"
+}
