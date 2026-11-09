@@ -1,0 +1,803 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-09T09:03:18.215Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "home_outdoor_garden_a2",
+  "inputs": {
+    "supports": "HR",
+    "supportCount": 1,
+    "ordinarySupportCount": 1,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 10,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|home_outdoor_garden_a2|HR|PT-BR",
+      "ordinary|home_outdoor_garden_a2|HR|RO",
+      "ordinary|home_outdoor_garden_a2|HR|RU",
+      "ordinary|home_outdoor_garden_a2|HR|SI",
+      "ordinary|home_outdoor_garden_a2|HR|SK",
+      "ordinary|home_outdoor_garden_a2|HR|SL",
+      "ordinary|home_outdoor_garden_a2|HR|SR",
+      "ordinary|home_outdoor_garden_a2|HR|SV",
+      "ordinary|home_outdoor_garden_a2|HR|SW",
+      "ordinary|home_outdoor_garden_a2|HR|TA"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-home_outdoor_garden_a2-2026-11-09-eb70efe7a5f6",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-home_outdoor_garden_a2-2026-11-09-eb70efe7a5f6",
+      "manifestHash": "cc97aa22ea04d2ac04ee85eb94996cff7ea039135990582cb1897de5409929d8",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-3",
+        "generatedAt": "2026-11-09T08:56:48.235Z",
+        "ageMinutes": 6.499666666666666,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "7783224ac7861c65b4db8593cf71cf03040b67b9b7a74e0811e6066f6f90d7a5"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "91f08c97efbbb584e1b7dd494f2b40a8844a9a61a3cb880990e83ee3051f94be"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "70d5dd097488e421fca8808efb770df50cd414fa863518d3c13a3e4d05d3481b"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "911943f1b6a41fd2153746b10bd76a830293f3cbef145855a389ac1a50a539a8"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/home_outdoor_garden_a2.json",
+        "exists": true,
+        "sha256": "3fb527f2b3ff1dcfa569c714dcba6ef7c3a719a011f4e2b003810878309969de"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "d56f90725e05f84c2c36aba35bed2e5dd6773254d941492b210d705d896d9e7b"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 10,
+    "polyglotCount": 0,
+    "assignmentCount": 10,
+    "firstPublishAt": "2026-11-18T19:30:00.000Z",
+    "lastPublishAt": "2026-11-20T10:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 10,
+    "existingPlaylistCount": 10,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-3": 10
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 10,
+    "estimatedPlaylistItemInsertUnits": 500,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 500,
+    "byRoute": {
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 10,
+        "estimatedGeneralQuotaUnitsMaximum": 500
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|home_outdoor_garden_a2|HR|PT-BR",
+      "calendarAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|PT-BR|hr",
+      "videoType": "ordinary",
+      "setId": "home_outdoor_garden_a2",
+      "supportLang": "HR",
+      "targetLang": "PT-BR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hr-HR-GabrijelaNeural",
+        "supportLang": "HR"
+      },
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-18T19:30:00.000Z",
+      "localDate": "2026-11-18",
+      "localTime": "20:30",
+      "timeZone": "Europe/Zagreb",
+      "slotKey": "hr|2026-11-18T19:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HR__PT-BR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLNvxHHOhGHVY",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Portugalski (Brazil) A1: rječnik i izgovor",
+        "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Portugalski (Brazil): kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-09T04:42:08.991Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|PT-BR",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_outdoor_garden_a2|HR|RO",
+      "calendarAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|RO|hr",
+      "videoType": "ordinary",
+      "setId": "home_outdoor_garden_a2",
+      "supportLang": "HR",
+      "targetLang": "RO",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hr-HR-GabrijelaNeural",
+        "supportLang": "HR"
+      },
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-18T22:30:00.000Z",
+      "localDate": "2026-11-18",
+      "localTime": "23:30",
+      "timeZone": "Europe/Zagreb",
+      "slotKey": "hr|2026-11-18T22:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HR__RO__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLCZyCjvyotiA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Rumunjski A1: rječnik i izgovor",
+        "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Rumunjski: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-09T04:42:08.991Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|RO",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_outdoor_garden_a2|HR|RU",
+      "calendarAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|RU|hr",
+      "videoType": "ordinary",
+      "setId": "home_outdoor_garden_a2",
+      "supportLang": "HR",
+      "targetLang": "RU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hr-HR-GabrijelaNeural",
+        "supportLang": "HR"
+      },
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-19T07:30:00.000Z",
+      "localDate": "2026-11-19",
+      "localTime": "08:30",
+      "timeZone": "Europe/Zagreb",
+      "slotKey": "hr|2026-11-19T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HR__RU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL3_zOFdP7_lIP4h0dpJvngiD97lSl5Fnh",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Ruski A1: rječnik i izgovor",
+        "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Ruski: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-09T04:42:08.991Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|RU",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_outdoor_garden_a2|HR|SI",
+      "calendarAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|SI|hr",
+      "videoType": "ordinary",
+      "setId": "home_outdoor_garden_a2",
+      "supportLang": "HR",
+      "targetLang": "SI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hr-HR-GabrijelaNeural",
+        "supportLang": "HR"
+      },
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-19T10:30:00.000Z",
+      "localDate": "2026-11-19",
+      "localTime": "11:30",
+      "timeZone": "Europe/Zagreb",
+      "slotKey": "hr|2026-11-19T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HR__SI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLPzFjs4JDcx8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Sinhaleški A1: rječnik i izgovor",
+        "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Sinhaleški: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-09T04:42:08.991Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|SI",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|home_outdoor_garden_a2|HR|SK",
+      "calendarAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|SK|hr",
+      "videoType": "ordinary",
+      "setId": "home_outdoor_garden_a2",
+      "supportLang": "HR",
+      "targetLang": "SK",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hr-HR-GabrijelaNeural",
+        "supportLang": "HR"
+      },
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-19T13:30:00.000Z",
+      "localDate": "2026-11-19",
+      "localTime": "14:30",
+      "timeZone": "Europe/Zagreb",
+      "slotKey": "hr|2026-11-19T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HR__SK__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLGjSSwMPvf8c",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Slovački A1: rječnik i izgovor",
+        "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Slovački: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-09T04:42:08.991Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|SK",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|home_outdoor_garden_a2|HR|SL",
+      "calendarAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|SL|hr",
+      "videoType": "ordinary",
+      "setId": "home_outdoor_garden_a2",
+      "supportLang": "HR",
+      "targetLang": "SL",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hr-HR-GabrijelaNeural",
+        "supportLang": "HR"
+      },
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-19T16:30:00.000Z",
+      "localDate": "2026-11-19",
+      "localTime": "17:30",
+      "timeZone": "Europe/Zagreb",
+      "slotKey": "hr|2026-11-19T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HR__SL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBWnBb-F_ZJE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Slovenski A1: rječnik i izgovor",
+        "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Slovenski: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-09T04:42:08.991Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|SL",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|home_outdoor_garden_a2|HR|SR",
+      "calendarAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|SR|hr",
+      "videoType": "ordinary",
+      "setId": "home_outdoor_garden_a2",
+      "supportLang": "HR",
+      "targetLang": "SR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hr-HR-GabrijelaNeural",
+        "supportLang": "HR"
+      },
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-19T19:30:00.000Z",
+      "localDate": "2026-11-19",
+      "localTime": "20:30",
+      "timeZone": "Europe/Zagreb",
+      "slotKey": "hr|2026-11-19T19:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HR__SR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLTPFt7Zr8BAU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Srpski A1: rječnik i izgovor",
+        "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Srpski: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-09T04:42:08.991Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|SR",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|home_outdoor_garden_a2|HR|SV",
+      "calendarAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|SV|hr",
+      "videoType": "ordinary",
+      "setId": "home_outdoor_garden_a2",
+      "supportLang": "HR",
+      "targetLang": "SV",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hr-HR-GabrijelaNeural",
+        "supportLang": "HR"
+      },
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-19T22:30:00.000Z",
+      "localDate": "2026-11-19",
+      "localTime": "23:30",
+      "timeZone": "Europe/Zagreb",
+      "slotKey": "hr|2026-11-19T22:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "HR__SV__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLCTGcA2p9z_4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Švedski A1: rječnik i izgovor",
+        "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Švedski: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-09T04:42:08.991Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|SV",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|home_outdoor_garden_a2|HR|SW",
+      "calendarAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|SW|hr",
+      "videoType": "ordinary",
+      "setId": "home_outdoor_garden_a2",
+      "supportLang": "HR",
+      "targetLang": "SW",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hr-HR-GabrijelaNeural",
+        "supportLang": "HR"
+      },
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-20T07:30:00.000Z",
+      "localDate": "2026-11-20",
+      "localTime": "08:30",
+      "timeZone": "Europe/Zagreb",
+      "slotKey": "hr|2026-11-20T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HR__SW__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLP2ZuE3Hsgqs",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Svahili A1: rječnik i izgovor",
+        "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Svahili: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-09T04:42:08.991Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|SW",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|home_outdoor_garden_a2|HR|TA",
+      "calendarAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|TA|hr",
+      "videoType": "ordinary",
+      "setId": "home_outdoor_garden_a2",
+      "supportLang": "HR",
+      "targetLang": "TA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_hr-HR-GabrijelaNeural",
+        "supportLang": "HR"
+      },
+      "channelKey": "hr",
+      "youtubeChannelId": "UCYUDLf-qwJLx6Z8etHxhvfg",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-20T10:30:00.000Z",
+      "localDate": "2026-11-20",
+      "localTime": "11:30",
+      "timeZone": "Europe/Zagreb",
+      "slotKey": "hr|2026-11-20T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "HR__TA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLfL18B35fZLA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tamilski A1: rječnik i izgovor",
+        "description": "FlashcardsLuna videozapisi za govornike hrvatskog koji uče Tamilski: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-09T04:42:08.991Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|home_outdoor_garden_a2|HR|TA",
+      "localSlotIndex": 1
+    }
+  ],
+  "campaignId": "yt-home_outdoor_garden_a2-2026-11-09-a67e3da1ab85",
+  "manifestHash": "0084d64b758a6310a4b140f999c9cb6c540024004da6c02d089357d034b22c36"
+}
