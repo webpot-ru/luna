@@ -1,5 +1,11 @@
 # Video Lessons Strategy & Specifications
 
+## Deck 16 Numbers & Counting
+
+The owner approved the v2 watercolor cover on 2026-11-10. The background at `assets/youtube-cover-templates/deck16-numbers-counting-base-v2.png` uses the composition of Decks 14 and 15. The package at `data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json` contains 2,859 ordinary and 216 Polyglot covers across 54 language variants. The cover registry enables custom uploads on the 16 supports with confirmed thumbnail capability.
+
+The tracked offline data at `data/decks/core_numbers_counting_a1.json` contains 44 cards per directed language pair. Video links resolve to the public `numbers-counting` study page. The package is ready for a fresh publication control.
+
 ## Deck14 local cover review — 2026-10-28
 
 Deck14 course routing was verified on 2026-10-28 against the public catalog and the HTTP200 EN/RU course pages: `https://flashcardsluna.com/en/courses/apartment-building-common-areas` and `https://flashcardsluna.com/ru/courses/apartment-building-common-areas`. The page titles match canonical Course Metadata (`Apartment Areas.` / `Места в доме.`), with35cards and54study languages. `config/video-public-course-links.json` maps `home_apartment_common_areas_a2` to the observed slug `apartment-building-common-areas`, preserving the existing ordinary/Polyglot `/study/standard?langs=` contract. The first read-only control40624469164 failed before a plan because this mapping was absent; a fresh control is required after this correction reaches main. This configuration correction does not authorize a claim, video publication or SR repair.

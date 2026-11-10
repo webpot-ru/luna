@@ -1,3 +1,5 @@
+- 2026-11-10 Deck 16 Numbers & Counting: the owner approved the v2 artwork and repository integration. The cover package contains 3,075 JPEGs, and the tracked offline deck has 44 cards per language pair. Six finalized publication campaigns moved to a content-addressed archive. The archive preserves all 234 campaign records. See `docs/video-lessons-strategy.md` for the cover and course-link contracts.
+
 - 2026-11-06 publication calendar storage: campaign claim, finalization and state merge use compact JSON for the calendar, preserving all reservations and the 95 MiB safety gate. See `docs/youtube-publication-campaigns.md`.
 
 - 2026-09-15 campaign live-audit pagination hardening: the all-route control default and both ordinary/Polyglot worker pre-upload checks now read up to 100 upload-playlist pages (5,000 videos) per channel. This closes the Deck #9 EN false-negative where the prior 10-page cap made a complete channel look incomplete before TTS/render/upload. Incomplete pagination remains fail-closed; the repair itself makes no provider or YouTube write.
