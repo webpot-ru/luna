@@ -8,11 +8,16 @@ import { verifyCampaignManifest } from "./lib/youtube-publication-campaign.mjs";
 import { readYoutubeDurableJson } from "./lib/youtube-durable-json.mjs";
 
 const identityFields = [
-  "assignmentKey", "setId", "videoType", "supportLang", "targetLang", "targetLangs",
-  "bundleKey", "targetLangsHash", "contentScope", "cardLimit", "maxDurationSeconds",
+  "assignmentKey", "setId", "videoType", "supportLang", "targetLang",
+  "bundleKey", "targetLangsHash", "contentScope",
   "channelKey", "youtubeChannelId", "routeKey",
 ];
-const identity = row => Object.fromEntries(identityFields.map(key => [key, row[key]]));
+const identity = row => ({
+  ...Object.fromEntries(identityFields.map(key => [key, row[key] ?? ""])),
+  targetLangs: row.targetLangs ?? [],
+  cardLimit: row.cardLimit ?? 0,
+  maxDurationSeconds: row.maxDurationSeconds ?? 0,
+});
 const sha256 = body => crypto.createHash("sha256").update(body).digest("hex");
 
 export function buildReboundMetadata({ source, target, routeKey, outputRoot }) {

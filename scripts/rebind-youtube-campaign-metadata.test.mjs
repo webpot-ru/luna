@@ -16,7 +16,7 @@ function signed(value) {
 const ordinary = { assignmentKey: "ordinary|deck|EN|DE", videoType: "ordinary", setId: "deck", supportLang: "EN", targetLang: "DE", routeKey: "youtube-1", channelKey: "en", publishAt: "2030-01-01T10:00:00Z" };
 const polyglot = { assignmentKey: "polyglot|deck|EN|bundle|hash|full", videoType: "polyglot", setId: "deck", supportLang: "EN", bundleKey: "bundle", targetLangs: ["DE", "FR"], contentScope: "full", routeKey: "youtube-1", channelKey: "en", publishAt: "2030-01-02T10:00:00Z" };
 const source = signed({ campaignId: "yt-source", setId: "deck", inputs: {}, evidence: { sourceFingerprints: { offlineDeck: { sha256: "deck-sha" } } }, assignments: [ordinary, polyglot] });
-const target = signed({ ...source, campaignId: "yt-target", inputs: { partialRecoveryOfCampaignId: source.campaignId }, assignments: source.assignments.map(row => ({ ...row, publishAt: "2030-02-01T10:00:00Z" })) });
+const target = signed({ ...source, campaignId: "yt-target", inputs: { partialRecoveryOfCampaignId: source.campaignId }, assignments: source.assignments.map(row => ({ ...row, targetLangs: row.targetLangs || [], cardLimit: row.cardLimit || 0, maxDurationSeconds: row.maxDurationSeconds || 0, contentScope: row.contentScope || "", publishAt: "2030-02-01T10:00:00Z" })) });
 const entries = [];
 for (const row of source.assignments) {
   const name = row.videoType + ".json";
