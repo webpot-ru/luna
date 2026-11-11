@@ -901,3 +901,24 @@ Recovered AZTE counts as upload_accepted_reconciliation_required and is NEVEReli
 
 
 2026-11-04 Deck15 course binding: control41834661350 stopped on all4routes before audit reports because home_outdoor_garden_a2 lacked a published course slug. Verified https://flashcardsluna.com/en/courses/outdoor-home-garden HTTP200 (Garden); added only this set mapping. Ordinary EN/ES-419 and SR Polyglot URL regressions pass. Owner approved this config/test/docs fix commit/push and a fresh read-only control/600plan (15supports15+1,36supports9+1 includingSR); claim/provider/upload/publication remain NOTauthorized. Existing publication/calendar/accepted video data untouched.
+
+## Pinned render runners and exact metadata recovery
+
+Ordinary and Polyglot publication workflows pin Ubuntu 24.04. The repository's
+Playwright 1.60.0 cannot install Chromium on Ubuntu 26.04, which GitHub began
+assigning through ubuntu-latest in November 2026.
+
+An explicitly approved full-set partial recovery may set both
+metadata_resume_run_id and metadata_resume_campaign_id. The latter must be
+the immutable source named by the recovery plan's partialRecoveryOfCampaignId.
+The recovery and source must have the identical assignment-key set, offline
+deck SHA-256 and per-assignment product, channel, route and content scope.
+A subset or scope change is rejected. Each route requires a complete source
+checkpoint with valid ownership, destinations and file checksums.
+
+scripts/rebind-youtube-campaign-metadata.mjs preserves generated text and
+records source campaign/hash provenance. It updates only metadata ownership
+and the recovery schedule, recalculates checksums and commits the index last.
+Every source document is validated before any replacement. Missing, partial
+or corrupt cross-campaign checkpoints fail before provider calls. The existing
+same-campaign metadata_resume_run_id behavior remains available.

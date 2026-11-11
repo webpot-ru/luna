@@ -177,7 +177,7 @@ concurrency:
 
 jobs:
   youtube-video-publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment:
       name: >-
         ${{
@@ -1099,7 +1099,7 @@ jobs:
   persist-publish-state:
     needs: youtube-video-publish
     if: ${{ always() && inputs.mode == 'apply' && inputs.campaign_id == '' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     concurrency:
       group: youtube-publish-state-${{ github.ref_name }}-${{ github.run_id }}

@@ -189,7 +189,7 @@ concurrency:
 
 jobs:
   prepare-polyglot-sequence:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       worker_matrix: ${{ steps.sequence.outputs.worker_matrix }}
     steps:
@@ -230,7 +230,7 @@ jobs:
 
   youtube-polyglot-video:
     needs: prepare-polyglot-sequence
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       # One physical support channel owns all of its Polyglot tail bundles in
@@ -1037,7 +1037,7 @@ jobs:
   persist-polyglot-publish-state:
     needs: youtube-polyglot-video
     if: ${{ always() && inputs.mode == 'apply' && inputs.campaign_id == '' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 90
     concurrency:
       group: youtube-publish-state-${{ github.ref_name }}-${{ github.run_id }}

@@ -867,3 +867,12 @@ Recovered AZTE counts as upload_accepted_reconciliation_required and is NEVEReli
 
 
 2026-11-05 Deck15 first600 uploads accepted after exact167 recovery41873235498; all prior accepted IDs preserved. Owner requested finishing the remaining KA-to-HI custom-thumbnail repair only for existing TIPWOhAHvwg. Prepared one-row committed-manifest candidate deck15-ka-hi-20261105 using the unchanged approved Deck15 JPG and current youtube-4 route. Copied only the explicit thumbnailSet=false from the exact source campaign receipt into the canonical KA-HI registry row (field was absent); all other fields/rows unchanged. Strict local thumbnail dry-run passes1ready/0blockers; no image/provider generation, video upload, playlist/schedule/metadata change. Repair dispatch and persistence remain pending; success requires per-ID custom_thumbnail_set/readback and durable thumbnailSet=true.
+
+- 2026-11-11 Deck16 first600 parent43018671877 stopped before render/upload:
+  all102 workers failed installing Playwright Chromium on ubuntu26.04-x64.
+  The durable finalizer records0completed/0observed/600missing/0duplicates/
+  0receipt errors. All four metadata routes completed. The prepared repair
+  pins render workflows to Ubuntu24.04 and adds validated full-set recovery
+  metadata reuse with original campaign/hash provenance. Local verification
+  checked all600 saved metadata documents without provider calls. Recovery
+  remains restricted to the same549ordinary+51Polyglot assignments.

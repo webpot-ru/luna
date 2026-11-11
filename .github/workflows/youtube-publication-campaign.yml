@@ -41,6 +41,10 @@ on:
         description: "Apply recovery only: prior campaign run whose validated completed metadata batches may be reused."
         required: false
         default: ""
+      metadata_resume_campaign_id:
+        description: "Exact full-set partial recovery only: immutable source campaign owning the reused metadata."
+        required: false
+        default: ""
       ready_media_spec:
         description: "Exact recovery only: committed approved ready-MP4 manifest; skips metadata/TTS/render generation."
         required: false
@@ -311,10 +315,24 @@ jobs:
         continue-on-error: true
         uses: actions/download-artifact@v4
         with:
-          name: youtube-campaign-metadata-${{ inputs.campaign_id }}-${{ matrix.route_key }}
+          name: youtube-campaign-metadata-${{ inputs.metadata_resume_campaign_id || inputs.campaign_id }}-${{ matrix.route_key }}
           path: outputs/youtube-campaign-metadata/${{ matrix.route_key }}
           run-id: ${{ inputs.metadata_resume_run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Rebind completed metadata from the exact full-set recovery source
+        if: ${{ inputs.metadata_resume_campaign_id != '' }}
+        env:
+          TARGET_CAMPAIGN: ${{ inputs.campaign_id }}
+          SOURCE_CAMPAIGN: ${{ inputs.metadata_resume_campaign_id }}
+          SOURCE_RUN: ${{ inputs.metadata_resume_run_id }}
+          ROUTE_KEY: ${{ matrix.route_key }}
+        run: |
+          set -euo pipefail
+          test -n "$SOURCE_RUN"
+          node scripts/rebind-youtube-campaign-metadata.mjs \
+            "$TARGET_CAMPAIGN" "$SOURCE_CAMPAIGN" "$ROUTE_KEY" \
+            "outputs/youtube-campaign-metadata/$ROUTE_KEY"
 
       - name: Generate route-batched campaign metadata before render/TTS
         shell: bash
