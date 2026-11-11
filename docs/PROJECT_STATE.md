@@ -886,3 +886,13 @@ Recovered AZTE counts as upload_accepted_reconciliation_required and is NEVEReli
   Deck16 sources, retaining all rows and failure/lineage evidence through normal
   durable hydration. The owner explicitly approved the two-source history exception and six-file
   commit/push before this publication attempt. All600metadata documents remain available from43018671877.
+
+
+- 2026-11-11 Deck16 parent43044567157 reused all600metadata documents with0new
+  provider calls, then20workers stalled in FFmpeg APT setup because the Azure
+  Ubuntu mirror failed DNS resolution. It was cancelled after confirming
+  renderAttempted=0/uploadsAttempted=0. Finalizer preserved600missing/0observed.
+  The scoped repair adds signed runtime mirror selection and bounded APT waits,
+  plus an isolated Ubuntu24.04 FFmpeg/Chromium canary. The owner authorized
+  necessary fixes, commit/push and safe missing-only retries until this exact600
+  batch is durably complete; every prior accepted ID remains excluded.

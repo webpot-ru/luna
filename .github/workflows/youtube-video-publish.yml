@@ -408,11 +408,13 @@ jobs:
           npm run check:youtube-publication-control -- "${CONTROL_ARGS[@]}"
 
       - name: Install system dependencies and FFmpeg
+        timeout-minutes: 15
         run: |
+          node scripts/prepare-youtube-render-apt.mjs
           if command -v ffmpeg >/dev/null 2>&1; then
             ffmpeg -version | head -n 1
           else
-            sudo apt-get update
+            sudo apt-get update -o APT::Update::Error-Mode=any
             sudo apt-get install -y --no-install-recommends ffmpeg
           fi
 
@@ -438,6 +440,7 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
 
       - name: Install Playwright Chromium with dependencies
+        timeout-minutes: 10
         if: ${{ inputs.source_run_id == '' }}
         run: npx playwright install chromium --with-deps
 

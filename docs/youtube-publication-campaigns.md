@@ -939,3 +939,23 @@ Use the existing content-addressed campaignArchives format and immutable SHA-256
 history file. Require an exact full-registry roundtrip, unchanged accepted rows
 and a strict95MiB writer budget. This does not authorize arbitrary archival of
 active or unresolved reconciliation claims.
+
+
+### Signed APT mirror selection for render runners
+
+Before FFmpeg or Playwright system packages, Ubuntu24.04 workers run
+scripts/prepare-youtube-render-apt.mjs. It requests the current Ubuntu mirror
+index, selects up to two reachable HTTPS mirrors and verifies every Noble pocket
+(noble, updates, backports, security) with gpgv and the installed Ubuntu archive
+keyring. If the index is unavailable it probes documented MIT, Princeton and
+kernel.org mirrors. Unreachable or invalidly signed candidates are rejected.
+
+Only the ephemeral runner Ubuntu source URIs and APT transport settings change.
+Signed-By, suites and components are preserved. IPv4,15-second network timeouts
+and one package-fetch retry bound Azure-mirror DNS stalls. No TLS/signature
+bypass, added signing key, provider retry or video-upload retry is introduced.
+
+The manual youtube-render-runner-preflight.yml runs the real package/browser
+installation and a small FFmpeg/Chromium smoke check without OAuth, metadata
+providers or YouTube writes. Use it to validate this infrastructure before
+resuming a publication wave after a runner setup failure.

@@ -821,12 +821,14 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
 
       - name: Install render dependencies
+        timeout-minutes: 15
         if: ${{ inputs.mode != 'plan' && steps.polyglot_plan.outputs.already_published != 'true' }}
         run: |
+          node scripts/prepare-youtube-render-apt.mjs
           if command -v ffmpeg >/dev/null 2>&1; then
             ffmpeg -version | head -n 1
           else
-            sudo apt-get update
+            sudo apt-get update -o APT::Update::Error-Mode=any
             sudo apt-get install -y --no-install-recommends ffmpeg
           fi
           npx playwright install chromium --with-deps

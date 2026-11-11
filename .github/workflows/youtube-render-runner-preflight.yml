@@ -1,0 +1,55 @@
+name: YouTube Render Runner Preflight
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-render-runner:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/assets/
+            !/data/
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci
+      - name: Select reachable Ubuntu-signed archive mirrors
+        timeout-minutes: 6
+        run: node scripts/prepare-youtube-render-apt.mjs
+      - name: Verify FFmpeg and Playwright Chromium without providers or uploads
+        timeout-minutes: 12
+        run: |
+          set -euo pipefail
+          sudo apt-get update -o APT::Update::Error-Mode=any
+          sudo apt-get install -y --no-install-recommends ffmpeg
+          npx playwright install chromium --with-deps
+          ffmpeg -hide_banner -loglevel error -f lavfi -i color=c=black:s=64x64:d=0.1 -f null -
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { chromium } from 'playwright';
+          const browser = await chromium.launch({ headless: true });
+          try {
+            const page = await browser.newPage();
+            await page.setContent('<title>Luna runner readiness</title>');
+            assert.equal(await page.title(), 'Luna runner readiness');
+            console.log('Chromium smoke PASS ' + browser.version());
+          } finally {
+            await browser.close();
+          }
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: youtube-render-runner-preflight-${{ github.run_id }}
+          if-no-files-found: warn
+          path: outputs/youtube-render-runner-preflight
