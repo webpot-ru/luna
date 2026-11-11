@@ -878,3 +878,11 @@ Recovered AZTE counts as upload_accepted_reconciliation_required and is NEVEReli
   remains restricted to the same549ordinary+51Polyglot assignments.
 
 - 2026-11-11 recovery43030435382 stopped at the metadata ownership gate with0completed/0observed/600missing/0worker artifacts. The rebind CLI had a missing URL.href in its entry-point check. The fix includes a real child-process CLI regression, successful local CLI checks of all600metadata documents and strict full-set immutable ancestry validation. Another production dispatch requires separate owner approval.
+
+
+- 2026-11-11 another Deck16 exact600 recovery is prepared after explicit owner
+  approval. Adding its claim crosses the95MiB ledger guard by about1.03MiB.
+  A narrow archive proposal covers only the two fully superseded, zero-accepted
+  Deck16 sources, retaining all rows and failure/lineage evidence through normal
+  durable hydration. The owner explicitly approved the two-source history exception and six-file
+  commit/push before this publication attempt. All600metadata documents remain available from43018671877.

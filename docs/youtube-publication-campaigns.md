@@ -924,3 +924,18 @@ and the recovery schedule, recalculates checksums and commits the index last.
 Every source document is validated before any replacement. Missing, partial
 or corrupt cross-campaign checkpoints fail before provider calls. The existing
 same-campaign metadata_resume_run_id behavior remains available.
+
+
+### Explicitly approved historical archive of superseded zero-acceptance sources
+
+A separately owner-approved archive may preserve the two Deck16 failed sources
+9952f425f192 and a23b44bb3a2c after exact600 recovery supersedes every remaining
+claim. This is a narrow exception to automatic selection of finalized campaigns.
+Both sources must have zero accepted/observed IDs, no active assignment/slot
+indexes, and only superseded_partial_recovery rows. Statuses, failure summaries,
+assignment rows and lineage links remain byte-equivalent after hydration.
+
+Use the existing content-addressed campaignArchives format and immutable SHA-256
+history file. Require an exact full-registry roundtrip, unchanged accepted rows
+and a strict95MiB writer budget. This does not authorize arbitrary archival of
+active or unresolved reconciliation claims.
