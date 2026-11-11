@@ -896,3 +896,13 @@ Recovered AZTE counts as upload_accepted_reconciliation_required and is NEVEReli
   plus an isolated Ubuntu24.04 FFmpeg/Chromium canary. The owner authorized
   necessary fixes, commit/push and safe missing-only retries until this exact600
   batch is durably complete; every prior accepted ID remains excluded.
+
+
+- 2026-11-11 signed mirror canary43050060846 passed real Ubuntu24.04 package,
+  FFmpeg and Chromium smoke checks without OAuth or metadata providers. The
+  owner authorized continued in-scope repair/recovery until the original exact
+  Deck16 batch is complete. The next claim retains549ordinary+51Polyglot and
+  carries forward all600original metadata documents. Cancelled source43044567157
+  has0completed/0observed/600missing and20pre-render failure artifacts. Only its
+  fully superseded, zero-acceptance history moves to a new immutable archive;
+  all previous archives and accepted IDs are preserved.

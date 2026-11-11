@@ -959,3 +959,11 @@ The manual youtube-render-runner-preflight.yml runs the real package/browser
 installation and a small FFmpeg/Chromium smoke check without OAuth, metadata
 providers or YouTube writes. Use it to validate this infrastructure before
 resuming a publication wave after a runner setup failure.
+
+
+The owner's2026-11-11 authorization to finish the exact Deck16 batch also covers
+archival of its cancelled pre-render source540ff6bb0fda after its600claims are
+superseded to the next exact recovery. Require the same zero-accepted/observed
+proof, empty active indexes, complete superseded rows and exact history
+roundtrip. The older history files remain immutable and every accepted row
+outside this batch is unchanged.
