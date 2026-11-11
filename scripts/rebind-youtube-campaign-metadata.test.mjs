@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { spawnSync } from "node:child_process";
 import { buildReboundMetadata } from "./rebind-youtube-campaign-metadata.mjs";
 import { sha256Json } from "./lib/youtube-publication-campaign.mjs";
 
@@ -16,7 +17,19 @@ function signed(value) {
 const ordinary = { assignmentKey: "ordinary|deck|EN|DE", videoType: "ordinary", setId: "deck", supportLang: "EN", targetLang: "DE", routeKey: "youtube-1", channelKey: "en", publishAt: "2030-01-01T10:00:00Z" };
 const polyglot = { assignmentKey: "polyglot|deck|EN|bundle|hash|full", videoType: "polyglot", setId: "deck", supportLang: "EN", bundleKey: "bundle", targetLangs: ["DE", "FR"], contentScope: "full", routeKey: "youtube-1", channelKey: "en", publishAt: "2030-01-02T10:00:00Z" };
 const source = signed({ campaignId: "yt-source", setId: "deck", inputs: {}, evidence: { sourceFingerprints: { offlineDeck: { sha256: "deck-sha" } } }, assignments: [ordinary, polyglot] });
-const target = signed({ ...source, campaignId: "yt-target", inputs: { partialRecoveryOfCampaignId: source.campaignId }, assignments: source.assignments.map(row => ({ ...row, targetLangs: row.targetLangs || [], cardLimit: row.cardLimit || 0, maxDurationSeconds: row.maxDurationSeconds || 0, contentScope: row.contentScope || "", publishAt: "2030-02-01T10:00:00Z" })) });
+const target = signed({
+  ...source,
+  campaignId: "yt-target",
+  inputs: { partialRecoveryOfCampaignId: source.campaignId },
+  assignments: source.assignments.map(row => ({
+    ...row,
+    targetLangs: row.targetLangs || [],
+    cardLimit: row.cardLimit || 0,
+    maxDurationSeconds: row.maxDurationSeconds || 0,
+    contentScope: row.contentScope || "",
+    publishAt: "2030-02-01T10:00:00Z",
+  })),
+});
 const entries = [];
 for (const row of source.assignments) {
   const name = row.videoType + ".json";
@@ -44,6 +57,10 @@ for (const [, body] of writes.slice(0, -1)) {
 const next = JSON.parse(writes.at(-1)[1]);
 assert.equal(next.campaignId, target.campaignId);
 for (let i = 0; i < 2; i++) assert.equal(next.entries[i].sha256, hash(writes[i][1]));
+const grandchild = signed({ ...target, campaignId: "yt-grandchild", inputs: { partialRecoveryOfCampaignId: target.campaignId } });
+assert.equal(build({ target: grandchild, ancestors: [target] }).length, 3);
+assert.throws(() => build({ target: grandchild }), /exact partial-recovery source lineage/);
+assert.throws(() => build({ target: grandchild, ancestors: [signed({ ...target, assignments: [target.assignments[0]] })] }), /intermediate recovery changed/);
 assert.throws(() => build({ target: signed({ ...target, inputs: {} }) }), /exact partial-recovery source/);
 assert.throws(() => build({ target: signed({ ...target, assignments: [target.assignments[0]] }) }), /entire original assignment set/);
 assert.throws(() => build({ target: signed({ ...target, assignments: target.assignments.map(row => ({ ...row, routeKey: "youtube-2" })) }) }), /route|identity/i);
@@ -57,4 +74,24 @@ writeIndex({ ...checkpoint, entries: entries.map(entry => ({ ...entry, artifactP
 assert.throws(() => build(), /escapes output root/);
 writeIndex({ ...checkpoint, complete: false });
 assert.throws(() => build(), /completed checkpoint/);
+writeIndex(checkpoint);
+const plans = path.join(root, "config/youtube-publication-campaign-plans");
+fs.mkdirSync(plans, { recursive: true });
+fs.copyFileSync("config/video-localization.json", path.join(root, "config/video-localization.json"));
+fs.writeFileSync(path.join(plans, source.campaignId + ".json"), JSON.stringify(source));
+fs.writeFileSync(path.join(plans, target.campaignId + ".json"), JSON.stringify(target));
+fs.writeFileSync(path.join(plans, grandchild.campaignId + ".json"), JSON.stringify(grandchild));
+fs.writeFileSync(path.join(root, "config/youtube-publication-campaigns.json"), JSON.stringify({
+  campaigns: [{ campaignId: grandchild.campaignId, manifestHash: grandchild.manifestHash, status: "claimed" }],
+}));
+const cli = spawnSync(process.execPath, [
+  path.resolve("scripts/rebind-youtube-campaign-metadata.mjs"),
+  grandchild.campaignId, source.campaignId, "youtube-1", ".",
+], { cwd: root, encoding: "utf8" });
+assert.equal(cli.status, 0, cli.stderr);
+assert.match(cli.stdout, /Rebound 2 verified metadata documents; provider calls: 0/);
+assert.equal(JSON.parse(fs.readFileSync(path.join(root, "index.json"))).campaignId, grandchild.campaignId);
+for (const name of ["ordinary.json", "polyglot.json"]) {
+  assert.equal(JSON.parse(fs.readFileSync(path.join(root, name))).campaignManifestHash, grandchild.manifestHash);
+}
 console.log("Exact recovery metadata rebind tests passed");

@@ -876,3 +876,5 @@ Recovered AZTE counts as upload_accepted_reconciliation_required and is NEVEReli
   metadata reuse with original campaign/hash provenance. Local verification
   checked all600 saved metadata documents without provider calls. Recovery
   remains restricted to the same549ordinary+51Polyglot assignments.
+
+- 2026-11-11 recovery43030435382 stopped at the metadata ownership gate with0completed/0observed/600missing/0worker artifacts. The rebind CLI had a missing URL.href in its entry-point check. The fix includes a real child-process CLI regression, successful local CLI checks of all600metadata documents and strict full-set immutable ancestry validation. Another production dispatch requires separate owner approval.

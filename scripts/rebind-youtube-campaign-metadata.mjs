@@ -18,13 +18,26 @@ const identity = row => ({
   cardLimit: row.cardLimit ?? 0,
   maxDurationSeconds: row.maxDurationSeconds ?? 0,
 });
+const identities = manifest => manifest.assignments.map(identity)
+  .sort((left, right) => left.assignmentKey.localeCompare(right.assignmentKey));
 const sha256 = body => crypto.createHash("sha256").update(body).digest("hex");
 
-export function buildReboundMetadata({ source, target, routeKey, outputRoot }) {
+export function buildReboundMetadata({ source, target, ancestors = [], routeKey, outputRoot }) {
   verifyCampaignManifest(source);
   verifyCampaignManifest(target);
   assert.notEqual(source.campaignId, target.campaignId);
-  assert.equal(target.inputs.partialRecoveryOfCampaignId, source.campaignId, "Only the exact partial-recovery source may supply metadata");
+  let descendant = target;
+  const visited = new Set([target.campaignId]);
+  for (const ancestor of [...ancestors, source]) {
+    verifyCampaignManifest(ancestor);
+    assert.ok(!visited.has(ancestor.campaignId), "Recovery source lineage contains a cycle");
+    visited.add(ancestor.campaignId);
+    assert.equal(descendant.inputs.partialRecoveryOfCampaignId, ancestor.campaignId, "Only the exact partial-recovery source lineage may supply metadata");
+    assert.equal(ancestor.setId, source.setId);
+    assert.equal(ancestor.evidence.sourceFingerprints.offlineDeck.sha256, source.evidence.sourceFingerprints.offlineDeck.sha256, "Source deck changed within recovery lineage");
+    assert.deepEqual(identities(ancestor), identities(source), "An intermediate recovery changed metadata identity or scope");
+    descendant = ancestor;
+  }
   assert.equal(target.setId, source.setId);
   assert.equal(target.evidence.sourceFingerprints.offlineDeck.sha256, source.evidence.sourceFingerprints.offlineDeck.sha256, "Source deck changed");
   assert.deepEqual(target.assignments.map(r => r.assignmentKey).sort(), source.assignments.map(r => r.assignmentKey).sort(), "Reuse requires the entire original assignment set");
@@ -77,7 +90,22 @@ function main() {
   const readPlan = id => JSON.parse(fs.readFileSync(`config/youtube-publication-campaign-plans/${id}.json`, "utf8"));
   const target = readPlan(campaignId);
   assert.equal(target.manifestHash, campaign.manifestHash);
-  const writes = buildReboundMetadata({ source: readPlan(sourceId), target, routeKey, outputRoot });
+  assert.equal(target.campaignId, campaignId);
+  const source = readPlan(sourceId);
+  assert.equal(source.campaignId, sourceId);
+  const ancestors = [];
+  const visited = new Set([campaignId]);
+  let parentId = target.inputs.partialRecoveryOfCampaignId;
+  while (parentId !== sourceId) {
+    assert.match(parentId || "", /^yt-[a-z0-9_-]+$/);
+    assert.ok(!visited.has(parentId), "Recovery source lineage contains a cycle");
+    visited.add(parentId);
+    const parent = readPlan(parentId);
+    assert.equal(parent.campaignId, parentId);
+    ancestors.push(parent);
+    parentId = parent.inputs.partialRecoveryOfCampaignId;
+  }
+  const writes = buildReboundMetadata({ source, target, ancestors, routeKey, outputRoot });
   // Validate every source file before replacing any file. Commit the index last.
   // An interrupted transfer therefore fails checksum validation before generation.
   for (const [file, body] of writes) {
@@ -88,4 +116,4 @@ function main() {
   console.log(`Rebound ${writes.length - 1} verified metadata documents; provider calls: 0`);
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1]))) main();
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main();

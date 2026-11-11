@@ -909,8 +909,10 @@ Playwright 1.60.0 cannot install Chromium on Ubuntu 26.04, which GitHub began
 assigning through ubuntu-latest in November 2026.
 
 An explicitly approved full-set partial recovery may set both
-metadata_resume_run_id and metadata_resume_campaign_id. The latter must be
-the immutable source named by the recovery plan's partialRecoveryOfCampaignId.
+metadata_resume_run_id and metadata_resume_campaign_id. The source must be a proven ancestor through immutable partialRecoveryOfCampaignId
+links. Every intermediate plan must preserve the entire assignment set, source
+deck fingerprint and metadata identities. Cycles, missing links and scope drift
+are rejected. The CLI entry point is covered by a child-process regression.
 The recovery and source must have the identical assignment-key set, offline
 deck SHA-256 and per-assignment product, channel, route and content scope.
 A subset or scope change is rejected. Each route requires a complete source
