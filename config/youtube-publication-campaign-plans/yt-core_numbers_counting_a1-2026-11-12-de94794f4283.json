@@ -1,0 +1,997 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-12T02:10:41.070Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "core_numbers_counting_a1",
+  "inputs": {
+    "supports": "SR,VI",
+    "supportCount": 2,
+    "ordinarySupportCount": 2,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 6,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|core_numbers_counting_a1|SR|CS",
+      "ordinary|core_numbers_counting_a1|SR|DA",
+      "ordinary|core_numbers_counting_a1|SR|DE",
+      "ordinary|core_numbers_counting_a1|SR|EN",
+      "ordinary|core_numbers_counting_a1|SR|EN-GB",
+      "ordinary|core_numbers_counting_a1|SR|ES",
+      "ordinary|core_numbers_counting_a1|VI|ES",
+      "ordinary|core_numbers_counting_a1|VI|ET",
+      "ordinary|core_numbers_counting_a1|VI|FI",
+      "ordinary|core_numbers_counting_a1|VI|FR",
+      "ordinary|core_numbers_counting_a1|VI|HI",
+      "ordinary|core_numbers_counting_a1|VI|HR"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-core_numbers_counting_a1-2026-11-11-f66e9f537dbf",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-core_numbers_counting_a1-2026-11-11-f66e9f537dbf",
+      "manifestHash": "eb6f6a360bf70334eae35406ab7d7b5103f8c2faabc509aaf2a9d622c7beb7d1",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-3",
+        "generatedAt": "2026-11-12T00:31:09.634Z",
+        "ageMinutes": 99.52393333333333,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      },
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-11-12T00:30:09.366Z",
+        "ageMinutes": 100.5284,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "cae849c1f1600f09ed8e021673fc9b24bd11ca0eb5505304aff48861fe936426"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "1ce74bb42e3e451fc529d98ec318b2e13705c8afca4fc57c4551bd229a9a0363"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "c056ea1074aefa345fbd7fb0b4be3ffe22d119c5850d114deeb3f5f6fed4106f"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "484fe938603eb5c2400ca0e6108a414ada1ac66f16ce3217bd2f97c39352013c"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/core_numbers_counting_a1.json",
+        "exists": true,
+        "sha256": "e928fe3edc657dfa3d1acc8d066345bd4116dcbf5218379fe3e0086cf7063e27"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "d6c946c4fe15d708d96779c11af8accb1c7d0b0490c47eec1a2c796bd3aaeded"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 2,
+    "ordinaryCount": 12,
+    "polyglotCount": 0,
+    "assignmentCount": 12,
+    "firstPublishAt": "2026-11-22T22:30:00.000Z",
+    "lastPublishAt": "2026-11-26T16:30:00.000Z",
+    "customThumbnailCount": 12,
+    "automaticThumbnailCount": 0,
+    "existingPlaylistCount": 12,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-2": 6,
+      "youtube-3": 6
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 12,
+    "estimatedPlaylistItemInsertUnits": 600,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 600,
+    "estimatedGeneralQuotaUnitsMaximum": 1200,
+    "byRoute": {
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 6,
+        "estimatedGeneralQuotaUnitsMaximum": 600
+      },
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 6,
+        "estimatedGeneralQuotaUnitsMaximum": 600
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|SR|CS",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|SR|CS|sr",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "SR",
+      "targetLang": "CS",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|SR|CS",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sr-RS-SophieNeural",
+        "supportLang": "SR"
+      },
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-22T22:30:00.000Z",
+      "localDate": "2026-11-22",
+      "localTime": "23:30",
+      "timeZone": "Europe/Belgrade",
+      "slotKey": "sr|2026-11-22T22:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/video/by-set/core_numbers_counting_a1/ordinary/by-channel/sr__SR__LunaCardsSrpski/CS__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json",
+        "sha256": "88d877d82e88e5567e659cbdf10b48e37ba16baac77560fe8dec439b26ed9ada"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SR__CS__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLsLGddwB2EijsRfahdk01q9skxwsVM44f",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Чешки A1: vokabular i izgovor",
+        "description": "FlashcardsLuna video snimci za govornike srpskog koji uče Чешки: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-11T11:58:00.841Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|SR|DA",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|SR|DA|sr",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "SR",
+      "targetLang": "DA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|SR|DA",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sr-RS-SophieNeural",
+        "supportLang": "SR"
+      },
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-23T07:30:00.000Z",
+      "localDate": "2026-11-23",
+      "localTime": "08:30",
+      "timeZone": "Europe/Belgrade",
+      "slotKey": "sr|2026-11-23T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/video/by-set/core_numbers_counting_a1/ordinary/by-channel/sr__SR__LunaCardsSrpski/DA__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json",
+        "sha256": "f709eca62f7989559aaccf7d95d6c1f23311266197c4306b7b653d5f537ad41f"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SR__DA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLsLGddwB2Eiio2V3IGeIiHH50sAtGzF1S",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Дански A1: vokabular i izgovor",
+        "description": "FlashcardsLuna video snimci za govornike srpskog koji uče Дански: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-11T11:58:00.841Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|SR|DE",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|SR|DE|sr",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "SR",
+      "targetLang": "DE",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|SR|DE",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sr-RS-SophieNeural",
+        "supportLang": "SR"
+      },
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-23T10:30:00.000Z",
+      "localDate": "2026-11-23",
+      "localTime": "11:30",
+      "timeZone": "Europe/Belgrade",
+      "slotKey": "sr|2026-11-23T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/video/by-set/core_numbers_counting_a1/ordinary/by-channel/sr__SR__LunaCardsSrpski/DE__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json",
+        "sha256": "1cb577cc405f1447e84068a649f9f7ccfba63c6b39578fc38d41e6f9ef9c3a80"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SR__DE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLsLGddwB2EijoKKvOYGy2yFuOqPuaqE4H",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Немачки A1: vokabular i izgovor",
+        "description": "FlashcardsLuna video snimci za govornike srpskog koji uče Немачки: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-11T11:58:00.841Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|SR|EN",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|SR|EN|sr",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "SR",
+      "targetLang": "EN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|SR|EN",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sr-RS-SophieNeural",
+        "supportLang": "SR"
+      },
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-23T13:30:00.000Z",
+      "localDate": "2026-11-23",
+      "localTime": "14:30",
+      "timeZone": "Europe/Belgrade",
+      "slotKey": "sr|2026-11-23T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/video/by-set/core_numbers_counting_a1/ordinary/by-channel/sr__SR__LunaCardsSrpski/EN__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json",
+        "sha256": "173adec61a2d24edd08b2dc3198e577daf9cfbe94e13875774ad9e08f34716f3"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SR__EN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLsLGddwB2Eii-X0Ko6MAZ0WTSMw77h8Gp",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Енглески A1: vokabular i izgovor",
+        "description": "FlashcardsLuna video snimci za govornike srpskog koji uče Енглески: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-11T11:58:00.841Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|SR|EN-GB",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|SR|EN-GB|sr",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "SR",
+      "targetLang": "EN-GB",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|SR|EN-GB",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sr-RS-SophieNeural",
+        "supportLang": "SR"
+      },
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-23T16:30:00.000Z",
+      "localDate": "2026-11-23",
+      "localTime": "17:30",
+      "timeZone": "Europe/Belgrade",
+      "slotKey": "sr|2026-11-23T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/video/by-set/core_numbers_counting_a1/ordinary/by-channel/sr__SR__LunaCardsSrpski/EN-GB__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json",
+        "sha256": "bb6be57306ea64f97a84b04c7685bd81ff8780d40975e4c46cfb6bb3a7bc2477"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SR__EN-GB__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLsLGddwB2EigznD7EKTT0GTXQyWxMKCC4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Енглески (Уједињено Краљевство) A1: vokabular i izgovor",
+        "description": "FlashcardsLuna video snimci za govornike srpskog koji uče Енглески (Уједињено Краљевство): kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-11T11:58:00.841Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|SR|ES",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|SR|ES|sr",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "SR",
+      "targetLang": "ES",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|SR|ES",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_sr-RS-SophieNeural",
+        "supportLang": "SR"
+      },
+      "channelKey": "sr",
+      "youtubeChannelId": "UCdbuujAIwGoL-XqDhs2JOhw",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-23T19:30:00.000Z",
+      "localDate": "2026-11-23",
+      "localTime": "20:30",
+      "timeZone": "Europe/Belgrade",
+      "slotKey": "sr|2026-11-23T19:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/video/by-set/core_numbers_counting_a1/ordinary/by-channel/sr__SR__LunaCardsSrpski/ES__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json",
+        "sha256": "8d4833855ec311c424faf9ce7d70babe36a090ac6e75d652fb5a8bfc4da7c292"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "SR__ES__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLsLGddwB2Eiibi8T3dS4ISjiiFhidb2AW",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Шпански A1: vokabular i izgovor",
+        "description": "FlashcardsLuna video snimci za govornike srpskog koji uče Шпански: kartice, izgovor, pauze za ponavljanje i kratki mini testovi.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-11T11:58:00.841Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|VI|ES",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|VI|ES|vi",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "VI",
+      "targetLang": "ES",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|VI|ES",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_vi-VN-HoaiMyNeural",
+        "supportLang": "VI"
+      },
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-25T16:30:00.000Z",
+      "localDate": "2026-11-25",
+      "localTime": "23:30",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "slotKey": "vi|2026-11-25T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/video/by-set/core_numbers_counting_a1/ordinary/by-channel/vi__VI__LunaCardsTiengViet/ES__Ti_ng_T_y_Ban_Nha/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json",
+        "sha256": "d11d37b0ad30239ff0d44b0867a008d31c7258cd88cbceff2f28e59e1b26b64e"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "VI__ES__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLP-RVRjbJRL9Bf2ih7XA-dGHSKVr-62NF",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tiếng Tây Ban Nha A1: từ vựng và phát âm",
+        "description": "Video FlashcardsLuna dành cho người nói tiếng Việt học Tiếng Tây Ban Nha: thẻ ghi nhớ, phát âm, khoảng dừng để lặp lại và bài kiểm tra ngắn.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-11T11:58:00.841Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|VI|ET",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|VI|ET|vi",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "VI",
+      "targetLang": "ET",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|VI|ET",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_vi-VN-HoaiMyNeural",
+        "supportLang": "VI"
+      },
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-26T04:30:00.000Z",
+      "localDate": "2026-11-26",
+      "localTime": "11:30",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "slotKey": "vi|2026-11-26T04:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/video/by-set/core_numbers_counting_a1/ordinary/by-channel/vi__VI__LunaCardsTiengViet/ET__Ti_ng_Estonia/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json",
+        "sha256": "c2e2791b8cd420437935efcef040152cd140b1a32ceb863c199023fd59a04476"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "VI__ET__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLP-RVRjbJRL92avU5G28Ua6WZvGUBRzWc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tiếng Estonia A1: từ vựng và phát âm",
+        "description": "Video FlashcardsLuna dành cho người nói tiếng Việt học Tiếng Estonia: thẻ ghi nhớ, phát âm, khoảng dừng để lặp lại và bài kiểm tra ngắn.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-11T11:58:00.841Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|VI|FI",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|VI|FI|vi",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "VI",
+      "targetLang": "FI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|VI|FI",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_vi-VN-HoaiMyNeural",
+        "supportLang": "VI"
+      },
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-26T07:30:00.000Z",
+      "localDate": "2026-11-26",
+      "localTime": "14:30",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "slotKey": "vi|2026-11-26T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/video/by-set/core_numbers_counting_a1/ordinary/by-channel/vi__VI__LunaCardsTiengViet/FI__Ti_ng_Ph_n_Lan/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json",
+        "sha256": "9e36a8224d03a0f08d47b597706e1b2dbc78353626fa78fb2894a19d71e45dd3"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "VI__FI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLP-RVRjbJRL98LTv-kW2DD9_kCUI2eEZT",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tiếng Phần Lan A1: từ vựng và phát âm",
+        "description": "Video FlashcardsLuna dành cho người nói tiếng Việt học Tiếng Phần Lan: thẻ ghi nhớ, phát âm, khoảng dừng để lặp lại và bài kiểm tra ngắn.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-11T11:58:00.841Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|VI|FR",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|VI|FR|vi",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "VI",
+      "targetLang": "FR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|VI|FR",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_vi-VN-HoaiMyNeural",
+        "supportLang": "VI"
+      },
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-26T10:30:00.000Z",
+      "localDate": "2026-11-26",
+      "localTime": "17:30",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "slotKey": "vi|2026-11-26T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/video/by-set/core_numbers_counting_a1/ordinary/by-channel/vi__VI__LunaCardsTiengViet/FR__Ti_ng_Ph_p/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json",
+        "sha256": "648ba7c2e0d7fae1dd29e26db9eafc63277e8f3222b2f50b29c18f3a56ddaca2"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "VI__FR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLP-RVRjbJRL8AU7kFPbjkMoYZcXN3wJ-z",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tiếng Pháp A1: từ vựng và phát âm",
+        "description": "Video FlashcardsLuna dành cho người nói tiếng Việt học Tiếng Pháp: thẻ ghi nhớ, phát âm, khoảng dừng để lặp lại và bài kiểm tra ngắn.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-11T11:58:00.841Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|VI|HI",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|VI|HI|vi",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "VI",
+      "targetLang": "HI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|VI|HI",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_vi-VN-HoaiMyNeural",
+        "supportLang": "VI"
+      },
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-26T13:30:00.000Z",
+      "localDate": "2026-11-26",
+      "localTime": "20:30",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "slotKey": "vi|2026-11-26T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/video/by-set/core_numbers_counting_a1/ordinary/by-channel/vi__VI__LunaCardsTiengViet/HI__Ti_ng_Hindi/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json",
+        "sha256": "3af51af68f5cb43daff9c12650a43f29d08469463935e3ac480c1e1c74782673"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "VI__HI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLNDjP38EccYk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tiếng Hindi A1: từ vựng và phát âm",
+        "description": "Video FlashcardsLuna dành cho người nói tiếng Việt học Tiếng Hindi: thẻ ghi nhớ, phát âm, khoảng dừng để lặp lại và bài kiểm tra ngắn.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-11T11:58:00.841Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|VI|HR",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|VI|HR|vi",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "VI",
+      "targetLang": "HR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|VI|HR",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_vi-VN-HoaiMyNeural",
+        "supportLang": "VI"
+      },
+      "channelKey": "vi",
+      "youtubeChannelId": "UCuDc2oBQPppV8Br78CAiKTA",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-26T16:30:00.000Z",
+      "localDate": "2026-11-26",
+      "localTime": "23:30",
+      "timeZone": "Asia/Ho_Chi_Minh",
+      "slotKey": "vi|2026-11-26T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/video/by-set/core_numbers_counting_a1/ordinary/by-channel/vi__VI__LunaCardsTiengViet/HR__Ti_ng_Croatia/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck16-numbers-v2-approved-20261110/manifest.json",
+        "sha256": "c5d2651c85dabfaabd36d02e46064b4de19413bda05f2fde07f1e21170427f89"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "VI__HR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLZBOBLz3QRWc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tiếng Croatia A1: từ vựng và phát âm",
+        "description": "Video FlashcardsLuna dành cho người nói tiếng Việt học Tiếng Croatia: thẻ ghi nhớ, phát âm, khoảng dừng để lặp lại và bài kiểm tra ngắn.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-11T11:58:00.841Z"
+      },
+      "status": "planned",
+      "localSlotIndex": 5
+    }
+  ],
+  "campaignId": "yt-core_numbers_counting_a1-2026-11-12-de94794f4283",
+  "manifestHash": "52276fe50cd774c149f4fb16f84325b550be1d3e3eb91940f04f65dc0c647b50"
+}
