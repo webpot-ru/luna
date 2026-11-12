@@ -967,3 +967,7 @@ superseded to the next exact recovery. Require the same zero-accepted/observed
 proof, empty active indexes, complete superseded rows and exact history
 roundtrip. The older history files remain immutable and every accepted row
 outside this batch is unchanged.
+
+### Exact missing-only metadata checkpoint extraction
+
+Recovery metadata reuse may select a nonempty unique subset of its immutable source assignment keys. The exact source ancestry, deck SHA, route/channel/content identity and no-accepted-ID gate remain mandatory. The complete original route checkpoint is authenticated (ownership, count, destinations, file checksums) before selecting entries. The resulting checkpoint contains only the selected missing assignments and updates assignmentCount; unrelated metadata and accepted videos are excluded. Deck16 parent43051686117 requires only12 missing ordinary rows, while its two accepted thumbnail403 rows use the separate exact thumbnail repair manifest.

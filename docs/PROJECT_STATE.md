@@ -906,3 +906,5 @@ Recovered AZTE counts as upload_accepted_reconciliation_required and is NEVEReli
   has0completed/0observed/600missing and20pre-render failure artifacts. Only its
   fully superseded, zero-acceptance history moves to a new immutable archive;
   all previous archives and accepted IDs are preserved.
+
+- 2026-11-12 Deck16 parent43051686117 durably observed588/600, completed586, missing12 (SR6+VI6); SR-BN VrpNjQ9ns_Q and VI-ES-419 We638A9M2Ww are accepted with thumbnail403 and must never be reuploaded. Owner authorized exact two thumbnail-only repairs and recovery of only12 no-ID rows. Metadata rebinding now authenticates the entire original route before extracting a unique immutable missing-only subset; no provider regeneration.

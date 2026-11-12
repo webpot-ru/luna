@@ -40,12 +40,14 @@ export function buildReboundMetadata({ source, target, ancestors = [], routeKey,
   }
   assert.equal(target.setId, source.setId);
   assert.equal(target.evidence.sourceFingerprints.offlineDeck.sha256, source.evidence.sourceFingerprints.offlineDeck.sha256, "Source deck changed");
-  assert.deepEqual(target.assignments.map(r => r.assignmentKey).sort(), source.assignments.map(r => r.assignmentKey).sort(), "Reuse requires the entire original assignment set");
   const original = new Map(source.assignments.map(row => [row.assignmentKey, row]));
   assert.equal(original.size, source.assignments.length);
+  assert.ok(target.assignments.length > 0, "Recovery must select assignments");
+  assert.equal(new Set(target.assignments.map(row => row.assignmentKey)).size, target.assignments.length, "Recovery duplicates an assignment");
   const selected = target.assignments.filter(row => row.routeKey === routeKey);
   assert.ok(selected.length > 0, "Recovery route has no assignments");
   for (const row of target.assignments) {
+    assert.ok(original.has(row.assignmentKey), "Recovery assignment is absent from the source");
     assert.deepEqual(identity(row), identity(original.get(row.assignmentKey)), "Metadata assignment identity changed");
     assert.ok(!row.youtubeVideoId, "An accepted assignment cannot be rebound");
   }
@@ -54,9 +56,10 @@ export function buildReboundMetadata({ source, target, ancestors = [], routeKey,
   assert.equal(checkpoint.complete, true, "Recovery requires a completed checkpoint");
   const entries = loadReusableMetadataCheckpoint({ outputRoot, campaignId: source.campaignId,
     manifestHash: source.manifestHash, routeKey, batchSize: checkpoint.batchSize,
-    taskPlans: selected.map(row => ({ assignment: original.get(row.assignmentKey) })),
+    // Authenticate the entire original route before extracting a missing-only subset.
+    taskPlans: source.assignments.filter(row => row.routeKey === routeKey).map(assignment => ({ assignment })),
   });
-  assert.equal(entries.size, selected.length, "Recovery metadata must cover the entire route");
+  assert.equal(entries.size, source.assignments.filter(row => row.routeKey === routeKey).length, "Recovery metadata must cover the entire route");
   const provenance = { campaignId: source.campaignId, manifestHash: source.manifestHash };
   const writes = [];
   const rebound = selected.map(row => {
@@ -73,7 +76,7 @@ export function buildReboundMetadata({ source, target, ancestors = [], routeKey,
     writes.push([file, body]);
     return { ...entry, sha256: sha256(body) };
   });
-  const index = { ...checkpoint, campaignId: target.campaignId, manifestHash: target.manifestHash,
+  const index = { ...checkpoint, campaignId: target.campaignId, manifestHash: target.manifestHash, assignmentCount: selected.length,
     metadataRecoverySource: provenance, updatedAt: new Date().toISOString(), entries: rebound };
   writes.push([checkpointPath, JSON.stringify(index, null, 2) + "\n"]);
   return writes;
