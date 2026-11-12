@@ -1766972,7 +1766972,7 @@
       "youtubeVideoUrl": "https://www.youtube.com/watch?v=We638A9M2Ww",
       "publicationStatus": "live_youtube_upload_detected",
       "uploadedAt": "2026-11-11T17:07:48Z",
-      "lastReadbackAt": "2026-11-11T17:36:42.155Z",
+      "lastReadbackAt": "2026-11-12T00:46:54.550Z",
       "readbackSource": "youtube_uploads_playlist",
       "liveReadbackOnly": true,
       "urlSupportLang": "VI",
@@ -1767016,8 +1767016,9 @@
       "campaignId": "yt-core_numbers_counting_a1-2026-11-11-f66e9f537dbf",
       "campaignManifestHash": "eb6f6a360bf70334eae35406ab7d7b5103f8c2faabc509aaf2a9d622c7beb7d1",
       "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n    \"errors\": [\n      {\n        \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"forbidden\",\n        \"location\": \"videoId\",\n        \"locationType\": \"parameter\"\n      }\n    ]\n  }\n}\n",
-      "thumbnailSet": false,
-      "thumbnailSetError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n    \"errors\": [\n      {\n        \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"forbidden\",\n        \"location\": \"videoId\",\n        \"locationType\": \"parameter\"\n      }\n    ]\n  }\n}\n"
+      "thumbnailSet": true,
+      "thumbnailUploadedAt": "2026-11-12T00:46:54.550Z",
+      "lastThumbnailReadbackAt": "2026-11-12T00:46:54.550Z"
     },
     {
       "setId": "core_numbers_counting_a1",
