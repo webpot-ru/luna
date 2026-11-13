@@ -908,3 +908,6 @@ Recovered AZTE counts as upload_accepted_reconciliation_required and is NEVEReli
   all previous archives and accepted IDs are preserved.
 
 - 2026-11-12 Deck16 parent43051686117 durably observed588/600, completed586, missing12 (SR6+VI6); SR-BN VrpNjQ9ns_Q and VI-ES-419 We638A9M2Ww are accepted with thumbnail403 and must never be reuploaded. Owner authorized exact two thumbnail-only repairs and recovery of only12 no-ID rows. Metadata rebinding now authenticates the entire original route before extracting a unique immutable missing-only subset; no provider regeneration.
+
+
+2026-11-13 Deck16 next600 preparation: owner renewed execution after first600 completed. Standard history archive moved finalized12 recovery. A narrow terminal-history exception also snapshots unchanged source f66e9f537dbf:588 accepted IDs preserved, all12 unaccepted source rows already superseded into successful12/12 recovery, both thumbnail403 receipts resolved by exact successful repair runs43127465175/43127491677. Thus no unaccepted active source rows remain. Historical source status/finalizeSummary are preserved, not relabelled finalized. All239 logical campaigns roundtrip-identical, IDs/calendar unchanged; no YouTube/provider writes. This exact storage snapshot does not extend eligibility to other reconciliation campaigns.
