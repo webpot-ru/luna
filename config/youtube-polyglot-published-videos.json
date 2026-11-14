@@ -165462,8 +165462,8 @@
       "channelHandle": "@lunacardsmalay",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_thumbnail_auto",
-      "publishAt": "2026-11-25T03:30:00.000Z",
-      "scheduledPublishAt": "2026-11-25T03:30:00.000Z",
+      "publishAt": "2026-11-25T03:30:00Z",
+      "scheduledPublishAt": "2026-11-25T03:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -165480,11 +165480,11 @@
       "uploadedAt": "2026-11-13T16:58:49.696Z",
       "lastReadbackAt": "2026-11-13T16:58:49.696Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-11-25T03:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
