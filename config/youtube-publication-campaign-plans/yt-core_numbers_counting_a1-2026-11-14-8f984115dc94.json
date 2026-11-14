@@ -1,0 +1,749 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-14T03:43:07.287Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "core_numbers_counting_a1",
+  "inputs": {
+    "supports": "MS",
+    "supportCount": 1,
+    "ordinarySupportCount": 1,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 9,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|core_numbers_counting_a1|MS|ES-419",
+      "ordinary|core_numbers_counting_a1|MS|ET",
+      "ordinary|core_numbers_counting_a1|MS|FI",
+      "ordinary|core_numbers_counting_a1|MS|FR",
+      "ordinary|core_numbers_counting_a1|MS|HI",
+      "ordinary|core_numbers_counting_a1|MS|HR",
+      "ordinary|core_numbers_counting_a1|MS|HU",
+      "ordinary|core_numbers_counting_a1|MS|HY",
+      "ordinary|core_numbers_counting_a1|MS|ID"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-core_numbers_counting_a1-2026-11-13-afeb2fc73e7d",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-core_numbers_counting_a1-2026-11-13-afeb2fc73e7d",
+      "manifestHash": "a9365aee1717f05910949891cb297968fa364b377be543531f3e24d19218f7f6",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-2",
+        "generatedAt": "2026-11-14T02:51:29.461Z",
+        "ageMinutes": 51.630433333333336,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "fb44e3b104270c778c29fac311d08cbc3888688740cc24451ac069a24bbc7948"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "1eb6ff3db94265bfd47bf3e36e378709e355959ce7b388b4733e0a16e58af857"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "f38efb5622cb7e949b35e78625ac520c42f8fd9de835c4f77dfda33d052b9f6c"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "e3c1d7b9cda5abc92c383d59a3bfd7d55a9a15ce96d72a5e28b51fb320e7ec1b"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "484fe938603eb5c2400ca0e6108a414ada1ac66f16ce3217bd2f97c39352013c"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/core_numbers_counting_a1.json",
+        "exists": true,
+        "sha256": "e928fe3edc657dfa3d1acc8d066345bd4116dcbf5218379fe3e0086cf7063e27"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "9bc68259166105207ca55b38380a611ef2c5b92c2b2a2797d50bd13fbb040de4"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 9,
+    "polyglotCount": 0,
+    "assignmentCount": 9,
+    "firstPublishAt": "2026-11-23T12:30:00.000Z",
+    "lastPublishAt": "2026-11-25T00:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 9,
+    "existingPlaylistCount": 9,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-2": 9
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 9,
+    "estimatedPlaylistItemInsertUnits": 450,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 450,
+    "byRoute": {
+      "youtube-2": {
+        "estimatedVideoUploadCalls": 9,
+        "estimatedGeneralQuotaUnitsMaximum": 450
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|MS|ES-419",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|MS|ES-419|ms",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "MS",
+      "targetLang": "ES-419",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ms-MY-YasminNeural",
+        "supportLang": "MS"
+      },
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-24T00:30:00.000Z",
+      "localDate": "2026-11-24",
+      "localTime": "08:30",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "slotKey": "ms|2026-11-24T00:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "MS__ES-419__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL8q4vfdwFMEr_Pf2fHRky0ViM8S9mGh0S",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Sepanyol (Amerika Latin) A1: kosa kata dan sebutan",
+        "description": "Video FlashcardsLuna untuk penutur bahasa Melayu yang belajar Sepanyol (Amerika Latin): kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-13T15:09:59.292Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|MS|ES-419",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|MS|ET",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|MS|ET|ms",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "MS",
+      "targetLang": "ET",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ms-MY-YasminNeural",
+        "supportLang": "MS"
+      },
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-23T12:30:00.000Z",
+      "localDate": "2026-11-23",
+      "localTime": "20:30",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "slotKey": "ms|2026-11-23T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "MS__ET__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL8q4vfdwFMErqgdGQzl0xFYzOndYMszPw",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Estonia A1: kosa kata dan sebutan",
+        "description": "Video FlashcardsLuna untuk penutur bahasa Melayu yang belajar Estonia: kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-13T15:09:59.292Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|MS|ET",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|MS|FI",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|MS|FI|ms",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "MS",
+      "targetLang": "FI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ms-MY-YasminNeural",
+        "supportLang": "MS"
+      },
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-23T15:30:00.000Z",
+      "localDate": "2026-11-23",
+      "localTime": "23:30",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "slotKey": "ms|2026-11-23T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "MS__FI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL8q4vfdwFMEp57VZ89vXlGo__GDc33O6X",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Finland A1: kosa kata dan sebutan",
+        "description": "Video FlashcardsLuna untuk penutur bahasa Melayu yang belajar Finland: kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-13T15:09:59.292Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|MS|FI",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|MS|FR",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|MS|FR|ms",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "MS",
+      "targetLang": "FR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ms-MY-YasminNeural",
+        "supportLang": "MS"
+      },
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-24T03:30:00.000Z",
+      "localDate": "2026-11-24",
+      "localTime": "11:30",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "slotKey": "ms|2026-11-24T03:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "MS__FR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL8q4vfdwFMErRr7wbDMSUv12Ghk7OTcY1",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Perancis A1: kosa kata dan sebutan",
+        "description": "Video FlashcardsLuna untuk penutur bahasa Melayu yang belajar Perancis: kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-13T15:09:59.292Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|MS|FR",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|MS|HI",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|MS|HI|ms",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "MS",
+      "targetLang": "HI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ms-MY-YasminNeural",
+        "supportLang": "MS"
+      },
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-24T06:30:00.000Z",
+      "localDate": "2026-11-24",
+      "localTime": "14:30",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "slotKey": "ms|2026-11-24T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "MS__HI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL8q4vfdwFMEqTTbW2R-cwLHfAJxhFLlXp",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Hindi A1: kosa kata dan sebutan",
+        "description": "Video FlashcardsLuna untuk penutur bahasa Melayu yang belajar Hindi: kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-13T15:09:59.292Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|MS|HI",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|MS|HR",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|MS|HR|ms",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "MS",
+      "targetLang": "HR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ms-MY-YasminNeural",
+        "supportLang": "MS"
+      },
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-24T09:30:00.000Z",
+      "localDate": "2026-11-24",
+      "localTime": "17:30",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "slotKey": "ms|2026-11-24T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "MS__HR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLULfMsYc-tHw",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Croatia A1: kosa kata dan sebutan",
+        "description": "Video FlashcardsLuna untuk penutur bahasa Melayu yang belajar Croatia: kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-13T15:09:59.292Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|MS|HR",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|MS|HU",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|MS|HU|ms",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "MS",
+      "targetLang": "HU",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ms-MY-YasminNeural",
+        "supportLang": "MS"
+      },
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-24T12:30:00.000Z",
+      "localDate": "2026-11-24",
+      "localTime": "20:30",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "slotKey": "ms|2026-11-24T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "MS__HU__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLIvqALN_LaJc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Hungary A1: kosa kata dan sebutan",
+        "description": "Video FlashcardsLuna untuk penutur bahasa Melayu yang belajar Hungary: kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-13T15:09:59.292Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|MS|HU",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|MS|HY",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|MS|HY|ms",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "MS",
+      "targetLang": "HY",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ms-MY-YasminNeural",
+        "supportLang": "MS"
+      },
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-24T15:30:00.000Z",
+      "localDate": "2026-11-24",
+      "localTime": "23:30",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "slotKey": "ms|2026-11-24T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "MS__HY__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLd69hWA9CanE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Armenia A1: kosa kata dan sebutan",
+        "description": "Video FlashcardsLuna untuk penutur bahasa Melayu yang belajar Armenia: kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-13T15:09:59.292Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|MS|HY",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|MS|ID",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|MS|ID|ms",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "MS",
+      "targetLang": "ID",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ms-MY-YasminNeural",
+        "supportLang": "MS"
+      },
+      "channelKey": "ms",
+      "youtubeChannelId": "UCPINbpQTI50h-zjN6jGyy7Q",
+      "routeKey": "youtube-2",
+      "youtubeEnvironment": "youtube-api-youtube-2",
+      "publishAt": "2026-11-25T00:30:00.000Z",
+      "localDate": "2026-11-25",
+      "localTime": "08:30",
+      "timeZone": "Asia/Kuala_Lumpur",
+      "slotKey": "ms|2026-11-25T00:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "MS__ID__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLbKJpiL4_BxQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Indonesia A1: kosa kata dan sebutan",
+        "description": "Video FlashcardsLuna untuk penutur bahasa Melayu yang belajar Indonesia: kad imbas, sebutan, jeda ulang sebut dan ujian mini ringkas.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-13T15:09:59.292Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-2",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-2",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|MS|ID",
+      "localSlotIndex": 0
+    }
+  ],
+  "campaignId": "yt-core_numbers_counting_a1-2026-11-14-8f984115dc94",
+  "manifestHash": "92d09955aac690d04cc87ae5396b9f3215adea064ff2440175a5ada14f2507c2"
+}
