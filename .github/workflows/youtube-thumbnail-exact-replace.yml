@@ -349,10 +349,10 @@ jobs:
           git fetch origin "$BRANCH_NAME"
           git checkout "$BRANCH_NAME"
           git pull --ff-only origin "$BRANCH_NAME"
-          node scripts/merge-youtube-publish-state.mjs \
+          node scripts/persist-youtube-exact-thumbnail-receipts.mjs \
             --artifact-dir=.state-artifact \
-            --thumbnail-state-only \
-            --summary=outputs/review/youtube-thumbnail-batch-state-merge-${GITHUB_RUN_ID}.json
+            --run-id="${GITHUB_RUN_ID}" \
+            --apply
           if git diff --quiet -- config/youtube-published-videos.json config/youtube-polyglot-published-videos.json config/youtube-channels.json; then
             echo "No thumbnail state changes to commit."
             exit 0
