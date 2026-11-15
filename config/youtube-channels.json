@@ -1370,11 +1370,12 @@
         "Studio public fields configured/read back on 2026-06-21: name, handle, banner, description and site link; contact email intentionally not transmitted.",
         "For browser work, use the Google Sheet Current handle as the navigation/account-switch source. Do not use Channel ID / UC... as the browser URL source.",
         "Studio avatar upload completed/read back in YouTube Studio UI on 2026-06-21.",
-        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio.",
+        "2026-11-15 owner explicitly confirmed Advanced features enabled in YouTube Studio. Custom thumbnails and long-video upload enabled for future plans on owner evidence; historical forbidden receipts retained. No new thumbnails.set API acceptance is claimed by this configuration update."
       ],
-      "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto",
-      "longVideoUploadAllowed": false
+      "customThumbnailUploadAllowed": true,
+      "thumbnailFallbackMode": "custom_when_available",
+      "longVideoUploadAllowed": true
     },
     {
       "key": "az",
@@ -1401,11 +1402,12 @@
         "For browser work, use the Google Sheet Current handle as the navigation/account-switch source. Do not use Channel ID / UC... as the browser URL source.",
         "Studio avatar upload completed/read back in YouTube Studio UI on 2026-06-21.",
         "Published title is ASCII LunaCards Azerbaycan because the Studio/browser input path made the native Azerbaijani character unsafe during manual finishing; desired localized description remains Azerbaijani.",
-        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio.",
+        "2026-11-15 owner explicitly confirmed Advanced features enabled in YouTube Studio. Custom thumbnails and long-video upload enabled for future plans on owner evidence; historical forbidden receipts retained. No new thumbnails.set API acceptance is claimed by this configuration update."
       ],
-      "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto",
-      "longVideoUploadAllowed": false
+      "customThumbnailUploadAllowed": true,
+      "thumbnailFallbackMode": "custom_when_available",
+      "longVideoUploadAllowed": true
     },
     {
       "key": "ka",
