@@ -8398,25 +8398,25 @@
       "scheduledPublishAt": "2026-06-23T03:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
       "thumbnailFallbackReason": "youtube_thumbnail_permission_forbidden",
-      "needsThumbnailPermission": true,
-      "thumbnailSetError": "youtube.thumbnail/forbidden: The authenticated user doesn't have permissions to upload and set custom video thumbnails.",
       "metadataSource": "gemini-vectorengine",
       "metadataModel": "gemini-3.5-flash",
       "githubRunId": "27946269864",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27946269864",
       "uploadedAt": "2026-06-22T10:51:33.693Z",
-      "lastReadbackAt": "2026-06-22T10:51:33.693Z",
+      "lastReadbackAt": "2026-11-15T14:24:29.447Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-23T03:30:00.000Z",
         "thumbnailStatus": "forbidden_auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:24:29.447Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:24:29.447Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -8438,7 +8438,7 @@
       "scheduledPublishAt": "2026-06-23T06:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -8448,7 +8448,7 @@
       "githubRunId": "27946269864",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27946269864",
       "uploadedAt": "2026-06-22T10:51:37.033Z",
-      "lastReadbackAt": "2026-06-23T16:12:04.377Z",
+      "lastReadbackAt": "2026-11-15T14:24:33.565Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
@@ -8463,7 +8463,9 @@
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
       },
-      "lastMetadataRepairAt": "2026-06-23T16:12:04.377Z"
+      "lastMetadataRepairAt": "2026-06-23T16:12:04.377Z",
+      "thumbnailUploadedAt": "2026-11-15T14:24:33.565Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:24:33.565Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -8485,7 +8487,7 @@
       "scheduledPublishAt": "2026-06-23T09:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -8495,13 +8497,15 @@
       "githubRunId": "27946269864",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27946269864",
       "uploadedAt": "2026-06-22T10:51:39.859Z",
-      "lastReadbackAt": "2026-06-22T10:51:39.859Z",
+      "lastReadbackAt": "2026-11-15T14:24:37.246Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-23T09:30:00.000Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:24:37.246Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:24:37.246Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -8523,7 +8527,7 @@
       "scheduledPublishAt": "2026-06-23T12:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -8533,7 +8537,7 @@
       "githubRunId": "27946269864",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27946269864",
       "uploadedAt": "2026-06-22T10:51:43.318Z",
-      "lastReadbackAt": "2026-06-23T16:12:38.566Z",
+      "lastReadbackAt": "2026-11-15T14:24:41.679Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
@@ -8548,7 +8552,9 @@
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
       },
-      "lastMetadataRepairAt": "2026-06-23T16:12:38.566Z"
+      "lastMetadataRepairAt": "2026-06-23T16:12:38.566Z",
+      "thumbnailUploadedAt": "2026-11-15T14:24:41.679Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:24:41.679Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -8570,7 +8576,7 @@
       "scheduledPublishAt": "2026-06-23T15:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -8580,7 +8586,7 @@
       "githubRunId": "27946269864",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27946269864",
       "uploadedAt": "2026-06-22T10:51:46.924Z",
-      "lastReadbackAt": "2026-06-23T16:12:48.215Z",
+      "lastReadbackAt": "2026-11-15T14:24:45.952Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
@@ -8595,7 +8601,9 @@
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
       },
-      "lastMetadataRepairAt": "2026-06-23T16:12:48.215Z"
+      "lastMetadataRepairAt": "2026-06-23T16:12:48.215Z",
+      "thumbnailUploadedAt": "2026-11-15T14:24:45.952Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:24:45.952Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -8617,7 +8625,7 @@
       "scheduledPublishAt": "2026-06-23T18:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -8627,13 +8635,15 @@
       "githubRunId": "27946269864",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/27946269864",
       "uploadedAt": "2026-06-22T10:51:50.676Z",
-      "lastReadbackAt": "2026-06-22T10:51:50.676Z",
+      "lastReadbackAt": "2026-11-15T14:24:51.922Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-23T18:30:00.000Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:24:51.922Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:24:51.922Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -8655,25 +8665,25 @@
       "scheduledPublishAt": "2026-06-24T03:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
       "thumbnailFallbackReason": "youtube_thumbnail_permission_forbidden",
-      "needsThumbnailPermission": true,
-      "thumbnailSetError": "youtube.thumbnail/forbidden: The authenticated user doesn't have permissions to upload and set custom video thumbnails.",
       "metadataSource": "gemini-vectorengine",
       "metadataModel": "gemini-3.5-flash",
       "githubRunId": "28014849103",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28014849103",
       "uploadedAt": "2026-06-23T09:45:11.782Z",
-      "lastReadbackAt": "2026-06-23T09:45:11.782Z",
+      "lastReadbackAt": "2026-11-15T14:24:56.745Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-24T03:30:00Z",
         "thumbnailStatus": "forbidden_auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:24:56.745Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:24:56.745Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -8695,7 +8705,7 @@
       "scheduledPublishAt": "2026-06-24T06:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -8705,13 +8715,15 @@
       "githubRunId": "28014849103",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28014849103",
       "uploadedAt": "2026-06-23T09:45:16.449Z",
-      "lastReadbackAt": "2026-06-23T09:45:16.449Z",
+      "lastReadbackAt": "2026-11-15T14:25:01.090Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-24T06:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:25:01.090Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:01.090Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -8733,7 +8745,7 @@
       "scheduledPublishAt": "2026-06-24T09:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -8743,13 +8755,15 @@
       "githubRunId": "28014849103",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28014849103",
       "uploadedAt": "2026-06-23T09:45:20.603Z",
-      "lastReadbackAt": "2026-06-23T09:45:20.603Z",
+      "lastReadbackAt": "2026-11-15T14:25:05.079Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-24T09:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:25:05.079Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:05.079Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -8771,7 +8785,7 @@
       "scheduledPublishAt": "2026-06-24T12:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -8781,13 +8795,15 @@
       "githubRunId": "28014849103",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28014849103",
       "uploadedAt": "2026-06-23T09:45:24.811Z",
-      "lastReadbackAt": "2026-06-23T09:45:24.811Z",
+      "lastReadbackAt": "2026-11-15T14:25:09.249Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-24T12:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:25:09.249Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:09.249Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -8809,7 +8825,7 @@
       "scheduledPublishAt": "2026-06-24T15:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": true,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -8819,7 +8835,7 @@
       "githubRunId": "28014849103",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28014849103",
       "uploadedAt": "2026-06-23T09:45:30.060Z",
-      "lastReadbackAt": "2026-06-23T16:13:03.351Z",
+      "lastReadbackAt": "2026-11-15T14:25:17.362Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
@@ -8834,7 +8850,9 @@
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
       },
-      "lastMetadataRepairAt": "2026-06-23T16:13:03.351Z"
+      "lastMetadataRepairAt": "2026-06-23T16:13:03.351Z",
+      "thumbnailUploadedAt": "2026-11-15T14:25:17.362Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:17.362Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -22627,7 +22645,7 @@
       "scheduledPublishAt": "2026-06-24T18:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -22637,7 +22655,7 @@
       "githubRunId": "28024675862",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28024675862",
       "uploadedAt": "2026-06-23T12:08:15.937Z",
-      "lastReadbackAt": "2026-06-23T16:13:11.505Z",
+      "lastReadbackAt": "2026-11-15T14:25:21.610Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
@@ -22652,7 +22670,9 @@
         "source": "gemini-vectorengine",
         "model": "gemini-3.5-flash"
       },
-      "lastMetadataRepairAt": "2026-06-23T16:13:11.505Z"
+      "lastMetadataRepairAt": "2026-06-23T16:13:11.505Z",
+      "thumbnailUploadedAt": "2026-11-15T14:25:21.610Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:21.610Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -27755,7 +27775,7 @@
       "scheduledPublishAt": "2026-06-25T03:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -27765,13 +27785,15 @@
       "githubRunId": "28086761337",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28086761337",
       "uploadedAt": "2026-06-24T09:03:51.425Z",
-      "lastReadbackAt": "2026-06-24T09:03:51.425Z",
+      "lastReadbackAt": "2026-11-15T14:25:26.500Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-25T03:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:25:26.500Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:26.500Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -27869,7 +27891,7 @@
       "scheduledPublishAt": "2026-06-25T06:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -27879,13 +27901,15 @@
       "githubRunId": "28086761337",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28086761337",
       "uploadedAt": "2026-06-24T09:04:01.529Z",
-      "lastReadbackAt": "2026-06-24T09:04:01.529Z",
+      "lastReadbackAt": "2026-11-15T14:25:30.521Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-25T06:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:25:30.521Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:30.521Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -27983,7 +28007,7 @@
       "scheduledPublishAt": "2026-06-25T09:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -27993,13 +28017,15 @@
       "githubRunId": "28086761337",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28086761337",
       "uploadedAt": "2026-06-24T09:04:12.252Z",
-      "lastReadbackAt": "2026-06-24T09:04:12.252Z",
+      "lastReadbackAt": "2026-11-15T14:25:34.423Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-25T09:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:25:34.423Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:34.423Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -32132,7 +32158,7 @@
       "scheduledPublishAt": "2026-06-25T12:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -32142,13 +32168,15 @@
       "githubRunId": "28091919847",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28091919847",
       "uploadedAt": "2026-06-24T10:32:36.154Z",
-      "lastReadbackAt": "2026-06-24T10:32:36.154Z",
+      "lastReadbackAt": "2026-11-15T14:25:37.904Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-25T12:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:25:37.904Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:37.904Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -34518,7 +34546,7 @@
       "scheduledPublishAt": "2026-06-25T15:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -34528,13 +34556,15 @@
       "githubRunId": "28107347487",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28107347487",
       "uploadedAt": "2026-06-24T14:59:16.732Z",
-      "lastReadbackAt": "2026-06-24T14:59:16.732Z",
+      "lastReadbackAt": "2026-11-15T14:25:43.404Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-25T15:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:25:43.404Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:43.404Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -36692,7 +36722,7 @@
       "scheduledPublishAt": "2026-06-27T03:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -36702,13 +36732,15 @@
       "githubRunId": "28230469640",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28230469640",
       "uploadedAt": "2026-06-26T09:57:38.647Z",
-      "lastReadbackAt": "2026-06-26T09:57:38.647Z",
+      "lastReadbackAt": "2026-11-15T14:25:47.153Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-27T03:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:25:47.153Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:47.153Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -36730,7 +36762,7 @@
       "scheduledPublishAt": "2026-06-27T06:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -36740,13 +36772,15 @@
       "githubRunId": "28230469640",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28230469640",
       "uploadedAt": "2026-06-26T09:57:42.716Z",
-      "lastReadbackAt": "2026-06-26T09:57:42.716Z",
+      "lastReadbackAt": "2026-11-15T14:25:53.575Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-27T06:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:25:53.575Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:53.575Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -36768,7 +36802,7 @@
       "scheduledPublishAt": "2026-06-27T09:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -36778,13 +36812,15 @@
       "githubRunId": "28230469640",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28230469640",
       "uploadedAt": "2026-06-26T09:57:46.708Z",
-      "lastReadbackAt": "2026-06-26T09:57:46.708Z",
+      "lastReadbackAt": "2026-11-15T14:25:57.446Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-27T09:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:25:57.446Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:25:57.446Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -36806,7 +36842,7 @@
       "scheduledPublishAt": "2026-06-27T12:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -36816,13 +36852,15 @@
       "githubRunId": "28230469640",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28230469640",
       "uploadedAt": "2026-06-26T09:57:50.639Z",
-      "lastReadbackAt": "2026-06-26T09:57:50.639Z",
+      "lastReadbackAt": "2026-11-15T14:26:04.268Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-27T12:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:26:04.268Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:26:04.268Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -36844,7 +36882,7 @@
       "scheduledPublishAt": "2026-06-27T15:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -36854,13 +36892,15 @@
       "githubRunId": "28230469640",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28230469640",
       "uploadedAt": "2026-06-26T09:57:54.276Z",
-      "lastReadbackAt": "2026-06-26T09:57:54.276Z",
+      "lastReadbackAt": "2026-11-15T14:26:11.479Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-27T15:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:26:11.479Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:26:11.479Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -36882,7 +36922,7 @@
       "scheduledPublishAt": "2026-06-27T18:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -36892,13 +36932,15 @@
       "githubRunId": "28230469640",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28230469640",
       "uploadedAt": "2026-06-26T09:57:58.045Z",
-      "lastReadbackAt": "2026-06-26T09:57:58.045Z",
+      "lastReadbackAt": "2026-11-15T14:26:17.792Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-27T18:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:26:17.792Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:26:17.792Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -52092,7 +52134,7 @@
       "scheduledPublishAt": "2026-06-28T03:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -52102,13 +52144,15 @@
       "githubRunId": "28287336143",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28287336143",
       "uploadedAt": "2026-06-27T11:18:11.040Z",
-      "lastReadbackAt": "2026-06-27T11:18:11.040Z",
+      "lastReadbackAt": "2026-11-15T14:26:27.224Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-28T03:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:26:27.224Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:26:27.224Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -52130,7 +52174,7 @@
       "scheduledPublishAt": "2026-06-28T06:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -52140,13 +52184,15 @@
       "githubRunId": "28287336143",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28287336143",
       "uploadedAt": "2026-06-27T11:18:33.102Z",
-      "lastReadbackAt": "2026-06-27T11:18:33.102Z",
+      "lastReadbackAt": "2026-11-15T14:26:31.518Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-28T06:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:26:31.518Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:26:31.518Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -52168,7 +52214,7 @@
       "scheduledPublishAt": "2026-06-28T09:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -52178,13 +52224,15 @@
       "githubRunId": "28287336143",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28287336143",
       "uploadedAt": "2026-06-27T11:18:54.198Z",
-      "lastReadbackAt": "2026-06-27T11:18:54.198Z",
+      "lastReadbackAt": "2026-11-15T14:26:35.788Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-28T09:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:26:35.788Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:26:35.788Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -52206,7 +52254,7 @@
       "scheduledPublishAt": "2026-06-28T12:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -52216,13 +52264,15 @@
       "githubRunId": "28287336143",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28287336143",
       "uploadedAt": "2026-06-27T11:19:19.484Z",
-      "lastReadbackAt": "2026-06-27T11:19:19.484Z",
+      "lastReadbackAt": "2026-11-15T14:26:41.486Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-28T12:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:26:41.486Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:26:41.486Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -52244,7 +52294,7 @@
       "scheduledPublishAt": "2026-06-28T15:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -52254,13 +52304,15 @@
       "githubRunId": "28287336143",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28287336143",
       "uploadedAt": "2026-06-27T11:19:37.078Z",
-      "lastReadbackAt": "2026-06-27T11:19:37.078Z",
+      "lastReadbackAt": "2026-11-15T14:26:48.283Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-28T15:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:26:48.283Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:26:48.283Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -52282,7 +52334,7 @@
       "scheduledPublishAt": "2026-06-28T18:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -52292,13 +52344,15 @@
       "githubRunId": "28287336143",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28287336143",
       "uploadedAt": "2026-06-27T11:19:52.315Z",
-      "lastReadbackAt": "2026-06-27T11:19:52.315Z",
+      "lastReadbackAt": "2026-11-15T14:26:55.392Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-28T18:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:26:55.392Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:26:55.392Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -68059,7 +68113,7 @@
       "scheduledPublishAt": "2026-06-30T03:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -68069,7 +68123,7 @@
       "githubRunId": "28367386938",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28367386938",
       "uploadedAt": "2026-06-29T11:09:36.030Z",
-      "lastReadbackAt": "2026-09-25T17:50:20.352Z",
+      "lastReadbackAt": "2026-11-15T14:26:59.385Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
@@ -68085,7 +68139,9 @@
         "verifiedAt": "2026-09-25T17:50:20.352Z",
         "githubRunId": "36169247500",
         "inserted": false
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:26:59.385Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:26:59.385Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -68107,7 +68163,7 @@
       "scheduledPublishAt": "2026-06-30T06:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -68117,13 +68173,15 @@
       "githubRunId": "28367386938",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28367386938",
       "uploadedAt": "2026-06-29T11:09:55.147Z",
-      "lastReadbackAt": "2026-06-29T11:09:55.147Z",
+      "lastReadbackAt": "2026-11-15T14:27:03.524Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-30T06:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:27:03.524Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:27:03.524Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -68145,7 +68203,7 @@
       "scheduledPublishAt": "2026-06-30T09:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -68155,13 +68213,15 @@
       "githubRunId": "28367386938",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/28367386938",
       "uploadedAt": "2026-06-29T11:10:14.582Z",
-      "lastReadbackAt": "2026-06-29T11:10:14.582Z",
+      "lastReadbackAt": "2026-11-15T14:27:07.407Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-06-30T09:30:00Z",
         "thumbnailStatus": "auto_first_frame"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-15T14:27:07.407Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:27:07.407Z"
     },
     {
       "setId": "home_kitchen_cookware_pilot_01",
@@ -137056,7 +137116,7 @@
       "scheduledPublishAt": "2026-07-15T03:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -137068,13 +137128,15 @@
       "githubRunId": "29345942964",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29345942964",
       "uploadedAt": "2026-07-14T15:52:11.555Z",
-      "lastReadbackAt": "2026-07-14T15:52:11.555Z",
+      "lastReadbackAt": "2026-11-15T14:31:17.698Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:31:17.698Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:31:17.698Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -137096,7 +137158,7 @@
       "scheduledPublishAt": "2026-07-15T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -137108,13 +137170,15 @@
       "githubRunId": "29345942964",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29345942964",
       "uploadedAt": "2026-07-14T15:52:22.572Z",
-      "lastReadbackAt": "2026-07-14T15:52:22.572Z",
+      "lastReadbackAt": "2026-11-15T14:31:21.627Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:31:21.627Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:31:21.627Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -137136,7 +137200,7 @@
       "scheduledPublishAt": "2026-07-15T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -137148,13 +137212,15 @@
       "githubRunId": "29345942964",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29345942964",
       "uploadedAt": "2026-07-14T15:52:37.701Z",
-      "lastReadbackAt": "2026-07-14T15:52:37.701Z",
+      "lastReadbackAt": "2026-11-15T14:31:28.380Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:31:28.380Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:31:28.380Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -137176,7 +137242,7 @@
       "scheduledPublishAt": "2026-07-15T12:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -137188,13 +137254,15 @@
       "githubRunId": "29345942964",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29345942964",
       "uploadedAt": "2026-07-14T15:52:48.723Z",
-      "lastReadbackAt": "2026-07-14T15:52:48.723Z",
+      "lastReadbackAt": "2026-11-15T14:31:32.040Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:31:32.040Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:31:32.040Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -137216,7 +137284,7 @@
       "scheduledPublishAt": "2026-07-15T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -137228,13 +137296,15 @@
       "githubRunId": "29345942964",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29345942964",
       "uploadedAt": "2026-07-14T15:53:03.967Z",
-      "lastReadbackAt": "2026-07-14T15:53:03.967Z",
+      "lastReadbackAt": "2026-11-15T14:31:35.589Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:31:35.589Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:31:35.589Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -148714,7 +148784,7 @@
       "scheduledPublishAt": "2026-07-16T15:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -148726,13 +148796,15 @@
       "githubRunId": "29487310636",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636",
       "uploadedAt": "2026-07-16T10:56:14.975Z",
-      "lastReadbackAt": "2026-07-16T10:56:14.975Z",
+      "lastReadbackAt": "2026-11-15T14:31:42.223Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:31:42.223Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:31:42.223Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -148754,7 +148826,7 @@
       "scheduledPublishAt": "2026-07-16T18:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -148766,13 +148838,15 @@
       "githubRunId": "29487310636",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636",
       "uploadedAt": "2026-07-16T10:56:43.332Z",
-      "lastReadbackAt": "2026-07-16T10:56:43.332Z",
+      "lastReadbackAt": "2026-11-15T14:31:46.692Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:31:46.692Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:31:46.692Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -148794,7 +148868,7 @@
       "scheduledPublishAt": "2026-07-17T06:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -148806,13 +148880,15 @@
       "githubRunId": "29487310636",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636",
       "uploadedAt": "2026-07-16T10:56:59.156Z",
-      "lastReadbackAt": "2026-07-16T10:56:59.156Z",
+      "lastReadbackAt": "2026-11-15T14:31:50.675Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:31:50.675Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:31:50.675Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -148834,7 +148910,7 @@
       "scheduledPublishAt": "2026-07-17T03:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -148846,13 +148922,15 @@
       "githubRunId": "29487310636",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636",
       "uploadedAt": "2026-07-16T10:57:12.266Z",
-      "lastReadbackAt": "2026-07-16T10:57:12.266Z",
+      "lastReadbackAt": "2026-11-15T14:31:57.017Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:31:57.017Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:31:57.017Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -148874,7 +148952,7 @@
       "scheduledPublishAt": "2026-07-17T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -148886,13 +148964,15 @@
       "githubRunId": "29487310636",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29487310636",
       "uploadedAt": "2026-07-16T10:57:25.004Z",
-      "lastReadbackAt": "2026-07-16T10:57:25.004Z",
+      "lastReadbackAt": "2026-11-15T14:32:03.637Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:32:03.637Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:32:03.637Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158415,7 +158495,7 @@
       "scheduledPublishAt": "2026-07-17T15:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -158427,13 +158507,15 @@
       "githubRunId": "29574928824",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29574928824",
       "uploadedAt": "2026-07-17T12:19:41.601Z",
-      "lastReadbackAt": "2026-07-17T12:19:41.601Z",
+      "lastReadbackAt": "2026-11-15T14:32:08.443Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:32:08.443Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:32:08.443Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158455,7 +158537,7 @@
       "scheduledPublishAt": "2026-07-17T18:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -158467,13 +158549,15 @@
       "githubRunId": "29574928824",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29574928824",
       "uploadedAt": "2026-07-17T12:19:56.501Z",
-      "lastReadbackAt": "2026-07-17T12:19:56.501Z",
+      "lastReadbackAt": "2026-11-15T14:32:13.699Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:32:13.699Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:32:13.699Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158495,7 +158579,7 @@
       "scheduledPublishAt": "2026-07-18T03:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -158507,13 +158591,15 @@
       "githubRunId": "29574928824",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29574928824",
       "uploadedAt": "2026-07-17T12:20:05.535Z",
-      "lastReadbackAt": "2026-07-17T12:20:05.535Z",
+      "lastReadbackAt": "2026-11-15T14:32:17.278Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:32:17.278Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:32:17.278Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158535,7 +158621,7 @@
       "scheduledPublishAt": "2026-07-18T06:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -158547,13 +158633,15 @@
       "githubRunId": "29574928824",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29574928824",
       "uploadedAt": "2026-07-17T12:20:15.567Z",
-      "lastReadbackAt": "2026-07-17T12:20:15.567Z",
+      "lastReadbackAt": "2026-11-15T14:32:21.227Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:32:21.227Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:32:21.227Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -158575,7 +158663,7 @@
       "scheduledPublishAt": "2026-07-18T09:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -158587,13 +158675,15 @@
       "githubRunId": "29574928824",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29574928824",
       "uploadedAt": "2026-07-17T12:20:30.899Z",
-      "lastReadbackAt": "2026-07-17T12:20:30.899Z",
+      "lastReadbackAt": "2026-11-15T14:32:24.790Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:32:24.790Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:32:24.790Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -167835,7 +167925,7 @@
       "scheduledPublishAt": "2026-07-19T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -167847,13 +167937,15 @@
       "githubRunId": "29652924763",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763",
       "uploadedAt": "2026-07-18T18:24:11.988Z",
-      "lastReadbackAt": "2026-07-18T18:24:11.988Z",
+      "lastReadbackAt": "2026-11-15T14:32:31.834Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:32:31.834Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:32:31.834Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -167875,7 +167967,7 @@
       "scheduledPublishAt": "2026-07-19T03:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -167887,13 +167979,15 @@
       "githubRunId": "29652924763",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763",
       "uploadedAt": "2026-07-18T18:24:24.712Z",
-      "lastReadbackAt": "2026-07-18T18:24:24.712Z",
+      "lastReadbackAt": "2026-11-15T14:32:36.775Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:32:36.775Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:32:36.775Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -167915,7 +168009,7 @@
       "scheduledPublishAt": "2026-07-19T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -167927,13 +168021,15 @@
       "githubRunId": "29652924763",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763",
       "uploadedAt": "2026-07-18T18:24:35.827Z",
-      "lastReadbackAt": "2026-07-18T18:24:35.827Z",
+      "lastReadbackAt": "2026-11-15T14:32:42.735Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:32:42.735Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:32:42.735Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
@@ -167955,7 +168051,7 @@
       "scheduledPublishAt": "2026-07-19T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "first_frame_auto",
       "thumbnailSource": "youtube-auto-first-frame",
@@ -167967,13 +168063,15 @@
       "githubRunId": "29652924763",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29652924763",
       "uploadedAt": "2026-07-18T18:24:51.701Z",
-      "lastReadbackAt": "2026-07-18T18:24:51.701Z",
+      "lastReadbackAt": "2026-11-15T14:32:46.514Z",
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
         "uploadStatus": "processed"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-15T14:32:46.514Z",
+      "lastThumbnailReadbackAt": "2026-11-15T14:32:46.514Z"
     },
     {
       "setId": "home_kitchen_cooking_actions_a1_a2",
