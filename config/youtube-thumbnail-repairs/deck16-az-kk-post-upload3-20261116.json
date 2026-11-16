@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-16T12:13:42.074Z",
+  "setId": "core_numbers_counting_a1",
+  "scope": {
+    "supports": [
+      "AZ",
+      "KK"
+    ],
+    "action": "thumbnails.set_existing_video_ids_only",
+    "maxWrites": 3,
+    "videoUploads": 0
+  },
+  "policy": {
+    "existingVideoIdsOnly": true,
+    "exactMissingOnly": true,
+    "forceReupload": false,
+    "channelOwnershipReadbackRequired": true,
+    "postWriteReadbackRequired": true
+  },
+  "covers": [
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "AZ",
+      "viewerSupportLang": "AZ",
+      "channelKey": "az",
+      "channelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "channelHandle": "LunaCardsAzerbaycan",
+      "channelSupportLangs": [
+        "AZ"
+      ],
+      "targetLang": "NE",
+      "targetName": "Nepal",
+      "targetLabel": "Nepal A1",
+      "title": "Rəqəmlər",
+      "description": "Saymaq və sıralama. Əsas səviyyə.",
+      "descriptionLayout": "wrapped-safe-area-v1",
+      "measureHeadings": true,
+      "module": "Əsaslar",
+      "category": "Rəqəmlər",
+      "baseImage": "assets/youtube-cover-templates/deck16-numbers-counting-base-v2.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v1-deck16-numbers-counting-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/NE__Nepal/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/NE__Nepal/video.json",
+      "measuredTitleFontSize": 48,
+      "measuredTargetFontSize": 68,
+      "path": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/NE__Nepal/youtube_thumbnail.jpg",
+      "renderer": "reused-checksummed-approved-cover",
+      "dimensions": "1280x720",
+      "sizeBytes": 440118,
+      "sha256": "dbb7fa19ea1ef0b9e315f97eb0eb061a27eec8bc66fc8b52c324f5fe093eb1ea",
+      "youtubeVideoId": "dsoDeDA4AvY",
+      "expectedYoutubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "missingThumbnailEvidence": {
+        "sourceParentRunId": 43824679198,
+        "sourceCampaignId": "yt-core_numbers_counting_a1-2026-11-16-f76fd9b21695",
+        "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|NE",
+        "finalizedAt": "2026-11-16T08:19:45.265Z",
+        "reason": "thumbnails.set HTTP429 uploadRateLimitExceeded"
+      }
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KK",
+      "viewerSupportLang": "KK",
+      "channelKey": "kk",
+      "channelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "channelHandle": "LunaCardsKazakh",
+      "channelSupportLangs": [
+        "KK"
+      ],
+      "targetLang": "ML",
+      "targetName": "Малаялам тілі",
+      "targetLabel": "Малаялам тілі A1",
+      "title": "Сандар",
+      "description": "Санау және рет. Базалық деңгей.",
+      "descriptionLayout": "wrapped-safe-area-v1",
+      "measureHeadings": true,
+      "module": "Негіздер",
+      "category": "Сандар",
+      "baseImage": "assets/youtube-cover-templates/deck16-numbers-counting-base-v2.png",
+      "visualTemplate": "ordinary-target-language-first-large-headline-v1-deck16-numbers-counting-base",
+      "showModule": true,
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/ML__item/youtube_thumbnail.jpg",
+      "sidecarPath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/ML__item/video.json",
+      "measuredTitleFontSize": 48,
+      "measuredTargetFontSize": 44,
+      "path": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/ML__item/youtube_thumbnail.jpg",
+      "renderer": "reused-checksummed-approved-cover",
+      "dimensions": "1280x720",
+      "sizeBytes": 439511,
+      "sha256": "891f311dd01aeb29f687f26d20ef588309f198504011493c8a8772669f6a062b",
+      "youtubeVideoId": "ruDihvlIsNM",
+      "expectedYoutubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "missingThumbnailEvidence": {
+        "sourceParentRunId": 43824679198,
+        "sourceCampaignId": "yt-core_numbers_counting_a1-2026-11-16-f76fd9b21695",
+        "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KK|ML",
+        "finalizedAt": "2026-11-16T08:19:45.265Z",
+        "reason": "thumbnails.set HTTP429 uploadRateLimitExceeded"
+      }
+    },
+    {
+      "videoType": "polyglot",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KK",
+      "viewerSupportLang": "KK",
+      "channelKey": "kk",
+      "channelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "channelHandle": "LunaCardsKazakh",
+      "channelSupportLangs": [
+        "KK"
+      ],
+      "bundleKey": "slavic_core",
+      "bundleLabel": "Slavic Core",
+      "contentScope": "full",
+      "targetLangs": [
+        "RU",
+        "PL",
+        "CS",
+        "SK"
+      ],
+      "targetLangsCsv": "RU,PL,CS,SK",
+      "targetLangsHash": "93d499d62441",
+      "targetLanguageLines": [
+        "Орыс · Поляк тілі",
+        "Чех тілі · Словак тілі"
+      ],
+      "polyglotKey": "polyglot:core_numbers_counting_a1:KK:slavic_core:93d499d62441",
+      "title": "Сандар",
+      "description": "Санау және рет. Базалық деңгей.",
+      "descriptionLayout": "wrapped-safe-area-v1",
+      "measureHeadings": true,
+      "module": "Негіздер",
+      "category": "Сандар",
+      "baseImage": "assets/youtube-cover-templates/deck16-numbers-counting-base-v2.png",
+      "visualTemplate": "polyglot-target-languages-large-lines-v1-deck16-numbers-counting-base",
+      "uploadEligible": true,
+      "relativePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__slavic_core__93d499d62441__full.jpg",
+      "sidecarPath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__slavic_core__93d499d62441__full.json",
+      "measuredTitleFontSize": 48,
+      "measuredTargetLineSizes": [
+        38,
+        32
+      ],
+      "path": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__slavic_core__93d499d62441__full.jpg",
+      "renderer": "reused-checksummed-approved-cover",
+      "dimensions": "1280x720",
+      "sizeBytes": 439257,
+      "sha256": "4c365d17f80d6607c560de0ab021968959a72dc23023fcf09ba72401bd30400a",
+      "youtubeVideoId": "3ZvS7f_AHzM",
+      "expectedYoutubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "missingThumbnailEvidence": {
+        "sourceParentRunId": 43824679198,
+        "sourceCampaignId": "yt-core_numbers_counting_a1-2026-11-16-f76fd9b21695",
+        "sourceAssignmentKey": "polyglot|core_numbers_counting_a1|KK|slavic_core|93d499d62441|full",
+        "finalizedAt": "2026-11-16T08:19:45.265Z",
+        "reason": "thumbnails.set HTTP429 uploadRateLimitExceeded"
+      }
+    }
+  ]
+}
