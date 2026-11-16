@@ -6,6 +6,12 @@ const registry = { manifests: [row, { ...row, setId: 'deck13', path: 'data/youtu
 assert.deepEqual(workerCheckoutPatterns({ registry, setId: 'deck14', support: 'VI' }), ['/data/decks/deck14.json', '/data/youtube-cover-assets/deck14/']);
 assert.deepEqual(workerCheckoutPatterns({ registry, setId: 'deck14', support: 'vi' }), ['/data/decks/deck14.json', '/data/youtube-cover-assets/deck14/']);
 assert.deepEqual(workerCheckoutPatterns({ registry, setId: 'deck14', support: 'ML' }), ['/data/decks/deck14.json']);
+const multi = { status: 'approved', setIds: ['deck13', 'deck14'], supports: ['AZ', 'KK'], path: 'data/youtube-cover-assets/az-kk/manifest.json' };
+const combined = { manifests: [...registry.manifests, multi, { ...multi, status: 'draft', path: 'data/youtube-cover-assets/draft-multi/manifest.json' }] };
+for (const support of ['AZ','KK','az']) assert.deepEqual(workerCheckoutPatterns({ registry: combined, setId: 'deck14', support }), ['/data/decks/deck14.json','/data/youtube-cover-assets/az-kk/']);
+assert.deepEqual(workerCheckoutPatterns({ registry: combined, setId: 'deck15', support: 'AZ' }), ['/data/decks/deck15.json']);
+assert.deepEqual(workerCheckoutPatterns({ registry: combined, setId: 'deck14', support: 'MY' }), ['/data/decks/deck14.json']);
+assert.deepEqual(workerCheckoutPatterns({ registry: combined, setId: 'deck14', support: 'VI' }), workerCheckoutPatterns({ registry, setId: 'deck14', support: 'VI' }));
 for (const bad of ['../deck', 'ALL', 'deck*']) assert.throws(() => workerCheckoutPatterns({ registry, setId: bad, support: 'VI' }));
 for (const bad of ['ALL', 'VI,TH', '../VI']) assert.throws(() => workerCheckoutPatterns({ registry, setId: 'deck14', support: bad }));
 for (const bad of ['/tmp/manifest.json', 'data/youtube-cover-assets/../secrets/manifest.json', 'data/youtube-cover-assets/*/manifest.json', 'config/manifest.json']) assert.throws(() => workerCheckoutPatterns({ registry: { manifests: [{ ...row, path: bad }] }, setId: 'deck14', support: 'VI' }));
@@ -26,10 +32,11 @@ console.log('PASS exact deck/support assets; unrelated/draft excluded; unsafe pa
 // files are removed by this fixture, and the directory is retained for review.
 const { execFileSync } = await import('node:child_process');
 const path = await import('node:path');
+fs.mkdirSync(path.resolve('scratch'), { recursive: true });
 const fixture = fs.mkdtempSync(path.resolve('scratch/worker-sparse-fixture-'));
 const git = (args, input) => execFileSync('git', args, { cwd: fixture, input, encoding: 'utf8' }).trim();
 git(['init', '--initial-branch=main']);
-const records = { 'package.json': '{}', 'data/decks/deck14.json': '{}', 'data/decks/deck13.json': '{}', 'data/youtube-cover-assets/deck14/manifest.json': '{}', 'data/youtube-cover-assets/deck14/video.jpg': 'approved-image', 'data/youtube-cover-assets/deck13/manifest.json': '{}', 'data/youtube-cover-assets/deck13/video.jpg': 'unrelated-image', 'data/youtube-playlist-covers/other.jpg': 'unrelated-playlist' };
+const records = { 'package.json': '{}', 'data/decks/deck14.json': '{}', 'data/decks/deck13.json': '{}', 'data/youtube-cover-assets/deck14/manifest.json': '{}', 'data/youtube-cover-assets/deck14/video.jpg': 'approved-image', 'data/youtube-cover-assets/deck13/manifest.json': '{}', 'data/youtube-cover-assets/deck13/video.jpg': 'unrelated-image', 'data/youtube-playlist-covers/other.jpg': 'unrelated-playlist', 'data/youtube-cover-assets/az-kk/manifest.json': '{}', 'data/youtube-cover-assets/az-kk/video.jpg': 'approved-multi-set-image', 'data/youtube-cover-assets/draft-multi/manifest.json': '{}' };
 for (const [file, bytes] of Object.entries(records)) {
  const blob = git(['hash-object', '-w', '--stdin'], bytes);
  git(['update-index','--add','--cacheinfo','100644',blob,file]);
@@ -44,3 +51,9 @@ for (const f of ['data/decks/deck13.json','data/youtube-cover-assets/deck13/vide
 assert.equal(git(['ls-files','--error-unmatch','data/youtube-cover-assets/deck14/video.jpg']), 'data/youtube-cover-assets/deck14/video.jpg');
 assert.equal(fs.readFileSync(path.join(fixture,'data/youtube-cover-assets/deck14/video.jpg'),'utf8'), 'approved-image');
 console.log('PASS real Git sparse hydration, approved bytes unchanged/tracked, other decks absent');
+assert(!fs.existsSync(path.join(fixture,'data/youtube-cover-assets/az-kk/video.jpg')));
+git(['sparse-checkout','add','--stdin'], workerCheckoutPatterns({registry:combined,setId:'deck14',support:'AZ'}).join('\n')+'\n');
+assert.equal(fs.readFileSync(path.join(fixture,'data/youtube-cover-assets/az-kk/video.jpg'),'utf8'),'approved-multi-set-image');
+assert.equal(git(['ls-files','--error-unmatch','data/youtube-cover-assets/az-kk/video.jpg']),'data/youtube-cover-assets/az-kk/video.jpg');
+for (const f of ['data/decks/deck13.json','data/youtube-cover-assets/deck13/video.jpg','data/youtube-cover-assets/draft-multi/manifest.json']) assert(!fs.existsSync(path.join(fixture,f)),f+' must stay absent');
+console.log('PASS real multi-set sparse hydration; unsupported and draft packages remain absent');
