@@ -172255,8 +172255,8 @@
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded",
-      "publishAt": "2026-11-27T16:30:00.000Z",
-      "scheduledPublishAt": "2026-11-27T16:30:00.000Z",
+      "publishAt": "2026-11-27T16:30:00Z",
+      "scheduledPublishAt": "2026-11-27T16:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": true,
@@ -172272,11 +172272,11 @@
       "uploadedAt": "2026-11-16T08:16:14.312Z",
       "lastReadbackAt": "2026-11-16T08:16:14.312Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-11-27T16:30:00Z",
-        "thumbnailStatus": "custom_set"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     },
     {
       "videoType": "polyglot",
@@ -172310,8 +172310,8 @@
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
       "publicationStatus": "scheduled_uploaded_post_upload_partial",
-      "publishAt": "2026-11-29T09:30:00.000Z",
-      "scheduledPublishAt": "2026-11-29T09:30:00.000Z",
+      "publishAt": "2026-11-29T09:30:00Z",
+      "scheduledPublishAt": "2026-11-29T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
       "thumbnailSet": false,
@@ -172328,11 +172328,11 @@
       "uploadedAt": "2026-11-16T08:16:59.669Z",
       "lastReadbackAt": "2026-11-16T08:16:59.669Z",
       "readback": {
-        "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-11-29T09:30:00Z",
-        "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (429): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n    \"errors\": [\n      {\n        \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"uploadRateLimitExceeded\"\n      }\n    ]\n  }\n}\n"
-      }
+        "uploadStatus": "processed"
+      },
+      "liveReadbackPresent": true
     }
   ]
 }
