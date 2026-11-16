@@ -1852582,7 +1852582,7 @@
       "scheduledPublishAt": "2026-11-26T04:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "custom",
       "thumbnailSource": "pre-rendered-design-prototype",
@@ -1852594,13 +1852594,15 @@
       "githubRunId": "43870222065",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/43870222065",
       "uploadedAt": "2026-11-16T13:13:13.778Z",
-      "lastReadbackAt": "2026-11-16T13:13:13.778Z",
+      "lastReadbackAt": "2026-11-16T15:09:51.653Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-11-26T04:30:00Z",
         "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (429): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n    \"errors\": [\n      {\n        \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"uploadRateLimitExceeded\"\n      }\n    ]\n  }\n}\n"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-16T15:09:51.653Z",
+      "lastThumbnailReadbackAt": "2026-11-16T15:09:51.653Z"
     },
     {
       "setId": "core_numbers_counting_a1",
@@ -1852700,7 +1852702,7 @@
       "scheduledPublishAt": "2026-11-27T09:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "custom",
       "thumbnailSource": "pre-rendered-design-prototype",
@@ -1852712,13 +1852714,15 @@
       "githubRunId": "43870222065",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/43870222065",
       "uploadedAt": "2026-11-16T13:17:57.886Z",
-      "lastReadbackAt": "2026-11-16T13:17:57.886Z",
+      "lastReadbackAt": "2026-11-16T15:09:58.140Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-11-27T09:30:00Z",
         "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (429): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n    \"errors\": [\n      {\n        \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"uploadRateLimitExceeded\"\n      }\n    ]\n  }\n}\n"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-16T15:09:58.140Z",
+      "lastThumbnailReadbackAt": "2026-11-16T15:09:58.140Z"
     }
   ]
 }
