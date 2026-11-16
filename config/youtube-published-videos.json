@@ -1852196,7 +1852196,8 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-11-25T19:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
       "liveReadbackPresent": true,
       "youtubePlaylistId": "PLczrdz-Ngcqs",
@@ -1852207,7 +1852208,7 @@
       "playlist_key": "AZ__NE__ordinary-vocabulary__a1-everyday",
       "desiredPrivacyStatus": "public",
       "thumbnailUploadMode": "custom",
-      "thumbnailSource": "pre-rendered-design-prototype",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "githubRunId": "43824679198",
@@ -1852215,7 +1852216,16 @@
       "campaignId": "yt-core_numbers_counting_a1-2026-11-16-f76fd9b21695",
       "campaignManifestHash": "bb5fe298f9564207c5bb011e0107a78365bd43c23bb98a08c464e03a8fd97345",
       "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (429): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n    \"errors\": [\n      {\n        \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"uploadRateLimitExceeded\"\n      }\n    ]\n  }\n}\n",
-      "thumbnailSet": false
+      "thumbnailSet": true,
+      "thumbnailUploadedAt": "2026-11-16T12:29:59.525Z",
+      "lastThumbnailReadbackAt": "2026-11-16T12:29:59.525Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "workflowRunId": "43865834885",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/NE__Nepal/youtube_thumbnail.jpg",
+        "approvedImageSha256": "dbb7fa19ea1ef0b9e315f97eb0eb061a27eec8bc66fc8b52c324f5fe093eb1ea",
+        "responseItemCount": 1
+      }
     },
     {
       "setId": "core_numbers_counting_a1",
@@ -1852467,7 +1852477,8 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-11-27T03:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
       "liveReadbackPresent": true,
       "youtubePlaylistId": "PLTegLRWXh-HU",
@@ -1852478,7 +1852489,7 @@
       "playlist_key": "KK__ML__ordinary-vocabulary__a1-everyday",
       "desiredPrivacyStatus": "public",
       "thumbnailUploadMode": "custom",
-      "thumbnailSource": "pre-rendered-design-prototype",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "githubRunId": "43824679198",
@@ -1852486,7 +1852497,16 @@
       "campaignId": "yt-core_numbers_counting_a1-2026-11-16-f76fd9b21695",
       "campaignManifestHash": "bb5fe298f9564207c5bb011e0107a78365bd43c23bb98a08c464e03a8fd97345",
       "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (429): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n    \"errors\": [\n      {\n        \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"uploadRateLimitExceeded\"\n      }\n    ]\n  }\n}\n",
-      "thumbnailSet": false
+      "thumbnailSet": true,
+      "thumbnailUploadedAt": "2026-11-16T12:30:08.702Z",
+      "lastThumbnailReadbackAt": "2026-11-16T12:30:08.702Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "workflowRunId": "43865834885",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/ML__item/youtube_thumbnail.jpg",
+        "approvedImageSha256": "891f311dd01aeb29f687f26d20ef588309f198504011493c8a8772669f6a062b",
+        "responseItemCount": 1
+      }
     },
     {
       "setId": "core_numbers_counting_a1",
