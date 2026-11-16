@@ -10,7 +10,8 @@ export function workerCheckoutPatterns({ registry, setId, support }) {
   support = String(support || '').trim().replace(/_/g, '-').toUpperCase();
   assert(/^[A-Z]{2}(?:-[A-Z0-9]+)?$/.test(support), 'One canonical support is required');
   const selected = (registry.manifests || []).filter(m =>
-    m.status === (registry.policy?.activeStatus || 'approved') && m.setId === setId &&
+    m.status === (registry.policy?.activeStatus || 'approved') &&
+    [m.setId, ...(Array.isArray(m.setIds) ? m.setIds : [])].includes(setId) &&
     (!m.supports?.length || m.supports.includes(support)));
   const patterns = new Set([`/data/decks/${setId}.json`]);
   for (const m of selected) {
