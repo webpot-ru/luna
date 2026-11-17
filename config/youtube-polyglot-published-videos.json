@@ -172314,10 +172314,10 @@
       "scheduledPublishAt": "2026-11-29T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "custom",
-      "thumbnailSource": "pre-rendered-design-prototype",
+      "thumbnailSource": "custom",
       "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (429): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n    \"errors\": [\n      {\n        \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"uploadRateLimitExceeded\"\n      }\n    ]\n  }\n}\n",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
@@ -172330,9 +172330,19 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-11-29T09:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-16T15:10:06.946Z",
+      "lastThumbnailReadbackAt": "2026-11-16T15:10:06.946Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "workflowRunId": "43892010880",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "4c365d17f80d6607c560de0ab021968959a72dc23023fcf09ba72401bd30400a",
+        "responseItemCount": 1
+      }
     }
   ]
 }
