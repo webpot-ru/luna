@@ -1,0 +1,543 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-18T02:45:15.940Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "core_numbers_counting_a1",
+  "inputs": {
+    "supports": "KM",
+    "supportCount": 1,
+    "ordinarySupportCount": 1,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 6,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|core_numbers_counting_a1|KM|SI",
+      "ordinary|core_numbers_counting_a1|KM|SK",
+      "ordinary|core_numbers_counting_a1|KM|SL",
+      "ordinary|core_numbers_counting_a1|KM|SR",
+      "ordinary|core_numbers_counting_a1|KM|SV",
+      "ordinary|core_numbers_counting_a1|KM|SW"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-core_numbers_counting_a1-2026-11-18-c31c0829e7e9",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-core_numbers_counting_a1-2026-11-18-c31c0829e7e9",
+      "manifestHash": "e1e226cd0406576c46d1360f96d4b9b3ffff1c3c768e44f726296948573e8c49",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-3",
+        "generatedAt": "2026-11-18T02:39:18.830Z",
+        "ageMinutes": 5.951833333333333,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "66569c8b3e9ec2fc790414900876eb6c899bf614dc77b6b5d82ef304c958d5f0"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "71263d3b0e475f2b02683ba056a67ae423d8c931e941b6306c83c3b3b0c99a46"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "b5a6de1a49389a4fa23ea6c32b6cfc0972b750759f411da35807078444269977"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "7f2b3a14bff96182e838d54174382dbb703ea6864a1cf73b6ac9d0c63ce1a9b4"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "2377f4a918d60cc84ad95c3434b28ebfb95fe06100c5495f01411ccefea16ac0"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/core_numbers_counting_a1.json",
+        "exists": true,
+        "sha256": "e928fe3edc657dfa3d1acc8d066345bd4116dcbf5218379fe3e0086cf7063e27"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "eecdf9bb28c56d78999f728e8476eb091a8a492a11b99ebfdfc43bbbfaedd275"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 6,
+    "polyglotCount": 0,
+    "assignmentCount": 6,
+    "firstPublishAt": "2026-11-28T16:30:00.000Z",
+    "lastPublishAt": "2026-11-29T13:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 6,
+    "existingPlaylistCount": 6,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-3": 6
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 6,
+    "estimatedPlaylistItemInsertUnits": 300,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 300,
+    "byRoute": {
+      "youtube-3": {
+        "estimatedVideoUploadCalls": 6,
+        "estimatedGeneralQuotaUnitsMaximum": 300
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KM|SI",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KM|SI|km",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KM",
+      "targetLang": "SI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_km-KH-SreymomNeural",
+        "supportLang": "KM"
+      },
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-28T16:30:00.000Z",
+      "localDate": "2026-11-28",
+      "localTime": "23:30",
+      "timeZone": "Asia/Phnom_Penh",
+      "slotKey": "km|2026-11-28T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KM__SI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLbMq2h6QkIs4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ស្រីលង្កា A1: វាក្យសព្ទ និងការបញ្ចេញសំឡេង",
+        "description": "វីដេអូ FlashcardsLuna សម្រាប់អ្នកនិយាយភាសាខ្មែរ ដែលកំពុងរៀន ស្រីលង្កា: កាតពាក្យ ការបញ្ចេញសំឡេង ពេលសម្រាកសម្រាប់និយាយតាម និងតេស្តខ្លីៗ។",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T00:19:11.684Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KM|SI",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KM|SK",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KM|SK|km",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KM",
+      "targetLang": "SK",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_km-KH-SreymomNeural",
+        "supportLang": "KM"
+      },
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-29T01:30:00.000Z",
+      "localDate": "2026-11-29",
+      "localTime": "08:30",
+      "timeZone": "Asia/Phnom_Penh",
+      "slotKey": "km|2026-11-29T01:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "KM__SK__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLLjVzon_esOs",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ស្លូវ៉ាគី A1: វាក្យសព្ទ និងការបញ្ចេញសំឡេង",
+        "description": "វីដេអូ FlashcardsLuna សម្រាប់អ្នកនិយាយភាសាខ្មែរ ដែលកំពុងរៀន ស្លូវ៉ាគី: កាតពាក្យ ការបញ្ចេញសំឡេង ពេលសម្រាកសម្រាប់និយាយតាម និងតេស្តខ្លីៗ។",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T00:19:11.684Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KM|SK",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KM|SL",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KM|SL|km",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KM",
+      "targetLang": "SL",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_km-KH-SreymomNeural",
+        "supportLang": "KM"
+      },
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-29T04:30:00.000Z",
+      "localDate": "2026-11-29",
+      "localTime": "11:30",
+      "timeZone": "Asia/Phnom_Penh",
+      "slotKey": "km|2026-11-29T04:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "KM__SL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLL3rfkC1DNOg",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ស្លូវ៉ានី A1: វាក្យសព្ទ និងការបញ្ចេញសំឡេង",
+        "description": "វីដេអូ FlashcardsLuna សម្រាប់អ្នកនិយាយភាសាខ្មែរ ដែលកំពុងរៀន ស្លូវ៉ានី: កាតពាក្យ ការបញ្ចេញសំឡេង ពេលសម្រាកសម្រាប់និយាយតាម និងតេស្តខ្លីៗ។",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T00:19:11.684Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KM|SL",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KM|SR",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KM|SR|km",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KM",
+      "targetLang": "SR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_km-KH-SreymomNeural",
+        "supportLang": "KM"
+      },
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-29T07:30:00.000Z",
+      "localDate": "2026-11-29",
+      "localTime": "14:30",
+      "timeZone": "Asia/Phnom_Penh",
+      "slotKey": "km|2026-11-29T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "KM__SR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLUU3Ok_s1dyI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ស៊ែប A1: វាក្យសព្ទ និងការបញ្ចេញសំឡេង",
+        "description": "វីដេអូ FlashcardsLuna សម្រាប់អ្នកនិយាយភាសាខ្មែរ ដែលកំពុងរៀន ស៊ែប: កាតពាក្យ ការបញ្ចេញសំឡេង ពេលសម្រាកសម្រាប់និយាយតាម និងតេស្តខ្លីៗ។",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T00:19:11.684Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KM|SR",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KM|SV",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KM|SV|km",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KM",
+      "targetLang": "SV",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_km-KH-SreymomNeural",
+        "supportLang": "KM"
+      },
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-29T10:30:00.000Z",
+      "localDate": "2026-11-29",
+      "localTime": "17:30",
+      "timeZone": "Asia/Phnom_Penh",
+      "slotKey": "km|2026-11-29T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "KM__SV__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLbHkEjmhMNRk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ស៊ុយអែត A1: វាក្យសព្ទ និងការបញ្ចេញសំឡេង",
+        "description": "វីដេអូ FlashcardsLuna សម្រាប់អ្នកនិយាយភាសាខ្មែរ ដែលកំពុងរៀន ស៊ុយអែត: កាតពាក្យ ការបញ្ចេញសំឡេង ពេលសម្រាកសម្រាប់និយាយតាម និងតេស្តខ្លីៗ។",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T00:19:11.684Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KM|SV",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KM|SW",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KM|SW|km",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KM",
+      "targetLang": "SW",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_km-KH-SreymomNeural",
+        "supportLang": "KM"
+      },
+      "channelKey": "km",
+      "youtubeChannelId": "UCVPNmzYNdmbolICROM6CJag",
+      "routeKey": "youtube-3",
+      "youtubeEnvironment": "youtube-api-youtube-3",
+      "publishAt": "2026-11-29T13:30:00.000Z",
+      "localDate": "2026-11-29",
+      "localTime": "20:30",
+      "timeZone": "Asia/Phnom_Penh",
+      "slotKey": "km|2026-11-29T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "KM__SW__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLT1UA6eMyot8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ស្វាហ៊ីលី A1: វាក្យសព្ទ និងការបញ្ចេញសំឡេង",
+        "description": "វីដេអូ FlashcardsLuna សម្រាប់អ្នកនិយាយភាសាខ្មែរ ដែលកំពុងរៀន ស្វាហ៊ីលី: កាតពាក្យ ការបញ្ចេញសំឡេង ពេលសម្រាកសម្រាប់និយាយតាម និងតេស្តខ្លីៗ។",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T00:19:11.684Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-3",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-3",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KM|SW",
+      "localSlotIndex": 4
+    }
+  ],
+  "campaignId": "yt-core_numbers_counting_a1-2026-11-18-928587941d2e",
+  "manifestHash": "32e95e054dc44e4884523a45c6ef3c55d357deea022de95055500a1db1d5e265"
+}
