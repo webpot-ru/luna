@@ -1,0 +1,778 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-19T07:56:29.244Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "core_numbers_counting_a1",
+  "inputs": {
+    "supports": "AZ",
+    "supportCount": 1,
+    "ordinarySupportCount": 1,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 9,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|core_numbers_counting_a1|AZ|SW",
+      "ordinary|core_numbers_counting_a1|AZ|TA",
+      "ordinary|core_numbers_counting_a1|AZ|TE",
+      "ordinary|core_numbers_counting_a1|AZ|TH",
+      "ordinary|core_numbers_counting_a1|AZ|TL",
+      "ordinary|core_numbers_counting_a1|AZ|TR",
+      "ordinary|core_numbers_counting_a1|AZ|UZ",
+      "ordinary|core_numbers_counting_a1|AZ|VI",
+      "ordinary|core_numbers_counting_a1|AZ|ZH"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-core_numbers_counting_a1-2026-11-18-50b5462e0df0",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-core_numbers_counting_a1-2026-11-18-50b5462e0df0",
+      "manifestHash": "de7c9737b33d2a90c0b16b15ed2fb166dd23b2aa5ba1493e0373811aff9a5db0",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-4",
+        "generatedAt": "2026-11-19T07:51:18.951Z",
+        "ageMinutes": 5.17155,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "134d3aebd9ea3a6071efb960fb2e23abc146bdee6def45df062c0eb599ec31f9"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "37266ea371e6447e34ef6e948ac98b3c80d2ffca1eee37ebb79dae69d626caf1"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "67be8ee34c460be3ec137d7926c7444e98cd4b042c86237cef2457102b3676d9"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "7f2b3a14bff96182e838d54174382dbb703ea6864a1cf73b6ac9d0c63ce1a9b4"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "2377f4a918d60cc84ad95c3434b28ebfb95fe06100c5495f01411ccefea16ac0"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/core_numbers_counting_a1.json",
+        "exists": true,
+        "sha256": "e928fe3edc657dfa3d1acc8d066345bd4116dcbf5218379fe3e0086cf7063e27"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "6c747f4b1cd584a0b50fd64c57c41c46ff162bd4ae80c346e610473ba8c96810"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 9,
+    "polyglotCount": 0,
+    "assignmentCount": 9,
+    "firstPublishAt": "2026-11-28T07:30:00.000Z",
+    "lastPublishAt": "2026-11-29T13:30:00.000Z",
+    "customThumbnailCount": 9,
+    "automaticThumbnailCount": 0,
+    "existingPlaylistCount": 9,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-4": 9
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 9,
+    "estimatedPlaylistItemInsertUnits": 450,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 450,
+    "estimatedGeneralQuotaUnitsMaximum": 900,
+    "byRoute": {
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 9,
+        "estimatedGeneralQuotaUnitsMaximum": 900
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|AZ|SW",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|SW|az",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "AZ",
+      "targetLang": "SW",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_az-AZ-BanuNeural",
+        "supportLang": "AZ"
+      },
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-11-28T07:30:00.000Z",
+      "localDate": "2026-11-28",
+      "localTime": "11:30",
+      "timeZone": "Asia/Baku",
+      "slotKey": "az|2026-11-28T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/SW__Suahili/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/manifest.json",
+        "sha256": "794d153206a16e2b88859780b5740c7ac57ce7fe0b1af27ad9c6262123f046c8"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "AZ__SW__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLadfaFNXu1HA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Suahili A1: Everyday: söz",
+        "description": "Suahili dilini öyrənirik. Dərs mövzusu: FlashcardsLuna. Yerli natiqlərin tələffüzünü dinləyin və fasilələrdə sözləri təkrarlayın. Sonda sizi interaktiv mini-test gözləyir! Saytımızda dəstləri pulsuz məşq edin",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T04:37:07.160Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|SW",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|AZ|TA",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|TA|az",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "AZ",
+      "targetLang": "TA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_az-AZ-BanuNeural",
+        "supportLang": "AZ"
+      },
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-11-28T10:30:00.000Z",
+      "localDate": "2026-11-28",
+      "localTime": "14:30",
+      "timeZone": "Asia/Baku",
+      "slotKey": "az|2026-11-28T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/TA__Tamil/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/manifest.json",
+        "sha256": "c7df9783f01da33a7d263d41bd9c6249098469b1d4e836ffc048639b7195e0b6"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "AZ__TA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf52oKhUgxAg",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tamil A1: Everyday: söz",
+        "description": "Tamil dilini öyrənirik. Dərs mövzusu: FlashcardsLuna. Yerli natiqlərin tələffüzünü dinləyin və fasilələrdə sözləri təkrarlayın. Sonda sizi interaktiv mini-test gözləyir! Saytımızda dəstləri pulsuz məşq edin",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T04:37:07.160Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|TA",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|AZ|TE",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|TE|az",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "AZ",
+      "targetLang": "TE",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_az-AZ-BanuNeural",
+        "supportLang": "AZ"
+      },
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-11-28T13:30:00.000Z",
+      "localDate": "2026-11-28",
+      "localTime": "17:30",
+      "timeZone": "Asia/Baku",
+      "slotKey": "az|2026-11-28T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/TE__Teluqu/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/manifest.json",
+        "sha256": "697b0560e543101153de2756906c2cf418d37a6561c82cb0b66ce286cd958693"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "AZ__TE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLLHtLXhHgrI0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Teluqu A1: Everyday: söz",
+        "description": "Teluqu dilini öyrənirik. Dərs mövzusu: FlashcardsLuna. Yerli natiqlərin tələffüzünü dinləyin və fasilələrdə sözləri təkrarlayın. Sonda sizi interaktiv mini-test gözləyir! Saytımızda dəstləri pulsuz məşq edin",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T04:37:07.160Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|TE",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|AZ|TH",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|TH|az",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "AZ",
+      "targetLang": "TH",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_az-AZ-BanuNeural",
+        "supportLang": "AZ"
+      },
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-11-28T16:30:00.000Z",
+      "localDate": "2026-11-28",
+      "localTime": "20:30",
+      "timeZone": "Asia/Baku",
+      "slotKey": "az|2026-11-28T16:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/TH__Tay/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/manifest.json",
+        "sha256": "2122ee00ef801f237e208246794ec187fc136be9ee5319bae919a0d4b4418961"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "AZ__TH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBEQl0EPoOPc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tay A1: Everyday: söz",
+        "description": "Tay dilini öyrənirik. Dərs mövzusu: FlashcardsLuna. Yerli natiqlərin tələffüzünü dinləyin və fasilələrdə sözləri təkrarlayın. Sonda sizi interaktiv mini-test gözləyir! Saytımızda dəstləri pulsuz məşq edin",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T04:37:07.160Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|TH",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|AZ|TL",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|TL|az",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "AZ",
+      "targetLang": "TL",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_az-AZ-BanuNeural",
+        "supportLang": "AZ"
+      },
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-11-28T19:30:00.000Z",
+      "localDate": "2026-11-28",
+      "localTime": "23:30",
+      "timeZone": "Asia/Baku",
+      "slotKey": "az|2026-11-28T19:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/TL__Filippin/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/manifest.json",
+        "sha256": "b313c459ed8ff9bdfa622df8861ff10c54541b46c21f9548f1aefe0dc2193be3"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "AZ__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLKhn-kPmhrWQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Filippin A1: Everyday: söz",
+        "description": "Filippin dilini öyrənirik. Dərs mövzusu: FlashcardsLuna. Yerli natiqlərin tələffüzünü dinləyin və fasilələrdə sözləri təkrarlayın. Sonda sizi interaktiv mini-test gözləyir! Saytımızda dəstləri pulsuz məşq edin",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T04:37:07.160Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|TL",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|AZ|TR",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|TR|az",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "AZ",
+      "targetLang": "TR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_az-AZ-BanuNeural",
+        "supportLang": "AZ"
+      },
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-11-29T04:30:00.000Z",
+      "localDate": "2026-11-29",
+      "localTime": "08:30",
+      "timeZone": "Asia/Baku",
+      "slotKey": "az|2026-11-29T04:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/TR__T_rk/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/manifest.json",
+        "sha256": "87c18f605911f3c0909b97a55fc26b054c1776a9e4f4905cba6af4055fe462f9"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "AZ__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLem7gzWeKysU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Türk A1: Everyday: söz",
+        "description": "Türk dilini öyrənirik. Dərs mövzusu: FlashcardsLuna. Yerli natiqlərin tələffüzünü dinləyin və fasilələrdə sözləri təkrarlayın. Sonda sizi interaktiv mini-test gözləyir! Saytımızda dəstləri pulsuz məşq edin",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T04:37:07.160Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|TR",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|AZ|UZ",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|UZ|az",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "AZ",
+      "targetLang": "UZ",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_az-AZ-BanuNeural",
+        "supportLang": "AZ"
+      },
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-11-29T07:30:00.000Z",
+      "localDate": "2026-11-29",
+      "localTime": "11:30",
+      "timeZone": "Asia/Baku",
+      "slotKey": "az|2026-11-29T07:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/UZ__zb_k/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/manifest.json",
+        "sha256": "3cdadef4647cb28428ada11200aba2bdf9eefcee5e02fd51fcb6410e0d0956a3"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "AZ__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLUKNH4lW2Kz0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Özbək A1: Everyday: söz",
+        "description": "Özbək dilini öyrənirik. Dərs mövzusu: FlashcardsLuna. Yerli natiqlərin tələffüzünü dinləyin və fasilələrdə sözləri təkrarlayın. Sonda sizi interaktiv mini-test gözləyir! Saytımızda dəstləri pulsuz məşq edin",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T04:37:07.160Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|UZ",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|AZ|VI",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|VI|az",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "AZ",
+      "targetLang": "VI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_az-AZ-BanuNeural",
+        "supportLang": "AZ"
+      },
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-11-29T10:30:00.000Z",
+      "localDate": "2026-11-29",
+      "localTime": "14:30",
+      "timeZone": "Asia/Baku",
+      "slotKey": "az|2026-11-29T10:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/VI__Vyetnam/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/manifest.json",
+        "sha256": "1dbc8e8bd25fdc0f00efcfc377dcca8b578cb24641452a0d9dbd8042487a57b0"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "AZ__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLfLn2SKpzkY0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Vyetnam A1: Everyday: söz",
+        "description": "Vyetnam dilini öyrənirik. Dərs mövzusu: FlashcardsLuna. Yerli natiqlərin tələffüzünü dinləyin və fasilələrdə sözləri təkrarlayın. Sonda sizi interaktiv mini-test gözləyir! Saytımızda dəstləri pulsuz məşq edin",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T04:37:07.160Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|VI",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|core_numbers_counting_a1|AZ|ZH",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|ZH|az",
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "AZ",
+      "targetLang": "ZH",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_az-AZ-BanuNeural",
+        "supportLang": "AZ"
+      },
+      "channelKey": "az",
+      "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-11-29T13:30:00.000Z",
+      "localDate": "2026-11-29",
+      "localTime": "17:30",
+      "timeZone": "Asia/Baku",
+      "slotKey": "az|2026-11-29T13:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/core_numbers_counting_a1/ordinary/by-channel/az__AZ__LunaCardsAzerbaycan/ZH__in/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/manifest.json",
+        "sha256": "da5c5951460c0d2c4fefe438dac0bbe1342e01123e74a65bcb76065e50a7d885"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "AZ__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PL7jzfVz1zRZkH-y8LLWo0c5hq9UPh3HC6",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Çin A1: Everyday: söz",
+        "description": "Çin dilini öyrənirik. Dərs mövzusu: FlashcardsLuna. Yerli natiqlərin tələffüzünü dinləyin və fasilələrdə sözləri təkrarlayın. Sonda sizi interaktiv mini-test gözləyir! Saytımızda dəstləri pulsuz məşq edin",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-18T04:37:07.160Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|AZ|ZH",
+      "localSlotIndex": 3
+    }
+  ],
+  "campaignId": "yt-core_numbers_counting_a1-2026-11-19-0840cae6ea47",
+  "manifestHash": "d5430d3748031c144574fbb206f8b449c2ca20cb1b55826c2479e1382729a866"
+}
