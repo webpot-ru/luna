@@ -9058,16 +9058,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-15T16:30:00Z",
       "scheduledPublishAt": "2026-07-15T16:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.4-2026-03-05",
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-653a61b587f9",
@@ -9079,9 +9078,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:37:43.394Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:37:43.394Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_cooking_actions_a1_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "9316cf40431750d9a64b0ea769e15de377b3c859490b5eaf5e92857288085e48",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -9674,16 +9682,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-15T18:30:00Z",
       "scheduledPublishAt": "2026-07-15T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.4-2026-03-05",
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-14-653a61b587f9",
@@ -9695,9 +9702,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:47:59.784Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:47:59.784Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_cooking_actions_a1_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "3c738840d637d0f0bd321940a419d8e05865162ae0cbaad0bc3a187c8d875b56",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -11263,16 +11279,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-17T13:30:00Z",
       "scheduledPublishAt": "2026-07-17T13:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.4-2026-03-05",
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-16-807bb9dd1825",
@@ -11284,10 +11299,10 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
       "schemaVersion": 1,
-      "needsThumbnailPermission": false,
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-07-17T08:40:10.968Z",
       "liveReadbackPresent": true,
@@ -11295,7 +11310,15 @@
       "playlistInsertRepairStatus": "already_present_verified",
       "playlistInsertRepairGithubRunId": "29644968183",
       "playlistInsertRepairGithubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/29644968183",
-      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video."
+      "playlistInsertRepairNote": "Previous playlistItems.insert failure was repaired without reuploading the video.",
+      "thumbnailUploadedAt": "2026-11-19T11:37:51.155Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:37:51.155Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_cooking_actions_a1_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "328b8b5f3f8860756fbffbc1e00ba7df195244609973810ce9452f80fbd53b79",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -12738,16 +12761,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-17T12:30:00Z",
       "scheduledPublishAt": "2026-07-17T12:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.4-2026-03-05",
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-17-080c2f49ed8e",
@@ -12759,9 +12781,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:48:04.857Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:48:04.857Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_cooking_actions_a1_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "e95a5354873183e76c5d2d01306cbeb51a10e325fbd236236072534c223bc623",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -14932,16 +14963,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-19T16:30:00Z",
       "scheduledPublishAt": "2026-07-19T16:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.4-2026-03-05",
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
@@ -14953,9 +14983,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:37:59.923Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:37:59.923Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_cooking_actions_a1_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "10a70769c98f3a987f0d53dc90cd9358536e90cceeb7b04373646d5a581207c4",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -16050,16 +16089,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-19T15:30:00Z",
       "scheduledPublishAt": "2026-07-19T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.4-2026-03-05",
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-19-22abf6b3dbad",
@@ -16071,9 +16109,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:48:10.375Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:48:10.375Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_cooking_actions_a1_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "5b51d6065bf5e26243d68361539eeab49d3597ff67ccfd0839d1164efd2cf9b1",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -17792,16 +17839,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-20T16:30:00.000Z",
       "scheduledPublishAt": "2026-07-20T16:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.4-2026-03-05",
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
@@ -17814,7 +17860,15 @@
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-20T16:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "thumbnailStatus": "custom_set"
+      },
+      "thumbnailUploadedAt": "2026-11-19T11:38:05.156Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:38:05.156Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_cooking_actions_a1_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "241648d5f9c17c35a7a134305b7abe62468012a104087e48a7abcf8015d4183e",
+        "responseItemCount": 1
       }
     },
     {
@@ -18393,16 +18447,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-20T18:30:00.000Z",
       "scheduledPublishAt": "2026-07-20T18:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.4-2026-03-05",
       "campaignId": "yt-home_kitchen_cooking_actions_a1_a2-2026-07-20-59a58b479d32",
@@ -18415,7 +18468,15 @@
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-07-20T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "thumbnailStatus": "custom_set"
+      },
+      "thumbnailUploadedAt": "2026-11-19T11:48:15.769Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:48:15.769Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_cooking_actions_a1_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "e3e804b168dc815b3feeef553148dad02fe47603f666d975fa1e3d00337a5ebb",
+        "responseItemCount": 1
       }
     },
     {
@@ -22968,16 +23029,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-26T07:30:00.000Z",
       "scheduledPublishAt": "2026-07-26T07:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-13f9042f5330",
@@ -22989,9 +23049,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:38:14.112Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:38:14.112Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "7ef2ab9a6232b4054a9577924fc917fc2c8cb60cbeab00c3af9cdeb5ac5a01d5",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -23640,16 +23709,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-26T09:30:00Z",
       "scheduledPublishAt": "2026-07-26T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-13f9042f5330",
@@ -23661,9 +23729,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:48:23.850Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:48:23.850Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "a28b9624d136ce7c6dc451d2e34e891342ac5a0af208fb59d98dee5d18ccccfd",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -24031,16 +24108,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-27T07:30:00.000Z",
       "scheduledPublishAt": "2026-07-27T07:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-c433360db106",
@@ -24052,9 +24128,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:38:19.783Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:38:19.783Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "bdd7ce44533d5ad86aba06392086f8ea1f5ea2b20ec3abc450e255a363cfe038",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -25075,16 +25160,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-27T09:30:00.000Z",
       "scheduledPublishAt": "2026-07-27T09:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-26-c433360db106",
@@ -25096,9 +25180,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:48:32.111Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:48:32.111Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "e222719dfa5409289660a43f170974779fba279a14b8dd1984fbab48416ac5ae",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -26786,16 +26879,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-29T13:30:00Z",
       "scheduledPublishAt": "2026-07-29T13:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-27-1cbcda58a1fb",
@@ -26807,9 +26899,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:38:25.087Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:38:25.087Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "d80c019cd9653cdbac07c7873f8c14d0e3bb4f01ba9dc79e1def37ba66e82f11",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -27734,16 +27835,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-29T12:30:00Z",
       "scheduledPublishAt": "2026-07-29T12:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-27-1cbcda58a1fb",
@@ -27755,9 +27855,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:48:38.069Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:48:38.069Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "791e71120c429a371acf90bf633af79e6f1701c20ba01f6c16cc3b7284d932d1",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -28511,16 +28620,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-07-31T16:30:00Z",
       "scheduledPublishAt": "2026-07-31T16:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-31-9b914ee3c5ec",
@@ -28532,9 +28640,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:38:34.394Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:38:34.394Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "7a27da271a0317376e0a508fc9c909a426b4533258e15c17aaeda8ad9875b0e1",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -29571,16 +29688,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-02T15:30:00Z",
       "scheduledPublishAt": "2026-08-02T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "campaignId": "yt-home_kitchen_storage_cleaning_a2-2026-07-31-9b914ee3c5ec",
@@ -29592,9 +29708,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-08-02T15:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:48:44.249Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:48:44.249Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_storage_cleaning_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "1bd166cd1adb11c3ff92d6183388473253f0906ac5d11ce2ad9e5299a2f39c69",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -31462,16 +31587,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-05T04:30:00.000Z",
       "scheduledPublishAt": "2026-08-05T04:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "campaignId": "yt-home_kitchen_small_tools_supplies_a2-2026-08-03-962cf19176ea",
@@ -31483,9 +31607,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:38:42.212Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:38:42.212Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_small_tools_supplies_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "6746d858f96cae197f13239ca7f3c4b2e8284f5fc4e5a96b560c66172d57dfd0",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -32522,16 +32655,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-04T18:30:00.000Z",
       "scheduledPublishAt": "2026-08-04T18:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "campaignId": "yt-home_kitchen_small_tools_supplies_a2-2026-08-03-962cf19176ea",
@@ -32543,9 +32675,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:48:54.849Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:48:54.849Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_small_tools_supplies_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "7b39bfa6bbee92ba746666369e498672732a2a5acda4dfc83f299b467bacd2c9",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -34301,16 +34442,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-10T07:30:00Z",
       "scheduledPublishAt": "2026-08-10T07:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_kitchen_small_tools_supplies_a2-2026-08-08-266db214c4e6",
@@ -34322,9 +34462,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:38:48.307Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:38:48.307Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_small_tools_supplies_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "d24e4e6b16ccd8e4ad81c520e7cf6fa60668bd1ce1f0fc17adf221709c50cd9b",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -36871,16 +37020,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-12T04:30:00Z",
       "scheduledPublishAt": "2026-08-12T04:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_kitchen_small_tools_supplies_a2-2026-08-11-5b62a6a154f4",
@@ -36892,9 +37040,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:38:54.597Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:38:54.597Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_small_tools_supplies_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "eaa1fb8e2602b32dee8fdc55c0f757813d08005610cfcde8245ca87afc8d4d26",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -37987,16 +38144,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-12T15:30:00Z",
       "scheduledPublishAt": "2026-08-12T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_kitchen_small_tools_supplies_a2-2026-08-11-5b62a6a154f4",
@@ -38008,9 +38164,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-08-12T15:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:49:03.200Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:49:03.200Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_small_tools_supplies_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "27d233b4c8b06afddd8da4eafafb0f6e979288e9faf7b4d8143ed17d25265ee8",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -39711,16 +39876,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-13T16:30:00Z",
       "scheduledPublishAt": "2026-08-13T16:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "campaignId": "yt-home_kitchen_small_tools_supplies_a2-2026-08-12-abf8a7edfd9e",
@@ -39732,9 +39896,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-08-13T16:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:38:59.458Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:38:59.458Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_small_tools_supplies_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "a373ed183c3a562ab626c2e20f8ee55aa8cd2791985af2661274e32b37880757",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -40605,16 +40778,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-14T12:30:00Z",
       "scheduledPublishAt": "2026-08-14T12:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "campaignId": "yt-home_kitchen_small_tools_supplies_a2-2026-08-12-abf8a7edfd9e",
@@ -40626,9 +40798,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-08-14T12:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:49:11.542Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:49:11.542Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_kitchen_small_tools_supplies_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "005bdf3a9ad83e6937241121797b17e5510f3e22ff31ee62636b30df0f1b10ef",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -42497,16 +42678,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-17T16:30:00Z",
       "scheduledPublishAt": "2026-08-17T16:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "campaignId": "yt-home_bathroom_essentials_a1-2026-08-16-22df94331a5f",
@@ -42518,9 +42698,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:39:04.891Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:39:04.891Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_bathroom_essentials_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "3d77edc8e3dfdbc6be7af8e307c97cfc128f207dcae264a730f931cfe9af554b",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -43613,16 +43802,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-17T15:30:00Z",
       "scheduledPublishAt": "2026-08-17T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-terra",
       "campaignId": "yt-home_bathroom_essentials_a1-2026-08-16-22df94331a5f",
@@ -43634,9 +43822,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:49:17.342Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:49:17.342Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_bathroom_essentials_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "1df7bb47ea00f1f9d1067fb876af130d41477479a374f8b5867581aefe64a847",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -45225,16 +45422,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-19T10:30:00Z",
       "scheduledPublishAt": "2026-08-19T10:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_bathroom_essentials_a1-2026-08-16-c4c92732cef4",
@@ -45246,9 +45442,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:39:09.948Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:39:09.948Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_bathroom_essentials_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "75d8866983a82fa8531c2ce40e30546bf9abf41319575dbf4decddabc56b18e4",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -46229,16 +46434,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-19T09:30:00Z",
       "scheduledPublishAt": "2026-08-19T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_bathroom_essentials_a1-2026-08-16-c4c92732cef4",
@@ -46250,9 +46454,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:49:25.693Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:49:25.693Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_bathroom_essentials_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "75d235587568e9f451aee8b8bedc7329d814f862f2396e9910fbff3bd9525c39",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -47952,16 +48165,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-21T04:30:00Z",
       "scheduledPublishAt": "2026-08-21T04:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_bathroom_essentials_a1-2026-08-17-630098eb982d",
@@ -47973,9 +48185,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-08-21T04:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:39:14.792Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:39:14.792Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_bathroom_essentials_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "ff4c90bc4a379d8f8bff3d09d9b49c802c52a1525141c9ed5e14275044acc262",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -49048,16 +49269,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-21T03:30:00Z",
       "scheduledPublishAt": "2026-08-21T03:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_bathroom_essentials_a1-2026-08-17-630098eb982d",
@@ -49069,9 +49289,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-08-21T03:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:49:33.465Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:49:33.465Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_bathroom_essentials_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "ecae9f0184623bb6291d6ca73827ee78ccbb98c10953787a567a4ce40db40159",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -50744,16 +50973,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-22T16:30:00Z",
       "scheduledPublishAt": "2026-08-22T16:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_bathroom_essentials_a1-2026-08-18-3053201b4f8d",
@@ -50765,9 +50993,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-08-22T16:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:39:19.633Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:39:19.633Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_bathroom_essentials_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "9c2d99d4caf96a0c0d7fbeb5b13f06ba1f12c47e543153fbc8349a7fc704392c",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -51860,16 +52097,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-22T15:30:00Z",
       "scheduledPublishAt": "2026-08-22T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_bathroom_essentials_a1-2026-08-18-3053201b4f8d",
@@ -51881,9 +52117,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-08-22T15:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:49:40.155Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:49:40.155Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_bathroom_essentials_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "2f83485a174009d62570e4f02c71f5494266dbe3a6e62273faef79c68057362b",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -53694,16 +53939,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-26T04:30:00Z",
       "scheduledPublishAt": "2026-08-26T04:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_bedroom_basics_a1-2026-08-24-ec8d63e33ef4",
@@ -53715,9 +53959,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-08-26T04:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:39:27.788Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:39:27.788Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_bedroom_basics_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "5bbdabab44eed1a891a3414cb08d0ce5dbc8f4c84c9ef1fbd6d94209454b5624",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -54810,16 +55063,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-26T03:30:00Z",
       "scheduledPublishAt": "2026-08-26T03:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_bedroom_basics_a1-2026-08-24-ec8d63e33ef4",
@@ -54831,9 +55083,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-08-26T03:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:49:48.131Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:49:48.131Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_bedroom_basics_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "c238d7d261402317d6300f7ce19f997dcab1ea0c76a82941a05794818f66642c",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -56534,16 +56795,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-27T19:30:00.000Z",
       "scheduledPublishAt": "2026-08-27T19:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_bedroom_basics_a1-2026-08-25-6a37cbc4b34b",
@@ -56556,7 +56816,15 @@
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-08-27T19:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "thumbnailStatus": "custom_set"
+      },
+      "thumbnailUploadedAt": "2026-11-19T11:39:32.876Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:39:32.876Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_bedroom_basics_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "9118615a1d09ac6a3575400f8260c9e5e94a83e0fce38605e8a42dfba7b8ef35",
+        "responseItemCount": 1
       }
     },
     {
@@ -57650,16 +57918,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-27T18:30:00.000Z",
       "scheduledPublishAt": "2026-08-27T18:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_bedroom_basics_a1-2026-08-25-6a37cbc4b34b",
@@ -57672,7 +57939,15 @@
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-08-27T18:30:00Z",
-        "thumbnailStatus": "auto_first_frame"
+        "thumbnailStatus": "custom_set"
+      },
+      "thumbnailUploadedAt": "2026-11-19T11:49:56.139Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:49:56.139Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_bedroom_basics_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "a162d590fc94c6c2698d560440777a441ba45960e248918a7e52aa9553cdf640",
+        "responseItemCount": 1
       }
     },
     {
@@ -59374,16 +59649,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-29T13:30:00Z",
       "scheduledPublishAt": "2026-08-29T13:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_living_room_basics_a1-2026-08-26-401e270323ce",
@@ -59395,9 +59669,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:39:40.731Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:39:40.731Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_living_room_basics_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "e5a94f73af7de6244480c28b0f71d90ec61893b7025c0bdc44f80567db159768",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -60434,16 +60717,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-29T12:30:00Z",
       "scheduledPublishAt": "2026-08-29T12:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_living_room_basics_a1-2026-08-26-401e270323ce",
@@ -60455,9 +60737,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:50:04.336Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:50:04.336Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_living_room_basics_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "b0f5111e5d9b50b2fbadc739568f5f4acce2fe0b739a1debe7ca534d91796876",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -62214,16 +62505,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-31T07:30:00Z",
       "scheduledPublishAt": "2026-08-31T07:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_living_room_basics_a1-2026-08-27-db36e6795a5f",
@@ -62235,9 +62525,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:39:48.486Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:39:48.486Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_living_room_basics_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "0aa4ef4b1b6093df24413593dae47a90bb38df129f70ab5c506fbcabbfecf775",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -63330,16 +63629,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-08-31T06:30:00Z",
       "scheduledPublishAt": "2026-08-31T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_living_room_basics_a1-2026-08-27-db36e6795a5f",
@@ -63351,9 +63649,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:50:13.101Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:50:13.101Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_living_room_basics_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "a1da31ca81f2fe4c511613fc679a759c11fecb0c456ee7e4c8cea83515b1b78b",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -65053,16 +65360,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-01T19:30:00Z",
       "scheduledPublishAt": "2026-09-01T19:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_living_room_basics_a1-2026-08-28-7620e3262c87",
@@ -65074,9 +65380,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-09-01T19:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:39:53.270Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:39:53.270Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_living_room_basics_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "0fecc12af26f36a63ed8614cc20ad018259e39be206f976dcf05e5bc7533cbef",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -66094,16 +66409,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-01T18:30:00Z",
       "scheduledPublishAt": "2026-09-01T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_living_room_basics_a1-2026-08-28-7620e3262c87",
@@ -66115,9 +66429,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-09-01T18:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:50:25.447Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:50:25.447Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_living_room_basics_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "d78d642aead1ac2d762af6c42b7e2c701115b60b2638147874f16fbd79ef43f6",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -67843,16 +68166,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-03T13:30:00Z",
       "scheduledPublishAt": "2026-09-03T13:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_living_room_basics_a1-2026-08-29-74d606954141",
@@ -67864,9 +68186,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-09-03T13:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:39:58.285Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:39:58.285Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_living_room_basics_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "788b172d3e32673b383e14c5834535625f716fc16e1d8add61fa5083aa3c67ee",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -68959,16 +69290,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-03T12:30:00Z",
       "scheduledPublishAt": "2026-09-03T12:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_living_room_basics_a1-2026-08-29-74d606954141",
@@ -68980,9 +69310,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-09-03T12:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:50:37.224Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:50:37.224Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_living_room_basics_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "b91023eb528f6715aa65ee1338f9636c057c50321ebe16c69bc57eef24100666",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -70683,16 +71022,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-08T04:30:00Z",
       "scheduledPublishAt": "2026-09-08T04:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_dining_room_table_setup_a1_a2-2026-08-31-d9c226fe1372",
@@ -70704,9 +71042,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-09-08T04:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:40:06.161Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:40:06.161Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_dining_room_table_setup_a1_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "2ed75648dda174bd6720bbb3da5e487c48afc5453ed54b610950912dfb777469",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -71019,16 +71366,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-08T03:30:00Z",
       "scheduledPublishAt": "2026-09-08T03:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_dining_room_table_setup_a1_a2-2026-08-31-d9c226fe1372",
@@ -71040,9 +71386,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-09-08T03:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:50:43.515Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:50:43.515Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_dining_room_table_setup_a1_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "85161b783c26b1ee5d7f6fdd832c88f6639eb4e794e45d9679f3cdb01ac0250d",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -73523,16 +73878,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-09T16:30:00Z",
       "scheduledPublishAt": "2026-09-09T16:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_dining_room_table_setup_a1_a2-2026-09-03-03277aa2f923",
@@ -73544,9 +73898,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-09-09T16:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:40:14.096Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:40:14.096Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_dining_room_table_setup_a1_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "eb6014312f3a5987ea7fc926dff6cf6307937c7f41595e09766458f45f7f2a90",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -74639,16 +75002,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-09T15:30:00Z",
       "scheduledPublishAt": "2026-09-09T15:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_dining_room_table_setup_a1_a2-2026-09-03-03277aa2f923",
@@ -74660,9 +75022,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-09-09T15:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:50:51.528Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:50:51.528Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_dining_room_table_setup_a1_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "046b06290224d71b2f00d83fdd0b2d3a7cebc528fad46d5a29d73065f11abb3a",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -76362,16 +76733,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-11T10:30:00Z",
       "scheduledPublishAt": "2026-09-11T10:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_dining_room_table_setup_a1_a2-2026-09-04-cee61a8f48f1",
@@ -76383,9 +76753,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-09-11T10:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:40:21.973Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:40:21.973Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_dining_room_table_setup_a1_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "efc86e64540975bd31de2283b12282740b0f1d3568779984df57dedec671e861",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -77458,16 +77837,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-11T09:30:00Z",
       "scheduledPublishAt": "2026-09-11T09:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_dining_room_table_setup_a1_a2-2026-09-04-cee61a8f48f1",
@@ -77479,9 +77857,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-09-11T09:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:50:56.902Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:50:56.902Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_dining_room_table_setup_a1_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "d479a31b925a030b3cf44ab67515ebc5f0f1be8aceab9c4714731930febe3c3c",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -79155,16 +79542,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-13T04:30:00Z",
       "scheduledPublishAt": "2026-09-13T04:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_dining_room_table_setup_a1_a2-2026-09-05-fc72f3c550a9",
@@ -79176,9 +79562,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-09-13T04:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:40:29.677Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:40:29.677Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_dining_room_table_setup_a1_a2/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "ca9124a44668c3604003399f6c9f2978f8cbdf39f58461e66ba23a5a5aa36d96",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -80271,16 +80666,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-13T03:30:00Z",
       "scheduledPublishAt": "2026-09-13T03:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_dining_room_table_setup_a1_a2-2026-09-05-fc72f3c550a9",
@@ -80292,9 +80686,18 @@
       "readback": {
         "privacyStatus": "private",
         "publishAt": "2026-09-13T03:30:00Z",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:51:06.300Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:51:06.300Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_dining_room_table_setup_a1_a2/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__slavic_core__93d499d62441__full.jpg",
+        "approvedImageSha256": "adcb657f77bc69537a629098916ccdc776961dba50e195eee2821e17ec1f3725",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -81995,16 +82398,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-17T13:30:00Z",
       "scheduledPublishAt": "2026-09-17T13:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_entryway_outerwear_a1-2026-09-08-7f532e037ff6",
@@ -82016,9 +82418,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:40:35.556Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:40:35.556Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_entryway_outerwear_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "a3e2ee3e801145b07eee58e3e43f044c5b80f84faacbae0d8b8ff8d365286125",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -83055,16 +83466,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-17T12:30:00Z",
       "scheduledPublishAt": "2026-09-17T12:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_entryway_outerwear_a1-2026-09-08-7f532e037ff6",
@@ -83076,9 +83486,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:51:15.315Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:51:15.315Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_entryway_outerwear_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__global_europe_core__7a4233775927__full.jpg",
+        "approvedImageSha256": "72254ba9cf14d331e3cd6ad111ed9ae9cb071f581243f8342af0df6d75cd2ca2",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -86449,16 +86868,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-19T07:30:00Z",
       "scheduledPublishAt": "2026-09-19T07:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_entryway_outerwear_a1-2026-09-13-0b975add81f2",
@@ -86470,9 +86888,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:40:40.694Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:40:40.694Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_entryway_outerwear_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "e725e713391c69f80ec2b1495fa1716dbcf23ca79c795a55cc37425a3ad51710",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -86840,16 +87267,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-19T06:30:00Z",
       "scheduledPublishAt": "2026-09-19T06:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_entryway_outerwear_a1-2026-09-13-0b975add81f2",
@@ -86861,9 +87287,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:51:24.548Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:51:24.548Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_entryway_outerwear_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__romance_core__f34a59a474f1__full.jpg",
+        "approvedImageSha256": "a7ac89073388d7e2b77f41150a1d4d1fefce786dbcf7c23c48fb5bea7f35ee7a",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -87674,16 +88109,15 @@
       "youtubeChannelId": "UC9nlXd20M3EoVj5eaNhCXcA",
       "channelHandle": "@lunacardsazerbaycan",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-20T19:30:00Z",
       "scheduledPublishAt": "2026-09-20T19:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_entryway_outerwear_a1-2026-09-14-1a9e750f0478",
@@ -87695,9 +88129,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:40:45.978Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:40:45.978Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_entryway_outerwear_a1/polyglot/by-channel/az__AZ__LunaCardsAzerbaycan/AZ__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "4bd41728c739c79f5ebcfc1faac104a642414e0872594f7382dbc1fd5e00073b",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
@@ -88716,16 +89159,15 @@
       "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
       "channelHandle": "@lunacardskazakh",
       "privacyStatus": "public",
-      "publicationStatus": "scheduled_uploaded_thumbnail_auto",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-09-20T18:30:00Z",
       "scheduledPublishAt": "2026-09-20T18:30:00Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
-      "thumbnailUploadMode": "first_frame_auto",
-      "thumbnailSource": "youtube-auto-first-frame",
-      "thumbnailFallbackReason": "channel_custom_thumbnail_upload_not_available",
+      "thumbnailUploadMode": "custom",
+      "thumbnailSource": "custom",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-home_entryway_outerwear_a1-2026-09-14-1a9e750f0478",
@@ -88737,9 +89179,18 @@
       "readback": {
         "privacyStatus": "public",
         "publishAt": "",
-        "uploadStatus": "processed"
+        "uploadStatus": "processed",
+        "thumbnailStatus": "custom_set"
       },
-      "liveReadbackPresent": true
+      "liveReadbackPresent": true,
+      "thumbnailUploadedAt": "2026-11-19T11:51:30.497Z",
+      "lastThumbnailReadbackAt": "2026-11-19T11:51:30.497Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "approvedImagePath": "data/youtube-cover-assets/az-kk-all16-confirmed-20261115/video/by-set/home_entryway_outerwear_a1/polyglot/by-channel/kk__KK__LunaCardsKazakh/KK__east_asia_core__69af08ca98ea__full.jpg",
+        "approvedImageSha256": "bab0b5b78aa63e63397f8b37921aab17f63377942db59165c7667287bc676ee1",
+        "responseItemCount": 1
+      }
     },
     {
       "videoType": "polyglot",
