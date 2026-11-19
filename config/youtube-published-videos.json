@@ -1866822,7 +1866822,7 @@
       "scheduledPublishAt": "2026-11-29T12:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "custom",
       "thumbnailSource": "pre-rendered-design-prototype",
@@ -1866834,13 +1866834,15 @@
       "githubRunId": "44239547994",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/44239547994",
       "uploadedAt": "2026-11-18T05:06:08.597Z",
-      "lastReadbackAt": "2026-11-18T05:06:08.597Z",
+      "lastReadbackAt": "2026-11-19T07:35:40.602Z",
       "readback": {
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-11-29T12:30:00Z",
         "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (429): {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n    \"errors\": [\n      {\n        \"message\": \"The user has uploaded too many thumbnails recently. Please try the request again later.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"uploadRateLimitExceeded\"\n      }\n    ]\n  }\n}\n"
-      }
+      },
+      "thumbnailUploadedAt": "2026-11-19T07:35:40.602Z",
+      "lastThumbnailReadbackAt": "2026-11-19T07:35:40.602Z"
     }
   ]
 }
