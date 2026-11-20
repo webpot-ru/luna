@@ -185,10 +185,11 @@
       "notes": [
         "Existing FR channel public fields were already configured; public URL https://www.youtube.com/@LunaCardsFrancais returned HTTP 200 on 2026-06-21.",
         "Google Sheet row 8 status columns were updated on 2026-06-21 to remove stale public-link-fix marker; no Studio re-edit was needed.",
-        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio."
+        "YouTube API thumbnails.set returned domain=youtube.thumbnail / reason=forbidden; automation uses first-frame auto-thumbnail fallback until advanced features/custom thumbnails are enabled in Studio.",
+        "Owner confirmed the French channel now has access to custom thumbnails on 2026-11-20. The first approved existing-video batch validates YouTube acceptance."
       ],
-      "customThumbnailUploadAllowed": false,
-      "thumbnailFallbackMode": "first_frame_auto",
+      "customThumbnailUploadAllowed": true,
+      "thumbnailFallbackMode": "custom_when_available",
       "longVideoUploadAllowed": false
     },
     {
