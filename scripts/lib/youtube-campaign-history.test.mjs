@@ -14,6 +14,13 @@ const legacy = { schemaVersion: 1, sourceOfTruth: "unchanged", campaigns: [activ
 const write = (p, j) => fs.writeFileSync(p, `${JSON.stringify(j)}\n`);
 write(registryPath, legacy);
 assert.deepEqual(readYoutubeDurableJson(registryPath), legacy);
+const superseded = { campaignId: "superseded", status: "superseded_unlaunched_claim_consolidation", assignments: [{ status: "superseded_integrated_plan" }] };
+const inconsistent = { ...superseded, campaignId: "inconsistent", assignments: [{ status: "claimed" }] };
+write(registryPath, { ...legacy, campaigns: [...legacy.campaigns, superseded, inconsistent] });
+const terminalPlan = planYoutubeCampaignHistoryArchive(registryPath, { includeSuperseded: true });
+assert.deepEqual(JSON.parse(terminalPlan.historyText).campaigns, [done, superseded]);
+assert.deepEqual(terminalPlan.index.campaigns, [active, partial, inconsistent]);
+write(registryPath, legacy);
 const plan = planYoutubeCampaignHistoryArchive(registryPath);
 assert.equal(plan.reference.campaignCount, 1);
 assert.equal(plan.reference.sha256, crypto.createHash("sha256").update(plan.historyText).digest("hex"));

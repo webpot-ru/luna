@@ -512,7 +512,11 @@ then with `--apply --confirm=ARCHIVE_FINALIZED_YOUTUBE_CAMPAIGNS`. It moves only
 complete `finalized` campaign payloads into an immutable SHA-256-named JSON under
 `config/youtube-publication-campaign-history/`. No receipt, assignment, YouTube ID,
 campaign status or calendar reservation is removed or changed. Active and
-reconciliation-required campaigns remain inline. The root ledger keeps
+reconciliation-required campaigns remain inline. An explicitly approved storage
+migration may also use `--include-superseded` with
+`--confirm=ARCHIVE_TERMINAL_YOUTUBE_CAMPAIGNS`. It moves only the four recognized
+superseded campaign states whose every assignment has the matching superseded
+status. Both paths must round-trip the entire logical campaign list. The root ledger keeps
 `campaignArchives` (path, checksum and count) plus `campaignOrder` (all IDs in
 original order); every campaign consumer uses `readYoutubeDurableJson` to hydrate
 the complete logical registry, including historical recovery references.
@@ -664,6 +668,18 @@ Live control в этом режиме остаётся полным по все�
 Если fresh playlist discovery находит несколько public playlists с одной stable identity, выбор не делается по пустому ID или случайному порядку API. После явного пользовательского решения canonical ID сохраняется в `config/youtube-playlists.json`; discovery затем требует, чтобы именно этот ID принадлежал тому же channel. Для 13 исторических Deck #3 ordinary pairs `ET→KN`, `ET→LO`, `IS→KN`, `KA→HY/KK/KM/KN/LO`, `KK→HY`, `LO→KM`, `TL→HY/KK`, `UZ→HY` пользователь утвердил playlist с уже существующим видео Deck #2. Вторые legacy playlists не удаляются и видео между ними не перемещаются этой операцией.
 
 ## Safe publish sequence
+
+For an ordinary-only apply explicitly requiring the batch to stop at the first
+provider HTTP 429, set `stop_on_429=true` on the parent dispatch. One campaign
+still owns the complete manifest. Metadata routes, publish routes, channel
+workers, video rendering, and TTS prefetch are serialized in this mode. A 429
+from guarded fetch calls or the Edge TTS handshake exits before another provider
+request. In the upload step the failure goes through the existing error handler
+to preserve any already accepted video ID, and the finalizer can persist partial
+results. The evidence artifact records the HTTP status and provider host only,
+with a time stamp. The remaining jobs do not start after a worker failure. This
+mode requires the standard ordinary worker, with Polyglot and ready-media apply
+rejected in preflight; the normal parallel topology remains the default.
 
 Если source recovery содержит только ordinary-хвосты, integrated per-channel wave сохраняет новые Polyglot assignments базового плана на всех каналах. Она не требует старого Polyglot хвоста для каждого support; per-channel count и live product-slot collision gates остаются обязательными.
 

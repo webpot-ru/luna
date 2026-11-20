@@ -3,6 +3,7 @@ name: YouTube Campaign Route Publish
 on:
   workflow_call:
     inputs:
+      stop_on_429: { required: false, type: boolean, default: false }
       video_type: { required: false, type: string, default: "combined" }
       route_key: { required: true, type: string }
       campaign_id: { required: true, type: string }
@@ -73,8 +74,8 @@ jobs:
     if: ${{ (inputs.video_type == 'ordinary' || inputs.video_type == 'combined') && needs.prepare.outputs.ordinary_worker_count != '0' }}
     needs: prepare
     strategy:
-      fail-fast: false
-      max-parallel: 5
+      fail-fast: ${{ inputs.stop_on_429 }}
+      max-parallel: ${{ inputs.stop_on_429 && 1 || 5 }}
       matrix: ${{ fromJSON(needs.prepare.outputs.ordinary_worker_matrix) }}
     uses: ./.github/workflows/youtube-video-publish.yml
     with:
@@ -83,7 +84,8 @@ jobs:
       support: ${{ matrix.support }}
       youtube_environment: ${{ matrix.youtube_environment }}
       langs: ${{ matrix.langs }}
-      concurrency: "3"
+      concurrency: ${{ inputs.stop_on_429 && '1' || '3' }}
+      stop_on_429: ${{ inputs.stop_on_429 }}
       metadata_gemini_backend: api,vectorengine
       metadata_batch_size: "5"
       metadata_rate_limit_ms: "15000"

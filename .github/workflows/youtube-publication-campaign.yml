@@ -61,6 +61,11 @@ on:
         description: "Apply recovery only: one canonical support matching video_cache_resume_run_id."
         required: false
         default: ""
+      stop_on_429:
+        description: "Ordinary apply only. Process one channel at a time and stop the campaign at the first provider HTTP 429."
+        required: false
+        default: false
+        type: boolean
       confirm_campaign_apply:
         description: "Apply only: type APPLY_YOUTUBE_PUBLICATION_CAMPAIGN."
         required: false
@@ -166,6 +171,10 @@ jobs:
             echo "::error::apply requires campaign_id and campaign_manifest_hash"
             exit 1
           fi
+          if [ "${{ inputs.stop_on_429 }}" = "true" ] && [ -n "${{ inputs.ready_media_spec }}" ]; then
+            echo "::error::stop_on_429 requires the standard ordinary-video workflow."
+            exit 1
+          fi
           if [ -n "${{ inputs.metadata_resume_run_id }}" ] && ! [[ "${{ inputs.metadata_resume_run_id }}" =~ ^[0-9]+$ ]]; then
             echo "::error::metadata_resume_run_id must be an exact numeric GitHub run id"
             exit 1
@@ -195,6 +204,9 @@ jobs:
             --manifest-hash="${{ inputs.campaign_manifest_hash }}" \
             --github-output="$GITHUB_OUTPUT" \
             --output=outputs/youtube-publication-campaign-run-preflight.json
+          if [ "${{ inputs.stop_on_429 }}" = "true" ]; then
+            node -e 'const report = require("./outputs/youtube-publication-campaign-run-preflight.json"); if (!report.ordinaryMatrix.length || report.polyglotMatrix.length) throw new Error("stop_on_429 requires an ordinary-only campaign");'
+          fi
 
       - name: Gate optional ready-media reuse without provider calls
         if: ${{ inputs.ready_media_spec != '' || inputs.confirm_ready_media != '' }}
@@ -233,11 +245,11 @@ jobs:
     timeout-minutes: 180
     environment: ${{ matrix.youtube_environment }}
     strategy:
-      fail-fast: false
+      fail-fast: ${{ inputs.stop_on_429 }}
       # The shared 2M campaign budget is divided across routes. Four concurrent
       # route jobs keep Terra/Luna utilization bounded without serializing all
       # four active projects behind GitHub runner startup time.
-      max-parallel: 4
+      max-parallel: ${{ inputs.stop_on_429 && 1 || 4 }}
       matrix: ${{ fromJSON(needs.preflight.outputs.metadata_matrix) }}
     steps:
       - uses: actions/checkout@v4
@@ -337,6 +349,8 @@ jobs:
       - name: Generate route-batched campaign metadata before render/TTS
         shell: bash
         env:
+          NODE_OPTIONS: ${{ inputs.stop_on_429 && format('--import={0}/scripts/lib/youtube-stop-on-http-429.mjs', github.workspace) || '' }}
+          YOUTUBE_CAMPAIGN_HTTP429_MODE: ${{ inputs.stop_on_429 && 'stop' || '' }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_SERVICE_TIER: ${{ vars.OPENAI_SERVICE_TIER }}
           OPENAI_ROUTE_TOKEN_BUDGET: ${{ matrix.openai_token_budget }}
@@ -398,20 +412,29 @@ jobs:
           if-no-files-found: warn
           path: outputs/youtube-campaign-metadata/${{ matrix.route_key }}
 
+      - name: Preserve HTTP 429 stop evidence
+        if: ${{ failure() && inputs.stop_on_429 }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube-campaign-http429-${{ matrix.route_key }}
+          path: outputs/youtube-campaign-http429-stop.json
+          if-no-files-found: ignore
+
   routes:
     if: ${{ inputs.mode == 'apply' && inputs.ready_media_spec == '' && (needs.preflight.outputs.ordinary_worker_count != '0' || needs.preflight.outputs.polyglot_worker_count != '0') }}
     needs: [preflight, metadata]
     strategy:
-      fail-fast: false
+      fail-fast: ${{ inputs.stop_on_429 }}
       # Four active project queues run together. Within each route, up to five
       # ordinary channels run first; that route starts its own Polyglot queue as
       # soon as its ordinary queue finishes, without waiting for other routes.
-      max-parallel: 4
+      max-parallel: ${{ inputs.stop_on_429 && 1 || 4 }}
       matrix:
         route_key: [youtube-1, youtube-2, youtube-3, youtube-4]
     uses: ./.github/workflows/youtube-campaign-route-publish.yml
     with:
       video_type: combined
+      stop_on_429: ${{ inputs.stop_on_429 }}
       route_key: ${{ matrix.route_key }}
       campaign_id: ${{ inputs.campaign_id }}
       campaign_manifest_hash: ${{ inputs.campaign_manifest_hash }}

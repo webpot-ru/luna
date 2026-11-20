@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { campaignHttp429GuardEnabled, recordCampaignHttp429, stopIfCampaignHitHttp429 } from "./youtube-stop-on-http-429.mjs";
 import { edgeTtsRetryDelay } from "./edge-tts-backoff.mjs";
 import { appendAi33TaskLedger, readAi33TaskForCache } from "./ai33-task-ledger.mjs";
 import { execSync, execFileSync } from "node:child_process";
@@ -373,6 +374,7 @@ async function waitForAi33TaskAudio(taskId) {
 
 // Generate TTS Audio (Local Free Edge-TTS version!)
 export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
+  stopIfCampaignHitHttp429();
   if (!text || !text.trim()) return null;
   
   // Clean text to avoid Edge-TTS NoAudioReceived errors and formatting issues
@@ -495,6 +497,9 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
         try {
           if (fs.existsSync(temporaryPath)) fs.unlinkSync(temporaryPath);
         } catch (e) {}
+        if (campaignHttp429GuardEnabled && /HTTP status\s*=\s*429\b/i.test(String(err.stderr || ""))) {
+          recordCampaignHttp429("edge-tts");
+        }
         if (attempt < retryCount) {
           const waitMs = edgeTtsRetryDelay(formatExecError(err), attempt, retryBaseMs);
           console.warn(`[Local TTS] edge-tts failed for "${cleanedText.slice(0, 40)}..." using ${candidateCleanVoiceId} attempt ${attempt}/${retryCount}; retrying in ${waitMs}ms. ${formatExecError(err)}`);

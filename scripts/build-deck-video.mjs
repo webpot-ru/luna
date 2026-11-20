@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { campaignHttp429GuardEnabled } from "./lib/youtube-stop-on-http-429.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -295,8 +296,7 @@ async function main() {
   const uniqueTtsTasks = Array.from(uniqueTtsTasksMap.values());
   console.log(`Found ${uniqueTtsTasks.length} unique TTS audio clips to pre-fetch.`);
 
-  // Process unique tasks in batches of size 8
-  const CONCURRENCY_LIMIT = 8;
+  const CONCURRENCY_LIMIT = campaignHttp429GuardEnabled ? 1 : 8;
   for (let i = 0; i < uniqueTtsTasks.length; i += CONCURRENCY_LIMIT) {
     const batch = uniqueTtsTasks.slice(i, i + CONCURRENCY_LIMIT);
     await Promise.all(batch.map(async (task) => {

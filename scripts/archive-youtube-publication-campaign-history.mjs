@@ -6,8 +6,10 @@ import { planYoutubeCampaignHistoryArchive, readYoutubeDurableJson, serializeYou
 
 const apply = process.argv.includes("--apply");
 const registryPath = "config/youtube-publication-campaigns.json";
-if (apply) assert.ok(process.argv.includes("--confirm=ARCHIVE_FINALIZED_YOUTUBE_CAMPAIGNS"), "Explicit archive confirmation required");
-const plan = planYoutubeCampaignHistoryArchive(registryPath);
+const includeSuperseded = process.argv.includes("--include-superseded");
+const confirmation = includeSuperseded ? "ARCHIVE_TERMINAL_YOUTUBE_CAMPAIGNS" : "ARCHIVE_FINALIZED_YOUTUBE_CAMPAIGNS";
+if (apply) assert.ok(process.argv.includes(`--confirm=${confirmation}`), "Explicit archive confirmation required");
+const plan = planYoutubeCampaignHistoryArchive(registryPath, { includeSuperseded });
 const indexText = `${JSON.stringify(plan.index)}\n`;
 for (const text of [indexText, plan.historyText]) assert.ok(Buffer.byteLength(text) <= 95 * 1024 * 1024, "Archive/index exceeds safe blob budget");
 if (apply) {
