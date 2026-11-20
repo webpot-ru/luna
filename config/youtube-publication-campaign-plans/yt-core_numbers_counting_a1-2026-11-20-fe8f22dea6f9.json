@@ -1,0 +1,3339 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-20T13:16:11.865Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "core_numbers_counting_a1",
+  "inputs": {
+    "supports": "IT,KN,ML,TA,TE",
+    "supportCount": 5,
+    "ordinarySupportCount": 5,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 8,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|core_numbers_counting_a1|IT|TA",
+      "ordinary|core_numbers_counting_a1|IT|TE",
+      "ordinary|core_numbers_counting_a1|IT|TH",
+      "ordinary|core_numbers_counting_a1|IT|TL",
+      "ordinary|core_numbers_counting_a1|IT|TR",
+      "ordinary|core_numbers_counting_a1|IT|UZ",
+      "ordinary|core_numbers_counting_a1|IT|VI",
+      "ordinary|core_numbers_counting_a1|IT|ZH",
+      "ordinary|core_numbers_counting_a1|KN|TA",
+      "ordinary|core_numbers_counting_a1|KN|TE",
+      "ordinary|core_numbers_counting_a1|KN|TH",
+      "ordinary|core_numbers_counting_a1|KN|TL",
+      "ordinary|core_numbers_counting_a1|KN|TR",
+      "ordinary|core_numbers_counting_a1|KN|UZ",
+      "ordinary|core_numbers_counting_a1|KN|VI",
+      "ordinary|core_numbers_counting_a1|KN|ZH",
+      "ordinary|core_numbers_counting_a1|ML|TA",
+      "ordinary|core_numbers_counting_a1|ML|TE",
+      "ordinary|core_numbers_counting_a1|ML|TH",
+      "ordinary|core_numbers_counting_a1|ML|TL",
+      "ordinary|core_numbers_counting_a1|ML|TR",
+      "ordinary|core_numbers_counting_a1|ML|UZ",
+      "ordinary|core_numbers_counting_a1|ML|VI",
+      "ordinary|core_numbers_counting_a1|ML|ZH",
+      "ordinary|core_numbers_counting_a1|TA|SW",
+      "ordinary|core_numbers_counting_a1|TA|TE",
+      "ordinary|core_numbers_counting_a1|TA|TH",
+      "ordinary|core_numbers_counting_a1|TA|TL",
+      "ordinary|core_numbers_counting_a1|TA|TR",
+      "ordinary|core_numbers_counting_a1|TA|UZ",
+      "ordinary|core_numbers_counting_a1|TA|VI",
+      "ordinary|core_numbers_counting_a1|TA|ZH",
+      "ordinary|core_numbers_counting_a1|TE|SW",
+      "ordinary|core_numbers_counting_a1|TE|TA",
+      "ordinary|core_numbers_counting_a1|TE|TH",
+      "ordinary|core_numbers_counting_a1|TE|TL",
+      "ordinary|core_numbers_counting_a1|TE|TR",
+      "ordinary|core_numbers_counting_a1|TE|UZ",
+      "ordinary|core_numbers_counting_a1|TE|VI",
+      "ordinary|core_numbers_counting_a1|TE|ZH"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-core_numbers_counting_a1-2026-11-20-5e68cbdaa48d",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-core_numbers_counting_a1-2026-11-20-5e68cbdaa48d",
+      "manifestHash": "a63f5c68a19fea0cdd74c61e39052509157394865a76645dc4d7cf9f3f5daa09",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-4",
+        "generatedAt": "2026-11-20T13:05:28.753Z",
+        "ageMinutes": 10.718533333333333,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "/Users/lali/Documents/LUNA2/worktrees/deck13-publish-20261023/scratch/deck16-tail275-20261119/refresh-20261120/artifacts/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "bf0e6699d174ebe33fbee93cd68d3854006a1dd6d0e48ce69685e871b8b90978"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "205c30682d856c1db72f10447218096104f2d2b6653686712cb6c3608f5b4dff"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "d8c2fc633b9635c038cebbcd7e6b62f9d20de78205d0eaefbd4c5d16f1e0e091"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "7f2b3a14bff96182e838d54174382dbb703ea6864a1cf73b6ac9d0c63ce1a9b4"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "2377f4a918d60cc84ad95c3434b28ebfb95fe06100c5495f01411ccefea16ac0"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/core_numbers_counting_a1.json",
+        "exists": true,
+        "sha256": "e928fe3edc657dfa3d1acc8d066345bd4116dcbf5218379fe3e0086cf7063e27"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "/Users/lali/Documents/LUNA2/worktrees/deck13-publish-20261023/scratch/deck16-tail275-20261119/refresh-20261120/artifacts/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "1ee9fd6f409a819253979bf1584d97b3257d731f3531c2f14d8b0fd654007158"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 5,
+    "ordinaryCount": 40,
+    "polyglotCount": 0,
+    "assignmentCount": 40,
+    "firstPublishAt": "2026-11-29T18:00:00.000Z",
+    "lastPublishAt": "2026-12-01T07:30:00.000Z",
+    "customThumbnailCount": 0,
+    "automaticThumbnailCount": 40,
+    "existingPlaylistCount": 40,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-4": 40
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 40,
+    "estimatedPlaylistItemInsertUnits": 2000,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 0,
+    "estimatedGeneralQuotaUnitsMaximum": 2000,
+    "byRoute": {
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 40,
+        "estimatedGeneralQuotaUnitsMaximum": 2000
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "IT",
+      "targetLang": "TA",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_it-IT-IsabellaNeural",
+        "supportLang": "IT"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|IT|TA",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|IT|TA|it",
+      "publishAt": "2026-11-29T22:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-11-29",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "it|2026-11-29T22:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-30T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-02T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-06T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-29T22:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IT__TA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLJs74k25N8f0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Tamil A1: Everyday: parole",
+        "description": "Impariamo il Tamil. Argomento della lezione: FlashcardsLuna. Ascolta attentamente la pronuncia dei madrelingua e ripeti le parole durante le pause. Alla fine ti aspetta un mini-test interattivo! Esercitati gratis con i mazzi sul nostro sito",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|IT|TA",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "IT",
+      "targetLang": "TE",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_it-IT-IsabellaNeural",
+        "supportLang": "IT"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|IT|TE",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|IT|TE|it",
+      "publishAt": "2026-11-30T07:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-11-30",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "it|2026-11-30T07:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T07:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IT__TE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLCyGuktMWmew",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Telugu A1: Everyday: parole",
+        "description": "Impariamo il Telugu. Argomento della lezione: FlashcardsLuna. Ascolta attentamente la pronuncia dei madrelingua e ripeti le parole durante le pause. Alla fine ti aspetta un mini-test interattivo! Esercitati gratis con i mazzi sul nostro sito",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|IT|TE",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "IT",
+      "targetLang": "TH",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_it-IT-IsabellaNeural",
+        "supportLang": "IT"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|IT|TH",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|IT|TH|it",
+      "publishAt": "2026-11-30T10:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-11-30",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "it|2026-11-30T10:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T10:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T10:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IT__TH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLH1ZMlTtIsGE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Thailandese A1: Everyday: parole",
+        "description": "Impariamo il Thailandese. Argomento della lezione: FlashcardsLuna. Ascolta attentamente la pronuncia dei madrelingua e ripeti le parole durante le pause. Alla fine ti aspetta un mini-test interattivo! Esercitati gratis con i mazzi sul nostro sito",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|IT|TH",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "IT",
+      "targetLang": "TL",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_it-IT-IsabellaNeural",
+        "supportLang": "IT"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|IT|TL",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|IT|TL|it",
+      "publishAt": "2026-11-30T13:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-11-30",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "it|2026-11-30T13:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T13:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T13:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "IT__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBUZ66VO9UbY",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Filippino A1: Everyday: parole",
+        "description": "Impariamo il Filippino. Argomento della lezione: FlashcardsLuna. Ascolta attentamente la pronuncia dei madrelingua e ripeti le parole durante le pause. Alla fine ti aspetta un mini-test interattivo! Esercitati gratis con i mazzi sul nostro sito",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|IT|TL",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "IT",
+      "targetLang": "TR",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_it-IT-IsabellaNeural",
+        "supportLang": "IT"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|IT|TR",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|IT|TR|it",
+      "publishAt": "2026-11-30T16:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-11-30",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "it|2026-11-30T16:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T16:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T16:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "IT__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLYexkALtClNU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Turco A1: Everyday: parole",
+        "description": "Impariamo il Turco. Argomento della lezione: FlashcardsLuna. Ascolta attentamente la pronuncia dei madrelingua e ripeti le parole durante le pause. Alla fine ti aspetta un mini-test interattivo! Esercitati gratis con i mazzi sul nostro sito",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|IT|TR",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "IT",
+      "targetLang": "UZ",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_it-IT-IsabellaNeural",
+        "supportLang": "IT"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|IT|UZ",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|IT|UZ|it",
+      "publishAt": "2026-11-30T19:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-11-30",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "it|2026-11-30T19:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T19:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T19:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "IT__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLZWWM6KJvwH0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Uzbeco A1: Everyday: parole",
+        "description": "Impariamo il Uzbeco. Argomento della lezione: FlashcardsLuna. Ascolta attentamente la pronuncia dei madrelingua e ripeti le parole durante le pause. Alla fine ti aspetta un mini-test interattivo! Esercitati gratis con i mazzi sul nostro sito",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|IT|UZ",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "IT",
+      "targetLang": "VI",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_it-IT-IsabellaNeural",
+        "supportLang": "IT"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|IT|VI",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|IT|VI|it",
+      "publishAt": "2026-11-30T22:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-11-30",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "it|2026-11-30T22:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T22:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T22:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "IT__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLFYIpO1_MAso",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Vietnamita A1: Everyday: parole",
+        "description": "Impariamo il Vietnamita. Argomento della lezione: FlashcardsLuna. Ascolta attentamente la pronuncia dei madrelingua e ripeti le parole durante le pause. Alla fine ti aspetta un mini-test interattivo! Esercitati gratis con i mazzi sul nostro sito",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|IT|VI",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "IT",
+      "targetLang": "ZH",
+      "channelKey": "it",
+      "youtubeChannelId": "UCOFZxCVdm4FqhFgMvKsAlOw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_it-IT-IsabellaNeural",
+        "supportLang": "IT"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|IT|ZH",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|IT|ZH|it",
+      "publishAt": "2026-12-01T07:30:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Europe/Rome",
+      "localDate": "2026-12-01",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "it|2026-12-01T07:30:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-02T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-04T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-08T07:30:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-31T07:30:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "IT__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBYghFsxRVBNqHuk848m6hLD7i6ZTVm9T",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Cinese A1: Everyday: parole",
+        "description": "Impariamo il Cinese. Argomento della lezione: FlashcardsLuna. Ascolta attentamente la pronuncia dei madrelingua e ripeti le parole durante le pause. Alla fine ti aspetta un mini-test interattivo! Esercitati gratis con i mazzi sul nostro sito",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|IT|ZH",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KN",
+      "targetLang": "TA",
+      "channelKey": "kn",
+      "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kn-IN-SapnaNeural",
+        "supportLang": "KN"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KN|TA",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KN|TA|kn",
+      "publishAt": "2026-11-29T18:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-29",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "kn|2026-11-29T18:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-30T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-02T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-06T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-29T18:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "KN__TA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLC-8UA1bKAwY",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ತಮಿಳು A1: Everyday: ಪದಗಳು",
+        "description": "ನಾವು ತಮಿಳು ಕಲಿಯುತ್ತಿದ್ದೇವೆ. ಪಾಠದ ವಿಷಯ: FlashcardsLuna. ಸ್ಥಳೀಯ ಉಚ್ಚಾರಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಕೇಳಿ ಮತ್ತು ವಿರಾಮಗಳಲ್ಲಿ ಪದಗಳನ್ನು ಪುನರಾವರ್ತಿಸಿ. ಕೊನೆಯಲ್ಲಿ ಸಂವಾದಾತ್ಮಕ ಮಿನಿ-ಟೆಸ್ಟ್ ನಿಮಗಾಗಿ ಕಾಯುತ್ತಿದೆ! ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KN|TA",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KN",
+      "targetLang": "TE",
+      "channelKey": "kn",
+      "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kn-IN-SapnaNeural",
+        "supportLang": "KN"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KN|TE",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KN|TE|kn",
+      "publishAt": "2026-11-30T03:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "kn|2026-11-30T03:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T03:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "KN__TE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLDcur4ObhG9g",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ತೆಲುಗು A1: Everyday: ಪದಗಳು",
+        "description": "ನಾವು ತೆಲುಗು ಕಲಿಯುತ್ತಿದ್ದೇವೆ. ಪಾಠದ ವಿಷಯ: FlashcardsLuna. ಸ್ಥಳೀಯ ಉಚ್ಚಾರಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಕೇಳಿ ಮತ್ತು ವಿರಾಮಗಳಲ್ಲಿ ಪದಗಳನ್ನು ಪುನರಾವರ್ತಿಸಿ. ಕೊನೆಯಲ್ಲಿ ಸಂವಾದಾತ್ಮಕ ಮಿನಿ-ಟೆಸ್ಟ್ ನಿಮಗಾಗಿ ಕಾಯುತ್ತಿದೆ! ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KN|TE",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KN",
+      "targetLang": "TH",
+      "channelKey": "kn",
+      "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kn-IN-SapnaNeural",
+        "supportLang": "KN"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KN|TH",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KN|TH|kn",
+      "publishAt": "2026-11-30T06:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "kn|2026-11-30T06:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T06:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KN__TH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLPbOmNsCq4mc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ಥಾಯ್ A1: Everyday: ಪದಗಳು",
+        "description": "ನಾವು ಥಾಯ್ ಕಲಿಯುತ್ತಿದ್ದೇವೆ. ಪಾಠದ ವಿಷಯ: FlashcardsLuna. ಸ್ಥಳೀಯ ಉಚ್ಚಾರಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಕೇಳಿ ಮತ್ತು ವಿರಾಮಗಳಲ್ಲಿ ಪದಗಳನ್ನು ಪುನರಾವರ್ತಿಸಿ. ಕೊನೆಯಲ್ಲಿ ಸಂವಾದಾತ್ಮಕ ಮಿನಿ-ಟೆಸ್ಟ್ ನಿಮಗಾಗಿ ಕಾಯುತ್ತಿದೆ! ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KN|TH",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KN",
+      "targetLang": "TL",
+      "channelKey": "kn",
+      "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kn-IN-SapnaNeural",
+        "supportLang": "KN"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KN|TL",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KN|TL|kn",
+      "publishAt": "2026-11-30T09:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "kn|2026-11-30T09:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T09:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KN__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLBSMoWonTIwY",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ಫಿಲಿಪಿನೊ A1: Everyday: ಪದಗಳು",
+        "description": "ನಾವು ಫಿಲಿಪಿನೊ ಕಲಿಯುತ್ತಿದ್ದೇವೆ. ಪಾಠದ ವಿಷಯ: FlashcardsLuna. ಸ್ಥಳೀಯ ಉಚ್ಚಾರಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಕೇಳಿ ಮತ್ತು ವಿರಾಮಗಳಲ್ಲಿ ಪದಗಳನ್ನು ಪುನರಾವರ್ತಿಸಿ. ಕೊನೆಯಲ್ಲಿ ಸಂವಾದಾತ್ಮಕ ಮಿನಿ-ಟೆಸ್ಟ್ ನಿಮಗಾಗಿ ಕಾಯುತ್ತಿದೆ! ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KN|TL",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KN",
+      "targetLang": "TR",
+      "channelKey": "kn",
+      "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kn-IN-SapnaNeural",
+        "supportLang": "KN"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KN|TR",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KN|TR|kn",
+      "publishAt": "2026-11-30T12:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "kn|2026-11-30T12:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T12:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KN__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLeHgkgavY3Qc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ಟರ್ಕಿಶ್ A1: Everyday: ಪದಗಳು",
+        "description": "ನಾವು ಟರ್ಕಿಶ್ ಕಲಿಯುತ್ತಿದ್ದೇವೆ. ಪಾಠದ ವಿಷಯ: FlashcardsLuna. ಸ್ಥಳೀಯ ಉಚ್ಚಾರಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಕೇಳಿ ಮತ್ತು ವಿರಾಮಗಳಲ್ಲಿ ಪದಗಳನ್ನು ಪುನರಾವರ್ತಿಸಿ. ಕೊನೆಯಲ್ಲಿ ಸಂವಾದಾತ್ಮಕ ಮಿನಿ-ಟೆಸ್ಟ್ ನಿಮಗಾಗಿ ಕಾಯುತ್ತಿದೆ! ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KN|TR",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KN",
+      "targetLang": "UZ",
+      "channelKey": "kn",
+      "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kn-IN-SapnaNeural",
+        "supportLang": "KN"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KN|UZ",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KN|UZ|kn",
+      "publishAt": "2026-11-30T15:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "kn|2026-11-30T15:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T15:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KN__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLflYztvMv2RY",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ಉಜ್ಬೇಕ್ A1: Everyday: ಪದಗಳು",
+        "description": "ನಾವು ಉಜ್ಬೇಕ್ ಕಲಿಯುತ್ತಿದ್ದೇವೆ. ಪಾಠದ ವಿಷಯ: FlashcardsLuna. ಸ್ಥಳೀಯ ಉಚ್ಚಾರಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಕೇಳಿ ಮತ್ತು ವಿರಾಮಗಳಲ್ಲಿ ಪದಗಳನ್ನು ಪುನರಾವರ್ತಿಸಿ. ಕೊನೆಯಲ್ಲಿ ಸಂವಾದಾತ್ಮಕ ಮಿನಿ-ಟೆಸ್ಟ್ ನಿಮಗಾಗಿ ಕಾಯುತ್ತಿದೆ! ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KN|UZ",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KN",
+      "targetLang": "VI",
+      "channelKey": "kn",
+      "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kn-IN-SapnaNeural",
+        "supportLang": "KN"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KN|VI",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KN|VI|kn",
+      "publishAt": "2026-11-30T18:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "kn|2026-11-30T18:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T18:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KN__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLVsila6DLt1I",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ವಿಯೆಟ್ನಾಮೀಸ್ A1: Everyday: ಪದಗಳು",
+        "description": "ನಾವು ವಿಯೆಟ್ನಾಮೀಸ್ ಕಲಿಯುತ್ತಿದ್ದೇವೆ. ಪಾಠದ ವಿಷಯ: FlashcardsLuna. ಸ್ಥಳೀಯ ಉಚ್ಚಾರಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಕೇಳಿ ಮತ್ತು ವಿರಾಮಗಳಲ್ಲಿ ಪದಗಳನ್ನು ಪುನರಾವರ್ತಿಸಿ. ಕೊನೆಯಲ್ಲಿ ಸಂವಾದಾತ್ಮಕ ಮಿನಿ-ಟೆಸ್ಟ್ ನಿಮಗಾಗಿ ಕಾಯುತ್ತಿದೆ! ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KN|VI",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "KN",
+      "targetLang": "ZH",
+      "channelKey": "kn",
+      "youtubeChannelId": "UCQwFwnfrYboBi5SzRM4hMdQ",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kn-IN-SapnaNeural",
+        "supportLang": "KN"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|KN|ZH",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|KN|ZH|kn",
+      "publishAt": "2026-12-01T03:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-12-01",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "kn|2026-12-01T03:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-02T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-04T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-08T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-31T03:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KN__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf_oRAp8WRng",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ಚೈನೀಸ್ A1: Everyday: ಪದಗಳು",
+        "description": "ನಾವು ಚೈನೀಸ್ ಕಲಿಯುತ್ತಿದ್ದೇವೆ. ಪಾಠದ ವಿಷಯ: FlashcardsLuna. ಸ್ಥಳೀಯ ಉಚ್ಚಾರಣೆಯನ್ನು ಗಮನವಿಟ್ಟು ಕೇಳಿ ಮತ್ತು ವಿರಾಮಗಳಲ್ಲಿ ಪದಗಳನ್ನು ಪುನರಾವರ್ತಿಸಿ. ಕೊನೆಯಲ್ಲಿ ಸಂವಾದಾತ್ಮಕ ಮಿನಿ-ಟೆಸ್ಟ್ ನಿಮಗಾಗಿ ಕಾಯುತ್ತಿದೆ! ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಉಚಿತವಾಗಿ ಅಭ್ಯಾಸ ಮಾಡಿ",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|KN|ZH",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "ML",
+      "targetLang": "TA",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ml-IN-SobhanaNeural",
+        "supportLang": "ML"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|ML|TA",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|ML|TA|ml",
+      "publishAt": "2026-11-29T18:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-29",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "ml|2026-11-29T18:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-30T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-02T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-06T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-29T18:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "ML__TA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLf5jZ4zRDMSs",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "തമിഴ് A1: Everyday: വാക്കുകൾ",
+        "description": "നാം തമിഴ് പഠിക്കുന്നു. പാഠഭാഗം: FlashcardsLuna. ഉച്ചാരണം ശ്രദ്ധാപൂർവ്വം കേൾക്കുക, ഇടവേളകളിൽ വാക്കുകൾ ആവർത്തിക്കുക. അവസാനം ഒരു ഇന്ററാക്ടീവ് മിനി-ടെസ്റ്റ് നിങ്ങൾക്കായി കാത്തിരിക്കുന്നു! ഞങ്ങളുടെ വെബ്‌സൈറ്റിൽ സൗജന്യമായി പരിശീലിക്കുക",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|ML|TA",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "ML",
+      "targetLang": "TE",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ml-IN-SobhanaNeural",
+        "supportLang": "ML"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|ML|TE",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|ML|TE|ml",
+      "publishAt": "2026-11-30T03:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "ml|2026-11-30T03:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T03:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "ML__TE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLTbB9fkNhAm0",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "തെലുങ്ക് A1: Everyday: വാക്കുകൾ",
+        "description": "നാം തെലുങ്ക് പഠിക്കുന്നു. പാഠഭാഗം: FlashcardsLuna. ഉച്ചാരണം ശ്രദ്ധാപൂർവ്വം കേൾക്കുക, ഇടവേളകളിൽ വാക്കുകൾ ആവർത്തിക്കുക. അവസാനം ഒരു ഇന്ററാക്ടീവ് മിനി-ടെസ്റ്റ് നിങ്ങൾക്കായി കാത്തിരിക്കുന്നു! ഞങ്ങളുടെ വെബ്‌സൈറ്റിൽ സൗജന്യമായി പരിശീലിക്കുക",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|ML|TE",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "ML",
+      "targetLang": "TH",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ml-IN-SobhanaNeural",
+        "supportLang": "ML"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|ML|TH",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|ML|TH|ml",
+      "publishAt": "2026-11-30T06:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "ml|2026-11-30T06:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T06:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ML__TH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLDfZSl_r_wJA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "തായ് A1: Everyday: വാക്കുകൾ",
+        "description": "നാം തായ് പഠിക്കുന്നു. പാഠഭാഗം: FlashcardsLuna. ഉച്ചാരണം ശ്രദ്ധാപൂർവ്വം കേൾക്കുക, ഇടവേളകളിൽ വാക്കുകൾ ആവർത്തിക്കുക. അവസാനം ഒരു ഇന്ററാക്ടീവ് മിനി-ടെസ്റ്റ് നിങ്ങൾക്കായി കാത്തിരിക്കുന്നു! ഞങ്ങളുടെ വെബ്‌സൈറ്റിൽ സൗജന്യമായി പരിശീലിക്കുക",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|ML|TH",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "ML",
+      "targetLang": "TL",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ml-IN-SobhanaNeural",
+        "supportLang": "ML"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|ML|TL",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|ML|TL|ml",
+      "publishAt": "2026-11-30T09:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "ml|2026-11-30T09:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T09:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ML__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLW21pZWWyUdI",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ഫിലിപ്പിനോ A1: Everyday: വാക്കുകൾ",
+        "description": "നാം ഫിലിപ്പിനോ പഠിക്കുന്നു. പാഠഭാഗം: FlashcardsLuna. ഉച്ചാരണം ശ്രദ്ധാപൂർവ്വം കേൾക്കുക, ഇടവേളകളിൽ വാക്കുകൾ ആവർത്തിക്കുക. അവസാനം ഒരു ഇന്ററാക്ടീവ് മിനി-ടെസ്റ്റ് നിങ്ങൾക്കായി കാത്തിരിക്കുന്നു! ഞങ്ങളുടെ വെബ്‌സൈറ്റിൽ സൗജന്യമായി പരിശീലിക്കുക",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|ML|TL",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "ML",
+      "targetLang": "TR",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ml-IN-SobhanaNeural",
+        "supportLang": "ML"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|ML|TR",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|ML|TR|ml",
+      "publishAt": "2026-11-30T12:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "ml|2026-11-30T12:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T12:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ML__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLPviZ4LfWU5M",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ടർക്കിഷ് A1: Everyday: വാക്കുകൾ",
+        "description": "നാം ടർക്കിഷ് പഠിക്കുന്നു. പാഠഭാഗം: FlashcardsLuna. ഉച്ചാരണം ശ്രദ്ധാപൂർവ്വം കേൾക്കുക, ഇടവേളകളിൽ വാക്കുകൾ ആവർത്തിക്കുക. അവസാനം ഒരു ഇന്ററാക്ടീവ് മിനി-ടെസ്റ്റ് നിങ്ങൾക്കായി കാത്തിരിക്കുന്നു! ഞങ്ങളുടെ വെബ്‌സൈറ്റിൽ സൗജന്യമായി പരിശീലിക്കുക",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|ML|TR",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "ML",
+      "targetLang": "UZ",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ml-IN-SobhanaNeural",
+        "supportLang": "ML"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|ML|UZ",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|ML|UZ|ml",
+      "publishAt": "2026-11-30T15:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "ml|2026-11-30T15:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T15:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ML__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLYASG-fEKmIc",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ഉസ്‌ബെക്ക് A1: Everyday: വാക്കുകൾ",
+        "description": "നാം ഉസ്‌ബെക്ക് പഠിക്കുന്നു. പാഠഭാഗം: FlashcardsLuna. ഉച്ചാരണം ശ്രദ്ധാപൂർവ്വം കേൾക്കുക, ഇടവേളകളിൽ വാക്കുകൾ ആവർത്തിക്കുക. അവസാനം ഒരു ഇന്ററാക്ടീവ് മിനി-ടെസ്റ്റ് നിങ്ങൾക്കായി കാത്തിരിക്കുന്നു! ഞങ്ങളുടെ വെബ്‌സൈറ്റിൽ സൗജന്യമായി പരിശീലിക്കുക",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|ML|UZ",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "ML",
+      "targetLang": "VI",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ml-IN-SobhanaNeural",
+        "supportLang": "ML"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|ML|VI",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|ML|VI|ml",
+      "publishAt": "2026-11-30T18:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "ml|2026-11-30T18:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T18:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ML__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLMHcwtWza_i8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "വിയറ്റ്നാമീസ് A1: Everyday: വാക്കുകൾ",
+        "description": "നാം വിയറ്റ്നാമീസ് പഠിക്കുന്നു. പാഠഭാഗം: FlashcardsLuna. ഉച്ചാരണം ശ്രദ്ധാപൂർവ്വം കേൾക്കുക, ഇടവേളകളിൽ വാക്കുകൾ ആവർത്തിക്കുക. അവസാനം ഒരു ഇന്ററാക്ടീവ് മിനി-ടെസ്റ്റ് നിങ്ങൾക്കായി കാത്തിരിക്കുന്നു! ഞങ്ങളുടെ വെബ്‌സൈറ്റിൽ സൗജന്യമായി പരിശീലിക്കുക",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|ML|VI",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "ML",
+      "targetLang": "ZH",
+      "channelKey": "ml",
+      "youtubeChannelId": "UC9Y3EC5dqHPMqyYh4FkisXw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ml-IN-SobhanaNeural",
+        "supportLang": "ML"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|ML|ZH",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|ML|ZH|ml",
+      "publishAt": "2026-12-01T03:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-12-01",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "ml|2026-12-01T03:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-02T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-04T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-08T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-31T03:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "ML__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLdXciXm1qSac",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ചൈനീസ് A1: Everyday: വാക്കുകൾ",
+        "description": "നാം ചൈനീസ് പഠിക്കുന്നു. പാഠഭാഗം: FlashcardsLuna. ഉച്ചാരണം ശ്രദ്ധാപൂർവ്വം കേൾക്കുക, ഇടവേളകളിൽ വാക്കുകൾ ആവർത്തിക്കുക. അവസാനം ഒരു ഇന്ററാക്ടീവ് മിനി-ടെസ്റ്റ് നിങ്ങൾക്കായി കാത്തിരിക്കുന്നു! ഞങ്ങളുടെ വെബ്‌സൈറ്റിൽ സൗജന്യമായി പരിശീലിക്കുക",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|ML|ZH",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TA",
+      "targetLang": "SW",
+      "channelKey": "ta",
+      "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ta-IN-PallaviNeural",
+        "supportLang": "TA"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TA|SW",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TA|SW|ta",
+      "publishAt": "2026-11-29T18:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-29",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "ta|2026-11-29T18:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-30T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-02T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-06T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-29T18:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [],
+        "playlistKey": "TA__SW__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLS8pgpSSNPl8",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ஸ்வாஹிலி A1: Everyday: சொற்கள்",
+        "description": "நாம் ஸ்வாஹிலி கற்கிறோம். பாடத் தலைப்பு: FlashcardsLuna. உள்ளூர் உச்சரிப்பைக் கவனமாகக் கேட்டு, இடைவெளிகளின் போது சொற்களைத் திரும்பக் கூறவும். இறுதியில் ஒரு ஊடாடும் மினி-தேர்வு உங்களுக்காகக் காத்திருக்கிறது! எங்கள் இணையதளத்தில் இலவசமாகப் பயிற்சி செய்யுங்கள்",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TA|SW",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TA",
+      "targetLang": "TE",
+      "channelKey": "ta",
+      "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ta-IN-PallaviNeural",
+        "supportLang": "TA"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TA|TE",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TA|TE|ta",
+      "publishAt": "2026-11-30T03:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "ta|2026-11-30T03:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T03:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TA__TE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAS5ujgTPcmU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "தெலுங்கு A1: Everyday: சொற்கள்",
+        "description": "நாம் தெலுங்கு கற்கிறோம். பாடத் தலைப்பு: FlashcardsLuna. உள்ளூர் உச்சரிப்பைக் கவனமாகக் கேட்டு, இடைவெளிகளின் போது சொற்களைத் திரும்பக் கூறவும். இறுதியில் ஒரு ஊடாடும் மினி-தேர்வு உங்களுக்காகக் காத்திருக்கிறது! எங்கள் இணையதளத்தில் இலவசமாகப் பயிற்சி செய்யுங்கள்",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TA|TE",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TA",
+      "targetLang": "TH",
+      "channelKey": "ta",
+      "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ta-IN-PallaviNeural",
+        "supportLang": "TA"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TA|TH",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TA|TH|ta",
+      "publishAt": "2026-11-30T06:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "ta|2026-11-30T06:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T06:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TA__TH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAxy8A6ZzqqE",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "தாய் A1: Everyday: சொற்கள்",
+        "description": "நாம் தாய் கற்கிறோம். பாடத் தலைப்பு: FlashcardsLuna. உள்ளூர் உச்சரிப்பைக் கவனமாகக் கேட்டு, இடைவெளிகளின் போது சொற்களைத் திரும்பக் கூறவும். இறுதியில் ஒரு ஊடாடும் மினி-தேர்வு உங்களுக்காகக் காத்திருக்கிறது! எங்கள் இணையதளத்தில் இலவசமாகப் பயிற்சி செய்யுங்கள்",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TA|TH",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TA",
+      "targetLang": "TL",
+      "channelKey": "ta",
+      "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ta-IN-PallaviNeural",
+        "supportLang": "TA"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TA|TL",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TA|TL|ta",
+      "publishAt": "2026-11-30T09:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "ta|2026-11-30T09:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T09:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TA__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLRlmLxdQf95M",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ஃபிலிபினோ A1: Everyday: சொற்கள்",
+        "description": "நாம் ஃபிலிபினோ கற்கிறோம். பாடத் தலைப்பு: FlashcardsLuna. உள்ளூர் உச்சரிப்பைக் கவனமாகக் கேட்டு, இடைவெளிகளின் போது சொற்களைத் திரும்பக் கூறவும். இறுதியில் ஒரு ஊடாடும் மினி-தேர்வு உங்களுக்காகக் காத்திருக்கிறது! எங்கள் இணையதளத்தில் இலவசமாகப் பயிற்சி செய்யுங்கள்",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TA|TL",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TA",
+      "targetLang": "TR",
+      "channelKey": "ta",
+      "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ta-IN-PallaviNeural",
+        "supportLang": "TA"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TA|TR",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TA|TR|ta",
+      "publishAt": "2026-11-30T12:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "ta|2026-11-30T12:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T12:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TA__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLWDtW-z9D1zA",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "துருக்கிஷ் A1: Everyday: சொற்கள்",
+        "description": "நாம் துருக்கிஷ் கற்கிறோம். பாடத் தலைப்பு: FlashcardsLuna. உள்ளூர் உச்சரிப்பைக் கவனமாகக் கேட்டு, இடைவெளிகளின் போது சொற்களைத் திரும்பக் கூறவும். இறுதியில் ஒரு ஊடாடும் மினி-தேர்வு உங்களுக்காகக் காத்திருக்கிறது! எங்கள் இணையதளத்தில் இலவசமாகப் பயிற்சி செய்யுங்கள்",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TA|TR",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TA",
+      "targetLang": "UZ",
+      "channelKey": "ta",
+      "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ta-IN-PallaviNeural",
+        "supportLang": "TA"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TA|UZ",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TA|UZ|ta",
+      "publishAt": "2026-11-30T15:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "ta|2026-11-30T15:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T15:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TA__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLFSEBA7KTMHk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "உஸ்பெக் A1: Everyday: சொற்கள்",
+        "description": "நாம் உஸ்பெக் கற்கிறோம். பாடத் தலைப்பு: FlashcardsLuna. உள்ளூர் உச்சரிப்பைக் கவனமாகக் கேட்டு, இடைவெளிகளின் போது சொற்களைத் திரும்பக் கூறவும். இறுதியில் ஒரு ஊடாடும் மினி-தேர்வு உங்களுக்காகக் காத்திருக்கிறது! எங்கள் இணையதளத்தில் இலவசமாகப் பயிற்சி செய்யுங்கள்",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TA|UZ",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TA",
+      "targetLang": "VI",
+      "channelKey": "ta",
+      "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ta-IN-PallaviNeural",
+        "supportLang": "TA"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TA|VI",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TA|VI|ta",
+      "publishAt": "2026-11-30T18:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "ta|2026-11-30T18:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T18:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TA__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLAA30iWK5m8Q",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "வியட்நாமீஸ் A1: Everyday: சொற்கள்",
+        "description": "நாம் வியட்நாமீஸ் கற்கிறோம். பாடத் தலைப்பு: FlashcardsLuna. உள்ளூர் உச்சரிப்பைக் கவனமாகக் கேட்டு, இடைவெளிகளின் போது சொற்களைத் திரும்பக் கூறவும். இறுதியில் ஒரு ஊடாடும் மினி-தேர்வு உங்களுக்காகக் காத்திருக்கிறது! எங்கள் இணையதளத்தில் இலவசமாகப் பயிற்சி செய்யுங்கள்",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TA|VI",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TA",
+      "targetLang": "ZH",
+      "channelKey": "ta",
+      "youtubeChannelId": "UCc569J6C2XCvBnscVoMlwqg",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_ta-IN-PallaviNeural",
+        "supportLang": "TA"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TA|ZH",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TA|ZH|ta",
+      "publishAt": "2026-12-01T03:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-12-01",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "ta|2026-12-01T03:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-02T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-04T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-08T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-31T03:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TA__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLGnyCBcGDxvk",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "சீனம் A1: Everyday: சொற்கள்",
+        "description": "நாம் சீனம் கற்கிறோம். பாடத் தலைப்பு: FlashcardsLuna. உள்ளூர் உச்சரிப்பைக் கவனமாகக் கேட்டு, இடைவெளிகளின் போது சொற்களைத் திரும்பக் கூறவும். இறுதியில் ஒரு ஊடாடும் மினி-தேர்வு உங்களுக்காகக் காத்திருக்கிறது! எங்கள் இணையதளத்தில் இலவசமாகப் பயிற்சி செய்யுங்கள்",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TA|ZH",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TE",
+      "targetLang": "SW",
+      "channelKey": "te",
+      "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_te-IN-ShrutiNeural",
+        "supportLang": "TE"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TE|SW",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TE|SW|te",
+      "publishAt": "2026-11-29T18:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-29",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "te|2026-11-29T18:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-11-30T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-02T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-06T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-29T18:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TE__SW__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLbL6_Jmn1tTo",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "స్వాహిలి A1: Everyday: పదాలు",
+        "description": "మనం స్వాహిలి నేర్చుకుంటున్నాము. పాఠం అంశం: FlashcardsLuna. స్థానిక ఉచ్చారణను జాగ్రత్తగా వినండి మరియు విరామాలలో పదాలను పునరావృతం చేయండి. చివరలో ఒక ఇంటరాక్టివ్ మినీ-టెస్ట్ మీ కోసం వేచి ఉంది! మా వెబ్‌సైట్‌లో ఉచితంగా ప్రాక్టీస్ చేయండి",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TE|SW",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TE",
+      "targetLang": "TA",
+      "channelKey": "te",
+      "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_te-IN-ShrutiNeural",
+        "supportLang": "TE"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TE|TA",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TE|TA|te",
+      "publishAt": "2026-11-30T03:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "te|2026-11-30T03:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T03:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TE__TA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLPXiPy5AJDPw",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "తమిళం A1: Everyday: పదాలు",
+        "description": "మనం తమిళం నేర్చుకుంటున్నాము. పాఠం అంశం: FlashcardsLuna. స్థానిక ఉచ్చారణను జాగ్రత్తగా వినండి మరియు విరామాలలో పదాలను పునరావృతం చేయండి. చివరలో ఒక ఇంటరాక్టివ్ మినీ-టెస్ట్ మీ కోసం వేచి ఉంది! మా వెబ్‌సైట్‌లో ఉచితంగా ప్రాక్టీస్ చేయండి",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TE|TA",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TE",
+      "targetLang": "TH",
+      "channelKey": "te",
+      "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_te-IN-ShrutiNeural",
+        "supportLang": "TE"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TE|TH",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TE|TH|te",
+      "publishAt": "2026-11-30T06:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "11:30",
+      "localSlotIndex": 1,
+      "slotKey": "te|2026-11-30T06:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T06:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T06:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TE__TH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLa-VjqgDna7A",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "థాయ్ A1: Everyday: పదాలు",
+        "description": "మనం థాయ్ నేర్చుకుంటున్నాము. పాఠం అంశం: FlashcardsLuna. స్థానిక ఉచ్చారణను జాగ్రత్తగా వినండి మరియు విరామాలలో పదాలను పునరావృతం చేయండి. చివరలో ఒక ఇంటరాక్టివ్ మినీ-టెస్ట్ మీ కోసం వేచి ఉంది! మా వెబ్‌సైట్‌లో ఉచితంగా ప్రాక్టీస్ చేయండి",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TE|TH",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TE",
+      "targetLang": "TL",
+      "channelKey": "te",
+      "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_te-IN-ShrutiNeural",
+        "supportLang": "TE"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TE|TL",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TE|TL|te",
+      "publishAt": "2026-11-30T09:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "14:30",
+      "localSlotIndex": 2,
+      "slotKey": "te|2026-11-30T09:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T09:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T09:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TE__TL__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLNO6oOf6pAOQ",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ఫిలిపినో A1: Everyday: పదాలు",
+        "description": "మనం ఫిలిపినో నేర్చుకుంటున్నాము. పాఠం అంశం: FlashcardsLuna. స్థానిక ఉచ్చారణను జాగ్రత్తగా వినండి మరియు విరామాలలో పదాలను పునరావృతం చేయండి. చివరలో ఒక ఇంటరాక్టివ్ మినీ-టెస్ట్ మీ కోసం వేచి ఉంది! మా వెబ్‌సైట్‌లో ఉచితంగా ప్రాక్టీస్ చేయండి",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TE|TL",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TE",
+      "targetLang": "TR",
+      "channelKey": "te",
+      "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_te-IN-ShrutiNeural",
+        "supportLang": "TE"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TE|TR",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TE|TR|te",
+      "publishAt": "2026-11-30T12:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "17:30",
+      "localSlotIndex": 3,
+      "slotKey": "te|2026-11-30T12:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T12:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T12:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TE__TR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLK1VlIfKJzTo",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "టర్కిష్ A1: Everyday: పదాలు",
+        "description": "మనం టర్కిష్ నేర్చుకుంటున్నాము. పాఠం అంశం: FlashcardsLuna. స్థానిక ఉచ్చారణను జాగ్రత్తగా వినండి మరియు విరామాలలో పదాలను పునరావృతం చేయండి. చివరలో ఒక ఇంటరాక్టివ్ మినీ-టెస్ట్ మీ కోసం వేచి ఉంది! మా వెబ్‌సైట్‌లో ఉచితంగా ప్రాక్టీస్ చేయండి",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TE|TR",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TE",
+      "targetLang": "UZ",
+      "channelKey": "te",
+      "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_te-IN-ShrutiNeural",
+        "supportLang": "TE"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TE|UZ",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TE|UZ|te",
+      "publishAt": "2026-11-30T15:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "20:30",
+      "localSlotIndex": 4,
+      "slotKey": "te|2026-11-30T15:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T15:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T15:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TE__UZ__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLKvSCYHrHLrw",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "ఉజ్బెక్ A1: Everyday: పదాలు",
+        "description": "మనం ఉజ్బెక్ నేర్చుకుంటున్నాము. పాఠం అంశం: FlashcardsLuna. స్థానిక ఉచ్చారణను జాగ్రత్తగా వినండి మరియు విరామాలలో పదాలను పునరావృతం చేయండి. చివరలో ఒక ఇంటరాక్టివ్ మినీ-టెస్ట్ మీ కోసం వేచి ఉంది! మా వెబ్‌సైట్‌లో ఉచితంగా ప్రాక్టీస్ చేయండి",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TE|UZ",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TE",
+      "targetLang": "VI",
+      "channelKey": "te",
+      "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_te-IN-ShrutiNeural",
+        "supportLang": "TE"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TE|VI",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TE|VI|te",
+      "publishAt": "2026-11-30T18:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-11-30",
+      "localTime": "23:30",
+      "localSlotIndex": 5,
+      "slotKey": "te|2026-11-30T18:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-01T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-03T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-07T18:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-30T18:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TE__VI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLQTwEqU_Oqbw",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "వియత్నామీస్ A1: Everyday: పదాలు",
+        "description": "మనం వియత్నామీస్ నేర్చుకుంటున్నాము. పాఠం అంశం: FlashcardsLuna. స్థానిక ఉచ్చారణను జాగ్రత్తగా వినండి మరియు విరామాలలో పదాలను పునరావృతం చేయండి. చివరలో ఒక ఇంటరాక్టివ్ మినీ-టెస్ట్ మీ కోసం వేచి ఉంది! మా వెబ్‌సైట్‌లో ఉచితంగా ప్రాక్టీస్ చేయండి",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TE|VI",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    },
+    {
+      "videoType": "ordinary",
+      "setId": "core_numbers_counting_a1",
+      "supportLang": "TE",
+      "targetLang": "ZH",
+      "channelKey": "te",
+      "youtubeChannelId": "UCsfDK93oVkE6zxQT2FOfFtw",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "routeKey": "youtube-4",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_te-IN-ShrutiNeural",
+        "supportLang": "TE"
+      },
+      "assignmentKey": "ordinary|core_numbers_counting_a1|TE|ZH",
+      "calendarAssignmentKey": "ordinary|core_numbers_counting_a1|TE|ZH|te",
+      "publishAt": "2026-12-01T03:00:00.000Z",
+      "requestedStartDate": "auto",
+      "effectiveStartDate": "2026-11-20",
+      "timeZone": "Asia/Kolkata",
+      "localDate": "2026-12-01",
+      "localTime": "08:30",
+      "localSlotIndex": 0,
+      "slotKey": "te|2026-12-01T03:00:00.000Z",
+      "analyticsCheckpointsAt": [
+        {
+          "hoursAfterPublish": 24,
+          "dueAt": "2026-12-02T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 72,
+          "dueAt": "2026-12-04T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 168,
+          "dueAt": "2026-12-08T03:00:00.000Z"
+        },
+        {
+          "hoursAfterPublish": 720,
+          "dueAt": "2026-12-31T03:00:00.000Z"
+        }
+      ],
+      "thumbnail": {
+        "mode": "first_frame_auto",
+        "ready": true,
+        "reason": "custom_thumbnail_disabled_for_channel"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "TE__ZH__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLIzSqe0glOtU",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "చైనీస్ A1: Everyday: పదాలు",
+        "description": "మనం చైనీస్ నేర్చుకుంటున్నాము. పాఠం అంశం: FlashcardsLuna. స్థానిక ఉచ్చారణను జాగ్రత్తగా వినండి మరియు విరామాలలో పదాలను పునరావృతం చేయండి. చివరలో ఒక ఇంటరాక్టివ్ మినీ-టెస్ట్ మీ కోసం వేచి ఉంది! మా వెబ్‌సైట్‌లో ఉచితంగా ప్రాక్టీస్ చేయండి",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-20T00:33:41.745Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_numbers_counting_a1|TE|ZH",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "autoFallbackReason": "",
+      "polyglotKey": ""
+    }
+  ],
+  "campaignId": "yt-core_numbers_counting_a1-2026-11-20-fe8f22dea6f9",
+  "manifestHash": "d51b656fbe6245055db81640e9aed2e3d155180962edd9456494fb4306177c31"
+}
