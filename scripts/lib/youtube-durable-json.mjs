@@ -4,6 +4,12 @@ import crypto from "node:crypto";
 
 const LEDGER = "youtube-publication-campaigns.json";
 const HISTORY = "youtube-publication-campaign-history";
+const SUPERSEDED_STATES = new Map([
+  ["superseded_zero_upload_recovery", "superseded_zero_upload_recovery"],
+  ["superseded_zero_upload_expansion", "superseded_zero_upload_expansion"],
+  ["superseded_unlaunched_claim_rollover", "superseded_unlaunched_claim_rollover"],
+  ["superseded_unlaunched_claim_consolidation", "superseded_integrated_plan"],
+]);
 const hash = (text) => crypto.createHash("sha256").update(text).digest("hex");
 const rowHash = (row) => hash(JSON.stringify(row));
 
@@ -69,13 +75,17 @@ function indexedRegistry(value, archived) {
   };
 }
 
-export function planYoutubeCampaignHistoryArchive(filePath) {
+export function planYoutubeCampaignHistoryArchive(filePath, { includeSuperseded = false } = {}) {
   const registry = readYoutubeDurableJson(filePath);
   const archived = loadArchives(filePath, registry.campaignArchives || []);
-  // Only complete campaigns move to history. Active/reconciliation claims stay
-  // inline, and every reader still receives every campaign in original order.
-  const candidates = registry.campaigns.filter((row) => row.status === "finalized" && !archived.has(row.campaignId));
-  if (!candidates.length) throw new Error("No additional finalized campaigns to archive");
+  const candidates = registry.campaigns.filter((row) => {
+    if (archived.has(row.campaignId)) return false;
+    if (row.status === "finalized") return true;
+    const assignmentStatus = SUPERSEDED_STATES.get(row.status);
+    return includeSuperseded && assignmentStatus && row.assignments?.length > 0
+      && row.assignments.every((assignment) => assignment.status === assignmentStatus);
+  });
+  if (!candidates.length) throw new Error("No additional finalized or eligible superseded campaigns to archive");
   const history = { schemaVersion: 1, campaigns: candidates };
   const historyText = `${JSON.stringify(history)}\n`;
   const sha256 = hash(historyText);

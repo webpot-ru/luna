@@ -300,12 +300,12 @@ assert.equal(DEFAULT_VECTORENGINE_CAMPAIGN_SUB_BATCH_SIZE, 2);
 const campaignWorkflow = fs.readFileSync(".github/workflows/youtube-publication-campaign.yml", "utf8");
 assert.match(
   campaignWorkflow,
-  /  metadata:\n[\s\S]*?strategy:\n\s+fail-fast: false[\s\S]*?\n\s+max-parallel: 4\n\s+matrix:/u,
+  /  metadata:\n[\s\S]*?strategy:\n\s+fail-fast: \$\{\{ inputs\.stop_on_429 \}\}[\s\S]*?\n\s+max-parallel: \$\{\{ inputs\.stop_on_429 && 1 \|\| 4 \}\}\n\s+matrix:/u,
   "campaign metadata routes must allow four bounded concurrent provider jobs",
 );
 assert.match(
   campaignWorkflow,
-  /  routes:\n[\s\S]*?strategy:\n\s+fail-fast: false\n[\s\S]*?max-parallel: 4\n\s+matrix:\n\s+route_key: \[youtube-1, youtube-2, youtube-3, youtube-4\][\s\S]*?video_type: combined/u,
+  /  routes:\n[\s\S]*?strategy:\n\s+fail-fast: \$\{\{ inputs\.stop_on_429 \}\}\n[\s\S]*?max-parallel: \$\{\{ inputs\.stop_on_429 && 1 \|\| 4 \}\}\n\s+matrix:\n\s+route_key: \[youtube-1, youtube-2, youtube-3, youtube-4\][\s\S]*?video_type: combined/u,
   "all four active project queues must start together and own both publication phases",
 );
 const routeWorkerWorkflow = fs.readFileSync(".github/workflows/youtube-campaign-route-publish.yml", "utf8");
@@ -314,8 +314,8 @@ assert.match(
   /permissions:\n\s+actions: read\n\s+contents: write/u,
   "the nested route workflow must preserve the permissions required by its publication workflows",
 );
-assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?max-parallel: 5\n\s+matrix:/u, "each ordinary project queue must run five physical channels concurrently");
-assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?concurrency: "3"/u, "each ordinary channel must build three videos concurrently");
+assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?max-parallel: \$\{\{ inputs\.stop_on_429 && 1 \|\| 5 \}\}\n\s+matrix:/u, "each ordinary project queue must run five physical channels concurrently");
+assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?concurrency: \$\{\{ inputs\.stop_on_429 && '1' \|\| '3' \}\}/u, "each ordinary channel must build three videos concurrently");
 assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?max-parallel: 5\n\s+matrix:/u, "each Polyglot project queue must run five physical channels concurrently");
 assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?needs: \[prepare, ordinary\]/u, "each project must start Polyglot after its own ordinary queue");
 assert.match(routeWorkerWorkflow, /inputs\.video_type == 'polyglot' \|\| inputs\.video_type == 'combined'/u, "combined route publication must include Polyglot");
@@ -331,7 +331,7 @@ for (const [label, workflow] of [["ordinary", ordinaryWorkflow], ["Polyglot", po
   assert.match(workflow, /Restore pip download cache[\s\S]*?path: ~\/\.cache\/pip[\s\S]*?python-3\.10-edge-tts-v1/u, `${label} workers must restore the pip download cache`);
   assert.match(workflow, /Install Python TTS dependency[\s\S]*?run: pip install edge-tts/u, `${label} workers must keep the existing edge-tts install contract`);
   assert.match(workflow, /Restore Playwright browser cache[\s\S]*?path: ~\/\.cache\/ms-playwright[\s\S]*?hashFiles\('package-lock\.json'\)/u, `${label} workers must restore the lockfile-keyed Playwright browser cache`);
-  assert.match(workflow, /if command -v ffmpeg >\/dev\/null 2>&1; then[\s\S]*?ffmpeg -version \| head -n 1[\s\S]*?sudo apt-get install -y ffmpeg/u, `${label} workers must reuse hosted FFmpeg or retain the apt fallback`);
+  assert.match(workflow, /if command -v ffmpeg >\/dev\/null 2>&1; then[\s\S]*?ffmpeg -version \| head -n 1[\s\S]*?sudo apt-get install -y (?:--no-install-recommends )?ffmpeg/u, `${label} workers must reuse hosted FFmpeg or retain the apt fallback`);
 }
 assert.match(campaignWorkflow, /OPENAI_API_KEY: \$\{\{ secrets\.OPENAI_API_KEY \}\}/u);
 assert.match(campaignWorkflow, /BACKEND="openai"/u);

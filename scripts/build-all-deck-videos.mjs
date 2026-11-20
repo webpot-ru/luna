@@ -6,6 +6,7 @@ import { promisify } from "node:util";
 import { getDbLanguageCode, getSpreadsheetLanguageCode, normalizeLanguageCode } from "./lib/video-language-codes.mjs";
 import { BRAND_NAME } from "./lib/brand.mjs";
 import { shardItems } from "./lib/work-shards.mjs";
+import { stopIfCampaignHitHttp429 } from "./lib/youtube-stop-on-http-429.mjs";
 
 const execAsync = promisify(exec);
 const execFileAsync = promisify(execFile);
@@ -286,6 +287,7 @@ async function main() {
       }
       
       const result = await runBuild({ setId, targetLang, supportLang, transition, quizLimit });
+      stopIfCampaignHitHttp429();
       if (!result.ok) failures.push(result);
     }
   }
