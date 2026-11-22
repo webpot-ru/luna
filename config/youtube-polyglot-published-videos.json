@@ -42578,9 +42578,8 @@
       "publishAt": "2026-08-15T18:30:00.000Z",
       "scheduledPublishAt": "2026-08-15T18:30:00.000Z",
       "publicationStatus": "live_youtube_upload_detected",
-      "thumbnailSet": false,
-      "thumbnailUploadMode": "",
-      "needsThumbnailPermission": false,
+      "thumbnailSet": true,
+      "thumbnailUploadMode": "custom",
       "needsPlaylistInsert": false,
       "source": "publication_control_live_registry_reconciliation",
       "reconciledAt": "2026-08-13T14:42:10.664Z",
@@ -42602,7 +42601,11 @@
       "playlist_key": "POLYGLOT__KK__east-asia-core__69af08ca98ea",
       "githubRunId": "31707395039",
       "githubRunUrl": "https://github.com/webpot-ru/luna/actions/runs/31707395039",
-      "stateRecovery": "live_control_plus_finalizer_artifact_after_finalizer_push_failure"
+      "stateRecovery": "live_control_plus_finalizer_artifact_after_finalizer_push_failure",
+      "thumbnailSource": "custom",
+      "thumbnailUploadedAt": "2026-11-22T03:29:03.395Z",
+      "lastThumbnailReadbackAt": "2026-11-22T03:29:03.395Z",
+      "lastReadbackAt": "2026-11-22T03:29:03.395Z"
     },
     {
       "videoType": "polyglot",
