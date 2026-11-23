@@ -1,3 +1,5 @@
+- 2026-11-23 Deck 17 `Colors & Shapes`: the owner-approved May 18 archive supplies `core_colors_shapes_a1` with 34 cards across 54 language variants. The first-wave cover manifest contains 298 approved custom thumbnails. The course slug is `colors-shapes`. The 618-video first-wave scope covers 51 channels and requires fresh publication and playlist evidence before claim.
+
 - 2026-11-10 Deck 16 Numbers & Counting: the owner approved the v2 artwork and repository integration. The cover package contains 3,075 JPEGs, and the tracked offline deck has 44 cards per language pair. Six finalized publication campaigns moved to a content-addressed archive. The archive preserves all 234 campaign records. See `docs/video-lessons-strategy.md` for the cover and course-link contracts.
 
 - 2026-11-06 publication calendar storage: campaign claim, finalization and state merge use compact JSON for the calendar, preserving all reservations and the 95 MiB safety gate. See `docs/youtube-publication-campaigns.md`.
