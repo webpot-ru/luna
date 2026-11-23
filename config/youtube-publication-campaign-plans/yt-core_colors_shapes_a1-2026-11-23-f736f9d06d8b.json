@@ -1,0 +1,1054 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-23T02:56:37.705Z",
+  "mode": "partial_recovery_no_spend_plan",
+  "setId": "core_colors_shapes_a1",
+  "inputs": {
+    "supports": "KK",
+    "supportCount": 1,
+    "ordinarySupportCount": 1,
+    "polyglotSupportCount": 0,
+    "ordinaryPerChannel": 13,
+    "allowPartialOrdinaryTail": true,
+    "polyglotPerChannel": 0,
+    "allowPartialPolyglotTail": false,
+    "assignmentKeys": [
+      "ordinary|core_colors_shapes_a1|KK|BN",
+      "ordinary|core_colors_shapes_a1|KK|CS",
+      "ordinary|core_colors_shapes_a1|KK|DA",
+      "ordinary|core_colors_shapes_a1|KK|DE",
+      "ordinary|core_colors_shapes_a1|KK|EN",
+      "ordinary|core_colors_shapes_a1|KK|EN-GB",
+      "ordinary|core_colors_shapes_a1|KK|ES",
+      "ordinary|core_colors_shapes_a1|KK|ES-419",
+      "ordinary|core_colors_shapes_a1|KK|ET",
+      "ordinary|core_colors_shapes_a1|KK|FI",
+      "ordinary|core_colors_shapes_a1|KK|FR",
+      "ordinary|core_colors_shapes_a1|KK|HI",
+      "ordinary|core_colors_shapes_a1|KK|HR"
+    ],
+    "startDate": "auto",
+    "minFutureMinutes": 90,
+    "maxSnapshotAgeMinutes": 180,
+    "partialRecoveryOfCampaignId": "yt-core_colors_shapes_a1-2026-11-23-0ef758712516",
+    "polyglotScopeUpgrades": [],
+    "polyglotScopeDowngrades": [],
+    "automaticPolyglotScopeDowngrades": []
+  },
+  "evidence": {
+    "partialRecoveryCampaign": {
+      "campaignId": "yt-core_colors_shapes_a1-2026-11-23-0ef758712516",
+      "manifestHash": "937a65fa5e67430675044de0fe5a3ed1598804fa189fca34984d0b0300dfff74",
+      "status": "reconciliation_required",
+      "scopeUpgrades": {},
+      "scopeDowngrades": {}
+    },
+    "routeMigrations": [],
+    "routeControlReports": [
+      {
+        "routeKey": "youtube-4",
+        "generatedAt": "2026-11-23T02:56:37.598Z",
+        "ageMinutes": 0.0017833333333333334,
+        "selectedBlockerCount": 0,
+        "ignoredUnrelatedBlockerCount": 0
+      }
+    ],
+    "sourceFingerprints": {
+      "snapshot": {
+        "path": "outputs/youtube-publication-snapshot.json",
+        "exists": true,
+        "sha256": "203dc6c55aa619814a10c4e50bb3eaa588327e1e227197aea6f3d47fbd8b7937"
+      },
+      "calendar": {
+        "path": "config/youtube-publish-calendar.json",
+        "exists": true,
+        "sha256": "0071fcaadf027970b5a2ee42cdd0d2f9cdacf816681ffe95c11d9f4f13566a19"
+      },
+      "campaignRegistry": {
+        "path": "config/youtube-publication-campaigns.json",
+        "exists": true,
+        "sha256": "8cdfed03306150360a2e1fe1447d714af52a881572b647e5c2a3f9fc46a19d00"
+      },
+      "policy": {
+        "path": "config/youtube-publish-schedule-policy.json",
+        "exists": true,
+        "sha256": "667a7f88c10d0916aa3d0c27f04371fced016784d7534b36ecf3f3ecd36060c4"
+      },
+      "routing": {
+        "path": "config/youtube-api-project-routing.json",
+        "exists": true,
+        "sha256": "685e905492fd1f9bdf8e26f891d4c83ef9159d6fb5f084151a4dafaa89978ce1"
+      },
+      "channels": {
+        "path": "config/youtube-channels.json",
+        "exists": true,
+        "sha256": "813e75501769766cf6879b2be976a5831b2bccb3fa2eafd28318ec0b9fd897ac"
+      },
+      "covers": {
+        "path": "config/youtube-cover-assets.json",
+        "exists": true,
+        "sha256": "74c93fc951fd39d6da15788bed1cf43fdf059e5d306248740d9c27bf4fcf1222"
+      },
+      "deckSources": {
+        "path": "data/deck-sources.json",
+        "exists": true,
+        "sha256": "bfd41759c2a37faffca795e0324774f935c8d8c6d9da15f63dc9b9beb631de04"
+      },
+      "offlineDeck": {
+        "path": "data/decks/core_colors_shapes_a1.json",
+        "exists": true,
+        "sha256": "c6d0eea15f4ea6b4148eba066f8e3fa31968bcbd3e041b2d408e05dd527cf55f"
+      },
+      "ordinaryPlaylists": {
+        "path": "config/youtube-playlists.json",
+        "exists": true,
+        "sha256": "310e5899380e02a9b4bf0a24a74644004136c072bd53325fb9fbfb525baf942c"
+      },
+      "polyglotPlaylists": {
+        "path": "config/youtube-polyglot-playlists.json",
+        "exists": true,
+        "sha256": "689f77053ac254ce207817e8285fe614bf2ca9305265f2778573d0e68b7c197a"
+      },
+      "playlistDiscovery": {
+        "path": "outputs/youtube-playlist-discovery-snapshot.json",
+        "exists": true,
+        "sha256": "ec0d79a8f7b7ba06b3d62d617f591dcef5e16e76f243478776ba97ddd6a55426"
+      }
+    },
+    "deckSource": {
+      "mode": "git_offline_json",
+      "driveFileIdConfigured": false,
+      "offlineDeckExists": true,
+      "offlineDeckTracked": true,
+      "historicalGitBlob": {
+        "available": false,
+        "matchesLocalFile": false,
+        "commit": "",
+        "blobId": "",
+        "localBlobId": ""
+      }
+    }
+  },
+  "summary": {
+    "applyReady": true,
+    "blockerCount": 0,
+    "warningCount": 0,
+    "supportCount": 1,
+    "ordinaryCount": 13,
+    "polyglotCount": 0,
+    "assignmentCount": 13,
+    "firstPublishAt": "2026-12-01T15:30:00.000Z",
+    "lastPublishAt": "2026-12-03T15:30:00.000Z",
+    "customThumbnailCount": 13,
+    "automaticThumbnailCount": 0,
+    "existingPlaylistCount": 13,
+    "playlistCreateCount": 0,
+    "playlistCreateCountMaximum": 0,
+    "routeCounts": {
+      "youtube-4": 13
+    }
+  },
+  "estimatedUsage": {
+    "estimatedVideoUploadCalls": 13,
+    "estimatedPlaylistItemInsertUnits": 650,
+    "estimatedPlaylistCreateUnitsMaximum": 0,
+    "estimatedThumbnailSetUnits": 650,
+    "estimatedGeneralQuotaUnitsMaximum": 1300,
+    "byRoute": {
+      "youtube-4": {
+        "estimatedVideoUploadCalls": 13,
+        "estimatedGeneralQuotaUnitsMaximum": 1300
+      }
+    }
+  },
+  "blockers": [],
+  "warnings": [],
+  "assignments": [
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|BN",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|BN|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "BN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-02T03:30:00.000Z",
+      "localDate": "2026-12-02",
+      "localTime": "08:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-02T03:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/BN__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "151f6640cbf98f924758de3addb2e8b3e3d0420c9770f2948587ce065226902f"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__BN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLnPLNKl2kRWo9Pbvxn3HWQIOvOKTOIgVb",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Бенгал тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Бенгал тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|BN",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|CS",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|CS|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "CS",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-01T15:30:00.000Z",
+      "localDate": "2026-12-01",
+      "localTime": "20:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-01T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/CS__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "fcfbcdd2cea321a272c44923061e25b376c86ecd2cd7e175cc5446fd9989e056"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__CS__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLnPLNKl2kRWoJUKMXz-_ZufSU9h_WEGSv",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Чех тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Чех тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|CS",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|DA",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|DA|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "DA",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-01T18:30:00.000Z",
+      "localDate": "2026-12-01",
+      "localTime": "23:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-01T18:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/DA__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "55e86ea6425236555404ed7199696e19ddad352b7a4c191e2955f1a509d6a50c"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__DA__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLnPLNKl2kRWorr1iHJVQHekrIlqiQXeM_",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Дат тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Дат тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|DA",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|DE",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|DE|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "DE",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-02T06:30:00.000Z",
+      "localDate": "2026-12-02",
+      "localTime": "11:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-02T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/DE__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "998e13b8c287c0fcfbe714033564a25d49db956cf013823eb8c9b47b2c686e48"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__DE__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLnPLNKl2kRWp0m-j_q-oWACxiEyeRyCmL",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Неміс тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Неміс тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|DE",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|EN",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|EN|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "EN",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-02T09:30:00.000Z",
+      "localDate": "2026-12-02",
+      "localTime": "14:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-02T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/EN__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "1f323b19ee44f6b45b823866749537e8ef8166bff0f42ebc43a5386dcc4e5ce4"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__EN__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLnPLNKl2kRWoOdl4EXUh-X3AKsXi0cHkt",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Ағылшын тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Ағылшын тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|EN",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|EN-GB",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|EN-GB|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "EN-GB",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-02T12:30:00.000Z",
+      "localDate": "2026-12-02",
+      "localTime": "17:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-02T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/EN-GB__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "6bba9c0b2d5768d5f0a252d5fbb958f6d0e38b749d3fd52bd3b6dcd29a811ee7"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__EN-GB__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLnPLNKl2kRWqrMFjG9x3IfopcFfddkM6p",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Британдық ағылшын тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Британдық ағылшын тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|EN-GB",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|ES",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|ES|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "ES",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-02T15:30:00.000Z",
+      "localDate": "2026-12-02",
+      "localTime": "20:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-02T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/ES__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "dd8ea261bca05e4eeaec9b4a8bb8f5bbadc1a3d5822f3f55ef608a0a41f42a26"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__ES__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLnPLNKl2kRWpm5VnOl6DWJJ6HcAK1Mkeq",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Испан тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Испан тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|ES",
+      "localSlotIndex": 4
+    },
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|ES-419",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|ES-419|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "ES-419",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-02T18:30:00.000Z",
+      "localDate": "2026-12-02",
+      "localTime": "23:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-02T18:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/ES-419__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "54a1d08854020a6d78c5498bd4159bb384fcffa913fec5052a92e81053b05634"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__ES-419__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLnPLNKl2kRWqbOc-oJYFToIUiwqLA5BOf",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Латын Америкасы испан тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Латын Америкасы испан тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|ES-419",
+      "localSlotIndex": 5
+    },
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|ET",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|ET|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "ET",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-03T03:30:00.000Z",
+      "localDate": "2026-12-03",
+      "localTime": "08:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-03T03:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/ET__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "2dbb07eadc96b9a765d784beba3b9c4565c12950fb29a3aade26ff5e14ff024d"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__ET__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLnPLNKl2kRWqkMG5vbsjaO9xekYEMYiQ9",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Эстон тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Эстон тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|ET",
+      "localSlotIndex": 0
+    },
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|FI",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|FI|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "FI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-03T06:30:00.000Z",
+      "localDate": "2026-12-03",
+      "localTime": "11:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-03T06:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/FI__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "af2ce2d3703871ad0d1565f6a9a7f7d08954380baa6bf0cf9bacbd78e28428b4"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__FI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLnPLNKl2kRWq0_UruvZ5-aBbWf0n90UIX",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Фин тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Фин тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|FI",
+      "localSlotIndex": 1
+    },
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|FR",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|FR|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "FR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-03T09:30:00.000Z",
+      "localDate": "2026-12-03",
+      "localTime": "14:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-03T09:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/FR__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "5e319e1e4d04b26043335c07bbdb7a3321e95c47f2be61870f3db733cd02a63e"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__FR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLnPLNKl2kRWpCzFArFBvQ0aoj9X9Nyk4f",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Француз тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Француз тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|FR",
+      "localSlotIndex": 2
+    },
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|HI",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|HI|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "HI",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-03T12:30:00.000Z",
+      "localDate": "2026-12-03",
+      "localTime": "17:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-03T12:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/HI__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "0013bc99df72ff5ab9a115bad512f280b56e762b63f77c0d432f1b8c99446c7a"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__HI__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLnPLNKl2kRWqKUegzCLH_Ep7BgU_U2elR",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Хинди тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Хинди тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|HI",
+      "localSlotIndex": 3
+    },
+    {
+      "assignmentKey": "ordinary|core_colors_shapes_a1|KK|HR",
+      "calendarAssignmentKey": "ordinary|core_colors_shapes_a1|KK|HR|kk",
+      "videoType": "ordinary",
+      "setId": "core_colors_shapes_a1",
+      "supportLang": "KK",
+      "targetLang": "HR",
+      "targetLangs": [],
+      "targetLangsHash": "",
+      "bundleKey": "",
+      "requestedContentScope": "",
+      "contentScope": "",
+      "cardLimit": 0,
+      "maxDurationSeconds": 0,
+      "longVideoUploadAllowed": false,
+      "polyglotKey": "",
+      "autoFallbackReason": "",
+      "productionReadiness": {
+        "ready": true,
+        "status": "configured",
+        "reason": "configured_tts_voice",
+        "checkedAt": "",
+        "provider": "edge",
+        "voiceId": "edge_kk-KZ-AigulNeural",
+        "supportLang": "KK"
+      },
+      "channelKey": "kk",
+      "youtubeChannelId": "UCbTIdOTFdk0bVaytyx5v13Q",
+      "routeKey": "youtube-4",
+      "youtubeEnvironment": "youtube-api-youtube-4",
+      "publishAt": "2026-12-03T15:30:00.000Z",
+      "localDate": "2026-12-03",
+      "localTime": "20:30",
+      "timeZone": "Asia/Almaty",
+      "slotKey": "kk|2026-12-03T15:30:00.000Z",
+      "thumbnail": {
+        "mode": "custom",
+        "ready": true,
+        "reason": "",
+        "path": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/video/by-set/core_colors_shapes_a1/ordinary/by-channel/kk__KK__LunaCardsKazakh/HR__item/youtube_thumbnail.jpg",
+        "manifestPath": "data/youtube-cover-assets/deck17-colors-shapes-first-wave-20261123/manifest.json",
+        "sha256": "a630355f2fa29e4eb08d0214fe8cde7eced676097a0350a78addb44bf124d049"
+      },
+      "playlist": {
+        "ready": true,
+        "state": "resolved_existing",
+        "blockers": [],
+        "warnings": [
+          "durable playlist title differs from the current deterministic title; ID remains authoritative"
+        ],
+        "playlistKey": "KK__HR__ordinary-vocabulary__a1-everyday",
+        "youtubePlaylistId": "PLXJiCjSTccC4",
+        "playlistPrivacyStatus": "public",
+        "createAllowed": false,
+        "matchEvidence": [
+          "durable_registry_id"
+        ],
+        "title": "Хорват тілі A1: сөздік және айтылым",
+        "description": "FlashcardsLuna видеолары қазақ тілді көрермендерге Хорват тілін үйренуге көмектеседі: карточкалар, айтылым, қайталау паузалары және қысқа мини-тесттер.",
+        "registryEntryPresent": true,
+        "discoveryGeneratedAt": "2026-11-23T00:34:42.266Z"
+      },
+      "status": "planned",
+      "sourceRouteKey": "youtube-4",
+      "sourceYoutubeEnvironment": "youtube-api-youtube-4",
+      "sourceAssignmentKey": "ordinary|core_colors_shapes_a1|KK|HR",
+      "localSlotIndex": 4
+    }
+  ],
+  "campaignId": "yt-core_colors_shapes_a1-2026-11-23-f736f9d06d8b",
+  "manifestHash": "2b7c2f5c32f26c9603628401029dc69d5b1fc9fb8cc55073f6b67ecdc6004bc2"
+}
