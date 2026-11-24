@@ -1912588,16 +1912588,15 @@
       "youtubeChannelId": "UCgMA8idfFe5ybUFF-tXpO7Q",
       "channelHandle": "@lunacardsespanol",
       "privacyStatus": "private",
-      "publicationStatus": "scheduled_uploaded_post_upload_partial",
+      "publicationStatus": "scheduled_uploaded",
       "publishAt": "2026-12-05T16:30:00.000Z",
       "scheduledPublishAt": "2026-12-05T16:30:00.000Z",
       "desiredPrivacyStatus": "public",
       "needsVisibilityPromotion": false,
-      "thumbnailSet": false,
+      "thumbnailSet": true,
       "thumbnailLogoOverlay": false,
       "thumbnailUploadMode": "custom",
       "thumbnailSource": "pre-rendered-design-prototype",
-      "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n    \"errors\": [\n      {\n        \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"forbidden\",\n        \"location\": \"videoId\",\n        \"locationType\": \"parameter\"\n      }\n    ]\n  }\n}\n",
       "metadataSource": "openai-responses-campaign-batch",
       "metadataModel": "gpt-5.6-luna",
       "campaignId": "yt-core_colors_shapes_a1-2026-11-24-4ac0e233b680",
@@ -1912610,7 +1912609,18 @@
         "uploadStatus": "uploaded",
         "privacyStatus": "private",
         "publishAt": "2026-12-05T16:30:00Z",
-        "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n    \"errors\": [\n      {\n        \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"forbidden\",\n        \"location\": \"videoId\",\n        \"locationType\": \"parameter\"\n      }\n    ]\n  }\n}\n"
+        "postUploadError": "YouTube media upload /upload/youtube/v3/thumbnails/set failed (403): {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n    \"errors\": [\n      {\n        \"message\": \"The thumbnail can't be set for the specified video. The request might not be properly authorized.\",\n        \"domain\": \"youtube.thumbnail\",\n        \"reason\": \"forbidden\",\n        \"location\": \"videoId\",\n        \"locationType\": \"parameter\"\n      }\n    ]\n  }\n}\n",
+        "thumbnailStatus": "custom_set"
+      },
+      "thumbnailUploadedAt": "2026-11-24T11:20:45.684Z",
+      "lastThumbnailReadbackAt": "2026-11-24T11:20:45.684Z",
+      "thumbnailUploadEvidence": {
+        "source": "youtube.thumbnails.set",
+        "imageFileName": "youtube_thumbnail.jpg",
+        "responseItemCount": 1,
+        "workflowRunId": "45382878073",
+        "approvedImagePath": "data/youtube-cover-assets/deck17-colors-shapes-wave2-20261124/video/by-set/core_colors_shapes_a1/ordinary/by-channel/es__ES-419__LunaCardsEspanol/ID__Indonesio/youtube_thumbnail.jpg",
+        "approvedImageSha256": "fadd221b868ffc50955cefd5c53531a7e91208308bf5210b14479b7ecd30e23d"
       }
     }
   ]

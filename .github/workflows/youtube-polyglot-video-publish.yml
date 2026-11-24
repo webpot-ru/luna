@@ -4,6 +4,7 @@ on:
   workflow_call:
     inputs:
       stop_on_429: { required: false, type: boolean, default: false }
+      stop_on_403: { required: false, type: boolean, default: false }
       mode: { required: true, type: string }
       set_id: { required: true, type: string }
       support: { required: true, type: string }
@@ -251,6 +252,8 @@ jobs:
         'youtube-api-branding'
       }}
     timeout-minutes: 240
+    env:
+      YOUTUBE_CAMPAIGN_STOP_ON_403: ${{ inputs.stop_on_403 && '1' || '' }}
 
     steps:
       - name: Checkout repository

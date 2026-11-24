@@ -33,11 +33,6 @@ on:
         description: "Optional no-spend campaign plan: next ordinary videos per physical channel; 0 disables campaign planning."
         required: true
         default: "0"
-      campaign_allow_partial_ordinary_tail:
-        description: "Allow a final ordinary tail campaign to take fewer than the requested count only where the deck has no more unclaimed assignments."
-        required: true
-        default: false
-        type: boolean
       campaign_ordinary_count_overrides:
         description: "Explicit canonical support counts, e.g. FR:9,ID:9; each 1..campaign_ordinary_per_channel. Empty preserves uniform waves."
         required: false
@@ -82,6 +77,11 @@ on:
         description: "Explicitly approved single batch: fresh control, exact claim, then ONE standard parent dispatch. Default is preview only."
         type: boolean
         required: true
+        default: false
+      fast_stop_on_403_or_429:
+        description: "Apply only: stop the entire publication campaign at the first provider HTTP 403 or 429."
+        type: boolean
+        required: false
         default: false
       expected_assignment_count:
         description: "Exact owner-approved total; a different result stops before claim."

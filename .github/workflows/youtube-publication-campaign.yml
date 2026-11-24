@@ -66,6 +66,11 @@ on:
         required: false
         default: false
         type: boolean
+      stop_on_403:
+        description: "Also stop at the first provider HTTP 403; requires stop_on_429."
+        required: false
+        default: false
+        type: boolean
       confirm_campaign_apply:
         description: "Apply only: type APPLY_YOUTUBE_PUBLICATION_CAMPAIGN."
         required: false
@@ -169,6 +174,10 @@ jobs:
           fi
           if [ -z "${{ inputs.campaign_id }}" ] || [ -z "${{ inputs.campaign_manifest_hash }}" ]; then
             echo "::error::apply requires campaign_id and campaign_manifest_hash"
+            exit 1
+          fi
+          if [ "${{ inputs.stop_on_403 }}" = "true" ] && [ "${{ inputs.stop_on_429 }}" != "true" ]; then
+            echo "::error::stop_on_403 requires the serialized stop_on_429 mode."
             exit 1
           fi
           if [ "${{ inputs.stop_on_429 }}" = "true" ] && [ -n "${{ inputs.ready_media_spec }}" ]; then
@@ -348,6 +357,7 @@ jobs:
         env:
           NODE_OPTIONS: ${{ inputs.stop_on_429 && format('--import={0}/scripts/lib/youtube-stop-on-http-429.mjs', github.workspace) || '' }}
           YOUTUBE_CAMPAIGN_HTTP429_MODE: ${{ inputs.stop_on_429 && 'stop' || '' }}
+          YOUTUBE_CAMPAIGN_STOP_ON_403: ${{ inputs.stop_on_403 && '1' || '' }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_SERVICE_TIER: ${{ vars.OPENAI_SERVICE_TIER }}
           OPENAI_ROUTE_TOKEN_BUDGET: ${{ matrix.openai_token_budget }}
@@ -432,6 +442,7 @@ jobs:
     with:
       video_type: combined
       stop_on_429: ${{ inputs.stop_on_429 }}
+      stop_on_403: ${{ inputs.stop_on_403 }}
       route_key: ${{ matrix.route_key }}
       campaign_id: ${{ inputs.campaign_id }}
       campaign_manifest_hash: ${{ inputs.campaign_manifest_hash }}

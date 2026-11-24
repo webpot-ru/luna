@@ -670,11 +670,13 @@ Live control в этом режиме остаётся полным по все�
 ## Safe publish sequence
 
 For a standard apply explicitly requiring the batch to stop at the first
-provider HTTP 429, set `stop_on_429=true` on the parent dispatch. One campaign
+provider HTTP 429, set `stop_on_429=true` on the parent dispatch. To stop on
+HTTP 403 as well, also set `stop_on_403=true`. Fast Lane enables both with
+`fast_stop_on_403_or_429=true` on approved apply. One campaign
 still owns the complete manifest. Metadata routes, publish routes, channel
 workers, video rendering, and TTS prefetch are serialized in this mode. A 429
-from guarded fetch calls or the Edge TTS handshake exits before another provider
-request. In the upload step the failure goes through the existing error handler
+from guarded fetch calls or the Edge TTS handshake stops before another
+provider request. Guarded HTTP 403 responses stop in the same way when enabled. In the upload step the failure goes through the existing error handler
 to preserve any already accepted video ID, and the finalizer can persist partial
 results. The evidence artifact records the HTTP status and provider host only,
 with a time stamp. The remaining jobs do not start after a worker failure. A mixed campaign

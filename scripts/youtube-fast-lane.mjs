@@ -27,6 +27,7 @@ export function authorizeFastLane(event, ref) {
   assert(Number(i.campaign_ordinary_per_channel) > 0 || Number(i.campaign_polyglot_per_channel) > 0, "Playlist discovery must be activated");
   for (const key of ["persist_snapshot", "campaign_allow_partial_ordinary_tail", "campaign_allow_partial_polyglot_tail", "campaign_allow_partial_route_quota_tail"]) assert(!enabled(i[key]), `${key} is not supported`);
   const apply = enabled(i.fast_apply);
+  if (enabled(i.fast_stop_on_403_or_429)) assert(apply, "The stop flag is available only for approved apply");
   assert.equal(enabled(i.claim_campaign), apply, "Claim and approved apply must be enabled together");
   if (apply) {
     assert.equal(i.claim_target_branch, "main");
@@ -232,6 +233,10 @@ function main() {
     campaign_id: manifest.campaignId, campaign_manifest_hash: manifest.manifestHash,
     confirm_campaign_apply: inputs.fast_confirm_apply, confirm_openai_metadata: inputs.fast_confirm_metadata,
     playlist_preflight_mode: "owned_complete" };
+  if (enabled(inputs.fast_stop_on_403_or_429)) {
+    dispatchInputs.stop_on_429 = "true";
+    dispatchInputs.stop_on_403 = "true";
+  }
   const receiptPath = "outputs/youtube-fast-lane-dispatch.json";
   const receipt = { campaignId: manifest.campaignId, manifestHash: manifest.manifestHash, head,
     requestedAt: new Date().toISOString(), status: "attempt_started_no_retry", inputs: dispatchInputs };
