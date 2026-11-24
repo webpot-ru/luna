@@ -316,12 +316,16 @@ assert.match(
 );
 assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?max-parallel: \$\{\{ inputs\.stop_on_429 && 1 \|\| 5 \}\}\n\s+matrix:/u, "each ordinary project queue must run five physical channels concurrently");
 assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?concurrency: \$\{\{ inputs\.stop_on_429 && '1' \|\| '3' \}\}/u, "each ordinary channel must build three videos concurrently");
-assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?max-parallel: 5\n\s+matrix:/u, "each Polyglot project queue must run five physical channels concurrently");
+assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?fail-fast: \$\{\{ inputs\.stop_on_429 \}\}\n\s+max-parallel: \$\{\{ inputs\.stop_on_429 && 1 \|\| 5 \}\}/u, "only guarded Polyglot campaign routes must serialize workers");
+assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?\(!inputs\.stop_on_429 \|\| needs\.ordinary\.result == 'success' \|\| needs\.prepare\.outputs\.ordinary_worker_count == '0'\)/u, "guarded Polyglot queues must wait for successful ordinary work or an empty queue");
+assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?stop_on_429: \$\{\{ inputs\.stop_on_429 \}\}/u, "the reusable Polyglot workflow must inherit the guard");
 assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?needs: \[prepare, ordinary\]/u, "each project must start Polyglot after its own ordinary queue");
 assert.match(routeWorkerWorkflow, /inputs\.video_type == 'polyglot' \|\| inputs\.video_type == 'combined'/u, "combined route publication must include Polyglot");
 assert.doesNotMatch(campaignWorkflow, /needs: \[preflight, metadata, ordinary\]/u, "Polyglot must not wait for the global ordinary matrix");
 assert.match(routeWorkerWorkflow, /campaign_polyglot_rows: \$\{\{ matrix\.polyglot_rows \}\}/u, "the route worker must pass the complete Polyglot sequence for a physical channel");
 const polyglotWorkflow = fs.readFileSync(".github/workflows/youtube-polyglot-video-publish.yml", "utf8");
+assert.match(polyglotWorkflow, /Render Polyglot video locally\n[\s\S]*?YOUTUBE_CAMPAIGN_HTTP429_MODE: \$\{\{ inputs\.stop_on_429 && 'stop'/u, "Polyglot render must stop on the first provider HTTP 429");
+assert.match(polyglotWorkflow, /Upload Polyglot video to YouTube\n[\s\S]*?YOUTUBE_CAMPAIGN_HTTP429_MODE: \$\{\{ inputs\.stop_on_429 && 'preserve-receipt'/u, "guarded Polyglot upload must preserve video receipts");
 const ordinaryWorkflow = fs.readFileSync(".github/workflows/youtube-video-publish.yml", "utf8");
 assert.match(ordinaryWorkflow, /workflow_call:[\s\S]*?concurrency: \{ required: false, type: string, default: "3" \}/u, "ordinary reusable workflow must default to three concurrent video builds");
 assert.match(polyglotWorkflow, /prepare-polyglot-sequence:[\s\S]*?worker_matrix/u, "Polyglot publication must prepare a per-channel sequence");

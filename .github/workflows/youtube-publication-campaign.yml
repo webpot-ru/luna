@@ -62,7 +62,7 @@ on:
         required: false
         default: ""
       stop_on_429:
-        description: "Ordinary apply only. Process one channel at a time and stop the campaign at the first provider HTTP 429."
+        description: "Standard apply only. Process one channel at a time and stop the campaign at the first provider HTTP 429."
         required: false
         default: false
         type: boolean
@@ -204,9 +204,6 @@ jobs:
             --manifest-hash="${{ inputs.campaign_manifest_hash }}" \
             --github-output="$GITHUB_OUTPUT" \
             --output=outputs/youtube-publication-campaign-run-preflight.json
-          if [ "${{ inputs.stop_on_429 }}" = "true" ]; then
-            node -e 'const report = require("./outputs/youtube-publication-campaign-run-preflight.json"); if (!report.ordinaryMatrix.length || report.polyglotMatrix.length) throw new Error("stop_on_429 requires an ordinary-only campaign");'
-          fi
 
       - name: Gate optional ready-media reuse without provider calls
         if: ${{ inputs.ready_media_spec != '' || inputs.confirm_ready_media != '' }}

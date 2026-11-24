@@ -112,14 +112,13 @@ jobs:
     secrets: inherit
 
   polyglot:
-    # This route does not wait for ordinary work in the other seven projects.
-    # A failed ordinary worker in this route still must not suppress its
-    # independent Polyglot tail; exact receipts drive final recovery.
-    if: ${{ always() && !cancelled() && needs.prepare.result == 'success' && (inputs.video_type == 'polyglot' || inputs.video_type == 'combined') && needs.prepare.outputs.polyglot_worker_count != '0' }}
+    # In normal mode the route proceeds after its ordinary queue, even if
+    # that queue fails. Stop mode cancels the remaining work on failure.
+    if: ${{ always() && !cancelled() && needs.prepare.result == 'success' && (!inputs.stop_on_429 || needs.ordinary.result == 'success' || needs.prepare.outputs.ordinary_worker_count == '0') && (inputs.video_type == 'polyglot' || inputs.video_type == 'combined') && needs.prepare.outputs.polyglot_worker_count != '0' }}
     needs: [prepare, ordinary]
     strategy:
-      fail-fast: false
-      max-parallel: 5
+      fail-fast: ${{ inputs.stop_on_429 }}
+      max-parallel: ${{ inputs.stop_on_429 && 1 || 5 }}
       matrix: ${{ fromJSON(needs.prepare.outputs.polyglot_worker_matrix) }}
     uses: ./.github/workflows/youtube-polyglot-video-publish.yml
     with:
@@ -127,6 +126,7 @@ jobs:
       set_id: ${{ inputs.set_id }}
       support: ${{ matrix.support }}
       bundle: ""
+      stop_on_429: ${{ inputs.stop_on_429 }}
       campaign_polyglot_rows: ${{ matrix.polyglot_rows }}
       privacy: private
       publish_mode: scheduled
