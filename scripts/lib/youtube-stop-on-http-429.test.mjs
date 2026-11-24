@@ -17,8 +17,8 @@ const program = `
   try { await fetch("https://test.example/next"); }
   catch (error) { console.log("next request blocked"); }
 `;
-const run = (cwd, mode, script = program) => spawnSync(process.execPath, ["--input-type=module", "--eval", script], {
-  cwd, env: { ...process.env, YOUTUBE_CAMPAIGN_HTTP429_MODE: mode }, encoding: "utf8",
+const run = (cwd, mode, script = program, stopOn403 = "") => spawnSync(process.execPath, ["--input-type=module", "--eval", script], {
+  cwd, env: { ...process.env, YOUTUBE_CAMPAIGN_HTTP429_MODE: mode, YOUTUBE_CAMPAIGN_STOP_ON_403: stopOn403 }, encoding: "utf8",
 });
 const evidenceFile = (cwd) => path.join(cwd, "outputs/youtube-campaign-http429-stop.json");
 const dirs = ["stop", "preserve-receipt", ""].map((mode) => [mode, fs.mkdtempSync("scratch/http429-test-")]);
@@ -39,6 +39,20 @@ for (const [mode, cwd] of dirs) {
   assert.equal(JSON.parse(evidenceText).source, "test.example");
   assert.doesNotMatch(run(cwd, mode).stdout, /sent/u);
   assert.equal(fs.readFileSync(evidenceFile(cwd), "utf8"), evidenceText);
+}
+const forbidden = program.replace("429 : 200", "403 : 200");
+for (const [mode, optIn, expectedExit] of [["stop", "1", 75], ["preserve-receipt", "1", 0], ["stop", "", 0]]) {
+  const cwd = fs.mkdtempSync("scratch/http403-test-");
+  const result = run(cwd, mode, forbidden, optIn);
+  assert.equal(result.status, expectedExit, result.stderr);
+  if (optIn) {
+    assert.doesNotMatch(result.stdout, /sent \/next/u);
+    assert.equal(JSON.parse(fs.readFileSync(evidenceFile(cwd), "utf8")).status, 403);
+    if (mode === "preserve-receipt") assert.match(result.stdout, /receipt handler.*HTTP 403/u);
+  } else {
+    assert.match(result.stdout, /sent \/next/u);
+    assert.ok(!fs.existsSync(evidenceFile(cwd)));
+  }
 }
 const edgeDir = fs.mkdtempSync("scratch/http429-edge-test-");
 const edge = run(edgeDir, "stop", `const guard = await import(${JSON.stringify(moduleUrl)}); guard.recordCampaignHttp429("edge-tts");`);

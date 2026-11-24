@@ -12,10 +12,14 @@ export function buildFastLaneWorkflow(source) {
   // Partial quota-tail mode is forbidden here. Keep the standard quota policy,
   // freeing one dispatch input for reuse without exceeding GitHub's 25-input cap.
   replaceOnce('      campaign_max_video_uploads_per_route:\n        description: "Maximum videos.insert rows per API project for this quota day."\n        required: true\n        default: "1100"\n', "");
+  replaceOnce('      campaign_allow_partial_ordinary_tail:\n        description: "Allow a final ordinary tail campaign to take fewer than the requested count only where the deck has no more unclaimed assignments."\n        required: true\n        default: false\n        type: boolean\n', "");
   replaceOnce("permissions:\n  contents: read", [
     "      fast_apply:",
     '        description: "Explicitly approved single batch: fresh control, exact claim, then ONE standard parent dispatch. Default is preview only."',
     "        type: boolean", "        required: true", "        default: false",
+    "      fast_stop_on_403_or_429:",
+    '        description: "Apply only: stop the entire publication campaign at the first provider HTTP 403 or 429."',
+    "        type: boolean", "        required: false", "        default: false",
     "      expected_assignment_count:",
     '        description: "Exact owner-approved total; a different result stops before claim."',
     "        type: string", "        required: true", '        default: "585"',
