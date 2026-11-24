@@ -85,7 +85,7 @@ jobs:
       support: ${{ matrix.support }}
       youtube_environment: ${{ matrix.youtube_environment }}
       langs: ${{ matrix.langs }}
-      concurrency: ${{ inputs.stop_on_429 && '1' || '3' }}
+      concurrency: "3"
       stop_on_429: ${{ inputs.stop_on_429 }}
       stop_on_403: ${{ inputs.stop_on_403 }}
       metadata_gemini_backend: api,vectorengine

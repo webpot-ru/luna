@@ -674,7 +674,10 @@ provider HTTP 429, set `stop_on_429=true` on the parent dispatch. To stop on
 HTTP 403 as well, also set `stop_on_403=true`. Fast Lane enables both with
 `fast_stop_on_403_or_429=true` on approved apply. One campaign
 still owns the complete manifest. Metadata routes, publish routes, channel
-workers, video rendering, and TTS prefetch are serialized in this mode. A 429
+workers, TTS calls, and YouTube writes are serialized in this mode. Ordinary
+workers prepare all audio for their assigned targets serially before starting
+up to three render processes. Those processes use cached audio and fail on a
+missing clip without starting a new synthesis call. A 429
 from guarded fetch calls or the Edge TTS handshake stops before another
 provider request. Guarded HTTP 403 responses stop in the same way when enabled. In the upload step the failure goes through the existing error handler
 to preserve any already accepted video ID, and the finalizer can persist partial

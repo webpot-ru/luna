@@ -23,6 +23,11 @@ import { getPublicCourseDisplayUrl, getPublicCourseUrl, getQrCodeImageUrl } from
 import { outroIconNames } from "./lib/video-outro-icons.mjs";
 import { BRAND_NAME } from "./lib/brand.mjs";
 
+const audioStage = process.env.YOUTUBE_ORDINARY_AUDIO_STAGE || "";
+const prefetchOnly = audioStage === "prefetch";
+const cacheOnly = audioStage === "cache-only";
+const readAudio = (options) => getTtsAudio({ ...options, cacheOnly });
+
 const localizationPath = path.resolve("config/video-localization.json");
 const localizationData = JSON.parse(fs.readFileSync(localizationPath, "utf8"));
 
@@ -214,10 +219,6 @@ async function main() {
   const silent2sPath = path.join(outputDir, "silent-2s.wav");
   const silent3sPath = path.join(outputDir, "silent-3s.wav");
   const silent004sPath = path.join(outputDir, "silent-0.04s.wav");
-  generateSilentAudio(1.0, silent1sPath);
-  generateSilentAudio(2.0, silent2sPath);
-  generateSilentAudio(3.0, silent3sPath);
-  generateSilentAudio(0.04, silent004sPath);
 
   // Helper function to queue segment
   const queueSegment = (taskType, taskOptions, audioPath, durationOverride, segmentName, pauseDuration = 0) => {
@@ -296,13 +297,15 @@ async function main() {
   const uniqueTtsTasks = Array.from(uniqueTtsTasksMap.values());
   console.log(`Found ${uniqueTtsTasks.length} unique TTS audio clips to pre-fetch.`);
 
-  const CONCURRENCY_LIMIT = campaignHttp429GuardEnabled ? 1 : 8;
-  for (let i = 0; i < uniqueTtsTasks.length; i += CONCURRENCY_LIMIT) {
+  const CONCURRENCY_LIMIT = campaignHttp429GuardEnabled || prefetchOnly ? 1 : 8;
+  for (let i = 0; !cacheOnly && i < uniqueTtsTasks.length; i += CONCURRENCY_LIMIT) {
     const batch = uniqueTtsTasks.slice(i, i + CONCURRENCY_LIMIT);
     await Promise.all(batch.map(async (task) => {
       try {
-        await getTtsAudio(task);
+        const audioPath = await readAudio(task);
+        if (prefetchOnly && !audioPath) throw new Error("No audio returned for required clip");
       } catch (err) {
+        if (prefetchOnly) throw err;
         console.warn(`  -> Warning: Failed to pre-fetch audio for "${task.text}": ${err.message}`);
       }
     }));
@@ -310,9 +313,16 @@ async function main() {
     console.log(`  -> Progress: ${currentProgress}/${uniqueTtsTasks.length} audios processed.`);
   }
 
+  if (prefetchOnly) return;
+
+  generateSilentAudio(1.0, silent1sPath);
+  generateSilentAudio(2.0, silent2sPath);
+  generateSilentAudio(3.0, silent3sPath);
+  generateSilentAudio(0.04, silent004sPath);
+
   // 3.9 Intro Phase
   console.log("\n--- Starting Intro Phase Video Compilation ---");
-  const audioIntro = await getTtsAudio({
+  const audioIntro = await readAudio({
     text: introAudioText,
     voiceId: voiceSupport,
     langCode: supportLang,
@@ -366,20 +376,21 @@ async function main() {
     let audioSupportWord = null;
 
     try {
-      audioTargetWord = await getTtsAudio({
+      audioTargetWord = await readAudio({
         text: card.target_display,
         voiceId: voiceTarget,
         langCode: targetLang,
         cacheDir: voiceTargetCache
       });
 
-      audioSupportWord = await getTtsAudio({
+      audioSupportWord = await readAudio({
         text: card.support_display,
         voiceId: voiceSupport,
         langCode: supportLang,
         cacheDir: voiceSupportCache
       });
     } catch (err) {
+      if (cacheOnly) throw err;
       console.error(`[Card ${cardNum}] TTS Generation failed: ${err.message}. Skipping card.`);
       continue;
     }
@@ -610,7 +621,7 @@ async function main() {
   // 6. Outro Phase (Ad)
   console.log("\n--- Starting Outro Phase Video Compilation ---");
   const outroText = getOutroText(supportLang);
-  const audioOutro = await getTtsAudio({
+  const audioOutro = await readAudio({
     text: outroText,
     voiceId: voiceSupport,
     langCode: supportLang,

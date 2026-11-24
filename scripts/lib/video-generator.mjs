@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
-import { campaignHttp429GuardEnabled, recordCampaignHttp429, stopIfCampaignHitHttp429 } from "./youtube-stop-on-http-429.mjs";
+import { campaignHttp429GuardEnabled, recordCampaignHttp403, recordCampaignHttp429, stopIfCampaignHitHttp429 } from "./youtube-stop-on-http-429.mjs";
 import { edgeTtsRetryDelay } from "./edge-tts-backoff.mjs";
 import { appendAi33TaskLedger, readAi33TaskForCache } from "./ai33-task-ledger.mjs";
 import { execSync, execFileSync } from "node:child_process";
@@ -373,7 +373,7 @@ async function waitForAi33TaskAudio(taskId) {
 }
 
 // Generate TTS Audio (Local Free Edge-TTS version!)
-export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
+export async function getTtsAudio({ text, voiceId, langCode, cacheDir, cacheOnly = false }) {
   stopIfCampaignHitHttp429();
   if (!text || !text.trim()) return null;
   
@@ -392,9 +392,18 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
     .replace(/\s+/g, " ")
     .trim();
 
-  const textHash = crypto.createHash("sha256").update(`${voiceId}_${cleanedText}`).digest("hex");
-  const cachedPath = path.join(cacheDir, `${textHash}.mp3`);
+  const audioPath = (voice) => {
+    const hash = crypto.createHash("sha256").update(`${voice}_${cleanedText}`).digest("hex");
+    return path.join(cacheDir, `${hash}.mp3`);
+  };
+  const cachedPath = audioPath(voiceId);
   
+  if (cacheOnly) {
+    const voices = lang === "HY" ? [voiceId] : edgeVoiceCandidates(lang, voiceId);
+    const readyAudio = voices.map(audioPath).find(isUsableEdgeMp3);
+    if (!readyAudio) throw new Error(`Required pre-fetched audio missing: ${path.basename(cachedPath)}`);
+    return readyAudio;
+  }
   if (fs.existsSync(cachedPath) && fs.statSync(cachedPath).size > 0) {
     return cachedPath;
   }
@@ -458,8 +467,7 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
   for (let voiceIndex = 0; voiceIndex < voiceCandidates.length; voiceIndex += 1) {
     const candidateVoiceId = voiceCandidates[voiceIndex];
     const candidateCleanVoiceId = candidateVoiceId.replace(/^edge_/, "");
-    const candidateTextHash = crypto.createHash("sha256").update(`${candidateVoiceId}_${cleanedText}`).digest("hex");
-    const candidateCachedPath = path.join(cacheDir, `${candidateTextHash}.mp3`);
+    const candidateCachedPath = audioPath(candidateVoiceId);
     if (isUsableEdgeMp3(candidateCachedPath)) {
       return candidateCachedPath;
     }
@@ -497,8 +505,10 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir }) {
         try {
           if (fs.existsSync(temporaryPath)) fs.unlinkSync(temporaryPath);
         } catch (e) {}
-        if (campaignHttp429GuardEnabled && /HTTP status\s*=\s*429\b/i.test(String(err.stderr || ""))) {
-          recordCampaignHttp429("edge-tts");
+        if (campaignHttp429GuardEnabled) {
+          const status = String(err.stderr || "").match(/HTTP status\s*=\s*(403|429)\b/i)?.[1];
+          if (status === "429") recordCampaignHttp429("edge-tts");
+          if (status === "403") recordCampaignHttp403("edge-tts");
         }
         if (attempt < retryCount) {
           const waitMs = edgeTtsRetryDelay(formatExecError(err), attempt, retryBaseMs);

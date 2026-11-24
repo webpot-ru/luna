@@ -315,7 +315,7 @@ assert.match(
   "the nested route workflow must preserve the permissions required by its publication workflows",
 );
 assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?max-parallel: \$\{\{ inputs\.stop_on_429 && 1 \|\| 5 \}\}\n\s+matrix:/u, "each ordinary project queue must run five physical channels concurrently");
-assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?concurrency: \$\{\{ inputs\.stop_on_429 && '1' \|\| '3' \}\}/u, "each ordinary channel must build three videos concurrently");
+assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?concurrency: "3"/u, "each ordinary worker must allow three render processes");
 assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?fail-fast: \$\{\{ inputs\.stop_on_429 \}\}\n\s+max-parallel: \$\{\{ inputs\.stop_on_429 && 1 \|\| 5 \}\}/u, "only guarded Polyglot campaign routes must serialize workers");
 assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?\(!inputs\.stop_on_429 \|\| needs\.ordinary\.result == 'success' \|\| needs\.prepare\.outputs\.ordinary_worker_count == '0'\)/u, "guarded Polyglot queues must wait for successful ordinary work or an empty queue");
 assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?stop_on_429: \$\{\{ inputs\.stop_on_429 \}\}/u, "the reusable Polyglot workflow must inherit the guard");

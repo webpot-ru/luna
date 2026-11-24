@@ -31,6 +31,10 @@ function recordStop(status, source) {
   stopIfCampaignHitHttp429();
 }
 
+export function recordCampaignHttp403(source) {
+  if (stopOn403) recordStop(403, source);
+}
+
 export function recordCampaignHttp429(source) {
   recordStop(429, source);
 }
