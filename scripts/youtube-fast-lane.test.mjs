@@ -37,6 +37,19 @@ const approved = structuredClone(event);
 Object.assign(approved.inputs, { fast_apply: "true", claim_campaign: "true", claim_target_branch: "main",
   claim_confirm: "CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN", fast_confirm_apply: "APPLY_YOUTUBE_PUBLICATION_CAMPAIGN", fast_confirm_metadata: "USE_OPENAI_METADATA" });
 assert.equal(authorizeFastLane(approved, ref).apply, true);
+const withCheckpoint = { inputs: { ...approved.inputs,
+  fast_confirm_metadata: "REUSE_VERIFIED_YOUTUBE_METADATA",
+  recovery_source_campaign_id: "yt-fixture-source", recovery_source_manifest_hash: "a".repeat(64),
+  recovery_metadata_run_id: "1234", fast_stop_on_403_or_429: "true", edge_tts_retry_429: "true",
+} };
+assert.equal(authorizeFastLane(withCheckpoint, ref).metadataRunId, "1234");
+for (const change of [
+  { fast_confirm_metadata: "USE_OPENAI_METADATA" },
+  { recovery_source_campaign_id: "", recovery_source_manifest_hash: "" },
+  { recovery_metadata_run_id: "bad-run" },
+  { fast_stop_on_403_or_429: "false" },
+]) assert.throws(() => authorizeFastLane({ inputs: { ...withCheckpoint.inputs, ...change } }, ref));
+
 for (const key of ["claim_confirm", "fast_confirm_apply", "fast_confirm_metadata", "claim_target_branch"]) {
   const bad = structuredClone(approved); delete bad.inputs[key]; assert.throws(() => authorizeFastLane(bad, ref));
 }

@@ -37,16 +37,6 @@ on:
         description: "Explicit canonical support counts, e.g. FR:9,ID:9; each 1..campaign_ordinary_per_channel. Empty preserves uniform waves."
         required: false
         default: ""
-      campaign_allow_partial_polyglot_tail:
-        description: "Allow an all-tail campaign to take every remaining Polyglot bundle per channel, including fewer than the maximum."
-        required: true
-        default: false
-        type: boolean
-      campaign_allow_partial_route_quota_tail:
-        description: "Keep every possible tail below each route's daily video-upload cap and record only the unavoidable next-day remainder."
-        required: true
-        default: false
-        type: boolean
       campaign_polyglot_per_channel:
         description: "Optional no-spend campaign plan: next full Polyglot videos per physical channel; 0 disables campaign planning."
         required: true
@@ -83,6 +73,16 @@ on:
         type: boolean
         required: false
         default: false
+      recovery_metadata_run_id:
+        description: "Completed run with verified metadata for the direct recovery source. Empty generates metadata normally."
+        type: string
+        required: false
+        default: ""
+      edge_tts_retry_429:
+        description: "Guarded apply only: permit the Edge TTS cooldown between bounded HTTP 429 retries."
+        type: boolean
+        required: false
+        default: false
       expected_assignment_count:
         description: "Exact owner-approved total; a different result stops before claim."
         type: string
@@ -97,7 +97,7 @@ on:
         type: string
         required: false
         default: ""
-        description: "Apply only: USE_OPENAI_METADATA authorizes paid metadata for this batch."
+        description: "Apply only: USE_OPENAI_METADATA to generate or REUSE_VERIFIED_YOUTUBE_METADATA with a recovery run."
       recovery_source_campaign_id:
         type: string
         required: false

@@ -506,8 +506,9 @@ export async function getTtsAudio({ text, voiceId, langCode, cacheDir, cacheOnly
           if (fs.existsSync(temporaryPath)) fs.unlinkSync(temporaryPath);
         } catch (e) {}
         if (campaignHttp429GuardEnabled) {
+          const mayRetryRateLimit = process.env.YOUTUBE_CAMPAIGN_EDGE_TTS_RETRY_429 === "1" && attempt < retryCount;
           const status = String(err.stderr || "").match(/HTTP status\s*=\s*(403|429)\b/i)?.[1];
-          if (status === "429") recordCampaignHttp429("edge-tts");
+          if (status === "429" && !mayRetryRateLimit) recordCampaignHttp429("edge-tts");
           if (status === "403") recordCampaignHttp403("edge-tts");
         }
         if (attempt < retryCount) {

@@ -5,6 +5,7 @@ on:
     inputs:
       stop_on_429: { required: false, type: boolean, default: false }
       stop_on_403: { required: false, type: boolean, default: false }
+      edge_tts_retry_429: { required: false, type: boolean, default: false }
       mode: { required: true, type: string }
       set_id: { required: true, type: string }
       support: { required: true, type: string }
@@ -197,6 +198,7 @@ jobs:
     timeout-minutes: 360
     env:
       YOUTUBE_CAMPAIGN_STOP_ON_403: ${{ inputs.stop_on_403 && '1' || '' }}
+      YOUTUBE_CAMPAIGN_EDGE_TTS_RETRY_429: ${{ inputs.edge_tts_retry_429 && '1' || '' }}
       EFFECTIVE_YOUTUBE_ENVIRONMENT: >-
         ${{
           inputs.youtube_environment != 'auto' && inputs.youtube_environment ||
