@@ -3,6 +3,7 @@ name: YouTube Polyglot Video Publish
 on:
   workflow_call:
     inputs:
+      stop_on_429: { required: false, type: boolean, default: false }
       mode: { required: true, type: string }
       set_id: { required: true, type: string }
       support: { required: true, type: string }
@@ -232,7 +233,7 @@ jobs:
     needs: prepare-polyglot-sequence
     runs-on: ubuntu-24.04
     strategy:
-      fail-fast: false
+      fail-fast: ${{ inputs.stop_on_429 }}
       # One physical support channel owns all of its Polyglot tail bundles in
       # order. The route wrapper controls five such channels concurrently.
       max-parallel: 1
@@ -589,6 +590,8 @@ jobs:
         if: ${{ inputs.mode == 'apply' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
+          NODE_OPTIONS: ${{ inputs.stop_on_429 && format('--import={0}/scripts/lib/youtube-stop-on-http-429.mjs', github.workspace) || '' }}
+          YOUTUBE_CAMPAIGN_HTTP429_MODE: ${{ inputs.stop_on_429 && 'stop' || '' }}
           SET_ID: ${{ inputs.set_id }}
           SUPPORT: ${{ inputs.support }}
           TARGET_LANGS: ${{ steps.polyglot_plan.outputs.target_langs }}
@@ -603,6 +606,8 @@ jobs:
         if: ${{ inputs.mode == 'apply' && inputs.publish_mode == 'scheduled' && inputs.playlist_preflight_mode == 'owned_complete' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
+          NODE_OPTIONS: ${{ inputs.stop_on_429 && format('--import={0}/scripts/lib/youtube-stop-on-http-429.mjs', github.workspace) || '' }}
+          YOUTUBE_CAMPAIGN_HTTP429_MODE: ${{ inputs.stop_on_429 && 'stop' || '' }}
           SUPPORT: ${{ inputs.support }}
         run: |
           set -euo pipefail
@@ -627,6 +632,8 @@ jobs:
         if: ${{ inputs.mode == 'apply' && inputs.publish_mode == 'scheduled' && inputs.playlist_preflight_mode == 'target_playlist_only' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
+          NODE_OPTIONS: ${{ inputs.stop_on_429 && format('--import={0}/scripts/lib/youtube-stop-on-http-429.mjs', github.workspace) || '' }}
+          YOUTUBE_CAMPAIGN_HTTP429_MODE: ${{ inputs.stop_on_429 && 'stop' || '' }}
           SUPPORT: ${{ inputs.support }}
           CAMPAIGN_ID: ${{ inputs.campaign_id }}
           CAMPAIGN_MANIFEST_HASH: ${{ inputs.campaign_manifest_hash }}
@@ -704,6 +711,8 @@ jobs:
         if: ${{ steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
+          NODE_OPTIONS: ${{ inputs.stop_on_429 && format('--import={0}/scripts/lib/youtube-stop-on-http-429.mjs', github.workspace) || '' }}
+          YOUTUBE_CAMPAIGN_HTTP429_MODE: ${{ inputs.stop_on_429 && 'stop' || '' }}
           MODE: ${{ inputs.mode }}
           SET_ID: ${{ inputs.set_id }}
           SUPPORT: ${{ inputs.support }}
@@ -854,6 +863,8 @@ jobs:
         if: ${{ inputs.mode != 'plan' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
+          NODE_OPTIONS: ${{ inputs.stop_on_429 && format('--import={0}/scripts/lib/youtube-stop-on-http-429.mjs', github.workspace) || '' }}
+          YOUTUBE_CAMPAIGN_HTTP429_MODE: ${{ inputs.stop_on_429 && 'stop' || '' }}
           AI33_API_KEY: ${{ secrets.AI33_API_KEY }}
           SET_ID: ${{ inputs.set_id }}
           SUPPORT: ${{ inputs.support }}
@@ -953,6 +964,8 @@ jobs:
         if: ${{ inputs.mode == 'apply' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
+          NODE_OPTIONS: ${{ inputs.stop_on_429 && format('--import={0}/scripts/lib/youtube-stop-on-http-429.mjs', github.workspace) || '' }}
+          YOUTUBE_CAMPAIGN_HTTP429_MODE: ${{ inputs.stop_on_429 && 'stop' || '' }}
           SET_ID: ${{ inputs.set_id }}
           SUPPORT: ${{ inputs.support }}
           TARGET_LANGS: ${{ steps.polyglot_plan.outputs.target_langs }}
@@ -967,6 +980,8 @@ jobs:
         if: ${{ inputs.mode == 'apply' && steps.polyglot_plan.outputs.already_published != 'true' }}
         shell: bash
         env:
+          NODE_OPTIONS: ${{ inputs.stop_on_429 && format('--import={0}/scripts/lib/youtube-stop-on-http-429.mjs', github.workspace) || '' }}
+          YOUTUBE_CAMPAIGN_HTTP429_MODE: ${{ inputs.stop_on_429 && 'preserve-receipt' || '' }}
           CREATE_PLAYLISTS: ${{ inputs.create_playlists }}
           ALLOW_REPUBLISH: ${{ inputs.allow_republish }}
           INPUT_PRIVACY: ${{ inputs.privacy }}
@@ -1021,6 +1036,7 @@ jobs:
             outputs/polyglot-pre-rendered-thumbnail-copy-github.json
             outputs/polyglot-youtube-thumbnail-*.json
             outputs/youtube-polyglot-publish-ledger.jsonl
+            outputs/youtube-campaign-http429-stop.json
             outputs/youtube-live-publications-github.json
             outputs/youtube-publication-control-github.json
             outputs/youtube-polyglot-publish-schedule-github.json
