@@ -679,7 +679,12 @@ workers prepare all audio for their assigned targets serially before starting
 up to three render processes. Those processes use cached audio and fail on a
 missing clip without starting a new synthesis call. A 429
 from guarded fetch calls or the Edge TTS handshake stops before another
-provider request. Guarded HTTP 403 responses stop in the same way when enabled. In the upload step the failure goes through the existing error handler
+provider request. Guarded HTTP 403 responses stop in the same way when enabled.
+With the explicit `edge_tts_retry_429=true` input, an Edge TTS handshake 429
+uses the existing 30, 60, and 120 second backoff plus jitter, within the
+configured synthesis attempt budget. Subsequent attempts use the same voice
+and clip. On exhaustion the campaign stops. Other providers and YouTube
+retain their configured stop behavior. In the upload step the failure goes through the existing error handler
 to preserve any already accepted video ID, and the finalizer can persist partial
 results. The evidence artifact records the HTTP status and provider host only,
 with a time stamp. The remaining jobs do not start after a worker failure. A mixed campaign
@@ -930,14 +935,17 @@ Ordinary and Polyglot publication workflows pin Ubuntu 24.04. The repository's
 Playwright 1.60.0 cannot install Chromium on Ubuntu 26.04, which GitHub began
 assigning through ubuntu-latest in November 2026.
 
-An explicitly approved full-set partial recovery may set both
+An explicitly approved direct source-only recovery may set both
 metadata_resume_run_id and metadata_resume_campaign_id. The source must be a proven ancestor through immutable partialRecoveryOfCampaignId
 links. Every intermediate plan must preserve the entire assignment set, source
 deck fingerprint and metadata identities. Cycles, missing links and scope drift
 are rejected. The CLI entry point is covered by a child-process regression.
-The recovery and source must have the identical assignment-key set, offline
-deck SHA-256 and per-assignment product, channel, route and content scope.
-A subset or scope change is rejected. Each route requires a complete source
+A direct recovery can select a missing-only subset if every selected key
+has the same product, channel, route and content scope in the source and the
+offline deck checksum matches. Fast Lane accepts the source run via
+`recovery_metadata_run_id` with `REUSE_VERIFIED_YOUTUBE_METADATA`. The
+parent skips metadata generation when rebinding from a source campaign.
+Each route requires a complete source
 checkpoint with valid ownership, destinations and file checksums.
 
 scripts/rebind-youtube-campaign-metadata.mjs preserves generated text and

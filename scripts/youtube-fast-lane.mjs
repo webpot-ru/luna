@@ -28,14 +28,20 @@ export function authorizeFastLane(event, ref) {
   for (const key of ["persist_snapshot", "campaign_allow_partial_ordinary_tail", "campaign_allow_partial_polyglot_tail", "campaign_allow_partial_route_quota_tail"]) assert(!enabled(i[key]), `${key} is not supported`);
   const apply = enabled(i.fast_apply);
   if (enabled(i.fast_stop_on_403_or_429)) assert(apply, "The stop flag is available only for approved apply");
+  if (enabled(i.edge_tts_retry_429)) assert(apply && enabled(i.fast_stop_on_403_or_429), "Edge TTS cooldown requires guarded apply");
+  const metadataRunId = String(i.recovery_metadata_run_id || "");
+  if (metadataRunId) {
+    assert(apply && recovery, "Metadata reuse requires approved source-only recovery");
+    assert.match(metadataRunId, /^[1-9][0-9]*$/, "Metadata source run must be numeric");
+  }
   assert.equal(enabled(i.claim_campaign), apply, "Claim and approved apply must be enabled together");
   if (apply) {
     assert.equal(i.claim_target_branch, "main");
     assert.equal(i.claim_confirm, "CLAIM_YOUTUBE_PUBLICATION_CAMPAIGN");
     assert.equal(i.fast_confirm_apply, "APPLY_YOUTUBE_PUBLICATION_CAMPAIGN");
-    assert.equal(i.fast_confirm_metadata, "USE_OPENAI_METADATA");
+    assert.equal(i.fast_confirm_metadata, metadataRunId ? "REUSE_VERIFIED_YOUTUBE_METADATA" : "USE_OPENAI_METADATA");
   }
-  return { inputs: i, apply, recovery };
+  return { inputs: i, apply, recovery, metadataRunId };
 }
 
 export function verifyFastLaneEvidence({ event, ref, control, playlists, manifest, source = null, claimedCampaignId = "", now = Date.now() }) {
@@ -96,7 +102,7 @@ function main() {
   const [mode, artifactRoot] = process.argv.slice(2);
   const event = read(process.env.GITHUB_EVENT_PATH);
   const ref = process.env.GITHUB_REF;
-  const { inputs, apply, recovery } = authorizeFastLane(event, ref);
+  const { inputs, apply, recovery, metadataRunId } = authorizeFastLane(event, ref);
   if (mode === "authorize") return console.log("Explicit scope authorization: PASS");
   if (mode === "is-recovery") { process.exitCode = recovery ? 0 : 1; return; }
   if (mode === "import-control") {
@@ -231,8 +237,14 @@ function main() {
   const dispatchInputs = { mode: "apply", set_id: manifest.setId, supports: manifest.inputs.supports,
     ordinary_per_channel: String(manifest.inputs.ordinaryPerChannel), polyglot_per_channel: String(manifest.inputs.polyglotPerChannel),
     campaign_id: manifest.campaignId, campaign_manifest_hash: manifest.manifestHash,
-    confirm_campaign_apply: inputs.fast_confirm_apply, confirm_openai_metadata: inputs.fast_confirm_metadata,
-    playlist_preflight_mode: "owned_complete" };
+    confirm_campaign_apply: inputs.fast_confirm_apply, playlist_preflight_mode: "owned_complete" };
+  if (metadataRunId) {
+    dispatchInputs.metadata_resume_run_id = metadataRunId;
+    dispatchInputs.metadata_resume_campaign_id = recovery.campaignId;
+  } else {
+    dispatchInputs.confirm_openai_metadata = inputs.fast_confirm_metadata;
+  }
+  if (enabled(inputs.edge_tts_retry_429)) dispatchInputs.edge_tts_retry_429 = "true";
   if (enabled(inputs.fast_stop_on_403_or_429)) {
     dispatchInputs.stop_on_429 = "true";
     dispatchInputs.stop_on_403 = "true";

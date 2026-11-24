@@ -71,6 +71,11 @@ on:
         required: false
         default: false
         type: boolean
+      edge_tts_retry_429:
+        description: "Allow bounded pauses and retries for Edge TTS HTTP 429 in guarded apply."
+        required: false
+        default: false
+        type: boolean
       confirm_campaign_apply:
         description: "Apply only: type APPLY_YOUTUBE_PUBLICATION_CAMPAIGN."
         required: false
@@ -174,6 +179,10 @@ jobs:
           fi
           if [ -z "${{ inputs.campaign_id }}" ] || [ -z "${{ inputs.campaign_manifest_hash }}" ]; then
             echo "::error::apply requires campaign_id and campaign_manifest_hash"
+            exit 1
+          fi
+          if [ "${{ inputs.edge_tts_retry_429 }}" = "true" ] && [ "${{ inputs.stop_on_429 }}" != "true" ]; then
+            echo "::error::edge_tts_retry_429 requires guarded stop_on_429 mode."
             exit 1
           fi
           if [ "${{ inputs.stop_on_403 }}" = "true" ] && [ "${{ inputs.stop_on_429 }}" != "true" ]; then
@@ -338,7 +347,7 @@ jobs:
           run-id: ${{ inputs.metadata_resume_run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Rebind completed metadata from the exact full-set recovery source
+      - name: Rebind completed metadata from the verified recovery source
         if: ${{ inputs.metadata_resume_campaign_id != '' }}
         env:
           TARGET_CAMPAIGN: ${{ inputs.campaign_id }}
@@ -353,6 +362,7 @@ jobs:
             "outputs/youtube-campaign-metadata/$ROUTE_KEY"
 
       - name: Generate route-batched campaign metadata before render/TTS
+        if: ${{ inputs.metadata_resume_campaign_id == '' }}
         shell: bash
         env:
           NODE_OPTIONS: ${{ inputs.stop_on_429 && format('--import={0}/scripts/lib/youtube-stop-on-http-429.mjs', github.workspace) || '' }}
@@ -443,6 +453,7 @@ jobs:
       video_type: combined
       stop_on_429: ${{ inputs.stop_on_429 }}
       stop_on_403: ${{ inputs.stop_on_403 }}
+      edge_tts_retry_429: ${{ inputs.edge_tts_retry_429 }}
       route_key: ${{ matrix.route_key }}
       campaign_id: ${{ inputs.campaign_id }}
       campaign_manifest_hash: ${{ inputs.campaign_manifest_hash }}
