@@ -6,7 +6,7 @@ import { promisify } from "node:util";
 import { getDbLanguageCode, getSpreadsheetLanguageCode, normalizeLanguageCode } from "./lib/video-language-codes.mjs";
 import { BRAND_NAME } from "./lib/brand.mjs";
 import { shardItems } from "./lib/work-shards.mjs";
-import { stopIfCampaignHitHttp429 } from "./lib/youtube-stop-on-http-429.mjs";
+import { campaignHttp429GuardEnabled, stopIfCampaignHitHttp429 } from "./lib/youtube-stop-on-http-429.mjs";
 
 const execAsync = promisify(exec);
 const execFileAsync = promisify(execFile);
@@ -110,15 +110,18 @@ function appendToRegistry(setId, lang, supportLang, transition, quizLimit) {
   return registryPromise;
 }
 
-async function runBuild({ setId, targetLang, supportLang, transition, quizLimit }) {
+async function runBuild({ setId, targetLang, supportLang, transition, quizLimit, audioStage = "" }) {
   const cmd = `node scripts/build-deck-video.mjs --set ${setId} --target ${targetLang} --support ${supportLang} --quiz-limit ${quizLimit} --transition ${transition}`;
   console.log(`[START] Compiling video: ${targetLang} (support: ${supportLang})`);
   const start = Date.now();
   try {
-    await execAsync(cmd, { maxBuffer: 1024 * 1024 * 50 });
+    await execAsync(cmd, {
+      maxBuffer: 1024 * 1024 * 50,
+      env: { ...process.env, YOUTUBE_ORDINARY_AUDIO_STAGE: audioStage },
+    });
     const duration = ((Date.now() - start) / 1000).toFixed(1);
     console.log(`[SUCCESS] Compiled ${targetLang} in ${duration}s.`);
-    await appendToRegistry(setId, targetLang, supportLang, transition, quizLimit);
+    if (audioStage !== "prefetch") await appendToRegistry(setId, targetLang, supportLang, transition, quizLimit);
     return { ok: true, targetLang };
   } catch (err) {
     const duration = ((Date.now() - start) / 1000).toFixed(1);
@@ -265,6 +268,15 @@ async function main() {
   const queue = [...languages];
   const workers = [];
   const failures = [];
+  const renderFromCache = campaignHttp429GuardEnabled && concurrencyLimit > 1;
+  if (renderFromCache) {
+    console.log("Preparing all lesson audio serially before concurrent rendering.");
+    for (const targetLang of queue) {
+      const result = await runBuild({ setId, targetLang, supportLang, transition, quizLimit, audioStage: "prefetch" });
+      stopIfCampaignHitHttp429();
+      if (!result.ok) throw new Error(`Audio preparation failed for ${targetLang}: ${result.error}`);
+    }
+  }
 
   async function worker() {
     while (queue.length > 0) {
@@ -286,7 +298,10 @@ async function main() {
         continue;
       }
       
-      const result = await runBuild({ setId, targetLang, supportLang, transition, quizLimit });
+      const result = await runBuild({
+        setId, targetLang, supportLang, transition, quizLimit,
+        audioStage: renderFromCache ? "cache-only" : "",
+      });
       stopIfCampaignHitHttp429();
       if (!result.ok) failures.push(result);
     }

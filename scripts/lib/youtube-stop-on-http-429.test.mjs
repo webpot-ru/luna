@@ -58,4 +58,11 @@ const edgeDir = fs.mkdtempSync("scratch/http429-edge-test-");
 const edge = run(edgeDir, "stop", `const guard = await import(${JSON.stringify(moduleUrl)}); guard.recordCampaignHttp429("edge-tts");`);
 assert.equal(edge.status, 75, edge.stderr);
 assert.equal(JSON.parse(fs.readFileSync(evidenceFile(edgeDir), "utf8")).source, "edge-tts");
-console.log("HTTP 429 stops provider calls and preserves upload error handling");
+const edgeForbiddenDir = fs.mkdtempSync("scratch/http403-edge-test-");
+const edgeForbidden = run(edgeForbiddenDir, "stop", `const guard = await import(${JSON.stringify(moduleUrl)}); guard.recordCampaignHttp403("edge-tts");`, "1");
+assert.equal(edgeForbidden.status, 75, edgeForbidden.stderr);
+assert.deepEqual(
+  Object.fromEntries(Object.entries(JSON.parse(fs.readFileSync(evidenceFile(edgeForbiddenDir), "utf8"))).filter(([key]) => key !== "observedAt")),
+  { status: 403, source: "edge-tts" },
+);
+console.log("HTTP 403 and 429 guards stop provider calls and preserve upload receipts");

@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
 import {
   edgeVoiceCandidates,
   fetchDeckCards,
+  getTtsAudio,
   isUsableEdgeMp3,
   resolveOfflineDeckCards,
 } from "./lib/video-generator.mjs";
@@ -68,5 +73,58 @@ assert.match(canonicalExporter, /process\.exitCode = 1/);
 const videoGeneratorSource = fs.readFileSync("scripts/lib/video-generator.mjs", "utf8");
 assert.match(videoGeneratorSource, /crypto\.randomUUID\(\).*\.tmp\.mp3/);
 assert.doesNotMatch(videoGeneratorSource, /unlinkSync\(candidateCachedPath\)/);
+
+fs.mkdirSync("scratch", { recursive: true });
+const fixture = fs.mkdtempSync("scratch/guarded-parallel-video-");
+const mp3Fixture = Buffer.concat([Buffer.from("ID3"), Buffer.alloc(150)]);
+const fallbackVoice = "edge_lo-LA-ChanthavongNeural";
+const audioText = "cache only fixture";
+const fallbackHash = crypto.createHash("sha256").update(`${fallbackVoice}_${audioText}`).digest("hex");
+const fallbackPath = path.join(fixture, `${fallbackHash}.mp3`);
+fs.writeFileSync(fallbackPath, mp3Fixture);
+assert.equal(await getTtsAudio({
+  text: audioText, voiceId: "edge_lo-LA-KeomanyNeural", langCode: "LO", cacheDir: fixture, cacheOnly: true,
+}), fallbackPath);
+await assert.rejects(getTtsAudio({
+  text: "missing Armenian audio", voiceId: "ai33_fixture", langCode: "HY", cacheDir: fixture, cacheOnly: true,
+}), /Required pre-fetched audio missing/u);
+await assert.rejects(getTtsAudio({
+  text: "missing Edge audio", voiceId: "edge_en-US-JennyNeural", langCode: "EN", cacheDir: fixture, cacheOnly: true,
+}), /Required pre-fetched audio missing/u);
+
+fs.mkdirSync(path.join(fixture, "scripts"));
+fs.mkdirSync(path.join(fixture, "data/decks"), { recursive: true });
+fs.writeFileSync(path.join(fixture, "data/decks/fixture.json"), JSON.stringify({
+  cards: { RU: { FR: [], IT: [], DE: [], JA: [] } },
+}));
+fs.writeFileSync(path.join(fixture, "scripts/build-deck-video.mjs"), `
+  import fs from "node:fs";
+  const stage = process.env.YOUTUBE_ORDINARY_AUDIO_STAGE;
+  fs.appendFileSync("timing.log", stage + " start\\n");
+  await new Promise(resolve => setTimeout(resolve, 150));
+  fs.appendFileSync("timing.log", stage + " finish\\n");
+`);
+const parallelBuild = spawnSync(process.execPath, [
+  fileURLToPath(new URL("./build-all-deck-videos.mjs", import.meta.url)),
+  "--set", "fixture", "--support", "RU", "--concurrency", "3",
+], {
+  cwd: fixture,
+  env: { ...process.env, YOUTUBE_CAMPAIGN_HTTP429_MODE: "stop" },
+  encoding: "utf8",
+});
+assert.equal(parallelBuild.status, 0, parallelBuild.stderr);
+const marks = fs.readFileSync(path.join(fixture, "timing.log"), "utf8").trim().split("\n");
+assert.deepEqual(marks.slice(0, 8), Array(4).fill(["prefetch start", "prefetch finish"]).flat());
+const renders = marks.slice(8);
+assert.equal(renders.length, 8);
+assert(renders.every(mark => mark.startsWith("cache-only ")));
+let active = 0;
+let maximum = 0;
+for (const mark of renders) {
+  active += mark.endsWith(" start") ? 1 : -1;
+  maximum = Math.max(maximum, active);
+}
+assert.equal(active, 0);
+assert.equal(maximum, 3);
 
 console.log("video-generator offline deck tests passed");
