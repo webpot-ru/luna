@@ -69,10 +69,11 @@ on:
         required: true
         default: false
       fast_stop_on_403_or_429:
-        description: "Apply only: stop the entire publication campaign at the first provider HTTP 403 or 429."
-        type: boolean
+        description: "Apply only: true stops the campaign, channel stops only the affected channel, false disables the guard."
+        type: choice
+        options: ['false', 'true', 'channel']
         required: false
-        default: false
+        default: "false"
       recovery_metadata_run_id:
         description: "Completed run with verified metadata for the direct recovery source. Empty generates metadata normally."
         type: string

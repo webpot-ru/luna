@@ -43,6 +43,12 @@ const withCheckpoint = { inputs: { ...approved.inputs,
   recovery_metadata_run_id: "1234", fast_stop_on_403_or_429: "true", edge_tts_retry_429: "true",
 } };
 assert.equal(authorizeFastLane(withCheckpoint, ref).metadataRunId, "1234");
+const localGuard = { inputs: { ...withCheckpoint.inputs, fast_stop_on_403_or_429: "channel" } };
+assert.equal(authorizeFastLane(localGuard, ref).guarded, true);
+assert.equal(authorizeFastLane(localGuard, ref).channelLocalStop, true);
+assert.equal(authorizeFastLane(withCheckpoint, ref).channelLocalStop, false);
+assert.throws(() => authorizeFastLane({ inputs: { ...inputs, fast_stop_on_403_or_429: "channel" } }, ref));
+
 for (const change of [
   { fast_confirm_metadata: "USE_OPENAI_METADATA" },
   { recovery_source_campaign_id: "", recovery_source_manifest_hash: "" },
