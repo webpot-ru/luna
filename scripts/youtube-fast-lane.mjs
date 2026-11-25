@@ -27,8 +27,11 @@ export function authorizeFastLane(event, ref) {
   assert(Number(i.campaign_ordinary_per_channel) > 0 || Number(i.campaign_polyglot_per_channel) > 0, "Playlist discovery must be activated");
   for (const key of ["persist_snapshot", "campaign_allow_partial_ordinary_tail", "campaign_allow_partial_polyglot_tail", "campaign_allow_partial_route_quota_tail"]) assert(!enabled(i[key]), `${key} is not supported`);
   const apply = enabled(i.fast_apply);
-  if (enabled(i.fast_stop_on_403_or_429)) assert(apply, "The stop flag is available only for approved apply");
-  if (enabled(i.edge_tts_retry_429)) assert(apply && enabled(i.fast_stop_on_403_or_429), "Edge TTS cooldown requires guarded apply");
+  const channelLocalStop = i.fast_stop_on_403_or_429 === "channel";
+  const guarded = enabled(i.fast_stop_on_403_or_429) || channelLocalStop;
+  assert(guarded || !i.fast_stop_on_403_or_429 || i.fast_stop_on_403_or_429 === "false", "Unknown HTTP stop mode");
+  if (guarded) assert(apply, "The stop flag is available only for approved apply");
+  if (enabled(i.edge_tts_retry_429)) assert(apply && guarded, "Edge TTS cooldown requires guarded apply");
   const metadataRunId = String(i.recovery_metadata_run_id || "");
   if (metadataRunId) {
     assert(apply && recovery, "Metadata reuse requires approved source-only recovery");
@@ -41,7 +44,7 @@ export function authorizeFastLane(event, ref) {
     assert.equal(i.fast_confirm_apply, "APPLY_YOUTUBE_PUBLICATION_CAMPAIGN");
     assert.equal(i.fast_confirm_metadata, metadataRunId ? "REUSE_VERIFIED_YOUTUBE_METADATA" : "USE_OPENAI_METADATA");
   }
-  return { inputs: i, apply, recovery, metadataRunId };
+  return { inputs: i, apply, recovery, metadataRunId, guarded, channelLocalStop };
 }
 
 export function verifyFastLaneEvidence({ event, ref, control, playlists, manifest, source = null, claimedCampaignId = "", now = Date.now() }) {
@@ -102,7 +105,7 @@ function main() {
   const [mode, artifactRoot] = process.argv.slice(2);
   const event = read(process.env.GITHUB_EVENT_PATH);
   const ref = process.env.GITHUB_REF;
-  const { inputs, apply, recovery, metadataRunId } = authorizeFastLane(event, ref);
+  const { inputs, apply, recovery, metadataRunId, guarded, channelLocalStop } = authorizeFastLane(event, ref);
   if (mode === "authorize") return console.log("Explicit scope authorization: PASS");
   if (mode === "is-recovery") { process.exitCode = recovery ? 0 : 1; return; }
   if (mode === "import-control") {
@@ -245,7 +248,8 @@ function main() {
     dispatchInputs.confirm_openai_metadata = inputs.fast_confirm_metadata;
   }
   if (enabled(inputs.edge_tts_retry_429)) dispatchInputs.edge_tts_retry_429 = "true";
-  if (enabled(inputs.fast_stop_on_403_or_429)) {
+  if (channelLocalStop) dispatchInputs.channel_local_stop = "true";
+  if (guarded) {
     dispatchInputs.stop_on_429 = "true";
     dispatchInputs.stop_on_403 = "true";
   }

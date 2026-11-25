@@ -76,6 +76,11 @@ on:
         required: false
         default: false
         type: boolean
+      channel_local_stop:
+        description: "Use the normal four-route, five-channel concurrency while stopping only the affected channel."
+        required: false
+        default: false
+        type: boolean
       confirm_campaign_apply:
         description: "Apply only: type APPLY_YOUTUBE_PUBLICATION_CAMPAIGN."
         required: false
@@ -183,6 +188,10 @@ jobs:
           fi
           if [ "${{ inputs.edge_tts_retry_429 }}" = "true" ] && [ "${{ inputs.stop_on_429 }}" != "true" ]; then
             echo "::error::edge_tts_retry_429 requires guarded stop_on_429 mode."
+            exit 1
+          fi
+          if [ "${{ inputs.channel_local_stop }}" = "true" ] && { [ "${{ inputs.stop_on_429 }}" != "true" ] || [ "${{ inputs.stop_on_403 }}" != "true" ]; }; then
+            echo "::error::channel_local_stop requires both guarded stop flags."
             exit 1
           fi
           if [ "${{ inputs.stop_on_403 }}" = "true" ] && [ "${{ inputs.stop_on_429 }}" != "true" ]; then
@@ -441,16 +450,17 @@ jobs:
     if: ${{ inputs.mode == 'apply' && inputs.ready_media_spec == '' && (needs.preflight.outputs.ordinary_worker_count != '0' || needs.preflight.outputs.polyglot_worker_count != '0') }}
     needs: [preflight, metadata]
     strategy:
-      fail-fast: ${{ inputs.stop_on_429 }}
+      fail-fast: ${{ inputs.stop_on_429 && !inputs.channel_local_stop }}
       # Four active project queues run together. Within each route, up to five
       # ordinary channels run first; that route starts its own Polyglot queue as
       # soon as its ordinary queue finishes, without waiting for other routes.
-      max-parallel: ${{ inputs.stop_on_429 && 1 || 4 }}
+      max-parallel: ${{ inputs.stop_on_429 && !inputs.channel_local_stop && 1 || 4 }}
       matrix:
         route_key: [youtube-1, youtube-2, youtube-3, youtube-4]
     uses: ./.github/workflows/youtube-campaign-route-publish.yml
     with:
       video_type: combined
+      channel_local_stop: ${{ inputs.channel_local_stop }}
       stop_on_429: ${{ inputs.stop_on_429 }}
       stop_on_403: ${{ inputs.stop_on_403 }}
       edge_tts_retry_429: ${{ inputs.edge_tts_retry_429 }}

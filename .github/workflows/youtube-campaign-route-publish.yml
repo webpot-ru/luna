@@ -5,6 +5,7 @@ on:
     inputs:
       stop_on_429: { required: false, type: boolean, default: false }
       stop_on_403: { required: false, type: boolean, default: false }
+      channel_local_stop: { required: false, type: boolean, default: false }
       edge_tts_retry_429: { required: false, type: boolean, default: false }
       video_type: { required: false, type: string, default: "combined" }
       route_key: { required: true, type: string }
@@ -76,8 +77,8 @@ jobs:
     if: ${{ (inputs.video_type == 'ordinary' || inputs.video_type == 'combined') && needs.prepare.outputs.ordinary_worker_count != '0' }}
     needs: prepare
     strategy:
-      fail-fast: ${{ inputs.stop_on_429 }}
-      max-parallel: ${{ inputs.stop_on_429 && 1 || 5 }}
+      fail-fast: ${{ inputs.stop_on_429 && !inputs.channel_local_stop }}
+      max-parallel: ${{ inputs.stop_on_429 && !inputs.channel_local_stop && 1 || 5 }}
       matrix: ${{ fromJSON(needs.prepare.outputs.ordinary_worker_matrix) }}
     uses: ./.github/workflows/youtube-video-publish.yml
     with:
@@ -115,15 +116,40 @@ jobs:
       source_cache_run_id: ${{ matrix.support == inputs.video_cache_resume_support && inputs.video_cache_resume_run_id || '' }}
     secrets: inherit
 
-  polyglot:
-    # In normal mode the route proceeds after its ordinary queue, even if
-    # that queue fails. Stop mode cancels the remaining work on failure.
-    if: ${{ always() && !cancelled() && needs.prepare.result == 'success' && (!inputs.stop_on_429 || needs.ordinary.result == 'success' || needs.prepare.outputs.ordinary_worker_count == '0') && (inputs.video_type == 'polyglot' || inputs.video_type == 'combined') && needs.prepare.outputs.polyglot_worker_count != '0' }}
+  select-polyglot:
+    if: ${{ always() && !cancelled() && inputs.channel_local_stop && needs.prepare.result == 'success' && needs.prepare.outputs.polyglot_worker_count != '0' }}
     needs: [prepare, ordinary]
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.select.outputs.matrix }}
+      count: ${{ steps.select.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/lib/youtube-channel-local-stop.mjs
+          sparse-checkout-cone-mode: false
+      - id: select
+        name: Exclude channels whose ordinary uploads did not complete
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ROUTE_KEY: ${{ inputs.route_key }}
+          ORDINARY_MATRIX: ${{ needs.prepare.outputs.ordinary_worker_matrix }}
+          POLYGLOT_MATRIX: ${{ needs.prepare.outputs.polyglot_worker_matrix }}
+        run: node scripts/lib/youtube-channel-local-stop.mjs
+
+  polyglot:
+    if: >-
+      ${{ always() && !cancelled() && needs.prepare.result == 'success' &&
+          (inputs.video_type == 'polyglot' || inputs.video_type == 'combined') &&
+          (inputs.channel_local_stop
+            && needs.select-polyglot.result == 'success' && needs.select-polyglot.outputs.count != '0'
+          || !inputs.channel_local_stop && needs.prepare.outputs.polyglot_worker_count != '0'
+            && (!inputs.stop_on_429 || needs.ordinary.result == 'success' || needs.prepare.outputs.ordinary_worker_count == '0')) }}
+    needs: [prepare, ordinary, select-polyglot]
     strategy:
-      fail-fast: ${{ inputs.stop_on_429 }}
-      max-parallel: ${{ inputs.stop_on_429 && 1 || 5 }}
-      matrix: ${{ fromJSON(needs.prepare.outputs.polyglot_worker_matrix) }}
+      fail-fast: ${{ inputs.stop_on_429 && !inputs.channel_local_stop }}
+      max-parallel: ${{ inputs.stop_on_429 && !inputs.channel_local_stop && 1 || 5 }}
+      matrix: ${{ fromJSON(inputs.channel_local_stop && needs.select-polyglot.outputs.matrix || needs.prepare.outputs.polyglot_worker_matrix) }}
     uses: ./.github/workflows/youtube-polyglot-video-publish.yml
     with:
       mode: apply

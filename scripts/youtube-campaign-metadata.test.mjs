@@ -305,21 +305,37 @@ assert.match(
 );
 assert.match(
   campaignWorkflow,
-  /  routes:\n[\s\S]*?strategy:\n\s+fail-fast: \$\{\{ inputs\.stop_on_429 \}\}\n[\s\S]*?max-parallel: \$\{\{ inputs\.stop_on_429 && 1 \|\| 4 \}\}\n\s+matrix:\n\s+route_key: \[youtube-1, youtube-2, youtube-3, youtube-4\][\s\S]*?video_type: combined/u,
+  /  routes:\n[\s\S]*?strategy:\n\s+fail-fast: \$\{\{ inputs\.stop_on_429 && !inputs\.channel_local_stop \}\}\n[\s\S]*?max-parallel: \$\{\{ inputs\.stop_on_429 && !inputs\.channel_local_stop && 1 \|\| 4 \}\}\n\s+matrix:\n\s+route_key: \[youtube-1, youtube-2, youtube-3, youtube-4\][\s\S]*?video_type: combined/u,
   "all four active project queues must start together and own both publication phases",
 );
+const { selectPolyglotAfterOrdinary } = await import("./lib/youtube-channel-local-stop.mjs");
+const localRoute = "youtube-2";
+const matrixRow = support => ({ support, route_key: localRoute });
+const ordinaryWorker = (support, upload, conclusion = upload) => ({
+  name: `routes (${localRoute}) / ordinary (${support}, DE, youtube-api-youtube-2, ${localRoute}) / youtube-video-publish`,
+  status: "completed",
+  conclusion,
+  steps: [{ name: "Upload videos to YouTube", conclusion: upload }],
+});
+const scoped = {
+  route: localRoute, ordinary: ["SV", "DA", "NO"].map(matrixRow),
+  polyglot: ["SV", "DA", "NO", "NL"].map(matrixRow),
+  jobs: [ordinaryWorker("SV", "failure"), ordinaryWorker("DA", "success"), ordinaryWorker("NO", "skipped", "success")],
+};
+assert.deepEqual(selectPolyglotAfterOrdinary(scoped).map(row => row.support), ["DA", "NL"]);
+assert.throws(() => selectPolyglotAfterOrdinary({ ...scoped, jobs: scoped.jobs.slice(1) }), /Expected exactly one ordinary worker/u);
 const routeWorkerWorkflow = fs.readFileSync(".github/workflows/youtube-campaign-route-publish.yml", "utf8");
 assert.match(
   routeWorkerWorkflow,
   /permissions:\n\s+actions: read\n\s+contents: write/u,
   "the nested route workflow must preserve the permissions required by its publication workflows",
 );
-assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?max-parallel: \$\{\{ inputs\.stop_on_429 && 1 \|\| 5 \}\}\n\s+matrix:/u, "each ordinary project queue must run five physical channels concurrently");
+assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?max-parallel: \$\{\{ inputs\.stop_on_429 && !inputs\.channel_local_stop && 1 \|\| 5 \}\}\n\s+matrix:/u, "each ordinary project queue must run five physical channels concurrently");
 assert.match(routeWorkerWorkflow, /  ordinary:\n[\s\S]*?concurrency: "3"/u, "each ordinary worker must allow three render processes");
-assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?fail-fast: \$\{\{ inputs\.stop_on_429 \}\}\n\s+max-parallel: \$\{\{ inputs\.stop_on_429 && 1 \|\| 5 \}\}/u, "only guarded Polyglot campaign routes must serialize workers");
+assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?fail-fast: \$\{\{ inputs\.stop_on_429 && !inputs\.channel_local_stop \}\}\n\s+max-parallel: \$\{\{ inputs\.stop_on_429 && !inputs\.channel_local_stop && 1 \|\| 5 \}\}/u, "only guarded Polyglot campaign routes must serialize workers");
 assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?\(!inputs\.stop_on_429 \|\| needs\.ordinary\.result == 'success' \|\| needs\.prepare\.outputs\.ordinary_worker_count == '0'\)/u, "guarded Polyglot queues must wait for successful ordinary work or an empty queue");
 assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?stop_on_429: \$\{\{ inputs\.stop_on_429 \}\}/u, "the reusable Polyglot workflow must inherit the guard");
-assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?needs: \[prepare, ordinary\]/u, "each project must start Polyglot after its own ordinary queue");
+assert.match(routeWorkerWorkflow, /  polyglot:\n[\s\S]*?needs: \[prepare, ordinary, select-polyglot\]/u, "each project must start Polyglot after its own ordinary queue");
 assert.match(routeWorkerWorkflow, /inputs\.video_type == 'polyglot' \|\| inputs\.video_type == 'combined'/u, "combined route publication must include Polyglot");
 assert.doesNotMatch(campaignWorkflow, /needs: \[preflight, metadata, ordinary\]/u, "Polyglot must not wait for the global ordinary matrix");
 assert.match(routeWorkerWorkflow, /campaign_polyglot_rows: \$\{\{ matrix\.polyglot_rows \}\}/u, "the route worker must pass the complete Polyglot sequence for a physical channel");

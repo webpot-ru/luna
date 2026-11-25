@@ -690,7 +690,13 @@ results. The evidence artifact records the HTTP status and provider host only,
 with a time stamp. The remaining jobs do not start after a worker failure. A mixed campaign
 starts each route’s Polyglot queue only after that route’s ordinary queue
 completes successfully. Ready-media apply is rejected in this mode. The
-normal parallel topology remains the default.
+normal parallel topology remains the default. For scoped stops, explicitly
+select `fast_stop_on_403_or_429=channel` (parent `channel_local_stop=true`
+with both HTTP flags). Four routes can each run five channels, with up to
+three ordinary renders per channel. Uploads within each channel are sequential.
+A failed ordinary channel does not get its Polyglot worker. Successful and
+Polyglot-only channels remain eligible, and independent routes continue.
+This mode retains the approved Edge TTS cooldown when explicitly selected.
 
 Если source recovery содержит только ordinary-хвосты, integrated per-channel wave сохраняет новые Polyglot assignments базового плана на всех каналах. Она не требует старого Polyglot хвоста для каждого support; per-channel count и live product-slot collision gates остаются обязательными.
 
