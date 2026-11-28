@@ -44,6 +44,7 @@ import {
   normalizePlaylistText,
   playlistIdentityMarker,
 } from "./lib/youtube-playlist-discovery.mjs";
+import { appendVideoChaptersIfPresent } from "./lib/youtube-chapters.mjs";
 
 function parseArgs(argv) {
   const options = {
@@ -294,14 +295,14 @@ function normalizeUploadHashtag(value) {
   return text.startsWith("#") ? text : `#${text}`;
 }
 
-function buildUploadDescription(metadata) {
-  const description = String(metadata.description || "").trim();
+function buildUploadDescription(metadata, videoPath = "") {
+  const baseDescription = appendVideoChaptersIfPresent(String(metadata.description || "").trim(), videoPath);
   const hashtags = Array.isArray(metadata.hashtags)
     ? metadata.hashtags.map(normalizeUploadHashtag).filter(Boolean).slice(0, 3)
     : [];
-  const missing = hashtags.filter((tag) => !description.toLocaleLowerCase().includes(tag.toLocaleLowerCase()));
-  if (!missing.length) return description;
-  return `${description}\n\n${missing.join(" ")}`.trim();
+  const missing = hashtags.filter((tag) => !baseDescription.toLocaleLowerCase().includes(tag.toLocaleLowerCase()));
+  if (!missing.length) return baseDescription;
+  return `${baseDescription}\n\n${missing.join(" ")}`.trim();
 }
 
 function polishedMetadataIssue(metadata) {
@@ -679,7 +680,7 @@ async function uploadVideoResumable({ accessToken, videoPath, metadata, privacyS
   const resource = {
     snippet: {
       title: metadata.title,
-      description: buildUploadDescription(metadata),
+      description: buildUploadDescription(metadata, videoPath),
       tags: Array.isArray(metadata.tags) ? metadata.tags : [],
       categoryId: String(metadata.categoryId || "27"),
     },
