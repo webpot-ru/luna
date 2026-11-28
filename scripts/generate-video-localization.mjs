@@ -1223,6 +1223,510 @@ for (const [languageCode, label] of Object.entries(qrScanLabels)) {
   }
 }
 
+const v2UiLabels = {
+  "EN": {
+    "badge_web_live": "Web · Live now",
+    "badge_apps_soon": "iOS / Android · Soon",
+    "sidebar_bullet_1": "Pictures & examples",
+    "sidebar_bullet_2": "More decks & languages",
+    "sidebar_bullet_3": "Your own pace",
+    "midroll_next_badge": "Next: Mini-Test",
+    "repeat_aloud_label": "Repeat aloud"
+  },
+  "EN-GB": {
+    "badge_web_live": "Web · Live now",
+    "badge_apps_soon": "iOS / Android · Soon",
+    "sidebar_bullet_1": "Pictures & examples",
+    "sidebar_bullet_2": "More decks & languages",
+    "sidebar_bullet_3": "Your own pace",
+    "midroll_next_badge": "Next: Mini-Test",
+    "repeat_aloud_label": "Repeat aloud"
+  },
+  "ES": {
+    "badge_web_live": "Web · Disponible ya",
+    "badge_apps_soon": "iOS / Android · Pronto",
+    "sidebar_bullet_1": "Imágenes y ejemplos",
+    "sidebar_bullet_2": "Más mazos e idiomas",
+    "sidebar_bullet_3": "A tu propio ritmo",
+    "midroll_next_badge": "Siguiente: Mini-test",
+    "repeat_aloud_label": "Repite en voz alta"
+  },
+  "ES-419": {
+    "badge_web_live": "Web · Disponible ya",
+    "badge_apps_soon": "iOS / Android · Pronto",
+    "sidebar_bullet_1": "Imágenes y ejemplos",
+    "sidebar_bullet_2": "Más mazos e idiomas",
+    "sidebar_bullet_3": "A tu propio ritmo",
+    "midroll_next_badge": "Siguiente: Mini-test",
+    "repeat_aloud_label": "Repite en voz alta"
+  },
+  "RU": {
+    "badge_web_live": "Web · Открыто сейчас",
+    "badge_apps_soon": "iOS / Android · Скоро",
+    "sidebar_bullet_1": "Картинки и примеры",
+    "sidebar_bullet_2": "Другие колоды и языки",
+    "sidebar_bullet_3": "Свой темп обучения",
+    "midroll_next_badge": "Далее: мини-тест",
+    "repeat_aloud_label": "Повторите вслух"
+  },
+  "DE": {
+    "badge_web_live": "Web · Jetzt offen",
+    "badge_apps_soon": "iOS / Android · Bald",
+    "sidebar_bullet_1": "Bilder & Beispiele",
+    "sidebar_bullet_2": "Mehr Decks & Sprachen",
+    "sidebar_bullet_3": "Dein eigenes Tempo",
+    "midroll_next_badge": "Weiter: Mini-Test",
+    "repeat_aloud_label": "Laut nachsprechen"
+  },
+  "FR": {
+    "badge_web_live": "Web · En ligne",
+    "badge_apps_soon": "iOS / Android · Bientôt",
+    "sidebar_bullet_1": "Images et exemples",
+    "sidebar_bullet_2": "Autres thèmes et langues",
+    "sidebar_bullet_3": "À votre rythme",
+    "midroll_next_badge": "Suite : Mini-test",
+    "repeat_aloud_label": "Répétez à voix haute"
+  },
+  "IT": {
+    "badge_web_live": "Web · Già attivo",
+    "badge_apps_soon": "iOS / Android · Presto",
+    "sidebar_bullet_1": "Immagini ed esempi",
+    "sidebar_bullet_2": "Altri mazzi e lingue",
+    "sidebar_bullet_3": "Al tuo ritmo",
+    "midroll_next_badge": "Avanti: Mini-test",
+    "repeat_aloud_label": "Ripeti ad alta voce"
+  },
+  "PT": {
+    "badge_web_live": "Web · Já disponível",
+    "badge_apps_soon": "iOS / Android · Em breve",
+    "sidebar_bullet_1": "Imagens e exemplos",
+    "sidebar_bullet_2": "Mais baralhos e idiomas",
+    "sidebar_bullet_3": "Ao teu próprio ritmo",
+    "midroll_next_badge": "A seguir: Mini-teste",
+    "repeat_aloud_label": "Repete em voz alta"
+  },
+  "PT-BR": {
+    "badge_web_live": "Web · Já disponível",
+    "badge_apps_soon": "iOS / Android · Em breve",
+    "sidebar_bullet_1": "Imagens e exemplos",
+    "sidebar_bullet_2": "Mais baralhos e idiomas",
+    "sidebar_bullet_3": "No seu próprio ritmo",
+    "midroll_next_badge": "A seguir: Mini-teste",
+    "repeat_aloud_label": "Repita em voz alta"
+  },
+  "ZH": {
+    "badge_web_live": "Web · 现已开放",
+    "badge_apps_soon": "iOS / Android · 即将推出",
+    "sidebar_bullet_1": "配图与例句",
+    "sidebar_bullet_2": "更多词库与语言",
+    "sidebar_bullet_3": "自由掌握学习节奏",
+    "midroll_next_badge": "接下来：小测验",
+    "repeat_aloud_label": "大声跟读"
+  },
+  "JA": {
+    "badge_web_live": "Web · 利用可能",
+    "badge_apps_soon": "iOS / Android · 近日公開",
+    "sidebar_bullet_1": "イラストと例文",
+    "sidebar_bullet_2": "他のデッキと言語",
+    "sidebar_bullet_3": "自分のペースで学習",
+    "midroll_next_badge": "次へ：ミニテスト",
+    "repeat_aloud_label": "声に出して練習"
+  },
+  "KO": {
+    "badge_web_live": "Web · 지금 이용 가능",
+    "badge_apps_soon": "iOS / Android · 출시 예정",
+    "sidebar_bullet_1": "그림과 예문",
+    "sidebar_bullet_2": "더 많은 덱과 언어",
+    "sidebar_bullet_3": "내 속도에 맞춰 학습",
+    "midroll_next_badge": "다음: 미니 테스트",
+    "repeat_aloud_label": "소리 내어 따라 하기"
+  },
+  "VI": {
+    "badge_web_live": "Web · Đã mở",
+    "badge_apps_soon": "iOS / Android · Sắp ra mắt",
+    "sidebar_bullet_1": "Hình ảnh & ví dụ",
+    "sidebar_bullet_2": "Nhiều bộ thẻ & ngôn ngữ",
+    "sidebar_bullet_3": "Học theo nhịp của bạn",
+    "midroll_next_badge": "Tiếp theo: Kiểm tra nhỏ",
+    "repeat_aloud_label": "Đọc to theo"
+  },
+  "TH": {
+    "badge_web_live": "Web · เปิดใช้แล้ว",
+    "badge_apps_soon": "iOS / Android · เร็วๆ นี้",
+    "sidebar_bullet_1": "ภาพประกอบและตัวอย่าง",
+    "sidebar_bullet_2": "ชุดคำและภาษาอื่นๆ",
+    "sidebar_bullet_3": "เรียนตามจังหวะของคุณ",
+    "midroll_next_badge": "ถัดไป: แบบทดสอบสั้น",
+    "repeat_aloud_label": "ออกเสียงตาม"
+  },
+  "MS": {
+    "badge_web_live": "Web · Dibuka kini",
+    "badge_apps_soon": "iOS / Android · Akan datang",
+    "sidebar_bullet_1": "Gambar & contoh ayat",
+    "sidebar_bullet_2": "Lebih banyak dek & bahasa",
+    "sidebar_bullet_3": "Ikut rentak sendiri",
+    "midroll_next_badge": "Seterusnya: Kuiz Mini",
+    "repeat_aloud_label": "Ulang dengan lantang"
+  },
+  "ID": {
+    "badge_web_live": "Web · Sudah aktif",
+    "badge_apps_soon": "iOS / Android · Segera",
+    "sidebar_bullet_1": "Gambar & contoh kalimat",
+    "sidebar_bullet_2": "Dek & bahasa lainnya",
+    "sidebar_bullet_3": "Belajar sesuai ritmemu",
+    "midroll_next_badge": "Berikutnya: Kuis Mini",
+    "repeat_aloud_label": "Ucapkan dengan lantang"
+  },
+  "PL": {
+    "badge_web_live": "Web · Już działa",
+    "badge_apps_soon": "iOS / Android · Wkrótce",
+    "sidebar_bullet_1": "Obrazki i przykłady",
+    "sidebar_bullet_2": "Więcej talii i języków",
+    "sidebar_bullet_3": "Własne tempo nauki",
+    "midroll_next_badge": "Dalej: Mini-test",
+    "repeat_aloud_label": "Powtórz na głos"
+  },
+  "NL": {
+    "badge_web_live": "Web · Nu beschikbaar",
+    "badge_apps_soon": "iOS / Android · Binnenkort",
+    "sidebar_bullet_1": "Afbeeldingen & voorbeelden",
+    "sidebar_bullet_2": "Meer sets & talen",
+    "sidebar_bullet_3": "In je eigen tempo",
+    "midroll_next_badge": "Volgende: Mini-test",
+    "repeat_aloud_label": "Spreek hardop na"
+  },
+  "SV": {
+    "badge_web_live": "Web · Öppen nu",
+    "badge_apps_soon": "iOS / Android · Snart",
+    "sidebar_bullet_1": "Bilder & exempel",
+    "sidebar_bullet_2": "Fler kortlekar & språk",
+    "sidebar_bullet_3": "I din egen takt",
+    "midroll_next_badge": "Nästa: Minitest",
+    "repeat_aloud_label": "Upprepa högt"
+  },
+  "NO": {
+    "badge_web_live": "Web · Åpen nå",
+    "badge_apps_soon": "iOS / Android · Snart",
+    "sidebar_bullet_1": "Bilder og eksempler",
+    "sidebar_bullet_2": "Flere sett og språk",
+    "sidebar_bullet_3": "I ditt eget tempo",
+    "midroll_next_badge": "Neste: Minitest",
+    "repeat_aloud_label": "Gjenta høyt"
+  },
+  "NB": {
+    "badge_web_live": "Web · Åpen nå",
+    "badge_apps_soon": "iOS / Android · Snart",
+    "sidebar_bullet_1": "Bilder og eksempler",
+    "sidebar_bullet_2": "Flere sett og språk",
+    "sidebar_bullet_3": "I ditt eget tempo",
+    "midroll_next_badge": "Neste: Minitest",
+    "repeat_aloud_label": "Gjenta høyt"
+  },
+  "DA": {
+    "badge_web_live": "Web · Åben nu",
+    "badge_apps_soon": "iOS / Android · Snart",
+    "sidebar_bullet_1": "Billeder og eksempler",
+    "sidebar_bullet_2": "Flere sæt og sprog",
+    "sidebar_bullet_3": "I dit eget tempo",
+    "midroll_next_badge": "Næste: Minitest",
+    "repeat_aloud_label": "Gentag højt"
+  },
+  "FI": {
+    "badge_web_live": "Web · Avoinna nyt",
+    "badge_apps_soon": "iOS / Android · Tulossa",
+    "sidebar_bullet_1": "Kuvat ja esimerkit",
+    "sidebar_bullet_2": "Lisää pakkoja ja kieliä",
+    "sidebar_bullet_3": "Omaan tahtiisi",
+    "midroll_next_badge": "Seuraavaksi: Minitesti",
+    "repeat_aloud_label": "Toista ääneen"
+  },
+  "CS": {
+    "badge_web_live": "Web · Již dostupné",
+    "badge_apps_soon": "iOS / Android · Brzy",
+    "sidebar_bullet_1": "Obrázky a příklady",
+    "sidebar_bullet_2": "Další sady a jazyky",
+    "sidebar_bullet_3": "Vlastním tempem",
+    "midroll_next_badge": "Dále: Mini-test",
+    "repeat_aloud_label": "Opakujte nahlas"
+  },
+  "SK": {
+    "badge_web_live": "Web · Už dostupné",
+    "badge_apps_soon": "iOS / Android · Čoskoro",
+    "sidebar_bullet_1": "Obrázky a príklady",
+    "sidebar_bullet_2": "Ďalšie sady a jazyky",
+    "sidebar_bullet_3": "Vlastným tempom",
+    "midroll_next_badge": "Ďalej: Mini-test",
+    "repeat_aloud_label": "Zopakujte nahlas"
+  },
+  "HU": {
+    "badge_web_live": "Web · Már elérhető",
+    "badge_apps_soon": "iOS / Android · Hamarosan",
+    "sidebar_bullet_1": "Képek és példák",
+    "sidebar_bullet_2": "Több pakli és nyelv",
+    "sidebar_bullet_3": "Saját tempóban",
+    "midroll_next_badge": "Következik: Miniteszt",
+    "repeat_aloud_label": "Ismételd hangosan"
+  },
+  "RO": {
+    "badge_web_live": "Web · Disponibil acum",
+    "badge_apps_soon": "iOS / Android · În curând",
+    "sidebar_bullet_1": "Imagini și exemple",
+    "sidebar_bullet_2": "Mai multe seturi și limbi",
+    "sidebar_bullet_3": "În ritmul tău",
+    "midroll_next_badge": "Urmează: Mini-test",
+    "repeat_aloud_label": "Repetă cu voce tare"
+  },
+  "BG": {
+    "badge_web_live": "Web · Отворено сега",
+    "badge_apps_soon": "iOS / Android · Скоро",
+    "sidebar_bullet_1": "Картинки и примери",
+    "sidebar_bullet_2": "Още тестета и езици",
+    "sidebar_bullet_3": "Свое темпо на учене",
+    "midroll_next_badge": "Следва: Мини-тест",
+    "repeat_aloud_label": "Повторете на глас"
+  },
+  "HR": {
+    "badge_web_live": "Web · Dostupno sada",
+    "badge_apps_soon": "iOS / Android · Uskoro",
+    "sidebar_bullet_1": "Slike i primjeri",
+    "sidebar_bullet_2": "Više špilova i jezika",
+    "sidebar_bullet_3": "Vlastitim tempom",
+    "midroll_next_badge": "Slijedi: Mini-test",
+    "repeat_aloud_label": "Ponovite naglas"
+  },
+  "SR": {
+    "badge_web_live": "Web · Dostupno sada",
+    "badge_apps_soon": "iOS / Android · Uskoro",
+    "sidebar_bullet_1": "Slike i primeri",
+    "sidebar_bullet_2": "Više špilova i jezika",
+    "sidebar_bullet_3": "Sopstvenim tempom",
+    "midroll_next_badge": "Sledi: Mini-test",
+    "repeat_aloud_label": "Ponovite naglas"
+  },
+  "SL": {
+    "badge_web_live": "Web · Na voljo zdaj",
+    "badge_apps_soon": "iOS / Android · Kmalu",
+    "sidebar_bullet_1": "Slike in primeri",
+    "sidebar_bullet_2": "Več kompletov in jezikov",
+    "sidebar_bullet_3": "V lastnem tempu",
+    "midroll_next_badge": "Sledi: Mini-test",
+    "repeat_aloud_label": "Ponovite na glas"
+  },
+  "LT": {
+    "badge_web_live": "Web · Veikia dabar",
+    "badge_apps_soon": "iOS / Android · Greitai",
+    "sidebar_bullet_1": "Paveikslėliai ir pavyzdžiai",
+    "sidebar_bullet_2": "Daugiau rinkinių ir kalbų",
+    "sidebar_bullet_3": "Savo tempu",
+    "midroll_next_badge": "Toliau: Mini testas",
+    "repeat_aloud_label": "Kartokite garsiai"
+  },
+  "LV": {
+    "badge_web_live": "Web · Pieejams tagad",
+    "badge_apps_soon": "iOS / Android · Drīzumā",
+    "sidebar_bullet_1": "Attēli un piemēri",
+    "sidebar_bullet_2": "Vairāk komplektu un valodu",
+    "sidebar_bullet_3": "Savā tempā",
+    "midroll_next_badge": "Tālāk: Minitests",
+    "repeat_aloud_label": "Atkārtojiet skaļi"
+  },
+  "ET": {
+    "badge_web_live": "Web · Avatud kohe",
+    "badge_apps_soon": "iOS / Android · Peagi",
+    "sidebar_bullet_1": "Pildid ja näited",
+    "sidebar_bullet_2": "Rohkem pakke ja keeli",
+    "sidebar_bullet_3": "Omas tempos",
+    "midroll_next_badge": "Järgmine: Minitest",
+    "repeat_aloud_label": "Korda valjusti"
+  },
+  "IS": {
+    "badge_web_live": "Web · Opið núna",
+    "badge_apps_soon": "iOS / Android · Bráðum",
+    "sidebar_bullet_1": "Myndir og dæmi",
+    "sidebar_bullet_2": "Fleiri stokkar og tungumál",
+    "sidebar_bullet_3": "Á þínum hraða",
+    "midroll_next_badge": "Næst: Smápróf",
+    "repeat_aloud_label": "Endurtaktu upphátt"
+  },
+  "HI": {
+    "badge_web_live": "Web · अभी उपलब्ध",
+    "badge_apps_soon": "iOS / Android · जल्द ही",
+    "sidebar_bullet_1": "चित्र और उदाहरण",
+    "sidebar_bullet_2": "अन्य डेक और भाषाएँ",
+    "sidebar_bullet_3": "अपनी गति से सीखें",
+    "midroll_next_badge": "आगे: मिनी टेस्ट",
+    "repeat_aloud_label": "जोर से दोहराएँ"
+  },
+  "BN": {
+    "badge_web_live": "Web · এখনই উপলব্ধ",
+    "badge_apps_soon": "iOS / Android · শীঘ্রই",
+    "sidebar_bullet_1": "ছবি ও উদাহরণ",
+    "sidebar_bullet_2": "আরও ডেক ও ভাষা",
+    "sidebar_bullet_3": "নিজের গতিতে শিখুন",
+    "midroll_next_badge": "এরপর: মিনি টেস্ট",
+    "repeat_aloud_label": "জোরে বলুন"
+  },
+  "TL": {
+    "badge_web_live": "Web · Bukas na ngayon",
+    "badge_apps_soon": "iOS / Android · Malapit na",
+    "sidebar_bullet_1": "Mga larawan at halimbawa",
+    "sidebar_bullet_2": "Ibang deck at wika",
+    "sidebar_bullet_3": "Sariling bilis ng pag-aaral",
+    "midroll_next_badge": "Susunod: Mini-Test",
+    "repeat_aloud_label": "Ulitin nang malakas"
+  },
+  "MY": {
+    "badge_web_live": "Web · ယခုရနိုင်ပြီ",
+    "badge_apps_soon": "iOS / Android · မကြာမီ",
+    "sidebar_bullet_1": "ပုံများနှင့် ဥပမာများ",
+    "sidebar_bullet_2": "အခြားခေါင်းစဉ်နှင့် ဘာသာစကားများ",
+    "sidebar_bullet_3": "မိမိအရှိန်ဖြင့် လေ့လာပါ",
+    "midroll_next_badge": "နောက်တစ်ဆင့် - စမ်းသပ်ချက်",
+    "repeat_aloud_label": "အသံထွက်၍ လိုက်ဆိုပါ"
+  },
+  "KM": {
+    "badge_web_live": "Web · បើកប្រើឥឡូវនេះ",
+    "badge_apps_soon": "iOS / Android · ឆាប់ៗនេះ",
+    "sidebar_bullet_1": "រូបភាព និងឧទាហរណ៍",
+    "sidebar_bullet_2": "ប្រធានបទ និងភាសាផ្សេងទៀត",
+    "sidebar_bullet_3": "រៀនតាមល្បឿនផ្ទាល់ខ្លួន",
+    "midroll_next_badge": "បន្ទាប់៖ តេស្តខ្លី",
+    "repeat_aloud_label": "អានតាមឱ្យឮៗ"
+  },
+  "LO": {
+    "badge_web_live": "Web · ເປີດໃຊ້ແລ້ວ",
+    "badge_apps_soon": "iOS / Android · ໄວໆນີ້",
+    "sidebar_bullet_1": "ຮູບພາບ ແລະ ຕົວຢ່າງ",
+    "sidebar_bullet_2": "ຊຸດຄຳສັບ ແລະ ພາສາອື່ນ",
+    "sidebar_bullet_3": "ຮຽນຕາມຈັງຫວະຂອງທ່ານ",
+    "midroll_next_badge": "ຕໍ່ໄປ: ແບບທົດສອບສັ້ນ",
+    "repeat_aloud_label": "ເວົ້າຕາມດັງໆ"
+  },
+  "NE": {
+    "badge_web_live": "Web · अहिले उपलब्ध",
+    "badge_apps_soon": "iOS / Android · छिट्टै",
+    "sidebar_bullet_1": "तस्बिर र उदाहरणहरू",
+    "sidebar_bullet_2": "अन्य सेट र भाषाहरू",
+    "sidebar_bullet_3": "आफ्नै गतिमा सिक्नुहोस्",
+    "midroll_next_badge": "अर्को: सानो परीक्षा",
+    "repeat_aloud_label": "ठूलो स्वरमा दोहोर्याउनुहोस्"
+  },
+  "SI": {
+    "badge_web_live": "Web · දැන් විවෘතයි",
+    "badge_apps_soon": "iOS / Android · ළඟදීම",
+    "sidebar_bullet_1": "රූප සහ උදාහරණ",
+    "sidebar_bullet_2": "වෙනත් පාඩම් සහ භාෂා",
+    "sidebar_bullet_3": "ඔබේ වේගයෙන් ඉගෙන ගන්න",
+    "midroll_next_badge": "ඊළඟට: කුඩා පරීක්ෂණය",
+    "repeat_aloud_label": "හඬ නඟා කියන්න"
+  },
+  "TA": {
+    "badge_web_live": "Web · இப்போது திறந்துள்ளது",
+    "badge_apps_soon": "iOS / Android · விரைவில்",
+    "sidebar_bullet_1": "படங்கள் மற்றும் உதாரணங்கள்",
+    "sidebar_bullet_2": "மேலும் தொகுப்புகள் & மொழிகள்",
+    "sidebar_bullet_3": "உங்கள் வேகத்தில் கற்கவும்",
+    "midroll_next_badge": "அடுத்து: சிறு தேர்வு",
+    "repeat_aloud_label": "சத்தமாகச் சொல்லுங்கள்"
+  },
+  "TE": {
+    "badge_web_live": "Web · ఇప్పుడు అందుబాటులో",
+    "badge_apps_soon": "iOS / Android · త్వరలో",
+    "sidebar_bullet_1": "చిత్రాలు & ఉదాహరణలు",
+    "sidebar_bullet_2": "మరిన్ని డెక్స్ & భాషలు",
+    "sidebar_bullet_3": "మీ స్వంత వేగంతో నేర్చుకోండి",
+    "midroll_next_badge": "తర్వాత: మినీ టెస్ట్",
+    "repeat_aloud_label": "గట్టిగా పలకండి"
+  },
+  "KN": {
+    "badge_web_live": "Web · ಈಗ ಲಭ್ಯವಿದೆ",
+    "badge_apps_soon": "iOS / Android · ಶೀಘ್ರದಲ್ಲೇ",
+    "sidebar_bullet_1": "ಚಿತ್ರಗಳು ಮತ್ತು ಉದಾಹರಣೆಗಳು",
+    "sidebar_bullet_2": "ಇನ್ನಷ್ಟು ಸೆಟ್‌ಗಳು ಮತ್ತು ಭಾಷೆಗಳು",
+    "sidebar_bullet_3": "ನಿಮ್ಮದೇ ವೇಗದಲ್ಲಿ ಕಲಿಯಿರಿ",
+    "midroll_next_badge": "ಮುಂದೆ: ಮಿನಿ ಪರೀಕ್ಷೆ",
+    "repeat_aloud_label": "ಜೋರಾಗಿ ಹೇಳಿ"
+  },
+  "ML": {
+    "badge_web_live": "Web · ഇപ്പോൾ ലഭ്യമാണ്",
+    "badge_apps_soon": "iOS / Android · ഉടൻ വരുന്നു",
+    "sidebar_bullet_1": "ചിത്രങ്ങളും ഉദാഹരണങ്ങളും",
+    "sidebar_bullet_2": "കൂടുതൽ സെറ്റുകളും ഭാഷകളും",
+    "sidebar_bullet_3": "സ്വന്തം വേഗതയിൽ പഠിക്കൂ",
+    "midroll_next_badge": "അടുത്തത്: മിനി ടെസ്റ്റ്",
+    "repeat_aloud_label": "ഉറക്കെ ആവർത്തിക്കുക"
+  },
+  "UZ": {
+    "badge_web_live": "Web · Hozir ochiq",
+    "badge_apps_soon": "iOS / Android · Tez kunda",
+    "sidebar_bullet_1": "Rasmlar va misollar",
+    "sidebar_bullet_2": "Boshqa to'plam va tillar",
+    "sidebar_bullet_3": "O'z sur'atingizda o'rganing",
+    "midroll_next_badge": "Keyingi: Mini-test",
+    "repeat_aloud_label": "Ovoz chiqarib takrorlang"
+  },
+  "KK": {
+    "badge_web_live": "Web · Қазір ашық",
+    "badge_apps_soon": "iOS / Android · Жақында",
+    "sidebar_bullet_1": "Суреттер мен мысалдар",
+    "sidebar_bullet_2": "Басқа жинақтар мен тілдер",
+    "sidebar_bullet_3": "Өз қарқыныңызбен оқыңыз",
+    "midroll_next_badge": "Келесі: Шағын тест",
+    "repeat_aloud_label": "Дауыстап қайталаңыз"
+  },
+  "AZ": {
+    "badge_web_live": "Web · İndi açıqdır",
+    "badge_apps_soon": "iOS / Android · Tezliklə",
+    "sidebar_bullet_1": "Şəkillər və nümunələr",
+    "sidebar_bullet_2": "Digər dəstlər və dillər",
+    "sidebar_bullet_3": "Öz tempinizdə öyrənin",
+    "midroll_next_badge": "Növbəti: Mini-test",
+    "repeat_aloud_label": "Ucadan təkrarlayın"
+  },
+  "KA": {
+    "badge_web_live": "Web · ღიაა ახლა",
+    "badge_apps_soon": "iOS / Android · მალე",
+    "sidebar_bullet_1": "ილუსტრაციები და მაგალითები",
+    "sidebar_bullet_2": "სხვა დასტები და ენები",
+    "sidebar_bullet_3": "საკუთარი ტემპით სწავლა",
+    "midroll_next_badge": "შემდეგ: მინი-ტესტი",
+    "repeat_aloud_label": "გაიმეორეთ ხმამაღლა"
+  },
+  "HY": {
+    "badge_web_live": "Web · Բաց է հիմա",
+    "badge_apps_soon": "iOS / Android · Շուտով",
+    "sidebar_bullet_1": "Նկարներ և օրինակներ",
+    "sidebar_bullet_2": "Այլ հավաքածուներ և լեզուներ",
+    "sidebar_bullet_3": "Ձեր սեփական տեմպով",
+    "midroll_next_badge": "Հաջորդը՝ Մինի-թեստ",
+    "repeat_aloud_label": "Կրկնեք բարձրաձայն"
+  },
+  "TR": {
+    "badge_web_live": "Web · Şimdi açık",
+    "badge_apps_soon": "iOS / Android · Yakında",
+    "sidebar_bullet_1": "Görseller ve örnekler",
+    "sidebar_bullet_2": "Diğer desteler ve diller",
+    "sidebar_bullet_3": "Kendi hızında öğren",
+    "midroll_next_badge": "Sırada: Mini Test",
+    "repeat_aloud_label": "Sesli tekrar et"
+  },
+  "SW": {
+    "badge_web_live": "Web · Inapatikana sasa",
+    "badge_apps_soon": "iOS / Android · Hivi karibuni",
+    "sidebar_bullet_1": "Picha na mifano",
+    "sidebar_bullet_2": "Seti na lugha zaidi",
+    "sidebar_bullet_3": "Kwa kasi yako mwenyewe",
+    "midroll_next_badge": "Inayofuata: Jaribio Ndogo",
+    "repeat_aloud_label": "Rudia kwa sauti"
+  }
+};
+
+for (const [languageCode, extra] of Object.entries(v2UiLabels)) {
+  if (translations[languageCode]) {
+    Object.assign(translations[languageCode], extra);
+  }
+}
+
 const configDir = path.resolve("config");
 if (!fs.existsSync(configDir)) {
   fs.mkdirSync(configDir, { recursive: true });
