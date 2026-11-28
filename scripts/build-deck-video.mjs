@@ -19,6 +19,7 @@ import {
   getLanguageNameInLang 
 } from "./lib/card-slide-template.mjs";
 import { getOutroText } from "./lib/outro-slide-template.mjs";
+import { buildVideoChaptersFromSegments, YOUTUBE_CHAPTERS_FILENAME } from "./lib/youtube-chapters.mjs";
 import { getPublicCourseDisplayUrl, getPublicCourseUrl, getQrCodeImageUrl } from "./lib/video-public-url.mjs";
 import { outroIconNames } from "./lib/video-outro-icons.mjs";
 import { BRAND_NAME } from "./lib/brand.mjs";
@@ -797,6 +798,25 @@ async function main() {
     imageConcatLines += `file '${lastSeg.pngPath}'\n`;
   }
   fs.writeFileSync(imageConcatListPath, imageConcatLines, "utf8");
+
+  // 10.5 Write YouTube chapters sidecar next to the compiled MP4
+  try {
+    const chapters = buildVideoChaptersFromSegments(segments, {
+      deckTitle: cleanDeckTitle,
+      wordsLabel: cleanDeckTitle,
+      quizLabel: langData.quiz_title ? langData.quiz_title.split("·")[0].trim() : "Mini-Test",
+      outroLabel: "flashcardsluna.com",
+    });
+    if (chapters.length >= 3) {
+      fs.writeFileSync(
+        path.join(outputDir, YOUTUBE_CHAPTERS_FILENAME),
+        `${JSON.stringify({ schemaVersion: 1, setId, supportLang, targetLang, chapters }, null, 2)}\n`,
+        "utf8"
+      );
+    }
+  } catch (err) {
+    console.warn(`Warning: failed to write ${YOUTUBE_CHAPTERS_FILENAME}: ${err.message}`);
+  }
 
   // 11. Run final single-pass muxing
   const finalVideoPath = path.join(outputDir, `lesson_${targetLang.toLowerCase()}_${supportLang.toLowerCase()}.mp4`);
