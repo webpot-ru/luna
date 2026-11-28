@@ -107,6 +107,8 @@ function buildCardOptions({
     targetTranscription,
     supportWord,
     supportLang,
+    targetLang,
+    levelLabel: levelCode,
     state,
     quizTimer,
     rotateY,
@@ -214,14 +216,29 @@ async function main() {
     return wavPath;
   };
 
-  // 3. Generate silent audio helpers
+  // 3. Generate silent audio & subtle SFX helpers (100% synthetic via ffmpeg, zero Content ID risk)
   const silent1sPath = path.join(outputDir, "silent-1s.wav");
   const silent2sPath = path.join(outputDir, "silent-2s.wav");
   const silent3sPath = path.join(outputDir, "silent-3s.wav");
   const silent004sPath = path.join(outputDir, "silent-0.04s.wav");
+  const sfxFlipPath = path.join(outputDir, "sfx-flip.wav");
+  const sfxChimePath = path.join(outputDir, "sfx-chime.wav");
+
+  const generateSoftFlipSfx = (outPath) => {
+    execSync(
+      `ffmpeg -y -f lavfi -i "sine=frequency=520:duration=0.065:sample_rate=48000" -af "volume=0.09,afade=t=in:st=0:d=0.01,afade=t=out:st=0.015:d=0.05,pan=stereo|c0=c0|c1=c0" -ar 48000 -ac 2 "${outPath}"`,
+      { stdio: "ignore" }
+    );
+  };
+  const generateSoftChimeSfx = (outPath) => {
+    execSync(
+      `ffmpeg -y -f lavfi -i "sine=frequency=523.25:duration=0.28:sample_rate=48000" -f lavfi -i "sine=frequency=659.25:duration=0.24:sample_rate=48000" -filter_complex "[0:a]volume=0.11,afade=t=in:st=0:d=0.015,afade=t=out:st=0.06:d=0.22[a0];[1:a]adelay=75|75,volume=0.10,afade=t=in:st=0.075:d=0.015,afade=t=out:st=0.14:d=0.17[a1];[a0][a1]amix=inputs=2:duration=longest,pan=stereo|c0=c0|c1=c0[out]" -map "[out]" -ar 48000 -ac 2 "${outPath}"`,
+      { stdio: "ignore" }
+    );
+  };
 
   // Helper function to queue segment
-  const queueSegment = (taskType, taskOptions, audioPath, durationOverride, segmentName, pauseDuration = 0) => {
+  const queueSegment = (taskType, taskOptions, audioPath, durationOverride, segmentName, pauseDuration = 0, leadSfxPath = null) => {
     const duration = durationOverride || getAudioDuration(audioPath);
     segments.push({
       taskType,
@@ -229,7 +246,8 @@ async function main() {
       audioPath,
       duration,
       segmentName,
-      pauseDuration
+      pauseDuration,
+      leadSfxPath
     });
   };
 
@@ -319,6 +337,10 @@ async function main() {
   generateSilentAudio(2.0, silent2sPath);
   generateSilentAudio(3.0, silent3sPath);
   generateSilentAudio(0.04, silent004sPath);
+  generateSoftFlipSfx(sfxFlipPath);
+  generateSoftChimeSfx(sfxChimePath);
+  const sfxFlipDur = getAudioDuration(sfxFlipPath);
+  const sfxChimeDur = getAudioDuration(sfxChimePath);
 
   // 3.9 Intro Phase
   console.log("\n--- Starting Intro Phase Video Compilation ---");
@@ -358,7 +380,10 @@ async function main() {
     title: introTitle,
     deckTitle: cleanDeckTitle,
     subtitle: introSubtitleText,
-    description: introDesc
+    description: introDesc,
+    supportLang,
+    targetLang,
+    levelLabel: levelCode
   };
 
   queueSegment('intro', introOptions, wavIntro, totalVisualDurIntro, `intro-slide`, pauseDurIntro);
@@ -420,9 +445,9 @@ async function main() {
       // Visual duration is Target Audio + 2.0s rounded to nearest multiple of 0.04s (25 fps)
       const audioDur1 = getAudioDuration(wavTargetWord);
       const totalFrontVisualDur = Math.round((audioDur1 + 2.0) * 25) / 25;
-      // Audio pause duration is (totalFrontVisualDur + 0.44s transition) - audioDur1
-      const pauseDur1 = (totalFrontVisualDur + 0.44) - audioDur1;
-      queueSegment('card', optionsFront, wavTargetWord, totalFrontVisualDur, `card-${cardIdStr}-front`, pauseDur1);
+      // Audio pause duration is (totalFrontVisualDur + 0.44s transition) - audioDur1 - sfxFlipDur
+      const pauseDur1 = Math.max(0.04, (totalFrontVisualDur + 0.44) - audioDur1 - sfxFlipDur);
+      queueSegment('card', optionsFront, wavTargetWord, totalFrontVisualDur, `card-${cardIdStr}-front`, pauseDur1, sfxFlipPath);
 
       // Intermediate flip frames (11 frames total: 0 to 180 deg)
       const angles = [0, 18, 36, 54, 72, 90, 108, 126, 144, 162, 180];
@@ -511,8 +536,8 @@ async function main() {
       });
       const audioDur1 = getAudioDuration(wavTargetWord);
       const totalVisualDur1 = Math.round((audioDur1 + 2.0) * 25) / 25;
-      const pauseDur1 = totalVisualDur1 - audioDur1;
-      queueSegment('card', optionsWordOnly, wavTargetWord, totalVisualDur1, `card-${cardIdStr}-1`, pauseDur1);
+      const pauseDur1 = Math.max(0.04, totalVisualDur1 - audioDur1 - sfxFlipDur);
+      queueSegment('card', optionsWordOnly, wavTargetWord, totalVisualDur1, `card-${cardIdStr}-1`, pauseDur1, sfxFlipPath);
 
       // C. Mux State 2: Word + Translation
       console.log(`  -> Queue state: Word + Translation`);
@@ -530,6 +555,26 @@ async function main() {
       const pauseDur2 = totalVisualDur2 - audioDur2;
       queueSegment('card', optionsWordTranslation, wavSupportWord, totalVisualDur2, `card-${cardIdStr}-2`, pauseDur2);
     }
+  }
+
+  // 4.9 Short Mid-Roll Service Bridge (3.6s before mini-quiz)
+  const midrollUrl = getPublicCourseUrl({ setId, supportLang, targetLang });
+  const midrollDisplayUrl = getPublicCourseDisplayUrl(midrollUrl);
+  const midrollQrImageSrc = getQrCodeImageUrl(midrollUrl);
+  if (!noQuiz && cards.length > 0) {
+    const midrollOptions = {
+      supportLang,
+      deckTitle: cleanDeckTitle,
+      title: langData.outro_title || "Learn these words forever",
+      subtitle: langData.outro_subtitle || "Practice decks for free on our website",
+      qrScanLabel: langData.qr_scan_label || "Scan me",
+      outroUrl: midrollUrl,
+      outroDisplayUrl: midrollDisplayUrl,
+      outroQrImageSrc: midrollQrImageSrc
+    };
+    const midrollDur = 3.6;
+    const midrollPause = Math.max(0.04, midrollDur - sfxFlipDur);
+    queueSegment('midroll', midrollOptions, sfxFlipPath, midrollDur, 'midroll-service', midrollPause);
   }
 
   // 5. Quiz Phase (Mini-Test)
@@ -613,8 +658,8 @@ async function main() {
       // Extend reveal slide with 2.5 seconds silence padding at the end, rounded to 0.04s multiple
       const audioDur = getAudioDuration(wavQuizTargetWord);
       const totalVisualDur = Math.round((audioDur + 2.5) * 25) / 25;
-      const pauseDur = totalVisualDur - audioDur;
-      queueSegment('card', optionsAns, wavQuizTargetWord, totalVisualDur, `quiz-${quizIdStr}-ans`, pauseDur);
+      const pauseDur = Math.max(0.04, totalVisualDur - audioDur - sfxChimeDur);
+      queueSegment('card', optionsAns, wavQuizTargetWord, totalVisualDur, `quiz-${quizIdStr}-ans`, pauseDur, sfxChimePath);
     }
   }
 
@@ -660,6 +705,8 @@ async function main() {
     { iconName: outroIconNames[7], text: cleanBadgeText(langData.badge_notes, "Personal Notes") }
   ];
   const outroOptions = {
+    supportLang,
+    deckTitle: cleanDeckTitle,
     title: outroTitle,
     subtitle: outroSubtitle,
     qrScanLabel,
@@ -672,8 +719,8 @@ async function main() {
   // Pause for 2.5s after audio ends to let the user scan the QR, rounded to 0.04s multiple
   const audioDurOutro = getAudioDuration(wavOutro);
   const totalVisualDurOutro = Math.round((audioDurOutro + 2.5) * 25) / 25;
-  const pauseDurOutro = totalVisualDurOutro - audioDurOutro;
-  queueSegment('outro', outroOptions, wavOutro, totalVisualDurOutro, `outro-ad`, pauseDurOutro);
+  const pauseDurOutro = Math.max(0.04, totalVisualDurOutro - audioDurOutro - sfxChimeDur);
+  queueSegment('outro', outroOptions, wavOutro, totalVisualDurOutro, `outro-ad`, pauseDurOutro, sfxChimePath);
 
   if (segments.length === 0) {
     console.error("Error: No segments queued. Aborting.");
@@ -683,7 +730,7 @@ async function main() {
   // 7. Write the unified HTML renderer and prepare screenshot task list
   console.log(`\nWriting unified HTML renderer and preparing task list...`);
   const rendererPath = path.join(outputDir, "temp-renderer.html");
-  fs.writeFileSync(rendererPath, generateUnifiedRendererHtml(), "utf8");
+  fs.writeFileSync(rendererPath, generateUnifiedRendererHtml({ setId }), "utf8");
 
   const screenshotTasks = [];
   for (const seg of segments) {
@@ -718,6 +765,9 @@ async function main() {
   for (const seg of segments) {
     if (seg.skipAudio || !seg.audioPath) {
       continue;
+    }
+    if (seg.leadSfxPath) {
+      audioConcatLines.push(`file '${seg.leadSfxPath}'`);
     }
     audioConcatLines.push(`file '${seg.audioPath}'`);
 
@@ -791,6 +841,8 @@ async function main() {
     if (fs.existsSync(silent2sPath)) fs.unlinkSync(silent2sPath);
     if (fs.existsSync(silent3sPath)) fs.unlinkSync(silent3sPath);
     if (fs.existsSync(silent004sPath)) fs.unlinkSync(silent004sPath);
+    if (fs.existsSync(sfxFlipPath)) fs.unlinkSync(sfxFlipPath);
+    if (fs.existsSync(sfxChimePath)) fs.unlinkSync(sfxChimePath);
   } catch (e) {}
 
   console.log("Cleanup done!");

@@ -3,6 +3,7 @@ import path from "node:path";
 import { getQrCodeImageUrl } from "./video-public-url.mjs";
 import { getOutroIconDataUris, outroIconNames } from "./video-outro-icons.mjs";
 import { BRAND_NAME } from "./brand.mjs";
+import { generateUnifiedRendererHtmlV2 } from "./unified-video-renderer-v2.mjs";
 
 const localizationPath = path.resolve("config/video-localization.json");
 const localizationData = JSON.parse(fs.readFileSync(localizationPath, "utf8"));
@@ -749,7 +750,11 @@ export function generateSlideHtml(options) {
   </html>`;
 }
 
-export function generateUnifiedRendererHtml() {
+export function generateUnifiedRendererHtml(rendererOptions = {}) {
+  return generateUnifiedRendererHtmlV2(rendererOptions);
+}
+
+export function generateLegacyUnifiedRendererHtml() {
   const localizationJson = JSON.stringify(localizationData);
   const defaultOutroQrImageUrl = getDefaultOutroQrImageUrl();
   const outroIconJson = JSON.stringify(getOutroIconDataUriMap());
